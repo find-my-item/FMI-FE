@@ -80,7 +80,7 @@ module.exports = {
       900: "var(--core-colors-yellow-900)",
     },
     teal: {
-      120: "var(--core-colors-teal-100)",
+      100: "var(--core-colors-teal-100)",
       200: "var(--core-colors-teal-200)",
       300: "var(--core-colors-teal-300)",
       400: "var(--core-colors-teal-400)",

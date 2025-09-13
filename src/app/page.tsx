@@ -91,8 +91,11 @@ const Page = () => {
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold mb-4 text-teal-120">안녕하세요. 테스트입니다.</h2>
-          <div className="bg-teal-120 p-4">테스트입니다.</div>
+          <h2 className="text-2xl font-bold mb-4 text-teal-100">안녕하세요. 테스트입니다.</h2>
+          <div className="bg-teal-100 p-4 border-4 border-teal-100">테스트입니다.</div>
+          <div style={{ backgroundColor: "var(--core-colors-teal-100)", height: 40 }} />
+          <div style={{ backgroundColor: "var(--core-colors-teal-100)" }}>직접 변수 호출</div>
+          <div className="bg-teal-100">Tailwind 매핑</div>
         </section>
       </div>
     </div>
