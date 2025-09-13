@@ -85,6 +85,33 @@ function resolveTokenValue(token, depth = 0, maxDepth = 10) {
   token.resolving = true;
   let resolvedValue = token.originalValue;
 
+  // Handle array values (e.g., shadows arrays)
+  if (Array.isArray(resolvedValue)) {
+    const arr = resolvedValue.map((item) => {
+      if (typeof item === "string" && /^\{/.test(item)) {
+        const refToken = tokenMap.get(item.slice(1, -1));
+        return refToken ? resolveTokenValue(refToken, depth + 1, maxDepth) : item;
+      }
+      if (item && typeof item === "object") {
+        const out = {};
+        for (const [k, v] of Object.entries(item)) {
+          if (typeof v === "string" && /^\{/.test(v)) {
+            const ref = tokenMap.get(v.slice(1, -1));
+            out[k] = ref ? resolveTokenValue(ref, depth + 1, maxDepth) : v;
+          } else {
+            out[k] = v;
+          }
+        }
+        return out;
+      }
+      return item;
+    });
+    token.value = arr;
+    token.resolved = true;
+    token.resolving = false;
+    return token.value;
+  }
+
   // Handle object values (like shadows, typography)
   if (resolvedValue && typeof resolvedValue === "object" && !Array.isArray(resolvedValue)) {
     const result = {};
@@ -176,36 +203,78 @@ function resolveAllTokens() {
 function formatTokenValue(value, type) {
   if (value === undefined || value === null) return "";
 
-  // Handle object values (like shadows, typography)
+  // 1) Arrays (e.g., boxShadow arrays) → join as CSS box-shadow list
+  if (Array.isArray(value)) {
+    const parts = value.map((v) => formatTokenValue(v, type)).filter(Boolean);
+    return parts.join(", ");
+  }
+
+  // 2) Objects
   if (value && typeof value === "object") {
-    // For shadow objects
-    if (value.x !== undefined && value.y !== undefined && value.blur !== undefined) {
+    // Shadow object → x y blur [spread] color
+    if (
+      Object.prototype.hasOwnProperty.call(value, "x") &&
+      Object.prototype.hasOwnProperty.call(value, "y") &&
+      Object.prototype.hasOwnProperty.call(value, "blur")
+    ) {
+      const x = typeof value.x === "number" ? `${value.x}px` : `${value.x}`;
+      const y = typeof value.y === "number" ? `${value.y}px` : `${value.y}`;
+      const blur = typeof value.blur === "number" ? `${value.blur}px` : `${value.blur}`;
+      const spread =
+        value.spread !== undefined
+          ? typeof value.spread === "number"
+            ? `${value.spread}px`
+            : `${value.spread}`
+          : null;
       const color = value.color || "rgba(0,0,0,0.1)";
-      return `${value.x}px ${value.y}px ${value.blur}px ${color}`;
+      return [x, y, blur, spread, color].filter(Boolean).join(" ");
     }
-    // For typography objects
-    if (value.fontFamily || value.fontSize || value.fontWeight) {
-      const { fontFamily, fontSize, fontWeight, lineHeight, letterSpacing } = value;
-      return [
-        fontWeight || "normal",
-        fontSize ? `${fontSize}px` : "16px",
-        lineHeight ? `${lineHeight}px` : "1.5",
-        `"${fontFamily || "sans-serif"}"`,
-      ].join(" ");
+
+    // Typography object → create a usable shorthand-ish string
+    if (value.fontFamily || value.fontSize || value.fontWeight || value.lineHeight) {
+      const fontFamily = value.fontFamily ? String(value.fontFamily) : "sans-serif";
+      const fontWeight = value.fontWeight ? String(value.fontWeight) : "normal";
+      // fontSize: number→px, string 그대로
+      let fontSize = value.fontSize;
+      if (typeof fontSize === "number") fontSize = `${fontSize}px`;
+      // lineHeight: keep as-is if %, unitless allowed; number → normal (unitless) or px? we keep unitless if number
+      let lineHeight = value.lineHeight;
+      if (typeof lineHeight === "number") lineHeight = String(lineHeight);
+      const sizeLine = fontSize
+        ? lineHeight
+          ? `${fontSize}/${lineHeight}`
+          : `${fontSize}`
+        : "16px";
+      return `${fontWeight} ${sizeLine} "${fontFamily}"`;
     }
+
+    // Fallback: stringify (rare)
     return JSON.stringify(value);
   }
 
-  // Add units to numeric values based on type
+  // 3) Primitive strings: if looks like pure number, coerce to number for unit handling
+  if (typeof value === "string" && /^-?\d+(\.\d+)?$/.test(value)) {
+    const num = Number(value);
+    return formatTokenValue(num, type);
+  }
+
+  // 4) Numbers: add units by type
   if (typeof value === "number") {
-    if (type === "dimension" || type === "spacing" || type === "borderRadius") {
+    if (
+      type === "dimension" ||
+      type === "spacing" ||
+      type === "borderRadius" ||
+      type === "borderWidth"
+    ) {
       return `${value}px`;
     }
     if (type === "fontSizes") {
-      return `${value / 16}rem`; // Convert to rems for better accessibility
+      return `${value / 16}rem`;
     }
+    return String(value);
   }
 
+  // 5) Otherwise return as-is (colors, etc.)
   return value;
 }
 
