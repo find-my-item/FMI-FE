@@ -11,45 +11,45 @@
       },
       "sm": {
         "$type": "dimension",
-        "$value": "{dimension.xs} * {dimension.scale}"
+        "$value": "{core.dimension.xs} * {core.dimension.scale}"
       },
       "md": {
         "$type": "dimension",
-        "$value": "{dimension.sm} * {dimension.scale}"
+        "$value": "{core.dimension.sm} * {core.dimension.scale}"
       },
       "lg": {
         "$type": "dimension",
-        "$value": "{dimension.md} * {dimension.scale}"
+        "$value": "{core.dimension.md} * {core.dimension.scale}"
       },
       "xl": {
         "$type": "dimension",
-        "$value": "{dimension.lg} * {dimension.scale}"
+        "$value": "{core.dimension.lg} * {core.dimension.scale}"
       }
     },
     "spacing": {
       "xs": {
         "$type": "spacing",
-        "$value": "{dimension.xs}"
+        "$value": "{core.dimension.xs}"
       },
       "sm": {
         "$type": "spacing",
-        "$value": "{dimension.sm}"
+        "$value": "{core.dimension.sm}"
       },
       "md": {
         "$type": "spacing",
-        "$value": "{dimension.md}"
+        "$value": "{core.dimension.md}"
       },
       "lg": {
         "$type": "spacing",
-        "$value": "{dimension.lg}"
+        "$value": "{core.dimension.lg}"
       },
       "xl": {
         "$type": "spacing",
-        "$value": "{dimension.xl}"
+        "$value": "{core.dimension.xl}"
       },
       "multi-value": {
         "$type": "spacing",
-        "$value": "{dimension.sm} {dimension.xl}",
+        "$value": "{core.dimension.sm} {core.dimension.xl}",
         "$description": "You can have multiple values in a single spacing token. Read more on these: https://docs.tokens.studio/available-tokens/spacing-tokens#multi-value-spacing-tokens"
       }
     },
@@ -68,7 +68,7 @@
       },
       "multi-value": {
         "$type": "borderRadius",
-        "$value": "{borderRadius.sm} {borderRadius.lg}",
+        "$value": "{core.borderRadius.sm} {core.borderRadius.lg}",
         "$description": "You can have multiple values in a single radius token. Read more on these: https://docs.tokens.studio/available-tokens/border-radius-tokens#single--multiple-values"
       }
     },
@@ -541,27 +541,27 @@
     "fontSizes": {
       "h1": {
         "$type": "fontSizes",
-        "$value": "roundTo({fontSizes.body}*1.25^5)"
+        "$value": "49"
       },
       "h2": {
         "$type": "fontSizes",
-        "$value": "roundTo({fontSizes.body}*1.25^4)"
+        "$value": "39"
       },
       "h3": {
         "$type": "fontSizes",
-        "$value": "roundTo({fontSizes.body}*1.25^3)"
+        "$value": "31"
       },
       "h4": {
         "$type": "fontSizes",
-        "$value": "roundTo({fontSizes.body}*1.25^2)"
+        "$value": "25"
       },
       "h5": {
         "$type": "fontSizes",
-        "$value": "roundTo({fontSizes.body}*1.25^1)"
+        "$value": "20"
       },
       "h6": {
         "$type": "fontSizes",
-        "$value": "{fontSizes.body}"
+        "$value": "{core.fontSizes.body}"
       },
       "body": {
         "$type": "fontSizes",
@@ -569,11 +569,11 @@
       },
       "sm": {
         "$type": "fontSizes",
-        "$value": "{fontSizes.body} * 0.85"
+        "$value": "13.6"
       },
       "xs": {
         "$type": "fontSizes",
-        "$value": "{fontSizes.body} * 0.65"
+        "$value": "10.4"
       }
     }
   },
@@ -581,49 +581,49 @@
     "fg": {
       "default": {
         "$type": "color",
-        "$value": "{colors.black}"
+        "$value": "{core.colors.black}"
       },
       "muted": {
         "$type": "color",
-        "$value": "{colors.gray.700}"
+        "$value": "{core.colors.gray.700}"
       },
       "subtle": {
         "$type": "color",
-        "$value": "{colors.gray.500}"
+        "$value": "{core.colors.gray.500}"
       }
     },
     "bg": {
       "default": {
         "$type": "color",
-        "$value": "{colors.white}"
+        "$value": "{core.colors.white}"
       },
       "muted": {
         "$type": "color",
-        "$value": "{colors.gray.100}"
+        "$value": "{core.colors.gray.100}"
       },
       "subtle": {
         "$type": "color",
-        "$value": "{colors.gray.200}"
+        "$value": "{core.colors.gray.200}"
       }
     },
     "accent": {
       "default": {
         "$type": "color",
-        "$value": "{colors.indigo.400}"
+        "$value": "{core.colors.indigo.400}"
       },
       "onAccent": {
         "$type": "color",
-        "$value": "{colors.white}"
+        "$value": "{core.colors.white}"
       },
       "bg": {
         "$type": "color",
-        "$value": "{colors.indigo.200}"
+        "$value": "{core.colors.indigo.200}"
       }
     },
     "shadows": {
       "default": {
         "$type": "color",
-        "$value": "{colors.gray.900}"
+        "$value": "{core.colors.gray.900}"
       }
     }
   },
@@ -631,49 +631,49 @@
     "fg": {
       "default": {
         "$type": "color",
-        "$value": "{colors.white}"
+        "$value": "{core.colors.white}"
       },
       "muted": {
         "$type": "color",
-        "$value": "{colors.gray.300}"
+        "$value": "{core.colors.gray.300}"
       },
       "subtle": {
         "$type": "color",
-        "$value": "{colors.gray.500}"
+        "$value": "{core.colors.gray.500}"
       }
     },
     "bg": {
       "default": {
         "$type": "color",
-        "$value": "{colors.gray.900}"
+        "$value": "{core.colors.gray.900}"
       },
       "muted": {
         "$type": "color",
-        "$value": "{colors.gray.700}"
+        "$value": "{core.colors.gray.700}"
       },
       "subtle": {
         "$type": "color",
-        "$value": "{colors.gray.600}"
+        "$value": "{core.colors.gray.600}"
       }
     },
     "accent": {
       "default": {
         "$type": "color",
-        "$value": "{colors.indigo.600}"
+        "$value": "{core.colors.indigo.600}"
       },
       "onAccent": {
         "$type": "color",
-        "$value": "{colors.white}"
+        "$value": "{core.colors.white}"
       },
       "bg": {
         "$type": "color",
-        "$value": "{colors.indigo.800}"
+        "$value": "{core.colors.indigo.800}"
       }
     },
     "shadows": {
       "default": {
         "$type": "color",
-        "$value": "rgba({colors.black}, 0.3)"
+        "$value": "rgba(0,0,0,0.3)"
       }
     }
   },
@@ -682,34 +682,34 @@
       "primary": {
         "background": {
           "$type": "color",
-          "$value": "{accent.default}"
+          "$value": "{light.accent.default}"
         },
         "text": {
           "$type": "color",
-          "$value": "{accent.onAccent}"
+          "$value": "{light.accent.onAccent}"
         }
       },
       "borderRadius": {
         "$type": "borderRadius",
-        "$value": "{borderRadius.lg}"
+        "$value": "{core.borderRadius.lg}"
       },
       "borderWidth": {
         "$type": "borderWidth",
-        "$value": "{dimension.sm}"
+        "$value": "{core.dimension.sm}"
       }
     },
     "card": {
       "borderRadius": {
         "$type": "borderRadius",
-        "$value": "{borderRadius.lg}"
+        "$value": "{core.borderRadius.lg}"
       },
       "background": {
         "$type": "color",
-        "$value": "{bg.default}"
+        "$value": "{light.bg.default}"
       },
       "padding": {
         "$type": "dimension",
-        "$value": "{dimension.md}"
+        "$value": "{core.dimension.md}"
       }
     },
     "boxShadow": {
@@ -720,7 +720,7 @@
             "x": 5,
             "y": 5,
             "spread": 3,
-            "color": "rgba({shadows.default}, 0.15)",
+            "color": "rgba(26,32,44,0.15)",
             "blur": 5,
             "$type": "dropShadow"
           },
@@ -740,23 +740,23 @@
         "Bold": {
           "$type": "typography",
           "$value": {
-            "fontFamily": "{fontFamilies.heading}",
-            "fontWeight": "{fontWeights.headingBold}",
-            "lineHeight": "{lineHeights.heading}",
-            "fontSize": "{fontSizes.h1}",
-            "paragraphSpacing": "{paragraphSpacing.h1}",
-            "letterSpacing": "{letterSpacing.decreased}"
+            "fontFamily": "{core.fontFamilies.heading}",
+            "fontWeight": "{core.fontWeights.headingBold}",
+            "lineHeight": "{core.lineHeights.heading}",
+            "fontSize": "{core.fontSizes.h1}",
+            "paragraphSpacing": "{core.paragraphSpacing.h1}",
+            "letterSpacing": "{core.letterSpacing.decreased}"
           }
         },
         "Regular": {
           "$type": "typography",
           "$value": {
-            "fontFamily": "{fontFamilies.heading}",
-            "fontWeight": "{fontWeights.headingRegular}",
-            "lineHeight": "{lineHeights.heading}",
-            "fontSize": "{fontSizes.h1}",
-            "paragraphSpacing": "{paragraphSpacing.h1}",
-            "letterSpacing": "{letterSpacing.decreased}"
+            "fontFamily": "{core.fontFamilies.heading}",
+            "fontWeight": "{core.fontWeights.headingRegular}",
+            "lineHeight": "{core.lineHeights.heading}",
+            "fontSize": "{core.fontSizes.h1}",
+            "paragraphSpacing": "{core.paragraphSpacing.h1}",
+            "letterSpacing": "{core.letterSpacing.decreased}"
           }
         }
       },
@@ -764,34 +764,34 @@
         "Bold": {
           "$type": "typography",
           "$value": {
-            "fontFamily": "{fontFamilies.heading}",
-            "fontWeight": "{fontWeights.headingBold}",
-            "lineHeight": "{lineHeights.heading}",
-            "fontSize": "{fontSizes.h2}",
-            "paragraphSpacing": "{paragraphSpacing.h2}",
-            "letterSpacing": "{letterSpacing.decreased}"
+            "fontFamily": "{core.fontFamilies.heading}",
+            "fontWeight": "{core.fontWeights.headingBold}",
+            "lineHeight": "{core.lineHeights.heading}",
+            "fontSize": "{core.fontSizes.h2}",
+            "paragraphSpacing": "{core.paragraphSpacing.h2}",
+            "letterSpacing": "{core.letterSpacing.decreased}"
           }
         },
         "Regular": {
           "$type": "typography",
           "$value": {
-            "fontFamily": "{fontFamilies.heading}",
-            "fontWeight": "{fontWeights.headingRegular}",
-            "lineHeight": "{lineHeights.heading}",
-            "fontSize": "{fontSizes.h2}",
-            "paragraphSpacing": "{paragraphSpacing.h2}",
-            "letterSpacing": "{letterSpacing.decreased}"
+            "fontFamily": "{core.fontFamilies.heading}",
+            "fontWeight": "{core.fontWeights.headingRegular}",
+            "lineHeight": "{core.lineHeights.heading}",
+            "fontSize": "{core.fontSizes.h2}",
+            "paragraphSpacing": "{core.paragraphSpacing.h2}",
+            "letterSpacing": "{core.letterSpacing.decreased}"
           }
         }
       },
       "Body": {
         "$type": "typography",
         "$value": {
-          "fontFamily": "{fontFamilies.body}",
-          "fontWeight": "{fontWeights.bodyRegular}",
-          "lineHeight": "{lineHeights.heading}",
-          "fontSize": "{fontSizes.body}",
-          "paragraphSpacing": "{paragraphSpacing.h2}"
+          "fontFamily": "{core.fontFamilies.body}",
+          "fontWeight": "{core.fontWeights.bodyRegular}",
+          "lineHeight": "{core.lineHeights.heading}",
+          "fontSize": "{core.fontSizes.body}",
+          "paragraphSpacing": "{core.paragraphSpacing.h2}"
         }
       }
     }
