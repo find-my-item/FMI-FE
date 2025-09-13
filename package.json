@@ -12,7 +12,7 @@
     "build-storybook": "storybook build",
     "prepare": "husky",
     "convert:tokens": "node convert-tokens.js",
-    "build:tokens": "node src/index.js"
+    "build:tokens": "node src/dictionary.config.js"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.85.5",
