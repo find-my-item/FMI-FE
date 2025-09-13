@@ -89,6 +89,11 @@ const Page = () => {
             </button>
           </div>
         </section>
+
+        <section>
+          <h2 className="text-2xl font-bold mb-4 text-teal-120">안녕하세요. 테스트입니다.</h2>
+          <div className="bg-teal-120 p-4">테스트입니다.</div>
+        </section>
       </div>
     </div>
   );
