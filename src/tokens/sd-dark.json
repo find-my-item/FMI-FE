@@ -1,0 +1,50 @@
+{
+  "fg": {
+    "default": {
+      "$type": "color",
+      "$value": "{colors.white}"
+    },
+    "muted": {
+      "$type": "color",
+      "$value": "{colors.gray.300}"
+    },
+    "subtle": {
+      "$type": "color",
+      "$value": "{colors.gray.500}"
+    }
+  },
+  "bg": {
+    "default": {
+      "$type": "color",
+      "$value": "{colors.gray.900}"
+    },
+    "muted": {
+      "$type": "color",
+      "$value": "{colors.gray.700}"
+    },
+    "subtle": {
+      "$type": "color",
+      "$value": "{colors.gray.600}"
+    }
+  },
+  "accent": {
+    "default": {
+      "$type": "color",
+      "$value": "{colors.indigo.600}"
+    },
+    "onAccent": {
+      "$type": "color",
+      "$value": "{colors.white}"
+    },
+    "bg": {
+      "$type": "color",
+      "$value": "{colors.indigo.800}"
+    }
+  },
+  "shadows": {
+    "default": {
+      "$type": "color",
+      "$value": "rgba({colors.black}, 0.3)"
+    }
+  }
+}
