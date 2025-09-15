@@ -1,0 +1,3397 @@
+{
+  "dimension": {
+    "scale": {
+      "key": "{dimension.scale}",
+      "$type": "dimension",
+      "$value": "2px",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "original": {
+        "$type": "dimension",
+        "$value": "2",
+        "key": "{dimension.scale}"
+      },
+      "name": "dimension-scale",
+      "attributes": {
+        "category": "dimension",
+        "type": "scale"
+      },
+      "path": ["dimension", "scale"]
+    },
+    "xs": {
+      "key": "{dimension.xs}",
+      "$type": "dimension",
+      "$value": "4px",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "original": {
+        "$type": "dimension",
+        "$value": "4",
+        "key": "{dimension.xs}"
+      },
+      "name": "dimension-xs",
+      "attributes": {
+        "category": "dimension",
+        "type": "xs"
+      },
+      "path": ["dimension", "xs"]
+    },
+    "sm": {
+      "key": "{dimension.sm}",
+      "$type": "dimension",
+      "$value": "8px",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "original": {
+        "$type": "dimension",
+        "$value": "{dimension.xs} * {dimension.scale}",
+        "key": "{dimension.sm}"
+      },
+      "name": "dimension-sm",
+      "attributes": {
+        "category": "dimension",
+        "type": "sm"
+      },
+      "path": ["dimension", "sm"]
+    },
+    "md": {
+      "key": "{dimension.md}",
+      "$type": "dimension",
+      "$value": "16px",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "original": {
+        "$type": "dimension",
+        "$value": "{dimension.sm} * {dimension.scale}",
+        "key": "{dimension.md}"
+      },
+      "name": "dimension-md",
+      "attributes": {
+        "category": "dimension",
+        "type": "md"
+      },
+      "path": ["dimension", "md"]
+    },
+    "lg": {
+      "key": "{dimension.lg}",
+      "$type": "dimension",
+      "$value": "32px",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "original": {
+        "$type": "dimension",
+        "$value": "{dimension.md} * {dimension.scale}",
+        "key": "{dimension.lg}"
+      },
+      "name": "dimension-lg",
+      "attributes": {
+        "category": "dimension",
+        "type": "lg"
+      },
+      "path": ["dimension", "lg"]
+    },
+    "xl": {
+      "key": "{dimension.xl}",
+      "$type": "dimension",
+      "$value": "64px",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "original": {
+        "$type": "dimension",
+        "$value": "{dimension.lg} * {dimension.scale}",
+        "key": "{dimension.xl}"
+      },
+      "name": "dimension-xl",
+      "attributes": {
+        "category": "dimension",
+        "type": "xl"
+      },
+      "path": ["dimension", "xl"]
+    }
+  },
+  "spacing": {
+    "xs": {
+      "key": "{spacing.xs}",
+      "$type": "dimension",
+      "$value": "4px",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "spacing"
+        }
+      },
+      "original": {
+        "$type": "dimension",
+        "$value": "{dimension.xs}",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "spacing"
+          }
+        },
+        "key": "{spacing.xs}"
+      },
+      "name": "spacing-xs",
+      "attributes": {
+        "category": "spacing",
+        "type": "xs"
+      },
+      "path": ["spacing", "xs"]
+    },
+    "sm": {
+      "key": "{spacing.sm}",
+      "$type": "dimension",
+      "$value": "8px",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "spacing"
+        }
+      },
+      "original": {
+        "$type": "dimension",
+        "$value": "{dimension.sm}",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "spacing"
+          }
+        },
+        "key": "{spacing.sm}"
+      },
+      "name": "spacing-sm",
+      "attributes": {
+        "category": "spacing",
+        "type": "sm"
+      },
+      "path": ["spacing", "sm"]
+    },
+    "lg": {
+      "key": "{spacing.lg}",
+      "$type": "dimension",
+      "$value": "32px",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "spacing"
+        }
+      },
+      "original": {
+        "$type": "dimension",
+        "$value": "{dimension.lg}",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "spacing"
+          }
+        },
+        "key": "{spacing.lg}"
+      },
+      "name": "spacing-lg",
+      "attributes": {
+        "category": "spacing",
+        "type": "lg"
+      },
+      "path": ["spacing", "lg"]
+    },
+    "md": {
+      "value": {
+        "key": "{spacing.md.value}",
+        "$type": "other",
+        "$value": "16px",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "other",
+          "$value": "{dimension.md}",
+          "key": "{spacing.md.value}"
+        },
+        "name": "spacing-md-value",
+        "attributes": {
+          "category": "spacing",
+          "type": "md",
+          "item": "value"
+        },
+        "path": ["spacing", "md", "value"]
+      },
+      "type": {
+        "key": "{spacing.md.type}",
+        "$type": "other",
+        "$value": "spacing",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "other",
+          "$value": "spacing",
+          "key": "{spacing.md.type}"
+        },
+        "name": "spacing-md-type",
+        "attributes": {
+          "category": "spacing",
+          "type": "md",
+          "item": "type"
+        },
+        "path": ["spacing", "md", "type"]
+      }
+    },
+    "xl": {
+      "key": "{spacing.xl}",
+      "$type": "dimension",
+      "$value": "64px",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "spacing"
+        }
+      },
+      "original": {
+        "$type": "dimension",
+        "$value": "{dimension.xl}",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "spacing"
+          }
+        },
+        "key": "{spacing.xl}"
+      },
+      "name": "spacing-xl",
+      "attributes": {
+        "category": "spacing",
+        "type": "xl"
+      },
+      "path": ["spacing", "xl"]
+    },
+    "multi-value": {
+      "key": "{spacing.multi-value}",
+      "$type": "dimension",
+      "$value": "8px 64px",
+      "$description": "You can have multiple values in a single spacing token. Read more on these: https://docs.tokens.studio/available-tokens/spacing-tokens#multi-value-spacing-tokens",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "spacing"
+        }
+      },
+      "original": {
+        "$type": "dimension",
+        "$value": "{dimension.sm} {dimension.xl}",
+        "$description": "You can have multiple values in a single spacing token. Read more on these: https://docs.tokens.studio/available-tokens/spacing-tokens#multi-value-spacing-tokens",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "spacing"
+          }
+        },
+        "key": "{spacing.multi-value}"
+      },
+      "name": "spacing-multi-value",
+      "attributes": {
+        "category": "spacing",
+        "type": "multi-value"
+      },
+      "path": ["spacing", "multi-value"]
+    }
+  },
+  "borderRadius": {
+    "sm": {
+      "key": "{borderRadius.sm}",
+      "$type": "dimension",
+      "$value": "4px",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "borderRadius"
+        }
+      },
+      "original": {
+        "$type": "dimension",
+        "$value": "4",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "borderRadius"
+          }
+        },
+        "key": "{borderRadius.sm}"
+      },
+      "name": "border-radius-sm",
+      "attributes": {
+        "category": "borderRadius",
+        "type": "sm"
+      },
+      "path": ["borderRadius", "sm"]
+    },
+    "lg": {
+      "key": "{borderRadius.lg}",
+      "$type": "dimension",
+      "$value": "8px",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "borderRadius"
+        }
+      },
+      "original": {
+        "$type": "dimension",
+        "$value": "8",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "borderRadius"
+          }
+        },
+        "key": "{borderRadius.lg}"
+      },
+      "name": "border-radius-lg",
+      "attributes": {
+        "category": "borderRadius",
+        "type": "lg"
+      },
+      "path": ["borderRadius", "lg"]
+    },
+    "xl": {
+      "key": "{borderRadius.xl}",
+      "$type": "dimension",
+      "$value": "16px",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "borderRadius"
+        }
+      },
+      "original": {
+        "$type": "dimension",
+        "$value": "16",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "borderRadius"
+          }
+        },
+        "key": "{borderRadius.xl}"
+      },
+      "name": "border-radius-xl",
+      "attributes": {
+        "category": "borderRadius",
+        "type": "xl"
+      },
+      "path": ["borderRadius", "xl"]
+    },
+    "multi-value": {
+      "key": "{borderRadius.multi-value}",
+      "$type": "dimension",
+      "$value": "4px 8px",
+      "$description": "You can have multiple values in a single radius token. Read more on these: https://docs.tokens.studio/available-tokens/border-radius-tokens#single--multiple-values",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "borderRadius"
+        }
+      },
+      "original": {
+        "$type": "dimension",
+        "$value": "{borderRadius.sm} {borderRadius.lg}",
+        "$description": "You can have multiple values in a single radius token. Read more on these: https://docs.tokens.studio/available-tokens/border-radius-tokens#single--multiple-values",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "borderRadius"
+          }
+        },
+        "key": "{borderRadius.multi-value}"
+      },
+      "name": "border-radius-multi-value",
+      "attributes": {
+        "category": "borderRadius",
+        "type": "multi-value"
+      },
+      "path": ["borderRadius", "multi-value"]
+    }
+  },
+  "colors": {
+    "black": {
+      "key": "{colors.black}",
+      "$type": "color",
+      "$value": "#000000",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "original": {
+        "$type": "color",
+        "$value": "#000000",
+        "key": "{colors.black}"
+      },
+      "name": "colors-black",
+      "attributes": {
+        "category": "colors",
+        "type": "black"
+      },
+      "path": ["colors", "black"]
+    },
+    "white": {
+      "key": "{colors.white}",
+      "$type": "color",
+      "$value": "#ffffff",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "original": {
+        "$type": "color",
+        "$value": "#ffffff",
+        "key": "{colors.white}"
+      },
+      "name": "colors-white",
+      "attributes": {
+        "category": "colors",
+        "type": "white"
+      },
+      "path": ["colors", "white"]
+    },
+    "gray": {
+      "100": {
+        "key": "{colors.gray.100}",
+        "$type": "color",
+        "$value": "#f7fafc",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#f7fafc",
+          "key": "{colors.gray.100}"
+        },
+        "name": "colors-gray-100",
+        "attributes": {
+          "category": "colors",
+          "type": "gray",
+          "item": "100"
+        },
+        "path": ["colors", "gray", "100"]
+      },
+      "200": {
+        "key": "{colors.gray.200}",
+        "$type": "color",
+        "$value": "#edf2f7",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#edf2f7",
+          "key": "{colors.gray.200}"
+        },
+        "name": "colors-gray-200",
+        "attributes": {
+          "category": "colors",
+          "type": "gray",
+          "item": "200"
+        },
+        "path": ["colors", "gray", "200"]
+      },
+      "300": {
+        "key": "{colors.gray.300}",
+        "$type": "color",
+        "$value": "#e2e8f0",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#e2e8f0",
+          "key": "{colors.gray.300}"
+        },
+        "name": "colors-gray-300",
+        "attributes": {
+          "category": "colors",
+          "type": "gray",
+          "item": "300"
+        },
+        "path": ["colors", "gray", "300"]
+      },
+      "400": {
+        "key": "{colors.gray.400}",
+        "$type": "color",
+        "$value": "#cbd5e0",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#cbd5e0",
+          "key": "{colors.gray.400}"
+        },
+        "name": "colors-gray-400",
+        "attributes": {
+          "category": "colors",
+          "type": "gray",
+          "item": "400"
+        },
+        "path": ["colors", "gray", "400"]
+      },
+      "500": {
+        "key": "{colors.gray.500}",
+        "$type": "color",
+        "$value": "#a0aec0",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#a0aec0",
+          "key": "{colors.gray.500}"
+        },
+        "name": "colors-gray-500",
+        "attributes": {
+          "category": "colors",
+          "type": "gray",
+          "item": "500"
+        },
+        "path": ["colors", "gray", "500"]
+      },
+      "600": {
+        "key": "{colors.gray.600}",
+        "$type": "color",
+        "$value": "#718096",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#718096",
+          "key": "{colors.gray.600}"
+        },
+        "name": "colors-gray-600",
+        "attributes": {
+          "category": "colors",
+          "type": "gray",
+          "item": "600"
+        },
+        "path": ["colors", "gray", "600"]
+      },
+      "700": {
+        "key": "{colors.gray.700}",
+        "$type": "color",
+        "$value": "#4a5568",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#4a5568",
+          "key": "{colors.gray.700}"
+        },
+        "name": "colors-gray-700",
+        "attributes": {
+          "category": "colors",
+          "type": "gray",
+          "item": "700"
+        },
+        "path": ["colors", "gray", "700"]
+      },
+      "800": {
+        "key": "{colors.gray.800}",
+        "$type": "color",
+        "$value": "#2d3748",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#2d3748",
+          "key": "{colors.gray.800}"
+        },
+        "name": "colors-gray-800",
+        "attributes": {
+          "category": "colors",
+          "type": "gray",
+          "item": "800"
+        },
+        "path": ["colors", "gray", "800"]
+      },
+      "900": {
+        "key": "{colors.gray.900}",
+        "$type": "color",
+        "$value": "#1a202c",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#1a202c",
+          "key": "{colors.gray.900}"
+        },
+        "name": "colors-gray-900",
+        "attributes": {
+          "category": "colors",
+          "type": "gray",
+          "item": "900"
+        },
+        "path": ["colors", "gray", "900"]
+      }
+    },
+    "red": {
+      "100": {
+        "key": "{colors.red.100}",
+        "$type": "color",
+        "$value": "#fff5f5",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#fff5f5",
+          "key": "{colors.red.100}"
+        },
+        "name": "colors-red-100",
+        "attributes": {
+          "category": "colors",
+          "type": "red",
+          "item": "100"
+        },
+        "path": ["colors", "red", "100"]
+      },
+      "200": {
+        "key": "{colors.red.200}",
+        "$type": "color",
+        "$value": "#fed7d7",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#fed7d7",
+          "key": "{colors.red.200}"
+        },
+        "name": "colors-red-200",
+        "attributes": {
+          "category": "colors",
+          "type": "red",
+          "item": "200"
+        },
+        "path": ["colors", "red", "200"]
+      },
+      "300": {
+        "key": "{colors.red.300}",
+        "$type": "color",
+        "$value": "#feb2b2",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#feb2b2",
+          "key": "{colors.red.300}"
+        },
+        "name": "colors-red-300",
+        "attributes": {
+          "category": "colors",
+          "type": "red",
+          "item": "300"
+        },
+        "path": ["colors", "red", "300"]
+      },
+      "400": {
+        "key": "{colors.red.400}",
+        "$type": "color",
+        "$value": "#fc8181",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#fc8181",
+          "key": "{colors.red.400}"
+        },
+        "name": "colors-red-400",
+        "attributes": {
+          "category": "colors",
+          "type": "red",
+          "item": "400"
+        },
+        "path": ["colors", "red", "400"]
+      },
+      "500": {
+        "key": "{colors.red.500}",
+        "$type": "color",
+        "$value": "#f56565",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#f56565",
+          "key": "{colors.red.500}"
+        },
+        "name": "colors-red-500",
+        "attributes": {
+          "category": "colors",
+          "type": "red",
+          "item": "500"
+        },
+        "path": ["colors", "red", "500"]
+      },
+      "600": {
+        "key": "{colors.red.600}",
+        "$type": "color",
+        "$value": "#e53e3e",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#e53e3e",
+          "key": "{colors.red.600}"
+        },
+        "name": "colors-red-600",
+        "attributes": {
+          "category": "colors",
+          "type": "red",
+          "item": "600"
+        },
+        "path": ["colors", "red", "600"]
+      },
+      "700": {
+        "key": "{colors.red.700}",
+        "$type": "color",
+        "$value": "#c53030",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#c53030",
+          "key": "{colors.red.700}"
+        },
+        "name": "colors-red-700",
+        "attributes": {
+          "category": "colors",
+          "type": "red",
+          "item": "700"
+        },
+        "path": ["colors", "red", "700"]
+      },
+      "800": {
+        "key": "{colors.red.800}",
+        "$type": "color",
+        "$value": "#9b2c2c",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#9b2c2c",
+          "key": "{colors.red.800}"
+        },
+        "name": "colors-red-800",
+        "attributes": {
+          "category": "colors",
+          "type": "red",
+          "item": "800"
+        },
+        "path": ["colors", "red", "800"]
+      },
+      "900": {
+        "key": "{colors.red.900}",
+        "$type": "color",
+        "$value": "#742a2a",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#742a2a",
+          "key": "{colors.red.900}"
+        },
+        "name": "colors-red-900",
+        "attributes": {
+          "category": "colors",
+          "type": "red",
+          "item": "900"
+        },
+        "path": ["colors", "red", "900"]
+      }
+    },
+    "orange": {
+      "100": {
+        "key": "{colors.orange.100}",
+        "$type": "color",
+        "$value": "#fffaf0",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#fffaf0",
+          "key": "{colors.orange.100}"
+        },
+        "name": "colors-orange-100",
+        "attributes": {
+          "category": "colors",
+          "type": "orange",
+          "item": "100"
+        },
+        "path": ["colors", "orange", "100"]
+      },
+      "200": {
+        "key": "{colors.orange.200}",
+        "$type": "color",
+        "$value": "#feebc8",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#feebc8",
+          "key": "{colors.orange.200}"
+        },
+        "name": "colors-orange-200",
+        "attributes": {
+          "category": "colors",
+          "type": "orange",
+          "item": "200"
+        },
+        "path": ["colors", "orange", "200"]
+      },
+      "300": {
+        "key": "{colors.orange.300}",
+        "$type": "color",
+        "$value": "#fbd38d",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#fbd38d",
+          "key": "{colors.orange.300}"
+        },
+        "name": "colors-orange-300",
+        "attributes": {
+          "category": "colors",
+          "type": "orange",
+          "item": "300"
+        },
+        "path": ["colors", "orange", "300"]
+      },
+      "400": {
+        "key": "{colors.orange.400}",
+        "$type": "color",
+        "$value": "#f6ad55",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#f6ad55",
+          "key": "{colors.orange.400}"
+        },
+        "name": "colors-orange-400",
+        "attributes": {
+          "category": "colors",
+          "type": "orange",
+          "item": "400"
+        },
+        "path": ["colors", "orange", "400"]
+      },
+      "500": {
+        "key": "{colors.orange.500}",
+        "$type": "color",
+        "$value": "#ed8936",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#ed8936",
+          "key": "{colors.orange.500}"
+        },
+        "name": "colors-orange-500",
+        "attributes": {
+          "category": "colors",
+          "type": "orange",
+          "item": "500"
+        },
+        "path": ["colors", "orange", "500"]
+      },
+      "600": {
+        "key": "{colors.orange.600}",
+        "$type": "color",
+        "$value": "#dd6b20",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#dd6b20",
+          "key": "{colors.orange.600}"
+        },
+        "name": "colors-orange-600",
+        "attributes": {
+          "category": "colors",
+          "type": "orange",
+          "item": "600"
+        },
+        "path": ["colors", "orange", "600"]
+      },
+      "700": {
+        "key": "{colors.orange.700}",
+        "$type": "color",
+        "$value": "#c05621",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#c05621",
+          "key": "{colors.orange.700}"
+        },
+        "name": "colors-orange-700",
+        "attributes": {
+          "category": "colors",
+          "type": "orange",
+          "item": "700"
+        },
+        "path": ["colors", "orange", "700"]
+      },
+      "800": {
+        "key": "{colors.orange.800}",
+        "$type": "color",
+        "$value": "#9c4221",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#9c4221",
+          "key": "{colors.orange.800}"
+        },
+        "name": "colors-orange-800",
+        "attributes": {
+          "category": "colors",
+          "type": "orange",
+          "item": "800"
+        },
+        "path": ["colors", "orange", "800"]
+      },
+      "900": {
+        "key": "{colors.orange.900}",
+        "$type": "color",
+        "$value": "#7b341e",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#7b341e",
+          "key": "{colors.orange.900}"
+        },
+        "name": "colors-orange-900",
+        "attributes": {
+          "category": "colors",
+          "type": "orange",
+          "item": "900"
+        },
+        "path": ["colors", "orange", "900"]
+      }
+    },
+    "yellow": {
+      "100": {
+        "key": "{colors.yellow.100}",
+        "$type": "color",
+        "$value": "#fffff0",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#fffff0",
+          "key": "{colors.yellow.100}"
+        },
+        "name": "colors-yellow-100",
+        "attributes": {
+          "category": "colors",
+          "type": "yellow",
+          "item": "100"
+        },
+        "path": ["colors", "yellow", "100"]
+      },
+      "200": {
+        "key": "{colors.yellow.200}",
+        "$type": "color",
+        "$value": "#fefcbf",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#fefcbf",
+          "key": "{colors.yellow.200}"
+        },
+        "name": "colors-yellow-200",
+        "attributes": {
+          "category": "colors",
+          "type": "yellow",
+          "item": "200"
+        },
+        "path": ["colors", "yellow", "200"]
+      },
+      "300": {
+        "key": "{colors.yellow.300}",
+        "$type": "color",
+        "$value": "#faf089",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#faf089",
+          "key": "{colors.yellow.300}"
+        },
+        "name": "colors-yellow-300",
+        "attributes": {
+          "category": "colors",
+          "type": "yellow",
+          "item": "300"
+        },
+        "path": ["colors", "yellow", "300"]
+      },
+      "400": {
+        "key": "{colors.yellow.400}",
+        "$type": "color",
+        "$value": "#f6e05e",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#f6e05e",
+          "key": "{colors.yellow.400}"
+        },
+        "name": "colors-yellow-400",
+        "attributes": {
+          "category": "colors",
+          "type": "yellow",
+          "item": "400"
+        },
+        "path": ["colors", "yellow", "400"]
+      },
+      "500": {
+        "key": "{colors.yellow.500}",
+        "$type": "color",
+        "$value": "#ecc94b",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#ecc94b",
+          "key": "{colors.yellow.500}"
+        },
+        "name": "colors-yellow-500",
+        "attributes": {
+          "category": "colors",
+          "type": "yellow",
+          "item": "500"
+        },
+        "path": ["colors", "yellow", "500"]
+      },
+      "600": {
+        "key": "{colors.yellow.600}",
+        "$type": "color",
+        "$value": "#d69e2e",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#d69e2e",
+          "key": "{colors.yellow.600}"
+        },
+        "name": "colors-yellow-600",
+        "attributes": {
+          "category": "colors",
+          "type": "yellow",
+          "item": "600"
+        },
+        "path": ["colors", "yellow", "600"]
+      },
+      "700": {
+        "key": "{colors.yellow.700}",
+        "$type": "color",
+        "$value": "#b7791f",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#b7791f",
+          "key": "{colors.yellow.700}"
+        },
+        "name": "colors-yellow-700",
+        "attributes": {
+          "category": "colors",
+          "type": "yellow",
+          "item": "700"
+        },
+        "path": ["colors", "yellow", "700"]
+      },
+      "800": {
+        "key": "{colors.yellow.800}",
+        "$type": "color",
+        "$value": "#975a16",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#975a16",
+          "key": "{colors.yellow.800}"
+        },
+        "name": "colors-yellow-800",
+        "attributes": {
+          "category": "colors",
+          "type": "yellow",
+          "item": "800"
+        },
+        "path": ["colors", "yellow", "800"]
+      },
+      "900": {
+        "key": "{colors.yellow.900}",
+        "$type": "color",
+        "$value": "#744210",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#744210",
+          "key": "{colors.yellow.900}"
+        },
+        "name": "colors-yellow-900",
+        "attributes": {
+          "category": "colors",
+          "type": "yellow",
+          "item": "900"
+        },
+        "path": ["colors", "yellow", "900"]
+      }
+    },
+    "green": {
+      "100": {
+        "key": "{colors.green.100}",
+        "$type": "color",
+        "$value": "#f0fff4",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#f0fff4",
+          "key": "{colors.green.100}"
+        },
+        "name": "colors-green-100",
+        "attributes": {
+          "category": "colors",
+          "type": "green",
+          "item": "100"
+        },
+        "path": ["colors", "green", "100"]
+      },
+      "200": {
+        "key": "{colors.green.200}",
+        "$type": "color",
+        "$value": "#c6f6d5",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#c6f6d5",
+          "key": "{colors.green.200}"
+        },
+        "name": "colors-green-200",
+        "attributes": {
+          "category": "colors",
+          "type": "green",
+          "item": "200"
+        },
+        "path": ["colors", "green", "200"]
+      },
+      "300": {
+        "key": "{colors.green.300}",
+        "$type": "color",
+        "$value": "#9ae6b4",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#9ae6b4",
+          "key": "{colors.green.300}"
+        },
+        "name": "colors-green-300",
+        "attributes": {
+          "category": "colors",
+          "type": "green",
+          "item": "300"
+        },
+        "path": ["colors", "green", "300"]
+      },
+      "400": {
+        "key": "{colors.green.400}",
+        "$type": "color",
+        "$value": "#68d391",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#68d391",
+          "key": "{colors.green.400}"
+        },
+        "name": "colors-green-400",
+        "attributes": {
+          "category": "colors",
+          "type": "green",
+          "item": "400"
+        },
+        "path": ["colors", "green", "400"]
+      },
+      "500": {
+        "key": "{colors.green.500}",
+        "$type": "color",
+        "$value": "#48bb78",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#48bb78",
+          "key": "{colors.green.500}"
+        },
+        "name": "colors-green-500",
+        "attributes": {
+          "category": "colors",
+          "type": "green",
+          "item": "500"
+        },
+        "path": ["colors", "green", "500"]
+      },
+      "600": {
+        "key": "{colors.green.600}",
+        "$type": "color",
+        "$value": "#38a169",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#38a169",
+          "key": "{colors.green.600}"
+        },
+        "name": "colors-green-600",
+        "attributes": {
+          "category": "colors",
+          "type": "green",
+          "item": "600"
+        },
+        "path": ["colors", "green", "600"]
+      },
+      "700": {
+        "key": "{colors.green.700}",
+        "$type": "color",
+        "$value": "#2f855a",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#2f855a",
+          "key": "{colors.green.700}"
+        },
+        "name": "colors-green-700",
+        "attributes": {
+          "category": "colors",
+          "type": "green",
+          "item": "700"
+        },
+        "path": ["colors", "green", "700"]
+      },
+      "800": {
+        "key": "{colors.green.800}",
+        "$type": "color",
+        "$value": "#276749",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#276749",
+          "key": "{colors.green.800}"
+        },
+        "name": "colors-green-800",
+        "attributes": {
+          "category": "colors",
+          "type": "green",
+          "item": "800"
+        },
+        "path": ["colors", "green", "800"]
+      },
+      "900": {
+        "key": "{colors.green.900}",
+        "$type": "color",
+        "$value": "#22543d",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#22543d",
+          "key": "{colors.green.900}"
+        },
+        "name": "colors-green-900",
+        "attributes": {
+          "category": "colors",
+          "type": "green",
+          "item": "900"
+        },
+        "path": ["colors", "green", "900"]
+      }
+    },
+    "teal": {
+      "100": {
+        "key": "{colors.teal.100}",
+        "$type": "color",
+        "$value": "#e6fffa",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#e6fffa",
+          "key": "{colors.teal.100}"
+        },
+        "name": "colors-teal-100",
+        "attributes": {
+          "category": "colors",
+          "type": "teal",
+          "item": "100"
+        },
+        "path": ["colors", "teal", "100"]
+      },
+      "200": {
+        "key": "{colors.teal.200}",
+        "$type": "color",
+        "$value": "#b2f5ea",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#b2f5ea",
+          "key": "{colors.teal.200}"
+        },
+        "name": "colors-teal-200",
+        "attributes": {
+          "category": "colors",
+          "type": "teal",
+          "item": "200"
+        },
+        "path": ["colors", "teal", "200"]
+      },
+      "300": {
+        "key": "{colors.teal.300}",
+        "$type": "color",
+        "$value": "#81e6d9",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#81e6d9",
+          "key": "{colors.teal.300}"
+        },
+        "name": "colors-teal-300",
+        "attributes": {
+          "category": "colors",
+          "type": "teal",
+          "item": "300"
+        },
+        "path": ["colors", "teal", "300"]
+      },
+      "400": {
+        "key": "{colors.teal.400}",
+        "$type": "color",
+        "$value": "#4fd1c5",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#4fd1c5",
+          "key": "{colors.teal.400}"
+        },
+        "name": "colors-teal-400",
+        "attributes": {
+          "category": "colors",
+          "type": "teal",
+          "item": "400"
+        },
+        "path": ["colors", "teal", "400"]
+      },
+      "500": {
+        "key": "{colors.teal.500}",
+        "$type": "color",
+        "$value": "#38b2ac",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#38b2ac",
+          "key": "{colors.teal.500}"
+        },
+        "name": "colors-teal-500",
+        "attributes": {
+          "category": "colors",
+          "type": "teal",
+          "item": "500"
+        },
+        "path": ["colors", "teal", "500"]
+      },
+      "600": {
+        "key": "{colors.teal.600}",
+        "$type": "color",
+        "$value": "#319795",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#319795",
+          "key": "{colors.teal.600}"
+        },
+        "name": "colors-teal-600",
+        "attributes": {
+          "category": "colors",
+          "type": "teal",
+          "item": "600"
+        },
+        "path": ["colors", "teal", "600"]
+      },
+      "700": {
+        "key": "{colors.teal.700}",
+        "$type": "color",
+        "$value": "#2c7a7b",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#2c7a7b",
+          "key": "{colors.teal.700}"
+        },
+        "name": "colors-teal-700",
+        "attributes": {
+          "category": "colors",
+          "type": "teal",
+          "item": "700"
+        },
+        "path": ["colors", "teal", "700"]
+      },
+      "800": {
+        "key": "{colors.teal.800}",
+        "$type": "color",
+        "$value": "#285e61",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#285e61",
+          "key": "{colors.teal.800}"
+        },
+        "name": "colors-teal-800",
+        "attributes": {
+          "category": "colors",
+          "type": "teal",
+          "item": "800"
+        },
+        "path": ["colors", "teal", "800"]
+      },
+      "900": {
+        "key": "{colors.teal.900}",
+        "$type": "color",
+        "$value": "#234e52",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#234e52",
+          "key": "{colors.teal.900}"
+        },
+        "name": "colors-teal-900",
+        "attributes": {
+          "category": "colors",
+          "type": "teal",
+          "item": "900"
+        },
+        "path": ["colors", "teal", "900"]
+      }
+    },
+    "blue": {
+      "100": {
+        "key": "{colors.blue.100}",
+        "$type": "color",
+        "$value": "#ebf8ff",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#ebf8ff",
+          "key": "{colors.blue.100}"
+        },
+        "name": "colors-blue-100",
+        "attributes": {
+          "category": "colors",
+          "type": "blue",
+          "item": "100"
+        },
+        "path": ["colors", "blue", "100"]
+      },
+      "200": {
+        "key": "{colors.blue.200}",
+        "$type": "color",
+        "$value": "#bee3f8",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#bee3f8",
+          "key": "{colors.blue.200}"
+        },
+        "name": "colors-blue-200",
+        "attributes": {
+          "category": "colors",
+          "type": "blue",
+          "item": "200"
+        },
+        "path": ["colors", "blue", "200"]
+      },
+      "300": {
+        "key": "{colors.blue.300}",
+        "$type": "color",
+        "$value": "#90cdf4",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#90cdf4",
+          "key": "{colors.blue.300}"
+        },
+        "name": "colors-blue-300",
+        "attributes": {
+          "category": "colors",
+          "type": "blue",
+          "item": "300"
+        },
+        "path": ["colors", "blue", "300"]
+      },
+      "400": {
+        "key": "{colors.blue.400}",
+        "$type": "color",
+        "$value": "#63b3ed",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#63b3ed",
+          "key": "{colors.blue.400}"
+        },
+        "name": "colors-blue-400",
+        "attributes": {
+          "category": "colors",
+          "type": "blue",
+          "item": "400"
+        },
+        "path": ["colors", "blue", "400"]
+      },
+      "500": {
+        "key": "{colors.blue.500}",
+        "$type": "color",
+        "$value": "#4299e1",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#4299e1",
+          "key": "{colors.blue.500}"
+        },
+        "name": "colors-blue-500",
+        "attributes": {
+          "category": "colors",
+          "type": "blue",
+          "item": "500"
+        },
+        "path": ["colors", "blue", "500"]
+      },
+      "600": {
+        "key": "{colors.blue.600}",
+        "$type": "color",
+        "$value": "#3182ce",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#3182ce",
+          "key": "{colors.blue.600}"
+        },
+        "name": "colors-blue-600",
+        "attributes": {
+          "category": "colors",
+          "type": "blue",
+          "item": "600"
+        },
+        "path": ["colors", "blue", "600"]
+      },
+      "700": {
+        "key": "{colors.blue.700}",
+        "$type": "color",
+        "$value": "#2b6cb0",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#2b6cb0",
+          "key": "{colors.blue.700}"
+        },
+        "name": "colors-blue-700",
+        "attributes": {
+          "category": "colors",
+          "type": "blue",
+          "item": "700"
+        },
+        "path": ["colors", "blue", "700"]
+      },
+      "800": {
+        "key": "{colors.blue.800}",
+        "$type": "color",
+        "$value": "#2c5282",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#2c5282",
+          "key": "{colors.blue.800}"
+        },
+        "name": "colors-blue-800",
+        "attributes": {
+          "category": "colors",
+          "type": "blue",
+          "item": "800"
+        },
+        "path": ["colors", "blue", "800"]
+      },
+      "900": {
+        "key": "{colors.blue.900}",
+        "$type": "color",
+        "$value": "#2a4365",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#2a4365",
+          "key": "{colors.blue.900}"
+        },
+        "name": "colors-blue-900",
+        "attributes": {
+          "category": "colors",
+          "type": "blue",
+          "item": "900"
+        },
+        "path": ["colors", "blue", "900"]
+      }
+    },
+    "indigo": {
+      "100": {
+        "key": "{colors.indigo.100}",
+        "$type": "color",
+        "$value": "#ebf4ff",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#ebf4ff",
+          "key": "{colors.indigo.100}"
+        },
+        "name": "colors-indigo-100",
+        "attributes": {
+          "category": "colors",
+          "type": "indigo",
+          "item": "100"
+        },
+        "path": ["colors", "indigo", "100"]
+      },
+      "200": {
+        "key": "{colors.indigo.200}",
+        "$type": "color",
+        "$value": "#c3dafe",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#c3dafe",
+          "key": "{colors.indigo.200}"
+        },
+        "name": "colors-indigo-200",
+        "attributes": {
+          "category": "colors",
+          "type": "indigo",
+          "item": "200"
+        },
+        "path": ["colors", "indigo", "200"]
+      },
+      "300": {
+        "key": "{colors.indigo.300}",
+        "$type": "color",
+        "$value": "#a3bffa",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#a3bffa",
+          "key": "{colors.indigo.300}"
+        },
+        "name": "colors-indigo-300",
+        "attributes": {
+          "category": "colors",
+          "type": "indigo",
+          "item": "300"
+        },
+        "path": ["colors", "indigo", "300"]
+      },
+      "400": {
+        "key": "{colors.indigo.400}",
+        "$type": "color",
+        "$value": "#7f9cf5",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#7f9cf5",
+          "key": "{colors.indigo.400}"
+        },
+        "name": "colors-indigo-400",
+        "attributes": {
+          "category": "colors",
+          "type": "indigo",
+          "item": "400"
+        },
+        "path": ["colors", "indigo", "400"]
+      },
+      "500": {
+        "key": "{colors.indigo.500}",
+        "$type": "color",
+        "$value": "#667eea",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#667eea",
+          "key": "{colors.indigo.500}"
+        },
+        "name": "colors-indigo-500",
+        "attributes": {
+          "category": "colors",
+          "type": "indigo",
+          "item": "500"
+        },
+        "path": ["colors", "indigo", "500"]
+      },
+      "600": {
+        "key": "{colors.indigo.600}",
+        "$type": "color",
+        "$value": "#5a67d8",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#5a67d8",
+          "key": "{colors.indigo.600}"
+        },
+        "name": "colors-indigo-600",
+        "attributes": {
+          "category": "colors",
+          "type": "indigo",
+          "item": "600"
+        },
+        "path": ["colors", "indigo", "600"]
+      },
+      "700": {
+        "key": "{colors.indigo.700}",
+        "$type": "color",
+        "$value": "#4c51bf",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#4c51bf",
+          "key": "{colors.indigo.700}"
+        },
+        "name": "colors-indigo-700",
+        "attributes": {
+          "category": "colors",
+          "type": "indigo",
+          "item": "700"
+        },
+        "path": ["colors", "indigo", "700"]
+      },
+      "800": {
+        "key": "{colors.indigo.800}",
+        "$type": "color",
+        "$value": "#434190",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#434190",
+          "key": "{colors.indigo.800}"
+        },
+        "name": "colors-indigo-800",
+        "attributes": {
+          "category": "colors",
+          "type": "indigo",
+          "item": "800"
+        },
+        "path": ["colors", "indigo", "800"]
+      },
+      "900": {
+        "key": "{colors.indigo.900}",
+        "$type": "color",
+        "$value": "#3c366b",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#3c366b",
+          "key": "{colors.indigo.900}"
+        },
+        "name": "colors-indigo-900",
+        "attributes": {
+          "category": "colors",
+          "type": "indigo",
+          "item": "900"
+        },
+        "path": ["colors", "indigo", "900"]
+      }
+    },
+    "purple": {
+      "100": {
+        "key": "{colors.purple.100}",
+        "$type": "color",
+        "$value": "#faf5ff",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#faf5ff",
+          "key": "{colors.purple.100}"
+        },
+        "name": "colors-purple-100",
+        "attributes": {
+          "category": "colors",
+          "type": "purple",
+          "item": "100"
+        },
+        "path": ["colors", "purple", "100"]
+      },
+      "200": {
+        "key": "{colors.purple.200}",
+        "$type": "color",
+        "$value": "#e9d8fd",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#e9d8fd",
+          "key": "{colors.purple.200}"
+        },
+        "name": "colors-purple-200",
+        "attributes": {
+          "category": "colors",
+          "type": "purple",
+          "item": "200"
+        },
+        "path": ["colors", "purple", "200"]
+      },
+      "300": {
+        "key": "{colors.purple.300}",
+        "$type": "color",
+        "$value": "#d6bcfa",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#d6bcfa",
+          "key": "{colors.purple.300}"
+        },
+        "name": "colors-purple-300",
+        "attributes": {
+          "category": "colors",
+          "type": "purple",
+          "item": "300"
+        },
+        "path": ["colors", "purple", "300"]
+      },
+      "400": {
+        "key": "{colors.purple.400}",
+        "$type": "color",
+        "$value": "#b794f4",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#b794f4",
+          "key": "{colors.purple.400}"
+        },
+        "name": "colors-purple-400",
+        "attributes": {
+          "category": "colors",
+          "type": "purple",
+          "item": "400"
+        },
+        "path": ["colors", "purple", "400"]
+      },
+      "500": {
+        "key": "{colors.purple.500}",
+        "$type": "color",
+        "$value": "#9f7aea",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#9f7aea",
+          "key": "{colors.purple.500}"
+        },
+        "name": "colors-purple-500",
+        "attributes": {
+          "category": "colors",
+          "type": "purple",
+          "item": "500"
+        },
+        "path": ["colors", "purple", "500"]
+      },
+      "600": {
+        "key": "{colors.purple.600}",
+        "$type": "color",
+        "$value": "#805ad5",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#805ad5",
+          "key": "{colors.purple.600}"
+        },
+        "name": "colors-purple-600",
+        "attributes": {
+          "category": "colors",
+          "type": "purple",
+          "item": "600"
+        },
+        "path": ["colors", "purple", "600"]
+      },
+      "700": {
+        "key": "{colors.purple.700}",
+        "$type": "color",
+        "$value": "#6b46c1",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#6b46c1",
+          "key": "{colors.purple.700}"
+        },
+        "name": "colors-purple-700",
+        "attributes": {
+          "category": "colors",
+          "type": "purple",
+          "item": "700"
+        },
+        "path": ["colors", "purple", "700"]
+      },
+      "800": {
+        "key": "{colors.purple.800}",
+        "$type": "color",
+        "$value": "#553c9a",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#553c9a",
+          "key": "{colors.purple.800}"
+        },
+        "name": "colors-purple-800",
+        "attributes": {
+          "category": "colors",
+          "type": "purple",
+          "item": "800"
+        },
+        "path": ["colors", "purple", "800"]
+      },
+      "900": {
+        "key": "{colors.purple.900}",
+        "$type": "color",
+        "$value": "#44337a",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#44337a",
+          "key": "{colors.purple.900}"
+        },
+        "name": "colors-purple-900",
+        "attributes": {
+          "category": "colors",
+          "type": "purple",
+          "item": "900"
+        },
+        "path": ["colors", "purple", "900"]
+      }
+    },
+    "pink": {
+      "100": {
+        "key": "{colors.pink.100}",
+        "$type": "color",
+        "$value": "#fff5f7",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#fff5f7",
+          "key": "{colors.pink.100}"
+        },
+        "name": "colors-pink-100",
+        "attributes": {
+          "category": "colors",
+          "type": "pink",
+          "item": "100"
+        },
+        "path": ["colors", "pink", "100"]
+      },
+      "200": {
+        "key": "{colors.pink.200}",
+        "$type": "color",
+        "$value": "#fed7e2",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#fed7e2",
+          "key": "{colors.pink.200}"
+        },
+        "name": "colors-pink-200",
+        "attributes": {
+          "category": "colors",
+          "type": "pink",
+          "item": "200"
+        },
+        "path": ["colors", "pink", "200"]
+      },
+      "300": {
+        "key": "{colors.pink.300}",
+        "$type": "color",
+        "$value": "#fbb6ce",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#fbb6ce",
+          "key": "{colors.pink.300}"
+        },
+        "name": "colors-pink-300",
+        "attributes": {
+          "category": "colors",
+          "type": "pink",
+          "item": "300"
+        },
+        "path": ["colors", "pink", "300"]
+      },
+      "400": {
+        "key": "{colors.pink.400}",
+        "$type": "color",
+        "$value": "#f687b3",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#f687b3",
+          "key": "{colors.pink.400}"
+        },
+        "name": "colors-pink-400",
+        "attributes": {
+          "category": "colors",
+          "type": "pink",
+          "item": "400"
+        },
+        "path": ["colors", "pink", "400"]
+      },
+      "500": {
+        "key": "{colors.pink.500}",
+        "$type": "color",
+        "$value": "#ed64a6",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#ed64a6",
+          "key": "{colors.pink.500}"
+        },
+        "name": "colors-pink-500",
+        "attributes": {
+          "category": "colors",
+          "type": "pink",
+          "item": "500"
+        },
+        "path": ["colors", "pink", "500"]
+      },
+      "600": {
+        "key": "{colors.pink.600}",
+        "$type": "color",
+        "$value": "#d53f8c",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#d53f8c",
+          "key": "{colors.pink.600}"
+        },
+        "name": "colors-pink-600",
+        "attributes": {
+          "category": "colors",
+          "type": "pink",
+          "item": "600"
+        },
+        "path": ["colors", "pink", "600"]
+      },
+      "700": {
+        "key": "{colors.pink.700}",
+        "$type": "color",
+        "$value": "#b83280",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#b83280",
+          "key": "{colors.pink.700}"
+        },
+        "name": "colors-pink-700",
+        "attributes": {
+          "category": "colors",
+          "type": "pink",
+          "item": "700"
+        },
+        "path": ["colors", "pink", "700"]
+      },
+      "800": {
+        "key": "{colors.pink.800}",
+        "$type": "color",
+        "$value": "#97266d",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#97266d",
+          "key": "{colors.pink.800}"
+        },
+        "name": "colors-pink-800",
+        "attributes": {
+          "category": "colors",
+          "type": "pink",
+          "item": "800"
+        },
+        "path": ["colors", "pink", "800"]
+      },
+      "900": {
+        "key": "{colors.pink.900}",
+        "$type": "color",
+        "$value": "#702459",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "#702459",
+          "key": "{colors.pink.900}"
+        },
+        "name": "colors-pink-900",
+        "attributes": {
+          "category": "colors",
+          "type": "pink",
+          "item": "900"
+        },
+        "path": ["colors", "pink", "900"]
+      }
+    }
+  },
+  "opacity": {
+    "low": {
+      "key": "{opacity.low}",
+      "$type": "opacity",
+      "$value": 0.1,
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "original": {
+        "$type": "opacity",
+        "$value": "10%",
+        "key": "{opacity.low}"
+      },
+      "name": "opacity-low",
+      "attributes": {
+        "category": "opacity",
+        "type": "low"
+      },
+      "path": ["opacity", "low"]
+    },
+    "md": {
+      "key": "{opacity.md}",
+      "$type": "opacity",
+      "$value": 0.5,
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "original": {
+        "$type": "opacity",
+        "$value": "50%",
+        "key": "{opacity.md}"
+      },
+      "name": "opacity-md",
+      "attributes": {
+        "category": "opacity",
+        "type": "md"
+      },
+      "path": ["opacity", "md"]
+    },
+    "high": {
+      "key": "{opacity.high}",
+      "$type": "opacity",
+      "$value": 0.9,
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "original": {
+        "$type": "opacity",
+        "$value": "90%",
+        "key": "{opacity.high}"
+      },
+      "name": "opacity-high",
+      "attributes": {
+        "category": "opacity",
+        "type": "high"
+      },
+      "path": ["opacity", "high"]
+    }
+  },
+  "fontFamilies": {
+    "heading": {
+      "key": "{fontFamilies.heading}",
+      "$type": "fontFamily",
+      "$value": "Inter",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "fontFamilies"
+        }
+      },
+      "original": {
+        "$type": "fontFamily",
+        "$value": "Inter",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "fontFamilies"
+          }
+        },
+        "key": "{fontFamilies.heading}"
+      },
+      "name": "font-families-heading",
+      "attributes": {
+        "category": "fontFamilies",
+        "type": "heading"
+      },
+      "path": ["fontFamilies", "heading"]
+    },
+    "body": {
+      "key": "{fontFamilies.body}",
+      "$type": "fontFamily",
+      "$value": "Roboto",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "fontFamilies"
+        }
+      },
+      "original": {
+        "$type": "fontFamily",
+        "$value": "Roboto",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "fontFamilies"
+          }
+        },
+        "key": "{fontFamilies.body}"
+      },
+      "name": "font-families-body",
+      "attributes": {
+        "category": "fontFamilies",
+        "type": "body"
+      },
+      "path": ["fontFamilies", "body"]
+    }
+  },
+  "lineHeights": {
+    "heading": {
+      "key": "{lineHeights.heading}",
+      "$type": "lineHeight",
+      "$value": 1.1,
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "lineHeights"
+        }
+      },
+      "original": {
+        "$type": "lineHeight",
+        "$value": "110%",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "lineHeights"
+          }
+        },
+        "key": "{lineHeights.heading}"
+      },
+      "name": "line-heights-heading",
+      "attributes": {
+        "category": "lineHeights",
+        "type": "heading"
+      },
+      "path": ["lineHeights", "heading"]
+    },
+    "body": {
+      "key": "{lineHeights.body}",
+      "$type": "lineHeight",
+      "$value": 1.4,
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "lineHeights"
+        }
+      },
+      "original": {
+        "$type": "lineHeight",
+        "$value": "140%",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "lineHeights"
+          }
+        },
+        "key": "{lineHeights.body}"
+      },
+      "name": "line-heights-body",
+      "attributes": {
+        "category": "lineHeights",
+        "type": "body"
+      },
+      "path": ["lineHeights", "body"]
+    }
+  },
+  "letterSpacing": {
+    "default": {
+      "key": "{letterSpacing.default}",
+      "$type": "dimension",
+      "$value": "0",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "letterSpacing"
+        }
+      },
+      "original": {
+        "$type": "dimension",
+        "$value": "0",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "letterSpacing"
+          }
+        },
+        "key": "{letterSpacing.default}"
+      },
+      "name": "letter-spacing-default",
+      "attributes": {
+        "category": "letterSpacing",
+        "type": "default"
+      },
+      "path": ["letterSpacing", "default"]
+    },
+    "increased": {
+      "key": "{letterSpacing.increased}",
+      "$type": "dimension",
+      "$value": "1.5em",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "letterSpacing"
+        }
+      },
+      "original": {
+        "$type": "dimension",
+        "$value": "150%",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "letterSpacing"
+          }
+        },
+        "key": "{letterSpacing.increased}"
+      },
+      "name": "letter-spacing-increased",
+      "attributes": {
+        "category": "letterSpacing",
+        "type": "increased"
+      },
+      "path": ["letterSpacing", "increased"]
+    },
+    "decreased": {
+      "key": "{letterSpacing.decreased}",
+      "$type": "dimension",
+      "$value": "-0.05em",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "letterSpacing"
+        }
+      },
+      "original": {
+        "$type": "dimension",
+        "$value": "-5%",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "letterSpacing"
+          }
+        },
+        "key": "{letterSpacing.decreased}"
+      },
+      "name": "letter-spacing-decreased",
+      "attributes": {
+        "category": "letterSpacing",
+        "type": "decreased"
+      },
+      "path": ["letterSpacing", "decreased"]
+    }
+  },
+  "paragraphSpacing": {
+    "h1": {
+      "key": "{paragraphSpacing.h1}",
+      "$type": "dimension",
+      "$value": "32px",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "paragraphSpacing"
+        }
+      },
+      "original": {
+        "$type": "dimension",
+        "$value": "32",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "paragraphSpacing"
+          }
+        },
+        "key": "{paragraphSpacing.h1}"
+      },
+      "name": "paragraph-spacing-h1",
+      "attributes": {
+        "category": "paragraphSpacing",
+        "type": "h1"
+      },
+      "path": ["paragraphSpacing", "h1"]
+    },
+    "h2": {
+      "key": "{paragraphSpacing.h2}",
+      "$type": "dimension",
+      "$value": "26px",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "paragraphSpacing"
+        }
+      },
+      "original": {
+        "$type": "dimension",
+        "$value": "26",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "paragraphSpacing"
+          }
+        },
+        "key": "{paragraphSpacing.h2}"
+      },
+      "name": "paragraph-spacing-h2",
+      "attributes": {
+        "category": "paragraphSpacing",
+        "type": "h2"
+      },
+      "path": ["paragraphSpacing", "h2"]
+    }
+  },
+  "fontWeights": {
+    "headingRegular": {
+      "key": "{fontWeights.headingRegular}",
+      "$type": "fontWeight",
+      "$value": 400,
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "fontWeights"
+        }
+      },
+      "original": {
+        "$type": "fontWeight",
+        "$value": "Regular",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "fontWeights"
+          }
+        },
+        "key": "{fontWeights.headingRegular}"
+      },
+      "name": "font-weights-heading-regular",
+      "attributes": {
+        "category": "fontWeights",
+        "type": "headingRegular"
+      },
+      "path": ["fontWeights", "headingRegular"]
+    },
+    "headingBold": {
+      "key": "{fontWeights.headingBold}",
+      "$type": "fontWeight",
+      "$value": 700,
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "fontWeights"
+        }
+      },
+      "original": {
+        "$type": "fontWeight",
+        "$value": "Bold",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "fontWeights"
+          }
+        },
+        "key": "{fontWeights.headingBold}"
+      },
+      "name": "font-weights-heading-bold",
+      "attributes": {
+        "category": "fontWeights",
+        "type": "headingBold"
+      },
+      "path": ["fontWeights", "headingBold"]
+    },
+    "bodyRegular": {
+      "key": "{fontWeights.bodyRegular}",
+      "$type": "fontWeight",
+      "$value": 400,
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "fontWeights"
+        }
+      },
+      "original": {
+        "$type": "fontWeight",
+        "$value": "Regular",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "fontWeights"
+          }
+        },
+        "key": "{fontWeights.bodyRegular}"
+      },
+      "name": "font-weights-body-regular",
+      "attributes": {
+        "category": "fontWeights",
+        "type": "bodyRegular"
+      },
+      "path": ["fontWeights", "bodyRegular"]
+    },
+    "bodyBold": {
+      "key": "{fontWeights.bodyBold}",
+      "$type": "fontWeight",
+      "$value": 700,
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "fontWeights"
+        }
+      },
+      "original": {
+        "$type": "fontWeight",
+        "$value": "Bold",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "fontWeights"
+          }
+        },
+        "key": "{fontWeights.bodyBold}"
+      },
+      "name": "font-weights-body-bold",
+      "attributes": {
+        "category": "fontWeights",
+        "type": "bodyBold"
+      },
+      "path": ["fontWeights", "bodyBold"]
+    }
+  },
+  "fontSizes": {
+    "h1": {
+      "key": "{fontSizes.h1}",
+      "$type": "fontSize",
+      "$value": "49px",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "fontSizes"
+        }
+      },
+      "original": {
+        "$type": "fontSize",
+        "$value": "roundTo({fontSizes.body}*1.25^5)",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "fontSizes"
+          }
+        },
+        "key": "{fontSizes.h1}"
+      },
+      "name": "font-sizes-h1",
+      "attributes": {
+        "category": "fontSizes",
+        "type": "h1"
+      },
+      "path": ["fontSizes", "h1"]
+    },
+    "h2": {
+      "key": "{fontSizes.h2}",
+      "$type": "fontSize",
+      "$value": "39px",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "fontSizes"
+        }
+      },
+      "original": {
+        "$type": "fontSize",
+        "$value": "roundTo({fontSizes.body}*1.25^4)",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "fontSizes"
+          }
+        },
+        "key": "{fontSizes.h2}"
+      },
+      "name": "font-sizes-h2",
+      "attributes": {
+        "category": "fontSizes",
+        "type": "h2"
+      },
+      "path": ["fontSizes", "h2"]
+    },
+    "h3": {
+      "key": "{fontSizes.h3}",
+      "$type": "fontSize",
+      "$value": "31px",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "fontSizes"
+        }
+      },
+      "original": {
+        "$type": "fontSize",
+        "$value": "roundTo({fontSizes.body}*1.25^3)",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "fontSizes"
+          }
+        },
+        "key": "{fontSizes.h3}"
+      },
+      "name": "font-sizes-h3",
+      "attributes": {
+        "category": "fontSizes",
+        "type": "h3"
+      },
+      "path": ["fontSizes", "h3"]
+    },
+    "h4": {
+      "key": "{fontSizes.h4}",
+      "$type": "fontSize",
+      "$value": "25px",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "fontSizes"
+        }
+      },
+      "original": {
+        "$type": "fontSize",
+        "$value": "roundTo({fontSizes.body}*1.25^2)",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "fontSizes"
+          }
+        },
+        "key": "{fontSizes.h4}"
+      },
+      "name": "font-sizes-h4",
+      "attributes": {
+        "category": "fontSizes",
+        "type": "h4"
+      },
+      "path": ["fontSizes", "h4"]
+    },
+    "h5": {
+      "key": "{fontSizes.h5}",
+      "$type": "fontSize",
+      "$value": "20px",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "fontSizes"
+        }
+      },
+      "original": {
+        "$type": "fontSize",
+        "$value": "roundTo({fontSizes.body}*1.25^1)",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "fontSizes"
+          }
+        },
+        "key": "{fontSizes.h5}"
+      },
+      "name": "font-sizes-h5",
+      "attributes": {
+        "category": "fontSizes",
+        "type": "h5"
+      },
+      "path": ["fontSizes", "h5"]
+    },
+    "h6": {
+      "key": "{fontSizes.h6}",
+      "$type": "fontSize",
+      "$value": "16px",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "fontSizes"
+        }
+      },
+      "original": {
+        "$type": "fontSize",
+        "$value": "{fontSizes.body}",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "fontSizes"
+          }
+        },
+        "key": "{fontSizes.h6}"
+      },
+      "name": "font-sizes-h6",
+      "attributes": {
+        "category": "fontSizes",
+        "type": "h6"
+      },
+      "path": ["fontSizes", "h6"]
+    },
+    "body": {
+      "key": "{fontSizes.body}",
+      "$type": "fontSize",
+      "$value": "16px",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "fontSizes"
+        }
+      },
+      "original": {
+        "$type": "fontSize",
+        "$value": "16",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "fontSizes"
+          }
+        },
+        "key": "{fontSizes.body}"
+      },
+      "name": "font-sizes-body",
+      "attributes": {
+        "category": "fontSizes",
+        "type": "body"
+      },
+      "path": ["fontSizes", "body"]
+    },
+    "sm": {
+      "key": "{fontSizes.sm}",
+      "$type": "fontSize",
+      "$value": "13.6px",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "fontSizes"
+        }
+      },
+      "original": {
+        "$type": "fontSize",
+        "$value": "{fontSizes.body} * 0.85",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "fontSizes"
+          }
+        },
+        "key": "{fontSizes.sm}"
+      },
+      "name": "font-sizes-sm",
+      "attributes": {
+        "category": "fontSizes",
+        "type": "sm"
+      },
+      "path": ["fontSizes", "sm"]
+    },
+    "xs": {
+      "key": "{fontSizes.xs}",
+      "$type": "fontSize",
+      "$value": "10.4px",
+      "filePath": "src/tokens/sd-core.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "fontSizes"
+        }
+      },
+      "original": {
+        "$type": "fontSize",
+        "$value": "{fontSizes.body} * 0.65",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "fontSizes"
+          }
+        },
+        "key": "{fontSizes.xs}"
+      },
+      "name": "font-sizes-xs",
+      "attributes": {
+        "category": "fontSizes",
+        "type": "xs"
+      },
+      "path": ["fontSizes", "xs"]
+    }
+  },
+  "fg": {
+    "default": {
+      "key": "{fg.default}",
+      "$type": "color",
+      "$value": "#000000",
+      "filePath": "src/tokens/sd-light.json",
+      "isSource": true,
+      "original": {
+        "$type": "color",
+        "$value": "{colors.black}",
+        "key": "{fg.default}"
+      },
+      "name": "fg-default",
+      "attributes": {
+        "category": "fg",
+        "type": "default"
+      },
+      "path": ["fg", "default"]
+    },
+    "muted": {
+      "key": "{fg.muted}",
+      "$type": "color",
+      "$value": "#4a5568",
+      "filePath": "src/tokens/sd-light.json",
+      "isSource": true,
+      "original": {
+        "$type": "color",
+        "$value": "{colors.gray.700}",
+        "key": "{fg.muted}"
+      },
+      "name": "fg-muted",
+      "attributes": {
+        "category": "fg",
+        "type": "muted"
+      },
+      "path": ["fg", "muted"]
+    },
+    "subtle": {
+      "key": "{fg.subtle}",
+      "$type": "color",
+      "$value": "#a0aec0",
+      "filePath": "src/tokens/sd-light.json",
+      "isSource": true,
+      "original": {
+        "$type": "color",
+        "$value": "{colors.gray.500}",
+        "key": "{fg.subtle}"
+      },
+      "name": "fg-subtle",
+      "attributes": {
+        "category": "fg",
+        "type": "subtle"
+      },
+      "path": ["fg", "subtle"]
+    }
+  },
+  "bg": {
+    "default": {
+      "key": "{bg.default}",
+      "$type": "color",
+      "$value": "#ffffff",
+      "filePath": "src/tokens/sd-light.json",
+      "isSource": true,
+      "original": {
+        "$type": "color",
+        "$value": "{colors.white}",
+        "key": "{bg.default}"
+      },
+      "name": "bg-default",
+      "attributes": {
+        "category": "bg",
+        "type": "default"
+      },
+      "path": ["bg", "default"]
+    },
+    "muted": {
+      "key": "{bg.muted}",
+      "$type": "color",
+      "$value": "#f7fafc",
+      "filePath": "src/tokens/sd-light.json",
+      "isSource": true,
+      "original": {
+        "$type": "color",
+        "$value": "{colors.gray.100}",
+        "key": "{bg.muted}"
+      },
+      "name": "bg-muted",
+      "attributes": {
+        "category": "bg",
+        "type": "muted"
+      },
+      "path": ["bg", "muted"]
+    },
+    "subtle": {
+      "key": "{bg.subtle}",
+      "$type": "color",
+      "$value": "#edf2f7",
+      "filePath": "src/tokens/sd-light.json",
+      "isSource": true,
+      "original": {
+        "$type": "color",
+        "$value": "{colors.gray.200}",
+        "key": "{bg.subtle}"
+      },
+      "name": "bg-subtle",
+      "attributes": {
+        "category": "bg",
+        "type": "subtle"
+      },
+      "path": ["bg", "subtle"]
+    }
+  },
+  "accent": {
+    "default": {
+      "key": "{accent.default}",
+      "$type": "color",
+      "$value": "#7f9cf5",
+      "filePath": "src/tokens/sd-light.json",
+      "isSource": true,
+      "original": {
+        "$type": "color",
+        "$value": "{colors.indigo.400}",
+        "key": "{accent.default}"
+      },
+      "name": "accent-default",
+      "attributes": {
+        "category": "accent",
+        "type": "default"
+      },
+      "path": ["accent", "default"]
+    },
+    "onAccent": {
+      "key": "{accent.onAccent}",
+      "$type": "color",
+      "$value": "#ffffff",
+      "filePath": "src/tokens/sd-light.json",
+      "isSource": true,
+      "original": {
+        "$type": "color",
+        "$value": "{colors.white}",
+        "key": "{accent.onAccent}"
+      },
+      "name": "accent-on-accent",
+      "attributes": {
+        "category": "accent",
+        "type": "onAccent"
+      },
+      "path": ["accent", "onAccent"]
+    },
+    "bg": {
+      "key": "{accent.bg}",
+      "$type": "color",
+      "$value": "#c3dafe",
+      "filePath": "src/tokens/sd-light.json",
+      "isSource": true,
+      "original": {
+        "$type": "color",
+        "$value": "{colors.indigo.200}",
+        "key": "{accent.bg}"
+      },
+      "name": "accent-bg",
+      "attributes": {
+        "category": "accent",
+        "type": "bg"
+      },
+      "path": ["accent", "bg"]
+    }
+  },
+  "shadows": {
+    "default": {
+      "key": "{shadows.default}",
+      "$type": "color",
+      "$value": "#1a202c",
+      "filePath": "src/tokens/sd-light.json",
+      "isSource": true,
+      "original": {
+        "$type": "color",
+        "$value": "{colors.gray.900}",
+        "key": "{shadows.default}"
+      },
+      "name": "shadows-default",
+      "attributes": {
+        "category": "shadows",
+        "type": "default"
+      },
+      "path": ["shadows", "default"]
+    }
+  },
+  "button": {
+    "primary": {
+      "background": {
+        "key": "{button.primary.background}",
+        "$type": "color",
+        "$value": "#7f9cf5",
+        "filePath": "src/tokens/sd-theme.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "{accent.default}",
+          "key": "{button.primary.background}"
+        },
+        "name": "button-primary-background",
+        "attributes": {
+          "category": "button",
+          "type": "primary",
+          "item": "background"
+        },
+        "path": ["button", "primary", "background"]
+      },
+      "text": {
+        "key": "{button.primary.text}",
+        "$type": "color",
+        "$value": "#ffffff",
+        "filePath": "src/tokens/sd-theme.json",
+        "isSource": true,
+        "original": {
+          "$type": "color",
+          "$value": "{accent.onAccent}",
+          "key": "{button.primary.text}"
+        },
+        "name": "button-primary-text",
+        "attributes": {
+          "category": "button",
+          "type": "primary",
+          "item": "text"
+        },
+        "path": ["button", "primary", "text"]
+      }
+    },
+    "borderRadius": {
+      "key": "{button.borderRadius}",
+      "$type": "dimension",
+      "$value": "8px",
+      "filePath": "src/tokens/sd-theme.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "borderRadius"
+        }
+      },
+      "original": {
+        "$type": "dimension",
+        "$value": "{borderRadius.lg}",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "borderRadius"
+          }
+        },
+        "key": "{button.borderRadius}"
+      },
+      "name": "button-border-radius",
+      "attributes": {
+        "category": "button",
+        "type": "borderRadius"
+      },
+      "path": ["button", "borderRadius"]
+    },
+    "borderWidth": {
+      "key": "{button.borderWidth}",
+      "$type": "dimension",
+      "$value": "8px",
+      "filePath": "src/tokens/sd-theme.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "borderWidth"
+        }
+      },
+      "original": {
+        "$type": "dimension",
+        "$value": "{dimension.sm}",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "borderWidth"
+          }
+        },
+        "key": "{button.borderWidth}"
+      },
+      "name": "button-border-width",
+      "attributes": {
+        "category": "button",
+        "type": "borderWidth"
+      },
+      "path": ["button", "borderWidth"]
+    }
+  },
+  "card": {
+    "borderRadius": {
+      "key": "{card.borderRadius}",
+      "$type": "dimension",
+      "$value": "8px",
+      "filePath": "src/tokens/sd-theme.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "borderRadius"
+        }
+      },
+      "original": {
+        "$type": "dimension",
+        "$value": "{borderRadius.lg}",
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "borderRadius"
+          }
+        },
+        "key": "{card.borderRadius}"
+      },
+      "name": "card-border-radius",
+      "attributes": {
+        "category": "card",
+        "type": "borderRadius"
+      },
+      "path": ["card", "borderRadius"]
+    },
+    "background": {
+      "key": "{card.background}",
+      "$type": "color",
+      "$value": "#ffffff",
+      "filePath": "src/tokens/sd-theme.json",
+      "isSource": true,
+      "original": {
+        "$type": "color",
+        "$value": "{bg.default}",
+        "key": "{card.background}"
+      },
+      "name": "card-background",
+      "attributes": {
+        "category": "card",
+        "type": "background"
+      },
+      "path": ["card", "background"]
+    },
+    "padding": {
+      "key": "{card.padding}",
+      "$type": "dimension",
+      "$value": "16px",
+      "filePath": "src/tokens/sd-theme.json",
+      "isSource": true,
+      "original": {
+        "$type": "dimension",
+        "$value": "{dimension.md}",
+        "key": "{card.padding}"
+      },
+      "name": "card-padding",
+      "attributes": {
+        "category": "card",
+        "type": "padding"
+      },
+      "path": ["card", "padding"]
+    }
+  },
+  "boxShadow": {
+    "default": {
+      "key": "{boxShadow.default}",
+      "$type": "shadow",
+      "$value": "5px 5px 5px 3px rgba(26, 32, 44, 0.15), 4px 4px 5px 6px #00000033",
+      "filePath": "src/tokens/sd-theme.json",
+      "isSource": true,
+      "$extensions": {
+        "studio.tokens": {
+          "originalType": "boxShadow"
+        }
+      },
+      "original": {
+        "$type": "shadow",
+        "$value": [
+          {
+            "spread": 3,
+            "color": "rgba({shadows.default}, 0.15)",
+            "blur": 5,
+            "$type": "dropShadow",
+            "offsetX": 5,
+            "offsetY": 5
+          },
+          {
+            "spread": 6,
+            "color": "#00000033",
+            "blur": 5,
+            "$type": "innerShadow",
+            "offsetX": 4,
+            "offsetY": 4
+          }
+        ],
+        "$extensions": {
+          "studio.tokens": {
+            "originalType": "boxShadow"
+          }
+        },
+        "key": "{boxShadow.default}"
+      },
+      "name": "box-shadow-default",
+      "attributes": {
+        "category": "boxShadow",
+        "type": "default"
+      },
+      "path": ["boxShadow", "default"]
+    }
+  },
+  "typography": {
+    "H1": {
+      "Bold": {
+        "key": "{typography.H1.Bold}",
+        "$type": "typography",
+        "$value": "700 49px/1.1 Inter",
+        "filePath": "src/tokens/sd-theme.json",
+        "isSource": true,
+        "original": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{fontFamilies.heading}",
+            "fontWeight": "{fontWeights.headingBold}",
+            "lineHeight": "{lineHeights.heading}",
+            "fontSize": "{fontSizes.h1}",
+            "paragraphSpacing": "{paragraphSpacing.h1}",
+            "letterSpacing": "{letterSpacing.decreased}"
+          },
+          "key": "{typography.H1.Bold}"
+        },
+        "name": "typography-h1-bold",
+        "attributes": {
+          "category": "typography",
+          "type": "H1",
+          "item": "Bold"
+        },
+        "path": ["typography", "H1", "Bold"]
+      },
+      "Regular": {
+        "key": "{typography.H1.Regular}",
+        "$type": "typography",
+        "$value": "400 49px/1.1 Inter",
+        "filePath": "src/tokens/sd-theme.json",
+        "isSource": true,
+        "original": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{fontFamilies.heading}",
+            "fontWeight": "{fontWeights.headingRegular}",
+            "lineHeight": "{lineHeights.heading}",
+            "fontSize": "{fontSizes.h1}",
+            "paragraphSpacing": "{paragraphSpacing.h1}",
+            "letterSpacing": "{letterSpacing.decreased}"
+          },
+          "key": "{typography.H1.Regular}"
+        },
+        "name": "typography-h1-regular",
+        "attributes": {
+          "category": "typography",
+          "type": "H1",
+          "item": "Regular"
+        },
+        "path": ["typography", "H1", "Regular"]
+      }
+    },
+    "H2": {
+      "Bold": {
+        "key": "{typography.H2.Bold}",
+        "$type": "typography",
+        "$value": "700 39px/1.1 Inter",
+        "filePath": "src/tokens/sd-theme.json",
+        "isSource": true,
+        "original": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{fontFamilies.heading}",
+            "fontWeight": "{fontWeights.headingBold}",
+            "lineHeight": "{lineHeights.heading}",
+            "fontSize": "{fontSizes.h2}",
+            "paragraphSpacing": "{paragraphSpacing.h2}",
+            "letterSpacing": "{letterSpacing.decreased}"
+          },
+          "key": "{typography.H2.Bold}"
+        },
+        "name": "typography-h2-bold",
+        "attributes": {
+          "category": "typography",
+          "type": "H2",
+          "item": "Bold"
+        },
+        "path": ["typography", "H2", "Bold"]
+      },
+      "Regular": {
+        "key": "{typography.H2.Regular}",
+        "$type": "typography",
+        "$value": "400 39px/1.1 Inter",
+        "filePath": "src/tokens/sd-theme.json",
+        "isSource": true,
+        "original": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{fontFamilies.heading}",
+            "fontWeight": "{fontWeights.headingRegular}",
+            "lineHeight": "{lineHeights.heading}",
+            "fontSize": "{fontSizes.h2}",
+            "paragraphSpacing": "{paragraphSpacing.h2}",
+            "letterSpacing": "{letterSpacing.decreased}"
+          },
+          "key": "{typography.H2.Regular}"
+        },
+        "name": "typography-h2-regular",
+        "attributes": {
+          "category": "typography",
+          "type": "H2",
+          "item": "Regular"
+        },
+        "path": ["typography", "H2", "Regular"]
+      }
+    },
+    "Body": {
+      "key": "{typography.Body}",
+      "$type": "typography",
+      "$value": "400 16px/1.1 Roboto",
+      "filePath": "src/tokens/sd-theme.json",
+      "isSource": true,
+      "original": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{fontFamilies.body}",
+          "fontWeight": "{fontWeights.bodyRegular}",
+          "lineHeight": "{lineHeights.heading}",
+          "fontSize": "{fontSizes.body}",
+          "paragraphSpacing": "{paragraphSpacing.h2}"
+        },
+        "key": "{typography.Body}"
+      },
+      "name": "typography-body",
+      "attributes": {
+        "category": "typography",
+        "type": "Body"
+      },
+      "path": ["typography", "Body"]
+    }
+  }
+}
