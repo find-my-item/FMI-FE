@@ -39,8 +39,14 @@
       "$value": "{dimension.lg}"
     },
     "md": {
-      "value": "{dimension.md}",
-      "type": "spacing"
+      "value": {
+        "$type": "other",
+        "$value": "{dimension.md}"
+      },
+      "type": {
+        "$type": "other",
+        "$value": "spacing"
+      }
     },
     "xl": {
       "$type": "spacing",

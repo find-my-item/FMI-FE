@@ -194,6 +194,46 @@
       },
       "path": ["spacing", "lg"]
     },
+    "md": {
+      "value": {
+        "key": "{spacing.md.value}",
+        "$type": "other",
+        "$value": "16px",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "other",
+          "$value": "{dimension.md}",
+          "key": "{spacing.md.value}"
+        },
+        "name": "spacing-md-value",
+        "attributes": {
+          "category": "spacing",
+          "type": "md",
+          "item": "value"
+        },
+        "path": ["spacing", "md", "value"]
+      },
+      "type": {
+        "key": "{spacing.md.type}",
+        "$type": "other",
+        "$value": "spacing",
+        "filePath": "src/tokens/sd-core.json",
+        "isSource": true,
+        "original": {
+          "$type": "other",
+          "$value": "spacing",
+          "key": "{spacing.md.type}"
+        },
+        "name": "spacing-md-type",
+        "attributes": {
+          "category": "spacing",
+          "type": "md",
+          "item": "type"
+        },
+        "path": ["spacing", "md", "type"]
+      }
+    },
     "xl": {
       "key": "{spacing.xl}",
       "$type": "dimension",
