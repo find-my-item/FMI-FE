@@ -1,0 +1,10 @@
+{
+  "size-1": {
+    "value": "123",
+    "type": "sizing"
+  },
+  "size-3": {
+    "value": "{dimension.scale}",
+    "type": "spacing"
+  }
+}
