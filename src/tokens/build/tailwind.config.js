@@ -11,7 +11,7 @@ module.exports = {
         sm: "8px",
         md: "16px",
         lg: "32px",
-        xl: "64px",
+        xl: "64px"
       },
       spacing: {
         xs: "4px",
@@ -19,16 +19,16 @@ module.exports = {
         lg: "32px",
         md: {
           value: "16px",
-          type: "spacing",
+          type: "spacing"
         },
         xl: "64px",
-        multiValue: "8px 64px",
+        multiValue: "8px 64px"
       },
       borderRadius: {
         sm: "4px",
         lg: "8px",
         xl: "16px",
-        multiValue: "4px 8px",
+        multiValue: "4px 8px"
       },
       colors: {
         black: "#000000",
@@ -42,7 +42,7 @@ module.exports = {
           600: "#718096",
           700: "#4a5568",
           800: "#2d3748",
-          900: "#1a202c",
+          900: "#1a202c"
         },
         red: {
           100: "#fff5f5",
@@ -53,7 +53,7 @@ module.exports = {
           600: "#e53e3e",
           700: "#c53030",
           800: "#9b2c2c",
-          900: "#742a2a",
+          900: "#742a2a"
         },
         orange: {
           100: "#fffaf0",
@@ -64,7 +64,7 @@ module.exports = {
           600: "#dd6b20",
           700: "#c05621",
           800: "#9c4221",
-          900: "#7b341e",
+          900: "#7b341e"
         },
         yellow: {
           100: "#fffff0",
@@ -75,7 +75,7 @@ module.exports = {
           600: "#d69e2e",
           700: "#b7791f",
           800: "#975a16",
-          900: "#744210",
+          900: "#744210"
         },
         green: {
           100: "#f0fff4",
@@ -86,7 +86,7 @@ module.exports = {
           600: "#38a169",
           700: "#2f855a",
           800: "#276749",
-          900: "#22543d",
+          900: "#22543d"
         },
         teal: {
           100: "#e6fffa",
@@ -97,7 +97,7 @@ module.exports = {
           600: "#319795",
           700: "#2c7a7b",
           800: "#285e61",
-          900: "#234e52",
+          900: "#234e52"
         },
         blue: {
           100: "#ebf8ff",
@@ -108,7 +108,7 @@ module.exports = {
           600: "#3182ce",
           700: "#2b6cb0",
           800: "#2c5282",
-          900: "#2a4365",
+          900: "#2a4365"
         },
         indigo: {
           100: "#ebf4ff",
@@ -119,7 +119,7 @@ module.exports = {
           600: "#5a67d8",
           700: "#4c51bf",
           800: "#434190",
-          900: "#3c366b",
+          900: "#3c366b"
         },
         purple: {
           100: "#faf5ff",
@@ -130,7 +130,7 @@ module.exports = {
           600: "#805ad5",
           700: "#6b46c1",
           800: "#553c9a",
-          900: "#44337a",
+          900: "#44337a"
         },
         pink: {
           100: "#fff5f7",
@@ -141,93 +141,93 @@ module.exports = {
           600: "#d53f8c",
           700: "#b83280",
           800: "#97266d",
-          900: "#702459",
-        },
+          900: "#702459"
+        }
       },
       opacity: {
         low: 0.1,
         md: 0.5,
-        high: 0.9,
+        high: 0.9
       },
       fontFamilies: {
         heading: "Inter",
-        body: "Roboto",
+        body: "Roboto"
       },
       lineHeights: {
         heading: 1.1,
-        body: 1.4,
+        body: 1.4
       },
       letterSpacing: {
         default: "0",
         increased: "1.5em",
-        decreased: "-0.05em",
+        decreased: "-0.05em"
       },
       paragraphSpacing: {
-        h1: "32px",
-        h2: "26px",
+    "h1": "32px",
+    "h2": "26px"
       },
       fontWeights: {
         headingRegular: 400,
         headingBold: 700,
         bodyRegular: 400,
-        bodyBold: 700,
+        bodyBold: 700
       },
       fontSizes: {
-        h1: "49px",
-        h2: "39px",
-        h3: "31px",
-        h4: "25px",
-        h5: "20px",
-        h6: "16px",
+    "h1": "49px",
+    "h2": "39px",
+    "h3": "31px",
+    "h4": "25px",
+    "h5": "20px",
+    "h6": "16px",
         body: "16px",
         sm: "13.6px",
-        xs: "10.4px",
+        xs: "10.4px"
       },
       fg: {
         default: "#000000",
         muted: "#4a5568",
-        subtle: "#a0aec0",
+        subtle: "#a0aec0"
       },
       bg: {
         default: "#ffffff",
         muted: "#f7fafc",
-        subtle: "#edf2f7",
+        subtle: "#edf2f7"
       },
       accent: {
         default: "#7f9cf5",
         onAccent: "#ffffff",
-        bg: "#c3dafe",
+        bg: "#c3dafe"
       },
       shadows: {
-        default: "#1a202c",
+        default: "#1a202c"
       },
       button: {
         primary: {
           background: "#7f9cf5",
-          text: "#ffffff",
+          text: "#ffffff"
         },
         borderRadius: "8px",
-        borderWidth: "8px",
+        borderWidth: "8px"
       },
       card: {
         borderRadius: "8px",
         background: "#ffffff",
-        padding: "16px",
+        padding: "16px"
       },
       boxShadow: {
-        default: "5px 5px 5px 3px rgba(26, 32, 44, 0.15), 4px 4px 5px 6px #00000033",
+        default: "5px 5px 5px 3px rgba(26, 32, 44, 0.15), 4px 4px 5px 6px #00000033"
       },
       typography: {
-        H1: {
+    "H1": {
           Bold: "700 49px/1.1 Inter",
-          Regular: "400 49px/1.1 Inter",
+          Regular: "400 49px/1.1 Inter"
         },
-        H2: {
+    "H2": {
           Bold: "700 39px/1.1 Inter",
-          Regular: "400 39px/1.1 Inter",
+          Regular: "400 39px/1.1 Inter"
         },
-        Body: "400 16px/1.1 Roboto",
-      },
+        Body: "400 16px/1.1 Roboto"
+      }
     },
   },
-};
+}
