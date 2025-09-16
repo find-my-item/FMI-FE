@@ -1,101 +1,120 @@
 const Page = () => {
+  const shades = [100, 200, 300, 400, 500, 600, 700, 800, 900];
+
   return (
-    <div className="min-h-screen bg-light-bg-default dark:bg-dark-bg-default transition-colors duration-200 p-8">
+    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200 p-8">
       <div className="max-w-4xl mx-auto">
-        {/* Typography Example */}
-        <h1 className="text-4xl font-bold mb-6 text-light-fg-default dark:text-dark-fg-default">
+        {/* Title */}
+        <h1 className="text-4xl font-bold mb-6 text-gray-900 dark:text-gray-100 font-heading">
           Design System Showcase
         </h1>
 
         {/* Colors */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4 text-light-fg-default dark:text-dark-fg-default">
-            Colors
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[100, 200, 300, 400, 500, 600, 700, 800, 900].map((shade) => (
-              <div
-                key={`blue-${shade}`}
-                className="p-4 rounded-lg"
-                style={{ backgroundColor: `var(--core-colors-blue-${shade})` }}
-              >
-                <span className="text-sm font-mono">blue-{shade}</span>
+          <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">Colors</h2>
+
+          {/* Example: blue scale from theme.colors.blue[100..900] */}
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
+            {shades.map((shade) => (
+              <div key={`blue-${shade}`} className={`p-4 rounded-lg bg-blue-${shade}` as const}>
+                <span className="text-sm font-mono text-gray-900/80 dark:text-gray-900">
+                  blue-{shade}
+                </span>
               </div>
             ))}
           </div>
-        </section>
 
-        {/* Spacing */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4 text-light-fg-default dark:text-dark-fg-default">
-            Spacing
-          </h2>
-          <div className="space-y-4">
-            {["xs", "sm", "md", "lg", "xl"].map((size) => (
-              <div key={size} className="flex items-center">
-                <div
-                  className="bg-light-accent-default"
-                  style={{
-                    width: `var(--core-spacing-${size})`,
-                    height: "20px",
-                  }}
-                />
-                <span className="ml-2 text-light-fg-muted dark:text-dark-fg-muted">
-                  {size} ({`var(--core-spacing-${size})`})
+          {/* Teal scale */}
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            {shades.map((shade) => (
+              <div key={`teal-${shade}`} className={`p-4 rounded-lg bg-teal-${shade}` as const}>
+                <span className="text-sm font-mono text-gray-900/80 dark:text-gray-900">
+                  teal-{shade}
                 </span>
               </div>
             ))}
           </div>
         </section>
 
-        {/* Typography */}
+        {/* Spacing (uses theme.extend.spacing xs, sm, md, lg, xl) */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4 text-light-fg-default dark:text-dark-fg-default">
-            Typography
+          <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">Spacing</h2>
+          <div className="space-y-4">
+            {(["xs", "sm", "md", "lg", "xl"] as const).map((size) => (
+              <div key={size} className="flex items-center">
+                <div className={`bg-blue-400 dark:bg-blue-500 h-5`} style={{ width: undefined }}>
+                  {/* box purely sized by padding utility for visual width */}
+                </div>
+                <div className={`bg-purple-400 h-5 w-0 p-${size}`} />
+                <span className="ml-2 text-gray-700 dark:text-gray-300 font-mono">{`p-${size}`}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Border Radius (sm / lg / xl) */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">
+            Border Radius
           </h2>
-          <div className="space-y-6">
-            <h1 className="text-4xl font-bold text-light-fg-default dark:text-dark-fg-default">
-              Heading 1
-            </h1>
-            <h2 className="text-3xl font-bold text-light-fg-default dark:text-dark-fg-default">
-              Heading 2
-            </h2>
-            <h3 className="text-2xl font-bold text-light-fg-default dark:text-dark-fg-default">
-              Heading 3
-            </h3>
-            <p className="text-base text-light-fg-default dark:text-dark-fg-default">
-              This is a paragraph of text that shows the body font in action. It includes some
-              <span className="font-bold"> bold text </span>
-              and a{" "}
-              <a href="#" className="text-light-accent-default hover:underline">
-                link
-              </a>
-              .
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="p-6 bg-gray-100 dark:bg-gray-800 rounded-sm">rounded-sm</div>
+            <div className="p-6 bg-gray-100 dark:bg-gray-800 rounded-lg">rounded-lg</div>
+            <div className="p-6 bg-gray-100 dark:bg-gray-800 rounded-xl">rounded-xl</div>
+          </div>
+        </section>
+
+        {/* Opacity (low / md / high from theme.extend.opacity) */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">Opacity</h2>
+          <div className="flex items-center gap-4">
+            <div className="w-24 h-10 bg-purple-500 opacity-low rounded" />
+            <div className="w-24 h-10 bg-purple-500 opacity-md rounded" />
+            <div className="w-24 h-10 bg-purple-500 opacity-high rounded" />
+          </div>
+          <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">low / md / high</div>
+        </section>
+
+        {/* Typography (font families & sizes if configured) */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">Typography</h2>
+          <div className="space-y-3">
+            <p className="font-heading text-4xl text-gray-900 dark:text-gray-100">
+              Heading (font-heading)
+            </p>
+            <p className="font-body text-base text-gray-800 dark:text-gray-200">
+              Body (font-body). The quick brown fox jumps over the lazy dog.
+            </p>
+            <p className="tracking-increased text-gray-700 dark:text-gray-300">
+              Tracking increased
+            </p>
+            <p className="tracking-decreased text-gray-700 dark:text-gray-300">
+              Tracking decreased
             </p>
           </div>
         </section>
 
-        {/* Buttons */}
+        {/* Buttons (accent) */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4 text-light-fg-default dark:text-dark-fg-default">
-            Buttons
-          </h2>
+          <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">Buttons</h2>
           <div className="flex flex-wrap gap-4">
-            <button className="px-6 py-2 rounded-lg bg-light-accent-default text-light-accent-onaccent hover:opacity-90 transition-opacity">
+            <button className="px-6 py-2 rounded-lg bg-purple-400 text-white hover:opacity-90 transition-opacity">
               Primary Button
             </button>
-            <button className="px-6 py-2 rounded-lg border border-light-fg-muted text-light-fg-default hover:bg-light-bg-muted transition-colors dark:border-dark-fg-muted dark:text-dark-fg-default dark:hover:bg-dark-bg-muted">
+            <button className="px-6 py-2 rounded-lg border border-gray-400 text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
               Secondary Button
             </button>
           </div>
         </section>
 
-        <section>
-          <h2 className="text-2xl font-bold mb-4 text-teal-100">안녕하세요. 테스트입니다.</h2>
-          <div className="bg-teal-100 p-4 border-4 border-teal-100">테스트입니다.</div>
-          <div style={{ backgroundColor: "var(--core-colors-teal-100)", height: 40 }} />
-          <div style={{ backgroundColor: "var(--core-colors-teal-100)" }}>직접 변수 호출</div>
-          <div className="bg-teal-100">Tailwind 매핑</div>
+        {/* Cards (shadow & radius demo) */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">Card</h2>
+          <div className="p-md bg-white dark:bg-gray-800 rounded-lg shadow-[5px_5px_5px_3px_rgba(26,32,44,0.15),_4px_4px_5px_6px_#00000033]">
+            <p className="text-gray-800 dark:text-gray-200">
+              Custom boxShadow from theme.extend.boxShadow.default applied.
+            </p>
+          </div>
         </section>
       </div>
     </div>
