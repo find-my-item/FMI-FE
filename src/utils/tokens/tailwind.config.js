@@ -183,7 +183,6 @@ module.exports = {
         sm: "13.6px",
         xs: "10.4px",
       },
-      fontSize: "32px",
       fg: {
         default: "#000000",
         muted: "#4a5568",
