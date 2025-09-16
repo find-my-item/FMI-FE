@@ -1,5 +1,5 @@
 import type { Config } from "tailwindcss";
-const typedConfig: Config = require("./src/tokens/build/tailwind.config");
+const typedConfig: Config = require("./src/utils/tokens/tailwind.config");
 
 const {
   dimension, // check
