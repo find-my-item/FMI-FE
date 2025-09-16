@@ -1,15 +1,14 @@
 "use client";
-// 공용 컴포넌트 예시
 
+import { Tab } from "@/app/components/common";
 import { useState } from "react";
-import Tab from "@/app/components/common/Tab";
 
 const tabs = [
   { id: "1", label: "Tab 1" },
   { id: "2", label: "Tab 2" },
-  { id: "3", label: "Tab 3" },
 ];
 
+// 공용 컴포넌트 예시 페이지
 const page = () => {
   const [selected, setSelected] = useState("1");
   return (
