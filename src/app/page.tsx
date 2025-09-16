@@ -115,6 +115,7 @@ const Page = () => {
               Custom boxShadow from theme.extend.boxShadow.default applied.
             </p>
           </div>
+          <p className="bg-gray-900 text-white p-2">test</p>
         </section>
       </div>
     </div>
