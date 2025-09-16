@@ -1,0 +1,6 @@
+{
+  "fontSize": {
+    "$type": "sizing",
+    "$value": "{dimension.lg}"
+  }
+}
