@@ -10,9 +10,7 @@
     "test": "jest",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prepare": "husky",
-    "split:tokens": "node src/tokens/split-tokens.js",
-    "build:tokens:tailwind": "node src/tokens/sd-tokens-config.js && node src/tokens/tw-tokens-config.js"
+    "prepare": "husky"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.85.5",
