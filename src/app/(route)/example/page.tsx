@@ -2,6 +2,7 @@
 
 import { Dropdown, Tab } from "@/app/components/common";
 import Modal from "@/app/components/common/Modal/ModalLayout";
+import { useToast } from "@/app/context/ToastContext";
 import { useState } from "react";
 
 const tabs = [
@@ -20,9 +21,10 @@ const page = () => {
   const [selectedTab, setSelectedTab] = useState("1");
   const [selectedOption, setSelectedOption] = useState("1");
   const [isOpen, setIsOpen] = useState(false);
+  const { addToast } = useToast();
 
   return (
-    <div className="w-full h-[100vh] bg-gray-600 gap-4 flex-col-center">
+    <div className="w-full h-[100vh] bg-gray-600 gap-6 flex-col-center">
       {/* Tab */}
       <Tab
         tabs={tabs}
@@ -51,6 +53,28 @@ const page = () => {
           Close
         </button>
       </Modal>
+
+      {/* Toast */}
+      <div className="flex gap-2">
+        <button
+          className="px-4 py-2 border border-gray-300 rounded text-white hover:border-gray-500 hover:text-black mouse-hover"
+          onClick={() => addToast("정보가 정상적으로 처리되었습니다.", "info")}
+        >
+          Show info Toast
+        </button>
+        <button
+          className="px-4 py-2 border border-gray-300 rounded text-white hover:border-gray-500 hover:text-black mouse-hover"
+          onClick={() => addToast("성공적으로 저장되었습니다!", "success")}
+        >
+          Show Success Toast
+        </button>
+        <button
+          className="px-4 py-2 border border-gray-300 rounded text-white hover:border-gray-500 hover:text-black mouse-hover"
+          onClick={() => addToast("에러가 발생했습니다.", "error")}
+        >
+          Show Error Toast
+        </button>
+      </div>
     </div>
   );
 };
