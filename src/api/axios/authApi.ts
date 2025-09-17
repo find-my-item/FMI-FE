@@ -1,21 +1,13 @@
 import axios from "axios";
 
 const authApi = axios.create({
-  baseURL: "url", // env base url
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  withCredentials: true,
   timeout: 5000,
 });
 
-authApi.interceptors.request.use(
-  (config) => {
-    // 추후: JWT 토큰 주입
-    // const token = localStorage.getItem("accessToken");
-    // if (token) {
-    //   config.headers.Authorization = `Bearer ${token}`;
-    // }
-    // or cookie
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
+// authApi.interceptors.response.use(
+//   // authApi 401 에러 발생 시 토큰 재발급 로직 작성 가능
+// );
 
 export default authApi;
