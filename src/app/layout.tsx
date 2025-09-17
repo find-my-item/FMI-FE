@@ -1,5 +1,6 @@
 import "./globals.css";
 import Providers from "./providers";
+import { ToastProvider } from "./ToastProviders";
 
 export default function RootLayout({
   children,
@@ -9,7 +10,9 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className="antialiased">
-        <Providers>{children}</Providers>
+        <Providers>
+          <ToastProvider>{children}</ToastProvider>
+        </Providers>
       </body>
     </html>
   );
