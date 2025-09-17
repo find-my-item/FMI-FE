@@ -1,37 +1,36 @@
-name: Chromatic (trusted authors auto)
+name: Chromatic Deployment
 
 on:
-  pull_request_target:
+  push:
     branches: [develop]
-
-permissions:
-  contents: read
-  statuses: write
+  pull_request:
 
 jobs:
   chromatic:
-    # 내부 기여자만 허용 (OWNER, MEMBER, COLLABORATOR)
-    if: contains(fromJson('["OWNER","MEMBER","COLLABORATOR"]'), github.actor_association)
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout PR HEAD (trusted)
+      - name: Checkout
         uses: actions/checkout@v4
         with:
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
-          ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 0
-          persist-credentials: false
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: npm
+          node-version: 22
+          cache: "npm"
 
-      - run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
       - name: Publish to Chromatic
         uses: chromaui/action@v11
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           exitOnceUploaded: true
+
+      - name: Add UI Review Label
+        if: github.event_name == 'pull_request'
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          labels: 🤖 automated, Chromatic
