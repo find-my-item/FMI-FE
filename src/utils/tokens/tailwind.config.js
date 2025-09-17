@@ -17,6 +17,10 @@ module.exports = {
         xs: "4px",
         sm: "8px",
         lg: "32px",
+        md: {
+          value: "16px",
+          type: "spacing",
+        },
         xl: "64px",
         multiValue: "8px 64px",
       },
