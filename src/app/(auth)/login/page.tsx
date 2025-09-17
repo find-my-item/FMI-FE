@@ -18,7 +18,12 @@ const Page = () => {
     console.log(data);
   };
 
-  return <div></div>;
+  return (
+    <div>
+      <form onSubmit={handleSubmit(onSubmit)} >
+      </form>
+    </div>
+  )
 };
 
 export default Page;
