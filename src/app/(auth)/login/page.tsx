@@ -18,10 +18,7 @@ const Page = () => {
     console.log(data);
   };
 
-  return (
-    <div>
-    </div>
-  )
+  return <div></div>;
 };
 
 export default Page;

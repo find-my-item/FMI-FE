@@ -15,7 +15,7 @@ interface InputProps {
   register: UseFormRegister<FormValue>;
   required?: boolean;
   error?: FieldError;
-};
+}
 
 const AuthInput: React.FC<InputProps> = ({
   id,
@@ -27,7 +27,6 @@ const AuthInput: React.FC<InputProps> = ({
   validation,
   error,
 }) => {
-
   return (
     <>
       {label && <label htmlFor={id}>{label}</label>}

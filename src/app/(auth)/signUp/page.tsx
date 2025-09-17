@@ -13,9 +13,7 @@ const Page = () => {
   } = useForm<FormValue>({
     mode: "onChange",
     reValidateMode: "onChange",
-  }
-  );
-
+  });
 
   const onSubmit: SubmitHandler<FormValue> = (data) => {
     console.log(data);
@@ -40,7 +38,9 @@ const Page = () => {
           </div>
         ))}
 
-        <button type="submit" className="bg-slate-400 w-50 h-30" >회원가입</button>
+        <button type="submit" className="bg-slate-400 w-50 h-30">
+          회원가입
+        </button>
       </form>
     </div>
   );
