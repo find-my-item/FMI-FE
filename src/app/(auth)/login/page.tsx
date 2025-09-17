@@ -20,10 +20,9 @@ const Page = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)} >
-      </form>
+      <form onSubmit={handleSubmit(onSubmit)}></form>
     </div>
-  )
+  );
 };
 
 export default Page;
