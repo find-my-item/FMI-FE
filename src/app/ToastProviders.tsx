@@ -1,17 +1,18 @@
 "use client";
 
 import { createPortal } from "react-dom";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import { Toast } from "./components/common";
 import { ToastType } from "@/app/types/ToastTypes";
 import { ToastContext } from "./context/ToastContext";
 import { AnimatePresence, motion } from "framer-motion";
 
 export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
+  const idRef = useRef(0);
   const [toasts, setToasts] = useState<{ id: number; message: string; type: ToastType }[]>([]);
 
   const addToast = useCallback((message: string, type: ToastType) => {
-    const id = Date.now();
+    const id = (idRef.current += 1);
     setToasts((prev) => [...prev, { id, message, type }]);
     setTimeout(() => {
       setToasts((prev) => prev.filter((t) => t.id !== id));
@@ -28,11 +29,11 @@ export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
               {toasts.map((toast) => (
                 <motion.div
                   key={toast.id}
-                  initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -20, scale: 0.95 }}
-                  transition={{ duration: 0.2 }}
-                  className="pointer-events-auto"
+                  layout
+                  initial={{ opacity: 0, x: 40 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 40 }}
+                  transition={{ duration: 0.28, ease: "easeOut" }}
                 >
                   <Toast message={toast.message} type={toast.type} />
                 </motion.div>
