@@ -12,6 +12,7 @@ authApi.interceptors.request.use(
     // if (token) {
     //   config.headers.Authorization = `Bearer ${token}`;
     // }
+    // or cookie
     return config;
   },
   (error) => Promise.reject(error)
