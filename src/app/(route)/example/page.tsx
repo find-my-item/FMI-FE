@@ -1,8 +1,7 @@
 "use client";
 
-import { Dropdown, Tab } from "@/app/components/common";
-import Modal from "@/app/components/common/Modal/ModalLayout";
-import { useToast } from "@/app/context/ToastContext";
+import { Dropdown, Tab, ModalLayout } from "@/components";
+import { useToast } from "@/context/ToastContext";
 import { useState } from "react";
 
 const tabs = [
@@ -42,7 +41,7 @@ const page = () => {
       </button>
 
       {/* Modal */}
-      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} className="p-4 flex-center">
+      <ModalLayout isOpen={isOpen} onClose={() => setIsOpen(false)} className="p-4 flex-center">
         <h2>Modal Title</h2>
         <p className="h-[100px] flex-center">Modal Content</p>
         <span>Modal Footer</span>
@@ -52,7 +51,7 @@ const page = () => {
         >
           Close
         </button>
-      </Modal>
+      </ModalLayout>
 
       {/* Toast */}
       <div className="flex gap-2">

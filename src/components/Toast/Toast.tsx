@@ -1,5 +1,5 @@
 import { cn } from "@/utils/cn";
-import { ToastType } from "@/app/types/ToastTypes";
+import { ToastType } from "@/types/ToastTypes";
 
 interface ToastProps {
   message: string;
