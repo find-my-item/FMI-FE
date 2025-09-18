@@ -2,9 +2,9 @@
 
 import { createPortal } from "react-dom";
 import { useState, useCallback, useRef } from "react";
-import { Toast } from "@/app/components/common";
+import { Toast } from "@/components";
 import { ToastType } from "@/types/ToastTypes";
-import { ToastContext } from "@/app/context/ToastContext";
+import { ToastContext } from "@/context/ToastContext";
 import { AnimatePresence, motion } from "framer-motion";
 
 export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
