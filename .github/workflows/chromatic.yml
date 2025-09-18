@@ -1,12 +1,14 @@
 name: Chromatic Deployment
 
 on:
-  push:
-    branches: [develop]
   pull_request:
+    types: [closed]
+    branches:
+      - develop
 
 jobs:
   chromatic:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -28,9 +30,3 @@ jobs:
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           exitOnceUploaded: true
-
-      - name: Add UI Review Label
-        if: github.event_name == 'pull_request'
-        uses: actions-ecosystem/action-add-labels@v1
-        with:
-          labels: 🤖 automated, Chromatic
