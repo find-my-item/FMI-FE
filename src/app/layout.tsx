@@ -1,6 +1,6 @@
 import "./globals.css";
-import Providers from "./providers";
-import { ToastProvider } from "./ToastProviders";
+import Providers from "@/providers/QueryProviders";
+import { ToastProvider } from "@/providers/ToastProviders";
 
 export default function RootLayout({
   children,
