@@ -1,5 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import Input from "../../../components/Input/Input";
+import Input from "../../../components/common/Input/Input";
 import { FormValue, signUpInputObject } from "../types/FormData";
 
 const Page = () => {
