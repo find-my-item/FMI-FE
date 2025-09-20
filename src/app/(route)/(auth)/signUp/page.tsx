@@ -1,14 +1,12 @@
-"use client";
-
 import { SubmitHandler, useForm } from "react-hook-form";
-import AuthInput from "../../../components/Input/Input";
+import Input from "../../../components/Input/Input";
 import { FormValue, signUpInputObject } from "../types/FormData";
 
 const Page = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid, isSubmitting },
+    formState: { errors },
   } = useForm<FormValue>({
     mode: "onChange",
     reValidateMode: "onChange",
@@ -24,7 +22,7 @@ const Page = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         {signUpInputObject.map((item) => (
           <div key={item.id}>
-            <AuthInput
+            <Input
               register={register}
               id={item.id}
               label={item.label}

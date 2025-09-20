@@ -1,8 +1,6 @@
-"use client";
-
 import React from "react";
 import { RegisterOptions, UseFormRegister, FieldError } from "react-hook-form";
-import { FormValue } from "../types/FormData";
+import { FormValue } from "../../(route)/(auth)/types/FormData";
 
 const InputStyle = "w-[330px] h-[40px] px-3 py-3 m-2 border rounded-[3px]";
 
@@ -17,7 +15,7 @@ interface InputProps {
   error?: FieldError;
 }
 
-const AuthInput: React.FC<InputProps> = ({
+const Input = ({
   id,
   label,
   type = "text",
@@ -26,7 +24,7 @@ const AuthInput: React.FC<InputProps> = ({
   required = true,
   validation,
   error,
-}) => {
+}: InputProps) => {
   return (
     <>
       {label && <label htmlFor={id}>{label}</label>}
@@ -42,4 +40,4 @@ const AuthInput: React.FC<InputProps> = ({
   );
 };
 
-export default AuthInput;
+export default Input;
