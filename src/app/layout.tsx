@@ -1,6 +1,7 @@
 import "./globals.css";
 import Providers from "@/providers/QueryProviders";
 import { ToastProvider } from "@/providers/ToastProviders";
+import Header from "@/components/Header/Header";
 
 export default function RootLayout({
   children,
@@ -11,7 +12,10 @@ export default function RootLayout({
     <html lang="ko">
       <body className="antialiased">
         <Providers>
-          <ToastProvider>{children}</ToastProvider>
+          <ToastProvider>
+            <Header />
+            {children}
+          </ToastProvider>
         </Providers>
       </body>
     </html>

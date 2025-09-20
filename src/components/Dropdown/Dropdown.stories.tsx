@@ -1,7 +1,6 @@
 "use client";
 
 import { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
 import Dropdown from "./Dropdown";
 
 const meta = {
