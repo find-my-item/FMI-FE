@@ -1,6 +1,7 @@
 import { useModalBackdrop, useModalLockAndEsc } from "@/utils/useOverlayHandlers";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
+import Icon from "../Icon/Icon";
 
 const HeaderLink = [
   { name: "리스트", href: "/list" },
@@ -53,8 +54,7 @@ const SideBar = ({ isOpen, onClose }: SideBarProps) => {
               className="absolute top-4 right-4 text-gray-600 hover:text-gray-900 text-2xl select-none"
               aria-label="사이드바 닫기"
             >
-              {/* TODO(지권): 아이콘 변경 필요 */}
-              &times;
+              <Icon name="XSecond" />
             </button>
             <ul className="flex flex-col gap-4 mt-10">
               {HeaderLink.map((link) => (
