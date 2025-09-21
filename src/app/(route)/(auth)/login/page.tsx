@@ -13,9 +13,8 @@ const Page = () => {
       <input type="text" className={InputStyle} />
       <button>로그인</button>
       <input type="ckeckbox" />
-
     </div>
-  )
+  );
 };
 
 export default Page;

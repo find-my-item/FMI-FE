@@ -1,10 +1,8 @@
 import { RegisterOptions, UseFormRegister, FieldError } from "react-hook-form";
 import { FormValue } from "../../../(route)/(auth)/types/FormData";
 
-// const InputStyle = "w-[330px] h-[40px] px-3 py-3 m-2 border rounded-[3px]";
-
 interface InputProps {
-  inputStyle: string,
+  inputStyle: string;
   id: keyof FormValue;
   label?: string;
   type: string;

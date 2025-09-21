@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { SubmitHandler, useForm } from "react-hook-form";
 import Input from "../../../components/common/Input/Input";
