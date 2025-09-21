@@ -1,7 +1,7 @@
+import { Footer, Header } from "@/components";
 import "./globals.css";
 import Providers from "@/providers/QueryProviders";
 import { ToastProvider } from "@/providers/ToastProviders";
-import Header from "@/components/Header/Header";
 
 export default function RootLayout({
   children,
@@ -10,11 +10,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className="antialiased">
+      <body className="max-w-[700px] mx-auto flex-col-center border-2">
         <Providers>
           <ToastProvider>
             <Header />
             {children}
+            <Footer />
           </ToastProvider>
         </Providers>
       </body>

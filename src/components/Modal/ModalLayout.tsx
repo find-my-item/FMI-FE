@@ -1,3 +1,5 @@
+"use client";
+
 import { createPortal } from "react-dom";
 import { cn } from "@/utils/cn";
 import { useEffect, useCallback } from "react";
