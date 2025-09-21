@@ -1,8 +1,9 @@
-"use client";
+"use client"
 
 import { SubmitHandler, useForm } from "react-hook-form";
 import Input from "../../../components/common/Input/Input";
 import { FormValue, signUpInputObject } from "../types/FormData";
+import Button from "@/app/components/common/Button/Button";
 
 const InputStyle = "w-[330px] h-[40px] px-3 py-3 m-2 border rounded-[3px]";
 
@@ -17,7 +18,6 @@ const Page = () => {
   });
 
   const onSubmit: SubmitHandler<FormValue> = (data) => {
-    console.log(data);
     alert("폼 제출되었습니다.");
   };
 
@@ -39,10 +39,10 @@ const Page = () => {
             />
           </div>
         ))}
-
-        <button type="submit" className="bg-slate-400 w-50 h-30">
+        <Button name="회원가입" bnType="submit" bnStyle="bg-slate-400 w-50 h-30" />
+        {/* <button type="submit" className="bg-slate-400 w-50 h-30">
           회원가입
-        </button>
+        </button> */}
       </form>
     </div>
   );
