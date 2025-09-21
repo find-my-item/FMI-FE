@@ -1,6 +1,10 @@
+"use client"
+
 import { SubmitHandler, useForm } from "react-hook-form";
 import Input from "../../../components/common/Input/Input";
 import { FormValue, signUpInputObject } from "../types/FormData";
+
+const InputStyle = "w-[330px] h-[40px] px-3 py-3 m-2 border rounded-[3px]";
 
 const Page = () => {
   const {
@@ -24,6 +28,7 @@ const Page = () => {
           <div key={item.id}>
             <Input
               register={register}
+              inputStyle={InputStyle}
               id={item.id}
               label={item.label}
               type={item.type}

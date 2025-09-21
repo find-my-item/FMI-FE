@@ -1,10 +1,10 @@
-import React from "react";
 import { RegisterOptions, UseFormRegister, FieldError } from "react-hook-form";
 import { FormValue } from "../../../(route)/(auth)/types/FormData";
 
-const InputStyle = "w-[330px] h-[40px] px-3 py-3 m-2 border rounded-[3px]";
+// const InputStyle = "w-[330px] h-[40px] px-3 py-3 m-2 border rounded-[3px]";
 
 interface InputProps {
+  inputStyle: string,
   id: keyof FormValue;
   label?: string;
   type: string;
@@ -16,6 +16,7 @@ interface InputProps {
 }
 
 const Input = ({
+  inputStyle,
   id,
   label,
   type = "text",
@@ -30,7 +31,7 @@ const Input = ({
       {label && <label htmlFor={id}>{label}</label>}
       <input
         {...register(id, validation)}
-        className={InputStyle}
+        className={inputStyle}
         type={type}
         placeholder={placeholder}
         required={required}
