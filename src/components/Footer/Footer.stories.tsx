@@ -4,7 +4,6 @@ import Footer from "./Footer";
 const meta = {
   title: "Components/Footer",
   component: Footer,
-  tags: ["autodocs"],
 } satisfies Meta<typeof Footer>;
 
 export default meta;
