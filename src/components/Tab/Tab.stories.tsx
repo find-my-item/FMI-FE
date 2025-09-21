@@ -1,6 +1,6 @@
 "use client";
 
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 import { useState } from "react";
 import Tab from "./Tab";
 
