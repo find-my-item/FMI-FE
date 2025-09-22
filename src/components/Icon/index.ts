@@ -5,3 +5,4 @@ export { default as Logo } from "@/assets/logo.svg";
 export { default as ArrowLeft } from "@/assets/arrow-left.svg";
 export { default as Book } from "@/assets/book.svg";
 export { default as ArrowDown } from "@/assets/arrow-down.svg";
+export { default as ArrowUp } from "@/assets/arrow-up.svg";
