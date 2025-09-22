@@ -10,7 +10,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className="max-w-[700px] mx-auto flex-col-center border-2">
+      <body className="max-w-[390px] mx-auto flex-col-center border-2">
         <Providers>
           <ToastProvider>
             <Header />
