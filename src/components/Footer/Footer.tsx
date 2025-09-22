@@ -1,3 +1,6 @@
+"use client";
+
+import { useHiddenPath } from "@/hooks/useHiddenPath";
 import Link from "next/link";
 
 const FooterLink = [
@@ -7,6 +10,9 @@ const FooterLink = [
 ];
 
 const Footer = () => {
+  const isHidden = useHiddenPath();
+  if (isHidden) return null;
+
   return (
     <footer className="sticky bottom-0 w-full bg-gray-300 text-black py-4">
       <div className="container mx-auto px-4 flex flex-col items-center gap-4">
