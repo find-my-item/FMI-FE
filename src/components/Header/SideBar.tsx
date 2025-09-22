@@ -2,7 +2,7 @@ import { useModalBackdrop, useModalLockAndEsc } from "@/utils/useOverlayHandlers
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import Icon from "../Icon/Icon";
-import ManualPopup from "@/app/(route)/manual/_components/ManualPopup";
+import ManualPopup from "@/components/ManualPopup/ManualPopup";
 import { useState } from "react";
 
 const HeaderLink = [

@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/utils/cn";
-import ManualPopup from "./_components/ManualPopup";
+import ManualPopup from "../../../components/ManualPopup/ManualPopup";
 import { useState } from "react";
 
 const manualList = [
