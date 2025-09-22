@@ -2,6 +2,7 @@
 
 import Icon from "@/components/Icon/Icon";
 import { cn } from "@/utils/cn";
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -23,22 +24,35 @@ const ManualItem = () => {
           </span>
         </button>
       </div>
-      {isOpen && (
-        <div className="w-full bg-[#E4E4E4]">
-          <div className="px-[20px] py-[38px] text-sm text-[#525252]">
-            <p className="mb-[26px]">
-              경찰청 유실물 종합 포털(
-              <Link href="https://www.lost112.go.kr/" target="_blank" rel="noopener noreferrer">
-                https://www.lost112.go.kr/
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="w-full bg-[#E4E4E4] overflow-hidden"
+          >
+            <div className="px-[20px] py-[38px] text-sm text-[#525252]">
+              <p className="mb-[26px]">
+                경찰청 유실물 종합 포털(
+                <Link href="https://www.lost112.go.kr/" target="_blank" rel="noopener noreferrer">
+                  https://www.lost112.go.kr/
+                </Link>
+                )을 통해 경찰청에서 보관 중인 유실물을 확인해 보세요.
+              </p>
+              <Link
+                href="https://www.lost112.go.kr/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-[30px] py-[14px] rounded-[4px] bg-[#525252] font-semibold text-[14px] text-white"
+              >
+                경찰청 바로가기
               </Link>
-              )을 통해 경찰청에서 보관 중인 유실물을 확인해 보세요.
-            </p>
-            <button className="px-[30px] py-[14px] rounded-[4px] bg-[#525252] font-semibold text-[14px] text-white">
-              경찰청 바로가기
-            </button>
-          </div>
-        </div>
-      )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };
