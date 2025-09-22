@@ -14,7 +14,7 @@ const HeaderLink = [
   { name: "공지사항", href: "/notice" },
   { name: "FAQ", href: "/faq" },
   { name: "채팅", href: "/chat" },
-  { name: "메뉴얼", href: "/manual" },
+  { name: "매뉴얼", href: "/manual" },
 ];
 
 type SideBarProps = {
@@ -76,7 +76,7 @@ const SideBar = ({ isOpen, onClose }: SideBarProps) => {
                   onClick={() => setManualPopup(true)}
                   className="mt-4 px-[16px] py-[12px] rounded-[12px] bg-[#04AD69] text-[16px] text-white"
                 >
-                  메뉴얼 보기 버튼
+                  매뉴얼 보기 버튼
                 </button>
                 <ManualPopup isOpen={manualPopup} onClose={() => setManualPopup(false)} />
               </li>
