@@ -25,10 +25,10 @@ const ManualPopup = ({ isOpen, onClose }: ManualPopupProps) => {
         <div className="text-center">
           <h1 className="mb-4 text-[20px] leading-[26px] font-semibold text-[#171717]">
             분실물이 있나요? <br />
-            메뉴얼을 보면 더 도움이 돼요!
+            매뉴얼을 보면 더 도움이 돼요!
           </h1>
           <p className="text-[14px] leading-[22px] text-[#7D7D7D]">
-            분실물 발생 시 도움이 되는 정보를 <br /> 메뉴얼에서 확인해 보세요.
+            분실물 발생 시 도움이 되는 정보를 <br /> 매뉴얼에서 확인해 보세요.
           </p>
         </div>
 

@@ -11,7 +11,7 @@ const ManualHeader = () => {
       <button className="w-[30px] h-[30px]" onClick={() => router.back()}>
         꺾쇠
       </button>
-      <h1 className="text-[20px] font-semibold text-[#242424]">유실물 발생 시 메뉴얼</h1>
+      <h1 className="text-[20px] font-semibold text-[#242424]">유실물 발생 시 매뉴얼</h1>
     </div>
   );
 };

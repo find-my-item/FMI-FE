@@ -4,3 +4,4 @@ export { default as XSecond } from "@/assets/x-second.svg";
 export { default as Logo } from "@/assets/logo.svg";
 export { default as ArrowLeft } from "@/assets/arrow-left.svg";
 export { default as Book } from "@/assets/book.svg";
+export { default as ArrowDown } from "@/assets/arrow-down.svg";

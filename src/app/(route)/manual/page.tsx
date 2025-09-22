@@ -1,26 +1,25 @@
 "use client";
 
 import { cn } from "@/utils/cn";
-import ManualPopup from "../../../components/ManualPopup/ManualPopup";
 import { useState } from "react";
+import ManualItem from "./_components/ManualItem";
 
 const manualList = [
   {
     title: "분실",
-    content: "분실 메뉴얼",
+    content: "분실 매뉴얼",
   },
   {
     title: "습득",
-    content: "습득 메뉴얼",
+    content: "습득 매뉴얼",
   },
   {
     title: "도난",
-    content: "도난 메뉴얼",
+    content: "도난 매뉴얼",
   },
 ];
 
 const page = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState("분실");
 
   return (
@@ -38,13 +37,10 @@ const page = () => {
           </button>
         ))}
       </div>
-      <button
-        onClick={() => setIsOpen(true)}
-        className="mt-4 px-[16px] py-[12px] rounded-[12px] bg-[#04AD69] text-[16px] text-white"
-      >
-        메뉴얼 보기 버튼
-      </button>
-      <ManualPopup isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      <ManualItem />
+      <ManualItem />
+      <ManualItem />
+      <ManualItem />
     </div>
   );
 };
