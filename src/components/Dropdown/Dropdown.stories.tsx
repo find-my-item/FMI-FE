@@ -1,6 +1,6 @@
 "use client";
 
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 import Dropdown from "./Dropdown";
 
 const meta = {
