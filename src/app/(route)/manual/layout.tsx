@@ -4,7 +4,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <ManualHeader />
-      <div className="w-full h-[calc(100vh-60px)]">{children}</div>
+      <div className="w-full min-h-[calc(100vh-60px)]">{children}</div>
     </>
   );
 };
