@@ -1,33 +1,26 @@
-"use client"
+"use client";
 
-import { SubmitHandler, useForm } from "react-hook-form";
-import Input from "../../../components/common/Input/Input";
+import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { FormValue, signUpInputObject } from "../types/FormData";
+import Input from "@/app/components/common/Input/Input";
 import Button from "@/app/components/common/Button/Button";
 
 const InputStyle = "w-[330px] h-[40px] px-3 py-3 m-2 border rounded-[3px]";
 
 const Page = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormValue>({
-    mode: "onChange",
-    reValidateMode: "onChange",
-  });
+  const methods = useForm<FormValue>();
 
-  const onSubmit: SubmitHandler<FormValue> = (data) => {
+  const onSubmit = (data: any) => {
     alert("폼 제출되었습니다.");
+    console.log(data); // 폼 제출 확인
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <FormProvider {...methods}>
+      <form onSubmit={methods.handleSubmit(onSubmit)}>
         {signUpInputObject.map((item) => (
           <div key={item.id}>
             <Input
-              register={register}
               inputStyle={InputStyle}
               id={item.id}
               label={item.label}
@@ -35,16 +28,12 @@ const Page = () => {
               placeholder={item.placeholder}
               required={item.required}
               validation={item.validation}
-              error={errors[item.id]}
             />
           </div>
         ))}
         <Button name="회원가입" bnType="submit" bnStyle="bg-slate-400 w-50 h-30" />
-        {/* <button type="submit" className="bg-slate-400 w-50 h-30">
-          회원가입
-        </button> */}
       </form>
-    </div>
+    </FormProvider>
   );
 };
 

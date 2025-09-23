@@ -47,7 +47,7 @@ export const signUpInputObject: InputType[] = [
     id: "passwordConfirm",
     label: "비밀번호 확인",
     type: "password",
-    placeholder: "비밀번호 확인",
+    placeholder: "비밀번호 재입력",
     validation: {
       required: true,
       pattern: {
@@ -57,12 +57,16 @@ export const signUpInputObject: InputType[] = [
     },
   },
   {
-    id: "nickname",
     label: "닉네임",
     type: "text",
-    placeholder: "닉네임을 입력해주세요",
+    id: "nickname",
+    placeholder: "닉네임을 입력해주세요.",
     validation: {
-      required: true,
+      required: "닉네임을 입력해주세요.",
+      maxLength: {
+        value: 10,
+        message: "한글+영문 / 한글 + 숫자 등 모두 가능 (10자 이내로)",
+      },
     },
   },
 ];
