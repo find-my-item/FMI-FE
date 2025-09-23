@@ -3,6 +3,7 @@
 import { cn } from "@/utils/cn";
 import { useState } from "react";
 import ManualItem from "./_components/ManualItem";
+import { MANUAL } from "./_constants/MANUAL";
 
 const manualList = [
   {
@@ -27,6 +28,7 @@ const page = () => {
       <div className="w-full px-[20px] flex border-b border-[#ADADAD]">
         {manualList.map((item) => (
           <button
+            key={item.title}
             className={cn(
               "flex-1 h-[60px] flex-center font-semibold text-[20px] text-[#ADADAD]",
               selected === item.title && "border-b-2 border-[#04AD69] text-[#04AD69]"
@@ -37,10 +39,15 @@ const page = () => {
           </button>
         ))}
       </div>
-      <ManualItem />
-      <ManualItem />
-      <ManualItem />
-      <ManualItem />
+      {MANUAL.filter((item) => item.category === selected).map((item) => (
+        <ManualItem
+          key={item.title}
+          title={item.title}
+          content={item.content}
+          href={item.href}
+          btnText={item.btnText}
+        />
+      ))}
     </div>
   );
 };
