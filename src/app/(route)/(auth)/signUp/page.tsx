@@ -12,7 +12,6 @@ const Page = () => {
 
   const onSubmit = (data: any) => {
     alert("폼 제출되었습니다.");
-    console.log(data); // 폼 제출 확인
   };
 
   return (

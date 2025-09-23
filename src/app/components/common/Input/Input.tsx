@@ -15,7 +15,6 @@ const Input = ({ inputStyle, id, label, type, placeholder, validation, required 
   const {
     register,
     watch,
-    setError,
     formState: { errors },
   } = useFormContext();
 
