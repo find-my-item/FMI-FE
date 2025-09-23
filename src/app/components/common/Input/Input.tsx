@@ -1,34 +1,3 @@
-// import { RegisterOptions, FieldError, useFormContext } from "react-hook-form";
-// import { FormValue } from "../../../(route)/(auth)/types/FormData";
-
-// const Input = ({
-//   inputStyle,
-//   id,
-//   label,
-//   type = "text",
-//   placeholder = "",
-//   required = true,
-//   validation,
-// }: InputProps) => {
-//   const { register, formState: { errors } } = useFormContext();
-
-//   return (
-//     <>
-//       {label && <label htmlFor={id}>{label}</label>}
-//       <input
-//         {...register(id, validation)}
-//         className={inputStyle}
-//         type={type}
-//         placeholder={placeholder}
-//         required={required}
-//       />
-//       {errors && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
-//     </>
-//   );
-// };
-
-// export default Input;
-
 import { RegisterOptions, useFormContext } from "react-hook-form";
 import { FormValue } from "../../../(route)/(auth)/types/FormData";
 
