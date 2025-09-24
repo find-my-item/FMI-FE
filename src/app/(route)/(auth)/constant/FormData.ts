@@ -1,4 +1,4 @@
-import { RegisterOptions } from "react-hook-form";
+import { InputType } from "@/app/types/InputTypes";
 import { InputStyle } from "../styles/authStyle";
 
 export type FormValue = {
@@ -6,16 +6,6 @@ export type FormValue = {
   password: string;
   passwordConfirm: string;
   nickname: string;
-};
-
-export type InputType = {
-  id: keyof FormValue;
-  label?: string;
-  type: string;
-  style: string;
-  placeholder: string;
-  validation?: RegisterOptions<FormValue>;
-  required?: boolean;
 };
 
 export const signUpInputObject: InputType[] = [

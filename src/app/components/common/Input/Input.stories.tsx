@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { FormProvider, useForm } from "react-hook-form";
 import { within, userEvent, expect } from "@storybook/test";
 import Input from "./Input";
-import { FormValue } from "../../../(route)/(auth)/types/FormData";
+import { FormValue } from "../../../(route)/(auth)/constant/FormData";
 
 const meta: Meta<typeof Input> = {
   title: "Components/Form/Input", // Storybook 사이드바에 표시될 경로

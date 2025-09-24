@@ -1,16 +1,7 @@
 import { RegisterOptions, useFormContext } from "react-hook-form";
+import { InputType } from "@/app/types/InputTypes";
 
-interface InputProps {
-  id: string;
-  label?: string;
-  style: string;
-  type: string;
-  placeholder: string;
-  validation?: RegisterOptions;
-  required?: boolean;
-}
-
-const Input = (props: InputProps) => {
+const Input = (props: InputType) => {
   const {
     register,
     watch,

@@ -1,7 +1,7 @@
 "use client";
 
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import { FormValue, signUpInputObject } from "../types/FormData";
+import { FormValue, signUpInputObject } from "../constant/FormData";
 import Input from "@/app/components/common/Input/Input";
 import Button from "@/app/components/common/Button/Button";
 
