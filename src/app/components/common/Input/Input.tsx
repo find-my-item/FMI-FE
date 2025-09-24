@@ -1,13 +1,12 @@
 import { RegisterOptions, useFormContext } from "react-hook-form";
-import { FormValue } from "../../../(route)/(auth)/types/FormData";
 
 interface InputProps {
-  id: keyof FormValue;
+  id: string;
   label?: string;
   style: string;
   type: string;
   placeholder: string;
-  validation?: RegisterOptions<FormValue>;
+  validation?: RegisterOptions;
   required?: boolean;
 }
 
@@ -23,14 +22,6 @@ const Input = (props: InputProps) => {
   const password = watch("password");
 
   const onConfirm = (e: any) => {
-    // const target = e.target;
-    // if (target.name === "passwordConfirm" && target.value !== password) {
-    //   // console.log("비밀번호 불일치");
-    //   setError("passwordConfirm", {
-    //     type: props.id,
-    //     message: "비밀번호가 일치하지 않습니다."
-    //   })
-    // }
     const { name, value } = e.target;
     if (name === "passwordConfirm") {
       // 값이 없으면 초기 로딩/첫 포커스아웃에서 에러 만들지 않음
