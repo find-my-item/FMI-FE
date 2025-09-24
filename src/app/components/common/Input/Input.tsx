@@ -2,43 +2,68 @@ import { RegisterOptions, useFormContext } from "react-hook-form";
 import { FormValue } from "../../../(route)/(auth)/types/FormData";
 
 interface InputProps {
-  inputStyle: string;
   id: keyof FormValue;
   label?: string;
+  style: string;
   type: string;
   placeholder: string;
   validation?: RegisterOptions<FormValue>;
   required?: boolean;
 }
 
-const Input = ({ inputStyle, id, label, type, placeholder, validation, required }: InputProps) => {
+const Input = (props: InputProps) => {
   const {
     register,
     watch,
-    formState: { errors },
+    clearErrors,
+    setError,
+    formState: { errors, touchedFields, isSubmitted },
   } = useFormContext();
 
   const password = watch("password");
 
   const onConfirm = (e: any) => {
-    const target = e.target;
-    if (target.name === "passwordConfirm" && target.value !== password) {
-      console.log("비밀번호 불일치");
+    // const target = e.target;
+    // if (target.name === "passwordConfirm" && target.value !== password) {
+    //   // console.log("비밀번호 불일치");
+    //   setError("passwordConfirm", {
+    //     type: props.id,
+    //     message: "비밀번호가 일치하지 않습니다."
+    //   })
+    // }
+    const { name, value } = e.target;
+    if (name === "passwordConfirm") {
+      // 값이 없으면 초기 로딩/첫 포커스아웃에서 에러 만들지 않음
+      if (!value) {
+        clearErrors("passwordConfirm");
+        return;
+      }
+      if (value !== password) {
+        setError("passwordConfirm", {
+          type: "validate",
+          message: "비밀번호가 일치하지 않습니다.",
+        });
+      } else {
+        clearErrors("passwordConfirm");
+      }
     }
   };
 
+  const fieldError = errors[props.id];
+  const showError = (!!touchedFields[props.id] || isSubmitted) && !!fieldError?.message;
+
   return (
     <div>
-      {label && <label htmlFor={id}>{label}</label>}
+      {props.label && <label htmlFor={props.id}>{props.label}</label>}
       <input
-        {...register(id, validation)}
-        className={inputStyle}
-        type={type}
-        placeholder={placeholder}
-        required={required}
+        {...register(props.id, props.validation)}
+        className={props.style}
+        type={props.type}
+        placeholder={props.placeholder}
+        required={props.required}
         onBlur={onConfirm}
       />
-      {errors && <p className="text-red-500 text-sm mt-1">{}</p>}
+      {showError && <p className="text-red-500 text-sm mt-1">{String(fieldError?.message)}</p>}
     </div>
   );
 };

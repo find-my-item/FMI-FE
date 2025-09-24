@@ -1,14 +1,13 @@
-"use client";
-
-const InputStyle = "w-[330px] h-[40px] px-3 py-3 m-2 border rounded-[3px]";
+import Button from "@/app/components/common/Button/Button";
+import { InputStyle } from "../styles/authStyle";
 
 const Page = () => {
   return (
     <div>
       <input type="text" className={InputStyle} />
       <input type="text" className={InputStyle} />
-      <button>로그인</button>
-      <input type="ckeckbox" />
+      <Button children="로그인" type="submit" style={InputStyle} />
+      <input type="checkbox" />
     </div>
   );
 };

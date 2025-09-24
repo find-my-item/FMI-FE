@@ -1,16 +1,14 @@
 interface ButtonProps {
-  name: string;
-  bnType: "submit" | "button" | "reset";
-  bnStyle: string;
+  children: string;
+  type: "submit" | "button" | "reset";
+  style: string;
 }
 
-const Button = ({ name, bnType, bnStyle }: ButtonProps) => {
+const Button = ({ children, type, style }: ButtonProps) => {
   return (
-    <div>
-      <button type={bnType} className={bnStyle}>
-        {name}
-      </button>
-    </div>
+    <button type={type} className={style}>
+      {children}
+    </button>
   );
 };
 

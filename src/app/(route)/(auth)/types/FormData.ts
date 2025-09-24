@@ -1,4 +1,5 @@
 import { RegisterOptions } from "react-hook-form";
+import { InputStyle } from "../styles/authStyle";
 
 export type FormValue = {
   email: string;
@@ -11,6 +12,7 @@ export type InputType = {
   id: keyof FormValue;
   label?: string;
   type: string;
+  style: string;
   placeholder: string;
   validation?: RegisterOptions<FormValue>;
   required?: boolean;
@@ -21,6 +23,7 @@ export const signUpInputObject: InputType[] = [
     id: "email",
     label: "이메일",
     type: "email",
+    style: InputStyle,
     placeholder: "이메일을 입력해주세요",
     validation: {
       required: "이메일은 필수 항목 입니다",
@@ -34,6 +37,7 @@ export const signUpInputObject: InputType[] = [
     id: "password",
     label: "비밀번호",
     type: "password",
+    style: InputStyle,
     placeholder: "비밀번호을 입력해주세요 (8~16자, 영문, 숫자, 특수문자 포함)",
     validation: {
       required: true,
@@ -47,6 +51,7 @@ export const signUpInputObject: InputType[] = [
     id: "passwordConfirm",
     label: "비밀번호 확인",
     type: "password",
+    style: InputStyle,
     placeholder: "비밀번호 재입력",
     validation: {
       required: true,
@@ -57,9 +62,10 @@ export const signUpInputObject: InputType[] = [
     },
   },
   {
+    id: "nickname",
     label: "닉네임",
     type: "text",
-    id: "nickname",
+    style: InputStyle,
     placeholder: "닉네임을 입력해주세요.",
     validation: {
       required: "닉네임을 입력해주세요.",
