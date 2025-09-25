@@ -1,15 +1,15 @@
 name: Chromatic Deployment
 
 on:
-  pull_request:
-    types: [closed]
-    branches:
-      - develop
-
+  push:
+    branches: [develop]
 jobs:
   chromatic:
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -19,11 +19,22 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
-          cache: "npm"
+          node-version: 20
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Check Chromatic token existence
+        env:
+          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+        run: |
+          if [ -z "$CHROMATIC_PROJECT_TOKEN" ]; then
+            echo "❌ CHROMATIC_PROJECT_TOKEN is missing in Actions secrets."
+            exit 1
+          else
+            echo "✅ CHROMATIC_PROJECT_TOKEN is present."
+          fi
 
       - name: Publish to Chromatic
         uses: chromaui/action@v11
