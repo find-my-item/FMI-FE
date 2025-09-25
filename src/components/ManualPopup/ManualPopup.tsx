@@ -2,6 +2,7 @@
 
 import { useModalBackdrop, useModalLockAndEsc } from "@/utils/useOverlayHandlers";
 import React from "react";
+import Icon from "../Icon/Icon";
 
 interface ManualPopupProps {
   isOpen: boolean;
@@ -20,7 +21,9 @@ const ManualPopup = ({ isOpen, onClose }: ManualPopupProps) => {
       onMouseDown={onBackdropMouseDown}
     >
       <div className="w-full max-w-md rounded-t-2xl bg-white px-6">
-        <div className="mx-auto mt-[71px] mb-6 h-[74px] w-[74px] rounded-full bg-black" />
+        <div className="mx-auto mt-[71px] mb-6 h-[74px] w-[74px] rounded-full">
+          <Icon name="Book" size={74} />
+        </div>
 
         <div className="text-center">
           <h1 className="mb-4 text-[20px] leading-[26px] font-semibold text-[#171717]">
