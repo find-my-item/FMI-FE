@@ -10,8 +10,7 @@
     "test": "jest",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prepare": "husky",
-    "chromatic": "npx chromatic --project-token=chpt_0093c6eb31794f0"
+    "prepare": "husky"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.85.5",

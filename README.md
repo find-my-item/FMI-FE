@@ -109,4 +109,4 @@ Next.js • TypeScript • Storybook • Jest • Playwright • zod • zustand
 
 - [위키](https://github.com/find-my-item/FMI-FE/wiki)
 - [배포](https://fmi-fe.vercel.app/)
-- [Chromatic](https://www.chromatic.com/builds?appId=68c99e09f6a97616c494116e)
+- [Storybook](https://68c99e09f6a97616c494116e-ulrtpjeevc.chromatic.com/?path=/docs)
