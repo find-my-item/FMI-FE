@@ -25,17 +25,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Check Chromatic token existence
-        env:
-          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-        run: |
-          if [ -z "$CHROMATIC_PROJECT_TOKEN" ]; then
-            echo "❌ CHROMATIC_PROJECT_TOKEN is missing in Actions secrets."
-            exit 1
-          else
-            echo "✅ CHROMATIC_PROJECT_TOKEN is present."
-          fi
-
       - name: Publish to Chromatic
         uses: chromaui/action@v11
         with:
