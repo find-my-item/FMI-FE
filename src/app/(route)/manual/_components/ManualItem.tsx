@@ -26,7 +26,7 @@ const ManualItem = ({ title, content, href, btnText }: ManualItemProps) => {
           className="flex w-full items-center justify-between"
         >
           <p className="font-semibold text-[16px] text-[#242424]">{title}</p>
-          <span className={cn("transition-transform duration-200", isOpen ? "rotate-180" : "")}>
+          <span className={cn("transition-transform duration-200", isOpen && "rotate-180")}>
             <Icon name="ArrowDown" />
           </span>
         </button>
