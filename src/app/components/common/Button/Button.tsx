@@ -1,12 +1,16 @@
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: string;
-  type: "submit" | "button" | "reset";
-  style: string;
+  className: string;
+  label: string;
 }
 
-const Button = ({ children, type, style }: ButtonProps) => {
+const buttonStyle = {
+  // 추후 추가 예정
+};
+
+const Button = ({ children, type, className, label, ...rest }: ButtonProps) => {
   return (
-    <button type={type} className={style}>
+    <button type={type} className={className} aria-label={label}>
       {children}
     </button>
   );

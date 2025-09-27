@@ -6,7 +6,7 @@ const Page = () => {
     <div>
       <input type="text" className={InputStyle} />
       <input type="text" className={InputStyle} />
-      <Button children="로그인" type="submit" style={InputStyle} />
+      <Button children="로그인" type="submit" className={InputStyle} label="로그인 버튼" />
       <input type="checkbox" />
     </div>
   );
