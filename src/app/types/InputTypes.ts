@@ -1,9 +1,9 @@
 import { RegisterOptions } from "react-hook-form";
 
 export type InputType = {
-  id: string;
+  name: string;
   label?: string;
-  style: string;
+  className?: string;
   type: string;
   placeholder: string;
   validation?: RegisterOptions;

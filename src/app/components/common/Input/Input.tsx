@@ -1,7 +1,7 @@
 import { RegisterOptions, useFormContext } from "react-hook-form";
 import { InputType } from "@/app/types/InputTypes";
 
-const Input = (props: InputType) => {
+const Input = ({ name, type, className, ...rest }: InputType) => {
   const {
     register,
     watch,
@@ -31,18 +31,17 @@ const Input = (props: InputType) => {
     }
   };
 
-  const fieldError = errors[props.id];
-  const showError = (!!touchedFields[props.id] || isSubmitted) && !!fieldError?.message;
+  const fieldError = errors[name];
+  const showError = (!!touchedFields[name] || isSubmitted) && !!fieldError?.message;
 
   return (
     <div>
-      {props.label && <label htmlFor={props.id}>{props.label}</label>}
+      {rest.label && <label htmlFor={name}>{rest.label}</label>}
       <input
-        {...register(props.id, props.validation)}
-        className={props.style}
-        type={props.type}
-        placeholder={props.placeholder}
-        required={props.required}
+        {...register(name, rest.validation)}
+        type={type}
+        className={className}
+        {...rest}
         onBlur={onConfirm}
       />
       {showError && <p className="text-red-500 text-sm mt-1">{String(fieldError?.message)}</p>}
