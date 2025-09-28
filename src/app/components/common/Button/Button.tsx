@@ -8,9 +8,9 @@ const buttonStyle = {
   // 추후 추가 예정
 };
 
-const Button = ({ children, type, className, label, ...rest }: ButtonProps) => {
+const Button = ({ children, type, className, ...rest }: ButtonProps) => {
   return (
-    <button type={type} className={className} aria-label={label}>
+    <button type={type} className={className} {...rest}>
       {children}
     </button>
   );
