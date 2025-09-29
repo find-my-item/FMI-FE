@@ -14,7 +14,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="sticky top-0 w-full h-16 bg-gray-300 flex justify-between items-center p-4">
+      <header className="sticky top-0 flex h-16 w-full items-center justify-between bg-gray-300 p-4">
         <Link href="/" aria-label="홈으로 이동">
           <Icon name="Logo" size={40} />
         </Link>

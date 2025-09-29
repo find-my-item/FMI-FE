@@ -32,7 +32,7 @@ const Page = () => {
         <Button
           children="회원가입"
           type="submit"
-          className="bg-slate-400 w-50 h-30"
+          className="w-50 h-30 bg-slate-400"
           label="회원가입 버튼"
         />
       </form>
