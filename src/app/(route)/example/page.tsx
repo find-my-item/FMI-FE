@@ -1,6 +1,7 @@
 "use client";
 
 import { Dropdown, Tab, ModalLayout } from "@/components";
+import Icon from "@/components/Icon/Icon";
 import { useToast } from "@/context/ToastContext";
 import { useState } from "react";
 
@@ -52,6 +53,10 @@ const page = () => {
           Close
         </button>
       </ModalLayout>
+
+      <Icon name="ArrowDown" size={24} />
+      <Icon name="ArrowDown" size={32} />
+      <Icon name="ArrowDown" size={40} />
 
       {/* Toast */}
       <div className="flex gap-2">
