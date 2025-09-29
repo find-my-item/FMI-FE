@@ -1,4 +1,4 @@
-import { InputType } from "@/app/types/InputTypes";
+import { InputType } from "@/types/InputTypes";
 
 export type FormValue = {
   email: string;
