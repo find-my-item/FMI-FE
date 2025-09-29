@@ -2,6 +2,8 @@ import { useModalBackdrop, useModalLockAndEsc } from "@/utils/useOverlayHandlers
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import Icon from "../Icon/Icon";
+import ManualPopup from "@/components/ManualPopup/ManualPopup";
+import { useState } from "react";
 
 const HeaderLink = [
   { name: "리스트", href: "/list" },
@@ -12,7 +14,7 @@ const HeaderLink = [
   { name: "공지사항", href: "/notice" },
   { name: "FAQ", href: "/faq" },
   { name: "채팅", href: "/chat" },
-  { name: "메뉴얼", href: "/manual" },
+  { name: "매뉴얼", href: "/manual" },
 ];
 
 type SideBarProps = {
@@ -23,6 +25,7 @@ type SideBarProps = {
 const SideBar = ({ isOpen, onClose }: SideBarProps) => {
   useModalLockAndEsc({ isOpen, onClose });
   const onBackdropMouseDown = useModalBackdrop({ onClose });
+  const [manualPopup, setManualPopup] = useState(false);
 
   return (
     <AnimatePresence initial={false} mode="wait">
@@ -68,6 +71,15 @@ const SideBar = ({ isOpen, onClose }: SideBarProps) => {
                   </Link>
                 </li>
               ))}
+              <li>
+                <button
+                  onClick={() => setManualPopup(true)}
+                  className="mt-4 px-[16px] py-[12px] rounded-[12px] bg-[#04AD69] text-[16px] text-white"
+                >
+                  매뉴얼 보기 버튼
+                </button>
+                <ManualPopup isOpen={manualPopup} onClose={() => setManualPopup(false)} />
+              </li>
             </ul>
           </motion.aside>
         </>

@@ -4,9 +4,13 @@ import React, { useState } from "react";
 import Link from "next/link";
 import SideBar from "./SideBar";
 import Icon from "../Icon/Icon";
+import { useHiddenPath } from "@/hooks/useHiddenPath";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const isHidden = useHiddenPath();
+  if (isHidden) return null;
 
   return (
     <>
