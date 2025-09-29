@@ -37,7 +37,7 @@ const ManualPopup = ({ isOpen, onClose }: ManualPopupProps) => {
 
         <div className="mt-8 mb-[69px] flex flex-col gap-3">
           <button className="h-[48px] w-full rounded-[12px] bg-[#04AD69] text-[18px] text-white">
-            로그인
+            매뉴얼 보러가기
           </button>
           <button className="h-[64px] w-full text-[#04AD69]" onClick={onClose}>
             다음에 볼게요
