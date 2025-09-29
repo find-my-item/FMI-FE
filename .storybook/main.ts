@@ -14,7 +14,6 @@ const config: StorybookConfig = {
   },
   staticDirs: ["../public"],
   webpackFinal: async (config) => {
-    // (1) 기존 svg 룰 수정
     (config.module!.rules as any[]).forEach((rule: any) => {
       if (rule?.test instanceof RegExp && rule.test.test(".svg")) {
         rule.exclude = [/\.svg$/].concat(rule.exclude || []);
