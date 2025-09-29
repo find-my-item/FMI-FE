@@ -1,5 +1,5 @@
 import { useFormContext } from "react-hook-form";
-import { InputType } from "@/app/types/InputTypes";
+import { InputType } from "@/types/InputTypes";
 
 const Input = ({ name, type, className, ...rest }: InputType) => {
   const {
