@@ -1,4 +1,5 @@
 import DetailHeader from "@/components/DetailHeader/DetailHeader";
+
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
