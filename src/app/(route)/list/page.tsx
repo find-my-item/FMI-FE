@@ -2,7 +2,7 @@
 
 import { Tab } from "@/components";
 import { useState } from "react";
-import ListItem from "./_components/ListItem";
+import ListItem from "./_components/ListItem/ListItem";
 
 const list = [
   {
