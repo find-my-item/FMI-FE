@@ -8,7 +8,6 @@ import { useHiddenPath } from "@/hooks/useHiddenPath";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-
   const isHidden = useHiddenPath();
   if (isHidden) return null;
 
