@@ -1,19 +1,13 @@
 import { cn } from "@/utils/cn";
 import React from "react";
 
-type TabItem = {
-  title: string;
-  content: string;
-  key: string;
-};
-
-interface TabProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "onClick"> {
-  tabs: TabItem[];
-  selected: string;
-  onValueChange: (key: string) => void;
+interface TabProps<T extends string> {
+  tabs: { key: T; label: string }[];
+  selected: T;
+  onValueChange: (key: T) => void;
 }
 
-const Tab = ({ tabs, selected, onValueChange, ...buttonProps }: TabProps) => {
+const Tab = <T extends string>({ tabs, selected, onValueChange, ...buttonProps }: TabProps<T>) => {
   return (
     <div className="flex w-full border-b border-[#ADADAD] px-[20px]">
       {tabs.map((tab) => (
@@ -27,7 +21,7 @@ const Tab = ({ tabs, selected, onValueChange, ...buttonProps }: TabProps) => {
           onClick={() => onValueChange(tab.key)}
           type="button"
         >
-          {tab.title}
+          {tab.label}
         </button>
       ))}
     </div>

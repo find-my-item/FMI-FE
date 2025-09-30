@@ -6,8 +6,8 @@ import { useToast } from "@/context/ToastContext";
 import { useState } from "react";
 
 const tabs = [
-  { id: "1", label: "Tab 1" },
-  { id: "2", label: "Tab 2" },
+  { key: "1", label: "Tab 1" },
+  { key: "2", label: "Tab 2" },
 ];
 
 const options = [
@@ -30,7 +30,7 @@ const page = () => {
         tabs={tabs}
         selected={selectedTab}
         onValueChange={setSelectedTab}
-        aria-label={`${tabs.find((tab) => tab.id === selectedTab)?.label || "Tab"}`}
+        aria-label={`${tabs.find((tab) => tab.key === selectedTab)?.label || "Tab"}`}
       />
       {/* Dropdown */}
       <Dropdown options={options} onSelect={setSelectedOption} />

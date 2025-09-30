@@ -7,18 +7,15 @@ import { Tab } from "@/components";
 
 const manualList = [
   {
-    title: "분실",
-    content: "분실 매뉴얼",
+    label: "분실",
     key: "LOST",
   },
   {
-    title: "습득",
-    content: "습득 매뉴얼",
+    label: "습득",
     key: "FOUND",
   },
   {
-    title: "도난",
-    content: "도난 매뉴얼",
+    label: "도난",
     key: "STOLEN",
   },
 ];
@@ -28,7 +25,11 @@ const page = () => {
 
   return (
     <div className="flex-col-center w-full">
-      <Tab tabs={manualList} selected={selected} onValueChange={setSelected} />
+      <Tab
+        tabs={manualList}
+        selected={selected}
+        onValueChange={(key) => setSelected(key as keyof typeof MANUAL)}
+      />
       {MANUAL[selected].map((item: ManualItemType) => (
         <ManualItem
           key={item.title}

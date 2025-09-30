@@ -4,23 +4,29 @@ import { Tab } from "@/components";
 import { useState } from "react";
 import ListItem from "./_components/ListItem";
 
+const list = [
+  {
+    key: "LOST",
+    label: "분실",
+  },
+  {
+    key: "FOUND",
+    label: "습득",
+  },
+];
+
 const page = () => {
-  const [selected, setSelected] = useState("1");
+  const [selected, setSelected] = useState("LOST");
 
   return (
     <div>
-      <Tab
-        tabs={[
-          { key: "1", title: "분실", content: "분실" },
-          { key: "2", title: "습득", content: "습득" },
-        ]}
-        selected={selected}
-        onValueChange={setSelected}
-      />
-      <div className="h-[67px] w-full bg-black"></div>
+      <Tab tabs={list} selected={selected} onValueChange={setSelected} />
+      <div className="h-[67px] w-full bg-black" />
       {/* 아이템 */}
       <div className="w-full">
-        <ListItem />
+        {Array.from({ length: 5 }).map((_, index) => (
+          <ListItem key={index} />
+        ))}
       </div>
     </div>
   );
