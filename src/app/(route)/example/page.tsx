@@ -33,7 +33,10 @@ const page = () => {
         aria-label={`${tabs.find((tab) => tab.key === selectedTab)?.label || "Tab"}`}
       />
       {/* Dropdown */}
-      <Dropdown options={options} onSelect={setSelectedOption} />
+      <Dropdown options={options} onSelect={setSelectedOption}>
+        <span className="text-[16px] font-semibold text-[#525252]">{selectedOption}</span>
+        <Icon name="ArrowDown" size={12} />
+      </Dropdown>
       <button
         className="mouse-hover rounded border border-gray-300 px-4 py-2 text-white hover:border-gray-500 hover:text-black"
         onClick={() => setIsOpen(true)}

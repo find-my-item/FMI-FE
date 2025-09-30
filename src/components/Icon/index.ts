@@ -9,3 +9,4 @@ export { default as ArrowUp } from "@/assets/arrow-up.svg";
 export { default as ArrowRightSmall } from "@/assets/arrow-right-small.svg";
 export { default as Star } from "@/assets/star.svg";
 export { default as Eye } from "@/assets/item-eye.svg";
+export { default as Position } from "@/assets/position.svg";
