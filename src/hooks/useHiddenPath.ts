@@ -1,8 +1,8 @@
 import { usePathname } from "next/navigation";
 
-const hiddenPaths = ["/manual"];
+const shownPaths = ["/"];
 
 export function useHiddenPath() {
   const pathname = usePathname();
-  return hiddenPaths.includes(pathname ?? "");
+  return !shownPaths.includes(pathname ?? "");
 }
