@@ -1,14 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import SideBar from "./SideBar";
 import Icon from "../Icon/Icon";
-import { useHiddenPath } from "@/hooks/useHiddenPath";
+import { useIsHiddenPath } from "@/hooks/useVisiblePath";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const isHidden = useHiddenPath();
+  const isHidden = useIsHiddenPath();
   if (isHidden) return null;
 
   return (
