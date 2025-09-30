@@ -14,4 +14,8 @@
   .mouse-hover {
     @apply transition-colors duration-100;
   }
+
+  .u-ellipsis {
+    @apply overflow-hidden text-ellipsis whitespace-nowrap;
+  }
 }
