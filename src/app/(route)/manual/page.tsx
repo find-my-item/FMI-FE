@@ -1,9 +1,9 @@
 "use client";
 
-import { cn } from "@/utils/cn";
 import { useState } from "react";
 import ManualItem from "./_components/ManualItem";
 import { MANUAL, ManualItemType } from "./_constants/MANUAL";
+import { Tab } from "@/components";
 
 const manualList = [
   {
@@ -28,20 +28,7 @@ const page = () => {
 
   return (
     <div className="flex-col-center w-full">
-      <div className="flex w-full border-b border-[#ADADAD] px-[20px]">
-        {manualList.map((item) => (
-          <button
-            key={item.key}
-            className={cn(
-              "flex-center h-[60px] flex-1 text-[20px] font-semibold text-[#ADADAD]",
-              selected === item.key && "border-b-2 border-[#04AD69] text-[#04AD69]"
-            )}
-            onClick={() => setSelected(item.key as keyof typeof MANUAL)}
-          >
-            {item.title}
-          </button>
-        ))}
-      </div>
+      <Tab tabs={manualList} selected={selected} onValueChange={setSelected} />
       {MANUAL[selected].map((item: ManualItemType) => (
         <ManualItem
           key={item.title}
