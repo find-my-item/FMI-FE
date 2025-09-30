@@ -1,6 +1,6 @@
 "use client";
 
-import { useHiddenPath } from "@/hooks/useHiddenPath";
+import { useIsHiddenPath } from "@/hooks/useVisiblePath";
 import Link from "next/link";
 
 const FooterLink = [
@@ -10,7 +10,7 @@ const FooterLink = [
 ];
 
 const Footer = () => {
-  const isHidden = useHiddenPath();
+  const isHidden = useIsHiddenPath();
   if (isHidden) return null;
 
   return (
