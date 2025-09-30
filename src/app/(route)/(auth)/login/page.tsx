@@ -34,8 +34,7 @@ const Page = () => {
       {/* divider 구분선 */}
       <div className="flex h-[18px] w-full items-center px-5">
         <div className="h-px flex-1 bg-[#E4E4E4]" />
-        <span className="px-3 text-[12px] text-[#9D9D9D]">또는</span>
-
+        <span className="px-3 text-[#9D9D9D] text-sm text-[12px]">또는</span>
         <div className="h-px flex-1 bg-[#E4E4E4]"></div>
       </div>
 
