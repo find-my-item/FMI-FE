@@ -36,10 +36,10 @@ export const WithContent: Story = {
     children: (
       <>
         <h2>Modal Title</h2>
-        <p className="h-[100px] flex-center">Modal Content</p>
+        <p className="flex-center h-[100px]">Modal Content</p>
         <span>Modal Footer</span>
         <button
-          className="mt-4 px-4 py-2 border border-gray-300 rounded hover:border-gray-500 hover:text-black mouse-hover"
+          className="mouse-hover mt-4 rounded border border-gray-300 px-4 py-2 hover:border-gray-500 hover:text-black"
           onClick={() => alert("Closed")}
         >
           Close

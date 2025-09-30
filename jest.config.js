@@ -5,7 +5,7 @@ module.exports = {
   transform: {
     "^.+\\.(ts|tsx)$": [
       "ts-jest",
-      { tsconfig: { jsx: "react-jsx" } } // JSX 변환 보장
+      { tsconfig: { jsx: "react-jsx" } }, // JSX 변환 보장
     ],
   },
   moduleNameMapper: {
