@@ -1,6 +1,5 @@
 name: Chromatic Deployment
 
-on:
   push:
     branches: [develop]
 jobs:

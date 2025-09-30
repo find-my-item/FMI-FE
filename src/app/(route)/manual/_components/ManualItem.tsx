@@ -18,14 +18,14 @@ const ManualItem = ({ title, content, href, btnText }: ManualItemProps) => {
 
   return (
     <>
-      <div className="w-full px-[20px] py-[26px] border-b border-[#E4E4E4]">
-        <button
-          aria-expanded={isOpen}
-          aria-controls="매뉴얼 아이템 패널"
-          onClick={() => setIsOpen((v) => !v)}
-          className="flex w-full items-center justify-between"
-        >
-          <p className="font-semibold text-[16px] text-[#242424]">{title}</p>
+      <div
+        aria-expanded={isOpen}
+        aria-controls="매뉴얼 아이템 패널"
+        onClick={() => setIsOpen((v) => !v)}
+        className="w-full cursor-pointer border-b border-[#E4E4E4] px-[20px] py-[26px]"
+      >
+        <button className="flex w-full items-center justify-between">
+          <p className="text-[16px] font-semibold text-[#242424]">{title}</p>
           <span className={cn("transition-transform duration-200", isOpen && "rotate-180")}>
             <Icon name="ArrowDown" />
           </span>
@@ -38,18 +38,19 @@ const ManualItem = ({ title, content, href, btnText }: ManualItemProps) => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="w-full bg-[#E4E4E4] overflow-hidden"
+            className="w-full overflow-hidden bg-[#E4E4E4]"
           >
-            <div className="px-[20px] py-[38px] text-sm text-[#525252]">
+            <div className="flex flex-col items-start justify-center px-[20px] py-[38px] text-sm text-[#525252]">
               <p className="mb-[26px]">{content}</p>
               {href && (
                 <Link
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-[30px] py-[14px] rounded-[4px] bg-[#525252] font-semibold text-[14px] text-white"
+                  className="flex w-full items-center justify-center gap-2 rounded-[4px] border border-[#DADADA] bg-white px-[30px] py-[14px] text-center text-[14px] font-semibold text-black"
                 >
                   {btnText}
+                  <Icon name="ArrowRightSmall" size={20} />
                 </Link>
               )}
             </div>

@@ -1,4 +1,9 @@
 import type { StorybookConfig } from "@storybook/nextjs";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
@@ -19,6 +24,12 @@ const config: StorybookConfig = {
       issuer: /\.[jt]sx?$/,
       use: ["@svgr/webpack"],
     });
+
+    config.resolve ||= {};
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}),
+      "next/navigation": path.resolve(__dirname, "./mock/next-navigation.ts"),
+    };
     return config;
   },
 };

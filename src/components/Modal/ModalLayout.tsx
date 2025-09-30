@@ -29,7 +29,7 @@ const DeleteModal = ({ isOpen, onClose, children, className }: DeleteModalProps)
         aria-describedby="delete-modal-desc"
         onClick={(e) => e.stopPropagation()}
         className={cn(
-          "w-[90vw] max-w-[600px] rounded-[20px] bg-white border border-gray-200",
+          "w-[90vw] max-w-[600px] rounded-[20px] border border-gray-200 bg-white",
           "flex flex-col overflow-hidden",
           className
         )}

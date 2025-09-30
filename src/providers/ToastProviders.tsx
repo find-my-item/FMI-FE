@@ -24,7 +24,7 @@ export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
       {children}
       {typeof document !== "undefined" &&
         createPortal(
-          <div className="fixed top-4 right-4 flex flex-col gap-2 pointer-events-none">
+          <div className="pointer-events-none fixed right-4 top-4 flex flex-col gap-2">
             <AnimatePresence>
               {toasts.map((toast) => (
                 <motion.div
