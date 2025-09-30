@@ -30,6 +30,7 @@ const config: StorybookConfig = {
       ...(config.resolve.alias || {}),
       "next/navigation": path.resolve(__dirname, "./mock/next-navigation.ts"),
     };
+
     return config;
   },
 };

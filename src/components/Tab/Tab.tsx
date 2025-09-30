@@ -1,34 +1,28 @@
+import { cn } from "@/utils/cn";
 import React from "react";
 
-type TabItem = {
-  id: string;
-  label: string;
-};
-
-interface TabProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onClick"> {
-  tabs: TabItem[];
-  selected: string;
-  onValueChange: (id: string) => void;
+interface TabProps<T extends string> {
+  tabs: { key: T; label: string }[];
+  selected: T;
+  onValueChange: (key: T) => void;
 }
 
-const style = {
-  base: "p-3 cursor-pointer hover:bg-gray-100 mouse-hover",
-  selected: "border-b-2 font-bold border-blue-500",
-  unselected: "text-gray-500 border border-b-0 border-black rounded-t-lg",
-};
-
-const Tab = ({ tabs, selected, onValueChange, ...props }: TabProps) => {
+const Tab = <T extends string>({ tabs, selected, onValueChange, ...buttonProps }: TabProps<T>) => {
   return (
-    <div className="flex">
+    <div className="flex w-full border-b border-[#ADADAD] px-[20px]">
       {tabs.map((tab) => (
-        <div
-          key={tab.id}
-          className={`${style.base} ${selected === tab.id ? style.selected : style.unselected}`}
-          onClick={() => onValueChange(tab.id)}
-          {...props}
+        <button
+          key={tab.key}
+          {...buttonProps}
+          className={cn(
+            "flex-center h-[60px] flex-1 text-[20px] font-semibold text-[#ADADAD]",
+            selected === tab.key && "border-b-2 border-[#04AD69] text-[#04AD69]"
+          )}
+          onClick={() => onValueChange(tab.key)}
+          type="button"
         >
           {tab.label}
-        </div>
+        </button>
       ))}
     </div>
   );

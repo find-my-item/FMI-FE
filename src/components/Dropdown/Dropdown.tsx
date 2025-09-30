@@ -12,9 +12,11 @@ interface DropdownProps {
   options: DropdownOption[];
   onSelect: (value: string) => void;
   placeholder?: string;
+  children: React.ReactNode;
+  className?: string;
 }
 
-const Dropdown = ({ options, onSelect, placeholder = "선택해주세요." }: DropdownProps) => {
+const Dropdown = ({ options, onSelect, children, className }: DropdownProps) => {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<DropdownOption | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -42,13 +44,15 @@ const Dropdown = ({ options, onSelect, placeholder = "선택해주세요." }: Dr
   };
 
   return (
-    <div ref={dropdownRef} className="relative inline-block min-w-[160px]">
+    <div ref={dropdownRef} className="relative inline-block">
       <div
-        className="flex cursor-pointer select-none items-center justify-between rounded border border-gray-300 bg-white px-3 py-2"
+        className={cn(
+          "flex cursor-pointer select-none items-center justify-between rounded-full bg-[#F5F5F5] px-3 py-2",
+          className
+        )}
         onClick={() => setOpen((prev) => !prev)}
       >
-        {selected ? selected.label : placeholder}
-        <span>▼</span>
+        {children}
       </div>
       {open && (
         <div className="absolute left-0 right-0 top-full z-10 mt-1 rounded border border-gray-300 bg-white shadow">
