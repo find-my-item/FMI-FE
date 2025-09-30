@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
       issuer: /\.[jt]sx?$/,
       use: [
         {
+          loader: require.resolve("@svgr/webpack"),
           options: {
             svgo: true,
             titleProp: true,
