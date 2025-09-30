@@ -21,12 +21,12 @@ const ManualPopup = ({ isOpen, onClose }: ManualPopupProps) => {
       onMouseDown={onBackdropMouseDown}
     >
       <div className="w-full max-w-md rounded-t-2xl bg-white px-6">
-        <div className="mx-auto mt-[71px] mb-6 h-[74px] w-[74px] rounded-full">
+        <div className="mx-auto mb-6 mt-[71px] h-[74px] w-[74px] rounded-full">
           <Icon name="Book" size={74} />
         </div>
 
         <div className="text-center">
-          <h1 className="mb-4 text-[20px] leading-[26px] font-semibold text-[#171717]">
+          <h1 className="mb-4 text-[20px] font-semibold leading-[26px] text-[#171717]">
             분실물이 있나요? <br />
             매뉴얼을 보면 더 도움이 돼요!
           </h1>
@@ -35,7 +35,7 @@ const ManualPopup = ({ isOpen, onClose }: ManualPopupProps) => {
           </p>
         </div>
 
-        <div className="mt-8 mb-[69px] flex flex-col gap-3">
+        <div className="mb-[69px] mt-8 flex flex-col gap-3">
           <button className="h-[48px] w-full rounded-[12px] bg-[#04AD69] text-[18px] text-white">
             매뉴얼 보러가기
           </button>

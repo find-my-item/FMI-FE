@@ -28,12 +28,12 @@ const page = () => {
 
   return (
     <div className="flex-col-center w-full">
-      <div className="w-full px-[20px] flex border-b border-[#ADADAD]">
+      <div className="flex w-full border-b border-[#ADADAD] px-[20px]">
         {manualList.map((item) => (
           <button
             key={item.key}
             className={cn(
-              "flex-1 h-[60px] flex-center font-semibold text-[20px] text-[#ADADAD]",
+              "flex-center h-[60px] flex-1 text-[20px] font-semibold text-[#ADADAD]",
               selected === item.key && "border-b-2 border-[#04AD69] text-[#04AD69]"
             )}
             onClick={() => setSelected(item.key as keyof typeof MANUAL)}

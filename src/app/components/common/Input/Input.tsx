@@ -14,7 +14,7 @@ const Input = ({ name, type, className, ...rest }: InputType) => {
     <div>
       {rest.label && <label htmlFor={name}>{rest.label}</label>}
       <input {...register(name, rest.validation)} type={type} className={className} {...rest} />
-      {showError && <p className="text-red-500 text-sm mt-1">{fieldError}</p>}
+      {showError && <p className="mt-1 text-sm text-red-500">{fieldError}</p>}
     </div>
   );
 };

@@ -33,7 +33,7 @@ const SideBar = ({ isOpen, onClose }: SideBarProps) => {
         <>
           <motion.div
             key="sidebar-overlay"
-            className="fixed inset-0 bg-black/20 z-40"
+            className="fixed inset-0 z-40 bg-black/20"
             onMouseDown={onBackdropMouseDown}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -47,24 +47,24 @@ const SideBar = ({ isOpen, onClose }: SideBarProps) => {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed top-0 right-0 h-full w-64 bg-white shadow-lg z-50 p-6 flex flex-col"
+            className="fixed right-0 top-0 z-50 flex h-full w-64 flex-col bg-white p-6 shadow-lg"
             aria-label="메인 내비게이션"
             role="dialog"
             aria-modal="true"
           >
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 text-gray-600 hover:text-gray-900 text-2xl select-none"
+              className="absolute right-4 top-4 select-none text-2xl text-gray-600 hover:text-gray-900"
               aria-label="사이드바 닫기"
             >
               <Icon name="XSecond" />
             </button>
-            <ul className="flex flex-col gap-4 mt-10">
+            <ul className="mt-10 flex flex-col gap-4">
               {HeaderLink.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="mouse-hover hover:underline select-none"
+                    className="mouse-hover select-none hover:underline"
                     onClick={onClose}
                   >
                     {link.name}
@@ -74,7 +74,7 @@ const SideBar = ({ isOpen, onClose }: SideBarProps) => {
               <li>
                 <button
                   onClick={() => setManualPopup(true)}
-                  className="mt-4 px-[16px] py-[12px] rounded-[12px] bg-[#04AD69] text-[16px] text-white"
+                  className="mt-4 rounded-[12px] bg-[#04AD69] px-[16px] py-[12px] text-[16px] text-white"
                 >
                   매뉴얼 보기 버튼
                 </button>

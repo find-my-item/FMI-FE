@@ -10,7 +10,7 @@ const Toast = ({ message, type }: ToastProps) => {
   return (
     <div
       className={cn(
-        "w-[260px] h-[40px] text-start flex items-center px-4 shadow-md text-white rounded-lg",
+        "flex h-[40px] w-[260px] items-center rounded-lg px-4 text-start text-white shadow-md",
         type === "success" && "bg-green-500",
         type === "error" && "bg-red-500",
         type === "info" && "bg-blue-500"

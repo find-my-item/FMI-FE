@@ -1,6 +1,7 @@
 "use client";
 
 import { Dropdown, Tab, ModalLayout } from "@/components";
+import Icon from "@/components/Icon/Icon";
 import { useToast } from "@/context/ToastContext";
 import { useState } from "react";
 
@@ -23,7 +24,7 @@ const page = () => {
   const { addToast } = useToast();
 
   return (
-    <div className="w-full h-[100vh] bg-gray-600 gap-6 flex-col-center">
+    <div className="flex-col-center h-[100vh] w-full gap-6 bg-gray-600">
       {/* Tab */}
       <Tab
         tabs={tabs}
@@ -34,41 +35,45 @@ const page = () => {
       {/* Dropdown */}
       <Dropdown options={options} onSelect={setSelectedOption} />
       <button
-        className="px-4 py-2 border border-gray-300 rounded text-white hover:border-gray-500 hover:text-black mouse-hover"
+        className="mouse-hover rounded border border-gray-300 px-4 py-2 text-white hover:border-gray-500 hover:text-black"
         onClick={() => setIsOpen(true)}
       >
         Open Modal
       </button>
 
       {/* Modal */}
-      <ModalLayout isOpen={isOpen} onClose={() => setIsOpen(false)} className="p-4 flex-center">
+      <ModalLayout isOpen={isOpen} onClose={() => setIsOpen(false)} className="flex-center p-4">
         <h2>Modal Title</h2>
-        <p className="h-[100px] flex-center">Modal Content</p>
+        <p className="flex-center h-[100px]">Modal Content</p>
         <span>Modal Footer</span>
         <button
-          className="mt-4 px-4 py-2 border border-gray-300 rounded hover:border-gray-500 hover:text-black mouse-hover"
+          className="mouse-hover mt-4 rounded border border-gray-300 px-4 py-2 hover:border-gray-500 hover:text-black"
           onClick={() => setIsOpen(false)}
         >
           Close
         </button>
       </ModalLayout>
 
+      <Icon name="ArrowDown" size={24} />
+      <Icon name="ArrowDown" size={32} />
+      <Icon name="ArrowDown" size={40} />
+
       {/* Toast */}
       <div className="flex gap-2">
         <button
-          className="px-4 py-2 border border-gray-300 rounded text-white hover:border-gray-500 hover:text-black mouse-hover"
+          className="mouse-hover rounded border border-gray-300 px-4 py-2 text-white hover:border-gray-500 hover:text-black"
           onClick={() => addToast("정보가 정상적으로 처리되었습니다.", "info")}
         >
           Show info Toast
         </button>
         <button
-          className="px-4 py-2 border border-gray-300 rounded text-white hover:border-gray-500 hover:text-black mouse-hover"
+          className="mouse-hover rounded border border-gray-300 px-4 py-2 text-white hover:border-gray-500 hover:text-black"
           onClick={() => addToast("성공적으로 저장되었습니다!", "success")}
         >
           Show Success Toast
         </button>
         <button
-          className="px-4 py-2 border border-gray-300 rounded text-white hover:border-gray-500 hover:text-black mouse-hover"
+          className="mouse-hover rounded border border-gray-300 px-4 py-2 text-white hover:border-gray-500 hover:text-black"
           onClick={() => addToast("에러가 발생했습니다.", "error")}
         >
           Show Error Toast

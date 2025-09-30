@@ -44,14 +44,14 @@ const Dropdown = ({ options, onSelect, placeholder = "선택해주세요." }: Dr
   return (
     <div ref={dropdownRef} className="relative inline-block min-w-[160px]">
       <div
-        className="border border-gray-300 rounded px-3 py-2 cursor-pointer bg-white select-none flex justify-between items-center"
+        className="flex cursor-pointer select-none items-center justify-between rounded border border-gray-300 bg-white px-3 py-2"
         onClick={() => setOpen((prev) => !prev)}
       >
         {selected ? selected.label : placeholder}
         <span>▼</span>
       </div>
       {open && (
-        <div className="absolute top-full left-0 right-0 border border-gray-300 rounded bg-white z-10 mt-1 shadow">
+        <div className="absolute left-0 right-0 top-full z-10 mt-1 rounded border border-gray-300 bg-white shadow">
           {options.length === 0 ? (
             <div className="px-3 py-2 text-gray-400">No options</div>
           ) : (
@@ -59,7 +59,7 @@ const Dropdown = ({ options, onSelect, placeholder = "선택해주세요." }: Dr
               <div
                 key={option.value}
                 className={cn(
-                  "px-3 py-2 cursor-pointer hover:bg-gray-300 mouse-hover",
+                  "mouse-hover cursor-pointer px-3 py-2 hover:bg-gray-300",
                   selected?.value === option.value && "bg-gray-100"
                 )}
                 onClick={() => handleSelect(option)}
