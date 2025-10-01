@@ -5,8 +5,11 @@ import { ButtonStyle } from "../styles/authStyle";
 import Link from "next/link";
 import { cn } from "@/utils/cn";
 import Icon from "@/components/Icon/Icon";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
+  const router = useRouter();
+
   return (
     <div className="flex-col-center flex min-h-screen w-full gap-8 md:flex-row">
       {/* logo */}
@@ -18,7 +21,7 @@ const Page = () => {
       {/* button */}
       <div className="flex w-full flex-col gap-3 px-5 text-[14px]">
         <Button
-          children="카카로로 3초 만에 시작하기"
+          children="카카오로 3초 만에 시작하기"
           type="submit"
           className={cn(ButtonStyle, "bg-[#FFEA14] text-[#242424]")}
           label="로그인 버튼"
@@ -28,7 +31,8 @@ const Page = () => {
           type="submit"
           className={cn(ButtonStyle, "bg-[#E4E4E4] text-[#525252]")}
           label="로그인 버튼"
-        />
+          onClick={() => router.push("/emailLogin")}
+        ></Button>
       </div>
 
       {/* divider 구분선 */}
