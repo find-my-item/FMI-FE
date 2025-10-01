@@ -1,1 +1,3 @@
-export const InputStyle = "w-[330px] h-[40px] px-3 py-3 m-2 border rounded-[3px]";
+export const InputStyle =
+  "w-full h-[50px] bg-[#F5F5F5] rounded-[10px] text-[#9D9D9D] text-[14px] font-semibold";
+export const ButtonStyle = "w-full h-[50px] rounded-[10px] font-semibold";

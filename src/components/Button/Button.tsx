@@ -1,7 +1,7 @@
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: string;
   className: string;
-  label: string;
+  label?: string;
 }
 
 const buttonStyle = {
