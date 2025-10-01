@@ -2,7 +2,7 @@
 
 import Button from "@/components/Button/Button";
 import Input from "@/components/Input/Input";
-import { ButtonStyle, InputStyle } from "../styles/authStyle";
+import { ButtonStyle, InputStyle } from "../../styles/authStyle";
 import { cn } from "@/utils/cn";
 
 const Page = () => {
