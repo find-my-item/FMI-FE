@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import SideBar from "./SideBar";
 import Icon from "../Icon/Icon";

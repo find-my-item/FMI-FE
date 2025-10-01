@@ -1,6 +1,6 @@
 "use client";
 
-import { Meta, StoryObj } from "@storybook/nextjs";
+import type { StoryObj } from "@storybook/nextjs";
 import { useState } from "react";
 import Tab from "./Tab";
 
@@ -14,14 +14,21 @@ const meta = {
   argTypes: {
     selected: { control: "text" },
   },
-} satisfies Meta<typeof Tab>;
+  decorators: [
+    (Story: React.ComponentType) => (
+      <div className="w-[500px]">
+        <Story />
+      </div>
+    ),
+  ],
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 const defaultTabs = [
-  { id: "1", label: "Option 1" },
-  { id: "2", label: "Option 2" },
+  { key: "1", label: "Opt 1" },
+  { key: "2", label: "Opt 2" },
 ];
 
 export const Basic: Story = {
@@ -39,9 +46,11 @@ export const Basic: Story = {
 export const ManyTabs: Story = {
   args: {
     tabs: [
-      { id: "1", label: "Option 1" },
-      { id: "2", label: "Option 2" },
-      { id: "3", label: "Option 3" },
+      { key: "1", label: "Opt 1" },
+      { key: "2", label: "Opt 2" },
+      { key: "3", label: "Opt 3" },
+      { key: "4", label: "Opt 4" },
+      { key: "5", label: "Opt 5" },
     ],
     selected: "1",
     onValueChange: () => {},

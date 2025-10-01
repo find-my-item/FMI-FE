@@ -27,6 +27,7 @@ export const Basic: Story = {
   args: {
     options: defaultOptions,
     onSelect: () => {},
+    children: <span>Dropdown</span>,
   },
   render: (args) => {
     return <Dropdown {...args} />;
@@ -43,6 +44,7 @@ export const ManyOptions: Story = {
       { value: "5", label: "Option 5" },
     ],
     onSelect: () => {},
+    children: <span>Dropdown</span>,
   },
   render: (args) => {
     return <Dropdown {...args} />;
