@@ -1,4 +1,3 @@
-import Icon from "@/components/Icon/Icon";
 import Link from "next/link";
 import CustomerList from "./CustomerList";
 
