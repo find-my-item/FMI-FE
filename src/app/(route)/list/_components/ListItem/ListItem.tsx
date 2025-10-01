@@ -48,7 +48,10 @@ const ListItem = ({ img, title, description, id, linkState = "list" }: ListItemP
         </div>
         <div className="mt-2 flex gap-2">
           {VIEW_ITEM.map((item) => (
-            <span className="flex items-center gap-2 text-[14px] leading-[20px] text-[#9D9D9D]">
+            <span
+              key={item.icon}
+              className="flex items-center gap-2 text-[14px] leading-[20px] text-[#9D9D9D]"
+            >
               <Icon name={item.icon} size={16} />
               {item.count}
             </span>
