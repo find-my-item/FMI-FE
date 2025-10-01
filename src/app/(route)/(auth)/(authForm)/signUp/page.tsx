@@ -1,10 +1,10 @@
 "use client";
 
 import { FormProvider, useForm } from "react-hook-form";
-import { FormValue, signUpInputObject } from "../_constant/FormData";
+import { FormValue, signUpInputObject } from "../../_constant/FormData";
 import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
-import { InputStyle } from "../styles/authStyle";
+import { InputStyle } from "../../styles/authStyle";
 
 const Page = () => {
   const methods = useForm<FormValue>({
