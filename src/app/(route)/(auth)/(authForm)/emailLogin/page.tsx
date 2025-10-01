@@ -7,20 +7,26 @@ import Link from "next/link";
 import { cn } from "@/utils/cn";
 import Icon from "@/components/Icon/Icon";
 import CheckBox from "./_components/CheckBox";
+import { useFormContext } from "react-hook-form";
 
 const Page = () => {
   const [show, setShow] = useState(false);
 
-  return (
-    <div className="flex-col-center flex min-h-screen w-full gap-6 md:flex-row">
-      {/* 상위 박스 (로고, 입력칸, 체크박스) */}
-      <div className="flex w-full flex-col gap-10 px-5">
-        {/* 로고 */}
-        <div className="flex-center">
-          <Icon name="Logo" size={50} title="로고" />
-          <h1 className="text-[39px] font-bold text-[#1EB87B]">찾아줘!</h1>
-        </div>
+  const methods = useFormContext();
 
+  const onSubmit = methods.handleSubmit((data) => {
+    alert("폼 제출되었습니다.");
+  });
+
+  return (
+    <div className="flex-col-center flex min-h-screen w-full gap-6 px-5 md:flex-row">
+      {/* 로고 */}
+      <div className="flex-center mb-10">
+        <Icon name="Logo" size={50} title="로고" />
+        <h1 className="text-[39px] font-bold text-[#1EB87B]">찾아줘!</h1>
+      </div>
+
+      <form onSubmit={onSubmit} className="flex w-full flex-col gap-10">
         {/* 로그인 입력칸 */}
         <div className="flex w-full flex-col gap-3">
           <input
@@ -29,7 +35,6 @@ const Page = () => {
             placeholder="이메일을 입력해주세요."
             className={cn(InputStyle)}
           />
-
           <div className={cn(InputStyle)}>
             <input
               name="password"
@@ -37,7 +42,7 @@ const Page = () => {
               placeholder="비밀번호를 입력해주세요."
               className="flex-1 bg-[#F5F5F5] focus:outline-none"
             />
-            <button className="outline-none" onClick={() => setShow(!show)}>
+            <button className="outline-none" type="button" onClick={() => setShow(!show)}>
               <Icon name={show ? "EyeOpen" : "EyeOff"} size={16} />
             </button>
           </div>
@@ -48,18 +53,19 @@ const Page = () => {
             <CheckBox children="자동 로그인" name="autoLogin" />
           </div>
         </div>
-      </div>
+        {/* </div> */}
 
-      {/* 로그인 버튼 */}
-      <div className="flex-col-center w-full gap-6 px-5">
-        <Button children="로그인" type="submit" className={cn(ButtonStyle)} />
-        {/* divider 구분선 */}
-        <div className="flex h-4 w-full items-center">
-          <div className="h-px flex-1 bg-[#E4E4E4]" />
-          <span className="px-3 text-[12px] text-[#9D9D9D]">로그인이 되지 않는다면?</span>
-          <div className="h-px flex-1 bg-[#E4E4E4]"></div>
+        {/* 로그인 버튼 */}
+        <div className="flex-col-center w-full gap-6">
+          <Button children="로그인" type="submit" className={cn(ButtonStyle)} />
+          {/* divider 구분선 */}
+          <div className="flex h-4 w-full items-center">
+            <div className="h-px flex-1 bg-[#E4E4E4]" />
+            <span className="px-3 text-[12px] text-[#9D9D9D]">로그인이 되지 않는다면?</span>
+            <div className="h-px flex-1 bg-[#E4E4E4]"></div>
+          </div>
         </div>
-      </div>
+      </form>
 
       {/* 회원확인 여부 */}
       <div className="flex h-11 w-full justify-center">

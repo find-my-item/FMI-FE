@@ -1,7 +1,7 @@
 "use client";
 
-import { useForm, useFormContext } from "react-hook-form";
-import { FormValue, signUpInputObject } from "../../_constant/FormData";
+import { useFormContext } from "react-hook-form";
+import { signUpInputObject } from "../../_constant/FormData";
 import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 import { InputStyle } from "../../styles/authStyle";

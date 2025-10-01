@@ -11,7 +11,7 @@ const Input = ({ name, type, className, ...rest }: InputType) => {
   const showError = (!!touchedFields[name] || isSubmitted) && !!fieldError;
 
   return (
-    <div>
+    <div className="w-full">
       {rest.label && <label htmlFor={name}>{rest.label}</label>}
       <input {...register(name, rest.validation)} type={type} className={className} {...rest} />
       {showError && <p className="mt-1 text-sm text-red-500">{fieldError}</p>}
