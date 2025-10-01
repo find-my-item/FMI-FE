@@ -9,6 +9,7 @@ const CustomerList = () => {
       <div className="flex flex-col gap-3">
         {customerListObject.map((item) => (
           <Link
+            key={item.id}
             href={`notice/customer/${item.id}`}
             className="w-full border-b border-b-[#E4E4E4] py-[24px] hover:bg-gray-100"
           >
