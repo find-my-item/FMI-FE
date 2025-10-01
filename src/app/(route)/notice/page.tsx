@@ -4,11 +4,7 @@ import { useState } from "react";
 import { NoticeCustomerState } from "./_types/noticeContainer";
 import NoticeView from "./_components/NoticeView";
 import { Tab } from "@/components";
-
-const tabs = [
-  { key: "notice", label: "공지사항" },
-  { key: "customer", label: "고객센터" },
-];
+import { tabs } from "./_constant/noticeTab";
 
 const Notice = () => {
   const [noticeCustomerState, setNoticeCustomerState] = useState<NoticeCustomerState>("notice");

@@ -1,6 +1,6 @@
 import { NoticeCustomerState } from "../_types/noticeContainer";
 import ListItem from "../../list/_components/ListItem/ListItem";
-import { NoticeListObject } from "../_constant/noticeListObject";
+import { noticeListObject } from "../_constant/noticeListObject";
 
 interface NoticeView {
   noticeCustomerState: NoticeCustomerState;
@@ -12,7 +12,7 @@ const NoticeView = ({ noticeCustomerState }: NoticeView) => {
       {noticeCustomerState === "customer" ? (
         <h1>고객센터</h1>
       ) : (
-        NoticeListObject.map((item) => (
+        noticeListObject.map((item) => (
           <ListItem
             id={item.id}
             title={item.title}
