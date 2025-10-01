@@ -1,10 +1,13 @@
 import Image from "next/image";
 import Icon from "@/components/Icon/Icon";
+import Link from "next/link";
 
 interface ListItemProps {
+  id?: number;
   img: string;
   title: string;
   description: string;
+  linkState?: "notice" | "list";
 }
 
 const VIEW_ITEM = [
@@ -18,9 +21,12 @@ const VIEW_ITEM = [
   },
 ] as const;
 
-const ListItem = ({ img, title, description }: ListItemProps) => {
+const ListItem = ({ img, title, description, id, linkState = "list" }: ListItemProps) => {
   return (
-    <div className="duration-130 flex w-full cursor-pointer items-center gap-[14px] border-b border-b-[#E4E4E4] px-[20px] py-[30px] transition-colors hover:bg-[#F9F9F9]">
+    <Link
+      href={linkState === "list" ? `/list/${id}` : `/notice/${id}`}
+      className="duration-130 flex w-full cursor-pointer items-center gap-[14px] border-b border-b-[#E4E4E4] px-[20px] py-[30px] transition-colors hover:bg-[#F9F9F9]"
+    >
       {img && (
         <Image
           src={img}
@@ -49,7 +55,7 @@ const ListItem = ({ img, title, description }: ListItemProps) => {
           ))}
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

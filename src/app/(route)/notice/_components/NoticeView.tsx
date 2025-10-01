@@ -1,12 +1,30 @@
 import { NoticeCustomerState } from "../_types/noticeContainer";
-import NoticeList from "./NoticeList";
+import ListItem from "../../list/_components/ListItem/ListItem";
+import { NoticeListObject } from "../_constant/noticeListObject";
 
 interface NoticeView {
   noticeCustomerState: NoticeCustomerState;
 }
 
 const NoticeView = ({ noticeCustomerState }: NoticeView) => {
-  return <div>{noticeCustomerState === "customer" ? <h1>고객센터</h1> : <NoticeList />}</div>;
+  return (
+    <div>
+      {noticeCustomerState === "customer" ? (
+        <h1>고객센터</h1>
+      ) : (
+        NoticeListObject.map((item) => (
+          <ListItem
+            id={item.id}
+            title={item.title}
+            description={item.body}
+            img={""}
+            key={item.id}
+            linkState="notice"
+          />
+        ))
+      )}
+    </div>
+  );
 };
 
 export default NoticeView;
