@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Button from "@/components/Button/Button";
 import { ButtonStyle, InputStyle } from "../../styles/authStyle";
 import Link from "next/link";
@@ -8,6 +9,8 @@ import Icon from "@/components/Icon/Icon";
 import CheckBox from "./_components/CheckBox";
 
 const Page = () => {
+  const [show, setShow] = useState(false);
+
   return (
     <div className="flex-col-center flex min-h-screen w-full gap-6 md:flex-row">
       {/* 상위 박스 (로고, 입력칸, 체크박스) */}
@@ -26,12 +29,19 @@ const Page = () => {
             placeholder="이메일을 입력해주세요."
             className={cn(InputStyle)}
           />
-          <input
-            name="password"
-            type="password"
-            placeholder="비밀번호를 입력해주세요."
-            className={cn(InputStyle)}
-          />
+
+          <div className={cn(InputStyle)}>
+            <input
+              name="password"
+              type={show ? "text" : "password"}
+              placeholder="비밀번호를 입력해주세요."
+              className="flex-1 bg-[#F5F5F5] focus:outline-none"
+            />
+            <button className="outline-none" onClick={() => setShow(!show)}>
+              <Icon name={show ? "EyeOpen" : "EyeOff"} size={16} />
+            </button>
+          </div>
+
           {/* 체크박스 */}
           <div className="flex w-full gap-3 text-[14px] text-[#9D9D9D]">
             <CheckBox children="아이디 기억하기" name="rememberID" />
@@ -42,11 +52,7 @@ const Page = () => {
 
       {/* 로그인 버튼 */}
       <div className="flex-col-center w-full gap-6 px-5">
-        <Button
-          children="로그인"
-          type="submit"
-          className={cn(ButtonStyle, "bg-[#1EB87B] text-white")}
-        />
+        <Button children="로그인" type="submit" className={cn(ButtonStyle)} />
         {/* divider 구분선 */}
         <div className="flex h-4 w-full items-center">
           <div className="h-px flex-1 bg-[#E4E4E4]" />
