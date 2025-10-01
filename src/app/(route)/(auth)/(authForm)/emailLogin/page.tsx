@@ -8,6 +8,7 @@ import { cn } from "@/utils/cn";
 import Icon from "@/components/Icon/Icon";
 import CheckBox from "./_components/CheckBox";
 import { useFormContext } from "react-hook-form";
+import Input from "@/components/Input/Input";
 
 const Page = () => {
   const [show, setShow] = useState(false);
@@ -29,14 +30,14 @@ const Page = () => {
       <form onSubmit={onSubmit} className="flex w-full flex-col gap-10">
         {/* 로그인 입력칸 */}
         <div className="flex w-full flex-col gap-3">
-          <input
+          <Input
             name="email"
             type="text"
             placeholder="이메일을 입력해주세요."
             className={cn(InputStyle)}
           />
           <div className={cn(InputStyle)}>
-            <input
+            <Input
               name="password"
               type={show ? "text" : "password"}
               placeholder="비밀번호를 입력해주세요."
