@@ -21,18 +21,21 @@ const Page = () => {
       {/* button */}
       <div className="flex w-full flex-col gap-3 px-5 text-[14px]">
         <Button
-          children="카카오로 3초 만에 시작하기"
           type="submit"
           className={cn(ButtonStyle, "bg-[#FFEA14] text-[#242424]")}
           label="로그인 버튼"
-        />
+        >
+          <Icon name="KakaoLogin" size={14} />
+          카카오로 3초 만에 시작하기
+        </Button>
         <Button
-          children="이메일로 로그인"
           type="submit"
           className={cn(ButtonStyle, "bg-[#E4E4E4] text-[#525252]")}
           label="로그인 버튼"
           onClick={() => router.push("/emailLogin")}
-        ></Button>
+        >
+          <Icon name="Mail" size={20} /> 이메일로 로그인
+        </Button>
       </div>
 
       {/* divider 구분선 */}
