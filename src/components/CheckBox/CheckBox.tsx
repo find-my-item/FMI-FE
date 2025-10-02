@@ -7,7 +7,7 @@ interface checkProps {
   name: string;
 }
 
-const CheckBox = ({ children, name }: checkProps) => {
+const CheckBox = ({ children, name, ...rest }: checkProps) => {
   return (
     <label htmlFor={name} className="flex cursor-pointer items-center">
       <input name={name} type="checkbox" className="peer sr-only" />
