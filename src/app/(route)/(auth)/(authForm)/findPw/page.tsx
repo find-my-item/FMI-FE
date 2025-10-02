@@ -5,30 +5,33 @@ import Button from "@/components/Button/Button";
 import Input from "@/components/Input/Input";
 import { ButtonStyle, InputStyle } from "../../styles/authStyle";
 import { cn } from "@/utils/cn";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 const Page = () => {
-  const [isSend, setIsSend] = useState(false);
-  const [email, setEmail] = useState("");
-
   const router = useRouter();
 
   const {
     handleSubmit,
-    formState: { isValid },
+    formState: { isValid, isSubmitSuccessful },
+    watch,
   } = useFormContext();
+
+  const email = watch("email");
 
   const onSubmit = handleSubmit((data) => {
     alert("폼 제출되었습니다.");
     // console.log("data>> ", data)
-    setEmail(data.email);
-    setIsSend(true);
   });
+
+  const handleClick = () => {
+    if (isSubmitSuccessful) {
+      router.push("/login");
+    }
+  };
 
   return (
     <form className="flex-col-center w-full gap-4 px-5 py-6" onSubmit={onSubmit}>
-      {isSend ? (
+      {isSubmitSuccessful ? (
         <div className="flex-col-center h-[91px] text-center text-[14px] leading-relaxed">
           <p>
             <span className="text-[#1EB87B]">{email}</span>으로
@@ -52,11 +55,12 @@ const Page = () => {
         />
       )}
       <Button
-        children={isSend ? "로그인 화면으로 이동" : "입력완료"}
-        type={isSend ? "button" : "submit"}
+        type={isSubmitSuccessful ? "button" : "submit"}
         className={cn(ButtonStyle, isValid && "bg-[#1EB87B]")}
-        onClick={isSend ? () => router.push("/login") : undefined}
-      />
+        onClick={handleClick}
+      >
+        {isSubmitSuccessful ? "로그인 화면으로 이동" : "입력완료"}
+      </Button>
     </form>
   );
 };

@@ -6,7 +6,7 @@ import { ButtonStyle, InputStyle } from "../../styles/authStyle";
 import Link from "next/link";
 import { cn } from "@/utils/cn";
 import Icon from "@/components/Icon/Icon";
-import CheckBox from "./_components/CheckBox";
+import CheckBox from "../../../../../components/CheckBox/CheckBox";
 import { useFormContext } from "react-hook-form";
 import Input from "@/components/Input/Input";
 
@@ -43,9 +43,9 @@ const Page = () => {
               placeholder="비밀번호를 입력해주세요."
               className="flex-1 bg-[#F5F5F5] focus:outline-none"
             />
-            <button className="outline-none" type="button" onClick={() => setShow(!show)}>
+            <Button className="outline-none" type="button" onClick={() => setShow(!show)}>
               <Icon name={show ? "EyeOpen" : "EyeOff"} size={16} />
-            </button>
+            </Button>
           </div>
 
           {/* 체크박스 */}
@@ -58,12 +58,12 @@ const Page = () => {
 
         {/* 로그인 버튼 */}
         <div className="flex-col-center w-full gap-6">
-          <Button children="로그인" type="submit" className={cn(ButtonStyle)} />
+          <Button children="로그인" type="submit" className={cn(ButtonStyle)}></Button>
           {/* divider 구분선 */}
           <div className="flex h-4 w-full items-center">
-            <div className="h-px flex-1 bg-[#E4E4E4]" />
+            <hr className="h-px flex-1 bg-[#E4E4E4]" />
             <span className="px-3 text-[12px] text-[#9D9D9D]">로그인이 되지 않는다면?</span>
-            <div className="h-px flex-1 bg-[#E4E4E4]"></div>
+            <hr className="h-px flex-1 bg-[#E4E4E4]" />
           </div>
         </div>
       </form>
