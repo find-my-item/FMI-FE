@@ -9,7 +9,7 @@ interface NoticeView {
 
 const NoticeView = ({ noticeCustomerState }: NoticeView) => {
   return (
-    <div>
+    <>
       {noticeCustomerState === "customer" ? (
         <Customer />
       ) : (
@@ -24,7 +24,7 @@ const NoticeView = ({ noticeCustomerState }: NoticeView) => {
           />
         ))
       )}
-    </div>
+    </>
   );
 };
 

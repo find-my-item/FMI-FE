@@ -13,7 +13,7 @@ const CustomerList = () => {
             href={`notice/customer/${item.id}`}
             className="w-full border-b border-b-[#E4E4E4] py-[24px] hover:bg-gray-100"
           >
-            <div>
+            <section>
               <div className="mb-2 flex items-center gap-3">
                 <p className="rounded-[4px] bg-emerald-100 px-2 py-[2px] text-[12px] text-emerald-700">
                   {item.category}
@@ -25,7 +25,7 @@ const CustomerList = () => {
 
               <div className="mb-2 flex items-center gap-3 text-[13px] text-[#5D5D5D]">
                 <span>작성자1</span>
-                <span className="text-[#9D9D9D]">3일전</span>
+                <time className="text-[#9D9D9D]">3일전</time>
               </div>
 
               <div className="mt-1 flex gap-4 text-[13px] text-[#9D9D9D]">
@@ -36,7 +36,7 @@ const CustomerList = () => {
                   <Icon name="Star" size={16} /> 12
                 </span>
               </div>
-            </div>
+            </section>
           </Link>
         ))}
       </div>
