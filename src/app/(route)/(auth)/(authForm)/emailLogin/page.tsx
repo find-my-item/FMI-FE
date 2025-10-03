@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Button from "@/components/Button/Button";
-import { ButtonStyle, InputStyle } from "../../styles/authStyle";
+import { InputStyle } from "../../styles/authStyle";
 import Link from "next/link";
 import { cn } from "@/utils/cn";
 import Icon from "@/components/Icon/Icon";
@@ -30,12 +30,7 @@ const Page = () => {
       <form onSubmit={onSubmit} className="flex w-full flex-col gap-10">
         {/* 로그인 입력칸 */}
         <div className="flex w-full flex-col gap-3">
-          <Input
-            name="email"
-            type="text"
-            placeholder="이메일을 입력해주세요."
-            className={cn(InputStyle)}
-          />
+          <Input name="email" type="text" placeholder="이메일을 입력해주세요." />
           <div className={cn(InputStyle)}>
             <Input
               name="password"
@@ -58,7 +53,7 @@ const Page = () => {
 
         {/* 로그인 버튼 */}
         <div className="flex-col-center w-full gap-6">
-          <Button children="로그인" type="submit" className={cn(ButtonStyle)}></Button>
+          <Button children="로그인" type="submit"></Button>
           {/* divider 구분선 */}
           <div className="flex h-4 w-full items-center">
             <hr className="h-px flex-1 bg-[#E4E4E4]" />

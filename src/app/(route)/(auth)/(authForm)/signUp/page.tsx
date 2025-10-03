@@ -4,7 +4,6 @@ import { useFormContext } from "react-hook-form";
 import { signUpInputObject } from "../../_constant/FormData";
 import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
-import { InputStyle } from "../../styles/authStyle";
 
 const Page = () => {
   const methods = useFormContext();
@@ -20,7 +19,6 @@ const Page = () => {
           key={item.name}
           name={item.name}
           type={item.type}
-          className={InputStyle}
           label={item.label}
           placeholder={item.placeholder}
           validation={item.validation}
