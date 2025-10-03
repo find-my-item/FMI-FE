@@ -13,7 +13,7 @@ const Page = () => {
   return (
     <div className="flex-col-center flex min-h-screen w-full gap-8 md:flex-row">
       {/* logo */}
-      <div className="flex-col-center">
+      <div className="flex-center">
         <Icon name="Logo" size={90} title="로고" />
         <h1 className="text-[49px] font-bold text-[#1EB87B]">찾아줘!</h1>
       </div>

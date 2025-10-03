@@ -3,7 +3,7 @@
 import { useFormContext } from "react-hook-form";
 import Button from "@/components/Button/Button";
 import Input from "@/components/Input/Input";
-import { ButtonStyle, InputStyle } from "../../styles/authStyle";
+import { ButtonStyle } from "../../styles/authStyle";
 import { cn } from "@/utils/cn";
 import { useRouter } from "next/navigation";
 
@@ -41,7 +41,6 @@ const Page = () => {
         </div>
       ) : (
         <Input
-          className={InputStyle}
           type="text"
           placeholder="아이디(이메일)을 입력해 주세요."
           name="email"

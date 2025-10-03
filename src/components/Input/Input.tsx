@@ -1,7 +1,10 @@
 import { useFormContext } from "react-hook-form";
 import { InputType } from "@/types/InputTypes";
 
-const Input = ({ name, type, className, ...rest }: InputType) => {
+const InputStyle =
+  "flex items-center w-full h-[50px] px-[14px] py-[12.5px] bg-[#F5F5F5] rounded-[10px] text-[#9D9D9D] text-[14px]";
+
+const Input = ({ name, type, className = InputStyle, ...rest }: InputType) => {
   const {
     register,
     formState: { errors, touchedFields, isSubmitted },
