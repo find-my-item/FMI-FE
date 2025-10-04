@@ -5,7 +5,6 @@ import webpack from "webpack";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 const MOCK_NAV = path.resolve(__dirname, "./mock/next-navigation.ts");
 
 const config: StorybookConfig = {
@@ -13,7 +12,6 @@ const config: StorybookConfig = {
   addons: ["@chromatic-com/storybook", "@storybook/addon-docs", "@storybook/addon-a11y"],
   framework: { name: "@storybook/nextjs", options: {} },
   staticDirs: ["../public"],
-
   webpackFinal: async (cfg) => {
     (cfg.module!.rules as any[]).forEach((rule: any) => {
       if (rule?.test instanceof RegExp && rule.test.test(".svg")) {
