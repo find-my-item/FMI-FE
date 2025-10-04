@@ -1,7 +1,9 @@
 name: Chromatic Deployment
 
+on:
   push:
     branches: [develop]
+
 jobs:
   chromatic:
     runs-on: ubuntu-latest
