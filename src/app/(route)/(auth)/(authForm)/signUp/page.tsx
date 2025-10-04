@@ -17,15 +17,17 @@ const Page = () => {
       <form onSubmit={onSubmit} className="flex w-full flex-col justify-between">
         <div className="w-full flex-1 gap-5 p-5">
           {signUpInputObject.map((item) => (
-            <div className="flex min-h-[106px] w-full flex-col justify-center">
+            <div className="flex min-h-[106px] w-full flex-row items-end">
               <Input
                 key={item.name}
                 name={item.name}
-                type={item.type}
                 label={item.label}
+                type={item.type}
                 placeholder={item.placeholder}
                 validation={item.validation}
               />
+              {item.name == "emailAuth" && <Button>인증번호 발송</Button>}
+              {item.name == "nickname" && <Button>중복 확인</Button>}
             </div>
           ))}
         </div>
