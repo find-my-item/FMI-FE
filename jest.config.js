@@ -7,6 +7,7 @@ module.exports = {
       "ts-jest",
       { tsconfig: { jsx: "react-jsx" } }, // JSX 변환 보장
     ],
+    "^.+\\.svg$": "jest-transformer-svg", // SVG 변환 추가
   },
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1",

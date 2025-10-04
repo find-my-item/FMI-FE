@@ -1,3 +1,5 @@
+"use client";
+
 import type { SVGProps } from "react";
 import * as Icons from "./index";
 
