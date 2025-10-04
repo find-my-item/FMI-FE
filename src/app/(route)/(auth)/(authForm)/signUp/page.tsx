@@ -6,31 +6,32 @@ import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 
 const Page = () => {
-  const methods = useFormContext();
+  const { handleSubmit } = useFormContext();
 
-  const onSubmit = methods.handleSubmit((data) => {
+  const onSubmit = handleSubmit((data) => {
     alert("폼 제출되었습니다.");
   });
 
   return (
-    <form onSubmit={onSubmit}>
-      {signUpInputObject.map((item) => (
-        <Input
-          key={item.name}
-          name={item.name}
-          type={item.type}
-          label={item.label}
-          placeholder={item.placeholder}
-          validation={item.validation}
-        />
-      ))}
-      <Button
-        children="회원가입"
-        type="submit"
-        className="w-50 h-30 bg-slate-400"
-        label="회원가입 버튼"
-      />
-    </form>
+    <div className="flex-col-center flex min-h-screen w-full md:flex-row">
+      <form onSubmit={onSubmit} className="flex-col-center w-full gap-5 p-5">
+        {signUpInputObject.map((item) => (
+          <div className="w-full">
+            <Input
+              key={item.name}
+              name={item.name}
+              type={item.type}
+              label={item.label}
+              placeholder={item.placeholder}
+              validation={item.validation}
+            />
+          </div>
+        ))}
+        <Button type="submit" label="회원가입 버튼">
+          다음
+        </Button>
+      </form>
+    </div>
   );
 };
 

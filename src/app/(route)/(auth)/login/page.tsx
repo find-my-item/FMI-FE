@@ -11,7 +11,7 @@ const Page = () => {
   const router = useRouter();
 
   return (
-    <div className="flex-col-center flex min-h-screen w-full gap-8 md:flex-row">
+    <div className="flex-col-center min-h-screen w-full gap-8 md:flex-row">
       {/* logo */}
       <div className="flex-center">
         <Icon name="Logo" size={90} title="로고" />
