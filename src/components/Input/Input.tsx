@@ -15,7 +15,12 @@ const Input = ({ name, type, className = InputStyle, ...rest }: InputType) => {
 
   return (
     <div className="w-full">
-      {rest.label && <label htmlFor={name}>{rest.label}</label>}
+      {rest.label && (
+        <label htmlFor={name}>
+          {rest.label}
+          {rest.validation?.required && <span className="text-[#1EB87B]">*</span>}
+        </label>
+      )}
       <input {...register(name, rest.validation)} type={type} className={className} {...rest} />
       {showError && <p className="mt-1 text-sm text-red-500">{fieldError}</p>}
     </div>

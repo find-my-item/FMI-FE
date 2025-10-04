@@ -17,14 +17,14 @@ export const signUpInputObject: InputType[] = [
       required: true,
       pattern: {
         value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
-        message: "이메일을 입력해주세요",
+        message: "이미 가입된 이메일입니다.",
       },
     },
   },
   {
     name: "emailAuth",
     label: "이메일 인증",
-    type: "number",
+    type: "text",
     placeholder: "인증번호를 입력해주세요",
     validation: {
       required: false,
@@ -43,7 +43,7 @@ export const signUpInputObject: InputType[] = [
       required: true,
       pattern: {
         value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z0-9])[^\s]{8,16}$/,
-        message: "8~16자리, 영문/숫자/특수문자 포함",
+        message: "영문/숫자/특수 문자 포함 8자리 이상을 입력해 주세요.",
       },
     },
   },
@@ -66,7 +66,7 @@ export const signUpInputObject: InputType[] = [
       required: true,
       maxLength: {
         value: 10,
-        message: "2~10자, 특수문자/금칙어 제한",
+        message: "2~10자 사이의 닉네임을 입력해 주세요.",
       },
     },
   },
