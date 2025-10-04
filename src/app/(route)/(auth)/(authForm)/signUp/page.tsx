@@ -14,22 +14,28 @@ const Page = () => {
 
   return (
     <div className="flex-col-center flex min-h-screen w-full md:flex-row">
-      <form onSubmit={onSubmit} className="flex-col-center w-full gap-5 p-5">
-        {signUpInputObject.map((item) => (
-          <div className="w-full">
-            <Input
-              key={item.name}
-              name={item.name}
-              type={item.type}
-              label={item.label}
-              placeholder={item.placeholder}
-              validation={item.validation}
-            />
-          </div>
-        ))}
-        <Button type="submit" label="회원가입 버튼">
-          다음
-        </Button>
+      <form onSubmit={onSubmit} className="flex w-full flex-col justify-between">
+        <div className="w-full flex-1 gap-5 p-5">
+          {signUpInputObject.map((item) => (
+            <div className="flex min-h-[106px] w-full flex-col justify-center">
+              <Input
+                key={item.name}
+                name={item.name}
+                type={item.type}
+                label={item.label}
+                placeholder={item.placeholder}
+                validation={item.validation}
+              />
+            </div>
+          ))}
+        </div>
+
+        <hr className="fixed bottom-[102px] left-0 h-px w-full bg-[#E4E4E4]" />
+        <div className="fixed bottom-0 left-0 min-h-[102px] w-full px-5 py-3">
+          <Button type="submit" label="회원가입 버튼">
+            다음
+          </Button>
+        </div>
       </form>
     </div>
   );
