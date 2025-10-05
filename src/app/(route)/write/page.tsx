@@ -1,7 +1,13 @@
 "use client";
 
 import Icon from "@/components/Icon/Icon";
+import RequiredText from "@/components/RequiredText/RequiredText";
+import { cn } from "@/utils/cn";
 import React, { useRef } from "react";
+
+const styles = {
+  section: "border-b border-[#E4E4E4] px-5 py-6",
+};
 
 const Page = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -20,7 +26,7 @@ const Page = () => {
       <h1 className="sr-only">분실/습득 등록 페이지</h1>
       <form onSubmit={handleSubmit} className="flex flex-col">
         <section
-          className="flex flex-col items-start justify-center gap-4 border-b border-[#E4E4E4] px-5 py-6"
+          className={cn("flex flex-col items-start justify-center gap-4", styles.section)}
           aria-label="이미지 업로드"
         >
           <input type="file" accept="image/*" className="hidden" ref={fileInputRef} />
@@ -36,11 +42,11 @@ const Page = () => {
         </section>
 
         <section
-          className="flex cursor-pointer items-center justify-between border-b border-[#E4E4E4] px-5 py-6"
+          className={cn("flex cursor-pointer items-center justify-between", styles.section)}
           aria-label="카테고리 선택"
         >
           <span className="text-[16px] text-[#9D9D9D]">
-            카테고리를 선택해 주세요. <span className="text-[#1EB87B]">*</span>
+            카테고리를 선택해 주세요. <RequiredText />
           </span>
           <button type="button" className="h-4 w-4">
             <Icon name="ArrowDown" size={16} title="카테고리 선택" />
@@ -48,7 +54,7 @@ const Page = () => {
         </section>
 
         <section
-          className="relative flex items-center justify-between border-b border-[#E4E4E4] px-5 py-6"
+          className={cn("relative flex items-center justify-between", styles.section)}
           aria-label="제목 입력"
         >
           <div className="relative w-full">
@@ -62,14 +68,14 @@ const Page = () => {
             />
             <span className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 text-[#9D9D9D] peer-placeholder-shown:opacity-100 peer-[&:not(:placeholder-shown)]:opacity-0">
               제목을 입력해 주세요.
-              <span className="text-[#1EB87B]">*</span>
+              <RequiredText />
             </span>
           </div>
         </section>
 
-        <section className="border-b border-[#E4E4E4] px-5 py-6" aria-label="내용 입력">
+        <section className={styles.section} aria-label="내용 입력">
           <label htmlFor="content" className="text-[16px] text-[#9D9D9D]">
-            내용을 입력해 주세요. <span className="text-[#1EB87B]">*</span>
+            내용을 입력해 주세요. <RequiredText />
           </label>
           <textarea
             name="content"
@@ -82,12 +88,12 @@ const Page = () => {
         </section>
 
         <section
-          className="flex cursor-pointer items-center justify-between border-b border-[#E4E4E4] px-5 py-6"
+          className={cn("flex cursor-pointer items-center justify-between", styles.section)}
           aria-label="위치 등록"
         >
           <span className="flex items-center gap-[6px] text-[16px] text-[#9D9D9D]">
             <Icon name="Location" size={16} title="위치 등록" />
-            위치를 등록해 주세요. <span className="text-[#1EB87B]">*</span>
+            위치를 등록해 주세요. <RequiredText />
           </span>
           <button type="button" className="h-4 w-4">
             <Icon name="ArrowRight" title="위치 열기" size={16} />
