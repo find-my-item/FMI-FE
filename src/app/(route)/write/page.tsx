@@ -3,7 +3,7 @@
 import Icon from "@/components/Icon/Icon";
 import RequiredText from "@/components/RequiredText/RequiredText";
 import { cn } from "@/utils/cn";
-import React, { useRef } from "react";
+import { useRef } from "react";
 
 const styles = {
   section: "border-b border-[#E4E4E4] px-5 py-6",
