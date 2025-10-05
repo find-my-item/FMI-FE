@@ -1,62 +1,103 @@
+"use client";
+
 import Icon from "@/components/Icon/Icon";
 import React from "react";
 
-const page = () => {
+const Page = () => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("submit");
+  };
+
   return (
-    <div>
-      <div className="flex flex-col items-start justify-center gap-4 border-b border-[#E4E4E4] px-5 py-6">
-        <div className="flex-center h-[104px] w-[104px] rounded-[6px] bg-[#F5F5F5]">
-          <Icon name="Camera" size={32} />
-        </div>
-        <span className="text-[14px] text-[#9D9D9D]">
-          * jpg, jpeg, png 파일을 첨부해 주세요. (선택)
-        </span>
-      </div>
+    <>
+      <h1 className="sr-only">분실/습득 등록 페이지</h1>
+      <form onSubmit={handleSubmit} className="flex flex-col">
+        <section
+          className="flex flex-col items-start justify-center gap-4 border-b border-[#E4E4E4] px-5 py-6"
+          aria-label="이미지 업로드"
+        >
+          <div className="flex-center h-[104px] w-[104px] rounded-[6px] bg-[#F5F5F5]">
+            <Icon name="Camera" size={32} />
+          </div>
+          <span className="text-[14px] text-[#9D9D9D]">
+            * jpg, jpeg, png 파일을 첨부해 주세요. (선택)
+          </span>
+        </section>
 
-      <div className="flex items-center justify-between border-b border-[#E4E4E4] px-5 py-6">
-        <span className="text-[16px] text-[#9D9D9D]">
-          카테고리를 선택해 주세요. <span className="text-[#1EB87B]">*</span>
-        </span>
-        <button className="h-4 w-4">
-          <Icon name="ArrowDown" size={16} />
-        </button>
-      </div>
+        <section
+          className="flex items-center justify-between border-b border-[#E4E4E4] px-5 py-6"
+          aria-label="카테고리 선택"
+        >
+          <span className="text-[16px] text-[#9D9D9D]">
+            카테고리를 선택해 주세요. <span className="text-[#1EB87B]">*</span>
+          </span>
+          <button type="button" className="h-4 w-4">
+            <Icon name="ArrowDown" size={16} />
+          </button>
+        </section>
 
-      <div className="flex items-center justify-between border-b border-[#E4E4E4] px-5 py-6">
-        <span className="text-[16px] text-[#9D9D9D]">
-          제목을 입력해 주세요. <span className="text-[#1EB87B]">*</span>
-        </span>
-      </div>
+        <section
+          className="relative flex items-center justify-between border-b border-[#E4E4E4] px-5 py-6"
+          aria-label="제목 입력"
+        >
+          <div className="relative w-full">
+            <input
+              type="text"
+              name="title"
+              id="title"
+              className="peer w-full bg-transparent text-[16px] placeholder-transparent outline-none"
+              placeholder="제목을 입력해 주세요."
+              required
+            />
+            <span className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 text-[#9D9D9D] peer-placeholder-shown:opacity-100 peer-[&:not(:placeholder-shown)]:opacity-0">
+              제목을 입력해 주세요.
+              <span className="text-[#1EB87B]">*</span>
+            </span>
+          </div>
+        </section>
 
-      <div className="border-b border-[#E4E4E4] px-5 py-6">
-        <span className="text-[16px] text-[#9D9D9D]">
-          내용을 입력해 주세요. <span className="text-[#1EB87B]">*</span>
-        </span>
-        <textarea
-          name=""
-          id=""
-          placeholder="분실/습득 날짜, 물건 종류, 물건의 특징 등 유실물 찾기에 도움이 되는 내용을 작성해 주세요."
-          className="w-full border-b border-[#E4E4E4] px-5 py-6 placeholder:text-[14px]"
-        ></textarea>
-      </div>
+        <section className="border-b border-[#E4E4E4] px-5 py-6" aria-label="내용 입력">
+          <label htmlFor="content" className="text-[16px] text-[#9D9D9D]">
+            내용을 입력해 주세요. <span className="text-[#1EB87B]">*</span>
+          </label>
+          <textarea
+            name="content"
+            id="content"
+            placeholder="분실/습득 날짜, 물건 종류, 물건의 특징 등 유실물 찾기에 도움이 되는 내용을 작성해 주세요."
+            className="w-full resize-none py-6 placeholder:text-[14px] focus:outline-none"
+            rows={3}
+            required
+          />
+        </section>
 
-      <div className="flex items-center justify-between border-b border-[#E4E4E4] px-5 py-6">
-        <span className="flex items-center gap-[6px] text-[16px] text-[#9D9D9D]">
-          <Icon name="Location" size={16} />
-          위치를 등록해 주세요. <span className="text-[#1EB87B]">*</span>
-        </span>
-        <button className="h-4 w-4">
-          <Icon name="ArrowRightSmall" />
-        </button>
-      </div>
+        <section
+          className="flex items-center justify-between border-b border-[#E4E4E4] px-5 py-6"
+          aria-label="위치 등록"
+        >
+          <span className="flex items-center gap-[6px] text-[16px] text-[#9D9D9D]">
+            <Icon name="Location" size={16} />
+            위치를 등록해 주세요. <span className="text-[#1EB87B]">*</span>
+          </span>
+          <button type="button" className="h-4 w-4">
+            <Icon name="ArrowRightSmall" />
+          </button>
+        </section>
 
-      <div className="px-5 pb-10 pt-3">
-        <button className="w-full rounded-[12px] bg-[#F5F5F5] px-[94px] py-5 text-[18px] font-bold text-[#D9D9D9]">
-          작성 완료
-        </button>
-      </div>
-    </div>
+        <section
+          className="mt-[159px] border-t border-[#E4E4E4] px-5 pb-10 pt-3"
+          aria-label="작성 완료"
+        >
+          <button
+            type="submit"
+            className="w-full rounded-[12px] bg-[#F5F5F5] px-[94px] py-5 text-[18px] font-bold text-[#D9D9D9]"
+          >
+            작성 완료
+          </button>
+        </section>
+      </form>
+    </>
   );
 };
 
-export default page;
+export default Page;
