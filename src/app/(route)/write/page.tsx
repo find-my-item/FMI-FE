@@ -5,7 +5,9 @@ const page = () => {
   return (
     <div>
       <div className="flex flex-col items-start justify-center gap-4 border-b border-[#E4E4E4] px-5 py-6">
-        <div className="h-[104px] w-[104px] rounded-[6px] bg-black" />
+        <div className="flex-center h-[104px] w-[104px] rounded-[6px] bg-[#F5F5F5]">
+          <Icon name="Camera" size={32} />
+        </div>
         <span className="text-[14px] text-[#9D9D9D]">
           * jpg, jpeg, png 파일을 첨부해 주세요. (선택)
         </span>
@@ -39,10 +41,11 @@ const page = () => {
       </div>
 
       <div className="flex items-center justify-between border-b border-[#E4E4E4] px-5 py-6">
-        <span className="text-[16px] text-[#9D9D9D]">
+        <span className="flex items-center gap-[6px] text-[16px] text-[#9D9D9D]">
+          <Icon name="Location" size={16} />
           위치를 등록해 주세요. <span className="text-[#1EB87B]">*</span>
         </span>
-        <button>
+        <button className="h-4 w-4">
           <Icon name="ArrowRightSmall" />
         </button>
       </div>
