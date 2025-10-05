@@ -3,7 +3,19 @@ export const useRouter = () => ({
   replace: (_: string) => {},
   prefetch: (_: string) => Promise.resolve(),
   back: () => {},
+  pathname: "/",
+  query: {},
+  asPath: "/",
+  events: {
+    on: () => {},
+    off: () => {},
+    emit: () => {},
+  },
 });
 
 export const usePathname = () => "/";
 export const useSearchParams = () => new URLSearchParams();
+
+export const useRouterBack = () => ({
+  back: () => {},
+});

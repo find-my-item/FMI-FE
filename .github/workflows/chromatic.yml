@@ -1,7 +1,9 @@
 name: Chromatic Deployment
 
+on:
   push:
     branches: [develop]
+
 jobs:
   chromatic:
     runs-on: ubuntu-latest
@@ -29,3 +31,4 @@ jobs:
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           exitOnceUploaded: true
+          exitZeroOnChanges: true

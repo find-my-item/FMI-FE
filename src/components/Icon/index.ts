@@ -11,3 +11,7 @@ export { default as Star } from "@/assets/star.svg";
 export { default as Eye } from "@/assets/item-eye.svg";
 export { default as Position } from "@/assets/position.svg";
 export { default as Search } from "@/assets/search.svg";
+export { default as Check } from "@/assets/check.svg";
+export { default as EyeOff } from "@/assets/eye-off.svg";
+export { default as KakaoLogin } from "@/assets/kakao_login.svg";
+export { default as Mail } from "@/assets/mail.svg";
