@@ -1,9 +1,15 @@
 "use client";
 
 import Icon from "@/components/Icon/Icon";
-import React from "react";
+import React, { useRef } from "react";
 
 const Page = () => {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleDivClick = () => {
+    fileInputRef.current?.click();
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("submit");
@@ -17,8 +23,12 @@ const Page = () => {
           className="flex flex-col items-start justify-center gap-4 border-b border-[#E4E4E4] px-5 py-6"
           aria-label="이미지 업로드"
         >
-          <div className="flex-center h-[104px] w-[104px] rounded-[6px] bg-[#F5F5F5]">
-            <Icon name="Camera" size={32} />
+          <input type="file" accept="image/*" className="hidden" ref={fileInputRef} />
+          <div
+            className="flex-center h-[104px] w-[104px] cursor-pointer rounded-[6px] bg-[#F5F5F5]"
+            onClick={handleDivClick}
+          >
+            <Icon name="Camera" size={32} title="이미지 업로드" />
           </div>
           <span className="text-[14px] text-[#9D9D9D]">
             * jpg, jpeg, png 파일을 첨부해 주세요. (선택)
@@ -26,14 +36,14 @@ const Page = () => {
         </section>
 
         <section
-          className="flex items-center justify-between border-b border-[#E4E4E4] px-5 py-6"
+          className="flex cursor-pointer items-center justify-between border-b border-[#E4E4E4] px-5 py-6"
           aria-label="카테고리 선택"
         >
           <span className="text-[16px] text-[#9D9D9D]">
             카테고리를 선택해 주세요. <span className="text-[#1EB87B]">*</span>
           </span>
           <button type="button" className="h-4 w-4">
-            <Icon name="ArrowDown" size={16} />
+            <Icon name="ArrowDown" size={16} title="카테고리 선택" />
           </button>
         </section>
 
@@ -72,15 +82,15 @@ const Page = () => {
         </section>
 
         <section
-          className="flex items-center justify-between border-b border-[#E4E4E4] px-5 py-6"
+          className="flex cursor-pointer items-center justify-between border-b border-[#E4E4E4] px-5 py-6"
           aria-label="위치 등록"
         >
           <span className="flex items-center gap-[6px] text-[16px] text-[#9D9D9D]">
-            <Icon name="Location" size={16} />
+            <Icon name="Location" size={16} title="위치 등록" />
             위치를 등록해 주세요. <span className="text-[#1EB87B]">*</span>
           </span>
           <button type="button" className="h-4 w-4">
-            <Icon name="ArrowRightSmall" />
+            <Icon name="ArrowRight" title="위치 열기" size={16} />
           </button>
         </section>
 

@@ -17,3 +17,4 @@ export { default as KakaoLogin } from "@/assets/kakao_login.svg";
 export { default as Mail } from "@/assets/mail.svg";
 export { default as Camera } from "@/assets/camera.svg";
 export { default as Location } from "@/assets/location.svg";
+export { default as ArrowRight } from "@/assets/arrow-right.svg";
