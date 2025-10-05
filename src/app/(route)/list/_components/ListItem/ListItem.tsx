@@ -1,10 +1,13 @@
 import Image from "next/image";
 import Icon from "@/components/Icon/Icon";
+import Link from "next/link";
 
 interface ListItemProps {
+  id?: number;
   img: string;
   title: string;
   description: string;
+  linkState?: "notice" | "list";
 }
 
 const VIEW_ITEM = [
@@ -18,9 +21,12 @@ const VIEW_ITEM = [
   },
 ] as const;
 
-const ListItem = ({ img, title, description }: ListItemProps) => {
+const ListItem = ({ img, title, description, id, linkState = "list" }: ListItemProps) => {
   return (
-    <div className="duration-130 flex w-full cursor-pointer items-center gap-[14px] border-b border-b-[#E4E4E4] px-[20px] py-[30px] transition-colors hover:bg-[#F9F9F9]">
+    <Link
+      href={linkState === "list" ? `/list/${id}` : `/notice/${id}`}
+      className="duration-130 flex w-full cursor-pointer items-center gap-[14px] border-b border-b-[#E4E4E4] px-[20px] py-[30px] transition-colors hover:bg-[#F9F9F9]"
+    >
       {img && (
         <Image
           src={img}
@@ -42,14 +48,17 @@ const ListItem = ({ img, title, description }: ListItemProps) => {
         </div>
         <div className="mt-2 flex gap-2">
           {VIEW_ITEM.map((item) => (
-            <span className="flex items-center gap-2 text-[14px] leading-[20px] text-[#9D9D9D]">
+            <span
+              key={item.icon}
+              className="flex items-center gap-2 text-[14px] leading-[20px] text-[#9D9D9D]"
+            >
               <Icon name={item.icon} size={16} />
               {item.count}
             </span>
           ))}
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
