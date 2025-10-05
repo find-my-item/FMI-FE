@@ -2,7 +2,7 @@ import { cn } from "@/utils/cn";
 import React from "react";
 
 interface TabProps<T extends string> {
-  tabs: { key: T; label: string }[];
+  tabs: ReadonlyArray<{ key: T; label: string }>;
   selected: T;
   onValueChange: (key: T) => void;
 }
