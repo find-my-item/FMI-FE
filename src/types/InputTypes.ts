@@ -9,4 +9,5 @@ export type InputType = {
   validation?: RegisterOptions;
   required?: boolean;
   onConfirm?: React.FocusEventHandler<HTMLInputElement>;
+  rule?: string;
 };

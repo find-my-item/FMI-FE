@@ -1,4 +1,6 @@
 import { InputType } from "@/types/InputTypes";
+import { InputStyle } from "../styles/authStyle";
+import { cn } from "@/utils/cn";
 
 export type FormValue = {
   email: string;
@@ -12,7 +14,7 @@ export const signUpInputObject: InputType[] = [
     name: "email",
     label: "아이디(이메일)",
     type: "text",
-    placeholder: "로그인에 사용할 이메일을 입력해주세요",
+    placeholder: "로그인에 사용할 이메일을 입력해주세요.",
     validation: {
       required: true,
       pattern: {
@@ -25,12 +27,13 @@ export const signUpInputObject: InputType[] = [
     name: "emailAuth",
     label: "이메일 인증",
     type: "text",
-    placeholder: "인증번호를 입력해주세요",
+    placeholder: "인증번호를 입력해주세요.",
+    className: cn(InputStyle, "w-[229px]"),
     validation: {
       required: false,
       pattern: {
         value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
-        message: "이메일을 입력해주세요",
+        message: "이메일을 입력해주세요.",
       },
     },
   },
@@ -39,6 +42,7 @@ export const signUpInputObject: InputType[] = [
     label: "비밀번호",
     type: "password",
     placeholder: "비밀번호을 입력해 주세요.",
+    rule: "8~16자리, 영문/숫자/특수 문자 포함",
     validation: {
       required: true,
       pattern: {
@@ -62,6 +66,8 @@ export const signUpInputObject: InputType[] = [
     label: "닉네임",
     type: "text",
     placeholder: "닉네임을 입력해 주세요.",
+    rule: "2~10자, 특수문자/금칙어 제한",
+    className: cn(InputStyle, "w-[256px]"),
     validation: {
       required: true,
       maxLength: {
