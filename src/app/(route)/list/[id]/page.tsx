@@ -2,7 +2,7 @@ import React from "react";
 import CommentList from "../../notice/_components/CommentList";
 import { commentListObject } from "../../notice/_constant/commentListObject";
 import { itemListObject } from "../_constants/listItem";
-import ListDetail from "../_components/ListDetail/ListDetail";
+import PostDetail from "../_components/PostDetail/PostDetail";
 
 interface ListDetailProps {
   params: Promise<{ id: string }>;
@@ -16,7 +16,7 @@ const page = async ({ params }: ListDetailProps) => {
 
   return (
     <>
-      <ListDetail item={listObject} type="find" />
+      <PostDetail item={listObject} type="find" />
       <CommentList comments={commentListObject} />
     </>
   );

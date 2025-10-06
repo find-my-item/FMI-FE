@@ -1,7 +1,7 @@
 import Icon from "@/components/Icon/Icon";
 import Link from "next/link";
 
-interface ListDetailProps {
+interface PostDetailProps {
   type: "find" | "lost";
   item: {
     id: number;
@@ -22,7 +22,7 @@ const LABELS = {
   lost: { label: "분실", backPath: "/lost" },
 };
 
-const ListDetail = ({ type, item }: ListDetailProps) => {
+const PostDetail = ({ type, item }: PostDetailProps) => {
   const { label, backPath } = LABELS[type];
 
   return (
@@ -49,16 +49,18 @@ const ListDetail = ({ type, item }: ListDetailProps) => {
 
       <section className="flex flex-col gap-12 px-[20px] py-[27px]">
         <div className="">
-          <span className="text-[14px] font-semibold text-green-500">{label}</span>
+          <span className="rounded-full bg-[#F5F5F5] px-4 py-[6px] text-[14px] font-semibold">
+            {label}
+          </span>
 
-          <div>
+          <div className="mt-[14px]">
             <h1 className="text-[20px] font-semibold">{item.title}</h1>
             <time className="text-[14px] leading-[20px] text-[#9D9D9D]">30분 전</time>
           </div>
 
-          <p className="leading-[22px]">{item.body}</p>
+          <p className="mt-[24px] leading-[22px]">{item.body}</p>
 
-          <ul className="flex gap-[20px] text-[14px] leading-[20px] text-[#5D5D5D]">
+          <ul className="mt-[32px] flex gap-[20px] text-[14px] leading-[20px] text-[#5D5D5D]">
             <li className="flex gap-[4px]">
               <Icon name="Star" size={20} title="즐겨찾기" />
               <span>즐겨찾기 12</span>
@@ -71,11 +73,13 @@ const ListDetail = ({ type, item }: ListDetailProps) => {
         </div>
 
         <section className="flex flex-col gap-[16px]">
-          <div className="h-[180px] rounded-md bg-black"></div>
-          <address className="flex items-center gap-[6px]">
-            <Icon name="Position" size={16} aria-hidden="true" />
-            <p className="text-[14px]">서울특별시 00구 00동</p>
-            <Icon name="ArrowRightSmall" size={16} title="지도 이동" />
+          <div className="h-[147px] rounded-md bg-black" />
+          <address className="flex items-center gap-[6px] not-italic">
+            <span className="flex items-center gap-[5px]">
+              <Icon name="Position" size={16} aria-hidden="true" />
+              <p className="text-[14px]">서울특별시 00구 00동</p>
+            </span>
+            <Icon name="ArrowRight" size={14} title="지도 이동" />
           </address>
         </section>
       </section>
@@ -83,4 +87,4 @@ const ListDetail = ({ type, item }: ListDetailProps) => {
   );
 };
 
-export default ListDetail;
+export default PostDetail;
