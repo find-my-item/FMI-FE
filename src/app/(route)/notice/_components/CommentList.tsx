@@ -15,7 +15,7 @@ const CommentList = ({ comments }: CommentListProps) => {
 
   return (
     <>
-      <header className="mb-[20px] mt-[95px] w-full border-t border-[#E4E4E4] px-[20px]">
+      <header className="mb-[20px] w-full border-t border-[#E4E4E4] px-[20px]">
         <h2 className="mt-[27px] font-semibold text-[#242424]">댓글 {comments.length}</h2>
       </header>
 
