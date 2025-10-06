@@ -1,5 +1,7 @@
 import Icon from "@/components/Icon/Icon";
 import Link from "next/link";
+import ItemDetailHeader from "./ItemDetailHeader";
+import Chip from "@/components/Chip/Chip";
 
 interface PostDetailProps {
   type: "find" | "lost";
@@ -27,31 +29,11 @@ const PostDetail = ({ type, item }: PostDetailProps) => {
 
   return (
     <article className="w-full">
-      <div className="h-[260px] bg-[#D9D9D9]" />
-
-      <section className="flex flex-col items-start justify-center gap-5 border-b border-[#E4E4E4] p-[20px]">
-        <div className="flex items-center justify-start gap-[14px]">
-          <div className="h-10 w-10 rounded-full bg-[#D9D9D9]" />
-          <div className="flex flex-col items-start justify-center">
-            <p className="text-[16px]">글자확인용임시닉네임</p>
-            <span className="text-[14px] leading-[20px] text-[#5D5D5D]">
-              작성글 13 · 현재 채팅 2
-            </span>
-          </div>
-        </div>
-        <Link
-          href={"/"}
-          className="flex-center w-full rounded-[6px] bg-[#1EB87B] py-[14px] font-semibold text-white"
-        >
-          채팅하러 가기
-        </Link>
-      </section>
+      <ItemDetailHeader />
 
       <section className="flex flex-col gap-12 px-[20px] py-[27px]">
-        <div className="">
-          <span className="rounded-full bg-[#F5F5F5] px-4 py-[6px] text-[14px] font-semibold">
-            {label}
-          </span>
+        <div>
+          <Chip label={label} />
 
           <div className="mt-[14px]">
             <h1 className="text-[20px] font-semibold">{item.title}</h1>
