@@ -20,7 +20,7 @@ const meta: Meta<typeof PostDetail> = {
 export default meta;
 type Story = StoryObj<typeof PostDetail>;
 
-export const PostDetailStory: Story = {
+export const Single: Story = {
   args: {
     type: "find",
     item: {

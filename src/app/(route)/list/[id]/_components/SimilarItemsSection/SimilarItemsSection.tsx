@@ -1,4 +1,3 @@
-import React from "react";
 import SimilarItem from "../SimilarItem/SimilarItem";
 
 const SimilarItemsSection = () => {

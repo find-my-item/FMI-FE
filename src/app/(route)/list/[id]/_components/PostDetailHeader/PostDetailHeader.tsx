@@ -1,8 +1,7 @@
 import Icon from "@/components/Icon/Icon";
 import Link from "next/link";
-import React from "react";
 
-const ItemDetailHeader = () => {
+const PostDetailHeader = () => {
   return (
     <>
       {/* 이미지 */}
@@ -33,4 +32,4 @@ const ItemDetailHeader = () => {
   );
 };
 
-export default ItemDetailHeader;
+export default PostDetailHeader;

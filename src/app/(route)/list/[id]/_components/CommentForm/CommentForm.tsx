@@ -1,7 +1,6 @@
 import Icon from "@/components/Icon/Icon";
-import React from "react";
 
-const CommentSection = () => {
+const CommentForm = () => {
   return (
     <form
       aria-label="댓글 입력 폼"
@@ -32,4 +31,4 @@ const CommentSection = () => {
   );
 };
 
-export default CommentSection;
+export default CommentForm;

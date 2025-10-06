@@ -1,6 +1,6 @@
 import Icon from "@/components/Icon/Icon";
-import ItemDetailHeader from "./ItemDetailHeader";
 import { Chip } from "@/components";
+import PostDetailHeader from "../PostDetailHeader/PostDetailHeader";
 
 interface PostDetailProps {
   type: "find" | "lost";
@@ -28,7 +28,7 @@ const PostDetail = ({ type, item }: PostDetailProps) => {
 
   return (
     <article className="w-full">
-      <ItemDetailHeader />
+      <PostDetailHeader />
 
       <section className="flex flex-col gap-12 px-[20px] py-[27px]">
         <div>

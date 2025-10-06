@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import Input from "./Input";
 

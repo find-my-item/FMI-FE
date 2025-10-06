@@ -1,5 +1,4 @@
 import Icon from "@/components/Icon/Icon";
-import React from "react";
 
 const SimilarItem = () => {
   return (
