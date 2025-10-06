@@ -1,17 +1,9 @@
 import { useFormContext } from "react-hook-form";
 import { InputType } from "@/types/InputTypes";
-
-const InputStyle =
-  "flex items-center w-full h-[50px] px-[14px] py-[12.5px] bg-[#F5F5F5] rounded-[10px] text-[#9D9D9D] text-[14px]";
+import { InputStyle } from "@/app/(route)/(auth)/styles/authStyle";
 
 const Input = ({ name, type, className = InputStyle, ...rest }: InputType) => {
-  const {
-    register,
-    formState: { errors, touchedFields, isSubmitted },
-  } = useFormContext();
-
-  const fieldError = errors[name]?.message as string;
-  const showError = (!!touchedFields[name] || isSubmitted) && !!fieldError;
+  const { register } = useFormContext();
 
   return (
     <div className="flex w-full flex-col gap-2">
@@ -22,7 +14,6 @@ const Input = ({ name, type, className = InputStyle, ...rest }: InputType) => {
         </label>
       )}
       <input {...register(name, rest.validation)} type={type} className={className} {...rest} />
-      {showError && <p className="mt-1 text-sm text-red-500">{fieldError}</p>}
     </div>
   );
 };
