@@ -3,6 +3,8 @@ import CommentList from "../../notice/_components/CommentList";
 import { commentListObject } from "../../notice/_constant/commentListObject";
 import { itemListObject } from "../_constants/listItem";
 import PostDetail from "./_components/PostDetail/PostDetail";
+import SimilarItemsSection from "./_components/SimilarItemsSection/SimilarItemsSection";
+import CommentSection from "./_components/CommentSection/CommentSection";
 
 interface ListDetailProps {
   params: Promise<{ id: string }>;
@@ -18,6 +20,8 @@ const page = async ({ params }: ListDetailProps) => {
     <>
       <PostDetail item={listObject} type="find" />
       <CommentList comments={commentListObject} />
+      <SimilarItemsSection />
+      <CommentSection />
     </>
   );
 };

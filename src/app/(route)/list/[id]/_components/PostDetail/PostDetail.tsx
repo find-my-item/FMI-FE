@@ -1,7 +1,6 @@
 import Icon from "@/components/Icon/Icon";
-import Link from "next/link";
 import ItemDetailHeader from "./ItemDetailHeader";
-import Chip from "@/components/Chip/Chip";
+import { Chip } from "@/components";
 
 interface PostDetailProps {
   type: "find" | "lost";
@@ -58,7 +57,12 @@ const PostDetail = ({ type, item }: PostDetailProps) => {
           <div className="h-[147px] rounded-md bg-black" />
           <address className="flex items-center gap-[6px] not-italic">
             <span className="flex items-center gap-[5px]">
-              <Icon name="Position" size={16} aria-hidden="true" />
+              <Icon
+                name="Position"
+                size={16}
+                aria-hidden="true"
+                className="fill-current text-[#1EB87B]"
+              />
               <p className="text-[14px]">서울특별시 00구 00동</p>
             </span>
             <Icon name="ArrowRight" size={14} title="지도 이동" />
