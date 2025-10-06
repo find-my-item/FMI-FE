@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@layer base {
+  input:focus,
+  textarea:focus,
+  select:focus {
+    @apply outline-none ring-0;
+  }
+}
+
 @layer utilities {
   .flex-center {
     @apply flex items-center justify-center;
