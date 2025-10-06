@@ -14,9 +14,9 @@ const Input = ({ name, type, className = InputStyle, ...rest }: InputType) => {
   const showError = (!!touchedFields[name] || isSubmitted) && !!fieldError;
 
   return (
-    <div className="w-full">
+    <div className="flex w-full flex-col gap-2">
       {rest.label && (
-        <label htmlFor={name}>
+        <label htmlFor={name} className="text-[#363636]">
           {rest.label}
           {rest.validation?.required && <span className="text-[#1EB87B]">*</span>}
         </label>
