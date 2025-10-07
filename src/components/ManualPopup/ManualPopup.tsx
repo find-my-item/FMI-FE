@@ -1,7 +1,6 @@
 "use client";
 
 import { useModalBackdrop, useModalLockAndEsc } from "@/utils/useOverlayHandlers";
-import React from "react";
 import Icon from "../Icon/Icon";
 
 interface ManualPopupProps {

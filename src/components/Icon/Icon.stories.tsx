@@ -5,8 +5,9 @@ import * as Icons from "./index";
 const iconOptions = Object.keys(Icons) as Array<keyof typeof Icons>;
 
 const meta: Meta<typeof Icon> = {
-  title: "Components/Icon",
+  title: "Icon/Icon",
   component: Icon,
+  tags: ["autodocs"],
   argTypes: {
     name: {
       control: "select",

@@ -1,5 +1,4 @@
 import { cn } from "@/utils/cn";
-import React from "react";
 
 interface TabProps<T extends string> {
   tabs: ReadonlyArray<{ key: T; label: string }>;
