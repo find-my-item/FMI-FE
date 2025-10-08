@@ -28,7 +28,6 @@ export const signUpInputObject: InputType[] = [
     label: "이메일 인증",
     type: "text",
     placeholder: "인증번호를 입력해주세요.",
-    className: cn(InputStyle, "w-[229px]"),
     validation: {
       required: false,
       pattern: {
@@ -67,7 +66,6 @@ export const signUpInputObject: InputType[] = [
     type: "text",
     placeholder: "닉네임을 입력해 주세요.",
     rule: "2~10자, 특수문자/금칙어 제한",
-    className: cn(InputStyle, "w-[256px]"),
     validation: {
       required: true,
       maxLength: {

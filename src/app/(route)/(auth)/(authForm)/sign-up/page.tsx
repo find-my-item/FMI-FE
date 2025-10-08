@@ -5,7 +5,7 @@ import { signUpInputObject } from "../../_constant/FormData";
 import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 import { cn } from "@/utils/cn";
-import { ButtonStyle } from "../../_constant/authStyle";
+import { ButtonStyle, signUpButtonStyle } from "../../_constant/authStyle";
 
 const Page = () => {
   const {
@@ -20,7 +20,7 @@ const Page = () => {
   return (
     <div className="flex-col-center flex min-h-screen w-full md:flex-row">
       <form onSubmit={onSubmit} className="flex w-full flex-col justify-between">
-        <div className="w-full flex-1 gap-5 p-5">
+        <div className="w-full flex-1 gap-5 p-4">
           {signUpInputObject.map((item) => {
             const fieldError = errors[item.name]?.message as string;
             const showError = (!!touchedFields[item.name] || isSubmitted) && !!fieldError;
@@ -36,14 +36,17 @@ const Page = () => {
                     placeholder={item.placeholder}
                     validation={item.validation}
                   />
+                  {item.name == "email" && (
+                    <Button className={signUpButtonStyle}>인증번호 발송</Button>
+                  )}
                   {item.name == "emailAuth" && (
-                    <Button className={cn(ButtonStyle, "bg-[#1EB87B]")}>인증번호 발송</Button>
+                    <Button className={signUpButtonStyle}>인증번호 확인</Button>
                   )}
                   {item.name == "nickname" && (
-                    <Button className={cn(ButtonStyle, "bg-[#1EB87B]")}>중복 확인</Button>
+                    <Button className={cn(signUpButtonStyle, "min-w-[100px]")}>중복 확인</Button>
                   )}
                 </div>
-                {item.name == "emailAuth" && <Button>인증번호 확인</Button>}
+                {/* {item.name == "emailAuth" && <Button>인증번호 확인</Button>} */}
                 {(showError || item.rule) && (
                   <p
                     className={cn(
