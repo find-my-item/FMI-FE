@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs";
 import Footer from "./Footer";
 
 const meta = {
-  title: "Components/Footer",
+  title: "공통 컴포넌트/Footer",
   component: Footer,
 } satisfies Meta<typeof Footer>;
 

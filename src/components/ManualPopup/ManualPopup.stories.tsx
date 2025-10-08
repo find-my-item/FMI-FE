@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import ManualPopup from "./ManualPopup";
 
 const meta: Meta<typeof ManualPopup> = {
-  title: "Components/ManualPopup",
+  title: "공통 컴포넌트/ManualPopup",
   parameters: {
     layout: "centered",
   },

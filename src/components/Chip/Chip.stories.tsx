@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs";
 import Chip from "./Chip";
 
 const meta: Meta<typeof Chip> = {
-  title: "Components/Chip",
+  title: "공통 컴포넌트/Chip",
   component: Chip,
   tags: ["autodocs"],
   argTypes: {

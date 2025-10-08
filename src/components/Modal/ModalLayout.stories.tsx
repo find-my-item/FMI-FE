@@ -4,7 +4,7 @@ import { Meta, StoryObj } from "@storybook/nextjs";
 import ModalLayout from "./ModalLayout";
 
 const meta = {
-  title: "Components/Modal",
+  title: "공통 컴포넌트/Modal",
   component: ModalLayout,
   tags: ["autodocs"],
   parameters: {

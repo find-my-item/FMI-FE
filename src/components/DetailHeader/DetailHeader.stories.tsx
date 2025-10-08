@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import DetailHeader from "./DetailHeader";
 
 const meta: Meta<typeof DetailHeader> = {
-  title: "Components/DetailHeader",
+  title: "공통 컴포넌트/DetailHeader",
   component: DetailHeader,
   tags: ["autodocs"],
   parameters: {
