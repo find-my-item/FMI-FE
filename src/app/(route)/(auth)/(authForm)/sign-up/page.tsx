@@ -5,7 +5,7 @@ import { signUpInputObject } from "../../_constant/FormData";
 import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 import { cn } from "@/utils/cn";
-import { ButtonStyle, signUpButtonStyle } from "../../_constant/authStyle";
+import { ButtonStyle, InputStyle, signUpButtonStyle } from "../../_constant/authStyle";
 
 const Page = () => {
   const {
@@ -32,7 +32,7 @@ const Page = () => {
                     name={item.name}
                     label={item.label}
                     type={item.type}
-                    className={item.className}
+                    className={cn(InputStyle, showError && "border-[#FF4242]")}
                     placeholder={item.placeholder}
                     validation={item.validation}
                   />
@@ -46,7 +46,8 @@ const Page = () => {
                     <Button className={cn(signUpButtonStyle, "min-w-[100px]")}>중복 확인</Button>
                   )}
                 </div>
-                {/* {item.name == "emailAuth" && <Button>인증번호 확인</Button>} */}
+
+                {/* 에러 확인 및 규칙 안내 */}
                 {(showError || item.rule) && (
                   <p
                     className={cn(
@@ -64,7 +65,7 @@ const Page = () => {
 
         <hr className="fixed bottom-[102px] left-0 h-px w-full bg-[#E4E4E4]" />
         <div className="fixed bottom-0 min-h-[102px] min-w-[390px] px-4 py-3">
-          <Button type="submit" label="회원가입 버튼" className={cn(ButtonStyle, "")}>
+          <Button type="submit" label="회원가입 버튼">
             다음
           </Button>
         </div>
