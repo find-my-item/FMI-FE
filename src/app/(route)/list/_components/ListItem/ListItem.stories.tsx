@@ -2,7 +2,7 @@ import { Meta } from "@storybook/react";
 import ListItem from "./ListItem";
 
 const meta: Meta<typeof ListItem> = {
-  title: "Components/List/ListItem",
+  title: "페이지/목록 페이지/ListItem",
   component: ListItem,
   tags: ["autodocs"],
   parameters: {
