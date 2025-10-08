@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import ManualItem from "./ManualItem";
 
 const meta: Meta<typeof ManualItem> = {
-  title: "Components/Manual/ManualItem",
+  title: "페이지/매뉴얼 페이지/ManualItem",
   component: ManualItem,
   tags: ["autodocs"],
   parameters: {
