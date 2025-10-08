@@ -63,7 +63,7 @@ const Page = () => {
         </div>
 
         <hr className="fixed bottom-[102px] left-0 h-px w-full bg-[#E4E4E4]" />
-        <div className="fixed bottom-0 left-0 min-h-[102px] w-full px-8 py-3">
+        <div className="fixed bottom-0 min-h-[102px] min-w-[390px] px-4 py-3">
           <Button type="submit" label="회원가입 버튼" className={cn(ButtonStyle, "")}>
             다음
           </Button>
