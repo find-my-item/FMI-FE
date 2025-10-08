@@ -1,6 +1,6 @@
 import { useFormContext } from "react-hook-form";
 import { InputType } from "@/types/InputTypes";
-import { InputStyle } from "@/app/(route)/(auth)/styles/authStyle";
+import { InputStyle } from "@/app/(route)/(auth)/_constant/authStyle";
 
 const Input = ({ name, type, className = InputStyle, ...rest }: InputType) => {
   const { register } = useFormContext();

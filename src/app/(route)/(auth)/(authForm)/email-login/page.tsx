@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Button from "@/components/Button/Button";
-import { InputStyle } from "../../styles/authStyle";
+import { InputStyle } from "../../_constant/authStyle";
 import Link from "next/link";
 import { cn } from "@/utils/cn";
 import Icon from "@/components/Icon/Icon";
@@ -31,17 +31,17 @@ const Page = () => {
         {/* 로그인 입력칸 */}
         <div className="flex w-full flex-col gap-3">
           <Input name="email" type="text" placeholder="이메일을 입력해주세요." />
-          <div className={cn(InputStyle)}>
-            <Input
-              name="password"
-              type={show ? "text" : "password"}
-              placeholder="비밀번호를 입력해주세요."
-              className="flex-1 bg-[#F5F5F5] focus:outline-none"
-            />
-            <Button className="outline-none" type="button" onClick={() => setShow(!show)}>
-              <Icon name={show ? "EyeOpen" : "EyeOff"} size={16} />
-            </Button>
-          </div>
+          {/* <div className={cn(InputStyle)}> */}
+          <Input
+            name="password"
+            type={show ? "text" : "password"}
+            placeholder="비밀번호를 입력해주세요."
+            className={cn(InputStyle, "relative flex-1 bg-[#F5F5F5] focus:outline-none")}
+          />
+          <Button className="absolute outline-none" type="button" onClick={() => setShow(!show)}>
+            <Icon name={show ? "EyeOpen" : "EyeOff"} size={16} />
+          </Button>
+          {/* </div> */}
 
           {/* 체크박스 */}
           <div className="flex w-full gap-3 text-[14px] text-[#9D9D9D]">

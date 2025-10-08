@@ -1,5 +1,5 @@
 import { InputType } from "@/types/InputTypes";
-import { InputStyle } from "../styles/authStyle";
+import { InputStyle } from "./authStyle";
 import { cn } from "@/utils/cn";
 
 export type FormValue = {
