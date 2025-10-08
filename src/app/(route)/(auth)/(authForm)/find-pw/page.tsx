@@ -3,7 +3,7 @@
 import { useFormContext } from "react-hook-form";
 import Button from "@/components/Button/Button";
 import Input from "@/components/Input/Input";
-import { ButtonStyle } from "../../styles/authStyle";
+import { ButtonStyle } from "../../_constant/authStyle";
 import { cn } from "@/utils/cn";
 import { useRouter } from "next/navigation";
 

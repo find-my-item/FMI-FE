@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "@/components/Button/Button";
-import { ButtonStyle } from "../styles/authStyle";
+import { ButtonStyle } from "../_constant/authStyle";
 import Link from "next/link";
 import { cn } from "@/utils/cn";
 import Icon from "@/components/Icon/Icon";
@@ -28,14 +28,13 @@ const Page = () => {
           <Icon name="KakaoLogin" size={14} />
           카카오로 3초 만에 시작하기
         </Button>
-        <Button
-          type="submit"
+        <Link
+          href={"/email-login"}
           className={cn(ButtonStyle, "bg-[#E4E4E4] text-[#525252]")}
-          label="로그인 버튼"
-          onClick={() => router.push("/emailLogin")}
+          aria-label="로그인 버튼"
         >
           <Icon name="Mail" size={20} /> 이메일로 로그인
-        </Button>
+        </Link>
       </div>
 
       {/* divider 구분선 */}

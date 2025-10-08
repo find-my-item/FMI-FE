@@ -5,6 +5,7 @@ import { signUpInputObject } from "../../_constant/FormData";
 import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 import { cn } from "@/utils/cn";
+import { ButtonStyle } from "../../_constant/authStyle";
 
 const Page = () => {
   const {
@@ -36,15 +37,13 @@ const Page = () => {
                     validation={item.validation}
                   />
                   {item.name == "emailAuth" && (
-                    <>
-                      <Button>인증번호 발송</Button>
-                    </>
+                    <Button className={cn(ButtonStyle, "bg-[#1EB87B]")}>인증번호 발송</Button>
                   )}
-                  {item.name == "nickname" && <Button>중복 확인</Button>}
+                  {item.name == "nickname" && (
+                    <Button className={cn(ButtonStyle, "bg-[#1EB87B]")}>중복 확인</Button>
+                  )}
                 </div>
                 {item.name == "emailAuth" && <Button>인증번호 확인</Button>}
-                {/* {item.rule && <p className="text-[12px] text-[#787878]">{item.rule}</p>} */}
-                {/* <p className="mt-1 text-[12px] text-red-500">{showError && fieldError && item.rule}</p> */}
                 {(showError || item.rule) && (
                   <p
                     className={cn(
@@ -62,7 +61,7 @@ const Page = () => {
 
         <hr className="fixed bottom-[102px] left-0 h-px w-full bg-[#E4E4E4]" />
         <div className="fixed bottom-0 left-0 min-h-[102px] w-full px-8 py-3">
-          <Button type="submit" label="회원가입 버튼">
+          <Button type="submit" label="회원가입 버튼" className={cn(ButtonStyle, "")}>
             다음
           </Button>
         </div>
