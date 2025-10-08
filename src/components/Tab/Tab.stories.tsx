@@ -5,7 +5,7 @@ import { useState } from "react";
 import Tab from "./Tab";
 
 const meta = {
-  title: "Components/Tab",
+  title: "공통 컴포넌트/Tab",
   component: Tab,
   tags: ["autodocs"],
   parameters: {

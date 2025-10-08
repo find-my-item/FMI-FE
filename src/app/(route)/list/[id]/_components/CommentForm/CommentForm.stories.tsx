@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs";
 import CommentForm from "./CommentForm";
 
 const meta: Meta<typeof CommentForm> = {
-  title: "Components/Detail/CommentForm",
+  title: "페이지/상세 페이지/CommentForm",
   component: CommentForm,
   tags: ["autodocs"],
   parameters: {

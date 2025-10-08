@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs";
 import PostDetailHeader from "./PostDetailHeader";
 
 const meta: Meta<typeof PostDetailHeader> = {
-  title: "Components/Detail/PostDetailHeader",
+  title: "페이지/상세 페이지/PostDetailHeader",
   component: PostDetailHeader,
   tags: ["autodocs"],
   parameters: {

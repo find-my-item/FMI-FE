@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs";
 import PostDetail from "./PostDetail";
 
 const meta: Meta<typeof PostDetail> = {
-  title: "Components/Detail/PostDetail",
+  title: "페이지/상세 페이지/PostDetail",
   component: PostDetail,
   tags: ["autodocs"],
   decorators: [

@@ -4,7 +4,7 @@ import { Meta, StoryObj } from "@storybook/nextjs";
 import Dropdown from "./Dropdown";
 
 const meta = {
-  title: "Components/Dropdown",
+  title: "공통 컴포넌트/Dropdown",
   component: Dropdown,
   tags: ["autodocs"],
   parameters: {

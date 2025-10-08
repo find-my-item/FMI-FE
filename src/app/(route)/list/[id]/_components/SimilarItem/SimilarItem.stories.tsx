@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs";
 import SimilarItem from "./SimilarItem";
 
 const meta: Meta<typeof SimilarItem> = {
-  title: "Components/Detail/SimilarItem",
+  title: "페이지/상세 페이지/SimilarItem",
   component: SimilarItem,
   tags: ["autodocs"],
   parameters: {

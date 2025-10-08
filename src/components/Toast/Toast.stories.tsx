@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs";
 import Toast from "./Toast";
 
 const meta: Meta<typeof Toast> = {
-  title: "Components/Toast",
+  title: "토스트/Toast",
   component: Toast,
   tags: ["autodocs"],
   argTypes: {
