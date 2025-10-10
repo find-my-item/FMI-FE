@@ -20,7 +20,7 @@ const Page = () => {
   });
 
   return (
-    <div className="flex-col-center flex min-h-screen w-full gap-6 px-5 md:flex-row">
+    <div className="flex-col-center flex min-h-screen w-full gap-6 px-5">
       {/* 로고 */}
       <div className="flex-center mb-10">
         <Icon name="Logo" size={50} title="로고" />
