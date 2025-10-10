@@ -21,3 +21,4 @@ export { default as ArrowRight } from "@/assets/arrow-right.svg";
 export { default as ProfileCheck } from "@/assets/profile-check.svg";
 export { default as Send } from "@/assets/send.svg";
 export { default as Image } from "@/assets/image.svg";
+export { default as Delete } from "@/assets/delete.svg";
