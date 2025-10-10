@@ -5,7 +5,13 @@ import { signUpInputObject } from "../../_constant/FormData";
 import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 import { cn } from "@/utils/cn";
-import { ButtonStyle, InputStyle, signUpButtonStyle } from "../../_constant/authStyle";
+import { InputStyle, signUpButtonStyle } from "../../_constant/authStyle";
+
+const buttonConfig: Record<string, { text: string; className: string }> = {
+  email: { text: "인증번호 발송", className: signUpButtonStyle },
+  emailAuth: { text: "인증번호 확인", className: signUpButtonStyle },
+  nickname: { text: "중복 확인", className: cn(signUpButtonStyle, "min-w-[100px]") },
+};
 
 const Page = () => {
   const {
@@ -20,41 +26,40 @@ const Page = () => {
   return (
     <div className="flex-col-center flex min-h-screen w-full md:flex-row">
       <form onSubmit={onSubmit} className="flex w-full flex-col justify-between">
-        <div className="w-full flex-1 gap-5 p-4">
+        <div className="flex w-full flex-col gap-5 p-4">
           {signUpInputObject.map((item) => {
             const fieldError = errors[item.name]?.message as string;
             const showError = (!!touchedFields[item.name] || isSubmitted) && !!fieldError;
+
+            const currentButtonConfig = buttonConfig[item.name];
             return (
-              <div className="flex w-full flex-col gap-3">
-                <div className="flex min-h-[106px] w-full flex-row items-end gap-[10px]">
+              <div className="flex min-h-[96px] w-full flex-col gap-2" key={item.name}>
+                {/* label */}
+                <label htmlFor={item.name} className="text-[14px] text-[#363636]">
+                  {item.label}
+                  {item.validation?.required && <span className="text-[#1EB87B]">*</span>}
+                </label>
+
+                {/* input */}
+                <div className="relative flex w-full flex-row items-end gap-[10px]" key={item.name}>
                   <Input
-                    key={item.name}
                     name={item.name}
-                    label={item.label}
                     type={item.type}
-                    className={cn(InputStyle, showError && "border-[#FF4242]")}
+                    className={cn(InputStyle, showError && "border-[#FF4242] bg-[#E4E4E4]")}
                     placeholder={item.placeholder}
                     validation={item.validation}
                   />
-                  {item.name == "email" && (
-                    <Button className={signUpButtonStyle}>인증번호 발송</Button>
-                  )}
-                  {item.name == "emailAuth" && (
-                    <Button className={signUpButtonStyle}>인증번호 확인</Button>
-                  )}
-                  {item.name == "nickname" && (
-                    <Button className={cn(signUpButtonStyle, "min-w-[100px]")}>중복 확인</Button>
+                  {/* button */}
+                  {currentButtonConfig && (
+                    <Button className={currentButtonConfig.className}>
+                      {currentButtonConfig.text}
+                    </Button>
                   )}
                 </div>
 
                 {/* 에러 확인 및 규칙 안내 */}
                 {(showError || item.rule) && (
-                  <p
-                    className={cn(
-                      "mt-1 text-[12px]",
-                      showError ? "text-red-500" : "text-[#787878]"
-                    )}
-                  >
+                  <p className={cn("text-[12px]", showError ? "text-red-500" : "text-[#787878]")}>
                     {showError ? fieldError : item.rule}
                   </p>
                 )}

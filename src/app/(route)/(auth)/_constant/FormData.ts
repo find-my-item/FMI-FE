@@ -30,10 +30,6 @@ export const signUpInputObject: InputType[] = [
     placeholder: "인증번호를 입력해주세요.",
     validation: {
       required: false,
-      pattern: {
-        value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
-        message: "이메일을 입력해주세요.",
-      },
     },
   },
   {
