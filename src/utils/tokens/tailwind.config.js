@@ -247,6 +247,14 @@ module.exports = {
             hover: "#ffffff",
             enteredSelected: "#ffffff",
             disabled: "#e4e4e4"
+          },
+          subtleGlass: {
+            default: "rgba(245, 245, 245, 0.7)",
+            hover: "rgba(245, 245, 245, 0.7)",
+            focused: "rgba(245, 245, 245, 0.7)",
+            enteredSelected: "#f5f5f5",
+            pressed: "#e4e4e4",
+            disabled: "rgba(228, 228, 228, 0.7)"
           }
         },
         brand: {
@@ -489,7 +497,8 @@ module.exports = {
     "cRadius_100": 4,
     "radius_400": 16,
     "radius_250": 10,
-    "radius_100": 4
+    "radius_100": 4,
+    "radius_600": 24
       }
     },
   },
