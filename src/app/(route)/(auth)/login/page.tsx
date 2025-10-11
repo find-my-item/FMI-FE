@@ -6,6 +6,7 @@ import Link from "next/link";
 import { cn } from "@/utils/cn";
 import Icon from "@/components/Icon/Icon";
 import { useRouter } from "next/navigation";
+import Logo from "../(authForm)/_components/Logo";
 
 const Page = () => {
   const router = useRouter();
@@ -13,10 +14,7 @@ const Page = () => {
   return (
     <div className="flex-col-center min-h-screen w-full gap-8">
       {/* logo */}
-      <Link className="flex-center cursor-pointer" href={"/"}>
-        <Icon name="Logo" size={50} title="로고" />
-        <h2 className="text-[20px] font-bold text-[#1EB87B]">찾아줘!</h2>
-      </Link>
+      <Logo />
 
       {/* button */}
       <div className="flex w-full flex-col gap-3 px-5 text-[14px]">
