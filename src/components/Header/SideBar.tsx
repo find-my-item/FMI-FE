@@ -11,7 +11,7 @@ const HeaderLink = [
   { name: "로그인", href: "/login" },
   { name: "회원가입", href: "/signUp" },
   { name: "프로필", href: "/profile" },
-  { name: "공지사항", href: "/notice" },
+  { name: "공지사항", href: "/notice?tab=notice" },
   { name: "FAQ", href: "/faq" },
   { name: "채팅", href: "/chat" },
   { name: "매뉴얼", href: "/manual" },
