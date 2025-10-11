@@ -44,7 +44,7 @@ const Page = () => {
       {/* 회원확인 여부 */}
       <div className="h-11">
         <span className="text-[12px] font-medium text-[#9D9D9D]">아직 회원이 아니신가요?</span>
-        <Link href="/signUp" className="p-3 text-[14px] text-[#1EB87B]">
+        <Link href="/sign-up" className="p-3 text-[14px] text-[#1EB87B]">
           회원가입
         </Link>
       </div>
