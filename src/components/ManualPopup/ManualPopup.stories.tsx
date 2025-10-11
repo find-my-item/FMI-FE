@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 import ManualPopup from "./ManualPopup";
 
 const meta: Meta<typeof ManualPopup> = {
