@@ -1,23 +1,33 @@
+"use client";
+
 import { useFormContext } from "react-hook-form";
 import { InputType } from "@/types/InputTypes";
-
-const InputStyle =
-  "flex items-center w-full h-[50px] px-[14px] py-[12.5px] bg-[#F5F5F5] rounded-[10px] text-[#9D9D9D] text-[14px]";
+import { InputStyle } from "@/app/(route)/(auth)/_constant/authStyle";
+import Icon from "../Icon/Icon";
+import { cn } from "@/utils/cn";
 
 const Input = ({ name, type, className = InputStyle, ...rest }: InputType) => {
-  const {
-    register,
-    formState: { errors, touchedFields, isSubmitted },
-  } = useFormContext();
+  const { register, watch, setValue } = useFormContext();
 
-  const fieldError = errors[name]?.message as string;
-  const showError = (!!touchedFields[name] || isSubmitted) && !!fieldError;
+  const value = watch(name);
+  const showClear = !!value;
 
   return (
-    <div className="w-full">
-      {rest.label && <label htmlFor={name}>{rest.label}</label>}
+    <div className="relative flex w-full flex-col">
       <input {...register(name, rest.validation)} type={type} className={className} {...rest} />
-      {showError && <p className="mt-1 text-sm text-red-500">{fieldError}</p>}
+
+      {/* 삭제 버튼 */}
+      <button
+        className={cn(
+          "flex-center absolute right-2 top-1/2 h-[16.67px] w-[16.67px] -translate-y-1/2 rounded-full bg-[#9D9D9D] outline-none",
+          !showClear && "opacity-0"
+        )}
+        onClick={() =>
+          setValue(name, "", { shouldValidate: true, shouldDirty: true, shouldTouch: true })
+        }
+      >
+        <Icon name="Delete" aria-label="입력값 지우기" size={6.97} />
+      </button>
     </div>
   );
 };

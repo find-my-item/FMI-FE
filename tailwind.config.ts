@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 const typedConfig: Config = require("./src/utils/tokens/tailwind.config");
+import { flexCenter, flexColCenter, mouseHover, uEllipsis } from "./src/utils/customStylePlugins";
 
 const {
   dimension, // check
@@ -35,6 +36,8 @@ const config: Config = {
       height: dimension, // check
     },
   },
+  plugins: [flexCenter, flexColCenter, mouseHover, uEllipsis],
+  safelist: ["flex-center", "flex-col-center", "mouse-hover", "u-ellipsis"],
 };
 
 export default config;
