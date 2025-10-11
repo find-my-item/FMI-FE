@@ -13,7 +13,6 @@ const Page = () => {
 
   return (
     <div className="flex-col-center min-h-screen w-full gap-8">
-      {/* logo */}
       <Logo />
 
       {/* button */}
