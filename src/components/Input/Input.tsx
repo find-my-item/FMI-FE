@@ -1,3 +1,5 @@
+"use client";
+
 import { useFormContext } from "react-hook-form";
 import { InputType } from "@/types/InputTypes";
 import { InputStyle } from "@/app/(route)/(auth)/_constant/authStyle";
