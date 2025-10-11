@@ -21,8 +21,7 @@ const Page = () => {
   });
 
   return (
-    <div className="flex-col-center flex min-h-screen w-full gap-6 px-5">
-      {/* 로고 */}
+    <div className="flex-col-center flex min-h-screen w-full gap-6 px-5 md:flex-row">
       <Logo />
 
       <form onSubmit={onSubmit} className="flex w-full flex-col gap-10">
@@ -35,12 +34,12 @@ const Page = () => {
               name="password"
               type={show ? "text" : "password"}
               placeholder="비밀번호를 입력해주세요."
-              className={cn(InputStyle, "relative")}
+              className={cn(InputStyle, "absolute bg-[#F5F5F5] focus:outline-none")}
             />
             <Button
-              className="absolute right-3 top-1/2 -translate-y-1/2 outline-none"
+              className="absolute outline-none"
               type="button"
-              aria-label={show ? "비밀번호 보기" : "비밀번호 숨기기"}
+              aria-label={show ? "비밀번호 숨기기" : "비밀번호 보기"}
               onClick={() => setShow(!show)}
             >
               <Icon name={show ? "EyeOpen" : "EyeOff"} size={16} />
@@ -69,11 +68,11 @@ const Page = () => {
 
       {/* 회원확인 여부 */}
       <div className="flex h-11 w-full justify-center">
-        <Link href="/find-pw" className="p-3 text-[14px] text-[#9D9D9D]">
+        <Link href="/findPw" className="p-3 text-[14px] text-[#9D9D9D]">
           비밀번호 찾기
         </Link>
         <span className="h-4 self-center border-l border-gray-300" />
-        <Link href="/sign-up" className="p-3 text-[14px] text-[#1EB87B]">
+        <Link href="/signUp" className="p-3 text-[14px] text-[#1EB87B]">
           회원가입
         </Link>
       </div>
