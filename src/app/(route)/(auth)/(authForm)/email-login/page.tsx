@@ -9,6 +9,7 @@ import Icon from "@/components/Icon/Icon";
 import CheckBox from "../../../../../components/CheckBox/CheckBox";
 import { useFormContext } from "react-hook-form";
 import Input from "@/components/Input/Input";
+import Logo from "../_components/Logo";
 
 const Page = () => {
   const [show, setShow] = useState(false);
@@ -22,10 +23,7 @@ const Page = () => {
   return (
     <div className="flex-col-center flex min-h-screen w-full gap-6 px-5">
       {/* 로고 */}
-      <Link className="flex-center cursor-pointer" href={"/"}>
-        <Icon name="Logo" size={50} title="로고" />
-        <h2 className="text-[20px] font-bold text-[#1EB87B]">찾아줘!</h2>
-      </Link>
+      <Logo />
 
       <form onSubmit={onSubmit} className="flex w-full flex-col gap-10">
         {/* 로그인 입력칸 */}
