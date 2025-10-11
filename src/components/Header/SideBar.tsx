@@ -9,7 +9,7 @@ const HeaderLink = [
   { name: "리스트", href: "/list" },
   { name: "글쓰기", href: "/write" },
   { name: "로그인", href: "/login" },
-  { name: "회원가입", href: "/signUp" },
+  { name: "회원가입", href: "/sign-up" },
   { name: "프로필", href: "/profile" },
   { name: "공지사항", href: "/notice" },
   { name: "FAQ", href: "/faq" },
