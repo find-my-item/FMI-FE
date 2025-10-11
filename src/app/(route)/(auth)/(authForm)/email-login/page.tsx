@@ -22,10 +22,10 @@ const Page = () => {
   return (
     <div className="flex-col-center flex min-h-screen w-full gap-6 px-5">
       {/* 로고 */}
-      <div className="flex-center mb-10">
+      <Link className="flex-center cursor-pointer" href={"/"}>
         <Icon name="Logo" size={50} title="로고" />
-        <h1 className="text-[39px] font-bold text-[#1EB87B]">찾아줘!</h1>
-      </div>
+        <h2 className="text-[20px] font-bold text-[#1EB87B]">찾아줘!</h2>
+      </Link>
 
       <form onSubmit={onSubmit} className="flex w-full flex-col gap-10">
         {/* 로그인 입력칸 */}
