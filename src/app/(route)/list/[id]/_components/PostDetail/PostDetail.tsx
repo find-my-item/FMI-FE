@@ -21,11 +21,11 @@ interface PostDetailProps {
 }
 
 const LABELS = {
-  find: { label: "습득" as const, backPath: "/find" as const },
-  lost: { label: "분실" as const, backPath: "/lost" as const },
-  notice: { label: "공지사항" as const, backPath: "/notice?tab=notice" as const },
-  customer: { label: "문의내역" as const, backPath: "/notice?tab=customer" as const },
-};
+  find: { label: "습득", backPath: "/find" },
+  lost: { label: "분실", backPath: "/lost" },
+  notice: { label: "공지사항", backPath: "/notice?tab=notice" },
+  customer: { label: "문의내역", backPath: "/notice?tab=customer" },
+} as const;
 
 const PostDetail = ({ type, item }: PostDetailProps) => {
   const { label, backPath } = LABELS[type];
