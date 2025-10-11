@@ -21,7 +21,7 @@ const Page = () => {
   });
 
   return (
-    <div className="flex-col-center flex min-h-screen w-full gap-6 px-5 md:flex-row">
+    <div className="flex-col-center flex min-h-screen w-full gap-6 px-5">
       <Logo />
 
       <form onSubmit={onSubmit} className="flex w-full flex-col gap-10">
@@ -37,7 +37,7 @@ const Page = () => {
               className={cn(InputStyle, "absolute bg-[#F5F5F5] focus:outline-none")}
             />
             <Button
-              className="absolute outline-none"
+              className="flex-center absolute right-2 top-3 outline-none"
               type="button"
               aria-label={show ? "비밀번호 숨기기" : "비밀번호 보기"}
               onClick={() => setShow(!show)}
@@ -68,11 +68,11 @@ const Page = () => {
 
       {/* 회원확인 여부 */}
       <div className="flex h-11 w-full justify-center">
-        <Link href="/findPw" className="p-3 text-[14px] text-[#9D9D9D]">
+        <Link href="/find-pw" className="p-3 text-[14px] text-[#9D9D9D]">
           비밀번호 찾기
         </Link>
         <span className="h-4 self-center border-l border-gray-300" />
-        <Link href="/signUp" className="p-3 text-[14px] text-[#1EB87B]">
+        <Link href="/sign-up" className="p-3 text-[14px] text-[#1EB87B]">
           회원가입
         </Link>
       </div>
