@@ -24,8 +24,8 @@ const Page = () => {
   });
 
   return (
-    <div className="flex-col-center flex min-h-screen w-full md:flex-row">
-      <form onSubmit={onSubmit} className="flex w-full flex-col justify-between">
+    <div className="flex min-h-screen w-full flex-col-center">
+      <form onSubmit={onSubmit} className="flex w-full flex-1 justify-between flex-col-center">
         <div className="flex w-full flex-col gap-5 p-4">
           {signUpInputObject.map((item) => {
             const fieldError = errors[item.name]?.message as string;
@@ -68,7 +68,7 @@ const Page = () => {
           })}
         </div>
 
-        <div className="sticky bottom-0 max-h-[102px] border-t border-[#E4E4E4] bg-white px-4 py-3">
+        <div className="sticky bottom-0 mt-auto h-[88px] w-full max-w-[390px] border-t border-[#E4E4E4] bg-white px-4 py-3">
           <Button type="submit" label="회원가입 버튼">
             다음
           </Button>

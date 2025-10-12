@@ -5,7 +5,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const ButtonStyle =
-  "w-full h-[50px] flex-center gap-1 rounded-[10px] bg-[#E4E4E4] font-semibold text-[16px] text-white";
+  "w-full h-[44px] flex-center gap-1 rounded-[10px] bg-[#E4E4E4] font-semibold text-[16px] text-white";
 
 const Button = ({ children, type, className = ButtonStyle, ...rest }: ButtonProps) => {
   return (
