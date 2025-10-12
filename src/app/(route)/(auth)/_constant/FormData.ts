@@ -38,6 +38,7 @@ export const signUpInputObject: InputType[] = [
     type: "password",
     placeholder: "비밀번호을 입력해 주세요.",
     rule: "8~16자리, 영문/숫자/특수 문자 포함",
+    eyeShow: true,
     validation: {
       required: true,
       pattern: {
@@ -51,6 +52,7 @@ export const signUpInputObject: InputType[] = [
     label: "비밀번호 확인",
     type: "password",
     placeholder: "비밀번호 입력해 주세요.",
+    eyeShow: true,
     validation: {
       required: true,
       validate: (value, formValue) => value === formValue || "비밀번호가 일치하지 않습니다.",
