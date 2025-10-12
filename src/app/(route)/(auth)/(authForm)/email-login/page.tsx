@@ -1,19 +1,13 @@
 "use client";
 
-import { useState } from "react";
 import Button from "@/components/Button/Button";
-import { InputStyle } from "../../_constant/authStyle";
 import Link from "next/link";
-import { cn } from "@/utils/cn";
-import Icon from "@/components/Icon/Icon";
 import CheckBox from "@/components/CheckBox/CheckBox";
 import { useFormContext } from "react-hook-form";
 import Input from "@/components/Input/Input";
 import Logo from "../_components/Logo";
 
 const Page = () => {
-  const [show, setShow] = useState(false);
-
   const methods = useFormContext();
 
   const onSubmit = methods.handleSubmit((data) => {
