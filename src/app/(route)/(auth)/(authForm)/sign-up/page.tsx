@@ -68,7 +68,7 @@ const Page = () => {
           })}
         </div>
 
-        <div className="sticky bottom-0 min-h-[102px] border-t border-[#E4E4E4] bg-white px-4 py-3">
+        <div className="sticky bottom-0 max-h-[102px] border-t border-[#E4E4E4] bg-white px-4 py-3">
           <Button type="submit" label="회원가입 버튼">
             다음
           </Button>
