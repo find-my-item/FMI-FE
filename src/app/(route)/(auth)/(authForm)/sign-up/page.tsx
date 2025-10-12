@@ -1,13 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { signUpInputObject } from "../../_constant/FormData";
 import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 import { cn } from "@/utils/cn";
 import { InputStyle, signUpButtonStyle } from "../../_constant/authStyle";
-import Icon from "@/components/Icon/Icon";
 
 const buttonConfig: Record<string, { text: string; className: string }> = {
   email: { text: "인증번호 발송", className: signUpButtonStyle },
