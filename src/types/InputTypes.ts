@@ -10,4 +10,5 @@ export type InputType = {
   required?: boolean;
   onConfirm?: React.FocusEventHandler<HTMLInputElement>;
   rule?: string;
+  eyeShow?: boolean;
 };
