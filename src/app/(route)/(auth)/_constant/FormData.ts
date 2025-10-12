@@ -29,7 +29,7 @@ export const signUpInputObject: InputType[] = [
     type: "text",
     placeholder: "인증번호를 입력해주세요.",
     validation: {
-      required: false,
+      required: true,
     },
   },
   {
