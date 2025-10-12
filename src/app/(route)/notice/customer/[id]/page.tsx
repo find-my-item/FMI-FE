@@ -1,5 +1,5 @@
 import { customerListObject } from "../../_constant/customerListObject";
-import PostDetail from "../../_components/PostDetail";
+import { CommentForm, PostDetail } from "@/app/(route)/list/[id]/_components/index";
 import CommentList from "../../_components/CommentList";
 import { commentListObject } from "../../_constant/commentListObject";
 
@@ -15,8 +15,9 @@ const CustomerDetail = async ({ params }: CustomerDetailProps) => {
 
   return (
     <>
-      <PostDetail item={customerItem} type="notice" />
+      <PostDetail item={customerItem} type="customer" />
       <CommentList comments={commentListObject} />
+      <CommentForm />
     </>
   );
 };
