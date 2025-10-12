@@ -21,7 +21,7 @@ const Page = () => {
   });
 
   return (
-    <div className="flex-col-center flex min-h-screen w-full gap-6 px-5">
+    <div className="flex min-h-screen w-full gap-6 px-5 flex-col-center">
       <Logo />
 
       <form onSubmit={onSubmit} className="flex w-full flex-col gap-10">
@@ -29,22 +29,12 @@ const Page = () => {
         <div className="flex w-full flex-col gap-3">
           <Input name="email" type="text" placeholder="이메일을 입력해주세요." />
 
-          <div className="relative">
-            <Input
-              name="password"
-              type={show ? "text" : "password"}
-              placeholder="비밀번호를 입력해주세요."
-              className={cn(InputStyle, "absolute bg-[#F5F5F5] focus:outline-none")}
-            />
-            <Button
-              className="flex-center absolute right-2 top-3 outline-none"
-              type="button"
-              aria-label={show ? "비밀번호 숨기기" : "비밀번호 보기"}
-              onClick={() => setShow(!show)}
-            >
-              <Icon name={show ? "EyeOpen" : "EyeOff"} size={16} />
-            </Button>
-          </div>
+          <Input
+            name="password"
+            type="password"
+            placeholder="비밀번호를 입력해주세요."
+            eyeShow={true}
+          />
 
           {/* 체크박스 */}
           <div className="flex w-full gap-3 text-[14px] text-[#9D9D9D]">
@@ -52,10 +42,9 @@ const Page = () => {
             <CheckBox children="자동 로그인" name="autoLogin" />
           </div>
         </div>
-        {/* </div> */}
 
         {/* 로그인 버튼 */}
-        <div className="flex-col-center w-full gap-6">
+        <div className="w-full gap-6 flex-col-center">
           <Button children="로그인" type="submit"></Button>
           {/* divider 구분선 */}
           <div className="flex h-4 w-full items-center">
