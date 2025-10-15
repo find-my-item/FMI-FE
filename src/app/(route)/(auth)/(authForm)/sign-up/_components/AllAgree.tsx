@@ -1,18 +1,7 @@
 import { CheckBox } from "@/components";
 import Icon from "@/components/Icon/Icon";
 import { useState } from "react";
-
-const AgreeConfig = [
-  {
-    name: "서비스 이용약관 (필수)",
-  },
-  {
-    name: "개인정보 수집 및 이용 동의 (필수)",
-  },
-  {
-    name: "마케팅 수신 동의 (선택)",
-  },
-];
+import { AgreeConfig } from "../../../_constant/Agreement";
 
 const AllAgree = () => {
   return (
