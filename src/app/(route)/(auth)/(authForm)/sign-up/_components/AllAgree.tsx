@@ -45,7 +45,11 @@ const AllAgree = () => {
                     onChange={() => setChecked(!checked)}
                   />
                   <div className="relative h-6 w-6 rounded bg-[#E4E4E4] flex-center peer-checked:bg-[#1EB87B] peer-checked:opacity-70 [&_svg]:opacity-0 peer-checked:[&_svg]:opacity-100">
-                    {/* <Icon name="Check" size={5} title="체크됨" /> */}
+                    <Icon
+                      name="Check"
+                      title="체크됨"
+                      className="absolute inset-0 m-auto h-2 peer-checked:opacity-100"
+                    />
                   </div>
                   <span className="ml-3 text-[#9D9D9D]">{item.name}</span>
                 </label>
