@@ -33,7 +33,7 @@ const DetailHeader = ({ title = "", children }: DetailHeaderProps) => {
 DetailHeader.Search = ({ ...props }) => {
   return (
     <button {...props}>
-      <Icon name="Search" size={24} />
+      <Icon name="Search" />
     </button>
   );
 };
