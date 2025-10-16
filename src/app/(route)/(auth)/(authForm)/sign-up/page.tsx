@@ -6,13 +6,13 @@ import AllAgree from "./_components/AllAgree";
 import SignUpField from "./_components/SignUpField";
 import DetailAgree from "./_components/DetailAgree";
 
-type Step = "form" | "term" | "termDetail"; // 회원가입 단계 타입 정의
+type Step = "form" | "term" | "termDetail";
 
 const Page = () => {
-  const [step, setStep] = useState<Step>("form"); // 회원가입 컴포넌트 상태관리
-  const [termDetail, setTermDetail] = useState(""); // 상세약관 상태관리
+  const [step, setStep] = useState<Step>("form");
+  const [termDetail, setTermDetail] = useState("");
 
-  const { handleSubmit, trigger } = useFormContext(); // 폼관리
+  const { handleSubmit, trigger } = useFormContext();
 
   const onSubmit = handleSubmit((data) => {
     alert("폼 제출되었습니다.");
