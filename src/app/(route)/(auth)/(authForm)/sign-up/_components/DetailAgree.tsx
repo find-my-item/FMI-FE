@@ -15,9 +15,9 @@ const DetailAgree = ({ termKey, onBack, onAgree }: Props) => {
         {AgreeConfig[termKey].content}
       </div>
 
-      {/* footer */}
+      {/* signUpFooter */}
       <div className="sticky bottom-0 mt-auto h-[88px] w-full max-w-[390px] border-t border-[#E4E4E4] bg-white px-4 py-3">
-        <Button type="button" label="회원가입 버튼">
+        <Button type="button" onClick={onAgree} label="회원가입 버튼">
           동의
         </Button>
       </div>
