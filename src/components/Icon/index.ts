@@ -22,3 +22,5 @@ export { default as ProfileCheck } from "@/assets/profile-check.svg";
 export { default as Send } from "@/assets/send.svg";
 export { default as Image } from "@/assets/image.svg";
 export { default as Delete } from "@/assets/delete.svg";
+export { default as Share } from "@/assets/share.svg";
+export { default as DetailMenu } from "@/assets/detail-menu.svg";

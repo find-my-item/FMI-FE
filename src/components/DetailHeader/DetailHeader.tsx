@@ -2,23 +2,72 @@
 
 import Icon from "@/components/Icon/Icon";
 import { useRouterBack } from "@/utils/useRouterBack";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { createContext } from "react";
 
-const DetailHeader = ({ title }: { title: string }) => {
+const DetailHeaderContext = createContext({ title: "" });
+
+interface DetailHeaderProps {
+  title?: string;
+  children?: React.ReactNode;
+}
+
+const DetailHeader = ({ title = "", children }: DetailHeaderProps) => {
   const { back } = useRouterBack();
-  const pathname = usePathname();
 
   return (
-    <div className="flex h-[56px] w-full items-center justify-between px-[20px]">
-      <div className="flex items-center justify-start gap-[3px]">
-        <button className="h-[30px] w-[30px]" onClick={() => back()} aria-label="뒤로가기">
-          <Icon name="ArrowLeftSmall" size={30} />
-        </button>
-        <h1 className="text-[20px] font-semibold text-[#242424]">{title}</h1>
+    <DetailHeaderContext.Provider value={{ title }}>
+      <div className="flex h-[56px] w-full items-center justify-between px-[20px]">
+        <div className="flex items-center justify-start gap-[8px]">
+          <button className="h-[30px] w-[30px]" onClick={() => back()} aria-label="뒤로가기">
+            <Icon name="ArrowLeftSmall" size={30} />
+          </button>
+          <h1 className="text-[20px] font-semibold text-[#242424]">{title}</h1>
+        </div>
+
+        {children}
       </div>
-      {pathname === "/list" && <Icon name="Search" size={24} />}
-    </div>
+    </DetailHeaderContext.Provider>
+  );
+};
+
+DetailHeader.Search = ({ ...props }) => {
+  return (
+    <button {...props}>
+      <Icon name="Search" size={24} />
+    </button>
+  );
+};
+
+DetailHeader.Save = ({ ...props }) => {
+  const isDisabledStyle = props.disabled ? "text-[#98E3BD]" : "text-[#1EB87B]";
+  return (
+    <button {...props} className={isDisabledStyle}>
+      저장
+    </button>
+  );
+};
+
+DetailHeader.Star = ({ isActive, ...props }: { isActive: boolean }) => {
+  return (
+    <button {...props}>
+      <Icon name="Star" />
+    </button>
+  );
+};
+
+DetailHeader.Share = ({ ...props }) => {
+  return (
+    <button {...props}>
+      <Icon name="Share" />
+    </button>
+  );
+};
+
+DetailHeader.Menu = ({ ...props }) => {
+  return (
+    <button {...props}>
+      <Icon name="DetailMenu" />
+    </button>
   );
 };
 
