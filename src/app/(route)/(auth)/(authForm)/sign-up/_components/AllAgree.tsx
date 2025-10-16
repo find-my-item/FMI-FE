@@ -1,9 +1,19 @@
-import { CheckBox } from "@/components";
 import Icon from "@/components/Icon/Icon";
 import { useState } from "react";
-import { AgreeConfig } from "../../../_constant/Agreement";
 
-const AllAgree = () => {
+type Props = {
+  onOpenDetail: (termKey: string) => void;
+  onBack: () => void;
+  onComplete: () => void;
+};
+
+const Terms = [
+  { key: "termsOfService", name: "서비스 이용약관 (필수)", required: true },
+  { key: "privacyPolicy", name: "개인정보 수집 및 이용 동의 (필수)", required: true },
+  { key: "marketingConsent", name: "마케팅 수신 동의 (선택)", required: false },
+];
+
+const AllAgree = ({ onOpenDetail, onBack, onComplete }: Props) => {
   return (
     <div className="flex w-full flex-col gap-7 p-4">
       <h1 className="text-[18px] font-semibold text-[#171717]">
@@ -17,7 +27,7 @@ const AllAgree = () => {
 
         {/* 각 약관 동의 */}
         <div className="flex min-h-[172px] w-full flex-col gap-5">
-          {AgreeConfig.map((item) => {
+          {Terms.map((item) => {
             const [checked, setChecked] = useState(false); // 체크 상태 관리
             return (
               <div
@@ -43,7 +53,7 @@ const AllAgree = () => {
                   <span className="ml-3 text-[#9D9D9D]">{item.name}</span>
                 </label>
 
-                <button className="bg-white">
+                <button className="bg-white" type="button" onClick={() => onOpenDetail(item.key)}>
                   <Icon name="ArrowRightSmall" size={24} />
                 </button>
               </div>
