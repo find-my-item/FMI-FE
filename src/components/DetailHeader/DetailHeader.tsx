@@ -32,7 +32,7 @@ const DetailHeader = ({ title = "", children }: DetailHeaderProps) => {
 
 DetailHeader.Search = ({ ...props }) => {
   return (
-    <button {...props}>
+    <button {...props} aria-label="검색">
       <Icon name="Search" />
     </button>
   );
@@ -41,7 +41,7 @@ DetailHeader.Search = ({ ...props }) => {
 DetailHeader.Save = ({ ...props }) => {
   const isDisabledStyle = props.disabled ? "text-[#98E3BD]" : "text-[#1EB87B]";
   return (
-    <button {...props} className={isDisabledStyle}>
+    <button {...props} className={isDisabledStyle} aria-label="게시글 저장">
       저장
     </button>
   );
@@ -49,7 +49,7 @@ DetailHeader.Save = ({ ...props }) => {
 
 DetailHeader.Star = ({ isActive, ...props }: { isActive: boolean }) => {
   return (
-    <button {...props}>
+    <button {...props} aria-label="즐겨찾기">
       <Icon name="Star" />
     </button>
   );
@@ -57,7 +57,7 @@ DetailHeader.Star = ({ isActive, ...props }: { isActive: boolean }) => {
 
 DetailHeader.Share = ({ ...props }) => {
   return (
-    <button {...props}>
+    <button {...props} aria-label="공유">
       <Icon name="Share" />
     </button>
   );
@@ -65,7 +65,7 @@ DetailHeader.Share = ({ ...props }) => {
 
 DetailHeader.Menu = ({ ...props }) => {
   return (
-    <button {...props}>
+    <button {...props} aria-label="게시글 상세 메뉴">
       <Icon name="DetailMenu" />
     </button>
   );
