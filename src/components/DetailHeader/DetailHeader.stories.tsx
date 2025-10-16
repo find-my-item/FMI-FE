@@ -63,6 +63,7 @@ export const PostDetail: Story = {
   args: {
     children: (
       <div className="flex gap-[23.5px]">
+        {/* storybook에서 사이즈 작게 뜨는 버그 */}
         <DetailHeader.Star isActive />
         <DetailHeader.Share />
         <DetailHeader.Menu />
