@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { NoticeCustomerState } from "./_types/noticeContainer";
 import NoticeView from "./_components/NoticeView";
-import { Tab } from "@/components";
+import { DetailHeader, Tab } from "@/components/index";
 import { tabs } from "./_constant/noticeTab";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
@@ -29,6 +29,7 @@ const Notice = () => {
 
   return (
     <div className="w-full">
+      <DetailHeader title={noticeCustomerState === "notice" ? "공지사항" : "고객센터"} />
       <Tab onValueChange={onChangeTab} tabs={tabs} selected={noticeCustomerState} />
       <NoticeView noticeCustomerState={noticeCustomerState} />
     </div>

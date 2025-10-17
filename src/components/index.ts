@@ -7,3 +7,4 @@ export { default as Footer } from "./Footer/Footer";
 export { default as Input } from "./Input/Input";
 export { default as Chip } from "./Chip/Chip";
 export { default as CheckBox } from "./CheckBox/CheckBox";
+export { default as DetailHeader } from "./DetailHeader/DetailHeader";
