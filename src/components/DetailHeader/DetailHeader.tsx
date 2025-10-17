@@ -27,8 +27,7 @@ const DetailHeader = ({ title = "", children }: DetailHeaderProps) => {
           </button>
           <h1 className="text-[20px] font-semibold text-[#242424]">{title}</h1>
         </div>
-
-        {children}
+        <div className="flex gap-[23.5px]">{children}</div>
       </div>
     </DetailHeaderContext.Provider>
   );
