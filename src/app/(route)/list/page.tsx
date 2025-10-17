@@ -32,7 +32,7 @@ const page = () => {
   return (
     <div>
       <DetailHeader title="게시글">
-        <DetailHeader.Search></DetailHeader.Search>
+        <DetailHeader.Search ariaLabel="게시글 검색" />
       </DetailHeader>
       <Tab tabs={list} selected={selected} onValueChange={setSelected} />
       <div className="flex h-[67px] w-full items-center gap-2 px-5">

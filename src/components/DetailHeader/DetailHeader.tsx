@@ -12,7 +12,7 @@ interface DetailHeaderProps {
 }
 
 interface AriaLabel {
-  ariaLabel: string;
+  ariaLabel?: string;
 }
 
 const DetailHeader = ({ title = "", children }: DetailHeaderProps) => {
@@ -34,7 +34,7 @@ const DetailHeader = ({ title = "", children }: DetailHeaderProps) => {
   );
 };
 
-DetailHeader.Search = ({ ariaLabel, ...props }: AriaLabel) => {
+DetailHeader.Search = ({ ariaLabel = "검색", ...props }: AriaLabel) => {
   return (
     <button {...props} aria-label={ariaLabel}>
       <Icon name="Search" />
@@ -51,7 +51,11 @@ DetailHeader.Save = ({ ...props }) => {
   );
 };
 
-DetailHeader.Star = ({ ariaLabel, isActive, ...props }: AriaLabel & { isActive: boolean }) => {
+DetailHeader.Star = ({
+  ariaLabel = "즐겨찾기 추가",
+  isActive,
+  ...props
+}: AriaLabel & { isActive: boolean }) => {
   return (
     <button {...props} aria-label={ariaLabel}>
       <Icon name="Star" />
@@ -59,9 +63,9 @@ DetailHeader.Star = ({ ariaLabel, isActive, ...props }: AriaLabel & { isActive: 
   );
 };
 
-DetailHeader.Share = ({ ariaLabel, ...props }: AriaLabel) => {
+DetailHeader.Share = ({ ariaLabel = "공유", ...props }: AriaLabel) => {
   return (
-    <button {...props} aria-label="공유">
+    <button {...props} aria-label={ariaLabel}>
       <Icon name="Share" />
     </button>
   );
