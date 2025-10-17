@@ -5,7 +5,7 @@ const Page = () => {
     <div className="min-h-screen bg-white p-8 transition-colors duration-200 dark:bg-gray-900">
       <div className="mx-auto max-w-4xl">
         {/* Title */}
-        <h1 className="mb-6 font-heading text-4xl font-bold text-gray-900 dark:text-gray-100">
+        <h1 className="font-heading mb-6 text-4xl font-bold text-gray-900 dark:text-gray-100">
           Design System Showcase
         </h1>
 
@@ -68,9 +68,9 @@ const Page = () => {
         <section className="mb-12">
           <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-gray-100">Opacity</h2>
           <div className="flex items-center gap-4">
-            <div className="h-10 w-24 rounded bg-purple-500 opacity-low" />
-            <div className="h-10 w-24 rounded bg-purple-500 opacity-md" />
-            <div className="h-10 w-24 rounded bg-purple-500 opacity-high" />
+            <div className="opacity-low h-10 w-24 rounded bg-purple-500" />
+            <div className="opacity-md h-10 w-24 rounded bg-purple-500" />
+            <div className="opacity-high h-10 w-24 rounded bg-purple-500" />
           </div>
           <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">low / md / high</div>
         </section>
@@ -110,7 +110,7 @@ const Page = () => {
         {/* Cards (shadow & radius demo) */}
         <section className="mb-12">
           <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-gray-100">Card</h2>
-          <div className="rounded-lg bg-white p-md shadow-[5px_5px_5px_3px_rgba(26,32,44,0.15),_4px_4px_5px_6px_#00000033] dark:bg-gray-800">
+          <div className="p-md rounded-lg bg-white shadow-[5px_5px_5px_3px_rgba(26,32,44,0.15),_4px_4px_5px_6px_#00000033] dark:bg-gray-800">
             <p className="text-gray-800 dark:text-gray-200">
               Custom boxShadow from theme.extend.boxShadow.default applied.
             </p>
