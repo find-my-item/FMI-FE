@@ -1,6 +1,6 @@
 "use client";
 
-import DetailHeader from "@/components/DetailHeader/DetailHeader";
+import { DetailHeader } from "@/components/index";
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (

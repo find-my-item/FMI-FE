@@ -4,7 +4,7 @@ import { Dropdown, Tab } from "@/components";
 import { useState } from "react";
 import ListItem from "./_components/ListItem/ListItem";
 import Icon from "@/components/Icon/Icon";
-import DetailHeader from "@/components/DetailHeader/DetailHeader";
+import { DetailHeader } from "@/components/index";
 
 const list = [
   {

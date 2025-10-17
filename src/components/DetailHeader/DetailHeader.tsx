@@ -2,7 +2,7 @@
 
 import Icon from "@/components/Icon/Icon";
 import { useRouterBack } from "@/utils/useRouterBack";
-import { createContext } from "react";
+import { ButtonHTMLAttributes, createContext } from "react";
 
 const DetailHeaderContext = createContext({ title: "" });
 
@@ -11,7 +11,7 @@ interface DetailHeaderProps {
   children?: React.ReactNode;
 }
 
-interface AriaLabel {
+interface BaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   ariaLabel?: string;
 }
 
@@ -33,7 +33,7 @@ const DetailHeader = ({ title = "", children }: DetailHeaderProps) => {
   );
 };
 
-DetailHeader.Search = ({ ariaLabel = "검색", ...props }: AriaLabel) => {
+DetailHeader.Search = ({ ariaLabel = "검색", ...props }: BaseButtonProps) => {
   return (
     <button {...props} aria-label={ariaLabel}>
       <Icon name="Search" />
@@ -41,10 +41,10 @@ DetailHeader.Search = ({ ariaLabel = "검색", ...props }: AriaLabel) => {
   );
 };
 
-DetailHeader.Save = ({ ...props }) => {
+DetailHeader.Save = ({ ariaLabel = "게시글 저장", ...props }: BaseButtonProps) => {
   const isDisabledStyle = props.disabled ? "text-[#98E3BD]" : "text-[#1EB87B]";
   return (
-    <button {...props} className={isDisabledStyle} aria-label="게시글 저장">
+    <button {...props} className={isDisabledStyle} aria-label={ariaLabel}>
       저장
     </button>
   );
@@ -54,7 +54,7 @@ DetailHeader.Star = ({
   ariaLabel = "즐겨찾기 추가",
   isActive,
   ...props
-}: AriaLabel & { isActive: boolean }) => {
+}: BaseButtonProps & { isActive: boolean }) => {
   return (
     <button {...props} aria-label={ariaLabel}>
       <Icon name="Star" />
@@ -62,7 +62,7 @@ DetailHeader.Star = ({
   );
 };
 
-DetailHeader.Share = ({ ariaLabel = "공유", ...props }: AriaLabel) => {
+DetailHeader.Share = ({ ariaLabel = "공유", ...props }: BaseButtonProps) => {
   return (
     <button {...props} aria-label={ariaLabel}>
       <Icon name="Share" />
@@ -70,9 +70,9 @@ DetailHeader.Share = ({ ariaLabel = "공유", ...props }: AriaLabel) => {
   );
 };
 
-DetailHeader.Menu = ({ ...props }) => {
+DetailHeader.Menu = ({ ariaLabel = "게시글 상세 메뉴", ...props }: BaseButtonProps) => {
   return (
-    <button {...props} aria-label="게시글 상세 메뉴">
+    <button {...props} aria-label={ariaLabel}>
       <Icon name="DetailMenu" />
     </button>
   );
