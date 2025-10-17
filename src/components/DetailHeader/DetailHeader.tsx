@@ -11,6 +11,10 @@ interface DetailHeaderProps {
   children?: React.ReactNode;
 }
 
+interface AriaLabel {
+  ariaLabel: string;
+}
+
 const DetailHeader = ({ title = "", children }: DetailHeaderProps) => {
   const { back } = useRouterBack();
 
@@ -30,9 +34,9 @@ const DetailHeader = ({ title = "", children }: DetailHeaderProps) => {
   );
 };
 
-DetailHeader.Search = ({ ...props }) => {
+DetailHeader.Search = ({ ariaLabel, ...props }: AriaLabel) => {
   return (
-    <button {...props} aria-label="검색">
+    <button {...props} aria-label={ariaLabel}>
       <Icon name="Search" />
     </button>
   );
@@ -47,15 +51,15 @@ DetailHeader.Save = ({ ...props }) => {
   );
 };
 
-DetailHeader.Star = ({ isActive, ...props }: { isActive: boolean }) => {
+DetailHeader.Star = ({ ariaLabel, isActive, ...props }: AriaLabel & { isActive: boolean }) => {
   return (
-    <button {...props} aria-label="즐겨찾기">
+    <button {...props} aria-label={ariaLabel}>
       <Icon name="Star" />
     </button>
   );
 };
 
-DetailHeader.Share = ({ ...props }) => {
+DetailHeader.Share = ({ ariaLabel, ...props }: AriaLabel) => {
   return (
     <button {...props} aria-label="공유">
       <Icon name="Share" />
