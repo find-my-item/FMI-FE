@@ -1,3 +1,6 @@
+import GlassMorphism from "@/design/GlassMorphism/GlassMorphism";
+import GlassMorphismButton from "@/design/GlassMorphism/GlassMorphismButton";
+
 const Page = () => {
   const shades = [100, 200, 300, 400, 500, 600, 700, 800, 900];
 
@@ -8,6 +11,12 @@ const Page = () => {
         <h1 className="font-heading mb-6 text-4xl font-bold text-gray-900 dark:text-gray-100">
           Design System Showcase
         </h1>
+        <div className="fixed max-w-[390px] gap-2 flex-col-center">
+          <GlassMorphismButton isDisabled={false}>다음</GlassMorphismButton>
+          <GlassMorphismButton isDisabled={true}>대기중</GlassMorphismButton>
+          <GlassMorphismButton isDisabled={true}>로그인</GlassMorphismButton>
+          <GlassMorphism />
+        </div>
 
         {/* Colors */}
         <section className="mb-12">
