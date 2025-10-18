@@ -21,6 +21,11 @@ const config: Config = {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   darkMode: "class",
   theme: {
+    screens: {
+      mobile: { min: "320px", max: "390px" },
+      tablet: { min: "391px", max: "810px" },
+      pc: "811px",
+    },
     extend: {
       ...validExtend, // 나머지 정상작동 값
       fontFamily: fontFamilies, // check
