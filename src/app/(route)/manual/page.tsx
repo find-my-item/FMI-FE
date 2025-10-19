@@ -22,21 +22,28 @@ const manualList = [
 
 const page = () => {
   const [selected, setSelected] = useState<keyof typeof MANUAL>("LOST");
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const handleToggle = (index: number) => {
+    setOpenIndex((prev) => (prev === index ? null : index));
+  };
 
   return (
-    <div className="flex-col-center w-full">
+    <div className="w-full flex-col-center">
       <Tab
         tabs={manualList}
         selected={selected}
-        onValueChange={(key) => setSelected(key as keyof typeof MANUAL)}
+        onValueChange={(key) => {
+          setSelected(key as keyof typeof MANUAL);
+          setOpenIndex(null);
+        }}
       />
-      {MANUAL[selected].map((item: ManualItemType) => (
+      {MANUAL[selected].map((item: ManualItemType, index: number) => (
         <ManualItem
           key={item.title}
-          title={item.title}
-          content={item.content}
-          href={item.href}
-          btnText={item.btnText}
+          {...item}
+          isOpen={openIndex === index}
+          onToggle={() => handleToggle(index)}
         />
       ))}
     </div>
