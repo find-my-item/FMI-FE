@@ -81,19 +81,48 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
                   aria-label="상세 약관 열기"
                   onClick={() => onOpenDetail(item.key)}
                 >
-                  <Icon name="ArrowRightSmall" size={24} />
-                </button>
-              </div>
+<<<<<<< HEAD
+<Icon name="ArrowRightSmall" size={24} />
+                </button >
+              </div >
             ))}
-          </div>
-        </div>
-      </div>
-      {/* signUpFooter */}
-      <div className="sticky bottom-0 mt-auto h-[88px] w-full max-w-[390px] border-t border-[#E4E4E4] bg-white px-4 py-3">
-        <Button type="submit" label="회원가입 버튼" onClick={onComplete}>
-          동의
-        </Button>
-      </div>
+=======
+                  {/* 체크박스 */}
+                  {/* <label htmlFor={item.name} className="flex cursor-pointer items-center">
+                    <input
+                      id={item.name}
+                      type="checkbox"
+                      className="peer sr-only"
+                      checked={checked}
+                      onChange={() => setChecked(!checked)}
+                    />
+                    <div className="relative h-6 w-6 rounded bg-[#E4E4E4] flex-center peer-checked:bg-[#1EB87B] peer-checked:opacity-70 [&_svg]:opacity-0 peer-checked:[&_svg]:opacity-100">
+                      <Icon
+                        name="Check"
+                        title="체크됨"
+                        className="absolute inset-0 m-auto h-2 peer-checked:opacity-100"
+                      />
+                    </div>
+                    <span className="ml-3 text-[#9D9D9D]">{item.name}</span>
+                  </label> */}
+                  <CheckBox name={item.name} onCheck={checkHandler} />
+
+                  <button className="bg-white" type="button" onClick={() => onOpenDetail(item.key)}>
+                    <Icon name="ArrowRightSmall" size={24} />
+                  </button>
+                </div>
+              );
+            })}
+>>>>>>> d01cddb (중간 저장)
+          </div >
+        </div >
+      </div >
+  {/* signUpFooter */ }
+  < div className = "sticky bottom-0 mt-auto h-[88px] w-full max-w-[390px] border-t border-[#E4E4E4] bg-white px-4 py-3" >
+    <Button type="submit" label="회원가입 버튼" onClick={onComplete}>
+      동의
+    </Button>
+      </div >
     </>
   );
 };
