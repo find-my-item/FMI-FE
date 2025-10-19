@@ -1,6 +1,7 @@
 import Icon from "@/components/Icon/Icon";
 import { useState } from "react";
 import Button from "@/components/Button/Button";
+import { CheckBox } from "@/components";
 
 type Props = {
   onOpenDetail: (termKey: string) => void;
@@ -15,6 +16,7 @@ const Terms = [
 ];
 
 const AllAgree = ({ onOpenDetail, onBack, onComplete }: Props) => {
+  const checkHandler = () => {};
   return (
     <>
       <div className="flex w-full flex-col gap-7 p-4">
@@ -37,7 +39,7 @@ const AllAgree = ({ onOpenDetail, onBack, onComplete }: Props) => {
                   className="flex h-[44px] w-full items-center justify-between text-[#5D5D5D]"
                 >
                   {/* 체크박스 */}
-                  <label htmlFor={item.name} className="flex cursor-pointer items-center">
+                  {/* <label htmlFor={item.name} className="flex cursor-pointer items-center">
                     <input
                       id={item.name}
                       type="checkbox"
@@ -53,7 +55,8 @@ const AllAgree = ({ onOpenDetail, onBack, onComplete }: Props) => {
                       />
                     </div>
                     <span className="ml-3 text-[#9D9D9D]">{item.name}</span>
-                  </label>
+                  </label> */}
+                  <CheckBox name={item.name} onCheck={checkHandler} />
 
                   <button className="bg-white" type="button" onClick={() => onOpenDetail(item.key)}>
                     <Icon name="ArrowRightSmall" size={24} />

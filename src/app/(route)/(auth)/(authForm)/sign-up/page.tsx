@@ -9,7 +9,7 @@ import DetailAgree from "./_components/DetailAgree";
 type Step = "form" | "term" | "termDetail";
 
 const Page = () => {
-  const [step, setStep] = useState<Step>("form");
+  const [step, setStep] = useState<Step>("term");
   const [termDetail, setTermDetail] = useState("");
 
   const { handleSubmit, trigger } = useFormContext();
