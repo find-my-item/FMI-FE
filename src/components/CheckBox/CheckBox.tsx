@@ -1,7 +1,7 @@
 "use client";
 
 import Icon from "@/components/Icon/Icon";
-import { ForwardedRef, InputHTMLAttributes, useState } from "react";
+import { InputHTMLAttributes } from "react";
 import { cn } from "@/utils/cn";
 
 interface CheckBoxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type" | "id"> {

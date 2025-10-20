@@ -1,14 +1,7 @@
 import Icon from "@/components/Icon/Icon";
-import { useState } from "react";
 import Button from "@/components/Button/Button";
 import { CheckBox } from "@/components";
 import { useFormContext, useWatch } from "react-hook-form";
-
-interface Props {
-  onOpenDetail: (termKey: string) => void;
-  onBack: () => void;
-  onComplete: () => void;
-}
 
 const Terms = [
   { key: "termsOfService", name: "서비스 이용약관 (필수)", required: true },
@@ -16,7 +9,12 @@ const Terms = [
   { key: "marketingConsent", name: "마케팅 수신 동의 (선택)", required: false },
 ];
 
-const AllAgree = ({ onOpenDetail, onBack, onComplete }: Props) => {
+interface Props {
+  onOpenDetail: (termKey: string) => void;
+  onComplete: () => void;
+}
+
+const AllAgree = ({ onOpenDetail, onComplete }: Props) => {
   const { register, setValue, control } = useFormContext();
 
   const selectAll = useWatch({ control, name: "selectAll" }); // 전체 선택
@@ -25,9 +23,11 @@ const AllAgree = ({ onOpenDetail, onBack, onComplete }: Props) => {
   // 전체약관동의 체크 박스 토글 함수
   const handleToggleAll = (e: React.ChangeEvent<HTMLInputElement>) => {
     const checked = e.currentTarget.checked; // 현재 체크 상태
+
+    // 개별 항목 모두 체크
     Terms.forEach((item) => {
       setValue(item.key, checked, { shouldValidate: true, shouldDirty: true });
-    }); // 개별 항목 모두 체크
+    });
     setValue("selectAll", checked, { shouldValidate: false, shouldDirty: false }); // 전체 항목 체크
   };
 
@@ -77,7 +77,7 @@ const AllAgree = ({ onOpenDetail, onBack, onComplete }: Props) => {
       </div>
       {/* signUpFooter */}
       <div className="sticky bottom-0 mt-auto h-[88px] w-full max-w-[390px] border-t border-[#E4E4E4] bg-white px-4 py-3">
-        <Button type="button" label="회원가입 버튼">
+        <Button type="submit" label="회원가입 버튼" onClick={onComplete}>
           동의
         </Button>
       </div>

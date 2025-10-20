@@ -5,10 +5,13 @@ import { useFormContext } from "react-hook-form";
 import AllAgree from "./_components/AllAgree";
 import SignUpField from "./_components/SignUpField";
 import DetailAgree from "./_components/DetailAgree";
+import { useRouter } from "next/navigation";
 
 type Step = "form" | "term" | "termDetail";
 
 const Page = () => {
+  const router = useRouter();
+
   const [step, setStep] = useState<Step>("term");
   const [termDetail, setTermDetail] = useState("");
 
@@ -16,6 +19,7 @@ const Page = () => {
 
   const onSubmit = handleSubmit((data) => {
     alert("폼 제출되었습니다.");
+    router.push("/");
   });
 
   const onNext = async () => {
@@ -30,6 +34,7 @@ const Page = () => {
 
   const completeTerms = async () => {
     const ok = await trigger(["termsOfService", "privacyPolicy"]);
+    console.log("ok>>> ", ok);
     if (ok) {
       onSubmit();
     }
@@ -44,11 +49,7 @@ const Page = () => {
       <form onSubmit={onSubmit} className="flex w-full flex-1 flex-col justify-between">
         {step === "form" && <SignUpField onNext={onNext} />}
         {step === "term" && (
-          <AllAgree
-            onOpenDetail={openTermDetail}
-            onBack={() => setStep("form")}
-            onComplete={() => completeTerms}
-          />
+          <AllAgree onOpenDetail={openTermDetail} onComplete={() => completeTerms} />
         )}
         {step === "termDetail" && (
           <DetailAgree termKey={termDetail} onBack={() => setStep("term")} onAgree={onAgreeTerm} />

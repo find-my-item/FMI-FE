@@ -61,7 +61,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
         })}
       </div>
       <div className="sticky bottom-0 mt-auto h-[88px] w-full max-w-[390px] border-t border-[#E4E4E4] bg-white px-4 py-3">
-        <Button type="submit" label="회원가입 버튼" onClick={onNext}>
+        <Button type="button" label="회원가입 폼 버튼" onClick={onNext}>
           다음
         </Button>
       </div>
