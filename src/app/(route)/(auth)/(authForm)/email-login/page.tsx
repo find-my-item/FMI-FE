@@ -32,8 +32,18 @@ const Page = () => {
 
           {/* 체크박스 */}
           <div className="flex w-full gap-3 text-[14px] text-[#9D9D9D]">
-            <CheckBox children="아이디 기억하기" name="rememberID" />
-            <CheckBox children="자동 로그인" name="autoLogin" />
+            <CheckBox
+              label="아이디 기억하기"
+              id="rememberID"
+              boxSize="w-[18px] h-[18px]"
+              textStyle="text-[12px]"
+            />
+            <CheckBox
+              label="자동 로그인"
+              id="autoLogin"
+              boxSize="w-[18px] h-[18px]"
+              textStyle="text-[12px]"
+            />
           </div>
         </div>
 
