@@ -1,13 +1,18 @@
-import React from "react";
 import { ModalLayout } from "..";
 import { cn } from "@/utils/cn";
+import Icon, { IconName } from "../Icon/Icon";
 
 interface ConfirmModalProps {
   title: React.ReactNode;
-  description: React.ReactNode;
-  icon?: string;
+  content: React.ReactNode;
+  icon?: IconName;
   isOpen: boolean;
   onClose: () => void;
+  onConfirm: () => void;
+  onFalse: () => void;
+  size: "small" | "medium";
+  iconSize?: number;
+  iconTitle?: string;
 }
 
 const style = {
@@ -16,19 +21,63 @@ const style = {
   falseBtn: "bg-[#FFFFFF] text-gray-800 border border-[#CFCFCF]",
 };
 
-const ConfirmModal = ({ isOpen, onClose, title, description, icon }: ConfirmModalProps) => {
+const ConfirmModal = ({
+  isOpen,
+  onClose,
+  title,
+  content,
+  icon,
+  onConfirm,
+  onFalse,
+  size = "medium",
+  iconSize = 20,
+  iconTitle,
+}: ConfirmModalProps) => {
+  const sizeMap = {
+    small: "w-[320px]",
+    medium: "w-[400px]",
+  };
+
+  const btnList = [
+    {
+      label: "False",
+      onClick: onFalse,
+      className: style.falseBtn,
+    },
+    {
+      label: "True",
+      onClick: onConfirm,
+      className: style.trueBtn,
+    },
+  ];
+
   return (
-    <ModalLayout isOpen={isOpen} onClose={onClose} className="gap-[24px] p-6 flex-col-center">
+    <ModalLayout
+      isOpen={isOpen}
+      onClose={onClose}
+      className={cn("gap-[24px] p-6 flex-col-center", sizeMap[size])}
+    >
       <div className="gap-[16px] flex-col-center">
-        {icon && <div>{icon}</div>}
+        {icon && (
+          <div className="h-[48px] w-[48px] rounded-full bg-[#525252] flex-center">
+            <Icon name={icon} size={iconSize} title={iconTitle} className="text-white" />
+          </div>
+        )}
         <div className="gap-[4px] flex-col-center">
-          <div>{title}</div>
-          <div>{description}</div>
+          <div className="text-[18px] font-semibold leading-[140%]">{title}</div>
+          <div className="text-[14px] leading-[140%]">{content}</div>
         </div>
       </div>
       <div className="w-full gap-2 flex-center">
-        <button className={cn(style.baseBtn, style.falseBtn)}>False</button>
-        <button className={cn(style.baseBtn, style.trueBtn)}>True</button>
+        {btnList.map((btn) => (
+          <button
+            key={btn.label}
+            className={cn(style.baseBtn, btn.className)}
+            onClick={btn.onClick}
+          >
+            {btn.label}
+          </button>
+        ))}
       </div>
     </ModalLayout>
   );

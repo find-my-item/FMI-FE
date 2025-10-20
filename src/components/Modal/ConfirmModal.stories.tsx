@@ -20,12 +20,56 @@ const meta: Meta<typeof ConfirmModal> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+export const IconMediumModal: Story = {
   args: {
     isOpen: true,
     onClose: () => {},
     title: "Title",
-    description: "Description",
-    icon: "Icon",
+    content: "Content",
+    icon: "Search",
+    iconTitle: "Search",
+    onConfirm: () => {},
+    onFalse: () => {},
+    size: "medium",
+    iconSize: 20,
+  },
+};
+
+export const IconSmallModal: Story = {
+  args: {
+    isOpen: true,
+    onClose: () => {},
+    title: "Title",
+    content: "Content",
+    icon: "Search",
+    iconTitle: "Search",
+    onConfirm: () => {},
+    onFalse: () => {},
+    size: "small",
+    iconSize: 20,
+  },
+};
+
+export const NoIconMediumModal: Story = {
+  args: {
+    isOpen: true,
+    onClose: () => {},
+    title: "Title",
+    content: "Content",
+    onConfirm: () => {},
+    onFalse: () => {},
+    size: "medium",
+  },
+};
+
+export const NoIconSmallModal: Story = {
+  args: {
+    isOpen: true,
+    onClose: () => {},
+    title: "Title",
+    content: "Content",
+    onConfirm: () => {},
+    onFalse: () => {},
+    size: "small",
   },
 };

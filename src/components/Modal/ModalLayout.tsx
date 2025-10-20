@@ -29,7 +29,7 @@ const ModalLayout = ({ isOpen, onClose, children, className }: ModalLayoutProps)
         aria-describedby="modal-desc"
         onClick={(e) => e.stopPropagation()}
         className={cn(
-          "w-[90vw] max-w-[600px] rounded-[20px] border border-gray-200 bg-white",
+          "rounded-[20px] border border-gray-200 bg-white",
           "flex flex-col overflow-hidden",
           className
         )}
