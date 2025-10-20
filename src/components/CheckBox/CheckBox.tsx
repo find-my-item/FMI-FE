@@ -1,26 +1,20 @@
 "use client";
 
 import Icon from "@/components/Icon/Icon";
-import { useState } from "react";
+import { ForwardedRef, InputHTMLAttributes, useState } from "react";
 import { cn } from "@/utils/cn";
 
-interface checkProps {
-  name: string;
+interface CheckBoxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type" | "id"> {
+  id: string;
+  label: string;
   boxSize?: string;
+  textStyle?: string;
 }
 
-const CheckBox = ({ name, boxSize, ...rest }: checkProps) => {
-  const [checked, setChecked] = useState(false); // 체크 상태 관리
-
+const CheckBox = ({ id, label, boxSize, textStyle, ...rest }: CheckBoxProps) => {
   return (
-    <label htmlFor={name} className="flex cursor-pointer items-center">
-      <input
-        id={name}
-        type="checkbox"
-        className="peer sr-only"
-        checked={checked}
-        onChange={() => setChecked(!checked)}
-      />
+    <label htmlFor={id} className="flex cursor-pointer items-center">
+      <input id={id} type="checkbox" className="peer sr-only" {...rest} />
       <div
         className={cn(
           "relative h-6 w-6 rounded bg-[#E4E4E4] flex-center peer-checked:bg-[#1EB87B] peer-checked:opacity-70 [&_svg]:opacity-0 peer-checked:[&_svg]:opacity-100",
@@ -33,7 +27,7 @@ const CheckBox = ({ name, boxSize, ...rest }: checkProps) => {
           className="absolute inset-0 m-auto h-2 peer-checked:opacity-100"
         />
       </div>
-      <span className="ml-3 text-[#9D9D9D]">{name}</span>
+      <span className={cn("ml-3 text-[#5D5D5D]", textStyle)}>{label}</span>
     </label>
   );
 };

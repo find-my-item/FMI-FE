@@ -2,12 +2,13 @@ import Icon from "@/components/Icon/Icon";
 import { useState } from "react";
 import Button from "@/components/Button/Button";
 import { CheckBox } from "@/components";
+import { useFormContext, useWatch } from "react-hook-form";
 
-type Props = {
+interface Props {
   onOpenDetail: (termKey: string) => void;
   onBack: () => void;
   onComplete: () => void;
-};
+}
 
 const Terms = [
   { key: "termsOfService", name: "서비스 이용약관 (필수)", required: true },
@@ -16,7 +17,29 @@ const Terms = [
 ];
 
 const AllAgree = ({ onOpenDetail, onBack, onComplete }: Props) => {
-  const checkHandler = () => {};
+  const { register, setValue, control } = useFormContext();
+  const selectAll = useWatch({ control, name: "selectAll" }); // 전체 선택
+  const termsValue = useWatch({ control, name: Terms.map((item) => item.key) }); // 개별 선택
+
+  // 전체약관동의 체크 박스 토글 함수
+  const handleToggleAll = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const checked = e.currentTarget.checked; // 현재 체크 상태
+    Terms.forEach((item) => {
+      setValue(item.key, checked, { shouldValidate: true, shouldDirty: true });
+    }); // 개별 항목 모두 체크
+    setValue("selectAll", checked, { shouldValidate: false, shouldDirty: false }); // 전체 항목 체크
+  };
+
+  // 개별 체크박스와 전체 체크박스 동기화
+  const allChecked =
+    Array.isArray(termsValue) && termsValue.length === Terms.length
+      ? termsValue.every(Boolean)
+      : false;
+
+  if (selectAll !== allChecked) {
+    setValue("selectAll", allChecked, { shouldValidate: false, shouldDirty: false });
+  }
+
   return (
     <>
       <div className="flex w-full flex-col gap-7 p-4">
@@ -26,44 +49,27 @@ const AllAgree = ({ onOpenDetail, onBack, onComplete }: Props) => {
 
         <div className="flex min-h-[272px] w-full flex-col gap-8">
           <div className="flex min-h-[68px] w-full items-center border-b border-[#CCCCCC] text-[#5D5D5D]">
-            약관 전체 동의
+            <CheckBox
+              id="selectAll"
+              label="전체 약관 동의"
+              {...register("selectAll")}
+              onChange={handleToggleAll}
+            />
           </div>
 
           {/* 각 약관 동의 */}
           <div className="flex min-h-[172px] w-full flex-col gap-5">
-            {Terms.map((item) => {
-              const [checked, setChecked] = useState(false); // 체크 상태 관리
-              return (
-                <div
-                  key={item.name}
-                  className="flex h-[44px] w-full items-center justify-between text-[#5D5D5D]"
-                >
-                  {/* 체크박스 */}
-                  {/* <label htmlFor={item.name} className="flex cursor-pointer items-center">
-                    <input
-                      id={item.name}
-                      type="checkbox"
-                      className="peer sr-only"
-                      checked={checked}
-                      onChange={() => setChecked(!checked)}
-                    />
-                    <div className="relative h-6 w-6 rounded bg-[#E4E4E4] flex-center peer-checked:bg-[#1EB87B] peer-checked:opacity-70 [&_svg]:opacity-0 peer-checked:[&_svg]:opacity-100">
-                      <Icon
-                        name="Check"
-                        title="체크됨"
-                        className="absolute inset-0 m-auto h-2 peer-checked:opacity-100"
-                      />
-                    </div>
-                    <span className="ml-3 text-[#9D9D9D]">{item.name}</span>
-                  </label> */}
-                  <CheckBox name={item.name} onCheck={checkHandler} />
-
-                  <button className="bg-white" type="button" onClick={() => onOpenDetail(item.key)}>
-                    <Icon name="ArrowRightSmall" size={24} />
-                  </button>
-                </div>
-              );
-            })}
+            {Terms.map((item) => (
+              <div
+                key={item.name}
+                className="flex h-[44px] w-full items-center justify-between text-[#5D5D5D]"
+              >
+                <CheckBox id={item.key} label={item.name} {...register(item.key)} />
+                <button className="bg-white" type="button" onClick={() => onOpenDetail(item.key)}>
+                  <Icon name="ArrowRightSmall" size={24} />
+                </button>
+              </div>
+            ))}
           </div>
         </div>
       </div>
