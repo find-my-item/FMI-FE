@@ -2,17 +2,21 @@ import { ModalLayout } from "..";
 import { cn } from "@/utils/cn";
 import Icon, { IconName } from "../Icon/Icon";
 
+type IconType = {
+  name: IconName;
+  size?: number;
+  title?: string;
+};
+
 interface ConfirmModalProps {
   title: React.ReactNode;
   content: React.ReactNode;
-  icon?: IconName;
+  icon?: IconType;
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
   onFalse: () => void;
   size: "small" | "medium";
-  iconSize?: number;
-  iconTitle?: string;
 }
 
 const style = {
@@ -30,8 +34,6 @@ const ConfirmModal = ({
   onConfirm,
   onFalse,
   size = "medium",
-  iconSize = 20,
-  iconTitle,
 }: ConfirmModalProps) => {
   const sizeMap = {
     small: "w-[320px]",
@@ -60,7 +62,7 @@ const ConfirmModal = ({
       <div className="gap-[16px] flex-col-center">
         {icon && (
           <div className="h-[48px] w-[48px] rounded-full bg-[#525252] flex-center">
-            <Icon name={icon} size={iconSize} title={iconTitle} className="text-white" />
+            <Icon name={icon.name} size={icon.size} title={icon.title} className="text-white" />
           </div>
         )}
         <div className="gap-[4px] flex-col-center">

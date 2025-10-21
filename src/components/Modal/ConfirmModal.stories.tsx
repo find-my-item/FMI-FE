@@ -1,6 +1,8 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import ConfirmModal from "./ConfirmModal";
 
+// TODO: 스토리북 렌더링 및 옵션 확인
+
 const meta: Meta<typeof ConfirmModal> = {
   title: "공통 컴포넌트/ConfirmModal",
   component: ConfirmModal,
@@ -21,11 +23,9 @@ const meta: Meta<typeof ConfirmModal> = {
       description: "모달 크기",
     },
     icon: {
-      control: { type: "text" },
+      control: { type: "object" },
       description: "아이콘 이름. 미설정 시 아이콘 없음",
     },
-    iconTitle: { control: { type: "text" } },
-    iconSize: { control: { type: "number" } },
     isOpen: { control: { type: "boolean" } },
   },
   args: {
@@ -33,9 +33,11 @@ const meta: Meta<typeof ConfirmModal> = {
     title: "Title",
     content: "Content",
     size: "medium",
-    icon: "Search",
-    iconTitle: "Search",
-    iconSize: 20,
+    icon: {
+      name: "Search",
+      size: 20,
+      title: "Search",
+    },
   },
 };
 
@@ -43,7 +45,6 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-// Docs와 Canvas에 하나의 스토리만 노출되는 Playground
 export const Playground: Story = {
   parameters: {
     docs: {
