@@ -23,7 +23,7 @@ const CheckBox = ({ id, label, boxSize, textStyle, ...rest }: CheckBoxProps) => 
       >
         <Icon
           name="Check"
-          title="체크됨"
+          title="체크"
           className="absolute inset-0 m-auto h-2 peer-checked:opacity-100"
         />
       </div>

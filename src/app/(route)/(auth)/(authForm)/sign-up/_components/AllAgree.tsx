@@ -2,7 +2,6 @@ import Icon from "@/components/Icon/Icon";
 import Button from "@/components/Button/Button";
 import { CheckBox } from "@/components";
 import { useFormContext, useWatch } from "react-hook-form";
-import FooterButton from "./ButtonFooter";
 
 const Terms = [
   { key: "termsOfService", name: "서비스 이용약관 (필수)", required: true },
@@ -82,7 +81,6 @@ const AllAgree = ({ onOpenDetail, onComplete }: Props) => {
           동의
         </Button>
       </div>
-      {/* <FooterButton /> */}
     </>
   );
 };
