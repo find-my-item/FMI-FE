@@ -3,7 +3,7 @@
 import Button from "@/components/Button/Button";
 import Link from "next/link";
 import CheckBox from "@/components/CheckBox/CheckBox";
-import { useFormContext } from "react-hook-form";
+import { useWatch, useFormContext } from "react-hook-form";
 import Input from "@/components/Input/Input";
 import Logo from "../_components/Logo";
 
@@ -13,9 +13,11 @@ const CheckBoxItem = [
 ];
 
 const Page = () => {
-  const methods = useFormContext();
+  const { register, control, handleSubmit } = useFormContext();
 
-  const onSubmit = methods.handleSubmit((data) => {
+  const checkBoxValues = useWatch({ control, name: CheckBoxItem.map((item) => item.id) });
+
+  const onSubmit = handleSubmit((data) => {
     alert("폼 제출되었습니다.");
   });
 
@@ -37,12 +39,14 @@ const Page = () => {
 
           {/* 체크박스 */}
           <div className="flex w-full gap-3 text-[14px] text-[#9D9D9D]">
-            {CheckBoxItem.map((item) => (
+            {CheckBoxItem.map((item, index) => (
               <CheckBox
                 label={item.label}
                 id={item.id}
                 boxSize="w-[18px] h-[18px]"
                 textStyle="text-[12px]"
+                {...register(item.id)}
+                state={!!checkBoxValues?.[index]}
               />
             ))}
           </div>

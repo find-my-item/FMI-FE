@@ -75,7 +75,12 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
                   {...register(item.key)}
                   state={!!termsValue?.[index]}
                 />
-                <button className="bg-white" type="button" onClick={() => onOpenDetail(item.key)}>
+                <button
+                  className="bg-white"
+                  type="button"
+                  aria-label="상세 약관 열기"
+                  onClick={() => onOpenDetail(item.key)}
+                >
                   <Icon name="ArrowRightSmall" size={24} />
                 </button>
               </div>
