@@ -1,3 +1,6 @@
+import GlassMorphism from "@/design/GlassMorphism/GlassMorphism";
+import GlassMorphismButton from "@/design/GlassMorphism/GlassMorphismButton";
+
 const Page = () => {
   const shades = [100, 200, 300, 400, 500, 600, 700, 800, 900];
 
@@ -5,16 +8,22 @@ const Page = () => {
     <div className="min-h-screen bg-white p-8 transition-colors duration-200 dark:bg-gray-900">
       <div className="mx-auto max-w-4xl">
         {/* Title */}
-        <h1 className="mb-6 font-heading text-4xl font-bold text-gray-900 dark:text-gray-100">
+        <h1 className="font-heading mb-6 text-4xl font-bold text-gray-900 dark:text-gray-100 tablet:mb-10">
           Design System Showcase
         </h1>
+        <div className="fixed max-w-[390px] gap-2 flex-col-center">
+          <GlassMorphismButton isDisabled={false}>다음</GlassMorphismButton>
+          <GlassMorphismButton isDisabled={true}>대기중</GlassMorphismButton>
+          <GlassMorphismButton isDisabled={true}>로그인</GlassMorphismButton>
+          <GlassMorphism />
+        </div>
 
         {/* Colors */}
         <section className="mb-12">
           <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-gray-100">Colors</h2>
 
           {/* Example: blue scale from theme.colors.blue[100..900] */}
-          <div className="mb-6 grid grid-cols-2 gap-4 md:grid-cols-5">
+          <div className="md:grid-cols-5 mb-6 grid grid-cols-2 gap-4">
             {shades.map((shade) => (
               <div key={`blue-${shade}`} className={`rounded-lg p-4 bg-blue-${shade}` as const}>
                 <span className="font-mono text-sm text-gray-900/80 dark:text-gray-900">
@@ -25,7 +34,7 @@ const Page = () => {
           </div>
 
           {/* Teal scale */}
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-5">
+          <div className="md:grid-cols-5 grid grid-cols-2 gap-4">
             {shades.map((shade) => (
               <div key={`teal-${shade}`} className={`rounded-lg p-4 bg-teal-${shade}` as const}>
                 <span className="font-mono text-sm text-gray-900/80 dark:text-gray-900">
@@ -57,7 +66,7 @@ const Page = () => {
           <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-gray-100">
             Border Radius
           </h2>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <div className="sm:grid-cols-3 grid grid-cols-1 gap-4">
             <div className="rounded-sm bg-gray-100 p-6 dark:bg-gray-800">rounded-sm</div>
             <div className="rounded-lg bg-gray-100 p-6 dark:bg-gray-800">rounded-lg</div>
             <div className="rounded-xl bg-gray-100 p-6 dark:bg-gray-800">rounded-xl</div>
@@ -68,9 +77,9 @@ const Page = () => {
         <section className="mb-12">
           <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-gray-100">Opacity</h2>
           <div className="flex items-center gap-4">
-            <div className="h-10 w-24 rounded bg-purple-500 opacity-low" />
-            <div className="h-10 w-24 rounded bg-purple-500 opacity-md" />
-            <div className="h-10 w-24 rounded bg-purple-500 opacity-high" />
+            <div className="opacity-low h-10 w-24 rounded bg-purple-500" />
+            <div className="opacity-md h-10 w-24 rounded bg-purple-500" />
+            <div className="opacity-high h-10 w-24 rounded bg-purple-500" />
           </div>
           <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">low / md / high</div>
         </section>
@@ -110,7 +119,7 @@ const Page = () => {
         {/* Cards (shadow & radius demo) */}
         <section className="mb-12">
           <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-gray-100">Card</h2>
-          <div className="rounded-lg bg-white p-md shadow-[5px_5px_5px_3px_rgba(26,32,44,0.15),_4px_4px_5px_6px_#00000033] dark:bg-gray-800">
+          <div className="p-md rounded-lg bg-white shadow-[5px_5px_5px_3px_rgba(26,32,44,0.15),_4px_4px_5px_6px_#00000033] dark:bg-gray-800">
             <p className="text-gray-800 dark:text-gray-200">
               Custom boxShadow from theme.extend.boxShadow.default applied.
             </p>

@@ -2,6 +2,7 @@ import { itemListObject } from "../_constants/listItem";
 import { PostDetail, SimilarItemsSection, CommentForm } from "./_components";
 import { commentListObject } from "../../notice/_constant/commentListObject";
 import CommentList from "../../notice/_components/CommentList";
+import PostDetailTopHeader from "./_components/PostDetailTopHeader/PostDetailTopHeader";
 
 interface ListDetailProps {
   params: Promise<{ id: string }>;
@@ -15,6 +16,7 @@ const page = async ({ params }: ListDetailProps) => {
 
   return (
     <>
+      <PostDetailTopHeader />
       <PostDetail item={listObject} type="find" />
       <CommentList comments={commentListObject} />
       <SimilarItemsSection />
