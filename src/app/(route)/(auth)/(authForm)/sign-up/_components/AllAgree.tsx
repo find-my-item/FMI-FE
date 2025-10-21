@@ -45,8 +45,8 @@ const AllAgree = ({ onOpenDetail, onComplete }: Props) => {
     <>
       <div className="flex w-full flex-col gap-7 p-4">
         <h1 className="text-[18px] font-semibold text-[#171717]">
-          서비스 이용을 위해 <br />
-          약관 동의가 필요합니다.
+          <p>서비스 이용을 위해 </p>
+          <p>약관 동의가 필요합니다.</p>
         </h1>
 
         <div className="flex min-h-[272px] w-full flex-col gap-8">

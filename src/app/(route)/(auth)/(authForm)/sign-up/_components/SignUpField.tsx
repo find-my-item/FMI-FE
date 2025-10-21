@@ -1,4 +1,3 @@
-import { useFormContext } from "react-hook-form";
 import { signUpInputObject } from "../../../_constant/FormData";
 import Button from "@/components/Button/Button";
 import SignUpItem from "./SignUpItem";

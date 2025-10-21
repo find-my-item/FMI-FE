@@ -7,6 +7,11 @@ import { useFormContext } from "react-hook-form";
 import Input from "@/components/Input/Input";
 import Logo from "../_components/Logo";
 
+const CheckBoxItem = [
+  { label: "아이디 기억하기", id: "rememberID" },
+  { label: "자동 로그인", id: "autoLogin" },
+];
+
 const Page = () => {
   const methods = useFormContext();
 
@@ -32,18 +37,14 @@ const Page = () => {
 
           {/* 체크박스 */}
           <div className="flex w-full gap-3 text-[14px] text-[#9D9D9D]">
-            <CheckBox
-              label="아이디 기억하기"
-              id="rememberID"
-              boxSize="w-[18px] h-[18px]"
-              textStyle="text-[12px]"
-            />
-            <CheckBox
-              label="자동 로그인"
-              id="autoLogin"
-              boxSize="w-[18px] h-[18px]"
-              textStyle="text-[12px]"
-            />
+            {CheckBoxItem.map((item) => (
+              <CheckBox
+                label={item.label}
+                id={item.id}
+                boxSize="w-[18px] h-[18px]"
+                textStyle="text-[12px]"
+              />
+            ))}
           </div>
         </div>
 
