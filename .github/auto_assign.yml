@@ -1,0 +1,10 @@
+addReviewers: true
+
+addAssignees: author
+
+reviewers:
+  - wlrnjs
+  - suhyeon0111
+  - DevHyungJun
+
+numberOfReviewers: 0
