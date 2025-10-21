@@ -1,13 +1,13 @@
 import Button from "@/components/Button/Button";
 import { AgreeConfig } from "../../../_constant/Agreement";
 
-interface Props {
+interface DetailAgreeProps {
   termKey: string;
   onBack: () => void;
   onAgree: () => void;
 }
 
-const DetailAgree = ({ termKey, onBack, onAgree }: Props) => {
+const DetailAgree = ({ termKey, onBack, onAgree }: DetailAgreeProps) => {
   return (
     <>
       {/* <div>{AgreeConfig[termKey].title}</div> */}

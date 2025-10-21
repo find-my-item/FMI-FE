@@ -9,12 +9,12 @@ const Terms = [
   { key: "marketingConsent", name: "마케팅 수신 동의 (선택)", required: false },
 ];
 
-interface Props {
+interface AllAgreeProps {
   onOpenDetail: (termKey: string) => void;
   onComplete: () => void;
 }
 
-const AllAgree = ({ onOpenDetail, onComplete }: Props) => {
+const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
   const { register, setValue, control } = useFormContext();
 
   const selectAll = useWatch({ control, name: "selectAll" }); // 전체 선택
