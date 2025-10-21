@@ -9,6 +9,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
       <div className="flex w-full flex-col gap-5 p-4">
         {signUpInputObject.map((item) => (
           <SignUpItem
+            key={item.name}
             name={item.name}
             label={item.label}
             type={item.type}
