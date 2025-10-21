@@ -25,6 +25,11 @@ const style = {
   falseBtn: "bg-[#FFFFFF] text-gray-800 border border-[#CFCFCF]",
 };
 
+const sizeMap: Record<"small" | "medium", string> = {
+  small: "w-[320px]",
+  medium: "w-[400px]",
+};
+
 const ConfirmModal = ({
   isOpen,
   onClose,
@@ -35,11 +40,6 @@ const ConfirmModal = ({
   onFalse,
   size = "medium",
 }: ConfirmModalProps) => {
-  const sizeMap = {
-    small: "w-[320px]",
-    medium: "w-[400px]",
-  };
-
   const btnList = [
     {
       label: "False",
