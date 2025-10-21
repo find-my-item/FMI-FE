@@ -67,15 +67,15 @@ const page = () => {
       <div className="flex gap-2">
         <button
           className="rounded border border-gray-300 px-4 py-2 text-white mouse-hover hover:border-gray-500 hover:text-black"
-          onClick={() => addToast("정보가 정상적으로 처리되었습니다.", "info")}
+          onClick={() => addToast("정보가 정상적으로 처리되었습니다.", "success")}
         >
-          Show info Toast
+          Show Success Toast
         </button>
         <button
           className="rounded border border-gray-300 px-4 py-2 text-white mouse-hover hover:border-gray-500 hover:text-black"
-          onClick={() => addToast("성공적으로 저장되었습니다!", "success")}
+          onClick={() => addToast("성공적으로 저장되었습니다!", "warning")}
         >
-          Show Success Toast
+          Show Warning Toast
         </button>
         <button
           className="rounded border border-gray-300 px-4 py-2 text-white mouse-hover hover:border-gray-500 hover:text-black"
