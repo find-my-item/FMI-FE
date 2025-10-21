@@ -6,30 +6,30 @@ const meta: Meta<typeof Toast> = {
   component: Toast,
   tags: ["autodocs"],
   argTypes: {
-    type: { control: { type: "select" }, options: ["info", "success", "error"] },
+    type: { control: { type: "select" }, options: ["success", "warning", "error"] },
   },
 };
 export default meta;
 
 type Story = StoryObj<typeof Toast>;
 
-export const Info: Story = {
+export const Success: Story = {
   args: {
-    message: "정상적으로 처리되었습니다.",
-    type: "info",
+    type: "success",
+    message: "Text",
   },
 };
 
-export const Success: Story = {
+export const Warning: Story = {
   args: {
-    message: "성공적으로 저장되었습니다!",
-    type: "success",
+    type: "warning",
+    message: "Text",
   },
 };
 
 export const Error: Story = {
   args: {
-    message: "오류가 발생했습니다.",
     type: "error",
+    message: "Text",
   },
 };
