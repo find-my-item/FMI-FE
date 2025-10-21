@@ -54,7 +54,9 @@ const Page = () => {
 
         {/* 로그인 버튼 */}
         <div className="w-full gap-6 flex-col-center">
-          <Button children="로그인" type="submit"></Button>
+          <Button type="submit" label="로그인 버튼">
+            로그인
+          </Button>
           {/* divider 구분선 */}
           <div className="flex h-4 w-full items-center">
             <hr className="h-px flex-1 bg-[#E4E4E4]" />

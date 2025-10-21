@@ -58,7 +58,9 @@ const SignUpItem = ({
         />
         {/* button */}
         {currentButtonConfig && (
-          <Button className={currentButtonConfig.className}>{currentButtonConfig.text}</Button>
+          <Button className={currentButtonConfig.className} label={currentButtonConfig.text}>
+            {currentButtonConfig.text}
+          </Button>
         )}
       </div>
 
