@@ -20,6 +20,8 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
   const selectAll = useWatch({ control, name: "selectAll" }); // 전체 선택
   const termsValue = useWatch({ control, name: Terms.map((item) => item.key) }); // 개별 선택
 
+  console.log("termsValue>> ", termsValue);
+
   // 전체약관동의 체크 박스 토글 함수
   const handleToggleAll = (e: React.ChangeEvent<HTMLInputElement>) => {
     const checked = e.currentTarget.checked; // 현재 체크 상태
@@ -56,17 +58,23 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
               label="전체 약관 동의"
               {...register("selectAll")}
               onChange={handleToggleAll}
+              state={!!selectAll}
             />
           </div>
 
           {/* 각 약관 동의 */}
           <div className="flex min-h-[172px] w-full flex-col gap-5">
-            {Terms.map((item) => (
+            {Terms.map((item, index) => (
               <div
                 key={item.name}
                 className="flex h-[44px] w-full items-center justify-between text-[#5D5D5D]"
               >
-                <CheckBox id={item.key} label={item.name} {...register(item.key)} />
+                <CheckBox
+                  id={item.key}
+                  label={item.name}
+                  {...register(item.key)}
+                  state={!!termsValue?.[index]}
+                />
                 <button className="bg-white" type="button" onClick={() => onOpenDetail(item.key)}>
                   <Icon name="ArrowRightSmall" size={24} />
                 </button>
