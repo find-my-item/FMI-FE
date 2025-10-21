@@ -9,7 +9,7 @@ interface CheckBoxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "typ
   label: string;
   boxSize?: string;
   textStyle?: string;
-  state?: boolean;
+  state: boolean;
 }
 
 const CheckBox = ({ id, label, boxSize, textStyle, state, ...rest }: CheckBoxProps) => {
