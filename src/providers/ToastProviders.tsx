@@ -1,7 +1,7 @@
 "use client";
 
 import { createPortal } from "react-dom";
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { Toast } from "@/components";
 import { ToastType } from "@/types/ToastTypes";
 import { ToastContext } from "@/context/ToastContext";
@@ -10,6 +10,9 @@ import { AnimatePresence, motion } from "framer-motion";
 export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
   const idRef = useRef(0);
   const [toasts, setToasts] = useState<{ id: number; message: string; type: ToastType }[]>([]);
+
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   const addToast = useCallback((message: string, type: ToastType) => {
     const id = (idRef.current += 1);
@@ -22,7 +25,7 @@ export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <ToastContext.Provider value={{ addToast }}>
       {children}
-      {typeof document !== "undefined" &&
+      {mounted &&
         createPortal(
           <div className="pointer-events-none fixed right-4 top-4 flex flex-col gap-2">
             <AnimatePresence>
