@@ -13,12 +13,12 @@ interface ListItemProps {
 
 const VIEW_ITEM = [
   {
-    icon: "Eye",
-    count: 24,
-  },
-  {
     icon: "Star",
     count: 12,
+  },
+  {
+    icon: "Eye",
+    count: 24,
   },
 ] as const;
 
@@ -37,15 +37,15 @@ const ListItem = ({ img, title, description, id, linkState = "list" }: ListItemP
         )}
         <div className="flex flex-col gap-2">
           <div className="w-full">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1">
               <Badge variant="new" />
-              <h2 className="w-full text-[18px] font-semibold text-[#242424] u-ellipsis">
+              <h2 className="w-full text-[18px] font-semibold leading-[140%] text-[#363636] u-ellipsis">
                 {title}
               </h2>
             </div>
-            <span className="text-[14px] leading-5 text-[#5D5D5D]">노원구 00동 · 30분 전</span>
+            <span className="text-[14px] leading-[140%] text-[#787878]">노원구 00동 · 30분 전</span>
           </div>
-          <p className="w-full text-[14px] leading-[20px] text-[#9D9D9D] u-ellipsis">
+          <p className="w-full text-[14px] leading-[140%] text-[#5D5D5D] u-ellipsis">
             {description}
           </p>
         </div>
@@ -53,7 +53,7 @@ const ListItem = ({ img, title, description, id, linkState = "list" }: ListItemP
           {VIEW_ITEM.map((item) => (
             <span
               key={item.icon}
-              className="flex items-center gap-2 text-[14px] leading-[20px] text-[#9D9D9D]"
+              className="flex items-center gap-1 text-[14px] leading-[120%] text-[#9D9D9D]"
             >
               <Icon name={item.icon} size={16} />
               {item.count}
