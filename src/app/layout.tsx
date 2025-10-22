@@ -2,6 +2,8 @@ import { Footer, Header } from "@/components";
 import "./globals.css";
 import Providers from "@/providers/QueryProviders";
 import { ToastProvider } from "@/providers/ToastProviders";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export default function RootLayout({
   children,
@@ -17,6 +19,8 @@ export default function RootLayout({
             {children}
             <Footer />
           </ToastProvider>
+          <Analytics />
+          <SpeedInsights />
         </Providers>
       </body>
     </html>

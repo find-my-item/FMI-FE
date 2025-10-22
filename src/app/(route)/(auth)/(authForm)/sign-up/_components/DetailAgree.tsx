@@ -1,13 +1,13 @@
 import Button from "@/components/Button/Button";
 import { AgreeConfig } from "../../../_constant/Agreement";
 
-interface Props {
+interface DetailAgreeProps {
   termKey: string;
   onBack: () => void;
   onAgree: () => void;
 }
 
-const DetailAgree = ({ termKey, onBack, onAgree }: Props) => {
+const DetailAgree = ({ termKey, onBack, onAgree }: DetailAgreeProps) => {
   return (
     <>
       {/* <div>{AgreeConfig[termKey].title}</div> */}
@@ -17,7 +17,7 @@ const DetailAgree = ({ termKey, onBack, onAgree }: Props) => {
 
       {/* signUpFooter */}
       <div className="sticky bottom-0 mt-auto h-[88px] w-full max-w-[390px] border-t border-[#E4E4E4] bg-white px-4 py-3">
-        <Button type="button" onClick={onAgree} label="회원가입 버튼">
+        <Button type="button" onClick={onAgree} label={termKey + "동의"}>
           동의
         </Button>
       </div>

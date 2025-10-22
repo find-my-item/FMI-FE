@@ -3,14 +3,21 @@
 import Button from "@/components/Button/Button";
 import Link from "next/link";
 import CheckBox from "@/components/CheckBox/CheckBox";
-import { useFormContext } from "react-hook-form";
+import { useWatch, useFormContext } from "react-hook-form";
 import Input from "@/components/Input/Input";
 import Logo from "../_components/Logo";
 
-const Page = () => {
-  const methods = useFormContext();
+const CheckBoxItem = [
+  { label: "아이디 기억하기", id: "rememberID" },
+  { label: "자동 로그인", id: "autoLogin" },
+];
 
-  const onSubmit = methods.handleSubmit((data) => {
+const Page = () => {
+  const { register, control, handleSubmit } = useFormContext();
+
+  const checkBoxValues = useWatch({ control, name: CheckBoxItem.map((item) => item.id) });
+
+  const onSubmit = handleSubmit((data) => {
     alert("폼 제출되었습니다.");
   });
 
@@ -32,14 +39,24 @@ const Page = () => {
 
           {/* 체크박스 */}
           <div className="flex w-full gap-3 text-[14px] text-[#9D9D9D]">
-            <CheckBox children="아이디 기억하기" name="rememberID" />
-            <CheckBox children="자동 로그인" name="autoLogin" />
+            {CheckBoxItem.map((item, index) => (
+              <CheckBox
+                label={item.label}
+                id={item.id}
+                boxSize="w-[18px] h-[18px]"
+                textStyle="text-[12px]"
+                {...register(item.id)}
+                state={!!checkBoxValues?.[index]}
+              />
+            ))}
           </div>
         </div>
 
         {/* 로그인 버튼 */}
         <div className="w-full gap-6 flex-col-center">
-          <Button children="로그인" type="submit"></Button>
+          <Button type="submit" label="로그인 버튼">
+            로그인
+          </Button>
           {/* divider 구분선 */}
           <div className="flex h-4 w-full items-center">
             <hr className="h-px flex-1 bg-[#E4E4E4]" />

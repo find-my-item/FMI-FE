@@ -22,11 +22,7 @@ const Page = () => {
       <form onSubmit={onSubmit} className="flex w-full flex-1 flex-col justify-between">
         {step === "form" && <SignUpField onNext={onNext} />}
         {step === "term" && (
-          <AllAgree
-            onOpenDetail={openTermDetail}
-            onBack={() => setStep("form")}
-            onComplete={() => completeTerms}
-          />
+          <AllAgree onOpenDetail={openTermDetail} onComplete={() => completeTerms} />
         )}
         {step === "termDetail" && (
           <DetailAgree termKey={termDetail} onBack={() => setStep("term")} onAgree={onAgreeTerm} />

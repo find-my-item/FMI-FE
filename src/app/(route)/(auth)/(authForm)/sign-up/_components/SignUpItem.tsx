@@ -10,7 +10,7 @@ const buttonConfig: Record<string, { text: string; className: string }> = {
   nickname: { text: "중복 확인", className: cn(signUpButtonStyle, "min-w-[100px]") },
 };
 
-interface Props {
+interface SignUpItemProps {
   name: string;
   label?: string;
   type: string;
@@ -20,7 +20,15 @@ interface Props {
   eyeShow?: boolean;
 }
 
-const SignUpItem = ({ name, label, type, placeholder, validation, rule, eyeShow }: Props) => {
+const SignUpItem = ({
+  name,
+  label,
+  type,
+  placeholder,
+  validation,
+  rule,
+  eyeShow,
+}: SignUpItemProps) => {
   const {
     formState: { errors, touchedFields, isSubmitted },
   } = useFormContext();
@@ -50,7 +58,9 @@ const SignUpItem = ({ name, label, type, placeholder, validation, rule, eyeShow 
         />
         {/* button */}
         {currentButtonConfig && (
-          <Button className={currentButtonConfig.className}>{currentButtonConfig.text}</Button>
+          <Button className={currentButtonConfig.className} label={currentButtonConfig.text}>
+            {currentButtonConfig.text}
+          </Button>
         )}
       </div>
 

@@ -1,11 +1,14 @@
 import { useCallback, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { FormValue } from "../../../_constant/FormData";
+import { useRouter } from "next/navigation";
 
 type Step = "form" | "term" | "termDetail";
 
 export const useSignUpFlow = () => {
-  const [step, setStep] = useState<Step>("form");
+  const router = useRouter();
+
+  const [step, setStep] = useState<Step>("term");
   const [termDetail, setTermDetail] = useState("");
 
   const { handleSubmit, trigger } = useFormContext<FormValue>();
@@ -13,6 +16,7 @@ export const useSignUpFlow = () => {
   // 최종 폼 제출
   const onSubmit = handleSubmit((data) => {
     alert("폼 제출되었습니다.");
+    router.push("/email-login");
   });
 
   // 회원가입 1단계 -> 2단계
