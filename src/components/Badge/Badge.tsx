@@ -4,21 +4,21 @@ interface BadgeProps {
   variant: "new" | "hot";
 }
 
+const style = {
+  new: "bg-[#1EB87B]",
+  hot: "bg-[#FF4242]",
+};
+
+const label = {
+  new: "N",
+  hot: "H",
+};
+
 function Badge({ variant }: BadgeProps) {
-  const style = {
-    new: "bg-[#1EB87B]",
-    hot: "bg-[#FF4242]",
-  };
-
-  const label = {
-    new: "N",
-    hot: "H",
-  };
-
   return (
     <div
       className={cn(
-        "h-[14px] w-[14px] rounded-full text-[8px] text-white flex-center",
+        "h-[14px] w-[14px] rounded-full text-[8px] font-semibold text-white flex-center",
         style[variant]
       )}
     >

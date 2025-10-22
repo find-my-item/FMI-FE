@@ -39,7 +39,7 @@ const ListItem = ({ img, title, description, id, linkState = "list" }: ListItemP
           <div className="w-full">
             <div className="flex items-center gap-1">
               <Badge variant="new" />
-              <h2 className="w-full text-[18px] font-semibold leading-[140%] text-[#363636] u-ellipsis">
+              <h2 className="flex-1 text-[18px] font-semibold leading-[140%] text-[#363636] u-ellipsis">
                 {title}
               </h2>
             </div>
