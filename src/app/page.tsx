@@ -1,5 +1,7 @@
 import GlassMorphism from "@/design/GlassMorphism/GlassMorphism";
 import GlassMorphismButton from "@/design/GlassMorphism/GlassMorphismButton";
+import Button from "@/components/Button/Button";
+import Icon from "@/components/Icon/Icon";
 
 const Page = () => {
   const shades = [100, 200, 300, 400, 500, 600, 700, 800, 900];
@@ -17,7 +19,6 @@ const Page = () => {
           <GlassMorphismButton isDisabled={true}>로그인</GlassMorphismButton>
           <GlassMorphism />
         </div>
-
         {/* Colors */}
         <section className="mb-12">
           <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-gray-100">Colors</h2>
@@ -44,7 +45,13 @@ const Page = () => {
             ))}
           </div>
         </section>
-
+        <Button
+          children="TEXT"
+          variant="solid"
+          hierarchy="subtle"
+          size="big"
+          icon={<Icon name="Logo" />}
+        />
         {/* Spacing (uses theme.extend.spacing xs, sm, md, lg, xl) */}
         <section className="mb-12">
           <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-gray-100">Spacing</h2>
