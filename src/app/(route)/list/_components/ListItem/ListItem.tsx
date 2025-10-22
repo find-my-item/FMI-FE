@@ -1,8 +1,7 @@
 import Image from "next/image";
 import Icon from "@/components/Icon/Icon";
 import Link from "next/link";
-import { Chip } from "@/components";
-import { Badge } from "@/components/Badge/Badge";
+import { Badge, Chip } from "@/components";
 
 interface ListItemProps {
   id?: number;

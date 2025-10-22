@@ -4,7 +4,7 @@ interface BadgeProps {
   variant: "new" | "hot";
 }
 
-export function Badge({ variant }: BadgeProps) {
+function Badge({ variant }: BadgeProps) {
   const style = {
     new: "bg-[#1EB87B]",
     hot: "bg-[#FF4242]",
@@ -26,3 +26,5 @@ export function Badge({ variant }: BadgeProps) {
     </div>
   );
 }
+
+export default Badge;
