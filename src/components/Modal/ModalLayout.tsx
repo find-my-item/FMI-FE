@@ -4,14 +4,14 @@ import { createPortal } from "react-dom";
 import { cn } from "@/utils/cn";
 import { useModalBackdrop, useModalLockAndEsc } from "@/utils/useOverlayHandlers";
 
-interface DeleteModalProps {
+interface ModalLayoutProps {
   isOpen: boolean;
   onClose?: () => void;
   children: React.ReactNode;
   className: string;
 }
 
-const DeleteModal = ({ isOpen, onClose, children, className }: DeleteModalProps) => {
+const ModalLayout = ({ isOpen, onClose, children, className }: ModalLayoutProps) => {
   useModalLockAndEsc({ isOpen, onClose });
   const onBackdropMouseDown = useModalBackdrop({ onClose });
 
@@ -25,11 +25,11 @@ const DeleteModal = ({ isOpen, onClose, children, className }: DeleteModalProps)
       <div
         role="dialog"
         aria-modal="true"
-        aria-labelledby="delete-modal-title"
-        aria-describedby="delete-modal-desc"
+        aria-labelledby="modal-title"
+        aria-describedby="modal-desc"
         onClick={(e) => e.stopPropagation()}
         className={cn(
-          "w-[90vw] max-w-[600px] rounded-[20px] border border-gray-200 bg-white",
+          "rounded-[20px] border border-gray-200 bg-white",
           "flex flex-col overflow-hidden",
           className
         )}
@@ -41,4 +41,4 @@ const DeleteModal = ({ isOpen, onClose, children, className }: DeleteModalProps)
   );
 };
 
-export default DeleteModal;
+export default ModalLayout;

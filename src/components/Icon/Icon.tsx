@@ -3,7 +3,7 @@
 import type { SVGProps } from "react";
 import * as Icons from "./index";
 
-type IconName = keyof typeof Icons;
+export type IconName = keyof typeof Icons;
 
 type Props = Omit<SVGProps<SVGSVGElement>, "ref"> & {
   name: IconName;
