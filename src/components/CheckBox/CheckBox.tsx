@@ -9,10 +9,11 @@ interface CheckBoxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "typ
   label: string;
   boxSize?: string;
   textStyle?: string;
+  iconSize?: string;
   state: boolean;
 }
 
-const CheckBox = ({ id, label, boxSize, textStyle, state, ...rest }: CheckBoxProps) => {
+const CheckBox = ({ id, label, boxSize, textStyle, iconSize, state, ...rest }: CheckBoxProps) => {
   return (
     <label htmlFor={id} className="flex cursor-pointer items-center">
       <input id={id} type="checkbox" className="peer sr-only" {...rest} />
@@ -25,7 +26,10 @@ const CheckBox = ({ id, label, boxSize, textStyle, state, ...rest }: CheckBoxPro
         <Icon
           name="Check"
           title={state ? "체크됨" : "체크안됨"}
-          className="absolute inset-0 m-auto h-2 peer-checked:opacity-100"
+          className={cn(
+            "absolute left-1/2 top-1/2 h-2 -translate-x-1/2 -translate-y-1/2 peer-checked:opacity-100",
+            iconSize
+          )}
         />
       </div>
       <span className={cn("ml-3 text-[#5D5D5D]", textStyle)}>{label}</span>
