@@ -20,8 +20,6 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
   const selectAll = useWatch({ control, name: "selectAll" }); // 전체 선택
   const termsValue = useWatch({ control, name: Terms.map((item) => item.key) }); // 개별 선택
 
-  console.log("termsValue>> ", termsValue);
-
   // 전체약관동의 체크 박스 토글 함수
   const handleToggleAll = (e: React.ChangeEvent<HTMLInputElement>) => {
     const checked = e.currentTarget.checked; // 현재 체크 상태

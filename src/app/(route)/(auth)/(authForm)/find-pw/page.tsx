@@ -20,7 +20,6 @@ const Page = () => {
 
   const onSubmit = handleSubmit((data) => {
     alert("폼 제출되었습니다.");
-    // console.log("data>> ", data)
   });
 
   const handleClick = () => {

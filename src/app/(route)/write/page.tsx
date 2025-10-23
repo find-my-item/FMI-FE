@@ -18,7 +18,6 @@ const Page = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("submit");
   };
 
   return (
@@ -31,7 +30,7 @@ const Page = () => {
         >
           <input type="file" accept="image/*" className="hidden" ref={fileInputRef} />
           <div
-            className="flex-center h-[104px] w-[104px] cursor-pointer rounded-[6px] bg-[#F5F5F5]"
+            className="h-[104px] w-[104px] cursor-pointer rounded-[6px] bg-[#F5F5F5] flex-center"
             onClick={handleDivClick}
           >
             <Icon name="Camera" size={32} title="이미지 업로드" />
