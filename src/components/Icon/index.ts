@@ -26,3 +26,4 @@ export { default as Share } from "@/assets/share.svg";
 export { default as DetailMenu } from "@/assets/detail-menu.svg";
 export { default as Success } from "@/assets/success.svg";
 export { default as Warning } from "@/assets/warning.svg";
+export { default as Error } from "@/assets/error.svg";
