@@ -44,7 +44,7 @@ const Page = () => {
                 label={item.label}
                 id={item.id}
                 boxSize="w-[18px] h-[18px]"
-                textStyle="text-[12px]"
+                textStyle="text-[12px] ml-2"
                 iconSize="h-[6px]"
                 {...register(item.id)}
                 state={!!checkBoxValues?.[index]}
