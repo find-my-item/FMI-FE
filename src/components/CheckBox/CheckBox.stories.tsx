@@ -30,7 +30,7 @@ export const CustomChecked: Story = {
     label: "전체 동의",
     state: false,
     boxSize: "w-[18px] h-[18px]",
-    textStyle: "text-[12px]",
+    textStyle: "text-[12px] ml-2",
     iconSize: "h-[6px]",
   },
 };
