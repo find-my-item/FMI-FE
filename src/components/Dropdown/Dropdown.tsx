@@ -63,7 +63,7 @@ const Dropdown = ({ options, onSelect, children, className }: DropdownProps) => 
               <div
                 key={option.value}
                 className={cn(
-                  "mouse-hover cursor-pointer px-3 py-2 hover:bg-gray-300",
+                  "cursor-pointer px-3 py-2 mouse-hover hover:bg-gray-300",
                   selected?.value === option.value && "bg-gray-100"
                 )}
                 onClick={() => handleSelect(option)}

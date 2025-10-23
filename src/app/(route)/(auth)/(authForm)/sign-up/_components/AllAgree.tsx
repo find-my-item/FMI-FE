@@ -82,18 +82,18 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
                   onClick={() => onOpenDetail(item.key)}
                 >
                   <Icon name="ArrowRightSmall" size={24} />
-                </button >
-              </div >
+                </button>
+              </div>
             ))}
-          </div >
-        </div >
-      </div >
+          </div>
+        </div>
+      </div>
       {/* signUpFooter */}
-      < div className="sticky bottom-0 mt-auto h-[88px] w-full max-w-[390px] border-t border-[#E4E4E4] bg-white px-4 py-3" >
+      <div className="sticky bottom-0 mt-auto h-[88px] w-full max-w-[390px] border-t border-[#E4E4E4] bg-white px-4 py-3">
         <Button type="submit" label="회원가입 버튼" onClick={onComplete}>
           동의
         </Button>
-      </div >
+      </div>
     </>
   );
 };

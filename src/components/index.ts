@@ -8,3 +8,4 @@ export { default as Input } from "./Input/Input";
 export { default as Chip } from "./Chip/Chip";
 export { default as CheckBox } from "./CheckBox/CheckBox";
 export { default as DetailHeader } from "./DetailHeader/DetailHeader";
+export { default as Badge } from "./Badge/Badge";
