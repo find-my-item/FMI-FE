@@ -24,7 +24,7 @@ type Story = StoryObj<typeof CheckBox>;
 
 export const Default: Story = {};
 
-export const CustomChecked: Story = {
+export const loginChecked: Story = {
   args: {
     id: "allTerms",
     label: "전체 동의",
