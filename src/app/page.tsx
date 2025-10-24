@@ -78,13 +78,9 @@ const Page = () => {
             ))}
           </div>
         </section>
-        <Button
-          children="찾아줘"
-          variant="solid"
-          hierarchy="subtle"
-          size="big"
-          icon={<Icon name="Logo" />}
-        />
+        <Button variant="solid" hierarchy="subtle" size="big" icon={<Icon name="Logo" />}>
+          찾아줘
+        </Button>
         <Bookmark isActive={false} />
         <KebabMenuButton />
         <Location children="위치" disabled />

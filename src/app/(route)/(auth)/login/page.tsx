@@ -17,11 +17,7 @@ const Page = () => {
 
       {/* button */}
       <div className="flex w-full flex-col gap-3 px-5 text-[14px]">
-        <Button
-          type="submit"
-          className={cn(ButtonStyle, "bg-[#FFEA14] text-[#242424]")}
-          children="로그인 버튼"
-        >
+        <Button type="submit" className={cn(ButtonStyle, "bg-[#FFEA14] text-[#242424]")}>
           <Icon name="KakaoLogin" size={14} />
           카카오로 3초 만에 시작하기
         </Button>

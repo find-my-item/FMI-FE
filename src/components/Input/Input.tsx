@@ -38,6 +38,7 @@ const Input = ({ name, type, className = InputStyle, eyeShow = false, ...rest }:
           eyeShow ? "right-8" : "right-2",
           !showClear && "opacity-0"
         )}
+        type="button"
         onClick={() =>
           setValue(name, "", { shouldValidate: true, shouldDirty: true, shouldTouch: true })
         }

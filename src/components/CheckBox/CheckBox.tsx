@@ -1,20 +1,38 @@
 "use client";
 
 import Icon from "@/components/Icon/Icon";
+import { InputHTMLAttributes } from "react";
+import { cn } from "@/utils/cn";
 
-interface checkProps {
-  children: string;
-  name: string;
+interface CheckBoxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type" | "id"> {
+  id: string;
+  label: string;
+  boxSize?: string;
+  textStyle?: string;
+  iconSize?: string;
+  state: boolean;
 }
 
-const CheckBox = ({ children, name, ...rest }: checkProps) => {
+const CheckBox = ({ id, label, boxSize, textStyle, iconSize, state, ...rest }: CheckBoxProps) => {
   return (
-    <label htmlFor={name} className="flex cursor-pointer items-center">
-      <input name={name} type="checkbox" />
-      {/* <div className="relative grid h-3 w-3 place-items-center rounded bg-[#E4E4E4] peer-checked:bg-[#1EB87B] [&_svg]:opacity-0 peer-checked:[&_svg]:opacity-100">
-        <Icon name="Check" size={5} title="체크됨" />
-      </div> */}
-      <span className="ml-3 text-[#9D9D9D]">{children}</span>
+    <label htmlFor={id} className="flex cursor-pointer items-center">
+      <input id={id} type="checkbox" className="peer sr-only" {...rest} />
+      <div
+        className={cn(
+          "relative h-6 w-6 rounded bg-[#E4E4E4] flex-center peer-checked:bg-[#1EB87B] peer-checked:opacity-70 [&_svg]:opacity-0 peer-checked:[&_svg]:opacity-100",
+          boxSize
+        )}
+      >
+        <Icon
+          name="Check"
+          title={state ? "체크됨" : "체크안됨"}
+          className={cn(
+            "absolute left-1/2 top-1/2 h-2 -translate-x-1/2 -translate-y-1/2 peer-checked:opacity-100",
+            iconSize
+          )}
+        />
+      </div>
+      <span className={cn("ml-3 text-[#5D5D5D]", textStyle)}>{label}</span>
     </label>
   );
 };

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Icon from "@/components/Icon/Icon";
 import Link from "next/link";
+import { Badge, Chip } from "@/components";
 
 interface ListItemProps {
   id?: number;
@@ -12,12 +13,12 @@ interface ListItemProps {
 
 const VIEW_ITEM = [
   {
-    icon: "Eye",
-    count: 24,
-  },
-  {
     icon: "Star",
     count: 12,
+  },
+  {
+    icon: "Eye",
+    count: 24,
   },
 ] as const;
 
@@ -27,22 +28,24 @@ const ListItem = ({ img, title, description, id, linkState = "list" }: ListItemP
       href={linkState === "list" ? `/list/${id}` : `/notice/${id}`}
       className="duration-130 flex w-full cursor-pointer items-center gap-[14px] border-b border-b-[#E4E4E4] px-[20px] py-[30px] transition-colors hover:bg-[#F9F9F9]"
     >
-      {img && (
-        <Image
-          src={img}
-          alt="아이템 이미지"
-          width={92}
-          height={100}
-          className="h-[100px] w-[92px] rounded-[6px]"
-        />
-      )}
       <div className="min-w-0 flex-1">
+        {linkState === "list" && (
+          <div className="mb-2 flex gap-2">
+            <Chip label="찾는중" type="status" />
+            <Chip label="전자기기" type="category" />
+          </div>
+        )}
         <div className="flex flex-col gap-2">
           <div className="w-full">
-            <h2 className="u-ellipsis w-full text-[18px] font-semibold text-[#242424]">{title}</h2>
-            <span className="text-[14px] leading-5 text-[#5D5D5D]">노원구 · 30분 전</span>
+            <div className="flex items-center gap-1">
+              <Badge variant="new" />
+              <h2 className="flex-1 text-[18px] font-semibold leading-[140%] text-[#363636] u-ellipsis">
+                {title}
+              </h2>
+            </div>
+            <span className="text-[14px] leading-[140%] text-[#787878]">노원구 00동 · 30분 전</span>
           </div>
-          <p className="u-ellipsis w-full text-[14px] leading-[20px] text-[#9D9D9D]">
+          <p className="w-full text-[14px] leading-[140%] text-[#5D5D5D] u-ellipsis">
             {description}
           </p>
         </div>
@@ -50,7 +53,7 @@ const ListItem = ({ img, title, description, id, linkState = "list" }: ListItemP
           {VIEW_ITEM.map((item) => (
             <span
               key={item.icon}
-              className="flex items-center gap-2 text-[14px] leading-[20px] text-[#9D9D9D]"
+              className="flex items-center gap-1 text-[14px] leading-[120%] text-[#9D9D9D]"
             >
               <Icon name={item.icon} size={16} />
               {item.count}
@@ -58,6 +61,15 @@ const ListItem = ({ img, title, description, id, linkState = "list" }: ListItemP
           ))}
         </div>
       </div>
+      {img && (
+        <Image
+          src={img}
+          alt="아이템 이미지"
+          width={90}
+          height={90}
+          className="h-[90px] w-[90px] rounded-[10px]"
+        />
+      )}
     </Link>
   );
 };

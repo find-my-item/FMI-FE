@@ -34,7 +34,9 @@ const page = () => {
       <DetailHeader title="게시글">
         <DetailHeader.Search ariaLabel="게시글 검색" />
       </DetailHeader>
+
       <Tab tabs={list} selected={selected} onValueChange={setSelected} />
+
       <div className="flex h-[67px] w-full items-center gap-2 px-5">
         {dropdowns.map(({ value, setValue, icon }, idx) => (
           <Dropdown key={idx} options={[]} onSelect={setValue} className="gap-[4px]">
@@ -44,6 +46,7 @@ const page = () => {
           </Dropdown>
         ))}
       </div>
+
       {/* 아이템 */}
       <div className="w-full">
         {Array.from({ length: 5 }).map((_, index) => (

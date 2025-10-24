@@ -1,12 +1,15 @@
 import { InputType } from "@/types/InputTypes";
-import { InputStyle } from "./authStyle";
-import { cn } from "@/utils/cn";
 
 export type FormValue = {
   email: string;
   password: string;
   passwordConfirm: string;
   nickname: string;
+  agreements: {
+    termsofService: boolean;
+    privacyPolicy: boolean;
+    marketing: boolean;
+  };
 };
 
 export const signUpInputObject: InputType[] = [
@@ -55,7 +58,9 @@ export const signUpInputObject: InputType[] = [
     eyeShow: true,
     validation: {
       required: true,
-      validate: (value, formValue) => value === formValue || "비밀번호가 일치하지 않습니다.",
+      validate: (value, formValue) =>
+        value === formValue.password || "비밀번호가 일치하지 않습니다.",
+      deps: ["password"],
     },
   },
   {

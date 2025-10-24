@@ -14,8 +14,8 @@ const Tab = <T extends string>({ tabs, selected, onValueChange, ...buttonProps }
           key={tab.key}
           {...buttonProps}
           className={cn(
-            "flex-center h-[60px] flex-1 text-[20px] font-semibold text-[#ADADAD]",
-            selected === tab.key && "border-b-2 border-[#04AD69] text-[#04AD69]"
+            "h-[60px] flex-1 text-[20px] font-semibold text-[#ADADAD] flex-center",
+            selected === tab.key && "border-b-2 border-[#1EB87B] text-[#1EB87B]"
           )}
           onClick={() => onValueChange(tab.key)}
           type="button"
