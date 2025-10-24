@@ -25,3 +25,4 @@ export { default as Delete } from "@/assets/delete.svg";
 export { default as Share } from "@/assets/share.svg";
 export { default as DetailMenu } from "@/assets/detail-menu.svg";
 export { default as Loading } from "@/assets/loading.svg";
+export { default as Plus } from "@/assets/Plus.svg";

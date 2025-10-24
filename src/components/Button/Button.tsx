@@ -10,6 +10,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   iconPosition?: "leading" | "trailing";
   icon?: ReactNode;
   loading?: boolean;
+  ariaLabel?: string;
   children: ReactNode;
 }
 
@@ -23,6 +24,7 @@ const Button = ({
   children,
   disabled,
   className = "",
+  ariaLabel,
   ...props
 }: ButtonProps) => {
   const sizeStyles: Record<Size, string> = {
@@ -63,7 +65,12 @@ const Button = ({
   const combinedStyles = `${baseStyles} ${sizeStyles[size]} ${variantClass} ${glassCard} ${className}`;
 
   return (
-    <button disabled={disabled || loading} className={combinedStyles} {...props}>
+    <button
+      disabled={disabled || loading}
+      className={combinedStyles}
+      {...props}
+      aria-label={ariaLabel ?? ""}
+    >
       {loading ? (
         <Icon name="Loading" className="animate-spin" size={loadingSpinnerSize[size]} />
       ) : (

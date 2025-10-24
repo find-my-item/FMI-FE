@@ -12,7 +12,7 @@ const Page = () => {
   const router = useRouter();
 
   return (
-    <div className="flex-col-center min-h-screen w-full gap-8">
+    <div className="min-h-screen w-full gap-8 flex-col-center">
       <Logo />
 
       {/* button */}
@@ -20,7 +20,7 @@ const Page = () => {
         <Button
           type="submit"
           className={cn(ButtonStyle, "bg-[#FFEA14] text-[#242424]")}
-          label="로그인 버튼"
+          children="로그인 버튼"
         >
           <Icon name="KakaoLogin" size={14} />
           카카오로 3초 만에 시작하기
