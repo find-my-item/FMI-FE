@@ -3,6 +3,7 @@ import { Chip } from "@/components";
 import PostDetailHeader from "../PostDetailHeader/PostDetailHeader";
 import NoticeDetailHeader from "@/app/(route)/notice/_components/NoticeDetailHeader";
 import NoticeChip from "@/app/(route)/notice/_components/NoticeChip";
+import { cn } from "@/utils/cn";
 
 interface PostDetailProps {
   type: "find" | "lost" | "notice" | "customer";
@@ -36,20 +37,20 @@ const PostDetail = ({ type, item }: PostDetailProps) => {
       {isBoardType ? <PostDetailHeader /> : <NoticeDetailHeader backPath={backPath} />}
 
       <section
-        className={`flex flex-col ${isBoardType ? "gap-12 px-[20px] py-[27px]" : "px-[20px]"}`}
+        className={cn("flex flex-col", isBoardType ? "gap-12 px-[20px] py-[27px]" : "px-[20px]")}
       >
         <div>
           {isBoardType ? <Chip label={label} /> : <NoticeChip label={label} />}
 
           <div className={isBoardType ? "mt-[14px]" : "space-y-[28px]"}>
             <div>
-              <h1 className="text-[20px] font-semibold">{item.title}</h1>
-              <time className="text-[14px] leading-[20px] text-[#9D9D9D]">30분 전</time>
+              <h1 className="text-[20px] font-semibold text-[#363636]">{item.title}</h1>
+              <time className="text-[14px] leading-[140%] text-[#787878]">30분 전</time>
             </div>
 
-            <p className="mt-[24px] leading-[22px]">{item.body}</p>
+            <p className="mt-[24px] leading-[150%]">{item.body}</p>
 
-            <ul className="mt-[32px] flex gap-[20px] text-[14px] leading-[20px] text-[#5D5D5D]">
+            <ul className="mt-[32px] flex gap-[20px] text-[14px] leading-[140%] text-[#787878]">
               <li className="flex gap-[4px]">
                 <Icon name="Star" size={20} />
                 <span>즐겨찾기 12</span>
@@ -62,9 +63,10 @@ const PostDetail = ({ type, item }: PostDetailProps) => {
           </div>
         </div>
 
-        <section className="mt-[39px] flex flex-col gap-[16px]">
+        <section className="mt-[39px] flex flex-col gap-[18px]">
           {isBoardType && (
             <>
+              {/* TODO(지권): 추후 지도 컴포넌트 변경 */}
               <div className="h-[147px] rounded-md bg-black" />
               <address className="flex items-center gap-[6px] not-italic">
                 <span className="flex items-center gap-[5px]">
@@ -74,7 +76,7 @@ const PostDetail = ({ type, item }: PostDetailProps) => {
                     aria-hidden="true"
                     className="fill-current text-[#1EB87B]"
                   />
-                  <p className="text-[14px]">서울특별시 00구 00동</p>
+                  <p className="text-[14px] text-[#5D5D5D]">서울특별시 00구 00동</p>
                 </span>
                 <Icon name="ArrowRight" size={14} title="지도 이동" />
               </address>

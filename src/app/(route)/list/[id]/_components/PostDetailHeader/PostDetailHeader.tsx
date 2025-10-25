@@ -23,7 +23,7 @@ const PostDetailHeader = () => {
         </div>
         <Link
           href={"/"}
-          className="glass-card w-full rounded-[10px] bg-[#1EB87B]/70 py-[14px] font-semibold leading-[150%] text-white flex-center"
+          className="glass-card w-full rounded-[10px] bg-[#1EB87B]/70 py-[14px] font-semibold leading-[150%] text-[#F6FFFC] flex-center"
         >
           채팅하러 가기
         </Link>
