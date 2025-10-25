@@ -5,10 +5,12 @@ const SimilarItem = () => {
     {
       name: "Eye",
       value: 23,
+      ariaLabel: "조회수",
     },
     {
       name: "Star",
       value: 12,
+      ariaLabel: "즐겨찾기",
     },
   ];
 
@@ -24,7 +26,7 @@ const SimilarItem = () => {
 
       <ul className="flex items-center gap-2">
         {IconList.map((icon, index) => (
-          <li key={index} className="flex items-center gap-1">
+          <li key={index} className="flex items-center gap-1" aria-label={`${icon.ariaLabel}`}>
             <Icon name={icon.name as IconName} size={18} aria-hidden="true" />
             <span className="text-[14px] leading-5 text-[#9D9D9D]">{icon.value}</span>
           </li>
