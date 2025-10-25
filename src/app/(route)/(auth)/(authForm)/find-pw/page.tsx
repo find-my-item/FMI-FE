@@ -11,6 +11,7 @@ const Page = () => {
   const router = useRouter();
 
   const {
+    register,
     handleSubmit,
     formState: { isValid, isSubmitSuccessful },
     watch,
@@ -39,17 +40,28 @@ const Page = () => {
           </p>
         </div>
       ) : (
+        // <Input
+        //   type="text"
+        //   placeholder="아이디(이메일)을 입력해 주세요."
+        //   name="email"
+        //   validation={{
+        //     required: "이메일은 필수 항목 입니다",
+        //     pattern: {
+        //       value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
+        //       message: "이메일 형식이 올바르지 않습니다",
+        //     },
+        //   }}
+        // />
         <Input
           type="text"
           placeholder="아이디(이메일)을 입력해 주세요."
-          name="email"
-          validation={{
+          {...register("email", {
             required: "이메일은 필수 항목 입니다",
             pattern: {
               value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
               message: "이메일 형식이 올바르지 않습니다",
             },
-          }}
+          })}
         />
       )}
       <Button

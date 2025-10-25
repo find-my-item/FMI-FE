@@ -5,7 +5,7 @@ import SignUpItem from "./SignUpItem";
 const SignUpField = ({ onNext }: { onNext: () => void }) => {
   return (
     <>
-      <div className="flex w-full flex-col gap-5 p-4">
+      {/* <div className="flex w-full flex-col gap-5 p-4">
         {signUpInputObject.map((item) => (
           <SignUpItem
             key={item.name}
@@ -23,7 +23,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
         <Button type="button" ariaLabel="회원가입 폼 버튼" onClick={onNext}>
           다음
         </Button>
-      </div>
+      </div> */}
     </>
   );
 };

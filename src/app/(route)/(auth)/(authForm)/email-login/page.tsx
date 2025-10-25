@@ -28,14 +28,14 @@ const Page = () => {
       <form onSubmit={onSubmit} className="flex w-full flex-col gap-10">
         {/* 로그인 입력칸 */}
         <div className="flex w-full flex-col gap-3">
-          <Input name="email" type="text" placeholder="이메일을 입력해주세요." />
+          {/* <Input name="email" type="text" placeholder="이메일을 입력해주세요." />
 
           <Input
             name="password"
             type="password"
             placeholder="비밀번호를 입력해주세요."
             eyeShow={true}
-          />
+          /> */}
 
           {/* 체크박스 */}
           <div className="flex w-full gap-3 text-[14px] text-[#9D9D9D]">

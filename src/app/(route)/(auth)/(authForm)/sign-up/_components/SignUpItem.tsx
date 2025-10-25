@@ -48,14 +48,13 @@ const SignUpItem = ({
 
       {/* input */}
       <div className="flex w-full flex-row items-end gap-[10px]" key={name}>
-        <Input
+        {/* <Input
           name={name}
           type={type}
           className={cn(InputStyle, showError && "border-[#FF4242] bg-[#E4E4E4]")}
           placeholder={placeholder}
-          validation={validation}
           eyeShow={eyeShow}
-        />
+        /> */}
         {/* button */}
         {currentButtonConfig && (
           <Button className={currentButtonConfig.className} ariaLabel={currentButtonConfig.text}>
