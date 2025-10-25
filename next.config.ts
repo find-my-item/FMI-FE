@@ -14,6 +14,16 @@ const nextConfig: NextConfig = {
           loader: require.resolve("@svgr/webpack"),
           options: {
             svgo: true,
+            svgoConfig: {
+              plugins: [
+                {
+                  name: "removeAttrs",
+                  params: {
+                    attrs: "(stroke|stroke-width)",
+                  },
+                },
+              ],
+            },
             titleProp: true,
           },
         },
