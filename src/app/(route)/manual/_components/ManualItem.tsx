@@ -28,8 +28,10 @@ const ManualItem = ({ title, content, href, btnText, isOpen, onToggle }: ManualI
       >
         <button className="flex w-full items-center justify-between">
           <p className="text-[16px] font-semibold text-[#242424]">{title}</p>
-          <span className={cn("transition-transform duration-200", isOpen && "rotate-180")}>
-            <Icon name="ArrowDown" />
+          <span
+            className={cn("text-red-500 transition-transform duration-200", isOpen && "rotate-180")}
+          >
+            <Icon name="ArrowDown" className="text-red-500" />
           </span>
         </button>
       </div>
