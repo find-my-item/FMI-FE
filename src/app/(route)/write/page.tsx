@@ -3,7 +3,7 @@
 import Icon from "@/components/Icon/Icon";
 import RequiredText from "@/components/RequiredText/RequiredText";
 import { cn } from "@/utils/cn";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 const styles = {
   section: "border-b border-[#E4E4E4] px-5 py-6",
@@ -11,6 +11,7 @@ const styles = {
 
 const Page = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [disabled, setDisabled] = useState(false);
 
   const handleDivClick = () => {
     fileInputRef.current?.click();
@@ -75,7 +76,7 @@ const Page = () => {
           </div>
         </section>
 
-        <section className={styles.section} aria-label="내용 입력">
+        <section className={cn(styles.section, "min-h-[248px]")} aria-label="내용 입력">
           <label htmlFor="content" className="leading-[150%] text-[#9D9D9D]">
             내용을 입력해 주세요. <RequiredText />
           </label>
@@ -102,13 +103,16 @@ const Page = () => {
           </button>
         </section>
 
-        <section
-          className="mt-[159px] border-t border-[#E4E4E4] px-5 pb-10 pt-3"
-          aria-label="작성 완료"
-        >
+        <section className="border-t border-[#E4E4E4] px-5 pb-8 pt-3" aria-label="작성 완료">
           <button
             type="submit"
-            className="glass-card w-full rounded-[12px] bg-[#98E3BD]/90 py-[10px] text-[18px] font-bold text-[#D9D9D9]"
+            className={cn(
+              "glass-card w-full rounded-[12px] py-[10px] text-[16px] font-bold",
+              disabled && "opacity-50",
+              disabled
+                ? "cursor-not-allowed bg-[#98E3BD]/90 text-[#C2F1D4]"
+                : "bg-[#1EB87B]/70 text-[#F6FFFC]"
+            )}
           >
             작성 완료
           </button>
