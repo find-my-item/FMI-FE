@@ -1,16 +1,59 @@
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode;
-  className?: string;
-  label?: string;
+import { ButtonHTMLAttributes, ReactNode } from "react";
+import Icon from "@/components/Icon/Icon";
+import { SIZE_STYLES, LOADING_SPINNER_SIZE, VARIANT_STYLES, BASE_STYLES } from "./constantButton";
+import { Props } from "@/components/Icon/Icon";
+
+type Size = "big" | "medium" | "small";
+
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: "solid" | "outlined" | "inversed" | "auth";
+  hierarchy?: "normal" | "subtle";
+  size?: Size;
+  iconPosition?: "leading" | "trailing";
+  icon?: Props;
+  loading?: boolean;
+  ariaLabel?: string;
+  children: ReactNode;
 }
 
-const ButtonStyle =
-  "w-full h-[44px] flex-center gap-1 rounded-[10px] bg-[#98E3BD] opacity-90 font-semibold text-[16px] text-white";
+const Button = ({
+  variant = "solid",
+  hierarchy = "normal",
+  size = "medium",
+  iconPosition,
+  icon,
+  loading = false,
+  children,
+  disabled,
+  className = "",
+  ariaLabel = "버튼",
+  ...props
+}: ButtonProps) => {
+  const variantClass =
+    variant === "solid" ? VARIANT_STYLES.solid[hierarchy] : VARIANT_STYLES[variant].base;
 
-const Button = ({ children, type, className = ButtonStyle, ...rest }: ButtonProps) => {
+  const glassCard = variant === "solid" && "glass-card";
+
+  const finalIconPosition = icon && (iconPosition ?? "leading");
+
+  const combinedStyles = `${BASE_STYLES} ${SIZE_STYLES[size]} ${variantClass} ${glassCard} ${className}`;
+
   return (
-    <button type={type} className={className} {...rest}>
-      {children}
+    <button
+      disabled={disabled || loading}
+      className={combinedStyles}
+      {...props}
+      aria-label={ariaLabel ?? ""}
+    >
+      {loading ? (
+        <Icon name="Loading" className="animate-spin" size={LOADING_SPINNER_SIZE[size]} />
+      ) : (
+        <>
+          {finalIconPosition === "leading" && icon && <Icon {...icon} />}
+          {children}
+          {finalIconPosition === "trailing" && icon && <Icon {...icon} />}
+        </>
+      )}
     </button>
   );
 };
