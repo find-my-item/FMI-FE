@@ -1,10 +1,10 @@
 import { ReactNode } from "react";
-import Icon from "@/components/Icon/Icon";
+import Icon, { Props } from "@/components/Icon/Icon";
 import { cn } from "@/utils/cn";
 
 interface KebabMenuItem {
   text: ReactNode;
-  icon?: ReactNode;
+  icon?: Props;
   iconPosition?: "leading" | "trailing";
   loading?: boolean;
   disabled?: boolean;
@@ -35,11 +35,11 @@ const KebabMenu = ({ items }: KebabMenuProps) => {
           {item.loading ? (
             <Icon name="Loading" className="animate-spin" />
           ) : (
-            finalIconPosition(item) === "leading" && item.icon && <span>{item.icon}</span>
+            finalIconPosition(item) === "leading" && item.icon && <Icon {...item.icon} />
           )}
           {!item.loading && item.text}
           {!item.loading && finalIconPosition(item) === "trailing" && item.icon && (
-            <span>{item.icon}</span>
+            <Icon {...item.icon} />
           )}
         </button>
       ))}

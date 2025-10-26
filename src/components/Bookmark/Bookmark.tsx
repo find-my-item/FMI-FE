@@ -1,5 +1,6 @@
 import { ButtonHTMLAttributes } from "react";
 import Icon from "../Icon/Icon";
+import { SIZES } from "./_constant/bookmark";
 
 interface BookmarkProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   ariaLabel?: string;
@@ -7,22 +8,16 @@ interface BookmarkProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: "large" | "medium" | "small";
 }
 
-// svgr 세팅 변경 시 isActive 별 색깔 수정
+// TODO(형준): svgr 세팅 변경 시 isActive 별 색깔 수정
 const Bookmark = ({
   ariaLabel = "즐겨찾기 추가",
   isActive,
   size = "medium",
   ...props
 }: BookmarkProps) => {
-  const sizes = {
-    large: 30,
-    medium: 24,
-    small: 16,
-  };
-
   return (
     <button {...props} aria-label={ariaLabel}>
-      <Icon name="Star" size={sizes[size]} />
+      <Icon name="Star" size={SIZES[size]} />
     </button>
   );
 };

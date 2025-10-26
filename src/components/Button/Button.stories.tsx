@@ -63,7 +63,7 @@ export const WithLeadingIcon: Story = {
   args: {
     children: "With Icon",
     iconPosition: "leading",
-    icon: <Icon name="ArrowRight" size={16} />,
+    icon: { name: "ArrowRight", size: 16 },
   },
 };
 
@@ -71,7 +71,7 @@ export const WithTrailingIcon: Story = {
   args: {
     children: "With Icon",
     iconPosition: "trailing",
-    icon: <Icon name="ArrowRight" size={16} />,
+    icon: { name: "ArrowRight", size: 16 },
   },
 };
 

@@ -1,14 +1,14 @@
 import { ButtonHTMLAttributes, ReactNode } from "react";
-import Icon from "@/components/Icon/Icon";
+import Icon, { Props } from "@/components/Icon/Icon";
 import { cn } from "@/utils/cn";
 
 interface FilterProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   loading?: boolean;
-  icon?: ReactNode;
+  icon?: Props;
   iconPosition?: "leading" | "trailing";
   onSelected: boolean;
-  ariaLabel?: string;
+  ariaLabel: string;
 }
 
 const Filter = ({
@@ -17,7 +17,7 @@ const Filter = ({
   icon,
   iconPosition,
   onSelected,
-  ariaLabel = "필터",
+  ariaLabel,
   ...props
 }: FilterProps) => {
   const finalIconPosition = icon && (iconPosition ?? "leading");
@@ -25,7 +25,7 @@ const Filter = ({
   return (
     <button
       {...props}
-      aria-label={ariaLabel}
+      aria-label={`${ariaLabel} 필터`}
       className={cn(
         "gap-[4px] rounded-full bg-[#F5F5F5] px-[18px] py-[8px] font-[150] text-[#5D5D5D] flex-center hover:text-black active:bg-[#E4E4E4] active:text-[#9D9D9D] disabled:bg-[#E4E4E4] disabled:text-[#CFCFCF]",
         onSelected &&
@@ -36,10 +36,10 @@ const Filter = ({
       {loading ? (
         <Icon name="Loading" className="animate-spin" />
       ) : (
-        finalIconPosition === "leading" && icon && <span>{icon}</span>
+        finalIconPosition === "leading" && icon && <Icon {...icon} />
       )}
       {!loading && children}
-      {!loading && finalIconPosition === "trailing" && icon && <span>{icon}</span>}
+      {!loading && finalIconPosition === "trailing" && icon && <Icon {...icon} />}
     </button>
   );
 };

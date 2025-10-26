@@ -23,14 +23,14 @@ const Page = () => {
   const kebabMenuItem = [
     {
       text: "TEXT",
-      icon: <Icon name="Location" />,
-      iconPosition: "trailing" as const,
+      icon: { name: "Location" },
+      iconPosition: "trailing",
       loading: true,
-    },
+    } as const,
     {
       text: "TEXT",
-      icon: <Icon name="ArrowDown" size={24} />,
-    },
+      icon: { name: "ArrowDown", size: 24 },
+    } as const,
     {
       text: "TEXT",
     },
@@ -78,7 +78,7 @@ const Page = () => {
             ))}
           </div>
         </section>
-        <Button variant="solid" hierarchy="subtle" size="big" icon={<Icon name="Logo" />}>
+        <Button variant="solid" hierarchy="subtle" size="big" icon={{ name: "Logo" }}>
           찾아줘
         </Button>
         <Bookmark isActive={false} />
@@ -87,10 +87,11 @@ const Page = () => {
         <ViewMoreReply text="TEXT" disabled />
         <ViewMoreComment text="댓글 10개 더보기" />
         <Filter
+          ariaLabel="지역 선택"
           children="TEXT"
           onSelected={false}
           iconPosition="trailing"
-          icon={<Icon name="ArrowDown" size={16} />}
+          icon={{ name: "ArrowDown", size: 16 }}
         />
         <KebabMenu items={kebabMenuItem} />
         <FloatingButton />
@@ -98,7 +99,7 @@ const Page = () => {
         <ToggleImageButton
           images={images}
           toggleState={imageToggleState}
-          gap={20}
+          gap={50}
           onClick={() => setImageToggleState(!imageToggleState)}
         />
         {/* Spacing (uses theme.extend.spacing xs, sm, md, lg, xl) */}

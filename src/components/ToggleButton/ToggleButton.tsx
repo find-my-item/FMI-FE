@@ -19,17 +19,19 @@ const ToggleButton = ({
       {...props}
       disabled={disabled}
       aria-label={ariaLabel}
+      aria-checked={finalToggleState}
       className={cn(
-        "h-[30px] w-[64px] rounded-full bg-[#F5F5F5] p-[4px] transition-colors duration-300 disabled:bg-[#E4E4E4]",
+        "h-[30px] w-[64px] rounded-full bg-[#F5F5F5] p-[4px] transition-colors duration-200 disabled:bg-[#E4E4E4]",
         finalToggleState ? "bg-[#1EB87B]" : "bg-[#F5F5F5]"
       )}
     >
-      <div
+      <span
+        aria-hidden="true"
         className={cn(
-          "h-[22px] w-[22px] rounded-full bg-white shadow-sm transition-transform duration-200",
+          "block h-[22px] w-[22px] rounded-full bg-white shadow-sm transition-transform duration-200",
           finalToggleState ? "translate-x-[34px]" : "translate-x-0"
         )}
-      ></div>
+      />
     </button>
   );
 };

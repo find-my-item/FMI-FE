@@ -1,5 +1,6 @@
 import { ButtonHTMLAttributes } from "react";
 import { cn } from "@/utils/cn";
+import Image from "next/image";
 
 interface ToggleImageButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   images: string[];
@@ -32,26 +33,29 @@ const ToggleImageButton = ({
         <button
           {...props}
           key={image}
-          aria-label={`${ariaLabel} - ${isOn ? "on" : "off"}`}
+          aria-label={`${ariaLabel} - ${isOn ? "이미지 선택" : "이미지 선택되지 않음"}`}
           disabled={isActive}
           className={cn(
             "relative rounded-[6px] border-2 transition-all",
-            isActive ? "border-[#1EB87B]" : "border-transparent",
-            isActive ? "cursor-not-allowed" : "cursor-pointer"
+            isActive ? "cursor-not-allowed border-[#1EB87B]" : "cursor-pointer border-transparent"
           )}
         >
-          <img
-            src={image}
-            alt={`Toggle state ${isOn ? "on" : "off"}`}
-            className="glass-card h-[110px] w-[110px] rounded-[6px]"
-          />
-          <div
-            className={cn(
-              "absolute right-[6px] top-[6px] h-[20px] w-[20px] rounded-full border-[1.2px] border-[#1EB87B] text-[12px] font-[130] text-white flex-center",
-              isActive ? "bg-[#1EB87B]" : "bg-white"
-            )}
-          >
-            {isOn ? "1" : "2"}
+          <div className="relative h-[110px] w-[110px]">
+            <Image
+              src={image}
+              width={110}
+              height={110}
+              alt={`${isOn ? "선택된 이미지" : "선택되지 않은 이미지"}`}
+              className="glass-card h-[110px] w-[110px] rounded-[6px]"
+            />
+            <span
+              className={cn(
+                "absolute right-[6px] top-[6px] h-[20px] w-[20px] rounded-full border-[1.2px] border-[#1EB87B] text-[12px] font-[130] text-white flex-center",
+                isActive ? "bg-[#1EB87B]" : "bg-white"
+              )}
+            >
+              {isOn ? "1" : "2"}
+            </span>
           </div>
         </button>
       ))}

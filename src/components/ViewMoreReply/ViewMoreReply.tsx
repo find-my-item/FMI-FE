@@ -6,7 +6,7 @@ interface ViewMoreReply extends ButtonHTMLAttributes<HTMLButtonElement> {
   ariaLabel?: string;
 }
 
-// svgr 수정 시, 아이콘 색 수정
+// TODO(형준): svgr 수정 시, 아이콘 색 수정
 const ViewMoreReply = ({ text, ariaLabel = "답글 더보기", ...props }: ViewMoreReply) => {
   return (
     <button
