@@ -9,3 +9,5 @@ export { default as Chip } from "./Chip/Chip";
 export { default as CheckBox } from "./CheckBox/CheckBox";
 export { default as DetailHeader } from "./DetailHeader/DetailHeader";
 export { default as Badge } from "./Badge/Badge";
+export { default as PopupLayout } from "./PopupLayout/PopupLayout";
+export { default as Icon } from "./Icon/Icon";

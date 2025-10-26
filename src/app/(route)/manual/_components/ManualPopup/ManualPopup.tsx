@@ -1,24 +1,15 @@
 "use client";
 
-import { useModalBackdrop, useModalLockAndEsc } from "@/utils/useOverlayHandlers";
-import Icon from "../Icon/Icon";
+import { Icon, PopupLayout } from "@/components";
 
 interface ManualPopupProps {
   isOpen: boolean;
-  onClose?: () => void;
+  onClose: () => void;
 }
 
 const ManualPopup = ({ isOpen, onClose }: ManualPopupProps) => {
-  if (!isOpen) return null;
-
-  useModalLockAndEsc({ isOpen, onClose });
-  const onBackdropMouseDown = useModalBackdrop({ onClose });
-
   return (
-    <div
-      className="fixed inset-0 z-[9999] flex items-end justify-center bg-black/30"
-      onMouseDown={onBackdropMouseDown}
-    >
+    <PopupLayout isOpen={isOpen} onClose={onClose}>
       <div className="w-full max-w-md rounded-t-2xl bg-white px-6">
         <div className="mx-auto mb-6 mt-[71px] h-[74px] w-[74px] rounded-full">
           <Icon name="Book" size={74} />
@@ -43,7 +34,7 @@ const ManualPopup = ({ isOpen, onClose }: ManualPopupProps) => {
           </button>
         </div>
       </div>
-    </div>
+    </PopupLayout>
   );
 };
 
