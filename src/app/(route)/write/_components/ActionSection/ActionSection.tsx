@@ -1,7 +1,7 @@
 import { cn } from "@/utils/cn";
 
 interface ActionSectionProps {
-  disabled?: boolean;
+  disabled: boolean;
 }
 
 const ActionSection = ({ disabled }: ActionSectionProps) => {

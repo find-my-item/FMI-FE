@@ -26,6 +26,8 @@ const CategoryPopup = ({ isOpen, onClose }: CategoryPopupProps) => {
                 "flex h-[61px] w-full cursor-pointer items-center gap-3 px-[20px] py-[18px] text-[18px] leading-[140%] text-[#5D5D5D]",
                 "transition-colors hover:text-[#9D9D9D]"
               )}
+              aria-checked={selected === option}
+              role="radio"
             >
               <input
                 type="radio"
