@@ -9,17 +9,17 @@ interface PopupLayoutProps {
 }
 
 const PopupLayout = ({ isOpen, onClose, children }: PopupLayoutProps) => {
-  if (!isOpen) return null;
-
   useModalLockAndEsc({ isOpen, onClose });
   const onBackdropMouseDown = useModalBackdrop({ onClose });
+
+  if (!isOpen) return null;
 
   return (
     <div
       className="fixed inset-0 z-[9999] flex items-end justify-center bg-black/30"
       onMouseDown={onBackdropMouseDown}
     >
-      {children}
+      <div className="w-full max-w-md rounded-t-2xl bg-white px-6">{children}</div>
     </div>
   );
 };
