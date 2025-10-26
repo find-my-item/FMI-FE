@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes } from "react";
 import Icon from "../Icon/Icon";
-import { SIZES } from "./_constant/kebabMenuButton";
+import { SIZES } from "./constantKebabMenuButton";
 
 interface KebabMenuButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   ariaLabel?: string;
