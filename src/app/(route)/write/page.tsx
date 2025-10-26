@@ -30,13 +30,16 @@ const Page = () => {
         >
           <input type="file" accept="image/*" className="hidden" ref={fileInputRef} />
           <div
-            className="h-[104px] w-[104px] cursor-pointer rounded-[6px] bg-[#F5F5F5] flex-center"
+            className="h-[104px] w-[104px] cursor-pointer rounded-[6px] bg-[#F5F5F5] flex-col-center"
             onClick={handleDivClick}
           >
             <Icon name="Camera" size={32} title="이미지 업로드" />
+            <span className="text-[12px] leading-[130%] tracking-[-0.02em] text-[#9D9D9D]">
+              (0/5)
+            </span>
           </div>
-          <span className="text-[14px] text-[#9D9D9D]">
-            * jpg, jpeg, png 파일을 첨부해 주세요. (선택)
+          <span className="text-[12px] leading-[130%] tracking-[-0.02em] text-[#9D9D9D]">
+            * 사진은 최대 5장 첨부가 가능합니다. (선택)
           </span>
         </section>
 
@@ -44,11 +47,11 @@ const Page = () => {
           className={cn("flex cursor-pointer items-center justify-between", styles.section)}
           aria-label="카테고리 선택"
         >
-          <span className="text-[16px] text-[#9D9D9D]">
+          <span className="leading-[150%] text-[#9D9D9D]">
             카테고리를 선택해 주세요. <RequiredText />
           </span>
-          <button type="button" className="h-4 w-4">
-            <Icon name="ArrowDown" size={16} title="카테고리 선택" />
+          <button type="button" className="h-6 w-6">
+            <Icon name="ArrowDown" size={24} title="카테고리 선택" />
           </button>
         </section>
 
@@ -61,11 +64,11 @@ const Page = () => {
               type="text"
               name="title"
               id="title"
-              className="peer w-full bg-transparent text-[16px] placeholder-transparent outline-none"
+              className="peer w-full bg-transparent leading-[150%] text-[#9D9D9D] placeholder-transparent outline-none"
               placeholder="제목을 입력해 주세요."
               required
             />
-            <span className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 text-[#9D9D9D] peer-placeholder-shown:opacity-100 peer-[&:not(:placeholder-shown)]:opacity-0">
+            <span className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 leading-[150%] text-[#9D9D9D] peer-placeholder-shown:opacity-100 peer-[&:not(:placeholder-shown)]:opacity-0">
               제목을 입력해 주세요.
               <RequiredText />
             </span>
@@ -73,14 +76,14 @@ const Page = () => {
         </section>
 
         <section className={styles.section} aria-label="내용 입력">
-          <label htmlFor="content" className="text-[16px] text-[#9D9D9D]">
+          <label htmlFor="content" className="leading-[150%] text-[#9D9D9D]">
             내용을 입력해 주세요. <RequiredText />
           </label>
           <textarea
             name="content"
             id="content"
             placeholder="분실/습득 날짜, 물건 종류, 물건의 특징 등 유실물 찾기에 도움이 되는 내용을 작성해 주세요."
-            className="w-full resize-none py-6 placeholder:text-[14px] focus:outline-none"
+            className="w-full resize-none py-6 text-[14px] leading-[140%] text-[#9D9D9D] focus:outline-none"
             rows={3}
             required
           />
@@ -90,12 +93,12 @@ const Page = () => {
           className={cn("flex cursor-pointer items-center justify-between", styles.section)}
           aria-label="위치 등록"
         >
-          <span className="flex items-center gap-[6px] text-[16px] text-[#9D9D9D]">
+          <span className="flex items-center gap-[6px] leading-[150%] text-[#9D9D9D]">
             <Icon name="Location" size={16} title="위치 등록" />
             위치를 등록해 주세요. <RequiredText />
           </span>
-          <button type="button" className="h-4 w-4">
-            <Icon name="ArrowRight" title="위치 열기" size={16} />
+          <button type="button" className="h-[18px] w-[18px]">
+            <Icon name="ArrowRight" title="위치 열기" size={18} />
           </button>
         </section>
 
@@ -105,7 +108,7 @@ const Page = () => {
         >
           <button
             type="submit"
-            className="w-full rounded-[12px] bg-[#F5F5F5] px-[94px] py-5 text-[18px] font-bold text-[#D9D9D9]"
+            className="glass-card w-full rounded-[12px] bg-[#98E3BD]/90 py-[10px] text-[18px] font-bold text-[#D9D9D9]"
           >
             작성 완료
           </button>
