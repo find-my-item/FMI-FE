@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, ReactNode } from "react";
 import Icon from "@/components/Icon/Icon";
-import { SIZE_STYLES, LOADING_SPINNER_SIZE, VARIANT_STYLES, BASE_STYLES } from "./_constant/button";
+import { SIZE_STYLES, LOADING_SPINNER_SIZE, VARIANT_STYLES, BASE_STYLES } from "./constantButton";
 import { Props } from "@/components/Icon/Icon";
 
 type Size = "big" | "medium" | "small";

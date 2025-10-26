@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes } from "react";
 import Icon from "../Icon/Icon";
-import { SIZES } from "./_constant/bookmark";
+import { SIZES } from "./constantBookmark";
 
 interface BookmarkProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   ariaLabel?: string;
