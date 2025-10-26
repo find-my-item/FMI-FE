@@ -56,7 +56,7 @@ const Page = () => {
         type={isSubmitSuccessful ? "button" : "submit"}
         className={cn(ButtonStyle, isValid && "bg-[#1EB87B]")}
         onClick={handleClick}
-        label={isSubmitSuccessful ? "로그인 화면으로 이동" : "입력완료"}
+        ariaLabel={isSubmitSuccessful ? "로그인 화면으로 이동" : "입력완료"}
       >
         {isSubmitSuccessful ? "로그인 화면으로 이동" : "입력완료"}
       </Button>

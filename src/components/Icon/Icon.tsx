@@ -5,7 +5,7 @@ import * as Icons from "./index";
 
 export type IconName = keyof typeof Icons;
 
-type Props = Omit<SVGProps<SVGSVGElement>, "ref"> & {
+export type Props = Omit<SVGProps<SVGSVGElement>, "ref"> & {
   name: IconName;
   size?: number;
   title?: string;
