@@ -5,7 +5,8 @@ import Icon from "@/components/Icon/Icon";
 import RequiredText from "@/components/RequiredText/RequiredText";
 import { cn } from "@/utils/cn";
 import { useRef, useState } from "react";
-import TempSaveModal from "./_components/TempSaveModal";
+import TempSaveModal from "./_components/TempSaveModal/TempSaveModal";
+import CategoryPopup from "./_components/CategoryPopup/CategoryPopup";
 
 const styles = {
   section: "border-b border-[#E4E4E4] px-5 py-6",
@@ -15,6 +16,7 @@ const Page = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [disabled, setDisabled] = useState(false);
   const [saveModalOpen, setSaveModalOpen] = useState(false);
+  const [categoryPopupOpen, setCategoryPopupOpen] = useState(false);
 
   const handleDivClick = () => {
     fileInputRef.current?.click();
@@ -55,6 +57,7 @@ const Page = () => {
         <section
           className={cn("flex cursor-pointer items-center justify-between", styles.section)}
           aria-label="카테고리 선택"
+          onClick={() => setCategoryPopupOpen(true)}
         >
           <span className="leading-[150%] text-[#9D9D9D]">
             카테고리를 선택해 주세요. <RequiredText />
@@ -131,6 +134,7 @@ const Page = () => {
       </form>
 
       <TempSaveModal isOpen={saveModalOpen} onClose={() => setSaveModalOpen(false)} />
+      <CategoryPopup isOpen={categoryPopupOpen} onClose={() => setCategoryPopupOpen(false)} />
     </>
   );
 };
