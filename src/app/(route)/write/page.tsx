@@ -1,9 +1,11 @@
 "use client";
 
+import { DetailHeader } from "@/components";
 import Icon from "@/components/Icon/Icon";
 import RequiredText from "@/components/RequiredText/RequiredText";
 import { cn } from "@/utils/cn";
 import { useRef, useState } from "react";
+import TempSaveModal from "./_components/TempSaveModal";
 
 const styles = {
   section: "border-b border-[#E4E4E4] px-5 py-6",
@@ -12,6 +14,7 @@ const styles = {
 const Page = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [disabled, setDisabled] = useState(false);
+  const [saveModalOpen, setSaveModalOpen] = useState(false);
 
   const handleDivClick = () => {
     fileInputRef.current?.click();
@@ -24,6 +27,11 @@ const Page = () => {
   return (
     <>
       <h1 className="sr-only">분실/습득 등록 페이지</h1>
+
+      <DetailHeader title="분실했어요 글쓰기">
+        <DetailHeader.Save onClick={() => setSaveModalOpen(true)} />
+      </DetailHeader>
+
       <form onSubmit={handleSubmit} className="flex flex-col">
         <section
           className={cn("flex flex-col items-start justify-center gap-4", styles.section)}
@@ -84,7 +92,10 @@ const Page = () => {
             name="content"
             id="content"
             placeholder="분실/습득 날짜, 물건 종류, 물건의 특징 등 유실물 찾기에 도움이 되는 내용을 작성해 주세요."
-            className="w-full resize-none py-6 text-[14px] leading-[140%] text-[#9D9D9D] focus:outline-none"
+            className={cn(
+              "w-full resize-none py-6 text-[16px] leading-[150%] text-[#5D5D5D]",
+              "placeholder:text-[14px] placeholder:leading-[140%] placeholder:text-[#9D9D9D] focus:outline-none"
+            )}
             rows={3}
             required
           />
@@ -118,6 +129,8 @@ const Page = () => {
           </button>
         </section>
       </form>
+
+      <TempSaveModal isOpen={saveModalOpen} onClose={() => setSaveModalOpen(false)} />
     </>
   );
 };
