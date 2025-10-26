@@ -28,6 +28,9 @@ const nextConfig: NextConfig = {
     });
     return config;
   },
+  images: {
+    domains: ["images.mypetlife.co.kr", "i.namu.wiki"],
+  },
 };
 
 export default nextConfig;

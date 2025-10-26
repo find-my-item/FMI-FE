@@ -1,9 +1,44 @@
+"use client";
+
 import GlassMorphism from "@/design/GlassMorphism/GlassMorphism";
 import GlassMorphismButton from "@/design/GlassMorphism/GlassMorphismButton";
+import Button from "@/components/Button/Button";
+import Icon from "@/components/Icon/Icon";
+import Bookmark from "@/components/Bookmark/Bookmark";
+import KebabMenuButton from "@/components/KebabMenuButton/KebabMenuButton";
+import Location from "@/components/Location/Location";
+import ViewMoreReply from "@/components/ViewMoreReply/ViewMoreReply";
+import ViewMoreComment from "@/components/ViewMoreComment/ViewMoreComment";
+import Filter from "@/components/Filter/Filter";
+import KebabMenu from "@/components/KebabMenu/KebabMenu";
+import FloatingButton from "@/components/FloatingButton/FloatingButton";
+import ToggleButton from "@/components/ToggleButton/ToggleButton";
+import { useState } from "react";
+import ToggleImageButton from "@/components/ToggleImageButton/ToggleImageButton";
 
 const Page = () => {
+  const [toggleState, setToggleState] = useState(false);
+  const [imageToggleState, setImageToggleState] = useState(false);
   const shades = [100, 200, 300, 400, 500, 600, 700, 800, 900];
-
+  const kebabMenuItem = [
+    {
+      text: "TEXT",
+      icon: { name: "Location" },
+      iconPosition: "trailing",
+      loading: true,
+    } as const,
+    {
+      text: "TEXT",
+      icon: { name: "ArrowDown", size: 24 },
+    } as const,
+    {
+      text: "TEXT",
+    },
+  ];
+  const images = [
+    "https://images.mypetlife.co.kr/content/uploads/2022/12/16162807/IMG_1666-edited-scaled.jpg",
+    "https://i.namu.wiki/i/slmFMXb1Fchs2zN0ZGOzqfuPDvhRS-H9eBp7Gp613-DNKi6i6Ct7eFkTUpauqv5HAYR97mrNqrvvcCDEyBdL_g.webp",
+  ];
   return (
     <div className="min-h-screen bg-white p-8 transition-colors duration-200 dark:bg-gray-900">
       <div className="mx-auto max-w-4xl">
@@ -17,7 +52,6 @@ const Page = () => {
           <GlassMorphismButton isDisabled={true}>로그인</GlassMorphismButton>
           <GlassMorphism />
         </div>
-
         {/* Colors */}
         <section className="mb-12">
           <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-gray-100">Colors</h2>
@@ -44,7 +78,30 @@ const Page = () => {
             ))}
           </div>
         </section>
-
+        <Button variant="solid" hierarchy="subtle" size="big" icon={{ name: "Logo" }}>
+          찾아줘
+        </Button>
+        <Bookmark isActive={false} />
+        <KebabMenuButton />
+        <Location children="위치" disabled />
+        <ViewMoreReply text="TEXT" disabled />
+        <ViewMoreComment text="댓글 10개 더보기" />
+        <Filter
+          ariaLabel="지역 선택"
+          children="TEXT"
+          onSelected={false}
+          iconPosition="trailing"
+          icon={{ name: "ArrowDown", size: 16 }}
+        />
+        <KebabMenu items={kebabMenuItem} />
+        <FloatingButton />
+        <ToggleButton toggleState={toggleState} onClick={() => setToggleState(!toggleState)} />
+        <ToggleImageButton
+          images={images}
+          toggleState={imageToggleState}
+          gap={50}
+          onClick={() => setImageToggleState(!imageToggleState)}
+        />
         {/* Spacing (uses theme.extend.spacing xs, sm, md, lg, xl) */}
         <section className="mb-12">
           <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-gray-100">Spacing</h2>

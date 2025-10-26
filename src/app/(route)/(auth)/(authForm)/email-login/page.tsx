@@ -55,7 +55,7 @@ const Page = () => {
 
         {/* 로그인 버튼 */}
         <div className="w-full gap-6 flex-col-center">
-          <Button type="submit" label="로그인 버튼">
+          <Button type="submit" ariaLabel="로그인 버튼" variant="auth">
             로그인
           </Button>
           {/* divider 구분선 */}
