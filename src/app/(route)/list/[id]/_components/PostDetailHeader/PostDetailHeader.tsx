@@ -4,10 +4,13 @@ import Link from "next/link";
 const PostDetailHeader = () => {
   return (
     <>
-      {/* 이미지 */}
+      {/* TODO(지권): 추후 이미지 태그 변경 예정 */}
       <div className="h-[260px] bg-[#D9D9D9]" />
 
-      <section className="flex flex-col items-start justify-center gap-5 border-b border-[#E4E4E4] p-[20px]">
+      <section
+        aria-label="상세페이지 유저 정보"
+        className="flex flex-col items-start justify-center gap-5 border-b border-[#E4E4E4] p-[20px]"
+      >
         <div className="flex items-center justify-start gap-[14px]">
           <div className="relative h-10 w-10">
             <div className="h-full w-full rounded-full bg-[#D9D9D9]" />
@@ -23,7 +26,7 @@ const PostDetailHeader = () => {
         </div>
         <Link
           href={"/"}
-          className="flex-center w-full rounded-[6px] bg-[#1EB87B] py-[14px] font-semibold text-white"
+          className="glass-card w-full rounded-[10px] bg-[#1EB87B]/70 py-[14px] font-semibold leading-[150%] text-[#F6FFFC] flex-center"
         >
           채팅하러 가기
         </Link>
