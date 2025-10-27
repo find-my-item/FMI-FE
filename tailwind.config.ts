@@ -2,14 +2,28 @@ import type { Config } from "tailwindcss";
 const typedConfig: Config = require("./src/utils/tokens/tailwind.config");
 import { flexCenter, flexColCenter, mouseHover, uEllipsis } from "./src/utils/customStylePlugins";
 import customFonts from "./src/utils/customFonts";
+import plugin from "tailwindcss/plugin";
+
+const flatten = (obj: Record<string, any>, path: string[] = []): [string, string][] =>
+  Object.entries(obj).flatMap(([k, v]) =>
+    v && typeof v === "object"
+      ? flatten(v, path.concat(k))
+      : [[path.concat(k).join("-"), v as string]]
+  );
+
+const fillBgUtilities = plugin(({ addUtilities, theme }) => {
+  const tokens = (theme("fill") || {}) as Record<string, any>;
+  const utils = Object.fromEntries(
+    flatten(tokens).map(([k, v]) => [`.bg-fill-${k}`, { backgroundColor: v }])
+  );
+  addUtilities(utils);
+});
 
 const {
   dimension,
-  fontFamilies,
   lineHeights,
   letterSpacing,
   fontWeights,
-  fontSizes,
   fg,
   bg,
   accent,
@@ -28,6 +42,7 @@ const config: Config = {
       pc: "811px",
     },
     extend: {
+      fill: (typedConfig.theme?.extend as any)?.fill ?? {},
       ...validExtend,
       fontFamily: { sans: ["var(--font-pretendard)", "Inter", "sans-serif"] },
       lineHeight: lineHeights,
@@ -42,7 +57,7 @@ const config: Config = {
       height: dimension,
     },
   },
-  plugins: [flexCenter, flexColCenter, mouseHover, uEllipsis],
+  plugins: [fillBgUtilities, flexCenter, flexColCenter, mouseHover, uEllipsis],
   safelist: ["flex-center", "flex-col-center", "mouse-hover", "u-ellipsis"],
 };
 
