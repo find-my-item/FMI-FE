@@ -102,6 +102,19 @@ const Page = () => {
           gap={50}
           onClick={() => setImageToggleState(!imageToggleState)}
         />
+        <div className="m-1 space-y-5 border p-1">
+          <h1 className="text-title1-bold text-red-500">"폰트 적용 예시"</h1>
+          <section className="flex flex-col gap-3">
+            <span className="text-title1-bold">text-title1-bold</span>
+            <span className="text-title1-medium">text-title1-medium</span>
+            <span className="text-title1-regular">text-title1-regular</span>
+          </section>
+          <section className="flex flex-col gap-3">
+            <span className="text-caption2-semibold">text-caption2-semibold</span>
+            <span className="text-caption2-medium">text-caption2-medium</span>
+            <span className="text-caption2-regular">text-caption2-regular</span>
+          </section>
+        </div>
         {/* Spacing (uses theme.extend.spacing xs, sm, md, lg, xl) */}
         <section className="mb-12">
           <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-gray-100">Spacing</h2>

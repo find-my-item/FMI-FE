@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 const typedConfig: Config = require("./src/utils/tokens/tailwind.config");
 import { flexCenter, flexColCenter, mouseHover, uEllipsis } from "./src/utils/customStylePlugins";
+import customFonts from "./src/utils/customFonts";
 
 const {
   dimension,
@@ -31,7 +32,7 @@ const config: Config = {
       fontFamily: { sans: ["var(--font-pretendard)", "Inter", "sans-serif"] },
       lineHeight: lineHeights,
       fontWeight: fontWeights,
-      fontSize: fontSizes,
+      fontSize: customFonts,
       boxShadow: boxShadow,
       backgroundColor: bg,
       letterSpacing: letterSpacing,
