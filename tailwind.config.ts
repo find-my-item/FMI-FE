@@ -3,16 +3,16 @@ const typedConfig: Config = require("./src/utils/tokens/tailwind.config");
 import { flexCenter, flexColCenter, mouseHover, uEllipsis } from "./src/utils/customStylePlugins";
 
 const {
-  dimension, // check
-  fontFamilies, // check
-  lineHeights, // check
-  letterSpacing, // check
-  fontWeights, // check
-  fontSizes, // check
-  fg, // check
-  bg, // check
-  accent, // check
-  boxShadow, // check
+  dimension,
+  fontFamilies,
+  lineHeights,
+  letterSpacing,
+  fontWeights,
+  fontSizes,
+  fg,
+  bg,
+  accent,
+  boxShadow,
   ...validExtend
 } = typedConfig.theme?.extend ?? {};
 
@@ -27,18 +27,18 @@ const config: Config = {
       pc: "811px",
     },
     extend: {
-      ...validExtend, // 나머지 정상작동 값
-      fontFamily: fontFamilies, // check
-      lineHeight: lineHeights, // check
-      fontWeight: fontWeights, // check
-      fontSize: fontSizes, // check
-      boxShadow: boxShadow, // check
-      backgroundColor: bg, // check
-      letterSpacing: letterSpacing, // check
-      accentColor: accent, // check
-      textColor: fg, // check
-      width: dimension, // check
-      height: dimension, // check
+      ...validExtend,
+      fontFamily: { sans: ["var(--font-pretendard)", "Inter", "sans-serif"] },
+      lineHeight: lineHeights,
+      fontWeight: fontWeights,
+      fontSize: fontSizes,
+      boxShadow: boxShadow,
+      backgroundColor: bg,
+      letterSpacing: letterSpacing,
+      accentColor: accent,
+      textColor: fg,
+      width: dimension,
+      height: dimension,
     },
   },
   plugins: [flexCenter, flexColCenter, mouseHover, uEllipsis],
