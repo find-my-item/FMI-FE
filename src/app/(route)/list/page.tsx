@@ -5,17 +5,7 @@ import { useState } from "react";
 import ListItem from "./_components/ListItem/ListItem";
 import Icon from "@/components/Icon/Icon";
 import { DetailHeader } from "@/components/index";
-
-const list = [
-  {
-    key: "LOST",
-    label: "분실",
-  },
-  {
-    key: "FOUND",
-    label: "습득",
-  },
-];
+import { TABS } from "./_constants/TABS";
 
 const page = () => {
   const [selected, setSelected] = useState("LOST");
@@ -35,7 +25,7 @@ const page = () => {
         <DetailHeader.Search ariaLabel="게시글 검색" />
       </DetailHeader>
 
-      <Tab tabs={list} selected={selected} onValueChange={setSelected} />
+      <Tab tabs={TABS} selected={selected} onValueChange={setSelected} />
 
       <div className="flex h-[67px] w-full items-center gap-2 px-5">
         {dropdowns.map(({ value, setValue, icon }, idx) => (
