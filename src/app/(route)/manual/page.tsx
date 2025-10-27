@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import ManualItem from "./_components/ManualItem";
-import { MANUAL, ManualItemType } from "./_constants/MANUAL";
 import { Tab } from "@/components";
+import { ManualItem } from "./_components";
+import { MANUAL_DATA } from "./_constants/MANUAL_DATA";
+import { ManualItemType } from "./_types/ManualItemType";
 
 const manualList = [
   {
@@ -21,7 +22,7 @@ const manualList = [
 ];
 
 const page = () => {
-  const [selected, setSelected] = useState<keyof typeof MANUAL>("LOST");
+  const [selected, setSelected] = useState<keyof typeof MANUAL_DATA>("LOST");
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const handleToggle = (index: number) => {
@@ -34,11 +35,11 @@ const page = () => {
         tabs={manualList}
         selected={selected}
         onValueChange={(key) => {
-          setSelected(key as keyof typeof MANUAL);
+          setSelected(key as keyof typeof MANUAL_DATA);
           setOpenIndex(null);
         }}
       />
-      {MANUAL[selected].map((item: ManualItemType, index: number) => (
+      {MANUAL_DATA[selected].map((item: ManualItemType, index: number) => (
         <ManualItem
           key={item.title}
           {...item}

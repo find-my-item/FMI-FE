@@ -1,9 +1,4 @@
-export type ManualItemType = {
-  title: string;
-  content: React.ReactNode;
-  href?: string;
-  btnText?: string;
-};
+import { ManualItemType } from "../_types/ManualItemType";
 
 interface Manual {
   LOST: ManualItemType[];
@@ -11,7 +6,7 @@ interface Manual {
   STOLEN: ManualItemType[];
 }
 
-export const MANUAL: Manual = {
+export const MANUAL_DATA: Manual = {
   LOST: [
     {
       title: "경찰청 신고 내역을 확인했나요?",
