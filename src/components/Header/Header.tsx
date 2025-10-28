@@ -6,6 +6,19 @@ import SideBar from "./SideBar";
 import Icon from "../Icon/Icon";
 import { useHiddenPath } from "@/hooks/useHiddenPath";
 
+/**
+ * @author jikwon
+ *
+ * 상단 header 컴포넌트입니다.
+ *
+ * useHiddenPath 훅을 사용하여 / 메인 페이지에만 header를 표시합니다.
+ *
+ * @example
+ * ```tsx
+ * <Header />
+ * ```
+ */
+
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const isHidden = useHiddenPath();
