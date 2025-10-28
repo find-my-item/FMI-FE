@@ -1,8 +1,6 @@
 "use client";
 
 import { InputHTMLAttributes, useState } from "react";
-import { useFormContext } from "react-hook-form";
-// import { InputType } from "@/types/InputTypes";
 import { InputStyle } from "@/app/(route)/(auth)/_constant/authStyle";
 import Icon from "../Icon/Icon";
 import { cn } from "@/utils/cn";
@@ -11,12 +9,18 @@ interface InputType extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   type: string;
   className?: string;
-  label?: string;
-  rule?: string;
   eyeShow?: boolean;
+  IsBtn?: boolean;
 }
 
-const Input = ({ name, type, className = InputStyle, eyeShow = false, ...props }: InputType) => {
+const Input = ({
+  name,
+  type = "text",
+  className = InputStyle,
+  eyeShow = false,
+  IsBtn = false,
+  ...props
+}: InputType) => {
   const [value, setValue] = useState(""); // input 상태 관리 값
   const [show, setShow] = useState(false);
 
@@ -64,6 +68,9 @@ const Input = ({ name, type, className = InputStyle, eyeShow = false, ...props }
           <Icon name={show ? "EyeOpen" : "EyeOff"} size={16} />
         </button>
       )}
+
+      {/* with Button */}
+      <button></button>
     </div>
   );
 
