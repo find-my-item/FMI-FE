@@ -1,18 +1,26 @@
 import { cn } from "@/utils/cn";
+import { label, style } from "./BADGE";
+
+/**
+ * @author jikwon
+ *
+ * 상태를 나타내는 작은 원형 뱃지 컴포넌트입니다.
+ * `variant`에 따라 배경색과 라벨이 달라집니다.
+ *
+ * @param variant - 뱃지의 종류를 지정합니다.
+ * - `"new"`: 신규 항목 표시
+ * - `"hot"`: 인기 항목 표시
+ *
+ * @example
+ * ```tsx
+ * <Badge variant="new" />
+ * <Badge variant="hot" />
+ * ```
+ */
 
 interface BadgeProps {
   variant: "new" | "hot";
 }
-
-const style = {
-  new: "bg-[#1EB87B]",
-  hot: "bg-[#FF4242]",
-};
-
-const label = {
-  new: "N",
-  hot: "H",
-};
 
 function Badge({ variant }: BadgeProps) {
   return (
