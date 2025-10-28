@@ -12,7 +12,14 @@ import FloatingButton from "@/components/FloatingButton/FloatingButton";
 import ToggleButton from "@/components/ToggleButton/ToggleButton";
 import { useState } from "react";
 import ToggleImageButton from "@/components/ToggleImageButton/ToggleImageButton";
+<<<<<<< HEAD
 import { cn } from "@/utils/cn";
+=======
+import { Input } from "@/components";
+import InputField from "@/components/Input/InputField";
+import InputSearch from "@/components/Input/InputSearch";
+import InputChat from "@/components/Input/InputChat";
+>>>>>>> 15209e1 (design:공통 input 퍼블리싱)
 
 const Page = () => {
   const [toggleState, setToggleState] = useState(false);
@@ -194,6 +201,12 @@ const Page = () => {
           <p className="bg-gray-900 p-2 text-white">test</p>
         </section>
       </div>
+
+      {/* input */}
+      <Input name="test" type="text" />
+      <InputField />
+      <InputSearch />
+      <InputChat />
     </div>
   );
 };

@@ -1,19 +1,35 @@
 "use client";
 
+import { InputHTMLAttributes } from "react";
 import Icon from "../Icon/Icon";
+import { useState } from "react";
+import { cn } from "@/utils/cn";
 
-const InputSearch = () => {
+interface InputSearchProps extends InputHTMLAttributes<HTMLInputElement> {}
+
+const InputSearch = ({ ...props }: InputSearchProps) => {
+  const [value, setValue] = useState("");
+
   return (
-    <div className="flex w-full flex-row gap-2">
-      {/* 이미지 첨부버튼 */}
-      <button className="h-11 w-11 rounded-full bg-[#F5F5F5]">
-        <Icon name="Image" />
-      </button>
+    <div className="relative flex w-full flex-row gap-2">
+      <Icon name="Search" size={16} className="absolute left-5 top-1/2 -translate-y-1/2" />
 
-      <input className="h-11 w-full rounded-[24px] bg-[#F5F5F5] text-[#9D9D9D] focus:text-[#000000] disabled:text-[#9D9D9D]" />
-      {/* 전송 버튼 */}
-      <button className="h-11 w-11 rounded-full bg-[#1EB87B] opacity-70">
-        <Icon name="Send" />
+      <input
+        {...props}
+        className="h-11 min-w-0 flex-1 rounded-[24px] bg-[#F5F5F5] px-10 text-[14px] text-[#9D9D9D] focus:text-[#000000] disabled:text-[#9D9D9D]"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
+
+      {/* 삭제 버튼 */}
+      <button
+        className={cn(
+          "absolute right-5 top-1/2 h-[16.67px] w-[16.67px] -translate-y-1/2 rounded-full bg-[#9D9D9D] outline-none flex-center"
+        )}
+        type="button"
+        onClick={() => setValue("")}
+      >
+        <Icon name="Delete" aria-label="입력값 지우기" size={6.97} />
       </button>
     </div>
   );
