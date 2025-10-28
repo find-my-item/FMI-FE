@@ -1,5 +1,5 @@
-import { customerListObject } from "../_constant/customerListObject";
-import CustomerItem from "./CustomerItem";
+import { customerListObject } from "../../_constant/customerListObject";
+import CustomerItem from "../CustomerItem/CustomerItem";
 
 const CustomerList = () => {
   return (
