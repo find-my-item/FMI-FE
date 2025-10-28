@@ -27,6 +27,3 @@ const DeleteButton = ({ eyeShow, isValue, customStyle, onDelete }: DeleteButtonP
 };
 
 export default DeleteButton;
-
-("absolute h-[16.67px] w-[16.67px] right-[14px] top-[14px] rounded-full bg-[#9D9D9D] outline-none flex-center");
-("absolute w-[16.67px] h-[16.67px] top-1/2 -translate-y-1/2 rounded-full bg-[#9D9D9D] outline-none flex-center");

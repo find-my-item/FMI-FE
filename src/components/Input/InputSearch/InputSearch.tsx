@@ -4,6 +4,7 @@ import { InputHTMLAttributes } from "react";
 import Icon from "../../Icon/Icon";
 import { useState } from "react";
 import { cn } from "@/utils/cn";
+import DeleteButton from "../DeleteButton";
 
 interface InputSearchProps extends InputHTMLAttributes<HTMLInputElement> {}
 
@@ -22,15 +23,11 @@ const InputSearch = ({ ...props }: InputSearchProps) => {
       />
 
       {/* 삭제 버튼 */}
-      <button
-        className={cn(
-          "absolute right-5 top-1/2 h-[16.67px] w-[16.67px] -translate-y-1/2 rounded-full bg-[#9D9D9D] outline-none flex-center"
-        )}
-        type="button"
-        onClick={() => setValue("")}
-      >
-        <Icon name="Delete" aria-label="입력값 지우기" size={6.97} />
-      </button>
+      <DeleteButton
+        isValue={value}
+        customStyle="top-1/2 -translate-y-1/2 right-5"
+        onDelete={() => setValue("")}
+      />
     </div>
   );
 };

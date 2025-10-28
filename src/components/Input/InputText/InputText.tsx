@@ -25,8 +25,6 @@ const InputText = ({
   const [value, setValue] = useState(""); // input 상태 관리 값
   const [show, setShow] = useState(false);
 
-  const showClear = !!value;
-
   const actualType =
     eyeShow && (name === "password" || name === "passwordConfirm")
       ? show
@@ -52,17 +50,6 @@ const InputText = ({
         customStyle="top-1/2 -translate-y-1/2"
         onDelete={() => setValue("")}
       />
-      {/* <button
-        className={cn(
-          "absolute top-1/2 h-[16.67px] w-[16.67px] -translate-y-1/2 rounded-full bg-[#9D9D9D] outline-none flex-center",
-          eyeShow ? "right-8" : "right-2",
-          !showClear && "opacity-0"
-        )}
-        type="button"
-        onClick={() => setValue("")}
-      >
-        <Icon name="Delete" aria-label="입력값 지우기" size={6.97} />
-      </button> */}
 
       {/* 비밀번호 눈 모양 버튼 */}
       {eyeShow && (

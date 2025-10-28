@@ -2,7 +2,6 @@
 
 import { TextareaHTMLAttributes, useState } from "react";
 import { cn } from "@/utils/cn";
-import Icon from "../../Icon/Icon";
 import DeleteButton from "../DeleteButton";
 
 interface InputFieldProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {}
