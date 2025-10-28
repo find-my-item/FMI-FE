@@ -18,6 +18,7 @@ const InputSearch = ({ ...props }: InputSearchProps) => {
       <input
         {...props}
         className="h-11 min-w-0 flex-1 rounded-[24px] bg-[#F5F5F5] px-10 text-[14px] text-[#9D9D9D] focus:text-[#000000] disabled:text-[#9D9D9D]"
+        placeholder="검색어 키워드를 입력해 주세요."
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />

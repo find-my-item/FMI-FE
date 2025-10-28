@@ -41,10 +41,10 @@ const SignUpItem = ({
   return (
     <div className="flex min-h-[96px] w-full flex-col gap-2" key={name}>
       {/* label */}
-      <label htmlFor={name} className="text-[14px] text-[#363636]">
+      {/* <label htmlFor={name} className="text-[14px] text-[#363636]">
         {label}
         {validation?.required && <span className="text-[#1EB87B]">*</span>}
-      </label>
+      </label> */}
 
       {/* input */}
       <div className="flex w-full flex-row items-end gap-[10px]" key={name}>

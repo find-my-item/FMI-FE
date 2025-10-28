@@ -1,17 +1,19 @@
 "use client";
 
-import { InputHTMLAttributes, useState } from "react";
+import { InputHTMLAttributes, ReactNode, useState } from "react";
 import { InputStyle } from "@/app/(route)/(auth)/_constant/authStyle";
 import Icon from "../../Icon/Icon";
 import { cn } from "@/utils/cn";
 import DeleteButton from "../DeleteButton";
+import Button from "@/components/Button/Button";
 
 interface InputTextType extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   type: string;
   className?: string;
   eyeShow?: boolean;
-  IsBtn?: boolean;
+  label: string;
+  required: boolean;
 }
 
 const InputText = ({
@@ -19,9 +21,11 @@ const InputText = ({
   type = "text",
   className = InputStyle,
   eyeShow = false,
-  IsBtn = false,
+  label,
+  required,
+  children,
   ...props
-}: InputTextType) => {
+}: InputTextType & { children?: ReactNode }) => {
   const [value, setValue] = useState(""); // input 상태 관리 값
   const [show, setShow] = useState(false);
 
@@ -33,38 +37,57 @@ const InputText = ({
       : type;
 
   return (
-    <div className="relative flex w-full flex-row">
-      <input
-        {...props}
-        name={name}
-        type={actualType}
-        className={className}
-        onChange={(e) => setValue(e.target.value)}
-        value={value}
-      />
+    <div className="flex w-full flex-col gap-2">
+      {/* label */}
+      <label htmlFor={name} className="text-body2-medium text-[#363636]">
+        {label}
+        {required && <span className="text-[#1EB87B]">*</span>}
+      </label>
 
-      {/* 삭제 버튼 */}
-      <DeleteButton
-        eyeShow={eyeShow}
-        isValue={value}
-        customStyle="top-1/2 -translate-y-1/2"
-        onDelete={() => setValue("")}
-      />
+      <div className="flex w-full flex-row gap-2">
+        <div className="relative flex w-full flex-row">
+          <input
+            {...props}
+            name={name}
+            type={actualType}
+            className={className}
+            onChange={(e) => setValue(e.target.value)}
+            value={value}
+          />
+          {/* 삭제 버튼 */}
+          <DeleteButton
+            eyeShow={eyeShow}
+            isValue={value}
+            customStyle="top-1/2 -translate-y-1/2"
+            onDelete={() => setValue("")}
+          />
+          {/* 비밀번호 눈 모양 버튼 */}
+          {eyeShow && (
+            <button
+              className="absolute right-2 top-3 outline-none flex-center"
+              type="button"
+              aria-label={show ? "비밀번호 숨기기" : "비밀번호 보기"}
+              onClick={() => setShow(!show)}
+            >
+              <Icon name={show ? "EyeOpen" : "EyeOff"} size={16} />
+            </button>
+          )}
+        </div>
 
-      {/* 비밀번호 눈 모양 버튼 */}
-      {eyeShow && (
-        <button
-          className="absolute right-2 top-3 outline-none flex-center"
-          type="button"
-          aria-label={show ? "비밀번호 숨기기" : "비밀번호 보기"}
-          onClick={() => setShow(!show)}
-        >
-          <Icon name={show ? "EyeOpen" : "EyeOff"} size={16} />
-        </button>
-      )}
+        {/* with Button */}
+        {children && (
+          // <Button className="bg-white border border-[#CFCFCF] text-body1-semibold text-[#5D5D5D]">
+          <Button variant="outlined" className="text-body1-semibold">
+            {children}
+          </Button>
+        )}
+      </div>
 
-      {/* with Button */}
-      <button></button>
+      {/* 안내 문구 */}
+      <div className="flex w-full justify-between text-caption1-regular text-[#787878]">
+        <p> Cpation </p>
+        {name === "nickname" && <span> {value.length}/10 </span>}
+      </div>
     </div>
   );
 

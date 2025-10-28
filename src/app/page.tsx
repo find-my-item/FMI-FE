@@ -14,7 +14,6 @@ import { useState } from "react";
 import ToggleImageButton from "@/components/ToggleImageButton/ToggleImageButton";
 import { cn } from "@/utils/cn";
 
-
 const Page = () => {
   const [toggleState, setToggleState] = useState(false);
   const [imageToggleState, setImageToggleState] = useState(false);
