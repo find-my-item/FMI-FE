@@ -4,7 +4,7 @@ import Button from "@/components/Button/Button";
 import Link from "next/link";
 import CheckBox from "@/components/CheckBox/CheckBox";
 import { useWatch, useFormContext } from "react-hook-form";
-import Input from "@/components/Input/Input";
+import Input from "@/components/Input/InputText/InputText";
 import Logo from "../_components/Logo";
 
 const CheckBoxItem = [

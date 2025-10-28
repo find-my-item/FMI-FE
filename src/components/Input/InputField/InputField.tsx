@@ -2,7 +2,8 @@
 
 import { TextareaHTMLAttributes, useState } from "react";
 import { cn } from "@/utils/cn";
-import Icon from "../Icon/Icon";
+import Icon from "../../Icon/Icon";
+import DeleteButton from "../DeleteButton";
 
 interface InputFieldProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {}
 
@@ -22,14 +23,11 @@ const InputField = ({ ...props }: InputFieldProps) => {
       />
 
       {/* 삭제 버튼 */}
-      <button
-        className={cn(
-          "absolute right-[14px] top-[14px] h-[16.67px] w-[16.67px] rounded-full bg-[#9D9D9D] outline-none flex-center"
-        )}
-        type="button"
-      >
-        <Icon name="Delete" aria-label="입력값 지우기" size={6.97} />
-      </button>
+      <DeleteButton
+        isValue={value}
+        customStyle="right-[14px] top-[14px]"
+        onDelete={() => setValue("")}
+      />
 
       <span>error</span>
     </div>

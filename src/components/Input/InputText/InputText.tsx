@@ -2,10 +2,11 @@
 
 import { InputHTMLAttributes, useState } from "react";
 import { InputStyle } from "@/app/(route)/(auth)/_constant/authStyle";
-import Icon from "../Icon/Icon";
+import Icon from "../../Icon/Icon";
 import { cn } from "@/utils/cn";
+import DeleteButton from "../DeleteButton";
 
-interface InputType extends InputHTMLAttributes<HTMLInputElement> {
+interface InputTextType extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   type: string;
   className?: string;
@@ -13,14 +14,14 @@ interface InputType extends InputHTMLAttributes<HTMLInputElement> {
   IsBtn?: boolean;
 }
 
-const Input = ({
+const InputText = ({
   name,
   type = "text",
   className = InputStyle,
   eyeShow = false,
   IsBtn = false,
   ...props
-}: InputType) => {
+}: InputTextType) => {
   const [value, setValue] = useState(""); // input 상태 관리 값
   const [show, setShow] = useState(false);
 
@@ -45,7 +46,13 @@ const Input = ({
       />
 
       {/* 삭제 버튼 */}
-      <button
+      <DeleteButton
+        eyeShow={eyeShow}
+        isValue={value}
+        customStyle="top-1/2 -translate-y-1/2"
+        onDelete={() => setValue("")}
+      />
+      {/* <button
         className={cn(
           "absolute top-1/2 h-[16.67px] w-[16.67px] -translate-y-1/2 rounded-full bg-[#9D9D9D] outline-none flex-center",
           eyeShow ? "right-8" : "right-2",
@@ -55,7 +62,7 @@ const Input = ({
         onClick={() => setValue("")}
       >
         <Icon name="Delete" aria-label="입력값 지우기" size={6.97} />
-      </button>
+      </button> */}
 
       {/* 비밀번호 눈 모양 버튼 */}
       {eyeShow && (
@@ -113,4 +120,4 @@ const Input = ({
   // );
 };
 
-export default Input;
+export default InputText;

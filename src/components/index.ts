@@ -4,7 +4,7 @@ export { default as ModalLayout } from "./Modal/ModalLayout";
 export { default as Toast } from "./Toast/Toast";
 export { default as Header } from "./Header/Header";
 export { default as Footer } from "./Footer/Footer";
-export { default as Input } from "./Input/Input";
+export { default as Input } from "./Input/InputText/InputText";
 export { default as Chip } from "./Chip/Chip";
 export { default as CheckBox } from "./CheckBox/CheckBox";
 export { default as DetailHeader } from "./DetailHeader/DetailHeader";
