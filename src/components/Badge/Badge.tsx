@@ -1,5 +1,5 @@
 import { cn } from "@/utils/cn";
-import { label, style } from "./BADGE";
+import { label, style } from "./CONST_BADGE";
 
 /**
  * @author jikwon
