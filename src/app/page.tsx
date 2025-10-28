@@ -1,9 +1,6 @@
 "use client";
 
-import GlassMorphism from "@/design/GlassMorphism/GlassMorphism";
-import GlassMorphismButton from "@/design/GlassMorphism/GlassMorphismButton";
 import Button from "@/components/Button/Button";
-import Icon from "@/components/Icon/Icon";
 import Bookmark from "@/components/Bookmark/Bookmark";
 import KebabMenuButton from "@/components/KebabMenuButton/KebabMenuButton";
 import Location from "@/components/Location/Location";
@@ -46,12 +43,6 @@ const Page = () => {
         <h1 className="font-heading mb-6 text-4xl font-bold text-gray-900 dark:text-gray-100 tablet:mb-10">
           Design System Showcase
         </h1>
-        <div className="fixed max-w-[390px] gap-2 flex-col-center">
-          <GlassMorphismButton isDisabled={false}>다음</GlassMorphismButton>
-          <GlassMorphismButton isDisabled={true}>대기중</GlassMorphismButton>
-          <GlassMorphismButton isDisabled={true}>로그인</GlassMorphismButton>
-          <GlassMorphism />
-        </div>
         {/* Colors */}
         <section className="mb-12">
           <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-gray-100">Colors</h2>

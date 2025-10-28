@@ -2,7 +2,7 @@ import { useModalBackdrop, useModalLockAndEsc } from "@/utils/useOverlayHandlers
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import Icon from "../Icon/Icon";
-import ManualPopup from "@/components/ManualPopup/ManualPopup";
+import ManualPopup from "@/app/(route)/manual/_components/ManualPopup/ManualPopup";
 import { useState } from "react";
 
 const HeaderLink = [
@@ -64,7 +64,7 @@ const SideBar = ({ isOpen, onClose }: SideBarProps) => {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="mouse-hover select-none hover:underline"
+                    className="select-none mouse-hover hover:underline"
                     onClick={onClose}
                   >
                     {link.name}

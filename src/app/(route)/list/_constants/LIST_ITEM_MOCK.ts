@@ -1,4 +1,4 @@
-export const itemListObject = [
+export const LIST_ITEM_MOCK = [
   {
     id: 1,
     title: "서비스 점검 안내",
