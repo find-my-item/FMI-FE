@@ -39,13 +39,15 @@ const ListItem = ({ img, title, description, id, linkState = "list" }: ListItemP
           <div className="w-full">
             <div className="flex items-center gap-1">
               <Badge variant="new" />
-              <h2 className="flex-1 text-[18px] font-semibold leading-[140%] text-[#363636] u-ellipsis">
+              <h2 className="flex-1 text-h3-semibold text-layout-header-default u-ellipsis">
                 {title}
               </h2>
             </div>
-            <span className="text-[14px] leading-[140%] text-[#787878]">노원구 00동 · 30분 전</span>
+            <span className="text-body2-regular text-layout-body-default">
+              노원구 00동 · 30분 전
+            </span>
           </div>
-          <p className="w-full text-[14px] leading-[140%] text-[#5D5D5D] u-ellipsis">
+          <p className="w-full text-body2-regular text-neutral-normal-default u-ellipsis">
             {description}
           </p>
         </div>
@@ -53,7 +55,7 @@ const ListItem = ({ img, title, description, id, linkState = "list" }: ListItemP
           {VIEW_ITEM.map((item) => (
             <span
               key={item.icon}
-              className="flex items-center gap-1 text-[14px] leading-[120%] text-[#9D9D9D]"
+              className="flex items-center gap-1 text-body2-regular text-neutral-strong-placeholder"
             >
               <Icon name={item.icon} size={16} />
               {item.count}
