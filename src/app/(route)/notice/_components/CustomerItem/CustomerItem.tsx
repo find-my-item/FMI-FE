@@ -22,7 +22,7 @@ const CustomerItem = ({ item }: CustomerItemProp) => {
           <p className="rounded-[4px] bg-emerald-100 px-2 py-[2px] text-[12px] text-emerald-700">
             {item.category}
           </p>
-          <h2 className="u-ellipsis text-[16px] font-semibold text-[#242424]">{item.title}</h2>
+          <h2 className="text-[16px] font-semibold text-[#242424] u-ellipsis">{item.title}</h2>
         </div>
 
         <div className="mb-2 flex items-center gap-3 text-[13px] text-[#5D5D5D]">

@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import NoticeDetail from "../[id]/page";
+import NoticeDetail from "./page";
 import { noticeListObject } from "../_constant/noticeListObject";
 
 describe("공지사항 상세 페이지 ID 일치 테스트", () => {
