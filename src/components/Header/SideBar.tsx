@@ -4,19 +4,23 @@ import Link from "next/link";
 import Icon from "../Icon/Icon";
 import ManualPopup from "@/app/(route)/manual/_components/ManualPopup/ManualPopup";
 import { useState } from "react";
+import { HEADER_LINK } from "./CONST_HEADER";
 
-const HeaderLink = [
-  { name: "리스트", href: "/list" },
-  { name: "글쓰기", href: "/write" },
-  { name: "로그인", href: "/login" },
-  { name: "회원가입", href: "/sign-up" },
-  { name: "프로필", href: "/profile" },
-  { name: "공지사항", href: "/notice?tab=notice" },
-  { name: "FAQ", href: "/faq" },
-  { name: "채팅", href: "/chat" },
-  { name: "매뉴얼", href: "/manual" },
-];
+// TODO(지권): 추후 디자인 수정 필요
 
+/**
+ * @author jikwon
+ *
+ * header 컴포넌트의 사이드바 컴포넌트입니다.
+ *
+ * @param isOpen - 사이드바가 열려있는지 여부
+ * @param onClose - 사이드바를 닫는 함수
+ *
+ * @example
+ * ```tsx
+ * <SideBar isOpen={isOpen} onClose={onClose} />
+ * ```
+ */
 type SideBarProps = {
   isOpen: boolean;
   onClose: () => void;
@@ -60,7 +64,7 @@ const SideBar = ({ isOpen, onClose }: SideBarProps) => {
               <Icon name="XSecond" />
             </button>
             <ul className="mt-10 flex flex-col gap-4">
-              {HeaderLink.map((link) => (
+              {HEADER_LINK.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}

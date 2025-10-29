@@ -1,17 +1,31 @@
 import { ToastType } from "@/types/ToastTypes";
 import { cn } from "@/utils/cn";
 import Icon, { IconName } from "../Icon/Icon";
+import { TOAST_CONFIG } from "./ToastTypes";
+
+/**
+ * @author jikwon
+ *
+ * 토스트 컴포넌트입니다.
+ * `type`에 따라 배경색과 아이콘, 사이즈가 달라집니다.
+ *
+ * @param type - 토스트의 종류를 지정합니다.
+ * - `"success"`: 성공 메시지를 나타냅니다.
+ * - `"error"`: 오류 메시지를 나타냅니다.
+ * - `"warning"`: 경고 메시지를 나타냅니다.
+ *
+ * @example
+ * ```tsx
+ * <Toast message="Text" type="success" />
+ * <Toast message="Text" type="error" />
+ * <Toast message="Text" type="warning" />
+ * ```
+ */
 
 interface ToastProps {
   message: string;
   type: ToastType;
 }
-
-const TOAST_CONFIG = {
-  success: { bg: "bg-[#46C691]", icon: "Success", size: 16 },
-  error: { bg: "bg-[#FF4242]", icon: "Error", size: 20 },
-  warning: { bg: "bg-[#FFC642]", icon: "Warning", size: 10 },
-} satisfies Record<ToastType, { bg: string; icon: IconName; size: number }>;
 
 function getToastConfig(type: ToastType) {
   return TOAST_CONFIG[type] ?? TOAST_CONFIG.success;

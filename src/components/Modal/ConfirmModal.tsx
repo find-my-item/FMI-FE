@@ -1,34 +1,45 @@
+import type { ReactNode } from "react";
 import { ModalLayout } from "..";
 import { cn } from "@/utils/cn";
-import Icon, { IconName } from "../Icon/Icon";
+import Icon, { Props as IconProps } from "../Icon/Icon";
+import { sizeMap, style } from "./CONST_MODAL";
 
-type IconType = {
-  name: IconName;
-  size?: number;
-  title?: string;
-};
-
+/**
+ * 확인 모달 컴포넌트입니다.
+ *
+ * @param title - 모달 제목
+ * @param content - 모달 내용
+ * @param icon - 아이콘(이름/크기/라벨만 사용)
+ * @param isOpen - 모달 열림 여부
+ * @param onClose - 닫기 핸들러(ESC/백드롭 포함)
+ * @param onConfirm - 확인 클릭 핸들러
+ * @param onCancel - 취소 클릭 핸들러
+ * @param size - 모달 크기. 기본값은 `"medium"`
+ *
+ * @example
+ * ```tsx
+ * <ConfirmModal
+ *   title="제목"
+ *   content="내용"
+ *   icon={{ name: "Logo", size: 24, title: "로고" }}
+ *   isOpen={isOpen}
+ *   onClose={onClose}
+ *   onConfirm={onConfirm}
+ *   onCancel={onCancel}
+ *   size="medium"
+ * />
+ * ```
+ */
 interface ConfirmModalProps {
-  title: React.ReactNode;
-  content: React.ReactNode;
-  icon?: IconType;
+  title: ReactNode;
+  content: ReactNode;
+  icon?: Pick<IconProps, "name" | "size" | "title">;
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
-  onFalse: () => void;
-  size: "small" | "medium";
+  onCancel: () => void;
+  size?: "small" | "medium";
 }
-
-const style = {
-  baseBtn: "flex-1 flex-center font-semibold text-[16px] py-[10px] rounded-[10px]",
-  trueBtn: "bg-[#1EB87B]/70 text-white glass-card",
-  falseBtn: "bg-[#FFFFFF] text-gray-800 border border-[#CFCFCF]",
-};
-
-const sizeMap: Record<"small" | "medium", string> = {
-  small: "w-[320px]",
-  medium: "w-[400px]",
-};
 
 const ConfirmModal = ({
   isOpen,
@@ -37,21 +48,13 @@ const ConfirmModal = ({
   content,
   icon,
   onConfirm,
-  onFalse,
+  onCancel,
   size = "medium",
 }: ConfirmModalProps) => {
-  const btnList = [
-    {
-      label: "False",
-      onClick: onFalse,
-      className: style.falseBtn,
-    },
-    {
-      label: "True",
-      onClick: onConfirm,
-      className: style.trueBtn,
-    },
-  ];
+  const buttons = [
+    { key: "cancel", label: "취소", onClick: onCancel, className: style.cancelBtn },
+    { key: "confirm", label: "확인", onClick: onConfirm, className: style.confirmBtn },
+  ] as const;
 
   return (
     <ModalLayout
@@ -65,19 +68,21 @@ const ConfirmModal = ({
             <Icon name={icon.name} size={icon.size} title={icon.title} className="text-white" />
           </div>
         )}
-        <div className="gap-[4px] flex-col-center">
+        <div className="gap-[4px] text-center flex-col-center">
           <div className="text-[18px] font-semibold leading-[140%]">{title}</div>
           <div className="text-[14px] leading-[140%]">{content}</div>
         </div>
       </div>
+
       <div className="w-full gap-2 flex-center">
-        {btnList.map((btn) => (
+        {buttons.map((b) => (
           <button
-            key={btn.label}
-            className={cn(style.baseBtn, btn.className)}
-            onClick={btn.onClick}
+            key={b.key}
+            type="button"
+            className={cn(style.baseBtn, b.className)}
+            onClick={b.onClick}
           >
-            {btn.label}
+            {b.label}
           </button>
         ))}
       </div>
