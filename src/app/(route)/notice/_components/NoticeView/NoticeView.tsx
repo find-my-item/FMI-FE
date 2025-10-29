@@ -1,7 +1,7 @@
-import { NoticeCustomerState } from "../_types/noticeContainer";
-import ListItem from "../../list/_components/ListItem/ListItem";
-import { noticeListObject } from "../_constant/noticeListObject";
-import Customer from "./Customer";
+import { NoticeCustomerState } from "../../_types/noticeContainer";
+import ListItem from "../../../list/_components/ListItem/ListItem";
+import { noticeListObject } from "../../_constant/noticeListObject";
+import Customer from "../Customer/Customer";
 
 interface NoticeView {
   noticeCustomerState: NoticeCustomerState;
