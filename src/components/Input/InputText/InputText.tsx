@@ -7,13 +7,15 @@ import { cn } from "@/utils/cn";
 import DeleteButton from "../DeleteButton";
 import Button from "@/components/Button/Button";
 
-interface InputTextType extends InputHTMLAttributes<HTMLInputElement> {
+interface InputTextProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "children"> {
   name: string;
   type: string;
   className?: string;
   eyeShow?: boolean;
   label: string;
   required: boolean;
+  children?: ReactNode;
+  btnOnClick?: () => void;
 }
 
 const InputText = ({
@@ -24,8 +26,9 @@ const InputText = ({
   label,
   required,
   children,
+  btnOnClick,
   ...props
-}: InputTextType & { children?: ReactNode }) => {
+}: InputTextProps) => {
   const [value, setValue] = useState(""); // input 상태 관리 값
   const [show, setShow] = useState(false);
 
@@ -76,8 +79,12 @@ const InputText = ({
 
         {/* with Button */}
         {children && (
-          // <Button className="bg-white border border-[#CFCFCF] text-body1-semibold text-[#5D5D5D]">
-          <Button variant="outlined" className="text-body1-semibold">
+          <Button
+            variant="outlined"
+            className="text-body1-semibold"
+            type="button"
+            onClick={btnOnClick}
+          >
             {children}
           </Button>
         )}
