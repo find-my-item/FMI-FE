@@ -26,7 +26,7 @@ const ListItem = ({ img, title, description, id, linkState = "list" }: ListItemP
   return (
     <Link
       href={linkState === "list" ? `/list/${id}` : `/notice/${id}`}
-      className="duration-130 flex w-full cursor-pointer items-center gap-[14px] border-b border-b-[#E4E4E4] px-[20px] py-[30px] transition-colors hover:bg-[#F9F9F9]"
+      className="duration-130 border-b-flatGray-50 flex w-full cursor-pointer items-center gap-[14px] border-b px-[20px] py-[30px] transition-colors hover:bg-[#F9F9F9]"
     >
       <div className="min-w-0 flex-1">
         {linkState === "list" && (
