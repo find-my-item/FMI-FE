@@ -185,11 +185,15 @@ module.exports = {
           800: "rgba(54, 54, 54, 0.7)",
           900: "rgba(36, 36, 36, 0.7)",
           950: "rgba(19, 20, 22, 0.7)",
-          1000: "rgba(0, 0, 0, 0.7)",
-          50_2: "rgba(228, 228, 228, 0.7)"
+          1000: "rgba(0, 0, 0, 0.7)"
         },
         yellow: {
           500: "#fee500"
+        },
+        tansparnt: {
+      "white_4": "rgba(255, 255, 255, 0.04)",
+      "white_8": "rgba(255, 255, 255, 0.08)",
+      "white_12": "rgba(255, 255, 255, 0.12)"
         },
         gray: {
           0: "#ffffff"
@@ -238,7 +242,13 @@ module.exports = {
             pressed: "#e4e4e4",
             default: "#f5f5f5",
             enteredSelected: "#f5f5f5",
-            disabled: "#e4e4e4"
+            disabled: "#e4e4e4",
+        "disabled_2": "#e4e4e4",
+        "pressed_2": "#e4e4e4",
+        "focused_2": "#f5f5f5",
+        "default_2": "#f5f5f5",
+        "enteredSelected_2": "#f5f5f5",
+        "hover_2": "#f5f5f5"
           },
           normal: {
             default: "#ffffff",
@@ -246,7 +256,27 @@ module.exports = {
             pressed: "#f5f5f5",
             hover: "#ffffff",
             enteredSelected: "#ffffff",
-            disabled: "#e4e4e4"
+            disabled: "#e4e4e4",
+        "pressed_2": "#f5f5f5",
+        "disabled_2": "#e4e4e4",
+        "focused_2": "#ffffff",
+        "enteredSelected_2": "#ffffff",
+        "hover_2": "#ffffff",
+        "default_2": "#ffffff"
+          },
+          subtle: {
+            default: "rgba(245, 245, 245, 0.7)",
+            hover: "rgba(245, 245, 245, 0.7)",
+            focused: "rgba(245, 245, 245, 0.7)",
+            enteredSelected: "#f5f5f5",
+            pressed: "#e4e4e4",
+            disabled: "rgba(228, 228, 228, 0.7)",
+        "pressed_2": "#e4e4e4",
+        "disabled_2": "rgba(228, 228, 228, 0.7)",
+        "focused_2": "rgba(245, 245, 245, 0.7)",
+        "enteredSelected_2": "#f5f5f5",
+        "hover_2": "rgba(245, 245, 245, 0.7)",
+        "default_2": "rgba(245, 245, 245, 0.7)"
           }
         },
         brand: {
@@ -256,7 +286,14 @@ module.exports = {
             hover: "#c2f1d4",
             default: "#d6f8e1",
             disabled: "#e3fcee",
-            pressed: "#c2f1d4"
+            pressed: "#c2f1d4",
+        "focused_2": "#c2f1d4",
+        "hover_2": "#c2f1d4",
+        "default_2": "#d6f8e1",
+        "enteredSelected_2": "#e3fcee",
+        "pressed_2": "#c2f1d4",
+        "disabled_2": "#e3fcee",
+        "default_3": "#eefff6"
           },
           normal: {
             pressed: "rgba(0, 158, 83, 0.7)",
@@ -264,63 +301,88 @@ module.exports = {
             default: "rgba(30, 184, 123, 0.7)",
             enteredSelected: "rgba(70, 198, 145, 0.7)",
             focused: "rgba(0, 183, 110, 0.7)",
-            disabled: "rgba(152, 227, 189, 0.9)"
+            disabled: "rgba(152, 227, 189, 0.9)",
+        "enteredSelected_2": "rgba(70, 198, 145, 0.7)",
+        "disabled_2": "rgba(152, 227, 189, 0.9)",
+        "default_2": "rgba(30, 184, 123, 0.7)",
+        "focused_2": "rgba(0, 183, 110, 0.7)",
+        "hover_2": "rgba(0, 183, 110, 0.7)",
+        "pressed_2": "rgba(0, 158, 83, 0.7)"
           }
-        },
-        layout: {
-          disabled: "#d9d9d9",
-          pressed: "#e4e4e4",
-          enteredSelected: "#ffffff",
-          focused: "#ffffff",
-          hover: "#f5f5f5",
-          default: "#ffffff"
         },
         neutralInversed: {
           normal: {
             enteredSelected: "#525252",
-            hover: "#d9d9d9",
-            preesed: "#cfcfcf",
+            hover: "#f5f5f5",
+            preesed: "#e4e4e4",
             disabled: "#e4e4e4",
-            default: "#ffffff",
-            focused: "#d9d9d9"
+            default: "#f5f5f5",
+            focused: "#f5f5f5",
+        "default_2": "#f5f5f5",
+        "disabled_2": "#e4e4e4",
+        "preesed_2": "#e4e4e4",
+        "enteredSelected_2": "#525252",
+        "hover_2": "#f5f5f5",
+        "focused_2": "#f5f5f5"
+          },
+          strong: {
+            disabled: "rgba(255, 255, 255, 0.04)",
+            preesed: "rgba(255, 255, 255, 0.08)",
+            enteredSelected: "rgba(255, 255, 255, 0.12)",
+            default: "rgba(255, 255, 255, 0.04)",
+            focused: "rgba(255, 255, 255, 0.08)",
+            hover: "rgba(255, 255, 255, 0.08)",
+        "disabled_2": "rgba(255, 255, 255, 0.04)",
+        "enteredSelected_2": "rgba(255, 255, 255, 0.12)",
+        "focused_2": "rgba(255, 255, 255, 0.08)",
+        "hover_2": "rgba(255, 255, 255, 0.08)",
+        "default_2": "rgba(255, 255, 255, 0.04)",
+        "preesed_2": "rgba(255, 255, 255, 0.08)"
           }
         },
         accent: {
           kakao: "#fee500",
           foundItem: "#eaf2fe",
-          lostItem: "#fef4e6"
+          lostItem: "#fef4e6",
+      "foundItem_2": "#eaf2fe",
+      "lostItem_2": "#fef4e6",
+      "kakao_2": "#fee500"
         }
       },
       fg: {
         layout: {
           body: {
-            hover: "#5d5d5d",
             default: "#787878",
-            pressed: "#787878",
-            focused: "#5d5d5d",
-            enteredSelected: "#525252",
-            disabled: "#cfcfcf"
+        "default_2": "#787878"
           },
           header: {
-            disabled: "#9d9d9d",
-            pressed: "#363636",
-            focused: "#000000",
-            hover: "#000000",
-            enteredSelected: "#000000",
-            default: "#363636"
+            default: "#363636",
+        "default_2": "#363636"
           }
         },
         neutralInversed: {
           normal: {
             disabled: "#cfcfcf",
             pressed: "#9d9d9d",
-            hover: "#5d5d5d",
-            default: "#9d9d9d",
-            focused: "#5d5d5d",
-            enteredSelected: "#ffffff"
+            hover: "#000000",
+            default: "#5d5d5d",
+            focused: "#000000",
+            enteredSelected: "#ffffff",
+        "pressed_2": "#9d9d9d",
+        "disabled_2": "#cfcfcf",
+        "enteredSelected_2": "#ffffff",
+        "default_2": "#5d5d5d",
+        "focused_2": "#000000",
+        "hover_2": "#000000"
           },
           strong: {
-            default: "#f5f5f5"
+            default: "#cfcfcf",
+            disabled: "#9d9d9d",
+            pressed: "#d9d9d9",
+            enteredSelected: "#ffffff",
+            focused: "#d9d9d9",
+            hover: "#d9d9d9",
+        "default_2": "#f5f5f5"
           }
         },
         neutral: {
@@ -331,7 +393,14 @@ module.exports = {
             disabled: "#9d9d9d",
             default: "#5d5d5d",
             preesed: "#9d9d9d",
-            enteredSelected: "#000000"
+            enteredSelected: "#000000",
+        "placeholder_2": "#9d9d9d",
+        "focused_2": "#000000",
+        "default_2": "#5d5d5d",
+        "preesed_2": "#9d9d9d",
+        "disabled_2": "#9d9d9d",
+        "hover_2": "#000000",
+        "enteredSelected_2": "#000000"
           },
           strong: {
             preesed: "#9d9d9d",
@@ -340,7 +409,14 @@ module.exports = {
             placeholder: "#9d9d9d",
             disabled: "#9d9d9d",
             focused: "#000000",
-            hover: "#000000"
+            hover: "#000000",
+        "preesed_2": "#9d9d9d",
+        "hover_2": "#000000",
+        "default_2": "#5d5d5d",
+        "enteredSelected_2": "#000000",
+        "disabled_2": "#9d9d9d",
+        "focused_2": "#000000",
+        "placeholder_2": "#9d9d9d"
           }
         },
         brand: {
@@ -350,7 +426,13 @@ module.exports = {
             default: "#1eb87b",
             focused: "#00b76e",
             hover: "#00b76e",
-            disabled: "#98e3bd"
+            disabled: "#98e3bd",
+        "disabled_2": "#98e3bd",
+        "pressed_2": "#6ed5a7",
+        "enteredSelected_2": "#1eb87b",
+        "focused_2": "#00b76e",
+        "hover_2": "#00b76e",
+        "default_2": "#1eb87b"
           },
           normal: {
             disabled: "#c2f1d4",
@@ -358,12 +440,20 @@ module.exports = {
             focused: "#f6fffc",
             hover: "#f6fffc",
             default: "#f6fffc",
-            pressed: "#98e3bd"
+            pressed: "#98e3bd",
+        "default_2": "#f6fffc",
+        "disabled_2": "#c2f1d4",
+        "pressed_2": "#98e3bd",
+        "focused_2": "#f6fffc",
+        "hover_2": "#f6fffc",
+        "enteredSelected_2": "#f6fffc"
           }
         },
         accent: {
           lostItem: "#ff9200",
-          foundItem: "#4f95ff"
+          foundItem: "#4f95ff",
+      "lostItem_2": "#ff9200",
+      "foundItem_2": "#4f95ff"
         }
       },
       border: {
@@ -374,49 +464,82 @@ module.exports = {
             hover: "#adadad",
             pressed: "#cfcfcf",
             disabled: "#cfcfcf",
-            default: "#cfcfcf"
+            default: "#cfcfcf",
+        "pressed_2": "#cfcfcf",
+        "focused_2": "#adadad",
+        "hover_2": "#adadad",
+        "default_2": "#cfcfcf",
+        "enteredSelected_2": "#9d9d9d",
+        "disabled_2": "#cfcfcf"
           },
           strong: {
-            pressed: "#b8d4ff",
-            enteredSelected: "#69a5ff",
-            disabled: "#cfcfcf",
-            focused: "#69a5ff",
-            hover: "#b8d4ff",
-            default: "#cfcfcf"
+        "enteredSelected_2": "#69a5ff",
+        "focused_2": "#69a5ff",
+        "hover_2": "#b8d4ff",
+        "default_2": "#cfcfcf",
+        "pressed_2": "#b8d4ff",
+        "disabled_2": "#cfcfcf"
           }
         },
         divider: {
-          default: "#d9d9d9"
+          default: "#d9d9d9",
+      "default_2": "#d9d9d9",
+      "default_3": "#e4e4e4"
         },
         brand: {
           subtle: {
-            pressed: "#69a5ff",
-            hover: "#b8d4ff",
-            focused: "#b8d4ff",
-            default: "#cde1fe",
-            disabled: "#cde1fe",
-            enteredSelected: "#69a5ff"
+        "enteredSelected_2": "#69a5ff",
+        "focused_2": "#b8d4ff",
+        "default_2": "#cde1fe",
+        "pressed_2": "#69a5ff",
+        "disabled_2": "#cde1fe",
+        "hover_2": "#b8d4ff",
+            default: "#d6f8e1",
+            hover: "#c2f1d4",
+            focused: "#c2f1d4",
+            enteredSelected: "#e3fcee",
+            pressed: "#c2f1d4",
+            disabled: "#e3fcee"
+          },
+          normal: {
+            default: "rgba(30, 184, 123, 0.7)",
+            hover: "rgba(0, 183, 110, 0.7)",
+            focused: "rgba(0, 183, 110, 0.7)",
+            enteredSelected: "rgba(70, 198, 145, 0.7)",
+            pressed: "rgba(0, 158, 83, 0.7)",
+            disabled: "rgba(152, 227, 189, 0.9)",
+        "default_2": "rgba(30, 184, 123, 0.7)",
+        "hover_2": "rgba(0, 183, 110, 0.7)",
+        "focused_2": "rgba(0, 183, 110, 0.7)",
+        "enteredSelected_2": "rgba(70, 198, 145, 0.7)",
+        "pressed_2": "rgba(0, 158, 83, 0.7)",
+        "disabled_2": "rgba(152, 227, 189, 0.9)"
           }
         }
-      },
-      bg: {
-        lnb: "#001536",
-        none: {
-          400: "#42547e",
-          500: "#293b62",
-          600: "#152343"
-        },
-        navigation: "#ffffff",
-        content: "#ffffff",
-    "layout_1depth": "#ffffff",
-        toast: "rgba(93, 93, 93, 0.7)",
-    "layout_2depth": "#f5f5f5"
       },
       system: {
         success: "#00b76e",
         warning: "#ff4242",
         toastSuccess: "#46c691",
-        toastWarning: "#ffc642"
+        toastWarning: "#ffc642",
+    "toastSuccess_3": "#46c691",
+    "toastWarning_3": "#ffc642",
+    "warning_3": "#ff4242",
+    "success_3": "#00b76e",
+        bookmark: "#ffc642"
+      },
+      bg: {
+    "layout_1depth": "#ffffff",
+        toast: "rgba(93, 93, 93, 0.7)",
+    "layout_2depth": "#f5f5f5",
+        dimTransparent: "rgba(0, 0, 0, 0.5)",
+        dimOpaque: "#363636",
+    "layout_1depth_2": "#ffffff",
+    "toast_2": "rgba(93, 93, 93, 0.7)",
+    "dimOpaque_2": "#363636",
+    "layout_2depth_2": "#f5f5f5",
+    "dimTransparent_2": "rgba(0, 0, 0, 0.5)",
+    "dimTransparent_3": "rgba(120, 120, 120, 0.1)"
       },
       spacing: {
         padding: {
@@ -482,12 +605,9 @@ module.exports = {
     "fontsize_800": 32
       },
       radius: {
-    "radius_500": 20,
-    "radius_300": 12,
-    "radius_2500": 100,
-    "radius_200": 8,
-    "cRadius_100": 4,
+    "radius_600": 24,
     "radius_400": 16,
+    "radius_2500": 100,
     "radius_250": 10,
     "radius_100": 4
       }
