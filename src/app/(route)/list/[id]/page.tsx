@@ -1,7 +1,7 @@
 import { LIST_ITEM_MOCK } from "../_constants/LIST_ITEM_MOCK";
 import { PostDetail, SimilarItemsSection, CommentForm } from "./_components";
 import { commentListObject } from "../../notice/_constant/commentListObject";
-import CommentList from "../../notice/_components/CommentList/CommentList";
+import CommentList from "../../../../components/CommentList/CommentList";
 import PostDetailTopHeader from "./_components/PostDetailTopHeader/PostDetailTopHeader";
 
 interface ListDetailProps {

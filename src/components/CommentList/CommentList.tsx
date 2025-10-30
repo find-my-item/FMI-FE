@@ -1,5 +1,5 @@
 import { ViewMoreComment } from "@/components";
-import CommentItem from "../CommentItem/CommentItem";
+import CommentItem from "./CommentItem";
 import { useMemo } from "react";
 
 interface Comment {
