@@ -1,15 +1,16 @@
 import Icon, { IconName } from "@/components/Icon/Icon";
+import { formatNumber } from "@/utils/formatNumber";
 
 const SimilarItem = () => {
   const IconList = [
     {
       name: "Eye",
-      value: 23,
+      value: 99999,
       ariaLabel: "조회수",
     },
     {
       name: "Star",
-      value: 12,
+      value: 1234,
       ariaLabel: "즐겨찾기",
     },
   ];
@@ -28,7 +29,7 @@ const SimilarItem = () => {
         {IconList.map((icon, index) => (
           <li key={index} className="flex items-center gap-1" aria-label={`${icon.ariaLabel}`}>
             <Icon name={icon.name as IconName} size={18} aria-hidden="true" />
-            <span className="text-[14px] leading-5 text-[#9D9D9D]">{icon.value}</span>
+            <span className="text-[14px] leading-5 text-[#9D9D9D]">{formatNumber(icon.value)}</span>
           </li>
         ))}
       </ul>
