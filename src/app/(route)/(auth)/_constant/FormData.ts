@@ -1,4 +1,4 @@
-import { InputType } from "@/types/InputTypes";
+import { RegisterOptions } from "react-hook-form";
 
 export type FormValue = {
   email: string;
@@ -12,7 +12,21 @@ export type FormValue = {
   };
 };
 
-export const signUpInputObject: InputType[] = [
+export type InputType = {
+  name: string;
+  label?: string;
+  className?: string;
+  type: string;
+  placeholder: string;
+  validation?: RegisterOptions;
+  required?: boolean;
+  onConfirm?: React.FocusEventHandler<HTMLInputElement>;
+  rule?: string; // 닉네임 규칙 안내 문구
+  eyeShow?: boolean;
+  btnText?: string;
+};
+
+export const SIGNUP_INPUT_DATA: InputType[] = [
   {
     name: "email",
     label: "아이디(이메일)",
@@ -25,6 +39,7 @@ export const signUpInputObject: InputType[] = [
         message: "이미 가입된 이메일입니다.",
       },
     },
+    btnText: "인증번호 발송",
   },
   {
     name: "emailAuth",
@@ -34,6 +49,7 @@ export const signUpInputObject: InputType[] = [
     validation: {
       required: true,
     },
+    btnText: "인증번호 확인",
   },
   {
     name: "password",
@@ -76,5 +92,6 @@ export const signUpInputObject: InputType[] = [
         message: "2~10자 사이의 닉네임을 입력해 주세요.",
       },
     },
+    btnText: "중복 확인",
   },
 ];

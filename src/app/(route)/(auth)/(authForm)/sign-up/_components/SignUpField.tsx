@@ -1,12 +1,12 @@
-import { signUpInputObject } from "../../../_constant/FormData";
+import { SIGNUP_INPUT_DATA } from "../../../_constant/FormData";
 import Button from "@/components/Button/Button";
 import SignUpItem from "./SignUpItem";
 
 const SignUpField = ({ onNext }: { onNext: () => void }) => {
   return (
     <>
-      {/* <div className="flex w-full flex-col gap-5 p-4">
-        {signUpInputObject.map((item) => (
+      <div className="flex w-full flex-col gap-5 p-4">
+        {SIGNUP_INPUT_DATA.map((item) => (
           <SignUpItem
             key={item.name}
             name={item.name}
@@ -16,6 +16,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
             validation={item.validation}
             rule={item.rule}
             eyeShow={item.eyeShow}
+            btnText={item.btnText}
           />
         ))}
       </div>
@@ -23,7 +24,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
         <Button type="button" ariaLabel="회원가입 폼 버튼" onClick={onNext}>
           다음
         </Button>
-      </div> */}
+      </div>
     </>
   );
 };
