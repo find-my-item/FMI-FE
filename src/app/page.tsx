@@ -75,7 +75,7 @@ const Page = () => {
         <Bookmark isActive={false} />
         <KebabMenuButton />
         <Location children="위치" disabled />
-        <ViewMoreReply text="TEXT" disabled />
+        <ViewMoreReply text="TEXT" onViewMore={() => {}} />
         <ViewMoreComment text="댓글 10개 더보기" />
         <Filter
           ariaLabel="지역 선택"
