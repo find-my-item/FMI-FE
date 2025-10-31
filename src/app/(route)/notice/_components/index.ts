@@ -1,4 +1,3 @@
-export { default as CommentList } from "./CommentList/CommentList";
 export { default as Customer } from "./Customer/Customer";
 export { default as CustomerItem } from "./CustomerItem/CustomerItem";
 export { default as CustomerList } from "./CustomerList/CustomerList";
