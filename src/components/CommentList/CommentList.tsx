@@ -1,14 +1,7 @@
 import { ViewMoreComment } from "@/components";
 import CommentItem from "./CommentItem";
 import { useMemo } from "react";
-
-interface Comment {
-  id: number;
-  author: string;
-  date: string;
-  content: string;
-  replyTo?: string;
-}
+import type { Comment } from "./types/commentItem";
 
 interface CommentListProps {
   comments: Comment[];

@@ -3,14 +3,7 @@
 import { Bookmark, Icon, KebabMenuButton, ViewMoreReply } from "@/components";
 import { cn } from "@/utils/cn";
 import { useState } from "react";
-
-interface Comment {
-  id: number;
-  author: string;
-  date: string;
-  content: string;
-  replyTo?: string;
-}
+import type { Comment } from "./types/commentItem";
 
 interface CommentItemProps {
   comment: Comment;
