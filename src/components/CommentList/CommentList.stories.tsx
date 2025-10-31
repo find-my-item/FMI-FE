@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import CommentList from "./CommentList";
+import { CommentList } from "@/components/index";
 
 const meta = {
   title: "공통 컴포넌트/CommentList",
