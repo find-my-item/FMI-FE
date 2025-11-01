@@ -70,7 +70,7 @@ const Page = () => {
             ))}
           </div>
         </section>
-        <Button variant="solid" hierarchy="subtle" size="big" icon={{ name: "Logo" }}>
+        <Button variant="solid" hierarchy="subtle" size="big">
           찾아줘
         </Button>
         <Bookmark isActive={false} />
