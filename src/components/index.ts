@@ -23,3 +23,4 @@ export { default as FloatingButton } from "./FloatingButton/FloatingButton";
 export { default as ToggleButton } from "./ToggleButton/ToggleButton";
 export { default as ToggleImageButton } from "./ToggleImageButton/ToggleImageButton";
 export { default as CommentList } from "./CommentList/CommentList";
+export { default as ListSearch } from "./ListSearch/ListSearch";

@@ -1,17 +1,22 @@
+import PostSearchView from "./component/PostSearchView";
+import RegionSearchView from "./component/RegionSearchView";
+import { LIST_SEARCH_PLACEHOLDER } from "./LIST_SEARCH_PLACEHOLDER";
+
 interface ListSearch {
-  placeholder: string;
+  searchMode: "region" | "post";
 }
 
-const ListSearch = ({ placeholder }: ListSearch) => {
+const ListSearch = ({ searchMode }: ListSearch) => {
   return (
     <div>
       <form className="px-[20px] py-[10px]">
         <input
           type="text"
-          placeholder={placeholder}
-          className="min-h-[40px] w-full rounded-full px-[20px] py-[8px] text-body1-regular text-neutral-normal-placeholder bg-fill-neutral-subtle-default"
+          placeholder={LIST_SEARCH_PLACEHOLDER[searchMode]}
+          className="min-h-[40px] w-full rounded-full px-[20px] py-[8px] text-body1-regular text-black bg-fill-neutral-subtle-default placeholder:text-neutral-normal-placeholder"
         />
       </form>
+      {searchMode === "post" ? <PostSearchView /> : <RegionSearchView />}
     </div>
   );
 };
