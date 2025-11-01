@@ -68,7 +68,9 @@ const ToggleImageButton = ({
           disabled={isActive}
           className={cn(
             "relative rounded-[6px] border-2 transition-all",
-            isActive ? "cursor-not-allowed border-[#1EB87B]" : "cursor-pointer border-transparent"
+            isActive
+              ? "cursor-not-allowed border-brand-normal-default"
+              : "cursor-pointer border-transparent"
           )}
         >
           <div className="relative h-[110px] w-[110px]">
@@ -81,8 +83,8 @@ const ToggleImageButton = ({
             />
             <span
               className={cn(
-                "absolute right-[6px] top-[6px] h-[20px] w-[20px] rounded-full border-[1.2px] border-[#1EB87B] text-[12px] font-[130] text-white flex-center",
-                isActive ? "bg-[#1EB87B]" : "bg-white"
+                "absolute right-[6px] top-[6px] h-[20px] w-[20px] rounded-full border-[1.2px] border-[#1EB87B] text-caption1-semibold text-white flex-center",
+                isActive ? "bg-fill-flatGreen-500" : "bg-white"
               )}
             >
               {isOn ? "1" : "2"}
