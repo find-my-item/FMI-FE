@@ -23,7 +23,7 @@ const InputField = ({ ...props }: InputFieldProps) => {
 
       {/* 삭제 버튼 */}
       <DeleteButton
-        isValue={value}
+        isValue={!!value}
         customStyle="right-[14px] top-[14px]"
         onDelete={() => setValue("")}
       />

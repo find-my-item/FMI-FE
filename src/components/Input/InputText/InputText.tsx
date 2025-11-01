@@ -5,13 +5,10 @@ import Icon from "../../Icon/Icon";
 import { cn } from "@/utils/cn";
 import DeleteButton from "../DeleteButton";
 import Button from "@/components/Button/Button";
-import { useFormContext, UseFormRegisterReturn } from "react-hook-form";
+import { RegisterOptions, useFormContext, UseFormRegisterReturn, useWatch } from "react-hook-form";
 
 interface InputTextProps
-  extends Omit<
-    InputHTMLAttributes<HTMLInputElement>,
-    "name" | "onChange" | "onBlur" | "ref" | "children"
-  > {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "children" | "value" | "defaultValue"> {
   name: string;
   type: string;
   className?: string;
@@ -22,7 +19,9 @@ interface InputTextProps
   btnOnClick?: () => void;
   errorMessage?: string;
   hasError?: boolean;
-  registeration?: UseFormRegisterReturn;
+  validation?: RegisterOptions;
+  // registeration?: UseFormRegisterReturn;
+  // watchedValue?: string;
 }
 
 const InputText = ({
@@ -34,12 +33,14 @@ const InputText = ({
   btnOnClick,
   errorMessage,
   hasError,
-  registeration,
+  // registeration,
   ...props
 }: InputTextProps) => {
-  const fieldName = registeration?.name ?? name; // Rhf으로 name 통일
-  const { watch, setValue } = useFormContext();
-  const currentValue = watch(fieldName);
+  const { register, watch } = useFormContext();
+  const currentValue = watch(name);
+  console.log(name, ">>> ", currentValue);
+  // 삭제 함수를 위한 코드
+  // const [value, setValue] = useState("");
 
   // 눈 아이콘을 위한 코드
   const [show, setShow] = useState(false);
@@ -49,9 +50,6 @@ const InputText = ({
         ? "text"
         : "password"
       : type;
-
-  // 확인용
-  console.log("rhf>>>", registeration);
 
   return (
     <div className="flex w-full flex-col gap-2">
@@ -67,18 +65,16 @@ const InputText = ({
             {...props}
             type={actualType}
             className={cn(className, hasError && "border border-[#FF4242]")}
-            {...registeration}
+            {...register(name, props.validation)}
           />
-
           {/* 삭제 버튼 */}
-          <DeleteButton
+          {/* <DeleteButton
             eyeShow={eyeShow}
             customStyle="top-1/2 -translate-y-1/2"
-            isValue={currentValue}
-            onDelete={() =>
-              setValue(name, "", { shouldValidate: true, shouldDirty: true, shouldTouch: true })
-            }
-          />
+            isValue={!!value}
+            onDelete={() => setValue("")}
+          /> */}
+
           {/* 비밀번호 눈 모양 버튼 */}
           {eyeShow && (
             <button
@@ -96,7 +92,7 @@ const InputText = ({
         {children && (
           <Button
             variant="outlined"
-            className="text-body1-semibold"
+            className="text-body1-semibold text-[#5D5D5D]"
             type="button"
             // 버튼 사이즈 확인 필요
             onClick={btnOnClick}
@@ -109,7 +105,7 @@ const InputText = ({
       <div className="flex w-full justify-between text-caption1-regular text-[#787878]">
         {hasError && <p className="text-[#FF4242]"> {errorMessage} </p>}
         {/* 성공 색 #00B76E */}
-        {name === "nickname" && <span> {currentValue}/10 </span>}
+        {/* {name === "nickname" && <span> {value.length}/10 </span>} */}
       </div>
     </div>
   );

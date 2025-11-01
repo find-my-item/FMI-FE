@@ -1,24 +1,36 @@
+"use client";
+
 import { SIGNUP_INPUT_DATA } from "../../../_constant/FormData";
 import Button from "@/components/Button/Button";
 import SignUpItem from "./SignUpItem";
+import { useForm, useFormContext } from "react-hook-form";
+import { InputStyle } from "../../../_constant/authStyle";
 
 const SignUpField = ({ onNext }: { onNext: () => void }) => {
+  const {
+    register,
+    formState: { errors, touchedFields, isSubmitted },
+  } = useFormContext();
+
   return (
     <>
       <div className="flex w-full flex-col gap-5 p-4">
-        {SIGNUP_INPUT_DATA.map((item) => (
-          <SignUpItem
-            key={item.name}
-            name={item.name}
-            label={item.label}
-            type={item.type}
-            placeholder={item.placeholder}
-            validation={item.validation}
-            rule={item.rule}
-            eyeShow={item.eyeShow}
-            btnText={item.btnText}
-          />
-        ))}
+        {SIGNUP_INPUT_DATA.map((item) => {
+          const errorMessage = errors[item.name]?.message as string;
+          const hasError = (!!touchedFields[item.name] || isSubmitted) && !!errorMessage;
+
+          return (
+            <div key={item.name}>
+              <input
+                type={item.type}
+                placeholder={item.placeholder}
+                className={InputStyle}
+                {...register(item.name, item.validation)}
+              />
+              {hasError && <p>errorMessage</p>}
+            </div>
+          );
+        })}
       </div>
       <div className="sticky bottom-0 mt-auto h-[88px] w-full max-w-[390px] border-t border-[#E4E4E4] bg-white px-4 py-3">
         <Button type="button" ariaLabel="회원가입 폼 버튼" onClick={onNext}>
@@ -30,3 +42,35 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
 };
 
 export default SignUpField;
+// import { SIGNUP_INPUT_DATA } from "../../../_constant/FormData";
+// import Button from "@/components/Button/Button";
+// import SignUpItem from "./SignUpItem";
+
+// const SignUpField = ({ onNext }: { onNext: () => void }) => {
+//   return (
+//     <>
+//       <div className="flex w-full flex-col gap-5 p-4">
+//         {SIGNUP_INPUT_DATA.map((item) => (
+//           <SignUpItem
+//             key={item.name}
+//             name={item.name}
+//             label={item.label}
+//             type={item.type}
+//             placeholder={item.placeholder}
+//             validation={item.validation}
+//             rule={item.rule}
+//             eyeShow={item.eyeShow}
+//             btnText={item.btnText}
+//           />
+//         ))}
+//       </div>
+//       <div className="sticky bottom-0 mt-auto h-[88px] w-full max-w-[390px] border-t border-[#E4E4E4] bg-white px-4 py-3">
+//         <Button type="button" ariaLabel="회원가입 폼 버튼" onClick={onNext}>
+//           다음
+//         </Button>
+//       </div>
+//     </>
+//   );
+// };
+
+// export default SignUpField;

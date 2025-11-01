@@ -25,7 +25,7 @@ const InputSearch = ({ ...props }: InputSearchProps) => {
 
       {/* 삭제 버튼 */}
       <DeleteButton
-        isValue={value}
+        isValue={!!value}
         customStyle="top-1/2 -translate-y-1/2 right-5"
         onDelete={() => setValue("")}
       />
