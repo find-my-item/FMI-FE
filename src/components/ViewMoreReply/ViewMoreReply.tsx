@@ -46,18 +46,18 @@ const ViewMoreReply = ({
     <div className="flex min-h-[40px] w-[390px] items-center gap-[12px]">
       <button
         onClick={onViewMore}
-        className="group flex items-center gap-[4px]"
+        className="flex items-center gap-[4px]"
         aria-label={viewMoreAriaLabel}
         disabled={disabled}
       >
-        <span className="text-body1-medium text-[#1EB87B] group-active:text-[#6ED5A7] group-disabled:text-[#98E3BD]">
+        <span className="text-body1-medium text-brand-subtle-default hover:text-brand-subtle-hover active:text-brand-subtle-pressed disabled:text-brand-subtle-disabled">
           {text}
         </span>
         <Icon name="ArrowDown" size={20} />
       </button>
       <button
         onClick={onWriteReply}
-        className="text-body1-medium text-[#5D5D5D] hover:text-black active:text-[#9D9D9D] disabled:text-[#9D9D9D]"
+        className="text-body1-medium text-neutral-strong-default hover:text-black active:text-neutral-strong-preesed disabled:text-neutral-strong-disabled"
         aria-label={writeReplyAriaLabel}
         disabled={disabled}
       >
