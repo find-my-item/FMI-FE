@@ -35,7 +35,7 @@ interface ToggleButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const ToggleButton = ({
   ariaLabel = "토글 버튼",
   toggleState,
-  disabled,
+  disabled = false,
   ...props
 }: ToggleButtonProps) => {
   const finalToggleState = disabled ? false : toggleState;
@@ -46,8 +46,8 @@ const ToggleButton = ({
       aria-label={ariaLabel}
       aria-checked={finalToggleState}
       className={cn(
-        "h-[30px] w-[64px] rounded-full bg-[#F5F5F5] p-[4px] transition-colors duration-200 disabled:bg-[#E4E4E4]",
-        finalToggleState ? "bg-[#1EB87B]" : "bg-[#F5F5F5]"
+        "h-[30px] w-[64px] rounded-full p-[4px] transition-colors duration-200 disabled:bg-fill-neutralInversed-normal-disabled",
+        finalToggleState ? "bg-fill-brand-normal-default" : "bg-fill-neutralInversed-normal-default"
       )}
     >
       <span
