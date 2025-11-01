@@ -20,12 +20,14 @@ import { ChipProps, ChipType } from "./ChipTypes";
 
 const TypeMap: Record<ChipType, string> = {
   status: "bg-flatGreen-75 text-flatGreen-500",
-  category: "bg-orange-100 text-orange-500",
+  category: "bg-flatGray-25 text-flatGray-500",
 };
 
 const Chip = ({ label, type = "status" }: ChipProps) => {
   return (
-    <span className={cn("rounded-full px-3 py-1 text-body2-semibold", TypeMap[type])}>{label}</span>
+    <span className={cn("rounded-full px-3 py-1 text-caption1-semibold", TypeMap[type])}>
+      {label}
+    </span>
   );
 };
 
