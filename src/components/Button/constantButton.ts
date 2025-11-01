@@ -28,6 +28,9 @@ export const VARIANT_STYLES = {
   auth: {
     base: "w-full h-[44px] flex-center gap-1 rounded-[10px] bg-[#98E3BD] opacity-90 font-semibold text-white",
   },
+  regionSearchList: {
+    base: "border-neutral-normal-default min-h-[60px] w-full border-b bg-white px-[20px] py-[20px] text-body2-medium text-neutral-strong-default text-left",
+  },
 } as const;
 
 export const BASE_STYLES =
