@@ -33,6 +33,8 @@ import { Props } from "@/components/Icon/Icon";
  *
  * @param children - 버튼 내부에 렌더링할 콘텐츠(텍스트 또는 요소)입니다.
  *
+ * @param ignoreBase - variant를 제외한 기본 스타일을 제거하는 옵션입니다. - boolean (기본값: `false`)
+ *
  * @example
  * ```tsx
  * <Button
@@ -51,7 +53,7 @@ import { Props } from "@/components/Icon/Icon";
 type Size = "big" | "medium" | "small";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "solid" | "outlined" | "inversed" | "auth";
+  variant?: "solid" | "outlined" | "inversed" | "auth" | "regionSearchList";
   hierarchy?: "normal" | "subtle";
   size?: Size;
   iconPosition?: "leading" | "trailing";
@@ -59,6 +61,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean;
   ariaLabel?: string;
   children: ReactNode;
+  ignoreBase?: boolean;
 }
 
 const Button = ({
@@ -72,6 +75,7 @@ const Button = ({
   disabled,
   className = "",
   ariaLabel = "버튼",
+  ignoreBase,
   ...props
 }: ButtonProps) => {
   const variantClass =
@@ -81,8 +85,9 @@ const Button = ({
 
   const finalIconPosition = icon && (iconPosition ?? "leading");
 
-  const combinedStyles = `${BASE_STYLES} ${SIZE_STYLES[size]} ${variantClass} ${glassCard} ${className}`;
-
+  const combinedStyles = ignoreBase
+    ? `${variantClass} ${className}`
+    : `${BASE_STYLES} ${SIZE_STYLES[size]} ${variantClass} ${glassCard} ${className}`;
   return (
     <button
       disabled={disabled || loading}
