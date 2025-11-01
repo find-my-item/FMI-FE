@@ -31,14 +31,14 @@ interface TabProps<T extends string> {
 
 const Tab = <T extends string>({ tabs, selected, onValueChange, ...buttonProps }: TabProps<T>) => {
   return (
-    <div className="flex w-full border-b border-[#ADADAD] px-[20px]">
+    <div className="flex w-full border-b border-divider-default px-[20px]">
       {tabs.map((tab) => (
         <button
           key={tab.key}
           {...buttonProps}
           className={cn(
-            "h-[60px] flex-1 text-[20px] font-semibold text-[#ADADAD] flex-center",
-            selected === tab.key && "border-b-2 border-[#1EB87B] text-[#1EB87B]"
+            "h-[60px] flex-1 text-h3-semibold text-flatGray-300 flex-center",
+            selected === tab.key && "border-b-2 border-flatGreen-500 text-flatGreen-500"
           )}
           onClick={() => onValueChange(tab.key)}
           type="button"

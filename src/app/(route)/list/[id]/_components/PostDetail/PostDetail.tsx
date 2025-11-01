@@ -44,13 +44,13 @@ const PostDetail = ({ type, item }: PostDetailProps) => {
 
           <div className={isBoardType ? "mt-[14px]" : "space-y-[28px]"}>
             <div>
-              <h1 className="text-[20px] font-semibold text-[#363636]">{item.title}</h1>
-              <time className="text-[14px] leading-[140%] text-[#787878]">30분 전</time>
+              <h1 className="text-[20px] font-semibold text-layout-header-default">{item.title}</h1>
+              <time className="text-[14px] leading-[140%] text-layout-body-default">30분 전</time>
             </div>
 
-            <p className="mt-[24px] leading-[150%]">{item.body}</p>
+            <p className="mt-[24px] text-body1-regular text-layout-header-default">{item.body}</p>
 
-            <ul className="mt-[32px] flex gap-[20px] text-[14px] leading-[140%] text-[#787878]">
+            <ul className="mt-[32px] flex gap-[20px] text-body2-medium text-layout-body-default">
               <li className="flex gap-[4px]">
                 <Icon name="Star" size={20} />
                 <span>즐겨찾기 12</span>
@@ -63,7 +63,7 @@ const PostDetail = ({ type, item }: PostDetailProps) => {
           </div>
         </div>
 
-        <section className="mt-[39px] flex flex-col gap-[18px]">
+        <section className="flex flex-col gap-[18px]">
           {isBoardType && (
             <>
               {/* TODO(지권): 추후 지도 컴포넌트 변경 */}
@@ -74,9 +74,9 @@ const PostDetail = ({ type, item }: PostDetailProps) => {
                     name="Position"
                     size={16}
                     aria-hidden="true"
-                    className="fill-current text-[#1EB87B]"
+                    className="fill-current text-brand-subtle-default"
                   />
-                  <p className="text-[14px] text-[#5D5D5D]">서울특별시 00구 00동</p>
+                  <p className="text-[14px] text-neutral-normal-default">서울특별시 00구 00동</p>
                 </span>
                 <Icon name="ArrowRight" size={14} title="지도 이동" />
               </address>

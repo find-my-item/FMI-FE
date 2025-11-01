@@ -5,21 +5,7 @@ import { Tab } from "@/components";
 import { ManualItem } from "./_components";
 import { MANUAL_DATA } from "./_constants/MANUAL_DATA";
 import { ManualItemType } from "./_types/ManualItemType";
-
-const manualList = [
-  {
-    label: "분실",
-    key: "LOST",
-  },
-  {
-    label: "습득",
-    key: "FOUND",
-  },
-  {
-    label: "도난",
-    key: "STOLEN",
-  },
-];
+import { MANUAL_LIST } from "./_constants/MANUAL_LIST";
 
 const page = () => {
   const [selected, setSelected] = useState<keyof typeof MANUAL_DATA>("LOST");
@@ -32,7 +18,7 @@ const page = () => {
   return (
     <div className="w-full flex-col-center">
       <Tab
-        tabs={manualList}
+        tabs={MANUAL_LIST}
         selected={selected}
         onValueChange={(key) => {
           setSelected(key as keyof typeof MANUAL_DATA);
