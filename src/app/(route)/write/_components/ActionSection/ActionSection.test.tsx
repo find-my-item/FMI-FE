@@ -15,8 +15,8 @@ describe("ActionSection", () => {
     render(<ActionSection disabled={false} />);
     const button = screen.getByRole("button", { name: "작성 완료" });
 
-    expect(button.className).toContain("bg-[#1EB87B]/70");
-    expect(button.className).toContain("text-[#F6FFFC]");
+    expect(button.className).toContain("bg-fill-brand-normal-default");
+    expect(button.className).toContain("text-brand-normal-default");
     expect(button.className).not.toContain("cursor-not-allowed");
   });
 
@@ -24,8 +24,8 @@ describe("ActionSection", () => {
     render(<ActionSection disabled={true} />);
     const button = screen.getByRole("button", { name: "작성 완료" });
 
-    expect(button.className).toContain("bg-[#98E3BD]/90");
-    expect(button.className).toContain("text-[#C2F1D4]");
+    expect(button.className).toContain("bg-fill-brand-normal-disabled");
+    expect(button.className).toContain("text-brand-normal-disabled");
     expect(button.className).toContain("cursor-not-allowed");
   });
 });

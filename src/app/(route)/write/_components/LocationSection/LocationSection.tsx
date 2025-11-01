@@ -4,10 +4,10 @@ import RequiredText from "@/components/RequiredText/RequiredText";
 const LocationSection = () => {
   return (
     <section
-      className="flex cursor-pointer items-center justify-between border-b border-[#E4E4E4] px-5 py-6"
+      className="flex cursor-pointer items-center justify-between border-b border-flatGray-50 px-5 py-6"
       aria-label="위치 등록"
     >
-      <span className="flex items-center gap-[6px] leading-[150%] text-[#9D9D9D]">
+      <span className="flex items-center gap-[5px] text-body1-medium text-flatGray-400">
         <Icon name="Location" size={16} title="위치 등록" />
         위치를 등록해 주세요. <RequiredText />
       </span>

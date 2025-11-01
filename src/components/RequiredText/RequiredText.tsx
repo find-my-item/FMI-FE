@@ -5,7 +5,7 @@ interface RequiredTextProps {
 }
 
 const RequiredText = ({ className }: RequiredTextProps) => {
-  return <span className={cn("text-[#1EB87B]", className)}>*</span>;
+  return <span className={cn("text-flatGreen-500", className)}>*</span>;
 };
 
 export default RequiredText;
