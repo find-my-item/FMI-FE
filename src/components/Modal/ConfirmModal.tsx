@@ -64,13 +64,13 @@ const ConfirmModal = ({
     >
       <div className="gap-[16px] flex-col-center">
         {icon && (
-          <div className="h-[48px] w-[48px] rounded-full bg-[#525252] flex-center">
+          <div className="h-[48px] w-[48px] rounded-full bg-fill-neutralInversed-normal-enteredSelected flex-center">
             <Icon name={icon.name} size={icon.size} title={icon.title} className="text-white" />
           </div>
         )}
         <div className="gap-[4px] text-center flex-col-center">
-          <div className="text-[18px] font-semibold leading-[140%]">{title}</div>
-          <div className="text-[14px] leading-[140%]">{content}</div>
+          <div className="text-h3-semibold text-layout-header-default">{title}</div>
+          <div className="text-body2-regular text-layout-body-default">{content}</div>
         </div>
       </div>
 

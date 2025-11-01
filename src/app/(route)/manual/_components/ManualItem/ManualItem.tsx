@@ -24,10 +24,10 @@ const ManualItem = ({ title, content, href, btnText, isOpen, onToggle }: ManualI
         aria-expanded={isOpen}
         aria-controls="매뉴얼 아이템 패널"
         onClick={onToggle}
-        className="w-full cursor-pointer border-b border-[#E4E4E4] px-[20px] py-[26px]"
+        className="w-full cursor-pointer border-b border-neutral-normal-default px-[20px] py-[26px]"
       >
         <button className="flex w-full items-center justify-between">
-          <p className="text-[16px] font-semibold text-[#242424]">{title}</p>
+          <p className="text-body1-semibold text-neutral-normal-default">{title}</p>
           <span className={cn("transition-transform duration-200", isOpen && "rotate-180")}>
             <Icon name="ArrowDown" />
           </span>
@@ -40,16 +40,16 @@ const ManualItem = ({ title, content, href, btnText, isOpen, onToggle }: ManualI
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="w-full overflow-hidden bg-[#F5F5F5]"
+            className="w-full overflow-hidden bg-fill-neutral-strong-default"
           >
-            <div className="flex flex-col items-start justify-center px-[20px] py-[24px] text-sm text-[#787878]">
+            <div className="flex flex-col items-start justify-center px-[20px] py-[24px] text-body2-regular text-layout-body-default">
               <p className="mb-[26px]">{content}</p>
               {href && (
                 <Link
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex w-full items-center justify-center gap-[6px] rounded-[10px] border border-[#DADADA] bg-white py-[10px] text-center text-[14px] font-semibold text-black"
+                  className="flex w-full items-center justify-center gap-[6px] rounded-[10px] border border-neutral-normal-default bg-white py-[10px] text-center text-body2-semibold text-neutral-normal-default"
                 >
                   {btnText}
                   <Icon name="ArrowRightSmall" size={20} />
