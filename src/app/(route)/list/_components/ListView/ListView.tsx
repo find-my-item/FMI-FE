@@ -44,7 +44,7 @@ const ListView = () => {
               icon={{ name: "Location", size: 16 }}
               onClick={() => searchUpdateQuery("search", "region")}
             />
-            {/* 형준: UI 깨짐 현상으로 인한 주석처리 */}
+            {/* TODO(형준): UI 깨짐 현상으로 인한 주석처리 */}
             {/* {dropdowns.map(({ value, setValue, icon }, idx) => (
               <Dropdown key={idx} options={[]} onSelect={setValue} className="gap-[4px]">
                 {idx === 0 && <Icon name={icon} size={16} />}
