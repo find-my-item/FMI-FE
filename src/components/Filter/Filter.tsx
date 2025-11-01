@@ -64,12 +64,14 @@ const Filter = ({
     <button
       {...props}
       aria-label={`${ariaLabel} 필터`}
-      className={cn(
-        "gap-[4px] rounded-full bg-[#F5F5F5] px-[18px] py-[8px] text-body1-semibold text-[#5D5D5D] flex-center hover:text-black active:bg-[#E4E4E4] active:text-[#9D9D9D] disabled:bg-[#E4E4E4] disabled:text-[#CFCFCF]",
+      className={`gap-[4px] rounded-full px-[18px] py-[8px] text-body1-semibold flex-center ${
+        !onSelected &&
+        `text-neutralInversed-normal-default bg-fill-neutralInversed-normal-default hover:text-black hover:bg-fill-neutralInversed-normal-hover active:text-neutralInversed-normal-pressed active:bg-fill-neutralInversed-normal-preesed`
+      } ${
         onSelected &&
-          "bg-[#525252] text-white hover:text-white active:bg-[#525252] active:text-white",
-        onSelected && loading && "bg-[#E4E4E4]"
-      )}
+        !loading &&
+        `text-white bg-fill-neutralInversed-normal-enteredSelected hover:text-white active:text-white active:bg-fill-neutralInversed-normal-enteredSelected`
+      } ${onSelected && loading && `bg-fill-neutralInversed-normal-disabled`} `}
     >
       {loading ? (
         <Icon name="Loading" className="animate-spin" />

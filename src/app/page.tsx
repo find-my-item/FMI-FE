@@ -80,7 +80,7 @@ const Page = () => {
         <ViewMoreComment text="댓글 10개 더보기" />
         <Filter
           ariaLabel="지역 선택"
-          children="TEXT"
+          children="지역 선택"
           onSelected={false}
           iconPosition="trailing"
           icon={{ name: "ArrowDown", size: 16 }}
