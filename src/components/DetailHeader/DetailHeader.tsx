@@ -22,7 +22,7 @@ const DetailHeader = ({ title = "", children }: DetailHeaderProps) => {
 
   return (
     <DetailHeaderContext.Provider value={{ title }}>
-      <div className="flex h-[56px] w-full items-center justify-between px-[20px]">
+      <div className="sticky top-0 z-10 flex h-[56px] w-full items-center justify-between bg-white px-[20px]">
         <div className="flex items-center justify-start gap-[8px]">
           <button className="h-[30px] w-[30px]" onClick={() => back()} aria-label="뒤로가기">
             <Icon name="ArrowLeftSmall" size={30} />
