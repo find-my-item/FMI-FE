@@ -8,7 +8,7 @@ interface ListSearch {
 
 const ListSearch = ({ searchMode }: ListSearch) => {
   return (
-    <div>
+    <>
       <form className="px-[20px] py-[10px]">
         <input
           type="text"
@@ -17,7 +17,7 @@ const ListSearch = ({ searchMode }: ListSearch) => {
         />
       </form>
       {searchMode === "post" ? <PostSearchView /> : <RegionSearchView />}
-    </div>
+    </>
   );
 };
 
