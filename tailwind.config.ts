@@ -22,6 +22,7 @@ const fillBgUtilities = plugin(({ addUtilities, theme }) => {
 const {
   dimension,
   lineHeights,
+  color,
   letterSpacing,
   fontWeights,
   fg,
@@ -44,6 +45,7 @@ const config: Config = {
     extend: {
       fill: (typedConfig.theme?.extend as any)?.fill ?? {},
       ...validExtend,
+      colors: color,
       fontFamily: { sans: ["var(--font-pretendard)", "Inter", "sans-serif"] },
       lineHeight: lineHeights,
       fontWeight: fontWeights,

@@ -25,9 +25,7 @@ const TypeMap: Record<ChipType, string> = {
 
 const Chip = ({ label, type = "status" }: ChipProps) => {
   return (
-    <span className={cn("rounded-full px-3 py-1 text-[14px] font-semibold", TypeMap[type])}>
-      {label}
-    </span>
+    <span className={cn("rounded-full px-3 py-1 text-body2-semibold", TypeMap[type])}>{label}</span>
   );
 };
 

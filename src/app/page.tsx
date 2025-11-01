@@ -12,6 +12,7 @@ import FloatingButton from "@/components/FloatingButton/FloatingButton";
 import ToggleButton from "@/components/ToggleButton/ToggleButton";
 import { useState } from "react";
 import ToggleImageButton from "@/components/ToggleImageButton/ToggleImageButton";
+import { cn } from "@/utils/cn";
 
 const Page = () => {
   const [toggleState, setToggleState] = useState(false);
@@ -93,6 +94,11 @@ const Page = () => {
           gap={50}
           onClick={() => setImageToggleState(!imageToggleState)}
         />
+        <div
+          className={cn("bg-fill-brand-normal-default", "text-title1-bold", "text-flatGray-500")}
+        >
+          안녕하세요
+        </div>
         <div className="m-1 space-y-5 border p-1">
           <h1 className="text-title1-bold text-red-500">"폰트 적용 예시"</h1>
           <section className="flex flex-col gap-3">
