@@ -58,7 +58,7 @@ const SignUpItem = ({
         />
         {/* button */}
         {currentButtonConfig && (
-          <Button className={currentButtonConfig.className} label={currentButtonConfig.text}>
+          <Button className={currentButtonConfig.className} ariaLabel={currentButtonConfig.text}>
             {currentButtonConfig.text}
           </Button>
         )}

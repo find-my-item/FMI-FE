@@ -3,6 +3,8 @@
 import Icon from "@/components/Icon/Icon";
 import { useRouterBack } from "@/utils/useRouterBack";
 import { ButtonHTMLAttributes, createContext } from "react";
+import Bookmark from "../Bookmark/Bookmark";
+import KebabMenuButton from "../KebabMenuButton/KebabMenuButton";
 
 const DetailHeaderContext = createContext({ title: "" });
 
@@ -20,7 +22,7 @@ const DetailHeader = ({ title = "", children }: DetailHeaderProps) => {
 
   return (
     <DetailHeaderContext.Provider value={{ title }}>
-      <div className="flex h-[56px] w-full items-center justify-between px-[20px]">
+      <div className="sticky top-0 z-10 flex h-[56px] w-full items-center justify-between bg-white px-[20px]">
         <div className="flex items-center justify-start gap-[8px]">
           <button className="h-[30px] w-[30px]" onClick={() => back()} aria-label="뒤로가기">
             <Icon name="ArrowLeftSmall" size={30} />
@@ -50,16 +52,10 @@ DetailHeader.Save = ({ ariaLabel = "게시글 저장", ...props }: BaseButtonPro
   );
 };
 
-DetailHeader.Star = ({
-  ariaLabel = "즐겨찾기 추가",
-  isActive,
-  ...props
-}: BaseButtonProps & { isActive: boolean }) => {
-  return (
-    <button {...props} aria-label={ariaLabel}>
-      <Icon name="Star" />
-    </button>
-  );
+DetailHeader.Star = (
+  props: BaseButtonProps & { isActive: boolean; size?: "large" | "medium" | "small" }
+) => {
+  return <Bookmark {...props} />;
 };
 
 DetailHeader.Share = ({ ariaLabel = "공유", ...props }: BaseButtonProps) => {
@@ -70,12 +66,8 @@ DetailHeader.Share = ({ ariaLabel = "공유", ...props }: BaseButtonProps) => {
   );
 };
 
-DetailHeader.Menu = ({ ariaLabel = "게시글 상세 메뉴", ...props }: BaseButtonProps) => {
-  return (
-    <button {...props} aria-label={ariaLabel}>
-      <Icon name="DetailMenu" />
-    </button>
-  );
+DetailHeader.Menu = (props: BaseButtonProps & { size?: "large" | "small" }) => {
+  return <KebabMenuButton {...props} />;
 };
 
 export default DetailHeader;

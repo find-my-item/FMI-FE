@@ -17,7 +17,7 @@ const DetailAgree = ({ termKey, onBack, onAgree }: DetailAgreeProps) => {
 
       {/* signUpFooter */}
       <div className="sticky bottom-0 mt-auto h-[88px] w-full max-w-[390px] border-t border-[#E4E4E4] bg-white px-4 py-3">
-        <Button type="button" onClick={onAgree} label={termKey + "동의"}>
+        <Button type="button" onClick={onAgree} ariaLabel={termKey + "동의"}>
           동의
         </Button>
       </div>

@@ -1,6 +1,6 @@
 import { customerListObject } from "../../_constant/customerListObject";
 import { CommentForm, PostDetail } from "@/app/(route)/list/[id]/_components/index";
-import CommentList from "../../_components/CommentList";
+import { CommentList } from "@/components/index";
 import { commentListObject } from "../../_constant/commentListObject";
 
 interface CustomerDetailProps {

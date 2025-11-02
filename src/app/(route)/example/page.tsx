@@ -100,7 +100,7 @@ const page = () => {
           title="Confirm Modal"
           content="안녕하세요 모달입니다."
           onConfirm={() => setConfirmModal(false)}
-          onFalse={() => setConfirmModal(false)}
+          onCancel={() => setConfirmModal(false)}
           size="medium"
         />
       </div>

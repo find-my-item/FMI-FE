@@ -1,7 +1,7 @@
-import { itemListObject } from "../_constants/listItem";
+import { LIST_ITEM_MOCK } from "../_constants/LIST_ITEM_MOCK";
 import { PostDetail, SimilarItemsSection, CommentForm } from "./_components";
 import { commentListObject } from "../../notice/_constant/commentListObject";
-import CommentList from "../../notice/_components/CommentList";
+import { CommentList } from "@/components/index";
 import PostDetailTopHeader from "./_components/PostDetailTopHeader/PostDetailTopHeader";
 
 interface ListDetailProps {
@@ -10,7 +10,7 @@ interface ListDetailProps {
 
 const page = async ({ params }: ListDetailProps) => {
   const { id } = await params;
-  const listObject = itemListObject.find((item) => item.id === Number(id));
+  const listObject = LIST_ITEM_MOCK.find((item) => item.id === Number(id));
 
   if (!listObject) return <div className="h-[600px] pt-4">존재하지 않는 상세페이지입니다.</div>;
 
