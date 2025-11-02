@@ -1,4 +1,5 @@
 "use client";
+"use no memo";
 
 import { FormProvider, useForm } from "react-hook-form";
 import { FormValue } from "../_constant/FormData";

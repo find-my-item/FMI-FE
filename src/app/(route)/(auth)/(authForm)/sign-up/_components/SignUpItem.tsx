@@ -9,37 +9,31 @@ const ButtonStyle =
 const signUpButtonStyle =
   "flex items-center justify-center min-w-[104px] h-10 text-[#5D5D5D] text-[14px] border border-[#CFCFCF] rounded-[10px] px-[10px] py-[14px]";
 
-const SignUpItem = ({
-  name,
-  label,
-  type,
-  placeholder,
-  validation,
-  rule,
-  eyeShow,
-  btnText,
-}: InputType) => {
+interface SignUpItemProps {
+  item: InputType;
+}
+
+const SignUpItem = ({ item }: SignUpItemProps) => {
   const {
-    formState: { errors, touchedFields, isSubmitted },
+    formState: { errors },
   } = useFormContext();
 
-  const errorMessage = errors[name]?.message as string;
+  const errorMessage = errors[item.name]?.message as string;
   const hasError = !!errorMessage;
 
   return (
     <InputText
-      name={name}
-      validation={validation}
-      label={label}
-      type={type}
-      placeholder={placeholder}
-      eyeShow={eyeShow}
+      name={item.name}
+      label={item.label}
+      type={item.type}
+      placeholder={item.placeholder}
+      validation={item.validation}
+      rule={item.rule}
+      eyeShow={item.eyeShow}
       errorMessage={errorMessage}
       hasError={hasError}
-      rule={rule}
-      // 버튼 사이즈 확인 필요
     >
-      {btnText}
+      {item.btnText}
     </InputText>
   );
 };

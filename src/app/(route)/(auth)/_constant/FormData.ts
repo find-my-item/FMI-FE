@@ -19,8 +19,6 @@ export type InputType = {
   type: string;
   placeholder: string;
   validation?: RegisterOptions;
-  required?: boolean;
-  onConfirm?: React.FocusEventHandler<HTMLInputElement>;
   rule?: string; // 닉네임 규칙 안내 문구
   eyeShow?: boolean;
   btnText?: string;

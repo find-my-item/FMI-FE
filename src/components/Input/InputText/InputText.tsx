@@ -14,7 +14,6 @@ interface InputTextProps
   className?: string;
   eyeShow?: boolean;
   label?: string;
-  required?: boolean;
   children?: ReactNode;
   btnOnClick?: () => void;
   successMessage?: string;
@@ -54,9 +53,8 @@ const InputText = ({
       {/* label */}
       <label htmlFor={name} className="text-body2-medium text-[#363636]">
         {props.label}
-        {props.required && <span className="text-[#1EB87B]">*</span>}
+        {props.validation?.required && <span className="text-[#1EB87B]">*</span>}
       </label>
-
       <div className="flex w-full flex-row gap-2">
         <div className="relative flex w-full flex-row">
           <input

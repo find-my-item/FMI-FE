@@ -7,17 +7,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
     <>
       <div className="flex w-full flex-col gap-5 p-4">
         {SIGNUP_INPUT_DATA.map((item) => (
-          <SignUpItem
-            key={item.name}
-            name={item.name}
-            label={item.label}
-            type={item.type}
-            placeholder={item.placeholder}
-            validation={item.validation}
-            rule={item.rule}
-            eyeShow={item.eyeShow}
-            btnText={item.btnText}
-          />
+          <SignUpItem key={item.name} item={item} />
         ))}
       </div>
       <div className="sticky bottom-0 mt-auto h-[88px] w-full max-w-[390px] border-t border-[#E4E4E4] bg-white px-4 py-3">

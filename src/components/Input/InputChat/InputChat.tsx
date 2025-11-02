@@ -5,15 +5,21 @@ import Icon from "../../Icon/Icon";
 import { useState } from "react";
 import { cn } from "@/utils/cn";
 
-interface InputChatProps extends InputHTMLAttributes<HTMLInputElement> {}
+interface InputChatProps extends InputHTMLAttributes<HTMLInputElement> {
+  photoClick: () => void;
+  sendClick?: () => void;
+}
 
-const InputChat = ({ ...props }: InputChatProps) => {
+const InputChat = ({ photoClick, sendClick, ...props }: InputChatProps) => {
   const [value, setValue] = useState("");
 
   return (
     <div className="flex w-full flex-row gap-2">
       {/* 이미지 첨부버튼 */}
-      <button className="relative h-11 w-11 shrink-0 rounded-full bg-[#F5F5F5]">
+      <button
+        className="relative h-11 w-11 shrink-0 rounded-full bg-[#F5F5F5]"
+        onClick={photoClick}
+      >
         <Icon
           name="Image"
           size={20}
@@ -33,7 +39,10 @@ const InputChat = ({ ...props }: InputChatProps) => {
       />
 
       {/* 전송 버튼 */}
-      <button className="relative h-11 w-11 shrink-0 rounded-full bg-[#98E3BD] opacity-90 hover:bg-[#1EB87B] hover:opacity-70">
+      <button
+        className="relative h-11 w-11 shrink-0 rounded-full bg-[#98E3BD] opacity-90 hover:bg-[#1EB87B] hover:opacity-70"
+        onClick={sendClick}
+      >
         <Icon
           name="Send"
           size={20}

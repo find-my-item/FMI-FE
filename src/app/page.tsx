@@ -199,7 +199,10 @@ const Page = () => {
 
         {/* input */}
         <InputField label="TEST" name="test" isLengthCheck={true} maxLength={30} />
-        <InputChat />
+        <InputChat
+          photoClick={() => alert("사진 버튼 클릭")}
+          sendClick={() => alert("전송 버튼 클릭")}
+        />
         <InputSearch />
       </div>
     </div>
