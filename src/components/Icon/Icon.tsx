@@ -38,7 +38,7 @@ export default function Icon({ name, size = 24, title, ...props }: Props) {
       height={size}
       aria-label={title}
       aria-hidden={title ? false : true}
-      fill="none"
+      fill="currentColor"
       stroke="currentColor"
       {...props}
     />

@@ -19,7 +19,7 @@ const nextConfig: NextConfig = {
                 {
                   name: "removeAttrs",
                   params: {
-                    attrs: "(stroke|stroke-width)",
+                    attrs: "(fill|stroke)",
                   },
                 },
               ],
