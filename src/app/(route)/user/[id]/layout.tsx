@@ -1,5 +1,5 @@
 const layout = ({ children }: { children: React.ReactNode }) => {
-  return <main className="w-full">{children}</main>;
+  return <main className="min-h-[100dvh] w-full">{children}</main>;
 };
 
 export default layout;
