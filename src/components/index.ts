@@ -24,3 +24,7 @@ export { default as ToggleButton } from "./ToggleButton/ToggleButton";
 export { default as ToggleImageButton } from "./ToggleImageButton/ToggleImageButton";
 export { default as CommentList } from "./CommentList/CommentList";
 export { default as ListSearch } from "./ListSearch/ListSearch";
+export { default as InputText } from "./Input/InputText/InputText";
+export { default as InputField } from "./Input/InputField/InputField";
+export { default as InputChat } from "./Input/InputChat/InputChat";
+export { default as InputSearch } from "./Input/InputSearch/InputSearch";
