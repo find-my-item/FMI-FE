@@ -29,7 +29,7 @@ const ViewMoreComment = ({ text, ariaLabel = "댓글 더보기", ...props }: Vie
     <button
       {...props}
       aria-label={ariaLabel}
-      className="flex min-h-[41px] w-full text-h3-medium text-[#1EB87B] flex-center hover:text-[#00B76E] active:text-[#6ED5A7] disabled:text-[#98E3BD]"
+      className="flex min-h-[41px] w-full text-h3-medium text-brand-subtle-default flex-center hover:text-brand-subtle-hover active:text-brand-subtle-pressed disabled:text-brand-subtle-disabled"
     >
       <span>{text}</span>
     </button>
