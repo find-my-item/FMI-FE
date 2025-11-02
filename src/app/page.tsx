@@ -70,17 +70,17 @@ const Page = () => {
             ))}
           </div>
         </section>
-        <Button variant="solid" hierarchy="subtle" size="big" icon={{ name: "Logo" }}>
+        <Button variant="solid" hierarchy="subtle" size="big">
           찾아줘
         </Button>
         <Bookmark isActive={false} />
         <KebabMenuButton />
-        <Location children="위치" disabled />
+        <Location children="위치" />
         <ViewMoreReply text="TEXT" onViewMore={() => {}} />
         <ViewMoreComment text="댓글 10개 더보기" />
         <Filter
           ariaLabel="지역 선택"
-          children="TEXT"
+          children="지역 선택"
           onSelected={false}
           iconPosition="trailing"
           icon={{ name: "ArrowDown", size: 16 }}
