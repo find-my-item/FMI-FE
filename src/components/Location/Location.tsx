@@ -29,12 +29,12 @@ const Location = ({ children, ariaLabel = "상세 위치 보기", ...props }: Lo
   return (
     <button
       {...props}
-      className="flex gap-[5px] text-[#5D5D5D] hover:text-[#000000] active:text-[#9D9D9D] disabled:text-[#9D9D9D]"
+      className="flex items-center gap-[5px] text-sm text-neutral-normal-default hover:text-black active:text-neutral-normal-preesed disabled:text-neutral-normal-disabled"
       aria-label={ariaLabel}
     >
-      <Icon name="Location" />
+      <Icon name="Location" size={16} />
       <span>{children}</span>
-      <Icon name="ArrowRightSmall" className="ml-[1px]" />
+      <Icon name="ArrowRightSmall" size={18} className="ml-[1px]" />
     </button>
   );
 };
