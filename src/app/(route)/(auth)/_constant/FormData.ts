@@ -24,6 +24,7 @@ export type InputType = {
   rule?: string; // 닉네임 규칙 안내 문구
   eyeShow?: boolean;
   btnText?: string;
+  successMessage?: string;
 };
 
 export const SIGNUP_INPUT_DATA: InputType[] = [
@@ -34,10 +35,6 @@ export const SIGNUP_INPUT_DATA: InputType[] = [
     placeholder: "로그인에 사용할 이메일을 입력해주세요.",
     validation: {
       required: true,
-      pattern: {
-        value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
-        message: "이미 가입된 이메일입니다.",
-      },
     },
     btnText: "인증번호 발송",
   },
@@ -50,6 +47,7 @@ export const SIGNUP_INPUT_DATA: InputType[] = [
       required: true,
     },
     btnText: "인증번호 확인",
+    successMessage: "인증되었습니다.",
   },
   {
     name: "password",
@@ -65,6 +63,7 @@ export const SIGNUP_INPUT_DATA: InputType[] = [
         message: "영문/숫자/특수 문자 포함 8자리 이상을 입력해 주세요.",
       },
     },
+    successMessage: "영문/숫자/특수 문자 포함 8자리 이상",
   },
   {
     name: "passwordConfirm",
@@ -78,6 +77,7 @@ export const SIGNUP_INPUT_DATA: InputType[] = [
         value === formValue.password || "비밀번호가 일치하지 않습니다.",
       deps: ["password"],
     },
+    successMessage: "비밀번호가 일치합니다.",
   },
   {
     name: "nickname",

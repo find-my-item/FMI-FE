@@ -13,6 +13,9 @@ import ToggleButton from "@/components/ToggleButton/ToggleButton";
 import { useState } from "react";
 import ToggleImageButton from "@/components/ToggleImageButton/ToggleImageButton";
 import { cn } from "@/utils/cn";
+import InputField from "@/components/Input/InputField/InputField";
+import InputChat from "@/components/Input/InputChat/InputChat";
+import InputSearch from "@/components/Input/InputSearch/InputSearch";
 
 const Page = () => {
   const [toggleState, setToggleState] = useState(false);
@@ -76,7 +79,7 @@ const Page = () => {
         <Bookmark isActive={false} />
         <KebabMenuButton />
         <Location children="위치" disabled />
-        <ViewMoreReply text="TEXT" onViewMore={() => { }} />
+        <ViewMoreReply text="TEXT" onViewMore={() => {}} />
         <ViewMoreComment text="댓글 10개 더보기" />
         <Filter
           ariaLabel="지역 선택"
@@ -193,6 +196,11 @@ const Page = () => {
           </div>
           <p className="bg-gray-900 p-2 text-white">test</p>
         </section>
+
+        {/* input */}
+        <InputField label="TEST" name="test" isLengthCheck={true} maxLength={30} />
+        <InputChat />
+        <InputSearch />
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import Icon from "../../Icon/Icon";
 import { cn } from "@/utils/cn";
 import DeleteButton from "../DeleteButton";
 import Button from "@/components/Button/Button";
-import { RegisterOptions, useFormContext, UseFormRegisterReturn, useWatch } from "react-hook-form";
+import { RegisterOptions, useFormContext } from "react-hook-form";
 
 interface InputTextProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "children" | "value" | "defaultValue"> {
@@ -17,11 +17,12 @@ interface InputTextProps
   required?: boolean;
   children?: ReactNode;
   btnOnClick?: () => void;
+  successMessage?: string;
   errorMessage?: string;
   hasError?: boolean;
+  isSuccess?: boolean;
   validation?: RegisterOptions;
-  // registeration?: UseFormRegisterReturn;
-  // watchedValue?: string;
+  rule?: string;
 }
 
 const InputText = ({
@@ -31,18 +32,15 @@ const InputText = ({
   eyeShow = false,
   children,
   btnOnClick,
+  hasError = false,
   errorMessage,
-  hasError,
-  // registeration,
   ...props
 }: InputTextProps) => {
-  const { register, watch } = useFormContext();
-  const currentValue = watch(name);
-  console.log(name, ">>> ", currentValue);
-  // 삭제 함수를 위한 코드
-  // const [value, setValue] = useState("");
+  const { register, watch, setValue } = useFormContext();
 
-  // 눈 아이콘을 위한 코드
+  const currentValue = watch(name);
+  const currentValueStr = (currentValue ?? "").toString();
+
   const [show, setShow] = useState(false);
   const actualType =
     eyeShow && (name === "password" || name === "passwordConfirm")
@@ -67,13 +65,14 @@ const InputText = ({
             className={cn(className, hasError && "border border-[#FF4242]")}
             {...register(name, props.validation)}
           />
+
           {/* 삭제 버튼 */}
-          {/* <DeleteButton
+          <DeleteButton
             eyeShow={eyeShow}
             customStyle="top-1/2 -translate-y-1/2"
-            isValue={!!value}
-            onDelete={() => setValue("")}
-          /> */}
+            isValue={!!currentValue}
+            onDelete={() => setValue(name, "")}
+          />
 
           {/* 비밀번호 눈 모양 버튼 */}
           {eyeShow && (
@@ -101,11 +100,18 @@ const InputText = ({
           </Button>
         )}
       </div>
+
       {/* 안내 문구 */}
       <div className="flex w-full justify-between text-caption1-regular text-[#787878]">
-        {hasError && <p className="text-[#FF4242]"> {errorMessage} </p>}
-        {/* 성공 색 #00B76E */}
-        {/* {name === "nickname" && <span> {value.length}/10 </span>} */}
+        {props.isSuccess ? (
+          <p className="text-[#00B76E]">{props.successMessage}</p>
+        ) : hasError ? (
+          <p className="text-[#FF4242]">{errorMessage}</p>
+        ) : (
+          <p>{props.rule}</p>
+        )}
+        {/* 글자 수 확인 */}
+        {name === "nickname" && <span> {currentValueStr.length}/10 </span>}
       </div>
     </div>
   );
