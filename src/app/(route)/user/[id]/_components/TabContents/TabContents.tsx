@@ -32,6 +32,7 @@ const TabContents = () => {
             ))}
           </div>
         )}
+
         {selectedTab === "comment" && (
           <div>
             {Array.from({ length: 5 }).map((_, index) => (
@@ -39,6 +40,7 @@ const TabContents = () => {
             ))}
           </div>
         )}
+
         {selectedTab === "favorite" && (
           <div>
             {Array.from({ length: 5 }).map((_, index) => (
