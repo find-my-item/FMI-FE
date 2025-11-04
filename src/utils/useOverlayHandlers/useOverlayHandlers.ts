@@ -1,5 +1,6 @@
-import { useEffect } from "react";
-import { useCallback } from "react";
+"use client";
+
+import { useEffect, useCallback } from "react";
 
 // 모달 스크롤 방지, ESC 키로 모달 닫기
 export const useModalLockAndEsc = ({
