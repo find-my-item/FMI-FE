@@ -1,7 +1,12 @@
 import type { Config } from "tailwindcss";
 const typedConfig: Config = require("./src/utils/tokens/tailwind.config");
-import { flexCenter, flexColCenter, mouseHover, uEllipsis } from "./src/utils/customStylePlugins";
-import customFonts from "./src/utils/customFonts";
+import {
+  flexCenter,
+  flexColCenter,
+  mouseHover,
+  uEllipsis,
+} from "./src/utils/customStylePlugins/customStylePlugins";
+import customFonts from "./src/utils/customFonts/customFonts";
 import plugin from "tailwindcss/plugin";
 
 const flatten = (obj: Record<string, any>, path: string[] = []): [string, string][] =>
