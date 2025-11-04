@@ -1,5 +1,7 @@
+"use no memo";
+
 import { SIGNUP_INPUT_DATA } from "../../../_constant/FormData";
-import Button from "@/components/Button/Button";
+import { Button } from "@/components";
 import SignUpItem from "./SignUpItem";
 
 const SignUpField = ({ onNext }: { onNext: () => void }) => {

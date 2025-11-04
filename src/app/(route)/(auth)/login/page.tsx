@@ -1,4 +1,5 @@
 "use client";
+"use no memo";
 
 import Button from "@/components/Button/Button";
 import { ButtonStyle } from "../_constant/authStyle";

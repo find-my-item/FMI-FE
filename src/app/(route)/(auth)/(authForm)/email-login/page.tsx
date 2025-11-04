@@ -1,11 +1,11 @@
 "use client";
 
-import Button from "@/components/Button/Button";
+import { Button } from "@/components";
 import Link from "next/link";
-import CheckBox from "@/components/CheckBox/CheckBox";
 import { useWatch, useFormContext } from "react-hook-form";
-import Input from "@/components/Input/InputText/InputText";
 import Logo from "../_components/Logo";
+import { CheckBox } from "@/components";
+import { InputText } from "@/components";
 
 const CheckBoxItem = [
   { label: "아이디 기억하기", id: "rememberID" },
@@ -28,15 +28,13 @@ const Page = () => {
       <form onSubmit={onSubmit} className="flex w-full flex-col gap-10">
         {/* 로그인 입력칸 */}
         <div className="flex w-full flex-col gap-3">
-          {/* <Input name="email" type="text" placeholder="이메일을 입력해주세요." />
-
-          <Input
+          <InputText name="email" placeholder="이메일을 입력해주세요." />
+          <InputText
             name="password"
             type="password"
             placeholder="비밀번호를 입력해주세요."
             eyeShow={true}
-          /> */}
-
+          />
           {/* 체크박스 */}
           <div className="flex w-full gap-3 text-[14px] text-[#9D9D9D]">
             {CheckBoxItem.map((item, index) => (

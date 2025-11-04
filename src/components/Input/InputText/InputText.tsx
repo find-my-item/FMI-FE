@@ -1,16 +1,20 @@
 "use client";
+"use no memo";
+
 import { InputHTMLAttributes, ReactNode, useState } from "react";
 import { InputStyle } from "@/app/(route)/(auth)/_constant/authStyle";
-import Icon from "../../Icon/Icon";
 import { cn } from "@/utils/cn";
-import DeleteButton from "../DeleteButton";
-import Button from "@/components/Button/Button";
 import { RegisterOptions, useFormContext } from "react-hook-form";
+import Icon from "@/components/Icon/Icon";
+import Button from "@/components/Button/Button";
+import DeleteButton from "../_internal/DeleteButton/DeleteButton";
+import Label from "../_internal/Label/Label";
+import Caption from "../_internal/Caption/Caption";
 
 interface InputTextProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "children" | "value" | "defaultValue"> {
   name: string;
-  type: string;
+  type?: string;
   className?: string;
   eyeShow?: boolean;
   label?: string;
@@ -33,42 +37,46 @@ const InputText = ({
   btnOnClick,
   hasError = false,
   errorMessage,
+  validation,
   ...props
 }: InputTextProps) => {
   const { register, watch, setValue } = useFormContext();
 
-  const currentValue = watch(name);
-  const currentValueStr = (currentValue ?? "").toString();
+  const isValue = watch(name) ?? "";
+  const isValueStr = (isValue ?? "").toString();
 
   const [show, setShow] = useState(false);
-  const actualType =
-    eyeShow && (name === "password" || name === "passwordConfirm")
-      ? show
-        ? "text"
-        : "password"
-      : type;
+  const actualType = () => {
+    if (eyeShow && (name === "password" || name === "passwordConfirm")) {
+      return show ? "text" : "password";
+    }
+    return type;
+  };
 
   return (
     <div className="flex w-full flex-col gap-2">
       {/* label */}
-      <label htmlFor={name} className="text-body2-medium text-[#363636]">
-        {props.label}
-        {props.validation?.required && <span className="text-[#1EB87B]">*</span>}
-      </label>
+      <Label
+        name={name}
+        label={props.label}
+        required={!!validation?.required}
+        className="text-body2-medium text-layout-header-default"
+      />
+
       <div className="flex w-full flex-row gap-2">
         <div className="relative flex w-full flex-row">
           <input
             {...props}
-            type={actualType}
-            className={cn(className, hasError && "border border-[#FF4242]")}
-            {...register(name, props.validation)}
+            type={actualType()}
+            className={cn(className, hasError && "border-system-warning border")}
+            {...register(name, validation)}
           />
 
           {/* 삭제 버튼 */}
           <DeleteButton
             eyeShow={eyeShow}
-            customStyle="top-1/2 -translate-y-1/2"
-            isValue={!!currentValue}
+            className="top-1/2 -translate-y-1/2"
+            value={isValue}
             onDelete={() => setValue(name, "")}
           />
 
@@ -89,10 +97,10 @@ const InputText = ({
         {children && (
           <Button
             variant="outlined"
-            className="text-body1-semibold text-[#5D5D5D]"
             type="button"
-            // 버튼 사이즈 확인 필요
             onClick={btnOnClick}
+            ignoreBase
+            className="w-auto whitespace-nowrap rounded-[10px] px-[14px] py-[10px] text-body2-semibold"
           >
             {children}
           </Button>
@@ -100,16 +108,17 @@ const InputText = ({
       </div>
 
       {/* 안내 문구 */}
-      <div className="flex w-full justify-between text-caption1-regular text-[#787878]">
-        {props.isSuccess ? (
-          <p className="text-[#00B76E]">{props.successMessage}</p>
-        ) : hasError ? (
-          <p className="text-[#FF4242]">{errorMessage}</p>
-        ) : (
-          <p>{props.rule}</p>
-        )}
+      <div className="flex w-full justify-between text-caption1-regular text-layout-body-default">
+        <Caption
+          isSuccess={props.isSuccess}
+          hasError={hasError}
+          successMessage={props.successMessage}
+          errorMessage={errorMessage}
+          rule={props.rule}
+        />
+
         {/* 글자 수 확인 */}
-        {name === "nickname" && <span> {currentValueStr.length}/10 </span>}
+        {name === "nickname" && <span> {isValueStr.length}/10 </span>}
       </div>
     </div>
   );

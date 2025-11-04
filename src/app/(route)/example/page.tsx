@@ -1,11 +1,11 @@
 "use client";
 
-import { Dropdown, Tab, ModalLayout } from "@/components";
+import { Dropdown, Tab, ModalLayout, InputChat, InputText, InputSearch } from "@/components";
 import Icon from "@/components/Icon/Icon";
 import ConfirmModal from "@/components/Modal/ConfirmModal";
 import { useToast } from "@/context/ToastContext";
 import { useState } from "react";
-
+import { FormProvider, useForm } from "react-hook-form";
 const tabs = [
   { key: "1", label: "Tab 1" },
   { key: "2", label: "Tab 2" },
@@ -24,6 +24,10 @@ const page = () => {
   const [confirmModal, setConfirmModal] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const { addToast } = useToast();
+
+  const methods = useForm({
+    mode: "onChange",
+  });
 
   return (
     <div className="h-[100vh] w-full gap-6 bg-gray-600 flex-col-center">
@@ -104,6 +108,15 @@ const page = () => {
           size="medium"
         />
       </div>
+
+      <FormProvider {...methods}>
+        <InputText name="test1" label="test1" validation={{ required: true }} />
+        <InputText name="test2" label="test2" validation={{ required: false }}>
+          TestBtn
+        </InputText>
+        <InputChat name="test3" />
+        <InputSearch name="test4" />
+      </FormProvider>
     </div>
   );
 };

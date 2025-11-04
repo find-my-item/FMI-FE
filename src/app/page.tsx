@@ -13,9 +13,6 @@ import ToggleButton from "@/components/ToggleButton/ToggleButton";
 import { useState } from "react";
 import ToggleImageButton from "@/components/ToggleImageButton/ToggleImageButton";
 import { cn } from "@/utils/cn";
-import InputField from "@/components/Input/InputField/InputField";
-import InputChat from "@/components/Input/InputChat/InputChat";
-import InputSearch from "@/components/Input/InputSearch/InputSearch";
 
 const Page = () => {
   const [toggleState, setToggleState] = useState(false);
@@ -196,14 +193,6 @@ const Page = () => {
           </div>
           <p className="bg-gray-900 p-2 text-white">test</p>
         </section>
-
-        {/* input */}
-        <InputField label="TEST" name="test" isLengthCheck={true} maxLength={30} />
-        <InputChat
-          photoClick={() => alert("사진 버튼 클릭")}
-          sendClick={() => alert("전송 버튼 클릭")}
-        />
-        <InputSearch />
       </div>
     </div>
   );

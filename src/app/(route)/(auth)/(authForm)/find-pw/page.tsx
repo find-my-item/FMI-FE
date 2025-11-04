@@ -1,8 +1,8 @@
 "use client";
 
 import { useFormContext } from "react-hook-form";
-import Button from "@/components/Button/Button";
-import Input from "@/components/Input/InputText/InputText";
+import { Button } from "@/components";
+import { InputText } from "@/components";
 import { ButtonStyle } from "../../_constant/authStyle";
 import { cn } from "@/utils/cn";
 import { useRouter } from "next/navigation";
@@ -11,7 +11,6 @@ const Page = () => {
   const router = useRouter();
 
   const {
-    register,
     handleSubmit,
     formState: { isValid, isSubmitSuccessful },
     watch,
@@ -40,38 +39,26 @@ const Page = () => {
           </p>
         </div>
       ) : (
-        // <Input
-        //   type="text"
-        //   placeholder="아이디(이메일)을 입력해 주세요."
-        //   name="email"
-        //   validation={{
-        //     required: "이메일은 필수 항목 입니다",
-        //     pattern: {
-        //       value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
-        //       message: "이메일 형식이 올바르지 않습니다",
-        //     },
-        //   }}
-        // />
-        <Input
+        <InputText
+          label="아이디(이메일)"
           type="text"
           placeholder="아이디(이메일)을 입력해 주세요."
-          {...register("email", {
-            required: "이메일은 필수 항목 입니다",
-            pattern: {
-              value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
-              message: "이메일 형식이 올바르지 않습니다",
-            },
-          })}
-        />
+          name="email"
+          validation={{ required: true }}
+        >
+          비밀번호 찾기
+        </InputText>
       )}
-      <Button
-        type={isSubmitSuccessful ? "button" : "submit"}
-        className={cn(ButtonStyle, isValid && "bg-[#1EB87B]")}
-        onClick={handleClick}
-        ariaLabel={isSubmitSuccessful ? "로그인 화면으로 이동" : "입력완료"}
-      >
-        {isSubmitSuccessful ? "로그인 화면으로 이동" : "입력완료"}
-      </Button>
+      {isSubmitSuccessful && (
+        <Button
+          type="button"
+          className={cn(ButtonStyle, isValid && "bg-[#1EB87B]")}
+          onClick={handleClick}
+          ariaLabel={isSubmitSuccessful ? "로그인 화면으로 이동" : "입력완료"}
+        >
+          {isSubmitSuccessful ? "로그인 화면으로 이동" : "입력완료"}
+        </Button>
+      )}
     </form>
   );
 };
