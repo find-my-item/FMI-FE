@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { DetailHeader } from "@/components/index";
+import { DetailHeader } from "@/components";
 import ListSearch from "@/components/ListSearch/ListSearch";
 import useSearchUpdateQueryString from "@/hooks/useSearchUpdateQueryString/useSearchUpdateQueryString";
 import { SEARCH_HEADER_TITLE } from "../../_constants/SEARCH_HEADER_TITLE";

@@ -1,7 +1,7 @@
 "use client";
 
-import Button from "@/components/Buttons/Button/Button";
 import {
+  Button,
   Bookmark,
   KebabMenu,
   KebabMenuButton,
@@ -12,7 +12,7 @@ import {
   FloatingButton,
   ToggleButton,
   ToggleImageButton,
-} from "@/components/index";
+} from "@/components";
 import { useState } from "react";
 import { cn } from "@/utils/cn";
 

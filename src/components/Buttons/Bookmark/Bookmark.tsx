@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes } from "react";
-import { Icon } from "@/components/index";
+import Icon from "@/components/Icon/Icon";
 import { SIZES } from "./constantBookmark";
 
 /**
