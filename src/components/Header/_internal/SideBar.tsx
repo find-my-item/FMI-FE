@@ -1,10 +1,10 @@
-import { useModalBackdrop, useModalLockAndEsc } from "@/utils/useOverlayHandlers";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import Icon from "../Icon/Icon";
 import ManualPopup from "@/app/(route)/manual/_components/ManualPopup/ManualPopup";
 import { useState } from "react";
-import { HEADER_LINK } from "./CONST_HEADER";
+import Icon from "@/components/Icon/Icon";
+import { HEADER_LINK } from "../CONST_HEADER";
+import { useModalBackdrop, useModalLockAndEsc } from "@/hooks";
 
 // TODO(지권): 추후 디자인 수정 필요
 

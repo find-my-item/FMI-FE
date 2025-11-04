@@ -1,5 +1,5 @@
-import PostSearchView from "./components/PostSearchView";
-import RegionSearchView from "./components/RegionSearchView";
+import PostSearchView from "./_internal/PostSearchView";
+import RegionSearchView from "./_internal/RegionSearchView";
 import { LIST_SEARCH_PLACEHOLDER } from "./LIST_SEARCH_PLACEHOLDER";
 
 interface ListSearch {

@@ -1,9 +1,8 @@
-import Icon from "@/components/Icon/Icon";
-import { Chip } from "@/components";
+import { Chip, Icon } from "@/components";
 import PostDetailHeader from "../PostDetailHeader/PostDetailHeader";
 import NoticeDetailHeader from "@/app/(route)/notice/_components/NoticeDetailHeader/NoticeDetailHeader";
 import NoticeChip from "@/app/(route)/notice/_components/NoticeChip/NoticeChip";
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils";
 
 interface PostDetailProps {
   type: "find" | "lost" | "notice" | "customer";

@@ -1,8 +1,8 @@
 "use client";
 
-import { useHiddenPath } from "@/hooks/useHiddenPath";
 import Link from "next/link";
 import { FOOTER_LINK } from "./CONST_FOOTER";
+import { useHiddenPath } from "@/hooks";
 
 /**
  * @author jikwon
