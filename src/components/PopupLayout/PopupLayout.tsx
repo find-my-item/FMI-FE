@@ -1,10 +1,6 @@
 "use client";
 
-import { cn } from "@/utils/cn/cn";
-import {
-  useModalBackdrop,
-  useModalLockAndEsc,
-} from "@/utils/useOverlayHandlers/useOverlayHandlers";
+import { cn, useModalBackdrop, useModalLockAndEsc } from "@/utils";
 
 /**
  * @author jikwon

@@ -1,8 +1,8 @@
 "use client";
 
-import Icon from "@/components/Icon/Icon";
+import Icon from "../Icon/Icon";
 import { InputHTMLAttributes } from "react";
-import { cn } from "@/utils/cn/cn";
+import { cn } from "@/utils";
 
 interface CheckBoxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type" | "id"> {
   id: string;

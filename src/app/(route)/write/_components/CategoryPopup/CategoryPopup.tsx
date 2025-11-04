@@ -1,7 +1,7 @@
 "use client";
 
 import { PopupLayout } from "@/components";
-import { cn } from "@/utils/cn/cn";
+import { cn } from "@/utils";
 import { useState } from "react";
 
 interface CategoryPopupProps {

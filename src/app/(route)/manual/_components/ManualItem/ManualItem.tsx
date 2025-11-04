@@ -1,7 +1,7 @@
 "use client";
 
-import Icon from "@/components/Icon/Icon";
-import { cn } from "@/utils/cn/cn";
+import { Icon } from "@/components";
+import { cn } from "@/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 

@@ -1,6 +1,6 @@
 import { Input } from "@/components";
 import { InputStyle, signUpButtonStyle } from "../../../_constant/authStyle";
-import { cn } from "@/utils/cn/cn";
+import { cn } from "@/utils";
 import { RegisterOptions, useFormContext } from "react-hook-form";
 import Button from "@/components/Buttons/Button/Button";
 

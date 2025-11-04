@@ -4,8 +4,8 @@ import { useFormContext } from "react-hook-form";
 import Button from "@/components/Buttons/Button/Button";
 import Input from "@/components/Input/Input";
 import { ButtonStyle } from "../../_constant/authStyle";
-import { cn } from "@/utils/cn/cn";
 import { useRouter } from "next/navigation";
+import { cn } from "@/utils";
 
 const Page = () => {
   const router = useRouter();

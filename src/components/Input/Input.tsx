@@ -5,7 +5,7 @@ import { useFormContext } from "react-hook-form";
 import { InputType } from "@/types/InputTypes";
 import { InputStyle } from "@/app/(route)/(auth)/_constant/authStyle";
 import Icon from "../Icon/Icon";
-import { cn } from "@/utils/cn/cn";
+import { cn } from "@/utils";
 
 const Input = ({ name, type, className = InputStyle, eyeShow = false, ...rest }: InputType) => {
   const { register, watch, setValue } = useFormContext();
