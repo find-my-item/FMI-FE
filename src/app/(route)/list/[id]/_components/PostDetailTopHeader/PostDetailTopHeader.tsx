@@ -1,6 +1,6 @@
 "use client";
 
-import { DetailHeader } from "@/components/index";
+import { DetailHeader } from "@/components";
 
 const PostDetailTopHeader = () => {
   return (

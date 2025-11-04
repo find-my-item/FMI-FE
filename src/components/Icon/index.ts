@@ -29,3 +29,4 @@ export { default as Success } from "@/assets/success.svg";
 export { default as Warning } from "@/assets/warning.svg";
 export { default as Error } from "@/assets/error.svg";
 export { default as Loading } from "@/assets/loading.svg";
+export { default as NotFound } from "@/assets/not-found.svg";

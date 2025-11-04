@@ -1,7 +1,7 @@
 "use client";
 "use no memo";
 
-import Button from "@/components/Button/Button";
+import Button from "@/components/Buttons/Button/Button";
 import { ButtonStyle } from "../_constant/authStyle";
 import Link from "next/link";
 import { cn } from "@/utils/cn";

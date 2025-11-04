@@ -6,10 +6,10 @@ import { InputStyle } from "@/app/(route)/(auth)/_constant/authStyle";
 import { cn } from "@/utils/cn";
 import { RegisterOptions, useFormContext } from "react-hook-form";
 import Icon from "@/components/Icon/Icon";
-import Button from "@/components/Button/Button";
 import DeleteButton from "../_internal/DeleteButton/DeleteButton";
 import Label from "../_internal/Label/Label";
 import Caption from "../_internal/Caption/Caption";
+import { Button } from "@/components";
 
 interface InputTextProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "children" | "value" | "defaultValue"> {
@@ -68,7 +68,7 @@ const InputText = ({
           <input
             {...props}
             type={actualType()}
-            className={cn(className, hasError && "border-system-warning border")}
+            className={cn(className, hasError && "border border-system-warning")}
             {...register(name, validation)}
           />
 

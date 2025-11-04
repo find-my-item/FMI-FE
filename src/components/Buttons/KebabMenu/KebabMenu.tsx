@@ -54,7 +54,7 @@ const KebabMenu = ({ items }: KebabMenuProps) => {
           disabled={item.disabled || item.loading}
           onClick={item.onClick}
           className={cn(
-            "grid auto-cols-max grid-flow-col items-center justify-center gap-[8px] border-b border-white bg-[#F5F5F5] px-[28px] py-[16px] text-[#5D5D5D] hover:text-black active:bg-[#E4E4E4] active:text-[#9D9D9D] disabled:bg-[#E4E4E4] disabled:text-[#9D9D9D]",
+            "grid auto-cols-max grid-flow-col items-center justify-center gap-[8px] border-b border-white px-[28px] py-[16px] text-neutral-normal-default bg-fill-neutral-subtle-default hover:text-black hover:bg-fill-neutral-subtle-hover active:text-neutral-normal-preesed active:bg-fill-neutral-subtle-pressed disabled:text-neutral-normal-disabled disabled:bg-fill-neutral-subtle-disabled",
             index === 0 && "rounded-t-[20px]",
             items.length === ++index && "rounded-b-[20px]"
           )}
