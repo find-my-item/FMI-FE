@@ -3,8 +3,7 @@
 import Icon from "@/components/Icon/Icon";
 import { useRouterBack } from "@/utils/useRouterBack";
 import { ButtonHTMLAttributes, createContext } from "react";
-import Bookmark from "../Bookmark/Bookmark";
-import KebabMenuButton from "../KebabMenuButton/KebabMenuButton";
+import { Bookmark, KebabMenuButton } from "@/components/index";
 
 const DetailHeaderContext = createContext({ title: "" });
 

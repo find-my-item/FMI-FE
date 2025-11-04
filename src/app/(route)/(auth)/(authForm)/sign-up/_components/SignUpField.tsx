@@ -1,5 +1,5 @@
 import { signUpInputObject } from "../../../_constant/FormData";
-import Button from "@/components/Button/Button";
+import Button from "@/components/Buttons/Button/Button";
 import SignUpItem from "./SignUpItem";
 
 const SignUpField = ({ onNext }: { onNext: () => void }) => {
