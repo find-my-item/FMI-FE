@@ -1,7 +1,8 @@
 "use client";
 
 import { createPortal } from "react-dom";
-import { cn, useModalBackdrop, useModalLockAndEsc } from "@/utils";
+import { cn } from "@/utils";
+import { useModalBackdrop, useModalLockAndEsc } from "@/hooks";
 
 /**
  * @author jikwon

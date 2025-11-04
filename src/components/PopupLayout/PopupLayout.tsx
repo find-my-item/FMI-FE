@@ -1,6 +1,7 @@
 "use client";
 
-import { cn, useModalBackdrop, useModalLockAndEsc } from "@/utils";
+import { cn } from "@/utils";
+import { useModalBackdrop, useModalLockAndEsc } from "@/hooks";
 
 /**
  * @author jikwon
