@@ -1,5 +1,5 @@
 import Icon from "@/components/Icon/Icon";
-import Button from "@/components/Button/Button";
+import Button from "@/components/Buttons/Button/Button";
 import { CheckBox } from "@/components";
 import { useFormContext, useWatch } from "react-hook-form";
 

@@ -1,4 +1,4 @@
-import Button from "@/components/Button/Button";
+import Button from "@/components/Buttons/Button/Button";
 
 const RegionSearchView = () => {
   const regions = [{ value: "서울시 광진구" }, { value: "경기 광명시" }];

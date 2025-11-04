@@ -2,7 +2,7 @@ import { Input } from "@/components";
 import { InputStyle, signUpButtonStyle } from "../../../_constant/authStyle";
 import { cn } from "@/utils/cn";
 import { RegisterOptions, useFormContext } from "react-hook-form";
-import Button from "@/components/Button/Button";
+import Button from "@/components/Buttons/Button/Button";
 
 const buttonConfig: Record<string, { text: string; className: string }> = {
   email: { text: "인증번호 발송", className: signUpButtonStyle },
