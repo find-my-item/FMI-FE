@@ -1,4 +1,4 @@
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils/cn/cn";
 import { ChipProps, ChipType } from "./ChipTypes";
 
 /**

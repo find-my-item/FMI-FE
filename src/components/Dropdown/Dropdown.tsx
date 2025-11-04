@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils/cn/cn";
 import { useState, useRef, useEffect } from "react";
 
 type DropdownOption = {

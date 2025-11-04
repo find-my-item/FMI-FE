@@ -3,7 +3,7 @@
 import Button from "@/components/Buttons/Button/Button";
 import { ButtonStyle } from "../_constant/authStyle";
 import Link from "next/link";
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils/cn/cn";
 import Icon from "@/components/Icon/Icon";
 import { useRouter } from "next/navigation";
 import Logo from "../(authForm)/_components/Logo";

@@ -1,5 +1,5 @@
 import RequiredText from "@/components/RequiredText/RequiredText";
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils/cn/cn";
 
 const ContentSection = () => {
   return (

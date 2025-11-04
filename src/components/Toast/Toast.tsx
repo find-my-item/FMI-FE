@@ -1,5 +1,5 @@
 import { ToastType } from "@/types/ToastTypes";
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils/cn/cn";
 import Icon, { IconName } from "../Icon/Icon";
 import { TOAST_CONFIG } from "./ToastTypes";
 

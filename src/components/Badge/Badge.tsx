@@ -1,4 +1,4 @@
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils/cn/cn";
 import { label, style } from "./CONST_BADGE";
 
 /**

@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes } from "react";
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils/cn/cn";
 import Image from "next/image";
 
 /**

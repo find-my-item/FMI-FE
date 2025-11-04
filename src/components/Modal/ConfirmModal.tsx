@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { ModalLayout } from "..";
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils/cn/cn";
 import Icon, { Props as IconProps } from "../Icon/Icon";
 import { sizeMap, style } from "./CONST_MODAL";
 
