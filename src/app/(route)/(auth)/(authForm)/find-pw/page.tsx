@@ -1,7 +1,7 @@
 "use client";
 
 import { useFormContext } from "react-hook-form";
-import Button from "@/components/Button/Button";
+import Button from "@/components/Buttons/Button/Button";
 import Input from "@/components/Input/Input";
 import { ButtonStyle } from "../../_constant/authStyle";
 import { cn } from "@/utils/cn";

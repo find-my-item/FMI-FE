@@ -1,6 +1,6 @@
 import { noticeListObject } from "../_constant/noticeListObject";
-import { CommentForm, PostDetail } from "@/app/(route)/list/[id]/_components/index";
-import { CommentList } from "@/components/index";
+import { CommentForm, PostDetail } from "@/app/(route)/list/[id]/_components";
+import { CommentList } from "@/components";
 import { commentListObject } from "../_constant/commentListObject";
 
 interface NoticeDetailProps {

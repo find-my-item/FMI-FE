@@ -1,17 +1,19 @@
 "use client";
 
-import Button from "@/components/Button/Button";
-import Bookmark from "@/components/Bookmark/Bookmark";
-import KebabMenuButton from "@/components/KebabMenuButton/KebabMenuButton";
-import Location from "@/components/Location/Location";
-import ViewMoreReply from "@/components/ViewMoreReply/ViewMoreReply";
-import ViewMoreComment from "@/components/ViewMoreComment/ViewMoreComment";
-import Filter from "@/components/Filter/Filter";
-import KebabMenu from "@/components/KebabMenu/KebabMenu";
-import FloatingButton from "@/components/FloatingButton/FloatingButton";
-import ToggleButton from "@/components/ToggleButton/ToggleButton";
+import {
+  Button,
+  Bookmark,
+  KebabMenu,
+  KebabMenuButton,
+  Location,
+  ViewMoreReply,
+  ViewMoreComment,
+  Filter,
+  FloatingButton,
+  ToggleButton,
+  ToggleImageButton,
+} from "@/components";
 import { useState } from "react";
-import ToggleImageButton from "@/components/ToggleImageButton/ToggleImageButton";
 import { cn } from "@/utils/cn";
 
 const Page = () => {

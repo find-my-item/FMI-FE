@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { DetailHeader } from "@/components/index";
+import DetailHeader from "@/components/DetailHeader/DetailHeader";
 
 jest.mock("@/utils/useRouterBack", () => ({
   useRouterBack: () => ({ back: jest.fn() }),

@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "@/components/Button/Button";
+import Button from "@/components/Buttons/Button/Button";
 import Link from "next/link";
 import CheckBox from "@/components/CheckBox/CheckBox";
 import { useWatch, useFormContext } from "react-hook-form";
