@@ -1,7 +1,4 @@
-import {
-  useModalBackdrop,
-  useModalLockAndEsc,
-} from "@/utils/useOverlayHandlers/useOverlayHandlers";
+import { useModalBackdrop, useModalLockAndEsc } from "@/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import Icon from "../Icon/Icon";
