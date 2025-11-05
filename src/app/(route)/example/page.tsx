@@ -127,7 +127,6 @@ const page = () => {
         </InputText>
         <InputChat name="test3" />
         <InputSearch name="test4" mode="RHF" onEnter={(value) => alert(value)} />
-
         <InputField
           name="test5"
           label="test5"
