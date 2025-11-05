@@ -1,13 +1,12 @@
 "use client";
 "use no memo";
 
-import Button from "@/components/Buttons/Button/Button";
 import { ButtonStyle } from "../_constant/authStyle";
 import Link from "next/link";
 import { cn } from "@/utils";
 import { useRouter } from "next/navigation";
 import Logo from "../(authForm)/_components/Logo";
-import { Icon } from "@/components";
+import { Icon, Button } from "@/components";
 
 const Page = () => {
   const router = useRouter();
