@@ -30,6 +30,7 @@ const Page = () => {
   return (
     <form className="w-full gap-4 px-5 py-6 flex-col-center" onSubmit={onSubmit}>
       {isSubmitSuccessful ? (
+        // TODO(수현): div에 스타일을 적용하는게 아닌, p 태그에 div 스타일 적용 및 div 태그 제거
         <div className="h-[91px] text-center text-body2-regular flex-col-center">
           <p>
             <span className="text-flatGreen-500">{email}</span>으로

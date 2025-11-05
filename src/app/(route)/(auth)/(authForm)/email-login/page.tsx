@@ -5,6 +5,7 @@ import { useWatch, useFormContext } from "react-hook-form";
 import Logo from "../_components/Logo";
 import { CheckBox, InputText, Button } from "@/components";
 
+// TODO(수현): constants 분리 및 대문자 컨벤션 적용 필요
 const CheckBoxItem = [
   { label: "아이디 기억하기", id: "rememberID" },
   { label: "자동 로그인", id: "autoLogin" },
