@@ -1,12 +1,21 @@
 "use client";
 "use no memo";
 
-import { Dropdown, Tab, ModalLayout, InputChat, InputText, InputSearch } from "@/components";
+import {
+  Dropdown,
+  Tab,
+  ModalLayout,
+  InputChat,
+  InputText,
+  InputSearch,
+  InputField,
+} from "@/components";
 import Icon from "@/components/Icon/Icon";
 import ConfirmModal from "@/components/Modal/ConfirmModal";
 import { useToast } from "@/context/ToastContext";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+
 const tabs = [
   { key: "1", label: "Tab 1" },
   { key: "2", label: "Tab 2" },
@@ -28,6 +37,7 @@ const page = () => {
 
   const methods = useForm({
     mode: "onChange",
+    reValidateMode: "onChange",
   });
 
   return (
@@ -117,6 +127,13 @@ const page = () => {
         </InputText>
         <InputChat name="test3" />
         <InputSearch name="test4" mode="RHF" onEnter={(value) => alert(value)} />
+
+        <InputField
+          name="test5"
+          label="test5"
+          validation={{ maxLength: { value: 20, message: "20글자 이하로 작성해주세요." } }}
+          rule="테스트InputField"
+        />
       </FormProvider>
     </div>
   );

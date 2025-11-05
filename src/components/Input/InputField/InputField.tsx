@@ -1,4 +1,5 @@
 "use client";
+"use no memo";
 
 import { TextareaHTMLAttributes } from "react";
 import { cn } from "@/utils/cn";
@@ -26,10 +27,18 @@ const InputField = ({
   validation,
   ...props
 }: InputFieldProps) => {
-  const { register, watch, setValue } = useFormContext();
+  const {
+    register,
+    watch,
+    setValue,
+    formState: { errors },
+  } = useFormContext();
 
   const isValue = watch(name) ?? "";
   const isValueStr = (isValue ?? "").toString();
+
+  const maxLengthValue =
+    typeof validation?.maxLength === "number" ? validation.maxLength : validation?.maxLength?.value;
 
   return (
     <div className="flex w-full flex-col gap-1">
@@ -44,7 +53,7 @@ const InputField = ({
           {...props}
           className={cn(
             "disabled:background-[#E4E4E4] h-[120px] w-full resize-none rounded-[10px] border border-[#CFCFCF] p-3 hover:border-[#ADADAD] focus:border-[#ADADAD] disabled:text-[#9D9D9D]",
-            hasError && "border-system-warning",
+            !!errors[name] && "!border-system-warning",
             isValue && "border-[#ADADAD]"
           )}
           {...register(name, validation)}
@@ -54,21 +63,27 @@ const InputField = ({
         <DeleteButton
           value={isValue}
           className="right-[14px] top-[14px]"
-          onDelete={() => setValue(name, "")}
+          onDelete={() => setValue(name, "", { shouldValidate: true })}
         />
       </div>
 
       {/* 안내 문구 */}
       <div className="flex w-full justify-between text-caption1-regular text-layout-body-default">
-        <Caption hasError={hasError} errorMessage={props.errorMessage} rule={props.rule} />
+        <Caption
+          hasError={!!errors[name]}
+          errorMessage={errors[name]?.message as string}
+          rule={props.rule}
+        />
 
         {/* 글자 수 확인 */}
-        {isLengthCheck && (
+        {validation?.maxLength && (
           <span>
-            {isValueStr.length}/{props.maxLength}
+            {isValueStr.length}/{maxLengthValue}
           </span>
         )}
       </div>
+
+      {String(!!errors[name])}
     </div>
   );
 };
