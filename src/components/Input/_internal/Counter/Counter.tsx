@@ -5,13 +5,11 @@ interface CounterProps {
 
 const Counter = ({ maxLength, isLength }: CounterProps) => {
   return (
-    <>
-      {maxLength && (
-        <span>
-          {isLength}/{maxLength}
-        </span>
-      )}
-    </>
+    maxLength && (
+      <span>
+        {isLength}/{maxLength}
+      </span>
+    )
   );
 };
 
