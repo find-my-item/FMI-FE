@@ -6,6 +6,9 @@ const meta: Meta<typeof InputChat> = {
   title: "공통 컴포넌트/InputChat",
   component: InputChat,
   tags: ["autodocs"],
+  parameters: {
+    layout: "centered",
+  },
   decorators: [
     (Story) => {
       const methods = useForm();

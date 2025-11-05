@@ -6,6 +6,9 @@ const meta: Meta<typeof InputText> = {
   title: "공통 컴포넌트/InputText",
   component: InputText,
   tags: ["autodocs"],
+  parameters: {
+    layout: "centered",
+  },
   argTypes: {
     placeholder: { control: "text" },
     validation: { control: "object" },
