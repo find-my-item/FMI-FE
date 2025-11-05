@@ -1,76 +1,34 @@
-import { Input } from "@/components";
-import { InputStyle, signUpButtonStyle } from "../../../_constant/authStyle";
-import { cn } from "@/utils";
-import { RegisterOptions, useFormContext } from "react-hook-form";
-import Button from "@/components/Buttons/Button/Button";
+"use no memo";
 
-const buttonConfig: Record<string, { text: string; className: string }> = {
-  email: { text: "인증번호 발송", className: signUpButtonStyle },
-  emailAuth: { text: "인증번호 확인", className: signUpButtonStyle },
-  nickname: { text: "중복 확인", className: cn(signUpButtonStyle, "min-w-[100px]") },
+import { InputText } from "@/components";
+import { InputType } from "../../../_constant/FormData";
+
+const style = {
+  input:
+    "flex items-center relative w-full h-10 px-[14px] py-[12.5px] bg-[#F5F5F5] rounded-[10px] text-[#9D9D9D] text-[14px] border focus:outline-none",
+  button:
+    "w-full h-[50px] flex-center gap-1 rounded-[10px] bg-[#1EB87B] font-semibold text-[16px] text-white",
+  signUpButton:
+    "flex items-center justify-center min-w-[104px] h-10 text-[#5D5D5D] text-[14px] border border-[#CFCFCF] rounded-[10px] px-[10px] py-[14px]",
 };
 
 interface SignUpItemProps {
-  name: string;
-  label?: string;
-  type: string;
-  placeholder: string;
-  validation?: RegisterOptions;
-  rule?: string;
-  eyeShow?: boolean;
+  item: InputType;
 }
 
-const SignUpItem = ({
-  name,
-  label,
-  type,
-  placeholder,
-  validation,
-  rule,
-  eyeShow,
-}: SignUpItemProps) => {
-  const {
-    formState: { errors, touchedFields, isSubmitted },
-  } = useFormContext();
-
-  const fieldError = errors[name]?.message as string;
-  const showError = (!!touchedFields[name] || isSubmitted) && !!fieldError;
-
-  const currentButtonConfig = buttonConfig[name];
-
+const SignUpItem = ({ item }: SignUpItemProps) => {
   return (
-    <div className="flex min-h-[96px] w-full flex-col gap-2" key={name}>
-      {/* label */}
-      <label htmlFor={name} className="text-[14px] text-[#363636]">
-        {label}
-        {validation?.required && <span className="text-[#1EB87B]">*</span>}
-      </label>
-
-      {/* input */}
-      <div className="flex w-full flex-row items-end gap-[10px]" key={name}>
-        <Input
-          name={name}
-          type={type}
-          className={cn(InputStyle, showError && "border-[#FF4242] bg-[#E4E4E4]")}
-          placeholder={placeholder}
-          validation={validation}
-          eyeShow={eyeShow}
-        />
-        {/* button */}
-        {currentButtonConfig && (
-          <Button className={currentButtonConfig.className} ariaLabel={currentButtonConfig.text}>
-            {currentButtonConfig.text}
-          </Button>
-        )}
-      </div>
-
-      {/* 에러 확인 및 규칙 안내 */}
-      {(showError || rule) && (
-        <p className={cn("text-[12px]", showError ? "text-red-500" : "text-[#787878]")}>
-          {showError ? fieldError : rule}
-        </p>
-      )}
-    </div>
+    <InputText
+      name={item.name}
+      label={item.label}
+      type={item.type}
+      placeholder={item.placeholder}
+      validation={item.validation}
+      rule={item.rule}
+      eyeShow={item.eyeShow}
+    >
+      {item.btnText}
+    </InputText>
   );
 };
 

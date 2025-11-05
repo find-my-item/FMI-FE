@@ -1,4 +1,5 @@
 "use client";
+"use no memo";
 
 import AllAgree from "./_components/AllAgree";
 import SignUpField from "./_components/SignUpField";

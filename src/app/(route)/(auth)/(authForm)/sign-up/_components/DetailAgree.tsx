@@ -1,4 +1,4 @@
-import Button from "@/components/Buttons/Button/Button";
+import { Button } from "@/components";
 import { AgreeConfig } from "../../../_constant/Agreement";
 
 interface DetailAgreeProps {

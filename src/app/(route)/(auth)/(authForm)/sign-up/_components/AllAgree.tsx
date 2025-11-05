@@ -1,6 +1,4 @@
-import Icon from "@/components/Icon/Icon";
-import Button from "@/components/Buttons/Button/Button";
-import { CheckBox } from "@/components";
+import { Icon, Button, CheckBox } from "@/components";
 import { useFormContext, useWatch } from "react-hook-form";
 
 const Terms = [
@@ -44,10 +42,10 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
   return (
     <>
       <div className="flex w-full flex-col gap-7 p-4">
-        <h1 className="text-[18px] font-semibold text-[#171717]">
-          <p>서비스 이용을 위해 </p>
-          <p>약관 동의가 필요합니다.</p>
-        </h1>
+        <p className="text-[18px] font-semibold text-[#171717]">
+          서비스 이용을 위해 <br />
+          약관 동의가 필요합니다.
+        </p>
 
         <div className="flex min-h-[272px] w-full flex-col gap-8">
           <div className="flex min-h-[68px] w-full items-center border-b border-[#CCCCCC] text-[#5D5D5D]">
