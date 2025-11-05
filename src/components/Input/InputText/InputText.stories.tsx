@@ -11,7 +11,7 @@ const meta: Meta<typeof InputText> = {
     validation: { control: "object" },
   },
   decorators: [
-    (Story, context) => {
+    (Story) => {
       const methods = useForm();
 
       return (
