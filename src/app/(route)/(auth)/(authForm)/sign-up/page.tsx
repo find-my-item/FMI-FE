@@ -1,9 +1,7 @@
 "use client";
 "use no memo";
 
-import AllAgree from "./_components/AllAgree";
-import SignUpField from "./_components/SignUpField";
-import DetailAgree from "./_components/DetailAgree";
+import { AllAgree, DetailAgree, SignUpField } from "./_components";
 import { useSignUpFlow } from "./_hooks/useSignUpFlow";
 
 const Page = () => {

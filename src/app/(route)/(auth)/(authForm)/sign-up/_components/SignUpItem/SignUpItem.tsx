@@ -1,7 +1,7 @@
 "use no memo";
 
+import { InputType } from "@/app/(route)/(auth)/_constant/FormData";
 import { InputText } from "@/components";
-import { InputType } from "../../../_constant/FormData";
 
 const style = {
   input:

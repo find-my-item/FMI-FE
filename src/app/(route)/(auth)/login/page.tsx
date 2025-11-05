@@ -9,6 +9,7 @@ import Logo from "../(authForm)/_components/Logo";
 import { Icon, Button } from "@/components";
 
 const Page = () => {
+  // TODO(수현): 현재 사용하지 않은 router
   const router = useRouter();
 
   return (
@@ -16,7 +17,7 @@ const Page = () => {
       <Logo />
 
       {/* button */}
-      <div className="flex w-full flex-col gap-3 px-5 text-[14px]">
+      <div className="flex w-full flex-col gap-3 px-5 text-body1-semibold">
         <Button
           type="submit"
           ariaLabel="카카오 로그인 버튼"
