@@ -20,7 +20,10 @@ const Page = () => {
         <Button
           type="submit"
           ariaLabel="카카오 로그인 버튼"
-          className={cn(ButtonStyle, "!text-flatGray-900 bg-fill-accent-kakao")}
+          className={cn(
+            ButtonStyle,
+            "!text-flatGray-900 bg-fill-accent-kakao hover:bg-fill-accent-kakao"
+          )}
         >
           <Icon name="KakaoLogin" size={14} />
           카카오로 3초 만에 시작하기
