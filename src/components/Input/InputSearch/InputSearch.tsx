@@ -1,4 +1,5 @@
 "use client";
+"use no memo";
 
 import { InputHTMLAttributes } from "react";
 import Icon from "../../Icon/Icon";
@@ -11,23 +12,22 @@ interface InputSearchProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   className?: string;
   mode: "RHF" | "onChange";
-  // onEnter?: (value: string) => void;
+  onEnter: (value: string) => void;
 }
 
-const InputSearch = ({ name, mode, label, ...props }: InputSearchProps) => {
+const InputSearch = ({ name, mode, label, onEnter, ...props }: InputSearchProps) => {
   const { register, watch, setValue } = useFormContext();
   const rhfValue = watch(name) || "";
 
   const [innerValue, setInnerValue] = useState("");
 
-  const value = mode === "onChange" ? innerValue : undefined;
-  const onChange =
-    mode === "onChange"
-      ? props.onChange
-      : (e: React.ChangeEvent<HTMLInputElement>) => setInnerValue(e.target.value);
-
   const onChangeDelete = () => {
     mode === "RHF" ? setValue(name, "") : setInnerValue("");
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key !== "Enter") return;
+    onEnter?.(mode === "RHF" ? rhfValue : innerValue);
   };
 
   return (
@@ -35,11 +35,12 @@ const InputSearch = ({ name, mode, label, ...props }: InputSearchProps) => {
       <Icon name="Search" size={16} className="absolute left-5 top-1/2 -translate-y-1/2" />
 
       <input
-        {...(mode === "RHF" ? register(name) : {})}
+        {...(mode === "RHF"
+          ? register(name)
+          : { value: innerValue, onChange: (e) => setInnerValue(e.target.value) })}
         {...props}
         className="h-11 min-w-0 flex-1 rounded-[24px] border px-10 text-body1-regular text-neutral-normal-placeholder bg-fill-neutral-subtle-default hover:text-neutral-normal-hover focus:border-black focus:text-neutral-normal-focused"
-        value={value}
-        onChange={onChange}
+        onKeyDown={handleKeyDown}
       />
 
       {/* 삭제 버튼 */}

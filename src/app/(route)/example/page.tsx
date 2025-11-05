@@ -1,4 +1,5 @@
 "use client";
+"use no memo";
 
 import { Dropdown, Tab, ModalLayout, InputChat, InputText, InputSearch } from "@/components";
 import Icon from "@/components/Icon/Icon";
@@ -115,7 +116,7 @@ const page = () => {
           TestBtn
         </InputText>
         <InputChat name="test3" />
-        <InputSearch name="test4" />
+        <InputSearch name="test4" mode="RHF" onEnter={(value) => alert(value)} />
       </FormProvider>
     </div>
   );
