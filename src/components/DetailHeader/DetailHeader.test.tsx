@@ -2,8 +2,8 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import DetailHeader from "@/components/DetailHeader/DetailHeader";
 
-jest.mock("@/utils/useRouterBack", () => ({
-  useRouterBack: () => ({ back: jest.fn() }),
+jest.mock("next/navigation", () => ({
+  useRouter: () => ({ back: jest.fn() }),
 }));
 
 // 기본 상태 테스트

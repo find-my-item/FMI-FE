@@ -3,8 +3,8 @@
 import { useFormContext } from "react-hook-form";
 import { Button, InputText } from "@/components";
 import { ButtonStyle } from "../../_constant/authStyle";
-import { cn } from "@/utils/cn";
 import { useRouter } from "next/navigation";
+import { cn } from "@/utils";
 
 const Page = () => {
   const router = useRouter();

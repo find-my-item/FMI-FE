@@ -1,5 +1,5 @@
 import { ModalLayout } from "@/components";
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils";
 
 interface TempSaveModalProps {
   isOpen: boolean;

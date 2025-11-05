@@ -1,5 +1,6 @@
-import Icon, { IconName } from "@/components/Icon/Icon";
-import { formatNumber } from "@/utils/formatNumber";
+import { Icon } from "@/components";
+import { IconName } from "@/components/Icon/Icon";
+import { formatNumber } from "@/utils";
 
 const SimilarItem = () => {
   const IconList = [

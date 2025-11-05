@@ -1,10 +1,10 @@
 "use client";
 
 import Icon from "@/components/Icon/Icon";
-import { useRouterBack } from "@/utils/useRouterBack";
 import { ButtonHTMLAttributes, createContext } from "react";
 import Bookmark from "@/components/Buttons/Bookmark/Bookmark";
 import KebabMenuButton from "@/components/Buttons/KebabMenuButton/KebabMenuButton";
+import { useRouter } from "next/navigation";
 
 const DetailHeaderContext = createContext({ title: "" });
 
@@ -18,13 +18,13 @@ interface BaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const DetailHeader = ({ title = "", children }: DetailHeaderProps) => {
-  const { back } = useRouterBack();
+  const router = useRouter();
 
   return (
     <DetailHeaderContext.Provider value={{ title }}>
       <div className="sticky top-0 z-10 flex h-[56px] w-full items-center justify-between bg-white px-[20px]">
         <div className="flex items-center justify-start gap-[8px]">
-          <button className="h-[30px] w-[30px]" onClick={() => back()} aria-label="뒤로가기">
+          <button className="h-[30px] w-[30px]" onClick={() => router.back()} aria-label="뒤로가기">
             <Icon name="ArrowLeftSmall" size={30} />
           </button>
           <h1 className="text-[20px] font-semibold text-[#242424]">{title}</h1>
