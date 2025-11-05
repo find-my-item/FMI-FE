@@ -3,7 +3,7 @@ import { useForm, FormProvider } from "react-hook-form";
 import InputField from "./InputField";
 
 const meta: Meta<typeof InputField> = {
-  title: "공통 컴포넌트/InputField",
+  title: "공통 컴포넌트/Input/InputField",
   component: InputField,
   tags: ["autodocs"],
   parameters: {
