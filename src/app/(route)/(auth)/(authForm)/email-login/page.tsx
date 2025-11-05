@@ -4,8 +4,7 @@ import { Button } from "@/components";
 import Link from "next/link";
 import { useWatch, useFormContext } from "react-hook-form";
 import Logo from "../_components/Logo";
-import { CheckBox } from "@/components";
-import { InputText } from "@/components";
+import { CheckBox, InputText } from "@/components";
 
 const CheckBoxItem = [
   { label: "아이디 기억하기", id: "rememberID" },
