@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>찾아줘! 신고 결과 안내</title>
+    <style>
+      @font-face {
+        font-family: "SUIT Variable";
+        font-style: normal;
+        font-weight: 100 900;
+        src: url("https://cdn.jsdelivr.net/gh/sun-typeface/SUIT/fonts/variable/woff2/SUIT-Variable.woff2")
+          format("woff2");
+      }
+    </style>
+  </head>
+  <body
+    style="
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+      font-family:
+        &quot;SUIT Variable&quot;,
+        -apple-system,
+        BlinkMacSystemFont,
+        &quot;Apple SD Gothic Neo&quot;,
+        &quot;Malgun Gothic&quot;,
+        Arial,
+        sans-serif;
+    "
+  >
+    <div style="display: none; max-height: 0; overflow: hidden; opacity: 0; mso-hide: all">
+      찾아줘! 신고 결과 안내
+    </div>
+
+    <table
+      width="100%"
+      cellpadding="0"
+      cellspacing="0"
+      role="presentation"
+      style="background: #dfdede; mso-table-lspace: 0; mso-table-rspace: 0"
+    >
+      <tr>
+        <td align="center" style="padding: 24px 12px">
+          <table
+            cellpadding="0"
+            cellspacing="0"
+            role="presentation"
+            style="width: 100%; max-width: 728px; background: #ffffff; border-collapse: collapse"
+          >
+            <tr>
+              <td style="padding: 40px">
+                <!-- header -->
+                <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                  <tr>
+                    <td style="padding-bottom: 16px; border-bottom: 2px solid #1eb87b">
+                      <img
+                        src="https://i.ibb.co/Z1mmng2j/email-logo.png"
+                        alt="찾아줘! 로고"
+                        width="106"
+                        height="40"
+                        style="display: block; border: 0; outline: none; text-decoration: none"
+                      />
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- title -->
+                <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                  <tr>
+                    <td style="padding-top: 48px; padding-bottom: 48px">
+                      <h1
+                        style="
+                          margin: 0;
+                          font-size: 28px;
+                          line-height: 130%;
+                          font-weight: 700;
+                          color: #000;
+                          letter-spacing: -0.02em;
+                        "
+                      >
+                        <span style="color: #1eb87b">신고 처리 결과</span>
+                        안내
+                      </h1>
+                      <p
+                        style="
+                          margin: 0;
+                          font-size: 14px;
+                          line-height: 20px;
+                          font-weight: 500;
+                          color: #424242;
+                          padding-top: 24px;
+                        "
+                      >
+                        {{name}}님이 접수하신 신고 내역이 처리되었습니다.
+                        <br />
+                        자세한 신고 처리 결과는 찾아줘 신고 내역에서 확인해 주세요.
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- description -->
+                <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                  <tr>
+                    <td style="padding-bottom: 8px">
+                      <p
+                        style="
+                          margin: 0;
+                          font-size: 20px;
+                          line-height: 110%;
+                          font-weight: 700;
+                          letter-spacing: -0.05em;
+                          color: #363636;
+                          padding-bottom: 24px;
+                        "
+                      >
+                        신고 처리 결과 내용
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <table
+                        width="100%"
+                        cellpadding="0"
+                        cellspacing="0"
+                        role="presentation"
+                        style="
+                          border-collapse: collapse;
+                          border: 1px solid #e0e0e0;
+                          width: 100%;
+                          font-size: 14px;
+                          color: #333;
+                        "
+                      >
+                        <tr>
+                          <td
+                            style="
+                              padding: 20px 32px;
+                              border-top: 1px solid #e0e0e0;
+                              border-right: 1px solid #e0e0e0;
+                              font-weight: 400;
+                              font-size: 18px;
+                              line-height: 140%;
+                              text-align: left;
+                              white-space: nowrap;
+                              vertical-align: middle;
+                              text-align: center;
+                            "
+                          >
+                            신고 유형
+                          </td>
+                          <td
+                            style="
+                              width: 100%;
+                              padding: 20px 32px;
+                              text-align: left;
+                              font-weight: 700;
+                              font-size: 20px;
+                              line-height: 110%;
+                              letter-spacing: -0.05em;
+                              vertical-align: middle;
+                            "
+                          >
+                            {{TITLE}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              padding: 20px 32px;
+                              border-top: 1px solid #e0e0e0;
+                              border-right: 1px solid #e0e0e0;
+                              font-weight: 400;
+                              font-size: 18px;
+                              line-height: 140%;
+                              text-align: left;
+                              white-space: nowrap;
+                              vertical-align: middle;
+                              text-align: center;
+                            "
+                          >
+                            신고 유저
+                          </td>
+                          <td
+                            style="
+                              width: 100%;
+                              padding: 20px 32px;
+                              border-top: 1px solid #e0e0e0;
+                              font-weight: 700;
+                              font-size: 20px;
+                              line-height: 110%;
+                              letter-spacing: -0.05em;
+                              text-align: left;
+                              vertical-align: middle;
+                            "
+                          >
+                            {{USER}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              padding: 20px 32px;
+                              border-top: 1px solid #e0e0e0;
+                              border-right: 1px solid #e0e0e0;
+                              font-weight: 400;
+                              font-size: 18px;
+                              line-height: 140%;
+                              text-align: left;
+                              white-space: nowrap;
+                              vertical-align: middle;
+                              text-align: center;
+                            "
+                          >
+                            처리 결과
+                          </td>
+                          <td
+                            style="
+                              width: 100%;
+                              padding: 20px 32px;
+                              border-top: 1px solid #e0e0e0;
+                              font-weight: 700;
+                              font-size: 20px;
+                              line-height: 110%;
+                              letter-spacing: -0.05em;
+                              text-align: left;
+                              vertical-align: middle;
+                            "
+                          >
+                            {{RESULT}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              padding: 20px 32px;
+                              border-top: 1px solid #e0e0e0;
+                              border-right: 1px solid #e0e0e0;
+                              font-weight: 400;
+                              font-size: 18px;
+                              line-height: 140%;
+                              text-align: left;
+                              white-space: nowrap;
+                              vertical-align: middle;
+                              text-align: center;
+                            "
+                          >
+                            처리 일자
+                          </td>
+                          <td
+                            style="
+                              width: 100%;
+                              padding: 20px 32px;
+                              border-top: 1px solid #e0e0e0;
+                              font-weight: 700;
+                              font-size: 20px;
+                              line-height: 110%;
+                              letter-spacing: -0.05em;
+                              text-align: left;
+                              vertical-align: middle;
+                            "
+                          >
+                            {{RESULT}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              padding: 20px 32px;
+                              border-top: 1px solid #e0e0e0;
+                              border-right: 1px solid #e0e0e0;
+                              font-weight: 400;
+                              font-size: 18px;
+                              line-height: 140%;
+                              text-align: left;
+                              white-space: nowrap;
+                              vertical-align: middle;
+                              text-align: center;
+                            "
+                          >
+                            신고 내용
+                          </td>
+                          <td
+                            style="
+                              width: 100%;
+                              padding: 20px 32px;
+                              border-top: 1px solid #e0e0e0;
+                              font-weight: 700;
+                              font-size: 20px;
+                              line-height: 110%;
+                              letter-spacing: -0.05em;
+                              text-align: left;
+                              vertical-align: middle;
+                              font-weight: 600;
+                              font-size: 18px;
+                              line-height: 140%;
+                              color: #787878;
+                            "
+                          >
+                            <div
+                              style="
+                                display: -webkit-box;
+                                -webkit-line-clamp: 3;
+                                -webkit-box-orient: vertical;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                max-height: calc(1.1em * 3); /* 3줄 기준 높이 제한 */
+                                line-height: 1.1em;
+                                word-break: break-word;
+                              "
+                            >
+                              {{CONTENT}}
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="height: 24px; line-height: 24px; font-size: 0">&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: center; width: 100%">
+                      <a
+                        href="https://fmi-fe.vercel.app/login"
+                        style="
+                          text-decoration: none;
+                          color: #f6fffc;
+                          background: rgba(30, 184, 123, 0.7);
+                          border-radius: 10px;
+                          padding: 12px 20px;
+                          display: block;
+                          font-size: 16px;
+                          line-height: 150%;
+                        "
+                      >
+                        신고 내역 바로가기
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+
+          <!-- footer -->
+          <table
+            cellpadding="0"
+            cellspacing="0"
+            role="presentation"
+            style="
+              max-width: 728px;
+              width: 100%;
+              border-collapse: collapse;
+              mso-table-lspace: 0;
+              mso-table-rspace: 0;
+              table-layout: fixed;
+              background-color: #f5f5f5;
+            "
+          >
+            <tr>
+              <td style="padding: 48px 40px">
+                <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                  <tr>
+                    <td style="padding-bottom: 40px">
+                      <p
+                        style="
+                          margin: 0;
+                          font-size: 14px;
+                          line-height: 140%;
+                          font-weight: 500;
+                          color: #363636;
+                        "
+                      >
+                        해당 메일은 발신 전용으로 회신되지 않습니다. 궁금하신 사항이 있다면
+                        <a
+                          href="https://fmi-fe.vercel.app/"
+                          style="
+                            color: #00aaee;
+                            text-decoration: underline;
+                            text-underline-offset: 2px;
+                          "
+                          >고객센터</a
+                        >를 이용해 주세요.
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      style="
+                        height: 36px;
+                        vertical-align: bottom;
+                        border-top: 1px solid #d9d9d9;
+                        display: flex;
+                        padding-top: 16px;
+                        justify-content: space-between;
+                      "
+                    >
+                      <p style="margin: 0; font-size: 14px; line-height: 140%; color: #787878">
+                        Copyright © 찾아줘. All Rights Reserved.
+                      </p>
+                      <img
+                        src="https://i.ibb.co/GvSmsyDV/mini-logo.png"
+                        alt="찾아줘! 로고"
+                        width="88"
+                        height="36"
+                      />
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
