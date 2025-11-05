@@ -75,8 +75,6 @@ const InputField = ({ name, validation, ...props }: InputFieldProps) => {
         {/* 글자 수 확인 */}
         <Counter isLength={isValueStr.length} maxLength={maxLength} />
       </div>
-
-      {String(!!errors[name])}
     </div>
   );
 };
