@@ -1,11 +1,11 @@
 "use client";
 
 import { Meta, StoryObj } from "@storybook/nextjs";
-import Counter from "./Counter";
+import DeleteButton from "./DeleteButton";
 
-const meta: Meta<typeof Counter> = {
-  title: "공통 컴포넌트/Input/Internal/Counter",
-  component: Counter,
+const meta: Meta<typeof DeleteButton> = {
+  title: "공통 컴포넌트/Input/Internal/DeleteButton",
+  component: DeleteButton,
   tags: ["autodocs"],
   parameters: {
     layout: "centered",
@@ -17,7 +17,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    maxLength: 20,
-    isLength: 0,
+    value: "값 입력",
   },
 };
