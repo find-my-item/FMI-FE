@@ -3,7 +3,7 @@ import { useForm, FormProvider } from "react-hook-form";
 import InputSearch from "./InputSearch";
 
 const meta: Meta<typeof InputSearch> = {
-  title: "공통 컴포넌트/InputSearch",
+  title: "공통 컴포넌트/Input/InputSearch",
   component: InputSearch,
   tags: ["autodocs"],
   parameters: {
