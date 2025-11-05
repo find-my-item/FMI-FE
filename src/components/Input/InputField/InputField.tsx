@@ -25,6 +25,7 @@ const InputField = ({ name, validation, ...props }: InputFieldProps) => {
     watch,
     setValue,
     formState: { errors },
+    clearErrors,
   } = useFormContext();
 
   const isValue = watch(name) ?? "";
@@ -32,6 +33,15 @@ const InputField = ({ name, validation, ...props }: InputFieldProps) => {
 
   const maxLengthValue =
     typeof validation?.maxLength === "number" ? validation.maxLength : validation?.maxLength?.value;
+
+  const onDelete = () => {
+    setValue(name, "", {
+      shouldValidate: false,
+      shouldDirty: false,
+      shouldTouch: false,
+    });
+    clearErrors(name);
+  };
 
   return (
     <div className="flex w-full flex-col gap-1">
@@ -53,11 +63,7 @@ const InputField = ({ name, validation, ...props }: InputFieldProps) => {
         />
 
         {/* 삭제 버튼 */}
-        <DeleteButton
-          value={isValue}
-          className="right-[14px] top-[14px]"
-          onDelete={() => setValue(name, "", { shouldValidate: true })}
-        />
+        <DeleteButton value={isValue} className="right-[14px] top-[14px]" onDelete={onDelete} />
       </div>
 
       {/* 안내 문구 */}

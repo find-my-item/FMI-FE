@@ -42,6 +42,7 @@ const InputText = ({
     watch,
     setValue,
     formState: { errors },
+    clearErrors,
   } = useFormContext();
 
   const isValue = watch(name) ?? "";
@@ -53,6 +54,15 @@ const InputText = ({
       return show ? "text" : "password";
     }
     return type;
+  };
+
+  const onDelete = () => {
+    setValue(name, "", {
+      shouldValidate: false,
+      shouldDirty: false,
+      shouldTouch: false,
+    });
+    clearErrors(name);
   };
 
   const maxLengthValue =
@@ -82,7 +92,7 @@ const InputText = ({
             eyeShow={eyeShow}
             className="top-1/2 -translate-y-1/2"
             value={isValue}
-            onDelete={() => setValue(name, "", { shouldValidate: true })}
+            onDelete={onDelete}
           />
 
           {/* 비밀번호 눈 모양 버튼 */}
