@@ -1,7 +1,15 @@
 "use client";
 "use no memo";
 
-import { Dropdown, Tab, ModalLayout, InputChat, InputText, InputSearch } from "@/components";
+import {
+  Dropdown,
+  Tab,
+  ModalLayout,
+  InputChat,
+  InputText,
+  InputSearch,
+  InputField,
+} from "@/components";
 import Icon from "@/components/Icon/Icon";
 import ConfirmModal from "@/components/Modal/ConfirmModal";
 import { useToast } from "@/context/ToastContext";
@@ -117,6 +125,14 @@ const page = () => {
         </InputText>
         <InputChat name="test3" />
         <InputSearch name="test4" mode="RHF" onEnter={(value) => alert(value)} />
+        <InputField
+          name="test5"
+          label="test5"
+          validation={{
+            maxLength: { value: 20, message: "검색어는 20글자 이하로 입력해주세요." },
+          }}
+          maxLength={10}
+        />
       </FormProvider>
     </div>
   );

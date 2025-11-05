@@ -26,7 +26,12 @@ const InputField = ({
   validation,
   ...props
 }: InputFieldProps) => {
-  const { register, watch, setValue } = useFormContext();
+  const {
+    register,
+    watch,
+    setValue,
+    formState: { errors },
+  } = useFormContext();
 
   const isValue = watch(name) ?? "";
   const isValueStr = (isValue ?? "").toString();
@@ -44,7 +49,7 @@ const InputField = ({
           {...props}
           className={cn(
             "disabled:background-[#E4E4E4] h-[120px] w-full resize-none rounded-[10px] border border-[#CFCFCF] p-3 hover:border-[#ADADAD] focus:border-[#ADADAD] disabled:text-[#9D9D9D]",
-            hasError && "border-system-warning",
+            errors[name] && "border-system-warning",
             isValue && "border-[#ADADAD]"
           )}
           {...register(name, validation)}
@@ -60,7 +65,11 @@ const InputField = ({
 
       {/* 안내 문구 */}
       <div className="flex w-full justify-between text-caption1-regular text-layout-body-default">
-        <Caption hasError={hasError} errorMessage={props.errorMessage} rule={props.rule} />
+        <Caption
+          hasError={Boolean(errors)}
+          errorMessage={errors[name]?.message as string}
+          rule={props.rule}
+        />
 
         {/* 글자 수 확인 */}
         {isLengthCheck && (
