@@ -6,6 +6,9 @@ const meta: Meta<typeof InputSearch> = {
   title: "공통 컴포넌트/InputSearch",
   component: InputSearch,
   tags: ["autodocs"],
+  parameters: {
+    layout: "centered",
+  },
   decorators: [
     (Story) => {
       const methods = useForm();
