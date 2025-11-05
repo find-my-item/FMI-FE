@@ -2,31 +2,24 @@
 "use no memo";
 
 import { TextareaHTMLAttributes } from "react";
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils";
 import { RegisterOptions, useFormContext } from "react-hook-form";
 import DeleteButton from "../_internal/DeleteButton/DeleteButton";
 import Label from "../_internal/Label/Label";
 import Caption from "../_internal/Caption/Caption";
+import Counter from "../_internal/Counter/Counter";
 
 interface InputFieldProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   name: string;
   label: string;
   successMessage?: string;
-  errorMessage?: string;
-  hasError?: boolean;
   rule?: string;
   isLengthCheck?: boolean;
   maxLength?: number;
   validation?: RegisterOptions;
 }
 
-const InputField = ({
-  name,
-  isLengthCheck = false,
-  hasError,
-  validation,
-  ...props
-}: InputFieldProps) => {
+const InputField = ({ name, validation, ...props }: InputFieldProps) => {
   const {
     register,
     watch,
@@ -76,11 +69,7 @@ const InputField = ({
         />
 
         {/* 글자 수 확인 */}
-        {validation?.maxLength && (
-          <span>
-            {isValueStr.length}/{maxLengthValue}
-          </span>
-        )}
+        <Counter isLength={isValueStr.length} maxLength={maxLengthValue} />
       </div>
 
       {String(!!errors[name])}

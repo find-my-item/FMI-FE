@@ -2,14 +2,15 @@
 "use no memo";
 
 import { InputHTMLAttributes, ReactNode, useState } from "react";
-import { InputStyle } from "@/app/(route)/(auth)/_constant/authStyle";
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils";
 import { RegisterOptions, useFormContext } from "react-hook-form";
 import Icon from "@/components/Icon/Icon";
+import Button from "@/components/Buttons/Button/Button";
 import DeleteButton from "../_internal/DeleteButton/DeleteButton";
 import Label from "../_internal/Label/Label";
 import Caption from "../_internal/Caption/Caption";
-import { Button } from "@/components";
+import Counter from "../_internal/Counter/Counter";
+import { InputStyle } from "@/app/(route)/(auth)/_constant/authStyle";
 
 interface InputTextProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "children" | "value" | "defaultValue"> {
@@ -21,8 +22,6 @@ interface InputTextProps
   children?: ReactNode;
   btnOnClick?: () => void;
   successMessage?: string;
-  errorMessage?: string;
-  hasError?: boolean;
   isSuccess?: boolean;
   validation?: RegisterOptions;
   rule?: string;
@@ -35,12 +34,15 @@ const InputText = ({
   eyeShow = false,
   children,
   btnOnClick,
-  hasError = false,
-  errorMessage,
   validation,
   ...props
 }: InputTextProps) => {
-  const { register, watch, setValue } = useFormContext();
+  const {
+    register,
+    watch,
+    setValue,
+    formState: { errors },
+  } = useFormContext();
 
   const isValue = watch(name) ?? "";
   const isValueStr = (isValue ?? "").toString();
@@ -52,6 +54,9 @@ const InputText = ({
     }
     return type;
   };
+
+  const maxLengthValue =
+    typeof validation?.maxLength === "number" ? validation.maxLength : validation?.maxLength?.value;
 
   return (
     <div className="flex w-full flex-col gap-2">
@@ -67,9 +72,9 @@ const InputText = ({
         <div className="relative flex w-full flex-row">
           <input
             {...props}
-            type={actualType()}
-            className={cn(className, hasError && "border border-system-warning")}
             {...register(name, validation)}
+            type={actualType()}
+            className={cn(className, !!errors[name] && "border border-system-warning")}
           />
 
           {/* 삭제 버튼 */}
@@ -77,7 +82,7 @@ const InputText = ({
             eyeShow={eyeShow}
             className="top-1/2 -translate-y-1/2"
             value={isValue}
-            onDelete={() => setValue(name, "")}
+            onDelete={() => setValue(name, "", { shouldValidate: true })}
           />
 
           {/* 비밀번호 눈 모양 버튼 */}
@@ -111,14 +116,14 @@ const InputText = ({
       <div className="flex w-full justify-between text-caption1-regular text-layout-body-default">
         <Caption
           isSuccess={props.isSuccess}
-          hasError={hasError}
           successMessage={props.successMessage}
-          errorMessage={errorMessage}
+          hasError={!!errors[name]}
+          errorMessage={errors[name]?.message as string}
           rule={props.rule}
         />
 
         {/* 글자 수 확인 */}
-        {name === "nickname" && <span> {isValueStr.length}/10 </span>}
+        <Counter isLength={isValueStr.length} maxLength={maxLengthValue} />
       </div>
     </div>
   );

@@ -18,13 +18,6 @@ interface SignUpItemProps {
 }
 
 const SignUpItem = ({ item }: SignUpItemProps) => {
-  const {
-    formState: { errors },
-  } = useFormContext();
-
-  const errorMessage = errors[item.name]?.message as string;
-  const hasError = !!errorMessage;
-
   return (
     <InputText
       name={item.name}
@@ -34,8 +27,6 @@ const SignUpItem = ({ item }: SignUpItemProps) => {
       validation={item.validation}
       rule={item.rule}
       eyeShow={item.eyeShow}
-      errorMessage={errorMessage}
-      hasError={hasError}
     >
       {item.btnText}
     </InputText>

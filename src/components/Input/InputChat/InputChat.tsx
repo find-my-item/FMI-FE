@@ -1,7 +1,7 @@
 "use client";
 
 import { InputHTMLAttributes } from "react";
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils";
 import { RegisterOptions, useFormContext } from "react-hook-form";
 import Icon from "@/components/Icon/Icon";
 
