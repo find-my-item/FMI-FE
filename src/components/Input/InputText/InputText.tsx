@@ -11,6 +11,7 @@ import Label from "../_internal/Label/Label";
 import Caption from "../_internal/Caption/Caption";
 import Counter from "../_internal/Counter/Counter";
 import { InputStyle } from "@/app/(route)/(auth)/_constant/authStyle";
+import { useFormInput } from "../_internal/_hooks/useFormInput";
 
 interface InputTextProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "children" | "value" | "defaultValue"> {
@@ -45,6 +46,8 @@ const InputText = ({
     clearErrors,
   } = useFormContext();
 
+  const { onDelete } = useFormInput();
+
   const isValue = watch(name) ?? "";
   const isValueStr = (isValue ?? "").toString();
 
@@ -54,15 +57,6 @@ const InputText = ({
       return show ? "text" : "password";
     }
     return type;
-  };
-
-  const onDelete = () => {
-    setValue(name, "", {
-      shouldValidate: false,
-      shouldDirty: false,
-      shouldTouch: false,
-    });
-    clearErrors(name);
   };
 
   const maxLengthValue =
@@ -92,7 +86,7 @@ const InputText = ({
             eyeShow={eyeShow}
             className="top-1/2 -translate-y-1/2"
             value={isValue}
-            onDelete={onDelete}
+            onDelete={() => onDelete(name)}
           />
 
           {/* 비밀번호 눈 모양 버튼 */}

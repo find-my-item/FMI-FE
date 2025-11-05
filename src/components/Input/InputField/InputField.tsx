@@ -8,6 +8,7 @@ import DeleteButton from "../_internal/DeleteButton/DeleteButton";
 import Label from "../_internal/Label/Label";
 import Caption from "../_internal/Caption/Caption";
 import Counter from "../_internal/Counter/Counter";
+import { useFormInput } from "../_internal/_hooks/useFormInput";
 
 interface InputFieldProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   name: string;
@@ -28,20 +29,13 @@ const InputField = ({ name, validation, ...props }: InputFieldProps) => {
     clearErrors,
   } = useFormContext();
 
+  const { onDelete } = useFormInput();
+
   const isValue = watch(name) ?? "";
   const isValueStr = (isValue ?? "").toString();
 
-  const maxLengthValue =
+  const maxLength =
     typeof validation?.maxLength === "number" ? validation.maxLength : validation?.maxLength?.value;
-
-  const onDelete = () => {
-    setValue(name, "", {
-      shouldValidate: false,
-      shouldDirty: false,
-      shouldTouch: false,
-    });
-    clearErrors(name);
-  };
 
   return (
     <div className="flex w-full flex-col gap-1">
@@ -63,7 +57,11 @@ const InputField = ({ name, validation, ...props }: InputFieldProps) => {
         />
 
         {/* 삭제 버튼 */}
-        <DeleteButton value={isValue} className="right-[14px] top-[14px]" onDelete={onDelete} />
+        <DeleteButton
+          value={isValue}
+          className="right-[14px] top-[14px]"
+          onDelete={() => onDelete(name)}
+        />
       </div>
 
       {/* 안내 문구 */}
@@ -75,7 +73,7 @@ const InputField = ({ name, validation, ...props }: InputFieldProps) => {
         />
 
         {/* 글자 수 확인 */}
-        <Counter isLength={isValueStr.length} maxLength={maxLengthValue} />
+        <Counter isLength={isValueStr.length} maxLength={maxLength} />
       </div>
 
       {String(!!errors[name])}
