@@ -6,6 +6,9 @@ const meta: Meta<typeof InputField> = {
   title: "공통 컴포넌트/InputField",
   component: InputField,
   tags: ["autodocs"],
+  parameters: {
+    layout: "centered",
+  },
   decorators: [
     (Story) => {
       const methods = useForm();
