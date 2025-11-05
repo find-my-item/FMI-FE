@@ -2,7 +2,22 @@
 
 import { useEffect, useCallback } from "react";
 
-// 모달 스크롤 방지, ESC 키로 모달 닫기
+/**
+ *
+ * @author jikwon
+ *
+ * 모달이 열렸을 때 스크롤을 방지하고, `ESC` 키를 누르면 모달을 닫습니다.
+ *
+ * @example
+ * ```tsx
+ * const { isOpen, setIsOpen } = useState(false);
+ * useModalLockAndEsc({
+ *   isOpen,
+ *   onClose: () => setIsOpen(false),
+ * });
+ * ```
+ *
+ */
 export const useModalLockAndEsc = ({
   isOpen,
   onClose,
@@ -28,7 +43,24 @@ export const useModalLockAndEsc = ({
   }, [isOpen, onClose]);
 };
 
-// 모달 뒷 배경 클릭으로 모달 닫기
+/**
+ * 모달 배경(Backdrop)을 클릭했을 때,
+ * 배경을 클릭한 경우에만 모달을 닫는 이벤트 핸들러를 반환합니다.
+ *
+ * @example
+ * ```tsx
+ * const onBackdropClick = useModalBackdrop({
+ *   onClose: () => setIsOpen(false),
+ * });
+ *
+ * return (
+ *   <div className="modal-backdrop" onMouseDown={onBackdropClick}>
+ *     <div className="modal-content">...</div>
+ *   </div>
+ * );
+ * ```
+ *
+ */
 export const useModalBackdrop = ({ onClose }: { onClose?: () => void }) => {
   const onBackdropMouseDown = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
