@@ -32,7 +32,6 @@ jest.mock("@/components/Buttons/Button/Button", () => {
   };
 });
 
-// 내부 컴포넌트 mock
 jest.mock("../_internal/DeleteButton/DeleteButton", () => {
   const MockDeleteButton = ({ value, onDelete }: { value: string; onDelete: () => void }) =>
     value ? (
@@ -48,10 +47,17 @@ jest.mock("../_internal/DeleteButton/DeleteButton", () => {
 });
 
 jest.mock("../_internal/Label/Label", () => {
-  const MockLabel = ({ label, required }: { label: string; required: boolean }) => (
-    <label>
+  const MockLabel = ({
+    name,
+    label,
+    className,
+  }: {
+    name: string;
+    label: string;
+    className?: string;
+  }) => (
+    <label htmlFor={name} className={className}>
       {label}
-      {required && "*"}
     </label>
   );
   MockLabel.displayName = "MockLabel";
@@ -164,22 +170,25 @@ describe("InputField (Textarea) 컴포넌트", () => {
 
     await user.type(textarea, "열 글자입니다.");
 
-    expect(screen.getByTestId("counter")).toHaveTextContent("7/30");
+    expect(screen.getByTestId("counter")).toHaveTextContent("8/30");
   });
 
-  it("RHF 에러 발생 시 에러 클래스가 적용되고 Caption(Mock)이 에러 메시지를 렌더링하는지 확인", async () => {
+  // error 발생 시 border 색상 변경, 에러메시지 확인 테스트
+  test("RHF 에러 발생 시 에러 클래스가 적용되고 Caption(Mock)이 에러 메시지를 렌더링한다", async () => {
     const { user, textarea } = renderComponent({
       name: "intro",
       label: "소개",
-      validation: { required: "소개는 필수 항목입니다" },
+      validation: {
+        maxLength: { value: 5, message: "5자 이내로 입력해주세요." },
+      },
     });
 
-    await user.click(textarea);
-    await user.click(document.body);
+    await user.type(textarea, "여섯글자입니다");
 
     const errorMessage = await screen.findByTestId("error-message");
 
-    expect(errorMessage).toHaveTextContent("소개는 필수 항목입니다");
+    expect(errorMessage).toHaveTextContent("5자 이내로 입력해주세요.");
+
     expect(textarea).toHaveClass("!border-system-warning");
   });
 });
