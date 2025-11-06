@@ -1,6 +1,8 @@
+"use client";
+
 import { Filter, InputSearch } from "@/components";
 import { FormProvider, useForm } from "react-hook-form";
-import { FILTER_BUTTONS } from "../../_constants/FILTER_BUTTONS";
+import { createChatFilterButtons } from "../../_utils/createChatFilterButtons";
 import ChatItem from "../ChatItem/ChatItem";
 import { Props } from "@/components/Icon/Icon";
 
@@ -13,6 +15,7 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
     mode: "onChange",
     reValidateMode: "onChange",
   });
+  const buttons = createChatFilterButtons(searchUpdateQuery);
 
   return (
     <>
@@ -29,17 +32,14 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
         </FormProvider>
 
         <div className="flex gap-[8px] py-[14px]">
-          {FILTER_BUTTONS.map(({ text, icon, iconSize, iconPosition }) => (
+          {buttons.map(({ text, icon, iconSize, iconPosition, onClick }) => (
             <Filter
               key={text}
               ariaLabel={`채팅 리스트 ${text}`}
               onSelected={false}
               icon={{ name: icon as Props["name"], size: iconSize }}
               iconPosition={iconPosition as "leading" | "trailing"}
-              onClick={() => {
-                if (text !== "지역 선택") return;
-                searchUpdateQuery("search", "region");
-              }}
+              onClick={onClick}
             >
               {text}
             </Filter>
