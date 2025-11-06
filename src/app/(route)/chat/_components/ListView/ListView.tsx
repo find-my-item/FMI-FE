@@ -1,0 +1,23 @@
+"use client";
+
+import { DetailHeader, ListSearch } from "@/components";
+import useSearchUpdateQueryString from "@/hooks/useSearchUpdateQueryString/useSearchUpdateQueryString";
+import DefaultList from "../DefaultList/DefaultList";
+
+const ListView = () => {
+  const { searchMode, searchUpdateQuery } = useSearchUpdateQueryString();
+
+  return (
+    <div className="w-full">
+      <DetailHeader title={searchMode === "region" ? "지역 선택" : "채팅"} />
+
+      {searchMode === "default" ? (
+        <DefaultList searchUpdateQuery={searchUpdateQuery} />
+      ) : (
+        <ListSearch searchMode={searchMode} />
+      )}
+    </div>
+  );
+};
+
+export default ListView;
