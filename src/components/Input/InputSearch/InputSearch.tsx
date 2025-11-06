@@ -4,18 +4,56 @@
 import { InputHTMLAttributes } from "react";
 import Icon from "../../Icon/Icon";
 import { useState } from "react";
-import { useFormContext } from "react-hook-form";
+import { RegisterOptions, useFormContext } from "react-hook-form";
 import DeleteButton from "../_internal/DeleteButton/DeleteButton";
+
+/**
+ * @author suhyeon
+ *
+ * 검색을 위한 input 공통 컴포넌트 입니다.
+ * react-hook-form와 onChange 두 가지의 방식을 사용하실 수 있도록 유연하게 개발하였습니다.
+ * react-hook-form으로 사용하실 곳은 상위 요소로 FormProvider를 사용해주시고 method는 onChange 모드로 설정하시면 됩니다.
+ *
+ *
+ * @param items - 검색 입력창의 props입니다.
+ *  - 'name': 입력 필드의 id 및 register함수 사용을 위한 name
+ *  - `mode`: react-hook-from모드와 onChange모드 중 하나를 선택한다는 걸 InputSearch에 알려줍니다.
+ *  - `validation`: 입력 필드의 유효성 검사를 위한 RegisterOption입니다. (기본적으로는 name만 사용하셔도 무방하지만 혹시모르기에 props로 추가해두었습니다.)
+ *  - 'onEnter': 엔터 키 클릭 함수
+ *
+ *
+ * @example onChange 모드 사용 (독립형)
+ * ```tsx
+ *     <InputSearch
+ *       name="keyword"
+ *       mode="onChange"
+ *       placeholder="검색어 입력"
+ *       onEnter={(v)=> console.log(v)}
+ *     />
+ * ```
+ *
+ * @example react-hook-form모드
+ * ```tsx
+ * <FormProvider {...methods}>
+ *   <form onSubmit={methods.handleSubmit(onSubmit)}>
+ *     <InputSearch
+ *       name="search"
+ *       validation={{required: true}}
+ *       onEnter={(v) => console.log("엔터로 검색")}
+ *     />
+ *   </form>
+ * </FormProvider>
+ * ```
+ */
 
 interface InputSearchProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
-  label?: string;
-  className?: string;
   mode: "RHF" | "onChange";
+  validation: RegisterOptions;
   onEnter: (value: string) => void;
 }
 
-const InputSearch = ({ name, mode, onEnter, ...props }: InputSearchProps) => {
+const InputSearch = ({ name, mode, validation, onEnter, ...props }: InputSearchProps) => {
   const { register, watch, setValue } = useFormContext();
   const rhfValue = watch(name) || "";
 
@@ -35,8 +73,9 @@ const InputSearch = ({ name, mode, onEnter, ...props }: InputSearchProps) => {
       <Icon name="Search" size={16} className="absolute left-5 top-1/2 -translate-y-1/2" />
 
       <input
+        id={name}
         {...(mode === "RHF"
-          ? register(name)
+          ? register(name, validation)
           : { value: innerValue, onChange: (e) => setInnerValue(e.target.value) })}
         {...props}
         className="h-11 min-w-0 flex-1 rounded-[24px] border px-10 text-body1-regular text-neutral-normal-placeholder bg-fill-neutral-subtle-default hover:text-neutral-normal-hover focus:border-black focus:text-neutral-normal-focused"
