@@ -30,9 +30,10 @@ const Page = () => {
   return (
     <form className="w-full gap-4 px-5 py-6 flex-col-center" onSubmit={onSubmit}>
       {isSubmitSuccessful ? (
-        <div className="h-[91px] text-center text-[14px] leading-relaxed flex-col-center">
+        // TODO(수현): div에 스타일을 적용하는게 아닌, p 태그에 div 스타일 적용 및 div 태그 제거
+        <div className="h-[91px] text-center text-body2-regular flex-col-center">
           <p>
-            <span className="text-[#1EB87B]">{email}</span>으로
+            <span className="text-flatGreen-500">{email}</span>으로
             <br />
             임시 비밀번호를 발송했습니다.
           </p>
@@ -51,7 +52,7 @@ const Page = () => {
       {isSubmitSuccessful && (
         <Button
           type="button"
-          className={cn(ButtonStyle, isValid && "bg-[#1EB87B]")}
+          className={cn(ButtonStyle, isValid && "bg-fill-brand-normal-default")}
           onClick={handleClick}
           ariaLabel={isSubmitSuccessful ? "로그인 화면으로 이동" : "입력완료"}
         >
