@@ -10,7 +10,6 @@ import DeleteButton from "../_internal/DeleteButton/DeleteButton";
 import Label from "../_internal/Label/Label";
 import Caption from "../_internal/Caption/Caption";
 import Counter from "../_internal/Counter/Counter";
-import { InputStyle } from "@/app/(route)/(auth)/_constant/authStyle";
 import { useFormInput } from "../_internal/_hooks/useFormInput";
 
 interface InputTextProps
@@ -27,6 +26,8 @@ interface InputTextProps
   validation?: RegisterOptions;
   rule?: string;
 }
+const InputStyle =
+  "flex flex-1 items-center relative h-10 px-[14px] py-[12.5px] bg-[#F5F5F5] rounded-[10px] text-[#9D9D9D] text-[14px] border focus:outline-none";
 
 const InputText = ({
   name,
