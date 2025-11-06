@@ -9,11 +9,12 @@ interface InputChatProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   label?: string;
   className?: string;
-  sendClick?: () => void;
   validation?: RegisterOptions;
+  disabled?: boolean;
+  sendClick?: () => void;
 }
 
-const InputChat = ({ name, label, validation, sendClick, ...props }: InputChatProps) => {
+const InputChat = ({ name, label, validation, disabled, sendClick, ...props }: InputChatProps) => {
   const { register, watch } = useFormContext();
   const isValue = watch(name) ?? "";
 
@@ -32,13 +33,7 @@ const InputChat = ({ name, label, validation, sendClick, ...props }: InputChatPr
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
         />
       </label>
-      <input
-        id="ImageAttach"
-        type="file"
-        accept="image/*"
-        className="hidden"
-        // TODO(수현): disabled 처리 추가
-      />
+      <input id="ImageAttach" type="file" accept="image/*" className="hidden" disabled={disabled} />
 
       {/* 입력창 */}
       <input
@@ -49,6 +44,7 @@ const InputChat = ({ name, label, validation, sendClick, ...props }: InputChatPr
         )}
         placeholder="메시지 보내기"
         {...register(name, validation)}
+        disabled={disabled}
       />
 
       {/* 전송 버튼 */}
@@ -56,7 +52,7 @@ const InputChat = ({ name, label, validation, sendClick, ...props }: InputChatPr
         className="relative h-11 w-11 shrink-0 rounded-full bg-fill-brand-normal-disabled hover:bg-fill-brand-normal-disabled focus:bg-fill-brand-normal-default disabled:bg-fill-brand-normal-disabled"
         aria-label="전송 버튼"
         onClick={sendClick}
-        // TODO(수현): 버튼 disabled 처리 추가
+        disabled={disabled}
       >
         <Icon
           name="Send"

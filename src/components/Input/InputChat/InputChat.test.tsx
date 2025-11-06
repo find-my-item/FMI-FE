@@ -45,25 +45,21 @@ const renderComponent = (props: Partial<React.ComponentProps<typeof InputChat>> 
   };
 };
 
-/**
- * 3. 테스트 코드
- */
 describe("InputChat 컴포넌트", () => {
+  // 테스트 1
   it("필수 요소들이 올바르게 렌더링 되는지 확인", () => {
     renderComponent();
 
-    // 이미지 첨부 버튼 (label)
     expect(screen.getByLabelText("이미지 첨부")).toBeInTheDocument();
     expect(screen.getByText("Image")).toBeInTheDocument();
 
-    // 메시지 입력창
     expect(screen.getByPlaceholderText("메시지 보내기")).toBeInTheDocument();
 
-    // 전송 버튼
     expect(screen.getByLabelText("전송 버튼")).toBeInTheDocument();
     expect(screen.getByText("Send")).toBeInTheDocument();
   });
 
+  // 테스트 2
   it("입력창에 텍스트를 입력할 수 있는지 확인", async () => {
     const { user } = renderComponent();
     const input = screen.getByPlaceholderText<HTMLInputElement>("메시지 보내기");
@@ -72,20 +68,19 @@ describe("InputChat 컴포넌트", () => {
     expect(input.value).toBe("안녕하세요");
   });
 
+  // 테스트 3
   it("텍스트 입력 시 입력창에 'text-neutral-strong-focused' 클래스가 적용되는지 확인", async () => {
     const { user } = renderComponent();
     const input = screen.getByPlaceholderText("메시지 보내기");
 
-    // 1. 입력 전: 클래스가 없는지 확인
     expect(input).not.toHaveClass("text-neutral-strong-focused");
 
-    // 2. 입력 후: 클래스가 적용되었는지 확인
     await user.type(input, "A");
     expect(input).toHaveClass("text-neutral-strong-focused");
   });
 
-  // 전송 버튼 테스트
-  it("전송 버튼 클릭 시 sendClick 함수가 호출된다", async () => {
+  // 테스트 4
+  it("전송 버튼 클릭 시 sendClick 함수가 호출되는지 확인", async () => {
     const { user, props } = renderComponent();
     const sendButton = screen.getByLabelText("전송 버튼");
 
@@ -93,19 +88,19 @@ describe("InputChat 컴포넌트", () => {
     expect(props.sendClick).toHaveBeenCalledTimes(1);
   });
 
-  // disabled 테스트
-  it("disabled prop이 true일 때 입력창이 비활성화된다", () => {
+  // 테스트 5
+  it("disabled prop이 true일 때 입력창이 비활성화되는지 확인", () => {
     renderComponent({ disabled: true });
 
     const input = screen.getByPlaceholderText("메시지 보내기");
     expect(input).toBeDisabled();
   });
 
-  // TODO(수현): 버튼 disabled 처리 추가 후 주석 제거
-  // it("disabled prop이 true일때 비활성화된다", () => {
-  //   renderComponent({ disabled: true });
+  // 테스트 6
+  it("disabled prop이 true일때 비활성화 되는지 확인", () => {
+    renderComponent({ disabled: true });
 
-  //   const sendButton = screen.getByLabelText("전송 버튼");
-  //   expect(sendButton).not.toBeDisabled();
-  // });
+    const sendButton = screen.getByLabelText("전송 버튼");
+    expect(sendButton).toBeDisabled();
+  });
 });

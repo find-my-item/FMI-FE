@@ -13,10 +13,8 @@ describe("Label 컴포넌트", () => {
     render(<Label name="email" label="이메일 주소" />);
 
     const labelElement = screen.getByText("이메일 주소");
-
     expect(labelElement).toBeInTheDocument();
-
-    expect(labelElement).toHaveAttribute("htmlFor", "email");
+    expect(labelElement).toHaveAttribute("for", "email");
   });
 
   // 테스트 2
@@ -24,7 +22,6 @@ describe("Label 컴포넌트", () => {
     render(<Label name="username" label="사용자명" required={true} />);
 
     expect(screen.getByText("사용자명")).toBeInTheDocument();
-
     expect(screen.getByTestId("required-star")).toBeInTheDocument();
   });
 
@@ -33,7 +30,6 @@ describe("Label 컴포넌트", () => {
     const { rerender } = render(<Label name="bio" label="소개" />);
 
     expect(screen.queryByTestId("required-star")).not.toBeInTheDocument();
-
     rerender(<Label name="bio" label="소개" required={false} />);
     expect(screen.queryByTestId("required-star")).not.toBeInTheDocument();
   });

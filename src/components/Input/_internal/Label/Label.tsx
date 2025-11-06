@@ -9,7 +9,7 @@ interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
 
 const Label = ({ name, label, required, ...props }: LabelProps) => {
   return (
-    <label {...props} htmlFor={name}>
+    <label htmlFor={name} {...props}>
       {label}
       {required && <RequiredText />}
     </label>
