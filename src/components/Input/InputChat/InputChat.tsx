@@ -6,36 +6,35 @@ import { RegisterOptions, useFormContext } from "react-hook-form";
 import Icon from "@/components/Icon/Icon";
 
 /**
- * @author hyungjun
+ * @author suhyeon
  *
- * 여러 메뉴 항목을 세로로 나열한 Kebab 스타일 메뉴 컴포넌트입니다.
- * 각 항목은 텍스트와 아이콘을 가질 수 있으며, 로딩 상태와 비활성 상태를 지원합니다.
+ * 채팅을 위한 input 공통 컴포넌트 입니다.
+ * react-hook-form을 필수로 사용한다는 전제하에 개발하였습니다.
+ * 사용하실 곳의 상위 요소로 FormProvider를 사용해주시고 method는 onChange 모드로 설정하시면 됩니다.
  *
- * @param items - 메뉴 항목들의 배열입니다. 각 항목은 `KebabMenuItem` 형태로 구성됩니다.
- *  - `text`: 버튼에 표시할 콘텐츠 (텍스트 또는 ReactNode)
- *  - `icon`: 버튼에 표시할 아이콘 (선택적)
- *  - `iconPosition`: 아이콘 위치, `"leading"`(왼쪽) | `"trailing"`(오른쪽). 기본값 `"leading"`
- *  - `loading`: 로딩 상태 표시. `true`일 경우 버튼 비활성화 및 스피너 표시
- *  - `disabled`: 버튼 비활성화
- *  - `onClick`: 클릭 시 실행할 함수
- *  - `ariaLabel`: 접근성을 위한 버튼 라벨
+ *
+ * @param items - 채팅 input props와 채팅 전송 버튼에 관련한 props입니다.
+ *  - 'name': 입력 필드의 id 및 register함수 사용을 위한 name
+ *  - `validation`: 입력 필드의 유효성 검사를 위한 RegisterOption (기본적으로는 name만 사용하셔도 무방하지만 혹시모르기에 props로 추가해두었습니다.)
+ *  - `disabled`: 사진 첨부, 입력 필드, 전송 버튼 disabled 처리를 위한 인수
+ *  - 'sendClick': 사진 전송 및 입력필드의 전송 버튼 함수
  *
  * @example
  * ```tsx
- * <KebabMenu
- *   items={[
- *     { text: "편집", icon: { name: "Edit" }, onClick: handleEdit },
- *     { text: "삭제", icon: { name: "Trash" }, onClick: handleDelete, disabled: true },
- *     { text: "복사", icon: { name: "Copy" }, loading: true },
- *   ]}
- * />
- * ```
+ * <FormProvider {...methods}>
+ *   <form onSubmit={methods.handleSubmit(onSubmit)}>
+ *     <InputChat
+ *       name="message"
+ *       validation={{ required: "메시지를 입력해 주세요" }}
+ *       sendClick={() => methods.handleSubmit(onSubmit)()}
+ *     />
+ *   </form>
+ * </FormProvider>
+ *
  */
 
 interface InputChatProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
-  label?: string;
-  className?: string;
   validation?: RegisterOptions;
   disabled?: boolean;
   sendClick?: () => void;
@@ -64,13 +63,14 @@ const InputChat = ({ name, validation, disabled, sendClick, ...props }: InputCha
 
       {/* 입력창 */}
       <input
+        id={name}
         {...props}
+        {...register(name, validation)}
         className={cn(
           "h-11 min-w-0 flex-1 rounded-[24px] px-4 text-body2-medium text-neutral-normal-placeholder bg-fill-neutral-strong-default hover:placeholder-black focus:text-black disabled:text-neutral-strong-disabled",
           isValue && "text-neutral-strong-focused"
         )}
         placeholder="메시지 보내기"
-        {...register(name, validation)}
         disabled={disabled}
       />
 
