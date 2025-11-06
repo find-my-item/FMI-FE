@@ -1,0 +1,257 @@
+import { render, screen, fireEvent } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { FormProvider, useForm, UseFormProps } from "react-hook-form";
+import InputText from "./InputText"; // 테스트할 컴포넌트
+import "@testing-library/jest-dom";
+
+jest.mock("@/utils", () => ({
+  cn: (...args: any[]) => args.filter(Boolean).join(" "),
+}));
+
+jest.mock("@/components/Icon/Icon", () => {
+  const MockIcon = ({ name }: { name: string }) => <span>{name}</span>;
+  MockIcon.displayName = "MockIcon";
+  return {
+    __esModule: true,
+    default: MockIcon,
+  };
+});
+
+jest.mock("@/components/Buttons/Button/Button", () => {
+  const MockButton = ({
+    children,
+    onClick,
+  }: {
+    children: React.ReactNode;
+    onClick: () => void;
+  }) => <button onClick={onClick}>{children}</button>;
+  MockButton.displayName = "MockButton";
+  return {
+    __esModule: true,
+    default: MockButton,
+  };
+});
+
+// 내부 컴포넌트 mock
+jest.mock("../_internal/DeleteButton/DeleteButton", () => {
+  const MockDeleteButton = ({ value, onDelete }: { value: string; onDelete: () => void }) =>
+    value ? (
+      <button data-testid="delete-button" onClick={onDelete}>
+        Delete
+      </button>
+    ) : null;
+  MockDeleteButton.displayName = "MockDeleteButton";
+  return {
+    __esModule: true,
+    default: MockDeleteButton,
+  };
+});
+
+jest.mock("../_internal/Label/Label", () => {
+  const MockLabel = ({ label, required }: { label: string; required: boolean }) => (
+    <label>
+      {label}
+      {required && "*"}
+    </label>
+  );
+  MockLabel.displayName = "MockLabel";
+  return {
+    __esModule: true,
+    default: MockLabel,
+  };
+});
+
+// Caption Mock (에러/성공 메시지만 렌더링)
+jest.mock("../_internal/Caption/Caption", () => {
+  const MockCaption = ({
+    errorMessage,
+    successMessage,
+  }: {
+    errorMessage?: string;
+    successMessage?: string;
+  }) => (
+    <div>
+      {errorMessage && <span data-testid="error-message">{errorMessage}</span>}
+      {successMessage && <span data-testid="success-message">{successMessage}</span>}
+    </div>
+  );
+  MockCaption.displayName = "MockCaption";
+  return {
+    __esModule: true,
+    default: MockCaption,
+  };
+});
+
+jest.mock("../_internal/Counter/Counter", () => {
+  const MockCounter = ({ isLength, maxLength }: { isLength: number; maxLength?: number }) =>
+    maxLength ? (
+      <div data-testid="counter">
+        {isLength}/{maxLength}
+      </div>
+    ) : null;
+  MockCounter.displayName = "MockCounter";
+  return {
+    __esModule: true,
+    default: MockCounter,
+  };
+});
+
+const mockOnDelete = jest.fn();
+jest.mock("../_internal/_hooks/useFormInput", () => ({
+  useFormInput: () => ({
+    onDelete: mockOnDelete,
+  }),
+}));
+
+const renderComponent = (
+  props: Partial<React.ComponentProps<typeof InputText>>,
+  formConfig: Partial<UseFormProps> = {}
+) => {
+  const defaultProps = { name: "testInput" };
+  const mergedProps = { ...defaultProps, ...props };
+  const user = userEvent.setup();
+
+  const Wrapper = ({ children }: { children: React.ReactNode }) => {
+    const methods = useForm({
+      defaultValues: { [mergedProps.name]: "" },
+      mode: "onChange", // RHF의 에러 상태를 즉각 반영하기 위해
+      ...formConfig, //
+    });
+    return <FormProvider {...methods}>{children}</FormProvider>;
+  };
+
+  render(<InputText {...mergedProps} />, { wrapper: Wrapper });
+
+  return {
+    user,
+    props: mergedProps,
+    input: screen.getByLabelText(mergedProps.label || "") as HTMLInputElement,
+  };
+};
+
+describe("InputText 컴포넌트", () => {
+  beforeEach(() => {
+    mockOnDelete.mockClear();
+  });
+
+  // 기본 요소 렌더링 확인 테스트
+  it("기본 요소(Label, Input)를 올바르게 렌더링하는지 확인", () => {
+    renderComponent({ label: "테스트 라벨" });
+
+    expect(screen.getByText("테스트 라벨")).toBeInTheDocument();
+    expect(screen.getByLabelText("테스트 라벨")).toBeInTheDocument();
+  });
+
+  // label 테스트
+  it("validation.required가 true일 때 Label에 *가 표시되는지 확인", () => {
+    renderComponent({ label: "필수 항목", validation: { required: true } });
+    expect(screen.getByText("필수 항목*")).toBeInTheDocument();
+  });
+
+  // 삭제 버튼 테스트
+  it("입력 시 값이 변경되고 DeleteButton(Mock)이 나타나는지 확인", async () => {
+    const { user, input } = renderComponent({ label: "입력" });
+
+    expect(input.value).toBe("");
+    expect(screen.queryByTestId("delete-button")).not.toBeInTheDocument();
+
+    await user.type(input, "테스트");
+
+    expect(input.value).toBe("테스트");
+    expect(screen.getByTestId("delete-button")).toBeInTheDocument();
+  });
+
+  it("DeleteButton 클릭 시 useFormInput의 onDelete(Mock)를 호출하는지 확인", async () => {
+    const { user, input } = renderComponent({ label: "삭제 테스트" });
+
+    await user.type(input, "텍스트");
+    const deleteButton = screen.getByTestId("delete-button");
+    await user.click(deleteButton);
+
+    expect(mockOnDelete).toHaveBeenCalledTimes(1);
+    expect(mockOnDelete).toHaveBeenCalledWith("testInput"); // name prop
+  });
+
+  // 비밀번호 보기/숨기기 버튼 테스트
+  it("eyeShow=true일 때 '비밀번호 보기/숨기기' 버튼이 작동한다", async () => {
+    const { user, input } = renderComponent({
+      label: "비밀번호",
+      name: "password",
+      eyeShow: true,
+    });
+
+    expect(input).toHaveAttribute("type", "password");
+    expect(screen.getByText("EyeOff")).toBeInTheDocument();
+
+    const eyeButton = screen.getByLabelText("비밀번호 보기");
+    await user.click(eyeButton);
+
+    // 3. 변경 상태: text 타입, 'EyeOpen' 아이콘(Mock) 렌더링
+    expect(input).toHaveAttribute("type", "text");
+    expect(screen.getByText("EyeOpen")).toBeInTheDocument();
+    expect(screen.getByLabelText("비밀번호 숨기기")).toBeInTheDocument();
+  });
+
+  it("children(Button)이 렌더링되고 클릭 시 btnOnClick을 호출하는지 확인", async () => {
+    const mockBtnOnClick = jest.fn();
+    const { user } = renderComponent({
+      label: "이메일",
+      btnOnClick: mockBtnOnClick,
+      children: "중복 확인",
+    });
+
+    const customButton = screen.getByText("중복 확인");
+    expect(customButton).toBeInTheDocument();
+
+    await user.click(customButton);
+
+    expect(mockBtnOnClick).toHaveBeenCalledTimes(1);
+  });
+
+  // error 발생 시 caption 메시지 확인 테스트
+  it("RHF 에러 발생 시 input에 에러 클래스가 적용되고 Caption(Mock)이 에러 메시지를 렌더링하는지 확인", async () => {
+    const { input, user } = renderComponent({
+      label: "에러",
+      name: "errorField",
+      validation: { required: "이 필드는 필수입니다" },
+    });
+
+    await user.type(input, "a");
+    await user.clear(input);
+
+    const errorMessage = await screen.findByTestId("error-message");
+
+    expect(errorMessage).toHaveTextContent("이 필드는 필수입니다");
+    expect(input).toHaveClass("border-system-warning");
+  });
+
+  const input = screen.getByLabelText("에러");
+  expect(input).toHaveClass("border-system-warning");
+
+  expect(screen.getByTestId("error-message")).toHaveTextContent("이 필드는 필수입니다");
+});
+
+// success 시 cation메시지 확인 테스트
+it("isSuccess=true일 때 Caption(Mock)이 성공 메시지를 렌더링하는지 확인", () => {
+  renderComponent({
+    label: "성공",
+    isSuccess: true,
+    successMessage: "성공했습니다",
+  });
+
+  expect(screen.getByTestId("success-message")).toHaveTextContent("성공했습니다");
+});
+
+// 글자 수에 따라 counter 반영 확인 테스트
+it("maxLength가 있을 때 Counter(Mock)에 글자 수가 반영하는지 확인", async () => {
+  const { user, input } = renderComponent({
+    label: "카운터",
+    validation: { maxLength: 20 },
+  });
+
+  expect(screen.getByTestId("counter")).toHaveTextContent("0/20");
+
+  await user.type(input, "hello");
+
+  expect(screen.getByTestId("counter")).toHaveTextContent("5/20");
+});
