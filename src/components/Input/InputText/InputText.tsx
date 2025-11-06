@@ -17,6 +17,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   type?: string;
   className?: string;
   validation?: RegisterOptions;
+  disabled?: true;
 }
 
 interface CustomProps {
@@ -39,6 +40,7 @@ const InputText = ({
   type = "text",
   className = InputStyle,
   validation,
+  disabled,
   label,
   children,
   eyeShow = false,
@@ -87,6 +89,7 @@ const InputText = ({
             {...props}
             {...register(name, validation)}
             type={actualType()}
+            disabled={disabled}
             className={cn(className, !!errors[name] && "border border-system-warning")}
           />
 
@@ -118,6 +121,7 @@ const InputText = ({
             type="button"
             onClick={btnOnClick}
             ignoreBase
+            disabled={disabled}
             className="w-auto whitespace-nowrap rounded-[10px] px-[14px] py-[10px] text-body2-semibold"
           >
             {children}
