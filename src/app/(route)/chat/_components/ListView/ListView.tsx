@@ -1,7 +1,7 @@
 "use client";
 
 import { DetailHeader, ListSearch } from "@/components";
-import useSearchUpdateQueryString from "@/hooks/useSearchUpdateQueryString/useSearchUpdateQueryString";
+import { useSearchUpdateQueryString } from "@/hooks";
 import DefaultList from "../DefaultList/DefaultList";
 
 const ListView = () => {
