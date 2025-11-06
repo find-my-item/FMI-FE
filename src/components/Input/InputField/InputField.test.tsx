@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { FormProvider, useForm, UseFormProps } from "react-hook-form";
-import InputField from "./InputField"; // 테스트할 컴포넌트
+import InputField from "./InputField";
 import "@testing-library/jest-dom";
 
 jest.mock("@/utils", () => ({
@@ -67,7 +67,6 @@ jest.mock("../_internal/Label/Label", () => {
   };
 });
 
-// Caption Mock (에러 메시지만 렌더링)
 jest.mock("../_internal/Caption/Caption", () => {
   const MockCaption = ({ hasError, errorMessage }: { hasError?: boolean; errorMessage?: string }) =>
     // hasError와 errorMessage가 모두 true/존재할 때만 렌더링
@@ -129,6 +128,7 @@ describe("InputField (Textarea) 컴포넌트", () => {
     mockOnDelete.mockClear();
   });
 
+  // 테스트 1
   it("Label(Mock)과 textarea를 올바르게 렌더링하는지 확인", () => {
     renderComponent({ name: "intro", label: "소개" });
 
@@ -136,6 +136,7 @@ describe("InputField (Textarea) 컴포넌트", () => {
     expect(screen.getByLabelText("소개")).toBeInTheDocument();
   });
 
+  // 테스트 2
   it("타이핑 시 값이 변경되고 DeleteButton(Mock)이 나타나는지 확인", async () => {
     const { user, textarea } = renderComponent({ name: "intro", label: "소개" });
 
@@ -148,6 +149,7 @@ describe("InputField (Textarea) 컴포넌트", () => {
     expect(screen.getByTestId("delete-button")).toBeInTheDocument();
   });
 
+  // 테스트 3
   it("DeleteButton(Mock) 클릭 시 useFormInput의 onDelete(Mock)를 호출한다", async () => {
     const { user, textarea } = renderComponent({ name: "intro", label: "소개" });
 
@@ -159,6 +161,7 @@ describe("InputField (Textarea) 컴포넌트", () => {
     expect(mockOnDelete).toHaveBeenCalledWith("intro"); // name prop
   });
 
+  // 테스트 4
   it("maxLength가 있을 때 Counter(Mock)에 글자 수가 반영되는지 확인", async () => {
     const { user, textarea } = renderComponent({
       name: "intro",
@@ -173,8 +176,8 @@ describe("InputField (Textarea) 컴포넌트", () => {
     expect(screen.getByTestId("counter")).toHaveTextContent("8/30");
   });
 
-  // error 발생 시 border 색상 변경, 에러메시지 확인 테스트
-  test("RHF 에러 발생 시 에러 클래스가 적용되고 Caption(Mock)이 에러 메시지를 렌더링한다", async () => {
+  // 테스트 5
+  it("RHF 에러 발생 시 에러 클래스가 적용되고 Caption(Mock)이 에러 메시지를 렌더링한다", async () => {
     const { user, textarea } = renderComponent({
       name: "intro",
       label: "소개",
