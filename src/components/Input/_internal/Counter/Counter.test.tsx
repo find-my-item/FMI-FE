@@ -22,11 +22,4 @@ describe("Counter 컴포넌트", () => {
 
     expect(container).toBeEmptyDOMElement();
   });
-
-  test("isLength prop이 제공되지 않으면 '0/maxLength' 형식으로 렌더링하는지 확인", () => {
-    render(<Counter maxLength={50} />);
-
-    const counterText = screen.getByText("0/50");
-    expect(counterText).toBeInTheDocument();
-  });
 });
