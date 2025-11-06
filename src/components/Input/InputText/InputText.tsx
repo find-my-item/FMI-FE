@@ -43,9 +43,7 @@ const InputText = ({
   const {
     register,
     watch,
-    setValue,
     formState: { errors },
-    clearErrors,
   } = useFormContext();
 
   const { onDelete } = useFormInput();

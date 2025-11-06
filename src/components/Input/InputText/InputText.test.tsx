@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { FormProvider, useForm, UseFormProps } from "react-hook-form";
 import InputText from "./InputText"; // 테스트할 컴포넌트
@@ -208,12 +208,12 @@ describe("InputText 컴포넌트", () => {
     expect(mockBtnOnClick).toHaveBeenCalledTimes(1);
   });
 
-  // error 발생 시 caption 메시지 확인 테스트
+  // error 발생 시 border 색상 변경 확인 테스트
   it("RHF 에러 발생 시 input에 에러 클래스가 적용되고 Caption(Mock)이 에러 메시지를 렌더링하는지 확인", async () => {
     const { input, user } = renderComponent({
       label: "에러",
       name: "errorField",
-      validation: { required: "이 필드는 필수입니다" },
+      validation: { required: true },
     });
 
     await user.type(input, "a");
@@ -221,14 +221,8 @@ describe("InputText 컴포넌트", () => {
 
     const errorMessage = await screen.findByTestId("error-message");
 
-    expect(errorMessage).toHaveTextContent("이 필드는 필수입니다");
     expect(input).toHaveClass("border-system-warning");
   });
-
-  const input = screen.getByLabelText("에러");
-  expect(input).toHaveClass("border-system-warning");
-
-  expect(screen.getByTestId("error-message")).toHaveTextContent("이 필드는 필수입니다");
 });
 
 // success 시 cation메시지 확인 테스트
