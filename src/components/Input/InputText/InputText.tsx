@@ -13,7 +13,10 @@ import Counter from "../_internal/Counter/Counter";
 import { useFormInput } from "../_internal/_hooks/useFormInput";
 
 interface InputTextProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "children" | "value" | "defaultValue"> {
+  extends Omit<
+    InputHTMLAttributes<HTMLInputElement>,
+    "children" | "value" | "defaultValue" | "isSuccess" | "successMessage" | "rule"
+  > {
   name: string;
   type?: string;
   className?: string;
@@ -75,6 +78,7 @@ const InputText = ({
       <div className="flex w-full flex-row gap-2">
         <div className="relative flex w-full flex-row">
           <input
+            id={name}
             {...props}
             {...register(name, validation)}
             type={actualType()}

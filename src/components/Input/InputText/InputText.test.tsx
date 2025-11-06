@@ -32,7 +32,6 @@ jest.mock("@/components/Buttons/Button/Button", () => {
   };
 });
 
-// 내부 컴포넌트 mock
 jest.mock("../_internal/DeleteButton/DeleteButton", () => {
   const MockDeleteButton = ({ value, onDelete }: { value: string; onDelete: () => void }) =>
     value ? (
@@ -48,8 +47,16 @@ jest.mock("../_internal/DeleteButton/DeleteButton", () => {
 });
 
 jest.mock("../_internal/Label/Label", () => {
-  const MockLabel = ({ label, required }: { label: string; required: boolean }) => (
-    <label>
+  const MockLabel = ({
+    name,
+    label,
+    required,
+  }: {
+    name: string;
+    label: string;
+    required: boolean;
+  }) => (
+    <label htmlFor={name}>
       {label}
       {required && "*"}
     </label>
@@ -114,8 +121,8 @@ const renderComponent = (
   const Wrapper = ({ children }: { children: React.ReactNode }) => {
     const methods = useForm({
       defaultValues: { [mergedProps.name]: "" },
-      mode: "onChange", // RHF의 에러 상태를 즉각 반영하기 위해
-      ...formConfig, //
+      mode: "onChange",
+      ...formConfig,
     });
     return <FormProvider {...methods}>{children}</FormProvider>;
   };
@@ -125,7 +132,9 @@ const renderComponent = (
   return {
     user,
     props: mergedProps,
-    input: screen.getByLabelText(mergedProps.label || "") as HTMLInputElement,
+    input: screen.getByLabelText(new RegExp(mergedProps.label || ""), {
+      selector: "input",
+    }) as HTMLInputElement,
   };
 };
 
@@ -169,7 +178,7 @@ describe("InputText 컴포넌트", () => {
     await user.click(deleteButton);
 
     expect(mockOnDelete).toHaveBeenCalledTimes(1);
-    expect(mockOnDelete).toHaveBeenCalledWith("testInput"); // name prop
+    expect(mockOnDelete).toHaveBeenCalledWith("testInput");
   });
 
   // 비밀번호 보기/숨기기 버튼 테스트
@@ -186,7 +195,6 @@ describe("InputText 컴포넌트", () => {
     const eyeButton = screen.getByLabelText("비밀번호 보기");
     await user.click(eyeButton);
 
-    // 3. 변경 상태: text 타입, 'EyeOpen' 아이콘(Mock) 렌더링
     expect(input).toHaveAttribute("type", "text");
     expect(screen.getByText("EyeOpen")).toBeInTheDocument();
     expect(screen.getByLabelText("비밀번호 숨기기")).toBeInTheDocument();
@@ -208,20 +216,23 @@ describe("InputText 컴포넌트", () => {
     expect(mockBtnOnClick).toHaveBeenCalledTimes(1);
   });
 
-  // error 발생 시 border 색상 변경 확인 테스트
-  it("RHF 에러 발생 시 input에 에러 클래스가 적용되고 Caption(Mock)이 에러 메시지를 렌더링하는지 확인", async () => {
-    const { input, user } = renderComponent({
-      label: "에러",
-      name: "errorField",
-      validation: { required: true },
+  // error 발생 시 border 색상 변경, 에러메시지 확인 테스트
+  test("RHF 에러 발생 시 에러 클래스가 적용되고 Caption(Mock)이 에러 메시지를 렌더링한다", async () => {
+    const { user, input } = renderComponent({
+      name: "intro",
+      label: "소개",
+      validation: {
+        maxLength: { value: 5, message: "5자 이내로 입력해주세요." },
+      },
     });
 
-    await user.type(input, "a");
-    await user.clear(input);
+    await user.type(input, "여섯글자입니다");
 
     const errorMessage = await screen.findByTestId("error-message");
 
-    expect(input).toHaveClass("border-system-warning");
+    expect(errorMessage).toHaveTextContent("5자 이내로 입력해주세요.");
+
+    expect(input).toHaveClass("border border-system-warning");
   });
 });
 
@@ -240,7 +251,7 @@ it("isSuccess=true일 때 Caption(Mock)이 성공 메시지를 렌더링하는�
 it("maxLength가 있을 때 Counter(Mock)에 글자 수가 반영하는지 확인", async () => {
   const { user, input } = renderComponent({
     label: "카운터",
-    validation: { maxLength: 20 },
+    validation: { maxLength: { value: 20, message: "20자 이내로 입력해주세요." } },
   });
 
   expect(screen.getByTestId("counter")).toHaveTextContent("0/20");
