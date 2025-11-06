@@ -26,6 +26,7 @@ interface InputTextProps
   validation?: RegisterOptions;
   rule?: string;
 }
+
 const InputStyle =
   "flex flex-1 items-center relative h-10 px-[14px] py-[12.5px] bg-[#F5F5F5] rounded-[10px] text-[#9D9D9D] text-[14px] border focus:outline-none";
 
