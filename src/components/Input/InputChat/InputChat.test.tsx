@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { FormProvider, useForm } from "react-hook-form";
 import InputChat from "./InputChat";
-import "@testing-library/jest-dom"; // .toBeInTheDocument() 같은 Matcher를 사용하기 위해 import
+import "@testing-library/jest-dom";
 
 jest.mock("@/utils", () => ({
   cn: (...args: any[]) => args.filter(Boolean).join(" "),
