@@ -5,6 +5,7 @@ import { useWatch, useFormContext } from "react-hook-form";
 import Logo from "../_components/Logo";
 import { CheckBox, InputText, Button } from "@/components";
 
+// TODO(수현): constants 분리 및 대문자 컨벤션 적용 필요
 const CheckBoxItem = [
   { label: "아이디 기억하기", id: "rememberID" },
   { label: "자동 로그인", id: "autoLogin" },
@@ -34,13 +35,13 @@ const Page = () => {
             eyeShow={true}
           />
           {/* 체크박스 */}
-          <div className="flex w-full gap-3 text-[14px] text-[#9D9D9D]">
+          <div className="flex w-full gap-3">
             {CheckBoxItem.map((item, index) => (
               <CheckBox
                 label={item.label}
                 id={item.id}
                 boxSize="w-[18px] h-[18px]"
-                textStyle="text-[12px] ml-2"
+                textStyle="text-caption1-semibold text-neutral-normal-default ml-2"
                 iconSize="h-[6px]"
                 {...register(item.id)}
                 state={!!checkBoxValues?.[index]}
@@ -56,20 +57,23 @@ const Page = () => {
           </Button>
           {/* divider 구분선 */}
           <div className="flex h-4 w-full items-center">
-            <hr className="h-px flex-1 bg-[#E4E4E4]" />
-            <span className="px-3 text-[12px] text-[#9D9D9D]">로그인이 되지 않는다면?</span>
-            <hr className="h-px flex-1 bg-[#E4E4E4]" />
+            <hr className="h-px flex-1 bg-flatGray-100" />
+            <span className="px-3 text-caption1-medium text-layout-body-default">
+              로그인이 되지 않는다면?
+            </span>
+            <hr className="h-px flex-1 bg-flatGray-100" />
           </div>
         </div>
       </form>
 
       {/* 회원확인 여부 */}
-      <div className="flex h-11 w-full justify-center">
-        <Link href="/find-pw" className="p-3 text-[14px] text-[#9D9D9D]">
+      <div className="flex h-11 w-full justify-center text-caption1-semibold text-neutralInversed-strong-default">
+        <Link href="/find-pw" className="p-3">
           비밀번호 찾기
         </Link>
+        {/* TODO(수현): 이 부분 hr 태그로 변경 필요 */}
         <span className="h-4 self-center border-l border-gray-300" />
-        <Link href="/sign-up" className="p-3 text-[14px] text-[#1EB87B]">
+        <Link href="/sign-up" className="p-3">
           회원가입
         </Link>
       </div>

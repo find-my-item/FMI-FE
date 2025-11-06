@@ -1,21 +1,38 @@
+"use client";
+
+import { FormProvider, useForm } from "react-hook-form";
 import PostSearchView from "./_internal/PostSearchView";
 import RegionSearchView from "./_internal/RegionSearchView";
 import { LIST_SEARCH_PLACEHOLDER } from "./LIST_SEARCH_PLACEHOLDER";
+import InputSearch from "../Input/InputSearch/InputSearch";
+import { useEffect } from "react";
 
 interface ListSearch {
   searchMode: "region" | "post";
 }
 
 const ListSearch = ({ searchMode }: ListSearch) => {
+  const methods = useForm({
+    mode: "onChange",
+    reValidateMode: "onChange",
+  });
+
+  useEffect(() => {
+    methods.resetField(`${searchMode}Search`);
+  }, [searchMode]);
+
   return (
     <>
-      <form className="px-[20px] py-[10px]">
-        <input
-          type="text"
-          placeholder={LIST_SEARCH_PLACEHOLDER[searchMode]}
-          className="min-h-[40px] w-full rounded-full px-[20px] py-[8px] text-body1-regular text-black bg-fill-neutral-subtle-default placeholder:text-neutral-normal-placeholder"
-        />
-      </form>
+      <FormProvider {...methods}>
+        <div className="px-[20px] py-[10px]">
+          <InputSearch
+            mode="RHF"
+            name={`${searchMode}Search`}
+            placeholder={LIST_SEARCH_PLACEHOLDER[searchMode]}
+            onEnter={() => {}}
+          />
+        </div>
+      </FormProvider>
       {searchMode === "post" ? <PostSearchView /> : <RegionSearchView />}
     </>
   );

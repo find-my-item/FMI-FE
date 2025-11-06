@@ -1,3 +1,4 @@
+// TODO(수현): 파일 네이밍, 내부 네이밍 달라요
 export const AgreeConfig: Record<string, { title: string; content: string }> = {
   termsOfService: {
     title: "서비스 이용약관 (필수)",
