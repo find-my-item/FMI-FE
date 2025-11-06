@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense } from "react";
-import ListView from "./_components/ListView/ListView";
+import { ListView } from "@/app/(route)/chat/_components";
 
 const page = () => {
   return (
