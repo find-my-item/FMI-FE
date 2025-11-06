@@ -1,0 +1,185 @@
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { FormProvider, useForm, UseFormProps } from "react-hook-form";
+import InputField from "./InputField"; // 테스트할 컴포넌트
+import "@testing-library/jest-dom";
+
+jest.mock("@/utils", () => ({
+  cn: (...args: any[]) => args.filter(Boolean).join(" "),
+}));
+
+jest.mock("@/components/Icon/Icon", () => {
+  const MockIcon = ({ name }: { name: string }) => <span>{name}</span>;
+  MockIcon.displayName = "MockIcon";
+  return {
+    __esModule: true,
+    default: MockIcon,
+  };
+});
+
+jest.mock("@/components/Buttons/Button/Button", () => {
+  const MockButton = ({
+    children,
+    onClick,
+  }: {
+    children: React.ReactNode;
+    onClick: () => void;
+  }) => <button onClick={onClick}>{children}</button>;
+  MockButton.displayName = "MockButton";
+  return {
+    __esModule: true,
+    default: MockButton,
+  };
+});
+
+// 내부 컴포넌트 mock
+jest.mock("../_internal/DeleteButton/DeleteButton", () => {
+  const MockDeleteButton = ({ value, onDelete }: { value: string; onDelete: () => void }) =>
+    value ? (
+      <button data-testid="delete-button" onClick={onDelete}>
+        Delete
+      </button>
+    ) : null;
+  MockDeleteButton.displayName = "MockDeleteButton";
+  return {
+    __esModule: true,
+    default: MockDeleteButton,
+  };
+});
+
+jest.mock("../_internal/Label/Label", () => {
+  const MockLabel = ({ label, required }: { label: string; required: boolean }) => (
+    <label>
+      {label}
+      {required && "*"}
+    </label>
+  );
+  MockLabel.displayName = "MockLabel";
+  return {
+    __esModule: true,
+    default: MockLabel,
+  };
+});
+
+// Caption Mock (에러 메시지만 렌더링)
+jest.mock("../_internal/Caption/Caption", () => {
+  const MockCaption = ({ hasError, errorMessage }: { hasError?: boolean; errorMessage?: string }) =>
+    // hasError와 errorMessage가 모두 true/존재할 때만 렌더링
+    hasError && errorMessage ? <span data-testid="error-message">{errorMessage}</span> : null;
+  MockCaption.displayName = "MockCaption";
+  return {
+    __esModule: true,
+    default: MockCaption,
+  };
+});
+
+jest.mock("../_internal/Counter/Counter", () => {
+  const MockCounter = ({ isLength, maxLength }: { isLength: number; maxLength?: number }) =>
+    maxLength ? (
+      <div data-testid="counter">
+        {isLength}/{maxLength}
+      </div>
+    ) : null;
+  MockCounter.displayName = "MockCounter";
+  return {
+    __esModule: true,
+    default: MockCounter,
+  };
+});
+
+const renderComponent = (
+  props: React.ComponentProps<typeof InputField>,
+  formConfig: UseFormProps = {}
+) => {
+  const user = userEvent.setup();
+
+  const Wrapper = ({ children }: { children: React.ReactNode }) => {
+    const methods = useForm({
+      defaultValues: { [props.name]: "" },
+      mode: "onChange",
+      ...formConfig,
+    });
+    return <FormProvider {...methods}>{children}</FormProvider>;
+  };
+
+  render(<InputField {...props} />, { wrapper: Wrapper });
+
+  return {
+    user,
+    props,
+    textarea: screen.getByLabelText(props.label) as HTMLTextAreaElement,
+  };
+};
+
+const mockOnDelete = jest.fn();
+jest.mock("../_internal/_hooks/useFormInput", () => ({
+  useFormInput: () => ({
+    onDelete: mockOnDelete,
+  }),
+}));
+
+describe("InputField (Textarea) 컴포넌트", () => {
+  beforeEach(() => {
+    mockOnDelete.mockClear();
+  });
+
+  it("Label(Mock)과 textarea를 올바르게 렌더링하는지 확인", () => {
+    renderComponent({ name: "intro", label: "소개" });
+
+    expect(screen.getByText("소개")).toBeInTheDocument();
+    expect(screen.getByLabelText("소개")).toBeInTheDocument();
+  });
+
+  it("타이핑 시 값이 변경되고 DeleteButton(Mock)이 나타나는지 확인", async () => {
+    const { user, textarea } = renderComponent({ name: "intro", label: "소개" });
+
+    expect(textarea.value).toBe("");
+    expect(screen.queryByTestId("delete-button")).not.toBeInTheDocument();
+
+    await user.type(textarea, "안녕하세요");
+
+    expect(textarea.value).toBe("안녕하세요");
+    expect(screen.getByTestId("delete-button")).toBeInTheDocument();
+  });
+
+  it("DeleteButton(Mock) 클릭 시 useFormInput의 onDelete(Mock)를 호출한다", async () => {
+    const { user, textarea } = renderComponent({ name: "intro", label: "소개" });
+
+    await user.type(textarea, "텍스트");
+    const deleteButton = screen.getByTestId("delete-button");
+    await user.click(deleteButton);
+
+    expect(mockOnDelete).toHaveBeenCalledTimes(1);
+    expect(mockOnDelete).toHaveBeenCalledWith("intro"); // name prop
+  });
+
+  it("maxLength가 있을 때 Counter(Mock)에 글자 수가 반영되는지 확인", async () => {
+    const { user, textarea } = renderComponent({
+      name: "intro",
+      label: "소개",
+      validation: { maxLength: 30 },
+    });
+
+    expect(screen.getByTestId("counter")).toHaveTextContent("0/30");
+
+    await user.type(textarea, "열 글자입니다.");
+
+    expect(screen.getByTestId("counter")).toHaveTextContent("7/30");
+  });
+
+  it("RHF 에러 발생 시 에러 클래스가 적용되고 Caption(Mock)이 에러 메시지를 렌더링하는지 확인", async () => {
+    const { user, textarea } = renderComponent({
+      name: "intro",
+      label: "소개",
+      validation: { required: "소개는 필수 항목입니다" },
+    });
+
+    await user.click(textarea);
+    await user.click(document.body);
+
+    const errorMessage = await screen.findByTestId("error-message");
+
+    expect(errorMessage).toHaveTextContent("소개는 필수 항목입니다");
+    expect(textarea).toHaveClass("!border-system-warning");
+  });
+});
