@@ -5,6 +5,7 @@ import {
   flexColCenter,
   mouseHover,
   uEllipsis,
+  noScrollbar,
 } from "./src/utils/customStylePlugins/customStylePlugins";
 import customFonts from "./src/utils/customFonts/customFonts";
 import plugin from "tailwindcss/plugin";
@@ -67,8 +68,8 @@ const config: Config = {
       borderColor: border,
     },
   },
-  plugins: [fillBgUtilities, flexCenter, flexColCenter, mouseHover, uEllipsis],
-  safelist: ["flex-center", "flex-col-center", "mouse-hover", "u-ellipsis"],
+  plugins: [fillBgUtilities, flexCenter, flexColCenter, mouseHover, uEllipsis, noScrollbar],
+  safelist: ["flex-center", "flex-col-center", "mouse-hover", "u-ellipsis", "no-scrollbar"],
 };
 
 export default config;
