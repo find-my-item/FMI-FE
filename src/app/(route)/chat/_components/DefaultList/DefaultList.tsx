@@ -5,12 +5,15 @@ import { FormProvider, useForm } from "react-hook-form";
 import { createChatFilterButtons } from "../../_utils/createChatFilterButtons";
 import ChatItem from "../ChatItem/ChatItem";
 import { Props } from "@/components/Icon/Icon";
+import { useSearchParams } from "next/navigation";
 
 interface DefaultListProps {
   searchUpdateQuery: (key: string, value?: string) => void;
 }
 
 const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
+  const searchParams = useSearchParams();
+  const selectedRegion = searchParams.get("region");
   const methods = useForm({
     mode: "onChange",
     reValidateMode: "onChange",
@@ -36,12 +39,12 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
             <Filter
               key={text}
               ariaLabel={`채팅 리스트 ${text}`}
-              onSelected={false}
+              onSelected={text === "지역 선택" && selectedRegion ? true : false}
               icon={{ name: icon as Props["name"], size: iconSize }}
               iconPosition={iconPosition as "leading" | "trailing"}
               onClick={onClick}
             >
-              {text}
+              {text === "지역 선택" && selectedRegion ? selectedRegion : text}
             </Filter>
           ))}
         </div>
