@@ -20,6 +20,18 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
   });
   const buttons = createChatFilterButtons(searchUpdateQuery);
 
+  const renderButtons = buttons.map((btn) => {
+    const isRegionButton = btn.text === "지역 선택";
+    const isSelected = isRegionButton && !!selectedRegion;
+    const displayText = isSelected ? selectedRegion : btn.text;
+
+    return {
+      ...btn,
+      isSelected,
+      displayText,
+    };
+  });
+
   return (
     <>
       <div className="px-[20px]">
@@ -35,18 +47,20 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
         </FormProvider>
 
         <div className="flex gap-[8px] py-[14px] no-scrollbar">
-          {buttons.map(({ text, icon, iconSize, iconPosition, onClick }) => (
-            <Filter
-              key={text}
-              ariaLabel={`채팅 리스트 ${text}`}
-              onSelected={text === "지역 선택" && selectedRegion ? true : false}
-              icon={{ name: icon as Props["name"], size: iconSize }}
-              iconPosition={iconPosition as "leading" | "trailing"}
-              onClick={onClick}
-            >
-              {text === "지역 선택" && selectedRegion ? selectedRegion : text}
-            </Filter>
-          ))}
+          {renderButtons.map(
+            ({ text, icon, iconSize, iconPosition, onClick, isSelected, displayText }) => (
+              <Filter
+                key={text}
+                ariaLabel={`채팅 리스트 ${displayText}`}
+                onSelected={isSelected}
+                icon={{ name: icon as Props["name"], size: iconSize }}
+                iconPosition={iconPosition as "leading" | "trailing"}
+                onClick={onClick}
+              >
+                {displayText}
+              </Filter>
+            )
+          )}
         </div>
       </div>
       {Array.from({ length: 5 }).map((_, index) => (
