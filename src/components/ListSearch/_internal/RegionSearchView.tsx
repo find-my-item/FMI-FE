@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "@/components/Buttons/Button/Button";
+import { Button } from "@/components";
 import { useRouter, usePathname } from "next/navigation";
 
 const RegionSearchView = () => {
