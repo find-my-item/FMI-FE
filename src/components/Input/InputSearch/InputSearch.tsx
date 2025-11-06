@@ -15,7 +15,7 @@ interface InputSearchProps extends InputHTMLAttributes<HTMLInputElement> {
   onEnter: (value: string) => void;
 }
 
-const InputSearch = ({ name, mode, label, onEnter, ...props }: InputSearchProps) => {
+const InputSearch = ({ name, mode, onEnter, ...props }: InputSearchProps) => {
   const { register, watch, setValue } = useFormContext();
   const rhfValue = watch(name) || "";
 
