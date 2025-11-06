@@ -1,11 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import { MOCK_IMAGES } from "./MOCK_IMAGES";
 
 const ChatItem = () => {
-  const images = [
-    "https://images.mypetlife.co.kr/content/uploads/2022/12/16162807/IMG_1666-edited-scaled.jpg",
-    "https://i.namu.wiki/i/slmFMXb1Fchs2zN0ZGOzqfuPDvhRS-H9eBp7Gp613-DNKi6i6Ct7eFkTUpauqv5HAYR97mrNqrvvcCDEyBdL_g.webp",
-  ];
   return (
     <Link
       href={"chat/room/1"}
@@ -14,14 +11,14 @@ const ChatItem = () => {
       <section className="relative h-[58px] w-[58px] shrink-0">
         <Image
           alt="유저 프로필 이미지"
-          src={images[0]}
+          src={MOCK_IMAGES[0]}
           width={26}
           height={26}
           className="absolute left-0 top-0 z-10 rounded-full border-[1.5px] border-white"
         />
         <Image
           alt="게시글 썸네일 이미지"
-          src={images[1]}
+          src={MOCK_IMAGES[1]}
           width={50}
           height={50}
           className="absolute bottom-0 right-0 rounded"
