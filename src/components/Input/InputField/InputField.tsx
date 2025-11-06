@@ -40,6 +40,7 @@ const InputField = ({ name, validation, ...props }: InputFieldProps) => {
       <Label
         name={name}
         label={props.label}
+        required={!!validation?.required}
         className="text-body2-regular text-layout-body-default"
       />
 
