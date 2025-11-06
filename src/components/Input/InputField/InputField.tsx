@@ -24,9 +24,7 @@ const InputField = ({ name, validation, ...props }: InputFieldProps) => {
   const {
     register,
     watch,
-    setValue,
     formState: { errors },
-    clearErrors,
   } = useFormContext();
 
   const { onDelete } = useFormInput();
@@ -47,6 +45,7 @@ const InputField = ({ name, validation, ...props }: InputFieldProps) => {
 
       <div className="relative">
         <textarea
+          id={name}
           {...props}
           className={cn(
             "disabled:background-[#E4E4E4] h-[120px] w-full resize-none rounded-[10px] border border-[#CFCFCF] p-3 hover:border-[#ADADAD] focus:border-[#ADADAD] disabled:text-[#9D9D9D]",
