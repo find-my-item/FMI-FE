@@ -12,23 +12,24 @@ import Caption from "../_internal/Caption/Caption";
 import Counter from "../_internal/Counter/Counter";
 import { useFormInput } from "../_internal/_hooks/useFormInput";
 
-interface InputTextProps
-  extends Omit<
-    InputHTMLAttributes<HTMLInputElement>,
-    "children" | "value" | "defaultValue" | "isSuccess" | "successMessage" | "rule"
-  > {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   type?: string;
   className?: string;
-  eyeShow?: boolean;
+  validation?: RegisterOptions;
+}
+
+interface CustomProps {
   label?: string;
   children?: ReactNode;
+  eyeShow?: boolean;
   btnOnClick?: () => void;
-  successMessage?: string;
   isSuccess?: boolean;
-  validation?: RegisterOptions;
+  successMessage?: string;
   rule?: string;
 }
+
+type InputTextProps = InputProps & CustomProps;
 
 const InputStyle =
   "flex flex-1 items-center relative h-10 px-[14px] py-[12.5px] bg-[#F5F5F5] rounded-[10px] text-[#9D9D9D] text-[14px] border focus:outline-none";
@@ -37,10 +38,14 @@ const InputText = ({
   name,
   type = "text",
   className = InputStyle,
-  eyeShow = false,
-  children,
-  btnOnClick,
   validation,
+  label,
+  children,
+  eyeShow = false,
+  btnOnClick,
+  isSuccess,
+  successMessage,
+  rule,
   ...props
 }: InputTextProps) => {
   const {
@@ -70,7 +75,7 @@ const InputText = ({
       {/* label */}
       <Label
         name={name}
-        label={props.label}
+        label={label}
         required={!!validation?.required}
         className="text-body2-medium text-layout-header-default"
       />
@@ -123,11 +128,11 @@ const InputText = ({
       {/* 안내 문구 */}
       <div className="flex w-full justify-between text-caption1-regular text-layout-body-default">
         <Caption
-          isSuccess={props.isSuccess}
-          successMessage={props.successMessage}
+          isSuccess={isSuccess}
+          successMessage={successMessage}
           hasError={!!errors[name]}
           errorMessage={errors[name]?.message as string}
-          rule={props.rule}
+          rule={rule}
         />
 
         {/* 글자 수 확인 */}
