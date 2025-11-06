@@ -57,6 +57,9 @@ export const uEllipsis = plugin(function ({ addUtilities }) {
   addUtilities(utilities);
 });
 
+/**
+ * no-scrollbar: overflow-x-auto, whiteSpace-nowrap, scrollbar-hide
+ */
 export const noScrollbar = plugin(function ({ addUtilities }) {
   const utilities: Record<string, CSSRuleObject> = {
     ".no-scrollbar": {
