@@ -34,7 +34,7 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
           </div>
         </FormProvider>
 
-        <div className="flex gap-[8px] py-[14px]">
+        <div className="flex gap-[8px] py-[14px] no-scrollbar">
           {buttons.map(({ text, icon, iconSize, iconPosition, onClick }) => (
             <Filter
               key={text}

@@ -56,3 +56,21 @@ export const uEllipsis = plugin(function ({ addUtilities }) {
   };
   addUtilities(utilities);
 });
+
+export const noScrollbar = plugin(function ({ addUtilities }) {
+  const utilities: Record<string, CSSRuleObject> = {
+    ".no-scrollbar": {
+      overflowX: "auto",
+      whiteSpace: "nowrap",
+
+      "-ms-overflow-style": "none", // IE & Edge
+      "scrollbar-width": "none", // Firefox
+
+      "&::-webkit-scrollbar": {
+        display: "none", // Chrome, Safari, Opera
+      },
+    },
+  };
+
+  addUtilities(utilities);
+});
