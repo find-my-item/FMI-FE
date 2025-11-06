@@ -2,7 +2,7 @@
 
 import { Filter, InputSearch } from "@/components";
 import { FormProvider, useForm } from "react-hook-form";
-import { createChatFilterButtons } from "../../_utils/createChatFilterButtons";
+import { createChatFilterButtons } from "@/app/(route)/chat/_utils";
 import ChatItem from "../ChatItem/ChatItem";
 import { Props } from "@/components/Icon/Icon";
 import { useSearchParams } from "next/navigation";
