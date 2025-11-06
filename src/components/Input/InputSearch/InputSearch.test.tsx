@@ -85,6 +85,7 @@ describe("InputSearch 컴포넌트", () => {
       expect(screen.getByTestId("delete-button")).toBeInTheDocument();
     });
 
+    // 테스트 1
     it("Enter 키 입력 시 onEnter 함수를 RHF 값으로 호출하는지 확인", async () => {
       const mockOnEnter = jest.fn();
       const { user, input } = renderComponent({
@@ -100,6 +101,7 @@ describe("InputSearch 컴포넌트", () => {
       expect(mockOnEnter).toHaveBeenCalledWith("RHF 엔터 테스트");
     });
 
+    // 테스트 2
     it("삭제 버튼 클릭 시 RHF 값(setValue)이 초기화되는지 확인", async () => {
       const { user, input } = renderComponent({
         name: "searchRHF",
@@ -119,8 +121,9 @@ describe("InputSearch 컴포넌트", () => {
     });
   });
 
-  // mode="onChange" 테스트
+  // mode="onChange"
   describe('mode: "onChange" (내부 state 사용)', () => {
+    // 테스트 3
     it("입력 시 내부 state 값이 변경되고 삭제 버튼이 나타나는지 확인", async () => {
       const { user, input } = renderComponent({
         name: "searchLocal",
@@ -137,6 +140,7 @@ describe("InputSearch 컴포넌트", () => {
       expect(screen.getByTestId("delete-button")).toBeInTheDocument();
     });
 
+    // 테스트 4
     it("Enter 키 입력 시 onEnter 함수를 내부 state 값으로 호출하는지 확인", async () => {
       const mockOnEnter = jest.fn();
       const { user, input } = renderComponent({
@@ -152,6 +156,7 @@ describe("InputSearch 컴포넌트", () => {
       expect(mockOnEnter).toHaveBeenCalledWith("로컬 엔터 테스트");
     });
 
+    // 테스트 5
     it("삭제 버튼 클릭 시 내부 state 값이 초기화된다", async () => {
       const { user, input } = renderComponent({
         name: "searchLocal",

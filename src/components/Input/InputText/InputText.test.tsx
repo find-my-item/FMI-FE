@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { FormProvider, useForm, UseFormProps } from "react-hook-form";
-import InputText from "./InputText"; // 테스트할 컴포넌트
+import InputText from "./InputText";
 import "@testing-library/jest-dom";
 
 jest.mock("@/utils", () => ({
@@ -143,7 +143,7 @@ describe("InputText 컴포넌트", () => {
     mockOnDelete.mockClear();
   });
 
-  // 기본 요소 렌더링 확인 테스트
+  // 테스트 1
   it("기본 요소(Label, Input)를 올바르게 렌더링하는지 확인", () => {
     renderComponent({ label: "테스트 라벨" });
 
@@ -151,13 +151,13 @@ describe("InputText 컴포넌트", () => {
     expect(screen.getByLabelText("테스트 라벨")).toBeInTheDocument();
   });
 
-  // label 테스트
+  // 테스트 2
   it("validation.required가 true일 때 Label에 *가 표시되는지 확인", () => {
     renderComponent({ label: "필수 항목", validation: { required: true } });
     expect(screen.getByText("필수 항목*")).toBeInTheDocument();
   });
 
-  // 삭제 버튼 테스트
+  // 테스트 3
   it("입력 시 값이 변경되고 DeleteButton(Mock)이 나타나는지 확인", async () => {
     const { user, input } = renderComponent({ label: "입력" });
 
@@ -170,6 +170,7 @@ describe("InputText 컴포넌트", () => {
     expect(screen.getByTestId("delete-button")).toBeInTheDocument();
   });
 
+  // 테스트 4
   it("DeleteButton 클릭 시 useFormInput의 onDelete(Mock)를 호출하는지 확인", async () => {
     const { user, input } = renderComponent({ label: "삭제 테스트" });
 
@@ -181,7 +182,7 @@ describe("InputText 컴포넌트", () => {
     expect(mockOnDelete).toHaveBeenCalledWith("testInput");
   });
 
-  // 비밀번호 보기/숨기기 버튼 테스트
+  // 테스트 5
   it("eyeShow=true일 때 '비밀번호 보기/숨기기' 버튼이 작동한다", async () => {
     const { user, input } = renderComponent({
       label: "비밀번호",
@@ -200,6 +201,7 @@ describe("InputText 컴포넌트", () => {
     expect(screen.getByLabelText("비밀번호 숨기기")).toBeInTheDocument();
   });
 
+  // 테스트 6
   it("children(Button)이 렌더링되고 클릭 시 btnOnClick을 호출하는지 확인", async () => {
     const mockBtnOnClick = jest.fn();
     const { user } = renderComponent({
@@ -216,8 +218,8 @@ describe("InputText 컴포넌트", () => {
     expect(mockBtnOnClick).toHaveBeenCalledTimes(1);
   });
 
-  // error 발생 시 border 색상 변경, 에러메시지 확인 테스트
-  test("RHF 에러 발생 시 에러 클래스가 적용되고 Caption(Mock)이 에러 메시지를 렌더링한다", async () => {
+  // 테스트 7
+  it("RHF 에러 발생 시 에러 클래스가 적용되고 Caption(Mock)이 에러 메시지를 렌더링한다", async () => {
     const { user, input } = renderComponent({
       name: "intro",
       label: "소개",
@@ -236,7 +238,7 @@ describe("InputText 컴포넌트", () => {
   });
 });
 
-// success 시 cation메시지 확인 테스트
+// 테스트 8
 it("isSuccess=true일 때 Caption(Mock)이 성공 메시지를 렌더링하는지 확인", () => {
   renderComponent({
     label: "성공",
@@ -247,7 +249,7 @@ it("isSuccess=true일 때 Caption(Mock)이 성공 메시지를 렌더링하는�
   expect(screen.getByTestId("success-message")).toHaveTextContent("성공했습니다");
 });
 
-// 글자 수에 따라 counter 반영 확인 테스트
+// 테스트 9
 it("maxLength가 있을 때 Counter(Mock)에 글자 수가 반영하는지 확인", async () => {
   const { user, input } = renderComponent({
     label: "카운터",

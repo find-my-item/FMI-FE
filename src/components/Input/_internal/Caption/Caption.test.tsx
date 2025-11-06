@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import Caption from "./Caption"; // 테스트할 Caption 컴포넌트
+import Caption from "./Caption";
 import "@testing-library/jest-dom";
 
 describe("Caption 컴포넌트", () => {
