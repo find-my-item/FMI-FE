@@ -25,7 +25,7 @@ import Icon from "@/components/Icon/Icon";
  *   <form onSubmit={methods.handleSubmit(onSubmit)}>
  *     <InputChat
  *       name="message"
- *       validation={{ required: "메시지를 입력해 주세요" }}
+ *       validation={{ required: true }}
  *       sendClick={() => methods.handleSubmit(onSubmit)()}
  *     />
  *   </form>
