@@ -13,7 +13,6 @@ const RegionSearchView = () => {
         <Link
           key={value}
           href={`${pathname}?region=${value}`}
-          aria-label={`지역 선택 ${value}`}
           className="min-h-[60px] w-full border-b border-neutral-normal-default bg-white px-[20px] py-[20px] text-left text-body2-medium text-neutral-strong-default"
         >
           {value}
