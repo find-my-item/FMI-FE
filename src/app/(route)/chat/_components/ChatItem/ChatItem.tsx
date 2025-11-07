@@ -5,7 +5,7 @@ import { MOCK_IMAGES } from "./MOCK_IMAGES";
 const ChatItem = () => {
   return (
     <Link
-      href={"chat/room/1"}
+      href={"chat/1"}
       className="flex min-h-[113px] w-full items-center gap-[12px] border-b border-divider-default px-[16px] py-[24px] duration-150 hover:bg-flatGray-25"
     >
       <section className="relative h-[58px] w-[58px] shrink-0">
