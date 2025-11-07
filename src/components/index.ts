@@ -28,3 +28,4 @@ export { default as InputField } from "./Input/InputField/InputField";
 export { default as InputChat } from "./Input/InputChat/InputChat";
 export { default as InputSearch } from "./Input/InputSearch/InputSearch";
 export { default as RequiredText } from "./RequiredText/RequiredText";
+export { default as ConfirmModal } from "./Modal/ConfirmModal";
