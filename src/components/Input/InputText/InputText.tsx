@@ -12,6 +12,60 @@ import Caption from "../_internal/Caption/Caption";
 import Counter from "../_internal/Counter/Counter";
 import { useFormInput } from "../_internal/_hooks/useFormInput";
 
+/**
+ * @author suhyeon
+ *
+ * 일반 텍스트, 비밀번호를 입력받을 수 있고 버튼 결합 형태도 가능한 input 공통 컴포넌트 입니다.
+ * react-hook-form를 필수로 사용한다는 전제하에 개발하였습니다.
+ * react-hook-form으로 사용하실 곳은 상위 요소로 FormProvider를 사용해주시고 method는 onChange 모드로 설정하시면 됩니다.
+ *
+ *
+ * @param items -  일반 텍스트, 비밀번호를 입력받을 수 있고 버튼 결합 형태를 선택할 수 있는 props입니다.
+ *  - 'name': 입력 필드의 id 및 register함수 사용을 위한 name
+ *  - 'type': 입력 필드의 타입을 선택할 default로 'text'를 지정해놓았습니다. 그 외 타입들은 지정해주면 됩니다.
+ *  - 'className': 입력필드의 스타일
+ *  - `validation`: 입력 필드의 유효성 검사를 위한 RegisterOption
+ *  - 'disabled': 입력필드, 버튼을 disabled처리
+ *  - 'label': 라벨의 텍스트
+ *  - 'children': 버튼 텍스트 (동시에 버튼 결합 형태를 사용할 것을 의미합니다.)
+ *  - 'eyeShow': 비밀번호 타입을 사용할 때 비밀번호 숨기기/보이기 기능을 추가
+ *  - 'btnOnClick': 버튼이 눌렸을때 발생할 이벤트를 넣을 수 있는 옵션
+ *  - 'isSuccess': 성공 caption을 보여주기 위한 옵션
+ *  - 'successMessage': caption에 나타날 성공 메시지
+ *  - 'rule':
+ *
+ *
+ * @example 입력필드만 사용
+ * ```tsx
+ * <FormProvider {...methods}>
+ *   <form onSubmit={methods.handleSubmit(onSubmit)}>
+ *     <InputText
+ *       name="test"
+ *       validation={{maxLength: {value: 10, message: "10자 이내로 입력해주세요."}}}
+ *       label="테스트"
+ *       rule="2~10자 이내로 입력해주세요."
+ *     />
+ *   </form>
+ * </FormProvider>
+ * ```
+ *
+ * ```tsx 버튼 결합 형태
+ * <FormProvider {...methods}>
+ *   <form onSubmit={methods.handleSubmit(onSubmit)}>
+ *     <InputText
+ *       name="test"
+ *       validation={{maxLength: {value: 10, message: "10자 이내로 입력해주세요."}}}
+ *       label="테스트"
+ *       rule="2~10자 이내로 입력해주세요."
+ *       btnOnClick={(v) => console.log(v)}
+ *     > 버튼이름
+ *    </InputText>
+ *   </form>
+ * </FormProvider> ㅇ
+ *
+ *
+ */
+
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   type?: string;
@@ -24,7 +78,7 @@ interface CustomProps {
   label?: string;
   children?: ReactNode;
   eyeShow?: boolean;
-  btnOnClick?: () => void;
+  btnOnClick?: (value: string) => void;
   isSuccess?: boolean;
   successMessage?: string;
   rule?: string;
@@ -119,7 +173,7 @@ const InputText = ({
           <Button
             variant="outlined"
             type="button"
-            onClick={btnOnClick}
+            onClick={() => btnOnClick?.(isValue)}
             ignoreBase
             disabled={disabled}
             className="w-auto whitespace-nowrap rounded-[10px] px-[14px] py-[10px] text-body2-semibold"

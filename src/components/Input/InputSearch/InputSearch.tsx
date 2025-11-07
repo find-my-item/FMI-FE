@@ -49,7 +49,7 @@ import DeleteButton from "../_internal/DeleteButton/DeleteButton";
 interface InputSearchProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   mode: "RHF" | "onChange";
-  validation: RegisterOptions;
+  validation?: RegisterOptions;
   onEnter: (value: string) => void;
 }
 
