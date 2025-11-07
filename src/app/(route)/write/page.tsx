@@ -1,6 +1,6 @@
 "use client";
 
-import { DetailHeader } from "@/components";
+import { ConfirmModal, DetailHeader } from "@/components";
 import { useState } from "react";
 import {
   ActionSection,
@@ -10,7 +10,6 @@ import {
   TitleSection,
   CategorySection,
 } from "./_components";
-import ConfirmModal from "@/components/Modal/ConfirmModal";
 
 const Page = () => {
   const [disabled, setDisabled] = useState(false);
