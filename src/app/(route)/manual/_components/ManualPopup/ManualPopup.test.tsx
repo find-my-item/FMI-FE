@@ -6,6 +6,11 @@ jest.mock("@/components", () => ({
   __esModule: true,
   Icon: ({ name, ...rest }: any) => <span data-testid={`icon-${name}`} {...rest} />,
   PopupLayout: ({ isOpen, children }: any) => (isOpen ? <div>{children}</div> : null),
+  Button: ({ children, onClick, ...rest }: any) => (
+    <button type="button" onClick={onClick} {...rest}>
+      {children}
+    </button>
+  ),
 }));
 
 describe("ManualPopup", () => {
