@@ -9,7 +9,7 @@ const ChatRoom = () => {
     mode: "onChange",
     reValidateMode: "onChange",
   });
-  const isEmpty = true;
+  const isEmpty = false;
   const isPostMode: "find" | "lost" = "find";
 
   return (
