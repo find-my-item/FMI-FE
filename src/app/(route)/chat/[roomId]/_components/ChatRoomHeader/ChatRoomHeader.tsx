@@ -21,7 +21,7 @@ const ChatRoomHeader = ({ postMode }: { postMode: "lost" | "find" }) => {
           <Icon name="ArrowLeftSmall" size={18} />
         </button>
 
-        <h1 className="text-body2-semibold text-layout-body-default">사용자 닉네임</h1>
+        <p className="text-body2-semibold text-layout-body-default">사용자 닉네임</p>
 
         <button
           className="flex h-[40px] w-[40px] items-center justify-end"
