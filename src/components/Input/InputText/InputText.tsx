@@ -32,7 +32,7 @@ import { useFormInput } from "../_internal/_hooks/useFormInput";
  *  - 'btnOnClick': 버튼이 눌렸을때 발생할 이벤트를 넣을 수 있는 옵션
  *  - 'isSuccess': 성공 caption을 보여주기 위한 옵션
  *  - 'successMessage': caption에 나타날 성공 메시지
- *  - 'rule':
+ *  - 'rule': capation에 나타날 입력 필드의 규칙
  *
  *
  * @example 입력필드만 사용
