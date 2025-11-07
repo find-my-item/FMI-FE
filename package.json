@@ -13,7 +13,7 @@
     "chromatic": "npx chromatic --project-token=$CHROMATIC_PROJECT_TOKEN",
     "test:ci": "jest --ci --runInBand",
     "check:all": "run-s test build build-storybook",
-    "check:fast": "run-f test build-storybook"
+    "check:fast": "run-p test build-storybook"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.4.0",
@@ -58,6 +58,7 @@
     "jest-junit": "^16.0.0",
     "jest-transformer-svg": "^2.1.0",
     "lint-staged": "^16.1.5",
+    "npm-run-all": "^4.1.5",
     "playwright": "^1.55.0",
     "postcss": "^8.5.6",
     "prettier": "^3.6.2",
