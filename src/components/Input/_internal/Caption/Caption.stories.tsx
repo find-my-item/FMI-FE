@@ -4,7 +4,7 @@ import { Meta, StoryObj } from "@storybook/nextjs";
 import Caption from "./Caption";
 
 const meta: Meta<typeof Caption> = {
-  title: "공통 컴포넌트/Input/Internal/Cation",
+  title: "공통 컴포넌트/Input/_Internal/Cation",
   component: Caption,
   tags: ["autodocs"],
   parameters: {

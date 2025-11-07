@@ -4,7 +4,7 @@ import { Meta, StoryObj } from "@storybook/nextjs";
 import DeleteButton from "./DeleteButton";
 
 const meta: Meta<typeof DeleteButton> = {
-  title: "공통 컴포넌트/Input/Internal/DeleteButton",
+  title: "공통 컴포넌트/Input/_Internal/DeleteButton",
   component: DeleteButton,
   tags: ["autodocs"],
   parameters: {
