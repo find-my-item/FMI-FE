@@ -1,10 +1,10 @@
-import ChatRoomHeader from "./_components/ChatRoomHeader/ChatRoomHeader";
+import EmptyChatRoom from "./_components/EmptyChatRoom/EmptyChatRoom";
 
 const ChatRoom = () => {
   return (
-    <div>
-      <ChatRoomHeader />
-    </div>
+    <>
+      <EmptyChatRoom />
+    </>
   );
 };
 
