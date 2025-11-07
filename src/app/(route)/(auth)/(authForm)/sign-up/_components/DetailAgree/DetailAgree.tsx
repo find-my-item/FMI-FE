@@ -1,5 +1,5 @@
 import { Button } from "@/components";
-import { AgreeConfig } from "@/app/(route)/(auth)/_constant/Agreement";
+import { AGREE_CONFIG } from "../../_constant/AGREE_CONFIG";
 
 interface DetailAgreeProps {
   termKey: string;
@@ -13,7 +13,7 @@ const DetailAgree = ({ termKey, onBack, onAgree }: DetailAgreeProps) => {
       {/* TODO(수현): 어떤 주석인지 남기기 */}
       {/* <div>{AgreeConfig[termKey].title}</div> */}
       <div className="whitespace-pre-wrap px-4 py-6 text-body2-regular text-layout-body-default">
-        {AgreeConfig[termKey].content}
+        {AGREE_CONFIG[termKey].content}
       </div>
 
       {/* signUpFooter */}
