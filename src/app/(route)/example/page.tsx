@@ -101,7 +101,12 @@ const page = () => {
 
       <FormProvider {...methods}>
         <InputText name="test1" label="test1" validation={{ required: true }} />
-        <InputText name="test2" label="test2" validation={{ required: false }}>
+        <InputText
+          name="test2"
+          label="test2"
+          validation={{ required: false }}
+          btnOnClick={(v) => alert(v)}
+        >
           TestBtn
         </InputText>
         <InputChat name="test3" />

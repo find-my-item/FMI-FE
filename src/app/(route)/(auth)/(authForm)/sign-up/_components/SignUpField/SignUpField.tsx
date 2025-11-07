@@ -1,6 +1,6 @@
 "use no memo";
 
-import { SIGNUP_INPUT_DATA } from "@/app/(route)/(auth)/_constant/FormData";
+import { SIGNUP_INPUT_CONFIG } from "../../_constant/SIGNUP_INPUT_CONFIG";
 import { Button } from "@/components";
 import SignUpItem from "../SignUpItem/SignUpItem";
 
@@ -12,7 +12,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
   return (
     <>
       <div className="flex w-full flex-col gap-5 p-4">
-        {SIGNUP_INPUT_DATA.map((item) => (
+        {SIGNUP_INPUT_CONFIG.map((item) => (
           <SignUpItem key={item.name} item={item} />
         ))}
       </div>

@@ -1,12 +1,12 @@
 import { ButtonHTMLAttributes } from "react";
 import { cn } from "@/utils";
-import { Icon } from "@/components";
+import Icon from "@/components/Icon/Icon";
 
 interface DeleteButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   eyeShow?: boolean;
-  value: string;
+  value?: string;
   className?: string;
-  onDelete: () => void;
+  onDelete?: () => void;
 }
 
 const DeleteButton = ({ eyeShow, value = "", className, onDelete }: DeleteButtonProps) => {
