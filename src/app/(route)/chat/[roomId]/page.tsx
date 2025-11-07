@@ -18,7 +18,7 @@ const ChatRoom = () => {
       {isEmpty ? <EmptyChatRoom postMode={isPostMode} /> : <ChatRoomMain />}
       <FormProvider {...methods}>
         <div className="px-[16px] pb-[24px] pt-[12px]">
-          <InputChat name="chatRoom" />
+          <InputChat name="chatRoom" aria-label="채팅 입력창" />
         </div>
       </FormProvider>
     </>
