@@ -1,29 +1,4 @@
-import { RegisterOptions } from "react-hook-form";
-
-export type FormValue = {
-  email: string;
-  password: string;
-  passwordConfirm: string;
-  nickname: string;
-  agreements: {
-    termsofService: boolean;
-    privacyPolicy: boolean;
-    marketing: boolean;
-  };
-};
-
-export type InputType = {
-  name: string;
-  label?: string;
-  className?: string;
-  type: string;
-  placeholder: string;
-  validation?: RegisterOptions;
-  rule?: string; // 닉네임 규칙 안내 문구
-  eyeShow?: boolean;
-  btnText?: string;
-  successMessage?: string;
-};
+import { InputType } from "../types/InputType";
 
 export const SIGNUP_INPUT_DATA: InputType[] = [
   {

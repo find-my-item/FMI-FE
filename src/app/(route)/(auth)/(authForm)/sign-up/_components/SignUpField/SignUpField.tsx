@@ -1,6 +1,6 @@
 "use no memo";
 
-import { SIGNUP_INPUT_DATA } from "@/app/(route)/(auth)/_constant/FormData";
+import { SIGNUP_INPUT_DATA } from "@/app/(route)/(auth)/(authForm)/sign-up/_constant/FormData";
 import { Button } from "@/components";
 import SignUpItem from "../SignUpItem/SignUpItem";
 

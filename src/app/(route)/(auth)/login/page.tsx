@@ -1,17 +1,12 @@
 "use client";
-"use no memo";
 
-import { ButtonStyle } from "../_constant/authStyle";
+import { ButtonStyle } from "../(authForm)/sign-up/_constant/authStyle";
 import Link from "next/link";
 import { cn } from "@/utils";
-import { useRouter } from "next/navigation";
-import Logo from "../(authForm)/_components/Logo";
+import Logo from "../_components/Logo";
 import { Icon, Button } from "@/components";
 
 const Page = () => {
-  // TODO(수현): 현재 사용하지 않은 router
-  const router = useRouter();
-
   return (
     <div className="min-h-screen w-full gap-8 flex-col-center">
       <Logo />
