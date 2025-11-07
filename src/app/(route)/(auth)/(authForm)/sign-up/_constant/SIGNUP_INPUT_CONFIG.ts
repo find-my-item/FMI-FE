@@ -1,6 +1,6 @@
 import { InputType } from "../types/InputType";
 
-export const SIGNUP_INPUT_DATA: InputType[] = [
+export const SIGNUP_INPUT_CONFIG: InputType[] = [
   {
     name: "email",
     label: "아이디(이메일)",
