@@ -14,14 +14,17 @@ const nextConfig: NextConfig = {
           loader: require.resolve("@svgr/webpack"),
           options: {
             svgo: true,
-            titleProp: true,
             svgoConfig: {
               plugins: [
-                { name: "removeViewBox", active: false },
-                { name: "removeDimensions", active: true },
-                // { name: "removeAttrs", params: { attrs: "(fill|stroke)" } },
+                {
+                  name: "removeAttrs",
+                  params: {
+                    attrs: "(fill|stroke)",
+                  },
+                },
               ],
             },
+            titleProp: true,
           },
         },
       ],
