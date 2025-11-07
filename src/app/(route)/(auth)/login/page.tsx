@@ -3,8 +3,8 @@
 import { ButtonStyle } from "../(authForm)/sign-up/_constant/authStyle";
 import Link from "next/link";
 import { cn } from "@/utils";
-import Logo from "../_components/Logo";
 import { Icon, Button } from "@/components";
+import { Logo } from "../_components";
 
 const Page = () => {
   return (
