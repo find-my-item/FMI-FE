@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { FormValue } from "../_constant/FormData";
+import { FormValue } from "../_constant/SIGNUP_INPUT_CONFIG";
 import { useRouter } from "next/navigation";
 
 type Step = "form" | "term" | "termDetail";
