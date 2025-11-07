@@ -4,7 +4,7 @@ export type FormValue = {
   passwordConfirm: string;
   nickname: string;
   agreements: {
-    termsofService: boolean;
+    termsOfService: boolean;
     privacyPolicy: boolean;
     marketing: boolean;
   };
