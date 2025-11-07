@@ -1,5 +1,3 @@
-"use client";
-
 import { Meta, StoryObj } from "@storybook/nextjs";
 import Label from "./Label";
 
