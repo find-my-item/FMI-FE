@@ -1,6 +1,6 @@
 "use client";
 
-import { Icon } from "@/components";
+import { Button, Icon } from "@/components";
 import { cn } from "@/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
@@ -26,12 +26,16 @@ const ManualItem = ({ title, content, href, btnText, isOpen, onToggle }: ManualI
         onClick={onToggle}
         className="w-full cursor-pointer border-b border-neutral-normal-default px-[20px] py-[26px]"
       >
-        <button className="flex w-full items-center justify-between">
+        <Button
+          variant="outlined"
+          ignoreBase
+          className="flex w-full items-center justify-between border-none"
+        >
           <p className="text-body1-semibold text-neutral-normal-default">{title}</p>
           <span className={cn("transition-transform duration-200", isOpen && "rotate-180")}>
             <Icon name="ArrowDown" />
           </span>
-        </button>
+        </Button>
       </div>
       <AnimatePresence>
         {isOpen && (
