@@ -14,4 +14,20 @@ module.exports = {
     "\\.(css|scss|sass|less)$": "identity-obj-proxy",
   },
   testMatch: ["**/?(*.)+(test|spec).(ts|tsx)"],
+
+  reporters: [
+    "default",
+    [
+      "jest-junit",
+      {
+        outputDirectory: "test-results",
+        outputName: "junit.xml",
+        addFileAttribute: "true",
+      },
+    ],
+  ],
+
+  collectCoverage: true,
+  collectCoverageFrom: ["src/**/*.{ts,tsx}"],
+  coverageDirectory: "coverage",
 };
