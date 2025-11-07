@@ -1,3 +1,5 @@
+// TODO(지권): 컴포넌트 사용 미확정
+
 "use client";
 
 import { useState } from "react";
