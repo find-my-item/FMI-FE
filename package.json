@@ -11,7 +11,8 @@
     "build-storybook": "storybook build",
     "prepare": "husky",
     "chromatic": "npx chromatic --project-token=$CHROMATIC_PROJECT_TOKEN",
-    "test:ci": "jest --ci --runInBand"
+    "test:ci": "jest --ci --runInBand",
+    "check:all": "run-s test build build-storybook"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.4.0",
