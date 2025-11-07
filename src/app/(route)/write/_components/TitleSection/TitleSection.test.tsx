@@ -2,9 +2,9 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import TitleSection from "./TitleSection";
 
-jest.mock("@/components/RequiredText/RequiredText", () => () => (
-  <span data-testid="required-text">*</span>
-));
+jest.mock("@/components", () => ({
+  RequiredText: () => <span data-testid="required-text">*</span>,
+}));
 
 describe("TitleSection", () => {
   it("제목 입력 섹션이 렌더링되어야 한다", () => {

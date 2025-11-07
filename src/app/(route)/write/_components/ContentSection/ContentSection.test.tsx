@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import ContentSection from "./ContentSection";
 
-jest.mock("@/components/RequiredText/RequiredText", () => () => (
-  <span data-testid="required-text">*</span>
-));
+jest.mock("@/components", () => ({
+  RequiredText: () => <span data-testid="required-text">*</span>,
+}));
 
 describe("ContentSection", () => {
   it("내용 입력 섹션이 렌더링되어야 한다", () => {
