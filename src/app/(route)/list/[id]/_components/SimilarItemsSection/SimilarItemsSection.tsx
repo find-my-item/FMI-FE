@@ -5,13 +5,13 @@ const SimilarItemsSection = () => {
     <section className="flex flex-col gap-[16px] py-[18px] pl-[20px]">
       <h2 className="text-h2-medium text-flatGray-900">비슷한 분실물</h2>
 
-      <div className="hide-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth">
+      <ul className="hide-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth">
         {Array.from({ length: 4 }).map((_, index) => (
-          <div key={index} className="snap-start">
+          <li key={index} className="snap-start">
             <SimilarItem />
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </section>
   );
 };
