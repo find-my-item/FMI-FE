@@ -1,11 +1,7 @@
 import { cn } from "@/utils";
+import { CHAT_CHIP_MODE } from "./CHAT_CHIP_MODE";
 
 const ChatChip = ({ mode }: { mode: "find" | "lost" }) => {
-  const CHAT_CHIP_MODE = {
-    find: { style: "text-accent-foundItem bg-fill-accent-fountItem", text: "습득물" },
-    lost: { style: "text-accent-lostItem bg-fill-accent-lostItem", text: "분실물" },
-  };
-
   return (
     <span
       role="note"
