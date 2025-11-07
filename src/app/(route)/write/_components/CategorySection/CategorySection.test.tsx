@@ -4,11 +4,10 @@ import CategorySection from "./CategorySection";
 
 jest.mock("@/components", () => ({
   Icon: ({ title }: { title: string }) => <span data-testid={`icon-${title}`}>{title}</span>,
+  RequiredText: () => <span data-testid="required-text">*</span>,
 }));
-jest.mock("@/components/RequiredText/RequiredText", () => () => (
-  <span data-testid="required-text">*</span>
-));
-jest.mock("../CategoryPopup/CategoryPopup", () => ({
+
+jest.mock("../_internal/CategoryPopup/CategoryPopup", () => ({
   __esModule: true,
   default: ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) =>
     isOpen && (

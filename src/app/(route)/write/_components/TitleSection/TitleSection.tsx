@@ -1,6 +1,6 @@
 "use client";
 
-import RequiredText from "@/components/RequiredText/RequiredText";
+import { RequiredText } from "@/components";
 
 const TitleSection = () => {
   return (
@@ -13,11 +13,11 @@ const TitleSection = () => {
           type="text"
           name="title"
           id="title"
-          className="peer w-full bg-transparent text-body1-medium text-flatGray-400 placeholder-transparent outline-none"
+          className="peer w-full bg-transparent text-body1-medium text-neutral-normal-default placeholder-transparent outline-none placeholder:text-flatGray-400"
           placeholder="제목을 입력해 주세요."
           required
         />
-        <span className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 text-body1-medium text-flatGray-400 peer-placeholder-shown:opacity-100 peer-[&:not(:placeholder-shown)]:opacity-0">
+        <span className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 text-body1-medium text-neutral-normal-placeholder peer-placeholder-shown:opacity-100 peer-[&:not(:placeholder-shown)]:opacity-0">
           제목을 입력해 주세요.
           <RequiredText />
         </span>

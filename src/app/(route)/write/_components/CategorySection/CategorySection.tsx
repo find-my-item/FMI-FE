@@ -1,9 +1,8 @@
 "use client";
 
-import { Icon } from "@/components";
 import { useState } from "react";
-import RequiredText from "@/components/RequiredText/RequiredText";
-import CategoryPopup from "../CategoryPopup/CategoryPopup";
+import { CategoryPopup } from "../_internal";
+import { Icon, RequiredText } from "@/components";
 
 const CategorySection = () => {
   const [categoryPopupOpen, setCategoryPopupOpen] = useState(false);

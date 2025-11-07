@@ -2,11 +2,16 @@ import { render, screen } from "@testing-library/react";
 import LocationSection from "./LocationSection";
 
 jest.mock("@/components", () => ({
-  Icon: ({ title }: { title: string }) => <span data-testid={`icon-${title}`}>{title}</span>,
+  Icon: ({ name, title }: { name: string; title?: string }) => (
+    <span data-testid={`icon-${name}`}>{title ?? name}</span>
+  ),
+  Button: ({ children, ...rest }: any) => (
+    <button data-testid="open-button" {...rest}>
+      {children}
+    </button>
+  ),
+  RequiredText: () => <span data-testid="required-text">*</span>,
 }));
-jest.mock("@/components/RequiredText/RequiredText", () => () => (
-  <span data-testid="required-text">*</span>
-));
 
 describe("LocationSection", () => {
   it("위치 등록 섹션이 렌더링되어야 한다", () => {
@@ -26,8 +31,8 @@ describe("LocationSection", () => {
   it("Location 아이콘과 ArrowRight 아이콘이 각각 존재해야 한다", () => {
     render(<LocationSection />);
 
-    expect(screen.getByTestId("icon-위치 등록")).toBeInTheDocument();
-    expect(screen.getByTestId("icon-위치 열기")).toBeInTheDocument();
+    expect(screen.getByTestId("icon-Location")).toBeInTheDocument();
+    expect(screen.getByTestId("icon-ArrowRight")).toBeInTheDocument();
   });
 
   it("위치 열기 버튼이 존재해야 한다", () => {
@@ -35,5 +40,6 @@ describe("LocationSection", () => {
 
     const button = screen.getByRole("button");
     expect(button).toBeInTheDocument();
+    expect(screen.getByTestId("icon-ArrowRight")).toBeInTheDocument();
   });
 });
