@@ -1,16 +1,16 @@
 import { cn } from "@/utils";
 import { CHAT_CHIP_MODE } from "./CHAT_CHIP_MODE";
 
-const ChatChip = ({ mode }: { mode: "find" | "lost" }) => {
+const ChatChip = ({ postMode }: { postMode: "find" | "lost" }) => {
   return (
     <span
       role="note"
       className={cn(
         "h-[18px] w-[40px] shrink-0 rounded text-caption2-semibold flex-center",
-        CHAT_CHIP_MODE[mode].style
+        CHAT_CHIP_MODE[postMode].style
       )}
     >
-      {CHAT_CHIP_MODE[mode].text}
+      {CHAT_CHIP_MODE[postMode].text}
     </span>
   );
 };

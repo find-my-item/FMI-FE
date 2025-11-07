@@ -10,12 +10,13 @@ const ChatRoom = () => {
     mode: "onChange",
     reValidateMode: "onChange",
   });
-  const isEmpty = false;
+  const isEmpty = true;
+  const isPostMode: "find" | "lost" = "find";
 
   return (
     <>
-      <ChatRoomHeader />
-      {isEmpty ? <EmptyChatRoom /> : <ChatRoomMain />}
+      <ChatRoomHeader postMode={isPostMode} />
+      {isEmpty ? <EmptyChatRoom postMode={isPostMode} /> : <ChatRoomMain />}
       <FormProvider {...methods}>
         <div className="px-[16px] pb-[24px] pt-[12px]">
           <InputChat name="chatRoom" />
