@@ -4,7 +4,7 @@ import { Tab } from "@/components";
 import { useState } from "react";
 import { USER_TABS } from "../../_types/USER_TABS";
 import ListItem from "@/app/(route)/list/_components/ListItem/ListItem";
-import CommentItem from "../CommentItem/CommentItem";
+import { CommentItem } from "../_internal";
 
 type SelectedTab = (typeof USER_TABS)[number]["key"];
 

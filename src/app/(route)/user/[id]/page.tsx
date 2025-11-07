@@ -1,8 +1,7 @@
 "use client";
 
 import { DetailHeader } from "@/components";
-import UserHeader from "./_components/UserHeader/UserHeader";
-import TabContents from "./_components/TabContents/TabContents";
+import { TabContents, UserHeader } from "./_components";
 
 export default function Page() {
   return (
