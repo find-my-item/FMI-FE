@@ -4,7 +4,7 @@ import { Meta, StoryObj } from "@storybook/nextjs";
 import Label from "./Label";
 
 const meta: Meta<typeof Label> = {
-  title: "공통 컴포넌트/Input/Internal/Label",
+  title: "공통 컴포넌트/Input/_Internal/Label",
   component: Label,
   tags: ["autodocs"],
   parameters: {
