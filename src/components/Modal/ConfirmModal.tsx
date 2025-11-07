@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { cn } from "@/utils";
 import Icon, { Props as IconProps } from "../Icon/Icon";
 import { sizeMap, style } from "./CONST_MODAL";
-import ModalLayout from "./ModalLayout";
+import ModalLayout from "./_internal/ModalLayout";
 
 /**
  * 확인 모달 컴포넌트입니다.
