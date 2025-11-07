@@ -1,11 +1,11 @@
 import { cn } from "@/utils";
-import { MockChatDataType } from "../../../_types/MockChatDataType";
+import { MockChatDataType, Sender } from "../../../_types/MockChatDataType";
 import { CHAT_SENDER_STYLE } from "../_constants/CHAT_SENDER_STYLE";
 
 interface ChatBoxProps {
   chat: MockChatDataType;
-  prevSender?: "me" | "other";
-  nextSender?: "me" | "other";
+  prevSender?: Sender;
+  nextSender?: Sender;
 }
 
 const ChatBox = ({ chat, prevSender, nextSender }: ChatBoxProps) => {
