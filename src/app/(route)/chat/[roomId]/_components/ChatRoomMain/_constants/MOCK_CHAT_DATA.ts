@@ -1,4 +1,5 @@
 import { MockChatDataType } from "../../../_types/MockChatDataType";
+
 export const MOCK_CHAT_DATA: MockChatDataType[] = [
   { sender: "other", text: "안녕하세요!\n혹시 분실물 글 보고 연락드렸어요.", time: "14:11" },
   { sender: "me", text: "아! 네 안녕하세요 :)", time: "14:12" },
