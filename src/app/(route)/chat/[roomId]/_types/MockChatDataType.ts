@@ -1,5 +1,7 @@
+export type Sender = "me" | "other";
+
 export interface MockChatDataType {
-  sender: "other" | "me";
+  sender: Sender;
   text: string;
   time: string;
 }
