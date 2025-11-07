@@ -1,6 +1,6 @@
 "use client";
 
-import { ButtonStyle } from "../(authForm)/sign-up/_constant/authStyle";
+import { ButtonStyle } from "../(authForm)/sign-up/_constant/AUTH_STYLE";
 import Link from "next/link";
 import { cn } from "@/utils";
 import { Icon, Button } from "@/components";
