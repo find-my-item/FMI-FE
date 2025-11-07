@@ -1,9 +1,8 @@
 "use client";
 
-import { ChatRoomHeader, EmptyChatRoom } from "./_components";
+import { ChatRoomHeader, EmptyChatRoom, ChatRoomMain } from "./_components";
 import { InputChat } from "@/components";
 import { FormProvider, useForm } from "react-hook-form";
-import ChatRoomMain from "./_components/ChatRoomMain/ChatRoomMain";
 
 const ChatRoom = () => {
   const methods = useForm({
