@@ -1,29 +1,23 @@
 "use client";
 
-import { Button } from "@/components";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { MOCK_REGIONS } from "../MOCK_REGIONS";
+import Link from "next/link";
 
 const RegionSearchView = () => {
-  const router = useRouter();
   const pathname = usePathname();
 
-  const handleRegionRoute = (value: string) => {
-    router.replace(`${pathname}?region=${value}`);
-  };
-
   return (
-    <section>
-      {MOCK_REGIONS.map((i) => (
-        <Button
-          key={i.value}
-          ariaLabel={`지역 선택 ${i.value}`}
-          variant="regionSearchList"
-          ignoreBase
-          onClick={() => handleRegionRoute(i.value)}
+    <section className="flex flex-col">
+      {MOCK_REGIONS.map(({ value }) => (
+        <Link
+          key={value}
+          href={`${pathname}?region=${value}`}
+          aria-label={`지역 선택 ${value}`}
+          className="min-h-[60px] w-full border-b border-neutral-normal-default bg-white px-[20px] py-[20px] text-left text-body2-medium text-neutral-strong-default"
         >
-          {i.value}
-        </Button>
+          {value}
+        </Link>
       ))}
     </section>
   );

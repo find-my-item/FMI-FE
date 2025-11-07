@@ -19,9 +19,9 @@ const ChatBox = ({ chat, prevSender, nextSender }: ChatBoxProps) => {
 
   return (
     <div className={cn("flex items-end gap-2", style.container, marginBottom)}>
-      <span className={cn("text-caption1-medium text-layout-body-default", style.timeOrder)}>
+      <time className={cn("text-caption1-medium text-layout-body-default", style.timeOrder)}>
         {time}
-      </span>
+      </time>
       <p
         className={cn(
           "max-w-[272px] whitespace-pre-wrap break-words rounded-[24px] px-[16px] py-[12px]",
