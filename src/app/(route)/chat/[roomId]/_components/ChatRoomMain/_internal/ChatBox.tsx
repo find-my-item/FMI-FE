@@ -22,7 +22,7 @@ const ChatBox = ({ chat, prevSender, nextSender }: ChatBoxProps) => {
       <span className={cn("text-caption1-medium text-layout-body-default", style.timeOrder)}>
         {time}
       </span>
-      <div
+      <p
         className={cn(
           "max-w-[272px] whitespace-pre-wrap break-words rounded-[24px] px-[16px] py-[12px]",
           style.bubbleColor,
@@ -30,7 +30,7 @@ const ChatBox = ({ chat, prevSender, nextSender }: ChatBoxProps) => {
         )}
       >
         {text}
-      </div>
+      </p>
     </div>
   );
 };
