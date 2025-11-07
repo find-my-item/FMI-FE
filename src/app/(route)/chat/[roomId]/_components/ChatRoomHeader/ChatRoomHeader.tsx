@@ -41,11 +41,11 @@ const ChatRoomHeader = () => {
           className="h-[40px] w-[40px] rounded"
         />
 
-        <div className="flex flex-col">
+        <div className="flex min-w-0 flex-col">
           <div className="flex items-center gap-1">
             <ChatChip mode="lost" />
-            <h2 className="text-body1-semibold text-layout-header-default">
-              여기에 게시글명이 표기됩니다
+            <h2 className="truncate text-body1-semibold text-layout-header-default">
+              여기에 게시글명이 표기됩니다 여기에 게시글명이 표기됩니다. 여기에
             </h2>
           </div>
           <p className="h-[16px] text-caption1-medium text-layout-body-default">
