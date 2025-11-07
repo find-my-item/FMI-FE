@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { MOCK_IMAGES } from "../../../_components/ChatItem/MOCK_IMAGES";
 import ChatChip from "../ChatChip/ChatChip";
 
-const ChatRoomHeader = () => {
+const ChatRoomHeader = ({ postMode }: { postMode: "lost" | "find" }) => {
   const router = useRouter();
 
   return (
@@ -43,7 +43,7 @@ const ChatRoomHeader = () => {
 
         <div className="flex min-w-0 flex-col">
           <div className="flex items-center gap-1">
-            <ChatChip mode="lost" />
+            <ChatChip postMode={postMode} />
             <h2 className="truncate text-body1-semibold text-layout-header-default">
               여기에 게시글명이 표기됩니다 여기에 게시글명이 표기됩니다. 여기에
             </h2>
