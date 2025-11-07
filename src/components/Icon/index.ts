@@ -31,3 +31,4 @@ export { default as Error } from "@/assets/error.svg";
 export { default as Loading } from "@/assets/loading.svg";
 export { default as NotFound } from "@/assets/not-found.svg";
 export { default as Information } from "@/assets/information.svg";
+export { default as Chat } from "@/assets/chat.svg";
