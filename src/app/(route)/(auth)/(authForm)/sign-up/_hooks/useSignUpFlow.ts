@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { FormValue } from "../_constant/SIGNUP_INPUT_CONFIG";
 import { useRouter } from "next/navigation";
+import { FormValue } from "../types/FormValue";
 
 type Step = "form" | "term" | "termDetail";
 
@@ -41,7 +41,7 @@ export const useSignUpFlow = () => {
   // 약관 동의 -> 최종제출
   const completeTerms = useCallback(async () => {
     const ok = await trigger([
-      "agreements.termsofService",
+      "agreements.termsOfService",
       "agreements.privacyPolicy",
       "agreements.marketing",
     ]);
