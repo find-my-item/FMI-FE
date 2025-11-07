@@ -4,7 +4,7 @@ import { Meta, StoryObj } from "@storybook/nextjs";
 import Counter from "./Counter";
 
 const meta: Meta<typeof Counter> = {
-  title: "공통 컴포넌트/Input/Internal/Counter",
+  title: "공통 컴포넌트/Input/_Internal/Counter",
   component: Counter,
   tags: ["autodocs"],
   parameters: {
