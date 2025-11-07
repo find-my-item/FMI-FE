@@ -1,6 +1,6 @@
 "use client";
 
-import { DetailHeader } from "@/components";
+import { ConfirmModal, DetailHeader } from "@/components";
 import { useState } from "react";
 import {
   ActionSection,
@@ -8,7 +8,6 @@ import {
   ImageSection,
   LocationSection,
   TitleSection,
-  TempSaveModal,
   CategorySection,
 } from "./_components";
 
@@ -40,7 +39,15 @@ const Page = () => {
         <ActionSection disabled={disabled} />
       </form>
 
-      <TempSaveModal isOpen={saveModalOpen} onClose={() => setSaveModalOpen(false)} />
+      <ConfirmModal
+        size="small"
+        isOpen={saveModalOpen}
+        onClose={() => setSaveModalOpen(false)}
+        title="임시 저장한 게시글이 있습니다."
+        content="임시 저장한 내용을 불러오시겠어요?"
+        onConfirm={() => setSaveModalOpen(false)}
+        onCancel={() => setSaveModalOpen(false)}
+      />
     </>
   );
 };

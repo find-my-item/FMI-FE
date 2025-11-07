@@ -1,15 +1,7 @@
 "use client";
 "use no memo";
 
-import {
-  Dropdown,
-  Tab,
-  ModalLayout,
-  InputChat,
-  InputText,
-  InputSearch,
-  InputField,
-} from "@/components";
+import { Dropdown, Tab, InputChat, InputText, InputSearch, InputField } from "@/components";
 import Icon from "@/components/Icon/Icon";
 import ConfirmModal from "@/components/Modal/ConfirmModal";
 import { useToast } from "@/context/ToastContext";
@@ -61,19 +53,6 @@ const page = () => {
         Open Modal
       </button>
 
-      {/* Modal */}
-      <ModalLayout isOpen={isOpen} onClose={() => setIsOpen(false)} className="p-4 flex-center">
-        <h2>Modal Title</h2>
-        <p className="h-[100px] flex-center">Modal Content</p>
-        <span>Modal Footer</span>
-        <button
-          className="mt-4 rounded border border-gray-300 px-4 py-2 mouse-hover hover:border-gray-500 hover:text-black"
-          onClick={() => setIsOpen(false)}
-        >
-          Close
-        </button>
-      </ModalLayout>
-
       <Icon name="ArrowDown" size={24} />
       <Icon name="ArrowDown" size={32} />
       <Icon name="ArrowDown" size={40} />
@@ -122,7 +101,12 @@ const page = () => {
 
       <FormProvider {...methods}>
         <InputText name="test1" label="test1" validation={{ required: true }} />
-        <InputText name="test2" label="test2" validation={{ required: false }}>
+        <InputText
+          name="test2"
+          label="test2"
+          validation={{ required: false }}
+          btnOnClick={(v) => alert(v)}
+        >
           TestBtn
         </InputText>
         <InputChat name="test3" />
