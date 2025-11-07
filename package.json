@@ -10,7 +10,9 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "prepare": "husky",
-    "chromatic": "npx chromatic --project-token=$CHROMATIC_PROJECT_TOKEN"
+    "chromatic": "npx chromatic --project-token=$CHROMATIC_PROJECT_TOKEN",
+    "test:ci": "jest --ci --runInBand",
+    "check:all": "run-s test build build-storybook"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.4.0",
@@ -52,6 +54,7 @@
     "husky": "^9.1.7",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
+    "jest-junit": "^16.0.0",
     "jest-transformer-svg": "^2.1.0",
     "lint-staged": "^16.1.5",
     "playwright": "^1.55.0",
@@ -67,5 +70,9 @@
     "*.{js,jsx,ts,tsx,json,md,css,scss}": [
       "prettier --write"
     ]
+  },
+  "jest-junit": {
+    "outputDirectory": "reports",
+    "outputName": "junit.xml"
   }
 }
