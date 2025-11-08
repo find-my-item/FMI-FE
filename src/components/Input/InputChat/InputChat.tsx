@@ -1,8 +1,8 @@
 "use client";
 
-import { InputHTMLAttributes } from "react";
+import { ChangeEvent, KeyboardEvent, TextareaHTMLAttributes, useRef } from "react";
 import { cn } from "@/utils";
-import { RegisterOptions, useFormContext } from "react-hook-form";
+import { Controller, RegisterOptions, useFormContext } from "react-hook-form";
 import Icon from "@/components/Icon/Icon";
 
 /**
@@ -33,61 +33,102 @@ import Icon from "@/components/Icon/Icon";
  *
  */
 
-interface InputChatProps extends InputHTMLAttributes<HTMLInputElement> {
+interface InputChatProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   name: string;
   validation?: RegisterOptions;
   disabled?: boolean;
-  sendClick?: () => void;
 }
 
-const InputChat = ({ name, validation, disabled, sendClick, ...props }: InputChatProps) => {
-  const { register, watch } = useFormContext();
-  const isValue = watch(name) ?? "";
+const InputChat = ({ name, validation, disabled, ...props }: InputChatProps) => {
+  const { control } = useFormContext();
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+
+  const adjustHeight = (textarea: HTMLTextAreaElement) => {
+    textarea.style.height = "auto";
+    const newHeight = Math.min(textarea.scrollHeight, 120);
+    textarea.style.height = `${newHeight}px`;
+    textarea.style.overflowY = "hidden";
+  };
+
+  const clearHeight = () => {
+    if (!textareaRef.current) return;
+    textareaRef.current.style.height = "auto";
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      e.currentTarget.form?.requestSubmit();
+      clearHeight();
+    }
+  };
 
   return (
-    <div className="flex w-full flex-row gap-2">
-      {/* 이미지 첨부 */}
-      <label
-        htmlFor="ImageAttach"
-        className="relative h-11 w-11 shrink-0 rounded-full bg-fill-neutral-strong-default"
-        aria-label="이미지 첨부"
-        role="button"
-      >
-        <Icon
-          name="Image"
-          size={20}
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-        />
-      </label>
-      <input id="ImageAttach" type="file" accept="image/*" className="hidden" disabled={disabled} />
+    <Controller
+      name={name}
+      control={control}
+      rules={validation}
+      render={({ field }) => (
+        <div className="flex w-full flex-row items-end gap-2 overflow-y-visible">
+          {/* 이미지 첨부 */}
+          <label
+            htmlFor="ImageAttach"
+            className="relative h-11 w-11 shrink-0 rounded-full bg-fill-neutral-strong-default"
+            aria-label="이미지 첨부"
+            role="button"
+          >
+            <Icon
+              name="Image"
+              size={20}
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+            />
+          </label>
+          <input
+            id="ImageAttach"
+            type="file"
+            accept="image/*"
+            className="hidden"
+            disabled={disabled}
+          />
 
-      {/* 입력창 */}
-      <input
-        id={name}
-        {...props}
-        {...register(name, validation)}
-        className={cn(
-          "h-11 min-w-0 flex-1 rounded-[24px] px-4 text-body2-medium text-neutral-normal-placeholder bg-fill-neutral-strong-default hover:placeholder-black focus:text-black disabled:text-neutral-strong-disabled",
-          isValue && "text-neutral-strong-focused"
-        )}
-        placeholder="메시지 보내기"
-        disabled={disabled}
-      />
+          {/* 입력창 */}
+          <textarea
+            {...props}
+            {...field}
+            ref={(e) => {
+              field.ref(e);
+              textareaRef.current = e;
+            }}
+            rows={1}
+            onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
+              field.onChange(e);
+              adjustHeight(e.target);
+            }}
+            onKeyDown={handleKeyDown}
+            className={cn(
+              "max-h-[120px] min-h-11 min-w-0 flex-1 resize-none overflow-y-hidden rounded-[24px] px-4 py-[10px] text-body2-medium text-neutral-normal-placeholder bg-fill-neutral-strong-default hover:placeholder-black focus:text-black disabled:text-neutral-strong-disabled",
+              field.value && "text-neutral-strong-focused"
+            )}
+            placeholder="메시지 보내기"
+            disabled={disabled}
+          />
 
-      {/* 전송 버튼 */}
-      <button
-        className="relative h-11 w-11 shrink-0 rounded-full bg-fill-brand-normal-disabled hover:bg-fill-brand-normal-disabled focus:bg-fill-brand-normal-default disabled:bg-fill-brand-normal-disabled"
-        aria-label="전송 버튼"
-        onClick={sendClick}
-        disabled={disabled}
-      >
-        <Icon
-          name="Send"
-          size={20}
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-        />
-      </button>
-    </div>
+          {/* 전송 버튼 */}
+          <button
+            type="submit"
+            className="relative h-11 w-11 shrink-0 rounded-full bg-fill-brand-normal-default hover:bg-fill-brand-normal-disabled active:bg-fill-brand-normal-default disabled:bg-fill-brand-normal-disabled"
+            aria-label="전송 버튼"
+            disabled={disabled || !field.value?.trim()}
+          >
+            <Icon
+              name="Send"
+              size={20}
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+            />
+          </button>
+        </div>
+      )}
+    />
   );
 };
 
