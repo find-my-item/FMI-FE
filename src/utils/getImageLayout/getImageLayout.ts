@@ -14,7 +14,7 @@ export const getImageLayout = (images: string[] = []): ImageItem[] => {
     return [{ src: images[0], width: 148, height: 148, colSpan: 2 }];
   }
 
-  // 2장: 148x96 두 개가 가로로 배치
+  // 2장: 148x148 두 개가 가로로 배치
   if (count === 2) {
     return images.map((src) => ({
       src,
