@@ -3,12 +3,12 @@
 import { ChatRoomHeader, EmptyChatRoom, ChatRoomMain } from "./_components";
 import { InputChat } from "@/components";
 import { FormProvider, useForm } from "react-hook-form";
+import { ChatRoomProvider, useChatRoom } from "./_components/ChatRoomProvider/ChatRoomProvider";
 import { MOCK_CHAT_DATA } from "./_components/ChatRoomMain/_constants/MOCK_CHAT_DATA";
-import { useState } from "react";
 
-type ChatFormValues = {
+interface ChatFormValues {
   chatRoom: string;
-};
+}
 
 const ChatRoom = () => {
   const methods = useForm<ChatFormValues>({
@@ -18,20 +18,28 @@ const ChatRoom = () => {
       chatRoom: "",
     },
   });
-  const [chats, setChats] = useState(() => [...MOCK_CHAT_DATA].reverse());
+  const { setChats } = useChatRoom();
   const isEmpty = false;
   const isPostMode: "find" | "lost" = "find";
 
   const onSubmit = ({ chatRoom }: ChatFormValues) => {
     if (chatRoom.trim() === "") return;
-    setChats((prev) => [{ sender: "me", text: chatRoom, time: "17:00" }, ...prev]);
+    setChats((prev) => [
+      {
+        sender: "me" as const,
+        text: chatRoom,
+        time: "17:00",
+        images: [],
+      },
+      ...prev,
+    ]);
     methods.reset();
   };
 
   return (
     <>
       <ChatRoomHeader postMode={isPostMode} />
-      {isEmpty ? <EmptyChatRoom postMode={isPostMode} /> : <ChatRoomMain chats={chats} />}
+      {isEmpty ? <EmptyChatRoom postMode={isPostMode} /> : <ChatRoomMain />}
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)} className="px-[16px] pb-[24px] pt-[12px]">
           <InputChat name="chatRoom" aria-label="채팅 입력창" />
@@ -41,4 +49,12 @@ const ChatRoom = () => {
   );
 };
 
-export default ChatRoom;
+const page = () => {
+  return (
+    <ChatRoomProvider initialChats={[...MOCK_CHAT_DATA].reverse()}>
+      <ChatRoom />
+    </ChatRoomProvider>
+  );
+};
+
+export default page;

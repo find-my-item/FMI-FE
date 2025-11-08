@@ -1,7 +1,7 @@
 "use client";
 "use no memo";
 
-import { Dropdown, Tab, InputChat, InputText, InputSearch, InputField } from "@/components";
+import { Dropdown, Tab, InputText, InputSearch, InputField } from "@/components";
 import Icon from "@/components/Icon/Icon";
 import ConfirmModal from "@/components/Modal/ConfirmModal";
 import { useToast } from "@/context/ToastContext";
@@ -109,7 +109,6 @@ const page = () => {
         >
           TestBtn
         </InputText>
-        <InputChat name="test3" />
         <InputSearch name="test4" mode="RHF" onEnter={(value) => alert(value)} />
         <InputField
           name="test5"
