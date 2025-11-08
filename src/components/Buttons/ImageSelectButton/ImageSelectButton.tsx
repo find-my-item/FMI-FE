@@ -1,3 +1,5 @@
+"use client";
+
 import { ButtonHTMLAttributes } from "react";
 import { cn } from "@/utils";
 import Image from "next/image";
@@ -5,6 +7,7 @@ import Icon from "@/components/Icon/Icon";
 import { handleClick } from "./_utils/handleClick";
 import { getImageButtonState } from "./_utils/getImageButtonState";
 import { useChatRoom } from "@/app/(route)/chat/[roomId]/_components/ChatRoomProvider/ChatRoomProvider";
+import { handleFileChange } from "@/components/Input/InputChat/utils/handleFileChange";
 
 /**
  * @author hyungjun
@@ -38,7 +41,8 @@ interface ToggleImageButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
 }
 
 const ToggleImageButton = ({ ariaLabel, gap = 8 }: ToggleImageButtonProps) => {
-  const { images, selectedImages, setSelectedImages } = useChatRoom();
+  const { images, setImages, selectedImages, setSelectedImages } = useChatRoom();
+  const isDisabled = images.length >= 5;
 
   return (
     <div
@@ -49,13 +53,25 @@ const ToggleImageButton = ({ ariaLabel, gap = 8 }: ToggleImageButtonProps) => {
     >
       <label
         htmlFor="ImageAttach"
-        className="h-[100px] w-[100px] cursor-pointer rounded-[9.62px] bg-fill-neutral-strong-default flex-center"
+        className={cn(
+          "h-[100px] w-[100px] rounded-[9.62px] bg-fill-neutral-strong-default flex-center",
+          isDisabled && "pointer-events-none"
+        )}
         aria-label="이미지 첨부"
         role="button"
+        aria-disabled={isDisabled}
       >
         <Icon name="Image" size={26} />
       </label>
-      <input id="ImageAttach" type="file" accept="image/*" multiple className="hidden" />
+      <input
+        id="ImageAttach"
+        type="file"
+        accept="image/*"
+        multiple
+        className="hidden"
+        disabled={isDisabled}
+        onChange={(e) => handleFileChange(e, images, setImages)}
+      />
 
       {images.map((image, index) => {
         const { isActive, order } = getImageButtonState(index, selectedImages);
