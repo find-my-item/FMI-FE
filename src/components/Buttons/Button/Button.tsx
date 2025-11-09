@@ -53,7 +53,7 @@ import { Props } from "@/components/Icon/Icon";
 type Size = "big" | "medium" | "small";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "solid" | "outlined" | "inversed" | "auth" | "regionSearchList";
+  variant?: "solid" | "outlined" | "inversed" | "auth";
   hierarchy?: "normal" | "subtle";
   size?: Size;
   iconPosition?: "leading" | "trailing";
