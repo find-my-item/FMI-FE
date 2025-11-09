@@ -1,7 +1,7 @@
 "use client";
 
 import ChatBox from "./_internal/ChatBox";
-import { useChatRoom } from "../ChatRoomProvider/ChatRoomProvider";
+import { useChatRoom } from "@/providers/ChatRoomProvider";
 import { useRef } from "react";
 import useChatScroll from "./hooks/useChatScroll/useChatScroll";
 

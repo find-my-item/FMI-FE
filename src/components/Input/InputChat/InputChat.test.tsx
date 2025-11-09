@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { FormProvider, useForm } from "react-hook-form";
 import InputChat from "./InputChat";
-import { ChatRoomProvider } from "@/app/(route)/chat/[roomId]/_components/ChatRoomProvider/ChatRoomProvider";
+import { ChatRoomProvider } from "@/providers/ChatRoomProvider";
 import "@testing-library/jest-dom";
 
 jest.mock("@/utils", () => ({

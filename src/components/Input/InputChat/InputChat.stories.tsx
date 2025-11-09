@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/nextjs";
 import { useForm, FormProvider } from "react-hook-form";
 import InputChat from "./InputChat";
-import { ChatRoomProvider } from "@/app/(route)/chat/[roomId]/_components/ChatRoomProvider/ChatRoomProvider";
+import { ChatRoomProvider } from "@/providers/ChatRoomProvider";
 
 const meta: Meta<typeof InputChat> = {
   title: "공통 컴포넌트/Input/InputChat",

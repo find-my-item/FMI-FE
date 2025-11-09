@@ -4,11 +4,11 @@ import { ChangeEvent, TextareaHTMLAttributes, useRef } from "react";
 import { cn } from "@/utils";
 import { Controller, RegisterOptions, useFormContext } from "react-hook-form";
 import Icon from "@/components/Icon/Icon";
-import InputChatImageSection from "../_internal/InputChatImageSection/InputChatImageSection";
+import InputChatImageSection from "./_internal/InputChatImageSection";
 import { handleFileChange } from "./utils/handleFileChange";
 import { adjustHeight } from "./utils/adjustHeight";
 import { handleKeyDown } from "./utils/handleKeydown";
-import { useChatRoom } from "@/app/(route)/chat/[roomId]/_components/ChatRoomProvider/ChatRoomProvider";
+import { useChatRoom } from "@/providers/ChatRoomProvider";
 
 /**
  * @author suhyeon
