@@ -2,12 +2,19 @@
 
 import ChatBox from "./_internal/ChatBox";
 import { useChatRoom } from "../ChatRoomProvider/ChatRoomProvider";
+import { useRef } from "react";
+import useChatScroll from "./hooks/useChatScroll/useChatScroll";
 
 const ChatRoomMain = () => {
   const { chats } = useChatRoom();
+  const scrollRef = useRef<HTMLDivElement>(null);
+  useChatScroll(scrollRef, chats);
 
   return (
-    <div className="flex flex-1 flex-col-reverse overflow-y-scroll bg-flatGray-25 px-[16px] py-[8px] no-scrollbar">
+    <div
+      ref={scrollRef}
+      className="flex flex-1 flex-col-reverse overflow-y-scroll scroll-smooth bg-flatGray-25 px-[16px] py-[8px] no-scrollbar"
+    >
       <h1 className="sr-only">채팅 표시 화면</h1>
       {chats.map((chat, i) => (
         <ChatBox
