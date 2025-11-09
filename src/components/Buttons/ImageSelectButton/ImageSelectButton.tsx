@@ -21,8 +21,6 @@ import { useObjectURLs } from "@/hooks";
  * @param images - 표시할 이미지 URL 배열입니다.
  * 각 버튼은 배열 순서대로 렌더링되며, 클릭 시 선택 상태가 토글됩니다.
  *
- * @param gap - 버튼 간 간격(px)입니다. 기본값 `8`
- *
  * @param ariaLabel - 접근성을 위한 버튼 그룹 라벨 텍스트입니다.
  *
  * @example
@@ -30,7 +28,6 @@ import { useObjectURLs } from "@/hooks";
  * <ToggleImageButton
  *   images={["/img1.png", "/img2.png", "/img3.png"]} (File타입)
  *   position="horizontal"
- *   gap={8}
  *   ariaLabel="프로필 이미지 선택"
  * />
  * ```
@@ -38,25 +35,23 @@ import { useObjectURLs } from "@/hooks";
 
 interface ToggleImageButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   ariaLabel?: string;
-  gap?: number;
 }
 
-const ToggleImageButton = ({ ariaLabel, gap = 8 }: ToggleImageButtonProps) => {
+const ToggleImageButton = ({ ariaLabel }: ToggleImageButtonProps) => {
   const { images, setImages, selectedImages, setSelectedImages } = useChatRoom();
   const urls = useObjectURLs(images);
   const isDisabled = images.length >= 5;
 
   return (
     <div
-      className="flex select-none flex-wrap"
-      style={{ gap: `${gap}px` }}
+      className="grid grid-cols-[repeat(auto-fill,_104px)] justify-center gap-x-[20px] gap-y-[16px]"
       aria-label={ariaLabel}
       role="group"
     >
       <label
         htmlFor="ImageAttach"
         className={cn(
-          "h-[100px] w-[100px] rounded-[9.62px] bg-fill-neutral-strong-default flex-center",
+          "h-[100px] w-[100px] rounded-[10px] bg-fill-neutral-strong-default flex-center",
           isDisabled && "pointer-events-none"
         )}
         aria-label="이미지 첨부"
@@ -83,7 +78,7 @@ const ToggleImageButton = ({ ariaLabel, gap = 8 }: ToggleImageButtonProps) => {
             key={index}
             onClick={() => handleClick(index, setSelectedImages)}
             className={cn(
-              "relative rounded-[6px] border-2 transition-all duration-75",
+              "relative rounded-[10px] border-2 transition-all duration-75",
               isActive ? "border-brand-normal-default" : "border-transparent"
             )}
           >
@@ -94,7 +89,7 @@ const ToggleImageButton = ({ ariaLabel, gap = 8 }: ToggleImageButtonProps) => {
                   width={100}
                   height={100}
                   alt={`${index + 1}번째 가져온 이미지`}
-                  className="glass-card h-[100px] w-[100px] rounded-[6px] object-cover"
+                  className="glass-card h-full w-full rounded-[10px] object-cover"
                 />
               )}
 
