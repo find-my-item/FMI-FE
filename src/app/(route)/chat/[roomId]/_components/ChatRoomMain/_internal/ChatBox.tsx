@@ -5,16 +5,14 @@ import ChatImageBox from "./ChatImageBox";
 
 interface ChatBoxProps {
   chat: MockChatDataType;
-  prevSender?: Sender;
   nextSender?: Sender;
+  lastChat?: boolean;
 }
 
-const ChatBox = ({ chat, prevSender, nextSender }: ChatBoxProps) => {
+const ChatBox = ({ chat, nextSender, lastChat }: ChatBoxProps) => {
   const { sender, text, time, images } = chat;
 
-  const isPrevSame = prevSender === sender;
-  const isNextSame = nextSender === sender;
-  const marginBottom = isPrevSame || isNextSame ? "mb-2" : "mb-4";
+  const marginBottom = lastChat ? "mb-0" : nextSender === sender ? "mb-2" : "mb-4";
 
   const style = CHAT_SENDER_STYLE[sender];
   return (
@@ -33,7 +31,7 @@ const ChatBox = ({ chat, prevSender, nextSender }: ChatBoxProps) => {
           {text}
         </p>
       )}
-      <ChatImageBox images={images || []} bubbleOrder={style.bubbleOrder} />
+      <ChatImageBox images={images} bubbleOrder={style.bubbleOrder} />
     </div>
   );
 };
