@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import useDragSwipe from "../hooks/useDragSwipe/useDragSwipe";
+import useDragSwipe from "../_hooks/useDragSwipe/useDragSwipe";
 import { cn } from "@/utils";
 
 interface ImageViewerMainImageProps {

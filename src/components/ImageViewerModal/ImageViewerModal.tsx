@@ -1,14 +1,14 @@
 "use client";
 
 import { createPortal } from "react-dom";
-import { useDotNavigation } from "../hooks/useDotNavigation/useDotNavigation";
-import { useModalOverflow } from "../hooks/useModalOverflow/useModalOverflow";
-import { getNextIndex, getPrevIndex } from "../utils/imageViewer/imageViewer";
-import useImageViewerNavigation from "../hooks/useImageViewerNavigation/useImageViewerNavigation";
-import ImageViewerHeader from "./ImageViewerHeader";
-import ImageViewerNavigation from "./ImageViewerNavigation";
-import ImageViewerDots from "./ImageViewerDots";
-import ImageViewerMainImage from "./ImageViewerMainImage";
+import { useDotNavigation } from "./_hooks/useDotNavigation/useDotNavigation";
+import { useModalOverflow } from "./_hooks/useModalOverflow/useModalOverflow";
+import { getNextIndex, getPrevIndex } from "./_utils/imageViewer";
+import useImageViewerNavigation from "@/components/ImageViewerModal/_hooks/useImageViewerNavigation/useImageViewerNavigation";
+import ImageViewerHeader from "./_internal/ImageViewerHeader";
+import ImageViewerNavigation from "./_internal/ImageViewerNavigation";
+import ImageViewerDots from "./_internal/ImageViewerDots";
+import ImageViewerMainImage from "./_internal/ImageViewerMainImage";
 
 interface ImageViewerModalProps {
   images: string[];

@@ -1,6 +1,6 @@
 import { Icon } from "@/components";
 import { cn } from "@/utils";
-import { downloadImage } from "../utils/imageViewer/imageViewer";
+import { downloadImage } from "../_utils/imageViewer";
 
 interface ImageViewerHeaderProps {
   onClose: () => void;
