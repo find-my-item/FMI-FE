@@ -4,7 +4,7 @@ import { ChatRoomHeader, EmptyChatRoom, ChatRoomMain } from "./_components";
 import { InputChat } from "@/components";
 import { FormProvider, useForm } from "react-hook-form";
 import { ChatRoomProvider, useChatRoom } from "@/providers/ChatRoomProvider";
-import { MOCK_CHAT_DATA } from "./_components/ChatRoomMain/_constants/MOCK_CHAT_DATA";
+import { MOCK_CHAT_DATA } from "./_components/ChatRoomMain/constants/MOCK_CHAT_DATA";
 
 interface ChatFormValues {
   chatRoom: string;
