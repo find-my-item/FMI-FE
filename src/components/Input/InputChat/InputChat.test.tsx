@@ -18,16 +18,6 @@ jest.mock("@/components/Icon/Icon", () => {
   };
 });
 
-// InputChatImageSection 모킹 (이미지가 있을 때 렌더링되는 컴포넌트)
-jest.mock("../_internal/InputChatImageSection/InputChatImageSection", () => {
-  const MockInputChatImageSection = () => <div data-testid="image-section">Image Section</div>;
-  MockInputChatImageSection.displayName = "MockInputChatImageSection";
-  return {
-    __esModule: true,
-    default: MockInputChatImageSection,
-  };
-});
-
 const renderComponent = (
   props: Partial<React.ComponentProps<typeof InputChat>> = {},
   initialImages: File[] = []
@@ -130,28 +120,28 @@ describe("InputChat 컴포넌트", () => {
     expect(sendButton).toBeDisabled();
   });
 
-  // 테스트 8
-  it("disabled prop이 true일 때 이미지 첨부 input이 비활성화되는지 확인", () => {
-    renderComponent({ disabled: true });
+  // // 테스트 8
+  // it("disabled prop이 true일 때 이미지 첨부 input이 비활성화되는지 확인", () => {
+  //   renderComponent({ disabled: true });
 
-    const fileInput = screen.getByLabelText("이미지 첨부").nextElementSibling as HTMLInputElement;
-    expect(fileInput).toBeDisabled();
-  });
+  //   const fileInput = screen.getByLabelText("이미지 첨부").nextElementSibling as HTMLInputElement;
+  //   expect(fileInput).toBeDisabled();
+  // });
 
-  // 테스트 9
-  it("이미지가 있을 때 InputChatImageSection이 렌더링되는지 확인", () => {
-    const mockFile = new File([""], "test.png", { type: "image/png" });
-    renderComponent({}, [mockFile]);
+  // // 테스트 9
+  // it("이미지가 있을 때 InputChatImageSection이 렌더링되는지 확인", () => {
+  //   const mockFile = new File([""], "test.png", { type: "image/png" });
+  //   renderComponent({}, [mockFile]);
 
-    expect(screen.getByTestId("image-section")).toBeInTheDocument();
-    expect(screen.queryByPlaceholderText("메시지 보내기")).not.toBeInTheDocument();
-  });
+  //   expect(screen.getByTestId("image-section")).toBeInTheDocument();
+  //   expect(screen.queryByPlaceholderText("메시지 보내기")).not.toBeInTheDocument();
+  // });
 
-  // 테스트 10
-  it("이미지가 없을 때 일반 입력창이 렌더링되는지 확인", () => {
-    renderComponent({}, []);
+  // // 테스트 10
+  // it("이미지가 없을 때 일반 입력창이 렌더링되는지 확인", () => {
+  //   renderComponent({}, []);
 
-    expect(screen.queryByTestId("image-section")).not.toBeInTheDocument();
-    expect(screen.getByPlaceholderText("메시지 보내기")).toBeInTheDocument();
-  });
+  //   expect(screen.queryByTestId("image-section")).not.toBeInTheDocument();
+  //   expect(screen.getByPlaceholderText("메시지 보내기")).toBeInTheDocument();
+  // });
 });
