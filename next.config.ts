@@ -1,5 +1,10 @@
 import type { NextConfig } from "next";
 
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+  openAnalyzer: process.env.ANALYZE === "true",
+});
+
 const nextConfig: NextConfig = {
   experimental: {
     reactCompiler: true,
@@ -33,4 +38,5 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+// export default nextConfig;
+export default withBundleAnalyzer(nextConfig);

@@ -12,7 +12,9 @@
     "prepare": "husky",
     "chromatic": "npx chromatic --project-token=$CHROMATIC_PROJECT_TOKEN",
     "test:ci": "jest --ci --runInBand",
-    "check:all": "run-s test build build-storybook"
+    "check:all": "run-s test build build-storybook",
+    "check:fast": "run-p test build-storybook",
+    "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.4.0",
@@ -35,6 +37,7 @@
     "@chromatic-com/storybook": "^4.1.1",
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
+    "@next/bundle-analyzer": "^16.0.1",
     "@playwright/test": "^1.55.0",
     "@storybook/addon-a11y": "^9.1.3",
     "@storybook/addon-docs": "^9.1.3",
@@ -51,12 +54,14 @@
     "autoprefixer": "^10.4.21",
     "babel-jest": "^29.7.0",
     "chromatic": "^13.1.5",
+    "cross-env": "^10.1.0",
     "husky": "^9.1.7",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "jest-junit": "^16.0.0",
     "jest-transformer-svg": "^2.1.0",
     "lint-staged": "^16.1.5",
+    "npm-run-all": "^4.1.5",
     "playwright": "^1.55.0",
     "postcss": "^8.5.6",
     "prettier": "^3.6.2",

@@ -1,5 +1,5 @@
 export { default as ActionSection } from "./ActionSection/ActionSection";
-export { default as CategoryPopup } from "./CategoryPopup/CategoryPopup";
+export { default as CategoryPopup } from "./_internal/CategoryPopup/CategoryPopup";
 export { default as ImageSection } from "./ImageSection/ImageSection";
 export { default as LocationSection } from "./LocationSection/LocationSection";
 export { default as TitleSection } from "./TitleSection/TitleSection";

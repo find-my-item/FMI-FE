@@ -6,12 +6,8 @@ jest.mock("next/image", () => (props: any) => {
   return <img {...props} />;
 });
 
-jest.mock("@/components/Icon/Icon", () => ({
-  __esModule: true,
-  default: ({ name, ...rest }: any) => <span data-testid={`icon-${name}`} {...rest} />,
-}));
-
 jest.mock("@/components", () => ({
+  Icon: ({ name, ...rest }: any) => <span data-testid={`icon-${name}`} {...rest} />,
   Badge: ({ variant }: { variant: string }) => <span data-testid={`badge-${variant}`}>badge</span>,
   Chip: ({ label, type }: { label: string; type: string }) => (
     <span data-testid={`chip-${type}`}>{label}</span>

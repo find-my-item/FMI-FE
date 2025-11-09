@@ -24,7 +24,7 @@ jest.mock("@/app/(route)/list/_components/ListItem/ListItem", () => () => (
   <div data-testid="list-item">ListItem</div>
 ));
 
-jest.mock("../CommentItem/CommentItem", () => () => (
+jest.mock("../_internal/CommentItem/CommentItem", () => () => (
   <div data-testid="comment-item">CommentItem</div>
 ));
 

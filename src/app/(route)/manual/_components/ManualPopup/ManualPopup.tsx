@@ -1,6 +1,6 @@
 "use client";
 
-import { Icon, PopupLayout } from "@/components";
+import { Button, Icon, PopupLayout } from "@/components";
 
 interface ManualPopupProps {
   isOpen: boolean;
@@ -25,12 +25,16 @@ const ManualPopup = ({ isOpen, onClose }: ManualPopupProps) => {
       </div>
 
       <div className="my-10 flex flex-col gap-3">
-        <button className="h-[48px] w-full rounded-[12px] text-body1-semibold text-white bg-fill-brand-normal-default">
+        <Button className="h-[48px] w-full rounded-[12px] text-body1-semibold text-white bg-fill-brand-normal-default">
           매뉴얼 보러가기
-        </button>
-        <button className="h-[64px] w-full text-neutralInversed-strong-default" onClick={onClose}>
+        </Button>
+        <Button
+          variant="outlined"
+          className="h-[64px] w-full border-none text-neutralInversed-strong-default"
+          onClick={onClose}
+        >
           다음에 볼게요
-        </button>
+        </Button>
       </div>
     </PopupLayout>
   );
