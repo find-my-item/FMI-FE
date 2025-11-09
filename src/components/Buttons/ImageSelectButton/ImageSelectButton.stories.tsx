@@ -11,10 +11,6 @@ const meta = {
   parameters: { layout: "centered" },
   tags: ["autodocs"],
   argTypes: {
-    gap: {
-      control: { type: "number" },
-      description: "버튼 간 간격(px)",
-    },
     ariaLabel: {
       control: "text",
       description: "접근성을 위한 라벨",
@@ -67,7 +63,6 @@ const ImageSelectButtonWrapper = (args: ImageSelectButtonProps) => {
 export const Default: Story = {
   render: (args) => <ImageSelectButtonWrapper {...args} />,
   args: {
-    gap: 8,
     ariaLabel: "이미지 선택",
   },
 };
