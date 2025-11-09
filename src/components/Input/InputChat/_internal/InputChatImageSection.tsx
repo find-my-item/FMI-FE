@@ -1,3 +1,5 @@
+"use client";
+
 import { Icon, ImageSelectButton } from "@/components";
 import { handleSendImage } from "../utils/handleSendImage";
 import { useChatRoom } from "@/providers/ChatRoomProvider";
@@ -17,9 +19,10 @@ const InputChatImageSection = () => {
           onClick={() =>
             handleSendImage(selectedImages, images, setChats, setImages, setSelectedImages)
           }
-          className="p-1 text-body1-medium text-brand-subtle-default"
+          className="p-1 text-body1-medium text-brand-subtle-default disabled:text-brand-subtle-disabled"
+          disabled={!selectedImages.length}
         >
-          사진 {selectedImages.length}개 전송
+          {!selectedImages.length ? "사진 선택" : `사진 ${selectedImages.length}개 전송`}
         </button>
       </div>
       <ImageSelectButton gap={16} />
