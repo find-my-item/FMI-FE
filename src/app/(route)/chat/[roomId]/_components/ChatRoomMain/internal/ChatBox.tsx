@@ -1,6 +1,6 @@
 import { cn } from "@/utils";
 import { MockChatDataType, Sender } from "../../../MockChatDataType";
-import { CHAT_SENDER_STYLE } from "../_constants/CHAT_SENDER_STYLE";
+import { CHAT_SENDER_STYLE } from "../constants/CHAT_SENDER_STYLE";
 import ChatImageBox from "./ChatImageBox";
 
 interface ChatBoxProps {
