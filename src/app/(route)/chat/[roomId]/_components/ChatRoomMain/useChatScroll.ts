@@ -1,5 +1,5 @@
 import { RefObject, useEffect } from "react";
-import { MockChatDataType } from "../../../../MockChatDataType";
+import { MockChatDataType } from "../../MockChatDataType";
 
 const useChatScroll = (scrollRef: RefObject<HTMLDivElement | null>, chats: MockChatDataType[]) => {
   useEffect(() => {

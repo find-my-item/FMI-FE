@@ -3,7 +3,7 @@
 import ChatBox from "./internal/ChatBox";
 import { useChatRoom } from "@/providers/ChatRoomProvider";
 import { useRef } from "react";
-import useChatScroll from "./hooks/useChatScroll/useChatScroll";
+import useChatScroll from "./useChatScroll";
 
 const ChatRoomMain = () => {
   const { chats } = useChatRoom();
