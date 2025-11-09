@@ -2,7 +2,7 @@
 
 import { SelectedImage } from "@/types/SelectedImage";
 import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useState } from "react";
-import { MockChatDataType } from "../../_types/MockChatDataType";
+import { MockChatDataType } from "@/app/(route)/chat/[roomId]/_types/MockChatDataType";
 
 interface ChatRoomContextType {
   chats: MockChatDataType[];

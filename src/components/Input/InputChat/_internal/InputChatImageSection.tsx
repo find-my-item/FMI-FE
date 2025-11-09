@@ -1,6 +1,6 @@
 import { Icon, ImageSelectButton } from "@/components";
-import { handleSendImage } from "./handleSendImage";
-import { useChatRoom } from "@/app/(route)/chat/[roomId]/_components/ChatRoomProvider/ChatRoomProvider";
+import { handleSendImage } from "../utils/handleSendImage";
+import { useChatRoom } from "@/providers/ChatRoomProvider";
 
 const InputChatImageSection = () => {
   const { setChats, images, setImages, selectedImages, setSelectedImages } = useChatRoom();

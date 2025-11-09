@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import ImageSelectButton from "./ImageSelectButton";
 import { ComponentProps, useState } from "react";
-import { ChatRoomProvider } from "@/app/(route)/chat/[roomId]/_components/ChatRoomProvider/ChatRoomProvider";
+import { ChatRoomProvider } from "@/providers/ChatRoomProvider";
 
 type ImageSelectButtonProps = ComponentProps<typeof ImageSelectButton>;
 

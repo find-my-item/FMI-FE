@@ -6,7 +6,7 @@ import Image from "next/image";
 import Icon from "@/components/Icon/Icon";
 import { handleClick } from "./_utils/handleClick";
 import { getImageButtonState } from "./_utils/getImageButtonState";
-import { useChatRoom } from "@/app/(route)/chat/[roomId]/_components/ChatRoomProvider/ChatRoomProvider";
+import { useChatRoom } from "@/providers/ChatRoomProvider";
 import { handleFileChange } from "@/components/Input/InputChat/utils/handleFileChange";
 import { useObjectURLs } from "@/hooks";
 
