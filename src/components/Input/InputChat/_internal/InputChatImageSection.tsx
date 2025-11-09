@@ -25,7 +25,7 @@ const InputChatImageSection = () => {
           {!selectedImages.length ? "사진 선택" : `사진 ${selectedImages.length}개 전송`}
         </button>
       </div>
-      <ImageSelectButton gap={16} />
+      <ImageSelectButton />
     </div>
   );
 };
