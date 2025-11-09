@@ -18,7 +18,6 @@ export const handleSendImage = (
   setChats((prev) => [
     {
       sender: "me",
-      text: "",
       images: imageUrls,
       time: "17:00",
     },

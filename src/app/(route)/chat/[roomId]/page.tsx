@@ -26,10 +26,9 @@ const ChatRoom = () => {
     if (chatRoom.trim() === "") return;
     setChats((prev) => [
       {
-        sender: "me" as const,
+        sender: "me",
         text: chatRoom,
         time: "17:00",
-        images: [],
       },
       ...prev,
     ]);
