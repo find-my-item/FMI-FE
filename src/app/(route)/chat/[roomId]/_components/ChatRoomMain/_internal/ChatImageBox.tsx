@@ -5,7 +5,9 @@ import { cn } from "@/utils";
 import { getImageLayout, getSpecialLayoutGroups } from "@/utils/getImageLayout/getImageLayout";
 import dynamic from "next/dynamic";
 import ChatImageButton from "./ChatImageButton";
-const ImageViewerModal = dynamic(() => import("./ImageViewerModal"), { ssr: false });
+const ImageViewerModal = dynamic(() => import("@/components/ImageViewerModal/ImageViewerModal"), {
+  ssr: false,
+});
 
 const ChatImageBox = ({ images, bubbleOrder }: { images?: string[]; bubbleOrder: string }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
