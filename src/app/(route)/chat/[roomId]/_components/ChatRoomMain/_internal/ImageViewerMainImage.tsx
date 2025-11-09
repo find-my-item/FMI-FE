@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import useDragSwipe from "../hooks/useDragSwipe/useDragSwipe";
+import { cn } from "@/utils";
 
 interface ImageViewerMainImageProps {
   handlePrev: () => void;
@@ -23,7 +24,10 @@ const ImageViewerMainImage = ({
 
   return (
     <section
-      className="relative h-[80vh] w-full cursor-grab select-none"
+      className={cn(
+        "relative h-[80vh] w-full select-none",
+        images.length === 1 ? "cursor-default" : "cursor-grab"
+      )}
       onClick={(e) => e.stopPropagation()}
       onMouseDown={handleDragStart}
       onMouseMove={handleDragMove}
