@@ -8,6 +8,7 @@ import { handleClick } from "./_utils/handleClick";
 import { getImageButtonState } from "./_utils/getImageButtonState";
 import { useChatRoom } from "@/app/(route)/chat/[roomId]/_components/ChatRoomProvider/ChatRoomProvider";
 import { handleFileChange } from "@/components/Input/InputChat/utils/handleFileChange";
+import { useObjectURLs } from "@/hooks";
 
 /**
  * @author hyungjun
@@ -42,6 +43,7 @@ interface ToggleImageButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
 
 const ToggleImageButton = ({ ariaLabel, gap = 8 }: ToggleImageButtonProps) => {
   const { images, setImages, selectedImages, setSelectedImages } = useChatRoom();
+  const urls = useObjectURLs(images);
   const isDisabled = images.length >= 5;
 
   return (
@@ -73,7 +75,7 @@ const ToggleImageButton = ({ ariaLabel, gap = 8 }: ToggleImageButtonProps) => {
         onChange={(e) => handleFileChange(e, images, setImages)}
       />
 
-      {images.map((image, index) => {
+      {urls.map((src, index) => {
         const { isActive, order } = getImageButtonState(index, selectedImages);
 
         return (
@@ -86,13 +88,17 @@ const ToggleImageButton = ({ ariaLabel, gap = 8 }: ToggleImageButtonProps) => {
             )}
           >
             <div className="relative h-[100px] w-[100px]">
-              <Image
-                src={URL.createObjectURL(image)}
-                width={100}
-                height={100}
-                alt=""
-                className="glass-card h-[100px] w-[100px] rounded-[6px]"
-              />
+              {urls[index] && (
+                <Image
+                  src={src}
+                  width={100}
+                  height={100}
+                  alt={`${index + 1}번째 가져온 이미지`}
+                  className="glass-card h-[100px] w-[100px] rounded-[6px]"
+                  unoptimized
+                />
+              )}
+
               <span
                 className={cn(
                   "absolute right-[6px] top-[6px] h-[20px] w-[20px] rounded-full border-[1.2px] text-caption1-semibold flex-center",
