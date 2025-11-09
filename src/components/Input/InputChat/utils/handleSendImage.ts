@@ -1,4 +1,4 @@
-import { MockChatDataType } from "@/app/(route)/chat/[roomId]/_types/MockChatDataType";
+import { MockChatDataType } from "@/app/(route)/chat/[roomId]/MockChatDataType";
 import { SelectedImage } from "@/types/SelectedImage";
 import { Dispatch, SetStateAction } from "react";
 
