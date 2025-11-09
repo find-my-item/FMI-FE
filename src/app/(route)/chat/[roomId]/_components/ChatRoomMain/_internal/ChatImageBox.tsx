@@ -3,11 +3,8 @@
 import { useState } from "react";
 import { cn } from "@/utils";
 import { getImageLayout, getSpecialLayoutGroups } from "@/utils/getImageLayout/getImageLayout";
-import dynamic from "next/dynamic";
 import ChatImageButton from "./ChatImageButton";
-const ImageViewerModal = dynamic(() => import("@/components/ImageViewerModal/ImageViewerModal"), {
-  ssr: false,
-});
+import { ImageViewerModal } from "@/components";
 
 const ChatImageBox = ({ images, bubbleOrder }: { images?: string[]; bubbleOrder: string }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
