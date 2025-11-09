@@ -94,8 +94,7 @@ const ToggleImageButton = ({ ariaLabel, gap = 8 }: ToggleImageButtonProps) => {
                   width={100}
                   height={100}
                   alt={`${index + 1}번째 가져온 이미지`}
-                  className="glass-card h-[100px] w-[100px] rounded-[6px]"
-                  unoptimized
+                  className="glass-card h-[100px] w-[100px] rounded-[6px] object-cover"
                 />
               )}
 
