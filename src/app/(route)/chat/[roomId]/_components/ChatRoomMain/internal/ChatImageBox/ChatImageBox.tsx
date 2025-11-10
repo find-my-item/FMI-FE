@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { cn } from "@/utils";
 import { getImageLayout, getSpecialLayoutGroups } from "@/utils/getImageLayout/getImageLayout";
-import ChatImageButton from "./ChatImageButton";
+import ChatImageButton from "../ChatImageButton/ChatImageButton";
 import { ImageViewerModal } from "@/components";
 
 const ChatImageBox = ({ images, bubbleOrder }: { images?: string[]; bubbleOrder: string }) => {
