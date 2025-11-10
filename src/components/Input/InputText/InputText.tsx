@@ -87,7 +87,7 @@ interface CustomProps {
 type InputTextProps = InputProps & CustomProps;
 
 const InputStyle =
-  "flex flex-1 items-center relative h-10 py-3 px-2 bg-fill-neutral-strong-default rounded-[10px] text-body2-regular text-neutral-strong-placeholder hover:text-neutral-strong-hover border focus:outline-none focus:text-neutral-strong-focused disabled:text-neutral-strong-disabled";
+  "flex flex-1 items-center relative h-10 py-3 px-2 bg-fill-neutral-strong-default rounded-[10px] text-body2-regular text-neutral-strong-entered placeholder:text-neutral-strong-placeholder hover:text-neutral-strong-hover border focus:outline-none focus:text-neutral-strong-focused disabled:text-neutral-strong-disabled";
 
 const InputText = ({
   name,
