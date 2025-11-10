@@ -1,10 +1,10 @@
 "use client";
 
 import { createPortal } from "react-dom";
-import { useDotNavigation } from "./_hooks/useDotNavigation/useDotNavigation";
-import { useModalOverflow } from "./_hooks/useModalOverflow/useModalOverflow";
+import { useDotNavigation } from "./_hooks/useDotNavigation";
+import { useModalOverflow } from "./_hooks/useModalOverflow";
 import { getNextIndex, getPrevIndex } from "./_utils/imageViewer";
-import useImageViewerNavigation from "@/components/ImageViewerModal/_hooks/useImageViewerNavigation/useImageViewerNavigation";
+import useImageViewerNavigation from "@/components/ImageViewerModal/_hooks/useImageViewerNavigation";
 import ImageViewerHeader from "./_internal/ImageViewerHeader";
 import ImageViewerNavigation from "./_internal/ImageViewerNavigation";
 import ImageViewerDots from "./_internal/ImageViewerDots";
