@@ -8,7 +8,7 @@ const InputChatImageSection = () => {
   const { setChats, images, setImages, selectedImages, setSelectedImages } = useChatRoom();
 
   return (
-    <div>
+    <>
       <div className="mb-[20px] flex items-center justify-between px-[4px] pb-[12px]">
         <button aria-label="사진 전송 취소 버튼" onClick={() => setImages([])}>
           <Icon name="XSecond" size={20} />
@@ -26,7 +26,7 @@ const InputChatImageSection = () => {
         </button>
       </div>
       <ImageSelectButton />
-    </div>
+    </>
   );
 };
 
