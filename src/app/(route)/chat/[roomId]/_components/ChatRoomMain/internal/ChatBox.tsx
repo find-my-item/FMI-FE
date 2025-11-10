@@ -1,5 +1,5 @@
 import { cn } from "@/utils";
-import { MockChatDataType, Sender } from "../../../MockChatDataType";
+import { MockChatDataType, Sender } from "@/app/(route)/chat/_types/MockChatDataType";
 import { CHAT_SENDER_STYLE } from "../constants/CHAT_SENDER_STYLE";
 import ChatImageBox from "./ChatImageBox";
 
