@@ -26,7 +26,6 @@ export const ChatRoomProvider = ({
   initialChats = [],
   initialImages = [],
 }: ChatRoomProviderProps) => {
-  // const [chats, setChats] = useState(() => [...MOCK_CHAT_DATA].reverse());
   const [chats, setChats] = useState<MockChatDataType[]>(initialChats);
   const [images, setImages] = useState<File[]>(initialImages);
   const [selectedImages, setSelectedImages] = useState<SelectedImage[]>([]);
