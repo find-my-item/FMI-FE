@@ -51,5 +51,4 @@ node_modules/
 /playwright/.cache/
 
 # Jest test reports
-reports/
-*.xml
+reports/*
