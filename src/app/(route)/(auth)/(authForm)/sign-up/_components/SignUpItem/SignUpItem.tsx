@@ -18,17 +18,19 @@ interface SignUpItemProps {
 
 const SignUpItem = ({ item }: SignUpItemProps) => {
   return (
-    <InputText
-      name={item.name}
-      label={item.label}
-      type={item.type}
-      placeholder={item.placeholder}
-      validation={item.validation}
-      rule={item.rule}
-      eyeShow={item.eyeShow}
-    >
-      {item.btnText}
-    </InputText>
+    <div className="h-[96px]">
+      <InputText
+        name={item.name}
+        label={item.label}
+        type={item.type}
+        placeholder={item.placeholder}
+        validation={item.validation}
+        rule={item.rule}
+        eyeShow={item.eyeShow}
+      >
+        {item.btnText}
+      </InputText>
+    </div>
   );
 };
 

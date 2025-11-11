@@ -9,9 +9,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
     <>
       <div className="flex w-full flex-col gap-5 p-4">
         {SIGNUP_INPUT_CONFIG.map((item) => (
-          <div className="h-[96px]">
-            <SignUpItem key={item.name} item={item} />
-          </div>
+          <SignUpItem key={item.name} item={item} />
         ))}
       </div>
       <div className="sticky bottom-0 mt-auto h-[88px] w-full max-w-[390px] border-t border-flatGray-50 bg-white px-4 py-3">
