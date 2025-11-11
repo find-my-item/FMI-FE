@@ -79,6 +79,7 @@ interface CustomProps {
   children?: ReactNode;
   eyeShow?: boolean;
   btnOnClick?: (value: string) => void;
+  btnType?: "button" | "submit" | "reset";
   isSuccess?: boolean;
   successMessage?: string;
   rule?: string;
@@ -99,6 +100,7 @@ const InputText = ({
   children,
   eyeShow = false,
   btnOnClick,
+  btnType = "button",
   isSuccess,
   successMessage,
   rule,
@@ -177,7 +179,7 @@ const InputText = ({
         {children && (
           <Button
             variant="outlined"
-            type="button"
+            type={btnType}
             onClick={() => btnOnClick?.(isValue)}
             ignoreBase
             disabled={disabled}
