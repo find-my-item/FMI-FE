@@ -3,16 +3,14 @@
 
 import { useFormContext } from "react-hook-form";
 import { Button, InputText } from "@/components";
-import { ButtonStyle } from "../sign-up/_constant/AUTH_STYLE";
 import { useRouter } from "next/navigation";
-import { cn } from "@/utils";
 
 const Page = () => {
   const router = useRouter();
 
   const {
     handleSubmit,
-    formState: { isValid, isSubmitSuccessful },
+    formState: { isSubmitSuccessful },
     watch,
   } = useFormContext();
 

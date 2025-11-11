@@ -4,17 +4,12 @@ import Link from "next/link";
 import { useWatch, useFormContext } from "react-hook-form";
 import { CheckBox, InputText, Button } from "@/components";
 import { Logo } from "../../_components";
-
-// TODO(수현): constants 분리 및 대문자 컨벤션 적용 필요
-const CheckBoxItem = [
-  { label: "아이디 기억하기", id: "rememberID" },
-  { label: "자동 로그인", id: "autoLogin" },
-];
+import { CHECKBOX_CONFIG } from "./_constant/CHECKBOX_CONFIG";
 
 const Page = () => {
   const { register, control, handleSubmit } = useFormContext();
 
-  const checkBoxValues = useWatch({ control, name: CheckBoxItem.map((item) => item.id) });
+  const checkBoxValues = useWatch({ control, name: CHECKBOX_CONFIG.map((item) => item.id) });
 
   const onSubmit = handleSubmit((data) => {
     alert("폼 제출되었습니다.");
@@ -27,16 +22,23 @@ const Page = () => {
       <form onSubmit={onSubmit} className="flex w-full flex-col gap-10">
         {/* 로그인 입력칸 */}
         <div className="flex w-full flex-col gap-3">
-          <InputText name="email" placeholder="이메일을 입력해주세요." />
+          <InputText
+            name="email"
+            label="아이디(이메일)"
+            validation={{ required: true }}
+            placeholder="이메일을 입력해주세요."
+          />
           <InputText
             name="password"
+            label="비밀번호"
+            validation={{ required: true }}
             type="password"
             placeholder="비밀번호를 입력해주세요."
             eyeShow={true}
           />
           {/* 체크박스 */}
           <div className="flex w-full gap-3">
-            {CheckBoxItem.map((item, index) => (
+            {CHECKBOX_CONFIG.map((item, index) => (
               <CheckBox
                 label={item.label}
                 id={item.id}
