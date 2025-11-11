@@ -44,7 +44,6 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
 
         <div className="flex min-h-[272px] w-full flex-col gap-8">
           <div className="flex min-h-[68px] w-full items-center border-b border-[#CCCCCC] text-body1-semibold text-neutral-normal-default">
-            {/* TODO(수현): checkbox 미체크 상태 아이콘 추가 필요 */}
             <CheckBox
               id="selectAll"
               label="전체 약관 동의"
