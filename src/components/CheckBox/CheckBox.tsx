@@ -19,7 +19,7 @@ const CheckBox = ({ id, label, boxSize, textStyle, iconSize, state, ...rest }: C
       <input id={id} type="checkbox" className="peer sr-only" {...rest} />
       <div
         className={cn(
-          "relative h-6 w-6 rounded bg-[#E4E4E4] flex-center peer-checked:bg-[#1EB87B] peer-checked:opacity-70 [&_svg]:opacity-0 peer-checked:[&_svg]:opacity-100",
+          "relative h-6 w-6 rounded bg-[#E4E4E4] flex-center peer-checked:bg-[#1EB87B]",
           boxSize
         )}
       >
@@ -27,7 +27,7 @@ const CheckBox = ({ id, label, boxSize, textStyle, iconSize, state, ...rest }: C
           name="Check"
           title={state ? "체크됨" : "체크안됨"}
           className={cn(
-            "absolute left-1/2 top-1/2 h-2 -translate-x-1/2 -translate-y-1/2 peer-checked:opacity-100",
+            "absolute left-1/2 top-1/2 h-2 -translate-x-1/2 -translate-y-1/2",
             iconSize
           )}
         />
