@@ -3,11 +3,10 @@ import { AGREE_CONFIG } from "../../_constant/AGREE_CONFIG";
 
 interface DetailAgreeProps {
   termKey: string;
-  onBack: () => void;
   onAgree: () => void;
 }
 
-const DetailAgree = ({ termKey, onBack, onAgree }: DetailAgreeProps) => {
+const DetailAgree = ({ termKey, onAgree }: DetailAgreeProps) => {
   return (
     <>
       <DetailHeader title={AGREE_CONFIG[termKey].title} />
