@@ -1,6 +1,6 @@
 "use no memo";
 
-import { InputType } from "../../types/InputType";
+import { InputType } from "../../../types/InputType";
 import { InputText } from "@/components";
 
 const style = {

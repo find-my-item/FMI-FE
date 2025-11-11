@@ -5,6 +5,7 @@ import { useWatch, useFormContext } from "react-hook-form";
 import { CheckBox, InputText, Button } from "@/components";
 import { Logo } from "../../_components";
 import { CHECKBOX_CONFIG } from "./_constant/CHECKBOX_CONFIG";
+import { EMAIL_LOGIN_CONFIG } from "./_constant/EMAIL_LOGIN_CONFIG";
 
 const Page = () => {
   const { register, control, handleSubmit } = useFormContext();
@@ -22,20 +23,16 @@ const Page = () => {
       <form onSubmit={onSubmit} className="flex w-full flex-col gap-10">
         {/* 로그인 입력칸 */}
         <div className="flex w-full flex-col gap-3">
-          <InputText
-            name="email"
-            label="아이디(이메일)"
-            validation={{ required: true }}
-            placeholder="이메일을 입력해주세요."
-          />
-          <InputText
-            name="password"
-            label="비밀번호"
-            validation={{ required: true }}
-            type="password"
-            placeholder="비밀번호를 입력해주세요."
-            eyeShow={true}
-          />
+          {EMAIL_LOGIN_CONFIG.map((item) => (
+            <InputText
+              name={item.name}
+              label={item.label}
+              validation={item.validation}
+              type={item.type}
+              placeholder={item.placeholder}
+              eyeShow={item.eyeShow}
+            />
+          ))}
           {/* 체크박스 */}
           <div className="flex w-full gap-3">
             {CHECKBOX_CONFIG.map((item, index) => (
