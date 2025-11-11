@@ -8,7 +8,7 @@ type Step = "form" | "term" | "termDetail";
 export const useSignUpFlow = () => {
   const router = useRouter();
 
-  const [step, setStep] = useState<Step>("form");
+  const [step, setStep] = useState<Step>("term");
   const [termDetail, setTermDetail] = useState("");
 
   const { handleSubmit, trigger } = useFormContext<FormValue>();

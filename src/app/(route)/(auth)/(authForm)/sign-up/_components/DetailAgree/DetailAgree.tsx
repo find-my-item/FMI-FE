@@ -1,4 +1,4 @@
-import { Button } from "@/components";
+import { Button, DetailHeader } from "@/components";
 import { AGREE_CONFIG } from "../../_constant/AGREE_CONFIG";
 
 interface DetailAgreeProps {
@@ -10,8 +10,7 @@ interface DetailAgreeProps {
 const DetailAgree = ({ termKey, onBack, onAgree }: DetailAgreeProps) => {
   return (
     <>
-      {/* TODO(수현): 어떤 주석인지 남기기 */}
-      {/* <div>{AgreeConfig[termKey].title}</div> */}
+      <DetailHeader title={AGREE_CONFIG[termKey].title} />
       <div className="whitespace-pre-wrap px-4 py-6 text-body2-regular text-layout-body-default">
         {AGREE_CONFIG[termKey].content}
       </div>
