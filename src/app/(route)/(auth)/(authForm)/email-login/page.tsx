@@ -73,8 +73,7 @@ const Page = () => {
         <Link href="/find-pw" className="p-3">
           비밀번호 찾기
         </Link>
-        {/* TODO(수현): 이 부분 hr 태그로 변경 필요 */}
-        <span className="h-4 self-center border-l border-gray-300" />
+        <hr className="h-4 self-center border-l border-gray-300" />
         <Link href="/sign-up" className="p-3">
           회원가입
         </Link>
