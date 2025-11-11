@@ -129,7 +129,7 @@ const InputText = ({
     typeof validation?.maxLength === "number" ? validation.maxLength : validation?.maxLength?.value;
 
   return (
-    <div className="flex h-[96px] w-full flex-col gap-2">
+    <div className="flex w-full flex-col gap-2">
       {/* label */}
       <Label
         name={name}
