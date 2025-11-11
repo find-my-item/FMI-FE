@@ -39,12 +39,6 @@ const Page = () => {
             </span>
             임시 비밀번호를 발송했습니다.
           </p>
-          {/* <p className="flex h-[77px] flex-col justify-center text-center text-body2-regular">
-            <span>
-              <span className="text-flatGreen-500">{email}</span> 으로
-            </span>
-            <span>임시 비밀번호를 발송했습니다.</span>
-          </p> */}
           <Button
             type="button"
             className="w-[318px]"
