@@ -2,7 +2,9 @@
 
 import { InputType } from "../../../types/InputType";
 import { InputText } from "@/components";
+import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
+import useAppQuery from "@/api/query/useAppQuery";
 
 const style = {
   input:
@@ -19,11 +21,27 @@ interface SignUpItemProps {
 
 const SignUpItem = ({ item }: SignUpItemProps) => {
   const { register, getValues } = useFormContext();
+  const [emailCheck, setEmailCheck] = useState<string>("");
+
+  const { data, error } = useAppQuery<{ exists: boolean }>(
+    "public",
+    ["auth/check-email", emailCheck],
+    `/auth/check-email?email=${emailCheck ?? ""}`,
+    {
+      enabled: !!emailCheck, // ✅ 값이 있을 때만 자동 요청
+      retry: false,
+    }
+  );
+
+  // 결과가 바뀌는 시점에 로그
+  useEffect(() => {
+    if (data) console.log("data>>>", data);
+  }, [data]);
 
   const ClickHandler = () => {
     if (item.name === "email") {
       const test = getValues("email");
-      console.log("email>> ", test);
+      setEmailCheck(test);
     }
   };
 
