@@ -2,6 +2,7 @@
 
 import { InputType } from "../../../types/InputType";
 import { InputText } from "@/components";
+import { useFormContext } from "react-hook-form";
 
 const style = {
   input:
@@ -17,6 +18,15 @@ interface SignUpItemProps {
 }
 
 const SignUpItem = ({ item }: SignUpItemProps) => {
+  const { register, getValues } = useFormContext();
+
+  const ClickHandler = () => {
+    if (item.name === "email") {
+      const test = getValues("email");
+      console.log("email>> ", test);
+    }
+  };
+
   return (
     <div className="h-[96px]">
       <InputText
@@ -27,6 +37,7 @@ const SignUpItem = ({ item }: SignUpItemProps) => {
         validation={item.validation}
         rule={item.rule}
         eyeShow={item.eyeShow}
+        btnOnClick={ClickHandler}
       >
         {item.btnText}
       </InputText>

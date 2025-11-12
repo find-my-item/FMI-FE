@@ -3,8 +3,14 @@
 import { SIGNUP_INPUT_CONFIG } from "../../_constant/SIGNUP_INPUT_CONFIG";
 import { Button } from "@/components";
 import SignUpItem from "../SignUpItem/SignUpItem";
+// import useAppQuery from "@/api/query/useAppQuery";
+// import { useFormContext } from "react-hook-form";
 
 const SignUpField = ({ onNext }: { onNext: () => void }) => {
+  // const {register, getValues} = useFormContext();
+  // const test = getValues("email");
+  // console.log("email>> ", test);
+
   return (
     <>
       <div className="flex w-full flex-col gap-5 p-4">
