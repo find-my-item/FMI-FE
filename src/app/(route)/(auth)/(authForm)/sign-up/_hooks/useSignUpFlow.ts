@@ -1,23 +1,16 @@
 import { useCallback, useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { useRouter } from "next/navigation";
 import { FormValue } from "../../types/FormValue";
 
 type Step = "form" | "term" | "termDetail";
 
-export const useSignUpFlow = () => {
-  const router = useRouter();
-
+export const useSignUpFlow = (onFinalSubmit: (data: FormValue) => void) => {
   const [step, setStep] = useState<Step>("form");
   const [termDetail, setTermDetail] = useState("");
 
   const { handleSubmit, trigger } = useFormContext<FormValue>();
 
-  // 최종 폼 제출
-  const onSubmit = handleSubmit((data) => {
-    alert("폼 제출되었습니다.");
-    router.push("/email-login");
-  });
+  const onSubmit = handleSubmit(onFinalSubmit);
 
   // 회원가입 1단계 -> 2단계
   const onNext = useCallback(async () => {
