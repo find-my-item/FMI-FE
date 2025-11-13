@@ -2,7 +2,7 @@
 "use no memo";
 
 import { FormProvider, useForm } from "react-hook-form";
-import { FormValue } from "./sign-up/types/FormValue";
+import { FormValue } from "./types/FormValue";
 
 export default function AuthSubLayout({ children }: { children: React.ReactNode }) {
   const methods = useForm<FormValue>({

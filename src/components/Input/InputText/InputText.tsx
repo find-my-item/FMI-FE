@@ -79,6 +79,7 @@ interface CustomProps {
   children?: ReactNode;
   eyeShow?: boolean;
   btnOnClick?: (value: string) => void;
+  btnType?: "button" | "submit" | "reset";
   isSuccess?: boolean;
   successMessage?: string;
   rule?: string;
@@ -87,7 +88,7 @@ interface CustomProps {
 type InputTextProps = InputProps & CustomProps;
 
 const InputStyle =
-  "flex flex-1 items-center relative h-10 px-[14px] py-[12.5px] bg-fill-neutral-strong-default rounded-[10px] text-body2-regular text-neutral-strong-placeholder hover:text-neutral-strong-hover border focus:outline-none focus:text-neutral-strong-focused disabled:text-neutral-strong-disabled";
+  "flex flex-1 items-center relative h-10 py-3 px-2 bg-fill-neutral-strong-default rounded-[10px] text-body2-regular text-neutral-strong-entered placeholder:text-neutral-strong-placeholder hover:text-neutral-strong-hover border focus:outline-none focus:text-neutral-strong-focused disabled:text-neutral-strong-disabled";
 
 const InputText = ({
   name,
@@ -99,6 +100,7 @@ const InputText = ({
   children,
   eyeShow = false,
   btnOnClick,
+  btnType = "button",
   isSuccess,
   successMessage,
   rule,
@@ -144,7 +146,12 @@ const InputText = ({
             {...register(name, validation)}
             type={actualType()}
             disabled={disabled}
-            className={cn(className, !!errors[name] && "border border-system-warning")}
+            className={cn(
+              className,
+              isValue && "pr-8",
+              eyeShow && "pr-[60px]",
+              !!errors[name] && "border border-system-warning"
+            )}
           />
 
           {/* 삭제 버튼 */}
@@ -172,7 +179,7 @@ const InputText = ({
         {children && (
           <Button
             variant="outlined"
-            type="button"
+            type={btnType}
             onClick={() => btnOnClick?.(isValue)}
             ignoreBase
             disabled={disabled}

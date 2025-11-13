@@ -4,17 +4,13 @@ import Link from "next/link";
 import { useWatch, useFormContext } from "react-hook-form";
 import { CheckBox, InputText, Button } from "@/components";
 import { Logo } from "../../_components";
-
-// TODO(수현): constants 분리 및 대문자 컨벤션 적용 필요
-const CheckBoxItem = [
-  { label: "아이디 기억하기", id: "rememberID" },
-  { label: "자동 로그인", id: "autoLogin" },
-];
+import { CHECKBOX_CONFIG } from "./_constant/CHECKBOX_CONFIG";
+import { EMAIL_LOGIN_CONFIG } from "./_constant/EMAIL_LOGIN_CONFIG";
 
 const Page = () => {
   const { register, control, handleSubmit } = useFormContext();
 
-  const checkBoxValues = useWatch({ control, name: CheckBoxItem.map((item) => item.id) });
+  const checkBoxValues = useWatch({ control, name: CHECKBOX_CONFIG.map((item) => item.id) });
 
   const onSubmit = handleSubmit((data) => {
     alert("폼 제출되었습니다.");
@@ -27,16 +23,19 @@ const Page = () => {
       <form onSubmit={onSubmit} className="flex w-full flex-col gap-10">
         {/* 로그인 입력칸 */}
         <div className="flex w-full flex-col gap-3">
-          <InputText name="email" placeholder="이메일을 입력해주세요." />
-          <InputText
-            name="password"
-            type="password"
-            placeholder="비밀번호를 입력해주세요."
-            eyeShow={true}
-          />
+          {EMAIL_LOGIN_CONFIG.map((item) => (
+            <InputText
+              name={item.name}
+              label={item.label}
+              validation={item.validation}
+              type={item.type}
+              placeholder={item.placeholder}
+              eyeShow={item.eyeShow}
+            />
+          ))}
           {/* 체크박스 */}
           <div className="flex w-full gap-3">
-            {CheckBoxItem.map((item, index) => (
+            {CHECKBOX_CONFIG.map((item, index) => (
               <CheckBox
                 label={item.label}
                 id={item.id}
@@ -71,8 +70,7 @@ const Page = () => {
         <Link href="/find-pw" className="p-3">
           비밀번호 찾기
         </Link>
-        {/* TODO(수현): 이 부분 hr 태그로 변경 필요 */}
-        <span className="h-4 self-center border-l border-gray-300" />
+        <hr className="h-4 self-center border-l border-gray-300" />
         <Link href="/sign-up" className="p-3">
           회원가입
         </Link>

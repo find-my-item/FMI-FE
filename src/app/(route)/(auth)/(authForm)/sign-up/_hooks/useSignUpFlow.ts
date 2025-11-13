@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { FormValue } from "../types/FormValue";
+import { FormValue } from "../../types/FormValue";
 
 type Step = "form" | "term" | "termDetail";
 

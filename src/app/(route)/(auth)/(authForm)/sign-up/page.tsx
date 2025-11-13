@@ -23,9 +23,7 @@ const Page = () => {
         {step === "term" && (
           <AllAgree onOpenDetail={openTermDetail} onComplete={() => completeTerms} />
         )}
-        {step === "termDetail" && (
-          <DetailAgree termKey={termDetail} onBack={() => setStep("term")} onAgree={onAgreeTerm} />
-        )}
+        {step === "termDetail" && <DetailAgree termKey={termDetail} onAgree={onAgreeTerm} />}
       </form>
     </div>
   );
