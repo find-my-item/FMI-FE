@@ -11,6 +11,7 @@ import SignUpContainer from "./_components/SignUpContainer/SignUpContainer";
 const Page = () => {
   const methods = useForm<FormValue>({
     mode: "onChange",
+    reValidateMode: "onChange",
     shouldUnregister: false, // 입력 값 유지
   });
 

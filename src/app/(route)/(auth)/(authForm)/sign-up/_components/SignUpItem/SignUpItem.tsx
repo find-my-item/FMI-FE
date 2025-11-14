@@ -6,47 +6,25 @@ import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import useAppQuery from "@/api/query/useAppQuery";
 
-const style = {
-  input:
-    "flex items-center relative w-full h-10 px-[14px] py-[12.5px] bg-[#F5F5F5] rounded-[10px] text-[#9D9D9D] text-[14px] border focus:outline-none",
-  button:
-    "w-full h-[50px] flex-center gap-1 rounded-[10px] bg-[#1EB87B] font-semibold text-[16px] text-white",
-  signUpButton:
-    "flex items-center justify-center min-w-[104px] h-10 text-[#5D5D5D] text-[14px] border border-[#CFCFCF] rounded-[10px] px-[10px] py-[14px]",
-};
-
 interface SignUpItemProps {
   item: InputType;
 }
 
+type responseType = {
+  isSuccess: boolean;
+  code: "string";
+  message: "string";
+  result: "string";
+};
+
 const SignUpItem = ({ item }: SignUpItemProps) => {
-  const { register, getValues } = useFormContext();
-  const [emailCheck, setEmailCheck] = useState<string>("");
+  // const { getValues } = useFormContext();
 
-  const { data, error } = useAppQuery<{ exists: boolean }>(
-    "public",
-    ["auth/check-email", emailCheck],
-    `/auth/check-email?email=${emailCheck ?? ""}`,
-    {
-      enabled: !!emailCheck, // ✅ 값이 있을 때만 자동 요청
-      retry: false,
-    }
-  );
-
-  // 결과가 바뀌는 시점에 로그
-  useEffect(() => {
-    if (data) console.log("data>>>", data);
-  }, [data]);
-
-  const ClickHandler = () => {
-    if (item.name === "email") {
-      const test = getValues("email");
-      setEmailCheck(test);
-    }
-  };
+  const ClickHandler = () => {};
 
   return (
     <div className="h-[96px]">
+      {/* TODO(수현): props 줄이기  */}
       <InputText
         name={item.name}
         label={item.label}
