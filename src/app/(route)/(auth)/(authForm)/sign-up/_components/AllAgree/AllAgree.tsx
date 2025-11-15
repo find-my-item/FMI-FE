@@ -15,8 +15,8 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
 
   const { register, setValue, control, getFieldState } = useFormContext();
 
-  const selectAll = useWatch({ control, name: "selectAll" }); // 전체 선택
-  const termsValue = useWatch({ control, name: TERMS_CONFIG.map((item) => item.name) }); // 개별 선택
+  const selectAll = useWatch({ control, name: "selectAll" });
+  const termsValue = useWatch({ control, name: TERMS_CONFIG.map((item) => item.name) });
 
   // 전체약관동의 체크 박스 토글 함수
   const handleToggleAll = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,7 +44,6 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
 
   useEffect(() => {
     setIsFormValid(!isTermsOfService && !isPrivacyPolicy);
-    console.log("isFormValid>> ", isFormValid);
   }, [isTermsOfService, isPrivacyPolicy, isFormValid]);
 
   return (
