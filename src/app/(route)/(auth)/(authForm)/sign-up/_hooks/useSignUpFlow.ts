@@ -5,7 +5,7 @@ import { FormValue } from "../../types/FormValue";
 type Step = "form" | "term" | "termDetail";
 
 export const useSignUpFlow = (onFinalSubmit: (data: FormValue) => void) => {
-  const [step, setStep] = useState<Step>("form");
+  const [step, setStep] = useState<Step>("term");
   const [termDetail, setTermDetail] = useState("");
 
   const { handleSubmit, trigger } = useFormContext<FormValue>();

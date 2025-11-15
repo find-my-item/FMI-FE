@@ -1,6 +1,9 @@
+"use no memo";
+
 import { Icon, Button, CheckBox } from "@/components";
 import { useFormContext, useWatch } from "react-hook-form";
 import { TERMS_CONFIG } from "../../_constant/TERMS_CONFIG";
+import { useEffect, useState } from "react";
 
 interface AllAgreeProps {
   onOpenDetail: (termKey: string) => void;
@@ -8,10 +11,12 @@ interface AllAgreeProps {
 }
 
 const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
-  const { register, setValue, control } = useFormContext();
+  const [isFormValid, setIsFormValid] = useState<boolean>(false); // 다음 버튼을 누르기 위한 disabled 장치
+
+  const { register, setValue, control, getFieldState } = useFormContext();
 
   const selectAll = useWatch({ control, name: "selectAll" }); // 전체 선택
-  const termsValue = useWatch({ control, name: TERMS_CONFIG.map((item) => item.key) }); // 개별 선택
+  const termsValue = useWatch({ control, name: TERMS_CONFIG.map((item) => item.name) }); // 개별 선택
 
   // 전체약관동의 체크 박스 토글 함수
   const handleToggleAll = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,7 +24,7 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
 
     // 개별 항목 모두 체크
     TERMS_CONFIG.forEach((item) => {
-      setValue(item.key, checked, { shouldValidate: true, shouldDirty: true });
+      setValue(item.name, checked, { shouldValidate: true, shouldDirty: true });
     });
     setValue("selectAll", checked, { shouldValidate: false, shouldDirty: false }); // 전체 항목 체크
   };
@@ -33,6 +38,14 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
   if (selectAll !== allChecked) {
     setValue("selectAll", allChecked, { shouldValidate: false, shouldDirty: false });
   }
+
+  const isTermsOfService = getFieldState("termsOfService").invalid; // 필수 약관 확인 (통과하면 false)
+  const isPrivacyPolicy = getFieldState("privacyPolicy").invalid; // 필수 약관 확인 (통과하면 false)
+
+  useEffect(() => {
+    setIsFormValid(!isTermsOfService && !isPrivacyPolicy);
+    console.log("isFormValid>> ", isFormValid);
+  }, [isTermsOfService, isPrivacyPolicy, isFormValid]);
 
   return (
     <>
@@ -61,16 +74,16 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
                 className="flex h-[44px] w-full items-center justify-between text-body1-semibold text-neutral-normal-default"
               >
                 <CheckBox
-                  id={item.key}
-                  label={item.name}
-                  {...register(item.key)}
+                  id={item.name}
+                  label={item.label}
+                  {...register(item.name, item.validation)}
                   state={!!termsValue?.[index]}
                 />
                 <button
                   className="bg-white"
                   type="button"
                   aria-label="상세 약관 열기"
-                  onClick={() => onOpenDetail(item.key)}
+                  onClick={() => onOpenDetail(item.name)}
                 >
                   <Icon name="ArrowRightSmall" size={24} />
                 </button>
@@ -81,7 +94,13 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
       </div>
       {/* signUpFooter */}
       <div className="sticky bottom-0 mt-auto h-[88px] w-full max-w-[390px] border-t border-flatGray-50 bg-white px-4 py-3">
-        <Button type="submit" ariaLabel="회원가입 버튼" onClick={onComplete} variant="auth">
+        <Button
+          type="submit"
+          ariaLabel="회원가입 버튼"
+          onClick={onComplete}
+          variant="auth"
+          disabled={!isFormValid}
+        >
           동의
         </Button>
       </div>
