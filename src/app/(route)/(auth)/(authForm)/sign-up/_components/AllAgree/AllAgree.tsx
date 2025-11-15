@@ -56,7 +56,7 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
         </p>
 
         <div className="flex min-h-[272px] w-full flex-col gap-8">
-          <div className="flex min-h-[68px] w-full items-center border-b border-[#CCCCCC] text-body1-semibold text-neutral-normal-default">
+          <div className="flex min-h-[68px] w-full items-center border-b border-divider-default text-body1-semibold text-neutral-normal-default">
             <CheckBox
               id="selectAll"
               label="전체 약관 동의"
