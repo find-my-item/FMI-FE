@@ -13,10 +13,10 @@ interface CheckBoxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "typ
   state: boolean;
 }
 
-const CheckBox = ({ id, label, boxSize, textStyle, iconSize, state, ...rest }: CheckBoxProps) => {
+const CheckBox = ({ id, label, boxSize, textStyle, iconSize, state, ...props }: CheckBoxProps) => {
   return (
     <label htmlFor={id} className="flex cursor-pointer items-center">
-      <input id={id} type="checkbox" className="peer sr-only" {...rest} />
+      <input id={id} type="checkbox" className="peer sr-only" {...props} />
       <div
         className={cn(
           "relative h-6 w-6 rounded bg-[#E4E4E4] flex-center peer-checked:bg-[#1EB87B]",
