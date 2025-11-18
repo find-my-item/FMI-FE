@@ -1,8 +1,7 @@
 "use client";
 "use no memo";
 
-import { useFormContext } from "react-hook-form";
-import { Button, InputText } from "@/components";
+import { Button, DetailHeader, InputText } from "@/components";
 import { useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
 import { FormValue } from "../types/FormValue";
@@ -19,7 +18,7 @@ const Page = () => {
     handleSubmit,
     formState: { isSubmitSuccessful },
     watch,
-  } = useFormContext();
+  } = useForm();
 
   const email = watch("email");
 
@@ -35,9 +34,9 @@ const Page = () => {
 
   return (
     <FormProvider {...methods}>
-      {" "}
+      <DetailHeader title="비밀번호 찾기" />
       <form
-        className="flex h-[191px] w-full gap-[10px] px-5 py-[30px] flex-col-center"
+        className="flex h-[191px] min-h-screen w-full flex-col gap-[10px] px-5 py-[30px]"
         onSubmit={onSubmit}
       >
         {isSubmitSuccessful ? (
