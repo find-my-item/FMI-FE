@@ -1,7 +1,7 @@
 "use no memo";
 
 import { SIGNUP_INPUT_CONFIG } from "../../_constant/SIGNUP_INPUT_CONFIG";
-import { Button, InputText } from "@/components";
+import { Button, InputText, DetailHeader } from "@/components";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -34,6 +34,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
 
   return (
     <>
+      <DetailHeader title="회원가입" />
       <div className="flex w-full flex-col gap-5 p-4">
         {SIGNUP_INPUT_CONFIG.map((item) => (
           <div key={item.name} className="h-[96px]">
