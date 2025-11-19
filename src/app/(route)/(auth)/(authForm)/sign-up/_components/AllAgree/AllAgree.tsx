@@ -1,6 +1,6 @@
 "use no memo";
 
-import { Icon, Button, CheckBox } from "@/components";
+import { Icon, Button, CheckBox, DetailHeader } from "@/components";
 import { useFormContext, useWatch } from "react-hook-form";
 import { TERMS_CONFIG } from "../../_constant/TERMS_CONFIG";
 import { useEffect, useState } from "react";
@@ -48,6 +48,7 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
 
   return (
     <>
+      <DetailHeader title="회원가입" />
       <div className="flex w-full flex-col gap-7 p-4">
         <p className="text-h3-semibold text-black">
           서비스 이용을 위해 <br />
