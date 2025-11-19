@@ -2,10 +2,10 @@ import { useCallback, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { FormValue } from "../../types/FormValue";
 
-type Step = "form" | "term" | "termDetail";
+// type Step = "form" | "term" | "termDetail";
 
 export const useSignUpFlow = (onFinalSubmit: (data: FormValue) => void) => {
-  const [step, setStep] = useState<Step>("form");
+  const [step, setStep] = useState<Number>(1);
   const [termDetail, setTermDetail] = useState("");
 
   const { handleSubmit, trigger } = useFormContext<FormValue>();
@@ -16,19 +16,19 @@ export const useSignUpFlow = (onFinalSubmit: (data: FormValue) => void) => {
   const onNext = useCallback(async () => {
     const ok = await trigger(["email", "password", "passwordConfirm", "nickname"]);
     if (ok) {
-      setStep("term");
+      setStep(2);
     }
   }, [trigger]);
 
   // 약관 상세 열기
   const openTermDetail = useCallback((termKey: string) => {
-    setStep("termDetail");
+    setStep(3);
     setTermDetail(termKey);
   }, []);
 
   // 세부 약관 -> 약관 동의
   const onAgreeTerm = useCallback(() => {
-    setStep("term");
+    setStep(2);
   }, []);
 
   // 약관 동의 -> 최종제출
