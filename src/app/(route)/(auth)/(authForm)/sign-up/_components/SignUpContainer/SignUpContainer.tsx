@@ -17,9 +17,9 @@ const SignUpContainer = ({ onFinalSubmit }: SignUpContainerProps) => {
 
   return (
     <form onSubmit={onSubmit} className="flex w-full flex-1 flex-col justify-between">
-      {step === 1 && <SignUpField onNext={onNext} />}
-      {step === 2 && <AllAgree onOpenDetail={openTermDetail} onComplete={completeTerms} />}
-      {step === 3 && <DetailAgree termKey={termDetail} onAgree={onAgreeTerm} />}
+      {step === "1" && <SignUpField onNext={() => onNext(2)} />}
+      {step === "2" && <AllAgree onOpenDetail={openTermDetail} onComplete={completeTerms} />}
+      {step === "3" && <DetailAgree termKey={termDetail} onAgree={() => onAgreeTerm(2)} />}
     </form>
   );
 };
