@@ -1,12 +1,11 @@
 "use client";
 "use no memo";
 
-import { AllAgree, DetailAgree, SignUpField } from "./_components";
-import { useSignUpFlow } from "./_hooks/useSignUpFlow";
 import { FormProvider, useForm } from "react-hook-form";
 import { FormValue } from "../types/FormValue";
 import { useRouter } from "next/navigation";
 import SignUpContainer from "./_components/SignUpContainer/SignUpContainer";
+import { Suspense } from "react";
 
 const Page = () => {
   const methods = useForm<FormValue>({
@@ -26,7 +25,9 @@ const Page = () => {
   return (
     <div className="flex min-h-screen w-full flex-col-center">
       <FormProvider {...methods}>
-        <SignUpContainer onFinalSubmit={handleFinalSubmit} />
+        <Suspense fallback={""}>
+          <SignUpContainer onFinalSubmit={handleFinalSubmit} />
+        </Suspense>
       </FormProvider>
     </div>
   );
