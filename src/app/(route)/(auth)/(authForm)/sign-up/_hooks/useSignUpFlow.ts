@@ -9,7 +9,8 @@ export const useSignUpFlow = (onFinalSubmit: (data: FormValue) => void) => {
 
   // 컴포넌트 전환 변수
   const step = searchParams.get("step") ?? "1";
-  console.log("step>> ", searchParams);
+  const termName = searchParams.get("term") ?? "";
+
   // 가드 변수
   const [maxStep, setMaxStep] = useState<number>(1);
 
@@ -52,8 +53,8 @@ export const useSignUpFlow = (onFinalSubmit: (data: FormValue) => void) => {
   }, []);
 
   // 세부 약관 -> 약관 동의
-  const onAgreeTerm = useCallback(async (nextStep: number) => {
-    router.push(`/sign-up?step=${nextStep}`);
+  const onAgreeTerm = useCallback(async (preStep: number) => {
+    router.push(`/sign-up?step=${preStep}`);
   }, []);
 
   // 약관 동의 -> 최종제출
@@ -76,5 +77,6 @@ export const useSignUpFlow = (onFinalSubmit: (data: FormValue) => void) => {
     openTermDetail,
     onAgreeTerm,
     completeTerms,
+    termName,
   };
 };

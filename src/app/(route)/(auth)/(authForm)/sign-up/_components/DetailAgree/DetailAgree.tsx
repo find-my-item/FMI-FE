@@ -3,13 +3,11 @@ import { AGREE_CONFIG } from "../../_constant/AGREE_CONFIG";
 import { useSearchParams } from "next/navigation";
 
 interface DetailAgreeProps {
+  termName: string;
   onAgree: () => void;
 }
 
-const DetailAgree = ({ onAgree }: DetailAgreeProps) => {
-  const searchParams = useSearchParams();
-
-  const termName = searchParams.get("term") ?? "";
+const DetailAgree = ({ termName, onAgree }: DetailAgreeProps) => {
   return (
     <>
       <DetailHeader title={AGREE_CONFIG[termName].title} />
