@@ -11,9 +11,12 @@ interface AllAgreeProps {
 }
 
 const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
-  const [isFormValid, setIsFormValid] = useState<boolean>(false); // 다음 버튼을 누르기 위한 disabled 장치
-
-  const { register, setValue, control, getFieldState } = useFormContext();
+  const {
+    register,
+    setValue,
+    control,
+    formState: { isValid },
+  } = useFormContext();
 
   const selectAll = useWatch({ control, name: "selectAll" });
   const termsValue = useWatch({ control, name: TERMS_CONFIG.map((item) => item.name) });
@@ -38,13 +41,6 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
   if (selectAll !== allChecked) {
     setValue("selectAll", allChecked, { shouldValidate: false, shouldDirty: false });
   }
-
-  const isTermsOfService = getFieldState("termsOfService").invalid; // 필수 약관 확인 (통과하면 false)
-  const isPrivacyPolicy = getFieldState("privacyPolicy").invalid; // 필수 약관 확인 (통과하면 false)
-
-  useEffect(() => {
-    setIsFormValid(!isTermsOfService && !isPrivacyPolicy);
-  }, [isTermsOfService, isPrivacyPolicy, isFormValid]);
 
   return (
     <>
@@ -99,7 +95,7 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
           ariaLabel="회원가입 버튼"
           onClick={onComplete}
           variant="auth"
-          disabled={!isFormValid}
+          disabled={!isValid}
         >
           동의
         </Button>
