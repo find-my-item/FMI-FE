@@ -2,20 +2,14 @@
 
 import { SIGNUP_INPUT_CONFIG } from "../../_constant/SIGNUP_INPUT_CONFIG";
 import { Button, InputText, DetailHeader } from "@/components";
-import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 const SignUpField = ({ onNext }: { onNext: () => void }) => {
-  const [isFormValid, setIsFormValid] = useState(false); // 다음 버튼을 누르기 위한 disabled 장치
-
   const {
     control,
     getFieldState,
     formState: { isSubmitting, isValid },
   } = useFormContext();
-
-  const isPassword = getFieldState("password").invalid; // 비밀번호 유효성 검사 확인 (통과하면 false)
-  const isPasswordConfirm = getFieldState("passwordConfirm").invalid; // 비밀번호 재확인 유효성 검사 확인 (통과하면 false)
 
   const HandlerToClick = (name: string) => {
     if (name === "email") {
@@ -27,10 +21,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
     }
   };
 
-  useEffect(() => {
-    // TODO(수현): api 연결 후 나머지 변수 추가 -> 버튼 disabled 해제
-    setIsFormValid(!isPassword && !isPasswordConfirm);
-  }, [isPassword, isPasswordConfirm]);
+  const isNextDisabled = isValid;
 
   return (
     <>
@@ -60,7 +51,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
           ariaLabel="회원가입 폼 버튼"
           onClick={onNext}
           className="w-full"
-          disabled={!isFormValid}
+          disabled={!isNextDisabled}
         >
           다음
         </Button>
