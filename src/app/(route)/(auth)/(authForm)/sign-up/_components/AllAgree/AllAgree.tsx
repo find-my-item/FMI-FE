@@ -1,6 +1,9 @@
-import { Icon, Button, CheckBox } from "@/components";
+"use no memo";
+
+import { Icon, Button, CheckBox, DetailHeader } from "@/components";
 import { useFormContext, useWatch } from "react-hook-form";
 import { TERMS_CONFIG } from "../../_constant/TERMS_CONFIG";
+import { useEffect, useState } from "react";
 
 interface AllAgreeProps {
   onOpenDetail: (termKey: string) => void;
@@ -8,10 +11,15 @@ interface AllAgreeProps {
 }
 
 const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
-  const { register, setValue, control } = useFormContext();
+  const {
+    register,
+    setValue,
+    control,
+    formState: { isValid },
+  } = useFormContext();
 
-  const selectAll = useWatch({ control, name: "selectAll" }); // 전체 선택
-  const termsValue = useWatch({ control, name: TERMS_CONFIG.map((item) => item.key) }); // 개별 선택
+  const selectAll = useWatch({ control, name: "selectAll" });
+  const termsValue = useWatch({ control, name: TERMS_CONFIG.map((item) => item.name) });
 
   // 전체약관동의 체크 박스 토글 함수
   const handleToggleAll = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,7 +27,7 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
 
     // 개별 항목 모두 체크
     TERMS_CONFIG.forEach((item) => {
-      setValue(item.key, checked, { shouldValidate: true, shouldDirty: true });
+      setValue(item.name, checked, { shouldValidate: true, shouldDirty: true });
     });
     setValue("selectAll", checked, { shouldValidate: false, shouldDirty: false }); // 전체 항목 체크
   };
@@ -36,6 +44,7 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
 
   return (
     <>
+      <DetailHeader title="회원가입" />
       <div className="flex w-full flex-col gap-7 p-4">
         <p className="text-h3-semibold text-black">
           서비스 이용을 위해 <br />
@@ -43,7 +52,7 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
         </p>
 
         <div className="flex min-h-[272px] w-full flex-col gap-8">
-          <div className="flex min-h-[68px] w-full items-center border-b border-[#CCCCCC] text-body1-semibold text-neutral-normal-default">
+          <div className="flex min-h-[68px] w-full items-center border-b border-divider-default text-body1-semibold text-neutral-normal-default">
             <CheckBox
               id="selectAll"
               label="전체 약관 동의"
@@ -61,16 +70,16 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
                 className="flex h-[44px] w-full items-center justify-between text-body1-semibold text-neutral-normal-default"
               >
                 <CheckBox
-                  id={item.key}
-                  label={item.name}
-                  {...register(item.key)}
+                  id={item.name}
+                  label={item.label}
+                  {...register(item.name, item.validation)}
                   state={!!termsValue?.[index]}
                 />
                 <button
                   className="bg-white"
                   type="button"
                   aria-label="상세 약관 열기"
-                  onClick={() => onOpenDetail(item.key)}
+                  onClick={() => onOpenDetail(item.name)}
                 >
                   <Icon name="ArrowRightSmall" size={24} />
                 </button>
@@ -81,7 +90,13 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
       </div>
       {/* signUpFooter */}
       <div className="sticky bottom-0 mt-auto h-[88px] w-full max-w-[390px] border-t border-flatGray-50 bg-white px-4 py-3">
-        <Button type="submit" ariaLabel="회원가입 버튼" onClick={onComplete} variant="auth">
+        <Button
+          type="submit"
+          ariaLabel="회원가입 버튼"
+          onClick={onComplete}
+          variant="auth"
+          disabled={!isValid}
+        >
           동의
         </Button>
       </div>

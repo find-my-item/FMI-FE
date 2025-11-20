@@ -26,7 +26,7 @@ export const VARIANT_STYLES = {
     base: "text-neutralInversed-strong-default bg-fill-neutralInversed-strong-default bg-opacity-[4%] hover:bg-opacity-[8%] hover:text-neutralInversed-strong-hover active:bg-opacity-[8%] active:text-neutralInversed-strong-pressed disabled:text-neutralInversed-strong-disabled",
   },
   auth: {
-    base: "w-full h-[44px] flex-center gap-1 rounded-[10px] bg-[#98E3BD] opacity-90 font-semibold text-white",
+    base: "w-full h-[44px] flex-center gap-1 rounded-[10px] bg-fill-brand-normal-default font-semibold text-white disabled:bg-fill-brand-normal-disabled",
   },
 } as const;
 
