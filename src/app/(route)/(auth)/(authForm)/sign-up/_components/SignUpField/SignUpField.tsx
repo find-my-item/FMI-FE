@@ -6,8 +6,6 @@ import { useFormContext } from "react-hook-form";
 
 const SignUpField = ({ onNext }: { onNext: () => void }) => {
   const {
-    control,
-    getFieldState,
     formState: { isSubmitting, isValid },
   } = useFormContext();
 
