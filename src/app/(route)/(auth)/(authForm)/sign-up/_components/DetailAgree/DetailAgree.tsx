@@ -1,22 +1,25 @@
 import { Button, DetailHeader } from "@/components";
 import { AGREE_CONFIG } from "../../_constant/AGREE_CONFIG";
+import { useSearchParams } from "next/navigation";
 
 interface DetailAgreeProps {
-  termKey: string;
   onAgree: () => void;
 }
 
-const DetailAgree = ({ termKey, onAgree }: DetailAgreeProps) => {
+const DetailAgree = ({ onAgree }: DetailAgreeProps) => {
+  const searchParams = useSearchParams();
+
+  const termName = searchParams.get("term") ?? "";
   return (
     <>
-      <DetailHeader title={AGREE_CONFIG[termKey].title} />
+      <DetailHeader title={AGREE_CONFIG[termName].title} />
       <div className="whitespace-pre-wrap px-4 py-6 text-body2-regular text-layout-body-default">
-        {AGREE_CONFIG[termKey].content}
+        {AGREE_CONFIG[termName].content}
       </div>
 
       {/* signUpFooter */}
       <div className="sticky bottom-0 mt-auto h-[88px] w-full max-w-[390px] border-t border-flatGray-50 bg-white px-4 py-3">
-        <Button type="button" onClick={onAgree} ariaLabel={termKey + "동의"}>
+        <Button type="button" onClick={onAgree} ariaLabel={termName + "동의"}>
           동의
         </Button>
       </div>
