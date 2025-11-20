@@ -20,7 +20,9 @@ const SignUpContainer = ({ onFinalSubmit }: SignUpContainerProps) => {
       {step === "2" && !termName && (
         <AllAgree onOpenDetail={openTermDetail} onComplete={completeTerms} />
       )}
-      {termName && <DetailAgree termName={termName} onAgree={() => onAgreeTerm(2)} />}
+      {step === "2" && termName && (
+        <DetailAgree termName={termName} onAgree={() => onAgreeTerm(2)} />
+      )}
     </form>
   );
 };

@@ -27,6 +27,10 @@ export const useSignUpFlow = (onFinalSubmit: (data: FormValue) => void) => {
 
   // 가드
   useEffect(() => {
+    const isStep = step === "1" || step === "2";
+    if (!isStep) {
+      router.replace(`/sign-up?step=1`);
+    }
     if (Number(step) > maxStep) {
       router.replace(`/sign-up?step=${maxStep}`);
     }
