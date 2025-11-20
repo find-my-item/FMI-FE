@@ -1,9 +1,14 @@
 "use client";
 
-import { InputHTMLAttributes } from "react";
+import { ChangeEvent, TextareaHTMLAttributes, useRef } from "react";
 import { cn } from "@/utils";
-import { RegisterOptions, useFormContext } from "react-hook-form";
+import { Controller, RegisterOptions, useFormContext } from "react-hook-form";
 import Icon from "@/components/Icon/Icon";
+import InputChatImageSection from "./_internal/InputChatImageSection";
+import { handleFileChange } from "./utils/handleFileChange";
+import { adjustHeight } from "./utils/adjustHeight";
+import { handleKeyDown } from "./utils/handleKeydown";
+import { useChatRoom } from "@/providers/ChatRoomProvider";
 
 /**
  * @author suhyeon
@@ -17,7 +22,6 @@ import Icon from "@/components/Icon/Icon";
  *  - 'name': 입력 필드의 id 및 register함수 사용을 위한 name
  *  - `validation`: 입력 필드의 유효성 검사를 위한 RegisterOption (기본적으로는 name만 사용하셔도 무방하지만 혹시모르기에 props로 추가해두었습니다.)
  *  - `disabled`: 사진 첨부, 입력 필드, 전송 버튼 disabled 처리를 위한 인수
- *  - 'sendClick': 사진 전송 및 입력필드의 전송 버튼 함수
  *
  * @example
  * ```tsx
@@ -26,68 +30,97 @@ import Icon from "@/components/Icon/Icon";
  *     <InputChat
  *       name="message"
  *       validation={{ required: true }}
- *       sendClick={() => methods.handleSubmit(onSubmit)()}
  *     />
  *   </form>
  * </FormProvider>
  *
  */
 
-interface InputChatProps extends InputHTMLAttributes<HTMLInputElement> {
+interface InputChatProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   name: string;
   validation?: RegisterOptions;
   disabled?: boolean;
-  sendClick?: () => void;
 }
 
-const InputChat = ({ name, validation, disabled, sendClick, ...props }: InputChatProps) => {
-  const { register, watch } = useFormContext();
-  const isValue = watch(name) ?? "";
+const InputChat = ({ name, validation, disabled, ...props }: InputChatProps) => {
+  const { control } = useFormContext();
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const { images, setImages } = useChatRoom();
 
   return (
-    <div className="flex w-full flex-row gap-2">
-      {/* 이미지 첨부 */}
-      <label
-        htmlFor="ImageAttach"
-        className="relative h-11 w-11 shrink-0 rounded-full bg-fill-neutral-strong-default"
-        aria-label="이미지 첨부"
-        role="button"
-      >
-        <Icon
-          name="Image"
-          size={20}
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-        />
-      </label>
-      <input id="ImageAttach" type="file" accept="image/*" className="hidden" disabled={disabled} />
+    <>
+      {images?.length !== 0 ? (
+        <InputChatImageSection />
+      ) : (
+        <Controller
+          name={name}
+          control={control}
+          rules={validation}
+          render={({ field }) => (
+            <div className="flex w-full flex-row items-end gap-2 overflow-y-visible">
+              {/* 이미지 첨부 */}
+              <label
+                htmlFor="ImageAttach"
+                className="relative h-11 w-11 shrink-0 rounded-full bg-fill-neutral-strong-default"
+                aria-label="이미지 첨부"
+                role="button"
+              >
+                <Icon
+                  name="Image"
+                  size={20}
+                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+                />
+              </label>
+              <input
+                id="ImageAttach"
+                type="file"
+                accept="image/*"
+                multiple
+                className="hidden"
+                disabled={disabled}
+                onChange={(e) => handleFileChange(e, images, setImages)}
+              />
 
-      {/* 입력창 */}
-      <input
-        id={name}
-        {...props}
-        {...register(name, validation)}
-        className={cn(
-          "h-11 min-w-0 flex-1 rounded-[24px] px-4 text-body2-medium text-neutral-normal-placeholder bg-fill-neutral-strong-default hover:placeholder-black focus:text-black disabled:text-neutral-strong-disabled",
-          isValue && "text-neutral-strong-focused"
-        )}
-        placeholder="메시지 보내기"
-        disabled={disabled}
-      />
+              {/* 입력창 */}
+              <textarea
+                {...props}
+                {...field}
+                ref={(e) => {
+                  field.ref(e);
+                  textareaRef.current = e;
+                }}
+                rows={1}
+                onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
+                  field.onChange(e);
+                  adjustHeight(e.target);
+                }}
+                onKeyDown={(e) => handleKeyDown(e, textareaRef)}
+                className={cn(
+                  "max-h-[120px] min-h-11 min-w-0 flex-1 resize-none overflow-y-hidden rounded-[24px] px-4 py-[10px] text-body2-medium text-neutral-normal-placeholder bg-fill-neutral-strong-default hover:placeholder-black focus:text-black disabled:text-neutral-strong-disabled",
+                  field.value && "text-neutral-strong-focused"
+                )}
+                placeholder="메시지 보내기"
+                disabled={disabled}
+              />
 
-      {/* 전송 버튼 */}
-      <button
-        className="relative h-11 w-11 shrink-0 rounded-full bg-fill-brand-normal-disabled hover:bg-fill-brand-normal-disabled focus:bg-fill-brand-normal-default disabled:bg-fill-brand-normal-disabled"
-        aria-label="전송 버튼"
-        onClick={sendClick}
-        disabled={disabled}
-      >
-        <Icon
-          name="Send"
-          size={20}
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+              {/* 전송 버튼 */}
+              <button
+                type="submit"
+                className="relative h-11 w-11 shrink-0 rounded-full bg-fill-brand-normal-default hover:bg-fill-brand-normal-disabled active:bg-fill-brand-normal-default disabled:bg-fill-brand-normal-disabled"
+                aria-label="전송 버튼"
+                disabled={disabled || !field.value?.trim()}
+              >
+                <Icon
+                  name="Send"
+                  size={20}
+                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+                />
+              </button>
+            </div>
+          )}
         />
-      </button>
-    </div>
+      )}
+    </>
   );
 };
 
