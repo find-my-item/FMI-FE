@@ -17,7 +17,6 @@ const Page = () => {
   const router = useRouter();
 
   const handleFinalSubmit = (data: FormValue) => {
-    console.log("최종 제출 데이터:", data);
     alert("폼 제출되었습니다.");
     router.push("/email-login");
   };
