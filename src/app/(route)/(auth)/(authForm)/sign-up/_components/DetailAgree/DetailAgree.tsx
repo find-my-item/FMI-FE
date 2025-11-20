@@ -1,6 +1,5 @@
 import { Button, DetailHeader } from "@/components";
 import { AGREE_CONFIG } from "../../_constant/AGREE_CONFIG";
-import { useSearchParams } from "next/navigation";
 
 interface DetailAgreeProps {
   termName: string;

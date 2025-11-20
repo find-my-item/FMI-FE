@@ -22,8 +22,6 @@ export const useSignUpFlow = (onFinalSubmit: (data: FormValue) => void) => {
     }
   }, []);
 
-  const [termDetail, setTermDetail] = useState<string>("");
-
   const { handleSubmit, trigger } = useFormContext<FormValue>();
   const onSubmit = handleSubmit(onFinalSubmit);
 
@@ -49,7 +47,6 @@ export const useSignUpFlow = (onFinalSubmit: (data: FormValue) => void) => {
   // 약관 상세 열기
   const openTermDetail = useCallback((termKey: string) => {
     router.push(`/sign-up?step=2&term=${termKey}`);
-    setTermDetail(termKey);
   }, []);
 
   // 세부 약관 -> 약관 동의
@@ -71,7 +68,6 @@ export const useSignUpFlow = (onFinalSubmit: (data: FormValue) => void) => {
 
   return {
     step,
-    termDetail,
     onSubmit,
     onNext,
     openTermDetail,
