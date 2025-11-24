@@ -3,7 +3,7 @@
 
 import { TextareaHTMLAttributes } from "react";
 import { cn } from "@/utils";
-import { RegisterOptions, useFormContext } from "react-hook-form";
+import { RegisterOptions, useFormContext, useWatch } from "react-hook-form";
 import DeleteButton from "../_internal/DeleteButton/DeleteButton";
 import Label from "../_internal/Label/Label";
 import Caption from "../_internal/Caption/Caption";
@@ -52,13 +52,12 @@ interface InputFieldProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 const InputField = ({ name, label, validation, rule, ...props }: InputFieldProps) => {
   const {
     register,
-    watch,
     formState: { errors },
   } = useFormContext();
 
   const { onDelete } = useFormInput();
 
-  const isValue = watch(name) ?? "";
+  const isValue = useWatch({ name }) ?? "";
   const isValueStr = (isValue ?? "").toString();
 
   const maxLength =
