@@ -127,7 +127,7 @@ const ChatReportPage = () => {
   const onSubmit = (data: ReportFormValues) => {
     if (!selectedReportReason || !data.report) return;
     addToast("신고가 접수되었습니다.", "success");
-    router.push("/chat");
+    router.replace("/chat");
   };
 
   return (
