@@ -3,8 +3,26 @@
 import { SIGNUP_INPUT_CONFIG } from "../../_constant/SIGNUP_INPUT_CONFIG";
 import { Button } from "@/components";
 import SignUpItem from "../SignUpItem/SignUpItem";
+import useAppMutation from "@/api/query/useAppMutation";
 
 const SignUpField = ({ onNext }: { onNext: () => void }) => {
+  const postEmail = useAppMutation<
+    { email: string },
+    {
+      isSuccess: boolean;
+      code: string;
+      message: string;
+      result: string;
+    }
+  >("auth", "auth/email/send-code", "post", {
+    onSuccess: (data) => {
+      console.log("data>>> ", data);
+    },
+    onError: (error) => {
+      console.log("error>> ", error);
+    },
+  });
+
   return (
     <>
       <div className="flex w-full flex-col gap-5 p-4">
