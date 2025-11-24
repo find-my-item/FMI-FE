@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { ReportReason } from "./_types/ReportReason";
-import ReportReasonModal from "./_components/ReportReasonModal";
+import { ReportReasonModal } from "./_components";
 
 type ReportFormValues = {
   report: string;
