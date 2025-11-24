@@ -1,7 +1,7 @@
 import { RegisterOptions } from "react-hook-form";
 
 type TermsType = {
-  name: string;
+  name: "termsOfService" | "privacyPolicy" | "marketingConsent";
   label: string;
   validation: RegisterOptions;
 };
