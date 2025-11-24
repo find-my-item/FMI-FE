@@ -33,12 +33,6 @@ const ReportReasonModal = ({
   const [tempSelectedReportReason, setTempSelectedReportReason] = useState<ReportReason | null>(
     selectedReportReason ?? null
   );
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    return () => setMounted(false);
-  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -54,7 +48,7 @@ const ReportReasonModal = ({
     }
   }, [isOpen]);
 
-  if (!isOpen || !mounted) return null;
+  if (!isOpen) return null;
 
   const handleSelectReportReason = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -70,7 +64,7 @@ const ReportReasonModal = ({
       onClick={onClose}
     >
       <form
-        className="absolute bottom-0 flex h-[671px] w-full max-w-[390px] flex-col rounded-t-[20px] bg-white px-[20px] py-[40px]"
+        className="animate-modal-slide-up absolute bottom-0 flex h-[671px] w-full max-w-[390px] flex-col rounded-t-[20px] bg-white px-[20px] py-[40px]"
         onClick={(e) => e.stopPropagation()}
         onSubmit={handleSelectReportReason}
       >
