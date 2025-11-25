@@ -1,13 +1,22 @@
 "use client";
 
 import { Filter } from "@/components";
-import { useState } from "react";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { ALERT_CATEGORIES } from "../../_constants/ALERT_CATEGORIES";
 
 type AlertCategoryKey = (typeof ALERT_CATEGORIES)[number]["key"];
 
 const AlertCategory = () => {
-  const [selected, setSelected] = useState<AlertCategoryKey>("all");
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const selected = (searchParams.get("category") as AlertCategoryKey) || "all";
+
+  const handleCategoryClick = (key: AlertCategoryKey) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("category", key);
+    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+  };
 
   return (
     <div className="mx-auto flex gap-[8px] py-[14px]">
@@ -16,7 +25,7 @@ const AlertCategory = () => {
           key={category.key}
           ariaLabel={category.label}
           onSelected={selected === category.key}
-          onClick={() => setSelected(category.key)}
+          onClick={() => handleCategoryClick(category.key)}
         >
           {category.label}
         </Filter>
