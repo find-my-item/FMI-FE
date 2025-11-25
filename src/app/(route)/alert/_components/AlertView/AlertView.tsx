@@ -1,5 +1,5 @@
 import { Icon } from "@/components";
-import { cn } from "@/utils";
+import { cn, formatDate } from "@/utils";
 
 const AlertView = () => {
   const ALERT_ITEMS = [
@@ -8,7 +8,7 @@ const AlertView = () => {
       category: "전자기기",
       title: ` 새 게시글이 등록되었어요.`,
       body: "시청역 아이폰 14 보관중입니다.",
-      createdAt: "2025.01.01",
+      createdAt: "2025-11-25T11:15:04.559Z",
       isRead: true,
       icon: "AlertItem" as const,
       iconBg: "bg-blue-200",
@@ -18,7 +18,7 @@ const AlertView = () => {
       category: "확인하지 않은 채팅",
       title: "이 있어요.",
       body: "혹시 OO동 OO빌딩 화장실에서 핸드폰 잃어버리셨나요 그럼 혹시",
-      createdAt: "2025.09.20",
+      createdAt: "2025-11-25T11:20:04.559Z",
       isRead: true,
       icon: "AlertUnreadChat" as const,
       iconBg: "bg-flatGreen-500",
@@ -28,7 +28,7 @@ const AlertView = () => {
       category: "새로운 채팅",
       title: "이 도착했어요.",
       body: "혹시 OO동 OO빌딩 화장실에서 핸드폰 잃어버리셨나요 그럼 혹시",
-      createdAt: "2025.09.20",
+      createdAt: "2025-11-20T11:15:04.559Z",
       isRead: true,
       icon: "AlertNewChat" as const,
       iconBg: "bg-flatGreen-500",
@@ -38,7 +38,7 @@ const AlertView = () => {
       category: "즐겨찾기한 게시글의 상태",
       title: "가 변경되었어요.",
       body: "노원구에서 검정색 카드 지갑 잃어버렸어요",
-      createdAt: "2025.09.20",
+      createdAt: "2025-11-18T11:15:04.559Z",
       isRead: true,
       icon: "AlertStar" as const,
       iconBg: "bg-system-bookmark",
@@ -48,7 +48,7 @@ const AlertView = () => {
       category: "새로운 댓글",
       title: "이 달렸어요.",
       body: "서울시 노원구 OO동 건물 화장실에서 핸드폰을 잃어버렸어요. 핸드폰은",
-      createdAt: "2025.09.20",
+      createdAt: "2025-11-19T11:15:04.559Z",
       isRead: false,
       icon: "AlertNewComment" as const,
       iconBg: "bg-flatGray-600",
@@ -79,10 +79,12 @@ const AlertView = () => {
                 <span className="text-body2-medium text-neutral-normal-default">{item.title}</span>
               </div>
               <span className="text-caption1-regular text-neutral-normal-placeholder">
-                {item.createdAt}
+                {formatDate(item.createdAt)}
               </span>
             </div>
-            <span className="text-body2-regular text-neutral-strong-default">{item.body}</span>
+            <span className="line-clamp-1 text-body2-regular text-neutral-strong-default">
+              {item.body}
+            </span>
           </div>
         </div>
       ))}
