@@ -35,3 +35,8 @@ export { default as ChatLost } from "@/assets/chat-lost.svg";
 export { default as ChatFind } from "@/assets/chat-find.svg";
 export { default as Download } from "@/assets/download.svg";
 export { default as Setting } from "@/assets/settings.svg";
+export { default as AlertItem } from "@/assets/alert-item.svg";
+export { default as AlertNewChat } from "@/assets/alert-new-chat.svg";
+export { default as AlertNewComment } from "@/assets/alert-new-comment.svg";
+export { default as AlertStar } from "@/assets/alert-star.svg";
+export { default as AlertUnreadChat } from "@/assets/alert-unread-chat.svg";
