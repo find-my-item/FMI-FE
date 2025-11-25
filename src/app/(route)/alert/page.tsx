@@ -1,15 +1,5 @@
-"use client";
-
-import { DetailHeader } from "@/components";
-
 const Alert = () => {
-  return (
-    <>
-      <DetailHeader title="알림">
-        <DetailHeader.Setting />
-      </DetailHeader>
-    </>
-  );
+  return <>알림페이지</>;
 };
 
 export default Alert;
