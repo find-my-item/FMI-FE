@@ -1,5 +1,11 @@
+import AlertTab from "./_components/AlertTab/AlertTab";
+
 const Alert = () => {
-  return <>알림페이지</>;
+  return (
+    <>
+      <AlertTab />
+    </>
+  );
 };
 
 export default Alert;
