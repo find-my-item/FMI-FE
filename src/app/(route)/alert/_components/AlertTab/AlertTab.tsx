@@ -1,24 +1,18 @@
 "use client";
 
 import { Tab } from "@/components";
-import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ALERT_TABS } from "../../_constants/ALERT_TABS";
-
-type AlertTabKey = (typeof ALERT_TABS)[number]["key"];
+import { AlertTabKey } from "../../_types/alertKeyType";
 
 const AlertTab = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const selected = (searchParams.get("tab") as AlertTabKey) || "all";
+  const selectedTab = (searchParams.get("tab") as AlertTabKey) || "all";
 
-  const onChangeTab = (key: AlertTabKey) => {
-    const params = new URLSearchParams(searchParams);
-    params.set("tab", key);
-    router.push(`${pathname}?${params.toString()}`, { scroll: false });
-  };
+  const onChangeTab = (key: AlertTabKey) => router.push(`/alert?tab=${key}`);
 
-  return <Tab tabs={ALERT_TABS} selected={selected} onValueChange={onChangeTab} />;
+  return <Tab tabs={ALERT_TABS} selected={selectedTab} onValueChange={onChangeTab} />;
 };
 
 export default AlertTab;

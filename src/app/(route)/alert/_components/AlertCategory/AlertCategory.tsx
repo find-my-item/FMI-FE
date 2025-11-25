@@ -1,22 +1,16 @@
 "use client";
 
 import { Filter } from "@/components";
-import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ALERT_CATEGORIES } from "../../_constants/ALERT_CATEGORIES";
-
-type AlertCategoryKey = (typeof ALERT_CATEGORIES)[number]["key"];
+import { AlertCategoryKey } from "../../_types/alertKeyType";
 
 const AlertCategory = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const selected = (searchParams.get("category") as AlertCategoryKey) || "all";
+  const selectedCategory = (searchParams.get("category") as AlertCategoryKey) || "all";
 
-  const handleCategoryClick = (key: AlertCategoryKey) => {
-    const params = new URLSearchParams(searchParams);
-    params.set("category", key);
-    router.push(`${pathname}?${params.toString()}`, { scroll: false });
-  };
+  const handleCategoryClick = (key: AlertCategoryKey) => router.push(`/alert?category=${key}`);
 
   return (
     <div className="mx-auto flex gap-[8px] py-[14px]">
@@ -24,7 +18,7 @@ const AlertCategory = () => {
         <Filter
           key={category.key}
           ariaLabel={category.label}
-          onSelected={selected === category.key}
+          onSelected={selectedCategory === category.key}
           onClick={() => handleCategoryClick(category.key)}
         >
           {category.label}
