@@ -2,15 +2,13 @@
 
 import { Tab } from "@/components";
 import { useState } from "react";
+import { ALERT_TABS } from "../../_constants/ALERT_TABS";
+
+type AlertTabKey = (typeof ALERT_TABS)[number]["key"];
 
 const AlertTab = () => {
-  const [selected, setSelected] = useState("all");
-  const ALERT_TABS = [
-    { key: "all", label: "전체" },
-    { key: "unread", label: "읽지 않음" },
-    { key: "read", label: "읽음" },
-  ];
-  const onChangeTab = (key: string) => {
+  const [selected, setSelected] = useState<AlertTabKey>("all");
+  const onChangeTab = (key: AlertTabKey) => {
     setSelected(key);
   };
 
