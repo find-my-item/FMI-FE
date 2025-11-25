@@ -17,7 +17,7 @@ export const SIGNUP_INPUT_CONFIG: InputType[] = [
     type: "text",
     placeholder: "인증번호를 입력해주세요.",
     validation: {
-      required: true,
+      required: false,
     },
     btnText: "인증번호 확인",
     successMessage: "인증되었습니다.",
