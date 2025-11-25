@@ -8,4 +8,5 @@ export const HEADER_LINK = [
   { name: "FAQ", href: "/faq" },
   { name: "채팅", href: "/chat" },
   { name: "매뉴얼", href: "/manual" },
+  { name: "알림", href: "/alert" },
 ];
