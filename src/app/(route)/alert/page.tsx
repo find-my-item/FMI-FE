@@ -1,9 +1,10 @@
-import AlertTab from "./_components/AlertTab/AlertTab";
+import { AlertTab, AlertCategory } from "./_components";
 
 const Alert = () => {
   return (
     <>
       <AlertTab />
+      <AlertCategory />
     </>
   );
 };
