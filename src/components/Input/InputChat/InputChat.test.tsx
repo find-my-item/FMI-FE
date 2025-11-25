@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { FormProvider, useForm } from "react-hook-form";
 import InputChat from "./InputChat";
+import { ChatRoomProvider } from "@/providers/ChatRoomProvider";
 import "@testing-library/jest-dom";
 
 jest.mock("@/utils", () => ({
@@ -17,10 +18,12 @@ jest.mock("@/components/Icon/Icon", () => {
   };
 });
 
-const renderComponent = (props: Partial<React.ComponentProps<typeof InputChat>> = {}) => {
+const renderComponent = (
+  props: Partial<React.ComponentProps<typeof InputChat>> = {},
+  initialImages: File[] = []
+) => {
   const defaultProps = {
     name: "test-chat",
-    sendClick: jest.fn(),
   };
   const mergedProps = { ...defaultProps, ...props };
 
@@ -31,7 +34,11 @@ const renderComponent = (props: Partial<React.ComponentProps<typeof InputChat>> 
       },
       mode: "onChange",
     });
-    return <FormProvider {...methods}>{children}</FormProvider>;
+    return (
+      <ChatRoomProvider initialImages={initialImages}>
+        <FormProvider {...methods}>{children}</FormProvider>
+      </ChatRoomProvider>
+    );
   };
 
   const user = userEvent.setup();
@@ -46,7 +53,6 @@ const renderComponent = (props: Partial<React.ComponentProps<typeof InputChat>> 
 };
 
 describe("InputChat 컴포넌트", () => {
-  // 테스트 1
   it("필수 요소들이 올바르게 렌더링 되는지 확인", () => {
     renderComponent();
 
@@ -59,16 +65,14 @@ describe("InputChat 컴포넌트", () => {
     expect(screen.getByText("Send")).toBeInTheDocument();
   });
 
-  // 테스트 2
   it("입력창에 텍스트를 입력할 수 있는지 확인", async () => {
     const { user } = renderComponent();
-    const input = screen.getByPlaceholderText<HTMLInputElement>("메시지 보내기");
+    const input = screen.getByPlaceholderText<HTMLTextAreaElement>("메시지 보내기");
 
     await user.type(input, "안녕하세요");
     expect(input.value).toBe("안녕하세요");
   });
 
-  // 테스트 3
   it("텍스트 입력 시 입력창에 'text-neutral-strong-focused' 클래스가 적용되는지 확인", async () => {
     const { user } = renderComponent();
     const input = screen.getByPlaceholderText("메시지 보내기");
@@ -79,16 +83,22 @@ describe("InputChat 컴포넌트", () => {
     expect(input).toHaveClass("text-neutral-strong-focused");
   });
 
-  // 테스트 4
-  it("전송 버튼 클릭 시 sendClick 함수가 호출되는지 확인", async () => {
-    const { user, props } = renderComponent();
+  it("전송 버튼이 비어있는 입력값일 때 비활성화되는지 확인", () => {
+    renderComponent();
     const sendButton = screen.getByLabelText("전송 버튼");
 
-    await user.click(sendButton);
-    expect(props.sendClick).toHaveBeenCalledTimes(1);
+    expect(sendButton).toBeDisabled();
   });
 
-  // 테스트 5
+  it("전송 버튼이 입력값이 있을 때 활성화되는지 확인", async () => {
+    const { user } = renderComponent();
+    const input = screen.getByPlaceholderText("메시지 보내기");
+    const sendButton = screen.getByLabelText("전송 버튼");
+
+    await user.type(input, "테스트 메시지");
+    expect(sendButton).not.toBeDisabled();
+  });
+
   it("disabled prop이 true일 때 입력창이 비활성화되는지 확인", () => {
     renderComponent({ disabled: true });
 
@@ -96,8 +106,7 @@ describe("InputChat 컴포넌트", () => {
     expect(input).toBeDisabled();
   });
 
-  // 테스트 6
-  it("disabled prop이 true일때 비활성화 되는지 확인", () => {
+  it("disabled prop이 true일 때 전송 버튼이 비활성화되는지 확인", () => {
     renderComponent({ disabled: true });
 
     const sendButton = screen.getByLabelText("전송 버튼");
