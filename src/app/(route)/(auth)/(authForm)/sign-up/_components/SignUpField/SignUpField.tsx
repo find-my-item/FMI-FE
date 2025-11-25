@@ -1,8 +1,8 @@
 "use no memo";
 
 import { SIGNUP_INPUT_CONFIG } from "../../_constant/SIGNUP_INPUT_CONFIG";
-import SignUpItem from "../SignUpItem/SignUpItem";
-import useAppMutation from "@/api/query/useAppMutation";
+// import SignUpItem from "../SignUpItem/SignUpItem";
+// import useAppMutation from "@/api/query/useAppMutation";
 import { Button, InputText, DetailHeader, Toast } from "@/components";
 import { useFormContext } from "react-hook-form";
 import { useState } from "react";
@@ -14,25 +14,6 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
   } = useFormContext();
 
   const { addToast } = useToast();
-
-  // const { mutate, data, error, isPending } = useAppMutation<
-  //   { email: string },
-  //   { isSuccess: boolean; code: string; message: string; result: string }
-  // >("auth", "auth/email/send-code", "post", {
-  //   onSuccess: (data) => {
-  //     console.log("data>>> ", data);
-  //     return (<Toast message="인증번호가 발송되었습니다." type="success" />);
-  //   },
-  //   onError: (error) => {
-  //     console.log("error>> ", error);
-  //   },
-  // });
-
-  const [showToast, setShowToast] = useState<{
-    show: boolean;
-    type: "success" | "error" | "warning";
-    message: string;
-  }>({ show: false, type: "success", message: "" });
 
   const HandlerToClick = (name: string) => {
     if (name === "email") {
@@ -61,7 +42,6 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
     <>
       <DetailHeader title="회원가입" />
       <div className="flex w-full flex-col gap-5 p-4">
-        {showToast.show && <Toast message={showToast.message} type={showToast.type} />}
         {SIGNUP_INPUT_CONFIG.map((item) => (
           <div key={item.name} className="h-[96px]">
             {/* TODO(수현): props 줄이기  */}
