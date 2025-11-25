@@ -2,10 +2,16 @@ import { Icon } from "@/components";
 import { cn, formatDate } from "@/utils";
 import { MOCK_ALERT_ITEMS } from "../../_constants/MOCK_ALERT_ITEMS";
 
-const AlertView = () => {
+type AlertItem = (typeof MOCK_ALERT_ITEMS)[number];
+
+interface AlertViewProps {
+  items: AlertItem[];
+}
+
+const AlertView = ({ items }: AlertViewProps) => {
   return (
     <>
-      {MOCK_ALERT_ITEMS.map((item) => (
+      {items.map((item) => (
         <div
           key={item.id}
           className={cn(
