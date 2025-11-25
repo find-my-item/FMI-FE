@@ -2,15 +2,12 @@
 
 import { Filter } from "@/components";
 import { useState } from "react";
+import { ALERT_CATEGORIES } from "../../_constants/ALERT_CATEGORIES";
+
+type AlertCategoryKey = (typeof ALERT_CATEGORIES)[number]["key"];
 
 const AlertCategory = () => {
-  const [selected, setSelected] = useState("all");
-  const ALERT_CATEGORIES = [
-    { key: "all", label: "전체" },
-    { key: "categoryKeyword", label: "카테고리 키워드" },
-    { key: "chat", label: "채팅" },
-    { key: "comment", label: "댓글" },
-  ];
+  const [selected, setSelected] = useState<AlertCategoryKey>("all");
 
   return (
     <div className="mx-auto flex gap-[8px] py-[14px]">
