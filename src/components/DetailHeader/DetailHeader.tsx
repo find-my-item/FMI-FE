@@ -75,4 +75,12 @@ DetailHeader.Menu = (props: BaseButtonProps & { size?: "large" | "small" }) => {
   return <KebabMenuButton {...props} />;
 };
 
+DetailHeader.Setting = ({ ariaLabel = "알림 설정", ...props }: BaseButtonProps) => {
+  return (
+    <button {...props} aria-label={ariaLabel}>
+      <Icon name="Setting" />
+    </button>
+  );
+};
+
 export default DetailHeader;

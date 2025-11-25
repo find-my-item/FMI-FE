@@ -34,3 +34,4 @@ export { default as Information } from "@/assets/information.svg";
 export { default as ChatLost } from "@/assets/chat-lost.svg";
 export { default as ChatFind } from "@/assets/chat-find.svg";
 export { default as Download } from "@/assets/download.svg";
+export { default as Setting } from "@/assets/settings.svg";
