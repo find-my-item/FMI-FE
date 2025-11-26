@@ -3,6 +3,6 @@ export type ResponseType = {
   code: string;
   message: string;
   result: {
-    varified: boolean;
+    verified: boolean;
   };
 };

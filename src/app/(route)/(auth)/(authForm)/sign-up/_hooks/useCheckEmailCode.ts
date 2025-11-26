@@ -4,7 +4,7 @@ import useAppMutation from "@/api/query/useAppMutation";
 import { ResponseType } from "../../types/ResponseType";
 
 export const useCheckEmailcode = (email: string, code: string) => {
-  const { data } = useAppMutation<{ email: string; code: string }, ResponseType>(
+  return useAppMutation<{ email: string; code: string }, ResponseType>(
     "public",
     "/auth/email/verify",
     "post",
