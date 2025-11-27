@@ -8,6 +8,8 @@ import { useFormContext } from "react-hook-form";
 // import { useState } from "react";
 import { useToast } from "@/context/ToastContext";
 import { useSendEmail } from "../../_hooks/useSendEmail";
+import { useCheckNickname } from "../../_hooks/useCheckNickname";
+import { useEffect, useState } from "react";
 
 const SignUpField = ({ onNext }: { onNext: () => void }) => {
   const {
@@ -15,9 +17,25 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
     formState: { isSubmitting, isValid },
   } = useFormContext();
 
-  const { mutate, data, error, isPending } = useSendEmail();
+  const { mutate } = useSendEmail();
 
   const { addToast } = useToast();
+
+  // 닉네임 검사
+  const [nicknameValue, setNicknameValue] = useState("");
+  const { data, error, isSuccess, isError } = useCheckNickname(nicknameValue);
+  useEffect(() => {
+    if (isSuccess && data.code === "COMMON200") {
+      console.log("data>> ", data);
+      addToast("사용할 수 있는 닉네임입니다.", "success");
+    } else if (isError && data?.code === "NICKNAME_INVALID") {
+      console.log("error>> ", error);
+      addToast("닉네임에 금칙어가 포함되어 있습니다.", "warning");
+    } else if (isError && data?.code === "NICKNAME_DUPLICATE") {
+      addToast("중복된 닉네임입니다.", "warning");
+    }
+    // addToast("다시 시도해 주세요.", "error");
+  }, [nicknameValue, data, error, isSuccess, isError]);
 
   const HandlerToClick = (name: string) => {
     if (name === "email") {
@@ -30,10 +48,12 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
           onSuccess: (res) => {
             addToast("인증번호가 발송되었습니다.", "success");
           },
+          onError: (res) => {
+            addToast("다시 시도해 주세요.", "error");
+          },
         }
       );
       // addToast("이미 존재하는 이메일입니다.", "warning");
-      addToast("다시 시도해 주세요.", "error");
     } else if (name === "emailAuth") {
       // TODO(수현): email 인증번호 확인 api
       addToast("인증되었습니다.", "success");
@@ -41,10 +61,12 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
       addToast("다시 시도해 주세요.", "error");
     } else if (name === "nickname") {
       // TODO(수현): 닉네임 중복 확인 api
-      addToast("사용할 수 있는 닉네임입니다.", "success");
-      addToast("중복된 닉네임입니다.", "warning");
-      addToast("닉네임에 금칙어가 포함되어 있습니다.", "warning");
-      addToast("다시 시도해 주세요.", "error");
+      const nickname = getValues(name);
+      if (nickname) {
+        setNicknameValue(nickname);
+      } else {
+        addToast("닉네임을 입력해 주세요.", "warning");
+      }
     }
   };
 
