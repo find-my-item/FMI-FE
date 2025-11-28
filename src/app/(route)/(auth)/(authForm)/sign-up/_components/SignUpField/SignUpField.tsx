@@ -10,6 +10,7 @@ import { useToast } from "@/context/ToastContext";
 import { useSendEmail } from "../../_hooks/useSendEmail";
 import { useCheckNickname } from "../../_hooks/useCheckNickname";
 import { useEffect, useState } from "react";
+import { useCheckCode } from "../../_hooks/useCheckCode";
 
 const SignUpField = ({ onNext }: { onNext: () => void }) => {
   const {
@@ -17,13 +18,17 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
     formState: { isSubmitting, isValid },
   } = useFormContext();
 
-  const { mutate } = useSendEmail();
+  const { mutate: EmailMutate } = useSendEmail();
+  const [emailValue, setEmailValue] = useState("");
 
+  const { mutate: CodeMutate } = useCheckCode();
   const { addToast } = useToast();
 
   // 닉네임 검사
   const [nicknameValue, setNicknameValue] = useState("");
   const { data, error, isSuccess, isError } = useCheckNickname(nicknameValue);
+
+  // 닉네임 api useEffect
   useEffect(() => {
     if (isSuccess && data.code === "COMMON200") {
       console.log("data>> ", data);
@@ -40,15 +45,17 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
   const HandlerToClick = (name: string) => {
     if (name === "email") {
       // TODO(수현): email 중복 확인 및 인증번호 발송 api
-      const emailValue = getValues(name);
-
-      mutate(
-        { email: emailValue },
+      const isEmail = getValues(name);
+      setEmailValue(isEmail);
+      EmailMutate(
+        { email: isEmail },
         {
           onSuccess: (res) => {
+            console.log("res>> ", res);
             addToast("인증번호가 발송되었습니다.", "success");
           },
-          onError: (res) => {
+          onError: (error) => {
+            console.log("error>> ", error);
             addToast("다시 시도해 주세요.", "error");
           },
         }
@@ -56,9 +63,21 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
       // addToast("이미 존재하는 이메일입니다.", "warning");
     } else if (name === "emailAuth") {
       // TODO(수현): email 인증번호 확인 api
-      addToast("인증되었습니다.", "success");
-      addToast("인증번호가 일치하지 않습니다.", "warning");
-      addToast("다시 시도해 주세요.", "error");
+      const codeValue = getValues(name);
+      CodeMutate(
+        { email: emailValue, code: codeValue },
+        {
+          onSuccess: (data) => {
+            console.log("data>> ", data);
+            addToast("인증되었습니다.", "success");
+          },
+          onError: (error) => {
+            console.log("error>> ", error);
+            addToast("인증번호가 일치하지 않습니다.", "warning");
+          },
+        }
+      );
+      // addToast("다시 시도해 주세요.", "error");
     } else if (name === "nickname") {
       // TODO(수현): 닉네임 중복 확인 api
       const nickname = getValues(name);
