@@ -33,3 +33,6 @@ export { default as NotFound } from "@/assets/not-found.svg";
 export { default as Information } from "@/assets/information.svg";
 export { default as ChatLost } from "@/assets/chat-lost.svg";
 export { default as ChatFind } from "@/assets/chat-find.svg";
+export { default as HeadPhone } from "@/assets/headphones.svg";
+export { default as MessageTyping } from "@/assets/message-typing.svg";
+export { default as AnnotationAlert } from "@/assets/annotation-alert.svg";
