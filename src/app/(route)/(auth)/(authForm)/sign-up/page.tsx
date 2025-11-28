@@ -1,11 +1,12 @@
 "use client";
 "use no memo";
 
+import { AllAgree, DetailAgree, SignUpField } from "./_components";
+import { useSignUpFlow } from "./_hooks/useSignUpFlow";
 import { FormProvider, useForm } from "react-hook-form";
 import { FormValue } from "../types/FormValue";
 import { useRouter } from "next/navigation";
 import SignUpContainer from "./_components/SignUpContainer/SignUpContainer";
-import { Suspense } from "react";
 
 const Page = () => {
   const methods = useForm<FormValue>({
@@ -17,6 +18,7 @@ const Page = () => {
   const router = useRouter();
 
   const handleFinalSubmit = (data: FormValue) => {
+    console.log("최종 제출 데이터:", data);
     alert("폼 제출되었습니다.");
     router.push("/email-login");
   };
@@ -24,9 +26,7 @@ const Page = () => {
   return (
     <div className="flex min-h-screen w-full flex-col-center">
       <FormProvider {...methods}>
-        <Suspense fallback={""}>
-          <SignUpContainer onFinalSubmit={handleFinalSubmit} />
-        </Suspense>
+        <SignUpContainer onFinalSubmit={handleFinalSubmit} />
       </FormProvider>
     </div>
   );
