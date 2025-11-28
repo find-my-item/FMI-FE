@@ -24,6 +24,8 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
   const { mutate: CodeMutate } = useCheckCode();
   const { addToast } = useToast();
 
+  const [codeVerified, setCodeVerified] = useState(false);
+
   // 닉네임 검사
   const [nicknameValue, setNicknameValue] = useState("");
   const { data, error, isSuccess, isError } = useCheckNickname(nicknameValue);
@@ -42,11 +44,13 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
     // addToast("다시 시도해 주세요.", "error");
   }, [nicknameValue, data, error, isSuccess, isError]);
 
+  // 버튼 클릭 함수
   const HandlerToClick = (name: string) => {
     if (name === "email") {
       // TODO(수현): email 중복 확인 및 인증번호 발송 api
       const isEmail = getValues(name);
       setEmailValue(isEmail);
+
       EmailMutate(
         { email: isEmail },
         {
@@ -69,6 +73,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
         {
           onSuccess: (data) => {
             console.log("data>> ", data);
+            setCodeVerified(true);
             addToast("인증되었습니다.", "success");
           },
           onError: (error) => {
@@ -106,6 +111,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
               validation={item.validation}
               rule={item.rule}
               eyeShow={item.eyeShow}
+              disabled={item.name === "emailAuth" ? codeVerified : false}
               btnOnClick={() => HandlerToClick(item.name)}
             >
               {item.btnText}

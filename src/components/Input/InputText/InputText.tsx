@@ -71,7 +71,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   type?: string;
   className?: string;
   validation?: RegisterOptions;
-  disabled?: true;
+  disabled?: boolean;
 }
 
 interface CustomProps {
