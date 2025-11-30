@@ -33,16 +33,23 @@ const page = () => {
       </div>
 
       <div className="flex h-[96px] w-full items-center justify-center">
-        <div className="flex-row-center flex h-[84px] w-[350px] items-center justify-center gap-[52px]">
+        <div className="flex-row-center flex h-[84px] w-[350px] items-center justify-center">
           {/* 공지사항/고객센터/채팅목록 */}
           {TAP_CONFIG.map((item, index) => (
-            <div
-              key={index}
-              className="flex h-[84px] w-[82px] flex-col items-center justify-center gap-2 py-4"
-            >
-              <Icon name={item.iconName} size={24} />
-              <p className="text-body2-medium text-neutral-strong-default">{item.id}</p>
-            </div>
+            <>
+              <div
+                key={index}
+                className="flex h-[84px] w-[82px] flex-col items-center justify-center gap-2 py-4"
+              >
+                <Icon name={item.iconName} size={24} />
+                <p className="text-body2-medium text-neutral-strong-default">{item.id}</p>
+              </div>
+              {item.id !== "채팅목록" && (
+                <div className="flex w-[52px] items-center justify-center">
+                  <div className="h-[46px] border border-divider-default_3" />
+                </div>
+              )}
+            </>
           ))}
         </div>
       </div>
