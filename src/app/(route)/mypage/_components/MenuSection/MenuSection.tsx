@@ -1,4 +1,5 @@
 import { Icon } from "@/components";
+import { cn } from "@/utils";
 
 export type Menu = "내 활동" | "알림" | "신고/문의" | "계정 설정";
 
@@ -39,7 +40,12 @@ const MenuSection = ({ menu }: MenuSectionProps) => {
           </div>
         ))}
       </div>
-      <div className="mx-5 max-w-full border border-divider-default_3" />
+      <div
+        className={cn(
+          "mx-5 max-w-full border border-divider-default_3",
+          menu === "계정 설정" && "opacity-0"
+        )}
+      />
     </>
   );
 };
