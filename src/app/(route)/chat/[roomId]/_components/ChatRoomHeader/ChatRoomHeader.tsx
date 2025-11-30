@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { MOCK_IMAGES } from "../../../_components/ChatItem/MOCK_IMAGES";
 import ChatChip from "../ChatChip/ChatChip";
+import ChatRoomHeaderInfoButton from "../ChatRoomHeaderInfoButton/ChatRoomHeaderInfoButton";
 
 const ChatRoomHeader = ({ postMode }: { postMode: "lost" | "find" }) => {
   const router = useRouter();
@@ -23,13 +24,7 @@ const ChatRoomHeader = ({ postMode }: { postMode: "lost" | "find" }) => {
 
         <p className="text-body2-semibold text-layout-body-default">사용자 닉네임</p>
 
-        <button
-          className="flex h-[40px] w-[40px] items-center justify-end"
-          aria-label="채팅방 메뉴 열기 버튼"
-          type="button"
-        >
-          <Icon name="Information" size={18} />
-        </button>
+        <ChatRoomHeaderInfoButton />
       </nav>
 
       <section className="flex items-center gap-[16px] px-[16px]">

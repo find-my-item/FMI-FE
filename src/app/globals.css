@@ -57,3 +57,17 @@
     rgba(255, 255, 255, 0.3)
   );
 }
+
+@keyframes modal-slide-up {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+.animate-modal-slide-up {
+  animation: modal-slide-up 350ms ease-out forwards;
+}
