@@ -23,17 +23,23 @@ const MenuSection = ({ menu }: MenuSectionProps) => {
 
   return (
     <>
-      <div className="flex h-10 items-center text-body2-regular text-layout-body-default">
-        {menu}
-      </div>
-      {ListItems.map((item) => (
-        <div className="flex h-11 w-full items-center justify-between bg-slate-50 text-body1-semibold text-neutral-strong-default">
-          {item.label}
-          <button>
-            <Icon name="ArrowRightSmall" size={24} />
-          </button>
+      <div className="w-full px-5 py-6">
+        <div className="flex h-10 items-center text-body2-regular text-layout-body-default">
+          {menu}
         </div>
-      ))}
+        {ListItems.map((item, index) => (
+          <div
+            key={index}
+            className="flex h-11 w-full items-center justify-between text-body1-semibold text-neutral-strong-default"
+          >
+            {item.label}
+            <button>
+              <Icon name="ArrowRightSmall" size={24} />
+            </button>
+          </div>
+        ))}
+      </div>
+      <div className="mx-5 max-w-full border border-divider-default_3" />
     </>
   );
 };
