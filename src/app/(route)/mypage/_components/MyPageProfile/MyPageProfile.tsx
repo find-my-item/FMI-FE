@@ -3,7 +3,7 @@ interface ProfileProps {
   email: string;
 }
 
-const Profile = ({ userName, email }: ProfileProps) => {
+const MyPageProfile = ({ userName, email }: ProfileProps) => {
   return (
     <div className="flex h-[60px] w-[188px] flex-row items-center gap-6">
       <div className="h-[60px] w-[60px] rounded-full bg-slate-100" />
@@ -15,4 +15,4 @@ const Profile = ({ userName, email }: ProfileProps) => {
   );
 };
 
-export default Profile;
+export default MyPageProfile;
