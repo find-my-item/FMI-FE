@@ -1,9 +1,8 @@
 import { Icon } from "@/components";
 import { cn } from "@/utils";
+import { MenuType } from "../../_types/MenuType";
 
-export type Menu = "내 활동" | "알림" | "신고/문의" | "계정 설정";
-
-const LIST_ITEMS: Record<Menu, { label: string }[]> = {
+const LIST_ITEMS: Record<MenuType, { label: string }[]> = {
   "내 활동": [
     { label: "내가 쓴 게시물" },
     { label: "내가 쓴 댓글" },
@@ -15,9 +14,9 @@ const LIST_ITEMS: Record<Menu, { label: string }[]> = {
   "계정 설정": [{ label: "이메일 변경" }, { label: "비밀번호 변경" }, { label: "회원 탈퇴" }],
 };
 
-type MenuSectionProps = {
-  menu: Menu;
-};
+interface MenuSectionProps {
+  menu: MenuType;
+}
 
 const MenuSection = ({ menu }: MenuSectionProps) => {
   const ListItems = LIST_ITEMS[menu];

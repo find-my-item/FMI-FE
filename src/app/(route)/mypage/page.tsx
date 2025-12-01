@@ -1,7 +1,7 @@
 import { Button, Icon, Tab } from "@/components";
 import { ComponentProps } from "react";
 import MenuSection from "./_components/MenuSection/MenuSection";
-import { Menu } from "./_components/MenuSection/MenuSection";
+import { MenuType } from "./_types/MenuType";
 
 type TapConfig = {
   id: string;
@@ -14,7 +14,7 @@ const TAP_CONFIG: TapConfig[] = [
   { id: "채팅목록", iconName: "MessageTyping" },
 ];
 
-const MENU_LIST: Menu[] = ["내 활동", "알림", "신고/문의", "계정 설정"];
+const MENU_LIST: MenuType[] = ["내 활동", "알림", "신고/문의", "계정 설정"];
 
 const page = () => {
   return (
