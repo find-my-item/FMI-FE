@@ -16,7 +16,7 @@ const MenuSection = ({ menu }: MenuSectionProps) => {
         <div className="flex h-10 items-center text-body2-regular text-layout-body-default">
           {menu}
         </div>
-        {ListItems.map((item, index) => (
+        {ListItems.map((item) => (
           <div
             key={item.label}
             className="flex h-11 w-full items-center justify-between text-body1-semibold text-neutral-strong-default"
@@ -28,7 +28,7 @@ const MenuSection = ({ menu }: MenuSectionProps) => {
           </div>
         ))}
       </div>
-      <div
+      <hr
         className={cn(
           "mx-5 max-w-full border border-divider-default_3",
           menu === "계정 설정" && "opacity-0"

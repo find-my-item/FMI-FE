@@ -1,7 +1,8 @@
 import { Button, Icon, Tab } from "@/components";
-import MenuSection from "./_components/MenuSection/MenuSection";
+import MenuSection from "./_components/MyPageMenuSection/MyPageMenuSection";
 import { MypageMenuType } from "./_types/MypageMenuType";
 import { TAP_CONFIG } from "./_constants/TAP_CONFIG";
+import Profile from "./_components/Profile/Profile";
 
 const MENU_LIST: MypageMenuType[] = ["내 활동", "알림", "신고/문의", "계정 설정"];
 
@@ -9,14 +10,7 @@ const page = () => {
   return (
     <div className="min-h-scree flex w-full flex-col">
       <div className="flex h-[120px] w-full flex-row items-center justify-between px-5 py-[30px]">
-        {/* 프로필 */}
-        <div className="flex h-[60px] w-[188px] flex-row items-center gap-6">
-          <div className="h-[60px] w-[60px] rounded-full bg-slate-100" />
-          <div>
-            <p className="text-body1-semibold">사용자 닉네임</p>
-            <p className="text-body2-regular text-layout-body-default">asdf@gmail.com</p>
-          </div>
-        </div>
+        <Profile userName="사용자 닉네임" email="abc@gamil.com" />
         <Button variant="outlined"> 프로필 수정 </Button>
       </div>
 
@@ -33,7 +27,6 @@ const page = () => {
             {item.id !== "채팅목록" && <hr className="h-[46px] border border-divider-default_3" />}
           </>
         ))}
-        {/* </div> */}
       </div>
 
       {MENU_LIST.map((item) => (
