@@ -2,7 +2,8 @@ import { Button, Icon, Tab } from "@/components";
 import MenuSection from "./_components/MyPageMenuSection/MyPageMenuSection";
 import { MypageMenuType } from "./_types/MypageMenuType";
 import { TAP_CONFIG } from "./_constants/TAP_CONFIG";
-import Profile from "./_components/Profile/Profile";
+import Profile from "./_components/MyPageProfile/Profile";
+import MyPageTapList from "./_components/MyPageTapList/MyPageTapList";
 
 const MENU_LIST: MypageMenuType[] = ["내 활동", "알림", "신고/문의", "계정 설정"];
 
@@ -16,16 +17,7 @@ const page = () => {
 
       <div className="flex h-[96px] w-full items-center justify-center gap-[26px] px-5 py-[6px]">
         {TAP_CONFIG.map((item, index) => (
-          <>
-            <div
-              key={index}
-              className="flex h-[84px] w-[82px] flex-col items-center justify-center gap-2 py-4"
-            >
-              <Icon name={item.iconName} size={24} />
-              <p className="text-body2-medium text-neutral-strong-default">{item.id}</p>
-            </div>
-            {item.id !== "채팅목록" && <hr className="h-[46px] border border-divider-default_3" />}
-          </>
+          <MyPageTapList key={index} tapName={item.tapName} iconName={item.iconName} />
         ))}
       </div>
 
