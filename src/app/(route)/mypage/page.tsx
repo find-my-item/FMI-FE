@@ -1,20 +1,9 @@
 import { Button, Icon, Tab } from "@/components";
-import { ComponentProps } from "react";
 import MenuSection from "./_components/MenuSection/MenuSection";
-import { MenuType } from "./_types/MenuType";
+import { MypageMenuType } from "./_types/MypageMenuType";
+import { TAP_CONFIG } from "./_constants/TAP_CONFIG";
 
-type TapConfig = {
-  id: string;
-  iconName: ComponentProps<typeof Icon>["name"];
-};
-
-const TAP_CONFIG: TapConfig[] = [
-  { id: "공지사항", iconName: "AnnotationAlert" },
-  { id: "고객센터", iconName: "HeadPhone" },
-  { id: "채팅목록", iconName: "MessageTyping" },
-];
-
-const MENU_LIST: MenuType[] = ["내 활동", "알림", "신고/문의", "계정 설정"];
+const MENU_LIST: MypageMenuType[] = ["내 활동", "알림", "신고/문의", "계정 설정"];
 
 const page = () => {
   return (
