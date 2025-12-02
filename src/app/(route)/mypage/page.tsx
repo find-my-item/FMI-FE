@@ -15,7 +15,7 @@ const page = () => {
         <Button variant="outlined"> 프로필 수정 </Button>
       </div>
 
-      <div className="flex w-full items-center justify-center gap-[26px] px-5 py-[6px]">
+      <div className="w-full gap-[26px] px-5 py-[6px] flex-center">
         {TAP_CONFIG.map((item, index) => (
           <MyPageTapItem key={index} tapName={item.tapName} iconName={item.iconName} />
         ))}
