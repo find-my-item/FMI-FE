@@ -1,4 +1,5 @@
 import { Icon } from "@/components";
+import Link from "next/link";
 
 interface MyPageMenuItem {
   pageName: string;
@@ -6,12 +7,13 @@ interface MyPageMenuItem {
 
 const MyPageMenuItem = ({ pageName }: MyPageMenuItem) => {
   return (
-    <div className="flex h-11 w-full justify-between py-[10px] text-body1-semibold text-neutral-strong-default">
+    <Link
+      href={`/${pageName}`}
+      className="flex h-11 w-full justify-between py-[10px] text-body1-semibold text-neutral-strong-default"
+    >
       {pageName}
-      <button>
-        <Icon name="ArrowRightSmall" size={24} />
-      </button>
-    </div>
+      <Icon name="ArrowRightSmall" size={24} />
+    </Link>
   );
 };
 
