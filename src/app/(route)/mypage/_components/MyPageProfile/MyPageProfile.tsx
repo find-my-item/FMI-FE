@@ -5,7 +5,7 @@ interface ProfileProps {
 
 const MyPageProfile = ({ userName, email }: ProfileProps) => {
   return (
-    <div className="flex h-[60px] w-[188px] flex-row items-center gap-6">
+    <div className="flex w-[188px] flex-row items-center gap-6">
       <div className="h-[60px] w-[60px] rounded-full bg-slate-100" />
       <div>
         <p className="text-body1-semibold">{userName}</p>
