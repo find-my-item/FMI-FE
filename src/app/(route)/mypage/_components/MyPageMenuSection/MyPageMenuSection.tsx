@@ -9,7 +9,7 @@ interface MenuSectionProps {
 }
 
 const MenuSection = ({ menu }: MenuSectionProps) => {
-  const ListItems = MYPAGE_MENU_LIST[menu];
+  const MenuList = MYPAGE_MENU_LIST[menu];
 
   return (
     <>
@@ -17,7 +17,7 @@ const MenuSection = ({ menu }: MenuSectionProps) => {
         <div className="flex h-10 items-center text-body2-regular text-layout-body-default">
           {menu}
         </div>
-        {ListItems.map((item) => (
+        {MenuList.map((item) => (
           <MyPageMenuItem key={item.pageName} pageName={item.pageName} />
         ))}
       </div>
