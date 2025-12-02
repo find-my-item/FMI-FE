@@ -10,7 +10,7 @@ const MENU_LIST: MypageMenuType[] = ["내 활동", "알림", "신고/문의", "�
 const page = () => {
   return (
     <div className="flex w-full flex-col">
-      <div className="flex w-full flex-row items-center justify-between px-5 py-[30px]">
+      <div className="flex w-full items-center justify-between px-5 py-[30px]">
         <Profile userName="사용자 닉네임" email="abc@gamil.com" />
         <Button variant="outlined"> 프로필 수정 </Button>
       </div>
