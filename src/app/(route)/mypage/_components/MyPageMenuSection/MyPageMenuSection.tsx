@@ -2,6 +2,7 @@ import { Icon } from "@/components";
 import { cn } from "@/utils";
 import { MypageMenuType } from "../../_types/MypageMenuType";
 import { MYPAGE_MENU_LIST } from "../../_constants/MYPAGE_MENU_LIST";
+import MyPageMenuItem from "../MyPageMenuItem/MyPageMenuItem";
 
 interface MenuSectionProps {
   menu: MypageMenuType;
@@ -17,15 +18,7 @@ const MenuSection = ({ menu }: MenuSectionProps) => {
           {menu}
         </div>
         {ListItems.map((item) => (
-          <div
-            key={item.label}
-            className="flex h-11 w-full items-center justify-between text-body1-semibold text-neutral-strong-default"
-          >
-            {item.label}
-            <button>
-              <Icon name="ArrowRightSmall" size={24} />
-            </button>
-          </div>
+          <MyPageMenuItem key={item.pageName} pageName={item.pageName} />
         ))}
       </div>
       <hr
