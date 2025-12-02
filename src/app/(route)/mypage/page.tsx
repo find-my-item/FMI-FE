@@ -3,7 +3,7 @@ import MenuSection from "./_components/MyPageMenuSection/MyPageMenuSection";
 import { MypageMenuType } from "./_types/MypageMenuType";
 import { TAP_CONFIG } from "./_constants/TAP_CONFIG";
 import Profile from "./_components/MyPageProfile/MyPageProfile";
-import MyPageTapList from "./_components/MyPageTapList/MyPageTapList";
+import MyPageTapItem from "./_components/MyPageTapItem/MyPageTapItem";
 
 const MENU_LIST: MypageMenuType[] = ["내 활동", "알림", "신고/문의", "계정 설정"];
 
@@ -17,7 +17,7 @@ const page = () => {
 
       <div className="flex w-full items-center justify-center gap-[26px] px-5 py-[6px]">
         {TAP_CONFIG.map((item, index) => (
-          <MyPageTapList key={index} tapName={item.tapName} iconName={item.iconName} />
+          <MyPageTapItem key={index} tapName={item.tapName} iconName={item.iconName} />
         ))}
       </div>
 

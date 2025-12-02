@@ -2,15 +2,15 @@ import Icon from "@/components/Icon/Icon";
 import { IconName } from "@/components/Icon/Icon";
 import { MyPageTapType } from "../../_types/MyPageTapType";
 
-interface MyPageTapListProps {
+interface MyPageTapItemProps {
   tapName: MyPageTapType;
   iconName: IconName;
 }
 
-const MyPageTapList = ({ tapName, iconName }: MyPageTapListProps) => {
+const MyPageTapItem = ({ tapName, iconName }: MyPageTapItemProps) => {
   return (
     <>
-      <div className="flex h-[84px] w-[82px] flex-col items-center justify-center gap-2 py-4">
+      <div className="w-[82px] gap-2 py-4 flex-col-center">
         <Icon name={iconName} size={24} />
         <p className="text-body2-medium text-neutral-strong-default">{tapName}</p>
       </div>
@@ -19,4 +19,4 @@ const MyPageTapList = ({ tapName, iconName }: MyPageTapListProps) => {
   );
 };
 
-export default MyPageTapList;
+export default MyPageTapItem;
