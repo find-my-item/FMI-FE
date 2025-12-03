@@ -1,5 +1,20 @@
 import { ManualItemType } from "../_types/ManualItemType";
 
+export const MANUAL_LIST = [
+  {
+    label: "분실",
+    key: "LOST",
+  },
+  {
+    label: "습득",
+    key: "FOUND",
+  },
+  {
+    label: "도난",
+    key: "STOLEN",
+  },
+] as const;
+
 interface Manual {
   LOST: ManualItemType[];
   FOUND: ManualItemType[];
@@ -139,4 +154,4 @@ export const MANUAL_DATA: Manual = {
       btnText: "정보 공개 포털 보러가기",
     },
   ],
-};
+} as const;

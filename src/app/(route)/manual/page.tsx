@@ -3,9 +3,8 @@
 import { useState } from "react";
 import { Tab } from "@/components";
 import { ManualItem } from "./_components";
-import { MANUAL_DATA } from "./_constants/MANUAL_DATA";
+import { MANUAL_DATA, MANUAL_LIST } from "./_constants/MANUAL_CONSTANT";
 import { ManualItemType } from "./_types/ManualItemType";
-import { MANUAL_LIST } from "./_constants/MANUAL_LIST";
 
 const page = () => {
   const [selected, setSelected] = useState<keyof typeof MANUAL_DATA>("LOST");
