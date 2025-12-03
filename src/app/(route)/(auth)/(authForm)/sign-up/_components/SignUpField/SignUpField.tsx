@@ -5,10 +5,10 @@ import { Button, InputText, DetailHeader, Toast } from "@/components";
 import { useFormContext } from "react-hook-form";
 // import { useState } from "react";
 import { useToast } from "@/context/ToastContext";
-import { useSendEmail } from "../../_hooks/useSendEmail";
-import { useCheckNickname } from "../../_hooks/useCheckNickname";
+import { useSendEmail } from "../../_hooks/useApiSendEmail";
+import { useCheckNickname } from "../../_hooks/useApiCheckNickname";
 import { useEffect, useState } from "react";
-import { useCheckCode } from "../../_hooks/useCheckCode";
+import { useCheckCode } from "../../_hooks/useApiCheckCode";
 
 const SignUpField = ({ onNext }: { onNext: () => void }) => {
   const {

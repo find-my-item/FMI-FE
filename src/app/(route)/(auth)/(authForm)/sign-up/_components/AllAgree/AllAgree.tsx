@@ -3,7 +3,6 @@
 import { Icon, Button, CheckBox, DetailHeader } from "@/components";
 import { useFormContext, useWatch } from "react-hook-form";
 import { TERMS_CONFIG } from "../../_constant/TERMS_CONFIG";
-// import { useEffect, useState } from "react";
 
 interface AllAgreeProps {
   onOpenDetail: (termKey: string) => void;

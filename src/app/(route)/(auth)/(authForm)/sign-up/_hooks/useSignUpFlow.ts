@@ -2,9 +2,11 @@ import { useCallback, useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FormType } from "../../types/FormType";
+import { useRoutingGard } from "./useRoutingGard";
 
 export const useSignUpFlow = () => {
-  // export const useSignUpFlow = (onFinalSubmit: (data: FormType) => void) => {
+  const { updateMaxStep } = useRoutingGard();
+
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -12,40 +14,18 @@ export const useSignUpFlow = () => {
   const step = searchParams.get("step") ?? "1";
   const termName = searchParams.get("term") ?? "";
 
-  // 가드 변수
-  const [maxStep, setMaxStep] = useState<number>(1);
+  const { trigger, getValues } = useFormContext<FormType>();
 
-  // maxStep 변경 시 sessionStorage에 저장
-  useEffect(() => {
-    const stored = window.sessionStorage.getItem("signup-max-step");
-    if (stored) {
-      setMaxStep(Number(stored));
-    }
-  }, []);
-
-  const { handleSubmit, trigger, getValues } = useFormContext<FormType>();
-  // const onSubmit = handleSubmit(onFinalSubmit);
   const onSubmit = (data: any) => {
     console.log("request>>> ", data);
   };
-
-  // 가드
-  useEffect(() => {
-    const isStep = step === "1" || step === "2";
-    if (!isStep) {
-      router.replace(`/sign-up?step=1`);
-    }
-    if (Number(step) > maxStep) {
-      router.replace(`/sign-up?step=${maxStep}`);
-    }
-  }, [step, maxStep, router]);
 
   // 회원가입 1단계 -> 2단계
   const onNext = useCallback(
     async (nextStep: number) => {
       const ok = await trigger(["email", "password", "nickname"]);
       if (ok) {
-        setMaxStep((prev) => (nextStep > prev ? nextStep : prev));
+        updateMaxStep(nextStep);
         router.push(`/sign-up?step=${nextStep}`);
       }
     },
