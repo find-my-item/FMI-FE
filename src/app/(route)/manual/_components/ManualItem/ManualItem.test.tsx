@@ -26,7 +26,7 @@ describe("ManualItem", () => {
   const btnText = "자세히 보기";
 
   it("닫힘 상태일 때 내용이 보이지 않고 aria-expanded=false 입니다.", () => {
-    render(<ManualItem title={title} content={<span>{contentText}</span>} isOpen={false} />);
+    render(<ManualItem item={{ title, content: <span>{contentText}</span> }} isOpen={false} />);
 
     // 내용 미표시
     expect(screen.queryByText(contentText)).toBeNull();
@@ -43,7 +43,7 @@ describe("ManualItem", () => {
   });
 
   it("열림 상태일 때 내용이 보이고 aria-expanded=true 입니다.", () => {
-    render(<ManualItem title={title} content={<span>{contentText}</span>} isOpen />);
+    render(<ManualItem item={{ title, content: <span>{contentText}</span> }} isOpen={true} />);
 
     expect(screen.getByText(contentText)).toBeInTheDocument();
 
@@ -59,11 +59,13 @@ describe("ManualItem", () => {
   it("href가 주어지면 링크와 버튼 텍스트가 렌더링됩니다.", () => {
     render(
       <ManualItem
-        title={title}
-        content={<span>{contentText}</span>}
+        item={{
+          title,
+          content: <span>{contentText}</span>,
+          href,
+          btnText,
+        }}
         isOpen
-        href={href}
-        btnText={btnText}
       />
     );
 
@@ -75,8 +77,13 @@ describe("ManualItem", () => {
 
   it("헤더 클릭 시 onToggle이 호출됩니다.", () => {
     const onToggle = jest.fn();
-    render(<ManualItem title={title} content={<span>{contentText}</span>} onToggle={onToggle} />);
-
+    render(
+      <ManualItem
+        item={{ title, content: <span>{contentText}</span> }}
+        isOpen={false}
+        onToggle={onToggle}
+      />
+    );
     const headerButton = screen.getByRole("button");
     fireEvent.click(headerButton);
 
@@ -84,7 +91,7 @@ describe("ManualItem", () => {
   });
 
   it("href가 없으면 링크가 렌더링되지 않습니다.", () => {
-    render(<ManualItem title={title} content={<span>{contentText}</span>} isOpen />);
+    render(<ManualItem item={{ title, content: <span>{contentText}</span> }} isOpen={false} />);
 
     expect(screen.queryByRole("link")).toBeNull();
   });
