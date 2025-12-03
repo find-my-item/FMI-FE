@@ -2,9 +2,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import ManualPopup from "@/app/(route)/manual/_components/ManualPopup/ManualPopup";
 import { useState } from "react";
-import Icon from "@/components/Icon/Icon";
 import { HEADER_LINK } from "../CONST_HEADER";
 import { useModalBackdrop, useModalLockAndEsc } from "@/hooks";
+import Icon from "@/components/common/Icon/Icon";
 
 // TODO(지권): 추후 디자인 수정 필요
 

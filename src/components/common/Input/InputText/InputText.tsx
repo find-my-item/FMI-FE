@@ -4,13 +4,13 @@
 import { InputHTMLAttributes, ReactNode, useState } from "react";
 import { cn } from "@/utils";
 import { RegisterOptions, useFormContext } from "react-hook-form";
-import Icon from "@/components/Icon/Icon";
-import Button from "@/components/Buttons/Button/Button";
 import DeleteButton from "../_internal/DeleteButton/DeleteButton";
 import Label from "../_internal/Label/Label";
 import Caption from "../_internal/Caption/Caption";
 import Counter from "../_internal/Counter/Counter";
 import { useFormInput } from "../_internal/_hooks/useFormInput";
+import Button from "../../Buttons/Button/Button";
+import Icon from "../../Icon/Icon";
 
 /**
  * @author suhyeon

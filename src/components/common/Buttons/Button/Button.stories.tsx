@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Button from "./Button";
-import Icon from "@/components/Icon/Icon";
+import Icon from "../../Icon/Icon";
 
 const meta = {
   title: "공통 컴포넌트/Button",

@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, ReactNode } from "react";
-import Icon, { Props } from "@/components/Icon/Icon";
 import { cn } from "@/utils";
+import Icon, { Props } from "../../Icon/Icon";
 
 /**
  * @author hyungjun

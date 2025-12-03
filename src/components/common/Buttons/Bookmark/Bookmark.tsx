@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes } from "react";
-import Icon from "@/components/Icon/Icon";
 import { SIZES } from "./constantBookmark";
+import Icon from "../../Icon/Icon";
 
 /**
  * @author hyungjun

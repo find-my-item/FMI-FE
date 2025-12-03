@@ -1,6 +1,6 @@
 // TODO(지권): 삭제될 컴포넌트입니다.
 
-import Icon from "@/components/Icon/Icon";
+import { Icon } from "@/components";
 
 const CommentForm = () => {
   return (

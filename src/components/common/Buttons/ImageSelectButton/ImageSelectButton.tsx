@@ -3,12 +3,12 @@
 import { ButtonHTMLAttributes } from "react";
 import { cn } from "@/utils";
 import Image from "next/image";
-import Icon from "@/components/Icon/Icon";
 import { handleClick } from "./_utils/handleClick";
 import { getImageButtonState } from "./_utils/getImageButtonState";
 import { useChatRoom } from "@/providers/ChatRoomProvider";
-import { handleFileChange } from "@/components/Input/InputChat/utils/handleFileChange";
 import { useObjectURLs } from "@/hooks";
+import Icon from "../../Icon/Icon";
+import { handleFileChange } from "../../Input/InputChat/utils/handleFileChange";
 
 /**
  * @author hyungjun
