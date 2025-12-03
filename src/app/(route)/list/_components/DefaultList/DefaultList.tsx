@@ -2,8 +2,7 @@ import { Filter, Tab } from "@/components";
 import ListItem from "../ListItem/ListItem";
 import { TABS } from "../../_constants/TABS";
 import { Dispatch, SetStateAction } from "react";
-import Icon, { IconName } from "@/components/Icon/Icon";
-import Dropdown from "@/components/Dropdown/Dropdown";
+import { IconName } from "@/components/common/Icon/Icon";
 
 interface DefaultListProps {
   selected: string;

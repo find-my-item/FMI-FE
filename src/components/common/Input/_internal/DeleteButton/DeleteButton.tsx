@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes } from "react";
 import { cn } from "@/utils";
-import Icon from "@/components/Icon/Icon";
+import Icon from "@/components/common/Icon/Icon";
 
 interface DeleteButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   eyeShow?: boolean;

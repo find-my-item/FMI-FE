@@ -4,8 +4,8 @@ import { FormProvider, useForm } from "react-hook-form";
 import PostSearchView from "./_internal/PostSearchView";
 import RegionSearchView from "./_internal/RegionSearchView";
 import { LIST_SEARCH_PLACEHOLDER } from "./LIST_SEARCH_PLACEHOLDER";
-import InputSearch from "../Input/InputSearch/InputSearch";
 import { useEffect } from "react";
+import InputSearch from "@/components/common/Input/InputSearch/InputSearch";
 
 interface ListSearch {
   searchMode: "region" | "post";

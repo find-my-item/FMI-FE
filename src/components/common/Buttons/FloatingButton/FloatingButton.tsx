@@ -1,5 +1,5 @@
-import Icon from "@/components/Icon/Icon";
 import { ButtonHTMLAttributes } from "react";
+import Icon from "../../Icon/Icon";
 
 /**
  * @author hyungjun

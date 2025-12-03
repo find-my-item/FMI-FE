@@ -1,6 +1,6 @@
+import type { Meta, StoryObj } from "@storybook/nextjs";
 import { useState, useEffect } from "react";
 import ToggleButton from "./ToggleButton";
-import type { Meta, StoryObj } from "@storybook/react";
 
 const meta = {
   title: "공통 컴포넌트/ToggleButton",

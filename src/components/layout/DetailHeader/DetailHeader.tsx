@@ -1,10 +1,10 @@
 "use client";
 
-import Icon from "@/components/Icon/Icon";
 import { ButtonHTMLAttributes, createContext } from "react";
-import Bookmark from "@/components/Buttons/Bookmark/Bookmark";
-import KebabMenuButton from "@/components/Buttons/KebabMenuButton/KebabMenuButton";
 import { useRouter } from "next/navigation";
+import Icon from "@/components/common/Icon/Icon";
+import Bookmark from "@/components/common/Buttons/Bookmark/Bookmark";
+import KebabMenuButton from "@/components/common/Buttons/KebabMenuButton/KebabMenuButton";
 
 const DetailHeaderContext = createContext({ title: "" });
 

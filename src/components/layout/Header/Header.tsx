@@ -4,9 +4,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Icon from "../Icon/Icon";
 import { useHiddenPath } from "@/hooks";
 import SideBar from "./_internal/SideBar";
+import Icon from "@/components/common/Icon/Icon";
 
 /**
  * @author jikwon

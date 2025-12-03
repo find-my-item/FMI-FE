@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs";
-import DetailHeader from "@/components/DetailHeader/DetailHeader";
+import DetailHeader from "./DetailHeader";
 
 const meta: Meta<typeof DetailHeader> = {
   title: "공통 컴포넌트/DetailHeader",

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/nextjs";
 import ImageSelectButton from "./ImageSelectButton";
 import { ComponentProps, useState } from "react";
 import { ChatRoomProvider } from "@/providers/ChatRoomProvider";

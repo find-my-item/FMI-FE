@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
-import { Badge } from "..";
+import Badge from "./Badge";
 
 const meta: Meta<typeof Badge> = {
   component: Badge,
