@@ -28,7 +28,7 @@ const page = () => {
       {MANUAL_DATA[selected].map((item: ManualItemType, index: number) => (
         <ManualItem
           key={item.title}
-          {...item}
+          item={item}
           isOpen={openIndex === index}
           onToggle={() => handleToggle(index)}
         />
