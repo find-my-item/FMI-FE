@@ -1,4 +1,4 @@
-import { ManualItemType } from "../_types/ManualItemType";
+import { ManualItemType, ManualKey } from "../_types/ManualType";
 
 export const MANUAL_LIST = [
   {
@@ -15,11 +15,7 @@ export const MANUAL_LIST = [
   },
 ] as const;
 
-interface Manual {
-  LOST: ManualItemType[];
-  FOUND: ManualItemType[];
-  STOLEN: ManualItemType[];
-}
+type Manual = Record<ManualKey, ManualItemType[]>;
 
 export const MANUAL_DATA: Manual = {
   LOST: [
