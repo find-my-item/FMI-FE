@@ -9,7 +9,7 @@ jest.mock("@/utils", () => ({
   cn: (...args: any[]) => args.filter(Boolean).join(" "),
 }));
 
-jest.mock("@/components/Icon/Icon", () => {
+jest.mock("@/components/common/Icon/Icon", () => {
   const MockIcon = ({ name }: { name: string }) => <div data-testid="icon">{name}</div>;
   MockIcon.displayName = "MockIcon";
   return {

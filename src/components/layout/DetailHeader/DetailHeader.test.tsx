@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import DetailHeader from "@/components/DetailHeader/DetailHeader";
+import DetailHeader from "./DetailHeader";
 
 jest.mock("next/navigation", () => ({
   useRouter: () => ({ back: jest.fn() }),
