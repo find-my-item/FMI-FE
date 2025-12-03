@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { FormValue } from "../../types/FormValue";
 import { useRouter, useSearchParams } from "next/navigation";
+import { FormType } from "../../types/FormType";
 
-export const useSignUpFlow = (onFinalSubmit: (data: FormValue) => void) => {
+export const useSignUpFlow = () => {
+  // export const useSignUpFlow = (onFinalSubmit: (data: FormType) => void) => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -22,8 +23,11 @@ export const useSignUpFlow = (onFinalSubmit: (data: FormValue) => void) => {
     }
   }, []);
 
-  const { handleSubmit, trigger } = useFormContext<FormValue>();
-  const onSubmit = handleSubmit(onFinalSubmit);
+  const { handleSubmit, trigger, getValues } = useFormContext<FormType>();
+  // const onSubmit = handleSubmit(onFinalSubmit);
+  const onSubmit = (data: any) => {
+    console.log("request>>> ", data);
+  };
 
   // 가드
   useEffect(() => {
@@ -39,7 +43,7 @@ export const useSignUpFlow = (onFinalSubmit: (data: FormValue) => void) => {
   // 회원가입 1단계 -> 2단계
   const onNext = useCallback(
     async (nextStep: number) => {
-      const ok = await trigger(["email", "password", "passwordConfirm", "nickname"]);
+      const ok = await trigger(["email", "password", "nickname"]);
       if (ok) {
         setMaxStep((prev) => (nextStep > prev ? nextStep : prev));
         router.push(`/sign-up?step=${nextStep}`);
@@ -60,13 +64,18 @@ export const useSignUpFlow = (onFinalSubmit: (data: FormValue) => void) => {
 
   // 약관 동의 -> 최종제출
   const completeTerms = useCallback(async () => {
-    const ok = await trigger([
-      "agreements.termsOfService",
-      "agreements.privacyPolicy",
-      "agreements.marketing",
-    ]);
+    const ok = await trigger(["termsOfServiceAgreed", "privacyPolicyAgreed", "marketingConsent"]);
     if (ok) {
-      onSubmit();
+      const data = getValues();
+      const selectedData = {
+        email: data.email,
+        password: data.password,
+        nickname: data.nickname,
+        termsOfServiceAgreed: data.termsOfServiceAgreed,
+        privacyPolicyAgreed: data.privacyPolicyAgreed,
+        marketingConsent: data.marketingConsent,
+      };
+      onSubmit(selectedData);
     }
   }, [trigger, onSubmit]);
 

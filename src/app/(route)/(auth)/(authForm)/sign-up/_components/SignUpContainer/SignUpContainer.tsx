@@ -1,21 +1,24 @@
 "use client";
 
-import { FormValue } from "../../../types/FormValue";
+import { FormType } from "../../../types/FormType";
+// import { ApiSignUpType } from "../../../types/ApiSingUpType";
 import { useSignUpFlow } from "../../_hooks/useSignUpFlow";
 import SignUpField from "../SignUpField/SignUpField";
 import AllAgree from "../AllAgree/AllAgree";
 import DetailAgree from "../DetailAgree/DetailAgree";
+import { useFormContext } from "react-hook-form";
 
 interface SignUpContainerProps {
-  onFinalSubmit: (data: FormValue) => void | Promise<void>;
+  onFinalSubmit: (data: FormType) => void;
 }
 
-const SignUpContainer = ({ onFinalSubmit }: SignUpContainerProps) => {
+const SignUpContainer = () => {
+  const { handleSubmit } = useFormContext();
   const { step, onSubmit, onNext, openTermDetail, onAgreeTerm, completeTerms, termName } =
-    useSignUpFlow(onFinalSubmit);
+    useSignUpFlow();
 
   return (
-    <form onSubmit={onSubmit} className="flex w-full flex-1 flex-col justify-between">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex w-full flex-1 flex-col justify-between">
       {step === "1" && <SignUpField onNext={() => onNext(2)} />}
       {step === "2" && !termName && (
         <AllAgree onOpenDetail={openTermDetail} onComplete={completeTerms} />

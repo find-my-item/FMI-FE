@@ -7,7 +7,7 @@ import { Logo } from "../../_components";
 import { CHECKBOX_CONFIG } from "./_constant/CHECKBOX_CONFIG";
 import { EMAIL_LOGIN_CONFIG } from "./_constant/EMAIL_LOGIN_CONFIG";
 import { FormProvider, useForm } from "react-hook-form";
-import { FormValue } from "../types/FormValue";
+import { FormValue } from "../types/FormType";
 
 const Page = () => {
   const methods = useForm<FormValue>({

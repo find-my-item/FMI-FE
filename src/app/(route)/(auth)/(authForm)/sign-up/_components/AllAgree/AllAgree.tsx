@@ -91,7 +91,7 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
       {/* signUpFooter */}
       <div className="sticky bottom-0 mt-auto h-[88px] w-full max-w-[390px] border-t border-flatGray-50 bg-white px-4 py-3">
         <Button
-          type="submit"
+          type="button"
           ariaLabel="회원가입 버튼"
           onClick={onComplete}
           variant="auth"

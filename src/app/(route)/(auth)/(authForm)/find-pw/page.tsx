@@ -4,7 +4,7 @@
 import { Button, DetailHeader, InputText } from "@/components";
 import { useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
-import { FormValue } from "../types/FormValue";
+import { FormValue } from "../types/FormType";
 
 const Page = () => {
   const methods = useForm<FormValue>({

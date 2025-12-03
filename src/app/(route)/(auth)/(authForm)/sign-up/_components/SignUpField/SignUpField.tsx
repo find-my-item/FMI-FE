@@ -1,8 +1,6 @@
 "use no memo";
 
 import { SIGNUP_INPUT_CONFIG } from "../../_constant/SIGNUP_INPUT_CONFIG";
-// import SignUpItem from "../SignUpItem/SignUpItem";
-// import useAppMutation from "@/api/query/useAppMutation";
 import { Button, InputText, DetailHeader, Toast } from "@/components";
 import { useFormContext } from "react-hook-form";
 // import { useState } from "react";
@@ -104,6 +102,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
           <div key={item.name} className="h-[96px]">
             {/* TODO(수현): props 줄이기  */}
             <InputText
+              key={item.name}
               name={item.name}
               label={item.label}
               type={item.type}
