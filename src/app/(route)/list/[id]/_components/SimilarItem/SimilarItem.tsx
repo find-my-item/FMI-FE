@@ -1,5 +1,5 @@
 import { Icon } from "@/components";
-import { IconName } from "@/components/Icon/Icon";
+import { IconName } from "@/components/common/Icon/Icon";
 import { formatNumber } from "@/utils";
 
 const SimilarItem = () => {
