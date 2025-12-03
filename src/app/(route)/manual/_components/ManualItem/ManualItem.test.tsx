@@ -14,7 +14,7 @@ jest.mock("next/link", () => ({
   default: ({ href, ...rest }: any) => <a href={href} {...rest} />,
 }));
 
-jest.mock("@/components/Icon/Icon", () => ({
+jest.mock("@/components/common/Icon/Icon", () => ({
   __esModule: true,
   default: ({ name, ...rest }: any) => <span data-testid={`icon-${name}`} {...rest} />,
 }));
