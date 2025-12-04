@@ -1,10 +1,15 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
 import { useFormContext } from "react-hook-form";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FormType } from "../../types/FormType";
 import { useRoutingGard } from "./useRoutingGard";
+import { ApiSignUpType } from "../../types/ApiSingUpType";
 
-export const useSignUpFlow = () => {
+interface useSignUpFlowProps {
+  onSubmit: (data: ApiSignUpType) => void;
+}
+
+export const useSignUpFlow = ({ onSubmit }: useSignUpFlowProps) => {
   const { updateMaxStep } = useRoutingGard();
 
   const searchParams = useSearchParams();
@@ -16,9 +21,9 @@ export const useSignUpFlow = () => {
 
   const { trigger, getValues } = useFormContext<FormType>();
 
-  const onSubmit = (data: any) => {
-    console.log("request>>> ", data);
-  };
+  // const onSubmit = (data: any) => {
+  //   console.log("request>>> ", data);
+  // };
 
   // 회원가입 1단계 -> 2단계
   const onNext = useCallback(
@@ -42,7 +47,7 @@ export const useSignUpFlow = () => {
     router.push(`/sign-up?step=${preStep}`);
   }, []);
 
-  // 약관 동의 -> 최종제출
+  // // 약관 동의 -> 최종제출
   const completeTerms = useCallback(async () => {
     const ok = await trigger(["termsOfServiceAgreed", "privacyPolicyAgreed", "marketingConsent"]);
     if (ok) {
@@ -61,7 +66,7 @@ export const useSignUpFlow = () => {
 
   return {
     step,
-    onSubmit,
+    // onSubmit,
     onNext,
     openTermDetail,
     onAgreeTerm,
