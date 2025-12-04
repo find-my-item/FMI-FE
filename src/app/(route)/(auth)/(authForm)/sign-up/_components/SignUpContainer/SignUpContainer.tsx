@@ -1,16 +1,33 @@
 "use client";
 
-import { FormType } from "../../../types/FormType";
 import { ApiSignUpType } from "../../../types/ApiSingUpType";
 import { useSignUpFlow } from "../../_hooks/useSignUpFlow";
 import SignUpField from "../SignUpField/SignUpField";
 import AllAgree from "../AllAgree/AllAgree";
 import DetailAgree from "../DetailAgree/DetailAgree";
-import { useFormContext } from "react-hook-form";
+import { useApiSignUp } from "../../_hooks/useApiSignUp";
+import { useToast } from "@/context/ToastContext";
+import { useRouter } from "next/navigation";
+import { error } from "console";
 
 const SignUpContainer = () => {
+  const router = useRouter();
+  const { addToast } = useToast();
+  const { mutate: SignUpMutate } = useApiSignUp();
+
   const onSignUpSubmit = (data: ApiSignUpType) => {
     console.log("request>>> ", data);
+    SignUpMutate(data, {
+      onSuccess: (res) => {
+        console.log("res>>> ", res);
+        router.push("/email-login");
+        addToast("회원가입이 완료되었어요.", "success");
+      },
+      onError: (error) => {
+        console.log("error>>>", error);
+        addToast("회원가입에 실패했어요", "warning");
+      },
+    });
   };
 
   const { step, onNext, openTermDetail, onAgreeTerm, completeTerms, termName } = useSignUpFlow({

@@ -10,9 +10,9 @@ type CheckCodeResponseType = {
 };
 
 export const useCheckCode = () => {
-  return useAppMutation<{ email: string; code: string }, CheckCodeResponseType>(
-    "public",
-    "/auth/email/verify",
-    "post"
-  );
+  return useAppMutation<
+    { email: string; code: string },
+    CheckCodeResponseType,
+    CheckCodeResponseType
+  >("public", "/auth/email/verify", "post");
 };

@@ -9,7 +9,7 @@ type SignUpResponse = {
   };
 };
 
-export const useSignUp = () => {
+export const useApiSignUp = () => {
   return useAppMutation<
     {
       email: string;
@@ -19,6 +19,7 @@ export const useSignUp = () => {
       privacyPolicyAgreed: boolean;
       marketingConsent: boolean;
     },
+    SignUpResponse,
     SignUpResponse
   >("public", "auth/signup", "post");
 };

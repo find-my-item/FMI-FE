@@ -13,7 +13,7 @@ import { useCheckCode } from "../../_hooks/useApiCheckCode";
 const SignUpField = ({ onNext }: { onNext: () => void }) => {
   const {
     getValues,
-    formState: { isSubmitting, isValid },
+    formState: { isValid },
   } = useFormContext();
 
   const { mutate: EmailMutate } = useSendEmail();
@@ -45,7 +45,6 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
   // 버튼 클릭 함수
   const HandlerToClick = (name: string) => {
     if (name === "email") {
-      // TODO(수현): email 중복 확인 및 인증번호 발송 api
       const isEmail = getValues(name);
       setEmailValue(isEmail);
 
@@ -64,7 +63,6 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
       );
       // addToast("이미 존재하는 이메일입니다.", "warning");
     } else if (name === "emailAuth") {
-      // TODO(수현): email 인증번호 확인 api
       const codeValue = getValues(name);
       CodeMutate(
         { email: emailValue, code: codeValue },
@@ -82,7 +80,6 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
       );
       // addToast("다시 시도해 주세요.", "error");
     } else if (name === "nickname") {
-      // TODO(수현): 닉네임 중복 확인 api
       const nickname = getValues(name);
       if (nickname) {
         setNicknameValue(nickname);

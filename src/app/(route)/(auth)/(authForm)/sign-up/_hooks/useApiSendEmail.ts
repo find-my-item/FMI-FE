@@ -7,7 +7,7 @@ type SendEmailResponseType = {
 };
 
 export const useSendEmail = () => {
-  return useAppMutation<{ email: string }, SendEmailResponseType>(
+  return useAppMutation<{ email: string }, SendEmailResponseType, SendEmailResponseType>(
     "public",
     "/auth/email/send-code",
     "post"
