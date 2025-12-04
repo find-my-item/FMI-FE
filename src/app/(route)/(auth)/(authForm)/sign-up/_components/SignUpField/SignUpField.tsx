@@ -3,7 +3,6 @@
 import { SIGNUP_INPUT_CONFIG } from "../../_constant/SIGNUP_INPUT_CONFIG";
 import { Button, InputText, DetailHeader, Toast } from "@/components";
 import { useFormContext } from "react-hook-form";
-// import { useState } from "react";
 import { useToast } from "@/context/ToastContext";
 import { useSendEmail } from "../../_hooks/useApiSendEmail";
 import { useCheckNickname } from "../../_hooks/useApiCheckNickname";
