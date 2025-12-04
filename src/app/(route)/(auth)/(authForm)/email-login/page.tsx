@@ -7,10 +7,10 @@ import { Logo } from "../../_components";
 import { CHECKBOX_CONFIG } from "./_constant/CHECKBOX_CONFIG";
 import { EMAIL_LOGIN_CONFIG } from "./_constant/EMAIL_LOGIN_CONFIG";
 import { FormProvider, useForm } from "react-hook-form";
-import { FormValue } from "../types/FormType";
+import { FormType } from "../types/FormType";
 
 const Page = () => {
-  const methods = useForm<FormValue>({
+  const methods = useForm<FormType>({
     mode: "onChange",
     shouldUnregister: false, // 입력 값 유지
   });
