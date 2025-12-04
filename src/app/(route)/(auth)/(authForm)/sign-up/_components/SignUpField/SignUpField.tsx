@@ -38,8 +38,6 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
       addToast("닉네임에 금칙어가 포함되어 있습니다.", "warning");
     } else if (isError && data?.code === "NICKNAME_DUPLICATE") {
       addToast("중복된 닉네임입니다.", "warning");
-    } else {
-      addToast("다시 시도해 주세요.", "error");
     }
   }, [nicknameValue, data, error, isSuccess, isError]);
 

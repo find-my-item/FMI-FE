@@ -15,15 +15,12 @@ const SignUpContainer = () => {
   const { mutate: SignUpMutate } = useApiSignUp();
 
   const onSignUpSubmit = (data: ApiSignUpType) => {
-    console.log("request>>> ", data);
     SignUpMutate(data, {
       onSuccess: (res) => {
-        console.log("res>>> ", res);
         router.push("/email-login");
         addToast("회원가입이 완료되었어요.", "success");
       },
       onError: (error) => {
-        console.log("error>>>", error);
         addToast("회원가입에 실패했어요", "warning");
       },
     });
