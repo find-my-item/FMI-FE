@@ -1,13 +1,14 @@
 import Icon from "@/components/Icon/Icon";
 import { IconName } from "@/components/Icon/Icon";
 import { MyPageTapType } from "../../_types/MyPageTapType";
+import { TAP_CONFIG } from "../../_constants/TAP_CONFIG";
 
 interface MyPageTapItemProps {
   tapName: MyPageTapType;
   iconName: IconName;
 }
 
-const MyPageTapItem = ({ tapName, iconName }: MyPageTapItemProps) => {
+const MyPageIconNavItem = ({ tapName, iconName }: MyPageTapItemProps) => {
   return (
     <>
       <div className="gap-2 px-4 py-4 flex-col-center">
@@ -21,4 +22,13 @@ const MyPageTapItem = ({ tapName, iconName }: MyPageTapItemProps) => {
   );
 };
 
-export default MyPageTapItem;
+const MyPageIconNav = () => {
+  return (
+    <div className="w-full gap-[26px] px-5 py-[6px] flex-center">
+      {TAP_CONFIG.map((item, index) => (
+        <MyPageIconNavItem key={index} tapName={item.tapName} iconName={item.iconName} />
+      ))}
+    </div>
+  );
+};
+export default MyPageIconNav;
