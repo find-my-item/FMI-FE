@@ -21,7 +21,13 @@ const SignUpContainer = () => {
         addToast("회원가입이 완료되었어요.", "success");
       },
       onError: (error) => {
-        addToast("회원가입에 실패했어요", "warning");
+        if (error.code === "AUTH409-EMAIL_DUPLICATED") {
+          addToast("이미 가입된 이메일이에요.", "warning");
+        } else if (error.code === "AUTH409-EMAIL_RECENTLY_DELETED") {
+          addToast("최근 탈퇴한 이메일이에요. 7일 후 재가입 해주세요.", "warning");
+        } else {
+          addToast("회원가입에 실패했어요. 다시 시도해 주세요.", "warning");
+        }
       },
     });
   };
