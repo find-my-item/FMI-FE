@@ -23,6 +23,7 @@ export const useRoutingGard = () => {
       router.replace(`/sign-up?step=1`);
     }
     if (Number(gardStep) > maxStep) {
+      alert("잘못된 접근이에요");
       router.replace(`/sign-up?step=${maxStep}`);
     }
   }, [gardStep, maxStep, router]);
