@@ -58,7 +58,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
             if (error.code === "_EMAIL_DUPLICATED") {
               addToast("이미 존재하는 이메일이에요.", "warning");
             } else if (error.code === "_EMAIL_RECENTLY_DELETED") {
-              addToast("최근 탈퇴한 이메일이에요, 7일 후 재가입 해주세요.", "warning");
+              addToast("최근 탈퇴한 이메일이에요. 7일 후 재가입 해주세요.", "warning");
             } else {
               addToast("다시 시도해 주세요.", "error");
             }
