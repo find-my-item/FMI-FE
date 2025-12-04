@@ -38,8 +38,9 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
       addToast("닉네임에 금칙어가 포함되어 있습니다.", "warning");
     } else if (isError && data?.code === "NICKNAME_DUPLICATE") {
       addToast("중복된 닉네임입니다.", "warning");
+    } else {
+      addToast("다시 시도해 주세요.", "error");
     }
-    // addToast("다시 시도해 주세요.", "error");
   }, [nicknameValue, data, error, isSuccess, isError]);
 
   // 버튼 클릭 함수
@@ -56,12 +57,17 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
             addToast("인증번호가 발송되었습니다.", "success");
           },
           onError: (error) => {
+            if (error.code === "_EMAIL_DUPLICATED") {
+              addToast("이미 존재하는 이메일이에요.", "warning");
+            } else if (error.code === "_EMAIL_RECENTLY_DELETED") {
+              addToast("최근 탈퇴한 이메일이에요, 7일 후 재가입 해주세요.", "warning");
+            } else {
+              addToast("다시 시도해 주세요.", "error");
+            }
             console.log("error>> ", error);
-            addToast("다시 시도해 주세요.", "error");
           },
         }
       );
-      // addToast("이미 존재하는 이메일입니다.", "warning");
     } else if (name === "emailAuth") {
       const codeValue = getValues(name);
       CodeMutate(
@@ -74,11 +80,14 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
           },
           onError: (error) => {
             console.log("error>> ", error);
-            addToast("인증번호가 일치하지 않습니다.", "warning");
+            if (error.code === "_INVALID_CREDENTIALS") {
+              addToast("인증번호가 일치하지 않아요", "warning");
+            } else {
+              addToast("다시 시도해 주세요.", "error");
+            }
           },
         }
       );
-      // addToast("다시 시도해 주세요.", "error");
     } else if (name === "nickname") {
       const nickname = getValues(name);
       if (nickname) {

@@ -8,7 +8,6 @@ import DetailAgree from "../DetailAgree/DetailAgree";
 import { useApiSignUp } from "../../_hooks/useApiSignUp";
 import { useToast } from "@/context/ToastContext";
 import { useRouter } from "next/navigation";
-import { error } from "console";
 
 const SignUpContainer = () => {
   const router = useRouter();
