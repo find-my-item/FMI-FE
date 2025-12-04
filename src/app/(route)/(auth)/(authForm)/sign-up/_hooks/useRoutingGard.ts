@@ -10,7 +10,6 @@ export const useRoutingGard = () => {
 
   const [maxStep, setMaxStep] = useState<number>(1);
 
-  // 초기
   useEffect(() => {
     const stored = window.sessionStorage.getItem("signup-max-step");
     if (stored) {
@@ -18,7 +17,6 @@ export const useRoutingGard = () => {
     }
   }, []);
 
-  // 가드
   useEffect(() => {
     const isStep = gardStep === "1" || gardStep === "2";
     if (!isStep) {
@@ -39,7 +37,6 @@ export const useRoutingGard = () => {
   };
 
   return {
-    gardStep,
     updateMaxStep,
   };
 };

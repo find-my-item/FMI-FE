@@ -21,10 +21,6 @@ export const useSignUpFlow = ({ onSubmit }: useSignUpFlowProps) => {
 
   const { trigger, getValues } = useFormContext<FormType>();
 
-  // const onSubmit = (data: any) => {
-  //   console.log("request>>> ", data);
-  // };
-
   // 회원가입 1단계 -> 2단계
   const onNext = useCallback(
     async (nextStep: number) => {
@@ -47,7 +43,7 @@ export const useSignUpFlow = ({ onSubmit }: useSignUpFlowProps) => {
     router.push(`/sign-up?step=${preStep}`);
   }, []);
 
-  // // 약관 동의 -> 최종제출
+  // 약관 동의 -> 최종제출 전 데이터 필터링
   const completeTerms = useCallback(async () => {
     const ok = await trigger(["termsOfServiceAgreed", "privacyPolicyAgreed", "marketingConsent"]);
     if (ok) {
@@ -66,7 +62,6 @@ export const useSignUpFlow = ({ onSubmit }: useSignUpFlowProps) => {
 
   return {
     step,
-    // onSubmit,
     onNext,
     openTermDetail,
     onAgreeTerm,
