@@ -3,9 +3,8 @@
 import { useState } from "react";
 import { Tab } from "@/components";
 import { ManualItem } from "./_components";
-import { MANUAL_DATA } from "./_constants/MANUAL_DATA";
-import { ManualItemType } from "./_types/ManualItemType";
-import { MANUAL_LIST } from "./_constants/MANUAL_LIST";
+import { MANUAL_DATA, MANUAL_LIST } from "./_constants/MANUAL_CONSTANT";
+import { ManualItemType } from "./_types/ManualType";
 
 const page = () => {
   const [selected, setSelected] = useState<keyof typeof MANUAL_DATA>("LOST");
@@ -28,7 +27,7 @@ const page = () => {
       {MANUAL_DATA[selected].map((item: ManualItemType, index: number) => (
         <ManualItem
           key={item.title}
-          {...item}
+          item={item}
           isOpen={openIndex === index}
           onToggle={() => handleToggle(index)}
         />

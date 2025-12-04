@@ -4,8 +4,8 @@ import { Filter, InputSearch } from "@/components";
 import { FormProvider, useForm } from "react-hook-form";
 import { createChatFilterButtons } from "../../_utils/createChatFilterButtons/createChatFilterButtons";
 import ChatItem from "../ChatItem/ChatItem";
-import { Props } from "@/components/Icon/Icon";
 import { useSearchParams } from "next/navigation";
+import { Props } from "@/components/common/Icon/Icon";
 
 interface DefaultListProps {
   searchUpdateQuery: (key: string, value?: string) => void;
