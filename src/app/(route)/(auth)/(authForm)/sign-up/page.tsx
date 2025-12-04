@@ -4,6 +4,7 @@
 import { FormProvider, useForm } from "react-hook-form";
 import { FormType } from "../types/FormType";
 import SignUpContainer from "./_components/SignUpContainer/SignUpContainer";
+import { Suspense } from "react";
 
 const Page = () => {
   const methods = useForm<FormType>({
@@ -14,9 +15,11 @@ const Page = () => {
 
   return (
     <div className="flex min-h-screen w-full flex-col-center">
-      <FormProvider {...methods}>
-        <SignUpContainer />
-      </FormProvider>
+      <Suspense fallback="">
+        <FormProvider {...methods}>
+          <SignUpContainer />
+        </FormProvider>
+      </Suspense>
     </div>
   );
 };
