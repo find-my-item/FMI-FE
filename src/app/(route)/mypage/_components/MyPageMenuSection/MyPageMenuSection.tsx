@@ -21,6 +21,7 @@ const MyPageMenuSection = ({ menu }: MyPageMenuSectionProps) => {
         </div>
         {menu.pages.map((item) => (
           <Link
+            key={item.pageName}
             href={item.pageLink}
             className="flex h-11 w-full justify-between py-[10px] text-body1-semibold text-neutral-strong-default"
           >
@@ -32,7 +33,7 @@ const MyPageMenuSection = ({ menu }: MyPageMenuSectionProps) => {
       <hr
         className={cn(
           "mx-5 max-w-full border border-divider-default_3",
-          menu.title === "계정 설정" && "opacity-0"
+          menu.title === "계정 설정" && "aria-hidden"
         )}
       />
     </>

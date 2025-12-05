@@ -9,7 +9,7 @@ const page = () => {
       <MyPageIconNav />
 
       {MYPAGE_MENU_LIST.map((item) => (
-        <MyPageMenuSection menu={item} />
+        <MyPageMenuSection key={item.title} menu={item} />
       ))}
     </div>
   );
