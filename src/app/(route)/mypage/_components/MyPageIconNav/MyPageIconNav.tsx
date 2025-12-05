@@ -1,5 +1,5 @@
-import Icon from "@/components/Icon/Icon";
-import { IconName } from "@/components/Icon/Icon";
+import { Icon } from "@/components";
+import { IconName } from "@/components/common/Icon/Icon";
 import { MyPageTapType } from "../../_types/MyPageTapType";
 import { TAP_CONFIG } from "../../_constants/TAP_CONFIG";
 

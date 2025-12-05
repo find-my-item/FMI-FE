@@ -1,4 +1,4 @@
-import { Props } from "@/components/Icon/Icon";
+import { Props } from "@/components/common/Icon/Icon";
 
 export const EMPTY_MODE_STYLE = {
   lost: {

@@ -1,23 +1,20 @@
 "use client";
 
-import { Button, Icon } from "@/components";
-import { cn } from "@/utils";
-import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
+import { AnimatePresence, motion } from "framer-motion";
+import { cn } from "@/utils";
+import { Button, Icon } from "@/components";
+import { ManualItemType } from "../../_types/ManualType";
 
-type Item = {
-  title: string;
-  content: React.ReactNode;
-  href?: string;
-  btnText?: string;
-};
-
-interface ManualItemProps extends Item {
+interface ManualItemProps {
+  item: ManualItemType;
   isOpen?: boolean;
   onToggle?: () => void;
 }
 
-const ManualItem = ({ title, content, href, btnText, isOpen, onToggle }: ManualItemProps) => {
+const ManualItem = ({ item, isOpen, onToggle }: ManualItemProps) => {
+  const { title, content, href, btnText } = item;
+
   return (
     <>
       <div

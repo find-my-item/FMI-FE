@@ -5,7 +5,7 @@ jest.mock("@/components", () => ({
   Icon: ({ name, title }: { name: string; title?: string }) => (
     <span data-testid={`icon-${name}`}>{title ?? name}</span>
   ),
-  Button: ({ children, ...rest }: any) => (
+  Button: ({ children, ignoreBase, ...rest }: any) => (
     <button data-testid="open-button" {...rest}>
       {children}
     </button>
