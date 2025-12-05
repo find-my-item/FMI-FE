@@ -1,6 +1,4 @@
-import MyPageProfile from "./_components/MyPageProfile/MyPageProfile";
-import MyPageIconNav from "./_components/MyPageIconNav/MyPageIconNav";
-import MyPageMenuSection from "./_components/MyPageMenuSection/MyPageMenuSection";
+import { MyPageIconNav, MyPageMenuSection, MyPageProfile } from "./_components";
 import { MYPAGE_MENU_LIST } from "./_constants/MYPAGE_MENU_LIST";
 
 const page = () => {
