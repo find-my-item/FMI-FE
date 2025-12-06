@@ -1,14 +1,14 @@
 import useAppMutation from "@/api/query/useAppMutation";
 
-type useLoginResType = {
+type ApiLoginResType = {
   isSuccess: boolean;
   code: string;
   message: string;
   result: string;
 };
 
-export const ApiUseLogin = () => {
-  return useAppMutation<{ email: string; password: string }, useLoginResType>(
+export const useApiLogin = () => {
+  return useAppMutation<{ email: string; password: string }, ApiLoginResType, ApiLoginResType>(
     "public",
     "/auth/login",
     "post"

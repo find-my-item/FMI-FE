@@ -7,6 +7,8 @@ import { Logo } from "../../_components";
 import { CHECKBOX_CONFIG } from "./_constant/CHECKBOX_CONFIG";
 import { EMAIL_LOGIN_CONFIG } from "./_constant/EMAIL_LOGIN_CONFIG";
 import { FormProvider, useForm } from "react-hook-form";
+import { useApiLogin } from "./_hooks/useApiLogin";
+import { useToast } from "@/context/ToastContext";
 
 type loginType = {
   email: string;
@@ -22,12 +24,35 @@ const Page = () => {
     shouldUnregister: false, // 입력 값 유지
   });
 
-  const { register, control, handleSubmit } = useForm();
+  const { addToast } = useToast();
+
+  const { register, control, getValues, handleSubmit } = useForm();
+  const { mutate, isPending } = useApiLogin();
 
   const checkBoxValues = useWatch({ control, name: CHECKBOX_CONFIG.map((item) => item.id) });
 
   const onSubmit = handleSubmit((data) => {
     // alert("폼 제출되었습니다.");
+    const isEmail = getValues("email");
+    const isPassword = getValues("password");
+
+    mutate(
+      { email: isEmail, password: isPassword },
+      {
+        onSuccess: (data) => {
+          console.log("data>> ", data);
+          addToast("로그인에 성공했어요.", "success");
+        },
+        onError: (error) => {
+          console.log("error>> ", error);
+          if (error.code === "AUTH401-INVALID_CREDENTIALS") {
+            addToast("아이디 또는 비밀번호가 일치하지 않아요.", "warning");
+          } else {
+            addToast("잠시 후 다시 시도해 주세요.", "error");
+          }
+        },
+      }
+    );
   });
 
   return (
