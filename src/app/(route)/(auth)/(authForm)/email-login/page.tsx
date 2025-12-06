@@ -7,10 +7,16 @@ import { Logo } from "../../_components";
 import { CHECKBOX_CONFIG } from "./_constant/CHECKBOX_CONFIG";
 import { EMAIL_LOGIN_CONFIG } from "./_constant/EMAIL_LOGIN_CONFIG";
 import { FormProvider, useForm } from "react-hook-form";
-import { FormValue } from "../types/FormValue";
+
+type loginType = {
+  email: string;
+  password: string;
+  rememberId: boolean;
+  autoLogin: boolean;
+};
 
 const Page = () => {
-  const methods = useForm<FormValue>({
+  const methods = useForm<loginType>({
     mode: "onChange",
     shouldUnregister: false, // 입력 값 유지
   });
@@ -20,7 +26,7 @@ const Page = () => {
   const checkBoxValues = useWatch({ control, name: CHECKBOX_CONFIG.map((item) => item.id) });
 
   const onSubmit = handleSubmit((data) => {
-    alert("폼 제출되었습니다.");
+    // alert("폼 제출되었습니다.");
   });
 
   return (
