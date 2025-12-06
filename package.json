@@ -26,9 +26,9 @@
     "babel-plugin-react-compiler": "^1.0.0",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.13",
-    "next": "15.5.2",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
+    "next": "^15.5.7",
+    "react": "^19.1.2",
+    "react-dom": "^19.1.2",
     "react-hook-form": "^7.62.0",
     "zod": "^4.1.5",
     "zustand": "^5.0.8"
