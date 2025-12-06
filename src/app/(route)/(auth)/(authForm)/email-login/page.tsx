@@ -18,6 +18,7 @@ type loginType = {
 const Page = () => {
   const methods = useForm<loginType>({
     mode: "onChange",
+    reValidateMode: "onChange",
     shouldUnregister: false, // 입력 값 유지
   });
 
