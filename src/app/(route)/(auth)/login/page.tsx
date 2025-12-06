@@ -1,10 +1,12 @@
 "use client";
 
-import { ButtonStyle } from "../(authForm)/sign-up/_constant/AUTH_STYLE";
 import Link from "next/link";
 import { cn } from "@/utils";
 import { Icon, Button } from "@/components";
 import { Logo } from "../_components";
+
+const ButtonStyle =
+  "w-full h-[50px] flex-center gap-1 rounded-[10px] bg-[#1EB87B] font-semibold text-[16px] text-white";
 
 const Page = () => {
   return (
