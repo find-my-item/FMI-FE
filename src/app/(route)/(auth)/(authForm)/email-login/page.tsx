@@ -26,7 +26,13 @@ const Page = () => {
 
   const { addToast } = useToast();
 
-  const { register, control, getValues, handleSubmit } = useForm();
+  const {
+    register,
+    control,
+    getValues,
+    handleSubmit,
+    formState: { isValid },
+  } = useForm();
   const { mutate, isPending } = useApiLogin();
 
   const checkBoxValues = useWatch({ control, name: CHECKBOX_CONFIG.map((item) => item.id) });
@@ -54,6 +60,8 @@ const Page = () => {
       }
     );
   });
+
+  const isDisabled = !isValid || isPending;
 
   return (
     <>
@@ -93,7 +101,7 @@ const Page = () => {
 
             {/* 로그인 버튼 */}
             <div className="w-full gap-6 flex-col-center">
-              <Button type="submit" ariaLabel="로그인 버튼" variant="auth">
+              <Button type="submit" ariaLabel="로그인 버튼" variant="auth" disabled={isDisabled}>
                 로그인
               </Button>
               {/* divider 구분선 */}
