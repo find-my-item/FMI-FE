@@ -4,7 +4,11 @@ type ApiLoginResType = {
   isSuccess: boolean;
   code: string;
   message: string;
-  result: string;
+  result: {
+    userId: number;
+    accessToken: string;
+    temporaryPassword: boolean;
+  };
 };
 
 export const useApiLogin = () => {

@@ -7,8 +7,11 @@ import { CHECKBOX_CONFIG } from "../_constants/CHECKBOX_CONFIG";
 import { useToast } from "@/context/ToastContext";
 import { useWatch, useFormContext } from "react-hook-form";
 import { useApiLogin } from "../_hooks/useApiLogin";
+import { useRouter } from "next/navigation";
 
 const EmailLoginForm = () => {
+  const router = useRouter();
+
   const { addToast } = useToast();
 
   const {
@@ -19,7 +22,8 @@ const EmailLoginForm = () => {
     handleSubmit,
     formState: { isValid },
   } = useFormContext();
-  // const { mutate, isPending } = useApiLogin();
+
+  const { mutate, isPending } = useApiLogin();
 
   const checkBoxValues = useWatch({ control, name: CHECKBOX_CONFIG.map((item) => item.id) });
 
@@ -35,31 +39,39 @@ const EmailLoginForm = () => {
 
   const onSubmit = handleSubmit((data) => {
     console.log("data>> ", data);
-    alert("폼 제출되었습니다.");
-    // const isEmail = getValues("email");
-    // const isPassword = getValues("password");
 
-    // mutate(
-    //   { email: isEmail, password: isPassword },
-    //   {
-    //     onSuccess: (data) => {
-    //       console.log("data>> ", data);
-    //       addToast("로그인에 성공했어요.", "success");
-    //     },
-    //     onError: (error) => {
-    //       console.log("error>> ", error);
-    //       if (error.code === "AUTH401-INVALID_CREDENTIALS") {
-    //         addToast("아이디 또는 비밀번호가 일치하지 않아요.", "warning");
-    //       } else {
-    //         addToast("잠시 후 다시 시도해 주세요.", "error");
-    //       }
-    //     },
-    //   }
-    // );
+    alert("폼 제출되었습니다.");
+    const isEmail = getValues("email");
+    const isPassword = getValues("password");
+
+    mutate(
+      { email: isEmail, password: isPassword },
+      {
+        onSuccess: (data) => {
+          const { accessToken, userId } = data.result;
+          localStorage.setItem("accessToken", accessToken);
+          localStorage.setItem("userId", String(userId));
+
+          console.log("data>> ", data);
+          addToast("로그인에 성공했어요.", "success");
+          if (data.result.temporaryPassword) {
+            router.push("/find-pw");
+            addToast("임시 비밀번호를 변경해주세요.", "warning");
+          }
+        },
+        onError: (error) => {
+          console.log("error>> ", error);
+          if (error.code === "AUTH401-INVALID_CREDENTIALS") {
+            addToast("아이디 또는 비밀번호가 일치하지 않아요.", "warning");
+          } else {
+            addToast("잠시 후 다시 시도해 주세요.", "error");
+          }
+        },
+      }
+    );
   });
 
-  // const isDisabled = !isValid || isPending;
-  const isDisabled = !isValid;
+  const isDisabled = !isValid || isPending;
 
   return (
     <form onSubmit={onSubmit} className="flex w-full flex-col gap-10">
