@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, ReactNode } from "react";
+import { ComponentPropsWithoutRef, ElementType, ReactNode } from "react";
 import { SIZE_STYLES, LOADING_SPINNER_SIZE, VARIANT_STYLES, BASE_STYLES } from "./constantButton";
 import Icon, { Props } from "../../Icon/Icon";
 
@@ -8,6 +8,10 @@ import Icon, { Props } from "../../Icon/Icon";
  * 다양한 스타일과 크기를 지원하는 버튼 컴포넌트입니다.
  * `variant`, `hierarchy`, `size` 조합으로 시각적 스타일을 제어하며,
  * 아이콘과 로딩 스피너를 함께 사용할 수 있습니다.
+ * `as` prop을 통해 button 태그 또는 Link 컴포넌트로 렌더링할 수 있습니다.
+ *
+ * @param as - 렌더링할 컴포넌트 타입을 지정합니다.
+ * `"button"` | `typeof Link` (기본값: `"button"`)
  *
  * @param variant - 버튼의 스타일을 지정합니다.
  * `"solid"` | `"outlined"` | `"inversed"` | `"auth"` (기본값: `"solid"`)
@@ -36,6 +40,7 @@ import Icon, { Props } from "../../Icon/Icon";
  *
  * @example
  * ```tsx
+ * // button 태그로 사용
  * <Button
  *   variant="solid"
  *   hierarchy="normal"
@@ -46,12 +51,23 @@ import Icon, { Props } from "../../Icon/Icon";
  * >
  *   추가하기
  * </Button>
+ *
+ * // Link 컴포넌트로 사용
+ * <Button
+ *   as={Link}
+ *   href="/about"
+ *   variant="outlined"
+ *   size="medium"
+ * >
+ *   상세보기
+ * </Button>
  * ```
  */
 
 type Size = "big" | "medium" | "small";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+type ButtonProps<E extends ElementType = "button"> = {
+  as?: E;
   variant?: "solid" | "outlined" | "inversed" | "auth";
   hierarchy?: "normal" | "subtle";
   size?: Size;
@@ -61,9 +77,10 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   ariaLabel?: string;
   children: ReactNode;
   ignoreBase?: boolean;
-}
+} & ComponentPropsWithoutRef<E>;
 
-const Button = ({
+const Button = <E extends ElementType = "button">({
+  as,
   variant = "solid",
   hierarchy = "normal",
   size = "medium",
@@ -76,7 +93,9 @@ const Button = ({
   ariaLabel = "버튼",
   ignoreBase,
   ...props
-}: ButtonProps) => {
+}: ButtonProps<E>) => {
+  const Component = (as ?? "button") as ElementType;
+
   const variantClass =
     variant === "solid" ? VARIANT_STYLES.solid[hierarchy] : VARIANT_STYLES[variant].base;
 
@@ -87,24 +106,27 @@ const Button = ({
   const combinedStyles = ignoreBase
     ? `${variantClass} ${className}`
     : `${BASE_STYLES} ${SIZE_STYLES[size]} ${variantClass} ${glassCard} ${className}`;
-  return (
-    <button
-      disabled={disabled || loading}
-      className={combinedStyles}
-      {...props}
-      aria-label={ariaLabel ?? ""}
-    >
-      {loading ? (
-        <Icon name="Loading" className="animate-spin" size={LOADING_SPINNER_SIZE[size]} />
-      ) : (
-        <>
-          {finalIconPosition === "leading" && icon && <Icon {...icon} />}
-          {children}
-          {finalIconPosition === "trailing" && icon && <Icon {...icon} />}
-        </>
-      )}
-    </button>
+
+  const isButton = Component === "button";
+
+  const content = loading ? (
+    <Icon name="Loading" className="animate-spin" size={LOADING_SPINNER_SIZE[size]} />
+  ) : (
+    <>
+      {finalIconPosition === "leading" && icon && <Icon {...icon} />}
+      {children}
+      {finalIconPosition === "trailing" && icon && <Icon {...icon} />}
+    </>
   );
+
+  const commonProps = {
+    className: combinedStyles,
+    "aria-label": ariaLabel ?? "",
+    ...(isButton && { disabled: disabled || loading }),
+    ...props,
+  };
+
+  return <Component {...commonProps}>{content}</Component>;
 };
 
 export default Button;

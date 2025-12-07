@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import Link from "next/link";
 import Button from "./Button";
 import Icon from "../../Icon/Icon";
 
@@ -12,7 +13,7 @@ const meta = {
   argTypes: {
     variant: {
       control: "select",
-      options: ["solid", "outlined", "inversed"],
+      options: ["solid", "outlined", "inversed", "auth"],
       description: "버튼의 스타일 variant",
     },
     hierarchy: {
@@ -42,6 +43,10 @@ const meta = {
     disabled: {
       control: "boolean",
       description: "비활성화 상태",
+    },
+    ignoreBase: {
+      control: "boolean",
+      description: "기본 스타일 제거 여부",
     },
   },
 } satisfies Meta<typeof Button>;
@@ -110,6 +115,40 @@ export const AllVariants: Story = {
         <div className="rounded bg-gray-800 p-4">
           <Button variant="inversed">Inversed</Button>
         </div>
+      </div>
+      <div className="flex gap-4">
+        <Button variant="auth">Auth</Button>
+      </div>
+    </div>
+  ),
+};
+
+// As Link Component
+export const AsLink: Story = {
+  args: {
+    children: "Link Button",
+  },
+  render: () => (
+    <div className="flex flex-col gap-4">
+      <div className="flex gap-4">
+        <Button as={Link} href="/about" ignoreBase>
+          <Icon name="Book" size={24} />
+        </Button>
+        <Button as={Link} href="/contact" variant="outlined">
+          Outlined Link
+        </Button>
+      </div>
+      <div className="flex gap-4">
+        <Button
+          as={Link}
+          href="/products"
+          variant="solid"
+          hierarchy="normal"
+          icon={{ name: "ArrowRight", size: 16 }}
+          iconPosition="trailing"
+        >
+          Link with Icon
+        </Button>
       </div>
     </div>
   ),
