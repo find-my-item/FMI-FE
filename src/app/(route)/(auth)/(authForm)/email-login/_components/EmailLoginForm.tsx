@@ -1,3 +1,6 @@
+"use no memo";
+
+import { useEffect } from "react";
 import { CheckBox, InputText, Button } from "@/components";
 import { EMAIL_LOGIN_CONFIG } from "../_constants/EMAIL_LOGIN_CONFIG";
 import { CHECKBOX_CONFIG } from "../_constants/CHECKBOX_CONFIG";
@@ -12,12 +15,23 @@ const EmailLoginForm = () => {
     register,
     control,
     getValues,
+    setValue,
     handleSubmit,
     formState: { isValid },
   } = useFormContext();
   // const { mutate, isPending } = useApiLogin();
 
   const checkBoxValues = useWatch({ control, name: CHECKBOX_CONFIG.map((item) => item.id) });
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const savedEmail = localStorage.getItem("saved-email");
+      if (savedEmail) {
+        setValue("email", savedEmail);
+        setValue("rememberId", true);
+      }
+    }
+  }, [setValue]);
 
   const onSubmit = handleSubmit((data) => {
     console.log("data>> ", data);
@@ -45,7 +59,7 @@ const EmailLoginForm = () => {
   });
 
   // const isDisabled = !isValid || isPending;
-  const isDisabled = isValid;
+  const isDisabled = !isValid;
 
   return (
     <form onSubmit={onSubmit} className="flex w-full flex-col gap-10">

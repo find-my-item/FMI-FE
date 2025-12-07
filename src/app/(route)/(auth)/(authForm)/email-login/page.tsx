@@ -1,4 +1,5 @@
 "use client";
+"use no memo";
 
 import { DetailHeader } from "@/components";
 import Link from "next/link";
