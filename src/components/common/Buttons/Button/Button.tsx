@@ -104,7 +104,7 @@ const Button = <E extends ElementType = "button">({
   const finalIconPosition = icon && (iconPosition ?? "leading");
 
   const combinedStyles = ignoreBase
-    ? `${variantClass} ${className}`
+    ? className
     : `${BASE_STYLES} ${SIZE_STYLES[size]} ${variantClass} ${glassCard} ${className}`;
 
   const isButton = Component === "button";
