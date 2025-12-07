@@ -62,6 +62,16 @@ import Icon, { Props } from "../../Icon/Icon";
  *   상세보기
  * </Button>
  * ```
+ *
+ * // Link 컴포넌트로 사용 (ignoreBase 옵션 사용하여 스타일 초기화)
+ * <Button
+ *   as={Link}
+ *   href="/about"
+ *   ignoreBase
+ *   className="p-4"
+ * >
+ *   상세보기
+ * </Button>
  */
 
 type Size = "big" | "medium" | "small";
