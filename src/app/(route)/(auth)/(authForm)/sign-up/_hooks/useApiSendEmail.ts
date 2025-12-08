@@ -1,9 +1,10 @@
 import useAppMutation from "@/api/query/useAppMutation";
 
-type SendEmailResponseType = {
+export type SendEmailResponseType = {
   isSuccess: boolean;
   code: string;
   message: string;
+  result: any;
 };
 
 export const useSendEmail = () => {

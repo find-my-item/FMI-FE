@@ -1,6 +1,6 @@
 import useAppMutation from "@/api/query/useAppMutation";
 
-type CheckCodeResponseType = {
+export type CheckCodeResponseType = {
   isSuccess: boolean;
   code: string;
   message: string;

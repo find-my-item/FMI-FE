@@ -8,7 +8,7 @@ type CheckNicknameResponseType = {
 };
 
 export const useCheckNickname = (nickname: string) => {
-  return useAppQuery<CheckNicknameResponseType>(
+  return useAppQuery<CheckNicknameResponseType, CheckNicknameResponseType>(
     "public",
     ["/auth/check-nickname", nickname],
     `/auth/check-nickname?nickname=${nickname}`,
