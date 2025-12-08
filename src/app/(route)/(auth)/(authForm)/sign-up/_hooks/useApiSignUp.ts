@@ -1,6 +1,6 @@
 import useAppMutation from "@/api/query/useAppMutation";
 
-type SignUpResponse = {
+export type SignUpResponse = {
   isSuccess: boolean;
   code: string;
   message: string;
