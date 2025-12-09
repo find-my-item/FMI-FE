@@ -40,7 +40,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
 
   // 닉네임 api useEffect
   useEffect(() => {
-    handlerNickname;
+    handlerNickname();
   }, [nicknameValue, data, error, isSuccess, isError]);
 
   const handlerErrorEmail = (error: SendEmailResponseType) => {
