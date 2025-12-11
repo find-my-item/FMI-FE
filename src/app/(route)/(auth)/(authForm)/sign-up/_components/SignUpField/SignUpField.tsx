@@ -4,10 +4,8 @@ import { SIGNUP_INPUT_CONFIG } from "../../_constant/SIGNUP_INPUT_CONFIG";
 import { Button, InputText, DetailHeader } from "@/components";
 import { useFormContext } from "react-hook-form";
 import { useToast } from "@/context/ToastContext";
-import { SendEmailResponseType, useSendEmail } from "../../_hooks/useApiSendEmail";
-import { useCheckNickname } from "../../_hooks/useApiCheckNickname";
 import { useEffect, useState } from "react";
-import { CheckCodeResponseType, useCheckCode } from "../../_hooks/useApiCheckCode";
+import { useCheckCode, useSendEmail, useCheckNickname } from "@/app/api";
 
 const SignUpField = ({ onNext }: { onNext: () => void }) => {
   const {
