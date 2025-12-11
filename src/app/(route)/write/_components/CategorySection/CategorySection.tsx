@@ -10,17 +10,17 @@ const CategorySection = () => {
   return (
     <>
       <section
-        className="flex cursor-pointer items-center justify-between border-b border-flatGray-50 px-5 py-6"
-        aria-label="카테고리 선택"
         onClick={() => setCategoryPopupOpen(true)}
+        className="flex cursor-pointer items-center justify-between border-b border-flatGray-50 px-5 py-6"
       >
-        <span className="text-body1-medium text-flatGray-400">
+        <span className="text-body1-medium text-neutral-normal-placeholder">
           카테고리를 선택해 주세요. <RequiredText />
         </span>
-        <button type="button" className="h-6 w-6">
-          <Icon name="ArrowDown" size={24} title="카테고리 선택" />
+        <button type="button" aria-label="카테고리 선택" className="h-6 w-6">
+          <Icon name="ArrowDown" size={24} />
         </button>
       </section>
+
       <CategoryPopup isOpen={categoryPopupOpen} onClose={() => setCategoryPopupOpen(false)} />
     </>
   );
