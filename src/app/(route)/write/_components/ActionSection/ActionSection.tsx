@@ -7,7 +7,7 @@ interface ActionSectionProps {
 
 const ActionSection = ({ disabled }: ActionSectionProps) => {
   return (
-    <section className="border-t border-flatGray-50 px-5 pb-8 pt-3">
+    <section className="px-5 pb-8 pt-3">
       <Button
         type="submit"
         disabled={disabled}

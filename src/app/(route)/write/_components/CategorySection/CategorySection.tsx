@@ -16,7 +16,7 @@ const CategorySection = () => {
         <span className="text-body1-medium text-neutral-normal-placeholder">
           카테고리를 선택해 주세요. <RequiredText />
         </span>
-        <button type="button" aria-label="카테고리 선택" className="h-6 w-6">
+        <button type="button" aria-label="카테고리 선택" className="size-6">
           <Icon name="ArrowDown" size={24} />
         </button>
       </section>

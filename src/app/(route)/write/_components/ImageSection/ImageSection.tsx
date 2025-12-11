@@ -19,7 +19,7 @@ const ImageSection = () => {
       <button
         aria-label="이미지 업로드"
         onClick={handleImgUpload}
-        className="h-[104px] w-[104px] cursor-pointer rounded-[6px] bg-flatGray-25 flex-col-center"
+        className="size-[104px] cursor-pointer rounded-[6px] bg-flatGray-25 flex-col-center"
       >
         <Icon name="Camera" size={32} />
         <span className="text-caption1-regular text-flatGray-400">(0/5)</span>
