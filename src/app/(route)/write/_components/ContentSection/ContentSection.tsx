@@ -1,5 +1,5 @@
-import { RequiredText } from "@/components";
 import { cn } from "@/utils";
+import { RequiredText } from "@/components";
 
 const ContentSection = () => {
   return (
@@ -13,15 +13,20 @@ const ContentSection = () => {
           rows={5}
           placeholder=" "
           className={cn(
-            "hide-scrollbar w-full resize-none py-6 text-body1-medium text-neutral-strong-default",
-            "placeholder:text-body2-regular placeholder:text-neutral-normal-placeholder focus:outline-none"
+            "hide-scrollbar w-full resize-none py-1 text-body1-medium text-neutral-strong-default",
+            "peer placeholder:text-body2-regular placeholder:text-neutral-normal-placeholder focus:outline-none"
           )}
         />
-        <div className="pointer-events-none absolute left-1 top-1">
+
+        <div
+          className={cn(
+            "pointer-events-none absolute left-0 top-1",
+            "peer-placeholder-shown:opacity-100 peer-[&:not(:placeholder-shown)]:opacity-0"
+          )}
+        >
           <p className="text-body1-medium text-flatGray-400">
             내용을 입력해 주세요. <RequiredText />
           </p>
-
           <p className="mt-7 text-body2-regular text-neutral-normal-placeholder">
             분실/습득 날짜, 물건 종류, 물건의 특징 등 유실물 찾기에 도움이 되는 내용을 작성해
             주세요. <br />

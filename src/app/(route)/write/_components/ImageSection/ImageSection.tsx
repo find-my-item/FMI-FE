@@ -1,5 +1,5 @@
-import { Icon } from "@/components";
 import { useRef } from "react";
+import { Icon } from "@/components";
 
 const ImageSection = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
