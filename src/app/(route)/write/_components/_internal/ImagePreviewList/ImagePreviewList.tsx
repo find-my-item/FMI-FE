@@ -1,16 +1,16 @@
 "use client";
 
+import { Dispatch, SetStateAction } from "react";
 import Image from "next/image";
 import { Icon } from "@/components";
-import { Dispatch, SetStateAction } from "react";
 
-interface Props {
+interface ImagePreviewListProps {
   images: string[];
   setImages: Dispatch<SetStateAction<string[]>>;
   setImgTotalCount: Dispatch<SetStateAction<number>>;
 }
 
-const ImagePreviewList = ({ images, setImages, setImgTotalCount }: Props) => {
+const ImagePreviewList = ({ images, setImages, setImgTotalCount }: ImagePreviewListProps) => {
   return (
     <>
       {images.map((image, index) => (
@@ -20,7 +20,9 @@ const ImagePreviewList = ({ images, setImages, setImgTotalCount }: Props) => {
             alt=""
             width={104}
             height={104}
-            className="size-[104px] rounded-[10px] object-contain"
+            quality={100}
+            draggable={false}
+            className="size-[104px] select-none rounded-[10px] object-contain"
           />
           <button
             type="button"

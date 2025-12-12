@@ -3,13 +3,15 @@
 import { useRef, useState } from "react";
 import { Icon } from "@/components";
 import { ImagePreviewList } from "../_internal";
+import { useToast } from "@/context/ToastContext";
 
 const ImageSection = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [images, setImages] = useState<string[]>([]);
   const [imgTotalCount, setImgTotalCount] = useState(0);
+  const { addToast } = useToast();
 
-  const handleSelectImage = () => {
+  const handleClickImage = () => {
     fileInputRef.current?.click();
   };
 
@@ -19,11 +21,20 @@ const ImageSection = () => {
 
     const fileArray = Array.from(files);
     const validFiles = fileArray.filter((file) => file.type.startsWith("image/"));
-
     const previewUrls = validFiles.map((file) => URL.createObjectURL(file));
 
-    setImages((prev) => [...prev, ...previewUrls]);
-    setImgTotalCount((prev) => prev + previewUrls.length);
+    const currentCount = images.length;
+    const remainCount = 5 - currentCount;
+
+    if (remainCount <= 0 || previewUrls.length > remainCount) {
+      addToast("이미지는 최대 5장만 첨부할 수 있어요.", "warning");
+      return;
+    }
+
+    const willAdd = previewUrls.slice(0, remainCount);
+
+    setImages((prev) => [...prev, ...willAdd]);
+    setImgTotalCount(currentCount + willAdd.length);
   };
 
   return (
@@ -32,6 +43,7 @@ const ImageSection = () => {
         type="file"
         accept="image/png, image/jpeg, image/jpg"
         className="hidden"
+        multiple
         ref={fileInputRef}
         onChange={handleImageUpload}
       />
@@ -40,11 +52,13 @@ const ImageSection = () => {
         <button
           type="button"
           aria-label="이미지 업로드"
-          onClick={handleSelectImage}
-          className="size-[104px] shrink-0 cursor-pointer rounded-[6px] bg-flatGray-25 flex-col-center"
+          onClick={handleClickImage}
+          className="size-[104px] shrink-0 rounded-[6px] bg-flatGray-25 flex-col-center"
         >
           <Icon name="Camera" size={32} />
-          <span className="text-caption1-regular text-flatGray-400">({imgTotalCount}/5)</span>
+          <span className="select-none text-caption1-regular text-flatGray-400">
+            ({imgTotalCount}/5)
+          </span>
         </button>
         <ImagePreviewList
           images={images}
