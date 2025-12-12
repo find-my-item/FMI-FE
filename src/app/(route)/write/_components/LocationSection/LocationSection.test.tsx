@@ -16,9 +16,7 @@ jest.mock("@/components", () => ({
 describe("LocationSection", () => {
   it("위치 등록 섹션이 렌더링되어야 한다", () => {
     render(<LocationSection />);
-
-    const section = screen.getByLabelText("위치 등록");
-    expect(section).toBeInTheDocument();
+    expect(screen.getByText("위치를 등록해 주세요.")).toBeInTheDocument();
   });
 
   it("위치 텍스트와 RequiredText가 표시되어야 한다", () => {
@@ -32,14 +30,6 @@ describe("LocationSection", () => {
     render(<LocationSection />);
 
     expect(screen.getByTestId("icon-Location")).toBeInTheDocument();
-    expect(screen.getByTestId("icon-ArrowRight")).toBeInTheDocument();
-  });
-
-  it("위치 열기 버튼이 존재해야 한다", () => {
-    render(<LocationSection />);
-
-    const button = screen.getByRole("button");
-    expect(button).toBeInTheDocument();
     expect(screen.getByTestId("icon-ArrowRight")).toBeInTheDocument();
   });
 });

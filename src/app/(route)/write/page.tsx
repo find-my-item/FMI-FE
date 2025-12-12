@@ -25,6 +25,7 @@ const Page = () => {
       <DetailHeader title="분실했어요 글쓰기">
         <DetailHeader.Save onClick={() => setSaveModalOpen(true)} />
       </DetailHeader>
+
       <form onSubmit={handleSubmit} className="flex flex-col">
         <ImageSection />
 
