@@ -7,7 +7,7 @@ import AllAgree from "../AllAgree/AllAgree";
 import DetailAgree from "../DetailAgree/DetailAgree";
 import { useToast } from "@/context/ToastContext";
 import { useRouter } from "next/navigation";
-import { SIGNUP_ERROR_MESSAGE } from "../../_constant/SIGNUP_ERROR_MESSAGE";
+import { SIGNUP_ERROR_MESSAGE } from "../../_constants/SIGNUP_ERROR_MESSAGE";
 import { useApiSignUp } from "@/app/api";
 import { ApiResponseType } from "@/types";
 

@@ -1,6 +1,6 @@
 "use no memo";
 
-import { SIGNUP_INPUT_CONFIG } from "../../_constant/SIGNUP_INPUT_CONFIG";
+import { SIGNUP_INPUT_CONFIG } from "../../_constants/SIGNUP_INPUT_CONFIG";
 import { Button, InputText, DetailHeader } from "@/components";
 import { useFormContext } from "react-hook-form";
 import { useSignUpBtnClick } from "../../_hooks/useSignUpBtnClick";

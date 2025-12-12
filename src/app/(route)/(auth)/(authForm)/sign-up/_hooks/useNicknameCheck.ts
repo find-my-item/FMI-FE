@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useCheckNickname } from "@/app/api";
 import { useFormContext } from "react-hook-form";
 import { useToast } from "@/context/ToastContext";
-import { NICKNAME_ERROR_MESSAGE } from "../_constant/SIGNUP_ERROR_MESSAGE";
+import { NICKNAME_ERROR_MESSAGE } from "../_constants/SIGNUP_ERROR_MESSAGE";
 
 export const useNicknameCheck = () => {
   const { addToast } = useToast();

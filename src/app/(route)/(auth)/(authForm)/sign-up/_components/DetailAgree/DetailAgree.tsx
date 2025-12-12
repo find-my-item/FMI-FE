@@ -1,5 +1,5 @@
 import { Button, DetailHeader } from "@/components";
-import { AGREE_CONFIG } from "../../_constant/AGREE_CONFIG";
+import { AGREE_CONFIG } from "../../_constants/AGREE_CONFIG";
 
 interface DetailAgreeProps {
   termName: string;
