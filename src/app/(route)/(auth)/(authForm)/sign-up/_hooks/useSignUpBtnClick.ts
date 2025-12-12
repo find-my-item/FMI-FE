@@ -1,33 +1,31 @@
 import { useFormContext } from "react-hook-form";
 import { useToast } from "@/context/ToastContext";
-import { useEffect, useState } from "react";
-import { useCheckCode, useSendEmail, useCheckNickname } from "@/app/api";
+import { useState } from "react";
+import { useCheckCode, useSendEmail } from "@/app/api";
 import { useNicknameCheck } from "./useNicknameCheck";
+import { ApiResponseType } from "@/types/ApiResponseType";
+import { EMAIL_ERROR_MESSAGE } from "../_constant/SIGNUP_ERROR_MESSAGE";
 
 export const useSignUpBtnClick = () => {
-  const {
-    getValues,
-    formState: { isValid },
-  } = useFormContext();
+  const { getValues } = useFormContext();
 
-  const [nicknameValue, setNicknameValue] = useState("");
-  const [codeVerified, setCodeVerified] = useState(false);
+  const [emailCodeVerified, setEmailCodeVerified] = useState(false);
 
   const { mutate: EmailMutate } = useSendEmail();
   const { mutate: CodeMutate } = useCheckCode();
-  // const { data, error, isSuccess, isError } = useCheckNickname(nicknameValue);
   const [emailValue, setEmailValue] = useState("");
 
   const { addToast } = useToast();
 
   const { handlerToClickNickname } = useNicknameCheck();
 
-  const handlerErrorEmail = (error: ResponseType) => {
+  const handlerErrorEmail = (error: ApiResponseType) => {
     const target = EMAIL_ERROR_MESSAGE[error.code as keyof typeof EMAIL_ERROR_MESSAGE];
-    addToast(target.message, target.status);
+    if (target) addToast(target.message, target.status);
+    else addToast("다시 시도해 주세요.", "error");
   };
 
-  const handlerErrorCode = (error: ResponseType) => {
+  const handlerErrorCode = (error: ApiResponseType) => {
     console.log("error>> ", error);
     if (error.code === "_INVALID_CREDENTIALS") {
       addToast("인증번호가 일치하지 않아요", "warning");
@@ -54,7 +52,7 @@ export const useSignUpBtnClick = () => {
         { email: emailValue, code: codeValue },
         {
           onSuccess: () => {
-            setCodeVerified(true);
+            setEmailCodeVerified(true);
             addToast("인증되었습니다.", "success");
           },
           onError: () => handlerErrorCode,
@@ -67,5 +65,6 @@ export const useSignUpBtnClick = () => {
 
   return {
     handlerToClick,
+    emailCodeVerified,
   };
 };

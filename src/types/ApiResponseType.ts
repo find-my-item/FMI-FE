@@ -1,4 +1,4 @@
-export type ResponseType = {
+export interface ApiResponseType {
   isSuccess: boolean;
   code: string;
   message: string;
@@ -6,4 +6,4 @@ export type ResponseType = {
     id: string;
     verified: boolean;
   };
-};
+}

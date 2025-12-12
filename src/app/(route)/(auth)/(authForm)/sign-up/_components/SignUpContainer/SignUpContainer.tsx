@@ -9,14 +9,14 @@ import { useToast } from "@/context/ToastContext";
 import { useRouter } from "next/navigation";
 import { SIGNUP_ERROR_MESSAGE } from "../../_constant/SIGNUP_ERROR_MESSAGE";
 import { useApiSignUp } from "@/app/api";
-import { ResponseType } from "../../../types/ResponseType";
+import { ApiResponseType } from "@/types";
 
 const SignUpContainer = () => {
   const router = useRouter();
   const { addToast } = useToast();
   const { mutate: SignUpMutate } = useApiSignUp();
 
-  const handlerSignUpError = (error: ResponseType) => {
+  const handlerSignUpError = (error: ApiResponseType) => {
     const target = SIGNUP_ERROR_MESSAGE[error.code as keyof typeof SIGNUP_ERROR_MESSAGE];
 
     if (target) {
