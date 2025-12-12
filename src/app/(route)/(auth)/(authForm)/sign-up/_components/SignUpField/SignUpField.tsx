@@ -6,6 +6,8 @@ import { useFormContext } from "react-hook-form";
 import { useToast } from "@/context/ToastContext";
 import { useEffect, useState } from "react";
 import { useCheckCode, useSendEmail, useCheckNickname } from "@/app/api";
+import { EMAIL_ERROR_MESSAGE, NICKNAME_ERROR_MESSAGE } from "../../_constant/SIGNUP_ERROR_MESSAGE";
+import { ResponseType } from "../../../types/ResponseType";
 
 const SignUpField = ({ onNext }: { onNext: () => void }) => {
   const {
@@ -27,12 +29,11 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
 
   const handlerNickname = () => {
     if (!data) return;
-    if (isSuccess && data.code === "COMMON200") {
+    if (isSuccess) {
       addToast("사용할 수 있는 닉네임입니다.", "success");
-    } else if (isError && data.code === "NICKNAME_INVALID") {
-      addToast("닉네임에 금칙어가 포함되어 있습니다.", "warning");
-    } else if (isError && data.code === "NICKNAME_DUPLICATE") {
-      addToast("중복된 닉네임입니다.", "warning");
+    } else {
+      const target = NICKNAME_ERROR_MESSAGE[data.code as keyof typeof NICKNAME_ERROR_MESSAGE];
+      addToast(target.message, target.status);
     }
   };
 
@@ -41,17 +42,12 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
     handlerNickname();
   }, [nicknameValue, data, error, isSuccess, isError]);
 
-  const handlerErrorEmail = (error: SendEmailResponseType) => {
-    if (error.code === "_EMAIL_DUPLICATED") {
-      addToast("이미 존재하는 이메일이에요.", "warning");
-    } else if (error.code === "_EMAIL_RECENTLY_DELETED") {
-      addToast("최근 탈퇴한 이메일이에요. 7일 후 재가입 해주세요.", "warning");
-    } else {
-      addToast("다시 시도해 주세요.", "error");
-    }
+  const handlerErrorEmail = (error: ResponseType) => {
+    const target = EMAIL_ERROR_MESSAGE[error.code as keyof typeof EMAIL_ERROR_MESSAGE];
+    addToast(target.message, target.status);
   };
 
-  const handlerErrorCode = (error: CheckCodeResponseType) => {
+  const handlerErrorCode = (error: ResponseType) => {
     console.log("error>> ", error);
     if (error.code === "_INVALID_CREDENTIALS") {
       addToast("인증번호가 일치하지 않아요", "warning");
@@ -81,7 +77,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
             setCodeVerified(true);
             addToast("인증되었습니다.", "success");
           },
-          onError: handlerErrorCode,
+          onError: () => handlerErrorCode,
         }
       );
     } else if (name === "nickname") {

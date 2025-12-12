@@ -1,4 +1,5 @@
 import useAppMutation from "@/api/query/useAppMutation";
+import { ApiSignUpType } from "@/app/(route)/(auth)/(authForm)/types/ApiSingUpType";
 
 export type SignUpResponse = {
   isSuccess: boolean;
@@ -10,16 +11,9 @@ export type SignUpResponse = {
 };
 
 export const useApiSignUp = () => {
-  return useAppMutation<
-    {
-      email: string;
-      password: string;
-      nickname: string;
-      termsOfServiceAgreed: boolean;
-      privacyPolicyAgreed: boolean;
-      marketingConsent: boolean;
-    },
-    SignUpResponse,
-    SignUpResponse
-  >("public", "auth/signup", "post");
+  return useAppMutation<ApiSignUpType, SignUpResponse, SignUpResponse>(
+    "public",
+    "auth/signup",
+    "post"
+  );
 };

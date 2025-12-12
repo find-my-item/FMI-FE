@@ -5,18 +5,19 @@ import { useSignUpFlow } from "../../_hooks/useSignUpFlow";
 import SignUpField from "../SignUpField/SignUpField";
 import AllAgree from "../AllAgree/AllAgree";
 import DetailAgree from "../DetailAgree/DetailAgree";
-import { SignUpResponse, useApiSignUp } from "../../_hooks/useApiSignUp";
 import { useToast } from "@/context/ToastContext";
 import { useRouter } from "next/navigation";
-import { EMAIL_ERROR_MESSAGE } from "../../_constant/SIGNUP_ERROR_MESSAGE";
+import { SIGNUP_ERROR_MESSAGE } from "../../_constant/SIGNUP_ERROR_MESSAGE";
+import { useApiSignUp } from "@/app/api";
+import { ResponseType } from "../../../types/ResponseType";
 
 const SignUpContainer = () => {
   const router = useRouter();
   const { addToast } = useToast();
   const { mutate: SignUpMutate } = useApiSignUp();
 
-  const handlerSignUpError = (error: SignUpResponse) => {
-    const target = EMAIL_ERROR_MESSAGE[error.code as keyof typeof EMAIL_ERROR_MESSAGE];
+  const handlerSignUpError = (error: ResponseType) => {
+    const target = SIGNUP_ERROR_MESSAGE[error.code as keyof typeof SIGNUP_ERROR_MESSAGE];
 
     if (target) {
       addToast(target.message, target.status);
@@ -31,7 +32,7 @@ const SignUpContainer = () => {
         router.push("/email-login");
         addToast("회원가입이 완료되었어요.", "success");
       },
-      onError: handlerSignUpError,
+      onError: () => handlerSignUpError,
     });
   };
 
