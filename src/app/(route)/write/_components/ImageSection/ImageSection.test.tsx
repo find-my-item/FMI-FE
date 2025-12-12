@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import ImageSection from "./ImageSection";
 
 jest.mock("@/components", () => ({
-  Icon: ({ title }: { title: string }) => <span data-testid={`icon-${title}`}>{title}</span>,
+  Icon: ({ name }: { name: string }) => <span data-testid={`icon-${name}`}>{name}</span>,
 }));
 
 describe("ImageSection", () => {
@@ -14,13 +14,15 @@ describe("ImageSection", () => {
 
   it("카메라 아이콘과 (0/5) 텍스트가 보여야 한다", () => {
     render(<ImageSection />);
-    expect(screen.getByTestId("icon-이미지 업로드")).toBeInTheDocument();
+    expect(screen.getByTestId("icon-Camera")).toBeInTheDocument();
     expect(screen.getByText("(0/5)")).toBeInTheDocument();
   });
 
   it("안내 문구가 보여야 한다", () => {
     render(<ImageSection />);
-    expect(screen.getByText("* 사진은 최대 5장 첨부가 가능합니다. (선택)")).toBeInTheDocument();
+    expect(
+      screen.getByText("최대 10MB, 총 5장의 이미지를 첨부할 수 있습니다. (jpg, jpeg, png)")
+    ).toBeInTheDocument();
   });
 
   it("박스를 클릭하면 숨겨진 file input의 click이 호출되어야 한다", async () => {
@@ -28,7 +30,7 @@ describe("ImageSection", () => {
     const fileInput = container.querySelector('input[type="file"]') as HTMLInputElement;
     const clickSpy = jest.spyOn(fileInput, "click");
 
-    const clickableBox = screen.getByTestId("icon-이미지 업로드").parentElement as HTMLElement;
+    const clickableBox = screen.getByTestId("icon-Camera").parentElement as HTMLElement;
     await userEvent.click(clickableBox);
 
     expect(clickSpy).toHaveBeenCalledTimes(1);
@@ -37,6 +39,6 @@ describe("ImageSection", () => {
   it("file input은 이미지 확장자만 허용해야 한다", () => {
     const { container } = render(<ImageSection />);
     const fileInput = container.querySelector('input[type="file"]') as HTMLInputElement;
-    expect(fileInput).toHaveAttribute("accept", "image/*");
+    expect(fileInput).toHaveAttribute("accept", "image/png, image/jpeg, image/jpg");
   });
 });

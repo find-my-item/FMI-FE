@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import CategorySection from "./CategorySection";
 
 jest.mock("@/components", () => ({
-  Icon: ({ title }: { title: string }) => <span data-testid={`icon-${title}`}>{title}</span>,
+  Icon: ({ name }: { name: string }) => <span data-testid={`icon-${name}`}>{name}</span>,
   RequiredText: () => <span data-testid="required-text">*</span>,
 }));
 
@@ -32,7 +32,7 @@ describe("CategorySection", () => {
 
   it("화살표 아이콘이 표시되어야 한다", () => {
     render(<CategorySection />);
-    expect(screen.getByTestId("icon-카테고리 선택")).toBeInTheDocument();
+    expect(screen.getByTestId("icon-ArrowDown")).toBeInTheDocument();
   });
 
   it("섹션을 클릭하면 카테고리 팝업이 열려야 한다", async () => {
