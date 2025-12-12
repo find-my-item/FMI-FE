@@ -3,6 +3,7 @@
 import { Dispatch, SetStateAction } from "react";
 import Image from "next/image";
 import { Icon } from "@/components";
+import { cn } from "@/utils";
 
 interface ImagePreviewListProps {
   images: string[];
@@ -14,7 +15,7 @@ const ImagePreviewList = ({ images, setImages, setImgTotalCount }: ImagePreviewL
   return (
     <>
       {images.map((image, index) => (
-        <div key={index} className="relative shrink-0">
+        <div key={index} className={cn("relative shrink-0")}>
           <Image
             src={image}
             alt=""
@@ -24,6 +25,11 @@ const ImagePreviewList = ({ images, setImages, setImgTotalCount }: ImagePreviewL
             draggable={false}
             className="size-[104px] select-none rounded-[10px] object-contain"
           />
+          {index === 0 && (
+            <span className="absolute left-0 top-0 rounded-tl-[10px] bg-[#1EB87B] pb-[3px] pl-[9px] pr-2 pt-[5px] text-caption1-semibold text-white">
+              대표
+            </span>
+          )}
           <button
             type="button"
             aria-label="이미지 삭제"
