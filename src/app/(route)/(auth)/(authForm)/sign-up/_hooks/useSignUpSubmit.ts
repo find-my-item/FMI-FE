@@ -1,4 +1,4 @@
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useToast } from "@/context/ToastContext";
 import { useApiSignUp } from "@/app/api";
 import { ApiSignUpType } from "../../types/ApiSingUpType";

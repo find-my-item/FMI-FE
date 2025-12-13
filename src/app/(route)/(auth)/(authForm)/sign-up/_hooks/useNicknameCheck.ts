@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useCheckNickname } from "@/app/api";
+import { useApiCheckNickname } from "@/app/api";
 import { useFormContext } from "react-hook-form";
 import { useToast } from "@/context/ToastContext";
 import { NICKNAME_ERROR_MESSAGE } from "../_constants/SIGNUP_ERROR_MESSAGE";
@@ -9,7 +9,7 @@ export const useNicknameCheck = () => {
   const { getValues } = useFormContext();
 
   const [nicknameValue, setNicknameValue] = useState("");
-  const { data, error, isSuccess, isError } = useCheckNickname(nicknameValue);
+  const { data, error, isSuccess, isError } = useApiCheckNickname(nicknameValue);
 
   const handlerNickname = () => {
     if (!data) return;
