@@ -11,7 +11,7 @@ const ImageSection = () => {
   const [imgTotalCount, setImgTotalCount] = useState(0);
   const { addToast } = useToast();
 
-  const handleClickImage = () => {
+  const handleImgUpload = () => {
     fileInputRef.current?.click();
   };
 
@@ -52,7 +52,7 @@ const ImageSection = () => {
         <button
           type="button"
           aria-label="이미지 업로드"
-          onClick={handleClickImage}
+          onClick={handleImgUpload}
           className="size-[104px] shrink-0 rounded-[6px] bg-flatGray-25 flex-col-center"
         >
           <Icon name="Camera" size={32} />
@@ -66,7 +66,6 @@ const ImageSection = () => {
           setImgTotalCount={setImgTotalCount}
         />
       </div>
-
       <span className="text-caption1-regular text-neutral-normal-placeholder">
         최대 10MB, 총 5장의 이미지를 첨부할 수 있습니다. (jpg, jpeg, png)
       </span>
