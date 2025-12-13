@@ -17,7 +17,7 @@ export const SIGNUP_INPUT_CONFIG: InputType[] = [
     type: "text",
     placeholder: "인증번호를 입력해주세요.",
     validation: {
-      required: false,
+      required: true,
     },
     btnText: "인증번호 확인",
     successMessage: "인증되었습니다.",
@@ -27,13 +27,13 @@ export const SIGNUP_INPUT_CONFIG: InputType[] = [
     label: "비밀번호",
     type: "password",
     placeholder: "비밀번호을 입력해 주세요.",
-    rule: "8~16자리, 영문/숫자/특수 문자 포함",
+    rule: "8~16자리, 대문자/소문자/숫자/특수 문자 포함",
     eyeShow: true,
     validation: {
       required: true,
       pattern: {
-        value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z0-9])[^\s]{8,16}$/,
-        message: "영문/숫자/특수 문자 포함 8자리 이상을 입력해 주세요.",
+        value: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9])[^\s]{8,16}$/,
+        message: "대문자/소문자/숫자/특수 문자 포함 8자리 이상을 입력해 주세요.",
       },
     },
     successMessage: "영문/숫자/특수 문자 포함 8자리 이상",
