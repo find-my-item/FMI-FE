@@ -1,2 +1,2 @@
-export * from "./ApiResponseType";
+export * from "./ApiBaseResponseType";
 export * from "./ToastTypes";

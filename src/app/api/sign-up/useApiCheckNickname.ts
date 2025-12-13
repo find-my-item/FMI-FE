@@ -1,14 +1,8 @@
 import useAppQuery from "@/api/query/useAppQuery";
-
-type CheckNicknameResponseType = {
-  isSuccess: boolean;
-  code: string;
-  message: string;
-  result: any;
-};
+import { ApiBaseResponseType } from "@/types";
 
 export const useCheckNickname = (nickname: string) => {
-  return useAppQuery<CheckNicknameResponseType, CheckNicknameResponseType>(
+  return useAppQuery<ApiBaseResponseType<null>, ApiBaseResponseType<null>>(
     "public",
     ["/auth/check-nickname", nickname],
     `/auth/check-nickname?nickname=${nickname}`,

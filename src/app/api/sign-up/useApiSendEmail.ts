@@ -1,14 +1,8 @@
 import useAppMutation from "@/api/query/useAppMutation";
-
-export type SendEmailResponseType = {
-  isSuccess: boolean;
-  code: string;
-  message: string;
-  result: any;
-};
+import { ApiBaseResponseType } from "@/types";
 
 export const useSendEmail = () => {
-  return useAppMutation<{ email: string }, SendEmailResponseType, SendEmailResponseType>(
+  return useAppMutation<{ email: string }, ApiBaseResponseType<null>, ApiBaseResponseType<null>>(
     "public",
     "/auth/email/send-code",
     "post"
