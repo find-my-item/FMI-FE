@@ -69,7 +69,7 @@ const ImagePreviewList = ({ images, setImages, setImgTotalCount }: ImagePreviewL
             height={104}
             quality={100}
             draggable={false}
-            className="size-[104px] select-none rounded-[10px] object-contain"
+            className="size-[104px] select-none rounded-[10px] object-cover"
           />
           {index === 0 && (
             // TODO(지권): 디자인 토큰 이슈 해결 후 변경
