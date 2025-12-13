@@ -1,7 +1,7 @@
 import { useFormContext } from "react-hook-form";
 import { useToast } from "@/context/ToastContext";
 import { useState } from "react";
-import { useCheckCode, useSendEmail } from "@/app/api";
+import { useApiCheckCode, useApiSendEmail } from "@/app/api";
 import { useNicknameCheck } from "./useNicknameCheck";
 import { EMAIL_CHECK_CODE_MESSAGE, EMAIL_ERROR_MESSAGE } from "../_constants/SIGNUP_ERROR_MESSAGE";
 import { useApiErrorToast } from "./useApiErrorToast";
@@ -11,8 +11,8 @@ export const useSignUpBtnClick = () => {
 
   const [emailCodeVerified, setEmailCodeVerified] = useState(false);
 
-  const { mutate: EmailMutate } = useSendEmail();
-  const { mutate: CodeMutate } = useCheckCode();
+  const { mutate: EmailMutate } = useApiSendEmail();
+  const { mutate: CodeMutate } = useApiCheckCode();
   const [emailValue, setEmailValue] = useState("");
 
   const { addToast } = useToast();
