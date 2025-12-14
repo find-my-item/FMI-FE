@@ -1,6 +1,6 @@
 "use client";
 
-import { Dispatch, SetStateAction, useRef } from "react";
+import { Dispatch, SetStateAction, useRef, type DragEvent } from "react";
 import Image from "next/image";
 import { Icon } from "@/components";
 import { cn } from "@/utils";
@@ -27,6 +27,16 @@ const ImagePreviewList = ({ images, setImages, setImgTotalCount }: ImagePreviewL
     });
   };
 
+  const handleImageDrop = (e: DragEvent<HTMLDivElement>, to: number) => {
+    e.preventDefault();
+
+    const from = dragFromIndexRef.current ?? Number(e.dataTransfer.getData("text/plain"));
+    if (Number.isNaN(from)) return;
+
+    reorderImages(from, to);
+    dragFromIndexRef.current = null;
+  };
+
   return (
     <div role="list" aria-label="이미지 미리보기 목록" className="flex gap-2">
       {images.map((image, index) => (
@@ -50,14 +60,7 @@ const ImagePreviewList = ({ images, setImages, setImgTotalCount }: ImagePreviewL
             e.preventDefault();
             e.dataTransfer.dropEffect = "move";
           }}
-          onDrop={(e) => {
-            e.preventDefault();
-            const from = dragFromIndexRef.current ?? Number(e.dataTransfer.getData("text/plain"));
-            const to = index;
-            if (Number.isNaN(from)) return;
-            reorderImages(from, to);
-            dragFromIndexRef.current = null;
-          }}
+          onDrop={(e) => handleImageDrop(e, index)}
           onDragEnd={() => {
             dragFromIndexRef.current = null;
           }}
