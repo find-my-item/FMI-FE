@@ -5,6 +5,7 @@ import { ApiFindPassword } from "@/app/api/ApiFindPassword";
 import { useState } from "react";
 import { useToast } from "@/context/ToastContext";
 import { FIND_PW_ERROR } from "../_constants/FIND_PW_ERROR";
+import { cn } from "@/utils";
 
 const FindPwForm = () => {
   const { mutate } = ApiFindPassword();
@@ -18,6 +19,7 @@ const FindPwForm = () => {
 
   const onSubmit = (data: any) => {
     console.log("data>> ", data);
+    setEmail(data.email);
 
     mutate(data, {
       onSuccess: (res) => {
@@ -35,7 +37,10 @@ const FindPwForm = () => {
 
   return (
     <form
-      className="flex h-[191px] min-h-screen w-full flex-col gap-[10px] px-5 py-[30px]"
+      className={cn(
+        "flex h-[191px] min-h-screen w-full flex-col gap-[10px] px-5 py-[30px]",
+        email && "px-9"
+      )}
       onSubmit={handleSubmit(onSubmit)}
     >
       {!email ? (
@@ -65,15 +70,15 @@ const FindPwForm = () => {
           </p>
           <Button
             type="button"
-            className="w-[318px]"
+            className="w-full"
             onClick={() => {
               if (email) {
                 router.push("/login");
               }
             }}
-            ariaLabel={email ? "로그인 화면으로 이동" : "입력완료"}
+            ariaLabel="로그인 화면으로 이동"
           >
-            {email ? "로그인 화면으로 이동" : "입력완료"}
+            비밀번호 변경
           </Button>
         </>
       )}
