@@ -52,7 +52,7 @@ DetailHeader.Save = ({ ariaLabel = "게시글 저장", ...props }: BaseButtonPro
   const isDisabledStyle = props.disabled ? "text-[#98E3BD]" : "text-[#1EB87B]";
   return (
     <button {...props} className={isDisabledStyle} aria-label={ariaLabel}>
-      저장
+      임시 저장
     </button>
   );
 };
