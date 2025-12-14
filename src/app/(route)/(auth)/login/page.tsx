@@ -40,9 +40,9 @@ const Page = () => {
 
       {/* divider 구분선 */}
       <div className="flex h-[18px] w-full items-center px-5">
-        <hr className="h-px flex-1 bg-flatGray-50" />
+        <hr aria-hidden="true" className="h-px flex-1 bg-flatGray-50" />
         <span className="px-3 text-caption1-medium text-layout-body-default">또는</span>
-        <hr className="h-px flex-1 bg-flatGray-50" />
+        <hr aria-hidden="true" className="h-px flex-1 bg-flatGray-50" />
       </div>
 
       {/* 회원확인 여부 */}

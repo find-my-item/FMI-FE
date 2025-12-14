@@ -48,11 +48,11 @@ const EmailLoginForm = () => {
       { email: isEmail, password: isPassword },
       {
         onSuccess: (data) => {
-          const { accessToken, userId } = data.result;
-          localStorage.setItem("accessToken", accessToken);
-          localStorage.setItem("userId", String(userId));
-
           console.log("data>> ", data);
+
+          // const { accessToken, userId } = data.result;
+          // localStorage.setItem("accessToken", accessToken);
+
           addToast("로그인에 성공했어요.", "success");
           if (data.result.temporaryPassword) {
             router.push("/find-pw");
@@ -110,11 +110,11 @@ const EmailLoginForm = () => {
         </Button>
         {/* divider 구분선 */}
         <div className="flex h-4 w-full items-center">
-          <hr className="h-px flex-1 bg-flatGray-100" />
+          <hr aria-hidden="true" className="aria-hidden h-px flex-1 bg-flatGray-100" />
           <span className="px-3 text-caption1-medium text-layout-body-default">
             로그인이 되지 않는다면?
           </span>
-          <hr className="h-px flex-1 bg-flatGray-100" />
+          <hr aria-hidden="true" className="h-px flex-1 bg-flatGray-100" />
         </div>
       </div>
     </form>

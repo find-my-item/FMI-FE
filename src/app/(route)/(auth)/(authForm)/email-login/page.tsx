@@ -36,7 +36,7 @@ const Page = () => {
           <Link href="/find-pw" className="p-3">
             비밀번호 찾기
           </Link>
-          <hr className="h-4 self-center border-l border-gray-300" />
+          <hr aria-hidden="true" className="h-4 self-center border-l border-gray-300" />
           <Link href="/sign-up" className="p-3">
             회원가입
           </Link>

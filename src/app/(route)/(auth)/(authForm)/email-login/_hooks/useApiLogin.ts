@@ -13,7 +13,7 @@ type ApiLoginResType = {
 
 export const useApiLogin = () => {
   return useAppMutation<{ email: string; password: string }, ApiLoginResType, ApiLoginResType>(
-    "public",
+    "auth",
     "/auth/login",
     "post"
   );
