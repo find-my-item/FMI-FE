@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
-import { DetailHeader, InputSearch } from "@/components";
+import { Button, DetailHeader, InputSearch, PopupLayout } from "@/components";
+import { useRouter, useSearchParams } from "next/navigation";
 
 type RegionRow = {
   sido: string;
@@ -14,7 +15,12 @@ type RegionRow = {
 
 const MAX_RESULTS = 30;
 
-const page = () => {
+const styles = {
+  baseButton:
+    "text-body1-semibold text-neutral-normal-default min-h-[44px] hover:bg-gray-100 transition-colors",
+};
+
+const Page = () => {
   const methods = useForm({
     defaultValues: {
       location: "",
@@ -22,8 +28,13 @@ const page = () => {
     mode: "onChange",
   });
 
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  console.log(searchParams.get("location"));
   const [regions, setRegions] = useState<RegionRow[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [km, setKm] = useState("3");
 
   const locationValue = useWatch({
     control: methods.control,
@@ -93,6 +104,11 @@ const page = () => {
     methods.setValue("location", row.display);
 
     console.log("selected:", row);
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("location", row.display);
+
+    router.push(`/write/location?${params.toString()}`, { scroll: false });
+    setIsPopupOpen(true);
   };
 
   return (
@@ -146,8 +162,50 @@ const page = () => {
           )}
         </ul>
       </section>
+      {searchParams.get("location") && (
+        <section>
+          <PopupLayout
+            isOpen={isPopupOpen}
+            onClose={() => setIsPopupOpen(false)}
+            className="px-5 py-10 flex-col-center"
+          >
+            <div className="mb-12 gap-4 flex-col-center">
+              <p className="flex">
+                <span className="text-h2-medium text-layout-header-default">
+                  {searchParams.get("location")} 근처
+                </span>
+                <span className="text-h1-medium text-brand-subtle-default">{km}km</span>
+              </p>
+              <div className="gap-[14px] py-[14px] flex-center">
+                <Button variant="outlined" className={styles.baseButton} onClick={() => setKm("3")}>
+                  3km
+                </Button>
+                <Button variant="outlined" className={styles.baseButton} onClick={() => setKm("5")}>
+                  5km
+                </Button>
+                <Button
+                  variant="outlined"
+                  className={styles.baseButton}
+                  onClick={() => setKm("10")}
+                >
+                  10km
+                </Button>
+              </div>
+            </div>
+            <Button className="min-h-[44px] w-full" onClick={() => setIsPopupOpen(false)}>
+              적용하기
+            </Button>
+          </PopupLayout>
+        </section>
+      )}
     </div>
   );
 };
 
-export default page;
+// const Page = () => {
+//   <Suspense fallback="">
+//     <LocationPage />
+//   </Suspense>;
+// };
+
+export default Page;
