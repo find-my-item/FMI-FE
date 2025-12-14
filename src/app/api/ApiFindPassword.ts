@@ -3,7 +3,7 @@ import { ApiBaseResponseType } from "@/types/ApiBaseResponseType";
 
 export const ApiFindPassword = () => {
   return useAppMutation<{ email: string }, ApiBaseResponseType<null>, ApiBaseResponseType<null>>(
-    "auth",
+    "public",
     "/auth/reset/request",
     "post"
   );

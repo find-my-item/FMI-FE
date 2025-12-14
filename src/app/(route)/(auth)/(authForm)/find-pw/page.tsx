@@ -4,7 +4,7 @@
 import { DetailHeader } from "@/components";
 import { FormProvider, useForm } from "react-hook-form";
 import { FormValue } from "../types/FormValue";
-import FindPwForm from "./components/FindPwForm";
+import FindPwForm from "./_components/FindPwForm";
 
 const Page = () => {
   const methods = useForm<FormValue>({
