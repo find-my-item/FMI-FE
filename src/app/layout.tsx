@@ -20,6 +20,10 @@ export default function RootLayout({
   return (
     <html lang="ko" className={pretendard.variable}>
       <head>
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="찾아줘!" />
+        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
         <Script
           async
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}

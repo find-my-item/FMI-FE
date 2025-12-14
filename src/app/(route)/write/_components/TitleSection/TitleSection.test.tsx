@@ -9,9 +9,7 @@ jest.mock("@/components", () => ({
 describe("TitleSection", () => {
   it("제목 입력 섹션이 렌더링되어야 한다", () => {
     render(<TitleSection />);
-
-    const section = screen.getByLabelText("제목 입력");
-    expect(section).toBeInTheDocument();
+    expect(screen.getByText("제목을 입력해 주세요.")).toBeInTheDocument();
   });
 
   it("제목 입력 input이 존재하고 placeholder가 설정되어 있어야 한다", () => {
