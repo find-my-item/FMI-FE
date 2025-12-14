@@ -8,10 +8,11 @@ import Icon, { Props } from "../../Icon/Icon";
  * 다양한 스타일과 크기를 지원하는 버튼 컴포넌트입니다.
  * `variant`, `hierarchy`, `size` 조합으로 시각적 스타일을 제어하며,
  * 아이콘과 로딩 스피너를 함께 사용할 수 있습니다.
- * `as` prop을 통해 button 태그 또는 Link 컴포넌트로 렌더링할 수 있습니다.
+ * `as` prop을 통해 button 태그 또는 다른 컴포넌트(예: Link)로 렌더링할 수 있습니다.
+ * `as`로 지정한 컴포넌트의 모든 props를 `...props`를 통해 전달할 수 있습니다.
  *
  * @param as - 렌더링할 컴포넌트 타입을 지정합니다.
- * `"button"` | `typeof Link` (기본값: `"button"`)
+ * `ElementType` (기본값: `"button"`)
  *
  * @param variant - 버튼의 스타일을 지정합니다.
  * `"solid"` | `"outlined"` | `"inversed"` | `"auth"` (기본값: `"solid"`)
@@ -32,7 +33,7 @@ import Icon, { Props } from "../../Icon/Icon";
  * `true`일 경우, 버튼은 비활성화되고 로딩 스피너가 표시됩니다. - boolean (기본값: `false`)
  *
  * @param ariaLabel - 접근성을 위한 버튼의 aria-label 속성입니다.
- * 기본값은 `"버튼"`입니다.
+ * 제공되지 않으면 `aria-label` 속성은 생략되며, 스크린 리더는 `children`의 텍스트를 읽습니다.
  *
  * @param children - 버튼 내부에 렌더링할 콘텐츠(텍스트 또는 요소)입니다.
  *
@@ -100,7 +101,7 @@ const Button = <E extends ElementType = "button">({
   children,
   disabled,
   className = "",
-  ariaLabel = "버튼",
+  ariaLabel,
   ignoreBase,
   ...props
 }: ButtonProps<E>) => {
@@ -131,8 +132,11 @@ const Button = <E extends ElementType = "button">({
 
   const commonProps = {
     className: combinedStyles,
-    "aria-label": ariaLabel ?? "",
-    ...(isButton && { disabled: disabled || loading }),
+    ...(ariaLabel && { "aria-label": ariaLabel }),
+    ...(isButton && {
+      disabled: disabled || loading,
+      type: "button" as const,
+    }),
     ...props,
   };
 
