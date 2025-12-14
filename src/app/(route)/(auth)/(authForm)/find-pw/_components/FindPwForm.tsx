@@ -18,16 +18,11 @@ const FindPwForm = () => {
   const [email, setEmail] = useState("");
 
   const onSubmit = (data: any) => {
-    console.log("data>> ", data);
-    setEmail(data.email);
-
     mutate(data, {
-      onSuccess: (res) => {
-        console.log("res>> ", res);
+      onSuccess: () => {
         setEmail(data.email);
       },
       onError: (error) => {
-        console.log("error>> ", error);
         const target = FIND_PW_ERROR[error.code as keyof typeof FIND_PW_ERROR];
         if (target) addToast(target.message, target.status);
         else addToast("잠시 후 다시 시도해주세요.", "error");
