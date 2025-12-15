@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { useWatch } from "react-hook-form";
 import { CheckBox, InputText, Button, DetailHeader } from "@/components";
-import { Logo } from "../../_components";
-import { CHECKBOX_CONFIG } from "./_constants/CHECKBOX_CONFIG";
-import { EMAIL_LOGIN_CONFIG } from "./_constants/EMAIL_LOGIN_CONFIG";
+import { Logo } from "../../../_components";
+import { CHECKBOX_CONFIG } from "../_constants/CHECKBOX_CONFIG";
+import { EMAIL_LOGIN_CONFIG } from "../_constants/EMAIL_LOGIN_CONFIG";
 import { FormProvider, useForm } from "react-hook-form";
 
 const Page = () => {
