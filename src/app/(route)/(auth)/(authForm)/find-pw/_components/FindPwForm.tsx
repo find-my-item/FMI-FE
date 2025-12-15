@@ -1,15 +1,13 @@
 import { useFormContext } from "react-hook-form";
 import { Button, InputText } from "@/components";
-import { useRouter } from "next/navigation";
 import { ApiFindPassword } from "@/app/api/ApiFindPassword";
 import { useState } from "react";
 import { FIND_PW_ERROR } from "../_constants/FIND_PW_ERROR";
 import { cn } from "@/utils";
 import { useApiErrorToast } from "@/hooks";
+import Link from "next/link";
 
 const FindPwForm = () => {
-  const router = useRouter();
-
   const [email, setEmail] = useState("");
 
   const { handleSubmit } = useFormContext();
@@ -60,17 +58,8 @@ const FindPwForm = () => {
             </span>
             임시 비밀번호를 발송했습니다.
           </p>
-          <Button
-            type="button"
-            className="w-full"
-            onClick={() => {
-              if (email) {
-                router.push("/login");
-              }
-            }}
-            ariaLabel="로그인 화면으로 이동"
-          >
-            비밀번호 변경
+          <Button as={Link} href="/login" className="w-full" ariaLabel="로그인 화면으로 이동">
+            로그인
           </Button>
         </>
       )}
