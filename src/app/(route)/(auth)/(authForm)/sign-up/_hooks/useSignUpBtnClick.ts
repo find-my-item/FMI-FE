@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useApiCheckCode, useApiSendEmail } from "@/app/api";
 import { useNicknameCheck } from "./useNicknameCheck";
 import { EMAIL_CHECK_CODE_MESSAGE, EMAIL_ERROR_MESSAGE } from "../_constants/SIGNUP_ERROR_MESSAGE";
-import { useApiErrorToast } from "./useApiErrorToast";
+import { useApiErrorToast } from "@/hooks";
 
 export const useSignUpBtnClick = () => {
   const { getValues } = useFormContext();

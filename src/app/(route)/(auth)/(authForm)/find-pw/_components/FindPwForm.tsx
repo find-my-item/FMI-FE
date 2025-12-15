@@ -3,19 +3,18 @@ import { Button, InputText } from "@/components";
 import { useRouter } from "next/navigation";
 import { ApiFindPassword } from "@/app/api/ApiFindPassword";
 import { useState } from "react";
-import { useToast } from "@/context/ToastContext";
 import { FIND_PW_ERROR } from "../_constants/FIND_PW_ERROR";
 import { cn } from "@/utils";
+import { useApiErrorToast } from "@/hooks";
 
 const FindPwForm = () => {
-  const { mutate } = ApiFindPassword();
-  const { addToast } = useToast();
-
   const router = useRouter();
 
-  const { handleSubmit } = useFormContext();
-
   const [email, setEmail] = useState("");
+
+  const { handleSubmit } = useFormContext();
+  const { mutate } = ApiFindPassword();
+  const { handlerApiError } = useApiErrorToast();
 
   const onSubmit = (data: any) => {
     mutate(data, {
@@ -23,9 +22,7 @@ const FindPwForm = () => {
         setEmail(data.email);
       },
       onError: (error) => {
-        const target = FIND_PW_ERROR[error.code as keyof typeof FIND_PW_ERROR];
-        if (target) addToast(target.message, target.status);
-        else addToast("잠시 후 다시 시도해주세요.", "error");
+        handlerApiError(FIND_PW_ERROR, error.code);
       },
     });
   };

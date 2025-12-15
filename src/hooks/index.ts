@@ -3,3 +3,4 @@ export { useModalLockAndEsc } from "./useOverlayHandlers/useOverlayHandlers";
 export { useModalBackdrop } from "./useOverlayHandlers/useOverlayHandlers";
 export { default as useSearchUpdateQueryString } from "./useSearchUpdateQueryString/useSearchUpdateQueryString";
 export { default as useObjectURLs } from "./useObjectURLs/useObjectURLs";
+export { default as useApiErrorToast } from "./domain/useApiErrorToast/useApiErrorToast";
