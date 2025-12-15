@@ -1,9 +1,17 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
 import { useFormContext } from "react-hook-form";
-import { FormValue } from "../../types/FormValue";
 import { useRouter, useSearchParams } from "next/navigation";
+import { FormType } from "../../types/FormType";
+import { useRoutingGard } from "./useRoutingGard";
+import { ApiSignUpType } from "../../types/ApiSingUpType";
 
-export const useSignUpFlow = (onFinalSubmit: (data: FormValue) => void) => {
+interface useSignUpFlowProps {
+  onSubmit: (data: ApiSignUpType) => void;
+}
+
+export const useSignUpFlow = ({ onSubmit }: useSignUpFlowProps) => {
+  const { updateMaxStep } = useRoutingGard();
+
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -11,37 +19,14 @@ export const useSignUpFlow = (onFinalSubmit: (data: FormValue) => void) => {
   const step = searchParams.get("step") ?? "1";
   const termName = searchParams.get("term") ?? "";
 
-  // 가드 변수
-  const [maxStep, setMaxStep] = useState<number>(1);
-
-  // maxStep 변경 시 sessionStorage에 저장
-  useEffect(() => {
-    const stored = window.sessionStorage.getItem("signup-max-step");
-    if (stored) {
-      setMaxStep(Number(stored));
-    }
-  }, []);
-
-  const { handleSubmit, trigger } = useFormContext<FormValue>();
-  const onSubmit = handleSubmit(onFinalSubmit);
-
-  // 가드
-  useEffect(() => {
-    const isStep = step === "1" || step === "2";
-    if (!isStep) {
-      router.replace(`/sign-up?step=1`);
-    }
-    if (Number(step) > maxStep) {
-      router.replace(`/sign-up?step=${maxStep}`);
-    }
-  }, [step, maxStep, router]);
+  const { trigger, getValues } = useFormContext<FormType>();
 
   // 회원가입 1단계 -> 2단계
   const onNext = useCallback(
     async (nextStep: number) => {
-      const ok = await trigger(["email", "password", "passwordConfirm", "nickname"]);
+      const ok = await trigger(["email", "password", "nickname"]);
       if (ok) {
-        setMaxStep((prev) => (nextStep > prev ? nextStep : prev));
+        updateMaxStep(nextStep);
         router.push(`/sign-up?step=${nextStep}`);
       }
     },
@@ -58,21 +43,25 @@ export const useSignUpFlow = (onFinalSubmit: (data: FormValue) => void) => {
     router.push(`/sign-up?step=${preStep}`);
   }, []);
 
-  // 약관 동의 -> 최종제출
+  // 약관 동의 -> 최종제출 전 데이터 필터링
   const completeTerms = useCallback(async () => {
-    const ok = await trigger([
-      "agreements.termsOfService",
-      "agreements.privacyPolicy",
-      "agreements.marketing",
-    ]);
+    const ok = await trigger(["termsOfServiceAgreed", "privacyPolicyAgreed", "marketingConsent"]);
     if (ok) {
-      onSubmit();
+      const data = getValues();
+      const selectedData = {
+        email: data.email,
+        password: data.password,
+        nickname: data.nickname,
+        termsOfServiceAgreed: data.termsOfServiceAgreed,
+        privacyPolicyAgreed: data.privacyPolicyAgreed,
+        marketingConsent: data.marketingConsent,
+      };
+      onSubmit(selectedData);
     }
   }, [trigger, onSubmit]);
 
   return {
     step,
-    onSubmit,
     onNext,
     openTermDetail,
     onAgreeTerm,

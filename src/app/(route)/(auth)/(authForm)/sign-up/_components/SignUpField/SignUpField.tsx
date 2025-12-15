@@ -1,23 +1,16 @@
 "use no memo";
 
-import { SIGNUP_INPUT_CONFIG } from "../../_constant/SIGNUP_INPUT_CONFIG";
+import { SIGNUP_INPUT_CONFIG } from "../../_constants/SIGNUP_INPUT_CONFIG";
 import { Button, InputText, DetailHeader } from "@/components";
 import { useFormContext } from "react-hook-form";
+import { useSignUpBtnClick } from "../../_hooks/useSignUpBtnClick";
 
 const SignUpField = ({ onNext }: { onNext: () => void }) => {
   const {
-    formState: { isSubmitting, isValid },
+    formState: { isValid },
   } = useFormContext();
 
-  const HandlerToClick = (name: string) => {
-    if (name === "email") {
-      // TODO(수현): email 중복 확인 및 인증번호 발송 api
-    } else if (name === "emailAuth") {
-      // TODO(수현): email 인증번호 확인 api
-    } else if (name === "nickname") {
-      // TODO(수현): 닉네임 중복 확인 api
-    }
-  };
+  const { handlerToClick, emailCodeVerified } = useSignUpBtnClick();
 
   const isNextDisabled = isValid;
 
@@ -29,6 +22,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
           <div key={item.name} className="h-[96px]">
             {/* TODO(수현): props 줄이기  */}
             <InputText
+              key={item.name}
               name={item.name}
               label={item.label}
               type={item.type}
@@ -36,7 +30,8 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
               validation={item.validation}
               rule={item.rule}
               eyeShow={item.eyeShow}
-              btnOnClick={() => HandlerToClick(item.name)}
+              disabled={item.name === "emailAuth" ? emailCodeVerified : false}
+              btnOnClick={() => handlerToClick(item.name)}
             >
               {item.btnText}
             </InputText>

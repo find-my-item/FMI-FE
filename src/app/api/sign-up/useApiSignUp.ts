@@ -1,0 +1,13 @@
+import useAppMutation from "@/api/query/useAppMutation";
+import { ApiSignUpType } from "@/app/(route)/(auth)/(authForm)/types/ApiSingUpType";
+import { ApiBaseResponseType } from "@/types";
+
+interface SignUpResponseType extends ApiBaseResponseType<{ id: string }> {}
+
+export const useApiSignUp = () => {
+  return useAppMutation<ApiSignUpType, SignUpResponseType, SignUpResponseType>(
+    "public",
+    "auth/signup",
+    "post"
+  );
+};
