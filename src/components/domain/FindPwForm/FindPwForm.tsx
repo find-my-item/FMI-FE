@@ -1,13 +1,20 @@
+"use client";
+
 import { useFormContext } from "react-hook-form";
 import { Button, InputText } from "@/components";
 import { ApiFindPassword } from "@/app/api/ApiFindPassword";
 import { useState } from "react";
-import { FIND_PW_ERROR } from "../_constants/FIND_PW_ERROR";
 import { cn } from "@/utils";
 import { useApiErrorToast } from "@/hooks";
 import Link from "next/link";
+import { FIND_PW_ERROR } from "@/constants";
 
-const FindPwForm = () => {
+interface FindPwFormProps {
+  text: string;
+  redirectLink: string;
+}
+
+const FindPwForm = ({ text, redirectLink }: FindPwFormProps) => {
   const [email, setEmail] = useState("");
 
   const { handleSubmit } = useFormContext();
@@ -58,8 +65,8 @@ const FindPwForm = () => {
             </span>
             임시 비밀번호를 발송했습니다.
           </p>
-          <Button as={Link} href="/login" className="w-full" ariaLabel="로그인 화면으로 이동">
-            로그인
+          <Button as={Link} href={redirectLink} className="w-full" ariaLabel="로그인 화면으로 이동">
+            {text}
           </Button>
         </>
       )}

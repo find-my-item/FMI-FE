@@ -1,9 +1,8 @@
 "use client";
 "use no memo";
 
-import { DetailHeader } from "@/components";
+import { DetailHeader, FindPwForm } from "@/components";
 import { FormProvider, useForm } from "react-hook-form";
-import FindPwForm from "./_components/FindPwForm";
 
 const Page = () => {
   const methods = useForm<{ email: string }>({
@@ -15,7 +14,7 @@ const Page = () => {
   return (
     <FormProvider {...methods}>
       <DetailHeader title="비밀번호 찾기" />
-      <FindPwForm />
+      <FindPwForm text="로그인" redirectLink="/login" />
     </FormProvider>
   );
 };
