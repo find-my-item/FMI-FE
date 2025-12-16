@@ -22,28 +22,26 @@ const FindPwForm = ({ text, redirectLink }: FindPwFormProps) => {
   const { handlerApiError } = useApiErrorToast();
 
   const onSubmit = (data: any) => {
-    mutate(data, {
-      onSuccess: () => {
-        setEmail(data.email);
-      },
-      onError: (error) => {
-        handlerApiError(FIND_PW_ERROR, error.code);
-      },
-    });
+    // mutate(data, {
+    //   onSuccess: () => {
+    //     setEmail(data.email);
+    //   },
+    //   onError: (error) => {
+    //     handlerApiError(FIND_PW_ERROR, error.code);
+    //   },
+    // });
+    setEmail(data.email);
   };
 
   return (
     <form
-      className={cn(
-        "flex h-[191px] min-h-screen w-full flex-col gap-[10px] px-5 py-[30px]",
-        email && "px-9"
-      )}
+      className={cn("flex min-h-screen w-full flex-col gap-[10px] px-5 py-[64px]", email && "px-9")}
       onSubmit={handleSubmit(onSubmit)}
     >
       {!email ? (
         <InputText
           label="아이디(이메일)"
-          type="text"
+          type="email"
           placeholder="아이디(이메일)을 입력해 주세요."
           name="email"
           validation={{
@@ -59,9 +57,12 @@ const FindPwForm = ({ text, redirectLink }: FindPwFormProps) => {
         </InputText>
       ) : (
         <>
-          <p className="flex h-[77px] flex-col justify-center text-center text-body2-regular">
-            <span>
-              <span className="text-flatGreen-500">{email}</span> 으로
+          <p className="flex flex-col items-center py-[18.5px] text-center text-body2-regular">
+            <span className="flex items-center justify-center">
+              <span className="inline-block max-w-[200px] truncate text-flatGreen-500">
+                {email}
+              </span>{" "}
+              으로 <br />
             </span>
             임시 비밀번호를 발송했습니다.
           </p>
