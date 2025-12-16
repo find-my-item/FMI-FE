@@ -1,5 +1,19 @@
-import { InputType } from "../../types/InputType";
+import { RegisterOptions } from "react-hook-form";
 
+interface InputType {
+  name: string;
+  label?: string;
+  className?: string;
+  type: string;
+  placeholder: string;
+  validation?: RegisterOptions;
+  rule?: string; // 닉네임 규칙 안내 문구
+  eyeShow?: boolean;
+  btnText?: string;
+  successMessage?: string;
+}
+
+// TODO(수현): validate 분리하기 (validate는 동적이기 때문에 따로 관리하는 것이 나을것 같음)
 export const SIGNUP_INPUT_CONFIG: InputType[] = [
   {
     name: "email",

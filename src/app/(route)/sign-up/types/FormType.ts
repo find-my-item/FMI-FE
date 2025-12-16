@@ -1,4 +1,4 @@
-export type FormType = {
+export interface FormType {
   email: string;
   emailAuth: number;
   password: string;
@@ -7,4 +7,4 @@ export type FormType = {
   termsOfServiceAgreed: boolean;
   privacyPolicyAgreed: boolean;
   marketingConsent: boolean;
-};
+}
