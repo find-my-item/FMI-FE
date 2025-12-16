@@ -22,15 +22,14 @@ const FindPwForm = ({ text, redirectLink }: FindPwFormProps) => {
   const { handlerApiError } = useApiErrorToast();
 
   const onSubmit = (data: any) => {
-    // mutate(data, {
-    //   onSuccess: () => {
-    //     setEmail(data.email);
-    //   },
-    //   onError: (error) => {
-    //     handlerApiError(FIND_PW_ERROR, error.code);
-    //   },
-    // });
-    setEmail(data.email);
+    mutate(data, {
+      onSuccess: () => {
+        setEmail(data.email);
+      },
+      onError: (error) => {
+        handlerApiError(FIND_PW_ERROR, error.code);
+      },
+    });
   };
 
   return (
@@ -41,11 +40,13 @@ const FindPwForm = ({ text, redirectLink }: FindPwFormProps) => {
       {!email ? (
         <InputText
           label="아이디(이메일)"
-          type="email"
+          type="text"
           placeholder="아이디(이메일)을 입력해 주세요."
           name="email"
           validation={{
             required: true,
+            maxLength: 254,
+            minLength: 6,
             pattern: {
               value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
               message: "이메일 형식을 입력해주세요.",
