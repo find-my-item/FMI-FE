@@ -1,7 +1,7 @@
 import { useToast } from "@/context/ToastContext";
 import { ToastType } from "@/types";
 
-const useApiErrorToast = () => {
+const useErrorToast = () => {
   const { addToast } = useToast();
 
   const handlerApiError = (
@@ -19,4 +19,4 @@ const useApiErrorToast = () => {
   return { handlerApiError };
 };
 
-export default useApiErrorToast;
+export default useErrorToast;

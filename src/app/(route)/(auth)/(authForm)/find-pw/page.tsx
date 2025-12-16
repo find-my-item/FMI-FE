@@ -3,9 +3,10 @@
 
 import { DetailHeader, FindPwForm } from "@/components";
 import { FormProvider, useForm } from "react-hook-form";
+import { ApiFindPwType } from "@/types";
 
 const Page = () => {
-  const methods = useForm<{ email: string }>({
+  const methods = useForm<ApiFindPwType>({
     mode: "onChange",
     reValidateMode: "onChange",
     shouldUnregister: false, // 입력 값 유지

@@ -2,12 +2,10 @@
 
 import { useFormContext } from "react-hook-form";
 import { Button, InputText } from "@/components";
-import { ApiFindPassword } from "@/app/api/ApiFindPassword";
-import { useState } from "react";
 import { cn } from "@/utils";
-import { useApiErrorToast } from "@/hooks";
 import Link from "next/link";
-import { FIND_PW_ERROR } from "@/constants";
+import { useFindPwSubmit } from "@/hooks";
+import { ApiFindPwType } from "@/types";
 
 interface FindPwFormProps {
   text: string;
@@ -15,27 +13,13 @@ interface FindPwFormProps {
 }
 
 const FindPwForm = ({ text, redirectLink }: FindPwFormProps) => {
-  const [email, setEmail] = useState("");
-
-  const { handleSubmit } = useFormContext();
-  const { mutate } = ApiFindPassword();
-  const { handlerApiError } = useApiErrorToast();
-
-  const onSubmit = (data: any) => {
-    mutate(data, {
-      onSuccess: () => {
-        setEmail(data.email);
-      },
-      onError: (error) => {
-        handlerApiError(FIND_PW_ERROR, error.code);
-      },
-    });
-  };
+  const { handleSubmit } = useFormContext<ApiFindPwType>();
+  const { onSubmitFindPassword, email } = useFindPwSubmit();
 
   return (
     <form
       className={cn("flex min-h-screen w-full flex-col gap-[10px] px-5 py-[64px]", email && "px-9")}
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(onSubmitFindPassword)}
     >
       {!email ? (
         <InputText
