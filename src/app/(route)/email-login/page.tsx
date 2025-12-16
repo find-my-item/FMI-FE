@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import { useWatch } from "react-hook-form";
-import { CheckBox, InputText, Button, DetailHeader } from "@/components";
-import { Logo } from "../../_components";
+import { CheckBox, InputText, Button, DetailHeader, AuthLogoLink } from "@/components";
 import { CHECKBOX_CONFIG } from "./_constants/CHECKBOX_CONFIG";
 import { EMAIL_LOGIN_CONFIG } from "./_constants/EMAIL_LOGIN_CONFIG";
 import { FormProvider, useForm } from "react-hook-form";
@@ -26,7 +25,7 @@ const Page = () => {
     <>
       <DetailHeader title="이메일 로그인" />
       <div className="flex min-h-screen w-full gap-6 px-5 flex-col-center">
-        <Logo />
+        <AuthLogoLink />
 
         <FormProvider {...methods}>
           <form onSubmit={onSubmit} className="flex w-full flex-col gap-10">

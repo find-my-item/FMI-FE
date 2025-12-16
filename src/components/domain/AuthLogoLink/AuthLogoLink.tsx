@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Icon } from "@/components";
 
-const Logo = () => {
+const AuthLogoLink = () => {
   return (
     <Link className="cursor-pointer flex-center" href={"/"} aria-label="메인페이지 이동">
       <Icon name="Logo" size={50} title="로고" />
@@ -10,4 +10,4 @@ const Logo = () => {
   );
 };
 
-export default Logo;
+export default AuthLogoLink;

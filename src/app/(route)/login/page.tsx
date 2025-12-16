@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import { cn } from "@/utils";
-import { Icon, Button } from "@/components";
-import { Logo } from "../_components";
+import { Icon, Button, AuthLogoLink } from "@/components";
 
 const ButtonStyle =
   "w-full h-[50px] flex-center gap-1 rounded-[10px] bg-[#1EB87B] font-semibold text-[16px] text-white";
@@ -11,7 +10,7 @@ const ButtonStyle =
 const Page = () => {
   return (
     <div className="min-h-screen w-full gap-8 flex-col-center">
-      <Logo />
+      <AuthLogoLink />
 
       {/* button */}
       <div className="flex w-full flex-col gap-3 px-5 text-body1-semibold">
