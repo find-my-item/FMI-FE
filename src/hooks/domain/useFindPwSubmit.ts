@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { ApiFindPassword } from "../../app/api";
+import { ApiFindPw } from "../../app/api";
 import useErrorToast from "./useErrorToast";
 import { FIND_PW_ERROR } from "@/constants";
 
 const useFindPwSubmit = () => {
   const [email, setEmail] = useState("");
-  const { mutate } = ApiFindPassword();
+  const { mutate } = ApiFindPw();
   const { handlerApiError } = useErrorToast();
 
   const onSubmitFindPassword = (data: { email: string }) => {
