@@ -19,12 +19,13 @@ const FindPwForm = ({ text, redirectLink }: FindPwFormProps) => {
   return (
     <form
       className={cn("flex min-h-screen w-full flex-col gap-[10px] px-5 py-[64px]", email && "px-9")}
+      noValidate
       onSubmit={handleSubmit(onSubmitFindPassword)}
     >
       {!email ? (
         <InputText
           label="아이디(이메일)"
-          type="text"
+          type="email"
           placeholder="아이디(이메일)을 입력해 주세요."
           name="email"
           validation={{
