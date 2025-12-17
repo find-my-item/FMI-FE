@@ -47,7 +47,7 @@ const FindPwForm = ({ text, redirectLink }: FindPwFormProps) => {
             <span className="flex items-center justify-center">
               <span className="inline-block max-w-[200px] truncate text-flatGreen-500">
                 {email}
-              </span>{" "}
+              </span>
               으로 <br />
             </span>
             임시 비밀번호를 발송했습니다.
