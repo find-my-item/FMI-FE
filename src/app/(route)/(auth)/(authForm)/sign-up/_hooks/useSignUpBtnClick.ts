@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useApiCheckCode, useApiSendEmail } from "@/app/api";
 import { useNicknameCheck } from "./useNicknameCheck";
 import { EMAIL_CHECK_CODE_MESSAGE, EMAIL_ERROR_MESSAGE } from "../_constants/SIGNUP_ERROR_MESSAGE";
-import { useApiErrorToast } from "./useApiErrorToast";
+import { useErrorToast } from "@/hooks";
 
 export const useSignUpBtnClick = () => {
   const { getValues } = useFormContext();
@@ -18,7 +18,7 @@ export const useSignUpBtnClick = () => {
   const { addToast } = useToast();
 
   const { handlerToClickNickname } = useNicknameCheck();
-  const { handlerApiError } = useApiErrorToast();
+  const { handlerApiError } = useErrorToast();
 
   // 버튼 클릭 함수
   const handlerToClick = (name: string) => {
