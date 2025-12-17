@@ -183,7 +183,7 @@ const InputText = ({
             onClick={() => btnOnClick?.(isValue)}
             ignoreBase
             disabled={disabled}
-            className="w-auto whitespace-nowrap rounded-[10px] px-[14px] py-[10px] text-body2-semibold"
+            className="w-auto whitespace-nowrap rounded-[10px] border border-neutral-normal-default px-[14px] py-[10px] text-body2-semibold"
           >
             {children}
           </Button>
