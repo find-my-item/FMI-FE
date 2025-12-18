@@ -3,7 +3,7 @@
 
 import { InputHTMLAttributes, ReactNode, useState } from "react";
 import { cn } from "@/utils";
-import { RegisterOptions, useFormContext } from "react-hook-form";
+import { RegisterOptions, useFormContext, UseFormRegisterReturn } from "react-hook-form";
 import DeleteButton from "../_internal/DeleteButton/DeleteButton";
 import Label from "../_internal/Label/Label";
 import Caption from "../_internal/Caption/Caption";
@@ -70,7 +70,8 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   type?: string;
   className?: string;
-  validation?: RegisterOptions;
+  // validation?: RegisterOptions;
+  validation: UseFormRegisterReturn;
   disabled?: boolean;
 }
 
@@ -107,7 +108,7 @@ const InputText = ({
   ...props
 }: InputTextProps) => {
   const {
-    register,
+    // register,
     watch,
     formState: { errors },
   } = useFormContext();
@@ -125,8 +126,9 @@ const InputText = ({
     return type;
   };
 
-  const maxLengthValue =
-    typeof validation?.maxLength === "number" ? validation.maxLength : validation?.maxLength?.value;
+  // const maxLengthValue =
+  //   typeof validation?.maxLength === "number" ?
+  //   validation.maxLength : validation?.maxLength?.value;
 
   return (
     <div className="flex w-full flex-col gap-2">
@@ -142,8 +144,8 @@ const InputText = ({
         <div className="relative flex w-full flex-row">
           <input
             id={name}
+            name={name}
             {...props}
-            {...register(name, validation)}
             type={actualType()}
             disabled={disabled}
             className={cn(
@@ -203,7 +205,8 @@ const InputText = ({
         />
 
         {/* 글자 수 확인 */}
-        <Counter isLength={isValueStr.length} maxLength={maxLengthValue} />
+        <Counter isLength={isValueStr.length} />
+        {/* <Counter isLength={isValueStr.length} maxLength={maxLengthValue} /> */}
       </div>
     </div>
   );
