@@ -1,4 +1,4 @@
-import { FeatureSection } from "./_components";
+import { CTASection, FeatureSection } from "./_components";
 import { FEATURES } from "./_constants/FEATURES";
 
 const page = () => {
@@ -7,6 +7,8 @@ const page = () => {
       {FEATURES.map((props, index) => (
         <FeatureSection key={index} {...props} />
       ))}
+
+      <CTASection />
     </div>
   );
 };
