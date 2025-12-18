@@ -61,7 +61,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
   return (
     <>
       <DetailHeader title="회원가입" />
-      <div className="flex w-full flex-col gap-5 p-4">
+      <div className="flex w-full flex-col gap-5 px-4 py-5">
         {SIGNUP_INPUT_CONFIG.map((item) => (
           <div key={item.name} className="h-[96px]">
             {/* TODO(수현): props 줄이기  */}

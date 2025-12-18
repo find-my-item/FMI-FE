@@ -9,7 +9,13 @@ interface DeleteButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   onDelete?: () => void;
 }
 
-const DeleteButton = ({ eyeShow, value = "", className, onDelete }: DeleteButtonProps) => {
+const DeleteButton = ({
+  eyeShow,
+  value = "",
+  className,
+  onDelete,
+  ...props
+}: DeleteButtonProps) => {
   const isValue = !!value.trim();
 
   return (
@@ -23,6 +29,7 @@ const DeleteButton = ({ eyeShow, value = "", className, onDelete }: DeleteButton
         eyeShow ? "right-8" : "right-2",
         className
       )}
+      {...props}
     >
       <Icon name="Delete" size={6.97} />
     </button>

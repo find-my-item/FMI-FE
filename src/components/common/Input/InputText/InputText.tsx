@@ -87,8 +87,11 @@ interface CustomProps {
 
 type InputTextProps = InputProps & CustomProps;
 
-const InputStyle =
-  "flex flex-1 items-center relative h-10 py-3 px-2 bg-fill-neutral-strong-default rounded-[10px] text-body2-regular text-neutral-strong-entered placeholder:text-neutral-strong-placeholder hover:text-neutral-strong-hover border focus:outline-none focus:text-neutral-strong-focused disabled:text-neutral-strong-disabled";
+const InputStyle = [
+  "flex flex-1 items-center relative h-10 py-3 px-2 bg-fill-neutral-strong-default rounded-[10px] text-body2-regular text-neutral-strong-entered",
+  "placeholder:text-neutral-strong-placeholder hover:text-neutral-strong-hover border focus:outline-none focus:text-neutral-strong-focused",
+  "disabled:text-neutral-strong-disabled disabled:bg-fill-neutral-strong-disabled",
+].join(" ");
 
 const InputText = ({
   name,
@@ -163,6 +166,7 @@ const InputText = ({
               className="top-1/2 -translate-y-1/2"
               value={isValue}
               onDelete={() => onDelete(name)}
+              disabled={disabled}
             />
           )}
           {/* 비밀번호 눈 모양 버튼 */}
@@ -187,7 +191,7 @@ const InputText = ({
             onClick={() => btnOnClick?.(isValue)}
             ignoreBase
             disabled={disabled}
-            className="w-auto whitespace-nowrap rounded-[10px] border border-neutral-normal-default px-[14px] py-[10px] text-body2-semibold"
+            className="text-neutral-normal-default, w-auto whitespace-nowrap rounded-[10px] border border-neutral-normal-default px-[14px] py-[10px] text-body2-semibold disabled:fill-neutral-normal-disabled disabled:text-neutral-normal-disabled"
           >
             {children}
           </Button>
