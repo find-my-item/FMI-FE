@@ -32,7 +32,7 @@ import Icon from "../../Icon/Icon";
  *  - 'btnOnClick': 버튼이 눌렸을때 발생할 이벤트를 넣을 수 있는 옵션
  *  - 'isSuccess': 성공 caption을 보여주기 위한 옵션
  *  - 'successMessage': caption에 나타날 성공 메시지
- *  - 'rule': capation에 나타날 입력 필드의 규칙
+ *  - 'rule': caption에 나타날 입력 필드의 규칙
  *
  *
  * @example 입력필드만 사용
@@ -71,7 +71,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   type?: string;
   className?: string;
   validation?: RegisterOptions;
-  disabled?: true;
+  disabled?: boolean;
 }
 
 interface CustomProps {
@@ -183,7 +183,7 @@ const InputText = ({
             onClick={() => btnOnClick?.(isValue)}
             ignoreBase
             disabled={disabled}
-            className="w-auto whitespace-nowrap rounded-[10px] px-[14px] py-[10px] text-body2-semibold"
+            className="w-auto whitespace-nowrap rounded-[10px] border border-neutral-normal-default px-[14px] py-[10px] text-body2-semibold"
           >
             {children}
           </Button>

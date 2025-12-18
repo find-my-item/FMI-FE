@@ -12,7 +12,7 @@ jest.mock("@/components", () => ({
 describe("ActionSection", () => {
   it("섹션과 제출 버튼이 렌더링되어야 합니다", () => {
     render(<ActionSection disabled={false} />);
-    expect(screen.getByRole("region", { name: "작성 완료" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "작성 완료" })).toBeInTheDocument();
 
     const button = screen.getByRole("button", { name: "작성 완료" });
     expect(button).toBeInTheDocument();
