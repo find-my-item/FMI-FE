@@ -20,7 +20,6 @@ const DeleteButton = ({ eyeShow, value = "", className, onDelete }: DeleteButton
       className={cn(
         "absolute h-[16.67px] w-[16.67px] rounded-full bg-[#9D9D9D] outline-none flex-center",
         eyeShow ? "right-8" : "right-2",
-        !isValue && "opacity-0",
         className
       )}
     >

@@ -114,7 +114,7 @@ const InputText = ({
 
   const { onDelete } = useFormInput();
 
-  const isValue = watch(name) ?? "";
+  const isValue = watch(name)?.trim();
   const isValueStr = (isValue ?? "").toString();
 
   const [show, setShow] = useState(false);
@@ -155,13 +155,14 @@ const InputText = ({
           />
 
           {/* 삭제 버튼 */}
-          <DeleteButton
-            eyeShow={eyeShow}
-            className="top-1/2 -translate-y-1/2"
-            value={isValue}
-            onDelete={() => onDelete(name)}
-          />
-
+          {!!isValue && (
+            <DeleteButton
+              eyeShow={eyeShow}
+              className="top-1/2 -translate-y-1/2"
+              value={isValue}
+              onDelete={() => onDelete(name)}
+            />
+          )}
           {/* 비밀번호 눈 모양 버튼 */}
           {eyeShow && (
             <button
