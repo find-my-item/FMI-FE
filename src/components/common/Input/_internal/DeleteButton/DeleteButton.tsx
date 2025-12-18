@@ -15,6 +15,7 @@ const DeleteButton = ({ eyeShow, value = "", className, onDelete }: DeleteButton
   return (
     <button
       type="button"
+      tabIndex={-1}
       aria-label="입력값 전체 삭제"
       onClick={onDelete}
       className={cn(

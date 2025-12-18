@@ -168,6 +168,7 @@ const InputText = ({
             <button
               className="absolute right-2 top-3 outline-none flex-center"
               type="button"
+              tabIndex={-1}
               aria-label={show ? "비밀번호 숨기기" : "비밀번호 보기"}
               onClick={() => setShow(!show)}
             >
