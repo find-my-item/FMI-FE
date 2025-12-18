@@ -109,7 +109,7 @@ const InputText = ({
   const {
     register,
     watch,
-    formState: { errors },
+    formState: { errors, touchedFields, dirtyFields },
   } = useFormContext();
 
   const { onDelete } = useFormInput();
@@ -127,6 +127,8 @@ const InputText = ({
 
   const maxLength =
     typeof validation?.maxLength === "number" ? validation.maxLength : validation?.maxLength?.value;
+
+  const showError = !!errors?.[name] && (touchedFields?.[name] || dirtyFields?.[name]);
 
   return (
     <div className="flex w-full flex-col gap-2">
@@ -150,7 +152,7 @@ const InputText = ({
               className,
               isValue && "pr-8",
               eyeShow && "pr-[60px]",
-              !!errors[name] && "border border-system-warning"
+              showError && "border border-system-warning"
             )}
           />
 

@@ -1,15 +1,16 @@
 "use no memo";
 
 import { SIGNUP_INPUT_CONFIG } from "../../_constants/SIGNUP_INPUT_CONFIG";
-import { Button, InputText, DetailHeader, InputField } from "@/components";
+import { Button, InputText, DetailHeader } from "@/components";
 import { useFormContext } from "react-hook-form";
 import { useSignUpBtnClick } from "../../_hooks/useSignUpBtnClick";
+import { useEffect } from "react";
 
 const SignUpField = ({ onNext }: { onNext: () => void }) => {
   const {
-    register,
     watch,
     getValues,
+    trigger,
     formState: { isValid },
   } = useFormContext();
 
@@ -17,8 +18,11 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
 
   const isNextEnabled = isValid;
 
-  const isPassword = watch("password");
-  const isPasswordConfirm = watch("passwordConfirm");
+  const password = watch("password");
+
+  useEffect(() => {
+    void trigger("passwordConfirm");
+  }, [password, trigger]);
 
   const inputValidation = (name: string) => {
     if (name === "email")
