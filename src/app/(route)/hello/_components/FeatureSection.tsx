@@ -29,6 +29,7 @@ const FeatureSection = ({
 
   return (
     <section
+      aria-labelledby={`service-introduce-${title}-title`}
       className={cn(
         "px-10 py-[60px] flex-col-center",
         // TODO(지권): 배경 색 수정 예정
@@ -38,17 +39,17 @@ const FeatureSection = ({
     >
       <Image
         src={imgUrl}
-        alt=""
+        alt={title}
         width={imageSize.width}
         height={imageSize.height}
         draggable={false}
         className="select-none"
         priority
       />
-      <article className="mt-10 gap-5 text-center flex-col-center">
+      <div className="mt-10 gap-5 text-center flex-col-center">
         <h2 className="text-h1-bold text-layout-header-default">{title}</h2>
         <p className="text-body1-regular text-layout-body-default">{description}</p>
-      </article>
+      </div>
     </section>
   );
 };
