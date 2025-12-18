@@ -2,7 +2,7 @@
 "use no memo";
 
 import { FormProvider, useForm } from "react-hook-form";
-import { FormType } from "../types/FormType";
+import { FormType } from "./types/FormType";
 import SignUpContainer from "./_components/SignUpContainer/SignUpContainer";
 import { Suspense } from "react";
 
