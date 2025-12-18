@@ -3,6 +3,7 @@ import ListItem from "../ListItem/ListItem";
 import { TABS } from "../../_constants/TABS";
 import { Dispatch, SetStateAction } from "react";
 import { IconName } from "@/components/common/Icon/Icon";
+import { useGetPost } from "@/api/query/list/useGetPost";
 
 interface DefaultListProps {
   selected: string;
@@ -12,6 +13,9 @@ interface DefaultListProps {
 }
 
 const DefaultList = ({ selected, setSelected, searchUpdateQuery, dropdowns }: DefaultListProps) => {
+  const { data } = useGetPost({ page: 0, size: 10 });
+  console.log(data);
+
   return (
     <>
       <Tab tabs={TABS} selected={selected} onValueChange={setSelected} />
