@@ -7,11 +7,24 @@ interface DetailAgreeProps {
 }
 
 const DetailAgree = ({ termName, onAgree }: DetailAgreeProps) => {
+  const term = AGREE_CONFIG[termName as keyof typeof AGREE_CONFIG];
+
+  // if (!term) {
+  //   return (
+  //     <>
+  //       <DetailHeader title="약관" />
+  //       <div className="whitespace-pre-wrap px-4 py-6 text-body2-regular text-layout-body-default">
+  //         존재하지 않는 약관입니다.
+  //       </div>
+  //     </>
+  //   )
+  // };
+
   return (
     <>
-      <DetailHeader title={AGREE_CONFIG[termName].title} />
+      <DetailHeader title={term.title} />
       <div className="whitespace-pre-wrap px-4 py-6 text-body2-regular text-layout-body-default">
-        {AGREE_CONFIG[termName].content}
+        {term.content}
       </div>
 
       {/* signUpFooter */}
