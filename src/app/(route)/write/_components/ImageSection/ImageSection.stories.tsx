@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import ImageSection from "./ImageSection";
+import { ToastProvider } from "@/providers/ToastProviders";
 
 const meta: Meta<typeof ImageSection> = {
   title: "페이지/글쓰기/ImageSection",
@@ -10,9 +11,11 @@ const meta: Meta<typeof ImageSection> = {
   },
   decorators: [
     (Story) => (
-      <div className="w-[390px]">
-        <Story />
-      </div>
+      <ToastProvider>
+        <div className="w-[390px]">
+          <Story />
+        </div>
+      </ToastProvider>
     ),
   ],
 };
