@@ -14,7 +14,8 @@ export const FEATURES = [
       description:
         "분실 지역, 물건 카테고리 별로 분실물 제보를 확인하고 편리하게 유실물을 찾아보세요.",
     },
-    variant: true,
+    variant: "highlight",
+    imageSize: { width: 197, height: 500 },
   },
   {
     content: {
@@ -31,6 +32,7 @@ export const FEATURES = [
       description:
         "알림을 받고 싶은 분실물 카테고리 키워드를 등록하면, 해당 게시글이 등록됐을 때 알림을 전송해요.",
     },
-    variant: true,
+    variant: "highlight",
+    style: "px-9",
   },
 ] as const;
