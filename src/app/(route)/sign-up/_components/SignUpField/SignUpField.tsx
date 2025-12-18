@@ -4,14 +4,12 @@ import { SIGNUP_INPUT_CONFIG } from "../../_constants/SIGNUP_INPUT_CONFIG";
 import { Button, InputText, DetailHeader, InputField } from "@/components";
 import { useFormContext } from "react-hook-form";
 import { useSignUpBtnClick } from "../../_hooks/useSignUpBtnClick";
-import { useEffect } from "react";
 
 const SignUpField = ({ onNext }: { onNext: () => void }) => {
   const {
     register,
     watch,
     getValues,
-    trigger,
     formState: { isValid },
   } = useFormContext();
 
@@ -43,7 +41,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
       return {
         required: true,
         validate: (value: string) =>
-          value === getValues("password") || "비밀번호가 일치하지 않아요",
+          value === getValues("password") || "비밀번호가 일치하지 않습니다.",
         deps: ["password"],
       };
     else if (name === "nickname")
@@ -65,9 +63,8 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
             {/* TODO(수현): props 줄이기  */}
             <InputText
               key={item.name}
-              // name={item.name}
-              // validation={item.validation}
-              {...register(item.name, inputValidation(item.name))}
+              name={item.name}
+              validation={inputValidation(item.name)}
               label={item.label}
               type={item.type}
               placeholder={item.placeholder}
@@ -75,6 +72,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
               eyeShow={item.eyeShow}
               disabled={item.name === "emailAuth" ? emailCodeVerified : false}
               btnOnClick={() => handlerToClick(item.name)}
+              maxLength={item.maxLength}
             >
               {item.btnText}
             </InputText>

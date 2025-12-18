@@ -70,8 +70,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   type?: string;
   className?: string;
-  // validation?: RegisterOptions;
-  validation: UseFormRegisterReturn;
+  validation?: RegisterOptions;
   disabled?: boolean;
 }
 
@@ -108,7 +107,7 @@ const InputText = ({
   ...props
 }: InputTextProps) => {
   const {
-    // register,
+    register,
     watch,
     formState: { errors },
   } = useFormContext();
@@ -126,9 +125,8 @@ const InputText = ({
     return type;
   };
 
-  // const maxLengthValue =
-  //   typeof validation?.maxLength === "number" ?
-  //   validation.maxLength : validation?.maxLength?.value;
+  const maxLength =
+    typeof validation?.maxLength === "number" ? validation.maxLength : validation?.maxLength?.value;
 
   return (
     <div className="flex w-full flex-col gap-2">
@@ -144,7 +142,7 @@ const InputText = ({
         <div className="relative flex w-full flex-row">
           <input
             id={name}
-            name={name}
+            {...register(name, validation)}
             {...props}
             type={actualType()}
             disabled={disabled}
@@ -205,8 +203,7 @@ const InputText = ({
         />
 
         {/* 글자 수 확인 */}
-        <Counter isLength={isValueStr.length} />
-        {/* <Counter isLength={isValueStr.length} maxLength={maxLengthValue} /> */}
+        <Counter isLength={isValueStr.length} maxLength={maxLength} />
       </div>
     </div>
   );
