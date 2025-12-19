@@ -7,7 +7,7 @@ import { EMAIL_CHECK_CODE_MESSAGE, EMAIL_ERROR_MESSAGE } from "../_constants/SIG
 import { useErrorToast } from "@/hooks";
 
 export const useSignUpBtnClick = () => {
-  const { getValues } = useFormContext();
+  const { getValues, trigger } = useFormContext();
 
   const [emailCodeVerified, setEmailCodeVerified] = useState(false);
 
@@ -21,31 +21,42 @@ export const useSignUpBtnClick = () => {
   const { handlerApiError } = useErrorToast();
 
   // 버튼 클릭 함수
-  const handlerToClick = (name: string) => {
-    if (name === "email") {
-      const isEmail = getValues(name);
-      setEmailValue(isEmail);
-      EmailMutate(
-        { email: isEmail },
-        {
-          onSuccess: () => addToast("인증번호가 발송되었습니다.", "success"),
-          onError: (error) => handlerApiError(EMAIL_ERROR_MESSAGE, error.code),
-        }
-      );
-    } else if (name === "emailAuth") {
-      const codeValue = getValues(name);
-      CodeMutate(
-        { email: emailValue, code: codeValue },
-        {
-          onSuccess: () => {
-            setEmailCodeVerified(true);
-            addToast("인증되었습니다.", "success");
-          },
-          onError: (error) => handlerApiError(EMAIL_CHECK_CODE_MESSAGE, error.code),
-        }
-      );
-    } else if (name === "nickname") {
-      handlerToClickNickname(name);
+  const handlerToClick = async (name: string) => {
+    const isValid = await trigger(name);
+    if (!isValid) return;
+
+    const rawInputValue = getValues(name);
+    const inputValue = typeof rawInputValue === "string" ? rawInputValue.trim() : "";
+
+    if (inputValue) {
+      if (name === "email") {
+        console.log("email>> ", inputValue);
+        setTimeout(() => {
+          EmailMutate(
+            { email: inputValue },
+            {
+              onSuccess: () => addToast("인증번호가 발송되었습니다.", "success"),
+              onError: (error) => handlerApiError(EMAIL_ERROR_MESSAGE, error.code),
+            }
+          );
+        }, 300);
+        setEmailValue(inputValue);
+      } else if (name === "emailAuth") {
+        console.log("emailAuth>> ", inputValue);
+        CodeMutate(
+          { email: emailValue, code: inputValue },
+          {
+            onSuccess: () => {
+              setEmailCodeVerified(true);
+              addToast("인증되었습니다.", "success");
+            },
+            onError: (error) => handlerApiError(EMAIL_CHECK_CODE_MESSAGE, error.code),
+          }
+        );
+      } else if (name === "nickname") {
+        console.log("nickname>> ", inputValue);
+        handlerToClickNickname(name);
+      }
     }
   };
 
