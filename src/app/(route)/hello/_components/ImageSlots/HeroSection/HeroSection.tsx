@@ -1,4 +1,5 @@
 import Image from "next/image";
+import "./HeroSection.css";
 
 interface HeroSectionImage {
   src: string;
