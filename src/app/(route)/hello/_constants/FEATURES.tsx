@@ -1,4 +1,5 @@
 import HeroSection from "../_components/ImageSlot/HeroSection";
+import SecondSection from "../_components/ImageSlot/SecondSection";
 
 export const FEATURES = [
   {
@@ -19,6 +20,7 @@ export const FEATURES = [
     },
     variant: "highlight",
     imageSize: { width: 197, height: 500 },
+    imageSlot: <SecondSection />,
   },
   {
     content: {
