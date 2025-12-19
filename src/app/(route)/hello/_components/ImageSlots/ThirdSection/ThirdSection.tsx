@@ -47,7 +47,7 @@ const ThirdSection = () => {
           width={PHONE.width}
           height={PHONE.height}
           draggable={false}
-          className="relative z-10"
+          className="relative z-10 h-[270px] w-[200px]"
         />
 
         <div className="absolute inset-x-0 top-[calc(50%+30px)] z-20 flex w-full -translate-y-1/2 flex-col px-[14px]">
@@ -62,14 +62,19 @@ const ThirdSection = () => {
                 {...item}
                 className="chat-animate"
                 style={{
-                  animationDelay: `${index * 0.2}s`,
+                  animationDelay: `${index * 0.4}s`,
                 }}
               />
             ))}
           </div>
 
-          {/* TODO(지권): 이모지 깨짐 현상 */}
-          <ImagePart {...CHAT_LAST} />
+          {/* TODO(지권): 이모지 깨짐 현상 수정 필요 */}
+          <ImagePart
+            {...CHAT_LAST}
+            style={{
+              animationDelay: "1.3s",
+            }}
+          />
         </div>
 
         {SIDE_MESSAGES.map((message) => (

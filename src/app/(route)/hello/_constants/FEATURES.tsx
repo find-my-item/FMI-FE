@@ -1,4 +1,4 @@
-import { HeroSection, SecondSection, ThirdSection } from "../_components/ImageSlots";
+import { FourthSection, HeroSection, SecondSection, ThirdSection } from "../_components/ImageSlots";
 
 export const FEATURES = [
   {
@@ -39,5 +39,6 @@ export const FEATURES = [
     },
     variant: "highlight",
     style: "px-9",
+    imageSlot: <FourthSection />,
   },
 ] as const;
