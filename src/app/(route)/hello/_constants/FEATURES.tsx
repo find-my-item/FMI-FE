@@ -1,4 +1,4 @@
-import Image from "next/image";
+import HeroSection from "../_components/ImageSlot/HeroSection";
 
 export const FEATURES = [
   {
@@ -8,6 +8,7 @@ export const FEATURES = [
       description:
         "물건을 잃어버렸을 때, 어떻게 찾아야 할지 막막할때가 있죠. '찾아줘!'는 그런 순간에 함께하는 실시간 위치 기반 분실물 찾기 플랫폼입니다.",
     },
+    imageSlot: <HeroSection />,
   },
   {
     content: {
