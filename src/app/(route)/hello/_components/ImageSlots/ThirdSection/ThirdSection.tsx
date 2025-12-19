@@ -1,3 +1,4 @@
+import { CSSProperties } from "react";
 import Image from "next/image";
 import {
   PHONE,
@@ -6,17 +7,20 @@ import {
   CHAT_LAST,
   SIDE_MESSAGES,
 } from "./THIRD_SECTION_PARTS";
+import "./ThirdSection.css";
 
 const ImagePart = ({
   src,
   width,
   height,
   className,
+  style,
 }: {
   src: string;
   width: number;
   height: number;
   className?: string;
+  style?: CSSProperties;
 }) => {
   return (
     <Image
@@ -27,6 +31,7 @@ const ImagePart = ({
       height={height}
       draggable={false}
       className={className}
+      style={style}
     />
   );
 };
@@ -51,11 +56,19 @@ const ThirdSection = () => {
           ))}
 
           <div className="mt-[7px] flex flex-col items-start gap-[3px]">
-            {CHAT_STACK_LEFT.map((item) => (
-              <ImagePart key={item.src} {...item} />
+            {CHAT_STACK_LEFT.map((item, index) => (
+              <ImagePart
+                key={item.src}
+                {...item}
+                className="chat-animate"
+                style={{
+                  animationDelay: `${index * 0.2}s`,
+                }}
+              />
             ))}
           </div>
 
+          {/* TODO(지권): 이모지 깨짐 현상 */}
           <ImagePart {...CHAT_LAST} />
         </div>
 
