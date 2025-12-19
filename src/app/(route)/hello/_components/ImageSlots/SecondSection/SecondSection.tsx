@@ -5,14 +5,14 @@ import { IMAGES } from "./SECOND_SECTION_IMAGES";
 
 const SecondSection = () => {
   return (
-    <div className="relative w-fit">
+    <div className="relative w-fit select-none">
       <Image
         src="/hello/second/service-second-layout.svg"
         alt=""
         width={196}
         height={405}
         draggable={false}
-        className="relative z-10 select-none"
+        className="relative z-10"
         priority
       />
 
@@ -26,7 +26,7 @@ const SecondSection = () => {
           draggable={false}
           priority={index === 0}
           className={cn(
-            "absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2 select-none",
+            "absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2",
             index === 0 ? "fade-out-once" : "fade-in-once"
           )}
         />

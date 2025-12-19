@@ -8,7 +8,14 @@ const CTASection = () => {
       aria-labelledby="service-introduce-cta-title"
       className="gap-5 px-9 py-[60px] text-center flex-col-center"
     >
-      <Image src="/hello/CTA/service-CTA.svg" alt="" width={70} height={70} aria-hidden />
+      <Image
+        src="/hello/CTA/service-CTA.svg"
+        alt=""
+        width={70}
+        height={70}
+        draggable={false}
+        className="select-none"
+      />
       <h3 className="text-h1-bold text-layout-header-default">분실의 걱정을 가볍게, 찾아줘!</h3>
       <p className="text-body1-regular text-layout-body-default">
         '찾아줘!'와 함께라면, 잃어버린 순간도 조금은 덜 답답해질 거예요.

@@ -38,7 +38,7 @@ const ImagePart = ({
 
 const ThirdSection = () => {
   return (
-    <div className="w-full flex-center">
+    <div className="w-full select-none flex-center">
       <div className="relative">
         <Image
           src={PHONE.src}
