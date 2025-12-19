@@ -1,11 +1,7 @@
 import Image from "next/image";
 import "./SecondSection.css";
 import { cn } from "@/utils";
-
-const IMAGES = [
-  "/hello/second/service-second-item-01.svg",
-  "/hello/second/service-second-item-02.svg",
-];
+import { IMAGES } from "./SECOND_SECTION_IMAGES";
 
 const SecondSection = () => {
   return (

@@ -1,4 +1,3 @@
-/* Y축 애니메이션 */
 @keyframes fadeInY {
   from {
     opacity: 0;
@@ -26,7 +25,6 @@
     floatY 2.2s ease-in-out 0.5s infinite;
 }
 
-/* Location Y축 애니메이션 */
 @keyframes floatHeroY {
   0% {
     opacity: 0;
