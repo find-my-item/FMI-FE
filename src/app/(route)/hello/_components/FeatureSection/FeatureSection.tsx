@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { cn } from "@/utils";
 import Image from "next/image";
 
@@ -17,6 +18,7 @@ interface FeatureSectionProps {
   variant?: "default" | "highlight";
   className?: string;
   imageSize?: ImageSize;
+  imageSlot?: ReactNode;
 }
 
 const FeatureSection = ({
@@ -24,6 +26,7 @@ const FeatureSection = ({
   variant = "default",
   className,
   imageSize = { width: 310, height: 310 },
+  imageSlot,
 }: FeatureSectionProps) => {
   const { imgUrl, title, description } = content;
 
@@ -37,15 +40,17 @@ const FeatureSection = ({
         className
       )}
     >
-      <Image
-        src={imgUrl}
-        alt={title}
-        width={imageSize.width}
-        height={imageSize.height}
-        draggable={false}
-        className="select-none"
-        priority
-      />
+      {imageSlot ?? (
+        <Image
+          src={imgUrl}
+          alt={title}
+          width={imageSize.width}
+          height={imageSize.height}
+          draggable={false}
+          className="select-none"
+          priority
+        />
+      )}
       <div className="mt-10 gap-5 text-center flex-col-center">
         <h2 className="text-h1-bold text-layout-header-default">{title}</h2>
         <p className="text-body1-regular text-layout-body-default">{description}</p>

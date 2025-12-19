@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export const FEATURES = [
   {
     content: {
