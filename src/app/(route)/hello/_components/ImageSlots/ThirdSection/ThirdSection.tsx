@@ -13,13 +13,53 @@ const ThirdSection = () => {
             draggable={false}
             className="relative z-10"
           />
-          <div className="absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2 flex-col-center">
+          <div className="absolute inset-x-0 top-[calc(50%+30px)] z-20 flex w-full -translate-y-1/2 flex-col px-[14px]">
             <Image
               src="/hello/third/service-inner-parts-01.svg"
               alt=""
               width={50}
               height={50}
               draggable={false}
+              className="self-center"
+            />
+            <Image
+              src="/hello/third/service-inner-parts-02.svg"
+              alt=""
+              width={145}
+              height={38}
+              draggable={false}
+              className="mt-[7px] self-end"
+            />
+            <div className="mt-[7px] flex flex-col items-start gap-[3px]">
+              <Image
+                src="/hello/third/service-inner-parts-03.svg"
+                alt=""
+                width={44}
+                height={20}
+                draggable={false}
+              />
+              <Image
+                src="/hello/third/service-inner-parts-04.svg"
+                alt=""
+                width={126}
+                height={38}
+                draggable={false}
+              />
+              <Image
+                src="/hello/third/service-inner-parts-05.svg"
+                alt=""
+                width={68}
+                height={20}
+                draggable={false}
+              />
+            </div>
+            <Image
+              src="/hello/third/service-inner-parts-06.svg"
+              alt=""
+              width={145}
+              height={38}
+              draggable={false}
+              className="mt-[7px] self-end"
             />
           </div>
         </div>
