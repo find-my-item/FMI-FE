@@ -3,15 +3,15 @@ import "./SecondSection.css";
 import { cn } from "@/utils";
 
 const IMAGES = [
-  "/hello/second/service-second-section-01.svg",
-  "/hello/second/service-second-section-02.svg",
+  "/hello/second/service-second-item-01.svg",
+  "/hello/second/service-second-item-02.svg",
 ];
 
 const SecondSection = () => {
   return (
     <div className="relative w-fit">
       <Image
-        src="/hello/second/service-second-section-layout.svg"
+        src="/hello/second/service-second-layout.svg"
         alt=""
         width={196}
         height={405}

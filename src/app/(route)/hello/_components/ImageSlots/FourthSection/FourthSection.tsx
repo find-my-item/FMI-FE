@@ -5,7 +5,7 @@ const FourthSection = () => {
   return (
     <div className="select-none flex-col-center">
       <Image
-        src="/hello/fourth/service-fourth-01.svg"
+        src="/hello/fourth/service-fourth-item-01.svg"
         alt=""
         width={318}
         height={86}
@@ -13,7 +13,7 @@ const FourthSection = () => {
         className="fade-in h-[86px] w-[318px]"
       />
       <Image
-        src="/hello/fourth/service-fourth-02.svg"
+        src="/hello/fourth/service-fourth-item-02.svg"
         alt=""
         width={280}
         height={75}
