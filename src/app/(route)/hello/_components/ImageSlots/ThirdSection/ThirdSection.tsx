@@ -1,86 +1,67 @@
 import Image from "next/image";
+import {
+  PHONE,
+  CHAT_ITEMS,
+  CHAT_STACK_LEFT,
+  CHAT_LAST,
+  SIDE_MESSAGES,
+} from "./THIRD_SECTION_PARTS";
+
+const ImagePart = ({
+  src,
+  width,
+  height,
+  className,
+}: {
+  src: string;
+  width: number;
+  height: number;
+  className?: string;
+}) => {
+  return (
+    <Image
+      src={src}
+      alt=""
+      aria-hidden
+      width={width}
+      height={height}
+      draggable={false}
+      className={className}
+    />
+  );
+};
 
 const ThirdSection = () => {
   return (
     <div className="w-full flex-center">
       <div className="relative">
-        <div className="relative">
-          <Image
-            src="/hello/third/service-phone-layout.svg"
-            alt=""
-            width={200}
-            height={270}
-            draggable={false}
-            className="relative z-10"
-          />
-          <div className="absolute inset-x-0 top-[calc(50%+30px)] z-20 flex w-full -translate-y-1/2 flex-col px-[14px]">
-            <Image
-              src="/hello/third/service-inner-parts-01.svg"
-              alt=""
-              width={50}
-              height={50}
-              draggable={false}
-              className="self-center"
-            />
-            <Image
-              src="/hello/third/service-inner-parts-02.svg"
-              alt=""
-              width={145}
-              height={38}
-              draggable={false}
-              className="mt-[7px] self-end"
-            />
-            <div className="mt-[7px] flex flex-col items-start gap-[3px]">
-              <Image
-                src="/hello/third/service-inner-parts-03.svg"
-                alt=""
-                width={44}
-                height={20}
-                draggable={false}
-              />
-              <Image
-                src="/hello/third/service-inner-parts-04.svg"
-                alt=""
-                width={126}
-                height={38}
-                draggable={false}
-              />
-              <Image
-                src="/hello/third/service-inner-parts-05.svg"
-                alt=""
-                width={68}
-                height={20}
-                draggable={false}
-              />
-            </div>
-            <Image
-              src="/hello/third/service-inner-parts-06.svg"
-              alt=""
-              width={145}
-              height={38}
-              draggable={false}
-              className="mt-[7px] self-end"
-            />
+        <Image
+          src={PHONE.src}
+          alt=""
+          aria-hidden
+          width={PHONE.width}
+          height={PHONE.height}
+          draggable={false}
+          className="relative z-10"
+        />
+
+        <div className="absolute inset-x-0 top-[calc(50%+30px)] z-20 flex w-full -translate-y-1/2 flex-col px-[14px]">
+          {CHAT_ITEMS.map((item) => (
+            <ImagePart key={item.src} {...item} />
+          ))}
+
+          <div className="mt-[7px] flex flex-col items-start gap-[3px]">
+            {CHAT_STACK_LEFT.map((item) => (
+              <ImagePart key={item.src} {...item} />
+            ))}
           </div>
+
+          <ImagePart {...CHAT_LAST} />
         </div>
 
-        <Image
-          src="/hello/third/service-left-message.svg"
-          alt=""
-          width={50}
-          height={50}
-          draggable={false}
-          className="absolute bottom-[16px] left-[-42px]"
-        />
-
-        <Image
-          src="/hello/third/service-right-message.svg"
-          alt=""
-          width={56}
-          height={56}
-          draggable={false}
-          className="absolute right-[-40px] top-[100px]"
-        />
+        {SIDE_MESSAGES.map((message) => (
+          <ImagePart key={message.src} {...message} />
+        ))}
       </div>
     </div>
   );
