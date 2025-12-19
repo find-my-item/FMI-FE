@@ -1,4 +1,4 @@
-import { HeroSection, SecondSection } from "../_components/ImageSlots";
+import { HeroSection, SecondSection, ThirdSection } from "../_components/ImageSlots";
 
 export const FEATURES = [
   {
@@ -28,6 +28,7 @@ export const FEATURES = [
       description:
         "실시간 채팅으로 제보자와 바로 대화하며 잃어버린 물건을 더 빠르고 쉽게 되찾을 수 있어요.",
     },
+    imageSlot: <ThirdSection />,
   },
   {
     content: {
