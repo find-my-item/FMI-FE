@@ -2,10 +2,21 @@
 
 import { InputText } from "@/components";
 import { InputTextProps } from "@/components/common/Input/InputText/InputText";
-import { useFormContext } from "react-hook-form";
+import { useFormContext, useController } from "react-hook-form";
 
 const SignUpItem = ({ children, ...props }: InputTextProps) => {
-  const { getValues } = useFormContext();
+  const { getValues, control } = useFormContext();
+
+  const {
+    field,
+    fieldState: { error, isDirty },
+  } = useController({
+    name: props.name,
+    control,
+    rules: props.validation,
+  });
+
+  const isSuccess = isDirty && !error && field.value;
 
   const inputValidation = (name: string) => {
     if (name === "email")
@@ -43,7 +54,7 @@ const SignUpItem = ({ children, ...props }: InputTextProps) => {
 
   return (
     <div className="h-[96px]">
-      <InputText validation={inputValidation(props.name)} {...props}>
+      <InputText validation={inputValidation(props.name)} isSuccess={isSuccess} {...props}>
         {children}
       </InputText>
     </div>

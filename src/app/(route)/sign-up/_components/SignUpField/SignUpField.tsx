@@ -2,7 +2,7 @@
 
 import { SIGNUP_INPUT_CONFIG } from "../../_constants/SIGNUP_INPUT_CONFIG";
 import { Button, DetailHeader } from "@/components";
-import { useFormContext } from "react-hook-form";
+import { useFormContext, useController } from "react-hook-form";
 import { useSignUpBtnClick } from "../../_hooks/useSignUpBtnClick";
 import { useEffect } from "react";
 import SignUpItem from "../SignUpItem/SignUpItem";
@@ -12,6 +12,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
     watch,
     trigger,
     formState: { isValid },
+    control,
   } = useFormContext();
 
   const isNextEnabled = isValid;
@@ -54,24 +55,3 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
 };
 
 export default SignUpField;
-
-// {SIGNUP_INPUT_CONFIG.map((item) => (
-//   <div key={item.name} className="h-[96px]">
-//     <InputText
-//       key={item.name}
-//       name={item.name}
-//       validation={inputValidation(item.name)}
-//       label={item.label}
-//       type={item.type}
-//       placeholder={item.placeholder}
-//       rule={item.rule}
-//       eyeShow={item.eyeShow}
-//       // disabled={item.name === "emailAuth" ? emailCodeVerified : false}
-//       disabled={isEnabled}
-//       btnOnClick={() => handlerToClick(item.name)}
-//       maxLength={item.maxLength}
-//     >
-//       {item.btnText}
-//     </InputText>
-//   </div>
-// ))}
