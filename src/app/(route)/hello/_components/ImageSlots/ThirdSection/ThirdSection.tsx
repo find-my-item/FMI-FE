@@ -1,3 +1,5 @@
+"use client";
+
 import { CSSProperties } from "react";
 import Image from "next/image";
 import {
@@ -8,6 +10,8 @@ import {
   SIDE_MESSAGES,
 } from "./THIRD_SECTION_PARTS";
 import "./ThirdSection.css";
+import { useInView } from "../../../_hooks/useInView";
+import { cn } from "@/utils";
 
 const ImagePart = ({
   src,
@@ -26,7 +30,6 @@ const ImagePart = ({
     <Image
       src={src}
       alt=""
-      aria-hidden
       width={width}
       height={height}
       draggable={false}
@@ -37,22 +40,33 @@ const ImagePart = ({
 };
 
 const ThirdSection = () => {
+  const { ref, inView } = useInView();
+
   return (
     <div className="w-full select-none flex-center">
       <div className="relative">
         <Image
           src={PHONE.src}
           alt=""
-          aria-hidden
           width={PHONE.width}
           height={PHONE.height}
           draggable={false}
           className="relative z-10 h-[270px] w-[200px]"
         />
 
-        <div className="absolute inset-x-0 top-[calc(50%+30px)] z-20 flex w-full -translate-y-1/2 flex-col px-[14px]">
-          {CHAT_ITEMS.map((item) => (
-            <ImagePart key={item.src} {...item} />
+        <div
+          ref={ref}
+          className="absolute inset-x-0 top-[calc(50%+30px)] z-20 flex w-full -translate-y-1/2 flex-col px-[14px]"
+        >
+          {CHAT_ITEMS.map((item, index) => (
+            <ImagePart
+              key={item.src}
+              {...item}
+              className={cn(item.className, inView && "chat-animate")}
+              style={{
+                animationDelay: `${index * 0.4}s`,
+              }}
+            />
           ))}
 
           <div className="mt-[7px] flex flex-col items-start gap-[3px]">
@@ -60,9 +74,9 @@ const ThirdSection = () => {
               <ImagePart
                 key={item.src}
                 {...item}
-                className="chat-animate"
+                className={cn(inView && "chat-animate")}
                 style={{
-                  animationDelay: `${index * 0.4}s`,
+                  animationDelay: `${index * 0.4 + 1}s`,
                 }}
               />
             ))}
@@ -71,8 +85,9 @@ const ThirdSection = () => {
           {/* TODO(지권): 이모지 깨짐 현상 수정 필요 */}
           <ImagePart
             {...CHAT_LAST}
+            className={cn(CHAT_LAST.className, inView && "chat-animate")}
             style={{
-              animationDelay: "1.3s",
+              animationDelay: "2.4s",
             }}
           />
         </div>

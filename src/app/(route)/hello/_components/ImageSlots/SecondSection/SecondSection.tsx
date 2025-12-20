@@ -1,9 +1,14 @@
+"use client";
+
 import Image from "next/image";
 import "./SecondSection.css";
 import { cn } from "@/utils";
 import { IMAGES } from "./SECOND_SECTION_IMAGES";
+import { useInView } from "../../../_hooks/useInView";
 
 const SecondSection = () => {
+  const { ref, inView } = useInView({ threshold: 0.5 });
+
   return (
     <div className="relative w-fit select-none">
       <Image
@@ -16,6 +21,7 @@ const SecondSection = () => {
         priority
       />
 
+      <div ref={ref} />
       {IMAGES.map((image, index) => (
         <Image
           key={image}
@@ -27,7 +33,7 @@ const SecondSection = () => {
           priority={index === 0}
           className={cn(
             "absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2",
-            index === 0 ? "fade-out-once" : "fade-in-once"
+            index === 0 ? inView && "fade-out-once" : "fade-in-once"
           )}
         />
       ))}
