@@ -1,21 +1,3 @@
-import { RegisterOptions } from "react-hook-form";
-import { InputHTMLAttributes } from "react";
-
-export interface InputType extends InputHTMLAttributes<HTMLInputElement> {
-  name: string;
-  label?: string;
-  className?: string;
-  type: string;
-  placeholder: string;
-  validation?: RegisterOptions;
-  rule?: string; // 닉네임 규칙 안내 문구
-  eyeShow?: boolean;
-  children?: string;
-  successMessage?: string;
-  maxLength?: number;
-  btnDisabled?: boolean;
-}
-
 export const SIGNUP_INPUT_CONFIG = [
   {
     name: "email",

@@ -2,7 +2,7 @@
 
 import { SIGNUP_INPUT_CONFIG } from "../../_constants/SIGNUP_INPUT_CONFIG";
 import { Button, DetailHeader } from "@/components";
-import { useFormContext, useController } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import { useSignUpBtnClick } from "../../_hooks/useSignUpBtnClick";
 import { useEffect } from "react";
 import SignUpItem from "../SignUpItem/SignUpItem";
@@ -12,7 +12,6 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
     watch,
     trigger,
     formState: { isValid },
-    control,
   } = useFormContext();
 
   const isNextEnabled = isValid;
