@@ -16,25 +16,28 @@ const Page = () => {
       <div className="flex w-full flex-col gap-3 px-5 text-body1-semibold">
         <Button
           type="submit"
+          ignoreBase
           ariaLabel="카카오 로그인 버튼"
           className={cn(
-            ButtonStyle,
+            "h-[44px] w-full gap-1 rounded-[10px] text-[16px] font-semibold text-white flex-center",
             "!text-flatGray-900 bg-fill-accent-kakao hover:bg-fill-accent-kakao"
           )}
         >
           <Icon name="KakaoLogin" size={14} />
           카카오로 3초 만에 시작하기
         </Button>
-        <Link
+        <Button
+          as={Link}
           href={"/email-login"}
+          ignoreBase
           className={cn(
-            ButtonStyle,
+            "h-[44px] w-full gap-1 rounded-[10px] text-[16px] font-semibold text-white flex-center",
             "border border-neutral-normal-default !text-neutral-normal-default bg-fill-neutral-normal-default"
           )}
           aria-label="로그인 버튼"
         >
           <Icon name="Mail" size={20} /> 이메일로 로그인
-        </Link>
+        </Button>
       </div>
 
       {/* divider 구분선 */}
@@ -49,13 +52,7 @@ const Page = () => {
         <span className="text-caption1-medium text-neutral-normal-placeholder">
           아직 회원이 아니신가요?
         </span>
-        <Link
-          href="/sign-up"
-          className={cn(
-            "p-3 text-caption1-semibold text-neutralInversed-strong-default",
-            "transition-colors hover:text-flatGreen-500"
-          )}
-        >
+        <Link href="/sign-up" className={cn("p-3 text-caption1-semibold text-flatGreen-500")}>
           회원가입
         </Link>
       </div>
