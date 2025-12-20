@@ -5,7 +5,7 @@ import { cn } from "@/utils";
 import { Icon, Button, AuthLogoLink } from "@/components";
 
 const ButtonStyle =
-  "w-full h-[50px] flex-center gap-1 rounded-[10px] bg-[#1EB87B] font-semibold text-[16px] text-white";
+  "w-full h-[44px] flex-center gap-1 rounded-[10px] text-body1-semibold text-white";
 
 const Page = () => {
   return (
@@ -25,16 +25,18 @@ const Page = () => {
           <Icon name="KakaoLogin" size={14} />
           카카오로 3초 만에 시작하기
         </Button>
-        <Link
+        <Button
+          as={Link}
           href={"/email-login"}
+          ignoreBase
           className={cn(
             ButtonStyle,
-            "border border-neutral-normal-default !text-neutral-normal-default bg-fill-neutral-normal-default"
+            "border border-neutral-normal-default text-neutral-normal-default bg-fill-brand-normal-default"
           )}
           aria-label="로그인 버튼"
         >
-          <Icon name="Mail" size={20} /> 이메일로 로그인
-        </Link>
+          <Icon name="Mail" size={20} className="text-white" /> 이메일로 로그인
+        </Button>
       </div>
 
       {/* divider 구분선 */}
@@ -52,8 +54,7 @@ const Page = () => {
         <Link
           href="/sign-up"
           className={cn(
-            "p-3 text-caption1-semibold text-neutralInversed-strong-default",
-            "transition-colors hover:text-flatGreen-500"
+            "Inversed-strong-default p-3 text-caption1-semibold text-brand-subtle-default"
           )}
         >
           회원가입
