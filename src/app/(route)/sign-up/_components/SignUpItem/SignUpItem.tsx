@@ -1,13 +1,11 @@
 "use no memo";
 
 import { InputText } from "@/components";
-import { useSignUpBtnClick } from "../../_hooks/useSignUpBtnClick";
 import { InputTextProps } from "@/components/common/Input/InputText/InputText";
 import { useFormContext } from "react-hook-form";
 
 const SignUpItem = ({ children, ...props }: InputTextProps) => {
   const { getValues } = useFormContext();
-  const { handlerToClick, emailCodeVerified, isEnabled } = useSignUpBtnClick();
 
   const inputValidation = (name: string) => {
     if (name === "email")
@@ -45,13 +43,7 @@ const SignUpItem = ({ children, ...props }: InputTextProps) => {
 
   return (
     <div className="h-[96px]">
-      {/* TODO(수현): props 줄이기  */}
-      <InputText
-        validation={inputValidation(props.name)}
-        disabled={props.name === "emailAuth" && isEnabled}
-        btnOnClick={() => handlerToClick(props.name)}
-        {...props}
-      >
+      <InputText validation={inputValidation(props.name)} {...props}>
         {children}
       </InputText>
     </div>

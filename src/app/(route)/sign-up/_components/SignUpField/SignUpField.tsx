@@ -1,7 +1,7 @@
 "use no memo";
 
 import { SIGNUP_INPUT_CONFIG } from "../../_constants/SIGNUP_INPUT_CONFIG";
-import { Button, InputText, DetailHeader } from "@/components";
+import { Button, DetailHeader } from "@/components";
 import { useFormContext } from "react-hook-form";
 import { useSignUpBtnClick } from "../../_hooks/useSignUpBtnClick";
 import { useEffect } from "react";
@@ -10,7 +10,6 @@ import SignUpItem from "../SignUpItem/SignUpItem";
 const SignUpField = ({ onNext }: { onNext: () => void }) => {
   const {
     watch,
-    getValues,
     trigger,
     formState: { isValid },
   } = useFormContext();
@@ -23,46 +22,20 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
     void trigger("passwordConfirm");
   }, [password, trigger]);
 
-  // const inputValidation = (name: string) => {
-  //   if (name === "email")
-  //     return {
-  //       required: true,
-  //     };
-  //   else if (name === "emailAuth")
-  //     return {
-  //       required: true,
-  //     };
-  //   else if (name === "password")
-  //     return {
-  //       required: true,
-  //       pattern: {
-  //         value: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9])[^\s]{8,16}$/,
-  //         message: "대문자/소문자/숫자/특수 문자 포함 8자리 이상을 입력해 주세요.",
-  //       },
-  //     };
-  //   else if (name === "passwordConfirm")
-  //     return {
-  //       required: true,
-  //       validate: (value: string) =>
-  //         value === getValues("password") || "비밀번호가 일치하지 않습니다.",
-  //       deps: ["password"],
-  //     };
-  //   else if (name === "nickname")
-  //     return {
-  //       required: true,
-  //       maxLength: {
-  //         value: 10,
-  //         message: "2~10자 사이의 닉네임을 입력해 주세요.",
-  //       },
-  //     };
-  // };
+  const { isDisabled, isBtnDisabled, handlerToClick } = useSignUpBtnClick();
 
   return (
     <>
       <DetailHeader title="회원가입" />
       <div className="flex w-full flex-col gap-5 px-4 py-5">
         {SIGNUP_INPUT_CONFIG.map((item) => (
-          <SignUpItem key={item.name} {...item} />
+          <SignUpItem
+            key={item.name}
+            disabled={item.name === "emailAuth" && isDisabled}
+            btnDisabled={item.name === "emailAuth" && isBtnDisabled}
+            btnOnClick={() => handlerToClick(item.name)}
+            {...item}
+          />
         ))}
       </div>
       <div className="sticky bottom-0 mt-auto h-[88px] w-full max-w-[390px] border-t border-flatGray-50 bg-white px-4 py-3">

@@ -3,13 +3,11 @@ import { useToast } from "@/context/ToastContext";
 import { useState } from "react";
 import { useApiCheckCode, useApiSendEmail } from "@/app/api";
 import { useNicknameCheck } from "./useNicknameCheck";
-import { EMAIL_CHECK_CODE_MESSAGE, EMAIL_ERROR_MESSAGE } from "../_constants/SIGNUP_ERROR_MESSAGE";
 import { useErrorToast } from "@/hooks";
+import { EMAIL_ERROR_MESSAGE, EMAIL_CHECK_CODE_MESSAGE } from "../_constants/SIGNUP_ERROR_MESSAGE";
 
 export const useSignUpBtnClick = () => {
   const { getValues, trigger } = useFormContext();
-
-  const [emailCodeVerified, setEmailCodeVerified] = useState(false);
 
   const { mutate: EmailMutate } = useApiSendEmail();
   const { mutate: CodeMutate } = useApiCheckCode();
@@ -19,7 +17,8 @@ export const useSignUpBtnClick = () => {
 
   const { handlerToClickNickname } = useNicknameCheck();
   const { handlerApiError } = useErrorToast();
-  const [isEnabled, setIsEnabled] = useState(true);
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [isBtnDisabled, setIsBtnDisabled] = useState(false);
 
   // 버튼 클릭 함수
   const handlerToClick = async (name: string) => {
@@ -31,30 +30,30 @@ export const useSignUpBtnClick = () => {
 
     if (inputValue) {
       if (name === "email") {
-        console.log("email>> ", inputValue);
-        setIsEnabled(true);
-        // setTimeout(() => {
-        //   EmailMutate(
-        //     { email: inputValue },
-        //     {
-        //       onSuccess: () => {
-        //         setIsEnabled(!isEnabled);
-        //         addToast("인증번호가 발송되었습니다.", "success");
-        //       },
-        //       onError: (error) => handlerApiError(EMAIL_ERROR_MESSAGE, error.code),
-        //     }
-        //   );
-        // }, 300);
-        setEmailValue(inputValue);
-      } else if (name === "emailAuth") {
-        console.log("emailAuth>> ", inputValue);
         setTimeout(() => {
+          console.log("email>> ", inputValue);
+          EmailMutate(
+            { email: inputValue },
+            {
+              onSuccess: () => {
+                addToast("인증번호가 발송되었습니다.", "success");
+                setIsDisabled(false);
+                setIsBtnDisabled(false);
+                setEmailValue(inputValue);
+              },
+              onError: (error) => handlerApiError(EMAIL_ERROR_MESSAGE, error.code),
+            }
+          );
+        }, 300);
+      } else if (name === "emailAuth") {
+        setTimeout(() => {
+          console.log("emailAuth>> ", inputValue);
           CodeMutate(
             { email: emailValue, code: inputValue },
             {
               onSuccess: () => {
-                setEmailCodeVerified(true);
                 addToast("인증되었습니다.", "success");
+                setIsBtnDisabled(true);
               },
               onError: (error) => handlerApiError(EMAIL_CHECK_CODE_MESSAGE, error.code),
             }
@@ -71,7 +70,7 @@ export const useSignUpBtnClick = () => {
 
   return {
     handlerToClick,
-    emailCodeVerified,
-    isEnabled,
+    isDisabled,
+    isBtnDisabled,
   };
 };
