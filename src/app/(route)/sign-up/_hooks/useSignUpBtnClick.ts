@@ -19,6 +19,7 @@ export const useSignUpBtnClick = () => {
 
   const { handlerToClickNickname } = useNicknameCheck();
   const { handlerApiError } = useErrorToast();
+  const [isEnabled, setIsEnabled] = useState(false);
 
   // 버튼 클릭 함수
   const handlerToClick = async (name: string) => {
@@ -31,31 +32,39 @@ export const useSignUpBtnClick = () => {
     if (inputValue) {
       if (name === "email") {
         console.log("email>> ", inputValue);
-        setTimeout(() => {
-          EmailMutate(
-            { email: inputValue },
-            {
-              onSuccess: () => addToast("인증번호가 발송되었습니다.", "success"),
-              onError: (error) => handlerApiError(EMAIL_ERROR_MESSAGE, error.code),
-            }
-          );
-        }, 300);
+        setIsEnabled(true);
+        // setTimeout(() => {
+        //   EmailMutate(
+        //     { email: inputValue },
+        //     {
+        //       onSuccess: () => {
+        //         setIsEnabled(!isEnabled);
+        //         addToast("인증번호가 발송되었습니다.", "success");
+        //       },
+        //       onError: (error) => handlerApiError(EMAIL_ERROR_MESSAGE, error.code),
+        //     }
+        //   );
+        // }, 300);
         setEmailValue(inputValue);
       } else if (name === "emailAuth") {
         console.log("emailAuth>> ", inputValue);
-        CodeMutate(
-          { email: emailValue, code: inputValue },
-          {
-            onSuccess: () => {
-              setEmailCodeVerified(true);
-              addToast("인증되었습니다.", "success");
-            },
-            onError: (error) => handlerApiError(EMAIL_CHECK_CODE_MESSAGE, error.code),
-          }
-        );
+        setTimeout(() => {
+          CodeMutate(
+            { email: emailValue, code: inputValue },
+            {
+              onSuccess: () => {
+                setEmailCodeVerified(true);
+                addToast("인증되었습니다.", "success");
+              },
+              onError: (error) => handlerApiError(EMAIL_CHECK_CODE_MESSAGE, error.code),
+            }
+          );
+        }, 300);
       } else if (name === "nickname") {
         console.log("nickname>> ", inputValue);
-        handlerToClickNickname(name);
+        setTimeout(() => {
+          handlerToClickNickname(name);
+        }, 300);
       }
     }
   };
@@ -63,5 +72,6 @@ export const useSignUpBtnClick = () => {
   return {
     handlerToClick,
     emailCodeVerified,
+    isEnabled,
   };
 };

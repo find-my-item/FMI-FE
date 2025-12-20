@@ -15,7 +15,7 @@ interface InputType {
 }
 
 // TODO(수현): validate 분리하기 (validate는 동적이기 때문에 따로 관리하는 것이 나을것 같음)
-export const SIGNUP_INPUT_CONFIG: InputType[] = [
+export const SIGNUP_INPUT_CONFIG = [
   {
     name: "email",
     label: "아이디(이메일)",
@@ -87,4 +87,4 @@ export const SIGNUP_INPUT_CONFIG: InputType[] = [
     btnText: "중복 확인",
     maxLength: 10,
   },
-];
+] as const;

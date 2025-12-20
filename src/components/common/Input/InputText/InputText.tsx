@@ -3,7 +3,7 @@
 
 import { InputHTMLAttributes, ReactNode, useState } from "react";
 import { cn } from "@/utils";
-import { RegisterOptions, useFormContext, UseFormRegisterReturn } from "react-hook-form";
+import { RegisterOptions, useFormContext } from "react-hook-form";
 import DeleteButton from "../_internal/DeleteButton/DeleteButton";
 import Label from "../_internal/Label/Label";
 import Caption from "../_internal/Caption/Caption";
@@ -85,12 +85,13 @@ interface CustomProps {
   rule?: string;
 }
 
-type InputTextProps = InputProps & CustomProps;
+export type InputTextProps = InputProps & CustomProps;
 
 const InputStyle = [
   "flex flex-1 items-center relative h-10 py-3 px-2 bg-fill-neutral-strong-default rounded-[10px] text-body2-regular text-neutral-strong-entered",
   "placeholder:text-neutral-strong-placeholder hover:text-neutral-strong-hover border focus:outline-none focus:text-neutral-strong-focused",
-  "disabled:text-neutral-strong-disabled disabled:bg-fill-neutral-strong-disabled",
+  "disabled:text-neutral-strong-disabled disabled:bg-fill-neutral-strong-disabled autofill:text-neutral-strong-default",
+  "autofill:shadow-[inset_0_0_0px_1000px_#f5f5f5] autofill:disabled:shadow-[inset_0_0_0px_1000px_#f5f5f5]",
 ].join(" ");
 
 const InputText = ({
@@ -160,15 +161,16 @@ const InputText = ({
           />
 
           {/* 삭제 버튼 */}
-          {!!isValue && (
-            <DeleteButton
-              eyeShow={eyeShow}
-              className="top-1/2 -translate-y-1/2"
-              value={isValue}
-              onDelete={() => onDelete(name)}
-              disabled={disabled}
-            />
-          )}
+          {disabled ||
+            (!!isValue && (
+              <DeleteButton
+                eyeShow={eyeShow}
+                className="top-1/2 -translate-y-1/2"
+                value={isValue}
+                onDelete={() => onDelete(name)}
+                // disabled={disabled}
+              />
+            ))}
           {/* 비밀번호 눈 모양 버튼 */}
           {eyeShow && (
             <button
@@ -191,7 +193,7 @@ const InputText = ({
             onClick={() => btnOnClick?.(isValue)}
             ignoreBase
             disabled={disabled}
-            className="text-neutral-normal-default, w-auto whitespace-nowrap rounded-[10px] border border-neutral-normal-default px-[14px] py-[10px] text-body2-semibold disabled:fill-neutral-normal-disabled disabled:text-neutral-normal-disabled"
+            className="text-neutral-normal-default, , w-auto whitespace-nowrap rounded-[10px] border border-neutral-normal-default px-[14px] py-[10px] text-body2-semibold disabled:text-neutral-normal-disabled disabled:bg-fill-neutral-normal-disabled"
           >
             {children}
           </Button>
