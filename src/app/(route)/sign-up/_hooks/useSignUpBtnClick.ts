@@ -19,7 +19,7 @@ export const useSignUpBtnClick = () => {
 
   const { handlerToClickNickname } = useNicknameCheck();
   const { handlerApiError } = useErrorToast();
-  const [isEnabled, setIsEnabled] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(true);
 
   // 버튼 클릭 함수
   const handlerToClick = async (name: string) => {

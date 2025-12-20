@@ -9,7 +9,7 @@ interface InputType {
   validation?: RegisterOptions;
   rule?: string; // 닉네임 규칙 안내 문구
   eyeShow?: boolean;
-  btnText?: string;
+  children?: string;
   successMessage?: string;
   maxLength?: number;
 }
@@ -24,7 +24,7 @@ export const SIGNUP_INPUT_CONFIG = [
     // validation: {
     //   required: true,
     // },
-    btnText: "인증번호 발송",
+    children: "인증번호 발송",
     maxLength: 256,
   },
   {
@@ -35,7 +35,7 @@ export const SIGNUP_INPUT_CONFIG = [
     // validation: {
     //   required: true,
     // },
-    btnText: "인증번호 확인",
+    children: "인증번호 확인",
     successMessage: "인증되었습니다.",
     maxLength: 6,
   },
@@ -84,7 +84,7 @@ export const SIGNUP_INPUT_CONFIG = [
     //     message: "2~10자 사이의 닉네임을 입력해 주세요.",
     //   },
     // },
-    btnText: "중복 확인",
+    children: "중복 확인",
     maxLength: 10,
   },
 ] as const;
