@@ -44,5 +44,5 @@ export const CHAT_LAST = {
   src: "/hello/third/service-third-item-06.svg",
   width: 145,
   height: 38,
-  className: "mt-[7px] self-end chat-animate",
+  className: "mt-[7px] self-end",
 };
