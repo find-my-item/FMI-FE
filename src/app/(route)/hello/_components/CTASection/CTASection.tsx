@@ -20,7 +20,11 @@ const CTASection = () => {
       <p className="text-body1-regular text-layout-body-default">
         '찾아줘!'와 함께라면, 잃어버린 순간도 조금은 덜 답답해질 거예요.
       </p>
-      <Button as={Link} href="/" className="mt-[30px] min-h-[44px] w-full">
+      <Button
+        as={Link}
+        href="/"
+        className="mt-[30px] min-h-[44px] w-full text-brand-subtle-default"
+      >
         찾아줘! 홈으로 이동
       </Button>
     </section>
