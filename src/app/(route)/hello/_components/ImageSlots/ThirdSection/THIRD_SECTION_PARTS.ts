@@ -35,9 +35,9 @@ export const CHAT_ITEMS = [
 ] as const;
 
 export const CHAT_STACK_LEFT = [
-  { src: "/hello/third/service-third-item-03.svg", width: 44, height: 20 },
+  { src: "/hello/third/service-third-item-03.svg", width: 126, height: 20 },
   { src: "/hello/third/service-third-item-04.svg", width: 126, height: 38 },
-  { src: "/hello/third/service-third-item-05.svg", width: 68, height: 20 },
+  { src: "/hello/third/service-third-item-05.svg", width: 126, height: 20 },
 ] as const;
 
 export const CHAT_LAST = {
