@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>찾아줘! 이메일 인증 안내</title>
+    <title>찾아줘! 피신고자 신고 결과 안내</title>
     <style>
       @font-face {
         font-family: "SUIT Variable";
@@ -30,7 +30,7 @@
     "
   >
     <div style="display: none; max-height: 0; overflow: hidden; opacity: 0; mso-hide: all">
-      이메일 인증을 위한 안내입니다. 아래 인증 번호로 인증을 완료해 주세요.
+      찾아줘! 피신고자 신고 결과 안내
     </div>
 
     <table
@@ -79,7 +79,7 @@
                           letter-spacing: -0.02em;
                         "
                       >
-                        <span style="color: #1eb87b">이메일 인증 번호</span>
+                        <span style="color: #1eb87b">{{ACTION}}</span>
                         안내
                       </h1>
                       <p
@@ -92,9 +92,10 @@
                           padding-top: 24px;
                         "
                       >
-                        본 메일은 이메일 인증을 위해 발송된 메일이에요.
+                        {{name}}님의 계정에 다수의 신고가 접수되었고, 운영진이 검토한 결과
+                        <span style="color: #1eb87b">{{ACTION}}</span>을 안내드려요.
                         <br />
-                        아래 인증 번호를 사용해 이메일 인증을 완료해 주세요.
+                        해당 내용에 이의가 있을 경우, 찾아줘 고객센터를 이용해 주세요.
                       </p>
                     </td>
                   </tr>
@@ -115,27 +116,158 @@
                           padding-bottom: 24px;
                         "
                       >
-                        이메일 인증 번호
+                        계정 처분 내용
                       </p>
                     </td>
                   </tr>
                   <tr>
-                    <td style="background: #e3fcee; border-radius: 10px; text-align: center">
-                      <div
+                    <td>
+                      <table
+                        width="100%"
+                        cellpadding="0"
+                        cellspacing="0"
+                        role="presentation"
                         style="
-                          font-size: 28px;
-                          font-weight: 700;
-                          color: #363636;
-                          line-height: 130%;
-                          letter-spacing: 0.02em;
-                          padding: 28px 0;
-                          font-family:
-                            SFMono-Regular, Menlo, Monaco, Consolas, &quot;Liberation Mono&quot;,
-                            &quot;Courier New&quot;, monospace;
+                          border-collapse: collapse;
+                          border: 1px solid #e0e0e0;
+                          width: 100%;
+                          font-size: 14px;
+                          color: #333;
+                          margin-bottom: 40px;
                         "
                       >
-                        {{CODE}}
-                      </div>
+                        <tr>
+                          <td
+                            style="
+                              padding: 20px 32px;
+                              border-top: 1px solid #e0e0e0;
+                              border-right: 1px solid #e0e0e0;
+                              font-weight: 400;
+                              font-size: 18px;
+                              line-height: 140%;
+                              text-align: left;
+                              white-space: nowrap;
+                              vertical-align: middle;
+                              text-align: center;
+                            "
+                          >
+                            신고유형
+                          </td>
+                          <td
+                            style="
+                              width: 100%;
+                              padding: 20px 32px;
+                              text-align: left;
+                              font-weight: 700;
+                              font-size: 20px;
+                              line-height: 110%;
+                              letter-spacing: -0.05em;
+                              vertical-align: middle;
+                            "
+                          >
+                            {{CATEGORY}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              padding: 20px 32px;
+                              border-top: 1px solid #e0e0e0;
+                              border-right: 1px solid #e0e0e0;
+                              font-weight: 400;
+                              font-size: 18px;
+                              line-height: 140%;
+                              text-align: left;
+                              white-space: nowrap;
+                              vertical-align: middle;
+                              text-align: center;
+                            "
+                          >
+                            아이디
+                          </td>
+                          <td
+                            style="
+                              width: 100%;
+                              padding: 20px 32px;
+                              border-top: 1px solid #e0e0e0;
+                              font-weight: 700;
+                              font-size: 20px;
+                              line-height: 110%;
+                              letter-spacing: -0.05em;
+                              text-align: left;
+                              vertical-align: middle;
+                            "
+                          >
+                            {{USER}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              padding: 20px 32px;
+                              border-top: 1px solid #e0e0e0;
+                              border-right: 1px solid #e0e0e0;
+                              font-weight: 400;
+                              font-size: 18px;
+                              line-height: 140%;
+                              text-align: left;
+                              white-space: nowrap;
+                              vertical-align: middle;
+                              text-align: center;
+                            "
+                          >
+                            닉네임
+                          </td>
+                          <td
+                            style="
+                              width: 100%;
+                              padding: 20px 32px;
+                              border-top: 1px solid #e0e0e0;
+                              font-weight: 700;
+                              font-size: 20px;
+                              line-height: 110%;
+                              letter-spacing: -0.05em;
+                              text-align: left;
+                              vertical-align: middle;
+                            "
+                          >
+                            {{NICKNAME}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              padding: 20px 32px;
+                              border-top: 1px solid #e0e0e0;
+                              border-right: 1px solid #e0e0e0;
+                              font-weight: 400;
+                              font-size: 18px;
+                              line-height: 140%;
+                              text-align: left;
+                              white-space: nowrap;
+                              vertical-align: middle;
+                              text-align: center;
+                            "
+                          >
+                            처분내용
+                          </td>
+                          <td
+                            style="
+                              width: 100%;
+                              padding: 20px 32px;
+                              border-top: 1px solid #e0e0e0;
+                              font-weight: 700;
+                              font-size: 20px;
+                              line-height: 110%;
+                              letter-spacing: -0.05em;
+                              text-align: left;
+                              vertical-align: middle;
+                            "
+                          >
+                            {{ACTION_DETAIL}}
+                          </td>
+                        </tr>
+                      </table>
                     </td>
                   </tr>
                 </table>
@@ -183,16 +315,6 @@
                           "
                           >고객센터</a
                         >를 이용해 주세요.
-                      </p>
-                      <p
-                        style="
-                          margin: 4px 0 0 0;
-                          font-size: 14px;
-                          line-height: 140%;
-                          color: #363636;
-                        "
-                      >
-                        타인이 고객님의 메일을 잘못 입력한 경우 메일이 발송될 수 있어요.
                       </p>
                       <p
                         style="
