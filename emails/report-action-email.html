@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>찾아줘! 피신고자 신고 대상자 안내</title>
+    <title>찾아줘! 피신고자 신고 결과 안내</title>
     <style>
       @font-face {
         font-family: "SUIT Variable";
@@ -30,7 +30,7 @@
     "
   >
     <div style="display: none; max-height: 0; overflow: hidden; opacity: 0; mso-hide: all">
-      찾아줘! 신고 대상자 안내
+      찾아줘! 피신고자 신고 결과 안내
     </div>
 
     <table
@@ -79,7 +79,7 @@
                           letter-spacing: -0.02em;
                         "
                       >
-                        <span style="color: #1eb87b">신고 대상자</span>
+                        <span style="color: #1eb87b">{{ACTION}}</span>
                         안내
                       </h1>
                       <p
@@ -92,11 +92,10 @@
                           padding-top: 24px;
                         "
                       >
-                        {{name}}님의 계정에 신고가 접수되어 안내드려요.
+                        {{name}}님의 계정에 다수의 신고가 접수되었고, 운영진이 검토한 결과
+                        <span style="color: #1eb87b">{{ACTION}}</span>을 안내드려요.
                         <br />
-                        다수의 신고가 접수될 경우
-                        <span style="color: #1eb87b">활동 정지 처분</span>을 받을 수 있으니 유의해
-                        주세요.
+                        해당 내용에 이의가 있을 경우, 찾아줘 고객센터를 이용해 주세요.
                       </p>
                     </td>
                   </tr>
@@ -117,7 +116,7 @@
                           padding-bottom: 24px;
                         "
                       >
-                        신고 접수 내용
+                        계정 처분 내용
                       </p>
                     </td>
                   </tr>
@@ -233,6 +232,39 @@
                             "
                           >
                             {{NICKNAME}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              padding: 20px 32px;
+                              border-top: 1px solid #e0e0e0;
+                              border-right: 1px solid #e0e0e0;
+                              font-weight: 400;
+                              font-size: 18px;
+                              line-height: 140%;
+                              text-align: left;
+                              white-space: nowrap;
+                              vertical-align: middle;
+                              text-align: center;
+                            "
+                          >
+                            처분내용
+                          </td>
+                          <td
+                            style="
+                              width: 100%;
+                              padding: 20px 32px;
+                              border-top: 1px solid #e0e0e0;
+                              font-weight: 700;
+                              font-size: 20px;
+                              line-height: 110%;
+                              letter-spacing: -0.05em;
+                              text-align: left;
+                              vertical-align: middle;
+                            "
+                          >
+                            {{ACTION_DETAIL}}
                           </td>
                         </tr>
                       </table>
