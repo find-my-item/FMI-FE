@@ -1,0 +1,13 @@
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.chat-animate {
+  animation: fadeUp 0.2s ease-out forwards;
+  opacity: 0;
+}
