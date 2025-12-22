@@ -2,6 +2,7 @@
 
 import { CSSProperties } from "react";
 import Image from "next/image";
+import { cn } from "@/utils";
 import {
   PHONE,
   CHAT_ITEMS,
@@ -10,8 +11,7 @@ import {
   SIDE_MESSAGES,
 } from "./THIRD_SECTION_PARTS";
 import "./ThirdSection.css";
-import { useInView } from "../../../_hooks/useInView";
-import { cn } from "@/utils";
+import { useInView } from "../../../_hooks";
 
 const ImagePart = ({
   src,

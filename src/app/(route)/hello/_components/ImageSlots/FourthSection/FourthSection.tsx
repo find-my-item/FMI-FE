@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import "./FourthSection.css";
-import { useInView } from "../../../_hooks/useInView";
 import { cn } from "@/utils";
+import "./FourthSection.css";
+import { useInView } from "../../../_hooks";
 
 const FourthSection = () => {
   const { ref, inView } = useInView();
