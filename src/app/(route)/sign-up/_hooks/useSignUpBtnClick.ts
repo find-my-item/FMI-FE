@@ -1,9 +1,10 @@
 import { useFormContext } from "react-hook-form";
 import { useToast } from "@/context/ToastContext";
 import { useState } from "react";
-import { useApiCheckCode, useApiSendEmail } from "@/app/api";
-import { useNicknameCheck } from "./useNicknameCheck";
+import useApiCheckCode from "@/api/sign-up/useApiCheckCode";
+import useApiSendEmail from "@/api/sign-up/useApiSendEmail";
 import { useErrorToast } from "@/hooks";
+import { useNicknameCheck } from "./useNicknameCheck";
 import { EMAIL_ERROR_MESSAGE, EMAIL_CHECK_CODE_MESSAGE } from "../_constants/SIGNUP_ERROR_MESSAGE";
 
 export const useSignUpBtnClick = () => {
