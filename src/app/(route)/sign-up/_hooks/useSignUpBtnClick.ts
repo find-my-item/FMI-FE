@@ -8,16 +8,17 @@ import { useNicknameCheck } from "./useNicknameCheck";
 import { EMAIL_ERROR_MESSAGE, EMAIL_CHECK_CODE_MESSAGE } from "../_constants/SIGNUP_ERROR_MESSAGE";
 
 export const useSignUpBtnClick = () => {
-  const [isEmailAuthDisabled, setIsEmailAuthDisabled] = useState(true);
-  const [isEmailDisabled, setIsEmailDisabled] = useState(false);
-  const [isEmailAuthVerified, setIsEmailAuthVerified] = useState(false);
+  const { getValues, trigger } = useFormContext();
 
   const [emailValue, setEmailValue] = useState("");
 
+  const [isEmailAuthDisabled, setIsEmailAuthDisabled] = useState(true);
+  const [isEmailDisabled, setIsEmailDisabled] = useState(false);
+
+  const [isEmailAuthVerified, setIsEmailAuthVerified] = useState(false);
+
   const { addToast } = useToast();
   const { handlerApiError } = useErrorToast();
-
-  const { getValues, trigger } = useFormContext();
 
   const { mutate: EmailMutate } = useApiSendEmail();
   const { mutate: CodeMutate } = useApiCheckCode();

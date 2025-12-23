@@ -2,7 +2,7 @@
 
 import { SIGNUP_INPUT_CONFIG } from "../../_constants/SIGNUP_INPUT_CONFIG";
 import { Button, DetailHeader } from "@/components";
-import { useFormContext } from "react-hook-form";
+import { useFormContext, useWatch } from "react-hook-form";
 import { useSignUpBtnClick } from "../../_hooks/useSignUpBtnClick";
 import { useEffect } from "react";
 import SignUpItem from "../SignUpItem/SignUpItem";
@@ -10,12 +10,12 @@ import { useNicknameCheck } from "../../_hooks/useNicknameCheck";
 
 const SignUpField = ({ onNext }: { onNext: () => void }) => {
   const {
-    watch,
+    control,
     trigger,
     formState: { isValid },
   } = useFormContext();
 
-  const password = watch("password");
+  const password = useWatch({ control, name: "password" });
 
   useEffect(() => {
     void trigger("passwordConfirm");
