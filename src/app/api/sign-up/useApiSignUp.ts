@@ -1,5 +1,5 @@
 import useAppMutation from "@/api/query/useAppMutation";
-import { ApiSignUpType } from "@/app/(route)/(auth)/(authForm)/types/ApiSingUpType";
+import { ApiSignUpType } from "@/app/(route)/sign-up/types/ApiSingUpType";
 import { ApiBaseResponseType } from "@/types";
 
 interface SignUpResponseType extends ApiBaseResponseType<{ id: string }> {}
