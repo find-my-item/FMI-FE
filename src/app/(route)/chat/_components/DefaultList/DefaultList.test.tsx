@@ -26,29 +26,21 @@ jest.mock("../ChatItem/ChatItem", () => ({
   default: () => <div data-testid="chat-item">ChatItem</div>,
 }));
 
-jest.mock("./components/SortFilter/SortFilter", () => ({
+jest.mock("../FilterDropdown/FilterDropdown", () => ({
   __esModule: true,
-  default: ({ searchUpdateQuery }: any) => (
-    <div data-testid="sort-filter">
+  default: ({ ariaLabel, searchUpdateQuery }: any) => (
+    <div data-testid={`filter-dropdown-${ariaLabel}`}>
       <button
-        data-testid="filter-채팅 리스트 최신순"
-        onClick={() => searchUpdateQuery("sort", "latest")}
+        data-testid={`filter-${ariaLabel}`}
+        onClick={() => {
+          if (ariaLabel.includes("최신순")) {
+            searchUpdateQuery("sort", "latest");
+          } else if (ariaLabel.includes("습득/분실")) {
+            searchUpdateQuery("type", "all");
+          }
+        }}
       >
-        최신순
-      </button>
-    </div>
-  ),
-}));
-
-jest.mock("./components/TypeFilter/TypeFilter", () => ({
-  __esModule: true,
-  default: ({ searchUpdateQuery }: any) => (
-    <div data-testid="type-filter">
-      <button
-        data-testid="filter-채팅 리스트 습득/분실"
-        onClick={() => searchUpdateQuery("type", "all")}
-      >
-        습득/분실
+        {ariaLabel.includes("최신순") ? "최신순" : "습득/분실"}
       </button>
     </div>
   ),
