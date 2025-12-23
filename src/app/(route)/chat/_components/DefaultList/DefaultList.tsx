@@ -17,25 +17,19 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
 
   return (
     <>
-      <div className="px-[20px]">
-        <div className="flex gap-[8px] py-[14px] no-scrollbar">
-          <Filter
-            ariaLabel={`채팅 리스트 ${displayText}`}
-            onSelected={!!selectedRegion}
-            icon={{ name: "Location", size: 16 }}
-            iconPosition="leading"
-            onClick={() => searchUpdateQuery("search", "region")}
-          >
-            {displayText}
-          </Filter>
-          {FilTER_DROPDOWN_OPTIONS.map((option) => (
-            <FilterDropdown
-              key={option.keyName}
-              {...option}
-              searchUpdateQuery={searchUpdateQuery}
-            />
-          ))}
-        </div>
+      <div className="flex gap-[8px] px-[20px] py-[14px] no-scrollbar">
+        <Filter
+          ariaLabel={`채팅 리스트 ${displayText}`}
+          onSelected={!!selectedRegion}
+          icon={{ name: "Location", size: 16 }}
+          iconPosition="leading"
+          onClick={() => searchUpdateQuery("search", "region")}
+        >
+          {displayText}
+        </Filter>
+        {FilTER_DROPDOWN_OPTIONS.map((option) => (
+          <FilterDropdown key={option.keyName} {...option} searchUpdateQuery={searchUpdateQuery} />
+        ))}
       </div>
       {Array.from({ length: 5 }).map((_, index) => (
         <ChatItem key={index} />
