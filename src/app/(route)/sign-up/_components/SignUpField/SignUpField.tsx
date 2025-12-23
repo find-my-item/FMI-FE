@@ -37,7 +37,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
     else return false;
   };
 
-  const isNextEnabled = isValid && isEmailAuthVerified;
+  const isNextEnabled = isValid && isEmailAuthVerified && isNicknameVerified;
 
   return (
     <>
@@ -53,7 +53,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
           />
         ))}
       </div>
-      <div className="sticky bottom-0 mt-auto h-[88px] w-full max-w-[390px] border-t border-flatGray-50 bg-white px-4 py-3">
+      <div className="sticky bottom-0 mt-auto h-[88px] w-full max-w-[390px] border-t border-divider-default bg-white px-4 py-3">
         <Button
           type="button"
           ariaLabel="회원가입 폼 버튼"

@@ -33,33 +33,33 @@ export const useSignUpBtnClick = () => {
 
     if (inputValue) {
       if (name === "email") {
-        // EmailMutate(
-        //   { email: inputValue },
-        //   {
-        //     onSuccess: () => {
-        //       addToast("인증번호가 발송되었습니다.", "success");
-        setIsEmailAuthDisabled(false);
-        setEmailValue(inputValue);
-        //     },
-        //     onError: (error) => {
-        //       console.log("error>>> ", error);
-        //       handlerApiError(EMAIL_ERROR_MESSAGE, error.code);
-        //     },
-        //   }
-        // );
+        EmailMutate(
+          { email: inputValue },
+          {
+            onSuccess: () => {
+              addToast("인증번호가 발송되었습니다.", "success");
+              setIsEmailAuthDisabled(false);
+              setEmailValue(inputValue);
+            },
+            onError: (error) => {
+              console.log("error>>> ", error);
+              handlerApiError(EMAIL_ERROR_MESSAGE, error.code);
+            },
+          }
+        );
       } else if (name === "emailAuth") {
-        // CodeMutate(
-        //   { email: emailValue, code: inputValue },
-        //   {
-        //     onSuccess: () => {
-        //       addToast("인증되었습니다.", "success");
-        setIsEmailAuthDisabled(true);
-        setIsEmailDisabled(true);
-        setIsEmailAuthVerified(true);
-        //     },
-        //     onError: (error) => handlerApiError(EMAIL_CHECK_CODE_MESSAGE, error.code),
-        //   }
-        // );
+        CodeMutate(
+          { email: emailValue, code: inputValue },
+          {
+            onSuccess: () => {
+              addToast("인증되었습니다.", "success");
+              setIsEmailAuthDisabled(true);
+              setIsEmailDisabled(true);
+              setIsEmailAuthVerified(true);
+            },
+            onError: (error) => handlerApiError(EMAIL_CHECK_CODE_MESSAGE, error.code),
+          }
+        );
       } else if (name === "nickname") {
         handlerToClickNickname(name);
       }
