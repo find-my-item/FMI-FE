@@ -5,12 +5,38 @@ import { InputChat } from "@/components";
 import { FormProvider, useForm } from "react-hook-form";
 import { ChatRoomProvider, useChatRoom } from "@/providers/ChatRoomProvider";
 import { MOCK_CHAT_DATA } from "./_components/ChatRoomMain/constants/MOCK_CHAT_DATA";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+
+const ACCESS_TOKEN =
+  "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ6bnpudW5AZ21haWwuY29tIiwicm9sZSI6IlVTRVIiLCJ1c2VySWQiOjMsImlzcyI6ImZtaSIsImlhdCI6MTc2NjA1OTU1NCwiZXhwIjoxNzY2MDYwNDU0fQ.ekeux2B_87SKnvsHW323_0ZEJ9qeC8MeheGKkpvkx6I";
+
+const fetchPostChats = async (postId: number) => {
+  const response = await axios.post(
+    `${process.env.NEXT_PUBLIC_API_URL}:8080/posts/${postId}/chats`,
+    undefined,
+    {
+      headers: {
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
+      },
+    }
+  );
+
+  return response;
+};
+const useFetchPostChats = (postId: number) => {
+  return useQuery({
+    queryKey: ["postChats", postId],
+    queryFn: () => fetchPostChats(postId),
+  });
+};
 
 interface ChatFormValues {
   chatRoom: string;
 }
 
-const ChatRoom = () => {
+const ChatRoom = ({ postId }: { postId: number }) => {
+  const { data: postChats } = useFetchPostChats(postId);
   const methods = useForm<ChatFormValues>({
     mode: "onChange",
     reValidateMode: "onChange",
@@ -48,10 +74,10 @@ const ChatRoom = () => {
   );
 };
 
-const page = () => {
+const page = ({ params }: { params: { roomId: string } }) => {
   return (
     <ChatRoomProvider initialChats={[...MOCK_CHAT_DATA].reverse()}>
-      <ChatRoom />
+      <ChatRoom postId={Number(params.roomId)} />
     </ChatRoomProvider>
   );
 };
