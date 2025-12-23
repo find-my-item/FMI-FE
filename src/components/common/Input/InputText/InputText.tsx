@@ -80,7 +80,6 @@ interface CustomProps {
   eyeShow?: boolean;
   btnOnClick?: (value: string) => void;
   btnType?: "button" | "submit" | "reset";
-  btnDisabled?: boolean;
   isSuccess?: boolean;
   successMessage?: string;
   rule?: string;
@@ -193,7 +192,7 @@ const InputText = ({
             type={btnType}
             onClick={() => btnOnClick?.(isValue)}
             ignoreBase
-            disabled={props.btnDisabled}
+            disabled={disabled}
             className="text-neutral-normal-default, text-body2-semibold, w-auto whitespace-nowrap rounded-[10px] border border-neutral-normal-default px-[14px] py-[10px] disabled:text-neutral-normal-disabled disabled:bg-fill-neutral-strong-default"
           >
             {children}

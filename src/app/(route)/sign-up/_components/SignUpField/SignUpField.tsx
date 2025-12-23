@@ -22,7 +22,19 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
     void trigger("passwordConfirm");
   }, [password, trigger]);
 
-  const { isDisabled, isBtnDisabled, handlerToClick } = useSignUpBtnClick();
+  const { isEmailDisabled, isEmailAuthDisabled, isEmailAuthVerified, handlerToClick } =
+    useSignUpBtnClick();
+
+  const handleDisabled = (name: string) => {
+    if (name === "emailAuth") return isEmailAuthDisabled;
+    else if (name === "email") return isEmailDisabled;
+  };
+
+  const handleSuccess = (name: string) => {
+    if (name === "emailAuth") return isEmailAuthVerified;
+    // else if (name === "nickname") return isNicknameDisabled;
+    else return false;
+  };
 
   return (
     <>
@@ -31,9 +43,9 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
         {SIGNUP_INPUT_CONFIG.map((item) => (
           <SignUpItem
             key={item.name}
-            disabled={item.name === "emailAuth" && isDisabled}
-            btnDisabled={item.name === "emailAuth" && isBtnDisabled}
+            disabled={handleDisabled(item.name)}
             btnOnClick={() => handlerToClick(item.name)}
+            isVerified={handleSuccess(item.name)}
             {...item}
           />
         ))}

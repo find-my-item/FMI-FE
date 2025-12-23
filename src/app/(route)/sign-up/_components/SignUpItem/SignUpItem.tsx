@@ -4,7 +4,11 @@ import { InputText } from "@/components";
 import { InputTextProps } from "@/components/common/Input/InputText/InputText";
 import { useFormContext, useController } from "react-hook-form";
 
-const SignUpItem = ({ children, ...props }: InputTextProps) => {
+interface SignUpItemProps extends InputTextProps {
+  isVerified: boolean;
+}
+
+const SignUpItem = ({ children, isVerified, ...props }: SignUpItemProps) => {
   const { getValues, control } = useFormContext();
 
   const {
@@ -17,6 +21,11 @@ const SignUpItem = ({ children, ...props }: InputTextProps) => {
   });
 
   const isSuccess = isDirty && !error && field.value;
+  const handleSuccess = (name: string) => {
+    if (name === "emailAuth") return isVerified;
+    // else if (name === "nickname") return isNicknameDisabled;
+    else return isSuccess;
+  };
 
   const inputValidation = (name: string) => {
     if (name === "email")
@@ -54,7 +63,11 @@ const SignUpItem = ({ children, ...props }: InputTextProps) => {
 
   return (
     <div className="h-[96px]">
-      <InputText validation={inputValidation(props.name)} isSuccess={isSuccess} {...props}>
+      <InputText
+        validation={inputValidation(props.name)}
+        isSuccess={handleSuccess(props.name)}
+        {...props}
+      >
         {children}
       </InputText>
     </div>
