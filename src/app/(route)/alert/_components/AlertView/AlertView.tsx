@@ -4,7 +4,7 @@ import { Icon } from "@/components";
 import { cn, formatDate } from "@/utils";
 import { MOCK_ALERT_ITEMS } from "../../_constants/MOCK_ALERT_ITEMS";
 import { useSearchParams } from "next/navigation";
-import { AlertTabKey, AlertCategoryKey } from "../../_types/alertKeyType";
+import { AlertCategoryKey } from "../../_types/alertKeyType";
 
 const AlertItem = ({ item }: { item: (typeof MOCK_ALERT_ITEMS)[number] }) => {
   return (
@@ -40,18 +40,11 @@ const AlertItem = ({ item }: { item: (typeof MOCK_ALERT_ITEMS)[number] }) => {
 
 const AlertView = () => {
   const searchParams = useSearchParams();
-  const selectedTab = (searchParams.get("tab") as AlertTabKey) || "all";
   const selectedCategory = (searchParams.get("category") as AlertCategoryKey) || "all";
 
   const filteredItems = MOCK_ALERT_ITEMS.filter((item) => {
-    const tabMatch =
-      selectedTab === "all" ||
-      (selectedTab === "unread" && !item.isRead) ||
-      (selectedTab === "read" && item.isRead);
-
     const categoryMatch = selectedCategory === "all" || item.categoryKey === selectedCategory;
-
-    return tabMatch && categoryMatch;
+    return categoryMatch;
   });
 
   return (
