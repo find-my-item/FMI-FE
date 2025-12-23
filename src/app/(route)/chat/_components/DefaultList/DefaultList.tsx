@@ -1,7 +1,6 @@
 "use client";
 
-import { Filter, InputSearch } from "@/components";
-import { FormProvider, useForm } from "react-hook-form";
+import { Filter } from "@/components";
 import { createChatFilterButtons } from "../../_utils/createChatFilterButtons/createChatFilterButtons";
 import ChatItem from "../ChatItem/ChatItem";
 import { useSearchParams } from "next/navigation";
@@ -14,10 +13,6 @@ interface DefaultListProps {
 const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
   const searchParams = useSearchParams();
   const selectedRegion = searchParams.get("region");
-  const methods = useForm({
-    mode: "onChange",
-    reValidateMode: "onChange",
-  });
   const buttons = createChatFilterButtons(searchUpdateQuery);
 
   const renderButtons = buttons.map((btn) => {
@@ -35,17 +30,6 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
   return (
     <>
       <div className="px-[20px]">
-        <FormProvider {...methods}>
-          <div className="py-[10px]">
-            <InputSearch
-              mode="RHF"
-              name="chatListSearch"
-              placeholder="채팅 참여자를 입력해 주세요."
-              onEnter={() => {}}
-            />
-          </div>
-        </FormProvider>
-
         <div className="flex gap-[8px] py-[14px] no-scrollbar">
           {renderButtons.map(
             ({ text, icon, iconSize, iconPosition, onClick, isSelected, displayText }) => (
