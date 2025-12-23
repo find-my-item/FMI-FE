@@ -23,7 +23,7 @@ const AlertItem = ({ item }: { item: (typeof MOCK_ALERT_ITEMS)[number] }) => {
       <div className="flex w-full flex-col gap-[4px]">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <span className="text-body2-medium text-brand-subtle-default">{item.category}</span>
+            <span className="text-body2-medium text-brand-normal-default">{item.category}</span>
             <span className="text-body2-medium text-neutral-normal-default">{item.title}</span>
           </div>
           <span className="text-caption1-regular text-neutral-normal-placeholder">
