@@ -16,7 +16,7 @@ interface FilterDropdownProps {
   searchUpdateQuery: (key: string, value?: string) => void;
 }
 
-const selectedText = {
+const SELECTED_TEXT = {
   oldest: "오래된순",
   latest: "최신순",
   all: "습득/분실",
@@ -44,10 +44,10 @@ const FilterDropdown = ({
   const getDisplayText = () => {
     if (keyName === "sort") {
       const sortValue = selectedSort || "latest";
-      return selectedText[sortValue as keyof typeof selectedText];
+      return SELECTED_TEXT[sortValue as keyof typeof SELECTED_TEXT];
     } else {
       const typeValue = selectedType || "all";
-      return selectedText[typeValue as keyof typeof selectedText];
+      return SELECTED_TEXT[typeValue as keyof typeof SELECTED_TEXT];
     }
   };
 
@@ -80,12 +80,12 @@ const FilterDropdown = ({
         {getDisplayText()}
       </Filter>
       {isOpen && (
-        <div className="absolute z-50 mt-1 flex min-w-[120px] flex-col rounded-lg border border-gray-200 bg-white shadow-lg">
+        <div className="absolute z-50 mt-[8px] flex flex-col">
           {options.map((option) => (
             <button
               key={option.value}
               onClick={() => handleOptionClick(option.value)}
-              className="w-full px-4 py-2 text-left first:rounded-t-lg last:rounded-b-lg hover:bg-gray-100"
+              className="glass-card w-full text-nowrap border border-white bg-[#F5F5F5]/70 px-[28px] py-[16px] text-left text-h3-medium text-neutral-normal-default transition-colors flex-center first:rounded-t-[20px] last:rounded-b-[20px]"
             >
               {option.label}
             </button>
