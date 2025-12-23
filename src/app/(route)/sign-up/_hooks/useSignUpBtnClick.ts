@@ -15,14 +15,13 @@ export const useSignUpBtnClick = () => {
   const [emailValue, setEmailValue] = useState("");
 
   const { addToast } = useToast();
+  const { handlerApiError } = useErrorToast();
 
   const { getValues, trigger } = useFormContext();
 
   const { mutate: EmailMutate } = useApiSendEmail();
   const { mutate: CodeMutate } = useApiCheckCode();
   const { handlerToClickNickname } = useNicknameCheck();
-
-  const { handlerApiError } = useErrorToast();
 
   // 버튼 클릭 함수
   const handlerToClick = async (name: string) => {
@@ -39,8 +38,8 @@ export const useSignUpBtnClick = () => {
         //   {
         //     onSuccess: () => {
         //       addToast("인증번호가 발송되었습니다.", "success");
-        //       setIsDisabled(false);
-        //       setEmailValue(inputValue);
+        setIsEmailAuthDisabled(false);
+        setEmailValue(inputValue);
         //     },
         //     onError: (error) => {
         //       console.log("error>>> ", error);
@@ -48,27 +47,25 @@ export const useSignUpBtnClick = () => {
         //     },
         //   }
         // );
-        setIsEmailAuthDisabled(false);
       } else if (name === "emailAuth") {
-        //   CodeMutate(
-        //     { email: emailValue, code: inputValue },
-        //     {
-        //       onSuccess: () => {
-        //         addToast("인증되었습니다.", "success");
-        //         setIsDisabled(true);
-        //       },
-        //       onError: (error) => handlerApiError(EMAIL_CHECK_CODE_MESSAGE, error.code),
-        //     }
-        //   );
-        // } else if (name === "nickname") {
-        //   handlerToClickNickname(name);
-        // }
+        // CodeMutate(
+        //   { email: emailValue, code: inputValue },
+        //   {
+        //     onSuccess: () => {
+        //       addToast("인증되었습니다.", "success");
         setIsEmailAuthDisabled(true);
         setIsEmailDisabled(true);
         setIsEmailAuthVerified(true);
+        //     },
+        //     onError: (error) => handlerApiError(EMAIL_CHECK_CODE_MESSAGE, error.code),
+        //   }
+        // );
+      } else if (name === "nickname") {
+        handlerToClickNickname(name);
       }
     }
   };
+
   return {
     handlerToClick,
     isEmailAuthDisabled,

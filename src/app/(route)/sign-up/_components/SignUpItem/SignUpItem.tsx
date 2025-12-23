@@ -23,7 +23,7 @@ const SignUpItem = ({ children, isVerified, ...props }: SignUpItemProps) => {
   const isSuccess = isDirty && !error && field.value;
   const handleSuccess = (name: string) => {
     if (name === "emailAuth") return isVerified;
-    // else if (name === "nickname") return isNicknameDisabled;
+    // else if (name === "nickname") return ;
     else return isSuccess;
   };
 

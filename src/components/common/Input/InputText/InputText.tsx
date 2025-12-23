@@ -168,7 +168,6 @@ const InputText = ({
                 className="top-1/2 -translate-y-1/2"
                 value={isValue}
                 onDelete={() => onDelete(name)}
-                // disabled={disabled}
               />
             ))}
           {/* 비밀번호 눈 모양 버튼 */}

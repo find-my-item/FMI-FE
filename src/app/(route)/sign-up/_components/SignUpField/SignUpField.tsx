@@ -6,6 +6,7 @@ import { useFormContext } from "react-hook-form";
 import { useSignUpBtnClick } from "../../_hooks/useSignUpBtnClick";
 import { useEffect } from "react";
 import SignUpItem from "../SignUpItem/SignUpItem";
+import { useNicknameCheck } from "../../_hooks/useNicknameCheck";
 
 const SignUpField = ({ onNext }: { onNext: () => void }) => {
   const {
@@ -13,8 +14,6 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
     trigger,
     formState: { isValid },
   } = useFormContext();
-
-  const isNextEnabled = isValid;
 
   const password = watch("password");
 
@@ -25,6 +24,8 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
   const { isEmailDisabled, isEmailAuthDisabled, isEmailAuthVerified, handlerToClick } =
     useSignUpBtnClick();
 
+  const { isNicknameVerified } = useNicknameCheck();
+
   const handleDisabled = (name: string) => {
     if (name === "emailAuth") return isEmailAuthDisabled;
     else if (name === "email") return isEmailDisabled;
@@ -32,9 +33,11 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
 
   const handleSuccess = (name: string) => {
     if (name === "emailAuth") return isEmailAuthVerified;
-    // else if (name === "nickname") return isNicknameDisabled;
+    else if (name === "nickname") return isNicknameVerified;
     else return false;
   };
+
+  const isNextEnabled = isValid && isEmailAuthVerified;
 
   return (
     <>
