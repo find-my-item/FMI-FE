@@ -46,7 +46,6 @@ export const useSignUpBtnClick = () => {
                     setEmailValue(inputValue);
                   },
                   onError: (error) => {
-                    console.log("error>>> ", error);
                     handlerApiError(EMAIL_ERROR_MESSAGE, error.code);
                   },
                 }
