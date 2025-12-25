@@ -3,6 +3,7 @@
 import { InputText } from "@/components";
 import { InputTextProps } from "@/components/common/Input/InputText/InputText";
 import { useFormContext, useController } from "react-hook-form";
+import { FormType } from "../../types/FormType";
 
 interface SignUpItemProps extends InputTextProps {
   isVerified: boolean;
@@ -27,39 +28,37 @@ const SignUpItem = ({ children, isVerified, ...props }: SignUpItemProps) => {
     else return isSuccess;
   };
 
-  const inputValidation = (name: string) => {
-    if (name === "email")
-      return {
-        required: true,
-      };
-    else if (name === "emailAuth")
-      return {
-        required: true,
-      };
-    else if (name === "password")
-      return {
-        required: true,
-        pattern: {
-          value: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9])[^\s]{8,16}$/,
-          message: "대문자/소문자/숫자/특수 문자 포함 8자리 이상을 입력해 주세요.",
-        },
-      };
-    else if (name === "passwordConfirm")
-      return {
-        required: true,
-        validate: (value: string) =>
-          value === getValues("password") || "비밀번호가 일치하지 않습니다.",
-        deps: ["password"],
-      };
-    else if (name === "nickname")
-      return {
-        required: true,
-        maxLength: {
-          value: 10,
-          message: "2~10자 사이의 닉네임을 입력해 주세요.",
-        },
-      };
+  const inputValidationRules = {
+    email: {
+      required: true,
+    },
+    emailAuth: {
+      required: true,
+    },
+    password: {
+      required: true,
+      pattern: {
+        value: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9])[^\s]{8,16}$/,
+        message: "대문자/소문자/숫자/특수 문자 포함 8자리 이상을 입력해 주세요.",
+      },
+    },
+    passwordConfirm: {
+      required: true,
+      validate: (value: string, formValues: FormType) =>
+        value === formValues.password || "비밀번호가 일치하지 않습니다.",
+      deps: ["password"],
+    },
+    nickname: {
+      required: true,
+      maxLength: {
+        value: 10,
+        message: "2~10자 사이의 닉네임을 입력해 주세요.",
+      },
+    },
   };
+
+  const inputValidation = (name: string) =>
+    inputValidationRules[name as keyof typeof inputValidationRules];
 
   return (
     <div className="h-[96px]">
