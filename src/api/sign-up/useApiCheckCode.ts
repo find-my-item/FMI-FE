@@ -6,10 +6,12 @@ export interface CheckCodeResponseType
     verified: boolean;
   }> {}
 
-export const useApiCheckCode = () => {
+const useApiCheckCode = () => {
   return useAppMutation<
     { email: string; code: string },
     CheckCodeResponseType,
     CheckCodeResponseType
   >("public", "/auth/email/verify", "post");
 };
+
+export default useApiCheckCode;
