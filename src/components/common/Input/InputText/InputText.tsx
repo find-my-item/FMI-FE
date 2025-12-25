@@ -87,12 +87,12 @@ interface CustomProps {
 
 export type InputTextProps = InputProps & CustomProps;
 
-const InputStyle = [
+const InputStyle = cn(
   "flex flex-1 items-center relative h-10 py-3 px-2 bg-fill-neutral-strong-default rounded-[10px] text-body2-regular text-neutral-strong-entered",
   "placeholder:text-neutral-strong-placeholder hover:text-neutral-strong-hover border focus:outline-none focus:text-neutral-strong-focused",
   "disabled:text-neutral-strong-disabled disabled:bg-fill-neutral-strong-disabled autofill:text-neutral-strong-default",
-  "autofill:shadow-[inset_0_0_0px_1000px_#f5f5f5] autofill:disabled:shadow-[inset_0_0_0px_1000px_#f5f5f5]",
-].join(" ");
+  "autofill:shadow-[inset_0_0_0px_1000px_#f5f5f5] autofill:disabled:shadow-[inset_0_0_0px_1000px_#f5f5f5]"
+);
 
 const InputText = ({
   name,
@@ -192,7 +192,11 @@ const InputText = ({
             onClick={() => btnOnClick?.(isValue)}
             ignoreBase
             disabled={disabled}
-            className="text-neutral-normal-default, text-body2-semibold, w-auto whitespace-nowrap rounded-[10px] border border-neutral-normal-default px-[14px] py-[10px] disabled:text-neutral-normal-disabled disabled:bg-fill-neutral-strong-default"
+            className={cn(
+              "text-neutral-normal-default, w-auto whitespace-nowrap rounded-[10px] text-body2-semibold",
+              "border border-neutral-normal-default px-[14px] py-[10px]",
+              "disabled:text-neutral-normal-disabled disabled:bg-fill-neutral-strong-default"
+            )}
           >
             {children}
           </Button>
