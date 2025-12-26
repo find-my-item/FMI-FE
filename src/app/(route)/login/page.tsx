@@ -4,8 +4,7 @@ import Link from "next/link";
 import { cn } from "@/utils";
 import { Icon, Button, AuthLogoLink } from "@/components";
 
-const ButtonStyle =
-  "w-full h-[44px] flex-center gap-1 rounded-[10px] text-body1-semibold text-white";
+const ButtonStyle = "w-full h-[44px] flex-center gap-1 rounded-[10px] text-body1-semibold ";
 
 const Page = () => {
   return (
@@ -13,13 +12,13 @@ const Page = () => {
       <AuthLogoLink />
 
       {/* button */}
-      <div className="flex w-full flex-col gap-3 px-5 text-body1-semibold">
+      <div className="flex w-full flex-col gap-3 px-5">
         <Button
           type="submit"
           ariaLabel="카카오 로그인 버튼"
           className={cn(
             ButtonStyle,
-            "!text-flatGray-900 bg-fill-accent-kakao hover:bg-fill-accent-kakao"
+            "text-flatGray-900 bg-fill-accent-kakao hover:bg-fill-accent-kakao"
           )}
         >
           <Icon name="KakaoLogin" size={14} />
@@ -29,10 +28,7 @@ const Page = () => {
           as={Link}
           href={"/email-login"}
           ignoreBase
-          className={cn(
-            ButtonStyle,
-            "border border-neutral-normal-default text-neutral-normal-default bg-fill-brand-normal-default"
-          )}
+          className={cn(ButtonStyle, "text-white bg-fill-brand-normal-default")}
           aria-label="로그인 버튼"
         >
           <Icon name="Mail" size={20} className="text-white" /> 이메일로 로그인
@@ -54,7 +50,7 @@ const Page = () => {
         <Link
           href="/sign-up"
           className={cn(
-            "Inversed-strong-default p-3 text-caption1-semibold text-brand-subtle-default"
+            "Inversed-strong-default p-3 text-caption1-semibold text-brand-normal-default"
           )}
         >
           회원가입
