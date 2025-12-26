@@ -56,9 +56,9 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
       <div className="sticky bottom-0 mt-auto h-[88px] w-full max-w-[390px] border-t border-divider-default bg-white px-4 py-3">
         <Button
           type="button"
+          variant="auth"
           ariaLabel="회원가입 폼 버튼"
           onClick={onNext}
-          className="w-full"
           disabled={!isNextEnabled}
         >
           다음
