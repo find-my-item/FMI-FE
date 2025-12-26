@@ -5,6 +5,8 @@ import { cn } from "@/utils";
 import { Icon, Button, AuthLogoLink } from "@/components";
 
 const ButtonStyle = "w-full h-[44px] flex-center gap-1 rounded-[10px] text-body1-semibold ";
+const REST_API_KEY = process.env.KAKA0_REST_API_KEY;
+const REDIRECT_URI = process.env.KAKAO_REDIRECT_URI;
 
 const Page = () => {
   return (
@@ -17,6 +19,9 @@ const Page = () => {
           type="submit"
           ignoreBase
           ariaLabel="카카오 로그인 버튼"
+          as={Link}
+          href={"/"}
+          // href={kakaoURL}
           className={cn(
             ButtonStyle,
             "text-flatGray-900 bg-fill-accent-kakao hover:bg-fill-accent-kakao"
