@@ -4,6 +4,9 @@ import { Suspense, useEffect, useMemo, useState } from "react";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
 import { Button, DetailHeader, InputSearch, PopupLayout } from "@/components";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Map } from "react-kakao-maps-sdk";
+import Script from "next/script";
+import KakaoMap from "./KakaoMap";
 
 type RegionRow = {
   sido: string;
@@ -162,6 +165,11 @@ const Page = () => {
           )}
         </ul>
       </section>
+
+      <div className="h-[400px] w-full border-2 border-dashed border-neutral-normal-default">
+        <KakaoMap />
+      </div>
+
       {searchParams.get("location") && (
         <section>
           <PopupLayout
