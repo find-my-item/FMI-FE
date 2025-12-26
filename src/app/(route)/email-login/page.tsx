@@ -28,11 +28,12 @@ const Page = () => {
         <AuthLogoLink />
 
         <FormProvider {...methods}>
-          <form onSubmit={onSubmit} className="flex w-full flex-col gap-[48px]">
+          <form onSubmit={onSubmit} className="flex w-full flex-col gap-12">
             {/* 로그인 입력칸 */}
             <div className="flex w-full flex-col gap-3">
               {EMAIL_LOGIN_CONFIG.map((item) => (
                 <InputText
+                  key={item.name}
                   name={item.name}
                   label={item.label}
                   validation={item.validation}
@@ -45,6 +46,7 @@ const Page = () => {
               <div className="flex w-full gap-3">
                 {CHECKBOX_CONFIG.map((item, index) => (
                   <CheckBox
+                    key={item.id}
                     label={item.label}
                     id={item.id}
                     boxSize="w-[18px] h-[18px]"
