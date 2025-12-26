@@ -3,6 +3,7 @@
 import { Icon, Button, CheckBox, DetailHeader } from "@/components";
 import { useFormContext, useWatch } from "react-hook-form";
 import { TERMS_CONFIG } from "../../_constants/TERMS_CONFIG";
+import { useEffect } from "react";
 
 interface AllAgreeProps {
   onOpenDetail: (termKey: string) => void;
@@ -20,6 +21,18 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
   const selectAll = useWatch({ control, name: "selectAll" });
   const termsValue = useWatch({ control, name: TERMS_CONFIG.map((item) => item.name) });
 
+  // 개별 체크박스와 전체 체크박스 동기화
+  const allChecked =
+    Array.isArray(termsValue) && termsValue.length === TERMS_CONFIG.length
+      ? termsValue.every(Boolean)
+      : false;
+
+  useEffect(() => {
+    if (selectAll !== allChecked) {
+      setValue("selectAll", allChecked, { shouldValidate: false, shouldDirty: false });
+    }
+  }, [selectAll, allChecked, setValue]);
+
   // 전체약관동의 체크 박스 토글 함수
   const handleToggleAll = (e: React.ChangeEvent<HTMLInputElement>) => {
     const checked = e.currentTarget.checked; // 현재 체크 상태
@@ -30,16 +43,6 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
     });
     setValue("selectAll", checked, { shouldValidate: false, shouldDirty: false }); // 전체 항목 체크
   };
-
-  // 개별 체크박스와 전체 체크박스 동기화
-  const allChecked =
-    Array.isArray(termsValue) && termsValue.length === TERMS_CONFIG.length
-      ? termsValue.every(Boolean)
-      : false;
-
-  if (selectAll !== allChecked) {
-    setValue("selectAll", allChecked, { shouldValidate: false, shouldDirty: false });
-  }
 
   return (
     <>
@@ -88,7 +91,7 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
         </div>
       </div>
       {/* signUpFooter */}
-      <div className="sticky bottom-0 mt-auto h-[88px] w-full max-w-[390px] border-t border-flatGray-50 bg-white px-4 py-3">
+      <div className="sticky bottom-0 mt-auto h-[88px] w-full max-w-[390px] border-t border-divider-default bg-white px-4 py-3">
         <Button
           type="button"
           ariaLabel="회원가입 버튼"

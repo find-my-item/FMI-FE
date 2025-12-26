@@ -4,8 +4,7 @@ import Link from "next/link";
 import { cn } from "@/utils";
 import { Icon, Button, AuthLogoLink } from "@/components";
 
-const ButtonStyle =
-  "w-full h-[50px] flex-center gap-1 rounded-[10px] bg-[#1EB87B] font-semibold text-[16px] text-white";
+const ButtonStyle = "w-full h-[44px] flex-center gap-1 rounded-[10px] text-body1-semibold ";
 
 const Page = () => {
   return (
@@ -13,14 +12,14 @@ const Page = () => {
       <AuthLogoLink />
 
       {/* button */}
-      <div className="flex w-full flex-col gap-3 px-5 text-body1-semibold">
+      <div className="flex w-full flex-col gap-3 px-5">
         <Button
           type="submit"
           ignoreBase
           ariaLabel="카카오 로그인 버튼"
           className={cn(
-            "h-[44px] w-full gap-1 rounded-[10px] text-[16px] font-semibold text-white flex-center",
-            "!text-flatGray-900 bg-fill-accent-kakao hover:bg-fill-accent-kakao"
+            ButtonStyle,
+            "text-flatGray-900 bg-fill-accent-kakao hover:bg-fill-accent-kakao"
           )}
         >
           <Icon name="KakaoLogin" size={14} />
@@ -30,13 +29,10 @@ const Page = () => {
           as={Link}
           href={"/email-login"}
           ignoreBase
-          className={cn(
-            "h-[44px] w-full gap-1 rounded-[10px] text-[16px] font-semibold text-white flex-center",
-            "border border-neutral-normal-default !text-neutral-normal-default bg-fill-neutral-normal-default"
-          )}
+          className={cn(ButtonStyle, "text-white bg-fill-brand-normal-default")}
           aria-label="로그인 버튼"
         >
-          <Icon name="Mail" size={20} /> 이메일로 로그인
+          <Icon name="Mail" size={20} className="text-white" /> 이메일로 로그인
         </Button>
       </div>
 
@@ -52,7 +48,12 @@ const Page = () => {
         <span className="text-caption1-medium text-neutral-normal-placeholder">
           아직 회원이 아니신가요?
         </span>
-        <Link href="/sign-up" className={cn("p-3 text-caption1-semibold text-flatGreen-500")}>
+        <Link
+          href="/sign-up"
+          className={cn(
+            "Inversed-strong-default p-3 text-caption1-semibold text-brand-normal-default"
+          )}
+        >
           회원가입
         </Link>
       </div>

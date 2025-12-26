@@ -1,0 +1,26 @@
+@keyframes fadeOutOnce {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeInOnce {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-out-once {
+  animation: fadeOutOnce 1000ms ease-out 1000ms forwards;
+}
+
+.fade-in-once {
+  opacity: 0;
+  animation: fadeInOnce 1000ms ease-out 1000ms forwards;
+}
