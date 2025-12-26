@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>찾아줘! 임시 비밀번호 안내</title>
+    <title>찾아줘! 피신고자 신고 대상자 안내</title>
     <style>
       @font-face {
         font-family: "SUIT Variable";
@@ -30,42 +30,28 @@
     "
   >
     <div style="display: none; max-height: 0; overflow: hidden; opacity: 0; mso-hide: all">
-      임시 비밀번호를 위한 안내입니다. 아래 인증 비밀번호로 로그인을 해주세요.
+      찾아줘! 신고 대상자 안내
     </div>
 
     <table
-      role="presentation"
       width="100%"
       cellpadding="0"
       cellspacing="0"
+      role="presentation"
       style="background: #dfdede; mso-table-lspace: 0; mso-table-rspace: 0"
     >
       <tr>
         <td align="center" style="padding: 24px 12px">
           <table
-            role="presentation"
-            width="100%"
             cellpadding="0"
             cellspacing="0"
-            style="
-              max-width: 728px;
-              width: 100%;
-              mso-table-lspace: 0;
-              mso-table-rspace: 0;
-              table-layout: fixed;
-              border-collapse: collapse;
-            "
+            role="presentation"
+            style="width: 100%; max-width: 728px; background: #ffffff; border-collapse: collapse"
           >
             <tr>
-              <td style="background: #ffffff; padding: 40px">
+              <td style="padding: 40px">
                 <!-- header -->
-                <table
-                  role="presentation"
-                  width="100%"
-                  cellpadding="0"
-                  cellspacing="0"
-                  style="border-collapse: collapse; table-layout: fixed"
-                >
+                <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
                   <tr>
                     <td style="padding-bottom: 16px; border-bottom: 2px solid #1eb87b">
                       <img
@@ -80,13 +66,7 @@
                 </table>
 
                 <!-- title -->
-                <table
-                  role="presentation"
-                  width="100%"
-                  cellpadding="0"
-                  cellspacing="0"
-                  style="border-collapse: collapse; table-layout: fixed"
-                >
+                <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
                   <tr>
                     <td style="padding-top: 48px; padding-bottom: 48px">
                       <h1
@@ -99,7 +79,8 @@
                           letter-spacing: -0.02em;
                         "
                       >
-                        <span style="color: #1eb87b">임시 비밀번호</span> 안내
+                        <span style="color: #1eb87b">신고 대상자</span>
+                        안내
                       </h1>
                       <p
                         style="
@@ -111,22 +92,18 @@
                           padding-top: 24px;
                         "
                       >
-                        본 메일은 임시 비밀번호 발급을 위해 발송된 메일이에요.<br />
-                        임시 비밀번호의 사용 기한은 <span style="color: #1eb87b">1시간</span>이며,
-                        기한이 지났을 경우 재발급하셔야 해요.
+                        {{name}}님의 계정에 신고가 접수되어 안내드려요.
+                        <br />
+                        다수의 신고가 접수될 경우
+                        <span style="color: #1eb87b">활동 정지 처분</span>을 받을 수 있으니 유의해
+                        주세요.
                       </p>
                     </td>
                   </tr>
                 </table>
 
                 <!-- description -->
-                <table
-                  role="presentation"
-                  width="100%"
-                  cellpadding="0"
-                  cellspacing="0"
-                  style="border-collapse: collapse; table-layout: fixed"
-                >
+                <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
                   <tr>
                     <td style="padding-bottom: 8px">
                       <p
@@ -140,57 +117,125 @@
                           padding-bottom: 24px;
                         "
                       >
-                        임시 비밀번호
+                        신고 접수 내용
                       </p>
                     </td>
                   </tr>
                   <tr>
-                    <td
-                      style="
-                        background: #e3fcee;
-                        border-radius: 10px;
-                        text-align: center;
-                        padding: 28px 0;
-                      "
-                    >
-                      <div
+                    <td>
+                      <table
+                        width="100%"
+                        cellpadding="0"
+                        cellspacing="0"
+                        role="presentation"
                         style="
-                          font-size: 28px;
-                          font-weight: 700;
-                          color: #363636;
-                          line-height: 130%;
-                          letter-spacing: 0.02em;
-                          font-family:
-                            SFMono-Regular, Menlo, Monaco, Consolas, &quot;Liberation Mono&quot;,
-                            &quot;Courier New&quot;, monospace;
+                          border-collapse: collapse;
+                          border: 1px solid #e0e0e0;
+                          width: 100%;
+                          font-size: 14px;
+                          color: #333;
+                          margin-bottom: 40px;
                         "
                       >
-                        {{PASSWORD}}
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="height: 24px; line-height: 24px; font-size: 0">&nbsp;</td>
-                  </tr>
-                  <tr>
-                    <td style="text-align: center; width: 100%">
-                      <!-- TODO(지권): URL 변경 -->
-                      <a
-                        href="https://fmi-fe.vercel.app/login"
-                        style="
-                          text-decoration: none;
-                          color: #f6fffc;
-                          background-color: rgba(30, 184, 123, 0.7);
-                          border-radius: 10px;
-                          padding: 12px 20px;
-                          display: block;
-                          font-weight: 600;
-                          font-size: 16px;
-                          line-height: 150%;
-                        "
-                      >
-                        로그인 화면으로 이동
-                      </a>
+                        <tr>
+                          <td
+                            style="
+                              padding: 20px 32px;
+                              border-top: 1px solid #e0e0e0;
+                              border-right: 1px solid #e0e0e0;
+                              font-weight: 400;
+                              font-size: 18px;
+                              line-height: 140%;
+                              text-align: left;
+                              white-space: nowrap;
+                              vertical-align: middle;
+                              text-align: center;
+                            "
+                          >
+                            신고유형
+                          </td>
+                          <td
+                            style="
+                              width: 100%;
+                              padding: 20px 32px;
+                              text-align: left;
+                              font-weight: 700;
+                              font-size: 20px;
+                              line-height: 110%;
+                              letter-spacing: -0.05em;
+                              vertical-align: middle;
+                            "
+                          >
+                            {{CATEGORY}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              padding: 20px 32px;
+                              border-top: 1px solid #e0e0e0;
+                              border-right: 1px solid #e0e0e0;
+                              font-weight: 400;
+                              font-size: 18px;
+                              line-height: 140%;
+                              text-align: left;
+                              white-space: nowrap;
+                              vertical-align: middle;
+                              text-align: center;
+                            "
+                          >
+                            아이디
+                          </td>
+                          <td
+                            style="
+                              width: 100%;
+                              padding: 20px 32px;
+                              border-top: 1px solid #e0e0e0;
+                              font-weight: 700;
+                              font-size: 20px;
+                              line-height: 110%;
+                              letter-spacing: -0.05em;
+                              text-align: left;
+                              vertical-align: middle;
+                            "
+                          >
+                            {{USER}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              padding: 20px 32px;
+                              border-top: 1px solid #e0e0e0;
+                              border-right: 1px solid #e0e0e0;
+                              font-weight: 400;
+                              font-size: 18px;
+                              line-height: 140%;
+                              text-align: left;
+                              white-space: nowrap;
+                              vertical-align: middle;
+                              text-align: center;
+                            "
+                          >
+                            닉네임
+                          </td>
+                          <td
+                            style="
+                              width: 100%;
+                              padding: 20px 32px;
+                              border-top: 1px solid #e0e0e0;
+                              font-weight: 700;
+                              font-size: 20px;
+                              line-height: 110%;
+                              letter-spacing: -0.05em;
+                              text-align: left;
+                              vertical-align: middle;
+                            "
+                          >
+                            {{NICKNAME}}
+                          </td>
+                        </tr>
+                      </table>
                     </td>
                   </tr>
                 </table>
@@ -200,10 +245,9 @@
 
           <!-- footer -->
           <table
-            role="presentation"
-            width="100%"
             cellpadding="0"
             cellspacing="0"
+            role="presentation"
             style="
               max-width: 728px;
               width: 100%;
@@ -216,13 +260,7 @@
           >
             <tr>
               <td style="padding: 48px 40px">
-                <table
-                  role="presentation"
-                  width="100%"
-                  cellpadding="0"
-                  cellspacing="0"
-                  style="border-collapse: collapse; table-layout: fixed"
-                >
+                <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
                   <tr>
                     <td style="padding-bottom: 40px">
                       <p
@@ -245,17 +283,6 @@
                           "
                           >고객센터</a
                         >를 이용해 주세요.
-                      </p>
-                      <p
-                        style="
-                          margin: 4px 0 0 0;
-                          font-size: 14px;
-                          line-height: 140%;
-                          color: #363636;
-                        "
-                      >
-                        임시 비밀번호를 요청하지 않았는데 해당 메일이 발송된 경우, 개인정보 유출
-                        위험이 있으므로 로그인 후 비밀번호 변경을 권장드려요.
                       </p>
                       <p
                         style="

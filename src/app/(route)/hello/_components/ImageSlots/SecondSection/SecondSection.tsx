@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import "./SecondSection.css";
 import { cn } from "@/utils";
+import "./SecondSection.css";
 import { IMAGES } from "./SECOND_SECTION_IMAGES";
-import { useInView } from "../../../_hooks/useInView";
+import { useInView } from "../../../_hooks";
 
 const SecondSection = () => {
   const { ref, inView } = useInView({ threshold: 0.5 });

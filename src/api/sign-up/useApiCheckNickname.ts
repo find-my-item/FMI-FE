@@ -1,7 +1,7 @@
 import useAppQuery from "@/api/query/useAppQuery";
 import { ApiBaseResponseType } from "@/types";
 
-export const useApiCheckNickname = (nickname: string) => {
+const useApiCheckNickname = (nickname: string) => {
   return useAppQuery<ApiBaseResponseType<null>, ApiBaseResponseType<null>>(
     "public",
     ["/auth/check-nickname", nickname],
@@ -12,3 +12,5 @@ export const useApiCheckNickname = (nickname: string) => {
     }
   );
 };
+
+export default useApiCheckNickname;
