@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
 import { DetailHeader, InputSearch } from "@/components";
@@ -16,7 +16,7 @@ type RegionRow = {
 
 const MAX_RESULTS = 30;
 
-const Page = () => {
+const LocationPage = () => {
   const methods = useForm({
     defaultValues: {
       location: "",
@@ -171,10 +171,10 @@ const Page = () => {
   );
 };
 
-// const Page = () => {
-//   <Suspense fallback="">
-//     <LocationPage />
-//   </Suspense>;
-// };
+const Page = () => {
+  <Suspense fallback="">
+    <LocationPage />
+  </Suspense>;
+};
 
 export default Page;
