@@ -104,10 +104,12 @@ const Page = () => {
     router.push(`/write/location?${params.toString()}`, { scroll: false });
   };
 
+  const locationTitle = searchParams.get("location");
+
   return (
     <div className="min-h-[100dvh] w-full">
       <h1 className="sr-only">위치등록 페이지</h1>
-      <DetailHeader title="위치등록" />
+      <DetailHeader title={locationTitle ? "위치 상세" : "위치 등록"} />
 
       <section className="px-5 py-[10px]">
         <FormProvider {...methods}>
@@ -156,13 +158,13 @@ const Page = () => {
         </ul>
       </section>
 
-      {searchParams.get("location") && (
+      {locationTitle && (
         <>
           <div className="h-[calc(100vh-380px)] w-full">
             <KakaoMap />
           </div>
 
-          <BottomSheet location={searchParams.get("location") || ""} km={km} setKm={setKm} />
+          <BottomSheet location={locationTitle} km={km} setKm={setKm} />
         </>
       )}
     </div>
