@@ -15,7 +15,7 @@ export default function KakaoMap() {
     <Map
       center={{ lat: 35.8737787566279, lng: 128.810871476804 }}
       level={3}
-      style={{ width: "100%", height: "400px" }}
-    />
+      style={{ width: "100%", height: "100%" }}
+    ></Map>
   );
 }
