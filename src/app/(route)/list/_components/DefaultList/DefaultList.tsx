@@ -17,12 +17,10 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
   const searchParams = useSearchParams();
 
   const rawType = searchParams.get("type");
-
   const type: PostType = rawType === "found" ? "FOUND" : "LOST";
 
   const { data } = useGetPost({ page: 0, size: 10, type });
-  console.log("data: ", data);
-  console.log("data.result: ", data?.result);
+  console.log("data:", data?.result);
 
   return (
     <>
@@ -48,15 +46,8 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
 
       {/* 아이템 */}
       <div className="w-full">
-        {data?.result?.map((item, index) => (
-          <ListItem
-            id={item.postId}
-            linkState="list"
-            img={item.thumbnailUrl}
-            title={item.title}
-            description={item.summary}
-            key={index}
-          />
+        {data?.result?.map((item) => (
+          <ListItem key={item.postId} post={item} linkState="list" />
         ))}
       </div>
     </>
