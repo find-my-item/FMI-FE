@@ -5,16 +5,10 @@ import { DetailHeader, AuthLogoLink } from "@/components";
 import Link from "next/link";
 import EmailLoginForm from "./_components/EmailLoginForm";
 import { FormProvider, useForm } from "react-hook-form";
-
-type loginType = {
-  email: string;
-  password: string;
-  rememberId: boolean;
-  autoLogin: boolean;
-};
+import { LoginType } from "./_types/LoginType";
 
 const Page = () => {
-  const methods = useForm<loginType>({
+  const methods = useForm<LoginType>({
     mode: "onChange",
     reValidateMode: "onChange",
     shouldUnregister: false, // 입력 값 유지
