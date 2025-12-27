@@ -20,11 +20,14 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
   const type: PostType = rawType === "found" ? "FOUND" : "LOST";
 
   const { data } = useGetPost({ page: 0, size: 10, type });
-  console.log("data:", data?.result);
 
   return (
     <>
-      <Tab tabs={TABS} selected={type} onValueChange={(key) => searchUpdateQuery("type", key)} />
+      <Tab
+        tabs={TABS}
+        selected={rawType ?? "lost"}
+        onValueChange={(key) => searchUpdateQuery("type", key)}
+      />
 
       <div className="flex h-[67px] w-full items-center gap-2 px-5">
         <Filter

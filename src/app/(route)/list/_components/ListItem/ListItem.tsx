@@ -9,18 +9,18 @@ type ListItemProps = {
   linkState?: "notice" | "list";
 };
 
-const VIEW_ITEM = [
-  {
-    icon: "Star",
-    count: 12,
-  },
-  {
-    icon: "Eye",
-    count: 24,
-  },
-] as const;
-
 const ListItem = ({ post, linkState = "list" }: ListItemProps) => {
+  const VIEW_ITEM = [
+    {
+      icon: "Star",
+      count: post.favoriteCount,
+    },
+    {
+      icon: "Eye",
+      count: 0, // TODO(지권): API 누락
+    },
+  ] as const;
+
   return (
     <Link
       href={linkState === "list" ? `/list/${post.postId}` : `/notice/${post.postId}`}
@@ -42,7 +42,7 @@ const ListItem = ({ post, linkState = "list" }: ListItemProps) => {
               </h2>
             </div>
             <span className="text-body2-regular text-layout-body-default">
-              {post.address} · {formatDate(post.createdAt)}
+              {post.address || "위치 정보가 이상해요."} · {formatDate(post.createdAt)}
             </span>
           </div>
           <p className="w-full text-body2-regular text-neutral-normal-default u-ellipsis">
