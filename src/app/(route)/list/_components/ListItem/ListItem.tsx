@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { PostItem } from "@/api/list/types";
 import { Badge, Chip, Icon } from "@/components";
-import { getItemCategoryLabel, getItemStatusLabel } from "@/utils";
+import { formatDate, getItemCategoryLabel, getItemStatusLabel } from "@/utils";
 
 type ListItemProps = {
   post: PostItem;
@@ -42,7 +42,7 @@ const ListItem = ({ post, linkState = "list" }: ListItemProps) => {
               </h2>
             </div>
             <span className="text-body2-regular text-layout-body-default">
-              {post.address} · {post.createdAt}
+              {post.address} · {formatDate(post.createdAt)}
             </span>
           </div>
           <p className="w-full text-body2-regular text-neutral-normal-default u-ellipsis">

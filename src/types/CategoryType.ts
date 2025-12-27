@@ -14,4 +14,11 @@
  * - ETC: 기타
  */
 
-export type CategoryType = "ELECTRONIC" | "WALLET" | "ID_CARD" | "JEWELRY" | "BAG" | "CARD" | "ETC";
+export type CategoryType =
+  | "ELECTRONICS"
+  | "WALLET"
+  | "ID_CARD"
+  | "JEWELRY"
+  | "BAG"
+  | "CARD"
+  | "ETC";
