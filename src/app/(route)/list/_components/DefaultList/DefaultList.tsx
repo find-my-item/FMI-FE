@@ -1,24 +1,28 @@
+"use client";
+
 import { Filter, Tab } from "@/components";
 import ListItem from "../ListItem/ListItem";
 import { TABS } from "../../_constants/TABS";
-import { Dispatch, SetStateAction } from "react";
-import { IconName } from "@/components/common/Icon/Icon";
-import { useGetPost } from "@/api/query/list/useGetPost";
+import { useGetPost } from "@/api/list/useGetPost";
+import { useSearchParams } from "next/navigation";
 
 interface DefaultListProps {
-  selected: string;
-  setSelected: Dispatch<SetStateAction<string>>;
   searchUpdateQuery: (key: string, value?: string) => void;
-  dropdowns?: { value: string; setValue: Dispatch<SetStateAction<string>>; icon: IconName }[];
+  // dropdowns?: { value: string; setValue: Dispatch<SetStateAction<string>>; icon: IconName }[];
 }
 
-const DefaultList = ({ selected, setSelected, searchUpdateQuery, dropdowns }: DefaultListProps) => {
-  const { data } = useGetPost({ page: 0, size: 10 });
-  console.log(data);
+const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
+  const searchParams = useSearchParams();
+
+  const type = searchParams.get("type") ?? "lost";
+
+  const { data } = useGetPost({ page: 0, size: 10, type: type.toUpperCase() });
+  console.log("data: ", data);
+  console.log("data.result: ", data?.result);
 
   return (
     <>
-      <Tab tabs={TABS} selected={selected} onValueChange={setSelected} />
+      <Tab tabs={TABS} selected={type} onValueChange={(key) => searchUpdateQuery("type", key)} />
 
       <div className="flex h-[67px] w-full items-center gap-2 px-5">
         <Filter
@@ -40,13 +44,13 @@ const DefaultList = ({ selected, setSelected, searchUpdateQuery, dropdowns }: De
 
       {/* 아이템 */}
       <div className="w-full">
-        {Array.from({ length: 5 }).map((_, index) => (
+        {data?.result?.map((item, index) => (
           <ListItem
-            id={1}
+            id={item.postId}
             linkState="list"
-            img="/test_list.JPG"
-            title="게시글 제목게시글 제목게시글 제목게시글 제목게시글 제목게시글 제목게시글 제목"
-            description="서울시 노원구 00동 건물 화장실에서 핸드폰을 잃어버렸습니다"
+            img={item.thumbnailUrl}
+            title={item.title}
+            description={item.summary}
             key={index}
           />
         ))}
