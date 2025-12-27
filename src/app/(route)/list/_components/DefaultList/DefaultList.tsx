@@ -6,6 +6,8 @@ import { TABS } from "../../_constants/TABS";
 import { useGetPost } from "@/api/list/useGetPost";
 import { useSearchParams } from "next/navigation";
 
+type PostType = "LOST" | "FOUND";
+
 interface DefaultListProps {
   searchUpdateQuery: (key: string, value?: string) => void;
   // dropdowns?: { value: string; setValue: Dispatch<SetStateAction<string>>; icon: IconName }[];
@@ -14,9 +16,11 @@ interface DefaultListProps {
 const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
   const searchParams = useSearchParams();
 
-  const type = searchParams.get("type") ?? "lost";
+  const rawType = searchParams.get("type");
 
-  const { data } = useGetPost({ page: 0, size: 10, type: type.toUpperCase() });
+  const type: PostType = rawType === "found" ? "FOUND" : "LOST";
+
+  const { data } = useGetPost({ page: 0, size: 10, type });
   console.log("data: ", data);
   console.log("data.result: ", data?.result);
 

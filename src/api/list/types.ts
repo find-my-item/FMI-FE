@@ -1,3 +1,10 @@
+export interface GetListResponse {
+  isSuccess: boolean;
+  code: string;
+  message: string;
+  result: PostItem[];
+}
+
 export interface PostItem {
   postId: number;
   title: string;
