@@ -31,12 +31,12 @@ const Page = () => {
         </FormProvider>
 
         {/* 회원확인 여부 */}
-        <div className="flex h-11 w-full justify-center text-caption1-semibold text-neutralInversed-strong-default">
-          <Link href="/find-pw" className="p-3">
+        <div className="flex h-11 w-full justify-center text-caption1-semibold">
+          <Link href="/find-pw" className="p-3 text-neutral-normal-default">
             비밀번호 찾기
           </Link>
-          <hr aria-hidden="true" className="h-4 self-center border-l border-gray-300" />
-          <Link href="/sign-up" className="p-3">
+          <hr className="h-4 self-center border-l border-gray-300" />
+          <Link href="/sign-up" className="p-3 text-brand-normal-default">
             회원가입
           </Link>
         </div>

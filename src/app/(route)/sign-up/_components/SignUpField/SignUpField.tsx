@@ -1,50 +1,65 @@
 "use no memo";
 
 import { SIGNUP_INPUT_CONFIG } from "../../_constants/SIGNUP_INPUT_CONFIG";
-import { Button, InputText, DetailHeader } from "@/components";
-import { useFormContext } from "react-hook-form";
+import { Button, DetailHeader } from "@/components";
+import { useFormContext, useWatch } from "react-hook-form";
 import { useSignUpBtnClick } from "../../_hooks/useSignUpBtnClick";
+import { useEffect } from "react";
+import SignUpItem from "../SignUpItem/SignUpItem";
+import { useNicknameCheck } from "../../_hooks/useNicknameCheck";
 
 const SignUpField = ({ onNext }: { onNext: () => void }) => {
   const {
+    control,
+    trigger,
     formState: { isValid },
   } = useFormContext();
 
-  const { handlerToClick, emailCodeVerified } = useSignUpBtnClick();
+  const password = useWatch({ control, name: "password" });
 
-  const isNextDisabled = isValid;
+  useEffect(() => {
+    void trigger("passwordConfirm");
+  }, [password, trigger]);
+
+  const { isEmailDisabled, isEmailAuthDisabled, isEmailAuthVerified, handlerToClick } =
+    useSignUpBtnClick();
+
+  const { isNicknameVerified } = useNicknameCheck();
+
+  const handleDisabled = (name: string) => {
+    if (name === "emailAuth") return isEmailAuthDisabled;
+    else if (name === "email") return isEmailDisabled;
+  };
+
+  const handleSuccess = (name: string) => {
+    if (name === "emailAuth") return isEmailAuthVerified;
+    else if (name === "nickname") return isNicknameVerified;
+    else return false;
+  };
+
+  const isNextEnabled = isValid && isEmailAuthVerified && isNicknameVerified;
 
   return (
     <>
       <DetailHeader title="회원가입" />
-      <div className="flex w-full flex-col gap-5 p-4">
+      <div className="flex w-full flex-col gap-5 px-4 py-5">
         {SIGNUP_INPUT_CONFIG.map((item) => (
-          <div key={item.name} className="h-[96px]">
-            {/* TODO(수현): props 줄이기  */}
-            <InputText
-              key={item.name}
-              name={item.name}
-              label={item.label}
-              type={item.type}
-              placeholder={item.placeholder}
-              validation={item.validation}
-              rule={item.rule}
-              eyeShow={item.eyeShow}
-              disabled={item.name === "emailAuth" ? emailCodeVerified : false}
-              btnOnClick={() => handlerToClick(item.name)}
-            >
-              {item.btnText}
-            </InputText>
-          </div>
+          <SignUpItem
+            key={item.name}
+            disabled={handleDisabled(item.name)}
+            btnOnClick={() => handlerToClick(item.name)}
+            isVerified={handleSuccess(item.name)}
+            {...item}
+          />
         ))}
       </div>
-      <div className="sticky bottom-0 mt-auto h-[88px] w-full max-w-[390px] border-t border-flatGray-50 bg-white px-4 py-3">
+      <div className="sticky bottom-0 mt-auto h-[88px] w-full max-w-[390px] border-t border-divider-default bg-white px-4 py-3">
         <Button
           type="button"
+          variant="auth"
           ariaLabel="회원가입 폼 버튼"
           onClick={onNext}
-          className="w-full"
-          disabled={!isNextDisabled}
+          disabled={!isNextEnabled}
         >
           다음
         </Button>
