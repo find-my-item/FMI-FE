@@ -4,15 +4,26 @@ import { useFormContext, useWatch } from "react-hook-form";
 import { CheckBox, InputText, Button } from "@/components";
 import { CHECKBOX_CONFIG } from "../_constants/CHECKBOX_CONFIG";
 import { EMAIL_LOGIN_CONFIG } from "../_constants/EMAIL_LOGIN_CONFIG";
+import { useState, useEffect } from "react";
+import { LoginType } from "../_types/LoginType";
 
 const Page = () => {
-  const { register, control, handleSubmit } = useFormContext();
+  const [autoLogin, setAutoLogin] = useState(false);
+  const [rememberId, setRememberId] = useState("");
+
+  const { register, control, handleSubmit } = useFormContext<LoginType>();
 
   const checkBoxValues = useWatch({ control, name: CHECKBOX_CONFIG.map((item) => item.id) });
 
   const onSubmit = handleSubmit((data) => {
     alert("폼 제출되었습니다.");
   });
+
+  useEffect(() => {
+    const storedAuth = localStorage.getItem("rememberId");
+
+    if (storedAuth) setRememberId(storedAuth);
+  }, []);
 
   return (
     <>
@@ -35,12 +46,11 @@ const Page = () => {
             {CHECKBOX_CONFIG.map((item, index) => (
               <CheckBox
                 key={item.id}
-                label={item.label}
-                id={item.id}
+                {...item}
+                {...register(item.id, { required: false })}
                 boxSize="w-[18px] h-[18px]"
                 textStyle="text-caption1-semibold text-neutral-normal-default ml-2"
                 iconSize="h-[6px]"
-                {...register(item.id, { required: false })}
                 state={!!checkBoxValues?.[index]}
               />
             ))}
