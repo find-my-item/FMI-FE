@@ -1,16 +1,14 @@
 "use client";
 
-import { ButtonHTMLAttributes, createContext } from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import Icon from "@/components/common/Icon/Icon";
 import Bookmark from "@/components/common/Buttons/Bookmark/Bookmark";
 import KebabMenuButton from "@/components/common/Buttons/KebabMenuButton/KebabMenuButton";
 
-const DetailHeaderContext = createContext({ title: "" });
-
 interface DetailHeaderProps {
   title?: string;
-  children?: React.ReactNode;
+  children?: ReactNode;
 }
 
 interface BaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -21,22 +19,22 @@ const DetailHeader = ({ title = "", children }: DetailHeaderProps) => {
   const router = useRouter();
 
   return (
-    <DetailHeaderContext.Provider value={{ title }}>
-      <div className="sticky top-0 z-[9999] flex h-[56px] w-full items-center justify-between bg-white px-[20px]">
-        <div className="flex items-center justify-start gap-[8px]">
-          <button
-            className="h-[30px] w-[30px]"
-            type="button"
-            onClick={() => router.back()}
-            aria-label="뒤로가기"
-          >
-            <Icon name="ArrowLeftSmall" size={30} />
-          </button>
-          <h1 className="text-[20px] font-semibold text-[#242424]">{title}</h1>
-        </div>
-        <div className="flex gap-[23.5px]">{children}</div>
+    <header className="sticky top-0 z-[9999] flex h-[56px] w-full items-center justify-between bg-white px-5">
+      <div className="flex items-center justify-start gap-2">
+        <button
+          className="h-[30px] w-[30px]"
+          type="button"
+          onClick={() => router.back()}
+          aria-label="뒤로가기"
+        >
+          <Icon name="ArrowLeftSmall" size={30} />
+        </button>
+        <h1 className="text-[20px] font-semibold text-flatGray-900">{title}</h1>
       </div>
-    </DetailHeaderContext.Provider>
+      <nav className="flex gap-[23.5px]" aria-label="헤더 액션">
+        {children}
+      </nav>
+    </header>
   );
 };
 
