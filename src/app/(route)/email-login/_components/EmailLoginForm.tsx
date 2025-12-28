@@ -6,17 +6,37 @@ import { CHECKBOX_CONFIG } from "../_constants/CHECKBOX_CONFIG";
 import { EMAIL_LOGIN_CONFIG } from "../_constants/EMAIL_LOGIN_CONFIG";
 import { useState, useEffect } from "react";
 import { LoginType } from "../_types/LoginType";
+import useApiEmailLogin from "@/api/auth/useApiEmailLogin";
 
 const Page = () => {
-  const [autoLogin, setAutoLogin] = useState(false);
+  const { reset } = useFormContext();
 
+  useEffect(() => {
+    const storedId = localStorage.getItem("rememberId") ?? "";
+
+    reset({
+      email: storedId,
+      rememberId: !!storedId,
+    });
+  }, []);
+
+  const [autoLogin, setAutoLogin] = useState(false);
+  const { mutate: EmailLoginMutate } = useApiEmailLogin();
   const { register, control, handleSubmit } = useFormContext<LoginType>();
 
   const checkBoxValues = useWatch({ control, name: CHECKBOX_CONFIG.map((item) => item.id) });
 
   const onSubmit = handleSubmit((data) => {
-    alert("폼 제출되었습니다.");
-    if (data.rememberId) localStorage.setItem("rememberId", data.email);
+    EmailLoginMutate(data, {
+      onSuccess: () => {
+        alert("폼 제출되었습니다.");
+        if (data.rememberId) localStorage.setItem("rememberId", data.email);
+        else localStorage.setItem("rememberId", "");
+      },
+      onError: (error) => {
+        console.log("error>>> ", error);
+      },
+    });
   });
 
   return (

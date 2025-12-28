@@ -11,12 +11,6 @@ const Page = () => {
   const methods = useForm<LoginType>({
     mode: "onChange",
     reValidateMode: "onChange",
-    shouldUnregister: false, // 입력 값 유지
-    defaultValues: {
-      email: localStorage.getItem("rememberId") ?? "",
-      rememberId: !!localStorage.getItem("rememberId"),
-      autoLogin: localStorage.getItem("autoLogin") === "true",
-    },
   });
 
   return (
