@@ -47,7 +47,7 @@ const ManualItem = ({ item, isOpen, onToggle }: ManualItemProps) => {
     <li>
       <button
         type="button"
-        aria-expanded={isOpen}
+        aria-expanded={!!isOpen}
         aria-controls="manual-item-panel"
         onClick={onToggle}
         className="flex w-full cursor-pointer items-center justify-between border-b border-neutral-normal-default px-[20px] py-[26px]"

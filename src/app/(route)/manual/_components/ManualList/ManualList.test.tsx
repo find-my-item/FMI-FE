@@ -1,100 +1,137 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { useState } from "react";
 import ManualList from "./ManualList";
 
-// TODO(지권): 테스트 코드 임시 주석
+// next/link를 JSDOM에서 쓰기 편하게 a로 치환
+jest.mock("next/link", () => {
+  return ({ href, children, ...props }: any) => (
+    <a href={href} {...props}>
+      {children}
+    </a>
+  );
+});
 
-// jest.mock("framer-motion", () => ({
-//   AnimatePresence: ({ children }: any) => <>{children}</>,
-//   motion: {
-//     div: ({ children, ...rest }: any) => <div {...rest}>{children}</div>,
-//   },
-// }));
+// Icon 컴포넌트는 테스트에서 의미 없으니 최소 렌더링으로 대체
+jest.mock("@/components", () => ({
+  Icon: ({ name }: { name: string }) => <span data-testid="icon">{name}</span>,
+  Button: ({ children }: any) => <button type="button">{children}</button>,
+}));
 
-// jest.mock("next/link", () => ({
-//   __esModule: true,
-//   default: ({ href, ...rest }: any) => <a href={href} {...rest} />,
-// }));
+// cn 유틸도 영향 없으니 pass-through
+jest.mock("@/utils", () => ({
+  cn: (...args: any[]) => args.filter(Boolean).join(" "),
+}));
 
-// jest.mock("@/components/common/Icon/Icon", () => ({
-//   __esModule: true,
-//   default: ({ name, ...rest }: any) => <span data-testid={`icon-${name}`} {...rest} />,
-// }));
+// MANUAL_DATA를 테스트용으로 고정
+jest.mock("../../_constants/MANUAL_CONSTANT", () => ({
+  MANUAL_DATA: {
+    lost: [
+      {
+        title: "신용카드를 분실하셨나요?",
+        content: "카드사에 분실신고가 필요해요.",
+      },
+      {
+        title: "경찰청 신고 내역을 확인했나요?",
+        content: "lost112에서 확인해 보세요.",
+        href: "https://www.lost112.go.kr/",
+        btnText: "경찰청 바로가기",
+      },
+    ],
+  },
+}));
 
-// describe("ManualItem", () => {
-//   const title = "자주 묻는 질문";
-//   const contentText = "정적 매뉴얼 내용입니다.";
-//   const href = "https://example.com";
-//   const btnText = "자세히 보기";
+describe("ManualList", () => {
+  const setup = async (initialOpenIndex: number | null = null) => {
+    const user = userEvent.setup();
 
-//   it("닫힘 상태일 때 내용이 보이지 않고 aria-expanded=false 입니다.", () => {
-//     render(<ManualItem item={{ title, content: <span>{contentText}</span> }} isOpen={false} />);
+    const Wrapper = () => {
+      const [openIndex, setOpenIndex] = useState<number | null>(initialOpenIndex);
 
-//     // 내용 미표시
-//     expect(screen.queryByText(contentText)).toBeNull();
+      return (
+        <ManualList openIndex={openIndex} setOpenIndex={setOpenIndex} selected={"lost" as any} />
+      );
+    };
 
-//     // 헤더 영역의 aria-expanded
-//     const headerButton = screen.getByRole("button");
-//     const clickableContainer = headerButton.parentElement as HTMLDivElement;
-//     expect(clickableContainer).toHaveAttribute("aria-expanded", "false");
+    render(<Wrapper />);
+    return { user };
+  };
 
-//     // 화살표 회전 클래스 미적용
-//     const arrow = screen.getByTestId("icon-ArrowDown");
-//     const arrowWrapper = arrow.parentElement as HTMLElement;
-//     expect(arrowWrapper.className).not.toContain("rotate-180");
-//   });
+  test("초기에는 모든 아이템 패널이 닫혀 있다", async () => {
+    await setup(null);
 
-//   it("열림 상태일 때 내용이 보이고 aria-expanded=true 입니다.", () => {
-//     render(<ManualItem item={{ title, content: <span>{contentText}</span> }} isOpen={true} />);
+    const buttons = screen.getAllByRole("button");
+    expect(buttons).toHaveLength(2);
 
-//     expect(screen.getByText(contentText)).toBeInTheDocument();
+    buttons.forEach((btn) => {
+      expect(btn).toHaveAttribute("aria-expanded", "false");
+    });
 
-//     const headerButton = screen.getByRole("button");
-//     const clickableContainer = headerButton.parentElement as HTMLDivElement;
-//     expect(clickableContainer).toHaveAttribute("aria-expanded", "true");
+    expect(screen.queryByText("카드사에 분실신고가 필요해요.")).not.toBeInTheDocument();
+    expect(screen.queryByText("lost112에서 확인해 보세요.")).not.toBeInTheDocument();
+  });
 
-//     const arrow = screen.getByTestId("icon-ArrowDown");
-//     const arrowWrapper = arrow.parentElement as HTMLElement;
-//     expect(arrowWrapper.className).toContain("rotate-180");
-//   });
+  test("아이템 클릭 시 해당 패널이 열리고, 다시 클릭하면 닫힌다", async () => {
+    const { user } = await setup(null);
 
-//   it("href가 주어지면 링크와 버튼 텍스트가 렌더링됩니다.", () => {
-//     render(
-//       <ManualItem
-//         item={{
-//           title,
-//           content: <span>{contentText}</span>,
-//           href,
-//           btnText,
-//         }}
-//         isOpen
-//       />
-//     );
+    const firstToggle = screen.getByRole("button", {
+      name: /신용카드를 분실하셨나요?/,
+    });
 
-//     const link = screen.getByRole("link", { name: btnText });
-//     expect(link).toHaveAttribute("href", href);
-//     expect(link).toHaveAttribute("target", "_blank");
-//     expect(link).toHaveAttribute("rel", expect.stringContaining("noopener"));
-//   });
+    await user.click(firstToggle);
+    expect(firstToggle).toHaveAttribute("aria-expanded", "true");
+    expect(await screen.findByText("카드사에 분실신고가 필요해요.")).toBeInTheDocument();
 
-//   it("헤더 클릭 시 onToggle이 호출됩니다.", () => {
-//     const onToggle = jest.fn();
-//     render(
-//       <ManualItem
-//         item={{ title, content: <span>{contentText}</span> }}
-//         isOpen={false}
-//         onToggle={onToggle}
-//       />
-//     );
-//     const headerButton = screen.getByRole("button");
-//     fireEvent.click(headerButton);
+    await user.click(firstToggle);
+    expect(firstToggle).toHaveAttribute("aria-expanded", "false");
+    expect(firstToggle).toHaveAttribute("aria-expanded", "false");
+  });
 
-//     expect(onToggle).toHaveBeenCalledTimes(1);
-//   });
+  test("다른 아이템을 클릭하면 기존 패널이 닫히고 새 패널이 열린다(단일 오픈)", async () => {
+    const { user } = await setup(null);
 
-//   it("href가 없으면 링크가 렌더링되지 않습니다.", () => {
-//     render(<ManualItem item={{ title, content: <span>{contentText}</span> }} isOpen={false} />);
+    const firstToggle = screen.getByRole("button", {
+      name: /신용카드를 분실하셨나요?/,
+    });
+    const secondToggle = screen.getByRole("button", {
+      name: /경찰청 신고 내역을 확인했나요?/,
+    });
 
-//     expect(screen.queryByRole("link")).toBeNull();
-//   });
-// });
+    await user.click(firstToggle);
+    expect(await screen.findByText("카드사에 분실신고가 필요해요.")).toBeInTheDocument();
+
+    await user.click(secondToggle);
+    expect(await screen.findByText("lost112에서 확인해 보세요.")).toBeInTheDocument();
+
+    expect(firstToggle).toHaveAttribute("aria-expanded", "false");
+    expect(secondToggle).toHaveAttribute("aria-expanded", "true");
+  });
+
+  test("href/btnText가 있는 아이템은 패널 오픈 시 링크가 렌더링된다", async () => {
+    const { user } = await setup(null);
+
+    const secondToggle = screen.getByRole("button", {
+      name: /경찰청 신고 내역을 확인했나요?/,
+    });
+    await user.click(secondToggle);
+
+    const link = await screen.findByRole("link", {
+      name: /경찰청 바로가기/,
+    });
+
+    expect(link).toHaveAttribute("href", "https://www.lost112.go.kr/");
+    expect(link).toHaveAttribute("target", "_blank");
+    expect(link).toHaveAttribute("rel", expect.stringContaining("noopener"));
+  });
+
+  test("initialOpenIndex가 주어지면 해당 아이템이 열린 상태로 렌더링된다", async () => {
+    await setup(0);
+
+    expect(await screen.findByText("카드사에 분실신고가 필요해요.")).toBeInTheDocument();
+
+    const firstToggle = screen.getByRole("button", {
+      name: /신용카드를 분실하셨나요?/,
+    });
+    expect(firstToggle).toHaveAttribute("aria-expanded", "true");
+  });
+});
