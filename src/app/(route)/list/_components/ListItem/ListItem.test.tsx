@@ -38,6 +38,7 @@ describe("ListItem", () => {
     const starIcon = screen.getByTestId("icon-Star");
     expect(starIcon.parentElement).toHaveTextContent(String(MOCK_POST_ITEM.favoriteCount));
 
+    // TODO(지권): 백엔드 API 누락
     // const eyeIcon = screen.getByTestId("icon-Eye");
     // expect(eyeIcon.parentElement).toHaveTextContent(String(MOCK_POST_ITEM.viewCount));
 
