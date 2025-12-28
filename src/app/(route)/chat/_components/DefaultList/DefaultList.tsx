@@ -17,7 +17,7 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
 
   return (
     <>
-      <div className="flex gap-[8px] px-[20px] py-[14px] no-scrollbar">
+      <div className="flex gap-2 px-5 py-[14px] no-scrollbar">
         <Filter
           ariaLabel={`채팅 리스트 ${displayText}`}
           onSelected={!!selectedRegion}
