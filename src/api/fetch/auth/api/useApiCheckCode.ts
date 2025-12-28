@@ -1,10 +1,5 @@
 import useAppMutation from "@/api/_base/query/useAppMutation";
-import { ApiBaseResponseType } from "@/types";
-
-export interface CheckCodeResponseType
-  extends ApiBaseResponseType<{
-    verified: boolean;
-  }> {}
+import { CheckCodeResponseType } from "../types/CheckCodeResponseType";
 
 const useApiCheckCode = () => {
   return useAppMutation<
