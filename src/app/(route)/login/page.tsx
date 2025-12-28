@@ -4,8 +4,7 @@ import Link from "next/link";
 import { cn } from "@/utils";
 import { Icon, Button, AuthLogoLink } from "@/components";
 
-const ButtonStyle =
-  "w-full h-[50px] flex-center gap-1 rounded-[10px] bg-[#1EB87B] font-semibold text-[16px] text-white";
+const ButtonStyle = "w-full h-[44px] flex-center gap-1 rounded-[10px] text-body1-semibold ";
 
 const Page = () => {
   return (
@@ -13,28 +12,27 @@ const Page = () => {
       <AuthLogoLink />
 
       {/* button */}
-      <div className="flex w-full flex-col gap-3 px-5 text-body1-semibold">
+      <div className="flex w-full flex-col gap-3 px-5">
         <Button
           type="submit"
           ariaLabel="카카오 로그인 버튼"
           className={cn(
             ButtonStyle,
-            "!text-flatGray-900 bg-fill-accent-kakao hover:bg-fill-accent-kakao"
+            "text-flatGray-900 bg-fill-accent-kakao hover:bg-fill-accent-kakao"
           )}
         >
           <Icon name="KakaoLogin" size={14} />
           카카오로 3초 만에 시작하기
         </Button>
-        <Link
+        <Button
+          as={Link}
           href={"/email-login"}
-          className={cn(
-            ButtonStyle,
-            "border border-neutral-normal-default !text-neutral-normal-default bg-fill-neutral-normal-default"
-          )}
+          ignoreBase
+          className={cn(ButtonStyle, "text-white bg-fill-brand-normal-default")}
           aria-label="로그인 버튼"
         >
-          <Icon name="Mail" size={20} /> 이메일로 로그인
-        </Link>
+          <Icon name="Mail" size={20} className="text-white" /> 이메일로 로그인
+        </Button>
       </div>
 
       {/* divider 구분선 */}
@@ -52,8 +50,7 @@ const Page = () => {
         <Link
           href="/sign-up"
           className={cn(
-            "p-3 text-caption1-semibold text-neutralInversed-strong-default",
-            "transition-colors hover:text-flatGreen-500"
+            "Inversed-strong-default p-3 text-caption1-semibold text-brand-normal-default"
           )}
         >
           회원가입

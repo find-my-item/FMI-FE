@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useApiCheckNickname } from "@/app/api";
+import useApiCheckNickname from "@/api/sign-up/useApiCheckNickname";
 import { useFormContext } from "react-hook-form";
 import { useToast } from "@/context/ToastContext";
 import { NICKNAME_ERROR_MESSAGE } from "../_constants/SIGNUP_ERROR_MESSAGE";
@@ -9,12 +9,14 @@ export const useNicknameCheck = () => {
   const { getValues } = useFormContext();
 
   const [nicknameValue, setNicknameValue] = useState("");
+  const [isNicknameVerified, setIsNicknameVerified] = useState(false);
   const { data, error, isSuccess, isError } = useApiCheckNickname(nicknameValue);
 
   const handlerNickname = () => {
     if (!data) return;
     if (isSuccess) {
       addToast("사용할 수 있는 닉네임입니다.", "success");
+      setIsNicknameVerified(true);
     } else {
       const target = NICKNAME_ERROR_MESSAGE[data.code as keyof typeof NICKNAME_ERROR_MESSAGE];
       addToast(target.message, target.status);
@@ -32,5 +34,6 @@ export const useNicknameCheck = () => {
 
   return {
     handlerToClickNickname,
+    isNicknameVerified,
   };
 };
