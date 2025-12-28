@@ -47,7 +47,6 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
         ))} */}
       </section>
 
-      {/* 아이템 */}
       <section aria-label="게시글 목록" className="w-full">
         {data?.result?.map((item) => (
           <ListItem key={item.postId} post={item} linkState="list" />
