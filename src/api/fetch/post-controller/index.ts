@@ -1,3 +1,3 @@
-export * from "./types";
+export * from "./types/PostItemType";
 
-export { useGetPost } from "./useGetPost";
+export { useGetPost } from "./api/useGetPost";
