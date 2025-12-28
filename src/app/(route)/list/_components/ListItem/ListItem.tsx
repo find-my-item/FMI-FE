@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { PostItem } from "@/api/fetch/list/types";
 import { Badge, Chip, Icon } from "@/components";
+import { PostItem } from "@/api/fetch/post-controller";
 import { formatDate, getItemCategoryLabel, getItemStatusLabel } from "@/utils";
 
 type ListItemProps = {
