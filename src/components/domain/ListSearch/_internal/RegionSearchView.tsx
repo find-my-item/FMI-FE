@@ -21,7 +21,7 @@ const RegionSearchView = () => {
         <button
           key={value}
           onClick={() => handleRegionClick(value)}
-          className="min-h-[60px] w-full border-b border-neutral-normal-default bg-white px-[20px] py-[20px] text-left text-body2-medium text-neutral-strong-default"
+          className="min-h-[60px] w-full border-b border-neutral-normal-default bg-white p-5 text-left text-body2-medium text-neutral-strong-default"
         >
           {value}
         </button>
