@@ -29,7 +29,7 @@ const DetailHeader = ({ title = "", children }: DetailHeaderProps) => {
         >
           <Icon name="ArrowLeftSmall" size={30} />
         </button>
-        <h2 className="text-xl font-semibold text-flatGray-900">{title}</h2>
+        <h2 className="text-xl font-semibold text-layout-header-default">{title}</h2>
       </div>
       {children && (
         <div className="flex gap-[23.5px]" aria-label="헤더 액션">
