@@ -19,7 +19,7 @@ const InputChatImageSection = () => {
           onClick={() =>
             handleSendImage(selectedImages, images, setChats, setImages, setSelectedImages)
           }
-          className="p-1 text-body1-medium text-brand-subtle-default disabled:text-brand-subtle-disabled"
+          className="p-1 text-body1-medium text-brand-normal-default disabled:text-brand-normal-disabled"
           disabled={!selectedImages.length}
         >
           {!selectedImages.length ? "사진 선택" : `사진 ${selectedImages.length}개 전송`}

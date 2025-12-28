@@ -4,7 +4,7 @@ export const CHAT_SENDER_STYLE = {
     timeOrder: "order-1",
     bubbleOrder: "order-2",
     bubbleColor:
-      "bg-fill-brand-normal-default bg-opacity-70 text-brand-normal-default rounded-br-[0px]",
+      "bg-fill-brand-normal-default bg-opacity-70 text-brand-subtle-default rounded-br-[0px]",
   },
   other: {
     container: "justify-start",
