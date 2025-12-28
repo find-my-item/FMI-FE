@@ -19,18 +19,6 @@ jest.mock("@/components", () => ({
       {children}
     </button>
   ),
-  InputSearch: ({ placeholder, onEnter }: any) => (
-    <input
-      data-testid="input-search"
-      type="text"
-      placeholder={placeholder}
-      onKeyDown={(e) => {
-        if (e.key === "Enter") {
-          onEnter?.();
-        }
-      }}
-    />
-  ),
 }));
 
 jest.mock("../ChatItem/ChatItem", () => ({
@@ -38,28 +26,24 @@ jest.mock("../ChatItem/ChatItem", () => ({
   default: () => <div data-testid="chat-item">ChatItem</div>,
 }));
 
-jest.mock("../../_utils/createChatFilterButtons/createChatFilterButtons", () => ({
-  createChatFilterButtons: jest.fn((searchUpdateQuery) => [
-    {
-      text: "지역 선택",
-      icon: "Location",
-      iconPosition: "leading",
-      iconSize: 16,
-      onClick: () => searchUpdateQuery("search", "region"),
-    },
-    {
-      text: "최신순",
-      icon: "ArrowDown",
-      iconPosition: "trailing",
-      iconSize: 12,
-    },
-    {
-      text: "습득/분실",
-      icon: "ArrowDown",
-      iconPosition: "trailing",
-      iconSize: 12,
-    },
-  ]),
+jest.mock("../FilterDropdown/FilterDropdown", () => ({
+  __esModule: true,
+  default: ({ ariaLabel, searchUpdateQuery }: any) => (
+    <div data-testid={`filter-dropdown-${ariaLabel}`}>
+      <button
+        data-testid={`filter-${ariaLabel}`}
+        onClick={() => {
+          if (ariaLabel.includes("최신순")) {
+            searchUpdateQuery("sort", "latest");
+          } else if (ariaLabel.includes("습득/분실")) {
+            searchUpdateQuery("type", "all");
+          }
+        }}
+      >
+        {ariaLabel.includes("최신순") ? "최신순" : "습득/분실"}
+      </button>
+    </div>
+  ),
 }));
 
 import { useSearchParams } from "next/navigation";
@@ -67,16 +51,6 @@ import { useSearchParams } from "next/navigation";
 describe("DefaultList", () => {
   beforeEach(() => {
     jest.clearAllMocks();
-  });
-
-  it("InputSearch 컴포넌트가 올바른 placeholder와 함께 렌더링됩니다", () => {
-    (useSearchParams as jest.Mock).mockReturnValue(new URLSearchParams());
-
-    render(<DefaultList searchUpdateQuery={mockSearchUpdateQuery} />);
-
-    const inputSearch = screen.getByTestId("input-search");
-    expect(inputSearch).toBeInTheDocument();
-    expect(inputSearch).toHaveAttribute("placeholder", "채팅 참여자를 입력해 주세요.");
   });
 
   it("필터 버튼들이 올바르게 렌더링됩니다", () => {
@@ -154,9 +128,6 @@ describe("DefaultList", () => {
     (useSearchParams as jest.Mock).mockReturnValue(new URLSearchParams());
 
     render(<DefaultList searchUpdateQuery={mockSearchUpdateQuery} />);
-
-    // InputSearch
-    expect(screen.getByTestId("input-search")).toBeInTheDocument();
 
     // Filter 버튼들
     expect(screen.getByTestId("filter-채팅 리스트 지역 선택")).toBeInTheDocument();

@@ -85,10 +85,14 @@ interface CustomProps {
   rule?: string;
 }
 
-type InputTextProps = InputProps & CustomProps;
+export type InputTextProps = InputProps & CustomProps;
 
-const InputStyle =
-  "flex flex-1 items-center relative h-10 py-3 px-2 bg-fill-neutral-strong-default rounded-[10px] text-body2-regular text-neutral-strong-entered placeholder:text-neutral-strong-placeholder hover:text-neutral-strong-hover border focus:outline-none focus:text-neutral-strong-focused disabled:text-neutral-strong-disabled";
+const InputStyle = cn(
+  "flex flex-1 items-center relative h-10 py-3 px-2 bg-fill-neutral-strong-default rounded-[10px] text-body2-regular text-neutral-strong-entered",
+  "placeholder:text-neutral-strong-placeholder hover:text-neutral-strong-hover border focus:outline-none focus:text-neutral-strong-focused",
+  "disabled:text-neutral-strong-disabled disabled:bg-fill-neutral-strong-disabled autofill:text-neutral-strong-default",
+  "autofill:shadow-[inset_0_0_0px_1000px_#f5f5f5] autofill:disabled:shadow-[inset_0_0_0px_1000px_#f5f5f5]"
+);
 
 const InputText = ({
   name,
@@ -109,12 +113,12 @@ const InputText = ({
   const {
     register,
     watch,
-    formState: { errors },
+    formState: { errors, touchedFields, dirtyFields },
   } = useFormContext();
 
   const { onDelete } = useFormInput();
 
-  const isValue = watch(name) ?? "";
+  const isValue = watch(name)?.trim();
   const isValueStr = (isValue ?? "").toString();
 
   const [show, setShow] = useState(false);
@@ -125,8 +129,10 @@ const InputText = ({
     return type;
   };
 
-  const maxLengthValue =
+  const maxLength =
     typeof validation?.maxLength === "number" ? validation.maxLength : validation?.maxLength?.value;
+
+  const showError = !!errors?.[name] && (touchedFields?.[name] || dirtyFields?.[name]);
 
   return (
     <div className="flex w-full flex-col gap-2">
@@ -142,31 +148,34 @@ const InputText = ({
         <div className="relative flex w-full flex-row">
           <input
             id={name}
-            {...props}
             {...register(name, validation)}
+            {...props}
             type={actualType()}
             disabled={disabled}
             className={cn(
               className,
               isValue && "pr-8",
               eyeShow && "pr-[60px]",
-              !!errors[name] && "border border-system-warning"
+              showError && "border border-system-warning"
             )}
           />
 
           {/* 삭제 버튼 */}
-          <DeleteButton
-            eyeShow={eyeShow}
-            className="top-1/2 -translate-y-1/2"
-            value={isValue}
-            onDelete={() => onDelete(name)}
-          />
-
+          {disabled ||
+            (!!isValue && (
+              <DeleteButton
+                eyeShow={eyeShow}
+                className="top-1/2 -translate-y-1/2"
+                value={isValue}
+                onDelete={() => onDelete(name)}
+              />
+            ))}
           {/* 비밀번호 눈 모양 버튼 */}
           {eyeShow && (
             <button
               className="absolute right-2 top-3 outline-none flex-center"
               type="button"
+              tabIndex={-1}
               aria-label={show ? "비밀번호 숨기기" : "비밀번호 보기"}
               onClick={() => setShow(!show)}
             >
@@ -183,7 +192,11 @@ const InputText = ({
             onClick={() => btnOnClick?.(isValue)}
             ignoreBase
             disabled={disabled}
-            className="w-auto whitespace-nowrap rounded-[10px] border border-neutral-normal-default px-[14px] py-[10px] text-body2-semibold"
+            className={cn(
+              "text-neutral-normal-default, w-auto whitespace-nowrap rounded-[10px] text-body2-semibold",
+              "border border-neutral-normal-default px-[14px] py-[10px]",
+              "disabled:text-neutral-normal-disabled disabled:bg-fill-neutral-strong-default"
+            )}
           >
             {children}
           </Button>
@@ -201,7 +214,7 @@ const InputText = ({
         />
 
         {/* 글자 수 확인 */}
-        <Counter isLength={isValueStr.length} maxLength={maxLengthValue} />
+        <Counter isLength={isValueStr.length} maxLength={maxLength} />
       </div>
     </div>
   );
