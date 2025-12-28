@@ -9,7 +9,6 @@ import { LoginType } from "../_types/LoginType";
 
 const Page = () => {
   const [autoLogin, setAutoLogin] = useState(false);
-  const [rememberId, setRememberId] = useState("");
 
   const { register, control, handleSubmit } = useFormContext<LoginType>();
 
