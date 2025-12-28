@@ -1,4 +1,4 @@
-import { ItemStatus } from "@/api/fetch/post-controller";
+import { ItemStatus } from "@/api/fetch/post";
 
 /**
  * @author jikwon
