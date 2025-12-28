@@ -1,10 +1,10 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
+import { useGetPost } from "@/api/fetch/post";
 import { Filter, Tab } from "@/components";
 import ListItem from "../ListItem/ListItem";
 import { TABS } from "../../_constants/TABS";
-import { useGetPost } from "@/api/list/useGetPost";
-import { useSearchParams } from "next/navigation";
 
 type PostType = "LOST" | "FOUND";
 

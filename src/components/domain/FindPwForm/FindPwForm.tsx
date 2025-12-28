@@ -5,7 +5,7 @@ import { Button, InputText } from "@/components";
 import { cn } from "@/utils";
 import Link from "next/link";
 import { useFindPwSubmit } from "@/hooks";
-import { ApiFindPwType } from "@/types";
+import { ApiFindPwType } from "@/api/fetch/auth";
 
 interface FindPwFormProps {
   text: string;
