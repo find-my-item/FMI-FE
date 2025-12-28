@@ -3,7 +3,6 @@ import userEvent from "@testing-library/user-event";
 import { useState } from "react";
 import ManualList from "./ManualList";
 
-// next/link를 JSDOM에서 쓰기 편하게 a로 치환
 jest.mock("next/link", () => {
   return ({ href, children, ...props }: any) => (
     <a href={href} {...props}>
@@ -12,18 +11,15 @@ jest.mock("next/link", () => {
   );
 });
 
-// Icon 컴포넌트는 테스트에서 의미 없으니 최소 렌더링으로 대체
 jest.mock("@/components", () => ({
   Icon: ({ name }: { name: string }) => <span data-testid="icon">{name}</span>,
   Button: ({ children }: any) => <button type="button">{children}</button>,
 }));
 
-// cn 유틸도 영향 없으니 pass-through
 jest.mock("@/utils", () => ({
   cn: (...args: any[]) => args.filter(Boolean).join(" "),
 }));
 
-// MANUAL_DATA를 테스트용으로 고정
 jest.mock("../../_constants/MANUAL_CONSTANT", () => ({
   MANUAL_DATA: {
     lost: [
