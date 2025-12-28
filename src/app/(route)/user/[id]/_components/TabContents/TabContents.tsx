@@ -5,6 +5,7 @@ import { useState } from "react";
 import { USER_TABS } from "../../_types/USER_TABS";
 import ListItem from "@/app/(route)/list/_components/ListItem/ListItem";
 import { CommentItem } from "../_internal";
+import { MOCK_POST_ITEM } from "@/mock/MOCK_DATA";
 
 type SelectedTab = (typeof USER_TABS)[number]["key"];
 
@@ -21,14 +22,7 @@ const TabContents = () => {
         {selectedTab === "post" && (
           <div>
             {Array.from({ length: 5 }).map((_, index) => (
-              <ListItem
-                id={1}
-                linkState="list"
-                img="/test_list.JPG"
-                title="게시글 제목게시글 제목게시글 제목게시글 제목게시글 제목게시글 제목게시글 제목"
-                description="서울시 노원구 00동 건물 화장실에서 핸드폰을 잃어버렸습니다"
-                key={index}
-              />
+              <ListItem post={MOCK_POST_ITEM} linkState="list" key={index} />
             ))}
           </div>
         )}
@@ -44,14 +38,7 @@ const TabContents = () => {
         {selectedTab === "favorite" && (
           <div>
             {Array.from({ length: 5 }).map((_, index) => (
-              <ListItem
-                id={1}
-                linkState="list"
-                img="/test_list.JPG"
-                title="게시글 제목게시글 제목게시글 제목게시글 제목게시글 제목게시글 제목게시글 제목"
-                description="서울시 노원구 00동 건물 화장실에서 핸드폰을 잃어버렸습니다"
-                key={index}
-              />
+              <ListItem post={MOCK_POST_ITEM} linkState="list" key={index} />
             ))}
           </div>
         )}
