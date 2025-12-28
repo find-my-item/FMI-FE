@@ -19,8 +19,8 @@ const DetailHeader = ({ title = "", children }: DetailHeaderProps) => {
   const router = useRouter();
 
   return (
-    <header className="sticky top-0 z-[9999] flex h-[56px] w-full items-center justify-between bg-white px-5">
-      <div className="flex items-center justify-start gap-2">
+    <header className="sticky top-0 z-[9999] flex h-14 w-full items-center justify-between bg-white px-5">
+      <div className="flex items-center gap-2">
         <button
           className="h-[30px] w-[30px]"
           type="button"
@@ -29,11 +29,13 @@ const DetailHeader = ({ title = "", children }: DetailHeaderProps) => {
         >
           <Icon name="ArrowLeftSmall" size={30} />
         </button>
-        <h2 className="text-[20px] font-semibold text-flatGray-900">{title}</h2>
+        <h2 className="text-xl font-semibold text-flatGray-900">{title}</h2>
       </div>
-      <nav className="flex gap-[23.5px]" aria-label="헤더 액션">
-        {children}
-      </nav>
+      {children && (
+        <div className="flex gap-[23.5px]" aria-label="헤더 액션">
+          {children}
+        </div>
+      )}
     </header>
   );
 };
@@ -47,7 +49,7 @@ DetailHeader.Search = ({ ariaLabel = "검색", ...props }: BaseButtonProps) => {
 };
 
 DetailHeader.Save = ({ ariaLabel = "게시글 저장", ...props }: BaseButtonProps) => {
-  const isDisabledStyle = props.disabled ? "text-[#98E3BD]" : "text-[#1EB87B]";
+  const isDisabledStyle = props.disabled ? "text-flatGreen-200" : "text-flatGreen-500";
   return (
     <button {...props} className={isDisabledStyle} aria-label={ariaLabel}>
       임시 저장
