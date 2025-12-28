@@ -45,7 +45,7 @@ export default function RootLayout({
         <Providers>
           <ToastProvider>
             <Header />
-            {children}
+            <main className="w-full flex-1">{children}</main>
             <Footer />
           </ToastProvider>
           <Analytics />
