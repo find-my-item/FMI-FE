@@ -4,6 +4,7 @@ import { Filter } from "@/components";
 import { useSearchParams } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
+import { SELECTED_TEXT } from "./SELECTED_TEXT";
 
 interface FilterOption {
   label: string;
@@ -16,14 +17,6 @@ interface FilterDropdownProps {
   keyName: string;
   searchUpdateQuery: (key: string, value?: string) => void;
 }
-
-const SELECTED_TEXT = {
-  oldest: "오래된순",
-  latest: "최신순",
-  all: "습득/분실",
-  found: "습득물",
-  lost: "분실물",
-} as const;
 
 const FilterDropdown = ({
   ariaLabel,
