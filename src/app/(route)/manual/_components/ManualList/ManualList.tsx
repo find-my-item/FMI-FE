@@ -5,6 +5,34 @@ import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/utils";
 import { Button, Icon } from "@/components";
 import { ManualItemType } from "../../_types/ManualType";
+import { MANUAL_DATA } from "../../_constants/MANUAL_CONSTANT";
+
+interface ManualListProps {
+  openIndex: number | null;
+  setOpenIndex: (index: number | null) => void;
+  selected: keyof typeof MANUAL_DATA;
+}
+
+const ManualList = ({ openIndex, setOpenIndex, selected }: ManualListProps) => {
+  const handleToggle = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
+  return (
+    <section className="w-full">
+      <ul>
+        {MANUAL_DATA[selected].map((item: ManualItemType, index: number) => (
+          <ManualItem
+            key={item.title}
+            item={item}
+            isOpen={openIndex === index}
+            onToggle={() => handleToggle(index)}
+          />
+        ))}
+      </ul>
+    </section>
+  );
+};
 
 interface ManualItemProps {
   item: ManualItemType;
@@ -16,24 +44,19 @@ const ManualItem = ({ item, isOpen, onToggle }: ManualItemProps) => {
   const { title, content, href, btnText } = item;
 
   return (
-    <>
-      <div
+    <li>
+      <button
+        type="button"
         aria-expanded={isOpen}
-        aria-controls="매뉴얼 아이템 패널"
+        aria-controls="manual-item-panel"
         onClick={onToggle}
-        className="w-full cursor-pointer border-b border-neutral-normal-default px-[20px] py-[26px]"
+        className="flex w-full cursor-pointer items-center justify-between border-b border-neutral-normal-default px-[20px] py-[26px]"
       >
-        <Button
-          variant="outlined"
-          ignoreBase
-          className="flex w-full items-center justify-between border-none"
-        >
-          <p className="text-body1-semibold text-neutral-normal-default">{title}</p>
-          <span className={cn("transition-transform duration-200", isOpen && "rotate-180")}>
-            <Icon name="ArrowDown" />
-          </span>
-        </Button>
-      </div>
+        <span className="text-body1-semibold text-neutral-normal-default">{title}</span>
+        <span className={cn("transition-transform duration-200", isOpen && "rotate-180")}>
+          <Icon name="ArrowDown" />
+        </span>
+      </button>
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -60,8 +83,8 @@ const ManualItem = ({ item, isOpen, onToggle }: ManualItemProps) => {
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </li>
   );
 };
 
-export default ManualItem;
+export default ManualList;

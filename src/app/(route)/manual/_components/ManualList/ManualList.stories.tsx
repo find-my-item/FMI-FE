@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs";
-import ManualItem from "./ManualItem";
+import ManualItem from "./ManualList";
 
 const meta: Meta<typeof ManualItem> = {
   title: "페이지/매뉴얼 페이지/ManualItem",
