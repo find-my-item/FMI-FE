@@ -17,13 +17,8 @@ const Page = () => {
 
   const onSubmit = handleSubmit((data) => {
     alert("폼 제출되었습니다.");
+    if (data.rememberId) localStorage.setItem("rememberId", data.email);
   });
-
-  useEffect(() => {
-    const storedAuth = localStorage.getItem("rememberId");
-
-    if (storedAuth) setRememberId(storedAuth);
-  }, []);
 
   return (
     <>
