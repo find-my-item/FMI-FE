@@ -1,22 +1,35 @@
+"use client";
+
 import { Filter, Tab } from "@/components";
 import ListItem from "../ListItem/ListItem";
 import { TABS } from "../../_constants/TABS";
-import { Dispatch, SetStateAction } from "react";
-import { IconName } from "@/components/common/Icon/Icon";
+import { useGetPost } from "@/api/list/useGetPost";
+import { useSearchParams } from "next/navigation";
+
+type PostType = "LOST" | "FOUND";
 
 interface DefaultListProps {
-  selected: string;
-  setSelected: Dispatch<SetStateAction<string>>;
   searchUpdateQuery: (key: string, value?: string) => void;
-  dropdowns?: { value: string; setValue: Dispatch<SetStateAction<string>>; icon: IconName }[];
+  // dropdowns?: { value: string; setValue: Dispatch<SetStateAction<string>>; icon: IconName }[];
 }
 
-const DefaultList = ({ selected, setSelected, searchUpdateQuery, dropdowns }: DefaultListProps) => {
+const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
+  const searchParams = useSearchParams();
+
+  const rawType = searchParams.get("type");
+  const type: PostType = rawType === "found" ? "FOUND" : "LOST";
+
+  const { data } = useGetPost({ page: 0, size: 10, type });
+
   return (
     <>
-      <Tab tabs={TABS} selected={selected} onValueChange={setSelected} />
+      <Tab
+        tabs={TABS}
+        selected={rawType ?? "lost"}
+        onValueChange={(key) => searchUpdateQuery("type", key)}
+      />
 
-      <div className="flex h-[67px] w-full items-center gap-2 px-5">
+      <section aria-label="필터 영역" className="flex h-[67px] w-full items-center gap-2 px-5">
         <Filter
           ariaLabel="지역 선택 필터 버튼"
           children={"지역 선택"}
@@ -32,21 +45,13 @@ const DefaultList = ({ selected, setSelected, searchUpdateQuery, dropdowns }: De
             {idx !== 0 && <Icon name="ArrowDown" size={12} />}
           </Dropdown>
         ))} */}
-      </div>
+      </section>
 
-      {/* 아이템 */}
-      <div className="w-full">
-        {Array.from({ length: 5 }).map((_, index) => (
-          <ListItem
-            id={1}
-            linkState="list"
-            img="/test_list.JPG"
-            title="게시글 제목게시글 제목게시글 제목게시글 제목게시글 제목게시글 제목게시글 제목"
-            description="서울시 노원구 00동 건물 화장실에서 핸드폰을 잃어버렸습니다"
-            key={index}
-          />
+      <section aria-label="게시글 목록" className="w-full">
+        {data?.result?.map((item) => (
+          <ListItem key={item.postId} post={item} linkState="list" />
         ))}
-      </div>
+      </section>
     </>
   );
 };

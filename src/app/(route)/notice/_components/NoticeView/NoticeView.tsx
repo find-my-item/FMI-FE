@@ -15,11 +15,18 @@ const NoticeView = ({ noticeCustomerState }: NoticeView) => {
       ) : (
         noticeListObject.map((item) => (
           <ListItem
-            id={item.id}
-            title={item.title}
-            description={item.body}
-            img={""}
-            key={item.id}
+            post={{
+              postId: item.id,
+              title: item.title,
+              summary: item.body,
+              thumbnailUrl: "",
+              address: "",
+              category: "ELECTRONICS",
+              itemStatus: "SEARCHING",
+              postType: "LOST",
+              favoriteCount: 0,
+              createdAt: "",
+            }}
             linkState="notice"
           />
         ))

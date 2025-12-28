@@ -1,10 +1,10 @@
 export const TABS = [
   {
-    key: "LOST",
+    key: "lost",
     label: "분실",
   },
   {
-    key: "FOUND",
+    key: "found",
     label: "습득",
   },
 ];
