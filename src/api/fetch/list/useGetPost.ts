@@ -1,5 +1,5 @@
 import { GetListResponse } from "./types";
-import useAppQuery from "../query/useAppQuery";
+import useAppQuery from "@/api/_base/query/useAppQuery";
 
 export const useGetPost = ({ page, size, type }: { page: number; size: number; type?: string }) => {
   return useAppQuery<GetListResponse>(

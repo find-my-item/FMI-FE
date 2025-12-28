@@ -1,4 +1,4 @@
-import useAppQuery from "@/api/query/useAppQuery";
+import useAppQuery from "@/api/_base/query/useAppQuery";
 import { ApiBaseResponseType } from "@/types";
 
 const useApiCheckNickname = (nickname: string) => {

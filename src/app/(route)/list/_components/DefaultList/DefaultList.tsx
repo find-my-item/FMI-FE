@@ -3,7 +3,7 @@
 import { Filter, Tab } from "@/components";
 import ListItem from "../ListItem/ListItem";
 import { TABS } from "../../_constants/TABS";
-import { useGetPost } from "@/api/list/useGetPost";
+import { useGetPost } from "@/api/fetch/list/useGetPost";
 import { useSearchParams } from "next/navigation";
 
 type PostType = "LOST" | "FOUND";

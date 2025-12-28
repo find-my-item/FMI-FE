@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useApiFindPw } from "@/api/find-pw/useApiFindPw";
+import { useApiFindPw } from "@/api/fetch/find-pw/useApiFindPw";
 import useErrorToast from "./useErrorToast";
 import { FIND_PW_ERROR } from "@/constants";
 import { ApiFindPwType } from "@/types";

@@ -1,4 +1,4 @@
-import useAppMutation from "@/api/query/useAppMutation";
+import useAppMutation from "@/api/_base/query/useAppMutation";
 import { ApiSignUpType } from "@/app/(route)/sign-up/types/ApiSingUpType";
 import { ApiBaseResponseType } from "@/types";
 

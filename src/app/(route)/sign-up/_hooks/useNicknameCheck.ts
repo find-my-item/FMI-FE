@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useApiCheckNickname from "@/api/sign-up/useApiCheckNickname";
+import useApiCheckNickname from "@/api/fetch/sign-up/useApiCheckNickname";
 import { useFormContext } from "react-hook-form";
 import { useToast } from "@/context/ToastContext";
 import { NICKNAME_ERROR_MESSAGE } from "../_constants/SIGNUP_ERROR_MESSAGE";

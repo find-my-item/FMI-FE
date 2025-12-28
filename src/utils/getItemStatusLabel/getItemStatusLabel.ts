@@ -1,4 +1,4 @@
-import { ItemStatus } from "@/api/list/types";
+import { ItemStatus } from "@/api/fetch/list/types";
 
 /**
  * @author jikwon
