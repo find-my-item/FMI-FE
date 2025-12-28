@@ -2,10 +2,11 @@
 
 import { Filter } from "@/components";
 import { useSearchParams } from "next/navigation";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { createPortal } from "react-dom";
-import { SELECTED_TEXT } from "./SELECTED_TEXT";
+import { SELECTED_TEXT } from "../../constants/SELECTED_TEXT";
 import { cn } from "@/utils";
+import { useHandleClickOutside, useUpdatePosition } from "../../hooks";
 
 interface FilterOption {
   label: string;
@@ -29,7 +30,8 @@ const FilterDropdown = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const searchParams = useSearchParams();
-
+  useHandleClickOutside(isOpen, containerRef, dropdownRef, setIsOpen);
+  useUpdatePosition(isOpen, containerRef, dropdownRef);
   const selectedValue = searchParams.get(keyName);
   const displayText =
     SELECTED_TEXT[
@@ -43,44 +45,6 @@ const FilterDropdown = ({
   };
 
   const toggleDropdown = () => setIsOpen((prev) => !prev);
-
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as Node;
-      const isOutsideContainer = containerRef.current && !containerRef.current.contains(target);
-      const isOutsideDropdown = dropdownRef.current && !dropdownRef.current.contains(target);
-
-      if (isOutsideContainer && isOutsideDropdown) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [isOpen]);
-
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const updatePosition = () => {
-      if (!containerRef.current || !dropdownRef.current) return;
-
-      const { left, top, height } = containerRef.current.getBoundingClientRect();
-      dropdownRef.current.style.left = `${left}px`;
-      dropdownRef.current.style.top = `${top + height + 8}px`;
-    };
-
-    updatePosition();
-    window.addEventListener("scroll", updatePosition, true);
-    window.addEventListener("resize", updatePosition);
-
-    return () => {
-      window.removeEventListener("scroll", updatePosition, true);
-      window.removeEventListener("resize", updatePosition);
-    };
-  }, [isOpen]);
 
   return (
     <>
