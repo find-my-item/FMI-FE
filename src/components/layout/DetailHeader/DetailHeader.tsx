@@ -29,7 +29,7 @@ const DetailHeader = ({ title = "", children }: DetailHeaderProps) => {
         >
           <Icon name="ArrowLeftSmall" size={30} />
         </button>
-        <h1 className="text-[20px] font-semibold text-flatGray-900">{title}</h1>
+        <h2 className="text-[20px] font-semibold text-flatGray-900">{title}</h2>
       </div>
       <nav className="flex gap-[23.5px]" aria-label="헤더 액션">
         {children}
