@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { SELECTED_TEXT } from "./SELECTED_TEXT";
+import { cn } from "@/utils";
 
 interface FilterOption {
   label: string;
@@ -101,7 +102,10 @@ const FilterDropdown = ({
               <button
                 key={option.value}
                 onClick={() => handleOptionClick(option.value)}
-                className="glass-card w-full text-nowrap border border-white bg-[#F5F5F5]/70 px-[28px] py-[16px] text-left text-h3-medium text-neutral-normal-default transition-colors flex-center first:rounded-t-[20px] last:rounded-b-[20px]"
+                className={cn(
+                  "glass-card w-full text-nowrap border border-white bg-[#F5F5F5]/70 px-[28px] py-[16px] text-left text-h3-medium text-neutral-normal-default transition-colors flex-center",
+                  "first:rounded-t-[20px] last:rounded-b-[20px]"
+                )}
               >
                 {option.label}
               </button>
