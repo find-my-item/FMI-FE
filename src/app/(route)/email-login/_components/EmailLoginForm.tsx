@@ -7,6 +7,8 @@ import { EMAIL_LOGIN_CONFIG } from "../_constants/EMAIL_LOGIN_CONFIG";
 import { useState, useEffect } from "react";
 import { LoginType } from "../_types/LoginType";
 import useApiEmailLogin from "@/api/auth/useApiEmailLogin";
+import { useErrorToast } from "@/hooks";
+import { EMAIL_LOGIN_ERROR_MESSAGE } from "../_constants/EMAIL_LOGIN_ERROR_MESSAGE";
 
 const Page = () => {
   const { reset } = useFormContext();
@@ -20,23 +22,34 @@ const Page = () => {
     });
   }, []);
 
-  const [autoLogin, setAutoLogin] = useState(false);
+  // const [autoLogin, setAutoLogin] = useState(false);
   const { mutate: EmailLoginMutate } = useApiEmailLogin();
   const { register, control, handleSubmit } = useFormContext<LoginType>();
 
   const checkBoxValues = useWatch({ control, name: CHECKBOX_CONFIG.map((item) => item.id) });
 
+  const { handlerApiError } = useErrorToast();
+
   const onSubmit = handleSubmit((data) => {
-    EmailLoginMutate(data, {
-      onSuccess: () => {
+    const filterData = {
+      email: data.email,
+      password: data.password,
+    };
+
+    EmailLoginMutate(filterData, {
+      onSuccess: (res) => {
         alert("폼 제출되었습니다.");
+        console.log("res>>>", res);
         if (data.rememberId) localStorage.setItem("rememberId", data.email);
         else localStorage.setItem("rememberId", "");
       },
       onError: (error) => {
         console.log("error>>> ", error);
+        handlerApiError(EMAIL_LOGIN_ERROR_MESSAGE, error.code);
       },
     });
+
+    // console.log("data>>>", filterData)
   });
 
   return (
