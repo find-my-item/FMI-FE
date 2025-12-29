@@ -2,11 +2,13 @@ import { useState } from "react";
 import { Filter } from "@/components";
 import FilterBottomSheet from "../FilterBottomSheet/FilterBottomSheet";
 import { CategoryFilterValue, StatusFilterValue } from "@/types";
-
-export type FilterTab = "region" | "category" | "sort" | "status";
+import { CATEGORY_LABEL_MAP, SORT_LABEL_MAP, STATUS_LABEL_MAP } from "../FilterBottomSheet/LABELS";
+import { FilterTab } from "../FilterBottomSheet/types";
+import { FiltersState } from "./filtersStateType";
+import { getFilterSelectedFlags } from "./getFilterSelectedFlags";
 
 const FilterSection = () => {
-  const [filters, setFilters] = useState({
+  const [filters, setFilters] = useState<FiltersState>({
     region: "",
     category: "" as CategoryFilterValue,
     sort: "latest", // TODO(지권): 정렬 API 누락
@@ -21,11 +23,12 @@ const FilterSection = () => {
     setIsOpen(true);
   };
 
-  const filterButtons: { label: string; tab: FilterTab }[] = [
-    { label: "카테고리", tab: "category" },
-    { label: "최신순", tab: "sort" },
-    { label: "찾는중", tab: "status" },
-  ];
+  const { isRegionSelected, isCategorySelected, isSortSelected, isStatusSelected } =
+    getFilterSelectedFlags(filters);
+
+  const categoryLabel = CATEGORY_LABEL_MAP[filters.category] ?? "카테고리";
+  const sortLabel = SORT_LABEL_MAP[filters.sort] ?? "최신순";
+  const statusLabel = STATUS_LABEL_MAP[filters.status] ?? "전체";
 
   return (
     <>
@@ -35,29 +38,46 @@ const FilterSection = () => {
       >
         <Filter
           ariaLabel="지역 선택 필터 버튼"
-          onSelected={false}
+          onSelected={isRegionSelected}
           icon={{ name: "Location", size: 16 }}
           className="flex-shrink-0"
-          onClick={() => {
-            openSheet("region");
-          }}
+          onClick={() => openSheet("region")}
         >
-          지역 선택
+          {isRegionSelected ? filters.region : "지역 선택"}
         </Filter>
 
-        {filterButtons.map(({ label, tab }) => (
-          <Filter
-            key={tab}
-            ariaLabel={label}
-            onSelected={false}
-            iconPosition="trailing"
-            icon={{ name: "ArrowDown", size: 12 }}
-            className="flex-shrink-0"
-            onClick={() => openSheet(tab)}
-          >
-            {label}
-          </Filter>
-        ))}
+        <Filter
+          ariaLabel="카테고리 필터 버튼"
+          onSelected={isCategorySelected}
+          iconPosition="trailing"
+          icon={{ name: "ArrowDown", size: 12 }}
+          className="flex-shrink-0"
+          onClick={() => openSheet("category")}
+        >
+          {categoryLabel}
+        </Filter>
+
+        <Filter
+          ariaLabel="정렬 필터 버튼"
+          onSelected={isSortSelected}
+          iconPosition="trailing"
+          icon={{ name: "ArrowDown", size: 12 }}
+          className="flex-shrink-0"
+          onClick={() => openSheet("sort")}
+        >
+          {sortLabel}
+        </Filter>
+
+        <Filter
+          ariaLabel="찾음여부 필터 버튼"
+          onSelected={isStatusSelected}
+          iconPosition="trailing"
+          icon={{ name: "ArrowDown", size: 12 }}
+          className="flex-shrink-0"
+          onClick={() => openSheet("status")}
+        >
+          {statusLabel}
+        </Filter>
       </section>
 
       {isOpen && (

@@ -3,7 +3,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/utils";
 import { CategoryFilterValue, StatusFilterValue } from "@/types";
 import { Button, Icon, PopupLayout } from "@/components";
-import { FilterTab } from "../FilterSection/FilterSection";
+import { FilterTab } from "./types";
 import { tabs, categories, sort, status } from "./CONSTANTS";
 
 interface FilterBottomSheetProps {

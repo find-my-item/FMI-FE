@@ -1,5 +1,5 @@
 import { CategoryFilterValue, StatusFilterValue } from "@/types";
-import { FilterTab } from "../FilterSection/FilterSection";
+import { FilterTab } from "./types";
 
 export const tabs: { label: string; value: FilterTab }[] = [
   { label: "지역", value: "region" },
