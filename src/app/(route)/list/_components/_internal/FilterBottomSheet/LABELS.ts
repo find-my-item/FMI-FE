@@ -1,4 +1,4 @@
-import { CategoryFilterValue, StatusFilterValue } from "@/types";
+import { CategoryFilterValue, SortFilterValue, StatusFilterValue } from "@/types";
 
 export const CATEGORY_LABEL_MAP: Partial<Record<CategoryFilterValue, string>> = {
   "": "카테고리",
@@ -11,14 +11,14 @@ export const CATEGORY_LABEL_MAP: Partial<Record<CategoryFilterValue, string>> = 
   ETC: "기타",
 };
 
-export const SORT_LABEL_MAP: Record<string, string> = {
-  latest: "최신순",
-  oldest: "오래된 순",
-  favorite: "즐겨찾기순",
-  views: "조회수순",
+export const SORT_LABEL_MAP: Record<SortFilterValue, string> = {
+  LATEST: "최신순",
+  OLDEST: "오래된 순",
+  MOST_FAVORITE: "즐겨찾기 많은 순",
+  MOST_VIEWS: "조회수 많은 순",
 };
 
-export const STATUS_LABEL_MAP: Record<StatusFilterValue | "", string> = {
+export const STATUS_LABEL_MAP: Record<StatusFilterValue, string> = {
   "": "전체",
   SEARCHING: "찾는중",
   FOUND: "찾음",

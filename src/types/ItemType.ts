@@ -33,7 +33,7 @@ export type CategoryFilterValue = "" | CategoryType;
 
 export type PostType = "LOST" | "FOUND";
 
-export type SortFilterValue = "LATEST" | "OLDEST" | "MOST_FAVORITE" | "MOST_VIEWS";
+export type SortFilterValue = "LATEST" | "OLDEST" | "MOST_FAVORITE" | "MOST_VIEWS"; // 임시 type API 수정 후 변경
 
 export type ItemStatus = "SEARCHING" | "FOUND";
 export type StatusFilterValue = "" | ItemStatus;
