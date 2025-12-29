@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useGetPost } from "@/api/fetch/post";
 import { Tab } from "@/components";
@@ -16,12 +15,6 @@ interface DefaultListProps {
 
 const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
   const searchParams = useSearchParams();
-  const [filters, setFilters] = useState({
-    region: "",
-    category: "",
-    sort: "latest",
-    status: "",
-  });
 
   const rawType = searchParams.get("type");
   const type: PostType = rawType === "found" ? "FOUND" : "LOST";
@@ -36,11 +29,7 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
         onValueChange={(key) => searchUpdateQuery("type", key)}
       />
 
-      <FilterSection
-        searchUpdateQuery={searchUpdateQuery}
-        filters={filters}
-        setFilters={setFilters}
-      />
+      <FilterSection />
 
       <section aria-label="게시글 목록" className="w-full">
         {data?.result?.map((item) => (

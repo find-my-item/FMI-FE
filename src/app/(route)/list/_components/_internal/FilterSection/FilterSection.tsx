@@ -1,22 +1,30 @@
+import { useState } from "react";
 import { Filter } from "@/components";
-import { Dispatch, SetStateAction, useState } from "react";
 import FilterBottomSheet from "../FilterBottomSheet/FilterBottomSheet";
 
-interface FilterSectionProps {
-  searchUpdateQuery: (key: string, value?: string) => void;
-  filters: {
-    region: string;
-    category: string;
-    sort: string;
-    status: string;
-  };
-  setFilters: Dispatch<
-    SetStateAction<{ region: string; category: string; sort: string; status: string }>
-  >;
-}
+export type FilterTab = "region" | "category" | "sort" | "status";
 
-const FilterSection = ({ searchUpdateQuery, filters, setFilters }: FilterSectionProps) => {
+const FilterSection = () => {
+  const [filters, setFilters] = useState({
+    region: "",
+    category: "",
+    sort: "latest",
+    status: "",
+  });
+
+  const [selectedTab, setSelectedTab] = useState<FilterTab>("region");
   const [isOpen, setIsOpen] = useState(false);
+
+  const openSheet = (tab: FilterTab) => {
+    setSelectedTab(tab);
+    setIsOpen(true);
+  };
+
+  const filterButtons: { label: string; tab: FilterTab }[] = [
+    { label: "카테고리", tab: "category" },
+    { label: "최신순", tab: "sort" },
+    { label: "찾는중", tab: "status" },
+  ];
 
   return (
     <>
@@ -28,28 +36,39 @@ const FilterSection = ({ searchUpdateQuery, filters, setFilters }: FilterSection
           ariaLabel="지역 선택 필터 버튼"
           onSelected={false}
           icon={{ name: "Location", size: 16 }}
-          onClick={() => searchUpdateQuery("search", "region")}
           className="flex-shrink-0"
+          onClick={() => {
+            openSheet("region");
+          }}
         >
           지역 선택
         </Filter>
 
-        {["카테고리", "최신순", "찾는중"].map((item) => (
+        {filterButtons.map(({ label, tab }) => (
           <Filter
-            key={item}
-            ariaLabel={item}
+            key={tab}
+            ariaLabel={label}
             onSelected={false}
             iconPosition="trailing"
             icon={{ name: "ArrowDown", size: 12 }}
             className="flex-shrink-0"
-            onClick={() => setIsOpen(true)}
+            onClick={() => openSheet(tab)}
           >
-            {item}
+            {label}
           </Filter>
         ))}
       </section>
 
-      {isOpen && <FilterBottomSheet isOpen={isOpen} setIsOpen={setIsOpen} />}
+      {isOpen && (
+        <FilterBottomSheet
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          selectedTab={selectedTab}
+          setSelectedTab={setSelectedTab}
+          filters={filters}
+          setFilters={setFilters}
+        />
+      )}
     </>
   );
 };
