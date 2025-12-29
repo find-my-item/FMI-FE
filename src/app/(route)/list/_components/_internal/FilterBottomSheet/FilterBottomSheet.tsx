@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/utils";
 import { Button, Icon, PopupLayout } from "@/components";
 import { FilterTab } from "./types";
@@ -25,6 +25,19 @@ const FilterBottomSheet = ({
   setFilters,
 }: FilterBottomSheetProps) => {
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const handleApply = () => {
+    const qs = applyFiltersToUrl({
+      filters,
+      searchParams: new URLSearchParams(searchParams.toString()),
+    });
+
+    router.replace(qs ? `${pathname}?${qs}` : pathname);
+    setIsOpen(false);
+  };
+
   return (
     <PopupLayout isOpen={isOpen} onClose={() => setIsOpen(false)} className="min-h-[530px] py-10">
       <div className="w-full gap-6 flex-col-center">
@@ -121,7 +134,7 @@ const FilterBottomSheet = ({
 
       <div className="h-[230px] w-full" />
 
-      <Button className="w-full" onClick={() => applyFiltersToUrl({ filters, searchParams })}>
+      <Button className="w-full" onClick={handleApply}>
         적용하기
       </Button>
     </PopupLayout>

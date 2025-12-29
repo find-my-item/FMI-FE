@@ -1,4 +1,8 @@
-import { CategoryFilterValue, SortFilterValue, StatusFilterValue } from "@/types";
+import {
+  CategoryFilterValue,
+  SortFilterValue,
+  StatusFilterValue,
+} from "../FilterBottomSheet/types";
 
 export type FiltersState = {
   region: string;

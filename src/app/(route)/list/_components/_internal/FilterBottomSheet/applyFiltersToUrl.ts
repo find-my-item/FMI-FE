@@ -1,5 +1,5 @@
-import { CategoryFilterValue, SortFilterValue, StatusFilterValue } from "@/types";
 import { FiltersState } from "../FilterSection/filtersStateType";
+import { CategoryFilterValue, SortFilterValue, StatusFilterValue } from "./types";
 
 const categoryToQueryValue = (category: CategoryFilterValue) => {
   if (!category) return "";

@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { Filter } from "@/components";
 import FilterBottomSheet from "../FilterBottomSheet/FilterBottomSheet";
-import { CategoryFilterValue, SortFilterValue, StatusFilterValue } from "@/types";
 import { CATEGORY_LABEL_MAP, SORT_LABEL_MAP, STATUS_LABEL_MAP } from "../FilterBottomSheet/LABELS";
-import { FilterTab } from "../FilterBottomSheet/types";
+import {
+  CategoryFilterValue,
+  FilterTab,
+  SortFilterValue,
+  StatusFilterValue,
+} from "../FilterBottomSheet/types";
 import { FiltersState } from "./filtersStateType";
 import { getFilterSelectedFlags } from "./getFilterSelectedFlags";
 
@@ -26,9 +30,9 @@ const FilterSection = () => {
   const { isRegionSelected, isCategorySelected, isSortSelected, isStatusSelected } =
     getFilterSelectedFlags(filters);
 
-  const categoryLabel = CATEGORY_LABEL_MAP[filters.category] ?? "카테고리";
-  const sortLabel = SORT_LABEL_MAP[filters.sort] ?? "최신순";
-  const statusLabel = STATUS_LABEL_MAP[filters.status] ?? "전체";
+  const categoryLabel = CATEGORY_LABEL_MAP[filters.category as CategoryFilterValue] ?? "카테고리";
+  const sortLabel = SORT_LABEL_MAP[filters.sort as SortFilterValue] ?? "최신순";
+  const statusLabel = STATUS_LABEL_MAP[filters.status as StatusFilterValue] ?? "전체";
 
   return (
     <>

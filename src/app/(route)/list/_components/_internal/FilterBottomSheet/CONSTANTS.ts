@@ -1,5 +1,5 @@
-import { CategoryFilterValue, SortFilterValue, StatusFilterValue } from "@/types";
 import { FilterTab } from "./types";
+import { CategoryFilterValue, SortFilterValue, StatusFilterValue } from "./types";
 
 export const tabs: { label: string; value: FilterTab }[] = [
   { label: "지역", value: "region" },

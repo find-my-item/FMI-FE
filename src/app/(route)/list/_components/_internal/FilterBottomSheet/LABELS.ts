@@ -1,4 +1,4 @@
-import { CategoryFilterValue, SortFilterValue, StatusFilterValue } from "@/types";
+import { CategoryFilterValue, SortFilterValue, StatusFilterValue } from "./types";
 
 export const CATEGORY_LABEL_MAP: Partial<Record<CategoryFilterValue, string>> = {
   "": "카테고리",
