@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { cn } from "@/utils";
-import { CategoryFilterValue, StatusFilterValue } from "@/types";
+import { CategoryFilterValue, SortFilterValue, StatusFilterValue } from "@/types";
 import { Button, Icon, PopupLayout } from "@/components";
 import { FilterTab } from "./types";
 import { tabs, categories, sort, status } from "./CONSTANTS";
@@ -18,7 +18,7 @@ interface FilterBottomSheetProps {
     SetStateAction<{
       region: string;
       category: CategoryFilterValue;
-      sort: string;
+      sort: SortFilterValue;
       status: StatusFilterValue;
     }>
   >;
@@ -49,6 +49,7 @@ const FilterBottomSheet = ({
                 aria-selected={isSelected}
                 className={cn(
                   "min-h-[60px] flex-1 text-[20px] font-semibold",
+                  // TODO(지권): 디자인 토큰 변경
                   isSelected ? "border-b-2 border-[#1EB87B] text-[#1EB87B]" : "text-[#ADADAD]"
                 )}
                 onClick={() => setSelectedTab(tab.value)}
@@ -91,7 +92,7 @@ const FilterBottomSheet = ({
                 label={category.label}
                 value={category.value}
                 selected={filters.category === category.value}
-                onSelect={(v) => setFilters((prev) => ({ ...prev, category: category.value }))}
+                onSelect={() => setFilters((prev) => ({ ...prev, category: category.value }))}
               />
             ))}
           </div>
@@ -99,13 +100,13 @@ const FilterBottomSheet = ({
 
         {selectedTab === "sort" && (
           <div className="flex w-full flex-wrap gap-2">
-            {sort.map((item, index) => (
+            {sort.map((sortItem, index) => (
               <ChipButton
                 key={index}
-                label={item.label}
-                value={item.value}
-                selected={filters.sort === item.value}
-                onSelect={(v) => setFilters((prev) => ({ ...prev, sort: v }))}
+                label={sortItem.label}
+                value={sortItem.value}
+                selected={filters.sort === sortItem.value}
+                onSelect={() => setFilters((prev) => ({ ...prev, sort: sortItem.value }))}
               />
             ))}
           </div>
@@ -113,13 +114,13 @@ const FilterBottomSheet = ({
 
         {selectedTab === "status" && (
           <div className="flex w-full flex-wrap gap-2">
-            {status.map((item, index) => (
+            {status.map((statusItem, index) => (
               <ChipButton
                 key={index}
-                label={item.label}
-                value={item.value}
-                selected={filters.status === item.value}
-                onSelect={() => setFilters((prev) => ({ ...prev, status: item.value }))}
+                label={statusItem.label}
+                value={statusItem.value}
+                selected={filters.status === statusItem.value}
+                onSelect={() => setFilters((prev) => ({ ...prev, status: statusItem.value }))}
               />
             ))}
           </div>

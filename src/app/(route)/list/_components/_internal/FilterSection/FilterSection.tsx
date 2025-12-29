@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Filter } from "@/components";
 import FilterBottomSheet from "../FilterBottomSheet/FilterBottomSheet";
-import { CategoryFilterValue, StatusFilterValue } from "@/types";
+import { CategoryFilterValue, SortFilterValue, StatusFilterValue } from "@/types";
 import { CATEGORY_LABEL_MAP, SORT_LABEL_MAP, STATUS_LABEL_MAP } from "../FilterBottomSheet/LABELS";
 import { FilterTab } from "../FilterBottomSheet/types";
 import { FiltersState } from "./filtersStateType";
@@ -11,7 +11,7 @@ const FilterSection = () => {
   const [filters, setFilters] = useState<FiltersState>({
     region: "",
     category: "" as CategoryFilterValue,
-    sort: "latest", // TODO(지권): 정렬 API 누락
+    sort: "LATEST" as SortFilterValue,
     status: "" as StatusFilterValue,
   });
 

@@ -3,7 +3,7 @@ import { FiltersState } from "./filtersStateType";
 export const getFilterSelectedFlags = (filters: FiltersState) => {
   const isRegionSelected = filters.region.trim().length > 0;
   const isCategorySelected = filters.category !== "";
-  const isSortSelected = filters.sort !== "latest";
+  const isSortSelected = filters.sort !== "LATEST";
   const isStatusSelected = filters.status !== "";
 
   return {

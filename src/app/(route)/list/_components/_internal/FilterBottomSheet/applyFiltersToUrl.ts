@@ -1,4 +1,4 @@
-import { CategoryFilterValue, StatusFilterValue } from "@/types";
+import { CategoryFilterValue, SortFilterValue, StatusFilterValue } from "@/types";
 import { FiltersState } from "../FilterSection/filtersStateType";
 
 const categoryToQueryValue = (category: CategoryFilterValue) => {
@@ -18,18 +18,18 @@ const categoryToQueryValue = (category: CategoryFilterValue) => {
   return map[category];
 };
 
-// TODO(지권): 누락된 API 수정 후 주석 해제
-// const itemStatusToQueryValue = (itemStatus: string) => {
-//   if (!itemStatus) return "";
+const sortToQueryValue = (sort: SortFilterValue) => {
+  if (!sort) return "";
 
-//   const map: Record<string, string> = {
-//     "": "",
-//     LOST: "lost",
-//     FOUND: "found",
-//   };
+  const map: Record<SortFilterValue, string> = {
+    LATEST: "latest",
+    OLDEST: "oldest",
+    MOST_FAVORITE: "mostFavorite",
+    MOST_VIEWS: "mostViews",
+  };
 
-//   return map[itemStatus];
-// };
+  return map[sort];
+};
 
 const statusToQueryValue = (status: StatusFilterValue) => {
   if (!status) return "";
@@ -58,7 +58,7 @@ export const applyFiltersToUrl = ({ filters, searchParams }: ApplyFiltersToUrlPr
 
   upsert("region", filters.region);
   upsert("category", categoryToQueryValue(filters.category));
-  upsert("sort", filters.sort);
+  upsert("sort", sortToQueryValue(filters.sort));
   upsert("status", statusToQueryValue(filters.status));
 
   return params.toString();
