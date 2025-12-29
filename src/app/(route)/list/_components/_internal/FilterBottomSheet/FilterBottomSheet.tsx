@@ -5,18 +5,15 @@ import { CategoryFilterValue, StatusFilterValue } from "@/types";
 import { Button, Icon, PopupLayout } from "@/components";
 import { FilterTab } from "./types";
 import { tabs, categories, sort, status } from "./CONSTANTS";
+import { applyFiltersToUrl } from "./applyFiltersToUrl";
+import { FiltersState } from "../FilterSection/filtersStateType";
 
 interface FilterBottomSheetProps {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
   selectedTab: FilterTab;
   setSelectedTab: (tab: FilterTab) => void;
-  filters: {
-    region: string;
-    category: CategoryFilterValue;
-    sort: string;
-    status: StatusFilterValue;
-  };
+  filters: FiltersState;
   setFilters: Dispatch<
     SetStateAction<{
       region: string;
@@ -27,23 +24,6 @@ interface FilterBottomSheetProps {
   >;
 }
 
-const categoryToQueryValue = (category: CategoryFilterValue | "") => {
-  if (!category) return "";
-
-  const map: Record<CategoryFilterValue, string> = {
-    "": "",
-    ELECTRONICS: "electronics",
-    WALLET: "wallet",
-    ID_CARD: "id-card",
-    JEWELRY: "jewelry",
-    BAG: "bag",
-    CARD: "card",
-    ETC: "etc",
-  };
-
-  return map[category];
-};
-
 const FilterBottomSheet = ({
   isOpen,
   setIsOpen,
@@ -52,29 +32,7 @@ const FilterBottomSheet = ({
   filters,
   setFilters,
 }: FilterBottomSheetProps) => {
-  const router = useRouter();
-  const pathname = usePathname();
   const searchParams = useSearchParams();
-
-  const applyFiltersToUrl = () => {
-    const params = new URLSearchParams(searchParams.toString());
-
-    const upsert = (key: string, value: string) => {
-      if (!value) params.delete(key);
-      else params.set(key, value);
-    };
-
-    upsert("region", filters.region);
-    upsert("category", categoryToQueryValue(filters.category));
-    upsert("sort", filters.sort);
-    upsert("status", filters.status);
-
-    const qs = params.toString();
-    router.replace(qs ? `${pathname}?${qs}` : pathname);
-
-    setIsOpen(false);
-  };
-
   return (
     <PopupLayout isOpen={isOpen} onClose={() => setIsOpen(false)} className="min-h-[530px] py-10">
       <div className="w-full gap-6 flex-col-center">
@@ -101,7 +59,6 @@ const FilterBottomSheet = ({
           })}
         </section>
 
-        {/* 콘텐츠 영역 */}
         {selectedTab === "region" && (
           <div className="relative w-full">
             <Icon
@@ -171,7 +128,7 @@ const FilterBottomSheet = ({
 
       <div className="h-[230px] w-full" />
 
-      <Button className="w-full" onClick={applyFiltersToUrl}>
+      <Button className="w-full" onClick={() => applyFiltersToUrl({ filters, searchParams })}>
         적용하기
       </Button>
     </PopupLayout>
