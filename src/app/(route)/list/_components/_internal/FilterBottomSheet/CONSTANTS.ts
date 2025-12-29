@@ -1,4 +1,4 @@
-import { CategoryFilterValue } from "@/types";
+import { CategoryFilterValue, StatusFilterValue } from "@/types";
 import { FilterTab } from "../FilterSection/FilterSection";
 
 export const tabs: { label: string; value: FilterTab }[] = [
@@ -26,8 +26,8 @@ export const sort = [
   { label: "조회수 많은 순", value: "mostViews" },
 ];
 
-export const status = [
+export const status: { label: string; value: StatusFilterValue }[] = [
   { label: "전체", value: "" },
-  { label: "찾는중", value: "finding" },
-  { label: "찾았음", value: "found" },
+  { label: "찾는중", value: "SEARCHING" },
+  { label: "찾았음", value: "FOUND" },
 ];

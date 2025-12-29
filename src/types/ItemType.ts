@@ -35,3 +35,5 @@ export type CategoryFilterValue = "" | CategoryType;
 export type PostType = "LOST" | "FOUND";
 
 export type ItemStatus = "SEARCHING" | "FOUND";
+
+export type StatusFilterValue = "" | "SEARCHING" | "FOUND";

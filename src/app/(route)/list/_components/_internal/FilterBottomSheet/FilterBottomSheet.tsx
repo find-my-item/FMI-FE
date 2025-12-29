@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/utils";
-import { CategoryFilterValue } from "@/types";
+import { CategoryFilterValue, StatusFilterValue } from "@/types";
 import { Button, Icon, PopupLayout } from "@/components";
 import { FilterTab } from "../FilterSection/FilterSection";
 import { tabs, categories, sort, status } from "./CONSTANTS";
@@ -15,10 +15,15 @@ interface FilterBottomSheetProps {
     region: string;
     category: CategoryFilterValue;
     sort: string;
-    status: string;
+    status: StatusFilterValue;
   };
   setFilters: Dispatch<
-    SetStateAction<{ region: string; category: CategoryFilterValue; sort: string; status: string }>
+    SetStateAction<{
+      region: string;
+      category: CategoryFilterValue;
+      sort: string;
+      status: StatusFilterValue;
+    }>
   >;
 }
 
@@ -157,7 +162,7 @@ const FilterBottomSheet = ({
                 label={item.label}
                 value={item.value}
                 selected={filters.status === item.value}
-                onSelect={(v) => setFilters((prev) => ({ ...prev, status: v }))}
+                onSelect={() => setFilters((prev) => ({ ...prev, status: item.value }))}
               />
             ))}
           </div>

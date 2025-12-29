@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Filter } from "@/components";
 import FilterBottomSheet from "../FilterBottomSheet/FilterBottomSheet";
-import { CategoryFilterValue } from "@/types";
+import { CategoryFilterValue, StatusFilterValue } from "@/types";
 
 export type FilterTab = "region" | "category" | "sort" | "status";
 
@@ -9,8 +9,8 @@ const FilterSection = () => {
   const [filters, setFilters] = useState({
     region: "",
     category: "" as CategoryFilterValue,
-    sort: "latest",
-    status: "",
+    sort: "latest", // TODO(지권): 정렬 API 누락
+    status: "" as StatusFilterValue,
   });
 
   const [selectedTab, setSelectedTab] = useState<FilterTab>("region");
