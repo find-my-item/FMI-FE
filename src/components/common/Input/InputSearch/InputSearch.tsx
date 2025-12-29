@@ -53,19 +53,23 @@ interface InputSearchProps extends InputHTMLAttributes<HTMLInputElement> {
   onEnter: (value: string) => void;
 }
 
-const InputSearch = ({ name, mode, validation, onEnter, ...props }: InputSearchProps) => {
+// RHF 모드용 컴포넌트
+const InputSearchRHF = ({
+  name,
+  validation,
+  onEnter,
+  ...props
+}: Omit<InputSearchProps, "mode">) => {
   const { register, watch, setValue } = useFormContext();
   const rhfValue = watch(name) || "";
 
-  const [innerValue, setInnerValue] = useState("");
-
   const onChangeDelete = () => {
-    mode === "RHF" ? setValue(name, "") : setInnerValue("");
+    setValue(name, "");
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== "Enter") return;
-    onEnter?.(mode === "RHF" ? rhfValue : innerValue);
+    onEnter?.(rhfValue);
   };
 
   return (
@@ -74,22 +78,63 @@ const InputSearch = ({ name, mode, validation, onEnter, ...props }: InputSearchP
 
       <input
         id={name}
-        {...(mode === "RHF"
-          ? register(name, validation)
-          : { value: innerValue, onChange: (e) => setInnerValue(e.target.value) })}
+        {...register(name, validation)}
         {...props}
         className="h-11 min-w-0 flex-1 rounded-[24px] border px-10 text-body1-regular text-neutral-normal-placeholder bg-fill-neutral-subtle-default hover:text-neutral-normal-hover focus:border-black focus:text-neutral-normal-focused"
         onKeyDown={handleKeyDown}
       />
 
-      {/* 삭제 버튼 */}
       <DeleteButton
-        value={mode === "RHF" ? rhfValue : innerValue}
+        value={rhfValue}
         className="right-5 top-1/2 -translate-y-1/2"
         onDelete={onChangeDelete}
       />
     </div>
   );
+};
+
+// onChange 모드용 컴포넌트
+const InputSearchOnChange = ({
+  name,
+  onEnter,
+  ...props
+}: Omit<InputSearchProps, "mode" | "validation">) => {
+  const [innerValue, setInnerValue] = useState("");
+
+  const onChangeDelete = () => {
+    setInnerValue("");
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key !== "Enter") return;
+    onEnter?.(innerValue);
+  };
+
+  return (
+    <div className="relative flex w-full flex-row gap-2">
+      <Icon name="Search" size={16} className="absolute left-5 top-1/2 -translate-y-1/2" />
+
+      <input
+        id={name}
+        value={innerValue}
+        onChange={(e) => setInnerValue(e.target.value)}
+        {...props}
+        className="h-11 min-w-0 flex-1 rounded-[24px] border px-10 text-body1-regular text-neutral-normal-placeholder bg-fill-neutral-subtle-default hover:text-neutral-normal-hover focus:border-black focus:text-neutral-normal-focused"
+        onKeyDown={handleKeyDown}
+      />
+
+      <DeleteButton
+        value={innerValue}
+        className="right-5 top-1/2 -translate-y-1/2"
+        onDelete={onChangeDelete}
+      />
+    </div>
+  );
+};
+
+// 메인 컴포넌트
+const InputSearch = ({ mode, ...props }: InputSearchProps) => {
+  return mode === "RHF" ? <InputSearchRHF {...props} /> : <InputSearchOnChange {...props} />;
 };
 
 export default InputSearch;
