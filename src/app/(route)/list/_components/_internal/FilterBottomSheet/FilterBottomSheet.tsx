@@ -1,10 +1,10 @@
 import { Dispatch, SetStateAction } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/utils";
+import { CategoryFilterValue } from "@/types";
 import { Button, Icon, PopupLayout } from "@/components";
 import { FilterTab } from "../FilterSection/FilterSection";
 import { tabs, categories, sort, status } from "./CONSTANTS";
-import { CategoryType } from "@/types";
 
 interface FilterBottomSheetProps {
   isOpen: boolean;
@@ -13,19 +13,19 @@ interface FilterBottomSheetProps {
   setSelectedTab: (tab: FilterTab) => void;
   filters: {
     region: string;
-    category: CategoryType;
+    category: CategoryFilterValue;
     sort: string;
     status: string;
   };
   setFilters: Dispatch<
-    SetStateAction<{ region: string; category: CategoryType; sort: string; status: string }>
+    SetStateAction<{ region: string; category: CategoryFilterValue; sort: string; status: string }>
   >;
 }
 
-const categoryToQueryValue = (category: CategoryType | "") => {
+const categoryToQueryValue = (category: CategoryFilterValue | "") => {
   if (!category) return "";
 
-  const map: Record<CategoryType, string> = {
+  const map: Record<CategoryFilterValue, string> = {
     "": "",
     ELECTRONICS: "electronics",
     WALLET: "wallet",

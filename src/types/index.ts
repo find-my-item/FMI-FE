@@ -1,2 +1,2 @@
 export * from "./ToastTypes";
-export type { CategoryType } from "./CategoryType";
+export type { CategoryType, PostType, ItemStatus, CategoryFilterValue } from "./CategoryType";

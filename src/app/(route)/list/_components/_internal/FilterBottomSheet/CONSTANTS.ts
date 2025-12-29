@@ -1,4 +1,4 @@
-import { CategoryType } from "@/types";
+import { CategoryFilterValue } from "@/types";
 import { FilterTab } from "../FilterSection/FilterSection";
 
 export const tabs: { label: string; value: FilterTab }[] = [
@@ -8,7 +8,7 @@ export const tabs: { label: string; value: FilterTab }[] = [
   { label: "찾음여부", value: "status" },
 ];
 
-export const categories: { label: string; value: CategoryType }[] = [
+export const categories: { label: string; value: CategoryFilterValue }[] = [
   { label: "전체", value: "" },
   { label: "전자기기", value: "ELECTRONICS" },
   { label: "지갑", value: "WALLET" },
