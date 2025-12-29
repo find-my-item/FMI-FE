@@ -1,7 +1,10 @@
 import { Dispatch, SetStateAction } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/utils";
 import { Button, Icon, PopupLayout } from "@/components";
 import { FilterTab } from "../FilterSection/FilterSection";
+import { tabs, categories, sort, status } from "./CONSTANTS";
+import { CategoryType } from "@/types";
 
 interface FilterBottomSheetProps {
   isOpen: boolean;
@@ -10,34 +13,63 @@ interface FilterBottomSheetProps {
   setSelectedTab: (tab: FilterTab) => void;
   filters: {
     region: string;
-    category: string;
+    category: CategoryType;
     sort: string;
     status: string;
   };
   setFilters: Dispatch<
-    SetStateAction<{ region: string; category: string; sort: string; status: string }>
+    SetStateAction<{ region: string; category: CategoryType; sort: string; status: string }>
   >;
 }
 
-const styles = {
-  baseButton: "min-h-[60px] flex-1 font-semibold text-[20px]",
-  selectedButton: "border-b-2 border-[#1EB87B] text-[#1EB87B]",
-  unselectedButton: "text-[#ADADAD]",
-};
+const categoryToQueryValue = (category: CategoryType | "") => {
+  if (!category) return "";
 
-const tabs: { label: string; value: FilterTab }[] = [
-  { label: "지역", value: "region" },
-  { label: "카테고리", value: "category" },
-  { label: "정렬", value: "sort" },
-  { label: "찾음여부", value: "status" },
-];
+  const map: Record<CategoryType, string> = {
+    "": "",
+    ELECTRONICS: "electronics",
+    WALLET: "wallet",
+    ID_CARD: "id-card",
+    JEWELRY: "jewelry",
+    BAG: "bag",
+    CARD: "card",
+    ETC: "etc",
+  };
+
+  return map[category];
+};
 
 const FilterBottomSheet = ({
   isOpen,
   setIsOpen,
   selectedTab,
   setSelectedTab,
+  filters,
+  setFilters,
 }: FilterBottomSheetProps) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const applyFiltersToUrl = () => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    const upsert = (key: string, value: string) => {
+      if (!value) params.delete(key);
+      else params.set(key, value);
+    };
+
+    upsert("region", filters.region);
+    upsert("category", categoryToQueryValue(filters.category));
+    upsert("sort", filters.sort);
+    upsert("status", filters.status);
+
+    const qs = params.toString();
+    router.replace(qs ? `${pathname}?${qs}` : pathname);
+
+    setIsOpen(false);
+  };
+
   return (
     <PopupLayout isOpen={isOpen} onClose={() => setIsOpen(false)} className="min-h-[530px] py-10">
       <div className="w-full gap-6 flex-col-center">
@@ -53,8 +85,8 @@ const FilterBottomSheet = ({
                 role="tab"
                 aria-selected={isSelected}
                 className={cn(
-                  styles.baseButton,
-                  isSelected ? styles.selectedButton : styles.unselectedButton
+                  "min-h-[60px] flex-1 text-[20px] font-semibold",
+                  isSelected ? "border-b-2 border-[#1EB87B] text-[#1EB87B]" : "text-[#ADADAD]"
                 )}
                 onClick={() => setSelectedTab(tab.value)}
               >
@@ -75,29 +107,66 @@ const FilterBottomSheet = ({
             <input
               className="w-full rounded-full px-5 py-[10px] pl-10 bg-fill-neutral-subtle-default"
               placeholder="검색어를 입력하세요"
+              value={filters.region}
+              onChange={(e) => setFilters((prev) => ({ ...prev, region: e.target.value }))}
             />
-            <Icon
-              name="Delete"
-              size={16}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
-            />
+            <button
+              type="button"
+              onClick={() => setFilters((prev) => ({ ...prev, region: "" }))}
+              className="absolute right-3 top-1/2 -translate-y-1/2"
+              aria-label="지역 검색어 지우기"
+            >
+              <Icon name="Delete" size={16} className="text-gray-400" />
+            </button>
           </div>
         )}
 
         {selectedTab === "category" && (
-          <div className="w-full text-sm text-gray-500">카테고리 필터 UI</div>
+          <div className="flex w-full flex-wrap gap-2">
+            {categories.map((category) => (
+              <ChipButton
+                key={category.value || "all"}
+                label={category.label}
+                value={category.value}
+                selected={filters.category === category.value}
+                onSelect={(v) => setFilters((prev) => ({ ...prev, category: category.value }))}
+              />
+            ))}
+          </div>
         )}
 
-        {selectedTab === "sort" && <div className="w-full text-sm text-gray-500">정렬 필터 UI</div>}
+        {selectedTab === "sort" && (
+          <div className="flex w-full flex-wrap gap-2">
+            {sort.map((item, index) => (
+              <ChipButton
+                key={index}
+                label={item.label}
+                value={item.value}
+                selected={filters.sort === item.value}
+                onSelect={(v) => setFilters((prev) => ({ ...prev, sort: v }))}
+              />
+            ))}
+          </div>
+        )}
 
         {selectedTab === "status" && (
-          <div className="w-full text-sm text-gray-500">찾음 여부 필터 UI</div>
+          <div className="flex w-full flex-wrap gap-2">
+            {status.map((item, index) => (
+              <ChipButton
+                key={index}
+                label={item.label}
+                value={item.value}
+                selected={filters.status === item.value}
+                onSelect={(v) => setFilters((prev) => ({ ...prev, status: v }))}
+              />
+            ))}
+          </div>
         )}
       </div>
 
       <div className="h-[230px] w-full" />
 
-      <Button className="w-full" onClick={() => setIsOpen(false)}>
+      <Button className="w-full" onClick={applyFiltersToUrl}>
         적용하기
       </Button>
     </PopupLayout>
@@ -105,3 +174,31 @@ const FilterBottomSheet = ({
 };
 
 export default FilterBottomSheet;
+
+const ChipButton = ({
+  label,
+  value,
+  selected,
+  onSelect,
+}: {
+  label: string;
+  value: string;
+  selected: boolean;
+  onSelect: (value: string) => void;
+}) => {
+  return (
+    <button
+      type="button"
+      onClick={() => onSelect(value)}
+      className={cn(
+        "rounded-full px-[18px] py-2 text-body1-semibold",
+        selected
+          ? "text-white bg-fill-neutralInversed-normal-enteredSelected"
+          : "text-neutralInversed-normal-default bg-fill-neutralInversed-normal-default"
+      )}
+      aria-pressed={selected}
+    >
+      {label}
+    </button>
+  );
+};

@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { Filter } from "@/components";
 import FilterBottomSheet from "../FilterBottomSheet/FilterBottomSheet";
+import { CategoryType } from "@/types";
 
 export type FilterTab = "region" | "category" | "sort" | "status";
 
 const FilterSection = () => {
   const [filters, setFilters] = useState({
     region: "",
-    category: "",
+    category: "" as CategoryType,
     sort: "latest",
     status: "",
   });

@@ -5,6 +5,7 @@
  *
  * - 이 타입은 분실물 및 습득물 게시글의 카테고리를 나타냅니다.
  *
+ * - "": 전체
  * - ELECTRONIC: 전자기기
  * - WALLET: 지갑
  * - ID_CARD: 신분증
@@ -15,6 +16,7 @@
  */
 
 export type CategoryType =
+  | ""
   | "ELECTRONICS"
   | "WALLET"
   | "ID_CARD"
