@@ -1,7 +1,7 @@
 "use client";
 "use no memo";
 
-import { InputHTMLAttributes } from "react";
+import { InputHTMLAttributes, KeyboardEvent } from "react";
 import Icon from "../../Icon/Icon";
 import { useState } from "react";
 import { RegisterOptions, useFormContext } from "react-hook-form";
@@ -67,7 +67,7 @@ const InputSearchRHF = ({
     setValue(name, "");
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== "Enter") return;
     onEnter?.(rhfValue);
   };
@@ -105,7 +105,7 @@ const InputSearchOnChange = ({
     setInnerValue("");
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== "Enter") return;
     onEnter?.(innerValue);
   };
