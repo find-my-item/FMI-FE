@@ -1,20 +1,27 @@
 "use client";
 
+import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useGetPost } from "@/api/fetch/post";
-import { Filter, Tab } from "@/components";
-import ListItem from "../ListItem/ListItem";
+import { Tab } from "@/components";
 import { TABS } from "../../_constants/TABS";
+import ListItem from "../ListItem/ListItem";
+import FilterSection from "../_internal/FilterSection/FilterSection";
 
 type PostType = "LOST" | "FOUND";
 
 interface DefaultListProps {
   searchUpdateQuery: (key: string, value?: string) => void;
-  // dropdowns?: { value: string; setValue: Dispatch<SetStateAction<string>>; icon: IconName }[];
 }
 
 const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
   const searchParams = useSearchParams();
+  const [filters, setFilters] = useState({
+    region: "",
+    category: "",
+    sort: "latest",
+    status: "",
+  });
 
   const rawType = searchParams.get("type");
   const type: PostType = rawType === "found" ? "FOUND" : "LOST";
@@ -29,23 +36,11 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
         onValueChange={(key) => searchUpdateQuery("type", key)}
       />
 
-      <section aria-label="필터 영역" className="flex h-[67px] w-full items-center gap-2 px-5">
-        <Filter
-          ariaLabel="지역 선택 필터 버튼"
-          children={"지역 선택"}
-          onSelected={false}
-          icon={{ name: "Location", size: 16 }}
-          onClick={() => searchUpdateQuery("search", "region")}
-        />
-        {/* TODO(형준): UI 깨짐 현상으로 인한 주석처리 */}
-        {/* {dropdowns.map(({ value, setValue, icon }, idx) => (
-          <Dropdown key={idx} options={[]} onSelect={setValue} className="gap-[4px]">
-            {idx === 0 && <Icon name={icon} size={16} />}
-            <span className="text-[16px] font-semibold text-[#525252]">{value}</span>
-            {idx !== 0 && <Icon name="ArrowDown" size={12} />}
-          </Dropdown>
-        ))} */}
-      </section>
+      <FilterSection
+        searchUpdateQuery={searchUpdateQuery}
+        filters={filters}
+        setFilters={setFilters}
+      />
 
       <section aria-label="게시글 목록" className="w-full">
         {data?.result?.map((item) => (
