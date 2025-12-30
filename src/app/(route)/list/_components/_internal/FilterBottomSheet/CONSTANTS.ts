@@ -17,7 +17,7 @@ export const categories = [
 ] as const;
 
 export const sort = [
-  { label: "최신순", value: "LATEST" },
+  { label: "최신순", value: "" },
   { label: "오래된 순", value: "OLDEST" },
   { label: "즐겨찾기 많은 순", value: "MOST_FAVORITED" },
   { label: "조회수 많은 순", value: "MOST_VIWED" },

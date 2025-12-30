@@ -15,7 +15,7 @@ const FilterSection = () => {
   const [filters, setFilters] = useState<FiltersState>({
     region: "",
     category: "" as CategoryFilterValue,
-    sort: "LATEST" as SortFilterValue,
+    sort: "" as SortFilterValue,
     status: "" as StatusFilterValue,
   });
 

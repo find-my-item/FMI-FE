@@ -22,7 +22,7 @@ const sortToQueryValue = (sort: SortFilterValue) => {
   if (!sort) return "";
 
   const map: Record<SortFilterValue, string> = {
-    LATEST: "latest",
+    "": "",
     OLDEST: "oldest",
     MOST_FAVORITED: "mostFavorite",
     MOST_VIWED: "mostViewed",

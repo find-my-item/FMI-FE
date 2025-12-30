@@ -12,7 +12,7 @@ export const CATEGORY_LABEL_MAP: Partial<Record<CategoryFilterValue, string>> = 
 };
 
 export const SORT_LABEL_MAP: Record<SortFilterValue, string> = {
-  LATEST: "최신순",
+  "": "최신순",
   OLDEST: "오래된 순",
   MOST_FAVORITED: "즐겨찾기 많은 순",
   MOST_VIWED: "조회수 많은 순",
