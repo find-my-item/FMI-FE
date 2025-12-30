@@ -1,20 +1,4 @@
-import { MYPAGE_PROFILE_INPUT } from "../../_constants/MYPAGE_PROFILE_INPUT";
 import { InputText, Button, Icon } from "@/components";
-
-// const myPageInputValidation = {
-//   "nickname": {
-//     required: true,
-//     maxLength: {
-//       value: 10,
-//     },
-//   },
-//   "email": {
-//     required: false,
-//   },
-//   "emailAuth": {
-//     required: false,
-//   },
-// };
 
 const MypageProfileForm = () => {
   const handleSubmitMypageProfile = () => {
@@ -33,15 +17,24 @@ const MypageProfileForm = () => {
       </div>
 
       <div className="flex w-full flex-col gap-5 p-5">
-        {MYPAGE_PROFILE_INPUT.map((item) => (
-          <InputText key={item.name} {...item}>
-            {item.children}
-          </InputText>
-        ))}
+        <InputText
+          name="nickname"
+          label="닉네임"
+          // TODO(수현): 기존 닉네임이 placeholder로 들어갈 예정
+          placeholder="기존 닉네임 표기"
+          rule="2~10자, 특수문자/금칙어 제한"
+          maxLength={10}
+          validation={{
+            required: true,
+            maxLength: 10,
+          }}
+        >
+          중복 확인
+        </InputText>
       </div>
 
-      <div className="sticky bottom-0 mt-auto h-[88px] w-full max-w-[390px] border-t border-divider-default bg-white px-4 py-3">
-        <Button type="button" variant="auth" ariaLabel="회원가입 폼 버튼">
+      <div className="sticky bottom-0 mt-auto h-[88px] w-full border-t border-divider-default bg-white px-4 py-3">
+        <Button type="submit" variant="auth" ariaLabel="설정완료 버튼">
           설정 완료
         </Button>
       </div>
