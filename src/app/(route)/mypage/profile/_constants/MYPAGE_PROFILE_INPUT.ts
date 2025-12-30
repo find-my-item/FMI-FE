@@ -9,6 +9,9 @@ export const MYPAGE_PROFILE_INPUT = [
     maxLength: 10,
     validation: {
       required: true,
+      maxLength: {
+        value: 10,
+      },
     },
   },
   {

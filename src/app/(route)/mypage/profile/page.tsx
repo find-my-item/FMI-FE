@@ -3,7 +3,7 @@
 import { DetailHeader } from "@/components";
 import { FormProvider, useForm } from "react-hook-form";
 import { Suspense } from "react";
-import MypageProfileForm from "./_components/MypageProfileForm/MypageProfileForm";
+import { MypageProfileForm } from "./_components";
 
 interface MypageProfileFormType {
   profile: string;
