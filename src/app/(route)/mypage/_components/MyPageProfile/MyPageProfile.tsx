@@ -18,8 +18,7 @@ const MyPageProfile = ({ userName, email }: ProfileProps) => {
         </div>
       </div>
       <Button as={Link} href="/mypage/profile" variant="outlined">
-        {" "}
-        프로필 수정{" "}
+        프로필 수정
       </Button>
     </div>
   );

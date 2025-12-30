@@ -1,13 +1,28 @@
 import { MYPAGE_PROFILE_INPUT } from "../../_constants/MYPAGE_PROFILE_INPUT";
 import { InputText, Button, Icon } from "@/components";
 
+// const myPageInputValidation = {
+//   "nickname": {
+//     required: true,
+//     maxLength: {
+//       value: 10,
+//     },
+//   },
+//   "email": {
+//     required: false,
+//   },
+//   "emailAuth": {
+//     required: false,
+//   },
+// };
+
 const MypageProfileForm = () => {
   const handleSubmitMypageProfile = () => {
     // TODO(수현): 폼 제출 함수 추가 예정
   };
 
   return (
-    <form onSubmit={handleSubmitMypageProfile} className="flex min-h-screen w-full flex-col">
+    <form onSubmit={handleSubmitMypageProfile} className="flex h-dvh w-full flex-col">
       <div className="flex justify-center py-[30px]">
         <div className="relative h-[80px] w-[80px]">
           <Icon name="UserProfile" size={80} />
