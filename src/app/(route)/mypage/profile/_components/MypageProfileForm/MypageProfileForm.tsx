@@ -1,4 +1,4 @@
-import { MYPAGE_PROFILE_INPUT } from "../_constants/MYPAGE_PROFILE_INPUT";
+import { MYPAGE_PROFILE_INPUT } from "../../_constants/MYPAGE_PROFILE_INPUT";
 import { InputText, Button, Icon } from "@/components";
 
 const MypageProfileForm = () => {
