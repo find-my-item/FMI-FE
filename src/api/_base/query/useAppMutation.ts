@@ -1,7 +1,7 @@
 "use client";
 
-import { useMutation, UseMutationOptions, UseMutationResult } from "@tanstack/react-query";
 import useAxios from "../axios/useAxios";
+import { useMutation, UseMutationOptions, UseMutationResult } from "@tanstack/react-query";
 
 // 제네릭
 // TVariables: mutate 호출 시 넣는 데이터 타입 (ex: {title: string; content: string})
