@@ -24,8 +24,8 @@ const sortToQueryValue = (sort: SortFilterValue) => {
   const map: Record<SortFilterValue, string> = {
     LATEST: "latest",
     OLDEST: "oldest",
-    MOST_FAVORITE: "mostFavorite",
-    MOST_VIEWS: "mostViews",
+    MOST_FAVORITED: "mostFavorite",
+    MOST_VIWED: "mostViewed",
   };
 
   return map[sort];
