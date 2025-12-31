@@ -9,8 +9,11 @@ import { LoginType } from "../_types/LoginType";
 import useApiEmailLogin from "@/api/auth/useApiEmailLogin";
 import { useErrorToast } from "@/hooks";
 import { EMAIL_LOGIN_ERROR_MESSAGE } from "../_constants/EMAIL_LOGIN_ERROR_MESSAGE";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
+  const router = useRouter();
+
   const { reset } = useFormContext();
 
   useEffect(() => {
@@ -38,7 +41,7 @@ const Page = () => {
 
     EmailLoginMutate(filterData, {
       onSuccess: (res) => {
-        alert("폼 제출되었습니다.");
+        router.push("/");
         console.log("res>>>", res);
         if (data.rememberId) localStorage.setItem("rememberId", data.email);
         else localStorage.setItem("rememberId", "");
