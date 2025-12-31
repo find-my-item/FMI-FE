@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useGetPost } from "@/api/fetch/post";
+import { useGetPost, usePostFilter } from "@/api/fetch/post";
 import { Tab } from "@/components";
 import { TABS } from "../../_constants/TABS";
 import ListItem from "../ListItem/ListItem";
@@ -19,7 +19,13 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
   const rawType = searchParams.get("type");
   const type: PostType = rawType === "found" ? "FOUND" : "LOST";
 
+  const rawRegion = searchParams.get("region");
+  const rawCategory = searchParams.get("category");
+  const rawSort = searchParams.get("sort");
+  const rawStatus = searchParams.get("status");
+
   const { data } = useGetPost({ page: 0, size: 10, type });
+  const { mutate, data: filterData } = usePostFilter();
 
   return (
     <>
