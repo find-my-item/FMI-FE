@@ -1,6 +1,8 @@
 import { InputText, Button, Icon } from "@/components";
 
 const MypageProfileForm = () => {
+  const profileImgURL = "";
+
   const handleSubmitMypageProfile = () => {
     // TODO(수현): 폼 제출 함수 추가 예정
   };
@@ -9,7 +11,15 @@ const MypageProfileForm = () => {
     <form onSubmit={handleSubmitMypageProfile} className="flex h-dvh w-full flex-col">
       <div className="flex justify-center py-[30px]">
         <div className="relative h-[80px] w-[80px]">
-          <Icon name="UserProfile" size={80} />
+          {profileImgURL ? (
+            <img
+              src={profileImgURL}
+              alt="프로필 이미지"
+              className="h-[80px] w-[80px] rounded-full"
+            />
+          ) : (
+            <Icon name="UserProfile" size={80} />
+          )}
           {/* TODO(수현): 디자인 토큰 변경 요청 해놓은 상태로 등록 시 추후 변경 */}
           <button
             className="absolute left-[52px] top-[52px] h-[28px] w-[28px] rounded-full bg-[#f5f5f5] flex-center"
