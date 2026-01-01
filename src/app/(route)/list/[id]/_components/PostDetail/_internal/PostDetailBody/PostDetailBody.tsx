@@ -18,7 +18,7 @@ const PostDetailBody = ({ isBoardType, label, data }: PostDetailBodyProps) => {
   const { title, content, favoriteCount } = data;
 
   return (
-    <div>
+    <article>
       {isBoardType ? <Chip label={label} /> : <NoticeChip label={label} />}
 
       <div className={isBoardType ? "mt-[14px]" : "space-y-[28px]"}>
@@ -40,7 +40,7 @@ const PostDetailBody = ({ isBoardType, label, data }: PostDetailBodyProps) => {
           </li>
         </ul>
       </div>
-    </div>
+    </article>
   );
 };
 

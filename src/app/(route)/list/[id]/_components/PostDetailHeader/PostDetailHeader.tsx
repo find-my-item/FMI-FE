@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { Icon } from "@/components";
+import { Button, Icon } from "@/components";
 
 type PostDetailDataType = {
   imageUrls: string[];
+  postId: string;
 };
 
 interface PostDetailHeaderType {
@@ -10,6 +11,8 @@ interface PostDetailHeaderType {
 }
 
 const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
+  const { imageUrls, postId } = headerData;
+
   return (
     <>
       {/* TODO(지권): 게시글 이미지, 추후 이미지 태그 변경 예정 */}
@@ -33,12 +36,10 @@ const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
             </span>
           </div>
         </div>
-        <Link
-          href={"/"}
-          className="glass-card w-full rounded-[10px] py-[10px] text-body1-semibold text-brand-normal-default bg-fill-brand-normal-default flex-center"
-        >
+
+        <Button as={Link} href={`/chat/${postId}`} className="w-full py-[10px]">
           채팅하러 가기
-        </Link>
+        </Button>
       </section>
     </>
   );

@@ -55,27 +55,25 @@ const PostDetail = ({ type, item }: PostDetailProps) => {
   return (
     <article className="w-full">
       {isBoardType ? (
-        <PostDetailHeader headerData={{ imageUrls: data.result.imageUrls }} />
+        <PostDetailHeader
+          headerData={{ imageUrls: data.result.imageUrls, postId: data.result.postId.toString() }}
+        />
       ) : (
         <NoticeDetailHeader backPath={backPath} />
       )}
 
-      <section
-        className={cn("flex flex-col", isBoardType ? "gap-12 px-[20px] py-[27px]" : "px-[20px]")}
-      >
+      <section className={cn("flex flex-col px-5", isBoardType && "gap-9 py-[27px]")}>
         <PostDetailBody isBoardType={isBoardType} label={label} data={data.result} />
 
-        <section className="flex flex-col gap-[18px]">
-          {isBoardType && (
-            <PostDetailMap
-              data={{
-                address: data.result.address,
-                latitude: data.result.latitude.toString(),
-                longitude: data.result.longitude.toString(),
-              }}
-            />
-          )}
-        </section>
+        {isBoardType && (
+          <PostDetailMap
+            data={{
+              address: data.result.address,
+              latitude: data.result.latitude.toString(),
+              longitude: data.result.longitude.toString(),
+            }}
+          />
+        )}
       </section>
     </article>
   );
