@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Button, PopupLayout } from "@/components";
-import { SHARE } from "./SHARE";
+import { SHARE, ShareId } from "./SHARE";
 
 interface PostShareProps {
   isOpen: boolean;
@@ -8,6 +8,22 @@ interface PostShareProps {
 }
 
 const PostShare = ({ isOpen, onClose }: PostShareProps) => {
+  const handleShareClick = (id: ShareId) => {
+    switch (id) {
+      case "kakao":
+        // kakaoShare();
+        break;
+      case "native":
+        // nativeShare();
+        break;
+      case "copy":
+        // copyLink();
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <PopupLayout isOpen={isOpen} onClose={onClose} className="min-h-[305px] space-y-12 px-5 py-10">
       <section className="gap-5 flex-col-center">
@@ -18,7 +34,7 @@ const PostShare = ({ isOpen, onClose }: PostShareProps) => {
               key={item.name}
               src={item.src}
               name={item.name}
-              onClick={item.onClick}
+              onClick={() => handleShareClick(item.id)}
             />
           ))}
         </div>
