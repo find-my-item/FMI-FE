@@ -7,6 +7,7 @@ type MapData = {
   latitude: number;
   longitude: number;
   postId: string;
+  radius: number;
 };
 
 interface PostDetailMapProps {
@@ -14,7 +15,7 @@ interface PostDetailMapProps {
 }
 
 const PostDetailMap = ({ data }: PostDetailMapProps) => {
-  const { address, latitude, longitude } = data;
+  const { address, latitude, longitude, postId, radius } = data;
 
   return (
     <div className="flex flex-col gap-[18px]">
@@ -22,7 +23,7 @@ const PostDetailMap = ({ data }: PostDetailMapProps) => {
         <KakaoMap latitude={latitude} longitude={longitude} />
       </div>
       <Link
-        href={`/list/${data.postId}/map?lat=${latitude}&lng=${longitude}&address=${encodeURIComponent(address)}`}
+        href={`/list/${postId}/map?lat=${latitude}&lng=${longitude}&address=${encodeURIComponent(address)}&radius=${radius}`}
       >
         <address className="flex items-center gap-[6px] not-italic">
           <span className="flex items-center gap-[5px]">

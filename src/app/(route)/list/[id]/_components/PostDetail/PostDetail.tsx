@@ -49,6 +49,7 @@ const PostDetail = ({ type, item }: PostDetailProps) => {
               latitude: data.result.latitude,
               longitude: data.result.longitude,
               postId: data.result.postId.toString(),
+              radius: data.result.radius,
             }}
           />
         )}
