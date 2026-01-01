@@ -1,25 +1,35 @@
 import { formatNumber } from "@/utils";
+import { CategoryType } from "@/types";
 import { Chip, Icon } from "@/components";
+import { ItemStatus } from "@/api/fetch/post";
 import { NoticeChip } from "@/app/(route)/notice/_components";
+import PostChipSection from "../PostChipSection/PostChipSection";
+import { LABELS } from "../../LABELS";
 
 type BodyData = {
   title: string;
   content: string;
   favoriteCount: number;
+  itemStatus: ItemStatus;
+  category: CategoryType;
 };
 
 type PostDetailBodyProps = {
   isBoardType: boolean;
-  label: "습득" | "분실" | "공지사항" | "문의내역";
+  label: "find" | "lost" | "notice" | "customer";
   data: BodyData;
 };
 
 const PostDetailBody = ({ isBoardType, label, data }: PostDetailBodyProps) => {
-  const { title, content, favoriteCount } = data;
+  const { title, content, favoriteCount, itemStatus, category } = data;
 
   return (
     <article>
-      {isBoardType ? <Chip label={label} /> : <NoticeChip label={label} />}
+      {isBoardType ? (
+        <PostChipSection itemStatus={itemStatus} category={category} />
+      ) : (
+        <NoticeChip label={LABELS[label].label} />
+      )}
 
       <div className={isBoardType ? "mt-[14px]" : "space-y-[28px]"}>
         <div>
