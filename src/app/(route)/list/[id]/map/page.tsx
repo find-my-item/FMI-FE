@@ -1,33 +1,17 @@
-"use client";
-
-import { DetailHeader } from "@/components";
-import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
-import DetailKakaoMap from "./_components/DetailKakaoMap/DetailKakaoMap";
+import { DetailHeader } from "@/components";
+import MapContent from "./_components/MapContent/MapContent";
 
 const page = () => {
-  const searchParams = useSearchParams();
-  const lat = searchParams.get("lat");
-  const lng = searchParams.get("lng");
-  const address = searchParams.get("address");
-  const radius = searchParams.get("radius");
-
   return (
-    <div className="min-h-[calc(100dvh-56px)]">
-      <Suspense fallback={""}>
-        <DetailHeader title="분실/습득 위치" />
-        <div className="relative h-[calc(100dvh-56px)] w-full">
-          <DetailKakaoMap
-            data={{
-              lat: lat ? Number(lat) : 0,
-              lng: lng ? Number(lng) : 0,
-              address: address || "",
-              radius: radius ? Number(radius) : 0,
-            }}
-          />
-        </div>
+    <section className="h-dvh">
+      <DetailHeader title="분실/습득 위치" />
+      <h1 className="sr-only">분실/습득 위치 지도</h1>
+
+      <Suspense fallback={null}>
+        <MapContent />
       </Suspense>
-    </div>
+    </section>
   );
 };
 
