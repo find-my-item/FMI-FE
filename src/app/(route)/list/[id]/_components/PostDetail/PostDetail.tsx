@@ -4,6 +4,7 @@ import PostDetailHeader from "../PostDetailHeader/PostDetailHeader";
 import NoticeDetailHeader from "@/app/(route)/notice/_components/NoticeDetailHeader/NoticeDetailHeader";
 import { MOCK_POST_DEFAULT_DETAIL } from "@/mock/MOCK_DATA";
 import { LABELS } from "./LABELS";
+import { GetPostDetailResponse } from "@/api/fetch/post/types/PostDetailType";
 
 interface PostDetailProps {
   type: "find" | "lost" | "notice" | "customer";
@@ -22,7 +23,7 @@ interface PostDetailProps {
 }
 
 // TODO(지권): 실제 API 호출로 대체 예정
-const data = MOCK_POST_DEFAULT_DETAIL;
+const data = MOCK_POST_DEFAULT_DETAIL as GetPostDetailResponse;
 
 const PostDetail = ({ type, item }: PostDetailProps) => {
   const { label, backPath } = LABELS[type];
