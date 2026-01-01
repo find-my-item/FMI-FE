@@ -43,7 +43,7 @@ const FilterBottomSheet = ({
       <div className="w-full gap-6 flex-col-center">
         <h2 className="text-h2-medium text-layout-header-default">필터</h2>
 
-        <section role="tablist" className="w-full flex-center">
+        <div role="tablist" className="w-full flex-center">
           {tabs.map((tab) => {
             const isSelected = selectedTab === tab.value;
 
@@ -52,6 +52,7 @@ const FilterBottomSheet = ({
                 key={tab.value}
                 role="tab"
                 aria-selected={isSelected}
+                aria-label={`${tab.label} 필터`}
                 className={cn(
                   "min-h-[60px] flex-1 text-[20px] font-semibold",
                   // TODO(지권): 디자인 토큰 변경
@@ -63,7 +64,7 @@ const FilterBottomSheet = ({
               </button>
             );
           })}
-        </section>
+        </div>
 
         {selectedTab === "region" && (
           <div className="relative w-full">
@@ -90,7 +91,7 @@ const FilterBottomSheet = ({
         )}
 
         {selectedTab === "category" && (
-          <div className="flex w-full flex-wrap gap-2">
+          <div role="radiogroup" aria-label="카테고리 선택" className="flex w-full flex-wrap gap-2">
             {categories.map((category) => (
               <ChipButton
                 key={category.value || "all"}
@@ -104,7 +105,11 @@ const FilterBottomSheet = ({
         )}
 
         {selectedTab === "sort" && (
-          <div className="flex w-full flex-wrap gap-2">
+          <div
+            role="radiogroup"
+            aria-label="정렬 방식 선택"
+            className="flex w-full flex-wrap gap-2"
+          >
             {sort.map((sortItem, index) => (
               <ChipButton
                 key={index}
@@ -118,7 +123,7 @@ const FilterBottomSheet = ({
         )}
 
         {selectedTab === "status" && (
-          <div className="flex w-full flex-wrap gap-2">
+          <div role="radiogroup" aria-label="상태 선택" className="flex w-full flex-wrap gap-2">
             {status.map((statusItem, index) => (
               <ChipButton
                 key={index}
@@ -157,6 +162,9 @@ const ChipButton = ({
   return (
     <button
       type="button"
+      role="radio"
+      aria-checked={selected}
+      tabIndex={selected ? 0 : -1}
       onClick={() => onSelect(value)}
       className={cn(
         "rounded-full px-[18px] py-2 text-body1-semibold",
@@ -164,7 +172,6 @@ const ChipButton = ({
           ? "text-white bg-fill-neutralInversed-normal-enteredSelected"
           : "text-neutralInversed-normal-default bg-fill-neutralInversed-normal-default"
       )}
-      aria-pressed={selected}
     >
       {label}
     </button>
