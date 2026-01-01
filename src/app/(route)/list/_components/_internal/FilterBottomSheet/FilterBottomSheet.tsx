@@ -139,7 +139,7 @@ const FilterBottomSheet = ({
 
       <div className="h-[230px] w-full" />
 
-      <Button className="w-full" onClick={handleApply}>
+      <Button role="button" ariaLabel="필터 적용" className="w-full" onClick={handleApply}>
         적용하기
       </Button>
     </PopupLayout>
