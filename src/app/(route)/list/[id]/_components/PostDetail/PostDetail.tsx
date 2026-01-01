@@ -4,7 +4,7 @@ import PostDetailHeader from "../PostDetailHeader/PostDetailHeader";
 import NoticeDetailHeader from "@/app/(route)/notice/_components/NoticeDetailHeader/NoticeDetailHeader";
 import { MOCK_POST_DEFAULT_DETAIL } from "@/mock/MOCK_DATA";
 import { LABELS } from "./LABELS";
-import { GetPostDetailResponse } from "@/api/fetch/post/types/PostDetailType";
+import { GetPostDetailResponse } from "@/api/fetch/post";
 
 interface PostDetailProps {
   type: "find" | "lost" | "notice" | "customer";
