@@ -2,7 +2,7 @@ import { Chip, Icon } from "@/components";
 import PostDetailHeader from "../PostDetailHeader/PostDetailHeader";
 import NoticeDetailHeader from "@/app/(route)/notice/_components/NoticeDetailHeader/NoticeDetailHeader";
 import NoticeChip from "@/app/(route)/notice/_components/NoticeChip/NoticeChip";
-import { cn } from "@/utils";
+import { cn, formatNumber } from "@/utils";
 
 interface PostDetailProps {
   type: "find" | "lost" | "notice" | "customer";
@@ -20,6 +20,28 @@ interface PostDetailProps {
   };
 }
 
+const data = {
+  isSuccess: true,
+  code: "COMMON200",
+  message: "성공입니다.",
+  result: {
+    postId: 1,
+    title: "강남역 2호선 개찰구 근처에서 에어팟(화이트) 분실",
+    content:
+      "12/26 오전 9시쯤 강남역 2호선 개찰구 근처에서 에어팟(2세대, 케이스 포함)을 분실했습니다. 습득하신 분 연락 부탁드립니다.",
+    address: "서울특별시 강남구 강남대로 396",
+    latitude: 37.4979,
+    longitude: 127.0276,
+    postType: "LOST",
+    itemStatus: "SEARCHING",
+    imageUrls: ["https://picsum.photos/400/300?random=1"],
+    radius: 0.5,
+    category: "ELECTRONICS",
+    favoriteCount: 1,
+    favoriteStatus: false,
+  },
+};
+
 const LABELS = {
   find: { label: "습득", backPath: "/find" },
   lost: { label: "분실", backPath: "/lost" },
@@ -33,7 +55,11 @@ const PostDetail = ({ type, item }: PostDetailProps) => {
 
   return (
     <article className="w-full">
-      {isBoardType ? <PostDetailHeader /> : <NoticeDetailHeader backPath={backPath} />}
+      {isBoardType ? (
+        <PostDetailHeader headerData={{ imageUrls: data.result.imageUrls }} />
+      ) : (
+        <NoticeDetailHeader backPath={backPath} />
+      )}
 
       <section
         className={cn("flex flex-col", isBoardType ? "gap-12 px-[20px] py-[27px]" : "px-[20px]")}
@@ -43,20 +69,24 @@ const PostDetail = ({ type, item }: PostDetailProps) => {
 
           <div className={isBoardType ? "mt-[14px]" : "space-y-[28px]"}>
             <div>
-              <h1 className="text-[20px] font-semibold text-layout-header-default">{item.title}</h1>
+              <h1 className="text-[20px] font-semibold text-layout-header-default">
+                {data.result.title}
+              </h1>
               <time className="text-[14px] leading-[140%] text-layout-body-default">30분 전</time>
             </div>
 
-            <p className="mt-[24px] text-body1-regular text-layout-header-default">{item.body}</p>
+            <p className="mt-[24px] text-body1-regular text-layout-header-default">
+              {data.result.content}
+            </p>
 
             <ul className="mt-[32px] flex gap-[20px] text-body2-medium text-layout-body-default">
               <li className="flex gap-[4px]">
                 <Icon name="Star" size={20} />
-                <span>즐겨찾기 12</span>
+                <span>즐겨찾기 {formatNumber(data.result.favoriteCount)}</span>
               </li>
               <li className="flex gap-[4px]">
                 <Icon name="EyeOpen" size={20} />
-                <span>조회 24</span>
+                <span>조회 {formatNumber(24)}</span>
               </li>
             </ul>
           </div>
@@ -75,7 +105,9 @@ const PostDetail = ({ type, item }: PostDetailProps) => {
                     aria-hidden="true"
                     className="fill-current text-brand-subtle-default"
                   />
-                  <p className="text-[14px] text-neutral-normal-default">서울특별시 00구 00동</p>
+                  <p className="text-[14px] text-neutral-normal-default">
+                    {data.result.address || "위치 정보 없음"}
+                  </p>
                 </span>
                 <Icon name="ArrowRight" size={14} title="지도 이동" />
               </address>

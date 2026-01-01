@@ -1,7 +1,15 @@
-import { Icon } from "@/components";
 import Link from "next/link";
+import { Icon } from "@/components";
 
-const PostDetailHeader = () => {
+type PostDetailDataType = {
+  imageUrls: string[];
+};
+
+interface PostDetailHeaderType {
+  headerData: PostDetailDataType;
+}
+
+const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
   return (
     <>
       {/* TODO(지권): 게시글 이미지, 추후 이미지 태그 변경 예정 */}
