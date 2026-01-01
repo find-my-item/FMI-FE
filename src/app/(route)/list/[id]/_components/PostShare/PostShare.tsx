@@ -59,8 +59,21 @@ const ShareOptionButton = ({
   onClick: () => void;
 }) => {
   return (
-    <button aria-label={name} type="button" className="gap-2 flex-col-center" onClick={onClick}>
-      <Image src={src} alt="" width={60} height={60} className="rounded-full" />
+    <button
+      aria-label={name}
+      type="button"
+      className="select-none gap-2 flex-col-center"
+      onClick={onClick}
+    >
+      <Image
+        src={src}
+        alt=""
+        width={60}
+        height={60}
+        draggable={false}
+        priority
+        className="rounded-full"
+      />
       <span className="text-body2-semibold text-neutral-normal-default">{name}</span>
     </button>
   );
