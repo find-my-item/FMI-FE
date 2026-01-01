@@ -1,8 +1,7 @@
-import { Chip, Icon } from "@/components";
+import { cn } from "@/utils";
+import { PostDetailBody, PostDetailMap } from "./_internal";
 import PostDetailHeader from "../PostDetailHeader/PostDetailHeader";
 import NoticeDetailHeader from "@/app/(route)/notice/_components/NoticeDetailHeader/NoticeDetailHeader";
-import NoticeChip from "@/app/(route)/notice/_components/NoticeChip/NoticeChip";
-import { cn, formatNumber } from "@/utils";
 
 interface PostDetailProps {
   type: "find" | "lost" | "notice" | "customer";
@@ -64,54 +63,17 @@ const PostDetail = ({ type, item }: PostDetailProps) => {
       <section
         className={cn("flex flex-col", isBoardType ? "gap-12 px-[20px] py-[27px]" : "px-[20px]")}
       >
-        <div>
-          {isBoardType ? <Chip label={label} /> : <NoticeChip label={label} />}
-
-          <div className={isBoardType ? "mt-[14px]" : "space-y-[28px]"}>
-            <div>
-              <h1 className="text-[20px] font-semibold text-layout-header-default">
-                {data.result.title}
-              </h1>
-              <time className="text-[14px] leading-[140%] text-layout-body-default">30분 전</time>
-            </div>
-
-            <p className="mt-[24px] text-body1-regular text-layout-header-default">
-              {data.result.content}
-            </p>
-
-            <ul className="mt-[32px] flex gap-[20px] text-body2-medium text-layout-body-default">
-              <li className="flex gap-[4px]">
-                <Icon name="Star" size={20} />
-                <span>즐겨찾기 {formatNumber(data.result.favoriteCount)}</span>
-              </li>
-              <li className="flex gap-[4px]">
-                <Icon name="EyeOpen" size={20} />
-                <span>조회 {formatNumber(24)}</span>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <PostDetailBody isBoardType={isBoardType} label={label} data={data.result} />
 
         <section className="flex flex-col gap-[18px]">
           {isBoardType && (
-            <>
-              {/* TODO(지권): 추후 지도 컴포넌트 변경 */}
-              <div className="h-[147px] rounded-md bg-black" />
-              <address className="flex items-center gap-[6px] not-italic">
-                <span className="flex items-center gap-[5px]">
-                  <Icon
-                    name="Position"
-                    size={16}
-                    aria-hidden="true"
-                    className="fill-current text-brand-subtle-default"
-                  />
-                  <p className="text-[14px] text-neutral-normal-default">
-                    {data.result.address || "위치 정보 없음"}
-                  </p>
-                </span>
-                <Icon name="ArrowRight" size={14} title="지도 이동" />
-              </address>
-            </>
+            <PostDetailMap
+              data={{
+                address: data.result.address,
+                latitude: data.result.latitude.toString(),
+                longitude: data.result.longitude.toString(),
+              }}
+            />
           )}
         </section>
       </section>
