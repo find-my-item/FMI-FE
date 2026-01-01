@@ -1,9 +1,10 @@
 import { Icon } from "@/components";
+import KakaoMap from "./KakaoMap";
 
 type MapData = {
   address: string;
-  latitude: string;
-  longitude: string;
+  latitude: number;
+  longitude: number;
 };
 
 interface PostDetailMapProps {
@@ -16,7 +17,9 @@ const PostDetailMap = ({ data }: PostDetailMapProps) => {
   return (
     <div className="flex flex-col gap-[18px]">
       {/* TODO(지권): 추후 지도 컴포넌트 변경 */}
-      <div className="h-[147px] rounded-md bg-black" />
+      <div className="h-[147px] overflow-hidden rounded-md border border-divider-default">
+        <KakaoMap latitude={latitude} longitude={longitude} />
+      </div>
       <address className="flex items-center gap-[6px] not-italic">
         <span className="flex items-center gap-[5px]">
           {address && (
