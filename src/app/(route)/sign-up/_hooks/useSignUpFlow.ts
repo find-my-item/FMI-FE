@@ -3,7 +3,7 @@ import { useFormContext } from "react-hook-form";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FormType } from "../types/FormType";
 import { useRoutingGard } from "./useRoutingGard";
-import { ApiSignUpType } from "../types/ApiSingUpType";
+import { ApiSignUpType } from "@/api/fetch/auth";
 
 interface useSignUpFlowProps {
   onSubmit: (data: ApiSignUpType) => void;

@@ -6,12 +6,11 @@ import { CHECKBOX_CONFIG } from "../_constants/CHECKBOX_CONFIG";
 import { EMAIL_LOGIN_CONFIG } from "../_constants/EMAIL_LOGIN_CONFIG";
 import { useState, useEffect } from "react";
 import { LoginType } from "../_types/LoginType";
-import useApiEmailLogin from "@/api/auth/useApiEmailLogin";
 import { useErrorToast } from "@/hooks";
 import { EMAIL_LOGIN_ERROR_MESSAGE } from "../_constants/EMAIL_LOGIN_ERROR_MESSAGE";
 import { useRouter } from "next/navigation";
 import { useCookies } from "react-cookie";
-import { AxiosError } from "axios";
+import useApiEmailLogin from "@/api/fetch/auth/api/useApiEmailLogin";
 
 const Page = () => {
   const router = useRouter();
