@@ -1,6 +1,6 @@
 import { formatNumber } from "@/utils";
-import { CategoryType, ItemStatus } from "@/types";
 import { Icon } from "@/components";
+import { CategoryType, ItemStatus } from "@/types";
 import { NoticeChip } from "@/app/(route)/notice/_components";
 import PostChipSection from "../PostChipSection/PostChipSection";
 import { LABELS } from "../../LABELS";
