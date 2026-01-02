@@ -12,8 +12,6 @@ interface PostShareProps {
   postId: string;
 }
 
-const fullUrl = window.location.href;
-
 const PostShare = ({ isOpen, onClose, postId }: PostShareProps) => {
   const { data } = useGetMetaData({ postId: Number(postId) });
 
@@ -21,7 +19,7 @@ const PostShare = ({ isOpen, onClose, postId }: PostShareProps) => {
     title: data?.result?.title || "데이터 공유하기",
     summary: data?.result?.summary || "데이터 공유하기",
     thumbnailUrl: data?.result?.thumbnailUrl || "/test_list.JPG",
-    link: fullUrl,
+    link: window.location.href,
   };
 
   const handleOption = (id: string) => handleShareClick({ id, metaData });
