@@ -3,9 +3,10 @@
 import Image from "next/image";
 import { useGetMetaData } from "@/api/fetch/post";
 import { Button, PopupLayout } from "@/components";
-import { shareMessage } from "@/utils/share/KakaoShare";
 import { SHARE, ShareId } from "./SHARE";
 import { copyCurrentUrl } from "@/utils/share/copyCurrentUrl";
+import { shareMessage } from "@/utils/share/KakaoShare";
+import { shareWithNative } from "@/utils/share/shareWithNative";
 
 interface PostShareProps {
   isOpen: boolean;
@@ -17,7 +18,6 @@ const fullUrl = window.location.href;
 
 const PostShare = ({ isOpen, onClose, postId }: PostShareProps) => {
   const { data } = useGetMetaData({ postId: Number(postId) });
-  console.log(data);
 
   const metaData = {
     title: data?.result?.title || "데이터 공유하기",
@@ -34,7 +34,11 @@ const PostShare = ({ isOpen, onClose, postId }: PostShareProps) => {
         });
         break;
       case "native":
-        // nativeShare();
+        shareWithNative({
+          metaData: {
+            ...metaData,
+          },
+        });
         break;
       case "copy":
         copyCurrentUrl();
