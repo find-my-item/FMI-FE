@@ -11,7 +11,6 @@ export const EMAIL_LOGIN_ERROR_MESSAGE = {
     message: "서버에러로 관리자에게 문의 해주세요.",
     status: "error",
   },
-
   ERR_BAD_REQUEST: {
     message: "잘못된 요청이에요.",
     status: "warning",

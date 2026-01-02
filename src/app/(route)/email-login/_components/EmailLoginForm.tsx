@@ -10,24 +10,24 @@ import useApiEmailLogin from "@/api/auth/useApiEmailLogin";
 import { useErrorToast } from "@/hooks";
 import { EMAIL_LOGIN_ERROR_MESSAGE } from "../_constants/EMAIL_LOGIN_ERROR_MESSAGE";
 import { useRouter } from "next/navigation";
+import { useCookies } from "react-cookie";
+import { AxiosError } from "axios";
 
 const Page = () => {
   const router = useRouter();
+  const { register, control, handleSubmit, reset } = useFormContext<LoginType>();
 
-  const { reset } = useFormContext();
-
+  const [cookie, setCookie, removeCookie] = useCookies(["email", "autoLogin"]);
   useEffect(() => {
-    const storedId = localStorage.getItem("rememberId") ?? "";
-
-    reset({
-      email: storedId,
-      rememberId: !!storedId,
-    });
+    if (cookie.email) {
+      reset({
+        email: cookie.email,
+        rememberId: !!cookie.email,
+      });
+    }
   }, []);
 
-  // const [autoLogin, setAutoLogin] = useState(false);
-  const { mutate: EmailLoginMutate } = useApiEmailLogin();
-  const { register, control, handleSubmit } = useFormContext<LoginType>();
+  const { mutate: EmailLoginMutate, error } = useApiEmailLogin();
 
   const checkBoxValues = useWatch({ control, name: CHECKBOX_CONFIG.map((item) => item.id) });
 
@@ -43,16 +43,21 @@ const Page = () => {
       onSuccess: (res) => {
         router.push("/");
         console.log("res>>>", res);
-        if (data.rememberId) localStorage.setItem("rememberId", data.email);
-        else localStorage.setItem("rememberId", "");
+        if (data.rememberId) {
+          setCookie("email", data.email, {
+            path: "/",
+            maxAge: 60 * 60 * 24 * 30,
+            secure: process.env.NODE_ENV === "production",
+          });
+        } else {
+          removeCookie("email");
+        }
       },
       onError: (error) => {
-        console.log("error>>> ", error);
         handlerApiError(EMAIL_LOGIN_ERROR_MESSAGE, error.code);
       },
+      // console.log("data>>>", filterData)
     });
-
-    // console.log("data>>>", filterData)
   });
 
   return (

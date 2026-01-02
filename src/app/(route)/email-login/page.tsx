@@ -6,6 +6,7 @@ import Link from "next/link";
 import EmailLoginForm from "./_components/EmailLoginForm";
 import { FormProvider, useForm } from "react-hook-form";
 import { LoginType } from "./_types/LoginType";
+import { CookiesProvider } from "react-cookie";
 
 const Page = () => {
   const methods = useForm<LoginType>({
@@ -14,7 +15,7 @@ const Page = () => {
   });
 
   return (
-    <>
+    <CookiesProvider>
       <DetailHeader title="이메일 로그인" />
       <div className="flex min-h-screen w-full gap-6 px-5 flex-col-center">
         <AuthLogoLink />
@@ -34,7 +35,7 @@ const Page = () => {
           </Link>
         </div>
       </div>
-    </>
+    </CookiesProvider>
   );
 };
 

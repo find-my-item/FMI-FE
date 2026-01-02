@@ -15,7 +15,7 @@ export interface EmailLoginResponseType
 const useApiEmailLogin = () => {
   return useAppMutation<ApiEmailLoginType, EmailLoginResponseType, EmailLoginResponseType>(
     "auth",
-    "/auth/login",
+    "auth/login",
     "post"
   );
 };
