@@ -1,2 +1,2 @@
 export * from "./ToastTypes";
-export type { CategoryType } from "./CategoryType";
+export type * from "./ItemType";
