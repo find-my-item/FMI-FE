@@ -1,5 +1,4 @@
 import { MyPageIconNav, MyPageMenuSection, MyPageProfile } from "./_components";
-import { MYPAGE_MENU_LIST } from "./_constants/MYPAGE_MENU_LIST";
 
 const page = () => {
   return (
