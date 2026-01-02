@@ -1,21 +1,24 @@
 import { CategoryType, ItemStatus, PostType } from "@/types";
 
-export interface GetListResponse {
+export interface GetPostDetailResponse {
   isSuccess: boolean;
   code: string;
   message: string;
-  result: PostItem[];
+  result: PostDetail;
 }
 
-export interface PostItem {
+export interface PostDetail {
   postId: number;
   title: string;
-  summary: string;
-  thumbnailUrl: string;
+  content: string;
   address: string;
-  itemStatus: ItemStatus;
+  latitude: number;
+  longitude: number;
   postType: PostType;
+  itemStatus: ItemStatus;
+  imageUrls: Array<string>;
+  radius: number;
   category: CategoryType;
   favoriteCount: number;
-  createdAt: string;
+  favoriteStatus: boolean;
 }
