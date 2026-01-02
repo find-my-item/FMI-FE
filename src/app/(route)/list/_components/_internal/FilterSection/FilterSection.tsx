@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Filter } from "@/components";
-import FilterBottomSheet from "../FilterBottomSheet/FilterBottomSheet";
 import { CATEGORY_LABEL_MAP, SORT_LABEL_MAP, STATUS_LABEL_MAP } from "../FilterBottomSheet/LABELS";
 import {
   CategoryFilterValue,
@@ -10,6 +9,7 @@ import {
 } from "../FilterBottomSheet/types";
 import { FiltersState } from "./filtersStateType";
 import { getFilterSelectedFlags } from "./getFilterSelectedFlags";
+import FilterBottomSheet from "../FilterBottomSheet/FilterBottomSheet";
 
 const FilterSection = () => {
   const [filters, setFilters] = useState<FiltersState>({
