@@ -1,6 +1,5 @@
 import { Chip } from "@/components";
-import { CategoryType } from "@/types";
-import { ItemStatus } from "@/api/fetch/post";
+import { CategoryType, ItemStatus } from "@/types";
 import { getItemCategoryLabel, getItemStatusLabel } from "@/utils";
 
 type ChipData = {
