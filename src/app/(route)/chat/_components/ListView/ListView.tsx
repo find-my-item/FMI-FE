@@ -3,55 +3,21 @@
 import { DetailHeader, ListSearch } from "@/components";
 import { useSearchUpdateQueryString } from "@/hooks";
 import DefaultList from "../DefaultList/DefaultList";
-import axios from "axios";
-import { useMutation, useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
-
-const postLogin = async () => {
-  const response = await axios.post(
-    `${process.env.NEXT_PUBLIC_API_URL}:8080/auth/login`,
-    {
-      email: "test@example.com",
-      password: "Test1234!",
-    },
-    {
-      withCredentials: true,
-    }
-  );
-
-  return response;
-};
-const usePostLogin = () => {
-  return useMutation({
-    mutationFn: postLogin,
-  });
-};
-
-const fetchChatList = async () => {
-  const response = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL}:8080/users/me/chats?size=10&sort=LATEST`,
-    {
-      withCredentials: true,
-    }
-  );
-
-  return response;
-};
-const useFetchChatList = (enabled: boolean) => {
-  return useQuery({
-    queryKey: ["chatList"],
-    queryFn: fetchChatList,
-    enabled,
-  });
-};
+import { useChatList } from "@/api/fetch/auth";
+import useAppMutation from "@/api/_base/query/useAppMutation";
 
 const ListView = () => {
-  const { mutate: postLogin, isSuccess: isLoginSuccess } = usePostLogin();
+  const { mutate: postLogin, isSuccess: isLoginSuccess } = useAppMutation(
+    "auth",
+    "auth/login",
+    "post"
+  );
+  const { data: chatList } = useChatList(10, "LATEST", isLoginSuccess);
   const { searchMode, searchUpdateQuery } = useSearchUpdateQueryString();
-  const { data } = useFetchChatList(isLoginSuccess);
 
   useEffect(() => {
-    postLogin();
+    postLogin({ email: "test@example.com", password: "Test1234!" });
   }, []);
 
   return (
