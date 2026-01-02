@@ -1,14 +1,17 @@
 import { Chip } from "@/components";
-import { CategoryType } from "@/types";
-import { ItemStatus } from "@/api/fetch/post";
+import { CategoryType, ItemStatus } from "@/types";
 import { getItemCategoryLabel, getItemStatusLabel } from "@/utils";
 
-type ChipData = {
-  itemStatus: ItemStatus;
-  category: CategoryType;
-};
+interface PostChipSectionProps {
+  chipData: {
+    itemStatus: ItemStatus;
+    category: CategoryType;
+  };
+}
 
-const PostChipSection = ({ itemStatus, category }: ChipData) => {
+const PostChipSection = ({ chipData }: PostChipSectionProps) => {
+  const { itemStatus, category } = chipData;
+
   return (
     <div className="flex gap-2">
       <Chip type="status" label={getItemStatusLabel(itemStatus)} />
