@@ -53,7 +53,9 @@ const Page = () => {
         }
       },
       onError: (error) => {
-        handlerApiError(EMAIL_LOGIN_ERROR_MESSAGE, error.code);
+        console.log("error>> ", error);
+        console.log("error>> ", error.response.data.code);
+        handlerApiError(EMAIL_LOGIN_ERROR_MESSAGE, error.response.data.code);
       },
       // console.log("data>>>", filterData)
     });
