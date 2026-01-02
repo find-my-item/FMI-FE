@@ -1,12 +1,10 @@
 "use client";
 
-type MetaData = {
-  title: string;
-  summary: string;
-  link: string;
-};
+import { MetaDataType } from "@/types";
 
-export const shareWithNative = async ({ metaData }: { metaData: MetaData }) => {
+type NativeMetaData = Omit<MetaDataType, "thumbnailUrl">;
+
+export const shareWithNative = async ({ metaData }: { metaData: NativeMetaData }) => {
   if (!navigator.share) return;
 
   const { title, summary, link } = metaData;

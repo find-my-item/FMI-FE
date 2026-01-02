@@ -1,13 +1,7 @@
+import { MetaDataType } from "@/types";
 import { copyCurrentUrl } from "./_internal/copyCurrentUrl";
 import { shareMessage } from "./_internal/KakaoShare";
 import { shareWithNative } from "./_internal/shareWithNative";
-
-type MetaDataType = {
-  title: string;
-  summary: string;
-  thumbnailUrl: string;
-  link: string;
-};
 
 interface HandleShareClickProps {
   id: string;

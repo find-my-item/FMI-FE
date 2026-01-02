@@ -19,10 +19,17 @@ const PostShare = ({ isOpen, onClose, postId }: PostShareProps) => {
     title: data?.result?.title || "데이터 공유하기",
     summary: data?.result?.summary || "데이터 공유하기",
     thumbnailUrl: data?.result?.thumbnailUrl || "/test_list.JPG",
-    link: window.location.href,
+    link: "",
   };
 
-  const handleOption = (id: string) => handleShareClick({ id, metaData });
+  const handleOption = (id: string) =>
+    handleShareClick({
+      id,
+      metaData: {
+        ...metaData,
+        link: window.location.href,
+      },
+    });
 
   return (
     <PopupLayout isOpen={isOpen} onClose={onClose} className="min-h-[305px] space-y-12 px-5 py-10">

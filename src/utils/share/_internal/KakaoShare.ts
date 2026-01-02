@@ -1,11 +1,6 @@
 "use client";
 
-type MessageData = {
-  title: string;
-  summary: string;
-  thumbnailUrl: string;
-  link: string;
-};
+import { MetaDataType } from "@/types";
 
 const getKakaoKey = () => {
   const key = process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY;
@@ -27,7 +22,7 @@ const initKakao = () => {
   return true;
 };
 
-export const shareMessage = (data: MessageData) => {
+export const shareMessage = (data: MetaDataType) => {
   const Kakao = (window as any).Kakao;
   if (!Kakao) return;
 
