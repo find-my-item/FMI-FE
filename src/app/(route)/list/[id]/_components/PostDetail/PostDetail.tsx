@@ -46,8 +46,10 @@ const PostDetail = ({ type, item }: PostDetailProps) => {
           <PostDetailMap
             data={{
               address: data.result.address,
-              latitude: data.result.latitude.toString(),
-              longitude: data.result.longitude.toString(),
+              latitude: data.result.latitude,
+              longitude: data.result.longitude,
+              postId: data.result.postId.toString(),
+              radius: data.result.radius,
             }}
           />
         )}
