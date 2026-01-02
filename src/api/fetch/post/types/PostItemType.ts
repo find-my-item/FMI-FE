@@ -1,4 +1,4 @@
-import { CategoryType } from "@/types";
+import { CategoryType, ItemStatus, PostType } from "@/types";
 
 export interface GetListResponse {
   isSuccess: boolean;
@@ -19,6 +19,3 @@ export interface PostItem {
   favoriteCount: number;
   createdAt: string;
 }
-
-export type ItemStatus = "SEARCHING" | "FOUND";
-export type PostType = "LOST" | "FOUND";
