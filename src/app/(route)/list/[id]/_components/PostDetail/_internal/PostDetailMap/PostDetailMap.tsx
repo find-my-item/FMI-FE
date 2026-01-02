@@ -1,13 +1,11 @@
 import { Icon } from "@/components";
 
-type MapData = {
-  address: string;
-  latitude: string;
-  longitude: string;
-};
-
 interface PostDetailMapProps {
-  data: MapData;
+  data: {
+    address: string;
+    latitude: string;
+    longitude: string;
+  };
 }
 
 const PostDetailMap = ({ data }: PostDetailMapProps) => {

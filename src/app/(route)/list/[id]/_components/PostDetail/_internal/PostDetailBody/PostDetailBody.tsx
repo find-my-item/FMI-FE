@@ -13,11 +13,11 @@ type BodyData = {
   category: CategoryType;
 };
 
-type PostDetailBodyProps = {
+interface PostDetailBodyProps {
   isBoardType: boolean;
   label: "find" | "lost" | "notice" | "customer";
   data: BodyData;
-};
+}
 
 const PostDetailBody = ({ isBoardType, label, data }: PostDetailBodyProps) => {
   const { title, content, favoriteCount, itemStatus, category } = data;
@@ -25,7 +25,7 @@ const PostDetailBody = ({ isBoardType, label, data }: PostDetailBodyProps) => {
   return (
     <article>
       {isBoardType ? (
-        <PostChipSection itemStatus={itemStatus} category={category} />
+        <PostChipSection chipData={{ itemStatus, category }} />
       ) : (
         <NoticeChip label={LABELS[label].label} />
       )}
