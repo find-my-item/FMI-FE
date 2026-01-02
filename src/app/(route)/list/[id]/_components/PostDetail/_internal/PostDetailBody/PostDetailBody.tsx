@@ -1,7 +1,6 @@
 import { formatNumber } from "@/utils";
-import { CategoryType } from "@/types";
-import { Chip, Icon } from "@/components";
-import { ItemStatus } from "@/api/fetch/post";
+import { Icon } from "@/components";
+import { CategoryType, ItemStatus } from "@/types";
 import { NoticeChip } from "@/app/(route)/notice/_components";
 import PostChipSection from "../PostChipSection/PostChipSection";
 import { LABELS } from "../../LABELS";
@@ -13,12 +12,11 @@ type BodyData = {
   itemStatus: ItemStatus;
   category: CategoryType;
 };
-
-type PostDetailBodyProps = {
+interface PostDetailBodyProps {
   isBoardType: boolean;
   label: "find" | "lost" | "notice" | "customer";
   data: BodyData;
-};
+}
 
 const PostDetailBody = ({ isBoardType, label, data }: PostDetailBodyProps) => {
   const { title, content, favoriteCount, itemStatus, category } = data;
@@ -26,7 +24,7 @@ const PostDetailBody = ({ isBoardType, label, data }: PostDetailBodyProps) => {
   return (
     <article>
       {isBoardType ? (
-        <PostChipSection itemStatus={itemStatus} category={category} />
+        <PostChipSection chipData={{ itemStatus, category }} />
       ) : (
         <NoticeChip label={LABELS[label].label} />
       )}

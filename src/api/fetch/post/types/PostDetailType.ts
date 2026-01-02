@@ -1,5 +1,4 @@
-import { CategoryType } from "@/types";
-import { ItemStatus, PostType } from "./PostItemType";
+import { CategoryType, ItemStatus, PostType } from "@/types";
 
 export interface GetPostDetailResponse {
   isSuccess: boolean;
