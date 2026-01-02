@@ -1,12 +1,10 @@
 "use client";
 
 import Image from "next/image";
+import { handleShareClick } from "@/utils";
 import { useGetMetaData } from "@/api/fetch/post";
 import { Button, PopupLayout } from "@/components";
-import { SHARE, ShareId } from "./SHARE";
-import { copyCurrentUrl } from "@/utils/share/copyCurrentUrl";
-import { shareMessage } from "@/utils/share/KakaoShare";
-import { shareWithNative } from "@/utils/share/shareWithNative";
+import { SHARE } from "./SHARE";
 
 interface PostShareProps {
   isOpen: boolean;
@@ -26,27 +24,7 @@ const PostShare = ({ isOpen, onClose, postId }: PostShareProps) => {
     link: fullUrl,
   };
 
-  const handleShareClick = (id: ShareId) => {
-    switch (id) {
-      case "kakao":
-        shareMessage({
-          ...metaData,
-        });
-        break;
-      case "native":
-        shareWithNative({
-          metaData: {
-            ...metaData,
-          },
-        });
-        break;
-      case "copy":
-        copyCurrentUrl();
-        break;
-      default:
-        break;
-    }
-  };
+  const handleOption = (id: string) => handleShareClick({ id, metaData });
 
   return (
     <PopupLayout isOpen={isOpen} onClose={onClose} className="min-h-[305px] space-y-12 px-5 py-10">
@@ -58,7 +36,7 @@ const PostShare = ({ isOpen, onClose, postId }: PostShareProps) => {
               key={item.name}
               src={item.src}
               name={item.name}
-              onClick={() => handleShareClick(item.id)}
+              onClick={() => handleOption(item.id)}
             />
           ))}
         </div>
