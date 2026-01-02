@@ -1,8 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import { useGetMetaData } from "@/api/fetch/post";
 import { Button, PopupLayout } from "@/components";
 import { shareMessage } from "@/utils/share/KakaoShare";
 import { SHARE, ShareId } from "./SHARE";
+import { copyCurrentUrl } from "@/utils/share/copyCurrentUrl";
 
 interface PostShareProps {
   isOpen: boolean;
@@ -10,26 +13,31 @@ interface PostShareProps {
   postId: string;
 }
 
+const fullUrl = window.location.href;
+
 const PostShare = ({ isOpen, onClose, postId }: PostShareProps) => {
   const { data } = useGetMetaData({ postId: Number(postId) });
   console.log(data);
 
-  const text = data?.result?.summary || "데이터 공유하기";
-  const link = data?.result?.thumbnailUrl || "https://www.finditem.kr/";
+  const metaData = {
+    title: data?.result?.title || "데이터 공유하기",
+    summary: data?.result?.summary || "데이터 공유하기",
+    thumbnailUrl: data?.result?.thumbnailUrl || "/test_list.JPG",
+    link: fullUrl,
+  };
 
   const handleShareClick = (id: ShareId) => {
     switch (id) {
       case "kakao":
         shareMessage({
-          text,
-          link,
+          ...metaData,
         });
         break;
       case "native":
         // nativeShare();
         break;
       case "copy":
-        // copyLink();
+        copyCurrentUrl();
         break;
       default:
         break;

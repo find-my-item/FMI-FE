@@ -1,7 +1,9 @@
 "use client";
 
 type MessageData = {
-  text: string;
+  title: string;
+  summary: string;
+  thumbnailUrl: string;
   link: string;
 };
 
@@ -34,16 +36,20 @@ export const shareMessage = (data: MessageData) => {
     if (!ok) return;
   }
 
-  const sendDefault = Kakao.Share?.sendDefault ?? Kakao.Link?.sendDefault;
+  const sendDefault = Kakao.Share?.sendDefault;
 
   if (!sendDefault) return;
 
   sendDefault({
-    objectType: "text",
-    text: data.text,
-    link: {
-      mobileWebUrl: data.link,
-      webUrl: data.link,
+    objectType: "feed",
+    content: {
+      title: data.title,
+      description: data.summary,
+      imageUrl: data.thumbnailUrl,
+      link: {
+        mobileWebUrl: data.link,
+        webUrl: data.link,
+      },
     },
   });
 };
