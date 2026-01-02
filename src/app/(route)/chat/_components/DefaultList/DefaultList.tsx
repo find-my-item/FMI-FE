@@ -16,13 +16,15 @@ interface DefaultListProps {
 const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
   const searchParams = useSearchParams();
   const selectedRegion = searchParams.get("region");
-  const displayText = selectedRegion || "지역 선택";
+  const regionDisplayText = selectedRegion || "지역 선택";
   const { mutate: postLogin, isSuccess: isLoginSuccess } = useAppMutation(
     "auth",
     "auth/login",
     "post"
   );
-  const { data: chatList } = useChatList(10, "LATEST", isLoginSuccess);
+  const { data: chatList } = useChatList({
+    enabled: isLoginSuccess,
+  });
 
   useEffect(() => {
     postLogin({ email: "znznun@gmail.com", password: "Khj1234!" });
@@ -32,13 +34,13 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
     <>
       <div className="flex gap-2 px-5 py-[14px] no-scrollbar">
         <Filter
-          ariaLabel={`채팅 리스트 ${displayText}`}
+          ariaLabel={`채팅 리스트 ${regionDisplayText}`}
           onSelected={!!selectedRegion}
           icon={{ name: "Location", size: 16 }}
           iconPosition="leading"
           onClick={() => searchUpdateQuery("search", "region")}
         >
-          {displayText}
+          {regionDisplayText}
         </Filter>
         {FilTER_DROPDOWN_OPTIONS.map((option) => (
           <FilterDropdown key={option.keyName} {...option} searchUpdateQuery={searchUpdateQuery} />
