@@ -9,6 +9,8 @@ const useChatList = (size = 10, sort: "LATEST" | "OLDEST" = "LATEST", enabled: b
     `/users/me/chats?size=${size}&sort=${sort}`,
     {
       enabled,
+      staleTime: 1000 * 60 * 15, // 15분
+      gcTime: 1000 * 60 * 15, // 15분
     }
   );
 };
