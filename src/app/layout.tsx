@@ -6,11 +6,17 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import localFont from "next/font/local";
 import Script from "next/script";
+import { Metadata } from "next";
 
 const pretendard = localFont({
   src: "../../public/fonts/PretendardVariable.woff2",
   variable: "--font-pretendard",
 });
+
+export const metadata: Metadata = {
+  title: "찾아줘!",
+  description: "분실물 찾기 서비스",
+};
 
 export default function RootLayout({
   children,
@@ -45,9 +51,13 @@ export default function RootLayout({
         <Providers>
           <ToastProvider>
             <Header />
-            {children}
+            <main className="w-full flex-1">{children}</main>
             <Footer />
           </ToastProvider>
+          <Script
+            src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY}&libraries=services,clusterer&autoload=false`}
+            strategy="beforeInteractive"
+          />
           <Analytics />
           <SpeedInsights />
         </Providers>

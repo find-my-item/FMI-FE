@@ -1,17 +1,11 @@
 import ListItem from "@/app/(route)/list/_components/ListItem/ListItem";
+import { MOCK_POST_ITEM } from "@/mock/MOCK_DATA";
 
 const PostSearchView = () => {
   return (
     <div className="w-full">
       {Array.from({ length: 2 }).map((_, index) => (
-        <ListItem
-          id={1}
-          linkState="list"
-          img=""
-          title="시청역 화장실에서 핸드폰 잃어버리신 분"
-          description="서울시 노원구 OO동 건물 화장실에서 핸드폰 잃어버린 분 있으신가요"
-          key={index}
-        />
+        <ListItem post={MOCK_POST_ITEM} key={index} />
       ))}
     </div>
   );

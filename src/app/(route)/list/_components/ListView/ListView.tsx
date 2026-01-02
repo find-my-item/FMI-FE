@@ -1,23 +1,12 @@
 "use client";
 
-import { useState } from "react";
-import { DetailHeader, ListSearch } from "@/components";
-import { SEARCH_HEADER_TITLE } from "../../_constants/SEARCH_HEADER_TITLE";
-import DefaultList from "../DefaultList/DefaultList";
 import { useSearchUpdateQueryString } from "@/hooks";
+import { DetailHeader, ListSearch } from "@/components";
+import DefaultList from "../DefaultList/DefaultList";
+import { SEARCH_HEADER_TITLE } from "../../_constants/SEARCH_HEADER_TITLE";
 
 const ListView = () => {
-  const [selected, setSelected] = useState("LOST");
-  const [selectedRegion, setSelectedRegion] = useState("지역선택");
-  const [selectedView, setSelectedView] = useState("조회순");
-  const [selectedCategory, setSelectedCategory] = useState("찾는중");
   const { searchMode, searchUpdateQuery } = useSearchUpdateQueryString();
-
-  const dropdowns = [
-    { value: selectedRegion, setValue: setSelectedRegion, icon: "Position" },
-    { value: selectedView, setValue: setSelectedView, icon: "ArrowDown" },
-    { value: selectedCategory, setValue: setSelectedCategory, icon: "ArrowDown" },
-  ] as const;
 
   return (
     <>
@@ -29,11 +18,7 @@ const ListView = () => {
       </DetailHeader>
 
       {searchMode === "default" ? (
-        <DefaultList
-          searchUpdateQuery={searchUpdateQuery}
-          selected={selected}
-          setSelected={setSelected}
-        />
+        <DefaultList searchUpdateQuery={searchUpdateQuery} />
       ) : (
         <ListSearch searchMode={searchMode} />
       )}

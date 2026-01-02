@@ -15,9 +15,9 @@ export const LOADING_SPINNER_SIZE = {
 export const VARIANT_STYLES = {
   solid: {
     normal:
-      "text-brand-normal-default bg-fill-brand-normal-default bg-opacity-70 hover:bg-fill-brand-normal-hover active:bg-fill-brand-normal-pressed active:text-brand-normal-pressed disabled:bg-fill-brand-normal-disabled disabled:text-brand-normal-disabled",
+      "text-brand-subtle-default bg-fill-brand-normal-default bg-opacity-70 hover:bg-fill-brand-normal-hover active:bg-fill-brand-normal-pressed active:text-brand-subtle-pressed disabled:bg-fill-brand-normal-disabled disabled:text-brand-subtle-disabled",
     subtle:
-      "text-brand-subtle-default bg-fill-brand-subtle-default hover:bg-fill-brand-subtle-hover hover:text-brand-subtle-hover active:bg-fill-brand-subtle-pressed active:text-brand-subtle-pressed disabled:bg-fill-brand-subtle-disabled disabled:text-brand-subtle-disabled",
+      "text-brand-normal-default bg-fill-brand-subtle-default hover:bg-fill-brand-subtle-hover hover:text-brand-normal-hover active:bg-fill-brand-subtle-pressed active:text-brand-normal-pressed disabled:bg-fill-brand-subtle-disabled disabled:text-brand-normal-disabled",
   },
   outlined: {
     base: "text-neutral-normal-default border border-neutral-normal-default hover:text-black hover:border-neutral-normal-hover active:bg-fill-neutral-normal-pressed active:text-neutral-normal-pressed disabled:bg-fill-neutral-normal-disabled disabled:text-neutral-normal-disabled disabled:border-neutral-normal-disabled",
