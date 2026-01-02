@@ -12,7 +12,6 @@ type BodyData = {
   itemStatus: ItemStatus;
   category: CategoryType;
 };
-
 interface PostDetailBodyProps {
   isBoardType: boolean;
   label: "find" | "lost" | "notice" | "customer";
