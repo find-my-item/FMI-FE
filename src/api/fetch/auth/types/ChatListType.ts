@@ -3,7 +3,7 @@ export interface ChatRoom {
   contactUser: {
     userId: number;
     nickname: string;
-    profileImageUrl: string;
+    profileImageUrl: string | null;
   };
   postInfo: {
     postId: number;
@@ -12,9 +12,9 @@ export interface ChatRoom {
     address: string;
     thumbnailUrl: string;
   };
-  messageType: "TEXT" | "IMAGE";
-  lastMessage: string;
-  lastMessageSentAt: string;
+  messageType: "TEXT" | "IMAGE" | null;
+  lastMessage: string | null;
+  lastMessageSentAt: string | null;
   unreadCount: number;
 }
 

@@ -17,7 +17,7 @@ const ListView = () => {
   const { searchMode, searchUpdateQuery } = useSearchUpdateQueryString();
 
   useEffect(() => {
-    postLogin({ email: "test@example.com", password: "Test1234!" });
+    postLogin({ email: "znznun@gmail.com", password: "Khj1234!" });
   }, []);
 
   return (
