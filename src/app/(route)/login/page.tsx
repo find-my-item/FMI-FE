@@ -4,10 +4,10 @@ import Link from "next/link";
 import { cn } from "@/utils";
 import { Icon, Button, AuthLogoLink } from "@/components";
 
-const ButtonStyle = "w-full h-[44px] flex-center gap-1 rounded-[10px] text-body1-semibold ";
+const ButtonStyle = "w-full h-[44px] flex-center gap-1 rounded-[10px] text-body1-semibold";
 
-const REST_API_KEY = process.env.KAKA0_REST_API_KEY;
-const REDIRECT_URI = process.env.KAKAO_REDIRECT_URI;
+const REST_API_KEY = process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY;
+const REDIRECT_URI = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI;
 
 const Page = () => {
   const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
