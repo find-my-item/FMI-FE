@@ -10,7 +10,7 @@ export interface ChatRoom {
     postType: "LOST" | "FOUND";
     title: string;
     address: string;
-    thumbnailUrl: string;
+    thumbnailUrl: string | null;
   };
   messageType: "TEXT" | "IMAGE" | null;
   lastMessage: string | null;
