@@ -1,13 +1,11 @@
 import Link from "next/link";
 import { Button, Icon } from "@/components";
 
-type PostDetailDataType = {
-  imageUrls: string[];
-  postId: string;
-};
-
 interface PostDetailHeaderType {
-  headerData: PostDetailDataType;
+  headerData: {
+    imageUrls: string[];
+    postId: string;
+  };
 }
 
 const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
