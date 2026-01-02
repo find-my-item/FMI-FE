@@ -1,17 +1,29 @@
 import Image from "next/image";
+import { useGetMetaData } from "@/api/fetch/post";
 import { Button, PopupLayout } from "@/components";
+import { shareMessage } from "@/utils/share/KakaoShare";
 import { SHARE, ShareId } from "./SHARE";
 
 interface PostShareProps {
   isOpen: boolean;
   onClose: () => void;
+  postId: string;
 }
 
-const PostShare = ({ isOpen, onClose }: PostShareProps) => {
+const PostShare = ({ isOpen, onClose, postId }: PostShareProps) => {
+  const { data } = useGetMetaData({ postId: Number(postId) });
+  console.log(data);
+
+  const text = data?.result?.summary || "데이터 공유하기";
+  const link = data?.result?.thumbnailUrl || "https://www.finditem.kr/";
+
   const handleShareClick = (id: ShareId) => {
     switch (id) {
       case "kakao":
-        // kakaoShare();
+        shareMessage({
+          text,
+          link,
+        });
         break;
       case "native":
         // nativeShare();
