@@ -4,7 +4,7 @@ import { useState } from "react";
 import { DetailHeader } from "@/components";
 import PostShare from "../PostShare/PostShare";
 
-const PostDetailTopHeader = () => {
+const PostDetailTopHeader = ({ postId }: { postId: string }) => {
   const [openShareModal, setOpenShareModal] = useState(false);
 
   return (
@@ -15,7 +15,7 @@ const PostDetailTopHeader = () => {
         <DetailHeader.Menu />
       </DetailHeader>
 
-      <PostShare isOpen={openShareModal} onClose={() => setOpenShareModal(false)} />
+      <PostShare isOpen={openShareModal} onClose={() => setOpenShareModal(false)} postId={postId} />
     </>
   );
 };

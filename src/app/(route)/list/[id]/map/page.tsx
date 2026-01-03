@@ -4,7 +4,7 @@ import MapContent from "./_components/MapContent/MapContent";
 
 const page = () => {
   return (
-    <section className="h-dvh">
+    <section className="h-base">
       <DetailHeader title="분실/습득 위치" />
       <h1 className="sr-only">분실/습득 위치 지도</h1>
 
