@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button, Icon } from "@/components";
-import ImageSection from "./_internal/ImageSection";
+import ImageSection from "./_internal/ImageSection/ImageSection";
 
 interface PostDetailHeaderType {
   headerData: {
