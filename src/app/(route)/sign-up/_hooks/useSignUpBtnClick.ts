@@ -61,7 +61,6 @@ export const useSignUpBtnClick = () => {
                   },
                   onError: (error) => {
                     handlerApiError(EMAIL_CHECK_CODE_MESSAGE, error.code);
-                    console.log("error>> ", error);
                   },
                 }
               );

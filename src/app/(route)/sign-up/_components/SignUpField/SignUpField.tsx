@@ -40,7 +40,6 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
   };
 
   const isNextEnabled = isValid && isEmailAuthVerified && isNicknameVerified;
-  console.log("nickname>>> ", isNicknameVerified);
   return (
     <>
       <DetailHeader title="회원가입" />
