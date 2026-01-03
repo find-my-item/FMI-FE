@@ -25,7 +25,7 @@ const Page = () => {
     }
   }, []);
 
-  const { mutate: EmailLoginMutate, error } = useApiEmailLogin();
+  const { mutate: EmailLoginMutate } = useApiEmailLogin();
 
   const checkBoxValues = useWatch({ control, name: CHECKBOX_CONFIG.map((item) => item.id) });
 
