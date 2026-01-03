@@ -22,7 +22,7 @@ const MypageProfileForm = () => {
           )}
           {/* TODO(수현): 디자인 토큰 변경 요청 해놓은 상태로 등록 시 추후 변경 */}
           <button
-            className="absolute left-[52px] top-[52px] h-[28px] w-[28px] rounded-full bg-[#f5f5f5] flex-center"
+            className="absolute left-[52px] top-[52px] h-[28px] w-[28px] rounded-full bg-fill-neutral-strong-default flex-center"
             aria-label="프로필 이미지 변경 버튼"
           >
             <Icon name="CameraBorder" size={16} />

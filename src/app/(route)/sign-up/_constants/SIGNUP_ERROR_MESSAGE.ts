@@ -22,4 +22,8 @@ export const NICKNAME_ERROR_MESSAGE = {
 
 export const EMAIL_CHECK_CODE_MESSAGE = {
   _INVALID_CREDENTIALS: { message: "인증번호가 일치하지 않아요.", status: "warning" },
+  "AUTH400-EMAIL_VERIFY_FAILED": {
+    message: "인증번호가 만료되었거나 일치하지 않아요.",
+    status: "warning",
+  },
 } as const;
