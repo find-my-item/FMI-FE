@@ -13,7 +13,7 @@ export const useNicknameCheck = () => {
 
   const { data, isSuccess, isError } = useApiCheckNickname(nicknameValue);
 
-  const handlerToClickNickname = (name: string) => {
+  const handleClickNickname = (name: string) => {
     const nickname = getValues(name);
 
     setIsNicknameVerified(false);
@@ -35,7 +35,7 @@ export const useNicknameCheck = () => {
   }, [data, isSuccess, isError, addToast]);
 
   return {
-    handlerToClickNickname,
+    handleClickNickname,
     isNicknameVerified,
   };
 };
