@@ -1,28 +1,35 @@
+"use client";
+
 import Image from "next/image";
+import { handleShareClick } from "@/utils";
+import { useGetMetaData } from "@/api/fetch/post";
 import { Button, PopupLayout } from "@/components";
-import { SHARE, ShareId } from "./SHARE";
+import { SHARE } from "./SHARE";
 
 interface PostShareProps {
   isOpen: boolean;
   onClose: () => void;
+  postId: string;
 }
 
-const PostShare = ({ isOpen, onClose }: PostShareProps) => {
-  const handleShareClick = (id: ShareId) => {
-    switch (id) {
-      case "kakao":
-        // kakaoShare();
-        break;
-      case "native":
-        // nativeShare();
-        break;
-      case "copy":
-        // copyLink();
-        break;
-      default:
-        break;
-    }
+const PostShare = ({ isOpen, onClose, postId }: PostShareProps) => {
+  const { data } = useGetMetaData({ postId: Number(postId) });
+
+  const metaData = {
+    title: data?.result?.title || "데이터 공유하기",
+    summary: data?.result?.summary || "데이터 공유하기",
+    thumbnailUrl: data?.result?.thumbnailUrl || "/test_list.JPG",
+    link: "",
   };
+
+  const handleOption = (id: string) =>
+    handleShareClick({
+      id,
+      metaData: {
+        ...metaData,
+        link: window.location.href,
+      },
+    });
 
   return (
     <PopupLayout isOpen={isOpen} onClose={onClose} className="min-h-[305px] space-y-12 px-5 py-10">
@@ -34,7 +41,7 @@ const PostShare = ({ isOpen, onClose }: PostShareProps) => {
               key={item.name}
               src={item.src}
               name={item.name}
-              onClick={() => handleShareClick(item.id)}
+              onClick={() => handleOption(item.id)}
             />
           ))}
         </div>
