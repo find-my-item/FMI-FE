@@ -22,7 +22,7 @@ export const useSignUpBtnClick = () => {
 
   const { mutate: EmailMutate } = useApiSendEmail();
   const { mutate: CodeMutate } = useApiCheckCode();
-  const { handlerToClickNickname, isNicknameVerified } = useNicknameCheck();
+  const { handleClickNickname, isNicknameVerified } = useNicknameCheck();
 
   const handlerToClick = useMemo(
     () =>
@@ -65,7 +65,7 @@ export const useSignUpBtnClick = () => {
                 }
               );
             } else if (name === "nickname") {
-              handlerToClickNickname(name);
+              handleClickNickname(name);
             }
           }
         },
@@ -80,7 +80,7 @@ export const useSignUpBtnClick = () => {
       handlerApiError,
       CodeMutate,
       emailValue,
-      handlerToClickNickname,
+      handleClickNickname,
     ]
   );
 
