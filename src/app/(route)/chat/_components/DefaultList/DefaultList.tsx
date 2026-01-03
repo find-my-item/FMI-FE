@@ -46,7 +46,7 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
           <FilterDropdown key={option.keyName} {...option} searchUpdateQuery={searchUpdateQuery} />
         ))}
       </div>
-      {chatList?.result?.chatRooms?.map((chatRoom) => (
+      {chatList?.map((chatRoom) => (
         <ChatItem key={chatRoom.roomId} chatRoom={chatRoom} />
       ))}
     </>
