@@ -27,7 +27,7 @@ const Page = () => {
 
   const { mutate: EmailLoginMutate } = useApiEmailLogin();
 
-  const checkBoxValues = useWatch({ control, name: CHECKBOX_CONFIG.map((item) => item.id) });
+  const checkBoxValues = useWatch({ control, name: "rememberId" });
 
   const { handlerApiError } = useErrorToast();
 
@@ -52,8 +52,8 @@ const Page = () => {
         }
       },
       onError: (error) => {
-        console.log("error>> ", error);
-        console.log("error>> ", error.response.data.code);
+        // console.log("error>> ", error);
+        // console.log("error>> ", error.response.data.code);
         handlerApiError(EMAIL_LOGIN_ERROR_MESSAGE, error.response.data.code);
       },
       // console.log("data>>>", filterData)
@@ -77,18 +77,16 @@ const Page = () => {
             />
           ))}
           {/* 체크박스 */}
-          <div className="flex w-full gap-3">
-            {CHECKBOX_CONFIG.map((item, index) => (
-              <CheckBox
-                key={item.id}
-                {...item}
-                {...register(item.id, { required: false })}
-                boxSize="w-[18px] h-[18px]"
-                textStyle="text-caption1-semibold text-neutral-normal-default ml-2"
-                iconSize="h-[6px]"
-                state={!!checkBoxValues?.[index]}
-              />
-            ))}
+          <div className="flex w-full">
+            <CheckBox
+              {...register("rememberId", { required: false })}
+              id="rememberId"
+              label="아이디 기억하기"
+              boxSize="w-[18px] h-[18px]"
+              textStyle="text-caption1-semibold text-neutral-normal-default ml-2"
+              iconSize="h-[6px]"
+              state={!!checkBoxValues}
+            />
           </div>
         </div>
 
