@@ -33,6 +33,7 @@
     "react-cookie": "^8.0.1",
     "react-dom": "^19.1.4",
     "react-hook-form": "^7.62.0",
+    "react-kakao-maps-sdk": "^1.2.0",
     "zod": "^4.1.5",
     "zustand": "^5.0.8"
   },
