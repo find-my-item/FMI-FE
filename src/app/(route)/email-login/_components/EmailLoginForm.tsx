@@ -4,25 +4,24 @@ import { useFormContext, useWatch } from "react-hook-form";
 import { CheckBox, InputText, Button } from "@/components";
 import { CHECKBOX_CONFIG } from "../_constants/CHECKBOX_CONFIG";
 import { EMAIL_LOGIN_CONFIG } from "../_constants/EMAIL_LOGIN_CONFIG";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { LoginType } from "../_types/LoginType";
 import { useErrorToast } from "@/hooks";
 import { EMAIL_LOGIN_ERROR_MESSAGE } from "../_constants/EMAIL_LOGIN_ERROR_MESSAGE";
 import { useRouter } from "next/navigation";
-import { useCookies } from "react-cookie";
+import { getCookie, setCookie, deleteCookie } from "cookies-next";
 import useApiEmailLogin from "@/api/fetch/auth/api/useApiEmailLogin";
 
 const Page = () => {
   const router = useRouter();
-  const { register, control, handleSubmit, reset } = useFormContext<LoginType>();
+  const { register, control, handleSubmit, setValue } = useFormContext<LoginType>();
 
-  const [cookie, setCookie, removeCookie] = useCookies(["email", "autoLogin"]);
+  const cookie = getCookie("email");
+
   useEffect(() => {
-    if (cookie.email) {
-      reset({
-        email: cookie.email,
-        rememberId: !!cookie.email,
-      });
+    if (typeof cookie === "string") {
+      setValue("email", cookie);
+      setValue("rememberId", !!cookie);
     }
   }, []);
 
@@ -49,7 +48,7 @@ const Page = () => {
             secure: process.env.NODE_ENV === "production",
           });
         } else {
-          removeCookie("email");
+          deleteCookie("email");
         }
       },
       onError: (error) => {
