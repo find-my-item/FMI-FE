@@ -3,17 +3,24 @@
 import { DetailHeader } from "@/components";
 import { TabContents, UserHeader } from "./_components";
 
-export default function Page() {
+const data = {
+  nickname: "사용자 닉네임",
+  email: "asdf@gmail.com",
+};
+
+const Page = () => {
   return (
     <>
-      <h1 className="sr-only">타인 프로필</h1>
       <DetailHeader title="프로필">
         <DetailHeader.Menu />
       </DetailHeader>
+      <h1 className="sr-only">타인 프로필</h1>
 
-      <UserHeader nickname="사용자 닉네임" email="asdf@gmail.com" />
+      <UserHeader nickname={data.nickname} email={data.email} />
 
       <TabContents />
     </>
   );
-}
+};
+
+export default Page;

@@ -16,7 +16,7 @@ const page = async ({ params }: ListDetailProps) => {
 
   return (
     <>
-      <PostDetailTopHeader />
+      <PostDetailTopHeader postId={id} />
       <PostDetail item={listObject} type="find" />
       <CommentList comments={commentListObject} />
       <SimilarItemsSection />
