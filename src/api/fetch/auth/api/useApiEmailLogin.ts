@@ -13,11 +13,11 @@ export interface EmailLoginResponseType
   }> {}
 
 const useApiEmailLogin = () => {
-  return useAppMutation<ApiEmailLoginType, EmailLoginResponseType, EmailLoginResponseType>(
-    "auth",
-    "auth/login",
-    "post"
-  );
+  return useAppMutation<
+    ApiEmailLoginType,
+    EmailLoginResponseType,
+    { response: { data: { isSuccess: boolean; code: string; message: string } } }
+  >("auth", "auth/login", "post");
 };
 
 export default useApiEmailLogin;
