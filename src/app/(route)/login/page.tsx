@@ -3,6 +3,9 @@
 import Link from "next/link";
 import { cn } from "@/utils";
 import { Icon, Button, AuthLogoLink } from "@/components";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import { useApiKakaoLogin } from "@/api/fetch/auth";
 
 const ButtonStyle = "w-full h-[44px] flex-center gap-1 rounded-[10px] text-body1-semibold";
 
@@ -10,7 +13,28 @@ const REST_API_KEY = process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY;
 const REDIRECT_URI = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI;
 
 const Page = () => {
+  const { mutate: KakaoLoginMutate } = useApiKakaoLogin();
+
   const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const code = searchParams.get("code");
+
+  useEffect(() => {
+    if (!code) return;
+
+    KakaoLoginMutate(
+      { code: code },
+      {
+        onSuccess: (res) => {
+          router.push("/");
+          console.log("res>>> ", res);
+        },
+        onError: (error) => console.log("error>> ", error),
+      }
+    );
+  }, [code, KakaoLoginMutate]);
 
   return (
     <div className="min-h-screen w-full gap-8 flex-col-center">
