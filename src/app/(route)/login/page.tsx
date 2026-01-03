@@ -13,28 +13,33 @@ const REST_API_KEY = process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY;
 const REDIRECT_URI = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI;
 
 const Page = () => {
-  const { mutate: KakaoLoginMutate } = useApiKakaoLogin();
-
   const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
-  const router = useRouter();
   const searchParams = useSearchParams();
-  const code = searchParams.get("code");
 
-  useEffect(() => {
-    if (!code) return;
+  // const code = searchParams.get("code");
+  // const router = useRouter();
+  // const { mutate: KakaoLoginMutate } = useApiKakaoLogin();
+  // useEffect(() => {
+  //   if (!code) return;
 
-    KakaoLoginMutate(
-      { code: code },
-      {
-        onSuccess: (res) => {
-          router.push("/");
-          console.log("res>>> ", res);
-        },
-        onError: (error) => console.log("error>> ", error),
-      }
-    );
-  }, [code, KakaoLoginMutate]);
+  //   if(code) {
+  //     console.log("code>>> ", code);
+  //     return <div>카카오 로그인 처리 중... </div>
+  //   }
+
+  //   KakaoLoginMutate(
+  //     { code: code },
+  //     {
+  //       onSuccess: (res) => {
+  //         router.push("/");
+  //         console.log("res>>> ", res);
+  //       },
+  //       onError: (error) => console.log("error>> ", error),
+  //     }
+  //   );
+
+  // }, [code, KakaoLoginMutate]);
 
   return (
     <div className="min-h-screen w-full gap-8 flex-col-center">
@@ -46,6 +51,8 @@ const Page = () => {
           type="submit"
           ignoreBase
           ariaLabel="카카오 로그인 버튼"
+          // as={Link}
+          // href={"/auth/kakao/callback"}
           onClick={() => (window.location.href = kakaoURL)}
           className={cn(
             ButtonStyle,
