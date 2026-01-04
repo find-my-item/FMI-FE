@@ -22,7 +22,7 @@ export const useSignUpBtnClick = () => {
 
   const { mutate: EmailMutate } = useApiSendEmail();
   const { mutate: CodeMutate } = useApiCheckCode();
-  const { handlerToClickNickname } = useNicknameCheck();
+  const { handleClickNickname, isNicknameVerified } = useNicknameCheck();
 
   const handlerToClick = useMemo(
     () =>
@@ -60,11 +60,13 @@ export const useSignUpBtnClick = () => {
                     setIsEmailDisabled(true);
                     setIsEmailAuthVerified(true);
                   },
-                  onError: (error) => handlerApiError(EMAIL_CHECK_CODE_MESSAGE, error.code),
+                  onError: (error) => {
+                    handlerApiError(EMAIL_CHECK_CODE_MESSAGE, error.code);
+                  },
                 }
               );
             } else if (name === "nickname") {
-              handlerToClickNickname(name);
+              handleClickNickname(name);
             }
           }
         },
@@ -79,7 +81,7 @@ export const useSignUpBtnClick = () => {
       handlerApiError,
       CodeMutate,
       emailValue,
-      handlerToClickNickname,
+      handleClickNickname,
     ]
   );
 
@@ -88,5 +90,6 @@ export const useSignUpBtnClick = () => {
     isEmailAuthDisabled,
     isEmailDisabled,
     isEmailAuthVerified,
+    isNicknameVerified,
   };
 };

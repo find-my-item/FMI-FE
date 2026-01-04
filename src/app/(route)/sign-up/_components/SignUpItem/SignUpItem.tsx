@@ -28,6 +28,10 @@ const inputValidationRules = {
   },
   nickname: {
     required: true,
+    minLength: {
+      value: 2,
+      message: "2~10자 사이의 닉네임을 입력해 주세요.",
+    },
     maxLength: {
       value: 10,
       message: "2~10자 사이의 닉네임을 입력해 주세요.",
@@ -51,23 +55,17 @@ const SignUpItem = ({ children, isVerified, ...props }: SignUpItemProps) => {
     rules: props.validation,
   });
 
-  const isSuccess = isDirty && !error && field.value;
+  const isFieldSuccess = isDirty && !error && !!field.value;
 
-  const handleSuccess = (name: string) => {
-    if (name === "emailAuth") return isVerified;
-    else return isSuccess;
-  };
+  const isSuccessState =
+    props.name === "emailAuth" || props.name === "nickname" ? isVerified : isFieldSuccess;
 
   const inputValidation = (name: string) =>
     inputValidationRules[name as keyof typeof inputValidationRules];
 
   return (
     <div className="h-[96px]">
-      <InputText
-        validation={inputValidation(props.name)}
-        isSuccess={handleSuccess(props.name)}
-        {...props}
-      >
+      <InputText validation={inputValidation(props.name)} isSuccess={isSuccessState} {...props}>
         {children}
       </InputText>
     </div>
