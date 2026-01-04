@@ -1,21 +1,4 @@
-export const CHANGE_EMAIL_INPUT_CONFIG = [
-  {
-    name: "email",
-    label: "아이디(이메일)",
-    type: "text",
-    placeholder: "로그인에 사용할 이메일을 입력해주세요.",
-    children: "인증번호 발송",
-    maxLength: 256,
-  },
-  {
-    name: "emailAuth",
-    label: "이메일 인증",
-    type: "text",
-    placeholder: "인증번호를 입력해주세요.",
-    children: "인증번호 확인",
-    successMessage: "인증되었습니다.",
-    maxLength: 6,
-  },
+export const CHANGE_PASSWORD_CONFIG = [
   {
     name: "password",
     label: "비밀번호",
