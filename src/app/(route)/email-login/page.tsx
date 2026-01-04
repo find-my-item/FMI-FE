@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useWatch } from "react-hook-form";
-import { CheckBox, InputText, Button, DetailHeader, AuthLogoLink } from "@/components";
+import { CheckBox, InputText, Button, AuthLogoLink } from "@/components";
+import { DetailHeader } from "@/components/layout";
 import { CHECKBOX_CONFIG } from "./_constants/CHECKBOX_CONFIG";
 import { EMAIL_LOGIN_CONFIG } from "./_constants/EMAIL_LOGIN_CONFIG";
 import { FormProvider, useForm } from "react-hook-form";
