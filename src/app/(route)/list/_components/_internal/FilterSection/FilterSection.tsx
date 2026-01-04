@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Filter } from "@/components";
+import { Filter } from "@/components/common";
 import { CATEGORY_LABEL_MAP, SORT_LABEL_MAP, STATUS_LABEL_MAP } from "../FilterBottomSheet/LABELS";
 import {
   CategoryFilterValue,

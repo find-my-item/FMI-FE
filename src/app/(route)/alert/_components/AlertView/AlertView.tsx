@@ -1,6 +1,6 @@
 "use client";
 
-import { Icon } from "@/components";
+import { Icon } from "@/components/common";
 import { cn, formatDate } from "@/utils";
 import { MOCK_ALERT_ITEMS } from "../../_constants/MOCK_ALERT_ITEMS";
 import { useSearchParams } from "next/navigation";

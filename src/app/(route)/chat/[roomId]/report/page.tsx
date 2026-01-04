@@ -1,6 +1,7 @@
 "use client";
 
-import { Button, DetailHeader, Icon, InputField, RequiredText } from "@/components";
+import { DetailHeader } from "@/components/layout";
+import { Button, Icon, InputField, RequiredText } from "@/components/common";
 import { useToast } from "@/context/ToastContext";
 import { cn } from "@/utils";
 import { useRouter } from "next/navigation";

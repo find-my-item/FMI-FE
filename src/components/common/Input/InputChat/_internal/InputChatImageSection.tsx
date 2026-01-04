@@ -1,6 +1,6 @@
 "use client";
 
-import { Icon, ImageSelectButton } from "@/components";
+import { Icon, ImageSelectButton } from "@/components/common";
 import { handleSendImage } from "../utils/handleSendImage";
 import { useChatRoom } from "@/providers/ChatRoomProvider";
 

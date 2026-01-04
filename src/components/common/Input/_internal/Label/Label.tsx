@@ -1,4 +1,4 @@
-import { RequiredText } from "@/components";
+import { RequiredText } from "@/components/common";
 import { LabelHTMLAttributes } from "react";
 
 interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {

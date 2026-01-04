@@ -1,6 +1,6 @@
 "use client";
 
-import { DetailHeader } from "@/components";
+import { DetailHeader } from "@/components/layout";
 import { TabContents, UserHeader } from "./_components";
 
 const data = {

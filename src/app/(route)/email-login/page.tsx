@@ -1,11 +1,12 @@
 "use client";
 "use no memo";
 
-import { DetailHeader, AuthLogoLink } from "@/components";
 import Link from "next/link";
 import { FormProvider, useForm } from "react-hook-form";
 import { EmailLoginForm } from "./_components";
 import { LoginFormType } from "./_types/LoginFormType";
+import { DetailHeader } from "@/components/layout";
+import { AuthLogoLink } from "@/components/domain";
 
 const page = () => {
   const methods = useForm<LoginFormType>({

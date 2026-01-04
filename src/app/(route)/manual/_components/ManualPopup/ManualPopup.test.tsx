@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import ManualPopup from "./ManualPopup";
 
-jest.mock("@/components", () => ({
+jest.mock("@/components/common", () => ({
   __esModule: true,
   Icon: ({ name, ...rest }: any) => <span data-testid={`icon-${name}`} {...rest} />,
   PopupLayout: ({ isOpen, children }: any) => (isOpen ? <div>{children}</div> : null),

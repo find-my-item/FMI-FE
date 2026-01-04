@@ -4,7 +4,7 @@ import { FormEvent, useEffect, useState } from "react";
 import { ReportReason } from "../_types/ReportReason";
 import { createPortal } from "react-dom";
 import { REPORT_REASONS } from "../_constants/REPORT_REASONS";
-import { Button } from "@/components";
+import { Button } from "@/components/common";
 
 const ReportReasonModal = ({
   isOpen,

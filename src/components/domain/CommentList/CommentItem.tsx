@@ -1,6 +1,6 @@
 "use client";
 
-import { Bookmark, Icon, KebabMenuButton, ViewMoreReply } from "@/components";
+import { Bookmark, Icon, KebabMenuButton, ViewMoreReply } from "@/components/common";
 import { cn } from "@/utils";
 import { useState } from "react";
 import type { Comment } from "./types/commentItem";

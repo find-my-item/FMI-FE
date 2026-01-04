@@ -1,4 +1,4 @@
-import { Icon } from "@/components";
+import { Icon } from "@/components/common";
 import KakaoMap from "./KakaoMap";
 import Link from "next/link";
 

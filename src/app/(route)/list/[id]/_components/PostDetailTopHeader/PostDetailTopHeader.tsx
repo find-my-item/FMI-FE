@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { DetailHeader } from "@/components";
+import { DetailHeader } from "@/components/layout";
 import PostShare from "../PostShare/PostShare";
 
 const PostDetailTopHeader = ({ postId }: { postId: string }) => {

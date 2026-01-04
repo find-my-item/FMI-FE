@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import LocationSection from "./LocationSection";
 
-jest.mock("@/components", () => ({
+jest.mock("@/components/common", () => ({
   Icon: ({ name, title }: { name: string; title?: string }) => (
     <span data-testid={`icon-${name}`}>{title ?? name}</span>
   ),

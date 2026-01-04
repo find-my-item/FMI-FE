@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import TitleSection from "./TitleSection";
 
-jest.mock("@/components", () => ({
+jest.mock("@/components/common", () => ({
   RequiredText: () => <span data-testid="required-text">*</span>,
 }));
 

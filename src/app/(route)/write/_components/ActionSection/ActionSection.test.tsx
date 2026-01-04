@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import ActionSection from "./ActionSection";
 
-jest.mock("@/components", () => ({
+jest.mock("@/components/common", () => ({
   Button: ({ children, className }: { children: React.ReactNode; className?: string }) => (
     <button type="submit" className={className} data-testid="submit-button">
       {children}

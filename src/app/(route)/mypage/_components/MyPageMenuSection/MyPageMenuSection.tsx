@@ -1,5 +1,5 @@
 import React from "react";
-import { Icon } from "@/components";
+import { Icon } from "@/components/common";
 import Link from "next/link";
 import { MYPAGE_MENU_LIST } from "../../_constants/MYPAGE_MENU_LIST";
 
