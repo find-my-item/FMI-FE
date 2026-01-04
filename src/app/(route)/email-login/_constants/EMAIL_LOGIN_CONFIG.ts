@@ -7,7 +7,7 @@ export const EMAIL_LOGIN_CONFIG = [
     eyeShow: false,
     validation: {
       required: true,
-      pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "이메일 형식을 입력해 주세요." },
+      // pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
     },
   },
   {

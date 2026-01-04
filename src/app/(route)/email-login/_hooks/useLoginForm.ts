@@ -1,17 +1,21 @@
 import useApiEmailLogin from "@/api/fetch/auth/api/useApiEmailLogin";
 import { useErrorToast } from "@/hooks";
 import { deleteCookie, getCookie, setCookie } from "cookies-next";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { LoginType } from "../_types/LoginType";
 import { EMAIL_LOGIN_ERROR_MESSAGE } from "../_constants/EMAIL_LOGIN_ERROR_MESSAGE";
+import { useToast } from "@/context/ToastContext";
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const useLoginForm = () => {
   const { handleSubmit, setValue } = useFormContext<LoginType>();
   const router = useRouter();
   const cookie = getCookie("email");
   const { mutate: EmailLoginMutate } = useApiEmailLogin();
+  const { addToast } = useToast();
   const { handlerApiError } = useErrorToast();
 
   useEffect(() => {
@@ -22,15 +26,20 @@ const useLoginForm = () => {
   }, []);
 
   const onSubmitLogin = handleSubmit((data) => {
+    if (!EMAIL_REGEX.test(data.email)) {
+      addToast("아이디에 이메일을 입력해주세요.", "warning");
+      return;
+    }
+
     const filterData = {
       email: data.email,
       password: data.password,
     };
 
     EmailLoginMutate(filterData, {
-      onSuccess: (res) => {
+      onSuccess: () => {
         router.replace("/");
-        console.log("res>>>", res);
+
         if (data.rememberId) {
           setCookie("email", data.email, {
             path: "/",
