@@ -17,7 +17,7 @@ const page = () => {
   });
 
   return (
-    <div className="h-dvh w-full">
+    <div className="w-full h-base">
       <DetailHeader title="비밀번호 변경" />
       <FormProvider {...methods}>
         <MypageChangePwForm />

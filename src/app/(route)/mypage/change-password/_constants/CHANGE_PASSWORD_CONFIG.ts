@@ -31,7 +31,6 @@ export const CHANGE_PASSWORD_CONFIG = [
     placeholder: "비밀번호 입력해 주세요.",
     eyeShow: true,
     successMessage: "비밀번호가 일치합니다.",
-    errorMessage: "비밀번호가 일치하지 않습니다.",
     maxLength: 16,
     validation: {
       required: true,
