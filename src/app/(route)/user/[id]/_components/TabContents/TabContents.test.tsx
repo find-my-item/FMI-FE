@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 import TabContents from "./TabContents";
 
-jest.mock("@/components", () => ({
+jest.mock("@/components/domain", () => ({
   Tab: ({ tabs, selected, onValueChange }: any) => (
     <div role="tablist" aria-label="프로필 탭">
       {tabs.map((t: any) => (

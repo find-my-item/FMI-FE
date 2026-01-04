@@ -8,8 +8,7 @@ jest.mock("@/hooks", () => ({
   useSearchUpdateQueryString: jest.fn(),
 }));
 
-jest.mock("@/components", () => ({
-  DetailHeader: ({ title }: { title: string }) => <div data-testid="detail-header">{title}</div>,
+jest.mock("@/components/domain", () => ({
   ListSearch: ({ searchMode }: { searchMode: "region" | "post" }) => (
     <div data-testid="list-search">{searchMode}</div>
   ),
