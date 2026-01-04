@@ -48,8 +48,7 @@ const MypageProfileForm = () => {
       </div>
 
       <FooterButton
-        name="설정 완료"
-        ariaLabel="설정 완료 버튼"
+        label="설정 완료"
         // TODO(수현): 기능 구현 브랜치로 disabled 제어 함수 추가 예정
         // disabled={ }
       />
