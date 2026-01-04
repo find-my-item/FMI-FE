@@ -1,26 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import { Tab } from "@/components";
 import { MOCK_POST_ITEM } from "@/mock/MOCK_DATA";
 import ListItem from "@/app/(route)/list/_components/ListItem/ListItem";
 import { USER_TABS } from "../../_types/USER_TABS";
 import { CommentItem } from "../_internal";
 
-type SelectedTab = (typeof USER_TABS)[number]["key"];
-
-const TabContents = () => {
-  const [selectedTab, setSelectedTab] = useState<SelectedTab>("post");
-
+const TabContents = ({ selectedTab }: { selectedTab: (typeof USER_TABS)[number]["key"] }) => {
   return (
     <>
-      <Tab
-        tabs={USER_TABS}
-        selected={selectedTab}
-        onValueChange={setSelectedTab}
-        aria-label="프로필 탭"
-      />
-
       <section>
         <ul>
           {selectedTab === "post" && (

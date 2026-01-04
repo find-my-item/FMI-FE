@@ -14,7 +14,7 @@ const CommentItem = ({ data }: CommentItemProps) => {
   const { postId, comment, date, likes } = data;
 
   return (
-    <li className="border-b border-divider-default px-5 py-[30px]">
+    <li className="border-b border-divider-default px-5 py-[30px] transition-colors hover:bg-flatGray-25">
       <Link href={`/list/${postId}`} className="flex w-full flex-col items-start gap-2">
         <p className="line-clamp-1 w-full text-body1-semibold text-layout-header-default">
           {comment}
