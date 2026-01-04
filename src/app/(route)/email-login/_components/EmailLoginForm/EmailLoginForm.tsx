@@ -6,7 +6,7 @@ import { EMAIL_LOGIN_CONFIG } from "../../_constants/EMAIL_LOGIN_CONFIG";
 import useLoginForm from "../../_hooks/useLoginForm";
 import { LoginFormType } from "../../_types/LoginFormType";
 
-const Page = () => {
+const EmailLoginForm = () => {
   const { register, control } = useFormContext<LoginFormType>();
   const checkBoxValues = useWatch({ control, name: "rememberId" });
 
@@ -49,4 +49,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default EmailLoginForm;
