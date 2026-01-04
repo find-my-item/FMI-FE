@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { handleShareClick } from "@/utils";
 import { useGetMetaData } from "@/api/fetch/post";
-import { Button, PopupLayout } from "@/components";
+import { Button } from "@/components";
+import { PopupLayout } from "@/components/domain";
 import { SHARE } from "./SHARE";
 
 interface PostShareProps {

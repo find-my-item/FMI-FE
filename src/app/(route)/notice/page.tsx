@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { NoticeCustomerState } from "./_types/noticeContainer";
 import NoticeView from "./_components/NoticeView/NoticeView";
 import { DetailHeader } from "@/components/layout";
-import { Tab } from "@/components";
+import { Tab } from "@/components/domain";
 import { tabs } from "./_constant/noticeTab";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";

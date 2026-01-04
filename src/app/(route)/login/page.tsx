@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { cn } from "@/utils";
-import { Icon, Button, AuthLogoLink } from "@/components";
+import { Icon, Button } from "@/components";
+import { AuthLogoLink } from "@/components/domain";
 
 const ButtonStyle = "w-full h-[44px] flex-center gap-1 rounded-[10px] text-body1-semibold ";
 

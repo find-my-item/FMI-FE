@@ -3,7 +3,7 @@
 
 import { ApiFindPwType } from "@/api/fetch/auth";
 import { DetailHeader } from "@/components/layout";
-import { FindPwForm } from "@/components";
+import { FindPwForm } from "@/components/domain";
 import { FormProvider, useForm } from "react-hook-form";
 
 const Page = () => {

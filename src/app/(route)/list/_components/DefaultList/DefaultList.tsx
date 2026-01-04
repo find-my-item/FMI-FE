@@ -2,7 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { useGetPost } from "@/api/fetch/post";
-import { Tab } from "@/components";
+import { Tab } from "@/components/domain";
 import { TABS } from "../../_constants/TABS";
 import ListItem from "../ListItem/ListItem";
 import FilterSection from "../_internal/FilterSection/FilterSection";

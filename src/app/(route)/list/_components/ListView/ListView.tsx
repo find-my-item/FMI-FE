@@ -2,7 +2,7 @@
 
 import { useSearchUpdateQueryString } from "@/hooks";
 import { DetailHeader } from "@/components/layout";
-import { ListSearch } from "@/components";
+import { ListSearch } from "@/components/domain";
 import DefaultList from "../DefaultList/DefaultList";
 import { SEARCH_HEADER_TITLE } from "../../_constants/SEARCH_HEADER_TITLE";
 
