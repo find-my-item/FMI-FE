@@ -10,9 +10,9 @@ jest.mock("next/navigation", () => ({
   useRouter: () => ({ push: mockPush, back: mockBack }),
 }));
 
-jest.mock("@/components", () => ({
+jest.mock("@/components/common", () => ({
   Icon: ({ name, ...rest }: any) => <span data-testid={`icon-${name}`} {...rest} />,
-  ConfirmModal: ({ isOpen, onClose, onConfirm, onCancel, title, content }: any) => {
+  ConfirmModal: ({ isOpen, onConfirm, onCancel, title, content }: any) => {
     if (!isOpen) return null;
     return (
       <div data-testid="confirm-modal">

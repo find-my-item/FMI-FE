@@ -1,9 +1,9 @@
 "use client";
 
-import { MOCK_POST_ITEM } from "@/mock/MOCK_DATA";
-import ListItem from "@/app/(route)/list/_components/ListItem/ListItem";
 import { USER_TABS } from "../../_types/USER_TABS";
+import ListItem from "@/app/(route)/list/_components/ListItem/ListItem";
 import { CommentItem } from "../_internal";
+import { MOCK_POST_ITEM } from "@/mock/MOCK_DATA";
 
 interface TabContentsProps {
   selectedTab: (typeof USER_TABS)[number]["key"];

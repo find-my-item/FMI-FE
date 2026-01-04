@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { DetailHeader, Tab } from "@/components";
+import { Tab } from "@/components/domain";
+import { DetailHeader } from "@/components/layout";
 import { TabContents, UserHeader } from "./_components";
 import { USER_TABS } from "./_types/USER_TABS";
 

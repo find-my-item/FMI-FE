@@ -1,5 +1,5 @@
 import { cn } from "@/utils";
-import { RequiredText } from "@/components";
+import { RequiredText } from "@/components/common";
 
 const TitleSection = () => {
   return (

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/utils";
-import { Button, Icon } from "@/components";
+import { Button, Icon } from "@/components/common";
 import { ManualItemType } from "../../_types/ManualType";
 import { MANUAL_DATA } from "../../_constants/MANUAL_CONSTANT";
 

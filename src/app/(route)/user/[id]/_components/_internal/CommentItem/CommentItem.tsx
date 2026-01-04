@@ -1,5 +1,5 @@
-import { Icon } from "@/components";
 import Link from "next/link";
+import { Icon } from "@/components/common";
 
 interface CommentItemProps {
   data: {

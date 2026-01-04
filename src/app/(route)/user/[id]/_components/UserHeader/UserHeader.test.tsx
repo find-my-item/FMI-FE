@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import UserHeader from "./UserHeader";
 
-jest.mock("@/components", () => ({
+jest.mock("@/components/common", () => ({
   Icon: ({ name, size, className }: any) => (
     <svg data-testid="icon" data-name={name} data-size={size} className={className} />
   ),
