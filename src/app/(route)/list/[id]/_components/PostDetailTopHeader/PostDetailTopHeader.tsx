@@ -10,9 +10,9 @@ const PostDetailTopHeader = ({ postId }: { postId: string }) => {
   return (
     <>
       <DetailHeader>
-        <DetailHeader.Star isActive />
-        <DetailHeader.Share onClick={() => setOpenShareModal(true)} />
-        <DetailHeader.Menu />
+        <DetailHeader.Star isActive ariaLabel="게시글 즐겨찾기" />
+        <DetailHeader.Share onClick={() => setOpenShareModal(true)} ariaLabel="게시글 공유" />
+        <DetailHeader.Menu ariaLabel="게시글 메뉴" />
       </DetailHeader>
 
       <PostShare isOpen={openShareModal} onClose={() => setOpenShareModal(false)} postId={postId} />
