@@ -1,6 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import PostDetailHeader from "./PostDetailHeader";
 
+jest.mock("swiper/css", () => ({}));
+jest.mock("swiper/css/pagination", () => ({}));
+
 describe("상세페이지 상단 헤더", () => {
   it("헤더가 렌더링되어야 한다.", () => {
     render(<PostDetailHeader headerData={{ imageUrls: [], postId: "1" }} />);
