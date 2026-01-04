@@ -35,8 +35,12 @@ const TabContents = () => {
             <>
               {Array.from({ length: 5 }).map((_, index) => (
                 <CommentItem
-                  comment="여기에 댓글 내용이 표기됩니다"
-                  date="2025.11.02"
+                  data={{
+                    postId: 1,
+                    likes: 5,
+                    comment: "여기에 댓글 내용이 표기됩니다",
+                    date: "2025.11.02",
+                  }}
                   key={index}
                 />
               ))}
