@@ -30,7 +30,7 @@ const MockInputField = ({ name, label, placeholder, maxLength }: any) => {
   );
 };
 
-jest.mock("@/components", () => {
+jest.mock("@/components/common", () => {
   const React = require("react");
   const { useFormContext } = require("react-hook-form");
 
@@ -51,7 +51,6 @@ jest.mock("@/components", () => {
   };
 
   return {
-    DetailHeader: ({ title }: { title: string }) => <div data-testid="detail-header">{title}</div>,
     Icon: ({ name, size, ...rest }: any) => (
       <span data-testid={`icon-${name}`} data-size={size} {...rest} />
     ),
@@ -71,6 +70,10 @@ jest.mock("@/components", () => {
     ),
   };
 });
+
+jest.mock("@/components/layout", () => ({
+  DetailHeader: ({ title }: { title: string }) => <div data-testid="detail-header">{title}</div>,
+}));
 
 jest.mock("./_components", () => ({
   ReportReasonModal: ({ isOpen, onClose, selectedReportReason, setSelectedReportReason }: any) => {

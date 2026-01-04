@@ -1,4 +1,4 @@
-import { FloatingButton } from "@/components";
+import { FloatingButton } from "@/components/common";
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (

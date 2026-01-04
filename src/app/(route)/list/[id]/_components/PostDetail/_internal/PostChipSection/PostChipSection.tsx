@@ -1,4 +1,4 @@
-import { Chip } from "@/components";
+import { Chip } from "@/components/common";
 import { CategoryType, ItemStatus } from "@/types";
 import { getItemCategoryLabel, getItemStatusLabel } from "@/utils";
 

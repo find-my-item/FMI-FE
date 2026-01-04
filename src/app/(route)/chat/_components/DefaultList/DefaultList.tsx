@@ -1,6 +1,6 @@
 "use client";
 
-import { Filter } from "@/components";
+import { Filter } from "@/components/common";
 import ChatItem from "../ChatItem/ChatItem";
 import { useSearchParams } from "next/navigation";
 import FilterDropdown from "../FilterDropdown/FilterDropdown";

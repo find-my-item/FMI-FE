@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { DetailHeader } from "@/components";
+import { DetailHeader } from "@/components/layout";
 import MapContent from "./_components/MapContent/MapContent";
 
 const page = () => {

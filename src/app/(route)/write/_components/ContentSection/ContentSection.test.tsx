@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import ContentSection from "./ContentSection";
 
-jest.mock("@/components", () => ({
+jest.mock("@/components/common", () => ({
   RequiredText: () => <span data-testid="required-text">*</span>,
 }));
 

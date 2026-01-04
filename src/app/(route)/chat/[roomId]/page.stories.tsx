@@ -3,7 +3,7 @@ import page from "./page";
 import { ChatRoomProvider } from "@/providers/ChatRoomProvider";
 import { MOCK_CHAT_DATA } from "./_components/ChatRoomMain/constants/MOCK_CHAT_DATA";
 import { ChatRoomHeader, EmptyChatRoom, ChatRoomMain } from "./_components";
-import { InputChat } from "@/components";
+import { InputChat } from "@/components/common";
 import { FormProvider, useForm } from "react-hook-form";
 import { useChatRoom } from "@/providers/ChatRoomProvider";
 
