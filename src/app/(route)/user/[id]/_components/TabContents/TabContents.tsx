@@ -1,11 +1,11 @@
 "use client";
 
-import { Tab } from "@/components";
 import { useState } from "react";
-import { USER_TABS } from "../../_types/USER_TABS";
-import ListItem from "@/app/(route)/list/_components/ListItem/ListItem";
-import { CommentItem } from "../_internal";
+import { Tab } from "@/components";
 import { MOCK_POST_ITEM } from "@/mock/MOCK_DATA";
+import ListItem from "@/app/(route)/list/_components/ListItem/ListItem";
+import { USER_TABS } from "../../_types/USER_TABS";
+import { CommentItem } from "../_internal";
 
 type SelectedTab = (typeof USER_TABS)[number]["key"];
 
@@ -14,34 +14,43 @@ const TabContents = () => {
 
   return (
     <>
-      <nav aria-label="프로필 탭">
-        <Tab tabs={USER_TABS} selected={selectedTab} onValueChange={setSelectedTab} />
-      </nav>
+      <Tab
+        tabs={USER_TABS}
+        selected={selectedTab}
+        onValueChange={setSelectedTab}
+        aria-label="프로필 탭"
+      />
 
       <section>
-        {selectedTab === "post" && (
-          <div>
-            {Array.from({ length: 5 }).map((_, index) => (
-              <ListItem post={MOCK_POST_ITEM} linkState="list" key={index} />
-            ))}
-          </div>
-        )}
+        <ul>
+          {selectedTab === "post" && (
+            <li>
+              {Array.from({ length: 5 }).map((_, index) => (
+                <ListItem post={MOCK_POST_ITEM} linkState="list" key={index} />
+              ))}
+            </li>
+          )}
 
-        {selectedTab === "comment" && (
-          <div>
-            {Array.from({ length: 5 }).map((_, index) => (
-              <CommentItem comment="여기에 댓글 내용이 표기됩니다" date="2025.11.02" key={index} />
-            ))}
-          </div>
-        )}
+          {selectedTab === "comment" && (
+            <>
+              {Array.from({ length: 5 }).map((_, index) => (
+                <CommentItem
+                  comment="여기에 댓글 내용이 표기됩니다"
+                  date="2025.11.02"
+                  key={index}
+                />
+              ))}
+            </>
+          )}
 
-        {selectedTab === "favorite" && (
-          <div>
-            {Array.from({ length: 5 }).map((_, index) => (
-              <ListItem post={MOCK_POST_ITEM} linkState="list" key={index} />
-            ))}
-          </div>
-        )}
+          {selectedTab === "favorite" && (
+            <>
+              {Array.from({ length: 5 }).map((_, index) => (
+                <ListItem post={MOCK_POST_ITEM} linkState="list" key={index} />
+              ))}
+            </>
+          )}
+        </ul>
       </section>
     </>
   );

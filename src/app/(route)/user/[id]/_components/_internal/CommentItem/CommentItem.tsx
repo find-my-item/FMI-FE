@@ -7,7 +7,7 @@ interface CommentItemProps {
 
 const CommentItem = ({ comment, date }: CommentItemProps) => {
   return (
-    <div className="flex w-full flex-col items-start gap-2 border-b border-divider-default px-5 py-[30px]">
+    <li className="flex w-full flex-col items-start gap-2 border-b border-divider-default px-5 py-[30px]">
       <p className="line-clamp-1 w-full text-body1-semibold text-layout-header-default">
         {comment}
       </p>
@@ -16,7 +16,7 @@ const CommentItem = ({ comment, date }: CommentItemProps) => {
         <Icon name="Star" size={16} />
         <span>12</span>
       </div>
-    </div>
+    </li>
   );
 };
 
