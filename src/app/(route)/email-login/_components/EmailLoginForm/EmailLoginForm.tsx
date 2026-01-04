@@ -32,7 +32,7 @@ const Page = () => {
       </fieldset>
 
       {/* 로그인 버튼 */}
-      <div className="w-full gap-6 flex-col-center">
+      <footer className="w-full gap-6 flex-col-center">
         <Button type="submit" variant="auth">
           로그인
         </Button>
@@ -44,7 +44,7 @@ const Page = () => {
           </span>
           <hr className="h-px flex-1 border border-divider-default" aria-hidden={true} />
         </nav>
-      </div>
+      </footer>
     </form>
   );
 };
