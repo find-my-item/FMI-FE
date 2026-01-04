@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Button, Icon } from "@/components";
+import { Button, Icon } from "@/components/common";
 
 interface PostDetailHeaderType {
   headerData: {

@@ -13,7 +13,7 @@ jest.mock("next/image", () => (props: any) => {
   return <img {...props} />;
 });
 
-jest.mock("@/components", () => ({
+jest.mock("@/components/common", () => ({
   Icon: ({ name, ...rest }: any) => <span data-testid={`icon-${name}`} {...rest} />,
 }));
 

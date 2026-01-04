@@ -1,6 +1,6 @@
 "use no memo";
 
-import { Icon, Button, CheckBox } from "@/components";
+import { Icon, Button, CheckBox } from "@/components/common";
 import { DetailHeader } from "@/components/layout";
 import { useFormContext, useWatch } from "react-hook-form";
 import { TERMS_CONFIG } from "../../_constants/TERMS_CONFIG";

@@ -1,4 +1,4 @@
-import { InputText, Button, Icon } from "@/components";
+import { InputText, Button, Icon } from "@/components/common";
 
 const MypageProfileForm = () => {
   const profileImgURL = "";

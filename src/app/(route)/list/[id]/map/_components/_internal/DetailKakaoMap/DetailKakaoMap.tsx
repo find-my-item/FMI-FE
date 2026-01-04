@@ -1,5 +1,5 @@
 import { Circle, Map, MapMarker } from "react-kakao-maps-sdk";
-import { Icon } from "@/components";
+import { Icon } from "@/components/common";
 
 type LocationDataType = {
   lat: number;

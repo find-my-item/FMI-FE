@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { handleShareClick } from "@/utils";
 import { useGetMetaData } from "@/api/fetch/post";
-import { Button } from "@/components";
+import { Button } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
 import { SHARE } from "./SHARE";
 

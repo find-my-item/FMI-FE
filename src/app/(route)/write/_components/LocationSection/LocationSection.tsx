@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Icon, RequiredText } from "@/components";
+import { Icon, RequiredText } from "@/components/common";
 
 const LocationSection = () => {
   return (

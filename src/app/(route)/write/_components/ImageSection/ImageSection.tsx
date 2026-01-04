@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { Icon } from "@/components";
+import { Icon } from "@/components/common";
 import { ImagePreviewList } from "../_internal";
 import { useToast } from "@/context/ToastContext";
 

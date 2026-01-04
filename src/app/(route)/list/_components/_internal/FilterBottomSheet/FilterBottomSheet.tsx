@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/utils";
-import { Button, Icon } from "@/components";
+import { Button, Icon } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
 import { FilterTab } from "./types";
 import { tabs, categories, sort, status } from "./CONSTANTS";

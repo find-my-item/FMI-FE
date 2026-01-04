@@ -1,6 +1,6 @@
 "use client";
 
-import { ConfirmModal, Icon } from "@/components";
+import { ConfirmModal, Icon } from "@/components/common";
 import { cn } from "@/utils";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";

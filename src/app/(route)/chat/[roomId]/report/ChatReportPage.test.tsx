@@ -30,7 +30,7 @@ const MockInputField = ({ name, label, placeholder, maxLength }: any) => {
   );
 };
 
-jest.mock("@/components", () => {
+jest.mock("@/components/common", () => {
   const React = require("react");
   const { useFormContext } = require("react-hook-form");
 

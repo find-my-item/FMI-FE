@@ -1,4 +1,4 @@
-import { ViewMoreComment } from "@/components";
+import { ViewMoreComment } from "@/components/common";
 import CommentItem from "./CommentItem";
 import { useMemo } from "react";
 import type { Comment } from "./types/commentItem";

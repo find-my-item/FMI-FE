@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Icon } from "@/components";
+import { Button, Icon } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
 
 interface ManualPopupProps {

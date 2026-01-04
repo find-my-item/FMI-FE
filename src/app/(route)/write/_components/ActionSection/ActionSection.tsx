@@ -1,5 +1,5 @@
 import { cn } from "@/utils";
-import { Button } from "@/components";
+import { Button } from "@/components/common";
 
 interface ActionSectionProps {
   disabled: boolean;
