@@ -84,7 +84,7 @@ export const noScrollbar = plugin(function ({ addUtilities }) {
 export const hBase = plugin(function ({ addUtilities }) {
   const utilities: Record<string, CSSRuleObject> = {
     ".h-base": {
-      height: "calc(100dvh - 56px)",
+      minHeight: "calc(100dvh - 56px)",
     },
   };
 

@@ -19,7 +19,7 @@ const DetailHeader = ({ title = "", children }: DetailHeaderProps) => {
   const router = useRouter();
 
   return (
-    <header className="sticky top-0 z-[9999] flex h-14 w-full items-center justify-between bg-white px-5">
+    <header className="sticky top-0 z-[10] flex h-14 w-full items-center justify-between bg-white px-5">
       <div className="flex items-center gap-2">
         <button
           className="h-[30px] w-[30px]"
