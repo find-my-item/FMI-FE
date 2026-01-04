@@ -25,7 +25,11 @@ export const MOCK_POST_DEFAULT_DETAIL = {
     longitude: 127.0276,
     postType: "LOST",
     itemStatus: "SEARCHING",
-    imageUrls: ["https://picsum.photos/400/300?random=1"],
+    imageUrls: [
+      "https://picsum.photos/400/300?random=1",
+      "https://picsum.photos/400/300?random=5",
+      "https://picsum.photos/400/300?random=6",
+    ],
     radius: 0.5,
     category: "ELECTRONICS",
     favoriteCount: 1,

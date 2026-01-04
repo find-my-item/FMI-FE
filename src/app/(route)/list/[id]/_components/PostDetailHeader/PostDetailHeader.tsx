@@ -1,5 +1,8 @@
 import Link from "next/link";
+
 import { Button, Icon } from "@/components/common";
+import ImageSection from "./_internal/ImageSection/ImageSection";
+
 
 interface PostDetailHeaderType {
   headerData: {
@@ -13,8 +16,7 @@ const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
 
   return (
     <>
-      {/* TODO(지권): 게시글 이미지, 추후 이미지 태그 변경 예정 */}
-      <div className="h-[260px] bg-flatGray-100" />
+      <ImageSection imageUrls={imageUrls} />
 
       <section
         aria-label="상세페이지 유저 정보"
