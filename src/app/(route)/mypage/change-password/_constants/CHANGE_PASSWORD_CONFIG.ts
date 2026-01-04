@@ -1,6 +1,6 @@
 export const CHANGE_PASSWORD_CONFIG = [
   {
-    name: "CurrentPassword",
+    name: "currentPassword",
     label: "현재 비밀번호",
     type: "password",
     placeholder: "비밀번호을 입력해 주세요.",
@@ -12,7 +12,7 @@ export const CHANGE_PASSWORD_CONFIG = [
     },
   },
   {
-    name: "NewPassword",
+    name: "newPassword",
     label: "새 비밀번호",
     type: "password",
     placeholder: "비밀번호을 입력해 주세요.",
@@ -25,7 +25,7 @@ export const CHANGE_PASSWORD_CONFIG = [
     },
   },
   {
-    name: "NewPasswordConfirm",
+    name: "newPasswordConfirm",
     label: "새 비밀번호 확인",
     type: "password",
     placeholder: "비밀번호 입력해 주세요.",

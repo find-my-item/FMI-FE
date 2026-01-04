@@ -4,15 +4,14 @@ import { DetailHeader } from "@/components";
 import { FormProvider, useForm } from "react-hook-form";
 import { MypageChangePwForm } from "./_components";
 
-interface ChangeEmailType {
-  email: string;
-  emailAuth: number;
-  password: string;
-  passwordConfirm: string;
+interface ChangePasswordType {
+  currentPassword: string;
+  newPassword: string;
+  newPasswordConfirm: string;
 }
 
 const page = () => {
-  const methods = useForm<ChangeEmailType>({
+  const methods = useForm<ChangePasswordType>({
     mode: "onChange",
     reValidateMode: "onChange",
   });
