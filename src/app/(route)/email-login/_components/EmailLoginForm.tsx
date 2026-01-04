@@ -2,7 +2,6 @@
 
 import { useFormContext, useWatch } from "react-hook-form";
 import { CheckBox, InputText, Button } from "@/components";
-import { CHECKBOX_CONFIG } from "../_constants/CHECKBOX_CONFIG";
 import { EMAIL_LOGIN_CONFIG } from "../_constants/EMAIL_LOGIN_CONFIG";
 import { useEffect } from "react";
 import { LoginType } from "../_types/LoginType";
@@ -11,58 +10,56 @@ import { EMAIL_LOGIN_ERROR_MESSAGE } from "../_constants/EMAIL_LOGIN_ERROR_MESSA
 import { useRouter } from "next/navigation";
 import { getCookie, setCookie, deleteCookie } from "cookies-next";
 import useApiEmailLogin from "@/api/fetch/auth/api/useApiEmailLogin";
+import useSubmitLogin from "../_hooks/useLoginForm";
+import useLoginForm from "../_hooks/useLoginForm";
 
 const Page = () => {
-  const router = useRouter();
-  const { register, control, handleSubmit, setValue } = useFormContext<LoginType>();
-
-  const cookie = getCookie("email");
-
-  useEffect(() => {
-    if (typeof cookie === "string") {
-      setValue("email", cookie);
-      setValue("rememberId", !!cookie);
-    }
-  }, []);
-
-  const { mutate: EmailLoginMutate } = useApiEmailLogin();
-
+  const { register, control } = useFormContext<LoginType>();
   const checkBoxValues = useWatch({ control, name: "rememberId" });
 
-  const { handlerApiError } = useErrorToast();
+  // const router = useRouter();
+  // const cookie = getCookie("email");
 
-  const onSubmit = handleSubmit((data) => {
-    const filterData = {
-      email: data.email,
-      password: data.password,
-    };
+  // useEffect(() => {
+  //   if (typeof cookie === "string") {
+  //     setValue("email", cookie);
+  //     setValue("rememberId", !!cookie);
+  //   }
+  // }, []);
 
-    EmailLoginMutate(filterData, {
-      onSuccess: (res) => {
-        router.push("/");
-        console.log("res>>>", res);
-        if (data.rememberId) {
-          setCookie("email", data.email, {
-            path: "/",
-            maxAge: 60 * 60 * 24 * 30,
-            secure: process.env.NODE_ENV === "production",
-          });
-        } else {
-          deleteCookie("email");
-        }
-      },
-      onError: (error) => {
-        // console.log("error>> ", error);
-        // console.log("error>> ", error.response.data.code);
-        handlerApiError(EMAIL_LOGIN_ERROR_MESSAGE, error.response.data.code);
-      },
-      // console.log("data>>>", filterData)
-    });
-  });
+  // const { mutate: EmailLoginMutate } = useApiEmailLogin();
 
+  // const { handlerApiError } = useErrorToast();
+
+  // const onSubmit = handleSubmit((data) => {
+  //   const filterData = {
+  //     email: data.email,
+  //     password: data.password,
+  //   };
+
+  //   EmailLoginMutate(filterData, {
+  //     onSuccess: (res) => {
+  //       router.push("/");
+  //       console.log("res>>>", res);
+  //       if (data.rememberId) {
+  //         setCookie("email", data.email, {
+  //           path: "/",
+  //           maxAge: 60 * 60 * 24 * 30,
+  //           secure: process.env.NODE_ENV === "production",
+  //         });
+  //       } else {
+  //         deleteCookie("email");
+  //       }
+  //     },
+  //     onError: (error) => {
+  //       handlerApiError(EMAIL_LOGIN_ERROR_MESSAGE, error.response.data.code);
+  //     },
+  //   });
+  // });
+  const { onSubmitLogin } = useLoginForm();
   return (
     <>
-      <form onSubmit={onSubmit} className="flex w-full flex-col gap-12">
+      <form onSubmit={onSubmitLogin} className="flex w-full flex-col gap-12">
         {/* 로그인 입력칸 */}
         <div className="flex w-full flex-col gap-3">
           {EMAIL_LOGIN_CONFIG.map((item) => (
