@@ -1,4 +1,4 @@
-import { Button } from "@/components";
+import { Button } from "@/components/common";
 import Link from "next/link";
 
 interface ProfileProps {

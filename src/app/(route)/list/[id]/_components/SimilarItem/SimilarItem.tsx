@@ -1,4 +1,4 @@
-import { Icon } from "@/components";
+import { Icon } from "@/components/common";
 import { IconName } from "@/components/common/Icon/Icon";
 import { formatNumber } from "@/utils";
 

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { CategoryPopup } from "../_internal";
-import { Icon, RequiredText } from "@/components";
+import { Icon, RequiredText } from "@/components/common";
 
 const CategorySection = () => {
   const [categoryPopupOpen, setCategoryPopupOpen] = useState(false);
