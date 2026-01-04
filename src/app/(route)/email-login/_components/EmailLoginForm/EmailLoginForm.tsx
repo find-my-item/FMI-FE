@@ -1,10 +1,10 @@
 "use client";
 
 import { useFormContext, useWatch } from "react-hook-form";
-import { CheckBox, InputText, Button } from "@/components";
 import { EMAIL_LOGIN_CONFIG } from "../../_constants/EMAIL_LOGIN_CONFIG";
 import useLoginForm from "../../_hooks/useLoginForm";
 import { LoginFormType } from "../../_types/LoginFormType";
+import { Button, CheckBox, InputText } from "@/components/common";
 
 const EmailLoginForm = () => {
   const { register, control } = useFormContext<LoginFormType>();
