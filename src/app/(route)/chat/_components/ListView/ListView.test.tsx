@@ -15,6 +15,10 @@ jest.mock("@/components", () => ({
   ),
 }));
 
+jest.mock("@/components/layout", () => ({
+  DetailHeader: ({ title }: { title: string }) => <div data-testid="detail-header">{title}</div>,
+}));
+
 jest.mock("../DefaultList/DefaultList", () => ({
   __esModule: true,
   default: ({
