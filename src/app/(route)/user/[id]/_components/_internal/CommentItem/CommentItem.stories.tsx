@@ -27,7 +27,9 @@ const meta: Meta<typeof CommentItem> = {
   decorators: [
     (Story) => (
       <div className="w-[400px]">
-        <Story />
+        <ul>
+          <Story />
+        </ul>
       </div>
     ),
   ],
