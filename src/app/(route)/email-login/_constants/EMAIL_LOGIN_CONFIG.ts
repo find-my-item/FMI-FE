@@ -7,7 +7,6 @@ export const EMAIL_LOGIN_CONFIG = [
     eyeShow: false,
     validation: {
       required: true,
-      // pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
     },
   },
   {

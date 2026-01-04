@@ -4,14 +4,14 @@ import { deleteCookie, getCookie, setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
-import { LoginType } from "../_types/LoginType";
 import { EMAIL_LOGIN_ERROR_MESSAGE } from "../_constants/EMAIL_LOGIN_ERROR_MESSAGE";
 import { useToast } from "@/context/ToastContext";
+import { LoginFormType } from "../_types/LoginFormType";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const useLoginForm = () => {
-  const { handleSubmit, setValue } = useFormContext<LoginType>();
+  const { handleSubmit, setValue } = useFormContext<LoginFormType>();
   const router = useRouter();
   const cookie = getCookie("email");
   const { mutate: EmailLoginMutate } = useApiEmailLogin();

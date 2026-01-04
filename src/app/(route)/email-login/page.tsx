@@ -4,11 +4,11 @@
 import { DetailHeader, AuthLogoLink } from "@/components";
 import Link from "next/link";
 import { FormProvider, useForm } from "react-hook-form";
-import { LoginType } from "./_types/LoginType";
 import { EmailLoginForm } from "./_components";
+import { LoginFormType } from "./_types/LoginFormType";
 
 const Page = () => {
-  const methods = useForm<LoginType>({
+  const methods = useForm<LoginFormType>({
     mode: "onChange",
     reValidateMode: "onChange",
   });
