@@ -2,7 +2,7 @@
 
 import { DetailHeader } from "@/components";
 import { FormProvider, useForm } from "react-hook-form";
-import { MypageChangeEmailForm } from "./_components";
+import { MypageChangePwForm } from "./_components";
 
 interface ChangeEmailType {
   email: string;
@@ -19,9 +19,9 @@ const page = () => {
 
   return (
     <div className="h-dvh w-full">
-      <DetailHeader title="이메일 변경" />
+      <DetailHeader title="비밀번호 변경" />
       <FormProvider {...methods}>
-        <MypageChangeEmailForm />
+        <MypageChangePwForm />
       </FormProvider>
     </div>
   );
