@@ -6,7 +6,7 @@ interface ApiEmailLoginType {
   password: string;
 }
 
-export interface EmailLoginResponseType
+interface EmailLoginResponseType
   extends ApiBaseResponseType<{
     userId: string;
     temporaryPassword: boolean;
