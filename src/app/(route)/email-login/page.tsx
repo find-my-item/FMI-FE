@@ -3,9 +3,9 @@
 
 import { DetailHeader, AuthLogoLink } from "@/components";
 import Link from "next/link";
-import EmailLoginForm from "./_components/EmailLoginForm";
 import { FormProvider, useForm } from "react-hook-form";
 import { LoginType } from "./_types/LoginType";
+import { EmailLoginForm } from "./_components";
 
 const Page = () => {
   const methods = useForm<LoginType>({
