@@ -1,4 +1,4 @@
-import { InputText, Button, Icon } from "@/components";
+import { InputText, Button, Icon, FooterButton } from "@/components";
 
 const MypageProfileForm = () => {
   const profileImgURL = "";
@@ -47,11 +47,12 @@ const MypageProfileForm = () => {
         </InputText>
       </div>
 
-      <div className="sticky bottom-0 mt-auto h-[88px] w-full border-t border-divider-default bg-white px-4 py-3">
-        <Button type="submit" variant="auth" ariaLabel="설정완료 버튼">
-          설정 완료
-        </Button>
-      </div>
+      <FooterButton
+        name="설정 완료"
+        ariaLabel="설정 완료 버튼"
+        // TODO(수현): 기능 구현 브랜치로 disabled 제어 함수 추가 예정
+        // disabled={ }
+      />
     </form>
   );
 };
