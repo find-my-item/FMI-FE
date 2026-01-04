@@ -23,6 +23,7 @@ const PostDetailMap = ({ data }: PostDetailMapProps) => {
         <KakaoMap latitude={latitude} longitude={longitude} />
       </div>
       <Link
+        aria-label="지도에서 위치 자세히 보기"
         href={`/list/${postId}/map?lat=${latitude}&lng=${longitude}&address=${encodeURIComponent(address)}&radius=${radius}`}
       >
         <address className="flex items-center gap-[6px] not-italic">

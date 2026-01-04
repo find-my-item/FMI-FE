@@ -7,7 +7,6 @@ const SimilarItemsSection = () => {
 
       <ul
         tabIndex={0}
-        aria-label="가로 스크롤 목록"
         className="hide-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth"
       >
         {Array.from({ length: 4 }).map((_, index) => (
