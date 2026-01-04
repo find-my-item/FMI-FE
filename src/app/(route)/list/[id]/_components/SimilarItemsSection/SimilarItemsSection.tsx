@@ -5,7 +5,11 @@ const SimilarItemsSection = () => {
     <section className="flex flex-col gap-[16px] py-[18px] pl-[20px]">
       <h2 className="text-h2-medium text-flatGray-900">비슷한 분실물</h2>
 
-      <ul className="hide-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth">
+      <ul
+        tabIndex={0}
+        aria-label="가로 스크롤 목록"
+        className="hide-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth"
+      >
         {Array.from({ length: 4 }).map((_, index) => (
           <li key={index} className="snap-start">
             <SimilarItem />
