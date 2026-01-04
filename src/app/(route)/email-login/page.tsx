@@ -7,7 +7,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { EmailLoginForm } from "./_components";
 import { LoginFormType } from "./_types/LoginFormType";
 
-const Page = () => {
+const page = () => {
   const methods = useForm<LoginFormType>({
     mode: "onChange",
     reValidateMode: "onChange",
@@ -16,15 +16,15 @@ const Page = () => {
   return (
     <>
       <DetailHeader title="이메일 로그인" />
-      <div className="flex w-full gap-6 px-5 flex-col-center h-base">
+      <h1 className="sr-only">이메일 로그인 페이지</h1>
+      <main className="flex w-full gap-6 px-5 flex-col-center h-base">
         <AuthLogoLink />
 
         <FormProvider {...methods}>
           <EmailLoginForm />
         </FormProvider>
 
-        {/* 회원확인 여부 */}
-        <div className="flex h-11 w-full justify-center text-caption1-semibold">
+        <nav className="flex h-11 w-full justify-center text-caption1-semibold">
           <Link href="/find-pw" className="p-3 text-neutral-normal-default">
             비밀번호 찾기
           </Link>
@@ -32,10 +32,10 @@ const Page = () => {
           <Link href="/sign-up" className="p-3 text-brand-normal-default">
             회원가입
           </Link>
-        </div>
-      </div>
+        </nav>
+      </main>
     </>
   );
 };
 
-export default Page;
+export default page;
