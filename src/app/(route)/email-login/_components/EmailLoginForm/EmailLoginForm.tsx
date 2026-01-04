@@ -17,15 +17,7 @@ const Page = () => {
       {/* 로그인 입력칸 */}
       <fieldset className="flex w-full flex-col gap-3">
         {EMAIL_LOGIN_CONFIG.map((item) => (
-          <InputText
-            key={item.name}
-            name={item.name}
-            label={item.label}
-            validation={item.validation}
-            type={item.type}
-            placeholder={item.placeholder}
-            eyeShow={item.eyeShow}
-          />
+          <InputText key={item.name} {...item} />
         ))}
         {/* 체크박스 */}
         <CheckBox
