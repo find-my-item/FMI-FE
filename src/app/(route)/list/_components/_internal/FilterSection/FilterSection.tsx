@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Filter } from "@/components/common";
-import { PostPostsFilterRequestBody } from "@/api/fetch/post";
 import FilterBottomSheet from "../FilterBottomSheet/FilterBottomSheet";
 import { FiltersState } from "./filtersStateType";
 import { getFilterSelectedFlags } from "./getFilterSelectedFlags";

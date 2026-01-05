@@ -21,7 +21,6 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
 
   const { data } = useGetPosts({ page: 0, size: 10, type: postType });
   const { listData } = useListDataWithFilters({ baseData: data, region, category, sort, status });
-  // console.log("listData: ", listData);
 
   return (
     <section className="h-base">
