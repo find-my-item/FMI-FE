@@ -45,3 +45,4 @@ export { default as AlertStar } from "@/assets/alert-star.svg";
 export { default as AlertUnreadChat } from "@/assets/alert-unread-chat.svg";
 export { default as UserProfile } from "@/assets/user-profile.svg";
 export { default as CameraBorder } from "@/assets/camera-border.svg";
+export { default as Heart } from "@/assets/heart.svg";

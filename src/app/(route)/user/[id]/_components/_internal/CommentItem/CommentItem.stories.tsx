@@ -11,23 +11,25 @@ const meta: Meta<typeof CommentItem> = {
     layout: "centered",
   },
   argTypes: {
-    comment: {
-      control: "text",
-      description: "댓글 내용",
-    },
-    date: {
-      control: "text",
-      description: "댓글 작성일",
+    data: {
+      control: "object",
+      description: "댓글 데이터",
     },
   },
   args: {
-    comment: "여기에 댓글 내용이 표기됩니다",
-    date: "2025.11.02",
+    data: {
+      postId: 1,
+      comment: "여기에 댓글 내용이 표기됩니다",
+      date: "2025.11.02",
+      likes: 5,
+    },
   },
   decorators: [
     (Story) => (
       <div className="w-[400px]">
-        <Story />
+        <ul>
+          <Story />
+        </ul>
       </div>
     ),
   ],

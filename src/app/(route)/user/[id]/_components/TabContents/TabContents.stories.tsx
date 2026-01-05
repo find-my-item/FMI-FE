@@ -8,6 +8,9 @@ const meta: Meta<typeof TabContents> = {
   parameters: {
     layout: "centered",
   },
+  args: {
+    selectedTab: "post",
+  },
   decorators: [
     (Story) => (
       <div className="w-[400px]">
@@ -20,4 +23,20 @@ const meta: Meta<typeof TabContents> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Post: Story = {
+  args: {
+    selectedTab: "post",
+  },
+};
+
+export const Comment: Story = {
+  args: {
+    selectedTab: "comment",
+  },
+};
+
+export const Favorite: Story = {
+  args: {
+    selectedTab: "favorite",
+  },
+};
