@@ -56,7 +56,9 @@ const ChatItem = ({ chatRoom }: ChatItemProps) => {
           )}
         </div>
         <p className="text-caption1-medium text-layout-body-default">
-          <span>{postInfo?.address || "위치 정보를 불러오지 못했습니다."}</span> ·
+          <span className="after:mx-1 after:content-['·']">
+            {postInfo?.address || "위치 정보를 불러오지 못했습니다."}
+          </span>
           <time>{formatDate(lastMessageSentAt || "시간 정보가 없습니다.")}</time>
         </p>
         <p className="truncate text-body2-medium text-layout-header-default">
