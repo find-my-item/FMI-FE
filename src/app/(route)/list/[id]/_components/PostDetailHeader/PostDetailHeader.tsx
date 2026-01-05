@@ -18,7 +18,7 @@ const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
       <ImageSection imageUrls={imageUrls} />
 
       <section
-        aria-label="상세페이지 유저 정보"
+        aria-label="게시글 작성자 정보"
         className="flex flex-col items-start justify-center gap-5 border-b border-flatGray-50 p-[20px]"
       >
         <div className="flex items-center justify-start gap-[14px]">
