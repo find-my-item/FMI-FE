@@ -3,7 +3,6 @@ import Link from "next/link";
 import { Button, Icon } from "@/components/common";
 import ImageSection from "./_internal/ImageSection/ImageSection";
 
-
 interface PostDetailHeaderType {
   headerData: {
     imageUrls: string[];
