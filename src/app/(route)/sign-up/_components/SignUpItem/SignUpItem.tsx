@@ -8,6 +8,7 @@ import { FormType } from "../../types/FormType";
 const inputValidationRules = {
   email: {
     required: true,
+    pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "이메일 형식을 입력해 주세요." },
   },
   emailAuth: {
     required: true,
