@@ -7,6 +7,7 @@ import { FilterTab } from "./types";
 import { tabs, categories, sort, status } from "./CONSTANTS";
 import { applyFiltersToUrl } from "./applyFiltersToUrl";
 import { FiltersState } from "../FilterSection/filtersStateType";
+import { PostPostsFilterRequestBody } from "@/api/fetch/post";
 
 interface FilterBottomSheetProps {
   isOpen: boolean;

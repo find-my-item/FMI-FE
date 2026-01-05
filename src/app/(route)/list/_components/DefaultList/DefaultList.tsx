@@ -1,17 +1,12 @@
 "use client";
 
-import { useEffect } from "react";
 import { Tab } from "@/components/domain";
-import { useGetPosts, usePostPostsFilter } from "@/api/fetch/post";
+import { useGetPosts } from "@/api/fetch/post";
 import { TABS } from "../../_constants/TABS";
 import ListItem from "../ListItem/ListItem";
 import FilterSection from "../_internal/FilterSection/FilterSection";
-import {
-  CategoryFilterValue,
-  SortFilterValue,
-  StatusFilterValue,
-} from "../_internal/FilterBottomSheet/types";
 import { usePostListFiltersFromSearchParams } from "../../_hooks/usePostListFromParams/usePostListFromParams";
+import { useListDataWithFilters } from "../../_hooks/useListDataWithFilters/useListDataWithFilters";
 
 type PostType = "LOST" | "FOUND";
 
@@ -20,23 +15,12 @@ interface DefaultListProps {
 }
 
 const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
-  const { type, status, category, sort, region } = usePostListFiltersFromSearchParams();
+  const { type, region, category, sort, status } = usePostListFiltersFromSearchParams();
 
   const postType: PostType = type === "lost" ? "LOST" : "FOUND";
 
   const { data } = useGetPosts({ page: 0, size: 10, type: postType });
-  const { mutate, data: filterData } = usePostPostsFilter();
-
-  useEffect(() => {
-    mutate({
-      address: region ?? undefined,
-      category: category as CategoryFilterValue,
-      sortType: sort as SortFilterValue,
-      itemStatus: status as StatusFilterValue,
-    });
-  }, [mutate, category, region, sort, status]);
-
-  console.log(filterData);
+  const { listData } = useListDataWithFilters({ baseData: data, region, category, sort, status });
 
   return (
     <section className="h-base">
@@ -49,7 +33,7 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
       <FilterSection />
 
       <section aria-label="게시글 목록" className="w-full">
-        {data?.result?.posts?.map((item) => (
+        {listData?.result?.posts?.map((item) => (
           <ListItem key={item.postId} post={item} linkState="list" />
         ))}
       </section>
