@@ -39,6 +39,7 @@ const ChatRoom = ({ postId }: { postId: number }) => {
   return (
     <>
       <ChatRoomHeader postMode={isPostMode} />
+      <h1 className="sr-only">채팅 상세 페이지</h1>
       {isEmpty ? <EmptyChatRoom postMode={isPostMode} /> : <ChatRoomMain />}
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)} className="px-[16px] pb-[24px] pt-[12px]">
