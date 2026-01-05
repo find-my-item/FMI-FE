@@ -55,7 +55,7 @@ describe("ChatItem", () => {
     render(<ChatItem chatRoom={mockChatRoom} />);
 
     const link = screen.getByRole("link");
-    expect(link).toHaveAttribute("href", "chat/1");
+    expect(link).toHaveAttribute("href", "/chat/1");
   });
 
   it("유저 프로필 이미지와 게시글 썸네일 이미지가 렌더링됩니다", () => {
