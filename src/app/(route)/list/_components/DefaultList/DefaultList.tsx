@@ -16,17 +16,18 @@ interface DefaultListProps {
 
 const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
   const { type, region, category, sort, status } = usePostListFiltersFromSearchParams();
-
-  const postType: PostType = type === "lost" ? "LOST" : "FOUND";
+  const selectedType = (type ?? "lost") as "lost" | "found";
+  const postType: PostType = selectedType === "lost" ? "LOST" : "FOUND";
 
   const { data } = useGetPosts({ page: 0, size: 10, type: postType });
   const { listData } = useListDataWithFilters({ baseData: data, region, category, sort, status });
+  // console.log("listData: ", listData);
 
   return (
     <section className="h-base">
       <Tab
         tabs={TABS}
-        selected={postType}
+        selected={selectedType}
         onValueChange={(key) => searchUpdateQuery("type", key)}
       />
 
