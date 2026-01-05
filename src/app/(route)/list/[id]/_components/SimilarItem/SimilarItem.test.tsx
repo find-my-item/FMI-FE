@@ -20,14 +20,14 @@ describe("비슷한 분실물 아이템", () => {
   it("위치가 렌더링되어야 한다.", () => {
     render(<SimilarItem />);
 
-    const similarItemElement = screen.getByText("노원구 · 30분 전");
+    const similarItemElement = screen.getByText(/노원구/);
     expect(similarItemElement).toBeInTheDocument();
   });
 
-  it("위치와 시간이 렌더링되어야 한다.", () => {
+  it("시간이 렌더링되어야 한다.", () => {
     render(<SimilarItem />);
 
-    const similarItemElement = screen.getByText("노원구 · 30분 전");
+    const similarItemElement = screen.getByText("30분 전");
     expect(similarItemElement).toBeInTheDocument();
   });
 });
