@@ -26,6 +26,7 @@ const ChatItem = ({ chatRoom }: ChatItemProps) => {
             width={26}
             height={26}
             className="absolute left-0 top-0 z-10 rounded-full border-[1.5px] border-white object-cover"
+            sizes="26px"
           />
         ) : (
           <Icon
@@ -40,6 +41,7 @@ const ChatItem = ({ chatRoom }: ChatItemProps) => {
           src={postInfo?.thumbnailUrl || MOCK_IMAGES[0]}
           width={50}
           height={50}
+          sizes="50px"
           className="absolute bottom-0 right-0 h-[50px] w-[50px] rounded object-cover"
         />
       </div>
