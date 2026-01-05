@@ -5,7 +5,7 @@ import ChatItem from "../ChatItem/ChatItem";
 import { useSearchParams } from "next/navigation";
 import FilterDropdown from "../FilterDropdown/FilterDropdown";
 import { FilTER_DROPDOWN_OPTIONS } from "../../constants/FILTER";
-import { useChatList } from "@/api/fetch/auth";
+import { useChatList } from "@/api/fetch/chat";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll/useInfiniteScroll";
 
 interface DefaultListProps {
