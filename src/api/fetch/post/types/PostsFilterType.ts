@@ -1,20 +1,24 @@
-import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 import {
   CategoryFilterValue,
   SortFilterValue,
   StatusFilterValue,
 } from "@/app/(route)/list/_components/_internal/FilterBottomSheet/types";
-
-export type PostPostsFilterSortType = {
-  category: CategoryFilterValue;
-  sortType: SortFilterValue;
-  status: StatusFilterValue;
-};
+import { GetListResponse } from "./PostItemType";
 
 export type PostPostsFilterRequestBody = {
-  page: number;
-  size: number;
-  sort: PostPostsFilterSortType[];
+  category?: CategoryFilterValue;
+  address?: string | undefined;
+  itemStatus?: StatusFilterValue;
+  sortType?: SortFilterValue;
 };
 
-export type PostPostsFilterResponse = ApiBaseResponseType<PostPostsFilterSortType[]>;
+export type PostPostsFilterResponse = GetListResponse;
+
+export type PostPostsFilterQuery = {
+  cursor?: number;
+  pageable: {
+    page: number;
+    size: number;
+    sort?: string[];
+  };
+};

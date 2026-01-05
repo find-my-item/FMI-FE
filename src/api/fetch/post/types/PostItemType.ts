@@ -1,18 +1,13 @@
+import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 import { CategoryType, ItemStatus, PostType } from "@/types";
 
-export interface GetListResponse {
-  isSuccess: boolean;
-  code: string;
-  message: string;
-  result: {
-    hasNext: hasNext;
-    nextCursor: nextCursor;
-    posts: PostItem[];
-  };
-}
+export interface GetListResponse extends ApiBaseResponseType<ListResult> {}
 
-export type hasNext = boolean;
-export type nextCursor = string | null;
+export interface ListResult {
+  hasNext: boolean;
+  nextCursor: number;
+  posts: PostItem[];
+}
 
 export interface PostItem {
   postId: number;

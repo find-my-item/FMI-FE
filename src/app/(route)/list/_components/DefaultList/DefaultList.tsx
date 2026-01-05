@@ -6,6 +6,12 @@ import { Tab } from "@/components/domain";
 import { TABS } from "../../_constants/TABS";
 import ListItem from "../ListItem/ListItem";
 import FilterSection from "../_internal/FilterSection/FilterSection";
+import { useEffect } from "react";
+import {
+  CategoryFilterValue,
+  SortFilterValue,
+  StatusFilterValue,
+} from "../_internal/FilterBottomSheet/types";
 
 type PostType = "LOST" | "FOUND";
 
@@ -26,6 +32,17 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
 
   const { data } = useGetPosts({ page: 0, size: 10, type });
   const { mutate, data: filterData } = usePostPostsFilter();
+
+  useEffect(() => {
+    mutate({
+      address: rawRegion ?? undefined,
+      category: rawCategory as CategoryFilterValue,
+      sortType: rawSort as SortFilterValue,
+      itemStatus: rawStatus as StatusFilterValue,
+    });
+  }, [mutate, rawCategory, rawRegion, rawSort, rawStatus]);
+
+  console.log(filterData);
 
   return (
     <>
