@@ -35,7 +35,7 @@ const Bookmark = ({
   ...props
 }: BookmarkProps) => {
   return (
-    <button {...props} aria-label={ariaLabel} aria-checked={isActive}>
+    <button {...props} aria-label={ariaLabel} aria-pressed={isActive}>
       <Icon name="Star" size={SIZES[size]} />
     </button>
   );
