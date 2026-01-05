@@ -25,6 +25,7 @@
     "axios": "^1.12.2",
     "babel-plugin-react-compiler": "^1.0.0",
     "clsx": "^2.1.1",
+    "cookies-next": "^6.1.1",
     "framer-motion": "^12.23.13",
     "lodash": "^4.17.21",
     "lodash.throttle": "^4.1.1",
@@ -32,6 +33,8 @@
     "react": "^19.1.4",
     "react-dom": "^19.1.4",
     "react-hook-form": "^7.62.0",
+    "react-kakao-maps-sdk": "^1.2.0",
+    "swiper": "^12.0.3",
     "zod": "^4.1.5",
     "zustand": "^5.0.8"
   },

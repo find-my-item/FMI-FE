@@ -8,7 +8,7 @@ jest.mock("next/navigation", () => ({
   useSearchParams: jest.fn(),
 }));
 
-jest.mock("@/components", () => ({
+jest.mock("@/components/common", () => ({
   Filter: ({ children, onClick, ariaLabel, onSelected }: any) => (
     <button
       data-testid={`filter-${ariaLabel}`}

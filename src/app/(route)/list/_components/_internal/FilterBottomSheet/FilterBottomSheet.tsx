@@ -1,7 +1,8 @@
 import { Dispatch, SetStateAction } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/utils";
-import { Button, Icon, PopupLayout } from "@/components";
+import { Button, Icon } from "@/components/common";
+import { PopupLayout } from "@/components/domain";
 import { FilterTab } from "./types";
 import { tabs, categories, sort, status } from "./CONSTANTS";
 import { applyFiltersToUrl } from "./applyFiltersToUrl";
@@ -52,6 +53,7 @@ const FilterBottomSheet = ({
                 key={tab.value}
                 role="tab"
                 aria-selected={isSelected}
+                aria-label={`${tab.label} 필터`}
                 className={cn(
                   "min-h-[60px] flex-1 text-[20px] font-semibold",
                   // TODO(지권): 디자인 토큰 변경
@@ -90,7 +92,7 @@ const FilterBottomSheet = ({
         )}
 
         {selectedTab === "category" && (
-          <div className="flex w-full flex-wrap gap-2">
+          <div role="radiogroup" aria-label="카테고리 선택" className="flex w-full flex-wrap gap-2">
             {categories.map((category) => (
               <ChipButton
                 key={category.value || "all"}
@@ -104,7 +106,11 @@ const FilterBottomSheet = ({
         )}
 
         {selectedTab === "sort" && (
-          <div className="flex w-full flex-wrap gap-2">
+          <div
+            role="radiogroup"
+            aria-label="정렬 방식 선택"
+            className="flex w-full flex-wrap gap-2"
+          >
             {sort.map((sortItem, index) => (
               <ChipButton
                 key={index}
@@ -118,7 +124,7 @@ const FilterBottomSheet = ({
         )}
 
         {selectedTab === "status" && (
-          <div className="flex w-full flex-wrap gap-2">
+          <div role="radiogroup" aria-label="상태 선택" className="flex w-full flex-wrap gap-2">
             {status.map((statusItem, index) => (
               <ChipButton
                 key={index}
@@ -134,7 +140,7 @@ const FilterBottomSheet = ({
 
       <div className="h-[230px] w-full" />
 
-      <Button className="w-full" onClick={handleApply}>
+      <Button role="button" ariaLabel="필터 적용" className="w-full" onClick={handleApply}>
         적용하기
       </Button>
     </PopupLayout>
@@ -157,6 +163,10 @@ const ChipButton = ({
   return (
     <button
       type="button"
+      role="radio"
+      aria-checked={selected}
+      aria-pressed={selected}
+      tabIndex={selected ? 0 : -1}
       onClick={() => onSelect(value)}
       className={cn(
         "rounded-full px-[18px] py-2 text-body1-semibold",
@@ -164,7 +174,6 @@ const ChipButton = ({
           ? "text-white bg-fill-neutralInversed-normal-enteredSelected"
           : "text-neutralInversed-normal-default bg-fill-neutralInversed-normal-default"
       )}
-      aria-pressed={selected}
     >
       {label}
     </button>

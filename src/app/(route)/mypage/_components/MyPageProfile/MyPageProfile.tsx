@@ -1,4 +1,5 @@
-import { Button } from "@/components";
+import { Button } from "@/components/common";
+import Link from "next/link";
 
 interface ProfileProps {
   userName: string;
@@ -16,7 +17,9 @@ const MyPageProfile = ({ userName, email }: ProfileProps) => {
           <span className="truncate text-body2-regular text-layout-body-default">{email}</span>
         </div>
       </div>
-      <Button variant="outlined"> 프로필 수정 </Button>
+      <Button as={Link} href="/mypage/profile" variant="outlined">
+        프로필 수정
+      </Button>
     </div>
   );
 };

@@ -43,5 +43,6 @@ export const SIGNUP_INPUT_CONFIG = [
     rule: "2~10자, 특수문자/금칙어 제한",
     children: "중복 확인",
     maxLength: 10,
+    successMessage: "사용할 수 있는 닉네임입니다.",
   },
 ] as const;

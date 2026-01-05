@@ -77,3 +77,16 @@ export const noScrollbar = plugin(function ({ addUtilities }) {
 
   addUtilities(utilities);
 });
+
+/**
+ * h-base
+ */
+export const hBase = plugin(function ({ addUtilities }) {
+  const utilities: Record<string, CSSRuleObject> = {
+    ".h-base": {
+      minHeight: "calc(100dvh - 56px)",
+    },
+  };
+
+  addUtilities(utilities);
+});

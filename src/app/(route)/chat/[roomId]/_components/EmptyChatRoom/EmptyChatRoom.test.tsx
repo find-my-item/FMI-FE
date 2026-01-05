@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import EmptyChatRoom from "./EmptyChatRoom";
 
-jest.mock("@/components", () => ({
+jest.mock("@/components/common", () => ({
   Icon: ({ name, size, ...rest }: any) => (
     <span data-testid={`icon-${name}`} data-size={size} {...rest} />
   ),

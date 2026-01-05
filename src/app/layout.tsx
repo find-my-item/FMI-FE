@@ -1,4 +1,4 @@
-import { Footer, Header } from "@/components";
+import { Footer, Header } from "@/components/layout";
 import "./globals.css";
 import Providers from "@/providers/QueryProviders";
 import { ToastProvider } from "@/providers/ToastProviders";
@@ -54,6 +54,16 @@ export default function RootLayout({
             <main className="w-full flex-1">{children}</main>
             <Footer />
           </ToastProvider>
+          <Script
+            src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY}&libraries=services,clusterer&autoload=false`}
+            strategy="beforeInteractive"
+          />
+          <Script
+            src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.7/kakao.min.js"
+            integrity="sha384-tJkjbtDbvoxO+diRuDtwRO9JXR7pjWnfjfRn5ePUpl7e7RJCxKCwwnfqUAdXh53p"
+            crossOrigin="anonymous"
+            strategy="afterInteractive"
+          />
           <Analytics />
           <SpeedInsights />
         </Providers>

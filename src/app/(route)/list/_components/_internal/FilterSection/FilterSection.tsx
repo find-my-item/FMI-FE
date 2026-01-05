@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { Filter } from "@/components";
+import { Filter } from "@/components/common";
 import FilterBottomSheet from "../FilterBottomSheet/FilterBottomSheet";
+import { FiltersState } from "./filtersStateType";
+import { getFilterSelectedFlags } from "./getFilterSelectedFlags";
 import { CATEGORY_LABEL_MAP, SORT_LABEL_MAP, STATUS_LABEL_MAP } from "../FilterBottomSheet/LABELS";
 import {
   CategoryFilterValue,
@@ -8,8 +10,6 @@ import {
   SortFilterValue,
   StatusFilterValue,
 } from "../FilterBottomSheet/types";
-import { FiltersState } from "./filtersStateType";
-import { getFilterSelectedFlags } from "./getFilterSelectedFlags";
 
 const FilterSection = () => {
   const [filters, setFilters] = useState<FiltersState>({
@@ -41,7 +41,7 @@ const FilterSection = () => {
         className="flex h-[67px] w-full items-center gap-2 overflow-x-auto overflow-y-hidden whitespace-nowrap px-5 no-scrollbar"
       >
         <Filter
-          ariaLabel="지역 선택 필터 버튼"
+          ariaLabel="지역 선택 필터"
           onSelected={isRegionSelected}
           icon={{ name: "Location", size: 16 }}
           className="flex-shrink-0"
@@ -51,7 +51,7 @@ const FilterSection = () => {
         </Filter>
 
         <Filter
-          ariaLabel="카테고리 필터 버튼"
+          ariaLabel="카테고리 필터"
           onSelected={isCategorySelected}
           iconPosition="trailing"
           icon={{ name: "ArrowDown", size: 12 }}
@@ -62,7 +62,7 @@ const FilterSection = () => {
         </Filter>
 
         <Filter
-          ariaLabel="정렬 필터 버튼"
+          ariaLabel="정렬 필터"
           onSelected={isSortSelected}
           iconPosition="trailing"
           icon={{ name: "ArrowDown", size: 12 }}
@@ -73,7 +73,7 @@ const FilterSection = () => {
         </Filter>
 
         <Filter
-          ariaLabel="찾음여부 필터 버튼"
+          ariaLabel="찾음여부 필터"
           onSelected={isStatusSelected}
           iconPosition="trailing"
           icon={{ name: "ArrowDown", size: 12 }}

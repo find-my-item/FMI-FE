@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Tab } from "@/components";
+import { Tab } from "@/components/domain";
 import ManualList from "./_components/ManualList/ManualList";
 import { MANUAL_DATA, MANUAL_LIST } from "./_constants/MANUAL_CONSTANT";
 

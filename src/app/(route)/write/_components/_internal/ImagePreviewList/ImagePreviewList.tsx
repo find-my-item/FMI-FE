@@ -2,7 +2,7 @@
 
 import { Dispatch, SetStateAction, useRef, type DragEvent } from "react";
 import Image from "next/image";
-import { Icon } from "@/components";
+import { Icon } from "@/components/common";
 import { cn } from "@/utils";
 
 interface ImagePreviewListProps {
