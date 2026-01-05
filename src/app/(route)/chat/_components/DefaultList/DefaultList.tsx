@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import FilterDropdown from "../FilterDropdown/FilterDropdown";
 import { FilTER_DROPDOWN_OPTIONS } from "../../constants/FILTER";
 import { useChatList } from "@/api/fetch/auth";
+import { useInfiniteScroll } from "@/hooks/useInfiniteScroll/useInfiniteScroll";
 
 interface DefaultListProps {
   searchUpdateQuery: (key: string, value?: string) => void;
@@ -15,7 +16,12 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
   const searchParams = useSearchParams();
   const selectedRegion = searchParams.get("region");
   const regionDisplayText = selectedRegion || "지역 선택";
-  const { data: chatList } = useChatList();
+  const { data: chatList, fetchNextPage, isFetchingNextPage, hasNextPage } = useChatList();
+  const { ref: chatListRef } = useInfiniteScroll({
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  });
 
   return (
     <>
@@ -36,6 +42,7 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
       {chatList?.map((chatRoom) => (
         <ChatItem key={chatRoom.roomId} chatRoom={chatRoom} />
       ))}
+      <div ref={chatListRef} className="h-[100px]" />
     </>
   );
 };
