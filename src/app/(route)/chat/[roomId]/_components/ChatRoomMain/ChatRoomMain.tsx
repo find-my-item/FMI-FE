@@ -15,6 +15,7 @@ const ChatRoomMain = () => {
       ref={scrollRef}
       className="flex flex-1 flex-col-reverse overflow-y-scroll scroll-smooth bg-flatGray-25 px-[16px] py-[8px] no-scrollbar"
     >
+      <h1 className="sr-only">채팅 표시 화면</h1>
       {chats.map((chat, i) => (
         <ChatBox key={i} chat={chat} nextSender={chats[i - 1]?.sender} lastChat={i === 0} />
       ))}

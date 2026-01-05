@@ -50,26 +50,24 @@ jest.mock("../FilterDropdown/FilterDropdown", () => ({
 
 jest.mock("@/api/fetch/auth", () => ({
   useChatList: jest.fn(() => ({
-    data: {
-      result: {
-        chatRooms: Array.from({ length: 5 }, (_, i) => ({
-          roomId: i + 1,
-          contactUser: { userId: i + 1, nickname: `User${i + 1}`, profileImageUrl: null },
-          postInfo: {
-            postId: i + 1,
-            postType: "LOST",
-            title: `Post${i + 1}`,
-            address: "서울시 강남구",
-            thumbnailUrl: null,
-          },
-          messageType: "TEXT",
-          lastMessage: "Test message",
-          lastMessageSentAt: new Date().toISOString(),
-          unreadCount: 0,
-        })),
-        nextCursor: null,
+    data: Array.from({ length: 5 }, (_, i) => ({
+      roomId: i + 1,
+      contactUser: { userId: i + 1, nickname: `User${i + 1}`, profileImageUrl: null },
+      postInfo: {
+        postId: i + 1,
+        postType: "LOST",
+        title: `Post${i + 1}`,
+        address: "서울시 강남구",
+        thumbnailUrl: null,
       },
-    },
+      messageType: "TEXT",
+      lastMessage: "Test message",
+      lastMessageSentAt: new Date().toISOString(),
+      unreadCount: 0,
+    })),
+    fetchNextPage: jest.fn(),
+    isFetchingNextPage: false,
+    hasNextPage: false,
   })),
 }));
 
