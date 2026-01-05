@@ -8,7 +8,7 @@ import {
   StatusFilterValue,
 } from "../../_components/_internal/FilterBottomSheet/types";
 
-export const usePostListFiltersFromSearchParams = () => {
+export const useListParams = () => {
   const searchParams = useSearchParams();
 
   return useMemo(
