@@ -1,17 +1,17 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
-import { useGetPosts, usePostPostsFilter } from "@/api/fetch/post";
+import { useEffect } from "react";
 import { Tab } from "@/components/domain";
+import { useGetPosts, usePostPostsFilter } from "@/api/fetch/post";
 import { TABS } from "../../_constants/TABS";
 import ListItem from "../ListItem/ListItem";
 import FilterSection from "../_internal/FilterSection/FilterSection";
-import { useEffect } from "react";
 import {
   CategoryFilterValue,
   SortFilterValue,
   StatusFilterValue,
 } from "../_internal/FilterBottomSheet/types";
+import { usePostListFiltersFromSearchParams } from "../../_hooks/usePostListFromParams/usePostListFromParams";
 
 type PostType = "LOST" | "FOUND";
 
@@ -20,35 +20,29 @@ interface DefaultListProps {
 }
 
 const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
-  const searchParams = useSearchParams();
+  const { type, status, category, sort, region } = usePostListFiltersFromSearchParams();
 
-  const rawType = searchParams.get("type");
-  const type: PostType = rawType === "found" ? "FOUND" : "LOST";
+  const postType: PostType = type === "lost" ? "LOST" : "FOUND";
 
-  const rawRegion = searchParams.get("region");
-  const rawCategory = searchParams.get("category");
-  const rawSort = searchParams.get("sort");
-  const rawStatus = searchParams.get("status");
-
-  const { data } = useGetPosts({ page: 0, size: 10, type });
+  const { data } = useGetPosts({ page: 0, size: 10, type: postType });
   const { mutate, data: filterData } = usePostPostsFilter();
 
   useEffect(() => {
     mutate({
-      address: rawRegion ?? undefined,
-      category: rawCategory as CategoryFilterValue,
-      sortType: rawSort as SortFilterValue,
-      itemStatus: rawStatus as StatusFilterValue,
+      address: region ?? undefined,
+      category: category as CategoryFilterValue,
+      sortType: sort as SortFilterValue,
+      itemStatus: status as StatusFilterValue,
     });
-  }, [mutate, rawCategory, rawRegion, rawSort, rawStatus]);
+  }, [mutate, category, region, sort, status]);
 
   console.log(filterData);
 
   return (
-    <>
+    <section className="h-base">
       <Tab
         tabs={TABS}
-        selected={rawType ?? "lost"}
+        selected={postType}
         onValueChange={(key) => searchUpdateQuery("type", key)}
       />
 
@@ -59,7 +53,7 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
           <ListItem key={item.postId} post={item} linkState="list" />
         ))}
       </section>
-    </>
+    </section>
   );
 };
 

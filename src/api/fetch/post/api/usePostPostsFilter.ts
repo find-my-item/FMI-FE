@@ -4,7 +4,7 @@ import { PostPostsFilterRequestBody, PostPostsFilterResponse } from "../types/Po
 export const usePostPostsFilter = () => {
   return useAppMutation<PostPostsFilterRequestBody, PostPostsFilterResponse>(
     "public",
-    "/post/filter",
+    "/posts/filter",
     "post"
   );
 };
