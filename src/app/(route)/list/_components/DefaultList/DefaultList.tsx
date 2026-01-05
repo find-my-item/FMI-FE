@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useGetPost, usePostFilter } from "@/api/fetch/post";
+import { useGetPosts, usePostFilter } from "@/api/fetch/post";
 import { Tab } from "@/components/domain";
 import { TABS } from "../../_constants/TABS";
 import ListItem from "../ListItem/ListItem";
@@ -24,7 +24,7 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
   const rawSort = searchParams.get("sort");
   const rawStatus = searchParams.get("status");
 
-  const { data } = useGetPost({ page: 0, size: 10, type });
+  const { data } = useGetPosts({ page: 0, size: 10, type });
   const { mutate, data: filterData } = usePostFilter();
 
   return (
@@ -38,7 +38,7 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
       <FilterSection />
 
       <section aria-label="게시글 목록" className="w-full">
-        {data?.result?.map((item) => (
+        {data?.result?.posts?.map((item) => (
           <ListItem key={item.postId} post={item} linkState="list" />
         ))}
       </section>

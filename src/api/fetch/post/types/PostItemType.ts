@@ -4,8 +4,15 @@ export interface GetListResponse {
   isSuccess: boolean;
   code: string;
   message: string;
-  result: PostItem[];
+  result: {
+    hasNext: hasNext;
+    nextCursor: nextCursor;
+    posts: PostItem[];
+  };
 }
+
+export type hasNext = boolean;
+export type nextCursor = string | null;
 
 export interface PostItem {
   postId: number;
