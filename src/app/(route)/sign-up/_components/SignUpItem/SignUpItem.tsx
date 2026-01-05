@@ -1,6 +1,6 @@
 "use no memo";
 
-import { InputText } from "@/components";
+import { InputText } from "@/components/common";
 import { InputTextProps } from "@/components/common/Input/InputText/InputText";
 import { useFormContext, useController } from "react-hook-form";
 import { FormType } from "../../types/FormType";
@@ -8,6 +8,7 @@ import { FormType } from "../../types/FormType";
 const inputValidationRules = {
   email: {
     required: true,
+    pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "이메일 형식을 입력해 주세요." },
   },
   emailAuth: {
     required: true,

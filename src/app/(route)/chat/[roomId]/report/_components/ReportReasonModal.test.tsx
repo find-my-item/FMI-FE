@@ -4,7 +4,7 @@ import "@testing-library/jest-dom";
 import ReportReasonModal from "./ReportReasonModal";
 import { ReportReason } from "../_types/ReportReason";
 
-jest.mock("@/components", () => ({
+jest.mock("@/components/common", () => ({
   Button: ({ children, disabled, onClick, type, className, ...rest }: any) => (
     <button
       type={type}

@@ -1,6 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import PostDetail from "./PostDetail";
 
+jest.mock("swiper/css", () => ({}));
+jest.mock("swiper/css/pagination", () => ({}));
+
 const item = {
   id: 1,
   title: "서비스 점검 안내",

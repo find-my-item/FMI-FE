@@ -1,6 +1,6 @@
 "use client";
 
-import { Icon } from "@/components";
+import { Icon } from "@/components/common";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { MOCK_IMAGES } from "../../../_components/ChatItem/MOCK_IMAGES";
