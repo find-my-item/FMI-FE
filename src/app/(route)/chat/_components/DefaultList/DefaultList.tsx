@@ -6,8 +6,6 @@ import { useSearchParams } from "next/navigation";
 import FilterDropdown from "../FilterDropdown/FilterDropdown";
 import { FilTER_DROPDOWN_OPTIONS } from "../../constants/FILTER";
 import { useChatList } from "@/api/fetch/auth";
-import { useEffect } from "react";
-import useAppMutation from "@/api/_base/query/useAppMutation";
 
 interface DefaultListProps {
   searchUpdateQuery: (key: string, value?: string) => void;
@@ -17,18 +15,7 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
   const searchParams = useSearchParams();
   const selectedRegion = searchParams.get("region");
   const regionDisplayText = selectedRegion || "지역 선택";
-  const { mutate: postLogin, isSuccess: isLoginSuccess } = useAppMutation(
-    "auth",
-    "auth/login",
-    "post"
-  );
-  const { data: chatList } = useChatList({
-    enabled: isLoginSuccess,
-  });
-
-  useEffect(() => {
-    postLogin({ email: "znznun@gmail.com", password: "Khj1234!" });
-  }, []);
+  const { data: chatList } = useChatList();
 
   return (
     <>
