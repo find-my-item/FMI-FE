@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useGetPosts, usePostFilter } from "@/api/fetch/post";
+import { useGetPosts, usePostPostsFilter } from "@/api/fetch/post";
 import { Tab } from "@/components/domain";
 import { TABS } from "../../_constants/TABS";
 import ListItem from "../ListItem/ListItem";
@@ -25,7 +25,7 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
   const rawStatus = searchParams.get("status");
 
   const { data } = useGetPosts({ page: 0, size: 10, type });
-  const { mutate, data: filterData } = usePostFilter();
+  const { mutate, data: filterData } = usePostPostsFilter();
 
   return (
     <>
