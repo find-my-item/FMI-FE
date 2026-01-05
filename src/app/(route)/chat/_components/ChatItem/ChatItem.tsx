@@ -10,7 +10,7 @@ interface ChatItemProps {
 }
 
 const ChatItem = ({ chatRoom }: ChatItemProps) => {
-  const { roomId, postInfo, contactUser, unreadCount, lastMessageSentAt, lastMessage } = chatRoom;
+  const { roomId, postInfo, contactUser, lastMessageSentAt, lastMessage, unreadCount } = chatRoom;
 
   return (
     <Link
@@ -50,8 +50,8 @@ const ChatItem = ({ chatRoom }: ChatItemProps) => {
             {contactUser?.nickname || "닉네임을 불러오지 못했습니다."}
           </span>
           {unreadCount > 0 && (
-            <span className="h-[16px] w-[16px] rounded-full bg-flatGreen-500 text-caption2-semibold text-white flex-center">
-              {unreadCount}
+            <span className="rounded-full bg-flatGreen-500 px-[5.5px] py-[1.5px] text-caption2-semibold text-white flex-center">
+              {unreadCount > 99 ? "99+" : unreadCount}
             </span>
           )}
         </div>
