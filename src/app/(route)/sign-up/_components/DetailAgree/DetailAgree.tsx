@@ -1,4 +1,5 @@
-import { Button, DetailHeader } from "@/components";
+import { Button } from "@/components/common";
+import { DetailHeader } from "@/components/layout";
 import { AGREE_CONFIG } from "../../_constants/AGREE_CONFIG";
 import { useFormContext } from "react-hook-form";
 

@@ -1,4 +1,4 @@
-import { Icon } from "@/components";
+import { Icon } from "@/components/common";
 import { cn } from "@/utils";
 import { downloadImage } from "../_utils/imageViewer";
 
