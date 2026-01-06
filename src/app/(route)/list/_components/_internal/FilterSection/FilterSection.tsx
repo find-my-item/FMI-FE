@@ -6,28 +6,36 @@ import { FiltersState } from "./filtersStateType";
 import { DEFAULT_FILTERS } from "./DEFAULT_FILTERS";
 import { CATEGORY_LABEL_MAP, SORT_LABEL_MAP, STATUS_LABEL_MAP } from "../FilterBottomSheet/LABELS";
 import {
+  filterSelectionState,
+  normalizedFilterValues,
+} from "../../../_utils/deriveFilterParams/deriveFilterParams";
+import {
   CategoryFilterValue,
   FilterTab,
   SortFilterValue,
   StatusFilterValue,
 } from "../FilterBottomSheet/types";
 import { usePostListFiltersFromSearchParams } from "../../../_hooks/usePostListFromParams/usePostListFromParams";
-import { deriveFilterViewModel } from "../../../_utils/deriveFilterViewModel/deriveFilterViewModel";
 
 const FilterSection = () => {
   const { region, category, sort, status } = usePostListFiltersFromSearchParams();
 
   const [filters, setFilters] = useState<FiltersState>(DEFAULT_FILTERS);
 
-  const {
-    isRegionSelected,
-    isCategorySelected,
-    isSortSelected,
-    isStatusSelected,
-    normalizedCategory,
-    normalizedSort,
-    normalizedStatus,
-  } = deriveFilterViewModel({ region, category, sort, status });
+  const { normalizedCategory, normalizedSort, normalizedStatus } = normalizedFilterValues({
+    region,
+    category,
+    sort,
+    status,
+  });
+
+  const { isRegionSelected, isCategorySelected, isSortSelected, isStatusSelected } =
+    filterSelectionState({
+      region,
+      category,
+      sort,
+      status,
+    });
 
   const categoryLabel =
     (normalizedCategory && CATEGORY_LABEL_MAP[normalizedCategory]) ?? "카테고리";

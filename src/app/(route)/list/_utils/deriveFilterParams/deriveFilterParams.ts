@@ -12,23 +12,28 @@ type Params = {
   status?: string | null;
 };
 
-export const deriveFilterViewModel = ({ region, category, sort, status }: Params) => {
+export const normalizedFilterValues = ({ region, category, sort, status }: Params) => {
+  const normalizedCategory = normalizeEnumValue<CategoryFilterValue>(category);
+  const normalizedSort = normalizeEnumValue<SortFilterValue>(sort);
+  const normalizedStatus = normalizeEnumValue<StatusFilterValue>(status);
+
+  return {
+    normalizedCategory,
+    normalizedSort,
+    normalizedStatus,
+  };
+};
+
+export const filterSelectionState = ({ region, category, sort, status }: Params) => {
   const isRegionSelected = Boolean(region);
   const isCategorySelected = Boolean(category);
   const isSortSelected = Boolean(sort);
   const isStatusSelected = Boolean(status);
-
-  const normalizedCategory = normalizeEnumValue<CategoryFilterValue>(category);
-  const normalizedSort = normalizeEnumValue<SortFilterValue>(sort);
-  const normalizedStatus = normalizeEnumValue<StatusFilterValue>(status);
 
   return {
     isRegionSelected,
     isCategorySelected,
     isSortSelected,
     isStatusSelected,
-    normalizedCategory,
-    normalizedSort,
-    normalizedStatus,
   };
 };
