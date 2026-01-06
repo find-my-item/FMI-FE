@@ -1,2 +1,2 @@
-export { default as BottomSheet } from "./BottomSheet/BottomSheet";
-export { default as KakaoMap } from "./KakaoMap/KakaoMap";
+export { default as LocationSearchSection } from "./LocationSearchSection/LocationSearchSection";
+export { default as LocationRangeSection } from "./LocationRangeSection/LocationRangeSection";
