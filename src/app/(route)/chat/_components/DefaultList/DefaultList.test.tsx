@@ -48,7 +48,7 @@ jest.mock("../FilterDropdown/FilterDropdown", () => ({
   ),
 }));
 
-jest.mock("@/api/fetch/chat", () => ({
+jest.mock("@/api/fetch/chatRoom", () => ({
   useChatList: jest.fn(() => ({
     data: Array.from({ length: 5 }, (_, i) => ({
       roomId: i + 1,
