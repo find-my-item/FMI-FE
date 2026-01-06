@@ -1,9 +1,9 @@
-import { formatNumber } from "@/utils";
 import { Icon } from "@/components/common";
+import { PostDetailData } from "@/api/fetch/post";
+import { formatDate, formatNumber } from "@/utils";
 import { NoticeChip } from "@/app/(route)/notice/_components";
 import PostChipSection from "../PostChipSection/PostChipSection";
 import { LABELS } from "../../LABELS";
-import { PostDetailData } from "@/api/fetch/post";
 
 interface PostDetailBodyProps {
   isBoardType: boolean;
@@ -25,7 +25,9 @@ const PostDetailBody = ({ isBoardType, label, data }: PostDetailBodyProps) => {
       <div className={isBoardType ? "mt-[14px]" : "space-y-7"}>
         <div>
           <h1 className="text-[20px] font-semibold text-layout-header-default">{title}</h1>
-          <time className="text-[14px] leading-[140%] text-layout-body-default">{createdAt}</time>
+          <time className="text-[14px] leading-[140%] text-layout-body-default">
+            {formatDate(createdAt)}
+          </time>
         </div>
 
         <p className="mt-6 text-body1-regular text-layout-header-default">{content}</p>
