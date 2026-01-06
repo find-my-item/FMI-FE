@@ -7,7 +7,7 @@ import type { PostDetailData } from "@/api/fetch/post/types/PostDetailType";
 
 interface PostDetailProps {
   type: "find" | "lost" | "notice" | "customer";
-  data: PostDetailData | undefined;
+  data: PostDetailData | undefined | any; // TODO(지권): 공지사항 타입 추가 후 any 타입 지워주세요
 }
 
 const PostDetail = ({ type, data }: PostDetailProps) => {

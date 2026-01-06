@@ -15,7 +15,7 @@ const CustomerDetail = async ({ params }: CustomerDetailProps) => {
 
   return (
     <>
-      <PostDetail item={customerItem} type="customer" />
+      <PostDetail data={customerItem} type="customer" />
       <CommentList comments={commentListObject} />
       <CommentForm />
     </>

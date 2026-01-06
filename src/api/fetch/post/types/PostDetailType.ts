@@ -18,7 +18,7 @@ export type PostDetailData = {
   favoriteCount: number;
   favoriteStatus: boolean;
   viewCount: number;
-  profileUrl: string;
+  profileUrl: string | null;
   nickName: string;
   createdAt: string;
   chatRoomCount: number;
