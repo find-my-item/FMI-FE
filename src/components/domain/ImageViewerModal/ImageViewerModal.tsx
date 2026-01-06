@@ -19,9 +19,19 @@ interface ImageViewerModalProps {
   initialIndex: number;
   isOpen: boolean;
   onClose: () => void;
+  imageInfo?: {
+    createdAt: string;
+    uploader: string;
+  };
 }
 
-const ImageViewerModal = ({ images, initialIndex, isOpen, onClose }: ImageViewerModalProps) => {
+const ImageViewerModal = ({
+  images,
+  initialIndex,
+  isOpen,
+  onClose,
+  imageInfo,
+}: ImageViewerModalProps) => {
   const swiperRef = useRef<SwiperType | null>(null);
 
   const handleNext = () => swiperRef.current?.slideNext();
@@ -43,6 +53,7 @@ const ImageViewerModal = ({ images, initialIndex, isOpen, onClose }: ImageViewer
         images={images}
         initialIndex={initialIndex}
         onClose={onClose}
+        imageInfo={imageInfo}
       />
 
       <div className="flex h-full items-center justify-center">

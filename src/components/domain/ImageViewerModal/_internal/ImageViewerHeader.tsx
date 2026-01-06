@@ -2,12 +2,17 @@ import { Icon } from "@/components/common";
 import { cn } from "@/utils";
 import { downloadImage } from "../_utils/imageViewer";
 import type { Swiper as SwiperType } from "swiper";
+import { RefObject } from "react";
 
 interface ImageViewerHeaderProps {
   onClose: () => void;
-  swiperRef: React.RefObject<SwiperType | null>;
+  swiperRef: RefObject<SwiperType | null>;
   images: string[];
   initialIndex: number;
+  imageInfo?: {
+    createdAt: string;
+    uploader: string;
+  };
 }
 
 const NAV_BUTTON_STYLE =
@@ -18,6 +23,7 @@ const ImageViewerHeader = ({
   swiperRef,
   images,
   initialIndex,
+  imageInfo,
 }: ImageViewerHeaderProps) => {
   const getCurrentImage = () => {
     const currentIndex = swiperRef.current?.realIndex ?? initialIndex;
@@ -33,12 +39,16 @@ const ImageViewerHeader = ({
       >
         <Icon name="ArrowLeftSmall" size={18} />
       </button>
-      <div className="flex flex-col items-center">
-        <span className="text-body2-semibold text-neutralInversed-strong-default">나</span>
-        <time className="text-caption1-medium text-layout-body-default">
-          2025.11.08.토요일 10:13
-        </time>
-      </div>
+      {imageInfo && (
+        <div className="flex flex-col items-center">
+          <span className="text-body2-semibold text-neutralInversed-strong-default">
+            {imageInfo.uploader}
+          </span>
+          <time className="text-caption1-medium text-layout-body-default">
+            {imageInfo.createdAt}
+          </time>
+        </div>
+      )}
       <button
         className={cn(NAV_BUTTON_STYLE, "w-[46px]")}
         aria-label="이미지 다운로드"
