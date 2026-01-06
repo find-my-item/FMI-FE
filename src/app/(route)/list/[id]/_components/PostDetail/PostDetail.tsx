@@ -13,7 +13,6 @@ interface PostDetailProps {
 const PostDetail = ({ type, data }: PostDetailProps) => {
   const { label, backPath } = LABELS[type];
   const isBoardType = type === "find" || type === "lost";
-  console.log(data);
 
   if (!data) return null;
 

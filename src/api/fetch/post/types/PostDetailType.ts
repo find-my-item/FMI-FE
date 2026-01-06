@@ -13,7 +13,7 @@ export type PostDetailData = {
   postType: PostType;
   itemStatus: ItemStatus;
   imageUrls: Array<string>;
-  radius: number;
+  radius: number; // TODO(지권): 반경 1000, 3000, 5000 변경
   category: CategoryType;
   favoriteCount: number;
   favoriteStatus: boolean;
