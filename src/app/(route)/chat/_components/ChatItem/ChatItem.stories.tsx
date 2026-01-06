@@ -1,7 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import ChatItem from "./ChatItem";
-import { MOCK_CHAT_ITEM } from "@/mock/MOCK_CHAT_ITEM";
-import { ChatRoom } from "@/api/fetch/chat/types/ChatListType";
+import { MOCK_CHAT_ITEM } from "@/mock/MOCK_DATA";
 
 const meta: Meta<typeof ChatItem> = {
   title: "페이지/채팅 페이지/ChatItem",
