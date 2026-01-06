@@ -1,20 +1,21 @@
 import Link from "next/link";
 
-import { Button, Icon } from "@/components/common";
-import ImageSection from "./_internal/ImageSection/ImageSection";
 import Image from "next/image";
+import { Button } from "@/components/common";
+import ImageSection from "./_internal/ImageSection/ImageSection";
+
+type HeaderData = {
+  imageUrls: string[];
+  postId: string;
+  nickName: string;
+  profileUrl: string | null;
+  userPostCount: number;
+  chatRoomCount: number;
+};
 
 interface PostDetailHeaderType {
-  headerData: {
-    imageUrls: string[];
-    postId: string;
-    nickName: string;
-    profileUrl: string | null;
-    userPostCount: number;
-    chatRoomCount: number;
-  };
+  headerData: HeaderData;
 }
-
 const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
   const { imageUrls, postId, nickName, profileUrl, userPostCount, chatRoomCount } = headerData;
 
