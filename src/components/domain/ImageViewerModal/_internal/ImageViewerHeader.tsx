@@ -4,13 +4,13 @@ import { downloadImage } from "../_utils/imageViewer";
 
 interface ImageViewerHeaderProps {
   onClose: () => void;
-  currentImage: string;
+  getCurrentImage: () => string;
 }
 
 const NAV_BUTTON_STYLE =
   "h-[40px] rounded-[10px] bg-fill-neutralInversed-strong-default flex-center";
 
-const ImageViewerHeader = ({ onClose, currentImage }: ImageViewerHeaderProps) => {
+const ImageViewerHeader = ({ onClose, getCurrentImage }: ImageViewerHeaderProps) => {
   return (
     <header className="absolute left-0 right-0 top-0 flex items-center justify-between px-[16px] py-[4px]">
       <button
@@ -31,7 +31,7 @@ const ImageViewerHeader = ({ onClose, currentImage }: ImageViewerHeaderProps) =>
         aria-label="이미지 다운로드"
         onClick={(e) => {
           e.stopPropagation();
-          downloadImage(currentImage);
+          downloadImage(getCurrentImage());
         }}
       >
         <Icon name="Download" size={18} />

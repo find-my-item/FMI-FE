@@ -1,14 +1,18 @@
 "use client";
 
 import { createPortal } from "react-dom";
-import { useDotNavigation } from "./_hooks/useDotNavigation";
-import { useModalOverflow } from "./_hooks/useModalOverflow";
-import { getNextIndex, getPrevIndex } from "./_utils/imageViewer";
+import { useRef } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper/modules";
+import type { Swiper as SwiperType } from "swiper";
+import Image from "next/image";
 import ImageViewerHeader from "./_internal/ImageViewerHeader";
 import ImageViewerNavigation from "./_internal/ImageViewerNavigation";
-import ImageViewerDots from "./_internal/ImageViewerDots";
-import ImageViewerMainImage from "./_internal/ImageViewerMainImage";
 import useImageViewerNavigation from "./_hooks/useImageViewerNavigation";
+
+import "swiper/css";
+import "swiper/css/pagination";
+import "./swiper-pagination.css";
 
 interface ImageViewerModalProps {
   images: string[];
@@ -18,12 +22,15 @@ interface ImageViewerModalProps {
 }
 
 const ImageViewerModal = ({ images, initialIndex, isOpen, onClose }: ImageViewerModalProps) => {
-  const { currentIndex, goTo, setCurrentIndex } = useDotNavigation(isOpen, initialIndex);
+  const swiperRef = useRef<SwiperType | null>(null);
 
-  useModalOverflow(isOpen);
+  const handleNext = () => swiperRef.current?.slideNext();
+  const handlePrev = () => swiperRef.current?.slidePrev();
 
-  const handlePrev = () => setCurrentIndex((prev) => getPrevIndex(prev, images.length));
-  const handleNext = () => setCurrentIndex((prev) => getNextIndex(prev, images.length));
+  const getCurrentImage = () => {
+    const currentIndex = swiperRef.current?.realIndex ?? initialIndex;
+    return images[currentIndex];
+  };
 
   useImageViewerNavigation({ isOpen, onClose, handlePrev, handleNext });
 
@@ -36,7 +43,7 @@ const ImageViewerModal = ({ images, initialIndex, isOpen, onClose }: ImageViewer
       aria-label="이미지 상세 보기 모달"
       className="fixed inset-0 z-50 bg-dimOpaque"
     >
-      <ImageViewerHeader currentImage={images[currentIndex]} onClose={onClose} />
+      <ImageViewerHeader getCurrentImage={getCurrentImage} onClose={onClose} />
 
       <div className="flex h-full items-center justify-center">
         <ImageViewerNavigation
@@ -45,15 +52,29 @@ const ImageViewerModal = ({ images, initialIndex, isOpen, onClose }: ImageViewer
           imagesLength={images.length}
         />
 
-        <ImageViewerMainImage
-          handlePrev={handlePrev}
-          handleNext={handleNext}
-          images={images}
-          currentIndex={currentIndex}
-        />
+        <Swiper
+          modules={[Pagination]}
+          pagination={{ clickable: true }}
+          loop
+          initialSlide={initialIndex}
+          onSwiper={(swiper) => (swiperRef.current = swiper)}
+          className="h-[80vh] w-full"
+        >
+          {images.map((image, index) => (
+            <SwiperSlide key={index}>
+              <div className="relative h-full w-full select-none">
+                <Image
+                  src={image}
+                  alt={`상세 이미지 ${index + 1}`}
+                  fill
+                  className="select-none object-contain"
+                  priority
+                />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
-
-      <ImageViewerDots currentIndex={currentIndex} goTo={goTo} imagesLength={images.length} />
     </div>
   );
 
