@@ -10,11 +10,13 @@ import {
 export const useListParams = () => {
   const searchParams = useSearchParams();
 
-  return () => ({
+  const sortParam = searchParams.get("sort");
+
+  return {
     type: searchParams.get("type"),
     status: searchParams.get("status") as StatusFilterValue,
     category: searchParams.get("category") as CategoryFilterValue,
-    sort: searchParams.get("sort") as SortFilterValue,
+    sort: (sortParam as SortFilterValue) ?? "latest",
     region: searchParams.get("region"),
-  });
+  };
 };
