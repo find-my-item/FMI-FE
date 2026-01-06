@@ -1,16 +1,29 @@
 import { Icon } from "@/components/common";
 import { cn } from "@/utils";
 import { downloadImage } from "../_utils/imageViewer";
+import type { Swiper as SwiperType } from "swiper";
 
 interface ImageViewerHeaderProps {
   onClose: () => void;
-  getCurrentImage: () => string;
+  swiperRef: React.RefObject<SwiperType | null>;
+  images: string[];
+  initialIndex: number;
 }
 
 const NAV_BUTTON_STYLE =
   "h-[40px] rounded-[10px] bg-fill-neutralInversed-strong-default flex-center";
 
-const ImageViewerHeader = ({ onClose, getCurrentImage }: ImageViewerHeaderProps) => {
+const ImageViewerHeader = ({
+  onClose,
+  swiperRef,
+  images,
+  initialIndex,
+}: ImageViewerHeaderProps) => {
+  const getCurrentImage = () => {
+    const currentIndex = swiperRef.current?.realIndex ?? initialIndex;
+    return images[currentIndex];
+  };
+
   return (
     <header className="absolute left-0 right-0 top-0 flex items-center justify-between px-[16px] py-[4px]">
       <button

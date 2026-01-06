@@ -27,11 +27,6 @@ const ImageViewerModal = ({ images, initialIndex, isOpen, onClose }: ImageViewer
   const handleNext = () => swiperRef.current?.slideNext();
   const handlePrev = () => swiperRef.current?.slidePrev();
 
-  const getCurrentImage = () => {
-    const currentIndex = swiperRef.current?.realIndex ?? initialIndex;
-    return images[currentIndex];
-  };
-
   useImageViewerNavigation({ isOpen, onClose, handlePrev, handleNext });
 
   if (!isOpen) return null;
@@ -43,7 +38,12 @@ const ImageViewerModal = ({ images, initialIndex, isOpen, onClose }: ImageViewer
       aria-label="이미지 상세 보기 모달"
       className="fixed inset-0 z-50 bg-dimOpaque"
     >
-      <ImageViewerHeader getCurrentImage={getCurrentImage} onClose={onClose} />
+      <ImageViewerHeader
+        swiperRef={swiperRef}
+        images={images}
+        initialIndex={initialIndex}
+        onClose={onClose}
+      />
 
       <div className="flex h-full items-center justify-center">
         <ImageViewerNavigation
