@@ -25,7 +25,7 @@ const sortToQueryValue = (sort: SortFilterValue) => {
     "": "",
     OLDEST: "oldest",
     MOST_FAVORITED: "most_favorited",
-    MOST_VIWED: "most_viewed",
+    MOST_VIWED: "most_viwed",
   };
 
   return map[sort];
