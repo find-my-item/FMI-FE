@@ -20,14 +20,14 @@ const LocationPage = () => {
 
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [radius, setRadius] = useState("3");
+  const [radius, setRadius] = useState("3000");
 
   const locationValue = useWatch({
     control: methods.control,
     name: "location",
   });
 
-  const { regions, isLoading: isLoaded } = useRegionRows();
+  const { regions, isLoading } = useRegionRows();
 
   const results = useMemo(() => {
     const q = (locationValue ?? "").trim();
@@ -56,11 +56,12 @@ const LocationPage = () => {
   };
 
   const locationTitle = searchParams.get("location");
+  const leaf = locationTitle?.trim().split(/\s+/).at(-1) ?? null;
 
   return (
     <div className="w-full h-base">
-      <h1 className="sr-only">위치등록 페이지</h1>
       <DetailHeader title={locationTitle ? "위치 상세" : "위치 등록"} />
+      <h1 className="sr-only">위치등록 페이지</h1>
 
       <section className="px-5 py-[10px]">
         <FormProvider {...methods}>
@@ -75,11 +76,9 @@ const LocationPage = () => {
 
       <section aria-label="검색 결과" className="px-0">
         <p className="sr-only" aria-live="polite">
-          {locationValue?.trim()
-            ? isLoaded
-              ? `검색 결과 ${results.length}개`
-              : "지역 목록을 불러오는 중입니다"
-            : ""}
+          {locationValue?.trim() && isLoading
+            ? `검색 결과 ${results.length}개`
+            : "지역 목록을 불러오는 중입니다"}
         </p>
 
         <ul>
@@ -101,7 +100,7 @@ const LocationPage = () => {
             );
           })}
 
-          {isLoaded && locationValue?.trim() && results.length === 0 && (
+          {isLoading && locationValue?.trim() && results.length === 0 && (
             <li className="p-5 text-body2-medium text-neutral-strong-default">
               검색 결과가 없습니다.
             </li>
@@ -115,7 +114,7 @@ const LocationPage = () => {
             <KakaoMap />
           </div>
 
-          <BottomSheet location={locationTitle} radius={radius} setRadius={setRadius} />
+          <BottomSheet location={leaf} radius={radius} setRadius={setRadius} />
         </>
       )}
     </div>
