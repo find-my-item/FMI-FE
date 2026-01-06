@@ -1,13 +1,9 @@
+import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 import { CategoryType, ItemStatus, PostType } from "@/types";
 
-export interface GetPostDetailResponse {
-  isSuccess: boolean;
-  code: string;
-  message: string;
-  result: PostDetail;
-}
+export interface GetDetailPostResponse extends ApiBaseResponseType<PostDetailData> {}
 
-export interface PostDetail {
+export type PostDetailData = {
   postId: number;
   title: string;
   content: string;
@@ -21,4 +17,12 @@ export interface PostDetail {
   category: CategoryType;
   favoriteCount: number;
   favoriteStatus: boolean;
-}
+  viewCount: number;
+  profileUrl: string;
+  nickName: string;
+  createdAt: string;
+  chatRoomCount: number;
+  userPostCount: number;
+  new: boolean;
+  hot: boolean;
+};
