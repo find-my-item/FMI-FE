@@ -10,7 +10,8 @@ const LocationRangeSection = ({ leaf }: LocationRangeSectionProps) => {
 
   return (
     <>
-      <div className="w-full h-base">
+      {/* TODO(지권): height 수정 필요 */}
+      <div className="h-[calc(100vh-350px)] w-full">
         <KakaoMap />
       </div>
 

@@ -12,7 +12,7 @@ const LocationPage = () => {
   const locationName = locationTitle?.trim().split(/\s+/).at(-1) ?? null;
 
   return (
-    <div className="w-full h-base">
+    <div className="min-h-dvh w-full">
       <DetailHeader title={locationTitle ? "위치 상세" : "위치 등록"} />
       <h1 className="sr-only">위치등록 페이지</h1>
 
