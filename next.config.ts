@@ -10,6 +10,20 @@ const nextConfig: NextConfig = {
     reactCompiler: true,
   },
 
+  // proxy 설정
+  async rewrites() {
+    const isDevelopment = process.env.NODE_ENV === "development";
+
+    if (!isDevelopment) return [];
+
+    return [
+      {
+        source: "/api/:path*",
+        destination: `${process.env.NEXT_PUBLIC_API_URL}/:path*`,
+      },
+    ];
+  },
+
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
@@ -34,7 +48,7 @@ const nextConfig: NextConfig = {
     return config;
   },
   images: {
-    domains: ["images.mypetlife.co.kr", "i.namu.wiki"],
+    domains: ["images.mypetlife.co.kr", "i.namu.wiki", "picsum.photos"],
   },
 };
 

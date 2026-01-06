@@ -1,14 +1,24 @@
-import { Icon } from "@/components";
 import Link from "next/link";
 
-const PostDetailHeader = () => {
+import { Button, Icon } from "@/components/common";
+import ImageSection from "./_internal/ImageSection/ImageSection";
+
+interface PostDetailHeaderType {
+  headerData: {
+    imageUrls: string[];
+    postId: string;
+  };
+}
+
+const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
+  const { imageUrls, postId } = headerData;
+
   return (
     <>
-      {/* TODO(지권): 게시글 이미지, 추후 이미지 태그 변경 예정 */}
-      <div className="h-[260px] bg-flatGray-100" />
+      <ImageSection imageUrls={imageUrls} />
 
       <section
-        aria-label="상세페이지 유저 정보"
+        aria-label="게시글 작성자 정보"
         className="flex flex-col items-start justify-center gap-5 border-b border-flatGray-50 p-[20px]"
       >
         <div className="flex items-center justify-start gap-[14px]">
@@ -25,12 +35,10 @@ const PostDetailHeader = () => {
             </span>
           </div>
         </div>
-        <Link
-          href={"/"}
-          className="glass-card w-full rounded-[10px] py-[10px] text-body1-semibold text-brand-normal-default bg-fill-brand-normal-default flex-center"
-        >
+
+        <Button as={Link} href={`/chat/${postId}`} className="w-full py-[10px]">
           채팅하러 가기
-        </Link>
+        </Button>
       </section>
     </>
   );

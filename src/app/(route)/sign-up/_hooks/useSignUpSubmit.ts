@@ -1,7 +1,6 @@
 import { useRouter } from "next/navigation";
 import { useToast } from "@/context/ToastContext";
-import { useApiSignUp } from "@/api/sign-up/useApiSignUp";
-import { ApiSignUpType } from "../types/ApiSingUpType";
+import { ApiSignUpType, useApiSignUp } from "@/api/fetch/auth";
 import { useErrorToast } from "@/hooks";
 import { SIGNUP_ERROR_MESSAGE } from "../_constants/SIGNUP_ERROR_MESSAGE";
 

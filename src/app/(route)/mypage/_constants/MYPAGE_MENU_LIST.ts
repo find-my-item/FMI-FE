@@ -22,7 +22,6 @@ export const MYPAGE_MENU_LIST = [
   {
     title: "계정 설정",
     pages: [
-      { pageName: "이메일 변경", pageLink: "/mypage/change-email" },
       { pageName: "비밀번호 변경", pageLink: "/mypage/change-password" },
       { pageName: "회원 탈퇴", pageLink: "/mypage/delete-account" },
     ],

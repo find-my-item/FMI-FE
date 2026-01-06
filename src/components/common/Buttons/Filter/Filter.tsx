@@ -67,7 +67,7 @@ const Filter = ({
       className={cn(
         "gap-[4px] rounded-full px-[18px] py-[8px] text-body1-semibold flex-center",
         !onSelected &&
-          "text-neutralInversed-normal-default bg-fill-neutralInversed-normal-default hover:text-black hover:bg-fill-neutralInversed-normal-hover active:text-neutralInversed-normal-pressed active:bg-fill-neutralInversed-normal-preesed",
+          "text-neutralInversed-normal-default bg-fill-neutralInversed-normal-default hover:text-black hover:bg-fill-neutralInversed-normal-hover",
         onSelected &&
           !loading &&
           "text-white bg-fill-neutralInversed-normal-enteredSelected hover:text-white active:text-white active:bg-fill-neutralInversed-normal-enteredSelected",

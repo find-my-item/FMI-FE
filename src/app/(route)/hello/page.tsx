@@ -3,13 +3,13 @@ import { FEATURES } from "./_constants/FEATURES";
 
 const page = () => {
   return (
-    <div className="min-h-[100dvh] flex-col-center">
+    <section className="flex-col-center h-base">
       {FEATURES.map((props, index) => (
         <FeatureSection key={index} {...props} />
       ))}
 
       <CTASection />
-    </div>
+    </section>
   );
 };
 

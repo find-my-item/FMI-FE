@@ -1,12 +1,11 @@
 import { useFormContext } from "react-hook-form";
 import { useToast } from "@/context/ToastContext";
 import { useMemo, useState } from "react";
-import useApiCheckCode from "@/api/sign-up/useApiCheckCode";
-import useApiSendEmail from "@/api/sign-up/useApiSendEmail";
 import { useErrorToast } from "@/hooks";
 import { useNicknameCheck } from "./useNicknameCheck";
 import { EMAIL_ERROR_MESSAGE, EMAIL_CHECK_CODE_MESSAGE } from "../_constants/SIGNUP_ERROR_MESSAGE";
 import { throttle } from "lodash";
+import { useApiCheckCode, useApiSendEmail } from "@/api/fetch/auth";
 
 export const useSignUpBtnClick = () => {
   const { getValues, trigger } = useFormContext();
@@ -23,7 +22,7 @@ export const useSignUpBtnClick = () => {
 
   const { mutate: EmailMutate } = useApiSendEmail();
   const { mutate: CodeMutate } = useApiCheckCode();
-  const { handlerToClickNickname } = useNicknameCheck();
+  const { handleClickNickname, isNicknameVerified } = useNicknameCheck();
 
   const handlerToClick = useMemo(
     () =>
@@ -60,11 +59,13 @@ export const useSignUpBtnClick = () => {
                     setIsEmailDisabled(true);
                     setIsEmailAuthVerified(true);
                   },
-                  onError: (error) => handlerApiError(EMAIL_CHECK_CODE_MESSAGE, error.code),
+                  onError: (error) => {
+                    handlerApiError(EMAIL_CHECK_CODE_MESSAGE, error.code);
+                  },
                 }
               );
             } else if (name === "nickname") {
-              handlerToClickNickname(name);
+              handleClickNickname(name);
             }
           }
         },
@@ -79,7 +80,7 @@ export const useSignUpBtnClick = () => {
       handlerApiError,
       CodeMutate,
       emailValue,
-      handlerToClickNickname,
+      handleClickNickname,
     ]
   );
 
@@ -88,5 +89,6 @@ export const useSignUpBtnClick = () => {
     isEmailAuthDisabled,
     isEmailDisabled,
     isEmailAuthVerified,
+    isNicknameVerified,
   };
 };

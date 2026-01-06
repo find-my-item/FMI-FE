@@ -1,9 +1,10 @@
 "use client";
 "use no memo";
 
-import { DetailHeader, FindPwForm } from "@/components";
+import { ApiFindPwType } from "@/api/fetch/auth";
+import { DetailHeader } from "@/components/layout";
+import { FindPwForm } from "@/components/domain";
 import { FormProvider, useForm } from "react-hook-form";
-import { ApiFindPwType } from "@/types";
 
 const Page = () => {
   const methods = useForm<ApiFindPwType>({

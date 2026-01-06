@@ -1,7 +1,7 @@
 import { LIST_ITEM_MOCK } from "../_constants/LIST_ITEM_MOCK";
 import { PostDetail, SimilarItemsSection, CommentForm } from "./_components";
 import { commentListObject } from "../../notice/_constant/commentListObject";
-import { CommentList } from "@/components";
+import { CommentList } from "@/components/domain";
 import PostDetailTopHeader from "./_components/PostDetailTopHeader/PostDetailTopHeader";
 
 interface ListDetailProps {
@@ -16,7 +16,7 @@ const page = async ({ params }: ListDetailProps) => {
 
   return (
     <>
-      <PostDetailTopHeader />
+      <PostDetailTopHeader postId={id} />
       <PostDetail item={listObject} type="find" />
       <CommentList comments={commentListObject} />
       <SimilarItemsSection />

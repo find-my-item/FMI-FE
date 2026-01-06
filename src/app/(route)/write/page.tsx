@@ -1,6 +1,7 @@
 "use client";
 
-import { ConfirmModal, DetailHeader } from "@/components";
+import { DetailHeader } from "@/components/layout";
+import { ConfirmModal } from "@/components/common";
 import { useState } from "react";
 import {
   ActionSection,

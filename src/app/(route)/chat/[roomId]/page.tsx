@@ -1,16 +1,17 @@
 "use client";
 
 import { ChatRoomHeader, EmptyChatRoom, ChatRoomMain } from "./_components";
-import { InputChat } from "@/components";
+import { InputChat } from "@/components/common";
 import { FormProvider, useForm } from "react-hook-form";
 import { ChatRoomProvider, useChatRoom } from "@/providers/ChatRoomProvider";
 import { MOCK_CHAT_DATA } from "./_components/ChatRoomMain/constants/MOCK_CHAT_DATA";
+import { use } from "react";
 
 interface ChatFormValues {
   chatRoom: string;
 }
 
-const ChatRoom = () => {
+const ChatRoom = ({ postId }: { postId: number }) => {
   const methods = useForm<ChatFormValues>({
     mode: "onChange",
     reValidateMode: "onChange",
@@ -38,9 +39,10 @@ const ChatRoom = () => {
   return (
     <>
       <ChatRoomHeader postMode={isPostMode} />
+      <h1 className="sr-only">채팅 상세 페이지</h1>
       {isEmpty ? <EmptyChatRoom postMode={isPostMode} /> : <ChatRoomMain />}
       <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)} className="px-[16px] pb-[24px] pt-[12px]">
+        <form onSubmit={methods.handleSubmit(onSubmit)} className="px-4 pb-6 pt-3">
           <InputChat name="chatRoom" aria-label="채팅 입력창" />
         </form>
       </FormProvider>
@@ -48,10 +50,11 @@ const ChatRoom = () => {
   );
 };
 
-const page = () => {
+const page = ({ params }: { params: Promise<{ roomId: string }> }) => {
+  const { roomId } = use(params);
   return (
     <ChatRoomProvider initialChats={[...MOCK_CHAT_DATA].reverse()}>
-      <ChatRoom />
+      <ChatRoom postId={Number(roomId)} />
     </ChatRoomProvider>
   );
 };

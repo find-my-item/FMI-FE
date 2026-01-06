@@ -32,3 +32,4 @@ export { default as Footer } from "./layout/Footer/Footer";
 export { default as DetailHeader } from "./layout/DetailHeader/DetailHeader";
 export { default as AuthLogoLink } from "./domain/AuthLogoLink/AuthLogoLink";
 export { default as FindPwForm } from "./domain/FindPwForm/FindPwForm";
+export { default as FooterButton } from "./domain/FooterButton/FooterButton";
