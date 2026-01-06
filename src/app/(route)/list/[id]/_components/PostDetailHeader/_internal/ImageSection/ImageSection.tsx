@@ -28,6 +28,7 @@ const ImageSection = ({ imageUrls }: ImageSectionProps) => {
     <>
       <div className="relative cursor-pointer select-none">
         <Swiper
+          loop
           modules={[Pagination]}
           pagination={{ clickable: true }}
           onTouchMove={() => {
