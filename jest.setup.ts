@@ -11,3 +11,6 @@ jest.mock("swiper/react", () => ({
 jest.mock("swiper/modules", () => ({
   Pagination: {},
 }));
+
+jest.mock("swiper/css", () => ({}));
+jest.mock("swiper/css/pagination", () => ({}));
