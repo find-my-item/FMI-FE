@@ -42,7 +42,7 @@ const ChatRoom = ({ postId }: { postId: number }) => {
       <h1 className="sr-only">채팅 상세 페이지</h1>
       {isEmpty ? <EmptyChatRoom postMode={isPostMode} /> : <ChatRoomMain />}
       <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)} className="px-[16px] pb-[24px] pt-[12px]">
+        <form onSubmit={methods.handleSubmit(onSubmit)} className="px-4 pb-6 pt-3">
           <InputChat name="chatRoom" aria-label="채팅 입력창" />
         </form>
       </FormProvider>
