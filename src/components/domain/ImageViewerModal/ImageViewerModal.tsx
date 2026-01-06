@@ -12,7 +12,7 @@ import useImageViewerNavigation from "./_hooks/useImageViewerNavigation";
 
 import "swiper/css";
 import "swiper/css/pagination";
-import "./swiper-pagination.css";
+import "./_internal/swiper-pagination.css";
 
 interface ImageViewerModalProps {
   images: string[];
