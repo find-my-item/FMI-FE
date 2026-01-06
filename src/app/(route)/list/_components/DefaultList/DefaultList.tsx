@@ -5,7 +5,7 @@ import { useGetPosts } from "@/api/fetch/post";
 import { TABS } from "../../_constants/TABS";
 import ListItem from "../ListItem/ListItem";
 import FilterSection from "../_internal/FilterSection/FilterSection";
-import { usePostListFiltersFromSearchParams } from "../../_hooks/usePostListFromParams/usePostListFromParams";
+import { useListParams } from "../../_hooks/useListParams/useListParams";
 import { useListDataWithFilters } from "../../_hooks/useListDataWithFilters/useListDataWithFilters";
 
 type PostType = "LOST" | "FOUND";
@@ -15,7 +15,7 @@ interface DefaultListProps {
 }
 
 const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
-  const { type, region, category, sort, status } = usePostListFiltersFromSearchParams();
+  const { type, region, category, sort, status } = useListParams();
   const selectedType = (type ?? "lost") as "lost" | "found";
   const postType: PostType = selectedType === "lost" ? "LOST" : "FOUND";
 
