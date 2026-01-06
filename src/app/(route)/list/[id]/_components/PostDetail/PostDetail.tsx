@@ -21,7 +21,14 @@ const PostDetail = ({ type, data }: PostDetailProps) => {
     <article className="w-full">
       {isBoardType ? (
         <PostDetailHeader
-          headerData={{ imageUrls: data.imageUrls, postId: data.postId.toString() }}
+          headerData={{
+            imageUrls: data.imageUrls,
+            postId: data.postId.toString(),
+            nickName: data.nickName,
+            profileUrl: data.profileUrl,
+            userPostCount: data.userPostCount,
+            chatRoomCount: data.chatRoomCount,
+          }}
         />
       ) : (
         <NoticeDetailHeader backPath={backPath} />
