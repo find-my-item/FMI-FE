@@ -44,7 +44,7 @@ const FilterBottomSheet = ({
       <div className="w-full gap-6 flex-col-center">
         <h2 className="text-h2-medium text-layout-header-default">필터</h2>
 
-        <div role="tablist" className="w-full flex-center">
+        <section role="tablist" className="w-full flex-center">
           {tabs.map((tab) => {
             const isSelected = selectedTab === tab.value;
 
@@ -65,7 +65,7 @@ const FilterBottomSheet = ({
               </button>
             );
           })}
-        </div>
+        </section>
 
         {selectedTab === "region" && (
           <div className="relative w-full">
@@ -165,6 +165,7 @@ const ChipButton = ({
       type="button"
       role="radio"
       aria-checked={selected}
+      aria-pressed={selected}
       tabIndex={selected ? 0 : -1}
       onClick={() => onSelect(value)}
       className={cn(

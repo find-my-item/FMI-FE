@@ -21,5 +21,5 @@ export const SORT_LABEL_MAP: Record<SortFilterValue, string> = {
 export const STATUS_LABEL_MAP: Record<StatusFilterValue, string> = {
   "": "전체",
   SEARCHING: "찾는중",
-  FOUND: "찾음",
+  FOUND: "찾았음",
 };
