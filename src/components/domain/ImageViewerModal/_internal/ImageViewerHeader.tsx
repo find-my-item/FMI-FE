@@ -3,16 +3,14 @@ import { cn } from "@/utils";
 import { downloadImage } from "../_utils/imageViewer";
 import type { Swiper as SwiperType } from "swiper";
 import { RefObject } from "react";
+import { ImageInfo } from "../_types/ImageInfo";
 
 interface ImageViewerHeaderProps {
   onClose: () => void;
   swiperRef: RefObject<SwiperType | null>;
   images: string[];
   initialIndex: number;
-  imageInfo?: {
-    createdAt: string;
-    uploader: string;
-  };
+  imageInfo?: ImageInfo;
 }
 
 const NAV_BUTTON_STYLE =

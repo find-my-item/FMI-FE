@@ -13,16 +13,14 @@ import useImageViewerNavigation from "./_hooks/useImageViewerNavigation";
 import "swiper/css";
 import "swiper/css/pagination";
 import "./_internal/swiper-pagination.css";
+import { ImageInfo } from "./_types/ImageInfo";
 
 interface ImageViewerModalProps {
   images: string[];
   initialIndex: number;
   isOpen: boolean;
   onClose: () => void;
-  imageInfo?: {
-    createdAt: string;
-    uploader: string;
-  };
+  imageInfo?: ImageInfo;
 }
 
 const ImageViewerModal = ({
