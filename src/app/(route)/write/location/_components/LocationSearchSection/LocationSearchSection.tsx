@@ -78,7 +78,8 @@ const LocationSearchSection = ({ searchParams }: LocationSearchSectionProps) => 
 
         <ul>
           {results.map((row) => {
-            const key = `${row.sido}|${row.sigungu}|${row.leaf}|${row.leafType}`;
+            const key = `${row.sido}|${row.sigungu}|${row.location}|${row.leafType}`;
+
             return (
               <li
                 key={key}

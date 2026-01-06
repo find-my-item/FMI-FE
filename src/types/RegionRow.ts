@@ -1,7 +1,7 @@
 export type RegionRow = {
   sido: string;
   sigungu: string;
-  leaf: string;
+  location: string;
   leafType: string;
   display: string;
 };

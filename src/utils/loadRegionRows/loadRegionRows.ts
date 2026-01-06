@@ -14,14 +14,14 @@ export const loadRegionRows = async (): Promise<RegionRow[]> => {
 
   return raw
     .map((row) => {
-      const [sido, sigungu, leaf, leafType] = row.split("|");
-      if (!sido || !sigungu || !leaf) return null;
+      const [sido, sigungu, location, leafType] = row.split("|");
+      if (!sido || !sigungu || !location) return null;
       return {
         sido,
         sigungu,
-        leaf,
+        location,
         leafType: leafType ?? "",
-        display: `${sido} ${sigungu} ${leaf}`,
+        display: `${sido} ${sigungu} ${location}`,
       };
     })
     .filter(Boolean) as RegionRow[];

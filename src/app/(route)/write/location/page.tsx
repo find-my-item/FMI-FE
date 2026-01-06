@@ -9,7 +9,7 @@ const LocationPage = () => {
   const searchParams = useSearchParams();
 
   const locationTitle = searchParams.get("location");
-  const leaf = locationTitle?.trim().split(/\s+/).at(-1) ?? null;
+  const locationName = locationTitle?.trim().split(/\s+/).at(-1) ?? null;
 
   return (
     <div className="w-full h-base">
@@ -19,7 +19,7 @@ const LocationPage = () => {
       {!locationTitle ? (
         <LocationSearchSection searchParams={searchParams} />
       ) : (
-        <LocationRangeSection leaf={leaf} />
+        <LocationRangeSection leaf={locationName} />
       )}
     </div>
   );
