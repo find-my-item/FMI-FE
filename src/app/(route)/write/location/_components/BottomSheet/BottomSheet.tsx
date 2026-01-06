@@ -2,20 +2,20 @@ import { Button } from "@/components";
 
 interface BottomSheetProps {
   location: string;
-  km: string;
-  setKm: (km: string) => void;
+  radius: string;
+  setRadius: (radius: string) => void;
 }
 
 const baseButton =
   "text-body1-semibold text-neutral-normal-default min-h-[44px] hover:bg-gray-100 transition-colors";
 
 const DISTANCE_OPTIONS = [
-  { km: "3", label: "3km" },
-  { km: "5", label: "5km" },
-  { km: "10", label: "10km" },
+  { radius: "1000", label: "1km" },
+  { radius: "3000", label: "3km" },
+  { radius: "5000", label: "5km" },
 ];
 
-const BottomSheet = ({ location, km, setKm }: BottomSheetProps) => {
+const BottomSheet = ({ location, radius, setRadius }: BottomSheetProps) => {
   const locationName = location;
 
   return (
@@ -24,15 +24,15 @@ const BottomSheet = ({ location, km, setKm }: BottomSheetProps) => {
         <div className="mb-12 gap-4 flex-col-center">
           <p>
             <span className="text-h2-medium text-layout-header-default">{locationName} 근처</span>
-            <span className="text-h1-medium text-brand-normal-default">{km}km</span>
+            <span className="text-h1-medium text-brand-normal-default">{radius}km</span>
           </p>
           <div className="w-full gap-[14px] py-[14px] flex-center">
             {DISTANCE_OPTIONS.map((option) => (
               <Button
-                key={option.km}
+                key={option.radius}
                 variant="outlined"
                 className={baseButton}
-                onClick={() => setKm(option.km)}
+                onClick={() => setRadius(option.radius)}
               >
                 {option.label}
               </Button>

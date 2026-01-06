@@ -4,7 +4,7 @@ import { Map, useKakaoLoader } from "react-kakao-maps-sdk";
 
 export default function KakaoMap() {
   const [loading, error] = useKakaoLoader({
-    appkey: process.env.NEXT_PUBLIC_KAKAO_MAP_KEY!,
+    appkey: process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY!,
     libraries: ["services"],
   });
 

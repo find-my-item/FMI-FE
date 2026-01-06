@@ -1,18 +1,12 @@
 "use client";
 
-import { Suspense, useEffect, useMemo, useState } from "react";
+import { Suspense, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
 import { DetailHeader, InputSearch } from "@/components";
 import { BottomSheet, KakaoMap } from "./_components";
-
-type RegionRow = {
-  sido: string;
-  sigungu: string;
-  leaf: string;
-  leafType: string;
-  display: string;
-};
+import { useRegionRows } from "@/hooks";
+import { RegionRow } from "@/types";
 
 const MAX_RESULTS = 30;
 
@@ -26,56 +20,14 @@ const LocationPage = () => {
 
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [regions, setRegions] = useState<RegionRow[]>([]);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [km, setKm] = useState("3");
+  const [radius, setRadius] = useState("3");
 
   const locationValue = useWatch({
     control: methods.control,
     name: "location",
   });
 
-  useEffect(() => {
-    let isMounted = true;
-
-    const load = async () => {
-      try {
-        const res = await fetch("/regions/eup-myeon-dong.min.json", { cache: "force-cache" });
-        if (!res.ok) throw new Error(`위치 정보를 불러오는데 실패했습니다: ${res.status}`);
-
-        const raw: string[] = await res.json();
-
-        const parsed: RegionRow[] = raw
-          .map((row) => {
-            const [sido, sigungu, leaf, leafType] = row.split("|");
-            if (!sido || !sigungu || !leaf) return null;
-            return {
-              sido,
-              sigungu,
-              leaf,
-              leafType: leafType ?? "",
-              display: `${sido} ${sigungu} ${leaf}`,
-            };
-          })
-          .filter(Boolean) as RegionRow[];
-
-        if (!isMounted) return;
-        setRegions(parsed);
-        setIsLoaded(true);
-      } catch (e) {
-        console.error(e);
-        if (!isMounted) return;
-        setRegions([]);
-        setIsLoaded(true);
-      }
-    };
-
-    load();
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
+  const { regions, isLoading: isLoaded } = useRegionRows();
 
   const results = useMemo(() => {
     const q = (locationValue ?? "").trim();
@@ -86,7 +38,7 @@ const LocationPage = () => {
     const matched: RegionRow[] = [];
     for (let i = 0; i < regions.length; i += 1) {
       const r = regions[i];
-      if (r.leaf.toLowerCase().includes(lowered)) {
+      if (r.display.toLowerCase().includes(lowered)) {
         matched.push(r);
         if (matched.length >= MAX_RESULTS) break;
       }
@@ -97,7 +49,6 @@ const LocationPage = () => {
   const handleSelect = (row: RegionRow) => {
     methods.setValue("location", row.display);
 
-    console.log("selected:", row);
     const params = new URLSearchParams(searchParams.toString());
     params.set("location", row.display);
 
@@ -107,7 +58,7 @@ const LocationPage = () => {
   const locationTitle = searchParams.get("location");
 
   return (
-    <div className="min-h-[100dvh] w-full">
+    <div className="w-full h-base">
       <h1 className="sr-only">위치등록 페이지</h1>
       <DetailHeader title={locationTitle ? "위치 상세" : "위치 등록"} />
 
@@ -164,17 +115,17 @@ const LocationPage = () => {
             <KakaoMap />
           </div>
 
-          <BottomSheet location={locationTitle} km={km} setKm={setKm} />
+          <BottomSheet location={locationTitle} radius={radius} setRadius={setRadius} />
         </>
       )}
     </div>
   );
 };
 
-const Page = () => {
-  <Suspense fallback="">
+const Page = () => (
+  <Suspense fallback={null}>
     <LocationPage />
-  </Suspense>;
-};
+  </Suspense>
+);
 
 export default Page;
