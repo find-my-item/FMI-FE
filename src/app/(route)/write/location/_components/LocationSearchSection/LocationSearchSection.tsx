@@ -1,13 +1,11 @@
 "use client";
 
-import { useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
+import { getRegionSearchResults } from "@/utils";
 import { InputSearch } from "@/components";
 import { useRegionRows } from "@/hooks";
 import { RegionRow } from "@/types";
-
-const MAX_RESULTS = 30;
 
 interface LocationSearchSectionProps {
   searchParams: URLSearchParams;
@@ -30,22 +28,7 @@ const LocationSearchSection = ({ searchParams }: LocationSearchSectionProps) => 
     name: "location",
   });
 
-  const results = useMemo(() => {
-    const q = (locationValue ?? "").trim();
-    if (!q) return [];
-
-    const lowered = q.toLowerCase();
-
-    const matched: RegionRow[] = [];
-    for (let i = 0; i < regions.length; i += 1) {
-      const r = regions[i];
-      if (r.display.toLowerCase().includes(lowered)) {
-        matched.push(r);
-        if (matched.length >= MAX_RESULTS) break;
-      }
-    }
-    return matched;
-  }, [locationValue, regions]);
+  const results = getRegionSearchResults({ regions, query: locationValue });
 
   const handleSelect = (row: RegionRow) => {
     methods.setValue("location", row.display);
@@ -92,7 +75,7 @@ const LocationSearchSection = ({ searchParams }: LocationSearchSectionProps) => 
             </li>
           ))}
 
-          {isLoading && locationValue?.trim() && results.length === 0 && (
+          {isLoading && locationValue?.trim() && getRegionSearchResults.length === 0 && (
             <li className="p-5 text-body2-medium text-neutral-strong-default">
               검색 결과가 없습니다.
             </li>

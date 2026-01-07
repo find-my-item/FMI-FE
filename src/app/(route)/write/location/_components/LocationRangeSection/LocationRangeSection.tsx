@@ -11,7 +11,7 @@ const LocationRangeSection = ({ location }: LocationRangeSectionProps) => {
 
   return (
     <>
-      {/* TODO(지권): height 수정 필요 */}
+      {/* TODO(지권): height, 좌표 수정 필요 */}
       <div className="h-[calc(100vh-350px)] w-full">
         <KakaoMap lat={35.8737787566279} lng={128.810871476804} radius={radius} />
       </div>
