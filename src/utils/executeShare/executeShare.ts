@@ -1,17 +1,15 @@
 import { MetaDataType } from "@/types";
-import { copyCurrentUrl } from "./_internal/copyCurrentUrl";
-import { shareMessage } from "./_internal/KakaoShare";
-import { shareWithNative } from "./_internal/shareWithNative";
+import { shareWithCopyUrl, shareWithKakao, shareWithNative } from "./_internal";
 
-interface HandleShareClickProps {
+interface ExecuteShareProps {
   id: string;
   metaData: MetaDataType;
 }
 
-export const handleShareClick = ({ id, metaData }: HandleShareClickProps) => {
+export const executeShare = ({ id, metaData }: ExecuteShareProps) => {
   switch (id) {
     case "kakao":
-      shareMessage({
+      shareWithKakao({
         ...metaData,
       });
       break;
@@ -23,7 +21,7 @@ export const handleShareClick = ({ id, metaData }: HandleShareClickProps) => {
       });
       break;
     case "copy":
-      copyCurrentUrl();
+      shareWithCopyUrl();
       break;
     default:
       break;

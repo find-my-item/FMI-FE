@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { handleShareClick } from "@/utils";
+import { executeShare } from "@/utils";
 import { useGetMetaData } from "@/api/fetch/post";
 import { Button } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
@@ -24,7 +24,7 @@ const PostShare = ({ isOpen, onClose, postId }: PostShareProps) => {
   };
 
   const handleOption = (id: string) =>
-    handleShareClick({
+    executeShare({
       id,
       metaData: {
         ...metaData,
