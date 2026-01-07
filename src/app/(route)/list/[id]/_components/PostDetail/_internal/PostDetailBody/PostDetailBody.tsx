@@ -1,4 +1,4 @@
-import { formatNumber } from "@/utils";
+import { formatCappedNumber } from "@/utils";
 import { Icon } from "@/components/common";
 import { CategoryType, ItemStatus } from "@/types";
 import { NoticeChip } from "@/app/(route)/notice/_components";
@@ -40,11 +40,11 @@ const PostDetailBody = ({ isBoardType, label, data }: PostDetailBodyProps) => {
         <ul className="mt-[32px] flex gap-[20px] text-body2-medium text-layout-body-default">
           <li className="flex gap-[4px]">
             <Icon name="Star" size={20} />
-            <span>즐겨찾기 {formatNumber(favoriteCount)}</span>
+            <span>즐겨찾기 {formatCappedNumber(favoriteCount)}</span>
           </li>
           <li className="flex gap-[4px]">
             <Icon name="EyeOpen" size={20} />
-            <span>조회 {formatNumber(24)}</span>
+            <span>조회 {formatCappedNumber(24)}</span>
           </li>
         </ul>
       </div>

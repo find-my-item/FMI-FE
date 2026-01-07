@@ -1,5 +1,5 @@
 export { cn } from "./cn/cn";
-export { formatNumber } from "./formatNumber/formatNumber";
+export { formatCappedNumber } from "./formatCappedNumber/formatCappedNumber";
 export { default as formatDate } from "./formatDate/formatDate";
 export { getItemStatusLabel } from "./getItemStatusLabel/getItemStatusLabel";
 export { getItemCategoryLabel } from "./getItemCategoryLabel/getItemCategoryLabel";
