@@ -53,6 +53,10 @@ const ChatImageBox = ({ images, bubbleOrder }: { images?: string[]; bubbleOrder:
         initialIndex={selectedImageIndex}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        imageInfo={{
+          createdAt: "2025.11.08.토요일 10:13",
+          uploader: "나",
+        }}
       />
     </>
   );

@@ -5,12 +5,7 @@ import {
   SortFilterValue,
   StatusFilterValue,
 } from "../../_components/_internal/FilterBottomSheet/types";
-
-const normalizeEnumParam = <T extends string>(value?: string | null): T | undefined => {
-  if (!value) return undefined;
-
-  return value.toUpperCase() as T;
-};
+import { normalizeEnumValue } from "@/utils";
 
 type useListDataWithFiltersProps = {
   baseData: GetListResponse | undefined;
@@ -36,9 +31,9 @@ export const useListDataWithFilters = ({
 
     const body: PostPostsFilterRequestBody = {
       address: region || undefined,
-      category: normalizeEnumParam<CategoryFilterValue>(category),
-      itemStatus: normalizeEnumParam<StatusFilterValue>(status),
-      sortType: normalizeEnumParam<SortFilterValue>(sort),
+      category: normalizeEnumValue<CategoryFilterValue>(category),
+      itemStatus: normalizeEnumValue<StatusFilterValue>(status),
+      sortType: normalizeEnumValue<SortFilterValue>(sort),
     };
 
     applyPostFilters(body);

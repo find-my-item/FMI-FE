@@ -6,3 +6,4 @@ export { getItemCategoryLabel } from "./getItemCategoryLabel/getItemCategoryLabe
 export { handleShareClick } from "./share/handleShareClick";
 export { loadRegionRows } from "./loadRegionRows/loadRegionRows";
 export { getMapLevelByRadius } from "./getMapLevelByRadius/getMapLevelByRadius";
+export { normalizeEnumValue } from "./normalizeEnumValue/normalizeEnumValue";
