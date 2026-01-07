@@ -5,13 +5,13 @@ import { getMapLevelByRadius } from "@/utils";
 import { useState } from "react";
 import { Circle, Map, MapMarker, useKakaoLoader } from "react-kakao-maps-sdk";
 
-interface WriteKakaoMap {
+interface WriteKakaoMapProps {
   lat: number;
   lng: number;
   radius: Radius;
 }
 
-const WriteKakaoMap = ({ lat, lng, radius }: WriteKakaoMap) => {
+const WriteKakaoMap = ({ lat, lng, radius }: WriteKakaoMapProps) => {
   const [loading, error] = useKakaoLoader({
     appkey: process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY!,
     libraries: ["services"],
