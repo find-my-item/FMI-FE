@@ -6,12 +6,25 @@ export async function middleware(request: NextRequest) {
   const accessToken = request.cookies.get("access_token")?.value;
   const refreshToken = request.cookies.get("refresh_token")?.value;
 
+  // 현재 페이지
+  const currentPath = request.nextUrl.pathname;
+
   // 접근 제한 페이지 url
-  const isProtectPath =
-    request.nextUrl.pathname.startsWith("/mypage") || request.nextUrl.pathname.startsWith("write");
+  const isProtectPath = currentPath.startsWith("/mypage") || currentPath.startsWith("/write");
+
+  // 로그인 관련 페이지
+  const isAuthPath =
+    currentPath.startsWith("/login") ||
+    currentPath.startsWith("/email-login") ||
+    currentPath.startsWith("/sign-up");
 
   // accessToken이 있을때
   if (accessToken) {
+    // 만약 로그인 페이지로 진입하려고 한다면
+    if (isAuthPath) {
+      return NextResponse.redirect(new URL("/", request.url));
+    }
+
     // 만약 쿠키를 심어서 보내야 한다면
     const response = NextResponse.next(); // 통과라는 뜻 (검문 결과 문제 없으니 원래 가려던 페이지로 진행 시켜~)
     response.cookies.set("isAuthorized", "true");
@@ -73,11 +86,6 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
-  if (!accessToken && request.nextUrl.pathname.startsWith("/mypage/:path*")) {
-    // 로그인 페이지로 리다이렉트
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
-
   return NextResponse.next();
 }
 
@@ -87,5 +95,5 @@ export async function middleware(request: NextRequest) {
 // 미들웨어가 실행될 경로 설정 (Matcher)
 export const config = {
   // 아래 경로에서만 미들웨어가 실행됩니다.
-  matcher: ["/mypage/:path*", "/email-login", "/login", "/write/:path*"],
+  matcher: ["/mypage/:path*", "/email-login", "/login", "/sign-up", "/write/:path*"],
 };
