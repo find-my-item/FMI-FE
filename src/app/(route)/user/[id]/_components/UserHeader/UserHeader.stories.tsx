@@ -22,7 +22,9 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    nickname: "사용자 닉네임",
-    email: "asdf@gmail.com",
+    data: {
+      nickname: "사용자 닉네임",
+      email: "asdf@gmail.com",
+    },
   },
 };

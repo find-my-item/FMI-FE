@@ -2,10 +2,9 @@
 
 import Link from "next/link";
 import { cn } from "@/utils";
-import { Icon, Button, AuthLogoLink } from "@/components";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
-import { useApiKakaoLogin } from "@/api/fetch/auth";
+import { Icon, Button } from "@/components/common";
+import { AuthLogoLink } from "@/components/domain";
+import { useSearchParams } from "next/navigation";
 
 const ButtonStyle = "w-full h-[44px] flex-center gap-1 rounded-[10px] text-body1-semibold";
 
@@ -75,9 +74,9 @@ const Page = () => {
 
       {/* divider 구분선 */}
       <div className="flex h-[18px] w-full items-center px-5">
-        <hr className="h-px flex-1 bg-flatGray-50" />
+        <hr aria-hidden="true" className="h-px flex-1 bg-flatGray-50" />
         <span className="px-3 text-caption1-medium text-layout-body-default">또는</span>
-        <hr className="h-px flex-1 bg-flatGray-50" />
+        <hr aria-hidden="true" className="h-px flex-1 bg-flatGray-50" />
       </div>
 
       {/* 회원확인 여부 */}

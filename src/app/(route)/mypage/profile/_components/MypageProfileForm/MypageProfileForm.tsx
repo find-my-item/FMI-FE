@@ -1,4 +1,4 @@
-import { InputText, Button, Icon } from "@/components";
+import { FooterButton, Icon, InputText } from "@/components";
 
 const MypageProfileForm = () => {
   const profileImgURL = "";
@@ -22,7 +22,7 @@ const MypageProfileForm = () => {
           )}
           {/* TODO(수현): 디자인 토큰 변경 요청 해놓은 상태로 등록 시 추후 변경 */}
           <button
-            className="absolute left-[52px] top-[52px] h-[28px] w-[28px] rounded-full bg-[#f5f5f5] flex-center"
+            className="absolute left-[52px] top-[52px] h-[28px] w-[28px] rounded-full bg-fill-neutral-strong-default flex-center"
             aria-label="프로필 이미지 변경 버튼"
           >
             <Icon name="CameraBorder" size={16} />
@@ -47,11 +47,11 @@ const MypageProfileForm = () => {
         </InputText>
       </div>
 
-      <div className="sticky bottom-0 mt-auto h-[88px] w-full border-t border-divider-default bg-white px-4 py-3">
-        <Button type="submit" variant="auth" ariaLabel="설정완료 버튼">
-          설정 완료
-        </Button>
-      </div>
+      <FooterButton
+        label="설정 완료"
+        // TODO(수현): 기능 구현 브랜치로 disabled 제어 함수 추가 예정
+        // disabled={ }
+      />
     </form>
   );
 };

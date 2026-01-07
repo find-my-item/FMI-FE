@@ -1,6 +1,6 @@
 "use client";
 
-import { Bookmark, Icon, KebabMenuButton, ViewMoreReply } from "@/components";
+import { Bookmark, Icon, KebabMenuButton, ViewMoreReply } from "@/components/common";
 import { cn } from "@/utils";
 import { useState } from "react";
 import type { Comment } from "./types/commentItem";
@@ -35,7 +35,7 @@ const CommentItem = ({ comment, replies = [] }: CommentItemProps) => {
               <time className="text-body2-regular text-[#9D9D9D]">{comment.date}</time>
             </div>
           </div>
-          <KebabMenuButton size="small" />
+          <KebabMenuButton size="small" ariaLabel="댓글 메뉴" />
         </div>
         <p className="text-body1-regular text-[#242424]">
           {comment.replyTo && <span className="mr-1 text-green-600">@{comment.replyTo}</span>}

@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import CategorySection from "./CategorySection";
 
-jest.mock("@/components", () => ({
+jest.mock("@/components/common", () => ({
   Icon: ({ name }: { name: string }) => <span data-testid={`icon-${name}`}>{name}</span>,
   RequiredText: () => <span data-testid="required-text">*</span>,
 }));

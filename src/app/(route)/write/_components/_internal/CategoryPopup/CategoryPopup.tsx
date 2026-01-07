@@ -1,8 +1,8 @@
 "use client";
 
-import { PopupLayout } from "@/components";
-import { cn } from "@/utils";
 import { useState } from "react";
+import { PopupLayout } from "@/components/domain";
+import { cn } from "@/utils";
 
 interface CategoryPopupProps {
   isOpen: boolean;

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Icon } from "@/components";
+import { Icon } from "@/components/common";
 
 const AuthLogoLink = () => {
   return (

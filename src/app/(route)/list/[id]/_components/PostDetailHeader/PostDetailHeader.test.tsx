@@ -1,11 +1,14 @@
 import { render, screen } from "@testing-library/react";
 import PostDetailHeader from "./PostDetailHeader";
 
+jest.mock("swiper/css", () => ({}));
+jest.mock("swiper/css/pagination", () => ({}));
+
 describe("상세페이지 상단 헤더", () => {
   it("헤더가 렌더링되어야 한다.", () => {
     render(<PostDetailHeader headerData={{ imageUrls: [], postId: "1" }} />);
 
-    const postDetailHeaderElement = screen.getByLabelText("상세페이지 유저 정보");
+    const postDetailHeaderElement = screen.getByLabelText("게시글 작성자 정보");
     expect(postDetailHeaderElement).toBeInTheDocument();
   });
 

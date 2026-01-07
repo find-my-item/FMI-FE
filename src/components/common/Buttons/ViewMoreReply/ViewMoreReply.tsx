@@ -50,7 +50,7 @@ const ViewMoreReply = ({
         aria-label={viewMoreAriaLabel}
         disabled={disabled}
       >
-        <span className="text-body1-medium text-brand-subtle-default hover:text-brand-subtle-hover active:text-brand-subtle-pressed disabled:text-brand-subtle-disabled">
+        <span className="text-body1-medium text-brand-normal-default hover:text-brand-normal-hover active:text-brand-normal-pressed disabled:text-brand-normal-disabled">
           {text}
         </span>
         <Icon name="ArrowDown" size={20} />
