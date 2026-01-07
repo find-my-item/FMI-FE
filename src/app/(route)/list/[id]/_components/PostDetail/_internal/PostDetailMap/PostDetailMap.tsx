@@ -1,6 +1,6 @@
+import Link from "next/link";
 import { Icon } from "@/components/common";
 import KakaoMap from "./KakaoMap";
-import Link from "next/link";
 
 type MapData = {
   address: string;
