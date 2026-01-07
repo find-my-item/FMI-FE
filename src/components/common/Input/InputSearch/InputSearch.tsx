@@ -80,7 +80,7 @@ const InputSearchRHF = ({
         id={name}
         {...register(name, validation)}
         {...props}
-        className="h-11 min-w-0 flex-1 rounded-[24px] border px-10 text-body1-regular text-neutral-normal-placeholder bg-fill-neutral-subtle-default hover:text-neutral-normal-hover focus:border-black focus:text-neutral-normal-focused"
+        className="h-11 min-w-0 flex-1 rounded-[24px] border px-10 text-body1-regular bg-fill-neutral-subtle-default placeholder:text-neutral-normal-placeholder hover:text-neutral-normal-hover focus:border-black focus:text-neutral-normal-focused"
         onKeyDown={handleKeyDown}
       />
 
@@ -119,7 +119,7 @@ const InputSearchOnChange = ({
         value={innerValue}
         onChange={(e) => setInnerValue(e.target.value)}
         {...props}
-        className="h-11 min-w-0 flex-1 rounded-[24px] border px-10 text-body1-regular text-neutral-normal-placeholder bg-fill-neutral-subtle-default hover:text-neutral-normal-hover focus:border-black focus:text-neutral-normal-focused"
+        className="h-11 min-w-0 flex-1 rounded-[24px] border px-10 text-body1-regular bg-fill-neutral-subtle-default placeholder:text-neutral-normal-placeholder hover:text-neutral-normal-hover focus:border-black focus:text-neutral-normal-focused"
         onKeyDown={handleKeyDown}
       />
 

@@ -1,5 +1,7 @@
-const layout = ({ children }: { children: React.ReactNode }) => {
-  return <main className="w-full">{children}</main>;
+import { ReactNode } from "react";
+
+const layout = ({ children }: { children: ReactNode }) => {
+  return <>{children}</>;
 };
 
 export default layout;

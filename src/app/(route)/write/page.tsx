@@ -1,8 +1,8 @@
 "use client";
 
+import { FormEvent, useState } from "react";
 import { DetailHeader } from "@/components/layout";
 import { ConfirmModal } from "@/components/common";
-import { useState } from "react";
 import {
   ActionSection,
   ContentSection,
@@ -16,16 +16,16 @@ const Page = () => {
   const [disabled, setDisabled] = useState(false);
   const [saveModalOpen, setSaveModalOpen] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
   };
 
   return (
     <>
-      <h1 className="sr-only">분실/습득 등록 페이지</h1>
       <DetailHeader title="분실했어요 글쓰기">
         <DetailHeader.Save onClick={() => setSaveModalOpen(true)} />
       </DetailHeader>
+      <h1 className="sr-only">분실/습득 등록 페이지</h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col">
         <ImageSection />
