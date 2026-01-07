@@ -2,10 +2,10 @@ import { useState } from "react";
 import { BottomSheet, KakaoMap } from "../_internal";
 
 interface LocationRangeSectionProps {
-  leaf: string | null;
+  location: string | null;
 }
 
-const LocationRangeSection = ({ leaf }: LocationRangeSectionProps) => {
+const LocationRangeSection = ({ location }: LocationRangeSectionProps) => {
   const [radius, setRadius] = useState("3");
 
   return (
@@ -15,7 +15,7 @@ const LocationRangeSection = ({ leaf }: LocationRangeSectionProps) => {
         <KakaoMap />
       </div>
 
-      <BottomSheet location={leaf} radius={radius} setRadius={setRadius} />
+      <BottomSheet location={location} radius={radius} setRadius={setRadius} />
     </>
   );
 };

@@ -1,7 +1,9 @@
 /**
  * @author jikwon
  *
- * 지역 정보 fetch 함수
+ * 행정구역(시 도 / 시 군 구 / 읍 면 동) 정보를 가져오는 함수
+ *
+ * @returns 지역 정보 배열
  */
 
 import { RegionRow } from "@/types";
@@ -14,13 +16,14 @@ export const loadRegionRows = async (): Promise<RegionRow[]> => {
 
   return raw
     .map((row) => {
-      const [sido, sigungu, location, leafType] = row.split("|");
+      const [sido, sigungu, location, locationType] = row.split("|");
       if (!sido || !sigungu || !location) return null;
+
       return {
         sido,
         sigungu,
         location,
-        leafType: leafType ?? "",
+        locationType: locationType ?? "",
         display: `${sido} ${sigungu} ${location}`,
       };
     })

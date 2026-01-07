@@ -19,7 +19,7 @@ const LocationPage = () => {
       {!locationTitle ? (
         <LocationSearchSection searchParams={searchParams} />
       ) : (
-        <LocationRangeSection leaf={locationName} />
+        <LocationRangeSection location={locationName} />
       )}
     </div>
   );

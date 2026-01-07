@@ -77,24 +77,20 @@ const LocationSearchSection = ({ searchParams }: LocationSearchSectionProps) => 
         </p>
 
         <ul>
-          {results.map((row) => {
-            const key = `${row.sido}|${row.sigungu}|${row.location}|${row.leafType}`;
-
-            return (
-              <li
-                key={key}
-                className="border-b border-neutral-normal-default transition-colors hover:bg-gray-100"
+          {results.map((row) => (
+            <li
+              key={`${row.sido}|${row.sigungu}|${row.location}`}
+              className="border-b border-neutral-normal-default transition-colors hover:bg-gray-100"
+            >
+              <button
+                type="button"
+                className="w-full p-5 text-left text-body2-medium text-neutral-strong-default"
+                onClick={() => handleSelect(row)}
               >
-                <button
-                  type="button"
-                  className="w-full p-5 text-left text-body2-medium text-neutral-strong-default"
-                  onClick={() => handleSelect(row)}
-                >
-                  {row.display}
-                </button>
-              </li>
-            );
-          })}
+                {row.display}
+              </button>
+            </li>
+          ))}
 
           {isLoading && locationValue?.trim() && results.length === 0 && (
             <li className="p-5 text-body2-medium text-neutral-strong-default">
