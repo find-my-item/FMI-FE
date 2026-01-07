@@ -8,7 +8,7 @@ const categoryToQueryValue = (category: CategoryFilterValue) => {
     "": "",
     ELECTRONICS: "electronics",
     WALLET: "wallet",
-    ID_CARD: "id-card",
+    ID_CARD: "id_card",
     JEWELRY: "jewelry",
     BAG: "bag",
     CARD: "card",
@@ -24,8 +24,8 @@ const sortToQueryValue = (sort: SortFilterValue) => {
   const map: Record<SortFilterValue, string> = {
     "": "",
     OLDEST: "oldest",
-    MOST_FAVORITED: "mostFavorite",
-    MOST_VIWED: "mostViewed",
+    MOST_FAVORITED: "most_favorited",
+    MOST_VIWED: "most_viwed",
   };
 
   return map[sort];
