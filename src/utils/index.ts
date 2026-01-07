@@ -4,4 +4,7 @@ export { default as formatDate } from "./formatDate/formatDate";
 export { getItemStatusLabel } from "./getItemStatusLabel/getItemStatusLabel";
 export { getItemCategoryLabel } from "./getItemCategoryLabel/getItemCategoryLabel";
 export { executeShare } from "./executeShare/executeShare";
+export { loadRegionRows } from "./loadRegionRows/loadRegionRows";
+export { getMapLevelByRadius } from "./getMapLevelByRadius/getMapLevelByRadius";
 export { normalizeEnumValue } from "./normalizeEnumValue/normalizeEnumValue";
+export { getRegionSearchResults } from "./getRegionSearchResults/getRegionSearchResults";

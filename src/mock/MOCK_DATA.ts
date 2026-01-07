@@ -1,4 +1,5 @@
 import { ChatRoom } from "@/api/fetch/chatRoom/types/ChatListType";
+import { GetDetailPostResponse } from "@/api/fetch/post";
 
 export const MOCK_POST_ITEM = {
   postId: 1,
@@ -13,31 +14,36 @@ export const MOCK_POST_ITEM = {
   createdAt: "2025-12-26 10:22:58",
 };
 
-export const MOCK_POST_DEFAULT_DETAIL = {
+export const MOCK_POST_DEFAULT_DETAIL: GetDetailPostResponse = {
   isSuccess: true,
   code: "COMMON200",
   message: "성공입니다.",
   result: {
-    postId: 1,
-    title: "강남역 2호선 개찰구 근처에서 에어팟(화이트) 분실",
+    postId: 2,
+    title: "홍대입구역 8번 출구 앞에서 검정 지갑 습득",
     content:
-      "12/26 오전 9시쯤 강남역 2호선 개찰구 근처에서 에어팟(2세대, 케이스 포함)을 분실했습니다. 습득하신 분 연락 부탁드립니다.",
-    address: "서울특별시 강남구 강남대로 396",
-    latitude: 37.4979,
-    longitude: 127.0276,
-    postType: "LOST",
-    itemStatus: "SEARCHING",
-    imageUrls: [
-      "https://picsum.photos/400/300?random=1",
-      "https://picsum.photos/400/300?random=5",
-      "https://picsum.photos/400/300?random=6",
-    ],
-    radius: 0.5,
-    category: "ELECTRONICS",
-    favoriteCount: 1,
+      "검정색 반지갑을 습득했습니다. 안에 카드/신분증이 일부 들어있습니다. 본인 확인 후 전달드릴게요.",
+    address: "서울특별시 마포구 양화로 160",
+    latitude: 37.5565,
+    longitude: 126.9239,
+    postType: "FOUND",
+    itemStatus: "FOUND",
+    imageUrls: ["https://picsum.photos/400/300?random=2"],
+    radius: 0.1,
+    category: "WALLET",
+    favoriteCount: 0,
     favoriteStatus: false,
+    viewCount: 0,
+    profileUrl: null,
+    nickName: "tester01",
+    createdAt: "2025-12-26T10:22:58",
+    chatRoomCount: 0,
+    userPostCount: 4,
+    new: false,
+    hot: false,
   },
 };
+
 export const MOCK_CHAT_ITEM = {
   roomId: 1,
   contactUser: {

@@ -6,6 +6,7 @@ import { useGetMetaData } from "@/api/fetch/post";
 import { Button } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
 import { SHARE } from "./SHARE";
+import { ShareId } from "@/types";
 
 interface PostShareProps {
   isOpen: boolean;
@@ -23,7 +24,7 @@ const PostShare = ({ isOpen, onClose, postId }: PostShareProps) => {
     link: "",
   };
 
-  const handleOption = (id: string) =>
+  const handleOption = (id: ShareId) =>
     executeShare({
       id,
       metaData: {
