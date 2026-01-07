@@ -1,8 +1,8 @@
-import { MetaDataType } from "@/types";
+import { MetaDataType, ShareId } from "@/types";
 import { shareWithCopyUrl, shareWithKakao, shareWithNative } from "./_internal";
 
 interface ExecuteShareProps {
-  id: string;
+  id: ShareId;
   metaData: MetaDataType;
 }
 

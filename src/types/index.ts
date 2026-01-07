@@ -1,4 +1,4 @@
 export * from "./ToastTypes";
 export type * from "./ItemType";
 
-export type { MetaDataType } from "./MetaDataType";
+export type { MetaDataType, ShareId } from "./MetaDataType";

@@ -10,6 +10,11 @@
  * - summary: 메타데이터 요약
  * - thumbnailUrl: 메타데이터 썸네일 URL
  * - link: 메타데이터 링크
+ *
+ * @description ShareId
+ * - kakao: 카카오
+ * - native: 네이티브
+ * - copy: 복사
  */
 export type MetaDataType = {
   title: string;
@@ -17,3 +22,5 @@ export type MetaDataType = {
   thumbnailUrl: string;
   link: string;
 };
+
+export type ShareId = "kakao" | "native" | "copy";
