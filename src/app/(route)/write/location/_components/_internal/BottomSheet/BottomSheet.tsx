@@ -1,10 +1,11 @@
 import { Button } from "@/components";
+import { Radius } from "@/types";
 import { DISTANCE_OPTIONS } from "./DISTANCE_OPTIONS";
 
 interface BottomSheetProps {
   location: string | null;
-  radius: string;
-  setRadius: (radius: string) => void;
+  radius: Radius;
+  setRadius: (radius: Radius) => void;
 }
 
 const BottomSheet = ({ location, radius, setRadius }: BottomSheetProps) => {
@@ -15,7 +16,7 @@ const BottomSheet = ({ location, radius, setRadius }: BottomSheetProps) => {
           <h2 className="text-h2-medium text-layout-header-default">
             {location || "선택한 위치"} 근처
           </h2>
-          <span className="text-h1-medium text-brand-normal-default">{radius}km</span>
+          <span className="text-h1-medium text-brand-normal-default">{radius / 1000}km</span>
         </div>
 
         <div className="w-full gap-[14px] py-[14px] flex-center">

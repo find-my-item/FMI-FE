@@ -5,3 +5,4 @@ export { getItemStatusLabel } from "./getItemStatusLabel/getItemStatusLabel";
 export { getItemCategoryLabel } from "./getItemCategoryLabel/getItemCategoryLabel";
 export { handleShareClick } from "./share/handleShareClick";
 export { loadRegionRows } from "./loadRegionRows/loadRegionRows";
+export { getMapLevelByRadius } from "./getMapLevelByRadius/getMapLevelByRadius";

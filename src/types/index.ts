@@ -3,3 +3,4 @@ export type * from "./ItemType";
 
 export type { MetaDataType } from "./MetaDataType";
 export type { RegionRow } from "./RegionRow";
+export type { Radius } from "./mapRadius";
