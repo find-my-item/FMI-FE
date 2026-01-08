@@ -15,9 +15,10 @@ import {
   SortFilterValue,
   StatusFilterValue,
 } from "../FilterBottomSheet/types";
+import { useListParams } from "../../../_hooks/useListParams/useListParams";
 
 const FilterSection = () => {
-  const { region, category, sort, status } = usePostListFiltersFromSearchParams();
+  const { region, category, sort, status } = useListParams();
 
   const [filters, setFilters] = useState<FiltersState>(DEFAULT_FILTERS);
 
@@ -122,11 +123,3 @@ const FilterSection = () => {
 };
 
 export default FilterSection;
-function usePostListFiltersFromSearchParams(): {
-  region: any;
-  category: any;
-  sort: any;
-  status: any;
-} {
-  throw new Error("Function not implemented.");
-}
