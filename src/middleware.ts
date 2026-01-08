@@ -49,13 +49,27 @@ export async function middleware(request: NextRequest) {
         // 재발급 성공
         const data = await res.json();
         const newAccessToken = data.access_token;
+        const newRefreshToken = data.refresh_token;
 
+        // 만약 로그인 관련 화면인지 확인 후 메인 페이지로 리다이렉트
+        if (isAuthPath) {
+          const response = NextResponse.redirect(new URL("/", request.url));
+
+          response.cookies.set("access_token", newAccessToken, { path: "/", httpOnly: true });
+          response.cookies.set("refresh_token", newRefreshToken, { path: "/", httpOnly: true });
+          response.cookies.set("isAuthorized", "true");
+          console.log("로그인 페이지 & 리프레시 토큰 재발급 성공~");
+
+          return response;
+        }
         const response = NextResponse.next();
 
         // 새 쿠키 설정
         response.cookies.set("access_token", newAccessToken, { path: "/", httpOnly: true });
+        response.cookies.set("refresh_token", newRefreshToken, { path: "/", httpOnly: true });
         response.cookies.set("isAuthorized", "true");
         console.log("토큰 재발급 성공!!");
+
         return response;
       } else {
         // 재발급 실패
@@ -65,14 +79,24 @@ export async function middleware(request: NextRequest) {
     } catch (error) {
       // 재발급 실패 처리
 
+      if (isAuthPath) {
+        const response = NextResponse.next();
+
+        response.cookies.delete({ name: "access_token", path: "/" });
+        response.cookies.delete({ name: "refresh_token", path: "/" });
+        response.cookies.delete({ name: "isAuthorized", path: "/" });
+
+        return response;
+      }
+
       const loginUrl = new URL("/login", request.url);
       loginUrl.searchParams.set("callbackUrl", request.nextUrl.pathname);
 
       const response = NextResponse.redirect(loginUrl);
-      response.cookies.delete("access_token");
-      response.cookies.delete("refresh_token");
-      response.cookies.delete("Authorized");
 
+      response.cookies.delete({ name: "access_token", path: "/" });
+      response.cookies.delete({ name: "refresh_token", path: "/" });
+      response.cookies.delete({ name: "isAuthorized", path: "/" });
       return response;
     }
   }
