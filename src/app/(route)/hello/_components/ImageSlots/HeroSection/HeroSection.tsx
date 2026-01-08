@@ -10,7 +10,7 @@ interface HeroSectionImage {
 
 const HeroSection = () => {
   return (
-    <div className="relative min-h-[225px] w-full flex-center">
+    <div data-testid="intro-section" className="relative min-h-[225px] w-full flex-center">
       <div className="animate-fade-in-float absolute right-[250px]">
         <HeroSectionImage src="/hello/hero/service-hero-wallet.svg" width={120} height={57} />
       </div>

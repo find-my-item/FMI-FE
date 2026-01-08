@@ -13,12 +13,12 @@
  *
  * @example
  * ```ts
- * formatNumber(1234); // "1,234"
- * formatNumber(10000); // "9,999+"
- * formatNumber(NaN); // "0"
+ * formatCappedNumber(1234); // "1,234"
+ * formatCappedNumber(10000); // "9,999+"
+ * formatCappedNumber(NaN); // "0"
  * ```
  */
-export function formatNumber(value: number): string {
+export function formatCappedNumber(value: number): string {
   if (isNaN(value)) return "0";
 
   if (value > 9999) {

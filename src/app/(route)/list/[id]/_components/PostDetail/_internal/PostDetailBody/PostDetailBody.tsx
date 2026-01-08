@@ -1,6 +1,6 @@
 import { Icon } from "@/components/common";
 import { PostDetailData } from "@/api/fetch/post";
-import { formatDate, formatNumber } from "@/utils";
+import { formatDate, formatCappedNumber } from "@/utils";
 import { NoticeChip } from "@/app/(route)/notice/_components";
 import PostChipSection from "../PostChipSection/PostChipSection";
 import { LABELS } from "../../LABELS";
@@ -35,11 +35,11 @@ const PostDetailBody = ({ isBoardType, label, data }: PostDetailBodyProps) => {
         <ul className="mt-8 flex gap-5 text-body2-medium text-layout-body-default">
           <li className="flex gap-1">
             <Icon name="Star" size={20} />
-            <span>즐겨찾기 {formatNumber(favoriteCount || 0)}</span>
+            <span>즐겨찾기 {formatCappedNumber(favoriteCount)}</span>
           </li>
           <li className="flex gap-1">
             <Icon name="EyeOpen" size={20} />
-            <span>조회 {formatNumber(viewCount || 0)}</span>
+            <span>조회 {formatCappedNumber(viewCount)}</span>
           </li>
         </ul>
       </div>
