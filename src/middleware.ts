@@ -47,9 +47,28 @@ export async function middleware(request: NextRequest) {
 
       if (res.ok) {
         // 재발급 성공
-        const data = await res.json();
-        const newAccessToken = data.access_token;
-        const newRefreshToken = data.refresh_token;
+        console.log("res.ok>>> ", res);
+
+        // 헤더에서 set-cookie 전체를 가져온다
+        const cookieStrings = await res.headers.getSetCookie();
+
+        // 쿠키 문자열에서 쿠키 추출하기
+        const getCookieValue = (name: string) => {
+          const cookieString = cookieStrings.find((str) => str.includes(`${name}=`));
+
+          if (!cookieString) return null;
+
+          const [keyVal] = cookieString.split(";");
+          const [, value] = keyVal.split("=");
+
+          return value;
+        };
+
+        const newAccessToken = getCookieValue("access_token") ?? "";
+        const newRefreshToken = getCookieValue("refresh_token") ?? "";
+
+        console.log("new_access_token>>   ", newAccessToken);
+        console.log("new_refresh_token>> ", newRefreshToken);
 
         // 만약 로그인 관련 화면인지 확인 후 메인 페이지로 리다이렉트
         if (isAuthPath) {
