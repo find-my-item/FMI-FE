@@ -1,6 +1,6 @@
 "use client";
 
-export const copyCurrentUrl = async () => {
+export const shareWithCopyUrl = async () => {
   const url = window.location.href;
 
   try {

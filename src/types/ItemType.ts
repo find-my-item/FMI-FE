@@ -5,6 +5,7 @@
  *
  * - 이 타입은 분실물 및 습득물 게시글의 타입을 표시합니다.
  *
+ * @description CategoryType
  * - "": 전체
  * - ELECTRONIC: 전자기기
  * - WALLET: 지갑
@@ -17,6 +18,14 @@
  * - LOST: 분실물
  * - FOUND: 습득물
  *
+ * - SEARCHING: 찾는중
+ * - FOUND: 찾았음
+ *
+ * @description PostType
+ * - LOST: 분실물
+ * - FOUND: 습득물
+ *
+ * @description ItemStatus
  * - SEARCHING: 찾는중
  * - FOUND: 찾았음
  */
