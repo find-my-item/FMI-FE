@@ -8,20 +8,6 @@ interface HeroSectionImage {
   height: number;
 }
 
-const HeroSectionImage = ({ src, alt = "", width, height }: HeroSectionImage) => {
-  return (
-    <Image
-      src={src}
-      alt={alt}
-      width={width}
-      height={height}
-      draggable={false}
-      className="select-none"
-      priority
-    />
-  );
-};
-
 const HeroSection = () => {
   return (
     <div className="relative min-h-[225px] w-full flex-center">
@@ -49,3 +35,17 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+
+const HeroSectionImage = ({ src, alt = "", width, height }: HeroSectionImage) => {
+  return (
+    <Image
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      draggable={false}
+      className="select-none"
+      priority
+    />
+  );
+};
