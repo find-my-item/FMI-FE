@@ -1,79 +1,60 @@
 import { defineConfig, devices } from "@playwright/test";
 
 /**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
-
-/**
- * See https://playwright.dev/docs/test-configuration.
+ * config.ts 세팅 공식문서: https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: "./tests",
-  /* Run tests in files in parallel */
+  /* 테스트 실행 파일 위치 */
+  testDir: "./tests/e2e",
+  /* 파일 단위로 테스트를 병렬 실행한다 */
   fullyParallel: true,
-  /* Fail the build on CI if you accidentally left test.only in the source code. */
+  /* CI 환경에서 test.only가 source code에 남아있을 경우 build를 실패시킨다 */
   forbidOnly: !!process.env.CI,
-  /* Retry on CI only */
+  /* CI 환경에서 테스트를 재시도한다 */
   retries: process.env.CI ? 2 : 0,
-  /* Opt out of parallel tests on CI. */
+  /* CI 환경에서는 병렬 테스트를 사용하지 않는다 */
   workers: process.env.CI ? 1 : undefined,
-  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
+  /* 테스트 결과를 html로 저장한다 */
   reporter: "html",
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  /* 아래에 정의된 모든 프로젝트에 공통으로 적용되는 설정 */
   use: {
-    /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://localhost:3000',
+    /* await page.goto('/') 기준 URL */
+    baseURL: process.env.PLAYWRIGHT_BASE_URL ?? "http://localhost:3000",
 
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+    /* 실패한 테스트를 재시도할 때 trace를 수집한다 */
     trace: "on-first-retry",
   },
 
-  /* Configure projects for major browsers */
   projects: [
     {
-      name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      name: "Mobile Safari",
+      use: {
+        ...devices["iPhone 12"],
+      },
     },
 
-    {
-      name: "firefox",
-      use: { ...devices["Desktop Firefox"] },
-    },
-
-    {
-      name: "webkit",
-      use: { ...devices["Desktop Safari"] },
-    },
-
-    /* Test against mobile viewports. */
+    /* 태블릿 */
     // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
+    //   name: "Tablet Chrome",
+    //   use: {
+    //     ...devices["Desktop Chrome"],
+    //     viewport: { width: 768, height: 1024 },
+    //   },
     // },
 
-    /* Test against branded browsers. */
+    /* 데스크탑 */
     // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
+    //   name: "Desktop Chrome",
+    //   use: {
+    //     ...devices["Desktop Chrome"],
+    //   },
     // },
   ],
 
-  /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://localhost:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
+  /* 테스트를 시작하기 전에 로컬 개발 서버를 실행한다 */
+  webServer: {
+    command: process.env.CI ? "npm run start" : "npm run dev",
+    url: "http://localhost:3000",
+    reuseExistingServer: !process.env.CI,
+  },
 });
