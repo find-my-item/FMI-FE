@@ -27,9 +27,10 @@ export default defineConfig({
 
   projects: [
     {
-      name: "Mobile Safari",
+      name: "Mobile Chrome (iPhone 12)",
       use: {
         ...devices["iPhone 12"],
+        browserName: "chromium",
       },
     },
 

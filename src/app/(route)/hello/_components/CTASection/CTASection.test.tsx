@@ -26,7 +26,7 @@ describe("CTASection", () => {
       screen.getByText("'찾아줘!'와 함께라면, 잃어버린 순간도 조금은 덜 답답해질 거예요.")
     ).toBeInTheDocument();
 
-    const link = screen.getByRole("link", { name: "찾아줘! 홈으로 이동" });
+    const link = screen.getByRole("link", { name: "찾아줘 홈으로 이동" });
     expect(link).toHaveAttribute("href", "/");
   });
 });
