@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "jest",
+    "test:jest": "jest",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "prepare": "husky",
@@ -14,7 +14,9 @@
     "test:ci": "jest --ci --runInBand",
     "check:all": "run-s test build build-storybook",
     "check:fast": "run-p test build-storybook",
-    "analyze": "ANALYZE=true next build"
+    "analyze": "ANALYZE=true next build",
+    "test:e2e": "playwright test",
+    "test:e2e:ci": "npm run build && playwright test"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.4.0",
