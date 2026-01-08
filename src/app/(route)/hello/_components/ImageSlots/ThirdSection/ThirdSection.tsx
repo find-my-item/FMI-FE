@@ -13,32 +13,6 @@ import {
 import "./ThirdSection.css";
 import { useInView } from "../../../_hooks";
 
-const ImagePart = ({
-  src,
-  width,
-  height,
-  className,
-  style,
-}: {
-  src: string;
-  width: number;
-  height: number;
-  className?: string;
-  style?: CSSProperties;
-}) => {
-  return (
-    <Image
-      src={src}
-      alt=""
-      width={width}
-      height={height}
-      draggable={false}
-      className={className}
-      style={style}
-    />
-  );
-};
-
 const ThirdSection = () => {
   const { ref, inView } = useInView();
 
@@ -100,3 +74,29 @@ const ThirdSection = () => {
 };
 
 export default ThirdSection;
+
+const ImagePart = ({
+  src,
+  width,
+  height,
+  className,
+  style,
+}: {
+  src: string;
+  width: number;
+  height: number;
+  className?: string;
+  style?: CSSProperties;
+}) => {
+  return (
+    <Image
+      src={src}
+      alt=""
+      width={width}
+      height={height}
+      draggable={false}
+      className={className}
+      style={style}
+    />
+  );
+};

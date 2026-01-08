@@ -8,7 +8,7 @@ jest.mock("next/image", () => ({
 }));
 
 const mockUseInView = jest.fn();
-jest.mock("../../../_hooks", () => ({
+jest.mock("../../../_hooks/useInView/useInView", () => ({
   __esModule: true,
   useInView: () => mockUseInView(),
 }));
