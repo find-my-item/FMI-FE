@@ -138,5 +138,12 @@ export async function middleware(request: NextRequest) {
 // 미들웨어가 실행될 경로 설정 (Matcher)
 export const config = {
   // 아래 경로에서만 미들웨어가 실행됩니다.
-  matcher: ["/mypage/:path*", "/email-login", "/login", "/sign-up", "/write/:path*"],
+  matcher: [
+    "/mypage/:path*",
+    "/email-login",
+    "/login",
+    "/sign-up",
+    "/write/:path*",
+    "/chat/:path*",
+  ],
 };
