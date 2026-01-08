@@ -82,7 +82,6 @@ const ThirdSection = () => {
             ))}
           </div>
 
-          {/* TODO(지권): 이모지 깨짐 현상 수정 필요 */}
           <ImagePart
             {...CHAT_LAST}
             className={cn(CHAT_LAST.className, inView && "chat-animate")}
