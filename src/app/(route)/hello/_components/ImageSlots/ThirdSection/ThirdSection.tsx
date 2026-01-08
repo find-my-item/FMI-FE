@@ -1,7 +1,6 @@
 "use client";
 
-import { CSSProperties } from "react";
-import Image from "next/image";
+import Image, { ImageProps } from "next/image";
 import { cn } from "@/utils";
 import {
   PHONE,
@@ -75,28 +74,6 @@ const ThirdSection = () => {
 
 export default ThirdSection;
 
-const ImagePart = ({
-  src,
-  width,
-  height,
-  className,
-  style,
-}: {
-  src: string;
-  width: number;
-  height: number;
-  className?: string;
-  style?: CSSProperties;
-}) => {
-  return (
-    <Image
-      src={src}
-      alt=""
-      width={width}
-      height={height}
-      draggable={false}
-      className={className}
-      style={style}
-    />
-  );
+const ImagePart = (props: Omit<ImageProps, "alt">) => {
+  return <Image alt="" {...props} />;
 };

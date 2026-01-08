@@ -1,12 +1,5 @@
-import Image from "next/image";
+import Image, { ImageProps } from "next/image";
 import "./HeroSection.css";
-
-interface HeroSectionImage {
-  src: string;
-  alt?: string;
-  width: number;
-  height: number;
-}
 
 const HeroSection = () => {
   return (
@@ -36,16 +29,6 @@ const HeroSection = () => {
 
 export default HeroSection;
 
-const HeroSectionImage = ({ src, alt = "", width, height }: HeroSectionImage) => {
-  return (
-    <Image
-      src={src}
-      alt={alt}
-      width={width}
-      height={height}
-      draggable={false}
-      className="select-none"
-      priority
-    />
-  );
+const HeroSectionImage = (props: Omit<ImageProps, "alt">) => {
+  return <Image alt="" {...props} draggable={false} className="select-none" priority />;
 };
