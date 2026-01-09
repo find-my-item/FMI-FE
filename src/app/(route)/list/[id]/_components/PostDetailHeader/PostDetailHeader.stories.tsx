@@ -25,6 +25,10 @@ export const Single: Story = {
     headerData: {
       imageUrls: ["https://picsum.photos/400/300?random=1"],
       postId: "1",
+      nickName: "사용자 닉네임",
+      profileUrl: null,
+      userPostCount: 4,
+      chatRoomCount: 0,
     },
   },
 };

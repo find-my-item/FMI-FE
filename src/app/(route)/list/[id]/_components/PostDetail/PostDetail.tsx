@@ -1,55 +1,49 @@
 import { cn } from "@/utils";
+import { LABELS } from "./LABELS";
 import { PostDetailBody, PostDetailMap } from "./_internal";
 import PostDetailHeader from "../PostDetailHeader/PostDetailHeader";
-import NoticeDetailHeader from "@/app/(route)/notice/_components/NoticeDetailHeader/NoticeDetailHeader";
-import { MOCK_POST_DEFAULT_DETAIL } from "@/mock/MOCK_DATA";
-import { LABELS } from "./LABELS";
-import { GetPostDetailResponse } from "@/api/fetch/post";
+import { NoticeDetailHeader } from "@/app/(route)/notice/_components";
+import type { PostDetailData } from "@/api/fetch/post/types/PostDetailType";
 
 interface PostDetailProps {
   type: "find" | "lost" | "notice" | "customer";
-  item: {
-    id: number;
-    title: string;
-    body: string;
-    comments?: {
-      id: number;
-      author: string;
-      date: string;
-      content: string;
-      replyTo?: string;
-    }[];
-  };
+  data: PostDetailData | undefined | any; // TODO(지권): 공지사항 타입 추가 후 any 타입 지워주세요
 }
 
-// TODO(지권): 실제 API 호출로 대체 예정
-const data = MOCK_POST_DEFAULT_DETAIL as GetPostDetailResponse;
-
-const PostDetail = ({ type, item }: PostDetailProps) => {
+const PostDetail = ({ type, data }: PostDetailProps) => {
   const { label, backPath } = LABELS[type];
   const isBoardType = type === "find" || type === "lost";
+
+  if (!data) return null;
 
   return (
     <article className="w-full">
       {isBoardType ? (
         <PostDetailHeader
-          headerData={{ imageUrls: data.result.imageUrls, postId: data.result.postId.toString() }}
+          headerData={{
+            imageUrls: data.imageUrls,
+            postId: data.postId.toString(),
+            nickName: data.nickName,
+            profileUrl: data.profileUrl,
+            userPostCount: data.userPostCount,
+            chatRoomCount: data.chatRoomCount,
+          }}
         />
       ) : (
         <NoticeDetailHeader backPath={backPath} />
       )}
 
       <section className={cn("flex flex-col px-5", isBoardType && "gap-9 py-[27px]")}>
-        <PostDetailBody isBoardType={isBoardType} label={type} data={data.result} />
+        <PostDetailBody isBoardType={isBoardType} label={type} data={data} />
 
         {isBoardType && (
           <PostDetailMap
             data={{
-              address: data.result.address,
-              latitude: data.result.latitude,
-              longitude: data.result.longitude,
-              postId: data.result.postId.toString(),
-              radius: data.result.radius,
+              address: data.address,
+              latitude: data.latitude,
+              longitude: data.longitude,
+              postId: data.postId.toString(),
+              radius: data.radius,
             }}
           />
         )}

@@ -14,6 +14,7 @@ module.exports = {
     "\\.module\\.(css|scss|sass)$": "identity-obj-proxy",
     "\\.(css|scss|sass|less)$": "<rootDir>/src/mock/styleMock.js", // global CSS (swiper/css 등)
   },
+  testPathIgnorePatterns: ["<rootDir>/tests/e2e/"],
   testMatch: ["**/?(*.)+(test|spec).(ts|tsx)"],
 
   reporters: [
