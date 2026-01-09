@@ -36,7 +36,7 @@ const LocationSearchSection = ({ searchParams }: LocationSearchSectionProps) => 
     const params = new URLSearchParams(searchParams.toString());
     params.set("location", row.display);
 
-    router.push(`/write/location?${params.toString()}`, { scroll: false });
+    router.push(`/write/post/location?${params.toString()}`, { scroll: false });
   };
 
   return (
