@@ -34,8 +34,13 @@ function getToastConfig(type: ToastType) {
 const Toast = ({ message = "Text", type }: ToastProps) => {
   const { bg, icon, size } = getToastConfig(type);
   return (
-    <div className="glass-card w-[300px] gap-3 rounded-lg bg-toast px-5 py-3 text-body1-semibold text-neutralInversed-normal-enteredSelected shadow-md flex-center">
-      <div className={cn(bg, "h-5 w-5 rounded-full flex-center")}>
+    <div
+      className={cn(
+        "glass-card w-full gap-3 rounded-lg bg-toast px-5 py-3 flex-center",
+        "text-body1-semibold text-neutralInversed-normal-enteredSelected shadow-md"
+      )}
+    >
+      <div className={cn(bg, "size-5 rounded-full flex-center")}>
         <Icon name={icon} size={size} />
       </div>
       {message}
