@@ -16,6 +16,7 @@
     "check:fast": "run-p test build-storybook",
     "analyze": "ANALYZE=true next build",
     "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
     "test:e2e:ci": "npm run build && playwright test"
   },
   "dependencies": {
