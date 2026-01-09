@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
 import { DetailHeader } from "@/components/layout";
 import { ConfirmModal } from "@/components/common";
@@ -28,9 +29,13 @@ const defaultValues: PostWriteFormValues = {
   temporarySave: false,
 };
 
-const Page = () => {
+const WritePage = () => {
   const [disabled, setDisabled] = useState(false);
   const [saveModalOpen, setSaveModalOpen] = useState(false);
+
+  const searchParams = useSearchParams();
+  const type = searchParams.get("type");
+  console.log(type);
 
   const methods = useForm<PostWriteFormValues>({
     defaultValues,
@@ -76,6 +81,14 @@ const Page = () => {
         />
       </FormProvider>
     </>
+  );
+};
+
+const Page = () => {
+  return (
+    <Suspense fallback={null}>
+      <WritePage />
+    </Suspense>
   );
 };
 

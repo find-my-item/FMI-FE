@@ -15,11 +15,11 @@ const ImageSection = () => {
 
   const { fields, append, remove, move } = useFieldArray({ control, name: "images" });
 
-  const handleImgUpload = () => {
+  const openImagePicker = () => {
     fileInputRef.current?.click();
   };
 
-  const handleImageUpload = () => {
+  const handleImageChange = () => {
     const files = fileInputRef.current?.files;
     if (!files) return;
 
@@ -48,14 +48,14 @@ const ImageSection = () => {
         className="hidden"
         multiple
         ref={fileInputRef}
-        onChange={handleImageUpload}
+        onChange={handleImageChange}
       />
 
       <div className="hide-scrollbar flex flex-nowrap items-center gap-4 overflow-x-scroll">
         <button
           type="button"
           aria-label="이미지 업로드"
-          onClick={handleImgUpload}
+          onClick={openImagePicker}
           className="size-[104px] shrink-0 rounded-[6px] bg-flatGray-25 flex-col-center"
         >
           <Icon name="Camera" size={32} />

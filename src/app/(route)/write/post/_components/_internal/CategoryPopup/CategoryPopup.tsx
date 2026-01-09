@@ -1,11 +1,11 @@
 "use client";
+"use no memo";
 
 import { useState } from "react";
 import { cn } from "@/utils";
 import { Button } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
 import { CategoryType } from "@/types";
-import { CategoryFormValue } from "../../../_types/PostWriteType";
 import { CATEGORY_OPTIONS } from "./CATEGORY_OPTIONS";
 
 interface CategoryPopupProps {
@@ -15,7 +15,7 @@ interface CategoryPopupProps {
 }
 
 const CategoryPopup = ({ isOpen, onClose, onSelect }: CategoryPopupProps) => {
-  const [selected, setSelected] = useState<CategoryFormValue>("");
+  const [selected, setSelected] = useState<CategoryType>("" as CategoryType);
 
   const handleApply = () => {
     if (!selected) return;
@@ -42,7 +42,7 @@ const CategoryPopup = ({ isOpen, onClose, onSelect }: CategoryPopupProps) => {
                 name="category"
                 value={option}
                 checked={selected === option}
-                onChange={(e) => setSelected(e.target.value as CategoryFormValue)}
+                onChange={(e) => setSelected(e.target.value as CategoryType)}
                 className="peer hidden"
               />
               <span
