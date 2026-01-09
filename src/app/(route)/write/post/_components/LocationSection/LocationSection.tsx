@@ -4,7 +4,7 @@ import { Icon, RequiredText } from "@/components/common";
 const LocationSection = () => {
   return (
     <Link
-      href={"/write/location"}
+      href={"/write/post/location"}
       className="flex cursor-pointer items-center justify-between border-b border-flatGray-50 px-5 py-6"
     >
       <span className="flex items-center gap-[5px] text-body1-medium text-flatGray-400">

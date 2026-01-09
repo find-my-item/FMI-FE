@@ -5,11 +5,11 @@ import { DetailHeader } from "@/components/layout";
 import { ConfirmModal } from "@/components/common";
 import {
   ActionSection,
+  CategorySection,
   ContentSection,
   ImageSection,
   LocationSection,
   TitleSection,
-  CategorySection,
 } from "./_components";
 
 const Page = () => {
