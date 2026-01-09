@@ -76,7 +76,7 @@ export async function middleware(request: NextRequest) {
 
           response.cookies.set("access_token", newAccessToken, { path: "/", httpOnly: true });
           response.cookies.set("refresh_token", newRefreshToken, { path: "/", httpOnly: true });
-          response.cookies.set("isAuthorized", "true");
+          response.cookies.set("isAuthorized", "true", { path: "/", httpOnly: true });
           console.log("로그인 페이지 & 리프레시 토큰 재발급 성공~");
 
           return response;
@@ -86,7 +86,7 @@ export async function middleware(request: NextRequest) {
         // 새 쿠키 설정
         response.cookies.set("access_token", newAccessToken, { path: "/", httpOnly: true });
         response.cookies.set("refresh_token", newRefreshToken, { path: "/", httpOnly: true });
-        response.cookies.set("isAuthorized", "true");
+        response.cookies.set("isAuthorized", "true", { path: "/", httpOnly: true });
         console.log("토큰 재발급 성공!!");
 
         return response;
