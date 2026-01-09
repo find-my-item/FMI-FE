@@ -67,16 +67,15 @@ export async function middleware(request: NextRequest) {
         const newAccessToken = getCookieValue("access_token") ?? "";
         const newRefreshToken = getCookieValue("refresh_token") ?? "";
 
-        console.log("new_access_token>>   ", newAccessToken);
-        console.log("new_refresh_token>> ", newRefreshToken);
-
         // 만약 로그인 관련 화면인지 확인 후 메인 페이지로 리다이렉트
         if (isAuthPath) {
           const response = NextResponse.redirect(new URL("/", request.url));
 
-          response.cookies.set("access_token", newAccessToken, { path: "/", httpOnly: true });
-          response.cookies.set("refresh_token", newRefreshToken, { path: "/", httpOnly: true });
-          response.cookies.set("isAuthorized", "true", { path: "/", httpOnly: true });
+          newAccessToken &&
+            response.cookies.set("access_token", newAccessToken, { path: "/", httpOnly: true });
+          newRefreshToken &&
+            response.cookies.set("refresh_token", newRefreshToken, { path: "/", httpOnly: true });
+          response.cookies.set("isAuthorized", "true", { path: "/" });
           console.log("로그인 페이지 & 리프레시 토큰 재발급 성공~");
 
           return response;
@@ -125,7 +124,9 @@ export async function middleware(request: NextRequest) {
     console.log("접근할 수 없는 페이지");
 
     const loginUrl = new URL("/login", request.url);
-    loginUrl.searchParams.set("callbackUrl", request.nextUrl.pathname);
+    const fullUrl = request.nextUrl.pathname + request.nextUrl.search;
+    loginUrl.searchParams.set("callbackUrl", fullUrl);
+
     return NextResponse.redirect(loginUrl);
   }
 
