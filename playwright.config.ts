@@ -15,7 +15,7 @@ export default defineConfig({
   /* CI 환경에서는 병렬 테스트를 사용하지 않는다 */
   workers: process.env.CI ? 1 : undefined,
   /* 테스트 결과를 html로 저장한다 */
-  reporter: "html",
+  reporter: [["html"], ["junit", { outputFile: "test-results/junit.xml" }]],
   /* 아래에 정의된 모든 프로젝트에 공통으로 적용되는 설정 */
   use: {
     /* await page.goto('/') 기준 URL */
