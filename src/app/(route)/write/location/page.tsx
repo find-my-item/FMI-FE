@@ -2,7 +2,7 @@
 
 import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { DetailHeader } from "@/components";
+import { DetailHeader } from "@/components/layout";
 import { LocationRangeSection, LocationSearchSection } from "./_components";
 
 const LocationPage = () => {

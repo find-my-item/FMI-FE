@@ -1,6 +1,6 @@
 "use client";
 
-import { CommentList } from "@/components";
+import { CommentList } from "@/components/domain";
 import PostDetail from "../PostDetail/PostDetail";
 import PostDetailTopHeader from "../PostDetailTopHeader/PostDetailTopHeader";
 import SimilarItemsSection from "../SimilarItemsSection/SimilarItemsSection";
