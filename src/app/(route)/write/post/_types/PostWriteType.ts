@@ -11,7 +11,7 @@ export interface PostWriteFormValues {
   radius: number;
   category: CategoryFormValue;
   temporarySave: boolean;
-  images: File[];
+  images: { file: File; previewUrl: string }[];
 }
 
 export type CategoryFormValue = "" | CategoryType;
