@@ -1,7 +1,6 @@
 "use client";
 
-import { CSSProperties } from "react";
-import Image from "next/image";
+import Image, { ImageProps } from "next/image";
 import { cn } from "@/utils";
 import {
   PHONE,
@@ -12,32 +11,6 @@ import {
 } from "./THIRD_SECTION_PARTS";
 import "./ThirdSection.css";
 import { useInView } from "../../../_hooks";
-
-const ImagePart = ({
-  src,
-  width,
-  height,
-  className,
-  style,
-}: {
-  src: string;
-  width: number;
-  height: number;
-  className?: string;
-  style?: CSSProperties;
-}) => {
-  return (
-    <Image
-      src={src}
-      alt=""
-      width={width}
-      height={height}
-      draggable={false}
-      className={className}
-      style={style}
-    />
-  );
-};
 
 const ThirdSection = () => {
   const { ref, inView } = useInView();
@@ -82,7 +55,6 @@ const ThirdSection = () => {
             ))}
           </div>
 
-          {/* TODO(지권): 이모지 깨짐 현상 수정 필요 */}
           <ImagePart
             {...CHAT_LAST}
             className={cn(CHAT_LAST.className, inView && "chat-animate")}
@@ -101,3 +73,7 @@ const ThirdSection = () => {
 };
 
 export default ThirdSection;
+
+const ImagePart = (props: Omit<ImageProps, "alt">) => {
+  return <Image alt="" {...props} />;
+};
