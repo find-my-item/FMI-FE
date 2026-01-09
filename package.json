@@ -14,7 +14,10 @@
     "test:ci": "jest --ci --runInBand",
     "check:all": "run-s test build build-storybook",
     "check:fast": "run-p test build-storybook",
-    "analyze": "ANALYZE=true next build"
+    "analyze": "ANALYZE=true next build",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:ci": "npm run build && playwright test"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.4.0",
@@ -26,7 +29,7 @@
     "babel-plugin-react-compiler": "^1.0.0",
     "clsx": "^2.1.1",
     "cookies-next": "^6.1.1",
-    "framer-motion": "^12.23.13",
+    "framer-motion": "^12.24.8",
     "lodash": "^4.17.21",
     "lodash.throttle": "^4.1.1",
     "next": "^15.5.9",

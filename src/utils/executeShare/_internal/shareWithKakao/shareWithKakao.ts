@@ -22,7 +22,7 @@ const initKakao = () => {
   return true;
 };
 
-export const shareMessage = (data: MetaDataType) => {
+export const shareWithKakao = (data: MetaDataType) => {
   const Kakao = (window as any).Kakao;
   if (!Kakao) return;
 

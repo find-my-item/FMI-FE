@@ -5,6 +5,30 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
   openAnalyzer: process.env.ANALYZE === "true",
 });
 
+const securityHeaders = [
+  {
+    key: "X-Frame-Options",
+    value: "DENY",
+  },
+  {
+    key: "Content-Security-Policy",
+    value: "frame-ancestors 'none';",
+  },
+  {
+    key: "Permissions-Policy",
+    value: "microphone=(), payment=()",
+    // value: "camera=(), microphone=(), payment=()",
+  },
+  {
+    key: "X-Content-Type-Options",
+    value: "nosniff",
+  },
+  {
+    key: "Referrer-Policy",
+    value: "strict-origin-when-cross-origin",
+  },
+];
+
 const nextConfig: NextConfig = {
   experimental: {
     reactCompiler: true,
@@ -49,6 +73,15 @@ const nextConfig: NextConfig = {
   },
   images: {
     domains: ["images.mypetlife.co.kr", "i.namu.wiki", "picsum.photos"],
+  },
+
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: securityHeaders,
+      },
+    ];
   },
 };
 

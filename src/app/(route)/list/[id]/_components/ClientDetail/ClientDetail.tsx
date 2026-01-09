@@ -1,0 +1,32 @@
+"use client";
+
+import { CommentList } from "@/components";
+import PostDetail from "../PostDetail/PostDetail";
+import PostDetailTopHeader from "../PostDetailTopHeader/PostDetailTopHeader";
+import SimilarItemsSection from "../SimilarItemsSection/SimilarItemsSection";
+import CommentForm from "../CommentForm/CommentForm";
+import { useGetDetailPost } from "@/api/fetch/post/api/useGetDetailPost";
+import { commentListObject } from "@/app/(route)/notice/_constant/commentListObject";
+
+interface ClientDetailProps {
+  id: string;
+}
+
+const ClientDetail = ({ id }: ClientDetailProps) => {
+  const { data, isLoading, isError } = useGetDetailPost({ id: Number(id) });
+
+  if (isLoading) return <div className="h-[600px] pt-4">로딩중</div>;
+  if (isError || !data?.result) return <div className="h-[600px] pt-4">오류가 발생했습니다.</div>;
+
+  return (
+    <>
+      <PostDetailTopHeader postId={id} />
+      <PostDetail type="find" data={data.result} />
+      <CommentList comments={commentListObject} />
+      <SimilarItemsSection />
+      <CommentForm />
+    </>
+  );
+};
+
+export default ClientDetail;
