@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ChatRoom } from "@/api/fetch/chatRoom/types/ChatListType";
-import { Icon } from "@/components";
+import { Icon } from "@/components/common";
 import { formatDate } from "@/utils";
 import { MOCK_IMAGES } from "./MOCK_IMAGES";
 
