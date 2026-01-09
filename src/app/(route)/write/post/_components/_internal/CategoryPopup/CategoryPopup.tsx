@@ -4,17 +4,23 @@ import { useState } from "react";
 import { cn } from "@/utils";
 import { Button } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
+import { CategoryType } from "@/types";
+import { CategoryFormValue } from "../../../_types/PostWriteType";
+import { CATEGORY_OPTIONS } from "./CATEGORY_OPTIONS";
 
 interface CategoryPopupProps {
   isOpen: boolean;
   onClose: () => void;
+  onSelect: (category: CategoryType) => void;
 }
 
-// TODO(지권): API 연동 후 상수 제거
-const CATEGORY_OPTIONS = ["전자기기", "지갑", "신분증", "귀금속", "가방", "카드", "기타"] as const;
+const CategoryPopup = ({ isOpen, onClose, onSelect }: CategoryPopupProps) => {
+  const [selected, setSelected] = useState<CategoryFormValue>("");
 
-const CategoryPopup = ({ isOpen, onClose }: CategoryPopupProps) => {
-  const [selected, setSelected] = useState<string | null>(null);
+  const handleApply = () => {
+    if (!selected) return;
+    onSelect(selected);
+  };
 
   return (
     <PopupLayout isOpen={isOpen} onClose={onClose} className="flex flex-col gap-12 px-5 py-10">
@@ -36,7 +42,7 @@ const CategoryPopup = ({ isOpen, onClose }: CategoryPopupProps) => {
                 name="category"
                 value={option}
                 checked={selected === option}
-                onChange={(e) => setSelected(e.target.value)}
+                onChange={(e) => setSelected(e.target.value as CategoryFormValue)}
                 className="peer hidden"
               />
               <span
@@ -52,7 +58,7 @@ const CategoryPopup = ({ isOpen, onClose }: CategoryPopupProps) => {
         </div>
       </section>
 
-      <Button type="button" className="min-h-11" disabled={!selected} onClick={onClose}>
+      <Button type="button" className="min-h-11" disabled={!selected} onClick={handleApply}>
         적용하기
       </Button>
     </PopupLayout>
