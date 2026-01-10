@@ -4,11 +4,10 @@ import { fetchRefreshToken } from "./api/fetch/auth";
 import { getCookieValue } from "./utils";
 
 export async function middleware(request: NextRequest) {
-  // value가 붙지 않으면 객체가 통채로 전달됨. 하지만 내가 쓰고 싶은건 객체가 아닌 쿠키의 값. 그러므로 value를 붙여서 사용해줘야 함.
   const accessToken = request.cookies.get("access_token")?.value;
   const refreshToken = request.cookies.get("refresh_token")?.value;
 
-  // 현재 페이지
+  // 현재 경로
   const currentPath = request.nextUrl.pathname;
 
   // 접근 제한 페이지 url
@@ -26,46 +25,17 @@ export async function middleware(request: NextRequest) {
     if (isAuthPath) {
       return NextResponse.redirect(new URL("/", request.url));
     }
-
-    // 만약 쿠키를 심어서 보내야 한다면
-    const response = NextResponse.next(); // 통과라는 뜻 (검문 결과 문제 없으니 원래 가려던 페이지로 진행 시켜~)
-    response.cookies.set("isAuthorized", "true");
-    return response;
   }
 
   // accessToken은 없고 리프레쉬 토큰만 있을때
   if (!accessToken && refreshToken) {
-    // 리프레쉬 토큰으로 토큰 재발급
-    console.log("미들웨어: 토큰 재발급 시도!! ");
-
     try {
-      // const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/refresh`, {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //     Cookie: `refresh_token=${refreshToken}`,
-      //   },
-      // });
+      // 리프레쉬 토큰으로 토큰 재발급
       const res = await fetchRefreshToken(refreshToken);
 
+      // 재발급 성공
       if (res.ok) {
-        // 재발급 성공
-        console.log("res.ok>>> ", res);
-
-        // 헤더에서 set-cookie 전체를 가져온다
         const cookieStrings = await res.headers.getSetCookie();
-
-        // 쿠키 문자열에서 쿠키 추출하기
-        // const getCookieValue = (name: string) => {
-        //   const cookieString = cookieStrings.find((str) => str.includes(`${name}=`));
-
-        //   if (!cookieString) return null;
-
-        //   const [keyVal] = cookieString.split(";");
-        //   const [, value] = keyVal.split("=");
-
-        //   return value;
-        // };
 
         const newAccessToken = getCookieValue({
           name: "access_token",
@@ -85,7 +55,6 @@ export async function middleware(request: NextRequest) {
           newRefreshToken &&
             response.cookies.set("refresh_token", newRefreshToken, { path: "/", httpOnly: true });
           response.cookies.set("isAuthorized", "true", { path: "/" });
-          console.log("로그인 페이지 & 리프레시 토큰 재발급 성공~");
 
           return response;
         }
@@ -95,12 +64,10 @@ export async function middleware(request: NextRequest) {
         response.cookies.set("access_token", newAccessToken, { path: "/", httpOnly: true });
         response.cookies.set("refresh_token", newRefreshToken, { path: "/", httpOnly: true });
         response.cookies.set("isAuthorized", "true", { path: "/", httpOnly: true });
-        console.log("토큰 재발급 성공!!");
 
         return response;
       } else {
         // 재발급 실패
-        console.log("재발급 실패");
         throw new Error("Refresh Failed");
       }
     } catch (error) {
@@ -128,10 +95,8 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  // 로그인이 안 되어 있는데 토큰이 필요한 페이지로 접근할 때
+  // 로그인이 안 되어 있는데 토큰이 필요한 페이지로 접근
   if (isProtectPath) {
-    console.log("접근할 수 없는 페이지");
-
     const loginUrl = new URL("/login", request.url);
     const fullUrl = request.nextUrl.pathname + request.nextUrl.search;
     loginUrl.searchParams.set("callbackUrl", fullUrl);
@@ -142,12 +107,8 @@ export async function middleware(request: NextRequest) {
   return NextResponse.next();
 }
 
-// NextRequest: 사용자가 보낸 편지 (주문서)
-// NextResponse: 사용자에게 우리가 보낼 객체 (서빙 카트)
-
-// 미들웨어가 실행될 경로 설정 (Matcher)
+// 미들웨어 실행 경로
 export const config = {
-  // 아래 경로에서만 미들웨어가 실행됩니다.
   matcher: [
     "/mypage/:path*",
     "/email-login",

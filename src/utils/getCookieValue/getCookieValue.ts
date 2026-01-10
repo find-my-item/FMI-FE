@@ -1,3 +1,11 @@
+/**
+ * @author suhyeon
+ *
+ * 헤더에서 쿠키 값을 추출하는 함수
+ *
+ * @returns 쿠키 value
+ */
+
 export const getCookieValue = ({
   name,
   cookieStrings,
