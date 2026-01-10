@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
+import { fetchRefreshToken } from "./api/fetch/auth";
 
 export async function middleware(request: NextRequest) {
   // value가 붙지 않으면 객체가 통채로 전달됨. 하지만 내가 쓰고 싶은건 객체가 아닌 쿠키의 값. 그러므로 value를 붙여서 사용해줘야 함.
@@ -37,13 +38,14 @@ export async function middleware(request: NextRequest) {
     console.log("미들웨어: 토큰 재발급 시도!! ");
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/refresh`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Cookie: `refresh_token=${refreshToken}`,
-        },
-      });
+      // const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/refresh`, {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     Cookie: `refresh_token=${refreshToken}`,
+      //   },
+      // });
+      const res = await fetchRefreshToken(refreshToken);
 
       if (res.ok) {
         // 재발급 성공

@@ -4,10 +4,12 @@ import { ApiSignUpType } from "@/api/fetch/auth/types/ApiSingUpType";
 
 interface SignUpResponseType extends ApiBaseResponseType<{ id: string }> {}
 
-export const useApiSignUp = () => {
+const useApiSignUp = () => {
   return useAppMutation<ApiSignUpType, SignUpResponseType, SignUpResponseType>(
     "public",
     "auth/signup",
     "post"
   );
 };
+
+export default useApiSignUp;
