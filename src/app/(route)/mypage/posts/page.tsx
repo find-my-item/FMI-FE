@@ -1,7 +1,8 @@
 "use client";
 
-import { DetailHeader, Filter, InputSearch } from "@/components";
+import { DetailHeader } from "@/components/layout";
 import { MYPAGE_POSTS_CONFIG } from "./_constants/MYPAGE_POSTS_CONFIG";
+import { Filter, InputSearch } from "@/components/common";
 
 const page = () => {
   return (
