@@ -1,4 +1,5 @@
-import { FooterButton, InputText } from "@/components";
+import { InputText } from "@/components/common";
+import { FooterButton } from "@/components/domain";
 import { CHANGE_PASSWORD_CONFIG } from "../../_constants/CHANGE_PASSWORD_CONFIG";
 
 const MypageChangePwForm = () => {
