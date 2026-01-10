@@ -14,15 +14,18 @@ import {
   TitleSection,
 } from "./_components";
 import { PostWriteFormValues } from "./_types/PostWriteType";
+import { usePostPosts } from "@/api/fetch/post";
+import type { PostPostsWriteRequestBody } from "@/api/fetch/post";
+import { CategoryType, PostType } from "@/types";
 
 const defaultValues: PostWriteFormValues = {
   postType: "",
   title: "",
   date: "",
   address: "",
-  latitude: 0,
-  longitude: 0,
-  radius: 0,
+  latitude: null,
+  longitude: null,
+  radius: null,
   category: "",
   content: "",
   images: [],
@@ -35,7 +38,6 @@ const WritePage = () => {
 
   const searchParams = useSearchParams();
   const type = searchParams.get("type");
-  console.log(type);
 
   const methods = useForm<PostWriteFormValues>({
     defaultValues,
@@ -44,8 +46,38 @@ const WritePage = () => {
     shouldUnregister: false,
   });
 
+  const { mutateAsync: postPosts } = usePostPosts();
+
+  const toPostWriteRequestBody = (
+    values: PostWriteFormValues
+  ): PostPostsWriteRequestBody | null => {
+    if (!values.postType || !values.category) return null;
+
+    return {
+      request: {
+        postType: values.postType as PostType,
+        title: values.title,
+        category: values.category as CategoryType,
+        content: values.content,
+        address: values.address,
+        latitude: values.latitude as number,
+        longitude: values.longitude as number,
+        radius: values.radius as number,
+        date: values.date,
+        temporarySave: values.temporarySave,
+      },
+      images: values.images.map((img) => img.file),
+    };
+  };
+
   const onSubmit = methods.handleSubmit((values) => {
-    console.log(values);
+    // console.log(values);
+    const body = toPostWriteRequestBody(values);
+
+    if (!body) return;
+
+    // console.log(body);
+    postPosts(body);
   });
 
   return (

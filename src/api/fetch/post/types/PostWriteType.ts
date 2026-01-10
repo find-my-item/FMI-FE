@@ -1,9 +1,13 @@
 import { CategoryType, PostType } from "@/types";
+import { PostDetailData } from "./PostDetailType";
+import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 
-export interface PostWritePayload {
+export interface PostPostsWriteRequestBody {
   request: PostWriteRequest;
   images: string[];
 }
+
+export interface PostPostsWriteResponse extends ApiBaseResponseType<PostDetailData> {}
 
 export interface PostWriteRequest {
   postType: PostType;

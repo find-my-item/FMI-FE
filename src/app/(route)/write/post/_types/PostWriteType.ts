@@ -5,10 +5,10 @@ export interface PostWriteFormValues {
   title: string;
   date: string;
   address: string;
-  latitude: number;
-  longitude: number;
+  latitude: number | null;
+  longitude: number | null;
   content: string;
-  radius: number;
+  radius: number | null;
   category: CategoryFormValue;
   temporarySave: boolean;
   images: { file: File; previewUrl: string }[];
