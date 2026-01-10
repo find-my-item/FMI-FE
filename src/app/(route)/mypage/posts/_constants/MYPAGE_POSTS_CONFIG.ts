@@ -1,22 +1,27 @@
 export const MYPAGE_POSTS_CONFIG = [
   {
     name: "기간",
-    iconName: "Calendar",
+    icon: { name: "Calendar", size: 16 },
+    iconPosition: "leading",
   },
   {
     name: "분류",
-    iconName: "ArrowDown",
+    icon: { name: "ArrowDown", size: 16 },
+    iconPosition: "trailing",
   },
   {
     name: "카테고리",
-    iconName: "ArrowDown",
+    icon: { name: "ArrowDown", size: 16 },
+    iconPosition: "trailing",
   },
   {
     name: "최신순",
-    iconName: "ArrowDown",
+    icon: { name: "ArrowDown", size: 16 },
+    iconPosition: "trailing",
   },
   {
     name: "찾음여부",
-    iconName: "ArrowDown",
+    icon: { name: "ArrowDown", size: 16 },
+    iconPosition: "trailing",
   },
-];
+] as const;

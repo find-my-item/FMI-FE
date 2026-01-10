@@ -21,10 +21,10 @@ const page = () => {
             <Filter
               key={item.name}
               ariaLabel={item.name}
+              icon={item.icon}
               onSelected={false}
-              icon={{ name: "ArrowDown" }}
               onClick={() => alert("테스트")}
-              iconPosition="trailing"
+              iconPosition={item.iconPosition}
             >
               {item.name}
             </Filter>
