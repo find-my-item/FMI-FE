@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 import { fetchRefreshToken } from "./api/fetch/auth";
+import { getCookieValue } from "./utils";
 
 export async function middleware(request: NextRequest) {
   // value가 붙지 않으면 객체가 통채로 전달됨. 하지만 내가 쓰고 싶은건 객체가 아닌 쿠키의 값. 그러므로 value를 붙여서 사용해줘야 함.
@@ -55,19 +56,25 @@ export async function middleware(request: NextRequest) {
         const cookieStrings = await res.headers.getSetCookie();
 
         // 쿠키 문자열에서 쿠키 추출하기
-        const getCookieValue = (name: string) => {
-          const cookieString = cookieStrings.find((str) => str.includes(`${name}=`));
+        // const getCookieValue = (name: string) => {
+        //   const cookieString = cookieStrings.find((str) => str.includes(`${name}=`));
 
-          if (!cookieString) return null;
+        //   if (!cookieString) return null;
 
-          const [keyVal] = cookieString.split(";");
-          const [, value] = keyVal.split("=");
+        //   const [keyVal] = cookieString.split(";");
+        //   const [, value] = keyVal.split("=");
 
-          return value;
-        };
+        //   return value;
+        // };
 
-        const newAccessToken = getCookieValue("access_token") ?? "";
-        const newRefreshToken = getCookieValue("refresh_token") ?? "";
+        const newAccessToken = getCookieValue({
+          name: "access_token",
+          cookieStrings: cookieStrings,
+        });
+        const newRefreshToken = getCookieValue({
+          name: "refresh_token",
+          cookieStrings: cookieStrings,
+        });
 
         // 만약 로그인 관련 화면인지 확인 후 메인 페이지로 리다이렉트
         if (isAuthPath) {
