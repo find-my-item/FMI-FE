@@ -16,7 +16,7 @@ jest.mock("next/link", () => ({
   ),
 }));
 
-jest.mock("@/components", () => ({
+jest.mock("@/components/common", () => ({
   __esModule: true,
   Icon: ({ name }: { name: string }) => <span data-testid={`icon-${name}`}>{name}</span>,
 }));

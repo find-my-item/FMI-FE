@@ -1,4 +1,4 @@
-import { Button } from "@/components";
+import { Button } from "@/components/common";
 import { Radius } from "@/types";
 import { DISTANCE_OPTIONS } from "./DISTANCE_OPTIONS";
 

@@ -1,14 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { PopupLayout } from "@/components/domain";
 import { cn } from "@/utils";
+import { Button } from "@/components/common";
+import { PopupLayout } from "@/components/domain";
 
 interface CategoryPopupProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
+// TODO(지권): API 연동 후 상수 제거
 const CATEGORY_OPTIONS = ["전자기기", "지갑", "신분증", "귀금속", "가방", "카드", "기타"] as const;
 
 const CategoryPopup = ({ isOpen, onClose }: CategoryPopupProps) => {
@@ -16,17 +18,18 @@ const CategoryPopup = ({ isOpen, onClose }: CategoryPopupProps) => {
 
   return (
     <PopupLayout isOpen={isOpen} onClose={onClose} className="flex flex-col gap-12 px-5 py-10">
-      <div className="flex flex-col gap-8">
-        <h2 className="text-center text-[20px] tracking-[0.01em]">카테고리 선택</h2>
+      <section className="flex flex-col gap-8">
+        <h2 className="text-center text-h2-medium text-layout-header-default">카테고리 선택</h2>
+
         <div className="flex flex-col gap-[2px]">
           {CATEGORY_OPTIONS.map((option) => (
             <label
               key={option}
-              className={cn(
-                "flex h-[61px] w-full cursor-pointer items-center gap-3 px-[20px] py-[18px] text-[18px] leading-[140%] text-[#5D5D5D]",
-                "transition-colors hover:text-[#9D9D9D]"
-              )}
               aria-checked={selected === option}
+              className={cn(
+                "flex h-[61px] w-full cursor-pointer items-center gap-3 px-5 py-[18px] text-h3-medium text-neutral-normal-default",
+                selected === option && "rounded-[4px] bg-fill-neutral-strong-default"
+              )}
             >
               <input
                 type="radio"
@@ -38,8 +41,8 @@ const CategoryPopup = ({ isOpen, onClose }: CategoryPopupProps) => {
               />
               <span
                 className={cn(
-                  "relative h-4 w-4 rounded-full border border-[#46C691]/70 peer-checked:border-[#1EB87B]",
-                  "before:absolute before:inset-[3px] before:scale-0 before:rounded-full before:bg-[#1EB87B] before:transition-transform",
+                  "relative h-4 w-4 rounded-full border border-brand-normal-enteredSelected peer-checked:border-brand-normal-enteredSelected",
+                  "before:absolute before:inset-[3px] before:scale-0 before:rounded-full before:transition-transform before:bg-fill-brand-normal-enteredSelected",
                   "peer-checked:before:scale-100"
                 )}
               />
@@ -47,15 +50,11 @@ const CategoryPopup = ({ isOpen, onClose }: CategoryPopupProps) => {
             </label>
           ))}
         </div>
-      </div>
-      <button
-        className={cn(
-          "w-full rounded-[10px] py-[10px] text-[16px] font-semibold transition-colors",
-          selected ? "bg-[#1EB87B]/70 text-[#F6FFFC]" : "bg-[#98E3BD]/90 text-[#C2F1D4]"
-        )}
-      >
+      </section>
+
+      <Button type="button" className="min-h-11" disabled={!selected} onClick={onClose}>
         적용하기
-      </button>
+      </Button>
     </PopupLayout>
   );
 };
