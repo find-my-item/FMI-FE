@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
 import { getRegionSearchResults } from "@/utils";
-import { InputSearch } from "@/components";
+import { InputSearch } from "@/components/common";
 import { useRegionRows } from "@/hooks";
 import { RegionRow } from "@/types";
 
