@@ -1,5 +1,6 @@
 import { Button, Filter } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
+import { cn } from "@/utils";
 import { useState } from "react";
 import Picker from "react-mobile-picker";
 
@@ -49,10 +50,10 @@ const MypagePostsBottomSheet = ({ isOpen, onClose, state }: MypagePostsBottomShe
     <PopupLayout
       isOpen={isOpen}
       onClose={onClose}
-      className={"h-[400px] w-full gap-8 px-5 py-10 flex-col-center"}
+      className={cn("w-full gap-12 px-5 py-10 flex-col-center")}
     >
       {state === "Date" && (
-        <>
+        <div className="gap-8 flex-col-center">
           <h2 className="text-h2-medium">기간설정</h2>
           <div className="flex gap-[14px]">
             <Filter ariaLabel="시작일" onSelected={true} className="px-10 py-2">
@@ -87,28 +88,29 @@ const MypagePostsBottomSheet = ({ isOpen, onClose, state }: MypagePostsBottomShe
               ))}
             </Picker.Column>
           </Picker>
-
-          <Button onClick={onClose} size="big" className="h-[44px] w-full">
-            닫기
-          </Button>
-        </>
+        </div>
       )}
 
       {state === "Filter" && (
-        <>
-          <h2 className="text-h2-medium">필터</h2>
+        <div className="flex gap-8 flex-col-center">
+          <h2 className="text-h2-medium text-layout-header-default">필터</h2>
           {FILTER_CONFIG.map((item) => (
-            <div key={item.title}>
-              <h3>{item.title}</h3>
-              {item.kind.map((item) => (
-                <Filter ariaLabel={item} onSelected={true} className="px-10 py-2">
-                  {item}
-                </Filter>
-              ))}
+            <div key={item.title} className="flex w-full flex-col gap-4">
+              <h3 className="text-h3-semibold text-layout-header-default">{item.title}</h3>
+              <div className="flex flex-wrap gap-2">
+                {item.kind.map((item) => (
+                  <Filter key={item} ariaLabel={item} onSelected={false} className="px-[18px] py-2">
+                    {item}
+                  </Filter>
+                ))}
+              </div>
             </div>
           ))}
-        </>
+        </div>
       )}
+      <Button onClick={onClose} size="big" className="h-[44px] w-full">
+        적용하기
+      </Button>
     </PopupLayout>
   );
 };
