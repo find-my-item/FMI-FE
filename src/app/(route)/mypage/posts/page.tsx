@@ -2,30 +2,23 @@
 
 import { DetailHeader } from "@/components/layout";
 import { MYPAGE_POSTS_CONFIG } from "./_constants/MYPAGE_POSTS_CONFIG";
-import { Button, Filter, InputSearch } from "@/components/common";
+import { Filter, InputSearch } from "@/components/common";
 import { ListItem } from "../../list/_components";
 import { useState } from "react";
-import { PopupLayout } from "@/components/domain";
-import Picker from "react-mobile-picker";
+import { MypagePostsBottomSheet } from "./_components";
 
 const page = () => {
-  const [dateOpen, setDateOpen] = useState(false);
+  const [isBottomOpen, setIsBottomOpen] = useState(false);
+  const [bottomState, setBottomState] = useState<"Date" | "Filter">("Date");
 
-  const today = new Date();
-  const [datePicker, setDatePicker] = useState({
-    year: today.getFullYear(),
-    month: today.getMonth(),
-    day: today.getDay(),
-  });
-
-  // 년도 배열
-  const getYears = (startYear: number, endYear: number) => {
-    return Array.from({ length: endYear - startYear + 1 }, (_, i) => String(startYear + i));
+  const handleFilterClick = (name: string) => {
+    setIsBottomOpen(true);
+    if (name === "기간") {
+      setBottomState("Date");
+    } else {
+      setBottomState("Filter");
+    }
   };
-  const currentYear = today.getFullYear();
-  const Years = getYears(2025, currentYear);
-  const Months = Array.from({ length: 12 }, (_, i) => String(i + 1));
-  const Days = Array.from({ length: 31 }, (_, i) => String(i + 1));
 
   return (
     <>
@@ -45,60 +38,18 @@ const page = () => {
               ariaLabel={item.name}
               icon={item.icon}
               onSelected={false}
-              onClick={() => setDateOpen(true)}
+              onClick={() => handleFilterClick(item.name)}
               iconPosition={item.iconPosition}
             >
               {item.name}
             </Filter>
           ))}
 
-          {/* 바텀시트 */}
-          <PopupLayout
-            isOpen={dateOpen}
-            onClose={() => setDateOpen(false)}
-            className="h-[400px] gap-8 px-5 py-10 flex-col-center"
-          >
-            <h2 className="text-h2-medium">기간설정</h2>
-            <div className="flex gap-[14px]">
-              <Filter ariaLabel="시작일" onSelected={true} className="px-10 py-2">
-                시작일
-              </Filter>
-              <Filter ariaLabel="종료일" onSelected={false}>
-                종료일
-              </Filter>
-            </div>
-
-            {/* 달력 */}
-            <Picker
-              value={datePicker}
-              onChange={setDatePicker}
-              wheelMode="normal" // 3D 효과를 원하면 'natural'
-            >
-              <Picker.Column name="year">
-                {Years.map((year) => (
-                  <Picker.Item key={year} value={year}>
-                    {year}
-                  </Picker.Item>
-                ))}
-              </Picker.Column>
-              <Picker.Column name="month">
-                {Months.map((month) => (
-                  <Picker.Item key={month} value={month}>
-                    {month}월
-                  </Picker.Item>
-                ))}
-              </Picker.Column>
-              <Picker.Column name="day">
-                {Days.map((day) => (
-                  <Picker.Item key={day} value={day}>
-                    {day}일
-                  </Picker.Item>
-                ))}
-              </Picker.Column>
-            </Picker>
-
-            <Button onClick={() => setDateOpen(false)}>닫기</Button>
-          </PopupLayout>
+          <MypagePostsBottomSheet
+            isOpen={isBottomOpen}
+            onClose={() => setIsBottomOpen(false)}
+            state={bottomState}
+          />
         </section>
 
         <section>
