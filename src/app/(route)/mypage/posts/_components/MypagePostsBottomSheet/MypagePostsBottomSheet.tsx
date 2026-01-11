@@ -35,7 +35,7 @@ const MypagePostsBottomSheet = ({ isOpen, onClose, state }: MypagePostsBottomShe
       className={cn("w-full gap-12 px-5 py-10 flex-col-center")}
     >
       {state === "Date" && (
-        <div className="gap-8 flex-col-center">
+        <div className="w-full gap-8 flex-col-center">
           <h2 className="text-h2-medium">기간설정</h2>
           <div className="flex gap-[14px]">
             <Filter ariaLabel="시작일" onSelected={true} className="px-10 py-2">
@@ -51,9 +51,11 @@ const MypagePostsBottomSheet = ({ isOpen, onClose, state }: MypagePostsBottomShe
             value={datePicker}
             onChange={setDatePicker}
             wheelMode="normal"
-            className="justify-between py-5 text-[20px] text-neutral-strong-default"
+            height={130}
+            itemHeight={64.5}
+            className="flex w-full text-[20px] text-neutral-strong-default"
           >
-            <Picker.Column name="year" className="">
+            <Picker.Column name="year">
               {Years.map((year) => (
                 <Picker.Item key={year} value={year}>
                   {year}
@@ -67,7 +69,7 @@ const MypagePostsBottomSheet = ({ isOpen, onClose, state }: MypagePostsBottomShe
                 </Picker.Item>
               ))}
             </Picker.Column>
-            <Picker.Column name="day" className="">
+            <Picker.Column name="day">
               {Days.map((day) => (
                 <Picker.Item key={day} value={day}>
                   {day}일
