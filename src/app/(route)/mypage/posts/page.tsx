@@ -1,7 +1,7 @@
 "use client";
 
 import { DetailHeader } from "@/components/layout";
-import { MYPAGE_POSTS_CONFIG } from "./_constants/MYPAGE_POSTS_CONFIG";
+import { MYPAGE_POSTS_FILTER } from "./_constants/MYPAGE_POSTS_FILTER";
 import { Filter, InputSearch } from "@/components/common";
 import { ListItem } from "../../list/_components";
 import { useState } from "react";
@@ -32,7 +32,7 @@ const page = () => {
 
         <section className="flex w-full gap-2 overflow-x-auto px-5 py-[14px]">
           <h2 className="sr-only">필터링 영역</h2>
-          {MYPAGE_POSTS_CONFIG.map((item) => (
+          {MYPAGE_POSTS_FILTER.map((item) => (
             <Filter
               key={item.name}
               ariaLabel={item.name}

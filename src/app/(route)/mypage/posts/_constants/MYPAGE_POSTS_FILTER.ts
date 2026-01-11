@@ -1,4 +1,4 @@
-export const MYPAGE_POSTS_CONFIG = [
+export const MYPAGE_POSTS_FILTER = [
   {
     name: "기간",
     icon: { name: "Calendar", size: 16 },

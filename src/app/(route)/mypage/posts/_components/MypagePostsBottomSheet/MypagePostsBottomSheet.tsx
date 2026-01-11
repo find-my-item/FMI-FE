@@ -3,31 +3,13 @@ import { PopupLayout } from "@/components/domain";
 import { cn } from "@/utils";
 import { useState } from "react";
 import Picker from "react-mobile-picker";
+import { MYPAGE_POSTS_SHEET_FILTER } from "../../_constants/MYPAGE_POSTS_SHEET_FILTER";
 
 interface MypagePostsBottomSheetProps {
   isOpen: boolean;
   onClose: () => void;
   state: "Date" | "Filter";
 }
-
-const FILTER_CONFIG = [
-  {
-    title: "분류",
-    kind: ["전체", "분실", "습득"],
-  },
-  {
-    title: "카테고리",
-    kind: ["전체", "전자기기", "지갑", "신분증", "귀금속", "가방", "카드", "기타"],
-  },
-  {
-    title: "정렬",
-    kind: ["최신순", "오래된 순", "즐겨찾기 많은 순", "조회 많은 순"],
-  },
-  {
-    title: "찾음 여부",
-    kind: ["전체", "찾는중", "찾았음"],
-  },
-];
 
 const MypagePostsBottomSheet = ({ isOpen, onClose, state }: MypagePostsBottomSheetProps) => {
   const today = new Date();
@@ -65,8 +47,13 @@ const MypagePostsBottomSheet = ({ isOpen, onClose, state }: MypagePostsBottomShe
           </div>
 
           {/* 달력 */}
-          <Picker value={datePicker} onChange={setDatePicker} wheelMode="normal">
-            <Picker.Column name="year">
+          <Picker
+            value={datePicker}
+            onChange={setDatePicker}
+            wheelMode="normal"
+            className="justify-between py-5 text-[20px] text-neutral-strong-default"
+          >
+            <Picker.Column name="year" className="">
               {Years.map((year) => (
                 <Picker.Item key={year} value={year}>
                   {year}
@@ -80,7 +67,7 @@ const MypagePostsBottomSheet = ({ isOpen, onClose, state }: MypagePostsBottomShe
                 </Picker.Item>
               ))}
             </Picker.Column>
-            <Picker.Column name="day">
+            <Picker.Column name="day" className="">
               {Days.map((day) => (
                 <Picker.Item key={day} value={day}>
                   {day}일
@@ -94,7 +81,7 @@ const MypagePostsBottomSheet = ({ isOpen, onClose, state }: MypagePostsBottomShe
       {state === "Filter" && (
         <div className="flex gap-8 flex-col-center">
           <h2 className="text-h2-medium text-layout-header-default">필터</h2>
-          {FILTER_CONFIG.map((item) => (
+          {MYPAGE_POSTS_SHEET_FILTER.map((item) => (
             <div key={item.title} className="flex w-full flex-col gap-4">
               <h3 className="text-h3-semibold text-layout-header-default">{item.title}</h3>
               <div className="flex flex-wrap gap-2">
