@@ -7,4 +7,3 @@ export { default as useApiCheckNickname } from "./api/useApiCheckNickname";
 export { default as useApiFindPw } from "./api/useApiFindPw";
 export { default as useApiSendEmail } from "./api/useApiSendEmail";
 export { default as useApiSignUp } from "./api/useApiSignUp";
-export { default as fetchRefreshToken } from "./api/fetchRefreshToken";
