@@ -52,3 +52,5 @@ node_modules/
 
 # Jest test reports
 reports/*
+# Sentry Config File
+.env.sentry-build-plugin
