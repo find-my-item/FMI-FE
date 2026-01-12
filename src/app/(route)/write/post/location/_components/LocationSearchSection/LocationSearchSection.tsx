@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
 import { getRegionSearchResults } from "@/utils";
-import { InputSearch } from "@/components";
+import { InputSearch } from "@/components/common";
 import { useRegionRows } from "@/hooks";
 import { RegionRow } from "@/types";
 
@@ -36,7 +36,7 @@ const LocationSearchSection = ({ searchParams }: LocationSearchSectionProps) => 
     const params = new URLSearchParams(searchParams.toString());
     params.set("location", row.display);
 
-    router.push(`/write/location?${params.toString()}`, { scroll: false });
+    router.push(`/write/post/location?${params.toString()}`, { scroll: false });
   };
 
   return (
