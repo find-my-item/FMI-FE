@@ -23,6 +23,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isVercel = process.env.VERCEL === "1";
+
   return (
     <html lang="ko" className={pretendard.variable}>
       <head>
@@ -55,7 +57,7 @@ export default function RootLayout({
             <Footer />
           </ToastProvider>
           <Script
-            src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY}&libraries=services,clusterer&autoload=false`}
+            src={`https://dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY}&libraries=services,clusterer&autoload=false`}
             strategy="beforeInteractive"
           />
           <Script
@@ -65,7 +67,7 @@ export default function RootLayout({
             strategy="afterInteractive"
           />
           <Analytics />
-          <SpeedInsights />
+          {isVercel && <SpeedInsights />}
         </Providers>
       </body>
     </html>
