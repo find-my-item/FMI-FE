@@ -7,8 +7,32 @@ const authApi = axios.create({
   timeout: 5000,
 });
 
-// authApi.interceptors.response.use(
-//   // authApi 401 에러 발생 시 토큰 재발급 로직 작성 가능
-// );
+authApi.interceptors.response.use(
+  (response) => response,
+
+  async (error) => {
+    const originalRequest = error.config;
+
+    if (typeof window === "undefined") {
+      return Promise.reject(error);
+    }
+
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+
+      try {
+        await authApi.post("/auth/refresh");
+
+        return authApi(originalRequest);
+      } catch (refreshError) {
+        window.location.href = "/login";
+
+        return Promise.reject(refreshError);
+      }
+    }
+
+    return Promise.reject(error);
+  }
+);
 
 export default authApi;
