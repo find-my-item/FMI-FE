@@ -2,9 +2,9 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import TabContents from "./TabContents";
 
-jest.mock("@/app/(route)/list/_components/ListItem/ListItem", () => () => (
-  <div data-testid="list-item">ListItem</div>
-));
+jest.mock("@/components/domain", () => ({
+  PostListItem: () => <div data-testid="list-item">PostListItem</div>,
+}));
 
 jest.mock("../_internal/CommentItem/CommentItem", () => () => (
   <li data-testid="comment-item">CommentItem</li>
