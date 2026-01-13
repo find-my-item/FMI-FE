@@ -12,8 +12,25 @@ const securityHeaders = [
     value: "DENY",
   },
   {
-    key: "Content-Security-Policy",
-    value: "frame-ancestors 'none';",
+    key: "Content-Security-Policy-Report-Only",
+    value: `
+    default-src 'self';
+    script-src 'self'
+      https://www.googletagmanager.com
+      https://www.google-analytics.com
+      https://dapi.kakao.com
+      https://t1.kakaocdn.net
+      https://va.vercel-scripts.com
+      'unsafe-inline';
+    connect-src 'self'
+      https://www.google-analytics.com
+      https://*.sentry.io;
+    img-src 'self' data: https://www.google-analytics.com;
+    style-src 'self' 'unsafe-inline';
+    font-src 'self';
+    worker-src 'self' blob:;
+    frame-ancestors 'none';
+  `.replace(/\n/g, ""),
   },
   {
     key: "Permissions-Policy",
