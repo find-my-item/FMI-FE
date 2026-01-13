@@ -1,7 +1,7 @@
 "use client";
 
+import { PostListItem } from "@/components/domain";
 import { USER_TABS } from "../../_types/USER_TABS";
-import ListItem from "@/app/(route)/list/_components/ListItem/ListItem";
 import { CommentItem } from "../_internal";
 import { MOCK_POST_ITEM } from "@/mock/MOCK_DATA";
 
@@ -17,7 +17,7 @@ const TabContents = ({ selectedTab }: TabContentsProps) => {
           <>
             {Array.from({ length: 5 }).map((_, index) => (
               <li key={index}>
-                <ListItem post={MOCK_POST_ITEM} linkState="list" />
+                <PostListItem post={MOCK_POST_ITEM} linkState="list" />
               </li>
             ))}
           </>
@@ -43,7 +43,7 @@ const TabContents = ({ selectedTab }: TabContentsProps) => {
           <>
             {Array.from({ length: 5 }).map((_, index) => (
               <li key={index}>
-                <ListItem post={MOCK_POST_ITEM} linkState="list" />
+                <PostListItem post={MOCK_POST_ITEM} linkState="list" />
               </li>
             ))}
           </>

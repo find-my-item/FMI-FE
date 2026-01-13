@@ -4,12 +4,12 @@ import { Badge, Chip, Icon } from "@/components/common";
 import { PostItem } from "@/api/fetch/post";
 import { formatDate, getItemCategoryLabel, getItemStatusLabel } from "@/utils";
 
-type ListItemProps = {
+type PostListItemProps = {
   post: PostItem;
   linkState?: "notice" | "list";
 };
 
-const ListItem = ({ post, linkState = "list" }: ListItemProps) => {
+const PostListItem = ({ post, linkState = "list" }: PostListItemProps) => {
   const VIEW_ITEM = [
     {
       icon: "Star",
@@ -74,4 +74,4 @@ const ListItem = ({ post, linkState = "list" }: ListItemProps) => {
   );
 };
 
-export default ListItem;
+export default PostListItem;
