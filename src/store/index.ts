@@ -1,1 +1,1 @@
-export { default as useWriteStore } from "./useWriteStore/useWriteStore";
+export { useWriteStore } from "./useWriteStore/useWriteStore";

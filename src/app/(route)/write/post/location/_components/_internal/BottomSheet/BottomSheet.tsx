@@ -1,6 +1,7 @@
 import { Button } from "@/components/common";
 import { Radius } from "@/types";
 import { DISTANCE_OPTIONS } from "./DISTANCE_OPTIONS";
+import { useWriteStore } from "@/store";
 
 type LocationInfo = {
   location: string | null;
@@ -21,6 +22,22 @@ interface BottomSheetProps {
 const BottomSheet = ({ locationInfo, radiusState }: BottomSheetProps) => {
   const { location, lat, lng } = locationInfo;
   const { radius, setRadius } = radiusState;
+
+  const isApplyDisabled = lat === null || lng === null || radius === null || location === null;
+
+  const {
+    setLatLng: setWriteLatLng,
+    setRadius: setWriteRadius,
+    setLocation: setWriteLocation,
+  } = useWriteStore();
+
+  const commitLocationRange = () => {
+    if (isApplyDisabled) return;
+
+    setWriteLatLng(lat, lng);
+    setWriteRadius(radius);
+    setWriteLocation(location);
+  };
 
   return (
     <section className="rounded-t-[20px] px-5 py-10 flex-col-center">
@@ -49,7 +66,9 @@ const BottomSheet = ({ locationInfo, radiusState }: BottomSheetProps) => {
         </div>
       </div>
 
-      <Button className="min-h-11 w-full">적용하기</Button>
+      <Button className="min-h-11 w-full" onClick={commitLocationRange} disabled={isApplyDisabled}>
+        적용하기
+      </Button>
     </section>
   );
 };
