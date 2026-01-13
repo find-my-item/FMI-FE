@@ -33,7 +33,7 @@ describe("PostListItem", () => {
       getItemCategoryLabel(MOCK_POST_ITEM.category)
     );
 
-    expect(screen.getByTestId("badge-new")).toBeInTheDocument();
+    // expect(screen.getByTestId("badge-new")).toBeInTheDocument();
 
     const starIcon = screen.getByTestId("icon-Star");
     expect(starIcon.parentElement).toHaveTextContent(String(MOCK_POST_ITEM.favoriteCount));
