@@ -96,8 +96,22 @@ const nextConfig: NextConfig = {
     });
     return config;
   },
+
   images: {
-    domains: ["images.mypetlife.co.kr", "i.namu.wiki", "picsum.photos"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.mypetlife.co.kr",
+      },
+      {
+        protocol: "https",
+        hostname: "i.namu.wiki",
+      },
+      {
+        protocol: "https",
+        hostname: "picsum.photos",
+      },
+    ],
   },
 
   async headers() {
