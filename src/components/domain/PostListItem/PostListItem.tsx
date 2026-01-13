@@ -4,10 +4,10 @@ import { Badge, Chip, Icon } from "@/components/common";
 import { PostItem } from "@/api/fetch/post";
 import { formatDate, getItemCategoryLabel, getItemStatusLabel } from "@/utils";
 
-type PostListItemProps = {
+interface PostListItemProps {
   post: PostItem;
   linkState?: "notice" | "list";
-};
+}
 
 const PostListItem = ({ post, linkState = "list" }: PostListItemProps) => {
   const { itemStatus, category, createdAt, new: isNew, hot: isHot } = post;
