@@ -16,9 +16,7 @@ const TabContents = ({ selectedTab }: TabContentsProps) => {
         {selectedTab === "post" && (
           <>
             {Array.from({ length: 5 }).map((_, index) => (
-              <li key={index}>
-                <PostListItem post={MOCK_POST_ITEM} linkState="list" />
-              </li>
+              <PostListItem post={MOCK_POST_ITEM} linkState="list" key={index} />
             ))}
           </>
         )}
@@ -42,9 +40,7 @@ const TabContents = ({ selectedTab }: TabContentsProps) => {
         {selectedTab === "favorite" && (
           <>
             {Array.from({ length: 5 }).map((_, index) => (
-              <li key={index}>
-                <PostListItem post={MOCK_POST_ITEM} linkState="list" />
-              </li>
+              <PostListItem post={MOCK_POST_ITEM} linkState="list" key={index} />
             ))}
           </>
         )}

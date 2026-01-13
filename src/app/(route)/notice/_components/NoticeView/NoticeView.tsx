@@ -25,7 +25,10 @@ const NoticeView = ({ noticeCustomerState }: NoticeView) => {
               itemStatus: "SEARCHING",
               postType: "LOST",
               favoriteCount: 0,
+              viewCount: 0,
               createdAt: "",
+              new: false,
+              hot: false,
             }}
             linkState="notice"
           />

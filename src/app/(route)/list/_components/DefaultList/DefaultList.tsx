@@ -21,6 +21,8 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
   const { data } = useGetPosts({ page: 0, size: 10, type: postType });
   const { listData } = useListDataWithFilters({ baseData: data, region, category, sort, status });
 
+  console.log(listData);
+
   return (
     <section className="h-base">
       <Tab
@@ -32,9 +34,11 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
       <FilterSection />
 
       <section aria-label="게시글 목록" className="w-full">
-        {listData?.result?.posts?.map((item) => (
-          <PostListItem key={item.postId} post={item} linkState="list" />
-        ))}
+        <ul>
+          {listData?.result?.posts?.map((item) => (
+            <PostListItem key={item.postId} post={item} linkState="list" />
+          ))}
+        </ul>
       </section>
     </section>
   );
