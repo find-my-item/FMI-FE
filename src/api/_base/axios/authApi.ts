@@ -22,11 +22,11 @@ authApi.interceptors.response.use(
 
       try {
         await authApi.post("/auth/refresh");
-
+        console.log("재발급 중>> ");
         return authApi(originalRequest);
       } catch (refreshError) {
         window.location.href = "/login";
-
+        console.log("토큰 재발급 실패>> ");
         return Promise.reject(refreshError);
       }
     }
