@@ -2,13 +2,26 @@ import { Button } from "@/components/common";
 import { Radius } from "@/types";
 import { DISTANCE_OPTIONS } from "./DISTANCE_OPTIONS";
 
-interface BottomSheetProps {
+type LocationInfo = {
   location: string | null;
+  lat: number | null;
+  lng: number | null;
+};
+
+type RadiusState = {
   radius: Radius;
   setRadius: (radius: Radius) => void;
+};
+
+interface BottomSheetProps {
+  locationInfo: LocationInfo;
+  radiusState: RadiusState;
 }
 
-const BottomSheet = ({ location, radius, setRadius }: BottomSheetProps) => {
+const BottomSheet = ({ locationInfo, radiusState }: BottomSheetProps) => {
+  const { location, lat, lng } = locationInfo;
+  const { radius, setRadius } = radiusState;
+
   return (
     <section className="rounded-t-[20px] px-5 py-10 flex-col-center">
       <div className="mb-12 gap-4 flex-col-center">
