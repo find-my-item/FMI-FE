@@ -1,10 +1,10 @@
 import { Meta } from "@storybook/nextjs";
-import ListItem from "./ListItem";
+import PostListItem from "./PostListItem";
 import { MOCK_POST_ITEM } from "@/mock/MOCK_DATA";
 
-const meta: Meta<typeof ListItem> = {
-  title: "페이지/목록 페이지/ListItem",
-  component: ListItem,
+const meta: Meta<typeof PostListItem> = {
+  title: "페이지/목록 페이지/PostListItem",
+  component: PostListItem,
   tags: ["autodocs"],
   parameters: {
     layout: "centered",
@@ -20,4 +20,4 @@ const meta: Meta<typeof ListItem> = {
 
 export default meta;
 
-export const ListItemStory = () => <ListItem post={MOCK_POST_ITEM} linkState="list" />;
+export const PostListItemStory = () => <PostListItem post={MOCK_POST_ITEM} linkState="list" />;

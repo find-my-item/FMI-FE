@@ -19,5 +19,8 @@ export interface PostItem {
   postType: PostType;
   category: CategoryType;
   favoriteCount: number;
+  viewCount: number;
   createdAt: string;
+  hot: boolean;
+  new: boolean;
 }

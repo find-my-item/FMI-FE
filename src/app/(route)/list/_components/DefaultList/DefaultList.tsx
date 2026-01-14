@@ -1,9 +1,8 @@
 "use client";
 
-import { Tab } from "@/components/domain";
+import { PostListItem, Tab } from "@/components/domain";
 import { useGetPosts } from "@/api/fetch/post";
 import { TABS } from "../../_constants/TABS";
-import ListItem from "../ListItem/ListItem";
 import FilterSection from "../_internal/FilterSection/FilterSection";
 import { useListParams } from "../../_hooks/useListParams/useListParams";
 import { useListDataWithFilters } from "../../_hooks/useListDataWithFilters/useListDataWithFilters";
@@ -33,9 +32,11 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
       <FilterSection />
 
       <section aria-label="게시글 목록" className="w-full">
-        {listData?.result?.posts?.map((item) => (
-          <ListItem key={item.postId} post={item} linkState="list" />
-        ))}
+        <ul>
+          {listData?.result?.posts?.map((item) => (
+            <PostListItem key={item.postId} post={item} linkState="list" />
+          ))}
+        </ul>
       </section>
     </section>
   );
