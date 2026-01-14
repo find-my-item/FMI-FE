@@ -1,7 +1,8 @@
-import { Button } from "@/components/common";
-import { Radius } from "@/types";
-import { DISTANCE_OPTIONS } from "./DISTANCE_OPTIONS";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useWriteStore } from "@/store";
+import { Radius } from "@/types";
+import { Button } from "@/components/common";
+import { DISTANCE_OPTIONS } from "./DISTANCE_OPTIONS";
 
 type LocationInfo = {
   location: string | null;
@@ -22,6 +23,8 @@ interface BottomSheetProps {
 const BottomSheet = ({ locationInfo, radiusState }: BottomSheetProps) => {
   const { location, lat, lng } = locationInfo;
   const { radius, setRadius } = radiusState;
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   const isApplyDisabled = lat === null || lng === null || radius === null || location === null;
 
@@ -37,6 +40,9 @@ const BottomSheet = ({ locationInfo, radiusState }: BottomSheetProps) => {
     setWriteLatLng(lat, lng);
     setWriteRadius(radius);
     setWriteLocation(location);
+
+    // router.replace(`/write/post?type=${searchParams.get("type")}`);
+    router.replace(`/write/post?type=lost`);
   };
 
   return (
