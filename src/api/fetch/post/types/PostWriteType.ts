@@ -4,7 +4,7 @@ import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 
 export interface PostPostsWriteRequestBody {
   request: PostWriteRequest;
-  images: string[];
+  images: File[];
 }
 
 export interface PostPostsWriteResponse extends ApiBaseResponseType<PostDetailData> {}

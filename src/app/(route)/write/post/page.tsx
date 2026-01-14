@@ -1,13 +1,11 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { CategoryType } from "@/types";
-import { useWriteStore } from "@/store";
 import { DetailHeader } from "@/components/layout";
 import { ConfirmModal } from "@/components/common";
 import { PostWriteFormValues } from "./_types/PostWriteType";
-import { PostPostsWriteRequestBody, usePostPosts } from "@/api/fetch/post";
+import usePostWriteSubmit from "./_hooks/usePostWriteSubmit/usePostWriteSubmit";
 import {
   ActionSection,
   CategorySection,
@@ -35,8 +33,6 @@ const WritePage = () => {
   const [disabled, setDisabled] = useState(false);
   const [saveModalOpen, setSaveModalOpen] = useState(false);
 
-  const { lat, lng, location, radius, type } = useWriteStore();
-
   const methods = useForm<PostWriteFormValues>({
     defaultValues,
     mode: "onChange",
@@ -44,48 +40,7 @@ const WritePage = () => {
     shouldUnregister: false,
   });
 
-  useEffect(() => {
-    methods.setValue("postType", type ?? "", { shouldValidate: true });
-    methods.setValue("address", location ?? "", { shouldValidate: true });
-    methods.setValue("latitude", lat ?? null, { shouldValidate: true });
-    methods.setValue("longitude", lng ?? null, { shouldValidate: true });
-    methods.setValue("radius", radius ?? null, { shouldValidate: true });
-  }, [type, location, lat, lng, radius, methods]);
-
-  const { mutateAsync: postPosts } = usePostPosts();
-
-  const toPostWriteRequestBody = (
-    values: PostWriteFormValues
-  ): PostPostsWriteRequestBody | null => {
-    if (!type || !values.category) return null;
-
-    return {
-      request: {
-        postType: type,
-        title: values.title,
-        category: values.category as CategoryType,
-        content: values.content,
-        address: location,
-        latitude: lat,
-        longitude: lng,
-        radius: radius,
-        date: new Date().toISOString(),
-        temporarySave: values.temporarySave,
-      },
-      images: values.images.map((img) => img.file),
-    };
-  };
-
-  const onSubmit = methods.handleSubmit((values) => {
-    // console.log("RHF values:", values);
-    // console.log("Zustand:", useWriteStore.getState());
-    const body = toPostWriteRequestBody(values);
-
-    if (!body) return;
-
-    // console.log(body);
-    postPosts(body);
-  });
+  const { onSubmit } = usePostWriteSubmit({ methods });
 
   return (
     <>
