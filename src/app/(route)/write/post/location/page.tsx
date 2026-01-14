@@ -15,7 +15,7 @@ const LocationPage = () => {
       {!locationTitle ? (
         <LocationSearchSection searchParams={searchParams} />
       ) : (
-        <LocationRangeSection location={locationName} />
+        <LocationRangeSection address={locationName} fullAddress={locationTitle} />
       )}
     </>
   );

@@ -9,21 +9,21 @@ interface UsePostWriteSubmitProps {
 }
 
 const usePostWriteSubmit = ({ methods }: UsePostWriteSubmitProps) => {
-  const { lat, lng, location, radius, type, clearLocation } = useWriteStore();
+  const { lat, lng, address, radius, type, clearLocation } = useWriteStore();
 
   useEffect(() => {
     methods.setValue("postType", type ?? "", { shouldValidate: true });
-    methods.setValue("address", location ?? "", { shouldValidate: true });
+    methods.setValue("address", address ?? "", { shouldValidate: true });
     methods.setValue("latitude", lat ?? null, { shouldValidate: true });
     methods.setValue("longitude", lng ?? null, { shouldValidate: true });
     methods.setValue("radius", radius ?? null, { shouldValidate: true });
-  }, [type, location, lat, lng, radius, methods]);
+  }, [type, address, lat, lng, radius, methods]);
 
   const { mutateAsync: postPosts } = usePostPosts();
 
   const toPostWriteFormData = (values: PostWriteFormValues): FormData | null => {
     if (!type || !values.category) return null;
-    if (!location || lat == null || lng == null || radius == null) return null;
+    if (!address || lat == null || lng == null || radius == null) return null;
 
     // TODO(지권): 정적 값 수정
     const request = {
@@ -31,7 +31,7 @@ const usePostWriteSubmit = ({ methods }: UsePostWriteSubmitProps) => {
       title: values.title,
       category: "BAG",
       content: values.content,
-      address: location,
+      address: address,
       latitude: lat,
       longitude: lng,
       radius: radius,
