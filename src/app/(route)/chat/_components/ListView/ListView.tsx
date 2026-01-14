@@ -4,9 +4,17 @@ import { ListSearch } from "@/components/domain";
 import { DetailHeader } from "@/components/layout";
 import { useSearchUpdateQueryString } from "@/hooks";
 import DefaultList from "../DefaultList/DefaultList";
+import { useChatSocket } from "@/api/fetch/chatRoom/api/useChatSocket";
 
 const ListView = () => {
   const { searchMode, searchUpdateQuery } = useSearchUpdateQueryString();
+
+  useChatSocket({
+    onMessage: (data) => {
+      console.log("웹소켓이 구독되었습니다.", data);
+    },
+  });
+
   return (
     <div className="w-full">
       <DetailHeader title={searchMode === "region" ? "지역 선택" : "채팅"} />
