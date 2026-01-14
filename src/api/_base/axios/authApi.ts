@@ -30,7 +30,7 @@ authApi.interceptors.response.use(
         return authApi(originalRequest);
       } catch (refreshError) {
         alert("다시 로그인 해주세요.");
-        window.location.href = "/login";
+        window.location.replace("/login");
 
         return Promise.reject(refreshError);
       }
