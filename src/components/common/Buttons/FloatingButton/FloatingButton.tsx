@@ -10,12 +10,23 @@ import { cn } from "@/utils";
  *
  * @param ariaLabel - 접근성을 위한 버튼 라벨 텍스트입니다.
  * 기본값은 `"플로팅 메뉴 버튼"`입니다.
+ * @param buttonClassName - 버튼 컨테이너에 적용할 커스텀 클래스명입니다.
+ * @param iconClassName - 아이콘에 적용할 커스텀 클래스명입니다.
  *
  * @example
  * ```tsx
  * <FloatingButton
  *   ariaLabel="게시글 작성 버튼"
  *   onClick={() => router.push('/post/create')}
+ * />
+ * ```
+ *
+ * ```tsx
+ * <FloatingButton
+ *   ariaLabel="게시글 작성 버튼"
+ *   onClick={() => router.push('/post/create')}
+ *   buttonClassName="bg-fill-brand-strong-pressed"
+ *   iconClassName="rotate-45"
  * />
  * ```
  */
