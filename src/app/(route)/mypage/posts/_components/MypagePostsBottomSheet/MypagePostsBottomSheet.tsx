@@ -4,6 +4,7 @@ import { cn } from "@/utils";
 import { useState } from "react";
 import Picker from "react-mobile-picker";
 import { MYPAGE_POSTS_SHEET_FILTER } from "../../_constants/MYPAGE_POSTS_SHEET_FILTER";
+import { eachYearOfInterval, endOfYear, startOfYear } from "date-fns";
 
 interface MypagePostsBottomSheetProps {
   isOpen: boolean;
@@ -13,7 +14,7 @@ interface MypagePostsBottomSheetProps {
 
 const MypagePostsBottomSheet = ({ isOpen, onClose, state }: MypagePostsBottomSheetProps) => {
   const today = new Date();
-  const [datePicker, setDatePicker] = useState({
+  const [selectDate, setSelectDate] = useState({
     year: today.getFullYear(),
     month: today.getMonth(),
     day: today.getDay(),
@@ -25,8 +26,8 @@ const MypagePostsBottomSheet = ({ isOpen, onClose, state }: MypagePostsBottomShe
   };
   const currentYear = today.getFullYear();
   const Years = getYears(2025, currentYear);
-  const Months = Array.from({ length: 12 }, (_, i) => String(i + 1));
-  const Days = Array.from({ length: 31 }, (_, i) => String(i + 1));
+  // const Months = Array.from({ length: 12 }, (_, i) => String(i + 1));
+  // const Days = Array.from({ length: 31 }, (_, i) => String(i + 1));
 
   return (
     <PopupLayout
@@ -48,14 +49,14 @@ const MypagePostsBottomSheet = ({ isOpen, onClose, state }: MypagePostsBottomShe
 
           {/* 달력 */}
           <Picker
-            value={datePicker}
-            onChange={setDatePicker}
+            value={selectDate}
+            onChange={setSelectDate}
             wheelMode="normal"
             height={130}
             itemHeight={64.5}
             className="flex w-full text-[20px] text-neutral-strong-default"
           >
-            <Picker.Column name="year">
+            {/* <Picker.Column name="year">
               {Years.map((year) => (
                 <Picker.Item key={year} value={year}>
                   {year}
@@ -75,7 +76,7 @@ const MypagePostsBottomSheet = ({ isOpen, onClose, state }: MypagePostsBottomShe
                   {day}일
                 </Picker.Item>
               ))}
-            </Picker.Column>
+            </Picker.Column> */}
           </Picker>
         </div>
       )}
