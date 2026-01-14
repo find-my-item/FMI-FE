@@ -13,8 +13,8 @@ type WriteStore = {
   setFullAddress: (fullAddress: string | null) => void;
   setRadius: (radius: Radius | null) => void;
 
-  type: PostType;
-  setType: (type: PostType) => void;
+  postType: PostType | null;
+  setPostType: (type: PostType) => void;
 
   clearLocation: () => void;
 };
@@ -25,13 +25,13 @@ export const useWriteStore = create<WriteStore>((set) => ({
   address: null,
   fullAddress: null,
   radius: null,
-  type: "LOST",
+  postType: null,
 
   setLatLng: (lat, lng) => set({ lat, lng }),
   setAddress: (address) => set({ address }),
   setFullAddress: (fullAddress) => set({ fullAddress }),
   setRadius: (radius) => set({ radius }),
-  setType: (type) => set({ type }),
+  setPostType: (postType) => set({ postType }),
   clearLocation: () =>
     set({ lat: null, lng: null, address: null, fullAddress: null, radius: null }),
 }));
