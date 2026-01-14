@@ -1,10 +1,10 @@
 import { Button, Filter } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
 import { cn } from "@/utils";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Picker from "react-mobile-picker";
 import { MYPAGE_POSTS_SHEET_FILTER } from "../../_constants/MYPAGE_POSTS_SHEET_FILTER";
-import { eachYearOfInterval, endOfYear, startOfYear } from "date-fns";
+import { getDaysInMonth } from "date-fns";
 
 interface MypagePostsBottomSheetProps {
   isOpen: boolean;
@@ -20,14 +20,20 @@ const MypagePostsBottomSheet = ({ isOpen, onClose, state }: MypagePostsBottomShe
     day: today.getDay(),
   });
 
-  // 년도 배열
-  const getYears = (startYear: number, endYear: number) => {
-    return Array.from({ length: endYear - startYear + 1 }, (_, i) => String(startYear + i));
-  };
-  const currentYear = today.getFullYear();
-  const Years = getYears(2025, currentYear);
-  // const Months = Array.from({ length: 12 }, (_, i) => String(i + 1));
-  // const Days = Array.from({ length: 31 }, (_, i) => String(i + 1));
+  const [year, setYear] = useState(2025);
+  const [month, setMonth] = useState(1);
+  const [day, setDay] = useState(1);
+
+  const daysInMonth = useMemo(() => {
+    // new Date(년, 월 인덱스) -> date-fns가 알아서 총 일수 반환
+    // 주의: month - 1 (1월은 0, 12월은 11)
+    const date = new Date(year, month - 1);
+    return getDaysInMonth(date);
+  }, [year, month]);
+
+  const makeDaysArray = useMemo(() => {
+    return Array.from({ length: daysInMonth }, (_, i) => i + 1);
+  }, [daysInMonth]);
 
   return (
     <PopupLayout
@@ -56,14 +62,14 @@ const MypagePostsBottomSheet = ({ isOpen, onClose, state }: MypagePostsBottomShe
             itemHeight={64.5}
             className="flex w-full text-[20px] text-neutral-strong-default"
           >
-            {/* <Picker.Column name="year">
-              {Years.map((year) => (
+            <Picker.Column name="year">
+              {Array.from({ length: today.getFullYear() - year }, (_, i) => i + 1).map((year) => (
                 <Picker.Item key={year} value={year}>
                   {year}
                 </Picker.Item>
               ))}
             </Picker.Column>
-            <Picker.Column name="month">
+            {/* <Picker.Column name="month">
               {Months.map((month) => (
                 <Picker.Item key={month} value={month}>
                   {month}월
