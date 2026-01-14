@@ -30,18 +30,18 @@ const CategoryPopup = ({ isOpen, onClose, onSelect }: CategoryPopupProps) => {
         <div className="flex flex-col gap-[2px]">
           {CATEGORY_OPTIONS.map((option) => (
             <label
-              key={option}
-              aria-checked={selected === option}
+              key={option.value}
+              aria-checked={selected === option.value}
               className={cn(
                 "flex h-[61px] w-full cursor-pointer items-center gap-3 px-5 py-[18px] text-h3-medium text-neutral-normal-default",
-                selected === option && "rounded-[4px] bg-fill-neutral-strong-default"
+                selected === option.value && "rounded-[4px] bg-fill-neutral-strong-default"
               )}
             >
               <input
                 type="radio"
                 name="category"
-                value={option}
-                checked={selected === option}
+                value={option.value}
+                checked={selected === option.value}
                 onChange={(e) => setSelected(e.target.value as CategoryType)}
                 className="peer hidden"
               />
@@ -52,7 +52,7 @@ const CategoryPopup = ({ isOpen, onClose, onSelect }: CategoryPopupProps) => {
                   "peer-checked:before:scale-100"
                 )}
               />
-              <span>{option}</span>
+              <span>{option.label}</span>
             </label>
           ))}
         </div>

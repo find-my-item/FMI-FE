@@ -1,12 +1,9 @@
-import { CategoryFormValue } from "../../../_types/PostWriteType";
-
 export const CATEGORY_OPTIONS = [
-  "전자기기",
-  "지갑",
-  "신분증",
-  "귀금속",
-  "가방",
-  "카드",
-  "기타",
-  "",
-] as CategoryFormValue[];
+  { value: "ELECTRONICS", label: "전자기기" },
+  { value: "WALLET", label: "지갑" },
+  { value: "ID_CARD", label: "신분증" },
+  { value: "JEWELRY", label: "귀금속" },
+  { value: "BAG", label: "가방" },
+  { value: "CARD", label: "카드" },
+  { value: "ETC", label: "기타" },
+] as const;

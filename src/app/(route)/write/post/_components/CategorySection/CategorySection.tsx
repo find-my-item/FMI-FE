@@ -1,19 +1,18 @@
 "use client";
-"use no memo";
 
 import { useState } from "react";
-import { useFormContext } from "react-hook-form";
+import { useFormContext, useWatch } from "react-hook-form";
 import { CategoryType } from "@/types";
+import { getItemCategoryLabel } from "@/utils";
 import { Icon, RequiredText } from "@/components/common";
 import { CategoryPopup } from "../_internal";
 import { PostWriteFormValues } from "../../_types/PostWriteType";
-import { getItemCategoryLabel } from "@/utils";
 
 const CategorySection = () => {
   const [categoryPopupOpen, setCategoryPopupOpen] = useState(false);
 
-  const { watch, setValue } = useFormContext<PostWriteFormValues>();
-  const category = watch("category");
+  const { control, setValue } = useFormContext<PostWriteFormValues>();
+  const category = useWatch({ control, name: "category" });
 
   const onSelectCategory = (category: CategoryType) => {
     setValue("category", category, {
