@@ -4,7 +4,7 @@ import { cn } from "@/utils";
 import { useMemo, useState } from "react";
 import Picker from "react-mobile-picker";
 import { MYPAGE_POSTS_SHEET_FILTER } from "../../_constants/MYPAGE_POSTS_SHEET_FILTER";
-import { getDaysInMonth } from "date-fns";
+import { getDaysInMonth, lastDayOfMonth, format } from "date-fns";
 
 interface MypagePostsBottomSheetProps {
   isOpen: boolean;
@@ -16,24 +16,32 @@ const MypagePostsBottomSheet = ({ isOpen, onClose, state }: MypagePostsBottomShe
   const today = new Date();
   const [selectDate, setSelectDate] = useState({
     year: today.getFullYear(),
-    month: today.getMonth(),
-    day: today.getDay(),
+    month: today.getMonth() + 1,
+    day: today.getDate(),
   });
 
-  const [year, setYear] = useState(2024);
-  const [month, setMonth] = useState(1);
-  const [day, setDay] = useState(1);
-
   const daysInMonth = useMemo(() => {
-    // new Date(년, 월 인덱스) -> date-fns가 알아서 총 일수 반환
-    // 주의: month - 1 (1월은 0, 12월은 11)
-    const date = new Date(year, month - 1);
+    const date = new Date(selectDate.year, selectDate.month - 1);
     return getDaysInMonth(date);
-  }, [year, month]);
+  }, [selectDate.year, selectDate.month]);
 
   const makeDaysArray = useMemo(() => {
     return Array.from({ length: daysInMonth }, (_, i) => i + 1);
   }, [daysInMonth]);
+
+  const handleDayChange = (newValue: { year: number; month: number; day: number }) => {
+    const { year, month, day } = newValue;
+
+    const maxDays = getDaysInMonth(new Date(year, month - 1));
+
+    const adjustedDay = day > maxDays ? maxDays : day;
+
+    setSelectDate({
+      year,
+      month,
+      day: adjustedDay,
+    });
+  };
 
   return (
     <PopupLayout
@@ -56,35 +64,36 @@ const MypagePostsBottomSheet = ({ isOpen, onClose, state }: MypagePostsBottomShe
           {/* 달력 */}
           <Picker
             value={selectDate}
-            onChange={setSelectDate}
+            onChange={handleDayChange}
             wheelMode="normal"
             height={130}
             itemHeight={64.5}
             className="flex w-full text-[20px] text-neutral-strong-default"
           >
             <Picker.Column name="year">
-              {Array.from({ length: today.getFullYear() - year + 1 }, (_, i) => year + i).map(
-                (year) => (
-                  <Picker.Item key={year} value={year}>
-                    {year}
-                  </Picker.Item>
-                )
-              )}
+              {Array.from(
+                { length: today.getFullYear() - selectDate.year + 1 },
+                (_, i) => selectDate.year + i
+              ).map((item) => (
+                <Picker.Item key={item} value={item}>
+                  {item}
+                </Picker.Item>
+              ))}
             </Picker.Column>
-            {/* <Picker.Column name="month">
-              {Months.map((month) => (
+            <Picker.Column name="month">
+              {Array.from({ length: 12 }, (_, i) => i + 1).map((month) => (
                 <Picker.Item key={month} value={month}>
                   {month}월
                 </Picker.Item>
               ))}
             </Picker.Column>
             <Picker.Column name="day">
-              {Days.map((day) => (
+              {makeDaysArray.map((day) => (
                 <Picker.Item key={day} value={day}>
                   {day}일
                 </Picker.Item>
               ))}
-            </Picker.Column> */}
+            </Picker.Column>
           </Picker>
         </div>
       )}
