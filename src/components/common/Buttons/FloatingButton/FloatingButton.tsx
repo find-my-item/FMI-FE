@@ -1,5 +1,6 @@
 import { ButtonHTMLAttributes } from "react";
 import Icon from "../../Icon/Icon";
+import { cn } from "@/utils";
 
 /**
  * @author hyungjun
@@ -21,16 +22,27 @@ import Icon from "../../Icon/Icon";
 
 interface FloatingButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   ariaLabel?: string;
+  buttonClassName?: string;
+  iconClassName?: string;
 }
 
-const FloatingButton = ({ ariaLabel = "플로팅 메뉴 버튼", ...props }: FloatingButtonProps) => {
+const FloatingButton = ({
+  ariaLabel = "플로팅 메뉴 버튼",
+  buttonClassName,
+  iconClassName,
+  ...props
+}: FloatingButtonProps) => {
   return (
     <button
-      {...props}
       aria-label={ariaLabel}
-      className="glass-card h-[70px] w-[70px] rounded-full bg-opacity-70 p-[12px] bg-fill-brand-normal-default flex-center"
+      className={cn(
+        "h-[70px] w-[70px] rounded-full p-3 flex-center",
+        "glass-card bg-opacity-70 bg-fill-brand-normal-default",
+        buttonClassName
+      )}
+      {...props}
     >
-      <Icon name="Plus" size={32} />
+      <Icon name="Plus" size={32} className={iconClassName} />
     </button>
   );
 };
