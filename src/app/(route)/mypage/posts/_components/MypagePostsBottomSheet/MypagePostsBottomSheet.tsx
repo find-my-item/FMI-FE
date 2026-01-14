@@ -20,7 +20,7 @@ const MypagePostsBottomSheet = ({ isOpen, onClose, state }: MypagePostsBottomShe
     day: today.getDay(),
   });
 
-  const [year, setYear] = useState(2025);
+  const [year, setYear] = useState(2024);
   const [month, setMonth] = useState(1);
   const [day, setDay] = useState(1);
 
@@ -63,11 +63,13 @@ const MypagePostsBottomSheet = ({ isOpen, onClose, state }: MypagePostsBottomShe
             className="flex w-full text-[20px] text-neutral-strong-default"
           >
             <Picker.Column name="year">
-              {Array.from({ length: today.getFullYear() - year }, (_, i) => i + 1).map((year) => (
-                <Picker.Item key={year} value={year}>
-                  {year}
-                </Picker.Item>
-              ))}
+              {Array.from({ length: today.getFullYear() - year + 1 }, (_, i) => year + i).map(
+                (year) => (
+                  <Picker.Item key={year} value={year}>
+                    {year}
+                  </Picker.Item>
+                )
+              )}
             </Picker.Column>
             {/* <Picker.Column name="month">
               {Months.map((month) => (
