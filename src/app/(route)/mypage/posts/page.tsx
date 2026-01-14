@@ -3,9 +3,9 @@
 import { DetailHeader } from "@/components/layout";
 import { MYPAGE_POSTS_FILTER } from "./_constants/MYPAGE_POSTS_FILTER";
 import { Filter, InputSearch } from "@/components/common";
-import { ListItem } from "../../list/_components";
 import { useState } from "react";
 import { MypagePostsBottomSheet } from "./_components";
+import { PostListItem } from "@/components/domain";
 
 const page = () => {
   const [isBottomOpen, setIsBottomOpen] = useState(false);
@@ -52,10 +52,10 @@ const page = () => {
           />
         </section>
 
-        <section>
+        <ul>
           <h2 className="sr-only">게시글 목록 영역</h2>
           {[1, 2, 3].map((item) => (
-            <ListItem
+            <PostListItem
               key={item}
               post={{
                 postId: 1,
@@ -67,11 +67,14 @@ const page = () => {
                 postType: "FOUND",
                 category: "CARD",
                 favoriteCount: 3,
+                viewCount: 5,
                 createdAt: "30분 전",
+                hot: false,
+                new: false,
               }}
             />
           ))}
-        </section>
+        </ul>
       </div>
     </>
   );
