@@ -3,53 +3,54 @@ import getBaseURL from "@/api/_base/axios/getBaseURL";
 
 type MessageHandler<T = any> = (message: T) => void;
 
-class ChatSocket {
-  private client: Client | null = null;
-  private subscriptions = new Map<string, StompSubscription>();
+// 채팅 소켓 클라이언트
+let client: Client | null = null;
+// 채팅 소켓 구독 목록
+const subscriptions = new Map<string, StompSubscription>();
 
-  connect() {
-    if (this.client?.connected) return;
+// 채팅 소켓 연결
+export const connectChatSocket = () => {
+  if (client?.connected) return;
 
-    this.client = new Client({
-      brokerURL: `${getBaseURL()}/ws`,
-      reconnectDelay: 5000,
-      debug: (msg) => {
-        if (process.env.NODE_ENV === "development") {
-          console.log("[STOMP]", msg);
-        }
-      },
-    });
+  client = new Client({
+    brokerURL: `${getBaseURL()}/ws`,
+    reconnectDelay: 5000,
+    debug: (msg) => {
+      if (process.env.NODE_ENV === "development") {
+        console.log("[STOMP]", msg);
+      }
+    },
+  });
 
-    this.client.activate();
-  }
+  client.activate();
+};
 
-  disconnect() {
-    this.subscriptions.forEach((sub) => sub.unsubscribe());
-    this.subscriptions.clear();
+export const disconnectChatSocket = () => {
+  subscriptions.forEach((sub) => sub.unsubscribe());
+  subscriptions.clear();
 
-    this.client?.deactivate();
-    this.client = null;
-  }
+  client?.deactivate();
+  client = null;
+};
 
-  subscribe<T>(destination: string, handler: MessageHandler<T>) {
-    if (!this.client?.connected) return;
-    if (this.subscriptions.has(destination)) return;
+// 채팅 소켓 구독
+export const subscribeChatSocket = <T>(destination: string, handler: MessageHandler<T>) => {
+  if (!client?.connected) return;
+  if (subscriptions.has(destination)) return;
 
-    const sub = this.client.subscribe(destination, (message: IMessage) => {
-      handler(JSON.parse(message.body));
-    });
+  const sub = client.subscribe(destination, (message: IMessage) => {
+    handler(JSON.parse(message.body));
+  });
 
-    this.subscriptions.set(destination, sub);
-  }
+  subscriptions.set(destination, sub);
+};
 
-  send(destination: string, body: unknown) {
-    if (!this.client?.connected) return;
+// 채팅 소켓 메시지 전송
+export const sendChatSocketMessage = (destination: string, body: unknown) => {
+  if (!client?.connected) return;
 
-    this.client.publish({
-      destination,
-      body: JSON.stringify(body),
-    });
-  }
-}
-
-export const chatSocket = new ChatSocket();
+  client.publish({
+    destination,
+    body: JSON.stringify(body),
+  });
+};

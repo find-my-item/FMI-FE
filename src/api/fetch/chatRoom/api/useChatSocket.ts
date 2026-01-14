@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { chatSocket } from "./chatSocket";
+import { connectChatSocket, disconnectChatSocket, subscribeChatSocket } from "./chatSocket";
 
 interface UseChatSocketOptions {
   onMessage?: (data: any) => void;
@@ -15,25 +15,22 @@ export const useChatSocket = ({
   onReadReceipt,
 }: UseChatSocketOptions = {}) => {
   useEffect(() => {
-    // 1. 연결
-    chatSocket.connect();
+    connectChatSocket();
 
-    // 2. 구독
     if (onMessage) {
-      chatSocket.subscribe("/user/queue/messages", onMessage);
+      subscribeChatSocket("/user/queue/messages", onMessage);
     }
 
     if (onListUpdate) {
-      chatSocket.subscribe("/user/queue/list-updates", onListUpdate);
+      subscribeChatSocket("/user/queue/list-updates", onListUpdate);
     }
 
     if (onReadReceipt) {
-      chatSocket.subscribe("/user/queue/read-receipts", onReadReceipt);
+      subscribeChatSocket("/user/queue/read-receipts", onReadReceipt);
     }
 
-    // 3. 페이지 이탈 시 정리
     return () => {
-      chatSocket.disconnect();
+      disconnectChatSocket();
     };
   }, []);
 };
