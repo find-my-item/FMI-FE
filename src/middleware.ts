@@ -21,8 +21,8 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
-  // 토큰이 없는 상황에서 보호된 페이지 접근하려고 할 때
-  if (isProtectPath && !accessToken && !refreshToken) {
+  // 리프레쉬 토큰이 없는 상황에서 보호된 페이지 접근하려고 할 때
+  if (isProtectPath && !refreshToken) {
     const loginUrl = new URL("/login", request.url);
     loginUrl.searchParams.set("callbackUrl", currentPath);
 
