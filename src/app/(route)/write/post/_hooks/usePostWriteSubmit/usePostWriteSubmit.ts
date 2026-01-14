@@ -9,7 +9,7 @@ interface UsePostWriteSubmitProps {
 }
 
 const usePostWriteSubmit = ({ methods }: UsePostWriteSubmitProps) => {
-  const { lat, lng, location, radius, type } = useWriteStore();
+  const { lat, lng, location, radius, type, clearLocation } = useWriteStore();
 
   useEffect(() => {
     methods.setValue("postType", type ?? "", { shouldValidate: true });
@@ -52,6 +52,7 @@ const usePostWriteSubmit = ({ methods }: UsePostWriteSubmitProps) => {
     if (!formData) return;
 
     postPosts(formData as unknown as PostPostsWriteRequestBody);
+    clearLocation();
   });
 
   return { onSubmit };

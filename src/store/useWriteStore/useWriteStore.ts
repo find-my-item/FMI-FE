@@ -13,6 +13,8 @@ type WriteStore = {
 
   type: PostType;
   setType: (type: PostType) => void;
+
+  clearLocation: () => void;
 };
 
 export const useWriteStore = create<WriteStore>((set) => ({
@@ -26,4 +28,5 @@ export const useWriteStore = create<WriteStore>((set) => ({
   setLocation: (location) => set({ location }),
   setRadius: (radius) => set({ radius }),
   setType: (type) => set({ type }),
+  clearLocation: () => set({ lat: null, lng: null, location: null, radius: null }),
 }));
