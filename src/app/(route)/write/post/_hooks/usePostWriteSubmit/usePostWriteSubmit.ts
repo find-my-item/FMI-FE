@@ -19,7 +19,17 @@ const usePostWriteSubmit = ({ methods }: UsePostWriteSubmitProps) => {
     methods.setValue("radius", radius ?? null, { shouldValidate: true });
   }, [type, address, lat, lng, radius, methods]);
 
-  const { mutateAsync: postPosts } = usePostPosts();
+  const canSubmit = (values: PostWriteFormValues) => {
+    if (!type) return false;
+    if (!address) return false;
+    if (lat == null || lng == null || radius == null) return false;
+    if (!values.category) return false;
+    if (!values.title || !values.content) return false;
+
+    return true;
+  };
+
+  const { mutateAsync: postPosts, isPending: isPosting } = usePostPosts();
 
   const toPostWriteFormData = (values: PostWriteFormValues): FormData | null => {
     if (!type || !values.category) return null;
@@ -55,7 +65,7 @@ const usePostWriteSubmit = ({ methods }: UsePostWriteSubmitProps) => {
     clearLocation();
   });
 
-  return { onSubmit };
+  return { onSubmit, isPosting, canSubmit };
 };
 
 export default usePostWriteSubmit;

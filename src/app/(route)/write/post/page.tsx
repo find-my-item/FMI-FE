@@ -30,7 +30,6 @@ const defaultValues: PostWriteFormValues = {
 };
 
 const WritePage = () => {
-  const [disabled, setDisabled] = useState(false);
   const [saveModalOpen, setSaveModalOpen] = useState(false);
 
   const methods = useForm<PostWriteFormValues>({
@@ -40,7 +39,9 @@ const WritePage = () => {
     shouldUnregister: false,
   });
 
-  const { onSubmit } = usePostWriteSubmit({ methods });
+  const { onSubmit, isPosting, canSubmit } = usePostWriteSubmit({ methods });
+  const values = methods.watch();
+  const isSubmitDisabled = !canSubmit(values) || isPosting;
 
   return (
     <>
@@ -61,7 +62,7 @@ const WritePage = () => {
 
           <LocationSection />
 
-          <ActionSection disabled={disabled} />
+          <ActionSection disabled={isSubmitDisabled} />
         </form>
 
         <ConfirmModal
