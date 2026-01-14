@@ -1,7 +1,7 @@
 import { NoticeCustomerState } from "../../_types/noticeContainer";
-import ListItem from "../../../list/_components/ListItem/ListItem";
 import { noticeListObject } from "../../_constant/noticeListObject";
 import Customer from "../Customer/Customer";
+import { PostListItem } from "@/components/domain";
 
 interface NoticeView {
   noticeCustomerState: NoticeCustomerState;
@@ -14,7 +14,7 @@ const NoticeView = ({ noticeCustomerState }: NoticeView) => {
         <Customer />
       ) : (
         noticeListObject.map((item) => (
-          <ListItem
+          <PostListItem
             post={{
               postId: item.id,
               title: item.title,
@@ -25,7 +25,10 @@ const NoticeView = ({ noticeCustomerState }: NoticeView) => {
               itemStatus: "SEARCHING",
               postType: "LOST",
               favoriteCount: 0,
+              viewCount: 0,
               createdAt: "",
+              new: false,
+              hot: false,
             }}
             linkState="notice"
           />

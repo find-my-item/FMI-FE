@@ -11,7 +11,10 @@ export const MOCK_POST_ITEM = {
   postType: "LOST" as const,
   category: "ELECTRONICS" as const,
   favoriteCount: 0,
+  viewCount: 2,
   createdAt: "2025-12-26 10:22:58",
+  new: false,
+  hot: false,
 };
 
 export const MOCK_POST_DEFAULT_DETAIL: GetDetailPostResponse = {
