@@ -29,11 +29,10 @@ const MypagePostsBottomSheet = ({ isOpen, onClose, state }: MypagePostsBottomShe
     return Array.from({ length: daysInMonth }, (_, i) => i + 1);
   }, [daysInMonth]);
 
-  const handleDayChange = (newValue: { year: number; month: number; day: number }) => {
-    const { year, month, day } = newValue;
+  const handleDayChange = (value: { year: number; month: number; day: number }) => {
+    const { year, month, day } = value;
 
     const maxDays = getDaysInMonth(new Date(year, month - 1));
-
     const adjustedDay = day > maxDays ? maxDays : day;
 
     setSelectDate({
@@ -47,7 +46,11 @@ const MypagePostsBottomSheet = ({ isOpen, onClose, state }: MypagePostsBottomShe
     <PopupLayout
       isOpen={isOpen}
       onClose={onClose}
-      className={cn("w-full gap-12 px-5 py-10 flex-col-center")}
+      className={cn(
+        "w-full gap-12 px-5 py-10 flex-col-center",
+        "[&_.picker-highlight]:before:hidden",
+        "[&_.picker-highlight]:after:!hidden"
+      )}
     >
       {state === "Date" && (
         <div className="w-full gap-8 flex-col-center">
@@ -68,7 +71,7 @@ const MypagePostsBottomSheet = ({ isOpen, onClose, state }: MypagePostsBottomShe
             wheelMode="normal"
             height={130}
             itemHeight={64.5}
-            className="flex w-full text-[20px] text-neutral-strong-default"
+            className="flex w-full border-none text-[20px] text-neutral-strong-default outline-none"
           >
             <Picker.Column name="year">
               {Array.from(
