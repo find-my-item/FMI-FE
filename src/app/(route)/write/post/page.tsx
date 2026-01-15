@@ -1,8 +1,10 @@
 "use client";
 
 import { Suspense, useEffect, useState } from "react";
+import NotFound from "@/app/not-found";
 import { useSearchParams } from "next/navigation";
-import { FormProvider, useForm } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
+import { useWriteStore } from "@/store";
 import { DetailHeader } from "@/components/layout";
 import { ConfirmModal } from "@/components/common";
 import { PostWriteFormValues } from "./_types/PostWriteType";
@@ -15,22 +17,9 @@ import {
   LocationSection,
   TitleSection,
 } from "./_components";
-import { useWriteStore } from "@/store";
-import NotFound from "@/app/not-found";
 
-const defaultValues: PostWriteFormValues = {
-  postType: "",
-  title: "",
-  date: "",
-  address: "",
-  latitude: null,
-  longitude: null,
-  radius: null,
-  category: "",
-  content: "",
-  images: [],
-  temporarySave: false,
-};
+// 2. 정적 위도/경도 수정
+// 3. 카테고리 타입 변환 로직 수정
 
 const WritePage = () => {
   const [saveModalOpen, setSaveModalOpen] = useState(false);
@@ -46,12 +35,7 @@ const WritePage = () => {
     if (postType === "find") setPostType("FOUND");
   }, [postType, setPostType]);
 
-  const methods = useForm<PostWriteFormValues>({
-    defaultValues,
-    mode: "onChange",
-    reValidateMode: "onChange",
-    shouldUnregister: false,
-  });
+  const methods = useFormContext<PostWriteFormValues>();
 
   const { onSubmit, isPosting, canSubmit } = usePostWriteSubmit({ methods });
   const values = methods.watch();
@@ -64,31 +48,29 @@ const WritePage = () => {
       </DetailHeader>
       <h1 className="sr-only">분실/습득 등록 페이지</h1>
 
-      <FormProvider {...methods}>
-        <form onSubmit={onSubmit} className="flex flex-col h-base">
-          <ImageSection />
+      <form onSubmit={onSubmit} className="flex flex-col h-base">
+        <ImageSection />
 
-          <CategorySection />
+        <CategorySection />
 
-          <TitleSection />
+        <TitleSection />
 
-          <ContentSection />
+        <ContentSection />
 
-          <LocationSection />
+        <LocationSection />
 
-          <ActionSection disabled={isSubmitDisabled} />
-        </form>
+        <ActionSection disabled={isSubmitDisabled} />
+      </form>
 
-        <ConfirmModal
-          size="small"
-          isOpen={saveModalOpen}
-          onClose={() => setSaveModalOpen(false)}
-          title="임시 저장한 게시글이 있습니다."
-          content="임시 저장한 내용을 불러오시겠어요?"
-          onConfirm={() => setSaveModalOpen(false)}
-          onCancel={() => setSaveModalOpen(false)}
-        />
-      </FormProvider>
+      <ConfirmModal
+        size="small"
+        isOpen={saveModalOpen}
+        onClose={() => setSaveModalOpen(false)}
+        title="임시 저장한 게시글이 있습니다."
+        content="임시 저장한 내용을 불러오시겠어요?"
+        onConfirm={() => setSaveModalOpen(false)}
+        onCancel={() => setSaveModalOpen(false)}
+      />
     </>
   );
 };

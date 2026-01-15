@@ -44,8 +44,7 @@ const BottomSheet = ({ locationInfo, radiusState }: BottomSheetProps) => {
     setWriteAddress(address);
     setWriteFullAddress(fullAddress);
 
-    // router.replace(`/write/post?type=${searchParams.get("type")}`);
-    router.replace(`/write/post?type=lost`);
+    router.back();
   };
 
   return (
