@@ -4,6 +4,7 @@ import { formatDate, formatCappedNumber } from "@/utils";
 import { NoticeChip } from "@/app/(route)/notice/_components";
 import PostChipSection from "../PostChipSection/PostChipSection";
 import { LABELS } from "../../LABELS";
+import { useDeletePostFavorites } from "@/api/fetch/post/api/useDeleteFavorites";
 
 interface PostDetailBodyProps {
   isBoardType: boolean;
@@ -15,6 +16,7 @@ const PostDetailBody = ({ isBoardType, label, data }: PostDetailBodyProps) => {
   console.log("data: ", data);
   const { title, content, favoriteCount, itemStatus, category, createdAt, viewCount } = data;
   const { mutate } = usePostFavorites(data.postId);
+  const { mutate: deleteMutate } = useDeletePostFavorites(data.postId);
 
   return (
     <article>
