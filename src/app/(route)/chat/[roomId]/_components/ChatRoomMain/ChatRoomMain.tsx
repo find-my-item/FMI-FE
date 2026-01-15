@@ -13,7 +13,7 @@ interface ChatRoomMainProps {
 const ChatRoomMain = ({ chatMessages }: ChatRoomMainProps) => {
   const { chats } = useChatRoom();
   const scrollRef = useRef<HTMLDivElement>(null);
-  useChatScroll(scrollRef, chats);
+  useChatScroll(scrollRef, chatMessages);
 
   return (
     <div

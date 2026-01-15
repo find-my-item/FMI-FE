@@ -1,12 +1,15 @@
 import { RefObject, useEffect } from "react";
-import { MockChatDataType } from "@/app/(route)/chat/_types/MockChatDataType";
+import { ChatMessage } from "@/api/fetch/ChatMessage/types/ChatMessageTypes";
 
-const useChatScroll = (scrollRef: RefObject<HTMLDivElement | null>, chats: MockChatDataType[]) => {
+const useChatScroll = (
+  scrollRef: RefObject<HTMLDivElement | null>,
+  chatMessages: ChatMessage[]
+) => {
   useEffect(() => {
     if (!scrollRef.current) return;
 
     scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-  }, [chats]);
+  }, [chatMessages]);
 };
 
 export default useChatScroll;
