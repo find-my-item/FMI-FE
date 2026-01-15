@@ -18,9 +18,6 @@ import {
   TitleSection,
 } from "./_components";
 
-// 2. 정적 위도/경도 수정
-// 3. 카테고리 타입 변환 로직 수정
-
 const WritePage = () => {
   const [saveModalOpen, setSaveModalOpen] = useState(false);
   const searchParams = useSearchParams();

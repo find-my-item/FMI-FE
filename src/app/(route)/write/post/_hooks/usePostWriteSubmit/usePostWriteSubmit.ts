@@ -35,7 +35,6 @@ const usePostWriteSubmit = ({ methods }: UsePostWriteSubmitProps) => {
     if (!postType || !values.category) return null;
     if (!address || lat == null || lng == null || radius == null) return null;
 
-    // TODO(지권): 정적 값 수정
     const request = {
       postType: postType,
       title: values.title,
