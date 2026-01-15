@@ -1,30 +1,23 @@
 "use client";
 
-import { Dispatch, SetStateAction, useRef, type DragEvent } from "react";
+import { useRef, type DragEvent } from "react";
 import Image from "next/image";
 import { Icon } from "@/components/common";
 import { cn } from "@/utils";
 
 interface ImagePreviewListProps {
-  images: string[];
-  setImages: Dispatch<SetStateAction<string[]>>;
-  setImgTotalCount: Dispatch<SetStateAction<number>>;
+  images: { id: string; previewUrl: string }[];
+  onRemove: (index: number) => void;
+  onMove: (from: number, to: number) => void;
 }
 
-const ImagePreviewList = ({ images, setImages, setImgTotalCount }: ImagePreviewListProps) => {
+const ImagePreviewList = ({ images, onRemove, onMove }: ImagePreviewListProps) => {
   const dragFromIndexRef = useRef<number | null>(null);
 
   const reorderImages = (from: number, to: number) => {
     if (from === to) return;
-
-    setImages((prev) => {
-      if (from < 0 || to < 0 || from >= prev.length || to >= prev.length) return prev;
-
-      const next = [...prev];
-      const [moved] = next.splice(from, 1);
-      next.splice(to, 0, moved);
-      return next;
-    });
+    if (from < 0 || to < 0 || from >= images.length || to >= images.length) return;
+    onMove(from, to);
   };
 
   const handleImageDrop = (e: DragEvent<HTMLDivElement>, to: number) => {
@@ -41,7 +34,7 @@ const ImagePreviewList = ({ images, setImages, setImgTotalCount }: ImagePreviewL
     <div role="list" aria-label="이미지 미리보기 목록" className="flex gap-2">
       {images.map((image, index) => (
         <div
-          key={index}
+          key={image.id}
           className={cn(
             "relative shrink-0",
             "cursor-grab active:cursor-grabbing",
@@ -66,7 +59,7 @@ const ImagePreviewList = ({ images, setImages, setImgTotalCount }: ImagePreviewL
           }}
         >
           <Image
-            src={image}
+            src={image.previewUrl}
             alt=""
             width={104}
             height={104}
@@ -83,10 +76,7 @@ const ImagePreviewList = ({ images, setImages, setImgTotalCount }: ImagePreviewL
           <button
             type="button"
             aria-label="이미지 삭제"
-            onClick={() => {
-              setImages((prev) => prev.filter((_, idx) => idx !== index));
-              setImgTotalCount((prev) => prev - 1);
-            }}
+            onClick={() => onRemove(index)}
             className="absolute right-1.5 top-1.5 rounded-full border border-divider-default bg-[#5D5D5D] p-[5px]"
           >
             <Icon name="Delete" size={10} />

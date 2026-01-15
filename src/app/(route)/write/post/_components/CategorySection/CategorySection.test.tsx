@@ -2,6 +2,17 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import CategorySection from "./CategorySection";
 
+const setValueMock = jest.fn();
+const useWatchMock = jest.fn((args: unknown) => undefined);
+
+jest.mock("react-hook-form", () => ({
+  useFormContext: () => ({
+    control: {},
+    setValue: setValueMock,
+  }),
+  useWatch: (args: unknown) => useWatchMock(args),
+}));
+
 jest.mock("@/components/common", () => ({
   Icon: ({ name }: { name: string }) => <span data-testid={`icon-${name}`}>{name}</span>,
   RequiredText: () => <span data-testid="required-text">*</span>,

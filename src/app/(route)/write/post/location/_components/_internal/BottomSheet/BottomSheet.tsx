@@ -1,14 +1,50 @@
-import { Button } from "@/components/common";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useWriteStore } from "@/store";
 import { Radius } from "@/types";
+import { Button } from "@/components/common";
 import { DISTANCE_OPTIONS } from "./DISTANCE_OPTIONS";
 
-interface BottomSheetProps {
+type LocationInfo = {
   location: string | null;
+  lat: number | null;
+  lng: number | null;
+};
+
+type RadiusState = {
   radius: Radius;
   setRadius: (radius: Radius) => void;
+};
+
+interface BottomSheetProps {
+  locationInfo: LocationInfo;
+  radiusState: RadiusState;
 }
 
-const BottomSheet = ({ location, radius, setRadius }: BottomSheetProps) => {
+const BottomSheet = ({ locationInfo, radiusState }: BottomSheetProps) => {
+  const { location, lat, lng } = locationInfo;
+  const { radius, setRadius } = radiusState;
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const isApplyDisabled = lat === null || lng === null || radius === null || location === null;
+
+  const {
+    setLatLng: setWriteLatLng,
+    setRadius: setWriteRadius,
+    setLocation: setWriteLocation,
+  } = useWriteStore();
+
+  const commitLocationRange = () => {
+    if (isApplyDisabled) return;
+
+    setWriteLatLng(lat, lng);
+    setWriteRadius(radius);
+    setWriteLocation(location);
+
+    // router.replace(`/write/post?type=${searchParams.get("type")}`);
+    router.replace(`/write/post?type=lost`);
+  };
+
   return (
     <section className="rounded-t-[20px] px-5 py-10 flex-col-center">
       <div className="mb-12 gap-4 flex-col-center">
@@ -36,7 +72,9 @@ const BottomSheet = ({ location, radius, setRadius }: BottomSheetProps) => {
         </div>
       </div>
 
-      <Button className="min-h-11 w-full">적용하기</Button>
+      <Button className="min-h-11 w-full" onClick={commitLocationRange} disabled={isApplyDisabled}>
+        적용하기
+      </Button>
     </section>
   );
 };

@@ -2,8 +2,16 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import TitleSection from "./TitleSection";
 
+const registerMock = jest.fn(() => ({ name: "title" }));
+
 jest.mock("@/components/common", () => ({
   RequiredText: () => <span data-testid="required-text">*</span>,
+}));
+
+jest.mock("react-hook-form", () => ({
+  useFormContext: () => ({
+    register: registerMock,
+  }),
 }));
 
 describe("TitleSection", () => {
@@ -17,7 +25,17 @@ describe("TitleSection", () => {
 
     const input = screen.getByPlaceholderText("제목을 입력해 주세요.");
     expect(input).toBeInTheDocument();
-    expect(input).toHaveAttribute("required");
+  });
+
+  it("register가 올바른 유효성 검사 옵션과 함께 호출되어야 한다", () => {
+    render(<TitleSection />);
+    expect(registerMock).toHaveBeenCalledWith(
+      "title",
+      expect.objectContaining({
+        required: "제목을 입력해 주세요.",
+        maxLength: { value: 50, message: "제목은 50자 이내로 입력해 주세요." },
+      })
+    );
   });
 
   it("라벨 텍스트와 RequiredText가 함께 표시되어야 한다", () => {

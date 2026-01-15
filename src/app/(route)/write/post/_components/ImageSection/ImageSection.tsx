@@ -1,40 +1,43 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useFieldArray, useFormContext } from "react-hook-form";
 import { Icon } from "@/components/common";
 import { ImagePreviewList } from "../_internal";
 import { useToast } from "@/context/ToastContext";
+import { PostWriteFormValues } from "../../_types/PostWriteType";
 
 const ImageSection = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [images, setImages] = useState<string[]>([]);
-  const [imgTotalCount, setImgTotalCount] = useState(0);
   const { addToast } = useToast();
 
-  const handleImgUpload = () => {
+  const { control } = useFormContext<PostWriteFormValues>();
+
+  const { fields, append, remove, move } = useFieldArray({ control, name: "images" });
+
+  const openImagePicker = () => {
     fileInputRef.current?.click();
   };
 
-  const handleImageUpload = () => {
+  const handleImageChange = () => {
     const files = fileInputRef.current?.files;
     if (!files) return;
 
-    const fileArray = Array.from(files);
-    const validFiles = fileArray.filter((file) => file.type.startsWith("image/"));
-    const previewUrls = validFiles.map((file) => URL.createObjectURL(file));
+    const fileArray = Array.from(files).filter((file) => file.type.startsWith("image/"));
 
-    const currentCount = images.length;
-    const remainCount = 5 - currentCount;
+    const remainCount = 5 - fields.length;
 
-    if (remainCount <= 0 || previewUrls.length > remainCount) {
+    if (remainCount <= 0 || fileArray.length > remainCount) {
       addToast("이미지는 최대 5장만 첨부할 수 있어요.", "warning");
       return;
     }
 
-    const willAdd = previewUrls.slice(0, remainCount);
-
-    setImages((prev) => [...prev, ...willAdd]);
-    setImgTotalCount(currentCount + willAdd.length);
+    fileArray.slice(0, remainCount).forEach((file) => {
+      append({
+        file,
+        previewUrl: URL.createObjectURL(file),
+      });
+    });
   };
 
   return (
@@ -45,26 +48,22 @@ const ImageSection = () => {
         className="hidden"
         multiple
         ref={fileInputRef}
-        onChange={handleImageUpload}
+        onChange={handleImageChange}
       />
 
       <div className="hide-scrollbar flex flex-nowrap items-center gap-4 overflow-x-scroll">
         <button
           type="button"
           aria-label="이미지 업로드"
-          onClick={handleImgUpload}
+          onClick={openImagePicker}
           className="size-[104px] shrink-0 rounded-[6px] bg-flatGray-25 flex-col-center"
         >
           <Icon name="Camera" size={32} />
           <span className="select-none text-caption1-regular text-flatGray-400">
-            ({imgTotalCount}/5)
+            ({fields.length}/5)
           </span>
         </button>
-        <ImagePreviewList
-          images={images}
-          setImages={setImages}
-          setImgTotalCount={setImgTotalCount}
-        />
+        <ImagePreviewList images={fields} onRemove={remove} onMove={move} />
       </div>
       <span className="text-caption1-regular text-neutral-normal-placeholder">
         최대 10MB, 총 5장의 이미지를 첨부할 수 있습니다. (jpg, jpeg, png)
