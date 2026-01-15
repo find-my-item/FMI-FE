@@ -9,14 +9,14 @@ import { PostListItem } from "@/components/domain";
 
 const page = () => {
   const [isBottomOpen, setIsBottomOpen] = useState(false);
-  const [bottomState, setBottomState] = useState<"Date" | "Filter">("Date");
+  const [bottomStateType, setBottomStateType] = useState<"Date" | "Filter">("Date");
 
   const handleFilterClick = (name: string) => {
     setIsBottomOpen(true);
     if (name === "기간") {
-      setBottomState("Date");
+      setBottomStateType("Date");
     } else {
-      setBottomState("Filter");
+      setBottomStateType("Filter");
     }
   };
 
@@ -48,7 +48,7 @@ const page = () => {
           <MypagePostsBottomSheet
             isOpen={isBottomOpen}
             onClose={() => setIsBottomOpen(false)}
-            state={bottomState}
+            state={bottomStateType}
           />
         </section>
 
