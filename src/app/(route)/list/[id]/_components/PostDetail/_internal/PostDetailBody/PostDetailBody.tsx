@@ -1,10 +1,10 @@
 import { Icon } from "@/components/common";
-import { PostDetailData, usePostFavorites } from "@/api/fetch/post";
+import { PostDetailData } from "@/api/fetch/post";
 import { formatDate, formatCappedNumber } from "@/utils";
 import { NoticeChip } from "@/app/(route)/notice/_components";
 import PostChipSection from "../PostChipSection/PostChipSection";
 import { LABELS } from "../../LABELS";
-import { useDeletePostFavorites } from "@/api/fetch/post/api/useDeleteFavorites";
+import { useToggleFavorite } from "../../../../_hooks/useToggleFavorite";
 
 interface PostDetailBodyProps {
   isBoardType: boolean;
@@ -13,10 +13,8 @@ interface PostDetailBodyProps {
 }
 
 const PostDetailBody = ({ isBoardType, label, data }: PostDetailBodyProps) => {
-  console.log("data: ", data);
   const { title, content, favoriteCount, itemStatus, category, createdAt, viewCount } = data;
-  const { mutate } = usePostFavorites(data.postId);
-  const { mutate: deleteMutate } = useDeletePostFavorites(data.postId);
+  const { handleToggleFavorite, isPending } = useToggleFavorite({ postId: data.postId });
 
   return (
     <article>
@@ -41,7 +39,8 @@ const PostDetailBody = ({ isBoardType, label, data }: PostDetailBodyProps) => {
             <button
               type="button"
               className="flex gap-1"
-              onClick={() => mutate({ postId: data.postId })}
+              disabled={isPending}
+              onClick={() => handleToggleFavorite(data.favoriteStatus)}
             >
               <Icon name="Star" size={20} />
               <span>즐겨찾기</span>
