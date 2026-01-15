@@ -54,13 +54,25 @@ export const disconnectChatSocket = () => {
 // 소켓 구독
 export const subscribeChatSocket = <T>(destination: string, handler: MessageHandler<T>) => {
   const subscribe = () => {
-    if (!client || subscriptions.has(destination)) return;
+    if (!client) return;
+
+    if (subscriptions.has(destination)) {
+      console.log(`[STOMP] Already subscribed to ${destination}`);
+      return;
+    }
 
     const sub = client.subscribe(destination, (message: IMessage) => {
-      handler(JSON.parse(message.body));
+      console.log(`[STOMP] Received message on ${destination}:`, message.body);
+      try {
+        const parsed = JSON.parse(message.body);
+        handler(parsed);
+      } catch (error) {
+        console.error("[STOMP] Failed to parse message:", error);
+      }
     });
 
     subscriptions.set(destination, sub);
+    console.log(`[STOMP] Subscribed to ${destination}`);
   };
 
   // 아직 연결 안 됐으면 대기열에 저장
