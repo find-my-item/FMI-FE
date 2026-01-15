@@ -8,51 +8,51 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 
 // TODO(지권): API URL https 변경
 
-const securityHeaders = [
-  {
-    key: "X-Frame-Options",
-    value: "DENY",
-  },
-  {
-    key: "Content-Security-Policy-Report-Only",
-    value: `
-    default-src 'self';
-    upgrade-insecure-requests;
-    script-src 'self'
-      https://www.googletagmanager.com
-      https://www.google-analytics.com
-      https://dapi.kakao.com
-      https://t1.kakaocdn.net
-      https://t1.daumcdn.net
-      https://va.vercel-scripts.com
-      'unsafe-inline';
-    connect-src 'self'
-      https://www.google-analytics.com
-      https://*.sentry.io
-      http://52.79.135.181;
-    img-src 'self' data:
-      https://www.google-analytics.com
-      https://*.daumcdn.net;
-    style-src 'self' 'unsafe-inline';
-    font-src 'self';
-    worker-src 'self' blob:;
-    frame-ancestors 'none';
-  `.replace(/\n/g, ""),
-  },
-  {
-    key: "Permissions-Policy",
-    value: "microphone=(), payment=()",
-    // value: "camera=(), microphone=(), payment=()",
-  },
-  {
-    key: "X-Content-Type-Options",
-    value: "nosniff",
-  },
-  {
-    key: "Referrer-Policy",
-    value: "strict-origin-when-cross-origin",
-  },
-];
+// const securityHeaders = [
+//   {
+//     key: "X-Frame-Options",
+//     value: "DENY",
+//   },
+//   {
+//     key: "Content-Security-Policy-Report-Only",
+//     value: `
+//     default-src 'self';
+//     upgrade-insecure-requests;
+//     script-src 'self'
+//       https://www.googletagmanager.com
+//       https://www.google-analytics.com
+//       https://dapi.kakao.com
+//       https://t1.kakaocdn.net
+//       https://t1.daumcdn.net
+//       https://va.vercel-scripts.com
+//       'unsafe-inline';
+//     connect-src 'self'
+//       https://www.google-analytics.com
+//       https://*.sentry.io
+//       http://52.79.135.181;
+//     img-src 'self' data:
+//       https://www.google-analytics.com
+//       https://*.daumcdn.net;
+//     style-src 'self' 'unsafe-inline';
+//     font-src 'self';
+//     worker-src 'self' blob:;
+//     frame-ancestors 'none';
+//   `.replace(/\n/g, ""),
+//   },
+//   {
+//     key: "Permissions-Policy",
+//     value: "microphone=(), payment=()",
+//     // value: "camera=(), microphone=(), payment=()",
+//   },
+//   {
+//     key: "X-Content-Type-Options",
+//     value: "nosniff",
+//   },
+//   {
+//     key: "Referrer-Policy",
+//     value: "strict-origin-when-cross-origin",
+//   },
+// ];
 
 const nextConfig: NextConfig = {
   experimental: {
@@ -119,14 +119,14 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  async headers() {
-    return [
-      {
-        source: "/:path*",
-        headers: securityHeaders,
-      },
-    ];
-  },
+  // async headers() {
+  //   return [
+  //     {
+  //       source: "/:path*",
+  //       headers: securityHeaders,
+  //     },
+  //   ];
+  // },
 };
 
 // export default nextConfig;
