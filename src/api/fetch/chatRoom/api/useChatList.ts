@@ -1,5 +1,5 @@
 import useAppInfiniteQuery from "@/api/_base/query/useAppInfiniteQuery";
-import { ChatListType, ChatRoom } from "@/api/fetch/chatRoom/types/ChatListType";
+import { ChatListType, ChatRoom } from "@/api/fetch/chatRoom/types/ChatRoomType";
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 import { useSearchParams } from "next/navigation";
 import QUERY_PARAMS from "./QUERY_PARAMS";
