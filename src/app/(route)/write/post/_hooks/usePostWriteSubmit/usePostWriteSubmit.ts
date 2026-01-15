@@ -39,7 +39,7 @@ const usePostWriteSubmit = ({ methods }: UsePostWriteSubmitProps) => {
     const request = {
       postType: postType,
       title: values.title,
-      category: "BAG",
+      category: values.category,
       content: values.content,
       address: address,
       latitude: lat,
