@@ -3,9 +3,11 @@ import { ListView } from "@/app/(route)/chat/_components";
 
 const page = () => {
   return (
-    <Suspense fallback="">
-      <ListView />
-    </Suspense>
+    <div className="h-base">
+      <Suspense fallback="">
+        <ListView />
+      </Suspense>
+    </div>
   );
 };
 
