@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+import { throttle } from "lodash";
 import { usePostFavorites } from "@/api/fetch/post";
 import { useDeletePostFavorites } from "@/api/fetch/post/api/useDeleteFavorites";
 
@@ -9,9 +11,13 @@ export const useToggleFavorite = ({ postId }: ToggleFavoriteProps) => {
   const { mutate: postFavorite, isPending: postPending } = usePostFavorites(postId);
   const { mutate: deleteFavorite, isPending: deletePending } = useDeletePostFavorites(postId);
 
-  const handleToggleFavorite = (favoriteStatus: boolean) => {
-    favoriteStatus ? deleteFavorite({ postId }) : postFavorite({ postId });
-  };
+  const handleToggleFavorite = useMemo(
+    () =>
+      throttle((favoriteStatus: boolean) => {
+        favoriteStatus ? deleteFavorite({ postId }) : postFavorite({ postId });
+      }, 300),
+    [postId, postFavorite, deleteFavorite]
+  );
 
   return {
     handleToggleFavorite,
