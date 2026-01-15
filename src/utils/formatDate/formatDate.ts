@@ -3,7 +3,14 @@ const MS_IN_HOUR = 60 * MS_IN_MINUTE;
 const MS_IN_DAY = 24 * MS_IN_HOUR;
 
 const formatDate = (date: string) => {
-  const targetDate = new Date(date);
+  let targetDate: Date;
+
+  if (date.includes("Z") || date.includes("+") || date.includes("-", 10)) {
+    targetDate = new Date(date);
+  } else {
+    targetDate = new Date(`${date}Z`);
+  }
+
   if (Number.isNaN(targetDate.getTime())) {
     return "";
   }

@@ -30,7 +30,7 @@ const ChatBox = ({ chat, nextSender, lastChat }: ChatBoxProps) => {
 
   const sender = userInfo?.result.userId === senderId ? "me" : "other";
   const marginBottom = lastChat ? "mb-0" : nextSender === sender ? "mb-2" : "mb-4";
-
+  console.log(createdAt, content);
   const style = CHAT_SENDER_STYLE[sender];
   return (
     <div className={cn("flex items-end gap-2", style.container, marginBottom)}>
