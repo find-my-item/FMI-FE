@@ -9,6 +9,7 @@ import { getDaysInMonth } from "date-fns";
 import { Button, Filter } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
 import { MYPAGE_POSTS_SHEET_FILTER } from "../../_constants/MYPAGE_POSTS_SHEET_FILTER";
+import { FilterModeType } from "../../_types/FilterModeType";
 
 const DateWheel = ({
   dateArray,
@@ -73,7 +74,7 @@ const DateWheel = ({
 interface MypagePostsBottomSheetProps {
   isOpen: boolean;
   onClose: () => void;
-  mode: "Date" | "Filter";
+  mode: FilterModeType;
 }
 
 const MypagePostsBottomSheet = ({ isOpen, onClose, mode }: MypagePostsBottomSheetProps) => {

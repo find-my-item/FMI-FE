@@ -2,10 +2,11 @@ import { Filter } from "@/components/common";
 import { MYPAGE_POSTS_FILTER } from "../../_constants/MYPAGE_POSTS_FILTER";
 import MypagePostsBottomSheet from "../MypagePostsBottomSheet/MypagePostsBottomSheet";
 import { useState } from "react";
+import { FilterModeType } from "../../_types/FilterModeType";
 
 const MypagePostsFilter = () => {
   const [isBottomOpen, setIsBottomOpen] = useState(false);
-  const [bottomStateType, setBottomStateType] = useState<"Date" | "Filter">("Date");
+  const [bottomStateType, setBottomStateType] = useState<FilterModeType>("Date");
 
   const handleFilterClick = (name: string) => {
     setIsBottomOpen(true);
