@@ -30,7 +30,7 @@ const page = () => {
           <InputSearch name="search" mode="onChange" onEnter={(v) => console.log(v)} />
         </section>
 
-        <section className="flex w-full gap-2 overflow-x-auto px-5 py-[14px]">
+        <section className="hidden-scrollbar flex w-full gap-2 overflow-x-auto px-5 py-[14px]">
           <h2 className="sr-only">필터링 영역</h2>
           {MYPAGE_POSTS_FILTER.map((item) => (
             <Filter
@@ -48,7 +48,7 @@ const page = () => {
           <MypagePostsBottomSheet
             isOpen={isBottomOpen}
             onClose={() => setIsBottomOpen(false)}
-            state={bottomStateType}
+            mode={bottomStateType}
           />
         </section>
 

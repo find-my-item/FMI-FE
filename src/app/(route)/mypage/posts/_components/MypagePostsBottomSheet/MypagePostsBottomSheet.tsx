@@ -3,13 +3,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperType } from "swiper";
-import "swiper/css"; // Swiper 기본 스타일 필수
-import { Mousewheel } from "swiper/modules"; // 👈 모듈 추가
-
+import { Mousewheel } from "swiper/modules";
+import "swiper/css";
 import { cn } from "@/utils";
 import { getDaysInMonth } from "date-fns";
-import { Button, Filter } from "@/components/common"; // 기존 컴포넌트 유지
-import { PopupLayout } from "@/components/domain"; // 기존 컴포넌트 유지
+import { Button, Filter } from "@/components/common";
+import { PopupLayout } from "@/components/domain";
+import { MYPAGE_POSTS_SHEET_FILTER } from "../../_constants/MYPAGE_POSTS_SHEET_FILTER";
 
 // ----------------------------------------------------------------------
 // 1. [재사용 컴포넌트] Wheel (각 컬럼 역할)
@@ -21,7 +21,17 @@ interface WheelProps {
   label?: string; // "년", "월", "일" 텍스트
 }
 
-const Wheel = ({ data, selected, onSelected, label }: WheelProps) => {
+const Wheel = ({
+  data,
+  selected,
+  onSelected,
+  label,
+}: {
+  data: number[];
+  selected: number;
+  onSelected: (value: number) => void;
+  label?: string;
+}) => {
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
 
   // 데이터가 바뀌거나 초기값 변경 시 슬라이드 위치 동기화
@@ -49,7 +59,7 @@ const Wheel = ({ data, selected, onSelected, label }: WheelProps) => {
         initialSlide={data.indexOf(selected)}
         className="h-full w-full"
         modules={[Mousewheel]}
-        // 👇 2. 마우스 휠 활성화 및 감도 조절
+        //  2. 마우스 휠 활성화 및 감도 조절
         mousewheel={{
           forceToAxis: true, // 세로 스크롤만 허용 (가로 스크롤 방지)
           sensitivity: 0.5, // 휠 감도 조절 (너무 빠르면 낮추세요)
@@ -71,16 +81,13 @@ const Wheel = ({ data, selected, onSelected, label }: WheelProps) => {
   );
 };
 
-// ----------------------------------------------------------------------
-// 2. [메인 컴포넌트] MypagePostsBottomSheet
-// ----------------------------------------------------------------------
 interface MypagePostsBottomSheetProps {
   isOpen: boolean;
   onClose: () => void;
-  state: "Date" | "Filter";
+  mode: "Date" | "Filter";
 }
 
-const MypagePostsBottomSheet = ({ isOpen, onClose, state }: MypagePostsBottomSheetProps) => {
+const MypagePostsBottomSheet = ({ isOpen, onClose, mode }: MypagePostsBottomSheetProps) => {
   const today = new Date();
 
   // 통합 상태 관리
@@ -126,7 +133,7 @@ const MypagePostsBottomSheet = ({ isOpen, onClose, state }: MypagePostsBottomShe
       onClose={onClose}
       className={cn("w-full gap-12 px-5 py-10 flex-col-center")}
     >
-      {state === "Date" && (
+      {mode === "Date" && (
         <div className="w-full gap-8 flex-col-center">
           <h2 className="text-h2-medium">기간설정</h2>
 
@@ -140,16 +147,13 @@ const MypagePostsBottomSheet = ({ isOpen, onClose, state }: MypagePostsBottomShe
             </Filter>
           </div>
 
-          {/* 🔥 Swiper 커스텀 Picker 영역 */}
           <div className="flex w-full items-center justify-between px-4">
-            {/* 년도 */}
             <Wheel
               data={years}
               selected={selectDate.year}
               onSelected={(val) => handleDateChange("year", val)}
             />
 
-            {/* 월 */}
             <Wheel
               data={months}
               selected={selectDate.month}
@@ -157,7 +161,6 @@ const MypagePostsBottomSheet = ({ isOpen, onClose, state }: MypagePostsBottomShe
               label="월"
             />
 
-            {/* 일 */}
             <Wheel
               data={days}
               selected={selectDate.day}
@@ -169,10 +172,21 @@ const MypagePostsBottomSheet = ({ isOpen, onClose, state }: MypagePostsBottomShe
       )}
 
       {/* Filter 영역 (기존 코드 유지) */}
-      {state === "Filter" && (
+      {mode === "Filter" && (
         <div className="flex gap-8 flex-col-center">
-          {/* ... 필터 내용 ... */}
-          <div>필터 영역입니다</div>
+          <h2 className="text-h2-medium text-layout-header-default">필터</h2>
+          {MYPAGE_POSTS_SHEET_FILTER.map((item) => (
+            <div key={item.title} className="flex w-full flex-col gap-4">
+              <h3 className="text-h3-semibold text-layout-header-default">{item.title}</h3>
+              <div className="flex flex-wrap gap-2">
+                {item.kind.map((item) => (
+                  <Filter key={item} ariaLabel={item} onSelected={false} className="px-[18px] py-2">
+                    {item}
+                  </Filter>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       )}
 
