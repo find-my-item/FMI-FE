@@ -22,3 +22,20 @@ export interface ChatListType {
   chatRooms: ChatRoom[];
   nextCursor: string | null;
 }
+
+export interface ChatMessageResponse {
+  messageId: number;
+  roomId: number;
+  senderId: number;
+  content: string;
+  messageType: "TEXT" | "IMAGE";
+  createdAt: string;
+}
+
+export interface ChatListUpdateResponse {
+  roomId: number;
+  messageType: "IMAGE" | "TEXT";
+  lastMessage: string | null;
+  lastMessageSentAt: string;
+  unreadCount: number;
+}
