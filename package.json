@@ -40,7 +40,6 @@
     "react-hook-form": "^7.71.0",
     "react-intersection-observer": "^10.0.0",
     "react-kakao-maps-sdk": "^1.2.0",
-    "react-mobile-picker": "^1.2.0",
     "swiper": "^12.0.3",
     "zod": "^4.1.5",
     "zustand": "^5.0.8"

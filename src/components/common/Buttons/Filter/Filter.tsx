@@ -71,7 +71,8 @@ const Filter = ({
         onSelected &&
           !loading &&
           "text-white bg-fill-neutralInversed-normal-enteredSelected hover:text-white active:text-white active:bg-fill-neutralInversed-normal-enteredSelected",
-        onSelected && loading && "bg-fill-neutralInversed-normal-disabled"
+        onSelected && loading && "bg-fill-neutralInversed-normal-disabled",
+        props.className
       )}
     >
       {loading ? (
