@@ -60,7 +60,6 @@ const DateWheel = ({
             )}
           >
             <div className="flex-center">
-              {" "}
               {item}
               {label && <span>{label}</span>}
             </div>
@@ -125,10 +124,10 @@ const MypagePostsBottomSheet = ({ isOpen, onClose, mode }: MypagePostsBottomShee
 
           {/* 상단 탭 버튼 */}
           <div className="flex gap-[14px]">
-            <Filter ariaLabel="시작일" onSelected={true} className="px-10 py-2">
+            <Filter ariaLabel="시작일" onSelected={true} className="!px-10 !py-2">
               시작일
             </Filter>
-            <Filter ariaLabel="종료일" onSelected={false}>
+            <Filter ariaLabel="종료일" onSelected={false} className="!px-10 !py-2">
               종료일
             </Filter>
           </div>
