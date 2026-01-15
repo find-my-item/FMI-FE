@@ -1,3 +1,4 @@
+import { withSentryConfig } from "@sentry/nextjs";
 import type { NextConfig } from "next";
 
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
@@ -5,14 +6,38 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
   openAnalyzer: process.env.ANALYZE === "true",
 });
 
+// TODO(지권): API URL https 변경
+
 const securityHeaders = [
   {
     key: "X-Frame-Options",
     value: "DENY",
   },
   {
-    key: "Content-Security-Policy",
-    value: "frame-ancestors 'none';",
+    key: "Content-Security-Policy-Report-Only",
+    value: `
+    default-src 'self';
+    upgrade-insecure-requests;
+    script-src 'self'
+      https://www.googletagmanager.com
+      https://www.google-analytics.com
+      https://dapi.kakao.com
+      https://t1.kakaocdn.net
+      https://t1.daumcdn.net
+      https://va.vercel-scripts.com
+      'unsafe-inline';
+    connect-src 'self'
+      https://www.google-analytics.com
+      https://*.sentry.io
+      http://52.79.135.181;
+    img-src 'self' data:
+      https://www.google-analytics.com
+      https://*.daumcdn.net;
+    style-src 'self' 'unsafe-inline';
+    font-src 'self';
+    worker-src 'self' blob:;
+    frame-ancestors 'none';
+  `.replace(/\n/g, ""),
   },
   {
     key: "Permissions-Policy",
@@ -71,8 +96,22 @@ const nextConfig: NextConfig = {
     });
     return config;
   },
+
   images: {
-    domains: ["images.mypetlife.co.kr", "i.namu.wiki", "picsum.photos"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.mypetlife.co.kr",
+      },
+      {
+        protocol: "https",
+        hostname: "i.namu.wiki",
+      },
+      {
+        protocol: "https",
+        hostname: "picsum.photos",
+      },
+    ],
   },
 
   async headers() {
@@ -86,4 +125,40 @@ const nextConfig: NextConfig = {
 };
 
 // export default nextConfig;
-export default withBundleAnalyzer(nextConfig);
+export default withSentryConfig(withBundleAnalyzer(nextConfig), {
+  // For all available options, see:
+  // https://www.npmjs.com/package/@sentry/webpack-plugin#options
+
+  org: "finditem",
+
+  project: "javascript-nextjs",
+
+  // Only print logs for uploading source maps in CI
+  silent: !process.env.CI,
+
+  // For all available options, see:
+  // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
+
+  // Upload a larger set of source maps for prettier stack traces (increases build time)
+  widenClientFileUpload: true,
+
+  // Uncomment to route browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers.
+  // This can increase your server load as well as your hosting bill.
+  // Note: Check that the configured route will not match with your Next.js middleware, otherwise reporting of client-
+  // side errors will fail.
+  // tunnelRoute: "/monitoring",
+
+  webpack: {
+    // Enables automatic instrumentation of Vercel Cron Monitors. (Does not yet work with App Router route handlers.)
+    // See the following for more information:
+    // https://docs.sentry.io/product/crons/
+    // https://vercel.com/docs/cron-jobs
+    automaticVercelMonitors: true,
+
+    // Tree-shaking options for reducing bundle size
+    treeshake: {
+      // Automatically tree-shake Sentry logger statements to reduce bundle size
+      removeDebugLogging: true,
+    },
+  },
+});
