@@ -5,15 +5,26 @@ import { useState } from "react";
 import { FilterModeType } from "../../_types/FilterModeType";
 
 const MypagePostsFilter = () => {
-  const [isBottomOpen, setIsBottomOpen] = useState(false);
-  const [bottomStateType, setBottomStateType] = useState<FilterModeType>("Date");
+  const [isBottomSheet, setIsBottomSheet] = useState<{
+    isOpen: boolean;
+    mode: FilterModeType;
+  }>({
+    isOpen: false,
+    mode: "Date",
+  });
 
+  // TODO(수현): name 타입 안정성 높이기
   const handleFilterClick = (name: string) => {
-    setIsBottomOpen(true);
     if (name === "기간") {
-      setBottomStateType("Date");
+      setIsBottomSheet({
+        isOpen: true,
+        mode: "Date",
+      });
     } else {
-      setBottomStateType("Filter");
+      setIsBottomSheet({
+        isOpen: true,
+        mode: "Filter",
+      });
     }
   };
 
@@ -34,9 +45,9 @@ const MypagePostsFilter = () => {
       ))}
 
       <MypagePostsBottomSheet
-        isOpen={isBottomOpen}
-        onClose={() => setIsBottomOpen(false)}
-        mode={bottomStateType}
+        onClose={() => setIsBottomSheet((prev) => ({ ...prev, type: "Category" }))}
+        isOpen={isBottomSheet.isOpen}
+        mode={isBottomSheet.mode}
       />
     </section>
   );

@@ -34,9 +34,7 @@ const DateWheel = ({
   }, [selected, dateArray, swiperInstance]);
 
   return (
-    <div className="relative h-[140px] w-full overflow-hidden flex-center">
-      <div className="absolute" />
-
+    <div className="h-[140px] w-full overflow-hidden flex-center">
       <Swiper
         direction="vertical"
         slidesPerView={2}
@@ -56,6 +54,7 @@ const DateWheel = ({
           <SwiperSlide
             key={item}
             className={cn(
+              // 디자인 토큰 수정 필요
               "flex w-full items-center justify-center text-[20px] font-semibold text-neutral-strong-disabled transition-colors",
               "[&.swiper-slide-active]:text-[20px] [&.swiper-slide-active]:text-neutral-strong-default"
             )}
