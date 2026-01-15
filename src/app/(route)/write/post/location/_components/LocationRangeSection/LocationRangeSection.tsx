@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { Radius } from "@/types";
 import { BottomSheet, KakaoMap } from "../_internal";
