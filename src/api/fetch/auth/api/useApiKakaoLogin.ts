@@ -3,7 +3,7 @@ import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 
 const useApiKakaoLogin = () => {
   return useAppMutation<{ code: string }, ApiBaseResponseType<null>, ApiBaseResponseType<null>>(
-    "public",
+    "auth",
     "/auth/kakao",
     "post"
   );

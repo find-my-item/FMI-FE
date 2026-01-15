@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useApiKakaoLogin } from "@/api/fetch/auth";
-import { Icon } from "@/components";
+import { Icon } from "@/components/common";
 
 const KakaoCallbackPage = () => {
   const router = useRouter();
