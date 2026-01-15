@@ -5,10 +5,17 @@ import { DetailHeader } from "@/components/layout";
 import { useSearchUpdateQueryString } from "@/hooks";
 import DefaultList from "../DefaultList/DefaultList";
 import { useChatSocket } from "@/api/fetch/chatRoom/api/useChatSocket";
+import { useQueryClient } from "@tanstack/react-query";
 
 const ListView = () => {
   const { searchMode, searchUpdateQuery } = useSearchUpdateQueryString();
-  useChatSocket();
+  const queryClient = useQueryClient();
+
+  useChatSocket({
+    onListUpdate: () => {
+      queryClient.invalidateQueries({ queryKey: ["chatList"] });
+    },
+  });
 
   return (
     <div className="w-full">
