@@ -1,21 +1,29 @@
 import { cn } from "@/utils";
 import { RequiredText } from "@/components/common";
+import { useFormContext } from "react-hook-form";
+import { PostWriteFormValues } from "../../_types/PostWriteType";
 
 const ContentSection = () => {
+  const { register } = useFormContext<PostWriteFormValues>();
+
   return (
     <section className="min-h-[248px] border-b border-flatGray-50 px-5 py-6">
       <div className="relative">
         <textarea
-          required
           id="content"
-          name="content"
-          maxLength={500}
           rows={5}
           placeholder=" "
           className={cn(
             "hide-scrollbar w-full resize-none py-1 text-body1-medium text-neutral-strong-default",
             "peer placeholder:text-body2-regular placeholder:text-neutral-normal-placeholder focus:outline-none"
           )}
+          {...register("content", {
+            required: "내용을 입력해주세요.",
+            maxLength: {
+              value: 500,
+              message: "내용은 500자 이내로 입력해주세요.",
+            },
+          })}
         />
 
         <div
