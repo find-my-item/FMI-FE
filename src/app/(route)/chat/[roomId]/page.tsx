@@ -5,7 +5,7 @@ import { InputChat } from "@/components/common";
 import { FormProvider, useForm } from "react-hook-form";
 import { ChatRoomProvider, useChatRoom } from "@/providers/ChatRoomProvider";
 import { MOCK_CHAT_DATA } from "./_components/ChatRoomMain/constants/MOCK_CHAT_DATA";
-import { use, useRef } from "react";
+import { use } from "react";
 import useChatMessages from "@/api/fetch/ChatMessage/api/useChatMessages";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll/useInfiniteScroll";
 
@@ -14,7 +14,6 @@ interface ChatFormValues {
 }
 
 const ChatRoom = ({ roomId }: { roomId: number }) => {
-  const scrollRef = useRef<HTMLDivElement>(null);
   const methods = useForm<ChatFormValues>({
     mode: "onChange",
     reValidateMode: "onChange",
@@ -31,7 +30,7 @@ const ChatRoom = ({ roomId }: { roomId: number }) => {
     isFetchingNextPage,
   } = useChatMessages(roomId);
 
-  const { ref } = useInfiniteScroll({
+  const { ref: chatMessagesRef } = useInfiniteScroll({
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
@@ -54,7 +53,7 @@ const ChatRoom = ({ roomId }: { roomId: number }) => {
       <ChatRoomHeader postMode={isPostMode} />
       <h1 className="sr-only">채팅 상세 페이지</h1>
       {chatMessages?.length === 0 ? <EmptyChatRoom postMode={isPostMode} /> : <ChatRoomMain />}
-      <div ref={ref} className="h-[100px]" />
+      <div ref={chatMessagesRef} className="h-[100px]" />
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)} className="px-4 pb-6 pt-3">
           <InputChat name="content" aria-label="채팅 입력창" />
