@@ -2,15 +2,16 @@
 
 import { ChatBox } from "./internal";
 import { useChatRoom } from "@/providers/ChatRoomProvider";
-import { useRef } from "react";
+import { Ref, useRef } from "react";
 import useChatScroll from "./useChatScroll";
 import { ChatMessage } from "@/api/fetch/ChatMessage/types/ChatMessageTypes";
 
 interface ChatRoomMainProps {
   chatMessages: ChatMessage[];
+  chatMessagesRef: Ref<HTMLDivElement>;
 }
 
-const ChatRoomMain = ({ chatMessages }: ChatRoomMainProps) => {
+const ChatRoomMain = ({ chatMessages, chatMessagesRef }: ChatRoomMainProps) => {
   const { chats } = useChatRoom();
   const scrollRef = useRef<HTMLDivElement>(null);
   useChatScroll(scrollRef, chatMessages);
@@ -27,7 +28,7 @@ const ChatRoomMain = ({ chatMessages }: ChatRoomMainProps) => {
           2025.11.07 금요일
         </span>
       </div>
-
+      <div ref={chatMessagesRef} className="h-[1px] flex-shrink-0" />
       {chatMessages
         .slice()
         .reverse()

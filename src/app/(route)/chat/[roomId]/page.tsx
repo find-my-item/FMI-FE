@@ -94,12 +94,11 @@ const ChatRoom = ({ roomId }: { roomId: number }) => {
 
       <div className="flex min-h-0 flex-1 flex-col">
         {chatMessages?.length !== 0 && chatMessages ? (
-          <ChatRoomMain chatMessages={chatMessages} />
+          <ChatRoomMain chatMessages={chatMessages} chatMessagesRef={chatMessagesRef} />
         ) : (
           <EmptyChatRoom postMode={isPostMode} />
         )}
       </div>
-      {/* <div ref={chatMessagesRef} className="h-[100px]" /> */}
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)} className="px-4 pb-6 pt-3">
           <InputChat name="content" aria-label="채팅 입력창" />
