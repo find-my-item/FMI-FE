@@ -8,15 +8,17 @@ interface LocationRangeSectionProps {
 
 const LocationRangeSection = ({ location }: LocationRangeSectionProps) => {
   const [radius, setRadius] = useState<Radius>(3000);
+  // TODO(지권): 목업 위도, 경도 수정 필요
+  const [lat, setLat] = useState(35.8737787566279);
+  const [lng, setLng] = useState(128.810871476804);
 
   return (
     <>
-      {/* TODO(지권): height, 좌표 수정 필요 */}
       <div className="h-[calc(100vh-350px)] w-full">
-        <KakaoMap lat={35.8737787566279} lng={128.810871476804} radius={radius} />
+        <KakaoMap lat={lat} lng={lng} radius={radius} />
       </div>
 
-      <BottomSheet location={location} radius={radius} setRadius={setRadius} />
+      <BottomSheet locationInfo={{ location, lat, lng }} radiusState={{ radius, setRadius }} />
     </>
   );
 };
