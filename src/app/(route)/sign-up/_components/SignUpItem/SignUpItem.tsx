@@ -28,6 +28,10 @@ const inputValidationRules = {
   },
   nickname: {
     required: true,
+    pattern: {
+      value: /^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]+$/,
+      message: "특수문자는 입력할 수 없습니다.",
+    },
     minLength: {
       value: 2,
       message: "2~10자 사이의 닉네임을 입력해 주세요.",
