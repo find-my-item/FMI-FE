@@ -1,5 +1,5 @@
 import { Icon } from "@/components/common";
-import { PostDetailData } from "@/api/fetch/post";
+import { PostDetailData, usePostFavorites } from "@/api/fetch/post";
 import { formatDate, formatCappedNumber } from "@/utils";
 import { NoticeChip } from "@/app/(route)/notice/_components";
 import PostChipSection from "../PostChipSection/PostChipSection";
@@ -12,7 +12,9 @@ interface PostDetailBodyProps {
 }
 
 const PostDetailBody = ({ isBoardType, label, data }: PostDetailBodyProps) => {
+  console.log("data: ", data);
   const { title, content, favoriteCount, itemStatus, category, createdAt, viewCount } = data;
+  const { mutate } = usePostFavorites(data.postId);
 
   return (
     <article>
@@ -33,9 +35,16 @@ const PostDetailBody = ({ isBoardType, label, data }: PostDetailBodyProps) => {
         <p className="mt-6 text-body1-regular text-layout-header-default">{content}</p>
 
         <ul className="mt-8 flex gap-5 text-body2-medium text-layout-body-default">
-          <li className="flex gap-1">
-            <Icon name="Star" size={20} />
-            <span>즐겨찾기 {formatCappedNumber(favoriteCount)}</span>
+          <li>
+            <button
+              type="button"
+              className="flex gap-1"
+              onClick={() => mutate({ postId: data.postId })}
+            >
+              <Icon name="Star" size={20} />
+              <span>즐겨찾기</span>
+              <span>{formatCappedNumber(favoriteCount)}</span>
+            </button>
           </li>
           <li className="flex gap-1">
             <Icon name="EyeOpen" size={20} />
