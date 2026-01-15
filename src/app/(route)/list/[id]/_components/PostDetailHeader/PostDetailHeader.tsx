@@ -1,17 +1,23 @@
 import Link from "next/link";
 
-import { Button, Icon } from "@/components/common";
+import Image from "next/image";
+import { Button } from "@/components/common";
 import ImageSection from "./_internal/ImageSection/ImageSection";
 
-interface PostDetailHeaderType {
-  headerData: {
-    imageUrls: string[];
-    postId: string;
-  };
-}
+type HeaderData = {
+  imageUrls: string[];
+  postId: string;
+  nickName: string;
+  profileUrl: string | null;
+  userPostCount: number;
+  chatRoomCount: number;
+};
 
+interface PostDetailHeaderType {
+  headerData: HeaderData;
+}
 const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
-  const { imageUrls, postId } = headerData;
+  const { imageUrls, postId, nickName, profileUrl, userPostCount, chatRoomCount } = headerData;
 
   return (
     <>
@@ -22,17 +28,23 @@ const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
         className="flex flex-col items-start justify-center gap-5 border-b border-flatGray-50 p-[20px]"
       >
         <div className="flex items-center justify-start gap-[14px]">
-          <div className="relative h-10 w-10">
-            {/* TODO(지권): 유저 프로필 이미지, 추후 이미지 태그 변경 예정 */}
-            <div className="h-full w-full rounded-full bg-flatGray-100" />
+          {/* TODO(지권): 대체 이미지 변경 필요 */}
+          <Image
+            src={profileUrl || "/test_list.JPG"}
+            alt={`${nickName} 프로필`}
+            width={40}
+            height={40}
+            className="h-10 w-10 rounded-full"
+          />
 
-            <Icon name="ProfileCheck" size={16} className="absolute bottom-0 right-0" />
-          </div>
           <div className="flex flex-col items-start justify-center">
-            <p className="text-[16px]">글자확인용임시닉네임</p>
-            <span className="text-[14px] leading-[20px] text-flatGray-600">
-              작성글 13 · 현재 채팅 2
-            </span>
+            <p className="text-[16px]">{nickName}</p>
+            <div className="text-[14px] leading-[20px] text-flatGray-600">
+              <span className="after:mx-2 after:inline-block after:content-['·']">
+                작성글 {userPostCount || 0}
+              </span>
+              <span>현재 채팅 {chatRoomCount || 0}</span>
+            </div>
           </div>
         </div>
 

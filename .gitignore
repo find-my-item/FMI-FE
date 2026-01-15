@@ -45,11 +45,12 @@ storybook-static
 
 # Playwright
 node_modules/
-/test-results/
+/test-results/.last-run.json
 /playwright-report/
 /blob-report/
 /playwright/.cache/
 
 # Jest test reports
 reports/*
-junit.xml
+# Sentry Config File
+.env.sentry-build-plugin

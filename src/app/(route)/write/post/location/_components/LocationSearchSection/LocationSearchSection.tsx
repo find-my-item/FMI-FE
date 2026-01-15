@@ -1,0 +1,89 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+import { FormProvider, useForm, useWatch } from "react-hook-form";
+import { getRegionSearchResults } from "@/utils";
+import { InputSearch } from "@/components/common";
+import { useRegionRows } from "@/hooks";
+import { RegionRow } from "@/types";
+
+interface LocationSearchSectionProps {
+  searchParams: URLSearchParams;
+}
+
+const LocationSearchSection = ({ searchParams }: LocationSearchSectionProps) => {
+  const router = useRouter();
+
+  const { regions, isLoading } = useRegionRows();
+
+  const methods = useForm({
+    defaultValues: {
+      location: "",
+    },
+    mode: "onChange",
+  });
+
+  const locationValue = useWatch({
+    control: methods.control,
+    name: "location",
+  });
+
+  const results = getRegionSearchResults({ regions, query: locationValue });
+
+  const handleSelect = (row: RegionRow) => {
+    methods.setValue("location", row.display);
+
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("location", row.display);
+
+    router.push(`/write/post/location?${params.toString()}`, { scroll: false });
+  };
+
+  return (
+    <>
+      <section className="px-5 py-[10px]">
+        <FormProvider {...methods}>
+          <InputSearch
+            placeholder="지역명을 입력해 주세요."
+            name="location"
+            mode="RHF"
+            onEnter={(value) => console.log(value)}
+          />
+        </FormProvider>
+      </section>
+
+      <section aria-label="검색 결과" className="px-0">
+        <p className="sr-only" aria-live="polite">
+          {locationValue?.trim() && isLoading
+            ? `검색 결과 ${results.length}개`
+            : "지역 목록을 불러오는 중입니다"}
+        </p>
+
+        <ul>
+          {results.map((row) => (
+            <li
+              key={`${row.sido}|${row.sigungu}|${row.location}`}
+              className="border-b border-neutral-normal-default transition-colors hover:bg-gray-100"
+            >
+              <button
+                type="button"
+                className="w-full p-5 text-left text-body2-medium text-neutral-strong-default"
+                onClick={() => handleSelect(row)}
+              >
+                {row.display}
+              </button>
+            </li>
+          ))}
+
+          {isLoading && locationValue?.trim() && getRegionSearchResults.length === 0 && (
+            <li className="p-5 text-body2-medium text-neutral-strong-default">
+              검색 결과가 없습니다.
+            </li>
+          )}
+        </ul>
+      </section>
+    </>
+  );
+};
+
+export default LocationSearchSection;

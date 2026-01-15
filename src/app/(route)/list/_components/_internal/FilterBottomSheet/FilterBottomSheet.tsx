@@ -56,8 +56,9 @@ const FilterBottomSheet = ({
                 aria-label={`${tab.label} 필터`}
                 className={cn(
                   "min-h-[60px] flex-1 text-[20px] font-semibold",
-                  // TODO(지권): 디자인 토큰 변경
-                  isSelected ? "border-b-2 border-[#1EB87B] text-[#1EB87B]" : "text-[#ADADAD]"
+                  isSelected
+                    ? "border-b-2 border-brand-normal-default text-brand-normal-default"
+                    : "text-system-unselected"
                 )}
                 onClick={() => setSelectedTab(tab.value)}
               >

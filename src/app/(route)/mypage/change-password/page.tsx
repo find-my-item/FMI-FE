@@ -1,6 +1,6 @@
 "use client";
 
-import { DetailHeader } from "@/components";
+import { DetailHeader } from "@/components/layout";
 import { FormProvider, useForm } from "react-hook-form";
 import { MypageChangePwForm } from "./_components";
 

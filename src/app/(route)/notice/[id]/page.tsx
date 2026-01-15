@@ -15,7 +15,7 @@ const NoticeDetail = async ({ params }: NoticeDetailProps) => {
 
   return (
     <>
-      <PostDetail item={noticeItem} type="notice" />
+      <PostDetail data={noticeItem} type="notice" />
       <CommentList comments={commentListObject} />
       <CommentForm />
     </>

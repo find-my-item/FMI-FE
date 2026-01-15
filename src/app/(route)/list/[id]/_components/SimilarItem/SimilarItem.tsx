@@ -1,6 +1,6 @@
 import { Icon } from "@/components/common";
 import { IconName } from "@/components/common/Icon/Icon";
-import { formatNumber } from "@/utils";
+import { formatCappedNumber } from "@/utils";
 
 const SimilarItem = () => {
   const IconList = [
@@ -34,7 +34,7 @@ const SimilarItem = () => {
             <Icon name={icon.name as IconName} size={18} aria-hidden="true" />
             <span className="sr-only">{icon.ariaLabel}</span>
             <span className="text-caption1-regular text-neutral-normal-placeholder">
-              {formatNumber(icon.value)}
+              {formatCappedNumber(icon.value)}
             </span>
           </li>
         ))}
