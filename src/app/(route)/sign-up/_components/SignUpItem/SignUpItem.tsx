@@ -4,6 +4,7 @@ import { InputText } from "@/components/common";
 import { InputTextProps } from "@/components/common/Input/InputText/InputText";
 import { useFormContext, useController } from "react-hook-form";
 import { FormType } from "../../types/FormType";
+import { useEffect } from "react";
 
 const inputValidationRules = {
   email: {
@@ -29,8 +30,8 @@ const inputValidationRules = {
   nickname: {
     required: true,
     pattern: {
-      value: /^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]+$/,
-      message: "특수문자는 입력할 수 없습니다.",
+      value: /^[a-zA-Z0-9가-힣]+$/,
+      message: "자음·모음 및 특수문자는 입력할 수 없습니다.",
     },
     minLength: {
       value: 2,
