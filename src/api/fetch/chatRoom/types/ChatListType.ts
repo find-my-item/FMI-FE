@@ -39,3 +39,20 @@ export interface ChatListUpdateResponse {
   lastMessageSentAt: string;
   unreadCount: number;
 }
+
+export interface ChatRoomResponse {
+  roomId: number;
+  opponentUser: {
+    opponentUserId: number;
+    nickname: string;
+    profileImageUrl: string;
+    emailVerified: boolean;
+  };
+  postInfo: {
+    postId: number;
+    postType: "LOST" | "FOUND";
+    title: string;
+    address: string;
+    thumbnailUrl: string;
+  };
+}
