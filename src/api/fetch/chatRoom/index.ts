@@ -1,2 +1,8 @@
 export { default as useChatList } from "./api/useChatList";
-export { chatSocket } from "./api/chatSocket";
+export { useChatSocket } from "./api/useChatSocket";
+export {
+  connectChatSocket,
+  disconnectChatSocket,
+  subscribeChatSocket,
+  sendChatSocketMessage,
+} from "./api/chatSocket";

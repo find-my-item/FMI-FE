@@ -8,12 +8,7 @@ import { useChatSocket } from "@/api/fetch/chatRoom/api/useChatSocket";
 
 const ListView = () => {
   const { searchMode, searchUpdateQuery } = useSearchUpdateQueryString();
-
-  useChatSocket({
-    onMessage: (data) => {
-      console.log("웹소켓이 구독되었습니다.", data);
-    },
-  });
+  useChatSocket();
 
   return (
     <div className="w-full">
