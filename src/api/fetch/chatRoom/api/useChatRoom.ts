@@ -5,7 +5,7 @@ import { ChatRoomResponse } from "../types/ChatListType";
 const useChatRoom = ({ postId }: { postId: number }) => {
   return useAppMutation<null, ApiBaseResponseType<ChatRoomResponse>>(
     "auth",
-    `posts/${postId}/chats`,
+    `/posts/${postId}/chats`,
     "post"
   );
 };
