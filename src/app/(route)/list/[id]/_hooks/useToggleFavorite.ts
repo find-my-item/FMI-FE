@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 import { throttle } from "lodash";
-import { usePostFavorites } from "@/api/fetch/post";
-import { useDeletePostFavorites } from "@/api/fetch/post/api/useDeleteFavorites";
+import { useDeletePostFavorites, usePostFavorites } from "@/api/fetch/post";
 
 interface ToggleFavoriteProps {
   postId: number;

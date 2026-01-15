@@ -10,3 +10,4 @@ export { usePostPostsFilter } from "./api/usePostPostsFilter";
 export { useGetMetaData } from "./api/useGetMetaData";
 export { usePostPosts } from "./api/usePostPosts";
 export { usePostFavorites } from "./api/usePostFavorites";
+export { useDeletePostFavorites } from "./api/useDeleteFavorites";

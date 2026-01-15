@@ -42,6 +42,7 @@ const PostDetailBody = ({ isBoardType, label, data }: PostDetailBodyProps) => {
               disabled={isPending}
               onClick={() => handleToggleFavorite(data.favoriteStatus)}
             >
+              {/* TODO(지권): 즐겨찾기 true 상태 아이콘 추가 */}
               <Icon name="Star" size={20} />
               <span>즐겨찾기</span>
               <span>{formatCappedNumber(favoriteCount)}</span>
