@@ -54,12 +54,16 @@ const LocationSearchSection = ({ searchParams }: LocationSearchSectionProps) => 
 
       <section aria-label="검색 결과" className="px-0">
         <p className="sr-only" aria-live="polite">
-          {locationValue?.trim() && isLoading
-            ? `검색 결과 ${results.length}개`
-            : "지역 목록을 불러오는 중입니다"}
+          {!locationValue?.trim()
+            ? "읍/면/동/리를 검색해 보세요."
+            : isLoading
+              ? "검색 결과를 불러오는 중입니다"
+              : `검색 결과 ${results.length}개`}
         </p>
 
         <ul>
+          {!locationValue?.trim() && <LocationGuideUI variant="initial" />}
+
           {results.map((row) => (
             <li
               key={`${row.sido}|${row.sigungu}|${row.location}`}
@@ -75,10 +79,8 @@ const LocationSearchSection = ({ searchParams }: LocationSearchSectionProps) => 
             </li>
           ))}
 
-          {isLoading && locationValue?.trim() && getRegionSearchResults.length === 0 && (
-            <li className="p-5 text-body2-medium text-neutral-strong-default">
-              검색 결과가 없습니다.
-            </li>
+          {!isLoading && locationValue?.trim() && results.length === 0 && (
+            <LocationGuideUI variant="empty" />
           )}
         </ul>
       </section>
@@ -87,3 +89,22 @@ const LocationSearchSection = ({ searchParams }: LocationSearchSectionProps) => 
 };
 
 export default LocationSearchSection;
+
+interface LocationGuideUIProps {
+  variant: "initial" | "empty";
+}
+
+const LocationGuideUI = ({ variant }: LocationGuideUIProps) => {
+  return (
+    <li className="mt-[6px] px-5 py-[10px]">
+      {variant === "empty" && (
+        <p className="text-body1-semibold text-layout-header-default">검색 결과가 없습니다.</p>
+      )}
+
+      <p className="text-body1-semibold text-brand-normal-default">읍/면/동/리를 검색해 보세요.</p>
+      <span className="text-body2-medium text-layout-body-default">
+        예) 삼일대로 428, 부산시 기장읍
+      </span>
+    </li>
+  );
+};
