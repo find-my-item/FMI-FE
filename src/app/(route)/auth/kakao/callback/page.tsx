@@ -23,7 +23,10 @@ const KakaoCallbackPage = () => {
     isRequesting.current = true;
 
     KakaoLoginMutate(
-      { code: code },
+      {
+        code: code,
+        environment: "dev",
+      },
       {
         onSuccess: (res) => {
           console.log("로그인 성공!", res);
