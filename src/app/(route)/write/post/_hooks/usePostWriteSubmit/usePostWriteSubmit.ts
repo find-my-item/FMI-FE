@@ -9,29 +9,38 @@ interface UsePostWriteSubmitProps {
 }
 
 const usePostWriteSubmit = ({ methods }: UsePostWriteSubmitProps) => {
-  const { lat, lng, location, radius, type } = useWriteStore();
+  const { lat, lng, address, radius, postType, clearLocation } = useWriteStore();
 
   useEffect(() => {
-    methods.setValue("postType", type ?? "", { shouldValidate: true });
-    methods.setValue("address", location ?? "", { shouldValidate: true });
+    methods.setValue("postType", postType ?? "", { shouldValidate: true });
+    methods.setValue("address", address ?? "", { shouldValidate: true });
     methods.setValue("latitude", lat ?? null, { shouldValidate: true });
     methods.setValue("longitude", lng ?? null, { shouldValidate: true });
     methods.setValue("radius", radius ?? null, { shouldValidate: true });
-  }, [type, location, lat, lng, radius, methods]);
+  }, [postType, address, lat, lng, radius, methods]);
 
-  const { mutateAsync: postPosts } = usePostPosts();
+  const canSubmit = (values: PostWriteFormValues) => {
+    if (!postType) return false;
+    if (!address) return false;
+    if (lat == null || lng == null || radius == null) return false;
+    if (!values.category) return false;
+    if (!values.title || !values.content) return false;
+
+    return true;
+  };
+
+  const { mutateAsync: postPosts, isPending: isPosting } = usePostPosts();
 
   const toPostWriteFormData = (values: PostWriteFormValues): FormData | null => {
-    if (!type || !values.category) return null;
-    if (!location || lat == null || lng == null || radius == null) return null;
+    if (!postType || !values.category) return null;
+    if (!address || lat == null || lng == null || radius == null) return null;
 
-    // TODO(지권): 정적 값 수정
     const request = {
-      postType: type,
+      postType: postType,
       title: values.title,
-      category: "BAG",
+      category: values.category,
       content: values.content,
-      address: location,
+      address: address,
       latitude: lat,
       longitude: lng,
       radius: radius,
@@ -52,9 +61,10 @@ const usePostWriteSubmit = ({ methods }: UsePostWriteSubmitProps) => {
     if (!formData) return;
 
     postPosts(formData as unknown as PostPostsWriteRequestBody);
+    clearLocation();
   });
 
-  return { onSubmit };
+  return { onSubmit, isPosting, canSubmit };
 };
 
 export default usePostWriteSubmit;
