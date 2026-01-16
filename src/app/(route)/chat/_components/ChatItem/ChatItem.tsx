@@ -10,12 +10,12 @@ interface ChatItemProps {
 }
 
 const ChatItem = ({ chatRoom }: ChatItemProps) => {
-  const { roomId, postInfo, contactUser, lastMessageSentAt, lastMessage, unreadCount } = chatRoom;
+  const { postInfo, contactUser, lastMessageSentAt, lastMessage, unreadCount } = chatRoom;
 
   return (
     <Link
-      href={`/chat/${roomId}`}
-      aria-label={`${roomId} 채팅방 링크`}
+      href={`/chat/${postInfo?.postId}`}
+      aria-label={`${postInfo?.postId} 채팅방 링크`}
       className="flex min-h-[113px] w-full items-center gap-[12px] border-b border-divider-default px-4 py-6 transition-colors hover:bg-flatGray-25"
     >
       <div className="relative h-[58px] w-[58px] shrink-0">

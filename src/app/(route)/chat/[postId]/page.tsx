@@ -13,12 +13,13 @@ import { useQueryClient, InfiniteData } from "@tanstack/react-query";
 import { ChatMessage } from "@/api/fetch/ChatMessage/types/ChatMessageTypes";
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 import { ChatMessageResponse } from "@/api/fetch/ChatMessage/types/ChatMessageTypes";
+import useChatRoom from "@/api/fetch/chatRoom/api/useChatRoom";
 
 interface ChatFormValues {
   content: string;
 }
 
-const ChatRoom = ({ roomId }: { roomId: number }) => {
+const ChatRoom = ({ postId }: { postId: number }) => {
   const queryClient = useQueryClient();
   const methods = useForm<ChatFormValues>({
     mode: "onChange",
@@ -27,15 +28,22 @@ const ChatRoom = ({ roomId }: { roomId: number }) => {
       content: "",
     },
   });
-  const isPostMode: "find" | "lost" = "find";
+  const { data: chatRoom } = useChatRoom({ postId });
+
+  const roomId = chatRoom?.result.roomId;
+  const isPostMode: "find" | "lost" =
+    chatRoom?.result.postInfo.postType === "FOUND" ? "find" : "lost";
+
   const {
     data: chatMessages,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useChatMessages(roomId);
+  } = useChatMessages(roomId ?? 0, { enabled: !!roomId });
   useChatSocket({
     onMessage: (message) => {
+      if (!roomId) return;
+
       const oldData = queryClient.getQueryData<
         InfiniteData<ApiBaseResponseType<ChatMessageResponse>>
       >(["chatMessages", roomId]);
@@ -80,7 +88,7 @@ const ChatRoom = ({ roomId }: { roomId: number }) => {
     isFetchingNextPage,
   });
   const onSubmit = ({ content }: ChatFormValues) => {
-    if (content.trim() === "") return;
+    if (content.trim() === "" || !roomId) return;
     sendChatSocketMessage(`/app/chats/${roomId}/send`, {
       content,
     });
@@ -89,7 +97,7 @@ const ChatRoom = ({ roomId }: { roomId: number }) => {
 
   return (
     <div className="flex h-[calc(100dvh-48px)] flex-col overflow-hidden">
-      <ChatRoomHeader postMode={isPostMode} />
+      <ChatRoomHeader chatRoom={chatRoom?.result} />
       <h1 className="sr-only">채팅 상세 페이지</h1>
 
       <div className="flex min-h-0 flex-1 flex-col">
@@ -99,20 +107,22 @@ const ChatRoom = ({ roomId }: { roomId: number }) => {
           <EmptyChatRoom postMode={isPostMode} />
         )}
       </div>
-      <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)} className="px-4 pb-6 pt-3">
-          <InputChat name="content" aria-label="채팅 입력창" roomId={roomId} />
-        </form>
-      </FormProvider>
+      {roomId && (
+        <FormProvider {...methods}>
+          <form onSubmit={methods.handleSubmit(onSubmit)} className="px-4 pb-6 pt-3">
+            <InputChat name="content" aria-label="채팅 입력창" roomId={roomId} />
+          </form>
+        </FormProvider>
+      )}
     </div>
   );
 };
 
-const page = ({ params }: { params: Promise<{ roomId: string }> }) => {
-  const { roomId } = use(params);
+const page = ({ params }: { params: Promise<{ postId: string }> }) => {
+  const { postId } = use(params);
   return (
     <ChatRoomProvider initialChats={[...MOCK_CHAT_DATA].reverse()}>
-      <ChatRoom roomId={Number(roomId)} />
+      <ChatRoom postId={Number(postId)} />
     </ChatRoomProvider>
   );
 };
