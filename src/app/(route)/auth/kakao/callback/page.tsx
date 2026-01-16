@@ -16,10 +16,8 @@ const KakaoCallbackPage = () => {
 
   useEffect(() => {
     if (!code) return;
-
     if (isRequesting.current) return;
 
-    // console.log("인가 코드 발견>> ", code);
     isRequesting.current = true;
 
     KakaoLoginMutate(
@@ -34,9 +32,10 @@ const KakaoCallbackPage = () => {
           router.replace("/");
         },
         onError: (error) => {
-          // console.error("로그인 실패", error);
-          alert("로그인에 실패했습니다. 다시 시도해주세요.");
           isRequesting.current = false;
+          if (error.code === "AUTH400-KAKAO_CODE_INVALID") alert(error.message);
+          if (error.code === "AUTH500-KAKAO_USERINFO_FAILED") alert(error.message);
+          else alert("로그인에 실패했습니다. 다시 시도해주세요.");
           router.replace("/login");
         },
       }
