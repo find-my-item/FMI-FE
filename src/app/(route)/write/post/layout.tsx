@@ -1,7 +1,8 @@
 import { ReactNode } from "react";
+import { PostWriteFormProvider } from "./location/_components";
 
-const layout = ({ children }: { children: ReactNode }) => {
-  return <>{children}</>;
+const Layout = ({ children }: { children: ReactNode }) => {
+  return <PostWriteFormProvider>{children}</PostWriteFormProvider>;
 };
 
-export default layout;
+export default Layout;

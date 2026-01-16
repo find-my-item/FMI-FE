@@ -1,3 +1,5 @@
+"use client";
+
 import useAppMutation from "@/api/_base/query/useAppMutation";
 import { PostPostsWriteRequestBody, PostPostsWriteResponse } from "../types/PostWriteType";
 import { useToast } from "@/context/ToastContext";
