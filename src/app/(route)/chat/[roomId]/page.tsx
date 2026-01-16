@@ -101,7 +101,7 @@ const ChatRoom = ({ roomId }: { roomId: number }) => {
       </div>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)} className="px-4 pb-6 pt-3">
-          <InputChat name="content" aria-label="채팅 입력창" />
+          <InputChat name="content" aria-label="채팅 입력창" roomId={roomId} />
         </form>
       </FormProvider>
     </div>

@@ -49,7 +49,7 @@ const ChatBox = ({ chat, nextSender, lastChat }: ChatBoxProps) => {
         </p>
       )}
       {messageType === "IMAGE" && (
-        <ChatImageBox images={imageUrls} bubbleOrder={style.bubbleOrder} />
+        <ChatImageBox images={imageUrls} createdAt={createdAt} bubbleOrder={style.bubbleOrder} />
       )}
     </div>
   );

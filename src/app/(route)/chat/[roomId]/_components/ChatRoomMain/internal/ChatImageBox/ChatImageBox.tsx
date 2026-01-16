@@ -6,7 +6,15 @@ import { getImageLayout, getSpecialLayoutGroups } from "@/utils/getImageLayout/g
 import ChatImageButton from "../ChatImageButton/ChatImageButton";
 import { ImageViewerModal } from "@/components/domain";
 
-const ChatImageBox = ({ images, bubbleOrder }: { images?: string[]; bubbleOrder: string }) => {
+const ChatImageBox = ({
+  images,
+  createdAt,
+  bubbleOrder,
+}: {
+  images?: string[];
+  createdAt: string;
+  bubbleOrder: string;
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
@@ -54,7 +62,7 @@ const ChatImageBox = ({ images, bubbleOrder }: { images?: string[]; bubbleOrder:
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         imageInfo={{
-          createdAt: "2025.11.08.토요일 10:13",
+          createdAt: createdAt,
           uploader: "나",
         }}
       />

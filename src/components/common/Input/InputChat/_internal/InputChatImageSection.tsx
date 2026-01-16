@@ -3,9 +3,12 @@
 import { Icon, ImageSelectButton } from "@/components/common";
 import { handleSendImage } from "../utils/handleSendImage";
 import { useChatRoom } from "@/providers/ChatRoomProvider";
+import useSendImage from "@/api/fetch/ChatMessage/api/useSendImage";
 
-const InputChatImageSection = () => {
-  const { setChats, images, setImages, selectedImages, setSelectedImages } = useChatRoom();
+const InputChatImageSection = ({ roomId }: { roomId: number }) => {
+  const { images, setImages, selectedImages, setSelectedImages } = useChatRoom();
+
+  const { mutate: sendImage } = useSendImage(roomId);
 
   return (
     <>
@@ -17,7 +20,7 @@ const InputChatImageSection = () => {
         <button
           aria-label="사진 전송 버튼"
           onClick={() =>
-            handleSendImage(selectedImages, images, setChats, setImages, setSelectedImages)
+            handleSendImage(selectedImages, images, setImages, setSelectedImages, sendImage)
           }
           className="p-1 text-body1-medium text-brand-normal-default disabled:text-brand-normal-disabled"
           disabled={!selectedImages.length}
