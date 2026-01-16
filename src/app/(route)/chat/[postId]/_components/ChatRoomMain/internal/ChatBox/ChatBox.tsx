@@ -1,5 +1,5 @@
 import { cn, formatDate } from "@/utils";
-import { Sender } from "@/app/(route)/chat/_types/MockChatDataType";
+import { Sender } from "@/app/(route)/chat/_types/Sender";
 import { CHAT_SENDER_STYLE } from "../../constants/CHAT_SENDER_STYLE";
 import ChatImageBox from "../ChatImageBox/ChatImageBox";
 import { ChatMessage } from "@/api/fetch/ChatMessage/types/ChatMessageTypes";

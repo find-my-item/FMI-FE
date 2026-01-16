@@ -1,7 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import ChatRoomMain from "./ChatRoomMain";
-import { ChatRoomProvider } from "@/providers/ChatRoomProvider";
-import { MOCK_CHAT_DATA } from "./constants/MOCK_CHAT_DATA";
+import { ChatMessage } from "@/api/fetch/ChatMessage/types/ChatMessageTypes";
 
 const meta: Meta<typeof ChatRoomMain> = {
   title: "페이지/채팅 상세 페이지/ChatRoomMain",
@@ -28,18 +27,33 @@ const meta: Meta<typeof ChatRoomMain> = {
 export default meta;
 type Story = StoryObj<typeof ChatRoomMain>;
 
+const mockChatMessages: ChatMessage[] = [
+  {
+    messageId: 1,
+    roomId: 1,
+    senderId: 1,
+    content: "안녕하세요!",
+    messageType: "TEXT",
+    createdAt: "2026-01-15T14:11:00.000Z",
+    imageUrls: [],
+  },
+  {
+    messageId: 2,
+    roomId: 1,
+    senderId: 2,
+    content: "네, 안녕하세요!",
+    messageType: "TEXT",
+    createdAt: "2026-01-15T14:12:00.000Z",
+    imageUrls: [],
+  },
+];
+
+const mockRef = { current: null };
+
 export const Default: Story = {
-  render: () => (
-    <ChatRoomProvider initialChats={MOCK_CHAT_DATA}>
-      <ChatRoomMain />
-    </ChatRoomProvider>
-  ),
+  render: () => <ChatRoomMain chatMessages={mockChatMessages} chatMessagesRef={mockRef} />,
 };
 
 export const Empty: Story = {
-  render: () => (
-    <ChatRoomProvider initialChats={[]}>
-      <ChatRoomMain />
-    </ChatRoomProvider>
-  ),
+  render: () => <ChatRoomMain chatMessages={[]} chatMessagesRef={mockRef} />,
 };
