@@ -2,7 +2,6 @@
 
 import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { DetailHeader } from "@/components/layout";
 import { LocationRangeSection, LocationSearchSection } from "./_components";
 
 const LocationPage = () => {
@@ -12,16 +11,13 @@ const LocationPage = () => {
   const locationName = locationTitle?.trim().split(/\s+/).at(-1) ?? null;
 
   return (
-    <div className="min-h-dvh w-full">
-      <DetailHeader title={locationTitle ? "위치 상세" : "위치 등록"} />
-      <h1 className="sr-only">위치등록 페이지</h1>
-
+    <>
       {!locationTitle ? (
         <LocationSearchSection searchParams={searchParams} />
       ) : (
-        <LocationRangeSection location={locationName} />
+        <LocationRangeSection address={locationName} fullAddress={locationTitle} />
       )}
-    </div>
+    </>
   );
 };
 

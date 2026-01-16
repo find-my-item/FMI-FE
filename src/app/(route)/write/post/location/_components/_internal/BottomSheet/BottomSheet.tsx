@@ -5,7 +5,8 @@ import { Button } from "@/components/common";
 import { DISTANCE_OPTIONS } from "./DISTANCE_OPTIONS";
 
 type LocationInfo = {
-  location: string | null;
+  address: string | null;
+  fullAddress: string | null;
   lat: number | null;
   lng: number | null;
 };
@@ -21,17 +22,18 @@ interface BottomSheetProps {
 }
 
 const BottomSheet = ({ locationInfo, radiusState }: BottomSheetProps) => {
-  const { location, lat, lng } = locationInfo;
+  const { address, fullAddress, lat, lng } = locationInfo;
   const { radius, setRadius } = radiusState;
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const isApplyDisabled = lat === null || lng === null || radius === null || location === null;
+  const isApplyDisabled = lat === null || lng === null || radius === null || address === null;
 
   const {
     setLatLng: setWriteLatLng,
     setRadius: setWriteRadius,
-    setLocation: setWriteLocation,
+    setAddress: setWriteAddress,
+    setFullAddress: setWriteFullAddress,
   } = useWriteStore();
 
   const commitLocationRange = () => {
@@ -39,10 +41,10 @@ const BottomSheet = ({ locationInfo, radiusState }: BottomSheetProps) => {
 
     setWriteLatLng(lat, lng);
     setWriteRadius(radius);
-    setWriteLocation(location);
+    setWriteAddress(address);
+    setWriteFullAddress(fullAddress);
 
-    // router.replace(`/write/post?type=${searchParams.get("type")}`);
-    router.replace(`/write/post?type=lost`);
+    router.back();
   };
 
   return (
@@ -50,7 +52,7 @@ const BottomSheet = ({ locationInfo, radiusState }: BottomSheetProps) => {
       <div className="mb-12 gap-4 flex-col-center">
         <div className="gap-2 flex-center">
           <h2 className="text-h2-medium text-layout-header-default">
-            {location || "선택한 위치"} 근처
+            {address || "선택한 위치"} 근처
           </h2>
           <span className="text-h1-medium text-brand-normal-default">{radius / 1000}km</span>
         </div>

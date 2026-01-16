@@ -1,7 +1,7 @@
 import React from "react";
 import { Icon } from "@/components/common";
 import Link from "next/link";
-import { MYPAGE_MENU_LIST } from "../../_constants/MYPAGE_MENU_LIST";
+import { MYPAGE_MENU_LIST } from "../../_constants/MYPAGE_ROUTE_CONFIG";
 
 const MyPageMenuSection = () => {
   return MYPAGE_MENU_LIST.map((menu) => (

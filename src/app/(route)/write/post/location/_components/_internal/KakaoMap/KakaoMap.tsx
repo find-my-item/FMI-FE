@@ -4,6 +4,7 @@ import { Radius } from "@/types";
 import { getMapLevelByRadius } from "@/utils";
 import { useState } from "react";
 import { Circle, Map, MapMarker, useKakaoLoader } from "react-kakao-maps-sdk";
+import { MapErrorState, MapLoadingState } from "../MapState/MapState";
 
 interface WriteKakaoMapProps {
   lat: number;
@@ -22,8 +23,8 @@ const WriteKakaoMap = ({ lat, lng, radius }: WriteKakaoMapProps) => {
     lng,
   });
 
-  if (loading) return null;
-  if (error) return <div>로드 실패</div>;
+  if (loading) return <MapLoadingState />;
+  if (error) return <MapErrorState />;
 
   const handleMapDragEnd = (map: kakao.maps.Map) => {
     const latlng = map.getCenter();

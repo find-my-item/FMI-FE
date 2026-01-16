@@ -4,26 +4,34 @@ import type { PostType, Radius } from "@/types";
 type WriteStore = {
   lat: number | null;
   lng: number | null;
-  location: string | null;
+  address: string | null;
+  fullAddress: string | null;
   radius: Radius | null;
 
   setLatLng: (lat: number | null, lng: number | null) => void;
-  setLocation: (location: string | null) => void;
+  setAddress: (address: string | null) => void;
+  setFullAddress: (fullAddress: string | null) => void;
   setRadius: (radius: Radius | null) => void;
 
-  type: PostType;
-  setType: (type: PostType) => void;
+  postType: PostType | null;
+  setPostType: (type: PostType) => void;
+
+  clearLocation: () => void;
 };
 
 export const useWriteStore = create<WriteStore>((set) => ({
   lat: null,
   lng: null,
-  location: null,
+  address: null,
+  fullAddress: null,
   radius: null,
-  type: "LOST",
+  postType: null,
 
   setLatLng: (lat, lng) => set({ lat, lng }),
-  setLocation: (location) => set({ location }),
+  setAddress: (address) => set({ address }),
+  setFullAddress: (fullAddress) => set({ fullAddress }),
   setRadius: (radius) => set({ radius }),
-  setType: (type) => set({ type }),
+  setPostType: (postType) => set({ postType }),
+  clearLocation: () =>
+    set({ lat: null, lng: null, address: null, fullAddress: null, radius: null }),
 }));
