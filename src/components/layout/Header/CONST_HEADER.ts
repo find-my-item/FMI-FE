@@ -11,5 +11,6 @@ export const HEADER_LINK = [
   { name: "공지사항", href: "/notice?tab=notice" },
   { name: "회원가입", href: "/sign-up" },
   { name: "타인 유저 프로필", href: "/user/123" },
-  { name: "일반 글쓰기", href: "/write/post" },
+  { name: "일반 분실 글쓰기", href: "/write/post?type=lost" },
+  { name: "일반 습득 글쓰기", href: "/write/post?type=find" },
 ];
