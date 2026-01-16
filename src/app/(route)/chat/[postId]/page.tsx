@@ -58,8 +58,12 @@ const ChatRoom = ({ postId }: { postId: number }) => {
       if (messageExists) return;
 
       const chatMessage: ChatMessage = {
-        ...message,
-        imageUrls: (message as any).imageUrls || [],
+        messageId: message.messageId,
+        messageType: message.messageType,
+        senderId: message.senderId,
+        content: message.content,
+        imageUrls: message.imageUrls || [],
+        createdAt: message.createdAt,
       };
 
       queryClient.setQueryData<InfiniteData<ApiBaseResponseType<ChatMessageResponse>>>(

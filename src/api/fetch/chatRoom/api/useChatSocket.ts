@@ -2,10 +2,10 @@
 
 import { useEffect } from "react";
 import { connectChatSocket, disconnectChatSocket, subscribeChatSocket } from "./chatSocket";
-import { ChatListUpdateResponse, ChatMessageResponse } from "../types/ChatRoomType";
+import { ChatListUpdateResponse, WebSocketChatMessage } from "../types/ChatRoomType";
 
 interface UseChatSocketOptions {
-  onMessage?: (data: ChatMessageResponse) => void;
+  onMessage?: (data: WebSocketChatMessage) => void;
   onListUpdate?: (data: ChatListUpdateResponse) => void;
   onReadReceipt?: (data: any) => void;
 }

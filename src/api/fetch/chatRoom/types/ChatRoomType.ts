@@ -23,12 +23,13 @@ export interface ChatListType {
   nextCursor: string | null;
 }
 
-export interface ChatMessageResponse {
+export interface WebSocketChatMessage {
   messageId: number;
   roomId: number;
   senderId: number;
   content: string;
   messageType: "TEXT" | "IMAGE";
+  imageUrls?: string[];
   createdAt: string;
 }
 
