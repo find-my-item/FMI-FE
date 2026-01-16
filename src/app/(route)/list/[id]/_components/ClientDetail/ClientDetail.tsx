@@ -9,11 +9,11 @@ import { useGetDetailPost } from "@/api/fetch/post/api/useGetDetailPost";
 import { commentListObject } from "@/app/(route)/notice/_constant/commentListObject";
 
 interface ClientDetailProps {
-  id: string;
+  id: number;
 }
 
 const ClientDetail = ({ id }: ClientDetailProps) => {
-  const { data, isLoading, isError } = useGetDetailPost({ id: Number(id) });
+  const { data, isLoading, isError } = useGetDetailPost({ id });
 
   if (isLoading) return <div className="h-[600px] pt-4">로딩중</div>;
   if (isError || !data?.result) return <div className="h-[600px] pt-4">오류가 발생했습니다.</div>;
