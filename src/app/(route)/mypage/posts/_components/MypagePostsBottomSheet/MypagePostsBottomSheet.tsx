@@ -10,6 +10,7 @@ import { Button, Filter } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
 import { MYPAGE_POSTS_SHEET_FILTER } from "../../_constants/MYPAGE_POSTS_SHEET_FILTER";
 import { FilterModeType } from "../../_types/FilterModeType";
+import useMakeDate from "../../_hooks/useMakeDate";
 
 const DateWheel = ({
   dateArray,
@@ -34,9 +35,7 @@ const DateWheel = ({
   }, [selected, dateArray, swiperInstance]);
 
   return (
-    <div className="relative h-[140px] w-full overflow-hidden flex-center">
-      <div className="absolute" />
-
+    <div className="h-[140px] w-full overflow-hidden flex-center">
       <Swiper
         direction="vertical"
         slidesPerView={2}
@@ -56,6 +55,7 @@ const DateWheel = ({
           <SwiperSlide
             key={item}
             className={cn(
+              // 디자인 토큰 수정 필요
               "flex w-full items-center justify-center text-[20px] font-semibold text-neutral-strong-disabled transition-colors",
               "[&.swiper-slide-active]:text-[20px] [&.swiper-slide-active]:text-neutral-strong-default"
             )}
@@ -78,40 +78,7 @@ interface MypagePostsBottomSheetProps {
 }
 
 const MypagePostsBottomSheet = ({ isOpen, onClose, mode }: MypagePostsBottomSheetProps) => {
-  const today = new Date();
-
-  const [selectDate, setSelectDate] = useState({
-    year: today.getFullYear(),
-    month: today.getMonth() + 1,
-    day: today.getDate(),
-  });
-
-  const years = useMemo(() => {
-    const startYear = 2025;
-    return Array.from({ length: today.getFullYear() - startYear + 1 }, (_, i) => startYear + i);
-  }, []);
-
-  const months = useMemo(() => Array.from({ length: 12 }, (_, i) => i + 1), []);
-
-  const days = useMemo(() => {
-    const date = new Date(selectDate.year, selectDate.month - 1);
-    const daysCount = getDaysInMonth(date);
-    return Array.from({ length: daysCount }, (_, i) => i + 1);
-  }, [selectDate.year, selectDate.month]);
-
-  const handleDateChange = (type: "year" | "month" | "day", value: number) => {
-    setSelectDate((prev) => {
-      const newDateArray = { ...prev, [type]: value };
-
-      if (type !== "day") {
-        const maxDay = getDaysInMonth(new Date(newDateArray.year, newDateArray.month - 1));
-        if (newDateArray.day > maxDay) {
-          newDateArray.day = maxDay;
-        }
-      }
-      return newDateArray;
-    });
-  };
+  const { years, months, days, selectDate, handleDateChange } = useMakeDate();
 
   return (
     <PopupLayout

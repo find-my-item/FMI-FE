@@ -3,8 +3,8 @@ import { PostListItem } from "@/components/domain";
 const MypagePostsList = () => {
   return (
     <section>
+      <h2 className="sr-only">게시글 목록 영역</h2>
       <ul>
-        <h2 className="sr-only">게시글 목록 영역</h2>
         {[1, 2, 3].map((item) => (
           <PostListItem
             key={item}
