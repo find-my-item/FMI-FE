@@ -1,11 +1,10 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperType } from "swiper";
 import { Mousewheel } from "swiper/modules";
 import { cn } from "@/utils";
-import { getDaysInMonth } from "date-fns";
 import { Button, Filter } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
 import { MYPAGE_POSTS_SHEET_FILTER } from "../../_constants/MYPAGE_POSTS_SHEET_FILTER";
