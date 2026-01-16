@@ -19,7 +19,7 @@ const KakaoCallbackPage = () => {
 
     if (isRequesting.current) return;
 
-    console.log("인가 코드 발견>> ", code);
+    // console.log("인가 코드 발견>> ", code);
     isRequesting.current = true;
 
     KakaoLoginMutate(
@@ -31,13 +31,13 @@ const KakaoCallbackPage = () => {
         onSuccess: (res) => {
           console.log("로그인 성공!", res);
 
-          router.push("/");
+          router.replace("/");
         },
         onError: (error) => {
-          console.error("로그인 실패", error);
+          // console.error("로그인 실패", error);
           alert("로그인에 실패했습니다. 다시 시도해주세요.");
           isRequesting.current = false;
-          router.push("/login");
+          router.replace("/login");
         },
       }
     );
