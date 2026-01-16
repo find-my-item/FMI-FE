@@ -1,8 +1,8 @@
 import { Icon } from "@/components/common";
 import { IconName } from "@/components/common/Icon/Icon";
 import { MyPageTapType } from "../../_types/MyPageTapType";
-import { TAP_CONFIG } from "../../_constants/TAP_CONFIG";
 import Link from "next/link";
+import { MYPAGE_TAP_CONFIG } from "../../_constants/MYPAGE_ROUTE_CONFIG";
 
 interface MyPageTapItemProps {
   pageName: MyPageTapType;
@@ -27,7 +27,7 @@ const MyPageIconNavItem = ({ pageName, iconName, pageLink }: MyPageTapItemProps)
 const MyPageIconNav = () => {
   return (
     <div className="w-full gap-[26px] px-5 py-[6px] flex-center">
-      {TAP_CONFIG.map((item, index) => (
+      {MYPAGE_TAP_CONFIG.map((item, index) => (
         <MyPageIconNavItem
           key={index}
           pageName={item.pageName}

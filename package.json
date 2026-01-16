@@ -30,6 +30,7 @@
     "babel-plugin-react-compiler": "^1.0.0",
     "clsx": "^2.1.1",
     "cookies-next": "^6.1.1",
+    "date-fns": "^4.1.0",
     "framer-motion": "^12.24.8",
     "lodash": "^4.17.21",
     "lodash.throttle": "^4.1.1",
