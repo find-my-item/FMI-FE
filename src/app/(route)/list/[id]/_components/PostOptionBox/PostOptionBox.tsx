@@ -1,12 +1,20 @@
+import { useDeleteDetailPost } from "@/api/fetch/post";
 import { cn } from "@/utils";
 
 interface PostOptionBoxProps {
   open: boolean;
   onClose: () => void;
+  postId: number;
 }
 
-const PostOptionBox = ({ open, onClose }: PostOptionBoxProps) => {
+const PostOptionBox = ({ open, onClose, postId }: PostOptionBoxProps) => {
   if (!open) return null;
+  const { mutate } = useDeleteDetailPost(postId);
+
+  const handleDeletePost = (postId: number) => {
+    mutate({ postId });
+    onClose();
+  };
 
   return (
     <div
@@ -21,7 +29,7 @@ const PostOptionBox = ({ open, onClose }: PostOptionBoxProps) => {
         <span>게시글 수정하기</span>
       </button>
       <hr className="h-[1px] bg-white" />
-      <button className="gap-2 px-7 py-4 flex-center">
+      <button className="gap-2 px-7 py-4 flex-center" onClick={() => handleDeletePost(postId)}>
         <span>게시글 삭제하기</span>
       </button>
       <hr className="h-[1px] bg-white" />
