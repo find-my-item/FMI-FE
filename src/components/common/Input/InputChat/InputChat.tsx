@@ -1,13 +1,13 @@
 "use client";
 
-import { ChangeEvent, TextareaHTMLAttributes, useRef } from "react";
+import { ChangeEvent, TextareaHTMLAttributes, useRef, useState } from "react";
 import { cn } from "@/utils";
 import { Controller, RegisterOptions, useFormContext } from "react-hook-form";
 import InputChatImageSection from "./_internal/InputChatImageSection";
 import { handleFileChange } from "./utils/handleFileChange";
 import { adjustHeight } from "./utils/adjustHeight";
 import { handleKeyDown } from "./utils/handleKeydown";
-import { useChatRoom } from "@/providers/ChatRoomProvider";
+import { SelectedImage } from "@/types/SelectedImage";
 import Icon from "../../Icon/Icon";
 
 /**
@@ -46,12 +46,19 @@ interface InputChatProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 const InputChat = ({ name, validation, disabled, roomId, ...props }: InputChatProps) => {
   const { control } = useFormContext();
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
-  const { images, setImages } = useChatRoom();
+  const [images, setImages] = useState<File[]>([]);
+  const [selectedImages, setSelectedImages] = useState<SelectedImage[]>([]);
 
   return (
     <>
       {images?.length !== 0 ? (
-        <InputChatImageSection roomId={roomId} />
+        <InputChatImageSection
+          roomId={roomId}
+          images={images}
+          setImages={setImages}
+          selectedImages={selectedImages}
+          setSelectedImages={setSelectedImages}
+        />
       ) : (
         <Controller
           name={name}

@@ -3,8 +3,6 @@
 import { ChatRoomHeader, EmptyChatRoom, ChatRoomMain } from "./_components";
 import { InputChat } from "@/components/common";
 import { FormProvider, useForm } from "react-hook-form";
-import { ChatRoomProvider } from "@/providers/ChatRoomProvider";
-import { MOCK_CHAT_DATA } from "./_components/ChatRoomMain/constants/MOCK_CHAT_DATA";
 import { use } from "react";
 import useChatMessages from "@/api/fetch/ChatMessage/api/useChatMessages";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll/useInfiniteScroll";
@@ -120,11 +118,7 @@ const ChatRoom = ({ postId }: { postId: number }) => {
 
 const page = ({ params }: { params: Promise<{ postId: string }> }) => {
   const { postId } = use(params);
-  return (
-    <ChatRoomProvider initialChats={[...MOCK_CHAT_DATA].reverse()}>
-      <ChatRoom postId={Number(postId)} />
-    </ChatRoomProvider>
-  );
+  return <ChatRoom postId={Number(postId)} />;
 };
 
 export default page;

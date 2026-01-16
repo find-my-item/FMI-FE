@@ -1,7 +1,6 @@
 "use client";
 
 import { ChatBox } from "./internal";
-import { useChatRoom } from "@/providers/ChatRoomProvider";
 import { Ref, useRef } from "react";
 import useChatScroll from "./useChatScroll";
 import { ChatMessage } from "@/api/fetch/ChatMessage/types/ChatMessageTypes";
@@ -40,7 +39,6 @@ const getDateKey = (isoString: string) => {
 };
 
 const ChatRoomMain = ({ chatMessages, chatMessagesRef }: ChatRoomMainProps) => {
-  const { chats } = useChatRoom();
   const scrollRef = useRef<HTMLDivElement>(null);
   useChatScroll(scrollRef, chatMessages);
   const { data: userInfo } = useAppQuery<ApiBaseResponseType<UserInfoResponse>>(

@@ -2,12 +2,25 @@
 
 import { Icon, ImageSelectButton } from "@/components/common";
 import { handleSendImage } from "../utils/handleSendImage";
-import { useChatRoom } from "@/providers/ChatRoomProvider";
 import useSendImage from "@/api/fetch/ChatMessage/api/useSendImage";
+import { Dispatch, SetStateAction } from "react";
+import { SelectedImage } from "@/types/SelectedImage";
 
-const InputChatImageSection = ({ roomId }: { roomId: number }) => {
-  const { images, setImages, selectedImages, setSelectedImages } = useChatRoom();
+interface InputChatImageSectionProps {
+  roomId: number;
+  images: File[];
+  setImages: Dispatch<SetStateAction<File[]>>;
+  selectedImages: SelectedImage[];
+  setSelectedImages: Dispatch<SetStateAction<SelectedImage[]>>;
+}
 
+const InputChatImageSection = ({
+  roomId,
+  images,
+  setImages,
+  selectedImages,
+  setSelectedImages,
+}: InputChatImageSectionProps) => {
   const { mutate: sendImage } = useSendImage(roomId);
 
   return (
@@ -28,7 +41,12 @@ const InputChatImageSection = ({ roomId }: { roomId: number }) => {
           {!selectedImages.length ? "사진 선택" : `사진 ${selectedImages.length}개 전송`}
         </button>
       </div>
-      <ImageSelectButton />
+      <ImageSelectButton
+        images={images}
+        setImages={setImages}
+        selectedImages={selectedImages}
+        setSelectedImages={setSelectedImages}
+      />
     </>
   );
 };
