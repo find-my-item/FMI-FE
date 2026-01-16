@@ -47,3 +47,6 @@ export { default as UserProfile } from "@/assets/user-profile.svg";
 export { default as CameraBorder } from "@/assets/camera-border.svg";
 export { default as Heart } from "@/assets/heart.svg";
 export { default as Calendar } from "@/assets/calendar.svg";
+export { default as ArrowSwitchHorizontal } from "@/assets/arrow-switch-horizontal.svg";
+export { default as Edit } from "@/assets/edit.svg";
+export { default as Trash } from "@/assets/trash.svg";

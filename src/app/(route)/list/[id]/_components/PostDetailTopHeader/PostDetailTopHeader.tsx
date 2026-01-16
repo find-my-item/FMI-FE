@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { DetailHeader } from "@/components/layout";
 import PostShare from "../PostShare/PostShare";
-import PostOptionBox from "../PostOptionBox/PostOptionBox";
+import PostActionMenu from "../PostActionMenu/PostActionMenu";
 
 const PostDetailTopHeader = ({ postId }: { postId: number }) => {
   const [openShareModal, setOpenShareModal] = useState(false);
@@ -19,7 +19,7 @@ const PostDetailTopHeader = ({ postId }: { postId: number }) => {
             onClick={() => setOpenOptionModal((v) => !v)}
             ariaLabel="게시글 메뉴"
           />
-          <PostOptionBox
+          <PostActionMenu
             open={openOptionModal}
             onClose={() => setOpenOptionModal(false)}
             postId={postId}
