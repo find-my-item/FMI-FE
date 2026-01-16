@@ -21,7 +21,7 @@ import { useFormInput } from "../_internal/_hooks/useFormInput";
  * @param items -  서술형 텍스트를 작성할 수 있는 input 공통 컴포넌트 props입니다.
  *  - 'name': 입력 필드의 id 및 register함수 사용을 위한 name
  *  - 'label': 라벨의 텍스트
- *  - 'rule': capation에 나타날 입력 필드의 규칙
+ *  - 'rule': caption에 나타날 입력 필드의 규칙
  *  - `validation`: 입력 필드의 유효성 검사를 위한 RegisterOption
  *
  *
