@@ -26,9 +26,7 @@ const KakaoCallbackPage = () => {
         environment: "dev",
       },
       {
-        onSuccess: (res) => {
-          console.log("로그인 성공!", res);
-
+        onSuccess: () => {
           router.replace("/");
         },
         onError: (error) => {
@@ -43,7 +41,7 @@ const KakaoCallbackPage = () => {
   }, [code, KakaoLoginMutate, router]);
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-center">
+    <div className="flex min-h-screen w-full flex-col-center">
       <div className="flex flex-col items-center gap-4">
         <Icon name="Loading" className="animate-spin" size={30} />
         <p className="text-body1-bold text-gray-700">카카오 로그인 중입니다...</p>
