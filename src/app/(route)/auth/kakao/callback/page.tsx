@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useApiKakaoLogin } from "@/api/fetch/auth";
 import { Icon } from "@/components/common";
+import { useToast } from "@/context/ToastContext";
 
 const KakaoCallbackPage = () => {
   const router = useRouter();
@@ -13,6 +14,8 @@ const KakaoCallbackPage = () => {
   const isRequesting = useRef(false);
 
   const { mutate: KakaoLoginMutate } = useApiKakaoLogin();
+
+  const { addToast } = useToast();
 
   useEffect(() => {
     if (!code) return;
@@ -31,9 +34,11 @@ const KakaoCallbackPage = () => {
         },
         onError: (error) => {
           isRequesting.current = false;
-          if (error.code === "AUTH400-KAKAO_CODE_INVALID") alert(error.message);
-          if (error.code === "AUTH500-KAKAO_USERINFO_FAILED") alert(error.message);
-          else alert("로그인에 실패했습니다. 다시 시도해주세요.");
+          if (error.code === "AUTH400-KAKAO_CODE_INVALID")
+            addToast("카카오 인증코드가 유효하지 않거나 이미 사용되었어요.", "warning");
+          if (error.code === "AUTH500-KAKAO_USERINFO_FAILED")
+            addToast("카카오 사용자 정보 조회에 실패했어요.", "warning");
+          else addToast("로그인에 실패했어요. 다시 시도해주세요.", "warning");
           router.replace("/login");
         },
       }
