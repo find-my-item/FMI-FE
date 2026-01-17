@@ -50,3 +50,4 @@ export { default as AlertState } from "@/assets/alert-state.svg";
 export { default as FindWriteBtn } from "@/assets/find-write-btn.svg";
 export { default as LostWriteBtn } from "@/assets/lost-write-btn.svg";
 export { default as Calendar } from "@/assets/calendar.svg";
+export { default as NoComments } from "@/assets/no-comments.svg";

@@ -2,28 +2,28 @@ import { Icon } from "@/components/common";
 import Image from "next/image";
 
 // TODO(수현): 임시 데이터, api 연결 시 삭제 예정
-const MockData = [
-  {
-    commentId: 1,
-    comment: "댓글 내용",
-    mentionUser: "감자",
-    date: "2026.01.15",
-    like: 34,
-  },
-  {
-    commentId: 2,
-    comment: "댓글 내용이 길어진다아ㅏ아아ㅏ아아아아아ㅏ아아아아아아ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ",
-    date: "2026.01.15",
-    like: 34,
-  },
-  {
-    commentId: 3,
-    // comment: "댓글 내용",
-    comment: "댓글 내용이 길어진다아ㅏ아아ㅏ아아아아아ㅏ아아아아아아ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ",
-    date: "2026.01.15",
-    like: 34,
-    thumbnailUrl: "https://picsum.photos/400/300?random=1",
-  },
+const MockData: any[] = [
+  // {
+  //   commentId: 1,
+  //   comment: "댓글 내용",
+  //   mentionUser: "감자",
+  //   date: "2026.01.15",
+  //   like: 34,
+  // },
+  // {
+  //   commentId: 2,
+  //   comment: "댓글 내용이 길어진다아ㅏ아아ㅏ아아아아아ㅏ아아아아아아ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ",
+  //   date: "2026.01.15",
+  //   like: 34,
+  // },
+  // {
+  //   commentId: 3,
+  //   // comment: "댓글 내용",
+  //   comment: "댓글 내용이 길어진다아ㅏ아아ㅏ아아아아아ㅏ아아아아아아ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ",
+  //   date: "2026.01.15",
+  //   like: 34,
+  //   thumbnailUrl: "https://picsum.photos/400/300?random=1",
+  // },
 ];
 
 const MypageCommentsList = () => {
@@ -61,6 +61,18 @@ const MypageCommentsList = () => {
           )}
         </div>
       ))}
+
+      {MockData.length === 0 && (
+        <div className="flex gap-5 py-20 flex-col-center">
+          <Icon name="NoComments" size={70} />
+          <h2 className="text-h2-bold text-layout-header-default">아직 작성한 댓글이 없어요</h2>
+          <p className="text-body2-regular text-layout-body-default">
+            {" "}
+            아직 작성한 댓글이 없습니다. <br />
+            게시글에 댓글을 남겨 보세요!
+          </p>
+        </div>
+      )}
     </section>
   );
 };
