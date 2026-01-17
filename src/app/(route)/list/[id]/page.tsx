@@ -7,11 +7,7 @@ interface ListDetailProps {
 const page = async ({ params }: ListDetailProps) => {
   const { id } = await params;
 
-  return (
-    <>
-      <ClientDetail id={id} />
-    </>
-  );
+  return <ClientDetail id={id} />;
 };
 
 export default page;

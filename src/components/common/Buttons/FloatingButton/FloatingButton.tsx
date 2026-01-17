@@ -1,5 +1,6 @@
 import { ButtonHTMLAttributes } from "react";
 import Icon from "../../Icon/Icon";
+import { cn } from "@/utils";
 
 /**
  * @author hyungjun
@@ -9,6 +10,8 @@ import Icon from "../../Icon/Icon";
  *
  * @param ariaLabel - 접근성을 위한 버튼 라벨 텍스트입니다.
  * 기본값은 `"플로팅 메뉴 버튼"`입니다.
+ * @param buttonClassName - 버튼 컨테이너에 적용할 커스텀 클래스명입니다.
+ * @param iconClassName - 아이콘에 적용할 커스텀 클래스명입니다.
  *
  * @example
  * ```tsx
@@ -17,20 +20,40 @@ import Icon from "../../Icon/Icon";
  *   onClick={() => router.push('/post/create')}
  * />
  * ```
+ *
+ * ```tsx
+ * <FloatingButton
+ *   ariaLabel="게시글 작성 버튼"
+ *   onClick={() => router.push('/post/create')}
+ *   buttonClassName="bg-fill-brand-strong-pressed"
+ *   iconClassName="rotate-45"
+ * />
+ * ```
  */
 
 interface FloatingButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   ariaLabel?: string;
+  buttonClassName?: string;
+  iconClassName?: string;
 }
 
-const FloatingButton = ({ ariaLabel = "플로팅 메뉴 버튼", ...props }: FloatingButtonProps) => {
+const FloatingButton = ({
+  ariaLabel = "플로팅 메뉴 버튼",
+  buttonClassName,
+  iconClassName,
+  ...props
+}: FloatingButtonProps) => {
   return (
     <button
-      {...props}
       aria-label={ariaLabel}
-      className="glass-card h-[70px] w-[70px] rounded-full bg-opacity-70 p-[12px] bg-fill-brand-normal-default flex-center"
+      className={cn(
+        "h-[70px] w-[70px] rounded-full p-3 flex-center",
+        "glass-card bg-opacity-70 bg-fill-brand-normal-default",
+        buttonClassName
+      )}
+      {...props}
     >
-      <Icon name="Plus" size={32} />
+      <Icon name="Plus" size={32} className={iconClassName} />
     </button>
   );
 };

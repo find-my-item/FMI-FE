@@ -1,4 +1,3 @@
-import { cn } from "@/utils";
 import { Button } from "@/components/common";
 
 interface ActionSectionProps {
@@ -8,16 +7,7 @@ interface ActionSectionProps {
 const ActionSection = ({ disabled }: ActionSectionProps) => {
   return (
     <section className="px-5 pb-8 pt-3">
-      <Button
-        type="submit"
-        disabled={disabled}
-        className={cn(
-          "glass-card min-h-[44px] w-full rounded-[10px] py-[10px] text-body1-semibold",
-          disabled
-            ? "cursor-not-allowed text-brand-normal-disabled bg-fill-brand-normal-disabled"
-            : "text-brand-normal-default bg-fill-brand-normal-default"
-        )}
-      >
+      <Button type="submit" variant="auth" disabled={disabled}>
         작성 완료
       </Button>
     </section>
