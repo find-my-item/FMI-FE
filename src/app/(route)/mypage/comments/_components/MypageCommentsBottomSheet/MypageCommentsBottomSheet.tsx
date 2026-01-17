@@ -1,6 +1,7 @@
 import { Button } from "@/components/common";
 import { DateRangeSheet, PopupLayout } from "@/components/domain";
 import { cn } from "@/utils";
+import { FilterModeType } from "../../../posts/_types/FilterModeType";
 
 interface MypageCommentsBottomSheetProps {
   isOpen: boolean;

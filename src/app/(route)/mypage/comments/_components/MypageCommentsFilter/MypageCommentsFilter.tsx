@@ -1,18 +1,17 @@
-import { Filter } from "@/components/common";
+import { Filter, KebabMenu } from "@/components/common";
 import MypageCommentsBottomSheet from "../MypageCommentsBottomSheet/MypageCommentsBottomSheet";
 import { MYPAGE_COMMENTS_FILTER } from "../../_constants/MYPAGE_COMMENTS_FILTER";
 import { useState } from "react";
+import { FilterModeType } from "../../../posts/_types/FilterModeType";
 
 const MypageCommentsFilter = () => {
-  const [isBottomOpen, setIsBottomOpen] = useState(false);
-  const [bottomState, setBottomState] = useState<"Date" | "Filter">("Date");
+  const [isBottomSheet, setIsBottomSheet] = useState(false);
 
+  // TODO(수현): name 타입 안정성 높이기
   const handleFilterClick = (name: string) => {
-    setIsBottomOpen(true);
-    if (name === "기간") {
-      setBottomState("Date");
+    if (name === "최신순") {
     } else {
-      setBottomState("Filter");
+      setIsBottomSheet(false);
     }
   };
 
@@ -32,7 +31,8 @@ const MypageCommentsFilter = () => {
         </Filter>
       ))}
 
-      <MypageCommentsBottomSheet isOpen={isBottomOpen} onClose={() => setIsBottomOpen(false)} />
+      {/* <KebabMenu items={}/> */}
+      <MypageCommentsBottomSheet onClose={() => setIsBottomSheet(false)} isOpen={isBottomSheet} />
     </section>
   );
 };
