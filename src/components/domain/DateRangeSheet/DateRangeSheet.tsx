@@ -32,7 +32,7 @@ const DateWheel = ({
     <div className="h-[140px] w-full overflow-hidden flex-center">
       <Swiper
         direction="vertical"
-        slidesPerView={2}
+        slidesPerView={5}
         centeredSlides={true}
         onSwiper={setSwiperInstance}
         onSlideChange={(swiper) => onSelected(dateArray[swiper.activeIndex])}
@@ -45,13 +45,16 @@ const DateWheel = ({
           thresholdDelta: 10, // 작은 떨림 무시
         }}
       >
+        {/* 중앙 포커스 해주기 위한 하얀 막 역할 */}
+        <div className="pointer-events-none absolute left-0 top-0 z-10 h-[40%] w-full bg-gradient-to-b from-white via-white/70 to-transparent" />
+        <div className="pointer-events-none absolute bottom-0 left-0 z-10 h-[40%] w-full bg-gradient-to-t from-white via-white/70 to-transparent" />
+
         {dateArray.map((item) => (
           <SwiperSlide
             key={item}
             className={cn(
-              // 디자인 토큰 수정 필요
-              "flex w-full items-center justify-center text-[20px] font-semibold text-neutral-strong-disabled transition-colors",
-              "[&.swiper-slide-active]:text-[20px] [&.swiper-slide-active]:text-neutral-strong-default"
+              "flex w-full items-center justify-center text-h2-regular text-layout-header-default transition-colors",
+              "[&.swiper-slide-active]:text-h2-regular [&.swiper-slide-active]:text-layout-header-default [&.swiper-slide-active]:opacity-100"
             )}
           >
             <div className="flex-center">
