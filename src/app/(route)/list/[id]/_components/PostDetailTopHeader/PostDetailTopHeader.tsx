@@ -11,21 +11,22 @@ const PostDetailTopHeader = ({ postId }: { postId: number }) => {
 
   return (
     <>
-      <DetailHeader>
-        <DetailHeader.Star isActive ariaLabel="게시글 즐겨찾기" />
-        <DetailHeader.Share onClick={() => setOpenShareModal(true)} ariaLabel="게시글 공유" />
-        <div className="relative inline-flex items-center">
+      <div className="relative">
+        <DetailHeader>
+          <DetailHeader.Star isActive ariaLabel="게시글 즐겨찾기" />
+          <DetailHeader.Share onClick={() => setOpenShareModal(true)} ariaLabel="게시글 공유" />
           <DetailHeader.Menu
             onClick={() => setOpenOptionModal((v) => !v)}
             ariaLabel="게시글 메뉴"
           />
-          <PostActionMenu
-            open={openOptionModal}
-            onClose={() => setOpenOptionModal(false)}
-            postId={postId}
-          />
-        </div>
-      </DetailHeader>
+        </DetailHeader>
+
+        <PostActionMenu
+          open={openOptionModal}
+          onClose={() => setOpenOptionModal(false)}
+          postId={postId}
+        />
+      </div>
 
       <PostShare isOpen={openShareModal} onClose={() => setOpenShareModal(false)} postId={postId} />
     </>

@@ -5,6 +5,7 @@ import { cn } from "@/utils";
 import { Button, Icon } from "@/components/common";
 import { useDeleteDetailPost } from "@/api/fetch/post";
 import ModalLayout from "@/components/common/Modal/_internal/ModalLayout";
+import { ACTION_MENU } from "./ACTION_MENU_STYLES";
 
 interface PostOptionBoxProps {
   open: boolean;
@@ -21,23 +22,23 @@ const PostActionMenu = ({ open, onClose, postId }: PostOptionBoxProps) => {
     <>
       <div
         className={cn(
-          "absolute right-[10%] top-[60%] z-10 mt-2",
+          "absolute left-[40%] top-[60%] z-10 mt-2",
           "min-h-[171px] w-[218px] overflow-hidden rounded-[20px] flex-col-center",
-          "glass-card border border-white bg-fill-neutral-subtle-default",
-          "text-nowrap text-h3-medium text-neutral-normal-default"
+          "border border-white bg-fill-neutral-subtle-default",
+          "text-nowrap text-h3-medium text-neutral-normal-default shadow-sm"
         )}
       >
-        <button className="gap-2 px-7 py-4 flex-center">
+        <button className={ACTION_MENU.buttonStyle}>
           <Icon name="Edit" size={20} />
           <span>게시글 수정하기</span>
         </button>
-        <hr className="h-[1px] bg-white" />
-        <button className="gap-2 px-7 py-4 flex-center" onClick={() => setDeleteModalOpen(true)}>
+        <hr className={ACTION_MENU.hrStyle} aria-hidden="true" />
+        <button className={ACTION_MENU.buttonStyle} onClick={() => setDeleteModalOpen(true)}>
           <Icon name="Trash" size={20} />
           <span className="text-system-warning">게시글 삭제하기</span>
         </button>
-        <hr className="h-[1px] bg-white" />
-        <button className="gap-2 px-7 py-4 flex-center">
+        <hr className={ACTION_MENU.hrStyle} aria-hidden="true" />
+        <button className={ACTION_MENU.buttonStyle}>
           <Icon name="ArrowSwitchHorizontal" size={20} />
           <span>찾았음 상태로 변경</span>
         </button>
@@ -81,10 +82,10 @@ const PostDeleteModal = ({ isOpen, onClose, postId }: PostDeleteModalProps) => {
         </p>
       </div>
       <div className="w-full gap-1 flex-center">
-        <Button variant="outlined" onClick={onClose} className="min-h-11 flex-1">
+        <Button variant="outlined" onClick={onClose} className={ACTION_MENU.deleteButtonStyle}>
           취소
         </Button>
-        <Button onClick={() => handleDeletePost(postId)} className="min-h-11 flex-1">
+        <Button onClick={() => handleDeletePost(postId)} className={ACTION_MENU.deleteButtonStyle}>
           삭제하기
         </Button>
       </div>
