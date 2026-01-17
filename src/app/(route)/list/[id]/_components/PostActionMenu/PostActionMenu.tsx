@@ -1,6 +1,10 @@
+"use client";
+
+import { useState } from "react";
 import { cn } from "@/utils";
-import { Icon } from "@/components/common";
+import { Button, Icon } from "@/components/common";
 import { useDeleteDetailPost } from "@/api/fetch/post";
+import ModalLayout from "@/components/common/Modal/_internal/ModalLayout";
 
 interface PostOptionBoxProps {
   open: boolean;
@@ -9,39 +13,81 @@ interface PostOptionBoxProps {
 }
 
 const PostActionMenu = ({ open, onClose, postId }: PostOptionBoxProps) => {
-  const { mutate } = useDeleteDetailPost(postId);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+
   if (!open) return null;
 
-  const handleDeletePost = (postId: number) => {
-    mutate({ postId });
-    onClose();
-  };
-
   return (
-    <div
-      className={cn(
-        "absolute right-[10%] top-[60%] z-10 mt-2",
-        "min-h-[171px] w-[218px] overflow-hidden rounded-[20px] flex-col-center",
-        "glass-card border border-white bg-fill-neutral-subtle-default",
-        "text-nowrap text-h3-medium text-neutral-normal-default"
-      )}
-    >
-      <button className="gap-2 px-7 py-4 flex-center">
-        <Icon name="Edit" size={20} />
-        <span>게시글 수정하기</span>
-      </button>
-      <hr className="h-[1px] bg-white" />
-      <button className="gap-2 px-7 py-4 flex-center" onClick={() => handleDeletePost(postId)}>
-        <Icon name="Trash" size={20} />
-        <span className="text-system-warning">게시글 삭제하기</span>
-      </button>
-      <hr className="h-[1px] bg-white" />
-      <button className="gap-2 px-7 py-4 flex-center">
-        <Icon name="ArrowSwitchHorizontal" size={20} />
-        <span>찾았음 상태로 변경</span>
-      </button>
-    </div>
+    <>
+      <div
+        className={cn(
+          "absolute right-[10%] top-[60%] z-10 mt-2",
+          "min-h-[171px] w-[218px] overflow-hidden rounded-[20px] flex-col-center",
+          "glass-card border border-white bg-fill-neutral-subtle-default",
+          "text-nowrap text-h3-medium text-neutral-normal-default"
+        )}
+      >
+        <button className="gap-2 px-7 py-4 flex-center">
+          <Icon name="Edit" size={20} />
+          <span>게시글 수정하기</span>
+        </button>
+        <hr className="h-[1px] bg-white" />
+        <button className="gap-2 px-7 py-4 flex-center" onClick={() => setDeleteModalOpen(true)}>
+          <Icon name="Trash" size={20} />
+          <span className="text-system-warning">게시글 삭제하기</span>
+        </button>
+        <hr className="h-[1px] bg-white" />
+        <button className="gap-2 px-7 py-4 flex-center">
+          <Icon name="ArrowSwitchHorizontal" size={20} />
+          <span>찾았음 상태로 변경</span>
+        </button>
+      </div>
+
+      <PostDeleteModal
+        isOpen={deleteModalOpen}
+        onClose={() => setDeleteModalOpen(false)}
+        postId={postId}
+      />
+    </>
   );
 };
 
 export default PostActionMenu;
+
+interface PostDeleteModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  postId: number;
+}
+
+const PostDeleteModal = ({ isOpen, onClose, postId }: PostDeleteModalProps) => {
+  const { mutate: deletePost } = useDeleteDetailPost(postId);
+
+  const handleDeletePost = (postId: number) => {
+    deletePost({ postId });
+    onClose();
+  };
+
+  return (
+    <ModalLayout
+      isOpen={isOpen}
+      onClose={onClose}
+      className="min-w-[350px] gap-6 p-6 flex-col-center"
+    >
+      <div className="space-y-1 text-center">
+        <h2 className="text-h3-semibold text-layout-header-default">정말로 삭제하시겠습니까?</h2>
+        <p className="text-body5-regular text-layout-body-default">
+          게시글 삭제 후에는 취소가 불가능합니다.
+        </p>
+      </div>
+      <div className="w-full gap-1 flex-center">
+        <Button variant="outlined" onClick={onClose} className="min-h-11 flex-1">
+          취소
+        </Button>
+        <Button onClick={() => handleDeletePost(postId)} className="min-h-11 flex-1">
+          삭제하기
+        </Button>
+      </div>
+    </ModalLayout>
+  );
+};
