@@ -63,10 +63,6 @@ const InputSearchRHF = ({
   const { register, watch, setValue } = useFormContext();
   const rhfValue = watch(name) || "";
 
-  const onChangeDelete = () => {
-    setValue(name, "");
-  };
-
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== "Enter") return;
     onEnter?.(rhfValue);
@@ -84,11 +80,7 @@ const InputSearchRHF = ({
         onKeyDown={handleKeyDown}
       />
 
-      <DeleteButton
-        value={rhfValue}
-        className="right-5 top-1/2 -translate-y-1/2"
-        onDelete={onChangeDelete}
-      />
+      <InputSearchDeleteButton value={rhfValue} onDelete={() => setValue(name, "")} />
     </div>
   );
 };
@@ -100,10 +92,6 @@ const InputSearchOnChange = ({
   ...props
 }: Omit<InputSearchProps, "mode" | "validation">) => {
   const [innerValue, setInnerValue] = useState("");
-
-  const onChangeDelete = () => {
-    setInnerValue("");
-  };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== "Enter") return;
@@ -123,30 +111,21 @@ const InputSearchOnChange = ({
         onKeyDown={handleKeyDown}
       />
 
-      <DeleteButton
-        value={innerValue}
-        className="right-5 top-1/2 -translate-y-1/2"
-        onDelete={onChangeDelete}
-      />
+      <InputSearchDeleteButton value={innerValue} onDelete={() => setInnerValue("")} />
     </div>
   );
 };
 
 // 삭제 버튼 컴포넌트
-const InputSearchDeleteButton = ({ value, onDelete }: { value: string; onDelte }) => {
+const InputSearchDeleteButton = ({ value, onDelete }: { value: string; onDelete: () => void }) => {
   return (
-    <>
+    value && (
       <DeleteButton
-        value={rhfValue}
+        value={value}
         className="right-5 top-1/2 -translate-y-1/2"
-        onDelete={onChangeDelete}
+        onDelete={onDelete}
       />
-      <DeleteButton
-        value={innerValue}
-        className="right-5 top-1/2 -translate-y-1/2"
-        onDelete={onChangeDelete}
-      />
-    </>
+    )
   );
 };
 
