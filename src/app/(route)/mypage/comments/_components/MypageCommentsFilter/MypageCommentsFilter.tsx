@@ -9,7 +9,7 @@ const MypageCommentsFilter = () => {
     open: false,
   });
 
-  const MYPAGE_COMMENTS_KEBAB_ITEM = [
+  const kebabMenuItems = [
     { text: "최신순", onClick: () => setIsKebabMenu({ menu: "최신순", open: false }) },
     { text: "오래된 순", onClick: () => setIsKebabMenu({ menu: "오래된 순", open: false }) },
   ];
@@ -40,7 +40,7 @@ const MypageCommentsFilter = () => {
         </Filter>
         {isKebabMenu.open && (
           <div className="absolute left-1/2 top-full z-50 mt-2 -translate-x-1/2">
-            <KebabMenu items={MYPAGE_COMMENTS_KEBAB_ITEM} />
+            <KebabMenu items={kebabMenuItems} />
           </div>
         )}
       </div>

@@ -1,30 +1,6 @@
 import { Icon } from "@/components/common";
 import Image from "next/image";
-
-// TODO(수현): 임시 데이터, api 연결 시 삭제 예정
-const MockData: any[] = [
-  {
-    commentId: 1,
-    comment: "댓글 내용",
-    mentionUser: "감자",
-    date: "2026.01.15",
-    like: 34,
-  },
-  {
-    commentId: 2,
-    comment: "댓글 내용이 길어진다아ㅏ아아ㅏ아아아아아ㅏ아아아아아아ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ",
-    date: "2026.01.15",
-    like: 34,
-  },
-  {
-    commentId: 3,
-    // comment: "댓글 내용",
-    comment: "댓글 내용이 길어진다아ㅏ아아ㅏ아아아아아ㅏ아아아아아아ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ",
-    date: "2026.01.15",
-    like: 34,
-    thumbnailUrl: "https://picsum.photos/400/300?random=1",
-  },
-];
+import { MOCK_MYPAGE_COMMENTS_ITEM } from "@/mock/MOCK_DATA";
 
 const MypageCommentsEmptyUI = () => {
   return (
@@ -44,7 +20,7 @@ const MypageCommentsList = () => {
     <section>
       <h2 className="sr-only">댓글 목록 영역</h2>
       <ul>
-        {MockData.map((item) => (
+        {MOCK_MYPAGE_COMMENTS_ITEM.map((item) => (
           <li
             key={item.commentId}
             className="flex w-full justify-between border-b border-divider-default px-5 py-[30px]"
@@ -76,7 +52,7 @@ const MypageCommentsList = () => {
           </li>
         ))}
       </ul>
-      {MockData.length === 0 && <MypageCommentsEmptyUI />}
+      {MOCK_MYPAGE_COMMENTS_ITEM.length === 0 && <MypageCommentsEmptyUI />}
     </section>
   );
 };
