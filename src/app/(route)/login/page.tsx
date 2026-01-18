@@ -5,7 +5,7 @@ import { cn } from "@/utils";
 import { Icon, Button } from "@/components/common";
 import { AuthLogoLink } from "@/components/domain";
 
-const ButtonStyle = "w-full h-[44px] flex-center gap-1 rounded-[10px] text-body1-semibold ";
+const ButtonStyle = "w-full h-11 flex-center gap-1 rounded-[10px] text-body1-semibold ";
 
 const Page = () => {
   return (
