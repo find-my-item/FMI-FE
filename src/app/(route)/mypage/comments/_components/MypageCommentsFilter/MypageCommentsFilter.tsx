@@ -3,6 +3,7 @@
 import { Filter, KebabMenu } from "@/components/common";
 import MypageCommentsBottomSheet from "../MypageCommentsBottomSheet/MypageCommentsBottomSheet";
 import { useState } from "react";
+import { MYPAGE_COMMENTS_KEBAB_OPTIONS } from "../../_constant/MYPAGE_COMMENTS_KEBAB_OPTIONS";
 
 const MypageCommentsFilter = () => {
   const [isBottomSheet, setIsBottomSheet] = useState(false);
@@ -11,10 +12,10 @@ const MypageCommentsFilter = () => {
     open: false,
   });
 
-  const kebabMenuItems = [
-    { text: "최신순", onClick: () => setIsKebabMenu({ menu: "최신순", open: false }) },
-    { text: "오래된 순", onClick: () => setIsKebabMenu({ menu: "오래된 순", open: false }) },
-  ];
+  const kebabMenuItems = MYPAGE_COMMENTS_KEBAB_OPTIONS.map((item) => ({
+    text: item.text,
+    onClick: () => setIsKebabMenu({ menu: item.text, open: false }),
+  }));
 
   return (
     <section className="flex w-full gap-2 px-5 py-[14px]">

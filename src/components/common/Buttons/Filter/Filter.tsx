@@ -62,7 +62,6 @@ const Filter = ({
 
   return (
     <button
-      {...props}
       aria-label={`${ariaLabel} 필터`}
       className={cn(
         "gap-[4px] whitespace-nowrap rounded-full px-[18px] py-[8px] text-body1-semibold flex-center",
@@ -74,6 +73,7 @@ const Filter = ({
         onSelected && loading && "bg-fill-neutralInversed-normal-disabled"
         // props.className
       )}
+      {...props}
     >
       {loading ? (
         <Icon name="Loading" className="animate-spin" />
