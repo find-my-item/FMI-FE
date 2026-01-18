@@ -12,9 +12,8 @@ export function middleware(request: NextRequest) {
     currentPath.startsWith("/sign-up");
 
   const isProtectPath =
-    currentPath.startsWith("/mypage/") ||
-    currentPath.startsWith("/write") ||
-    currentPath.startsWith("/chat");
+    // currentPath.startsWith("/mypage/") ||
+    currentPath.startsWith("/write") || currentPath.startsWith("/chat");
 
   // 토큰이 있는데 로그인, 회원가입 페이지에 접근하려고 할때
   if (isAuthPath && (accessToken || refreshToken)) {

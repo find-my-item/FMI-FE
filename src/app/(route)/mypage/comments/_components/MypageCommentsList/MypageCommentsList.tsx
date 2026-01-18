@@ -43,38 +43,39 @@ const MypageCommentsList = () => {
   return (
     <section>
       <h2 className="sr-only">댓글 목록 영역</h2>
-      {MockData.map((item) => (
-        <div
-          key={item.commentId}
-          className="flex w-full justify-between border-b border-divider-default px-5 py-[30px]"
-        >
-          <div className="flex min-w-0 flex-1 flex-col">
-            <span className="w-full truncate">
-              {item.mentionUser && (
-                <span className="mr-1 text-brand-normal-default"> @{item.mentionUser}</span>
-              )}
-              {item.comment}
-            </span>
+      <ul>
+        {MockData.map((item) => (
+          <li
+            key={item.commentId}
+            className="flex w-full justify-between border-b border-divider-default px-5 py-[30px]"
+          >
+            <div className="flex min-w-0 flex-1 flex-col">
+              <p className="w-full truncate">
+                {item.mentionUser && (
+                  <span className="mr-1 text-brand-normal-default"> @{item.mentionUser}</span>
+                )}
+                {item.comment}
+              </p>
 
-            <span className="mt-1 text-body2-regular text-layout-body-default">{item.date}</span>
-            <span className="mt-2 flex text-body2-regular text-neutral-strong-placeholder">
-              <Icon name="Star" size={16} />
-              {item.like}
-            </span>
-          </div>
+              <span className="mt-1 text-body2-regular text-layout-body-default">{item.date}</span>
+              <span className="mt-2 flex text-body2-regular text-neutral-strong-placeholder">
+                <Icon name="Star" size={16} />
+                {item.like}
+              </span>
+            </div>
 
-          {item.thumbnailUrl && (
-            <Image
-              src={item.thumbnailUrl}
-              alt=""
-              width={90}
-              height={90}
-              className="ml-1 object-cover"
-            />
-          )}
-        </div>
-      ))}
-
+            {item.thumbnailUrl && (
+              <Image
+                src={item.thumbnailUrl}
+                alt=""
+                width={90}
+                height={90}
+                className="ml-1 object-cover"
+              />
+            )}
+          </li>
+        ))}
+      </ul>
       {MockData.length === 0 && <MypageCommentsEmptyUI />}
     </section>
   );
