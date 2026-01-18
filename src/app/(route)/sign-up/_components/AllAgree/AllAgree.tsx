@@ -70,7 +70,7 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
             {TERMS_CONFIG.map((item, index) => (
               <div
                 key={item.name}
-                className="flex h-[44px] w-full items-center justify-between text-body1-semibold text-neutral-normal-default"
+                className="flex h-11 w-full items-center justify-between text-body1-semibold text-neutral-normal-default"
               >
                 <CheckBox
                   id={item.name}

@@ -29,7 +29,7 @@ const MypagePostsFilter = () => {
   };
 
   return (
-    <section className="hidden-scrollbar flex w-full gap-2 overflow-x-auto px-5 py-[14px]">
+    <section className="flex w-full gap-2 overflow-x-auto px-5 py-[14px] no-scrollbar">
       <h2 className="sr-only">필터링 영역</h2>
       {MYPAGE_POSTS_FILTER.map((item) => (
         <Filter
@@ -45,7 +45,7 @@ const MypagePostsFilter = () => {
       ))}
 
       <MypagePostsBottomSheet
-        onClose={() => setIsBottomSheet((prev) => ({ ...prev, type: "Category" }))}
+        onClose={() => setIsBottomSheet((prev) => ({ ...prev, isOpen: false }))}
         isOpen={isBottomSheet.isOpen}
         mode={isBottomSheet.mode}
       />
