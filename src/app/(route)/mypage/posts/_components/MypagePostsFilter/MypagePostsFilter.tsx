@@ -45,7 +45,7 @@ const MypagePostsFilter = () => {
       ))}
 
       <MypagePostsBottomSheet
-        onClose={() => setIsBottomSheet((prev) => ({ ...prev, type: "Category" }))}
+        onClose={() => setIsBottomSheet((prev) => ({ ...prev, isOpen: false }))}
         isOpen={isBottomSheet.isOpen}
         mode={isBottomSheet.mode}
       />
