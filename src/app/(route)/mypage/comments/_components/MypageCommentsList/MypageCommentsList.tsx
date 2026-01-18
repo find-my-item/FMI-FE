@@ -26,6 +26,19 @@ const MockData: any[] = [
   },
 ];
 
+const MypageCommentsEmptyUI = () => {
+  return (
+    <div className="flex gap-5 py-20 flex-col-center">
+      <Icon name="NoComments" size={70} />
+      <h2 className="text-h2-bold text-layout-header-default">아직 작성한 댓글이 없어요</h2>
+      <p className="text-body2-regular text-layout-body-default">
+        아직 작성한 댓글이 없습니다. <br />
+        게시글에 댓글을 남겨 보세요!
+      </p>
+    </div>
+  );
+};
+
 const MypageCommentsList = () => {
   return (
     <section>
@@ -62,16 +75,7 @@ const MypageCommentsList = () => {
         </div>
       ))}
 
-      {MockData.length === 0 && (
-        <div className="flex gap-5 py-20 flex-col-center">
-          <Icon name="NoComments" size={70} />
-          <h2 className="text-h2-bold text-layout-header-default">아직 작성한 댓글이 없어요</h2>
-          <p className="text-body2-regular text-layout-body-default">
-            아직 작성한 댓글이 없습니다. <br />
-            게시글에 댓글을 남겨 보세요!
-          </p>
-        </div>
-      )}
+      {MockData.length === 0 && <MypageCommentsEmptyUI />}
     </section>
   );
 };
