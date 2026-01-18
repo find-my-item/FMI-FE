@@ -1,7 +1,7 @@
 import ClientDetail from "./_components/ClientDetail/ClientDetail";
 
 interface ListDetailProps {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: number }>;
 }
 
 const page = async ({ params }: ListDetailProps) => {
