@@ -50,7 +50,7 @@ interface InputSearchProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   mode: "RHF" | "onChange";
   validation?: RegisterOptions;
-  onEnter: (value: string) => void;
+  onEnter?: (value: string) => void;
 }
 
 // RHF 모드용 컴포넌트
