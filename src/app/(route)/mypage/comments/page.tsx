@@ -1,5 +1,3 @@
-"use client";
-
 import { DetailHeader } from "@/components/layout";
 import { MypageCommentsFilter, MypageCommentsList, MypageCommentsSearch } from "./_components";
 
