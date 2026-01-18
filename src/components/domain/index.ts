@@ -8,3 +8,4 @@ export { default as FindPwForm } from "./FindPwForm/FindPwForm";
 export { default as FooterButton } from "./FooterButton/FooterButton";
 export { default as PostListItem } from "./PostListItem/PostListItem";
 export { default as DateRangeSheet } from "./DateRangeSheet/DateRangeSheet";
+export { default as MypageSearch } from "./MypageSearch/MypageSearch";
