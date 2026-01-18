@@ -132,6 +132,24 @@ const InputSearchOnChange = ({
   );
 };
 
+// 삭제 버튼 컴포넌트
+const InputSearchDeleteButton = ({ value, onDelete }: { value: string; onDelte }) => {
+  return (
+    <>
+      <DeleteButton
+        value={rhfValue}
+        className="right-5 top-1/2 -translate-y-1/2"
+        onDelete={onChangeDelete}
+      />
+      <DeleteButton
+        value={innerValue}
+        className="right-5 top-1/2 -translate-y-1/2"
+        onDelete={onChangeDelete}
+      />
+    </>
+  );
+};
+
 // 메인 컴포넌트
 const InputSearch = ({ mode, ...props }: InputSearchProps) => {
   return mode === "RHF" ? <InputSearchRHF {...props} /> : <InputSearchOnChange {...props} />;
