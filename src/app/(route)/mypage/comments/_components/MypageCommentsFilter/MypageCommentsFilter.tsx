@@ -1,3 +1,5 @@
+"use client";
+
 import { Filter, KebabMenu } from "@/components/common";
 import MypageCommentsBottomSheet from "../MypageCommentsBottomSheet/MypageCommentsBottomSheet";
 import { useState } from "react";

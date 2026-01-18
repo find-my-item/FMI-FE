@@ -1,3 +1,5 @@
+"use client";
+
 import { InputSearch } from "@/components/common";
 
 const MypageCommentsSearch = () => {
