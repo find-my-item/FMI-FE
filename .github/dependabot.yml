@@ -17,47 +17,6 @@ updates:
       prefix: "chore(deps)"
       include: "scope"
 
-    groups:
-      next:
-        patterns:
-          - "next"
-          - "@next/*"
-
-      react:
-        patterns:
-          - "react"
-          - "react-dom"
-          - "@types/react"
-          - "@types/react-dom"
-
-      storybook:
-        patterns:
-          - "@storybook/*"
-          - "storybook"
-
-      playwright:
-        patterns:
-          - "@playwright/*"
-          - "playwright"
-
-      jest:
-        patterns:
-          - "jest"
-          - "@types/jest"
-          - "ts-jest"
-          - "babel-jest"
-          - "jest-environment-jsdom"
-
-      testing-library:
-        patterns:
-          - "@testing-library/*"
-          - "@types/testing-library__*"
-          - "@testing-library/user-event"
-
-      typescript:
-        patterns:
-          - "typescript"
-
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
