@@ -67,3 +67,26 @@ export const MOCK_CHAT_ITEM = {
   lastMessageSentAt: "2026-01-01T10:00:00.000Z",
   unreadCount: 1,
 } as ChatRoom;
+
+export const MOCK_MYPAGE_COMMENTS_ITEM = [
+  {
+    commentId: 1,
+    comment: "댓글 내용",
+    mentionUser: "감자",
+    date: "2026.01.15",
+    like: 34,
+  },
+  {
+    commentId: 2,
+    comment: "댓글 내용이 길어진다아ㅏ아아ㅏ아아아아아ㅏ아아아아아아ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ",
+    date: "2026.01.15",
+    like: 34,
+  },
+  {
+    commentId: 3,
+    comment: "댓글 내용이 길어진다아ㅏ아아ㅏ아아아아아ㅏ아아아아아아ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ",
+    date: "2026.01.15",
+    like: 34,
+    thumbnailUrl: "https://picsum.photos/400/300?random=1",
+  },
+];

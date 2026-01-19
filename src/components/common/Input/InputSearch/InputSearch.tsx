@@ -50,7 +50,7 @@ interface InputSearchProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   mode: "RHF" | "onChange";
   validation?: RegisterOptions;
-  onEnter: (value: string) => void;
+  onEnter?: (value: string) => void;
 }
 
 // RHF 모드용 컴포넌트
@@ -62,10 +62,6 @@ const InputSearchRHF = ({
 }: Omit<InputSearchProps, "mode">) => {
   const { register, watch, setValue } = useFormContext();
   const rhfValue = watch(name) || "";
-
-  const onChangeDelete = () => {
-    setValue(name, "");
-  };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== "Enter") return;
@@ -84,11 +80,7 @@ const InputSearchRHF = ({
         onKeyDown={handleKeyDown}
       />
 
-      <DeleteButton
-        value={rhfValue}
-        className="right-5 top-1/2 -translate-y-1/2"
-        onDelete={onChangeDelete}
-      />
+      <InputSearchDeleteButton value={rhfValue} onDelete={() => setValue(name, "")} />
     </div>
   );
 };
@@ -100,10 +92,6 @@ const InputSearchOnChange = ({
   ...props
 }: Omit<InputSearchProps, "mode" | "validation">) => {
   const [innerValue, setInnerValue] = useState("");
-
-  const onChangeDelete = () => {
-    setInnerValue("");
-  };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== "Enter") return;
@@ -123,12 +111,21 @@ const InputSearchOnChange = ({
         onKeyDown={handleKeyDown}
       />
 
-      <DeleteButton
-        value={innerValue}
-        className="right-5 top-1/2 -translate-y-1/2"
-        onDelete={onChangeDelete}
-      />
+      <InputSearchDeleteButton value={innerValue} onDelete={() => setInnerValue("")} />
     </div>
+  );
+};
+
+// 삭제 버튼 컴포넌트
+const InputSearchDeleteButton = ({ value, onDelete }: { value: string; onDelete: () => void }) => {
+  return (
+    value && (
+      <DeleteButton
+        value={value}
+        className="right-5 top-1/2 -translate-y-1/2"
+        onDelete={onDelete}
+      />
+    )
   );
 };
 

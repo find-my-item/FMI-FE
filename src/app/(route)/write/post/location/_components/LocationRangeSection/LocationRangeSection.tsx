@@ -1,12 +1,15 @@
+"use client";
+
 import { useState } from "react";
 import { Radius } from "@/types";
 import { BottomSheet, KakaoMap } from "../_internal";
 
 interface LocationRangeSectionProps {
-  location: string | null;
+  address: string | null;
+  fullAddress: string | null;
 }
 
-const LocationRangeSection = ({ location }: LocationRangeSectionProps) => {
+const LocationRangeSection = ({ address, fullAddress }: LocationRangeSectionProps) => {
   const [radius, setRadius] = useState<Radius>(3000);
   // TODO(지권): 목업 위도, 경도 수정 필요
   const [lat, setLat] = useState(35.8737787566279);
@@ -18,7 +21,10 @@ const LocationRangeSection = ({ location }: LocationRangeSectionProps) => {
         <KakaoMap lat={lat} lng={lng} radius={radius} />
       </div>
 
-      <BottomSheet locationInfo={{ location, lat, lng }} radiusState={{ radius, setRadius }} />
+      <BottomSheet
+        locationInfo={{ address, fullAddress, lat, lng }}
+        radiusState={{ radius, setRadius }}
+      />
     </>
   );
 };

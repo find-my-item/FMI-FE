@@ -11,11 +11,11 @@ import { ShareId } from "@/types";
 interface PostShareProps {
   isOpen: boolean;
   onClose: () => void;
-  postId: string;
+  postId: number;
 }
 
 const PostShare = ({ isOpen, onClose, postId }: PostShareProps) => {
-  const { data } = useGetMetaData({ postId: Number(postId) });
+  const { data } = useGetMetaData({ postId });
 
   const metaData = {
     title: data?.result?.title || "데이터 공유하기",
