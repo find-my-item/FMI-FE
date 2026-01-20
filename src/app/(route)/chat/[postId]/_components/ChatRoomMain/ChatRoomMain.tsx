@@ -1,11 +1,12 @@
 "use client";
 
 import { ChatBox } from "./internal";
-import { Ref, useRef } from "react";
+import { Ref, useLayoutEffect, useRef, useState } from "react";
 import useChatScroll from "./useChatScroll";
 import { ChatMessage } from "@/api/fetch/ChatMessage/types/ChatMessageTypes";
 import useAppQuery from "@/api/_base/query/useAppQuery";
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
+import { cn } from "@/utils";
 
 interface UserInfoResponse {
   userId: number;
@@ -63,18 +64,29 @@ const getDateKey = (isoString: string) => {
 
 const ChatRoomMain = ({ chatMessages, chatMessagesRef }: ChatRoomMainProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
-  useChatScroll(scrollRef, chatMessages);
+  const [ready, setReady] = useState(false);
   const { data: userInfo } = useAppQuery<ApiBaseResponseType<UserInfoResponse>>(
     "auth",
     ["userInfo"],
     `/users/me`
   );
+  useChatScroll(scrollRef, chatMessages, userInfo?.result.userId ?? 0);
+
+  useLayoutEffect(() => {
+    if (!scrollRef.current) return;
+    scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    setReady(true);
+  }, []);
+
   const reversedMessages = chatMessages.slice().reverse();
 
   return (
     <div
       ref={scrollRef}
-      className="flex flex-1 flex-col overflow-y-scroll scroll-smooth bg-flatGray-25 px-[16px] py-[8px] no-scrollbar"
+      className={cn(
+        "flex flex-1 flex-col overflow-y-scroll bg-flatGray-25 px-[16px] py-[8px] no-scrollbar",
+        !ready && "invisible"
+      )}
     >
       <h1 className="sr-only">채팅 표시 화면</h1>
       <div ref={chatMessagesRef} className="h-[1px] flex-shrink-0" />
