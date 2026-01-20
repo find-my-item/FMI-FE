@@ -84,6 +84,16 @@ export const subscribeChatSocket = <T>(destination: string, handler: MessageHand
   subscribe();
 };
 
+// 소켓 구독 해제
+export const unsubscribeChatSocket = (destination: string) => {
+  const subscription = subscriptions.get(destination);
+  if (subscription) {
+    subscription.unsubscribe();
+    subscriptions.delete(destination);
+    console.log(`[STOMP] Unsubscribed from ${destination}`);
+  }
+};
+
 // 메시지 전송(텍스트)
 export const sendChatSocketMessage = (destination: string, body: unknown) => {
   if (!client?.connected) return;
