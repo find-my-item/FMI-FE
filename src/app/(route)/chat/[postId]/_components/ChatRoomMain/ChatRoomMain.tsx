@@ -1,8 +1,9 @@
 "use client";
 
 import { ChatBox } from "./internal";
-import { Ref, useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState, useEffect } from "react";
 import useChatScroll from "./useChatScroll";
+import { useChatInfiniteScroll } from "./useChatInfiniteScroll";
 import { ChatMessage } from "@/api/fetch/ChatMessage/types/ChatMessageTypes";
 import useAppQuery from "@/api/_base/query/useAppQuery";
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
@@ -18,7 +19,9 @@ interface UserInfoResponse {
 
 interface ChatRoomMainProps {
   chatMessages: ChatMessage[];
-  chatMessagesRef: Ref<HTMLDivElement>;
+  fetchNextPage: () => void;
+  hasNextPage: boolean | undefined;
+  isFetchingNextPage: boolean;
 }
 
 // 한국 시간대(UTC+9) 기준으로 날짜를 계산하는 헬퍼 함수
@@ -62,21 +65,54 @@ const getDateKey = (isoString: string) => {
   return `${year}-${month}-${date}`;
 };
 
-const ChatRoomMain = ({ chatMessages, chatMessagesRef }: ChatRoomMainProps) => {
-  const scrollRef = useRef<HTMLDivElement>(null);
+const ChatRoomMain = ({
+  chatMessages,
+  fetchNextPage,
+  hasNextPage,
+  isFetchingNextPage,
+}: ChatRoomMainProps) => {
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+  const scrollHeightRef = useRef<number>(0);
   const [ready, setReady] = useState(false);
   const { data: userInfo } = useAppQuery<ApiBaseResponseType<UserInfoResponse>>(
     "auth",
     ["userInfo"],
     `/users/me`
   );
+
   useChatScroll(scrollRef, chatMessages, userInfo?.result.userId ?? 0);
+  useChatInfiniteScroll({
+    scrollRef,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  });
 
   useLayoutEffect(() => {
     if (!scrollRef.current) return;
     scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    scrollHeightRef.current = scrollRef.current.scrollHeight;
     setReady(true);
   }, []);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el || isFetchingNextPage) return;
+
+    const prevScrollHeight = scrollHeightRef.current;
+    if (el.scrollHeight !== prevScrollHeight && prevScrollHeight > 0) {
+      const scrollDiff = el.scrollHeight - prevScrollHeight;
+      el.scrollTop = el.scrollTop + scrollDiff;
+    }
+    scrollHeightRef.current = el.scrollHeight;
+  }, [isFetchingNextPage, chatMessages.length]);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el || !isFetchingNextPage) return;
+
+    scrollHeightRef.current = el.scrollHeight;
+  }, [isFetchingNextPage]);
 
   return (
     <div
@@ -87,7 +123,6 @@ const ChatRoomMain = ({ chatMessages, chatMessagesRef }: ChatRoomMainProps) => {
       )}
     >
       <h1 className="sr-only">채팅 표시 화면</h1>
-      <div ref={chatMessagesRef} className="h-[1px] flex-shrink-0" />
       {chatMessages.map((chat, i) => {
         const prevChat = chatMessages[i - 1];
 

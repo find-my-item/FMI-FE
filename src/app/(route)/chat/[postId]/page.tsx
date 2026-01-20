@@ -5,7 +5,7 @@ import { InputChat } from "@/components/common";
 import { FormProvider, useForm } from "react-hook-form";
 import { use, useRef, useEffect } from "react";
 import useChatMessages from "@/api/fetch/ChatMessage/api/useChatMessages";
-import { useInfiniteScroll } from "@/hooks/useInfiniteScroll/useInfiniteScroll";
+import { useChatInfiniteScroll } from "./_components/ChatRoomMain/useChatInfiniteScroll";
 import { sendChatSocketMessage, useChatSocket } from "@/api/fetch/chatRoom";
 import { useQueryClient, InfiniteData } from "@tanstack/react-query";
 import { ChatMessage } from "@/api/fetch/ChatMessage/types/ChatMessageTypes";
@@ -66,6 +66,20 @@ const ChatRoom = ({ postId }: { postId: number }) => {
     hasNextPage,
     isFetchingNextPage,
   } = useChatMessages(roomId ?? 0, { enabled: !!roomId });
+
+  const initialFetchRef = useRef(false);
+  useEffect(() => {
+    if (
+      chatMessages &&
+      chatMessages.length > 0 &&
+      hasNextPage &&
+      !isFetchingNextPage &&
+      !initialFetchRef.current
+    ) {
+      initialFetchRef.current = true;
+      fetchNextPage();
+    }
+  }, [chatMessages, hasNextPage, isFetchingNextPage, fetchNextPage]);
   useChatSocket({
     onListUpdate: () => {
       queryClient.invalidateQueries({ queryKey: ["chatList"] });
@@ -114,11 +128,6 @@ const ChatRoom = ({ postId }: { postId: number }) => {
       }
     },
   });
-  const { ref: chatMessagesRef } = useInfiniteScroll({
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-  });
   const onSubmit = ({ content }: ChatFormValues) => {
     if (content.trim() === "" || !roomId || !userInfo?.result.userId) return;
 
@@ -162,7 +171,12 @@ const ChatRoom = ({ postId }: { postId: number }) => {
 
       <div className="flex min-h-0 flex-1 flex-col">
         {chatMessages?.length !== 0 && chatMessages ? (
-          <ChatRoomMain chatMessages={chatMessages} chatMessagesRef={chatMessagesRef} />
+          <ChatRoomMain
+            chatMessages={chatMessages}
+            fetchNextPage={fetchNextPage}
+            hasNextPage={hasNextPage}
+            isFetchingNextPage={isFetchingNextPage}
+          />
         ) : (
           <EmptyChatRoom postMode={isPostMode} />
         )}
