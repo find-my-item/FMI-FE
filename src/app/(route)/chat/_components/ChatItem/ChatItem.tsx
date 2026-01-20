@@ -10,7 +10,10 @@ interface ChatItemProps {
 }
 
 const ChatItem = ({ chatRoom }: ChatItemProps) => {
-  const { postInfo, contactUser, lastMessageSentAt, lastMessage, unreadCount } = chatRoom;
+  const { postInfo, contactUser, lastMessageSentAt, lastMessage, unreadCount, messageType } =
+    chatRoom;
+
+  const lastMessageIsImage = lastMessageSentAt && messageType === "IMAGE";
 
   return (
     <Link
@@ -64,7 +67,7 @@ const ChatItem = ({ chatRoom }: ChatItemProps) => {
           <time>{formatDate(lastMessageSentAt || "시간 정보가 없습니다.")}</time>
         </p>
         <p className="truncate text-body2-medium text-layout-header-default">
-          {lastMessage || "메시지를 불러오지 못했습니다."}
+          {lastMessageIsImage ? "사진" : lastMessage || "메시지를 불러오지 못했습니다."}
         </p>
       </div>
     </Link>
