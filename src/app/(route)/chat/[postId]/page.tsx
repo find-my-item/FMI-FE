@@ -67,6 +67,9 @@ const ChatRoom = ({ postId }: { postId: number }) => {
     isFetchingNextPage,
   } = useChatMessages(roomId ?? 0, { enabled: !!roomId });
   useChatSocket({
+    onListUpdate: () => {
+      queryClient.invalidateQueries({ queryKey: ["chatList"] });
+    },
     onMessage: (message) => {
       if (!roomId) return;
 

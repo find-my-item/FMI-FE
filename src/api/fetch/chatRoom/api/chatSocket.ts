@@ -5,6 +5,7 @@ type MessageHandler<T = any> = (message: T) => void;
 
 let client: Client | null = null;
 const subscriptions = new Map<string, StompSubscription>();
+const handlers = new Map<string, Set<MessageHandler>>();
 
 // 연결 전에 들어온 구독 요청을 임시로 저장
 let pendingSubscriptions: Array<() => void> = [];
@@ -44,6 +45,7 @@ export const connectChatSocket = () => {
 export const disconnectChatSocket = () => {
   subscriptions.forEach((sub) => sub.unsubscribe());
   subscriptions.clear();
+  handlers.clear();
 
   pendingSubscriptions = [];
 
@@ -56,8 +58,12 @@ export const subscribeChatSocket = <T>(destination: string, handler: MessageHand
   const subscribe = () => {
     if (!client) return;
 
+    if (!handlers.has(destination)) {
+      handlers.set(destination, new Set());
+    }
+    handlers.get(destination)!.add(handler);
+
     if (subscriptions.has(destination)) {
-      console.log(`[STOMP] Already subscribed to ${destination}`);
       return;
     }
 
@@ -65,7 +71,7 @@ export const subscribeChatSocket = <T>(destination: string, handler: MessageHand
       console.log(`[STOMP] Received message on ${destination}:`, message.body);
       try {
         const parsed = JSON.parse(message.body);
-        handler(parsed);
+        handlers.get(destination)?.forEach((h) => h(parsed));
       } catch (error) {
         console.error("[STOMP] Failed to parse message:", error);
       }
@@ -85,12 +91,26 @@ export const subscribeChatSocket = <T>(destination: string, handler: MessageHand
 };
 
 // 소켓 구독 해제
-export const unsubscribeChatSocket = (destination: string) => {
-  const subscription = subscriptions.get(destination);
-  if (subscription) {
-    subscription.unsubscribe();
-    subscriptions.delete(destination);
-    console.log(`[STOMP] Unsubscribed from ${destination}`);
+export const unsubscribeChatSocket = (destination: string, handler?: MessageHandler) => {
+  if (handler) {
+    handlers.get(destination)?.delete(handler);
+    if (handlers.get(destination)?.size === 0) {
+      const subscription = subscriptions.get(destination);
+      if (subscription) {
+        subscription.unsubscribe();
+        subscriptions.delete(destination);
+        handlers.delete(destination);
+        console.log(`[STOMP] Unsubscribed from ${destination}`);
+      }
+    }
+  } else {
+    const subscription = subscriptions.get(destination);
+    if (subscription) {
+      subscription.unsubscribe();
+      subscriptions.delete(destination);
+      handlers.delete(destination);
+      console.log(`[STOMP] Unsubscribed from ${destination}`);
+    }
   }
 };
 

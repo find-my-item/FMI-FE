@@ -44,13 +44,13 @@ export const useChatSocket = ({
 
     return () => {
       if (onMessage) {
-        unsubscribeChatSocket("/user/queue/messages");
+        unsubscribeChatSocket("/user/queue/messages", onMessage);
       }
       if (onListUpdate) {
-        unsubscribeChatSocket("/user/queue/list-updates");
+        unsubscribeChatSocket("/user/queue/list-updates", onListUpdate);
       }
       if (onReadReceipt) {
-        unsubscribeChatSocket("/user/queue/read-receipts");
+        unsubscribeChatSocket("/user/queue/read-receipts", onReadReceipt);
       }
     };
   }, [onMessage, onListUpdate, onReadReceipt, manageConnection]);
