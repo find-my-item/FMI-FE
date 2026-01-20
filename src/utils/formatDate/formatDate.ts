@@ -22,6 +22,10 @@ const formatDate = (date: string) => {
     return buildDateString(targetDate);
   }
 
+  if (diffMs < MS_IN_MINUTE) {
+    return "지금";
+  }
+
   if (diffMs < MS_IN_HOUR) {
     const minutesAgo = Math.max(1, Math.floor(diffMs / MS_IN_MINUTE));
     return `${minutesAgo}분 전`;
