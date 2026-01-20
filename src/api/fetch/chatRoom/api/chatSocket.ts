@@ -95,11 +95,19 @@ export const unsubscribeChatSocket = (destination: string) => {
 };
 
 // 메시지 전송(텍스트)
-export const sendChatSocketMessage = (destination: string, body: unknown) => {
-  if (!client?.connected) return;
+export const sendChatSocketMessage = (destination: string, body: unknown): boolean => {
+  if (!client?.connected) {
+    return false;
+  }
 
-  client.publish({
-    destination,
-    body: JSON.stringify(body),
-  });
+  try {
+    client.publish({
+      destination,
+      body: JSON.stringify(body),
+    });
+    return true;
+  } catch (error) {
+    console.error("[STOMP] Failed to send message:", error);
+    return false;
+  }
 };

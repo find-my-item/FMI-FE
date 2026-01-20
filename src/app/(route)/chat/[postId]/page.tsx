@@ -3,7 +3,7 @@
 import { ChatRoomHeader, EmptyChatRoom, ChatRoomMain } from "./_components";
 import { InputChat } from "@/components/common";
 import { FormProvider, useForm } from "react-hook-form";
-import { use } from "react";
+import { use, useRef, useEffect } from "react";
 import useChatMessages from "@/api/fetch/ChatMessage/api/useChatMessages";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll/useInfiniteScroll";
 import { sendChatSocketMessage, useChatSocket } from "@/api/fetch/chatRoom";
@@ -17,6 +17,7 @@ import useAppQuery from "@/api/_base/query/useAppQuery";
 import {
   addMessageToCache,
   replaceMessageInCache,
+  removeMessageFromCache,
 } from "@/utils/chatMessageCache/chatMessageCache";
 
 interface ChatFormValues {
@@ -46,6 +47,14 @@ const ChatRoom = ({ postId }: { postId: number }) => {
     ["userInfo"],
     `/users/me`
   );
+  const timeoutRefs = useRef<Map<number, NodeJS.Timeout>>(new Map());
+
+  useEffect(() => {
+    return () => {
+      timeoutRefs.current.forEach((timeoutId) => clearTimeout(timeoutId));
+      timeoutRefs.current.clear();
+    };
+  }, []);
 
   const roomId = chatRoom?.result.roomId;
   const isPostMode: "find" | "lost" =
@@ -86,6 +95,11 @@ const ChatRoom = ({ postId }: { postId: number }) => {
       );
 
       if (optimisticMessage) {
+        const timeoutId = timeoutRefs.current.get(optimisticMessage.messageId);
+        if (timeoutId) {
+          clearTimeout(timeoutId);
+          timeoutRefs.current.delete(optimisticMessage.messageId);
+        }
         replaceMessageInCache(queryClient, roomId, optimisticMessage.messageId, chatMessage);
       } else {
         const messageExists = firstPage.result.messages.some(
@@ -105,8 +119,9 @@ const ChatRoom = ({ postId }: { postId: number }) => {
   const onSubmit = ({ content }: ChatFormValues) => {
     if (content.trim() === "" || !roomId || !userInfo?.result.userId) return;
 
+    const optimisticId = -Date.now();
     const optimisticMessage: ChatMessage = {
-      messageId: -Date.now(),
+      messageId: optimisticId,
       messageType: "TEXT",
       senderId: userInfo.result.userId,
       content,
@@ -115,7 +130,25 @@ const ChatRoom = ({ postId }: { postId: number }) => {
     };
 
     addMessageToCache(queryClient, roomId, optimisticMessage);
+
     sendChatSocketMessage(`/app/chats/${roomId}/send`, { content });
+
+    const timeoutId = setTimeout(() => {
+      const oldData = queryClient.getQueryData<
+        InfiniteData<ApiBaseResponseType<ChatMessageResponse>>
+      >(["chatMessages", roomId]);
+
+      const firstPage = oldData?.pages[0];
+      if (firstPage) {
+        const stillOptimistic = firstPage.result.messages.find((m) => m.messageId === optimisticId);
+        if (stillOptimistic) {
+          removeMessageFromCache(queryClient, roomId, optimisticId);
+        }
+      }
+      timeoutRefs.current.delete(optimisticId);
+    }, 3000);
+
+    timeoutRefs.current.set(optimisticId, timeoutId);
     methods.reset();
   };
 
