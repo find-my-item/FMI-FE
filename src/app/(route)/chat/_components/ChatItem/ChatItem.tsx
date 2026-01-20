@@ -49,9 +49,9 @@ const ChatItem = ({ chatRoom }: ChatItemProps) => {
         />
       </div>
 
-      <div className="min-w-0 space-y-[2px]">
-        <div className="flex items-center justify-between">
-          <span className="text-h3-semibold text-layout-header-default">
+      <div className="w-full min-w-0 space-y-[2px]">
+        <div className="flex items-center justify-between truncate">
+          <span className="truncate text-h3-semibold text-layout-header-default">
             {contactUser?.nickname || "닉네임을 불러오지 못했습니다."}
           </span>
           {unreadCount > 0 && (
@@ -60,12 +60,14 @@ const ChatItem = ({ chatRoom }: ChatItemProps) => {
             </span>
           )}
         </div>
-        <p className="text-caption1-medium text-layout-body-default">
-          <span className="after:mx-1 after:content-['·']">
+        <div className="flex truncate text-caption1-medium text-layout-body-default">
+          <span className="truncate">
             {postInfo?.address || "위치 정보를 불러오지 못했습니다."}
           </span>
-          <time>{formatDate(lastMessageSentAt || "시간 정보가 없습니다.")}</time>
-        </p>
+          <time className="flex-shrink-0 before:mx-1 before:content-['·']">
+            {formatDate(lastMessageSentAt || "시간 정보가 없습니다.")}
+          </time>
+        </div>
         <p className="truncate text-body2-medium text-layout-header-default">
           {lastMessageIsImage ? "사진" : lastMessage || "메시지를 불러오지 못했습니다."}
         </p>
