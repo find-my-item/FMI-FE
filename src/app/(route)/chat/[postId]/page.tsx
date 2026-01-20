@@ -46,24 +46,18 @@ const ChatRoom = ({ postId }: { postId: number }) => {
         InfiniteData<ApiBaseResponseType<ChatMessageResponse>>
       >(["chatMessages", roomId]);
 
-      if (!oldData) return;
-
-      const firstPage = oldData.pages[0];
+      const firstPage = oldData?.pages[0];
       if (!firstPage) return;
 
-      const existingMessages = firstPage.result.messages;
-      const messageExists = existingMessages.some(
+      const messageExists = firstPage.result.messages.some(
         (m: ChatMessage) => m.messageId === message.messageId
       );
       if (messageExists) return;
 
+      const { roomId: _, ...chatMessageData } = message;
       const chatMessage: ChatMessage = {
-        messageId: message.messageId,
-        messageType: message.messageType,
-        senderId: message.senderId,
-        content: message.content,
+        ...chatMessageData,
         imageUrls: message.imageUrls || [],
-        createdAt: message.createdAt,
       };
 
       queryClient.setQueryData<InfiniteData<ApiBaseResponseType<ChatMessageResponse>>>(
