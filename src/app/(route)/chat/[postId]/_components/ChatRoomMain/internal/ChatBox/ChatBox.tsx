@@ -1,4 +1,4 @@
-import { cn, formatDate } from "@/utils";
+import { cn, formatChatTime } from "@/utils";
 import { Sender } from "@/app/(route)/chat/_types/Sender";
 import { CHAT_SENDER_STYLE } from "../../constants/CHAT_SENDER_STYLE";
 import ChatImageBox from "../ChatImageBox/ChatImageBox";
@@ -35,7 +35,7 @@ const ChatBox = ({ chat, nextSender, lastChat }: ChatBoxProps) => {
   return (
     <div className={cn("flex items-end gap-2", style.container, marginBottom)}>
       <time className={cn("text-caption1-medium text-layout-body-default", style.timeOrder)}>
-        {formatDate(createdAt)}
+        {formatChatTime(createdAt)}
       </time>
       {messageType === "TEXT" && (
         <p
