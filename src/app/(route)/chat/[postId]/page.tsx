@@ -94,6 +94,10 @@ const ChatRoom = ({ postId }: { postId: number }) => {
     sendChatSocketMessage(`/app/chats/${roomId}/send`, {
       content,
     });
+    // 서버 처리 시간을 고려하여 캐시 무효화
+    setTimeout(() => {
+      queryClient.invalidateQueries({ queryKey: ["chatMessages", roomId] });
+    }, 500);
     methods.reset();
   };
 
