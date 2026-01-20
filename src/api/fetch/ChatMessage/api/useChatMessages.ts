@@ -13,7 +13,11 @@ const useChatMessages = (roomId: number, options?: UseChatMessagesOptions) => {
     `/chats/${roomId}/messages`,
     {
       enabled: options?.enabled ?? true,
-      select: (data) => data.pages.flatMap((page) => page.result.messages),
+      select: (data) =>
+        data.pages
+          .slice()
+          .reverse()
+          .flatMap((page) => page.result.messages.slice().reverse()),
     }
   );
 };

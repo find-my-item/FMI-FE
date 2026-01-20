@@ -78,8 +78,6 @@ const ChatRoomMain = ({ chatMessages, chatMessagesRef }: ChatRoomMainProps) => {
     setReady(true);
   }, []);
 
-  const reversedMessages = chatMessages.slice().reverse();
-
   return (
     <div
       ref={scrollRef}
@@ -90,8 +88,8 @@ const ChatRoomMain = ({ chatMessages, chatMessagesRef }: ChatRoomMainProps) => {
     >
       <h1 className="sr-only">채팅 표시 화면</h1>
       <div ref={chatMessagesRef} className="h-[1px] flex-shrink-0" />
-      {reversedMessages.map((chat, i) => {
-        const prevChat = reversedMessages[i - 1];
+      {chatMessages.map((chat, i) => {
+        const prevChat = chatMessages[i - 1];
 
         const isNewDate = i === 0 || getDateKey(chat.createdAt) !== getDateKey(prevChat.createdAt);
         const nextSender = prevChat
@@ -109,11 +107,7 @@ const ChatRoomMain = ({ chatMessages, chatMessagesRef }: ChatRoomMainProps) => {
               </div>
             )}
 
-            <ChatBox
-              chat={chat}
-              nextSender={nextSender}
-              lastChat={i === reversedMessages.length - 1}
-            />
+            <ChatBox chat={chat} nextSender={nextSender} lastChat={i === chatMessages.length - 1} />
           </div>
         );
       })}
