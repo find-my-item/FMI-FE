@@ -5,14 +5,12 @@ import { InputChat } from "@/components/common";
 import { FormProvider, useForm } from "react-hook-form";
 import { use, useRef, useEffect } from "react";
 import useChatMessages from "@/api/fetch/ChatMessage/api/useChatMessages";
-import { useChatInfiniteScroll } from "./_components/ChatRoomMain/useChatInfiniteScroll";
 import { sendChatSocketMessage, useChatSocket } from "@/api/fetch/chatRoom";
 import { useQueryClient, InfiniteData } from "@tanstack/react-query";
 import { ChatMessage } from "@/api/fetch/ChatMessage/types/ChatMessageTypes";
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 import { ChatMessageResponse } from "@/api/fetch/ChatMessage/types/ChatMessageTypes";
 import useChatRoom from "@/api/fetch/chatRoom/api/useChatRoom";
-import { WebSocketChatMessage } from "@/api/fetch/chatRoom/types/ChatRoomType";
 import useAppQuery from "@/api/_base/query/useAppQuery";
 import {
   addMessageToCache,
