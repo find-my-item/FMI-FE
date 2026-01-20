@@ -8,6 +8,7 @@ import { SelectedImage } from "@/types/SelectedImage";
 
 interface InputChatImageSectionProps {
   roomId: number;
+  userId: number;
   images: File[];
   setImages: Dispatch<SetStateAction<File[]>>;
   selectedImages: SelectedImage[];
@@ -16,12 +17,13 @@ interface InputChatImageSectionProps {
 
 const InputChatImageSection = ({
   roomId,
+  userId,
   images,
   setImages,
   selectedImages,
   setSelectedImages,
 }: InputChatImageSectionProps) => {
-  const { mutate: sendImage } = useSendImage(roomId);
+  const { mutate: sendImage } = useSendImage(roomId, userId);
 
   return (
     <>

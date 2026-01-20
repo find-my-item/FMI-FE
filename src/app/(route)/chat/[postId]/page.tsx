@@ -12,9 +12,23 @@ import { ChatMessage } from "@/api/fetch/ChatMessage/types/ChatMessageTypes";
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 import { ChatMessageResponse } from "@/api/fetch/ChatMessage/types/ChatMessageTypes";
 import useChatRoom from "@/api/fetch/chatRoom/api/useChatRoom";
+import { WebSocketChatMessage } from "@/api/fetch/chatRoom/types/ChatRoomType";
+import useAppQuery from "@/api/_base/query/useAppQuery";
+import {
+  addMessageToCache,
+  replaceMessageInCache,
+} from "@/utils/chatMessageCache/chatMessageCache";
 
 interface ChatFormValues {
   content: string;
+}
+
+interface UserInfoResponse {
+  userId: number;
+  nickname: string;
+  email: string;
+  emailVerified: boolean;
+  profileImg: string;
 }
 
 const ChatRoom = ({ postId }: { postId: number }) => {
@@ -27,6 +41,11 @@ const ChatRoom = ({ postId }: { postId: number }) => {
     },
   });
   const { data: chatRoom } = useChatRoom({ postId });
+  const { data: userInfo } = useAppQuery<ApiBaseResponseType<UserInfoResponse>>(
+    "auth",
+    ["userInfo"],
+    `/users/me`
+  );
 
   const roomId = chatRoom?.result.roomId;
   const isPostMode: "find" | "lost" =
@@ -49,33 +68,33 @@ const ChatRoom = ({ postId }: { postId: number }) => {
       const firstPage = oldData?.pages[0];
       if (!firstPage) return;
 
-      const messageExists = firstPage.result.messages.some(
-        (m: ChatMessage) => m.messageId === message.messageId
-      );
-      if (messageExists) return;
-
       const { roomId: _, ...chatMessageData } = message;
       const chatMessage: ChatMessage = {
         ...chatMessageData,
         imageUrls: message.imageUrls || [],
       };
 
-      queryClient.setQueryData<InfiniteData<ApiBaseResponseType<ChatMessageResponse>>>(
-        ["chatMessages", roomId],
-        {
-          ...oldData,
-          pages: [
-            {
-              ...firstPage,
-              result: {
-                ...firstPage.result,
-                messages: [chatMessage, ...firstPage.result.messages],
-              },
-            },
-            ...oldData.pages.slice(1),
-          ],
-        }
+      const optimisticMessage = firstPage.result.messages.find(
+        (m) =>
+          m.messageId < 0 &&
+          ((m.messageType === "TEXT" &&
+            m.content === message.content &&
+            m.senderId === message.senderId) ||
+            (m.messageType === "IMAGE" &&
+              m.imageUrls.length === message.imageUrls?.length &&
+              m.senderId === message.senderId))
       );
+
+      if (optimisticMessage) {
+        replaceMessageInCache(queryClient, roomId, optimisticMessage.messageId, chatMessage);
+      } else {
+        const messageExists = firstPage.result.messages.some(
+          (m: ChatMessage) => m.messageId === message.messageId
+        );
+        if (!messageExists) {
+          addMessageToCache(queryClient, roomId, chatMessage);
+        }
+      }
     },
   });
   const { ref: chatMessagesRef } = useInfiniteScroll({
@@ -84,14 +103,19 @@ const ChatRoom = ({ postId }: { postId: number }) => {
     isFetchingNextPage,
   });
   const onSubmit = ({ content }: ChatFormValues) => {
-    if (content.trim() === "" || !roomId) return;
-    sendChatSocketMessage(`/app/chats/${roomId}/send`, {
+    if (content.trim() === "" || !roomId || !userInfo?.result.userId) return;
+
+    const optimisticMessage: ChatMessage = {
+      messageId: -Date.now(),
+      messageType: "TEXT",
+      senderId: userInfo.result.userId,
       content,
-    });
-    // 서버 처리 시간을 고려하여 캐시 무효화
-    setTimeout(() => {
-      queryClient.invalidateQueries({ queryKey: ["chatMessages", roomId] });
-    }, 500);
+      imageUrls: [],
+      createdAt: new Date().toISOString(),
+    };
+
+    addMessageToCache(queryClient, roomId, optimisticMessage);
+    sendChatSocketMessage(`/app/chats/${roomId}/send`, { content });
     methods.reset();
   };
 
@@ -107,10 +131,15 @@ const ChatRoom = ({ postId }: { postId: number }) => {
           <EmptyChatRoom postMode={isPostMode} />
         )}
       </div>
-      {roomId && (
+      {roomId && userInfo?.result.userId && (
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)} className="px-4 pb-6 pt-3">
-            <InputChat name="content" aria-label="채팅 입력창" roomId={roomId} />
+            <InputChat
+              name="content"
+              aria-label="채팅 입력창"
+              roomId={roomId}
+              userId={userInfo.result.userId}
+            />
           </form>
         </FormProvider>
       )}
