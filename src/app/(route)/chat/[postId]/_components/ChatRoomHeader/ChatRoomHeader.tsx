@@ -7,6 +7,7 @@ import { MOCK_IMAGES } from "../../../_components/ChatItem/MOCK_IMAGES";
 import ChatChip from "../ChatChip/ChatChip";
 import ChatRoomHeaderInfoButton from "../ChatRoomHeaderInfoButton/ChatRoomHeaderInfoButton";
 import { ChatRoomResponse } from "@/api/fetch/chatRoom/types/ChatRoomType";
+import Link from "next/link";
 
 const ChatRoomHeader = ({ chatRoom }: { chatRoom: ChatRoomResponse | undefined }) => {
   const router = useRouter();
@@ -32,7 +33,10 @@ const ChatRoomHeader = ({ chatRoom }: { chatRoom: ChatRoomResponse | undefined }
         <ChatRoomHeaderInfoButton />
       </nav>
 
-      <section className="flex items-center gap-[16px] px-[16px]">
+      <Link
+        href={`/list/${chatRoom.postInfo.postId}`}
+        className="flex items-center gap-[16px] px-[16px]"
+      >
         {/* TODO(형준): 대체 이미지 수정 예정 */}
         <Image
           alt="게시글 썸네일 이미지"
@@ -49,7 +53,7 @@ const ChatRoomHeader = ({ chatRoom }: { chatRoom: ChatRoomResponse | undefined }
           </div>
           <p className="h-[16px] text-caption1-medium text-layout-body-default">{address}</p>
         </div>
-      </section>
+      </Link>
     </header>
   );
 };
