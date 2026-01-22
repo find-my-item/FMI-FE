@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import CategorySection from "./CategorySection";
+import { FormProvider, useForm } from "react-hook-form";
 
 const meta: Meta<typeof CategorySection> = {
   title: "페이지/글쓰기/CategorySection",
@@ -9,11 +10,16 @@ const meta: Meta<typeof CategorySection> = {
     layout: "centered",
   },
   decorators: [
-    (Story) => (
-      <div className="h-screen w-[390px]">
-        <Story />
-      </div>
-    ),
+    (Story) => {
+      const methods = useForm();
+      return (
+        <FormProvider {...methods}>
+          <div className="h-screen w-[390px]">
+            <Story />
+          </div>
+        </FormProvider>
+      );
+    },
   ],
 };
 
