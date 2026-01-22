@@ -2,15 +2,15 @@
 
 import { Filter, KebabMenu } from "@/components/common";
 import { useState } from "react";
-import { MYPAGE_COMMENTS_KEBAB_OPTIONS } from "../../_constant/MYPAGE_COMMENTS_KEBAB_OPTIONS";
+import { MYPAGE_REPORTS_KEBAB_OPTIONS } from "../../_constant/MYPAGE_REPORTS_KEBAB_OPTIONS";
 
-const MypageKebabFilter = () => {
+const MypageReportsFilter = () => {
   const [isKebabMenu, setIsKebabMenu] = useState<{ menu: string; open: boolean }>({
-    menu: "최신순",
+    menu: "상태",
     open: false,
   });
 
-  const kebabMenuItems = MYPAGE_COMMENTS_KEBAB_OPTIONS.map((item) => ({
+  const kebabMenuItems = MYPAGE_REPORTS_KEBAB_OPTIONS.map((item) => ({
     text: item.text,
     onClick: () => setIsKebabMenu({ menu: item.text, open: false }),
   }));
@@ -22,15 +22,17 @@ const MypageKebabFilter = () => {
       <div className="relative">
         <Filter
           ariaLabel={isKebabMenu.menu}
-          icon={{ name: "ArrowDown", size: 16 }}
-          onSelected={false}
-          onClick={() => setIsKebabMenu((prev) => ({ ...prev, open: true }))}
+          onSelected={isKebabMenu.menu === "접수" ? false : true}
+          // TODO(수현): 아이콘 색 변경 필요함
+          icon={{ name: "ArrowDown", size: 12 }}
           iconPosition="trailing"
+          onClick={() => setIsKebabMenu((prev) => ({ ...prev, open: true }))}
         >
           {isKebabMenu.menu}
         </Filter>
+
         {isKebabMenu.open && (
-          <div className="absolute left-1/2 top-full z-50 mt-2 -translate-x-1/2">
+          <div className="absolute left-0 top-full mt-2">
             <KebabMenu items={kebabMenuItems} />
           </div>
         )}
@@ -39,4 +41,4 @@ const MypageKebabFilter = () => {
   );
 };
 
-export default MypageKebabFilter;
+export default MypageReportsFilter;
