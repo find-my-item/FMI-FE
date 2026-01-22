@@ -188,3 +188,35 @@ export const MOCK_MYPAGE_POSTS_LIST = [
     new: false,
   },
 ];
+
+export const MOCK_MYPAGE_REQUEST_COMMENTS = [
+  {
+    commentId: 1,
+    status: "user",
+    userNickname: "지갑찾는라이언",
+    createdAt: "2024-02-10T10:00:00",
+    content:
+      "신고 접수한 지 3일이 지났는데 아직 처리가 안 된 것 같아서요. 혹시 진행 상황을 알 수 있을까요? 급해서 그렇습니다 ㅠㅠ",
+  },
+  {
+    commentId: 2,
+    status: "admin",
+    createdAt: "2024-02-10T14:30:00",
+    content:
+      "안녕하세요, 회원님. 찾아줘 관리자입니다. \n현재 해당 게시글에 대한 신고 내용을 확인 중이며, 작성자에게 소명 요청을 보낸 상태입니다. 조금만 기다려주시면 감사하겠습니다.",
+  },
+  {
+    commentId: 3,
+    status: "user",
+    userNickname: "지갑찾는라이언",
+    createdAt: "2024-02-11T09:15:00",
+    content: "아 그렇군요. 답변 감사합니다. 확인되면 알림 부탁드립니다.",
+  },
+  {
+    commentId: 4,
+    status: "admin",
+    resolvedAt: "2024-02-12T11:00:00",
+    content:
+      "신고 처리가 완료되었습니다. \n해당 게시글은 규정 위반이 확인되어 블라인드 처리되었습니다. 이용에 불편을 드려 죄송합니다.",
+  },
+] as const;
