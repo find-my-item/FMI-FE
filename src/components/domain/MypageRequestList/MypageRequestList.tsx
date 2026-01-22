@@ -1,8 +1,6 @@
 import { Chip, Icon } from "@/components/common";
 import Link from "next/link";
 
-interface MypageRequestListProps {}
-
 const MypageRequestEmptyUI = () => {
   return (
     <div className="gap-5 py-20 flex-col-center">
@@ -21,6 +19,8 @@ const LIST_CHIP = {
   RECEIVED: { label: "처리 중", type: "received" },
   RESOLVED: { label: "처리 완료", type: "resolved" },
 } as const;
+
+interface MypageRequestListProps {}
 
 const MypageRequestList = () => {
   return (

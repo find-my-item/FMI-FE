@@ -4,7 +4,7 @@ import { InputSearch } from "@/components/common";
 
 interface MypageSearchProps {
   // TODO(수현): api 연결 작업 시 사용할 예정
-  searchMode?: "Posts" | "Comments" | "Favorite" | "Activity" | "Reports" | "Inquires";
+  searchMode?: "Posts" | "Comments" | "Favorite" | "Activity" | "Reports" | "Inquiries";
 }
 
 export const MypageSearch = ({ searchMode }: MypageSearchProps) => {
