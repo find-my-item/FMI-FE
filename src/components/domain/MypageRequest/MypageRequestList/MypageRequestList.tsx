@@ -15,7 +15,7 @@ const MypageRequestEmptyUI = () => {
   );
 };
 
-const LIST_CHIP = {
+const LIST_STATUS_CHIP = {
   PENDING: { label: "접수", type: "pending" },
   RECEIVED: { label: "처리 중", type: "received" },
   RESOLVED: { label: "처리 완료", type: "resolved" },
@@ -23,13 +23,22 @@ const LIST_CHIP = {
 
 interface MypageRequestListProps {
   status: MypageRequestType;
-  data: any[];
+  // TODO(수현): api 연결시 데이터 타입 수정 예정
+  data: readonly {
+    reportId: number;
+    status: "PENDING" | "RECEIVED" | "RESOLVED";
+    targetTitle: string;
+    createdAt: string;
+    reason: string;
+  }[];
 }
 
-const MypageRequestList = ({ data }: MypageRequestListProps) => {
+const MypageRequestList = ({ status, data }: MypageRequestListProps) => {
+  const sectionTitle = status === "reports" ? "내 신고 내역 목록 영역" : "내 문의 내역 목록 영역";
+
   return (
     <section>
-      <h2 className="sr-only">내 신고 내역 목록 영역</h2>
+      <h2 className="sr-only">{sectionTitle}</h2>
       <ul>
         {data.map((item) => (
           <li
@@ -38,8 +47,8 @@ const MypageRequestList = ({ data }: MypageRequestListProps) => {
           >
             <Link href={`/mypage/reports/${item.reportId}`}>
               <Chip
-                label={LIST_CHIP[item.status as keyof typeof LIST_CHIP].label}
-                type={LIST_CHIP[item.status as keyof typeof LIST_CHIP].type}
+                label={LIST_STATUS_CHIP[item.status as keyof typeof LIST_STATUS_CHIP].label}
+                type={LIST_STATUS_CHIP[item.status as keyof typeof LIST_STATUS_CHIP].type}
               />
               <h3 className="mt-2 text-h3-semibold text-layout-header-default">
                 {item.targetTitle}
@@ -47,7 +56,9 @@ const MypageRequestList = ({ data }: MypageRequestListProps) => {
               <span className="mt-[3px] text-body2-regular text-layout-body-default">
                 {item.createdAt}
               </span>
-              <p className="mt-2 text-body2-regular text-neutral-normal-default">{item.reason}</p>
+              <p className="mt-2 truncate text-body2-regular text-neutral-normal-default">
+                {item.reason}
+              </p>
             </Link>
           </li>
         ))}

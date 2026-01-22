@@ -90,3 +90,34 @@ export const MOCK_MYPAGE_COMMENTS_ITEM = [
     thumbnailUrl: "https://picsum.photos/400/300?random=1",
   },
 ];
+
+export const MOCK_MYPAGE_REQUESTS = [
+  {
+    reportId: 1,
+    status: "PENDING",
+    targetTitle: "악성 댓글 신고합니다.",
+    createdAt: "2024.01.22",
+    reason: "지속적인 욕설과 비방을 일삼고 있어 신고합니다. 확인 부탁드립니다.",
+  },
+  {
+    reportId: 2,
+    status: "RECEIVED",
+    targetTitle: "스팸 홍보 게시글",
+    createdAt: "2024.01.15",
+    reason: "커뮤니티 성격에 맞지 않는 불법 도박 사이트 홍보글입니다.",
+  },
+  {
+    reportId: 3,
+    status: "RESOLVED",
+    targetTitle: "사용자 프로필 사진 부적절",
+    createdAt: "2023.12.28",
+    reason: "선정적인 이미지를 프로필로 사용하고 있습니다.",
+  },
+  {
+    reportId: 4,
+    status: "RESOLVED",
+    targetTitle: "허위 사실 유포",
+    createdAt: "2023.11.05",
+    reason: "특정인에 대한 확인되지 않은 루머를 퍼뜨리고 있습니다.",
+  },
+] as const;
