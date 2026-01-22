@@ -1,19 +1,7 @@
-import { Chip, Icon } from "@/components/common";
+import { Chip } from "@/components/common";
 import Link from "next/link";
 import { MypageRequestType } from "../_internal/MypageRequestType";
-
-const MypageRequestEmptyUI = () => {
-  return (
-    <div className="gap-5 py-20 flex-col-center">
-      <Icon name="NoReports" size={70} />
-      <h2 className="text-h2-bold text-layout-header-default">신고 내역이 없어요</h2>
-      <p className="text-body2-regular text-layout-body-default">
-        아직 신고한 내역이 없습니다. <br />
-        이용 중 불편 사항이 있을 경우 신고할 수 있어요.
-      </p>
-    </div>
-  );
-};
+import MypageEmptyUI from "../../MypageEmptyUI/MypageEmptyUI";
 
 const LIST_STATUS_CHIP = {
   PENDING: { label: "접수", type: "pending" },
@@ -64,7 +52,13 @@ const MypageRequestList = ({ status, data }: MypageRequestListProps) => {
         ))}
       </ul>
 
-      {data.length === 0 && <MypageRequestEmptyUI />}
+      {data.length === 0 && (
+        <MypageEmptyUI
+          IconName="NoReports"
+          titleText="신고 내역"
+          subText="이용 중 불편 사항이 있을 경우 신고할 수 있어요."
+        />
+      )}
     </section>
   );
 };

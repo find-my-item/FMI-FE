@@ -11,3 +11,4 @@ export { default as DateRangeSheet } from "./DateRangeSheet/DateRangeSheet";
 export { default as MypageSearch } from "./MypageSearch/MypageSearch";
 export { default as MypageRequestList } from "./MypageRequest/MypageRequestList/MypageRequestList";
 export { default as MypageRequestFilter } from "./MypageRequest/MypageRequestFilter/MypageRequestFilter";
+export { default as MypageEmptyUI } from "./MypageEmptyUI/MypageEmptyUI";
