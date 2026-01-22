@@ -1,18 +1,18 @@
 import { DetailHeader } from "@/components/layout";
 import { MypageRequestFilter, MypageRequestList, MypageSearch } from "@/components/domain";
-import { MOCK_MYPAGE_REPORTS } from "@/mock/MOCK_DATA";
+import { MOCK_MYPAGE_INQUIRIES } from "@/mock/MOCK_DATA";
 
 const page = () => {
   return (
     <>
-      <DetailHeader title="내 신고 내역" />
-      <h1 className="sr-only">내 신고 내역 페이지</h1>
+      <DetailHeader title="내 문의 내역" />
+      <h1 className="sr-only">내 문의 내역 페이지</h1>
       <div className="w-full h-base">
         <MypageSearch />
 
-        <MypageRequestFilter status="reports" />
+        <MypageRequestFilter status="inquiries" />
 
-        <MypageRequestList status="reports" data={MOCK_MYPAGE_REPORTS} />
+        <MypageRequestList status="inquiries" data={MOCK_MYPAGE_INQUIRIES} />
       </div>
     </>
   );

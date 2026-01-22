@@ -2,6 +2,7 @@ import { Chip } from "@/components/common";
 import Link from "next/link";
 import { MypageRequestType } from "../_internal/MypageRequestType";
 import MypageEmptyUI from "../../MypageEmptyUI/MypageEmptyUI";
+import { formatDate } from "@/utils";
 
 const LIST_STATUS_CHIP = {
   PENDING: { label: "접수", type: "pending" },
@@ -13,7 +14,8 @@ interface MypageRequestListProps {
   status: MypageRequestType;
   // TODO(수현): api 연결시 데이터 타입 수정 예정
   data: readonly {
-    reportId: number;
+    reportId?: number;
+    inquiriesId?: number;
     status: "PENDING" | "RECEIVED" | "RESOLVED";
     targetTitle: string;
     createdAt: string;
@@ -30,10 +32,16 @@ const MypageRequestList = ({ status, data }: MypageRequestListProps) => {
       <ul>
         {data.map((item) => (
           <li
-            key={item.reportId}
+            key={item.reportId ?? item.inquiriesId}
             className="flex w-full flex-col justify-between border-b border-divider-default px-5 py-[30px]"
           >
-            <Link href={`/mypage/reports/${item.reportId}`}>
+            <Link
+              href={
+                status === "reports"
+                  ? `/mypage/$reports/${item.reportId}`
+                  : `/mypage/$inquiries/${item.inquiriesId}`
+              }
+            >
               <Chip
                 label={LIST_STATUS_CHIP[item.status as keyof typeof LIST_STATUS_CHIP].label}
                 type={LIST_STATUS_CHIP[item.status as keyof typeof LIST_STATUS_CHIP].type}
@@ -42,7 +50,7 @@ const MypageRequestList = ({ status, data }: MypageRequestListProps) => {
                 {item.targetTitle}
               </h3>
               <span className="mt-[3px] text-body2-regular text-layout-body-default">
-                {item.createdAt}
+                {formatDate(item.createdAt)}
               </span>
               <p className="mt-2 truncate text-body2-regular text-neutral-normal-default">
                 {item.reason}

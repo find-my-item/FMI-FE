@@ -4,7 +4,7 @@ import { DetailHeader } from "@/components/layout";
 const page = () => {
   return (
     <>
-      <DetailHeader title="내 신고 내역" />
+      <DetailHeader title="내 문의 내역" />
       <MypageRequestDetailContainer />
     </>
   );
