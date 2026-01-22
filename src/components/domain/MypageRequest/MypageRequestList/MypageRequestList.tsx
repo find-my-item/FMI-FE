@@ -1,5 +1,6 @@
 import { Chip, Icon } from "@/components/common";
 import Link from "next/link";
+import { MypageRequestType } from "../_internal/MypageRequestType";
 
 const MypageRequestEmptyUI = () => {
   return (
@@ -20,14 +21,17 @@ const LIST_CHIP = {
   RESOLVED: { label: "처리 완료", type: "resolved" },
 } as const;
 
-interface MypageRequestListProps {}
+interface MypageRequestListProps {
+  status: MypageRequestType;
+  data: any[];
+}
 
-const MypageRequestList = () => {
+const MypageRequestList = ({ data }: MypageRequestListProps) => {
   return (
     <section>
       <h2 className="sr-only">내 신고 내역 목록 영역</h2>
       <ul>
-        {MOCK_MYPAGE_REPORTS_ITEM.map((item) => (
+        {data.map((item) => (
           <li
             key={item.reportId}
             className="flex w-full flex-col justify-between border-b border-divider-default px-5 py-[30px]"
@@ -49,7 +53,7 @@ const MypageRequestList = () => {
         ))}
       </ul>
 
-      {MOCK_MYPAGE_REPORTS_ITEM.length === 0 && <MypageRequestEmptyUI />}
+      {data.length === 0 && <MypageRequestEmptyUI />}
     </section>
   );
 };

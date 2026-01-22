@@ -2,10 +2,11 @@
 
 import { Filter, KebabMenu } from "@/components/common";
 import { useState } from "react";
-import { MYPAGE_KEBAB_OPTIONS } from "./MYPAGE_KEBAB_OPTION";
+import { MYPAGE_KEBAB_OPTIONS } from "../_internal/MYPAGE_KEBAB_OPTION";
+import { MypageRequestType } from "../_internal/MypageRequestType";
 
 interface MypageKebabFilterProps {
-  status: "reports" | "inquiries";
+  status: MypageRequestType;
 }
 
 const MypageKebabFilter = ({ status }: MypageKebabFilterProps) => {
@@ -26,7 +27,7 @@ const MypageKebabFilter = ({ status }: MypageKebabFilterProps) => {
       <div className="relative">
         <Filter
           ariaLabel={isKebabMenu.menu}
-          onSelected={isKebabMenu.menu === "접수" ? false : true}
+          onSelected={isKebabMenu.menu === "상태" ? false : true}
           // TODO(수현): 아이콘 색 변경 필요함
           icon={{ name: "ArrowDown", size: 12 }}
           iconPosition="trailing"
