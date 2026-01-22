@@ -1,4 +1,4 @@
-import { MypageRequestFilter, MypageSearch } from "@/components/domain";
+import { MypageRequestFilter, MypageRequestList, MypageSearch } from "@/components/domain";
 import { DetailHeader } from "@/components/layout";
 
 const page = () => {
@@ -9,6 +9,7 @@ const page = () => {
       <div className="w-full h-base">
         <MypageSearch />
         <MypageRequestFilter status="reports" />
+        <MypageRequestList />
       </div>
     </>
   );
