@@ -1,5 +1,6 @@
 import { Client, IMessage, StompSubscription } from "@stomp/stompjs";
 import getBaseURL from "@/api/_base/axios/getBaseURL";
+import authApi from "@/api/_base/axios/authApi";
 
 type MessageHandler<T = any> = (message: T) => void;
 
@@ -10,9 +11,66 @@ const handlers = new Map<string, Set<MessageHandler>>();
 // 연결 전에 들어온 구독 요청을 임시로 저장
 let pendingSubscriptions: Array<() => void> = [];
 
+// 기존 구독 정보를 보존하기 위한 백업
+const savedSubscriptions = new Map<string, Set<MessageHandler>>();
+
+// 재연결 시도 중인지 추적 (중복 재연결 방지)
+let isReconnecting = false;
+
+// 토큰 재발급 이벤트 핸들러 (정리용)
+let tokenRefreshHandler: (() => void) | null = null;
+
+// 웹소켓 재연결 함수
+const reconnectChatSocket = async () => {
+  if (isReconnecting) return;
+  isReconnecting = true;
+
+  try {
+    // 현재 구독 정보 백업
+    handlers.forEach((handlerSet, destination) => {
+      savedSubscriptions.set(destination, new Set(handlerSet));
+    });
+
+    // 기존 연결 해제 (구독은 유지)
+    subscriptions.forEach((sub) => sub.unsubscribe());
+    subscriptions.clear();
+
+    // 클라이언트 비활성화
+    if (client) {
+      client.deactivate();
+      client = null;
+    }
+
+    // 🔑 상황 1 해결: 웹소켓이 끊겼을 때 토큰 재발급 시도
+    // 토큰이 만료되었을 가능성이 있으므로 재발급 시도
+    try {
+      await authApi.post("/auth/refresh");
+      console.log("[STOMP] Token refreshed before reconnecting");
+    } catch (refreshError) {
+      // 재발급 실패 시에도 재연결은 시도 (토큰 문제가 아닐 수도 있음)
+      console.warn("[STOMP] Token refresh failed, reconnecting anyway:", refreshError);
+    }
+
+    // 잠시 후 재연결
+    setTimeout(() => {
+      connectChatSocket();
+      isReconnecting = false;
+    }, 100);
+  } catch (error) {
+    console.error("[STOMP] Reconnection error:", error);
+    isReconnecting = false;
+  }
+};
+
 // 소켓 연결
 export const connectChatSocket = () => {
-  if (client) return;
+  if (client?.connected) return;
+
+  // 기존 클라이언트가 있지만 연결이 끊긴 경우 정리
+  if (client && !client.connected) {
+    client.deactivate();
+    client = null;
+  }
 
   client = new Client({
     brokerURL: `${getBaseURL()}/ws`,
@@ -26,17 +84,74 @@ export const connectChatSocket = () => {
 
     onConnect: () => {
       console.log("[STOMP] connected");
+      isReconnecting = false;
 
       // 🔑 연결 완료 후 대기 중이던 구독 처리
       pendingSubscriptions.forEach((subscribe) => subscribe());
       pendingSubscriptions = [];
+
+      // 🔑 백업된 구독 정보 복원
+      savedSubscriptions.forEach((handlerSet, destination) => {
+        handlerSet.forEach((handler) => {
+          subscribeChatSocket(destination, handler);
+        });
+      });
+      savedSubscriptions.clear();
     },
 
     onStompError: (frame) => {
       console.error("[STOMP ERROR]", frame.headers["message"]);
       console.error(frame.body);
+
+      // 인증 관련 에러인 경우 재연결 시도
+      const errorMessage = frame.headers["message"] || "";
+      if (
+        errorMessage.includes("401") ||
+        errorMessage.includes("403") ||
+        errorMessage.includes("Unauthorized")
+      ) {
+        console.log("[STOMP] Authentication error detected, reconnecting...");
+        reconnectChatSocket();
+      }
+    },
+
+    onDisconnect: () => {
+      console.log("[STOMP] disconnected");
+      // 🔑 상황 1 해결: 연결이 끊겼을 때 재연결 시도
+      // 토큰 만료로 인한 끊김일 수 있으므로 재연결 시도
+      if (client && !client.connected && handlers.size > 0) {
+        // 구독이 있는 경우에만 재연결 (의도적인 disconnect가 아닌 경우)
+        setTimeout(() => {
+          if (client && !client.connected && handlers.size > 0) {
+            reconnectChatSocket();
+          }
+        }, 1000);
+      }
+    },
+
+    onWebSocketError: (event) => {
+      console.error("[STOMP] WebSocket error:", event);
+      // 🔑 상황 1 해결: 웹소켓 에러 발생 시 재연결 시도
+      if (client && !client.connected && handlers.size > 0) {
+        reconnectChatSocket();
+      }
     },
   });
+
+  // 🔑 상황 2 해결: 토큰 재발급 이벤트 리스닝
+  if (typeof window !== "undefined") {
+    // 기존 핸들러가 있으면 제거
+    if (tokenRefreshHandler) {
+      window.removeEventListener("tokenRefreshed", tokenRefreshHandler);
+    }
+
+    tokenRefreshHandler = () => {
+      console.log("[STOMP] Token refreshed event received, reconnecting...");
+      reconnectChatSocket();
+    };
+
+    window.addEventListener("tokenRefreshed", tokenRefreshHandler);
+  }
 
   client.activate();
 };
@@ -46,8 +161,16 @@ export const disconnectChatSocket = () => {
   subscriptions.forEach((sub) => sub.unsubscribe());
   subscriptions.clear();
   handlers.clear();
+  savedSubscriptions.clear();
 
   pendingSubscriptions = [];
+  isReconnecting = false;
+
+  // 이벤트 리스너 제거
+  if (typeof window !== "undefined" && tokenRefreshHandler) {
+    window.removeEventListener("tokenRefreshed", tokenRefreshHandler);
+    tokenRefreshHandler = null;
+  }
 
   client?.deactivate();
   client = null;
@@ -94,12 +217,14 @@ export const subscribeChatSocket = <T>(destination: string, handler: MessageHand
 export const unsubscribeChatSocket = (destination: string, handler?: MessageHandler) => {
   if (handler) {
     handlers.get(destination)?.delete(handler);
+    savedSubscriptions.get(destination)?.delete(handler);
     if (handlers.get(destination)?.size === 0) {
       const subscription = subscriptions.get(destination);
       if (subscription) {
         subscription.unsubscribe();
         subscriptions.delete(destination);
         handlers.delete(destination);
+        savedSubscriptions.delete(destination);
         console.log(`[STOMP] Unsubscribed from ${destination}`);
       }
     }
@@ -109,6 +234,7 @@ export const unsubscribeChatSocket = (destination: string, handler?: MessageHand
       subscription.unsubscribe();
       subscriptions.delete(destination);
       handlers.delete(destination);
+      savedSubscriptions.delete(destination);
       console.log(`[STOMP] Unsubscribed from ${destination}`);
     }
   }
