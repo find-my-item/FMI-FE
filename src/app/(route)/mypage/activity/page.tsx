@@ -4,8 +4,8 @@ import { DetailHeader } from "@/components/layout";
 const page = () => {
   return (
     <>
-      <DetailHeader title="즐겨찾기 목록" />
-      <h1 className="sr-only">즐겨찾기 목록 페이지</h1>
+      <DetailHeader title="내 활동 내역" />
+      <h1 className="sr-only">내 활동 내역 페이지</h1>
       <div className="w-full h-base">
         <MypageSearch />
       </div>
