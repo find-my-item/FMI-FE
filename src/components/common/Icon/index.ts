@@ -57,3 +57,4 @@ export { default as Trash } from "@/assets/trash.svg";
 export { default as NoInquiries } from "@/assets/no-inquiries.svg";
 export { default as NoReports } from "@/assets/no-reports.svg";
 export { default as NoPosts } from "@/assets/no-posts.svg";
+export { default as NoActivity } from "@/assets/no-activity.svg";
