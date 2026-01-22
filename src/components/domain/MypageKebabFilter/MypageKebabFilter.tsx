@@ -2,15 +2,20 @@
 
 import { Filter, KebabMenu } from "@/components/common";
 import { useState } from "react";
-import { MYPAGE_REPORTS_KEBAB_OPTIONS } from "../../_constant/MYPAGE_REPORTS_KEBAB_OPTIONS";
+import { MYPAGE_KEBAB_OPTIONS } from "./MYPAGE_KEBAB_OPTION";
 
-const MypageReportsFilter = () => {
+interface MypageKebabFilterProps {
+  status: "reports" | "inquiries";
+}
+
+const MypageKebabFilter = ({ status }: MypageKebabFilterProps) => {
+  const currentStatus = status;
   const [isKebabMenu, setIsKebabMenu] = useState<{ menu: string; open: boolean }>({
     menu: "상태",
     open: false,
   });
 
-  const kebabMenuItems = MYPAGE_REPORTS_KEBAB_OPTIONS.map((item) => ({
+  const kebabMenuItems = MYPAGE_KEBAB_OPTIONS[status].map((item) => ({
     text: item.text,
     onClick: () => setIsKebabMenu({ menu: item.text, open: false }),
   }));
@@ -41,4 +46,4 @@ const MypageReportsFilter = () => {
   );
 };
 
-export default MypageReportsFilter;
+export default MypageKebabFilter;
