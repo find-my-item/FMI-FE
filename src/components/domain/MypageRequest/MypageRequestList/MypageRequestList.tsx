@@ -15,7 +15,7 @@ interface MypageRequestListProps {
   // TODO(수현): api 연결시 데이터 타입 수정 예정
   data: readonly {
     reportId?: number;
-    inquiriesId?: number;
+    inquiryId?: number;
     status: "PENDING" | "RECEIVED" | "RESOLVED";
     targetTitle: string;
     createdAt: string;
@@ -32,14 +32,14 @@ const MypageRequestList = ({ status, data }: MypageRequestListProps) => {
       <ul>
         {data.map((item) => (
           <li
-            key={item.reportId ?? item.inquiriesId}
+            key={item.reportId ?? item.inquiryId}
             className="flex w-full flex-col justify-between border-b border-divider-default px-5 py-[30px]"
           >
             <Link
               href={
                 status === "reports"
-                  ? `/mypage/$reports/${item.reportId}`
-                  : `/mypage/$inquiries/${item.inquiriesId}`
+                  ? `/mypage/reports/${item.reportId}`
+                  : `/mypage/inquiries/${item.inquiryId}`
               }
             >
               <Chip
