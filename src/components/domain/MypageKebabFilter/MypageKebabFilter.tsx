@@ -9,7 +9,6 @@ interface MypageKebabFilterProps {
 }
 
 const MypageKebabFilter = ({ status }: MypageKebabFilterProps) => {
-  const currentStatus = status;
   const [isKebabMenu, setIsKebabMenu] = useState<{ menu: string; open: boolean }>({
     menu: "상태",
     open: false,
