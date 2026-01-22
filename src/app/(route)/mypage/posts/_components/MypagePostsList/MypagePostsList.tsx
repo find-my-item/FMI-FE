@@ -1,31 +1,40 @@
-import { PostListItem } from "@/components/domain";
+import { MypageEmptyUI, PostListItem } from "@/components/domain";
+import { MOCK_MYPAGE_POSTS_LIST } from "@/mock/MOCK_DATA";
+import { CategoryType, ItemStatus, PostType } from "@/types";
 
 const MypagePostsList = () => {
   return (
     <section>
       <h2 className="sr-only">게시글 목록 영역</h2>
       <ul>
-        {[1, 2, 3].map((item) => (
+        {MOCK_MYPAGE_POSTS_LIST.map((item) => (
           <PostListItem
-            key={item}
+            key={item.postId}
             post={{
-              postId: 1,
-              title: "전자기기를 잃어버렸어요",
-              summary: "전자기기를 읽어버렸다구리이부ㅜ루아ㅓㅁㄴ이5ㄱ",
-              thumbnailUrl: "https://picsum.photos/400/300?random=1",
-              address: "서울특별시 강남구",
-              itemStatus: "SEARCHING",
-              postType: "FOUND",
-              category: "CARD",
-              favoriteCount: 3,
-              viewCount: 5,
-              createdAt: "30분 전",
-              hot: false,
-              new: false,
+              postId: item.postId,
+              title: item.title,
+              summary: item.summary,
+              thumbnailUrl: item.thumbnailUrl,
+              address: item.address,
+              itemStatus: item.itemStatus as ItemStatus,
+              postType: item.postType as PostType,
+              category: item.category as CategoryType,
+              favoriteCount: item.favoriteCount,
+              viewCount: item.viewCount,
+              createdAt: item.createdAt,
+              hot: item.hot,
+              new: item.new,
             }}
           />
         ))}
       </ul>
+      {MOCK_MYPAGE_POSTS_LIST.length === 0 && (
+        <MypageEmptyUI
+          IconName="NoPosts"
+          titleText="작성한 게시글"
+          subText="지금 바로 글을 남겨보세요!"
+        />
+      )}
     </section>
   );
 };

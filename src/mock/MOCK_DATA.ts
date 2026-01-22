@@ -121,3 +121,70 @@ export const MOCK_MYPAGE_REQUESTS = [
     reason: "특정인에 대한 확인되지 않은 루머를 퍼뜨리고 있습니다.",
   },
 ] as const;
+
+export const MOCK_MYPAGE_POSTS_LIST = [
+  {
+    postId: 1,
+    title: "아이폰 15 프로 맥스 분실했습니다 ㅠㅠ",
+    summary:
+      "강남역 11번 출구 근처에서 떨어뜨린 것 같아요. 투명 젤리 케이스 씌워져 있습니다. 꼭 좀 찾아주세요 사례하겠습니다.",
+    thumbnailUrl: "https://picsum.photos/400/300?random=1",
+    address: "서울특별시 강남구 역삼동",
+    itemStatus: "SEARCHING",
+    postType: "LOST",
+    category: "ELECTRONICS",
+    favoriteCount: 15,
+    viewCount: 230,
+    createdAt: "방금 전",
+    hot: true,
+    new: true,
+  },
+  {
+    postId: 2,
+    title: "검은색 가죽 지갑 습득했습니다",
+    summary:
+      "홍대 놀이터 벤치 위에 올려져 있었습니다. 안에 현금이랑 영수증 몇 장 들어있네요. 보관하고 있으니 연락주세요.",
+    thumbnailUrl: "https://picsum.photos/400/300?random=2",
+    address: "서울특별시 마포구 서교동",
+    itemStatus: "SEARCHING", // 주인을 찾는 중
+    postType: "FOUND", // 습득
+    category: "WALLET",
+    favoriteCount: 8,
+    viewCount: 45,
+    createdAt: "1시간 전",
+    hot: false,
+    new: true,
+  },
+  {
+    postId: 3,
+    title: "신한 체크카드 주우신 분 계신가요?",
+    summary:
+      "오늘 아침 출근길에 버스 정류장에서 떨어뜨린 것 같습니다. 뒷면에 서명이 되어있지 않습니다.",
+    thumbnailUrl: "https://picsum.photos/400/300?random=3",
+    address: "경기도 성남시 분당구",
+    itemStatus: "COMPLETED", // 해결됨 (예시)
+    postType: "LOST",
+    category: "CARD",
+    favoriteCount: 2,
+    viewCount: 12,
+    createdAt: "2일 전",
+    hot: false,
+    new: false,
+  },
+  {
+    postId: 4,
+    title: "갈색 푸들 강아지 보호 중입니다",
+    summary:
+      "목줄은 하고 있는데 인식표가 없네요. 겁이 많아서 구석에 웅크리고 있습니다. 주인분 빨리 연락 주세요.",
+    thumbnailUrl: "https://picsum.photos/400/300?random=4",
+    address: "서울특별시 송파구 잠실동",
+    itemStatus: "SEARCHING",
+    postType: "FOUND",
+    category: "ANIMAL",
+    favoriteCount: 56,
+    viewCount: 1200,
+    createdAt: "30분 전",
+    hot: true,
+    new: false,
+  },
+];
