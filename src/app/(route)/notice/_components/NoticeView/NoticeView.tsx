@@ -15,6 +15,7 @@ const NoticeView = ({ noticeCustomerState }: NoticeView) => {
       ) : (
         noticeListObject.map((item) => (
           <PostListItem
+            key={item.id}
             post={{
               postId: item.id,
               title: item.title,
