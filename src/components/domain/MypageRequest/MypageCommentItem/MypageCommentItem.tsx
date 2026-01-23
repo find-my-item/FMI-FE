@@ -1,7 +1,7 @@
 import { Chip } from "@/components/common";
 import { cn, formatDate } from "@/utils";
 // TODO(수현): 데이터 타입 api 연결 시 변경 예정
-interface DetailCommentsProps {
+interface MypageCommentItemProps {
   status: "admin" | "user";
   resolvedAt?: string;
   createdAt?: string;
@@ -9,7 +9,7 @@ interface DetailCommentsProps {
   content?: string;
 }
 
-const MypageRequestComment = ({ ...props }: DetailCommentsProps) => {
+const MypageCommentItem = ({ ...props }: MypageCommentItemProps) => {
   const displayDate = props.resolvedAt || props.createdAt;
   const displayName = status === "admin" ? "찾아줘 관리자" : props.userNickname;
 
@@ -42,4 +42,4 @@ const MypageRequestComment = ({ ...props }: DetailCommentsProps) => {
   );
 };
 
-export default MypageRequestComment;
+export default MypageCommentItem;

@@ -1,5 +1,5 @@
 import { Chip } from "@/components/common";
-import MypageRequestDetailComment from "../MypageCommentItem/MypageCommentItem";
+import MypageCommentItem from "../MypageCommentItem/MypageCommentItem";
 import { MOCK_MYPAGE_REQUEST_COMMENTS } from "@/mock/MOCK_DATA";
 
 const MypageRequestDetailContainer = () => {
@@ -17,7 +17,7 @@ const MypageRequestDetailContainer = () => {
       <ul>
         {MOCK_MYPAGE_REQUEST_COMMENTS.map((item) => (
           <li key={item.commentId}>
-            <MypageRequestDetailComment key={item.commentId} {...item} />
+            <MypageCommentItem key={item.commentId} {...item} />
           </li>
         ))}
       </ul>
