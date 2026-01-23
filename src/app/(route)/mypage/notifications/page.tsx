@@ -10,7 +10,7 @@ export const NOTIFICATION_ITEM = [
   "신고",
   "공지사항",
   "마케팅 목적의 이메일 수신 동의",
-];
+] as const;
 
 const page = () => {
   return (
@@ -19,10 +19,12 @@ const page = () => {
 
       <div className="w-full h-base">
         <h1 className="sr-only">알림 설정 페이지</h1>
-        {NOTIFICATION_ITEM.map((item) => (
-          // <NotificationSettingItem settingName={item} />
-          <></>
-        ))}
+
+        <ul className="w-full py-[16px]">
+          {NOTIFICATION_ITEM.map((item) => (
+            <NotificationSettingItem key={item} settingName={item} />
+          ))}
+        </ul>
       </div>
     </>
   );
