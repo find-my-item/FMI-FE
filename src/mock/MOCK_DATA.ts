@@ -168,8 +168,8 @@ export const MOCK_MYPAGE_POSTS_LIST = [
     favoriteCount: 15,
     viewCount: 230,
     createdAt: "방금 전",
-    hot: true,
-    new: true,
+    hot: false,
+    new: false,
   },
   {
     postId: 2,
@@ -178,14 +178,14 @@ export const MOCK_MYPAGE_POSTS_LIST = [
       "홍대 놀이터 벤치 위에 올려져 있었습니다. 안에 현금이랑 영수증 몇 장 들어있네요. 보관하고 있으니 연락주세요.",
     thumbnailUrl: "https://picsum.photos/400/300?random=2",
     address: "서울특별시 마포구 서교동",
-    itemStatus: "SEARCHING", // 주인을 찾는 중
-    postType: "FOUND", // 습득
+    itemStatus: "SEARCHING",
+    postType: "FOUND",
     category: "WALLET",
     favoriteCount: 8,
     viewCount: 45,
     createdAt: "1시간 전",
     hot: false,
-    new: true,
+    new: false,
   },
   {
     postId: 3,
@@ -194,7 +194,7 @@ export const MOCK_MYPAGE_POSTS_LIST = [
       "오늘 아침 출근길에 버스 정류장에서 떨어뜨린 것 같습니다. 뒷면에 서명이 되어있지 않습니다.",
     thumbnailUrl: "https://picsum.photos/400/300?random=3",
     address: "경기도 성남시 분당구",
-    itemStatus: "COMPLETED", // 해결됨 (예시)
+    itemStatus: "COMPLETED",
     postType: "LOST",
     category: "CARD",
     favoriteCount: 2,
@@ -216,10 +216,10 @@ export const MOCK_MYPAGE_POSTS_LIST = [
     favoriteCount: 56,
     viewCount: 1200,
     createdAt: "30분 전",
-    hot: true,
+    hot: false,
     new: false,
   },
-] as const;
+];
 
 export const MOCK_MYPAGE_REQUEST_COMMENTS = [
   {

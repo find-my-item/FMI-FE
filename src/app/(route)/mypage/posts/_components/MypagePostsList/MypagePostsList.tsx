@@ -1,13 +1,30 @@
 import { MypageEmptyUI, PostListItem } from "@/components/domain";
-import { MOCK_MYPAGE_POSTS_LIST } from "@/mock/MOCK_DATA";
 import { CategoryType, ItemStatus, PostType } from "@/types";
 
-const MypagePostsList = () => {
+interface MypagePostsListProps {
+  data: {
+    postId: number;
+    title: string;
+    summary: string;
+    thumbnailUrl: string;
+    address: string;
+    itemStatus: ItemStatus;
+    postType: PostType;
+    category: CategoryType;
+    favoriteCount: number;
+    viewCount: number;
+    createdAt: string;
+    hot: boolean;
+    new: boolean;
+  }[];
+}
+
+const MypagePostsList = ({ data }: MypagePostsListProps) => {
   return (
     <section>
       <h2 className="sr-only">게시글 목록 영역</h2>
       <ul>
-        {MOCK_MYPAGE_POSTS_LIST.map((item) => (
+        {data.map((item) => (
           <PostListItem
             key={item.postId}
             post={{
@@ -28,7 +45,7 @@ const MypagePostsList = () => {
           />
         ))}
       </ul>
-      {MOCK_MYPAGE_POSTS_LIST.length === 0 && (
+      {data.length === 0 && (
         <MypageEmptyUI
           IconName="NoPosts"
           titleText="작성한 게시글"

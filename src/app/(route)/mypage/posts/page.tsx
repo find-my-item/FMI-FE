@@ -14,7 +14,7 @@ const page = () => {
 
         <MypagePostsFilter />
 
-        <MypagePostsList />
+        <MypagePostsList data={[]} />
       </div>
     </>
   );
