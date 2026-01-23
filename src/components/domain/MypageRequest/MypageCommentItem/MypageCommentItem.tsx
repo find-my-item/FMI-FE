@@ -28,6 +28,7 @@ const MypageRequestComment = ({ ...props }: DetailCommentsProps) => {
             {props.status === "admin" && <Chip label="관리자" type="admin" />}
             <h3 className="text-body1-medium text-layout-header-default">{displayName}</h3>
           </span>
+
           {displayDate && (
             <span className="text-body2-regular text-layout-body-default">
               {formatDate(displayDate)}
