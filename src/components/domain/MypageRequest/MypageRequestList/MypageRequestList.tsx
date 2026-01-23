@@ -53,18 +53,21 @@ const MypageRequestList = ({ listType, data }: MypageRequestListProps) => {
   return (
     <section>
       <h2 className="sr-only">{sectionTitle}</h2>
-      <ul>
-        {data.map((item) => (
-          <li
-            key={item.reportId ?? item.inquiryId}
-            className="flex w-full flex-col justify-between border-b border-divider-default px-5 py-[30px]"
-          >
-            <MypageListLink listType={listType} {...item} />
-          </li>
-        ))}
-      </ul>
 
-      {data.length === 0 && <MypageEmptyUI pageType={listType} />}
+      {data.length === 0 ? (
+        <MypageEmptyUI pageType={listType} />
+      ) : (
+        <ul>
+          {data.map((item) => (
+            <li
+              key={item.reportId ?? item.inquiryId}
+              className="flex w-full flex-col justify-between border-b border-divider-default px-5 py-[30px]"
+            >
+              <MypageListLink listType={listType} {...item} />
+            </li>
+          ))}
+        </ul>
+      )}
     </section>
   );
 };
