@@ -96,7 +96,7 @@ export const MOCK_MYPAGE_REPORTS = [
     reportId: 1,
     status: "PENDING",
     targetTitle: "악성 댓글 신고합니다.",
-    createdAt: "2024-01-22T14:30:00", // T를 포함한 날짜 문자열
+    createdAt: "2024-01-22T14:30:00",
     reason: "지속적인 욕설과 비방을 일삼고 있어 신고합니다. 확인 부탁드립니다.",
   },
   {
