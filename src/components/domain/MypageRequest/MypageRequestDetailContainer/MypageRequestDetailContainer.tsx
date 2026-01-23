@@ -1,5 +1,5 @@
 import { Chip } from "@/components/common";
-import MypageRequestDetailComment from "../MypageRequestComment/MypageRequestComment";
+import MypageRequestDetailComment from "../MypageCommentItem/MypageCommentItem";
 import { MOCK_MYPAGE_REQUEST_COMMENTS } from "@/mock/MOCK_DATA";
 
 const MypageRequestDetailContainer = () => {

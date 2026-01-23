@@ -9,21 +9,15 @@ interface DetailCommentsProps {
   content?: string;
 }
 
-const MypageRequestComment = ({
-  status,
-  resolvedAt,
-  createdAt,
-  userNickname,
-  content,
-}: DetailCommentsProps) => {
-  const displayDate = resolvedAt || createdAt;
-  const displayName = status === "admin" ? "찾아줘 관리자" : userNickname;
+const MypageRequestComment = ({ ...props }: DetailCommentsProps) => {
+  const displayDate = props.resolvedAt || props.createdAt;
+  const displayName = status === "admin" ? "찾아줘 관리자" : props.userNickname;
 
   return (
     <article
       className={cn(
         "flex flex-col gap-2 border-b border-neutral-normal-default px-5 py-9",
-        status === "admin" && "bg-fill-neutral-strong-default"
+        props.status === "admin" && "bg-fill-neutral-strong-default"
       )}
     >
       <header className="flex gap-[14px]">
@@ -31,7 +25,7 @@ const MypageRequestComment = ({
 
         <span className="flex flex-col gap-[2px]">
           <span className="flex gap-[6px]">
-            {status === "admin" && <Chip label="관리자" type="admin" />}
+            {props.status === "admin" && <Chip label="관리자" type="admin" />}
             <h3 className="text-body1-medium text-layout-header-default">{displayName}</h3>
           </span>
 
@@ -41,7 +35,7 @@ const MypageRequestComment = ({
         </span>
       </header>
 
-      <p className="text-body1-regular text-layout-header-default">{content}</p>
+      <p className="text-body1-regular text-layout-header-default">{props.content}</p>
     </article>
   );
 };
