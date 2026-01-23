@@ -1,6 +1,7 @@
 import { DetailHeader } from "@/components/layout";
 import { MypageRequestFilter, MypageRequestList, MypageSearch } from "@/components/domain";
 import { MOCK_MYPAGE_INQUIRIES } from "@/mock/MOCK_DATA";
+import { CommentForm } from "../../list/[id]/_components";
 
 const page = () => {
   return (
