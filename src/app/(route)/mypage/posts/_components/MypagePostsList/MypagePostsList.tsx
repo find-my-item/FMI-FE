@@ -1,22 +1,9 @@
+import { MypagePostListType } from "@/api/fetch/post";
 import { MypageEmptyUI, PostListItem } from "@/components/domain";
 import { CategoryType, ItemStatus, PostType } from "@/types";
 
 interface MypagePostsListProps {
-  data: {
-    postId: number;
-    title: string;
-    summary: string;
-    thumbnailUrl: string;
-    address: string;
-    itemStatus: ItemStatus;
-    postType: PostType;
-    category: CategoryType;
-    favoriteCount: number;
-    viewCount: number;
-    createdAt: string;
-    hot: boolean;
-    new: boolean;
-  }[];
+  data: MypagePostListType[];
 }
 
 const MypagePostsList = ({ data }: MypagePostsListProps) => {
