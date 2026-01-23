@@ -12,7 +12,7 @@ const page = () => {
 
         <MypageRequestFilter status="reports" />
 
-        <MypageRequestList status="reports" data={MOCK_MYPAGE_REPORTS} />
+        <MypageRequestList listType="reports" data={MOCK_MYPAGE_REPORTS} />
       </div>
     </>
   );

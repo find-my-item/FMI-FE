@@ -1,7 +1,6 @@
 import { DetailHeader } from "@/components/layout";
 import { MypageRequestFilter, MypageRequestList, MypageSearch } from "@/components/domain";
 import { MOCK_MYPAGE_INQUIRIES } from "@/mock/MOCK_DATA";
-import { CommentForm } from "../../list/[id]/_components";
 
 const page = () => {
   return (
@@ -13,7 +12,7 @@ const page = () => {
 
         <MypageRequestFilter status="inquiries" />
 
-        <MypageRequestList status="inquiries" data={MOCK_MYPAGE_INQUIRIES} />
+        <MypageRequestList listType="inquiries" data={MOCK_MYPAGE_INQUIRIES} />
       </div>
     </>
   );
