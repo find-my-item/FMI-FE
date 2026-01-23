@@ -1,5 +1,8 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import DefaultList from "./DefaultList";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const meta: Meta<typeof DefaultList> = {
   title: "페이지/채팅 페이지/DefaultList",
@@ -16,9 +19,11 @@ const meta: Meta<typeof DefaultList> = {
   },
   decorators: [
     (Story) => (
-      <div className="w-[430px] border border-gray-200">
-        <Story />
-      </div>
+      <QueryClientProvider client={queryClient}>
+        <div className="w-[430px] border border-gray-200">
+          <Story />
+        </div>
+      </QueryClientProvider>
     ),
   ],
 };
