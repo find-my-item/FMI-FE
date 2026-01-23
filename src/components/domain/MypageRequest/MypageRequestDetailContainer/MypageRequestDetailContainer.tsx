@@ -15,11 +15,11 @@ const MypageRequestDetailContainer = () => {
       </div>
 
       <ul>
-        <li>
-          {MOCK_MYPAGE_REQUEST_COMMENTS.map((item) => (
+        {MOCK_MYPAGE_REQUEST_COMMENTS.map((item) => (
+          <li key={item.commentId}>
             <MypageRequestDetailComment key={item.commentId} {...item} />
-          ))}
-        </li>
+          </li>
+        ))}
       </ul>
     </div>
   );

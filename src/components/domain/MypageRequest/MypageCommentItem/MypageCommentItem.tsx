@@ -26,7 +26,7 @@ const MypageRequestComment = ({ ...props }: DetailCommentsProps) => {
         <span className="flex flex-col gap-[2px]">
           <span className="flex gap-[6px]">
             {props.status === "admin" && <Chip label="관리자" type="admin" />}
-            <h3 className="text-body1-medium text-layout-header-default">{displayName}</h3>
+            <span className="text-body1-medium text-layout-header-default">{displayName}</span>
           </span>
 
           {displayDate && (
