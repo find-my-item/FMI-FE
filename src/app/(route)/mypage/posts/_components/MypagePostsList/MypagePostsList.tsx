@@ -45,13 +45,7 @@ const MypagePostsList = ({ data }: MypagePostsListProps) => {
           />
         ))}
       </ul>
-      {data.length === 0 && (
-        <MypageEmptyUI
-          IconName="NoPosts"
-          titleText="작성한 게시글"
-          subText="지금 바로 글을 남겨보세요!"
-        />
-      )}
+      {data.length === 0 && <MypageEmptyUI pageType="posts" />}
     </section>
   );
 };

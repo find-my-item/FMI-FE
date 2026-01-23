@@ -55,13 +55,7 @@ const MypageRequestList = ({ status, data }: MypageRequestListProps) => {
         ))}
       </ul>
 
-      {data.length === 0 && (
-        <MypageEmptyUI
-          IconName="NoReports"
-          titleText="신고 내역"
-          subText="이용 중 불편 사항이 있을 경우 신고할 수 있어요."
-        />
-      )}
+      {data.length === 0 && <MypageEmptyUI pageType={status} />}
     </section>
   );
 };

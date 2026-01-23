@@ -40,13 +40,7 @@ const MypageCommentsList = () => {
           </li>
         ))}
       </ul>
-      {MOCK_MYPAGE_COMMENTS_ITEM.length === 0 && (
-        <MypageEmptyUI
-          IconName="NoComments"
-          titleText="작성한 댓글"
-          subText="게시글에 댓글을 남겨 보세요!"
-        />
-      )}
+      {MOCK_MYPAGE_COMMENTS_ITEM.length === 0 && <MypageEmptyUI pageType="comments" />}
     </section>
   );
 };
