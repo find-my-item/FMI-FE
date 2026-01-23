@@ -11,7 +11,7 @@ interface MypageCommentItemProps {
 
 const MypageCommentItem = ({ ...props }: MypageCommentItemProps) => {
   const displayDate = props.resolvedAt || props.createdAt;
-  const displayName = status === "admin" ? "찾아줘 관리자" : props.userNickname;
+  const displayName = props.status === "admin" ? "찾아줘 관리자" : props.userNickname;
 
   return (
     <article
