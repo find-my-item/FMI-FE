@@ -17,7 +17,7 @@ const MypageRequestDetailContainer = () => {
       <ul>
         {MOCK_MYPAGE_REQUEST_COMMENTS.map((item) => (
           <li key={item.commentId}>
-            <MypageCommentItem key={item.commentId} {...item} />
+            <MypageCommentItem key={item.commentId} data={item} />
           </li>
         ))}
       </ul>
