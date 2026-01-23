@@ -3,12 +3,7 @@ import Link from "next/link";
 import { MypageRequestType } from "../_internal/MypageRequestType";
 import MypageEmptyUI from "../../MypageEmptyUI/MypageEmptyUI";
 import { formatDate } from "@/utils";
-
-const LIST_STATUS_CHIP = {
-  PENDING: { label: "접수", type: "pending" },
-  RECEIVED: { label: "처리 중", type: "received" },
-  RESOLVED: { label: "처리 완료", type: "resolved" },
-} as const;
+import { LIST_STATUS_CHIP } from "../_internal/LIST_STATUS_CHIP";
 
 interface MypageRequestListProps {
   status: MypageRequestType;
