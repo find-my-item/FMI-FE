@@ -1,9 +1,9 @@
 import { Chip } from "@/components/common";
 import Link from "next/link";
-import { MypageRequestType } from "../_internal/MypageRequestType";
+import { MypageRequestType } from "../_types/MypageRequestType";
 import MypageEmptyUI from "../../MypageEmptyUI/MypageEmptyUI";
 import { formatDate } from "@/utils";
-import { LIST_STATUS_CHIP } from "../_internal/LIST_STATUS_CHIP";
+import { LIST_STATUS_CHIP } from "../_constants/LIST_STATUS_CHIP";
 
 interface MypageRequestListProps {
   status: MypageRequestType;

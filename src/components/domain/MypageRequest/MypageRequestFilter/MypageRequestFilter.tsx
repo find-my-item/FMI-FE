@@ -2,8 +2,8 @@
 
 import { Filter, KebabMenu } from "@/components/common";
 import { useState } from "react";
-import { MYPAGE_KEBAB_OPTIONS } from "../_internal/MYPAGE_KEBAB_OPTION";
-import { MypageRequestType } from "../_internal/MypageRequestType";
+import { MYPAGE_KEBAB_OPTIONS } from "../_constants/MYPAGE_KEBAB_OPTION";
+import { MypageRequestType } from "../_types/MypageRequestType";
 
 interface MypageKebabFilterProps {
   status: MypageRequestType;
