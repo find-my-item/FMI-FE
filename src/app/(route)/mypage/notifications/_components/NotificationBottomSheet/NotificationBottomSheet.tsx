@@ -24,7 +24,7 @@ const NotificationBottomSheet = ({ isOpen, onClose }: NotificationBottomSheetPro
                 key={item.value}
                 ariaLabel={item.label}
                 onSelected={isFilterSelected}
-                onClick={() => setIsFilterSelected(true)}
+                onClick={() => setIsFilterSelected(!isFilterSelected)}
               >
                 {item.label}
               </Filter>
