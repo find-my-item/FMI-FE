@@ -23,7 +23,7 @@ const NotificationBottomSheet = ({ isOpen, onClose }: NotificationBottomSheetPro
     <PopupLayout isOpen={isOpen} onClose={onClose}>
       <div className="w-full px-5 py-10 flex-col-center">
         <h2 className="text-h2-medium text-layout-header-default">카테고리 키워드</h2>
-        <div className="mt-8 flex w-full flex-wrap gap-2">
+        <div className="mt-8 flex w-full flex-wrap gap-x-2 gap-y-3">
           {CATEGORY_OPTIONS.map((item) => {
             const isSelected = selectedCategories.includes(item.value);
 
