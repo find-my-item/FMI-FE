@@ -11,20 +11,28 @@ interface NotificationBottomSheetProps {
 }
 
 const NotificationBottomSheet = ({ isOpen, onClose }: NotificationBottomSheetProps) => {
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+
+  const handleToggle = (value: string) => {
+    setSelectedCategories((prev) =>
+      prev.includes(value) ? prev.filter((item) => item !== value) : [...prev, value]
+    );
+  };
+
   return (
     <PopupLayout isOpen={isOpen} onClose={onClose}>
-      <div className="w-full gap-6 px-5 py-10 flex-col-center">
+      <div className="w-full px-5 py-10 flex-col-center">
         <h2 className="text-h2-medium text-layout-header-default">카테고리 키워드</h2>
-        <div className="flex w-full flex-wrap gap-2">
+        <div className="mt-8 flex w-full flex-wrap gap-2">
           {CATEGORY_OPTIONS.map((item) => {
-            const [isFilterSelected, setIsFilterSelected] = useState(false);
+            const isSelected = selectedCategories.includes(item.value);
 
             return (
               <Filter
                 key={item.value}
                 ariaLabel={item.label}
-                onSelected={isFilterSelected}
-                onClick={() => setIsFilterSelected(!isFilterSelected)}
+                onSelected={isSelected}
+                onClick={() => handleToggle(item.value)}
               >
                 {item.label}
               </Filter>
@@ -32,7 +40,7 @@ const NotificationBottomSheet = ({ isOpen, onClose }: NotificationBottomSheetPro
           })}
         </div>
 
-        <Button className="w-full" onClick={onClose}>
+        <Button className="mt-12 w-full" onClick={onClose}>
           적용하기
         </Button>
       </div>
