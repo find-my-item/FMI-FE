@@ -5,6 +5,8 @@ import { Tab } from "@/components/domain";
 import { DetailHeader } from "@/components/layout";
 import { TabContents, UserHeader } from "./_components";
 import { USER_TABS } from "./_types/USER_TABS";
+import { useGetUserData } from "@/api/fetch/user";
+import { useGetUserProfileById } from "@/api/fetch/user/api/useGetUserProfileById";
 
 const data = {
   nickname: "사용자 닉네임",
@@ -15,6 +17,11 @@ type SelectedTab = (typeof USER_TABS)[number]["key"];
 
 const Page = () => {
   const [selectedTab, setSelectedTab] = useState<SelectedTab>("post");
+  const { data: myData } = useGetUserData();
+  console.log(myData);
+
+  const { data: profileData } = useGetUserProfileById("5");
+  console.log(profileData);
 
   return (
     <div className="h-base">
