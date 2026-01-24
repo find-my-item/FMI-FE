@@ -1,8 +1,13 @@
 import useAppQuery from "@/api/_base/query/useAppQuery";
-import { GetUserDataResponse } from "../types/UserDataType";
+import { GetUserProfileDataResponse } from "../types/UserProfileIdDataType";
 
 export const useGetUserProfileById = (userId: string | undefined) => {
-  return useAppQuery<GetUserDataResponse>("auth", ["user-data", userId], `/users/${userId}/page`, {
-    enabled: !!userId,
-  });
+  return useAppQuery<GetUserProfileDataResponse>(
+    "auth",
+    ["user-data", userId],
+    `/users/${userId}/page`,
+    {
+      enabled: !!userId,
+    }
+  );
 };

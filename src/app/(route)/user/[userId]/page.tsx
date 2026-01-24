@@ -1,36 +1,32 @@
 "use client";
 
 import { useState } from "react";
+import { useParams } from "next/navigation";
 import { Tab } from "@/components/domain";
 import { DetailHeader } from "@/components/layout";
+import { useGetUserProfileById } from "@/api/fetch/user/api/useGetUserProfileById";
 import { TabContents, UserHeader } from "./_components";
 import { USER_TABS } from "./_types/USER_TABS";
-import { useGetUserData } from "@/api/fetch/user";
-import { useGetUserProfileById } from "@/api/fetch/user/api/useGetUserProfileById";
-
-const data = {
-  nickname: "사용자 닉네임",
-  email: "asdf@gmail.com",
-};
+import NotFound from "@/app/not-found";
 
 type SelectedTab = (typeof USER_TABS)[number]["key"];
 
 const Page = () => {
   const [selectedTab, setSelectedTab] = useState<SelectedTab>("post");
-  const { data: myData } = useGetUserData();
-  console.log(myData);
+  const { userId } = useParams<{ userId: string }>();
 
-  const { data: profileData } = useGetUserProfileById("5");
-  console.log(profileData);
+  const { data: profileData } = useGetUserProfileById(userId);
+
+  if (!profileData) return <NotFound />;
 
   return (
     <div className="h-base">
       <DetailHeader title="프로필">
         <DetailHeader.Menu ariaLabel="더보기 메뉴" />
       </DetailHeader>
-      <h1 className="sr-only">타인 프로필</h1>
+      <h1 className="sr-only">{profileData.result.nickname} 프로필</h1>
 
-      <UserHeader data={data} />
+      <UserHeader data={profileData.result} />
 
       <Tab
         tabs={USER_TABS}
