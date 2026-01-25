@@ -27,7 +27,7 @@ const CommentCard = ({ data }: CommentCardProps) => {
 
         <span className="mt-1 text-body2-regular text-layout-body-default">{data.date}</span>
 
-        <span className="mt-2 flex text-body2-regular text-neutral-strong-placeholder">
+        <span className="mt-2 flex gap-1 text-body2-regular text-neutral-strong-placeholder">
           <Icon name="Heart" size={16} />
           {data.like}
         </span>
