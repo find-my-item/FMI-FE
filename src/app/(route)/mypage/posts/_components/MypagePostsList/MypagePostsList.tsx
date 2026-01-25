@@ -1,31 +1,41 @@
-import { PostListItem } from "@/components/domain";
+import { MypagePostListType } from "@/api/fetch/post";
+import { MypageEmptyUI, PostListItem } from "@/components/domain";
+import { CategoryType, ItemStatus, PostType } from "@/types";
 
-const MypagePostsList = () => {
+interface MypagePostsListProps {
+  data: MypagePostListType[];
+}
+
+const MypagePostsList = ({ data }: MypagePostsListProps) => {
   return (
     <section>
       <h2 className="sr-only">게시글 목록 영역</h2>
-      <ul>
-        {[1, 2, 3].map((item) => (
-          <PostListItem
-            key={item}
-            post={{
-              postId: 1,
-              title: "전자기기를 잃어버렸어요",
-              summary: "전자기기를 읽어버렸다구리이부ㅜ루아ㅓㅁㄴ이5ㄱ",
-              thumbnailUrl: "https://picsum.photos/400/300?random=1",
-              address: "서울특별시 강남구",
-              itemStatus: "SEARCHING",
-              postType: "FOUND",
-              category: "CARD",
-              favoriteCount: 3,
-              viewCount: 5,
-              createdAt: "30분 전",
-              hot: false,
-              new: false,
-            }}
-          />
-        ))}
-      </ul>
+      {data.length === 0 ? (
+        <MypageEmptyUI pageType="posts" />
+      ) : (
+        <ul>
+          {data.map((item) => (
+            <PostListItem
+              key={item.postId}
+              post={{
+                postId: item.postId,
+                title: item.title,
+                summary: item.summary,
+                thumbnailUrl: item.thumbnailUrl,
+                address: item.address,
+                itemStatus: item.itemStatus as ItemStatus,
+                postType: item.postType as PostType,
+                category: item.category as CategoryType,
+                favoriteCount: item.favoriteCount,
+                viewCount: item.viewCount,
+                createdAt: item.createdAt,
+                hot: item.hot,
+                new: item.new,
+              }}
+            />
+          ))}
+        </ul>
+      )}
     </section>
   );
 };
