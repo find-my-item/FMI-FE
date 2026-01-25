@@ -7,7 +7,7 @@ import { useState } from "react";
 
 interface NotificationBottomSheetProps {
   isOpen: boolean;
-  onClose?: () => void;
+  onClose: () => void;
 }
 
 const NotificationBottomSheet = ({ isOpen, onClose }: NotificationBottomSheetProps) => {
