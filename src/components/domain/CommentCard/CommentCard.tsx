@@ -2,6 +2,34 @@ import { Icon } from "@/components/common";
 import { CommentCardType } from "@/types";
 import Image from "next/image";
 
+/**
+ * @author suhyeon
+ *
+ * 댓글 카드 컴포넌트입니다.
+ *
+ *
+ * @param commentId - 댓글 카드 id
+ * @param mentionUser - 댓글에서 언급한 유저 닉네임
+ * @param comment - 댓글 내용
+ * @param date - 댓글 작성 날짜
+ * @param like - 댓글의 좋아요 개수
+ * @param thumbnailUrl - 댓글의 이미지 url
+ *
+ * @example
+ * ```tsx
+ * <CommentCard
+ *   data={
+ *     commentId: 1,
+ *     mentionUser: "suhyeon",
+ *     comment: "댓글 내용이 들어갑니다.",
+ *     date: "2025-12-26T10:22:58",
+ *     like: 4,
+ *     thumbnailUrl: "https://picsum.photos/400/300?random=2",
+ *   }
+ * >
+ * ```
+ */
+
 interface CommentCardProps {
   data: CommentCardType;
 }
