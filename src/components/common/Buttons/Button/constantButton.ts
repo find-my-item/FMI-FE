@@ -14,6 +14,7 @@ export const LOADING_SPINNER_SIZE = {
 
 export const VARIANT_STYLES = {
   solid: {
+    // TODO(수현): 디자인 토큰 변경 필요
     normal:
       "text-brand-subtle-default bg-fill-brand-normal-default bg-opacity-70 hover:bg-fill-brand-normal-hover active:bg-fill-brand-normal-pressed active:text-brand-subtle-pressed disabled:bg-fill-brand-normal-disabled disabled:text-brand-subtle-disabled",
     subtle:
