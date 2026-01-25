@@ -30,8 +30,8 @@ authApi.interceptors.response.use(
 
         return authApi(originalRequest);
       } catch (refreshError) {
-        alert("다시 로그인 해주세요.");
-        window.location.replace("/login");
+        // 로그아웃 안내 토스트는 로그인 페이지에서 보여줌
+        window.location.replace("/login?reason=session-expired");
 
         return Promise.reject(refreshError);
       }
