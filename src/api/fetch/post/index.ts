@@ -5,6 +5,7 @@ export * from "./types/PostsFilterType";
 export * from "./types/PostWriteType";
 export * from "./types/PostDeleteDetailType";
 export * from "./types/PostFavoritesType";
+export * from "./types/MypagePostListType";
 
 export { useGetPosts } from "./api/useGetPosts";
 export { usePostPostsFilter } from "./api/usePostPostsFilter";

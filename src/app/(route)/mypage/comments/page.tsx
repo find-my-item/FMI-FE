@@ -1,5 +1,6 @@
 import { DetailHeader } from "@/components/layout";
-import { MypageCommentsFilter, MypageCommentsList, MypageCommentsSearch } from "./_components";
+import { MypageCommentsFilter, MypageCommentsList } from "./_components";
+import { MypageSearch } from "@/components/domain";
 
 const page = () => {
   return (
@@ -7,7 +8,7 @@ const page = () => {
       <DetailHeader title="내가 쓴 댓글" />
       <h1 className="sr-only">내가 쓴 댓글 페이지</h1>
       <div className="w-full h-base">
-        <MypageCommentsSearch />
+        <MypageSearch />
 
         <MypageCommentsFilter />
 
