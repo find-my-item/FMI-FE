@@ -1,5 +1,6 @@
 import { Icon } from "@/components/common";
 import { CommentCardType } from "@/types";
+import { formatDate } from "@/utils";
 import Image from "next/image";
 
 /**
@@ -11,7 +12,7 @@ import Image from "next/image";
  * @param commentId - 댓글 카드 id
  * @param mentionUser - 댓글에서 언급한 유저 닉네임
  * @param comment - 댓글 내용
- * @param date - 댓글 작성 날짜
+ * @param createdAt - 댓글 작성 날짜
  * @param like - 댓글의 좋아요 개수
  * @param thumbnailUrl - 댓글의 이미지 url
  *
@@ -22,7 +23,7 @@ import Image from "next/image";
  *     commentId: 1,
  *     mentionUser: "suhyeon",
  *     comment: "댓글 내용이 들어갑니다.",
- *     date: "2025-12-26T10:22:58",
+ *     createdAt: "2025-12-26T10:22:58",
  *     like: 4,
  *     thumbnailUrl: "https://picsum.photos/400/300?random=2",
  *   }
@@ -35,7 +36,7 @@ interface CommentCardProps {
 }
 
 const CommentCard = ({ data }: CommentCardProps) => {
-  const { date, mentionUser, thumbnailUrl, comment, like } = data;
+  const { createdAt, mentionUser, thumbnailUrl, comment, like } = data;
 
   return (
     <li className="flex w-full justify-between border-b border-divider-default px-5 py-[30px]">
@@ -45,7 +46,9 @@ const CommentCard = ({ data }: CommentCardProps) => {
           {comment}
         </p>
 
-        <span className="mt-1 text-body2-regular text-layout-body-default">{date}</span>
+        <span className="mt-1 text-body2-regular text-layout-body-default">
+          {formatDate(createdAt)}
+        </span>
 
         <span className="mt-2 flex gap-1 text-body2-regular text-neutral-strong-placeholder">
           <Icon name="Heart" size={16} />
