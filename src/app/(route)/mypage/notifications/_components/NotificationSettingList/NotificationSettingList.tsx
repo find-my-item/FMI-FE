@@ -4,6 +4,7 @@ import { Icon, ToggleButton } from "@/components/common";
 import { NotificationType } from "../../_types/NotificationType";
 import { useState } from "react";
 import NotificationBottomSheet from "../NotificationBottomSheet/NotificationBottomSheet";
+import { NOTIFICATION_ITEM } from "../../_constants/NOTIFICATION_ITEM";
 
 interface NotificationSettingItem {
   settingName: NotificationType;
@@ -47,4 +48,14 @@ const NotificationSettingItem = ({ settingName }: NotificationSettingItem) => {
   );
 };
 
-export default NotificationSettingItem;
+const NotificationSettingList = () => {
+  return (
+    <ul className="w-full py-[16px]">
+      {NOTIFICATION_ITEM.map((item) => (
+        <NotificationSettingItem key={item} settingName={item} />
+      ))}
+    </ul>
+  );
+};
+
+export default NotificationSettingList;
