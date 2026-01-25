@@ -50,7 +50,7 @@ const NotificationSettingItem = ({ settingName }: NotificationSettingItem) => {
 
 const NotificationSettingList = () => {
   return (
-    <ul className="w-full py-[16px]">
+    <ul className="w-full py-4">
       {NOTIFICATION_ITEM.map((item) => (
         <NotificationSettingItem key={item} settingName={item} />
       ))}
