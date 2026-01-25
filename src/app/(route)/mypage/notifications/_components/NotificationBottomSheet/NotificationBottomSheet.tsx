@@ -1,6 +1,6 @@
 "use client";
 
-import { CATEGORY_OPTIONS } from "@/app/(route)/write/post/_components/_internal/CategoryPopup/CATEGORY_OPTIONS";
+import { CATEGORY_OPTIONS } from "@/constants/CATEGORY_OPTIONS";
 import { Button, Filter } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
 import { useState } from "react";
