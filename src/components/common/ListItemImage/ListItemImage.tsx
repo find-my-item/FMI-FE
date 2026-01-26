@@ -40,11 +40,11 @@ const ListItemImage = ({
         src={src}
         alt={alt}
         width={size}
-        sizes={`${size}px`}
         height={size}
+        sizes={`${size}px`}
         draggable={false}
         priority={priority}
-        className={cn("object-cover", className)}
+        className={cn("object-cover", className, `h-[${size}px] w-[${size}px]`)}
       />
 
       {typeof imageCount === "number" && imageCount > 1 && (
