@@ -1,6 +1,6 @@
-import { GetDetailPostResponse } from "@/api/fetch/post";
+import { GetDetailPostResponse, PostItem } from "@/api/fetch/post";
 
-export const MOCK_POST_ITEM = {
+export const MOCK_POST_ITEM: PostItem = {
   postId: 1,
   title: "아이폰 15 분실",
   summary: "서울 노원구 상계동 근처에서 아이폰을 잃어버렸습니다.",
@@ -15,6 +15,8 @@ export const MOCK_POST_ITEM = {
   new: false,
   hot: false,
 };
+
+export const MOCK_POST_ITEMS: PostItem[] = [MOCK_POST_ITEM];
 
 export const MOCK_POST_DEFAULT_DETAIL: GetDetailPostResponse = {
   isSuccess: true,
