@@ -12,7 +12,7 @@ const MypageProfileForm = () => {
     <form onSubmit={handleSubmitMypageProfile} className="flex h-dvh w-full flex-col">
       <div className="flex justify-center py-[30px]">
         <div className="relative h-[80px] w-[80px]">
-          <ProfileAvatar size={80} src={null} alt="프로필" priority={true} />
+          <ProfileAvatar size={80} src={profileImgURL} alt="프로필" priority={true} />
           {/* TODO(수현): 디자인 토큰 변경 요청 해놓은 상태로 등록 시 추후 변경 */}
           <button
             className="absolute left-[52px] top-[52px] h-[28px] w-[28px] rounded-full bg-fill-neutral-strong-default flex-center"
