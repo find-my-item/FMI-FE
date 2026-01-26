@@ -7,7 +7,7 @@ import { Button, Icon } from "@/components/common";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useToast } from "@/context/ToastContext";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const ButtonStyle = "w-full h-11 flex-center gap-1 rounded-[10px] text-body1-semibold ";
 

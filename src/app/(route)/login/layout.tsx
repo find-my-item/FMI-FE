@@ -1,6 +1,6 @@
-import { Suspense } from "react";
+import { ReactNode, Suspense } from "react";
 
-const layout = ({ children }: { children: React.ReactNode }) => {
+const layout = ({ children }: { children: ReactNode }) => {
   return <Suspense fallback="">{children}</Suspense>;
 };
 
