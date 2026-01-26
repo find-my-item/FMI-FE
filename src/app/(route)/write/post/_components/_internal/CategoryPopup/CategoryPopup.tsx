@@ -6,7 +6,7 @@ import { cn } from "@/utils";
 import { Button } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
 import { CategoryType } from "@/types";
-import { CATEGORY_OPTIONS } from "./CATEGORY_OPTIONS";
+import { CATEGORY_OPTIONS } from "@/constants";
 
 interface CategoryPopupProps {
   isOpen: boolean;
