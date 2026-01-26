@@ -1,10 +1,12 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { USER_TABS, type UserProfileTabKey } from "../_types/USER_TABS";
+import type { UserTabType } from "@/api/fetch/user";
 
-const isUserProfileTabKey = (value: string | null): value is UserProfileTabKey => {
-  return USER_TABS.some((t) => t.key === value);
+const DEFAULT_TAB: UserTabType = "post";
+
+const isUserTabType = (value: string | null): value is UserTabType => {
+  return value === "post" || value === "comment" || value === "favorite";
 };
 
 export const useUserProfileTabQuery = () => {
@@ -12,26 +14,18 @@ export const useUserProfileTabQuery = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const selectedTab: UserProfileTabKey = (() => {
-    const tab = searchParams.get("tab");
-    return isUserProfileTabKey(tab) ? tab : "post";
-  })();
+  const rawTab = searchParams.get("tab");
+  const tab: UserTabType = isUserTabType(rawTab) ? rawTab : DEFAULT_TAB;
 
-  const updateTabQuery = (tab: UserProfileTabKey) => {
+  const updateTabQuery = (nextTab: UserTabType) => {
     const params = new URLSearchParams(searchParams.toString());
 
-    if (tab === "post") {
-      params.delete("tab");
-    } else {
-      params.set("tab", tab);
-    }
+    if (nextTab === DEFAULT_TAB) params.delete("tab");
+    else params.set("tab", nextTab);
 
     const qs = params.toString();
     router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
   };
 
-  return {
-    selectedTab,
-    updateTabQuery,
-  };
+  return { tab, updateTabQuery };
 };

@@ -8,3 +8,5 @@ export interface UserDataType {
   emailVerified: boolean;
   profileImg: string;
 }
+
+export type UserTabType = "post" | "comment" | "favorite";
