@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/nextjs";
 import PostListItem from "./PostListItem";
-import { MOCK_POST_ITEM } from "@/mock/MOCK_DATA";
+import { MOCK_POST_ITEM } from "@/mock/data";
 
 const meta: Meta<typeof PostListItem> = {
   title: "페이지/목록 페이지/PostListItem",

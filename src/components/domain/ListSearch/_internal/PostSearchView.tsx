@@ -1,5 +1,5 @@
 import { PostListItem } from "@/components/domain";
-import { MOCK_POST_ITEM } from "@/mock/MOCK_DATA";
+import { MOCK_POST_ITEM } from "@/mock/data";
 
 const PostSearchView = () => {
   return (
