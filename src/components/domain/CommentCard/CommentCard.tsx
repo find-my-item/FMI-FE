@@ -8,13 +8,7 @@ import Image from "next/image";
  *
  * 댓글 카드 컴포넌트입니다.
  *
- *
- * @param commentId - 댓글 카드 id
- * @param mentionUser - 댓글에서 언급한 유저 닉네임
- * @param comment - 댓글 내용
- * @param createdAt - 댓글 작성 날짜
- * @param like - 댓글의 좋아요 개수
- * @param thumbnailUrl - 댓글의 이미지 url
+ * @param data - 댓글 카드 컴포넌트 데이터
  *
  * @example
  * ```tsx
