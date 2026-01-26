@@ -1,23 +1,23 @@
 import Image from "next/image";
 
 interface UserHeaderProps {
-  data: {
+  data?: {
     nickname: string;
     profileImg: string;
   };
 }
 
 const UserHeader = ({ data }: UserHeaderProps) => {
-  const { nickname, profileImg } = data;
+  const { nickname, profileImg } = data || {};
 
-  // TODO(지권): 대체 이미지 경로 수정 필요
+  // TODO(지권): 대체 이미지 경로 및 대체 텍스트 수정 필요
   const imageSrc = profileImg || "/test_list.JPG";
 
   return (
     <section className="flex items-center gap-6 p-5">
       <div className="relative h-[60px] w-[60px]">
         <Image
-          alt={`${nickname}의 프로필 이미지`}
+          alt={`${nickname || "익명"}의 프로필 이미지`}
           src={imageSrc}
           width={60}
           height={60}
@@ -28,7 +28,9 @@ const UserHeader = ({ data }: UserHeaderProps) => {
       </div>
 
       <div className="flex flex-col items-start gap-1">
-        <h2 className="text-body1-semibold text-layout-header-default">{nickname}</h2>
+        <h2 className="text-body1-semibold text-layout-header-default">
+          {nickname || "로딩 중..."}
+        </h2>
       </div>
     </section>
   );
