@@ -18,6 +18,11 @@ export const metadata: Metadata = {
   description: "분실물 찾기 서비스",
 };
 
+if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
+  const { worker } = await import("@/mock/browser");
+  worker.start();
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
