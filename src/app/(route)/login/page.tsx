@@ -4,7 +4,7 @@ import Link from "next/link";
 import { cn } from "@/utils";
 import { AuthLogoLink } from "@/components/domain";
 import { Button, Icon } from "@/components/common";
-import { useSessionNotification } from "@/hooks";
+import useSessionNotification from "./_hooks/useSessionNotification";
 
 const ButtonStyle = "w-full h-11 flex-center gap-1 rounded-[10px] text-body1-semibold ";
 
