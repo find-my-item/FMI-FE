@@ -2,11 +2,11 @@
 
 import { PostListItem } from "@/components/domain";
 import { MOCK_POST_ITEM } from "@/mock/MOCK_DATA";
-import { SelectedTab } from "../../_types/USER_TABS";
+import { UserProfileTabKey } from "../../_types/USER_TABS";
 import { CommentItem } from "../_internal";
 
 interface TabContentsProps {
-  selectedTab: SelectedTab;
+  selectedTab: UserProfileTabKey;
   isLoading: boolean;
 }
 

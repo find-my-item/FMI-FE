@@ -1,22 +1,23 @@
 "use client";
 
-import { useState } from "react";
-import NotFound from "@/app/not-found";
 import { useParams } from "next/navigation";
+import NotFound from "@/app/not-found";
 import { Tab } from "@/components/domain";
 import { useGetUserProfileById } from "@/api/fetch/user";
 import UserHeader from "../UserHeader/UserHeader";
 import TabContents from "../TabContents/TabContents";
-import { SelectedTab, USER_TABS } from "../../_types/USER_TABS";
+import { USER_TABS } from "../../_types/USER_TABS";
+import { useUserProfileTabQuery } from "../../_hooks/useUserProfileTabQuery";
 
 const UserProfileView = () => {
   const { userId } = useParams<{ userId: string }>();
-  const [selectedTab, setSelectedTab] = useState<SelectedTab>("post");
 
   const { data, isLoading, isError } = useGetUserProfileById(userId);
 
   if (isError || !userId) return <NotFound />;
   const profileData = data?.result;
+
+  const { selectedTab, updateTabQuery } = useUserProfileTabQuery();
 
   return (
     <div className="h-base">
@@ -27,7 +28,7 @@ const UserProfileView = () => {
       <Tab
         tabs={USER_TABS}
         selected={selectedTab}
-        onValueChange={setSelectedTab}
+        onValueChange={updateTabQuery}
         aria-label="프로필 탭"
       />
 
