@@ -17,9 +17,6 @@ authApi.interceptors.response.use(
     const isAlreadyRetried = originalRequest._retry;
     const isRefreshRequest = originalRequest.url === "/auth/refresh";
 
-    // alert("에러 확인용");
-    // console.log("error>> ", error.response?.status);
-
     // 서버환경에서 실행했을때 에러라는 것을 알려줌
     if (typeof window === "undefined") {
       return Promise.reject(error);
