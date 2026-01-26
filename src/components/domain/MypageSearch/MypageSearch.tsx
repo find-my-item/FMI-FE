@@ -2,7 +2,12 @@
 
 import { InputSearch } from "@/components/common";
 
-const MypageCommentsSearch = () => {
+interface MypageSearchProps {
+  // TODO(수현): api 연결 작업 시 사용할 예정
+  searchMode?: "Posts" | "Comments" | "Favorite" | "Activity" | "Reports" | "Inquiries";
+}
+
+export const MypageSearch = ({ searchMode }: MypageSearchProps) => {
   return (
     <section className="w-full px-5 py-[10px]">
       <h2 className="sr-only">검색 영역</h2>
@@ -12,4 +17,4 @@ const MypageCommentsSearch = () => {
   );
 };
 
-export default MypageCommentsSearch;
+export default MypageSearch;
