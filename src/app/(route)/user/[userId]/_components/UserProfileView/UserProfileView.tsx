@@ -3,7 +3,7 @@
 import { useParams } from "next/navigation";
 import NotFound from "@/app/not-found";
 import { Tab } from "@/components/domain";
-import { useGetUserProfileById, type UserTabType } from "@/api/fetch/user";
+import { useGetUserProfileById } from "@/api/fetch/user";
 import UserHeader from "../UserHeader/UserHeader";
 import TabContents from "../TabContents/TabContents";
 import { USER_TABS } from "../../_types/USER_TABS";

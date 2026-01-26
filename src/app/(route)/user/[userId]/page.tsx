@@ -1,10 +1,9 @@
-import UserProfileView from "./_components/UserProfileView/UserProfileView";
-import UserProfileHeader from "./_components/UserProfileHeader/UserProfileHeader";
+import { UserProfileDetailHeader, UserProfileView } from "./_components";
 
 const Page = () => {
   return (
     <>
-      <UserProfileHeader />
+      <UserProfileDetailHeader />
 
       <UserProfileView />
     </>
