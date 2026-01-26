@@ -4,10 +4,10 @@ import Link from "next/link";
 import { cn } from "@/utils";
 import { AuthLogoLink } from "@/components/domain";
 import { Button, Icon } from "@/components/common";
-import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
-import { useToast } from "@/context/ToastContext";
-import { useRouter } from "next/navigation";
+// import { useSearchParams } from "next/navigation";
+// import { useEffect } from "react";
+// import { useToast } from "@/context/ToastContext";
+// import { useRouter } from "next/navigation";
 
 const ButtonStyle = "w-full h-11 flex-center gap-1 rounded-[10px] text-body1-semibold ";
 
@@ -16,17 +16,15 @@ const REDIRECT_URI = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI;
 const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
 const page = () => {
-  const { addToast } = useToast();
-  const searchParams = useSearchParams();
-  const router = useRouter();
+  // const { addToast } = useToast();
+  // const searchParams = useSearchParams();
+  // const router = useRouter();
 
-  useEffect(() => {
-    if (searchParams.get("expired") === "true") {
-      addToast("세션이 만료되었어요. 다시 로그인 해주세요.", "warning");
-
-      router.replace("/login");
-    }
-  }, [searchParams, addToast, router]);
+  // useEffect(() => {
+  //   if (searchParams.get("reason") === "session-expired") {
+  //     addToast("세션이 만료되었어요. 다시 로그인 해주세요.", "warning");
+  //   }
+  // }, [searchParams, addToast, router]);
 
   return (
     <div className="min-h-screen w-full gap-8 flex-col-center">
