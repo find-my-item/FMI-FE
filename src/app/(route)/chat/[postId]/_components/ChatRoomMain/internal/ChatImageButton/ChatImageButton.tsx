@@ -22,7 +22,8 @@ const ChatImageButton = ({ src, width, height, colSpan, index, onClick }: ChatIm
         width={width}
         height={height}
         alt={`채팅 이미지 ${index + 1}`}
-        className={cn("object-cover", `w-[${width}px] h-[${height}px]`)}
+        className={"object-cover"}
+        style={{ width: `${width}px`, height: `${height}px` }}
       />
     </button>
   );
