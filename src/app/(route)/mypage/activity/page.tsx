@@ -1,4 +1,3 @@
-import { InputSearch } from "@/components/common";
 import { MypageSearch } from "@/components/domain";
 import { DetailHeader } from "@/components/layout";
 
