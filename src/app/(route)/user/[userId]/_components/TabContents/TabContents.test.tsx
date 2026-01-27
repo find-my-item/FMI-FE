@@ -16,7 +16,7 @@ jest.mock("../_internal/EmptyUI/EmptyUI", () => () => <div>EmptyUI</div>);
 describe("TabContents", () => {
   it("초기 상태에서는 게시글 탭 콘텐츠가 표시되어야 합니다", () => {
     render(
-      <TabContents selectedTab="post" query={{ isLoading: false, data: MOCK_USER_PROFILE_DATA }} />
+      <TabContents selectedTab="posts" query={{ isLoading: false, data: MOCK_USER_PROFILE_DATA }} />
     );
 
     expect(screen.queryAllByTestId("list-item").length).toBeGreaterThan(0);
@@ -26,7 +26,7 @@ describe("TabContents", () => {
   it("댓글 탭 선택 시 댓글 콘텐츠가 표시되어야 합니다", () => {
     render(
       <TabContents
-        selectedTab="comment"
+        selectedTab="comments"
         query={{ isLoading: false, data: MOCK_USER_PROFILE_DATA }}
       />
     );
@@ -38,7 +38,7 @@ describe("TabContents", () => {
   it("즐겨찾기 탭 선택 시 즐겨찾기 콘텐츠가 표시되어야 합니다", () => {
     render(
       <TabContents
-        selectedTab="favorite"
+        selectedTab="favorites"
         query={{ isLoading: false, data: MOCK_USER_PROFILE_DATA }}
       />
     );

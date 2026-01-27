@@ -10,7 +10,7 @@ const meta: Meta<typeof TabContents> = {
     layout: "centered",
   },
   args: {
-    selectedTab: "post",
+    selectedTab: "posts",
     query: {
       isLoading: false,
       data: undefined,
@@ -30,7 +30,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Post: Story = {
   args: {
-    selectedTab: "post",
+    selectedTab: "posts",
     query: {
       isLoading: false,
       data: MOCK_USER_PROFILE_DATA,
@@ -40,7 +40,7 @@ export const Post: Story = {
 
 export const Comment: Story = {
   args: {
-    selectedTab: "comment",
+    selectedTab: "comments",
     query: {
       isLoading: false,
       data: MOCK_USER_PROFILE_DATA,
@@ -50,7 +50,7 @@ export const Comment: Story = {
 
 export const Favorite: Story = {
   args: {
-    selectedTab: "favorite",
+    selectedTab: "favorites",
     query: {
       isLoading: false,
       data: MOCK_USER_PROFILE_DATA,

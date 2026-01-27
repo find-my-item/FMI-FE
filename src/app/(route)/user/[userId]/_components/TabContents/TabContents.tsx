@@ -23,9 +23,9 @@ const TabContents = ({ selectedTab, query }: TabContentsProps) => {
   if (!data) return null;
 
   const list =
-    selectedTab === "post"
+    selectedTab === "posts"
       ? data.posts
-      : selectedTab === "comment"
+      : selectedTab === "comments"
         ? data.comments
         : data.favorites;
 
@@ -36,7 +36,7 @@ const TabContents = ({ selectedTab, query }: TabContentsProps) => {
   return (
     <section aria-label="탭 콘텐츠">
       <ul>
-        {selectedTab === "post" && (
+        {selectedTab === "posts" && (
           <>
             {data?.posts.map((post) => (
               <PostListItem post={post} linkState="list" key={post.postId} />
@@ -44,7 +44,7 @@ const TabContents = ({ selectedTab, query }: TabContentsProps) => {
           </>
         )}
 
-        {selectedTab === "comment" && (
+        {selectedTab === "comments" && (
           <>
             {data?.comments.map((comment) => (
               <CommentItem key={comment.commentId} data={comment} />
@@ -52,7 +52,7 @@ const TabContents = ({ selectedTab, query }: TabContentsProps) => {
           </>
         )}
 
-        {selectedTab === "favorite" && (
+        {selectedTab === "favorites" && (
           <>
             {data?.posts.map((post) => (
               <PostListItem post={post} linkState="list" key={post.postId} />

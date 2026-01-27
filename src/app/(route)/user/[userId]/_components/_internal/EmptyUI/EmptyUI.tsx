@@ -5,9 +5,9 @@ interface EmptyUIProps {
 }
 
 const EMPTY_LABEL_MAP: Record<UserProfileTabKey, string> = {
-  post: "작성한 게시글",
-  comment: "작성한 댓글",
-  favorite: "즐겨찾기한 게시글",
+  posts: "작성한 게시글",
+  comments: "작성한 댓글",
+  favorites: "즐겨찾기한 게시글",
 };
 
 const EmptyUI = ({ selectedTab }: EmptyUIProps) => {

@@ -17,7 +17,6 @@ const UserProfileView = () => {
 
   if (isError || !userId) return <NotFound />;
   const profileData = data?.result;
-  // console.log(profileData);
 
   return (
     <div className="h-base">
