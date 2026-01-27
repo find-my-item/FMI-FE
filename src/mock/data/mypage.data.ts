@@ -21,6 +21,31 @@ export const MOCK_MYPAGE_COMMENTS_ITEM = [
   },
 ];
 
+export const MOCK_USER_PROFILE = {
+  userId: 1,
+  nickname: "tester01",
+  profileImg: "test_list.JPG",
+  posts: [
+    {
+      postId: 1,
+      title: "강남역 2호선 개찰구 근처에서 에어팟(화이트) 분실",
+      summary: "12/26 오전 9시쯤 강남역 2호선...",
+      thumbnailUrl: "https://picsum.photos/400/300?random=1",
+      address: "서울특별시 강남구 강남대로 396",
+      itemStatus: "SEARCHING",
+      postType: "LOST",
+      category: "ELECTRONICS",
+      favoriteCount: 2,
+      favoriteStatus: false,
+      viewCount: null,
+      createdAt: "2025-12-26 10:22:58",
+      hot: false,
+      new: false,
+    },
+  ],
+  comments: [],
+};
+
 export const MOCK_MYPAGE_REPORTS = [
   {
     reportId: 1,
