@@ -3,7 +3,7 @@ import PostListItem from "./PostListItem";
 import { MOCK_POST_ITEM } from "@/mock/MOCK_DATA";
 
 const meta: Meta<typeof PostListItem> = {
-  title: "페이지/목록 페이지/PostListItem",
+  title: "공통 컴포넌트/PostListItem",
   component: PostListItem,
   tags: ["autodocs"],
   parameters: {
@@ -12,7 +12,9 @@ const meta: Meta<typeof PostListItem> = {
   decorators: [
     (Story) => (
       <div className="w-[430px]">
-        <Story />
+        <ul>
+          <Story />
+        </ul>
       </div>
     ),
   ],
