@@ -4,6 +4,7 @@ import { ChatRoomHeader, EmptyChatRoom, ChatRoomMain } from "./_components";
 import { InputChat } from "@/components/common";
 import { FormProvider, useForm } from "react-hook-form";
 import { use, useRef, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import useChatMessages from "@/api/fetch/ChatMessage/api/useChatMessages";
 import { sendChatSocketMessage, useChatSocket } from "@/api/fetch/chatRoom";
 import { useQueryClient, InfiniteData } from "@tanstack/react-query";
@@ -17,6 +18,7 @@ import {
   replaceMessageInCache,
   removeMessageFromCache,
 } from "@/utils/chatMessageCache/chatMessageCache";
+import useGetChatRoom from "@/api/fetch/chatRoom/api/useGetChatRoom";
 
 interface ChatFormValues {
   content: string;
@@ -39,31 +41,34 @@ const ChatRoom = ({ postId }: { postId: number }) => {
       content: "",
     },
   });
-  const { data: chatRoom } = useChatRoom({ postId });
+  const searchParams = useSearchParams();
+  const roomIdParam = searchParams.get("roomId");
+  const roomId = roomIdParam ? Number(roomIdParam) : 0;
+  const hasRoomId = !!roomId;
+
+  const { data: chatRoom } = useChatRoom({ postId, enabled: !hasRoomId });
+  const { data: chatRoomDetail } = useGetChatRoom({ roomId });
+  const chatRoomData = chatRoomDetail?.result || chatRoom?.result;
   const { data: userInfo } = useAppQuery<ApiBaseResponseType<UserInfoResponse>>(
     "auth",
     ["userInfo"],
     `/users/me`
   );
   const timeoutRefs = useRef<Map<number, NodeJS.Timeout>>(new Map());
-
   useEffect(() => {
     return () => {
       timeoutRefs.current.forEach((timeoutId) => clearTimeout(timeoutId));
       timeoutRefs.current.clear();
     };
   }, []);
-
-  const roomId = chatRoom?.result.roomId;
-  const isPostMode: "find" | "lost" =
-    chatRoom?.result.postInfo.postType === "FOUND" ? "find" : "lost";
+  const isPostMode: "find" | "lost" = chatRoomData?.postInfo.postType === "FOUND" ? "find" : "lost";
 
   const {
     data: chatMessages,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useChatMessages(roomId ?? 0, { enabled: !!roomId });
+  } = useChatMessages(roomId, { enabled: !!roomId });
 
   const initialFetchRef = useRef(false);
   useEffect(() => {
@@ -164,7 +169,7 @@ const ChatRoom = ({ postId }: { postId: number }) => {
 
   return (
     <div className="flex h-[calc(100dvh-48px)] flex-col overflow-hidden">
-      <ChatRoomHeader chatRoom={chatRoom?.result} />
+      <ChatRoomHeader chatRoom={chatRoomData} />
       <h1 className="sr-only">채팅 상세 페이지</h1>
 
       <div className="flex min-h-0 flex-1 flex-col">
@@ -197,6 +202,7 @@ const ChatRoom = ({ postId }: { postId: number }) => {
 
 const page = ({ params }: { params: Promise<{ postId: string }> }) => {
   const { postId } = use(params);
+
   return <ChatRoom postId={Number(postId)} />;
 };
 

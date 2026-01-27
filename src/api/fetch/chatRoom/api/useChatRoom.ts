@@ -1,9 +1,9 @@
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 import { ChatRoomResponse } from "../types/ChatRoomType";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, UseQueryOptions } from "@tanstack/react-query";
 import useAxios from "@/api/_base/axios/useAxios";
 
-const useChatRoom = ({ postId }: { postId: number }) => {
+const useChatRoom = ({ postId, enabled = true }: { postId: number; enabled?: boolean }) => {
   const axios = useAxios("auth");
   return useQuery<ApiBaseResponseType<ChatRoomResponse>, ChatRoomResponse>({
     queryKey: ["chatRoom", postId],
@@ -13,6 +13,7 @@ const useChatRoom = ({ postId }: { postId: number }) => {
       );
       return data;
     },
+    enabled,
     retry: 1,
     refetchOnWindowFocus: false,
     staleTime: 1000 * 60,

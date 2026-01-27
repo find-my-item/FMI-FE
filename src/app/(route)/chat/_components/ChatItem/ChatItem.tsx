@@ -17,7 +17,7 @@ const ChatItem = ({ chatRoom }: ChatItemProps) => {
 
   return (
     <Link
-      href={`/chat/${postInfo?.postId}`}
+      href={`/chat/${postInfo?.postId}?roomId=${chatRoom.roomId}`}
       aria-label={`${postInfo?.postId} 채팅방 링크`}
       className="flex min-h-[113px] w-full items-center gap-[12px] border-b border-divider-default px-4 py-6 transition-colors hover:bg-flatGray-25"
     >
