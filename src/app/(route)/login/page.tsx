@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { cn } from "@/utils";
-import { AuthLogoLink } from "@/components/domain";
 import { Button, Icon } from "@/components/common";
 import useSessionNotification from "./_hooks/useSessionNotification";
+import { LogoLink } from "./_components";
 
 const ButtonStyle = "w-full h-11 flex-center gap-1 rounded-[10px] text-body1-semibold ";
 
@@ -17,7 +17,7 @@ const page = () => {
 
   return (
     <div className="min-h-screen w-full gap-8 flex-col-center">
-      <AuthLogoLink />
+      <LogoLink />
 
       {/* button */}
       <div className="flex w-full flex-col gap-3 px-5">
