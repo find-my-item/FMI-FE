@@ -33,6 +33,7 @@ const PostDetailKakaoMap = () => {
         level={getMapLevelByRadius(rawData.radius)}
         showCircle
         radius={rawData.radius}
+        draggable
       >
         <div className="absolute bottom-9 left-1/2 z-10 flex w-[90%] -translate-x-1/2 gap-2 rounded-lg bg-white px-5 py-4 shadow-lg">
           <Icon name="Position" />

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Icon } from "@/components/common";
-import KakaoMap from "./KakaoMap";
+import { BaseKakaoMap } from "@/components/domain";
 
 type MapData = {
   address: string;
@@ -10,18 +10,19 @@ type MapData = {
   radius: number;
 };
 
-interface PostDetailMapProps {
+interface PostDetailPreviewKakaoMapProps {
   data: MapData;
 }
 
-const PostDetailMap = ({ data }: PostDetailMapProps) => {
+const PostDetailPreviewKakaoMap = ({ data }: PostDetailPreviewKakaoMapProps) => {
   const { address, latitude, longitude, postId, radius } = data;
 
   return (
     <div className="flex flex-col gap-[18px]">
       <div className="h-[147px] overflow-hidden rounded-md border border-divider-default">
-        <KakaoMap latitude={latitude} longitude={longitude} />
+        <BaseKakaoMap center={{ lat: latitude, lng: longitude }} level={7} showMarker />
       </div>
+
       <Link
         aria-label="지도에서 위치 자세히 보기"
         href={`/list/${postId}/map?lat=${latitude}&lng=${longitude}&address=${encodeURIComponent(address)}&radius=${radius}`}
@@ -47,4 +48,4 @@ const PostDetailMap = ({ data }: PostDetailMapProps) => {
   );
 };
 
-export default PostDetailMap;
+export default PostDetailPreviewKakaoMap;

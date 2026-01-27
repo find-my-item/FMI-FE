@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useState } from "react";
+import { CSSProperties, ReactNode, useState } from "react";
 import { Map, MapMarker, Circle, useKakaoLoader } from "react-kakao-maps-sdk";
 import { MapErrorState, MapLoadingState } from "@/components/domain/BaseKakaoMap/_internal";
 
@@ -12,7 +12,7 @@ interface BaseKakaoMapProps {
   /** map */
   level?: number;
   draggable?: boolean;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 
   /** marker */
   showMarker?: boolean;

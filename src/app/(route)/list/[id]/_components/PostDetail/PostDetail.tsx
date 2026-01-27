@@ -1,9 +1,9 @@
 import { cn } from "@/utils";
 import { LABELS } from "./LABELS";
-import { PostDetailBody, PostDetailMap } from "./_internal";
-import PostDetailHeader from "../PostDetailHeader/PostDetailHeader";
 import { NoticeDetailHeader } from "@/app/(route)/notice/_components";
 import type { PostDetailData } from "@/api/fetch/post/types/PostDetailType";
+import { PostDetailBody, PostDetailPreviewKakaoMap } from "./_internal";
+import PostDetailHeader from "../PostDetailHeader/PostDetailHeader";
 
 interface PostDetailProps {
   type: "find" | "lost" | "notice" | "customer";
@@ -36,17 +36,7 @@ const PostDetail = ({ type, data }: PostDetailProps) => {
       <section className={cn("flex flex-col px-5", isBoardType && "gap-9 py-[27px]")}>
         <PostDetailBody isBoardType={isBoardType} label={type} data={data} />
 
-        {isBoardType && (
-          <PostDetailMap
-            data={{
-              address: data.address,
-              latitude: data.latitude,
-              longitude: data.longitude,
-              postId: data.postId.toString(),
-              radius: data.radius,
-            }}
-          />
-        )}
+        {isBoardType && <PostDetailPreviewKakaoMap data={data} />}
       </section>
     </article>
   );
