@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import PostListItem from "./PostListItem";
-import { MOCK_POST_ITEM } from "@/mock/MOCK_DATA";
+import { MOCK_POST_ITEM } from "@/mock/data";
 import { getItemCategoryLabel, getItemStatusLabel } from "@/utils";
 
 jest.mock("next/image", () => (props: any) => {
@@ -13,6 +13,9 @@ jest.mock("@/components/common", () => ({
   Badge: ({ variant }: { variant: string }) => <span data-testid={`badge-${variant}`}>badge</span>,
   Chip: ({ label, type }: { label: string; type: string }) => (
     <span data-testid={`chip-${type}`}>{label}</span>
+  ),
+  ListItemImage: ({ src, alt, size }: any) => (
+    <img src={src} alt={alt} width={size} height={size} />
   ),
 }));
 
@@ -42,7 +45,7 @@ describe("PostListItem", () => {
     // const eyeIcon = screen.getByTestId("icon-Eye");
     // expect(eyeIcon.parentElement).toHaveTextContent(String(MOCK_POST_ITEM.viewCount));
 
-    const img = screen.getByAltText("아이템 이미지") as HTMLImageElement;
+    const img = screen.getByAltText("게시글 대표 이미지") as HTMLImageElement;
     expect(img).toBeInTheDocument();
     expect(img.getAttribute("src") || "").toContain("https://picsum.photos/400/300?random=1");
   });

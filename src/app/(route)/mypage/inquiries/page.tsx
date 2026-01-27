@@ -1,6 +1,6 @@
 import { DetailHeader } from "@/components/layout";
 import { MypageRequestFilter, MypageRequestList, MypageSearch } from "@/components/domain";
-import { MOCK_MYPAGE_INQUIRIES } from "@/mock/MOCK_DATA";
+import { MOCK_MYPAGE_INQUIRIES } from "@/mock/data";
 
 const page = () => {
   return (

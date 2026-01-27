@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import PostDetail from "./PostDetail";
-import { MOCK_POST_DEFAULT_DETAIL } from "@/mock/MOCK_DATA";
+import { MOCK_POST_DEFAULT_DETAIL } from "@/mock/data";
 import { ToastProvider } from "@/providers/ToastProviders";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 

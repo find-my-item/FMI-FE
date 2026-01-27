@@ -1,7 +1,5 @@
 import Link from "next/link";
-
-import Image from "next/image";
-import { Button } from "@/components/common";
+import { Button, ProfileAvatar } from "@/components/common";
 import ImageSection from "./_internal/ImageSection/ImageSection";
 
 type HeaderData = {
@@ -28,14 +26,7 @@ const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
         className="flex flex-col items-start justify-center gap-5 border-b border-flatGray-50 p-[20px]"
       >
         <div className="flex items-center justify-start gap-[14px]">
-          {/* TODO(지권): 대체 이미지 변경 필요 */}
-          <Image
-            src={profileUrl || "/test_list.JPG"}
-            alt={`${nickName} 프로필`}
-            width={40}
-            height={40}
-            className="h-10 w-10 rounded-full"
-          />
+          <ProfileAvatar size={40} src={profileUrl} alt={nickName} priority={true} />
 
           <div className="flex flex-col items-start justify-center">
             <p className="text-[16px]">{nickName}</p>

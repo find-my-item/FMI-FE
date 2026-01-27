@@ -321,11 +321,11 @@ module.exports = {
           },
           strong: {
             default: "#009e53",
-            hover: "#004c29",
-            focused: "#004c29",
+            hover: "#00753e",
+            focused: "#00753e",
             enteredSelected: "#009e53",
-            pressed: "#004c29",
-            disabled: "#0aa874",
+            pressed: "#00753e",
+            disabled: "#46c691",
           },
         },
         neutralInversed: {
@@ -468,18 +468,18 @@ module.exports = {
           },
           strongUseThis: {
             default: "#009e53",
-            hover: "#004c29",
-            focused: "#004c29",
+            hover: "#00753e",
+            focused: "#00753e",
             enteredSelected: "#00b76e",
-            pressed: "#004c29",
+            pressed: "#009e53",
             disabled: "#0aa874",
           },
           strong: {
             default: "#009e53",
-            hover: "#004c29",
-            focused: "#004c29",
+            hover: "#00753e",
+            focused: "#00753e",
             enteredSelected: "#009e53",
-            pressed: "#004c29",
+            pressed: "#00753e",
             disabled: "#0aa874",
           },
         },
@@ -569,6 +569,8 @@ module.exports = {
         bookmark: "#ffc642",
         favorite: "#ff6363",
         unselected: "#adadad",
+        announcement: "#ff9200",
+        report: "#ff6363",
       },
       bg: {
         layout_1depth: "#ffffff",
@@ -582,6 +584,7 @@ module.exports = {
         layout_2depth_2: "#f5f5f5",
         dimTransparent_2: "rgba(120, 120, 120, 0.1)",
         dimTransparent_3: "rgba(120, 120, 120, 0.1)",
+        layoutBrand: "#eefff6",
       },
       spacing: {
         padding: {

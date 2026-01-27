@@ -1,7 +1,6 @@
-import { Icon } from "@/components/common";
+import { Icon, ListItemImage } from "@/components/common";
 import { CommentCardType } from "@/types";
 import { formatDate } from "@/utils";
-import Image from "next/image";
 
 /**
  * @author suhyeon
@@ -50,15 +49,7 @@ const CommentCard = ({ data }: CommentCardProps) => {
         </span>
       </div>
 
-      {thumbnailUrl && (
-        <Image
-          src={thumbnailUrl}
-          alt=""
-          width={90}
-          height={90}
-          className="ml-1 h-[90px] w-[90px] object-cover"
-        />
-      )}
+      {thumbnailUrl && <ListItemImage src={thumbnailUrl} alt="댓글 이미지" size={90} />}
     </li>
   );
 };
