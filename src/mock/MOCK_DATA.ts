@@ -73,23 +73,48 @@ export const MOCK_MYPAGE_COMMENTS_ITEM = [
     commentId: 1,
     comment: "댓글 내용",
     mentionUser: "감자",
-    date: "2026.01.15",
+    createdAt: "2025-12-26T10:22:58",
     like: 34,
   },
   {
     commentId: 2,
     comment: "댓글 내용이 길어진다아ㅏ아아ㅏ아아아아아ㅏ아아아아아아ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ",
-    date: "2026.01.15",
+    createdAt: "2025-12-26T10:22:58",
     like: 34,
   },
   {
     commentId: 3,
     comment: "댓글 내용이 길어진다아ㅏ아아ㅏ아아아아아ㅏ아아아아아아ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ",
-    date: "2026.01.15",
+    createdAt: "2025-12-26T10:22:58",
     like: 34,
     thumbnailUrl: "https://picsum.photos/400/300?random=1",
   },
 ];
+
+export const MOCK_USER_PROFILE = {
+  userId: 1,
+  nickname: "tester01",
+  profileImg: "test_list.JPG",
+  posts: [
+    {
+      postId: 1,
+      title: "강남역 2호선 개찰구 근처에서 에어팟(화이트) 분실",
+      summary: "12/26 오전 9시쯤 강남역 2호선...",
+      thumbnailUrl: "https://picsum.photos/400/300?random=1",
+      address: "서울특별시 강남구 강남대로 396",
+      itemStatus: "SEARCHING",
+      postType: "LOST",
+      category: "ELECTRONICS",
+      favoriteCount: 2,
+      favoriteStatus: false,
+      viewCount: null,
+      createdAt: "2025-12-26 10:22:58",
+      hot: false,
+      new: false,
+    },
+  ],
+  comments: [],
+};
 
 export const MOCK_MYPAGE_REPORTS = [
   {

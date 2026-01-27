@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 
 const layout = ({ children }: { children: React.ReactNode }) => {
-  return <Suspense>{children}</Suspense>;
+  return <Suspense fallback="">{children}</Suspense>;
 };
 
 export default layout;

@@ -14,3 +14,4 @@ export { default as MypageRequestFilter } from "./MypageRequest/MypageRequestFil
 export { default as MypageRequestList } from "./MypageRequest/MypageRequestList/MypageRequestList";
 export { default as MypageRequestDetailContainer } from "./MypageRequest/MypageRequestDetailContainer/MypageRequestDetailContainer";
 export { default as MypageCommentItem } from "./MypageRequest/MypageCommentItem/MypageCommentItem";
+export { default as CommentCard } from "./CommentCard/CommentCard";
