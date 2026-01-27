@@ -7,15 +7,12 @@ import { EmailLoginForm } from "./_components";
 import { LoginFormType } from "./_types/LoginFormType";
 import { DetailHeader } from "@/components/layout";
 import { AuthLogoLink } from "@/components/domain";
-import useSessionNotification from "../_hooks/useSessionNotification";
 
 const page = () => {
   const methods = useForm<LoginFormType>({
     mode: "onChange",
     reValidateMode: "onChange",
   });
-
-  useSessionNotification();
 
   return (
     <>
