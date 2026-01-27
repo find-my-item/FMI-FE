@@ -4,6 +4,7 @@ import { PostListItem } from "@/components/domain";
 import { UserProfileTabKey } from "../../_types/USER_TABS";
 import { CommentItem } from "../_internal";
 import { UserProfileIdDataType } from "@/api/fetch/user";
+import EmptyUI from "../_internal/EmptyUI/EmptyUI";
 
 interface UserProfileQueryState {
   isLoading: boolean;
@@ -14,12 +15,6 @@ interface TabContentsProps {
   selectedTab: UserProfileTabKey;
   query: UserProfileQueryState;
 }
-
-const EMPTY_LABEL_MAP: Record<UserProfileTabKey, string> = {
-  post: "작성한 게시글",
-  comment: "작성한 댓글",
-  favorite: "즐겨찾기한 게시글",
-};
 
 const TabContents = ({ selectedTab, query }: TabContentsProps) => {
   const { isLoading, data } = query;
@@ -36,11 +31,7 @@ const TabContents = ({ selectedTab, query }: TabContentsProps) => {
         : data.favorites;
 
   if (list.length === 0) {
-    return (
-      <section aria-label="탭 콘텐츠">
-        <ContentEmptyUI label={EMPTY_LABEL_MAP[selectedTab]} />
-      </section>
-    );
+    return <EmptyUI selectedTab={selectedTab} />;
   }
 
   return (
@@ -75,18 +66,3 @@ const TabContents = ({ selectedTab, query }: TabContentsProps) => {
 };
 
 export default TabContents;
-
-// TODO(지권): 임시 Empty UI 컴포넌트
-
-interface ContentEmptyUIProps {
-  label: string;
-}
-
-const ContentEmptyUI = ({ label }: ContentEmptyUIProps) => {
-  return (
-    <li className="flex-center">
-      <span>{label}</span>
-      <p>데이터가 없습니다.</p>
-    </li>
-  );
-};
