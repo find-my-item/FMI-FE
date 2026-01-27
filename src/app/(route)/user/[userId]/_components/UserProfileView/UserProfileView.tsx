@@ -17,6 +17,7 @@ const UserProfileView = () => {
 
   if (isError || !userId) return <NotFound />;
   const profileData = data?.result;
+  console.log(profileData);
 
   return (
     <div className="h-base">
@@ -26,7 +27,7 @@ const UserProfileView = () => {
 
       <Tab tabs={USER_TABS} selected={tab} onValueChange={updateTabQuery} aria-label="프로필 탭" />
 
-      <TabContents selectedTab={tab} isLoading={isLoading} />
+      <TabContents selectedTab={tab} query={{ isLoading, data: profileData }} />
     </div>
   );
 };

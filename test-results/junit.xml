@@ -1,6 +1,0 @@
-<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="6.625932">
-<testsuite name="hello.spec.ts" timestamp="2026-01-08T16:48:07.720Z" hostname="Mobile Chrome (iPhone 12)" tests="1" failures="0" skipped="0" time="1.782" errors="0">
-<testcase name="서비스 소개 페이지 › 페이지 진입 시 주요 UI가 정상적으로 렌더링되고 CTA가 동작한다" classname="hello.spec.ts" time="1.782">
-</testcase>
-</testsuite>
-</testsuites>
