@@ -1,10 +1,9 @@
 "use client";
 
 import { PostListItem } from "@/components/domain";
-import { UserProfileTabKey } from "../../_types/USER_TABS";
-import { CommentItem } from "../_internal";
 import { UserProfileIdDataType } from "@/api/fetch/user";
-import EmptyUI from "../_internal/EmptyUI/EmptyUI";
+import { UserProfileTabKey } from "../../_types/USER_TABS";
+import { CommentItem, EmptyUI } from "../_internal";
 
 interface UserProfileQueryState {
   isLoading: boolean;
