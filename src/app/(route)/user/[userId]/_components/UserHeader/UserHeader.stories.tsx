@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import UserHeader from "./UserHeader";
+import { MOCK_USER_PROFILE } from "@/mock/MOCK_DATA";
 
 const meta: Meta<typeof UserHeader> = {
   title: "페이지/타인 페이지/UserHeader",
@@ -22,9 +23,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    data: {
-      nickname: "사용자 닉네임",
-      email: "asdf@gmail.com",
-    },
+    data: MOCK_USER_PROFILE,
   },
 };
