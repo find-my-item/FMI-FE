@@ -29,7 +29,7 @@ const page = () => {
           <Link href="/find-pw" className="p-3 text-neutral-normal-default">
             비밀번호 찾기
           </Link>
-          <hr className="h-4 self-center border-l border-gray-300" />
+          <hr className="h-4 w-px self-center bg-flatGray-50" />
           <Link href="/sign-up" className="p-3 text-brand-normal-default">
             회원가입
           </Link>
