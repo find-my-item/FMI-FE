@@ -32,7 +32,7 @@
     "cookies-next": "^6.1.1",
     "date-fns": "^4.1.0",
     "framer-motion": "^12.27.0",
-    "lodash": "^4.17.21",
+    "lodash": "^4.17.23",
     "lodash.throttle": "^4.1.1",
     "next": "^15.5.9",
     "react": "^19.1.4",
@@ -73,6 +73,7 @@
     "jest-junit": "^16.0.0",
     "jest-transformer-svg": "^2.1.0",
     "lint-staged": "^16.1.5",
+    "msw": "^2.12.7",
     "npm-run-all": "^4.1.5",
     "playwright": "^1.55.0",
     "postcss": "^8.5.6",
@@ -91,5 +92,10 @@
   "jest-junit": {
     "outputDirectory": "reports",
     "outputName": "junit.xml"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

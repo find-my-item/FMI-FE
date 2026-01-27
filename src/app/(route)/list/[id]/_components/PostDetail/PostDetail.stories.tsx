@@ -1,6 +1,10 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import PostDetail from "./PostDetail";
-import { MOCK_POST_DEFAULT_DETAIL } from "@/mock/MOCK_DATA";
+import { MOCK_POST_DEFAULT_DETAIL } from "@/mock/data";
+import { ToastProvider } from "@/providers/ToastProviders";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const meta: Meta<typeof PostDetail> = {
   title: "페이지/상세 페이지/PostDetail",
@@ -8,9 +12,13 @@ const meta: Meta<typeof PostDetail> = {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <div className="w-[400px] border border-gray-200">
-        <Story />
-      </div>
+      <ToastProvider>
+        <QueryClientProvider client={queryClient}>
+          <div className="w-[400px] border border-gray-200">
+            <Story />
+          </div>
+        </QueryClientProvider>
+      </ToastProvider>
     ),
   ],
   parameters: {

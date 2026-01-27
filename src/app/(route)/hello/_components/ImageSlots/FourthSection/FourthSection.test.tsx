@@ -3,7 +3,10 @@ import FourthSection from "./FourthSection";
 
 jest.mock("next/image", () => ({
   __esModule: true,
-  default: (props: any) => <img {...props} />,
+  default: (props: any) => {
+    const { priority, fill, sizes, loader, blurDataURL, placeholder, ...rest } = props;
+    return <img {...rest} />;
+  },
 }));
 
 const mockUseInView = jest.fn();

@@ -2,20 +2,22 @@
 
 import Link from "next/link";
 import { cn } from "@/utils";
-import { AuthLogoLink } from "@/components/domain";
 import { Button, Icon } from "@/components/common";
+import useSessionNotification from "./_hooks/useSessionNotification";
+import { LogoLink } from "./_components";
 
 const ButtonStyle = "w-full h-11 flex-center gap-1 rounded-[10px] text-body1-semibold ";
 
 const REST_API_KEY = process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY;
 const REDIRECT_URI = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI;
+const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
 const page = () => {
-  const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+  const { reason } = useSessionNotification();
 
   return (
     <div className="min-h-screen w-full gap-8 flex-col-center">
-      <AuthLogoLink />
+      <LogoLink />
 
       {/* button */}
       <div className="flex w-full flex-col gap-3 px-5">
@@ -34,7 +36,9 @@ const page = () => {
         </Button>
         <Button
           as={Link}
-          href={"/email-login"}
+          href={
+            reason === "session-expired" ? "/login/email?reason=session-expired" : "/email-login"
+          }
           ignoreBase
           className={cn(ButtonStyle, "text-white bg-fill-brand-normal-default")}
           aria-label="로그인 버튼"
