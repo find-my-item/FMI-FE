@@ -1,8 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
-import { Badge, Chip, Icon } from "@/components/common";
-import { PostItem } from "@/api/fetch/post";
+import { Badge, Chip, Icon, ListItemImage } from "@/components/common";
 import { formatDate, getItemCategoryLabel, getItemStatusLabel } from "@/utils";
+import { PostItem } from "@/api/fetch/post";
 
 interface PostListItemProps {
   post: PostItem;
@@ -71,13 +70,7 @@ const PostListItem = ({ post, linkState = "list" }: PostListItemProps) => {
         </div>
 
         {post.thumbnailUrl && (
-          <Image
-            src={post.thumbnailUrl}
-            alt="아이템 이미지"
-            width={90}
-            height={90}
-            className="h-[90px] w-[90px] rounded-[10px]"
-          />
+          <ListItemImage src={post.thumbnailUrl} alt="게시글 대표 이미지" size={90} />
         )}
       </Link>
     </li>

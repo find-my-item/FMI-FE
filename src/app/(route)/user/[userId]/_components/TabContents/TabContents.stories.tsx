@@ -10,6 +10,7 @@ const meta: Meta<typeof TabContents> = {
   },
   args: {
     selectedTab: "post",
+    isLoading: false,
   },
   decorators: [
     (Story) => (
@@ -26,17 +27,20 @@ type Story = StoryObj<typeof meta>;
 export const Post: Story = {
   args: {
     selectedTab: "post",
+    isLoading: false,
   },
 };
 
 export const Comment: Story = {
   args: {
     selectedTab: "comment",
+    isLoading: false,
   },
 };
 
 export const Favorite: Story = {
   args: {
     selectedTab: "favorite",
+    isLoading: false,
   },
 };

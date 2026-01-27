@@ -1,15 +1,19 @@
 "use client";
 
 import { PostListItem } from "@/components/domain";
-import { USER_TABS } from "../../_types/USER_TABS";
+import { MOCK_POST_ITEM } from "@/mock/data";
+import { UserProfileTabKey } from "../../_types/USER_TABS";
 import { CommentItem } from "../_internal";
-import { MOCK_POST_ITEM } from "@/mock/MOCK_DATA";
 
 interface TabContentsProps {
-  selectedTab: (typeof USER_TABS)[number]["key"];
+  selectedTab: UserProfileTabKey;
+  isLoading: boolean;
 }
 
-const TabContents = ({ selectedTab }: TabContentsProps) => {
+const TabContents = ({ selectedTab, isLoading }: TabContentsProps) => {
+  // TODO(지권): 로딩, 에러 상태 처리 필요
+  if (isLoading) return "로딩 중....";
+
   return (
     <section aria-label="탭 콘텐츠">
       <ul>

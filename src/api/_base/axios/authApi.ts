@@ -13,15 +13,16 @@ authApi.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
+    const isAuthError = [401, 403].includes(error.response?.status);
+    const isAlreadyRetried = originalRequest._retry;
+    const isRefreshRequest = originalRequest.url === "/auth/refresh";
+
     // 서버환경에서 실행했을때 에러라는 것을 알려줌
     if (typeof window === "undefined") {
       return Promise.reject(error);
     }
 
-    if (
-      (error.response?.status === 401 || error.response?.status === 403) &&
-      !originalRequest._retry
-    ) {
+    if (isAuthError && !isAlreadyRetried && !isRefreshRequest) {
       originalRequest._retry = true;
 
       try {
@@ -34,8 +35,8 @@ authApi.interceptors.response.use(
 
         return authApi(originalRequest);
       } catch (refreshError) {
-        alert("다시 로그인 해주세요.");
-        window.location.replace("/login");
+        // 로그아웃 안내 토스트는 로그인 페이지에서 보여줌
+        window.location.replace("/login?reason=session-expired");
 
         return Promise.reject(refreshError);
       }

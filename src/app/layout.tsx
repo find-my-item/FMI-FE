@@ -7,6 +7,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import localFont from "next/font/local";
 import Script from "next/script";
 import { Metadata } from "next";
+import MSWProvider from "@/providers/MSWProvider";
 
 const pretendard = localFont({
   src: "../../public/fonts/PretendardVariable.woff2",
@@ -52,6 +53,7 @@ export default function RootLayout({
       <body className="mx-auto max-w-[390px] border-2 flex-col-center">
         <Providers>
           <ToastProvider>
+            <MSWProvider />
             <Header />
             <main className="w-full flex-1">{children}</main>
             <Footer />
