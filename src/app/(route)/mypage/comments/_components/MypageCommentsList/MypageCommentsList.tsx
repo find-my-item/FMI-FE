@@ -1,4 +1,4 @@
-import { MOCK_MYPAGE_COMMENTS_ITEM } from "@/mock/MOCK_DATA";
+import { MOCK_MYPAGE_COMMENTS_ITEM } from "@/mock/data";
 import { CommentCard, MypageEmptyUI } from "@/components/domain";
 
 const MypageCommentsList = () => {

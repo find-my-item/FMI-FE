@@ -44,7 +44,7 @@ const ImageSection = ({ imageUrls }: ImageSectionProps) => {
           }}
           onClick={handleOpenIfTap}
         >
-          {imageUrls.map((url, index) => (
+          {imageUrls?.map((url, index) => (
             <SwiperSlide key={index}>
               <Image
                 src={url}

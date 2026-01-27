@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { UserProfileView } from "..";
-import { MOCK_USER_PROFILE } from "@/mock/MOCK_DATA";
+import { MOCK_USER_PROFILE } from "@/mock/data";
 
 const mockUseParams = jest.fn();
 const mockUseGetUserProfileById = jest.fn();

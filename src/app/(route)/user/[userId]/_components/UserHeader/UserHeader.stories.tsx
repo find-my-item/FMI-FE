@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import UserHeader from "./UserHeader";
-import { MOCK_USER_PROFILE } from "@/mock/MOCK_DATA";
+import { MOCK_USER_PROFILE } from "@/mock/data";
 
 const meta: Meta<typeof UserHeader> = {
   title: "페이지/타인 페이지/UserHeader",

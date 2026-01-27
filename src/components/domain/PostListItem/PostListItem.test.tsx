@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import PostListItem from "./PostListItem";
-import { MOCK_POST_ITEM } from "@/mock/MOCK_DATA";
+import { MOCK_POST_ITEM } from "@/mock/data";
 import { getItemCategoryLabel, getItemStatusLabel } from "@/utils";
 
 jest.mock("next/image", () => (props: any) => {

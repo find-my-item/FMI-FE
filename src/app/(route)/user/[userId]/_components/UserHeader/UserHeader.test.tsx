@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import UserHeader from "./UserHeader";
-import { MOCK_USER_PROFILE } from "@/mock/MOCK_DATA";
+import { MOCK_USER_PROFILE } from "@/mock/data";
 
 jest.mock("@/components/common", () => ({
   Icon: ({ name, size, className }: any) => (

@@ -1,7 +1,7 @@
 "use client";
 
 import { PostListItem } from "@/components/domain";
-import { MOCK_POST_ITEM } from "@/mock/MOCK_DATA";
+import { MOCK_POST_ITEM } from "@/mock/data";
 import { UserProfileTabKey } from "../../_types/USER_TABS";
 import { CommentItem } from "../_internal";
 
