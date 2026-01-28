@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Radius } from "@/types";
-import { BottomSheet, KakaoMap } from "../_internal";
+import { BottomSheet, PostWriteKakaoMap } from "../_internal";
 
 interface LocationRangeSectionProps {
   address: string | null;
@@ -18,7 +18,7 @@ const LocationRangeSection = ({ address, fullAddress }: LocationRangeSectionProp
   return (
     <>
       <div className="h-[calc(100vh-350px)] w-full">
-        <KakaoMap lat={lat} lng={lng} radius={radius} />
+        <PostWriteKakaoMap lat={lat} lng={lng} radius={radius} />
       </div>
 
       <BottomSheet

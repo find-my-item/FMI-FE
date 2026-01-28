@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import TabContents from "./TabContents";
+import { MOCK_USER_PROFILE_DATA } from "@/mock/data";
 
 const meta: Meta<typeof TabContents> = {
   title: "페이지/타인 페이지/TabContents",
@@ -9,8 +10,11 @@ const meta: Meta<typeof TabContents> = {
     layout: "centered",
   },
   args: {
-    selectedTab: "post",
-    isLoading: false,
+    selectedTab: "posts",
+    query: {
+      isLoading: false,
+      data: undefined,
+    },
   },
   decorators: [
     (Story) => (
@@ -26,21 +30,30 @@ type Story = StoryObj<typeof meta>;
 
 export const Post: Story = {
   args: {
-    selectedTab: "post",
-    isLoading: false,
+    selectedTab: "posts",
+    query: {
+      isLoading: false,
+      data: MOCK_USER_PROFILE_DATA,
+    },
   },
 };
 
 export const Comment: Story = {
   args: {
-    selectedTab: "comment",
-    isLoading: false,
+    selectedTab: "comments",
+    query: {
+      isLoading: false,
+      data: MOCK_USER_PROFILE_DATA,
+    },
   },
 };
 
 export const Favorite: Story = {
   args: {
-    selectedTab: "favorite",
-    isLoading: false,
+    selectedTab: "favorites",
+    query: {
+      isLoading: false,
+      data: MOCK_USER_PROFILE_DATA,
+    },
   },
 };

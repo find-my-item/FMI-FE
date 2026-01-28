@@ -1,16 +1,17 @@
 import { Suspense } from "react";
 import { DetailHeader } from "@/components/layout";
-import MapContent from "./_components/MapContent/MapContent";
+import { PostDetailKakaoMap } from "./_components";
 
 const page = () => {
   return (
-    <section className="h-base">
+    <section className="flex h-screen flex-col">
       <DetailHeader title="분실/습득 위치" />
-      <h1 className="sr-only">분실/습득 위치 지도</h1>
 
-      <Suspense fallback={null}>
-        <MapContent />
-      </Suspense>
+      <div className="min-h-0 flex-1">
+        <Suspense fallback={null}>
+          <PostDetailKakaoMap />
+        </Suspense>
+      </div>
     </section>
   );
 };

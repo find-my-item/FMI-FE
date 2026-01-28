@@ -9,6 +9,7 @@ export interface UserProfileIdDataType {
   profileImg: string;
   posts: Array<UserPostsDataType>;
   comments: Array<UserCommentsDataType>;
+  favorites: Array<UserPostsDataType>;
 }
 
 export interface UserPostsDataType {

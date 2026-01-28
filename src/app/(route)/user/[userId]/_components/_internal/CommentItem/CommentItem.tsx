@@ -1,17 +1,47 @@
 import Link from "next/link";
 import { Icon } from "@/components/common";
+import { UserCommentsDataType } from "@/api/fetch/user";
 
-interface CommentItemProps {
-  data: {
-    postId: number;
-    comment: string;
-    date: string;
-    likes: number;
-  };
+// TODO(지권): 임시 타입 변환 로직
+interface NormalizedCommentItem {
+  postId: number;
+  comment: string;
+  date: string;
+  likes: number;
 }
 
+const normalizeCommentData = (
+  data: CommentItemType | UserCommentsDataType
+): NormalizedCommentItem => {
+  if ("comment" in data) {
+    return {
+      postId: data.postId,
+      comment: data.comment,
+      date: data.date,
+      likes: data.likes,
+    };
+  }
+
+  return {
+    postId: data.postId,
+    comment: data.content,
+    date: data.createdAt,
+    likes: 0,
+  };
+};
+
+interface CommentItemType {
+  postId: number;
+  comment: string;
+  date: string;
+  likes: number;
+}
+
+interface CommentItemProps {
+  data: CommentItemType | UserCommentsDataType;
+}
 const CommentItem = ({ data }: CommentItemProps) => {
-  const { postId, comment, date, likes } = data;
+  const { postId, comment, date, likes } = normalizeCommentData(data);
 
   return (
     <li className="border-b border-divider-default px-5 py-[30px] transition-colors hover:bg-flatGray-25">
