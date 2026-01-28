@@ -17,6 +17,10 @@ const savedSubscriptions = new Map<string, Set<MessageHandler>>();
 // 재연결 시도 중인지 추적 (중복 재연결 방지)
 let isReconnecting = false;
 
+// 재연결 쓰로틀: 마지막 시도 이후 이 시간(ms) 이내면 재연결 생략
+const RECONNECT_THROTTLE_MS = 1000;
+let lastReconnectAttempt = 0;
+
 // 토큰 재발급 이벤트 핸들러 (정리용)
 let tokenRefreshHandler: (() => void) | null = null;
 
@@ -35,9 +39,9 @@ const reconnectChatSocket = async () => {
     subscriptions.forEach((sub) => sub.unsubscribe());
     subscriptions.clear();
 
-    // 클라이언트 비활성화
+    // 클라이언트 비활성화 완료까지 대기 후 재연결 (타이머 대신 Promise 활용)
     if (client) {
-      client.deactivate();
+      await client.deactivate();
       client = null;
     }
 
@@ -51,11 +55,8 @@ const reconnectChatSocket = async () => {
       console.warn("[STOMP] Token refresh failed, reconnecting anyway:", refreshError);
     }
 
-    // 잠시 후 재연결
-    setTimeout(() => {
-      connectChatSocket();
-      isReconnecting = false;
-    }, 100);
+    connectChatSocket();
+    isReconnecting = false;
   } catch (error) {
     console.error("[STOMP] Reconnection error:", error);
     isReconnecting = false;
@@ -118,14 +119,12 @@ export const connectChatSocket = () => {
     onDisconnect: () => {
       console.log("[STOMP] disconnected");
       // 🔑 상황 1 해결: 연결이 끊겼을 때 재연결 시도
-      // 토큰 만료로 인한 끊김일 수 있으므로 재연결 시도
+      // 타임스탬프 기반 쓰로틀로 연속 재연결 방지 (타이머 대신)
       if (client && !client.connected && handlers.size > 0) {
-        // 구독이 있는 경우에만 재연결 (의도적인 disconnect가 아닌 경우)
-        setTimeout(() => {
-          if (client && !client.connected && handlers.size > 0) {
-            reconnectChatSocket();
-          }
-        }, 1000);
+        const now = Date.now();
+        if (now - lastReconnectAttempt < RECONNECT_THROTTLE_MS) return;
+        lastReconnectAttempt = now;
+        reconnectChatSocket();
       }
     },
 
