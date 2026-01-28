@@ -5,8 +5,9 @@ import { Swiper as SwiperType } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Mousewheel } from "swiper/modules";
 import { cn } from "@/utils";
-import { Filter } from "@/components/common";
+import { Button, Filter } from "@/components/common";
 import useMakeDate from "./_hooks/useMakeDate";
+import PopupLayout from "../PopupLayout/PopupLayout";
 
 const DateWheel = ({
   dateArray,
@@ -70,46 +71,61 @@ const DateWheel = ({
   );
 };
 
-const DateRangeSheet = () => {
+interface DateRangeBottomSheetProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const DateRangeBottomSheet = ({ isOpen, onClose }: DateRangeBottomSheetProps) => {
   const { years, months, days, selectDate, handleDateChange } = useMakeDate();
 
   return (
-    <div className="w-full gap-8 flex-col-center">
-      <h2 className="text-h2-medium">기간설정</h2>
+    <PopupLayout
+      isOpen={isOpen}
+      onClose={onClose}
+      className="w-full gap-12 px-5 py-10 flex-col-center"
+    >
+      <div className="w-full gap-8 flex-col-center">
+        <h2 className="text-h2-medium">기간설정</h2>
 
-      {/* 상단 탭 버튼 */}
-      <div className="flex gap-[14px]">
-        <Filter ariaLabel="시작일" onSelected={true} className="!px-10 !py-2">
-          시작일
-        </Filter>
-        <Filter ariaLabel="종료일" onSelected={false} className="!px-10 !py-2">
-          종료일
-        </Filter>
+        {/* 상단 탭 버튼 */}
+        <div className="flex gap-[14px]">
+          <Filter ariaLabel="시작일" onSelected={true} className="!px-10 !py-2">
+            시작일
+          </Filter>
+          <Filter ariaLabel="종료일" onSelected={false} className="!px-10 !py-2">
+            종료일
+          </Filter>
+        </div>
+
+        <div className="flex w-full items-center justify-between px-4">
+          <DateWheel
+            dateArray={years}
+            selected={selectDate.year}
+            onSelected={(val) => handleDateChange("year", val)}
+          />
+
+          <DateWheel
+            dateArray={months}
+            selected={selectDate.month}
+            onSelected={(val) => handleDateChange("month", val)}
+            label="월"
+          />
+
+          <DateWheel
+            dateArray={days}
+            selected={selectDate.day}
+            onSelected={(val) => handleDateChange("day", val)}
+            label="일"
+          />
+        </div>
       </div>
 
-      <div className="flex w-full items-center justify-between px-4">
-        <DateWheel
-          dateArray={years}
-          selected={selectDate.year}
-          onSelected={(val) => handleDateChange("year", val)}
-        />
-
-        <DateWheel
-          dateArray={months}
-          selected={selectDate.month}
-          onSelected={(val) => handleDateChange("month", val)}
-          label="월"
-        />
-
-        <DateWheel
-          dateArray={days}
-          selected={selectDate.day}
-          onSelected={(val) => handleDateChange("day", val)}
-          label="일"
-        />
-      </div>
-    </div>
+      <Button onClick={onClose} size="big" className="h-11 w-full">
+        적용하기
+      </Button>
+    </PopupLayout>
   );
 };
 
-export default DateRangeSheet;
+export default DateRangeBottomSheet;

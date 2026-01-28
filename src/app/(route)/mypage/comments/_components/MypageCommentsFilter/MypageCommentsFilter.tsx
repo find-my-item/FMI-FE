@@ -1,9 +1,9 @@
 "use client";
 
 import { Filter, KebabMenu } from "@/components/common";
-import MypageCommentsBottomSheet from "../MypageCommentsBottomSheet/MypageCommentsBottomSheet";
 import { useState } from "react";
 import { MYPAGE_COMMENTS_KEBAB_OPTIONS } from "../../_constant/MYPAGE_COMMENTS_KEBAB_OPTIONS";
+import DateRangeBottomSheet from "@/components/domain/DateRangeSheet/DateRangeSheet";
 
 const MypageCommentsFilter = () => {
   const [isBottomSheet, setIsBottomSheet] = useState(false);
@@ -48,7 +48,7 @@ const MypageCommentsFilter = () => {
         )}
       </div>
 
-      <MypageCommentsBottomSheet onClose={() => setIsBottomSheet(false)} isOpen={isBottomSheet} />
+      <DateRangeBottomSheet onClose={() => setIsBottomSheet(false)} isOpen={isBottomSheet} />
     </section>
   );
 };
