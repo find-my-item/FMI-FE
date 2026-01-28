@@ -8,9 +8,10 @@ interface ChatBoxProps {
   chat: ChatMessage;
   nextSender?: "me" | "other";
   lastChat?: boolean;
+  opponentNickname?: string;
 }
 
-const ChatBox = ({ chat, nextSender, lastChat }: ChatBoxProps) => {
+const ChatBox = ({ chat, nextSender, lastChat, opponentNickname }: ChatBoxProps) => {
   const { content, createdAt, imageUrls, messageType, senderId } = chat;
   const { data: userInfo } = useGetUserData();
 
@@ -35,7 +36,12 @@ const ChatBox = ({ chat, nextSender, lastChat }: ChatBoxProps) => {
         </p>
       )}
       {messageType === "IMAGE" && (
-        <ChatImageBox images={imageUrls} createdAt={createdAt} bubbleOrder={style.bubbleOrder} />
+        <ChatImageBox
+          images={imageUrls}
+          createdAt={createdAt}
+          bubbleOrder={style.bubbleOrder}
+          opponentNickname={opponentNickname}
+        />
       )}
     </div>
   );

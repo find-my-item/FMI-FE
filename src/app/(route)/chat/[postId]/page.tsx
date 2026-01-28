@@ -64,6 +64,7 @@ const ChatRoom = ({ params }: { params: Promise<{ postId: string }> }) => {
             fetchNextPage={fetchNextPage}
             hasNextPage={hasNextPage}
             isFetchingNextPage={isFetchingNextPage}
+            opponentNickname={chatRoomData?.opponentUser.nickname}
           />
         ) : (
           <EmptyChatRoom postMode={postMode} />

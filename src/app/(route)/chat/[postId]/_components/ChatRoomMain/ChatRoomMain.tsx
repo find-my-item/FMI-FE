@@ -18,6 +18,7 @@ interface ChatRoomMainProps {
   fetchNextPage: () => void;
   hasNextPage: boolean | undefined;
   isFetchingNextPage: boolean;
+  opponentNickname?: string;
 }
 
 const ChatRoomMain = ({
@@ -25,6 +26,7 @@ const ChatRoomMain = ({
   fetchNextPage,
   hasNextPage,
   isFetchingNextPage,
+  opponentNickname,
 }: ChatRoomMainProps) => {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const scrollHeightRef = useRef<number>(0);
@@ -68,7 +70,12 @@ const ChatRoomMain = ({
       {chatMessagesWithMetadata.map(({ chat, isNewDate, nextSender, lastChat }) => (
         <div key={chat.messageId}>
           {isNewDate && <ChatDateDivider createdAt={chat.createdAt} />}
-          <ChatBox chat={chat} nextSender={nextSender} lastChat={lastChat} />
+          <ChatBox
+            chat={chat}
+            nextSender={nextSender}
+            lastChat={lastChat}
+            opponentNickname={opponentNickname}
+          />
         </div>
       ))}
     </div>

@@ -10,10 +10,12 @@ const ChatImageBox = ({
   images,
   createdAt,
   bubbleOrder,
+  opponentNickname,
 }: {
   images?: string[];
   createdAt: string;
   bubbleOrder: string;
+  opponentNickname?: string;
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -27,6 +29,8 @@ const ChatImageBox = ({
     setSelectedImageIndex(index);
     setIsModalOpen(true);
   };
+
+  const uploader = bubbleOrder === "order-1" ? opponentNickname || "상대방" : "나";
 
   return (
     <>
@@ -63,7 +67,7 @@ const ChatImageBox = ({
         onClose={() => setIsModalOpen(false)}
         imageInfo={{
           createdAt: createdAt,
-          uploader: "나",
+          uploader: uploader,
         }}
       />
     </>
