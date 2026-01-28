@@ -1,4 +1,4 @@
-import { ChatRoom } from "@/api/fetch/chatRoom/types/ChatListType";
+import { ChatRoom } from "@/api/fetch/chatRoom/types/ChatRoomType";
 
 export const MOCK_CHAT_ITEM = {
   roomId: 1,
