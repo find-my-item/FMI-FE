@@ -13,7 +13,7 @@ interface UseChatMessageSubmitParams {
   reset: UseFormReset<{ content: string }>;
 }
 
-export const useChatMessageSubmit = ({ roomId, userId, reset }: UseChatMessageSubmitParams) => {
+const useChatMessageSubmit = ({ roomId, userId, reset }: UseChatMessageSubmitParams) => {
   const queryClient = useQueryClient();
 
   const onSubmit = ({ content }: { content: string }) => {
@@ -43,3 +43,5 @@ export const useChatMessageSubmit = ({ roomId, userId, reset }: UseChatMessageSu
 
   return { onSubmit };
 };
+
+export default useChatMessageSubmit;

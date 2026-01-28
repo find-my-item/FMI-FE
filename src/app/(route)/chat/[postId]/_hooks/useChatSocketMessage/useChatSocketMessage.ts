@@ -7,11 +7,11 @@ import {
   addMessageToCache,
   replaceMessageInCache,
 } from "@/utils/chatMessageCache/chatMessageCache";
-import { transformWebSocketMessage } from "../_utils/transformWebSocketMessage";
-import { findOptimisticMessage } from "../_utils/findOptimisticMessage";
+import { transformWebSocketMessage } from "../../_utils/transformWebSocketMessage";
+import { findOptimisticMessage } from "../../_utils/findOptimisticMessage";
 import { ChatMessage } from "@/api/fetch/ChatMessage/types/ChatMessageTypes";
 
-export const useChatSocketMessage = (roomId: number) => {
+const useChatSocketMessage = (roomId: number) => {
   const queryClient = useQueryClient();
 
   useChatSocket({
@@ -44,3 +44,5 @@ export const useChatSocketMessage = (roomId: number) => {
     },
   });
 };
+
+export default useChatSocketMessage;

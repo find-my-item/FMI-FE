@@ -5,10 +5,12 @@ import { InputChat } from "@/components/common";
 import { FormProvider, useForm } from "react-hook-form";
 import { use } from "react";
 import useChatMessages from "@/api/fetch/ChatMessage/api/useChatMessages";
-import { useChatRoomData } from "./_hooks/useChatRoomData";
-import { useInitialChatPagination } from "./_hooks/useInitialChatPagination";
-import { useChatSocketMessage } from "./_hooks/useChatSocketMessage";
-import { useChatMessageSubmit } from "./_hooks/useChatMessageSubmit";
+import {
+  useChatRoomData,
+  useInitialChatPagination,
+  useChatSocketMessage,
+  useChatMessageSubmit,
+} from "./_hooks";
 
 interface ChatFormValues {
   content: string;

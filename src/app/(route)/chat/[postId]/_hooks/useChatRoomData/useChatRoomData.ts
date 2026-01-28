@@ -2,10 +2,10 @@ import { useSearchParams } from "next/navigation";
 import useChatRoom from "@/api/fetch/chatRoom/api/useChatRoom";
 import useGetChatRoom from "@/api/fetch/chatRoom/api/useGetChatRoom";
 import { useGetUserData } from "@/api/fetch/user";
-import { getPostMode } from "../_utils/getPostMode";
+import { getPostMode } from "../../_utils/getPostMode";
 import { ChatRoomResponse } from "@/api/fetch/chatRoom/types/ChatRoomType";
 
-export const useChatRoomData = (postId: number) => {
+const useChatRoomData = (postId: number) => {
   const searchParams = useSearchParams();
   const roomIdParam = searchParams.get("roomId");
   const roomId = roomIdParam ? Number(roomIdParam) : 0;
@@ -25,3 +25,5 @@ export const useChatRoomData = (postId: number) => {
     postMode,
   };
 };
+
+export default useChatRoomData;

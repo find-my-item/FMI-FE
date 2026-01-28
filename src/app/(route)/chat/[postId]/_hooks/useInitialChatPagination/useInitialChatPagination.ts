@@ -8,7 +8,7 @@ interface UseInitialChatPaginationParams {
   fetchNextPage: () => void;
 }
 
-export const useInitialChatPagination = ({
+const useInitialChatPagination = ({
   chatMessages,
   hasNextPage,
   isFetchingNextPage,
@@ -29,3 +29,5 @@ export const useInitialChatPagination = ({
     }
   }, [chatMessages, hasNextPage, isFetchingNextPage, fetchNextPage]);
 };
+
+export default useInitialChatPagination;
