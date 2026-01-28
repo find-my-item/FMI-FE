@@ -7,8 +7,8 @@ jest.mock("@/utils", () => ({
 }));
 
 describe("ChatChip", () => {
-  it("postMode가 find일 때 습득물 텍스트와 올바른 스타일이 적용됩니다", () => {
-    render(<ChatChip postMode="find" />);
+  it("postMode가 FOUND일 때 습득물 텍스트와 올바른 스타일이 적용됩니다", () => {
+    render(<ChatChip postMode="FOUND" />);
 
     const chip = screen.getByRole("note");
     expect(chip).toHaveTextContent("습득물");
@@ -16,8 +16,8 @@ describe("ChatChip", () => {
     expect(chip).toHaveClass("bg-fill-accent-foundItem");
   });
 
-  it("postMode가 lost일 때 분실물 텍스트와 올바른 스타일이 적용됩니다", () => {
-    render(<ChatChip postMode="lost" />);
+  it("postMode가 LOST일 때 분실물 텍스트와 올바른 스타일이 적용됩니다", () => {
+    render(<ChatChip postMode="LOST" />);
 
     const chip = screen.getByRole("note");
     expect(chip).toHaveTextContent("분실물");
@@ -26,7 +26,7 @@ describe("ChatChip", () => {
   });
 
   it("기본 클래스명들이 올바르게 적용됩니다", () => {
-    render(<ChatChip postMode="find" />);
+    render(<ChatChip postMode="FOUND" />);
 
     const chip = screen.getByRole("note");
     expect(chip).toHaveClass("h-[18px]");
@@ -38,14 +38,14 @@ describe("ChatChip", () => {
   });
 
   it("role이 note로 설정됩니다", () => {
-    render(<ChatChip postMode="find" />);
+    render(<ChatChip postMode="FOUND" />);
 
     const chip = screen.getByRole("note");
     expect(chip).toBeInTheDocument();
   });
 
-  it("find 모드일 때 모든 속성이 올바르게 렌더링됩니다", () => {
-    render(<ChatChip postMode="find" />);
+  it("FOUND 모드일 때 모든 속성이 올바르게 렌더링됩니다", () => {
+    render(<ChatChip postMode="FOUND" />);
 
     const chip = screen.getByRole("note");
     expect(chip).toHaveTextContent("습득물");
@@ -54,8 +54,8 @@ describe("ChatChip", () => {
     );
   });
 
-  it("lost 모드일 때 모든 속성이 올바르게 렌더링됩니다", () => {
-    render(<ChatChip postMode="lost" />);
+  it("LOST 모드일 때 모든 속성이 올바르게 렌더링됩니다", () => {
+    render(<ChatChip postMode="LOST" />);
 
     const chip = screen.getByRole("note");
     expect(chip).toHaveTextContent("분실물");
