@@ -4,6 +4,7 @@ import { downloadImage } from "../_utils/imageViewer";
 import type { Swiper as SwiperType } from "swiper";
 import { RefObject } from "react";
 import { ImageInfo } from "../_types/ImageInfo";
+import formatDateWithTime from "./formatDateWithTime";
 
 interface ImageViewerHeaderProps {
   onClose: () => void;
@@ -42,7 +43,7 @@ const ImageViewerHeader = ({
             {imageInfo.uploader}
           </span>
           <time className="text-caption1-medium text-layout-body-default">
-            {imageInfo.createdAt}
+            {formatDateWithTime(imageInfo.createdAt)}
           </time>
         </div>
       )}
