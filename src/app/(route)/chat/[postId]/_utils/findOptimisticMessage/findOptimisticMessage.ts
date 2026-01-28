@@ -1,7 +1,7 @@
 import { ChatMessage } from "@/api/fetch/ChatMessage/types/ChatMessageTypes";
 import { WebSocketChatMessage } from "@/api/fetch/chatRoom/types/ChatRoomType";
 
-export const findOptimisticMessage = (
+const findOptimisticMessage = (
   messages: ChatMessage[],
   receivedMessage: WebSocketChatMessage
 ): ChatMessage | undefined => {
@@ -16,3 +16,5 @@ export const findOptimisticMessage = (
           m.senderId === receivedMessage.senderId))
   );
 };
+
+export default findOptimisticMessage;

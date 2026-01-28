@@ -7,8 +7,7 @@ import {
   addMessageToCache,
   replaceMessageInCache,
 } from "@/utils/chatMessageCache/chatMessageCache";
-import { transformWebSocketMessage } from "../../_utils/transformWebSocketMessage";
-import { findOptimisticMessage } from "../../_utils/findOptimisticMessage";
+import { transformWebSocketMessage, findOptimisticMessage } from "../../_utils";
 import { ChatMessage } from "@/api/fetch/ChatMessage/types/ChatMessageTypes";
 
 const useChatSocketMessage = (roomId: number) => {
