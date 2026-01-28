@@ -57,8 +57,7 @@ const reconnectChatSocket = async () => {
 
     connectChatSocket();
     isReconnecting = false;
-  } catch (error) {
-    console.error("[STOMP] Reconnection error:", error);
+  } catch {
     isReconnecting = false;
   }
 };
@@ -101,9 +100,6 @@ export const connectChatSocket = () => {
     },
 
     onStompError: (frame) => {
-      console.error("[STOMP ERROR]", frame.headers["message"]);
-      console.error(frame.body);
-
       // 인증 관련 에러인 경우 재연결 시도
       const errorMessage = frame.headers["message"] || "";
       if (
@@ -128,8 +124,7 @@ export const connectChatSocket = () => {
       }
     },
 
-    onWebSocketError: (event) => {
-      console.error("[STOMP] WebSocket error:", event);
+    onWebSocketError: () => {
       // 🔑 상황 1 해결: 웹소켓 에러 발생 시 재연결 시도
       if (client && !client.connected && handlers.size > 0) {
         reconnectChatSocket();
@@ -194,8 +189,8 @@ export const subscribeChatSocket = <T>(destination: string, handler: MessageHand
       try {
         const parsed = JSON.parse(message.body);
         handlers.get(destination)?.forEach((h) => h(parsed));
-      } catch (error) {
-        console.error("[STOMP] Failed to parse message:", error);
+      } catch {
+        // 파싱 실패 시 무시
       }
     });
 
@@ -251,8 +246,7 @@ export const sendChatSocketMessage = (destination: string, body: unknown): boole
       body: JSON.stringify(body),
     });
     return true;
-  } catch (error) {
-    console.error("[STOMP] Failed to send message:", error);
+  } catch {
     return false;
   }
 };
