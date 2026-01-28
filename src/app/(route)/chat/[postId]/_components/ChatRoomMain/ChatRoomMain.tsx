@@ -2,11 +2,12 @@
 
 import { ChatBox, ChatDateDivider } from "./internal";
 import { useRef } from "react";
-import useChatScroll from "./internal/utils/useChatScroll";
-import { useChatInfiniteScroll } from "./internal/utils/useChatInfiniteScroll";
-import { useChatInitialScroll } from "./internal/utils/useChatInitialScroll";
-import { useChatScrollPreserve } from "./internal/utils/useChatScrollPreserve";
-import { useChatScrollHeightTracking } from "./internal/utils/useChatScrollHeightTracking";
+import {
+  useChatScroll,
+  useChatInfiniteScroll,
+  useChatInitialScroll,
+  useChatScrollPreserve,
+} from "./internal/hooks";
 import { ChatMessage } from "@/api/fetch/ChatMessage/types/ChatMessageTypes";
 import { cn } from "@/utils";
 import { useGetUserData } from "@/api/fetch/user";
@@ -35,6 +36,7 @@ const ChatRoomMain = ({
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
+    chatMessagesLength: chatMessages.length,
   });
 
   const ready = useChatInitialScroll(scrollRef, scrollHeightRef);
@@ -44,12 +46,6 @@ const ChatRoomMain = ({
     scrollHeightRef,
     isFetchingNextPage,
     chatMessagesLength: chatMessages.length,
-  });
-
-  useChatScrollHeightTracking({
-    scrollRef,
-    scrollHeightRef,
-    isFetchingNextPage,
   });
 
   return (
