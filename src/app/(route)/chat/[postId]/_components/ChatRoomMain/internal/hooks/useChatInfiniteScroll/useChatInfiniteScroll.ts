@@ -1,4 +1,4 @@
-import { useEffect, useRef, RefObject } from "react";
+import { useEffect, useLayoutEffect, useRef, RefObject } from "react";
 
 interface UseChatInfiniteScrollOptions {
   scrollRef: RefObject<HTMLDivElement | null>;
@@ -16,6 +16,7 @@ export function useChatInfiniteScroll({
   chatMessagesLength,
 }: UseChatInfiniteScrollOptions) {
   const prevScrollHeightRef = useRef<number>(0);
+  const prevScrollTopRef = useRef<number>(0);
   const prevLengthRef = useRef<number>(chatMessagesLength);
   const shouldPreserveScrollRef = useRef(false);
 
@@ -25,7 +26,9 @@ export function useChatInfiniteScroll({
 
     const onScroll = () => {
       if (el.scrollTop <= 20 && hasNextPage && !isFetchingNextPage) {
+        // 페칭 전 스크롤 위치와 높이 저장
         prevScrollHeightRef.current = el.scrollHeight;
+        prevScrollTopRef.current = el.scrollTop;
         prevLengthRef.current = chatMessagesLength;
         shouldPreserveScrollRef.current = true;
         fetchNextPage();
@@ -37,27 +40,28 @@ export function useChatInfiniteScroll({
   }, [scrollRef, fetchNextPage, hasNextPage, isFetchingNextPage, chatMessagesLength]);
 
   // 데이터 로드 완료 후 스크롤 보정 (chatMessagesLength 변경 감지)
-  useEffect(() => {
+  useLayoutEffect(() => {
     const el = scrollRef.current;
     if (!el || !shouldPreserveScrollRef.current || isFetchingNextPage) return;
 
     // 메시지가 실제로 추가되었는지 확인
-    if (chatMessagesLength <= prevLengthRef.current) return;
+    if (chatMessagesLength <= prevLengthRef.current) {
+      shouldPreserveScrollRef.current = false;
+      return;
+    }
 
-    // DOM 업데이트를 기다리기 위해 여러 프레임 사용
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        if (!el) return;
-        const newScrollHeight = el.scrollHeight;
-        const prevScrollHeight = prevScrollHeightRef.current;
-        const scrollDiff = newScrollHeight - prevScrollHeight;
+    // useLayoutEffect는 DOM 업데이트 직후 실행되므로 더 정확한 타이밍
+    const newScrollHeight = el.scrollHeight;
+    const prevScrollHeight = prevScrollHeightRef.current;
+    const scrollDiff = newScrollHeight - prevScrollHeight;
 
-        if (scrollDiff > 0) {
-          el.scrollTop = el.scrollTop + scrollDiff;
-        }
-        shouldPreserveScrollRef.current = false;
-        prevLengthRef.current = chatMessagesLength;
-      });
-    });
+    if (scrollDiff > 0) {
+      // 이전 스크롤 위치를 기준으로 보정
+      // 위에 추가된 내용만큼 아래로 이동하여 같은 내용을 보고 있도록 유지
+      el.scrollTop = prevScrollTopRef.current + scrollDiff;
+    }
+
+    shouldPreserveScrollRef.current = false;
+    prevLengthRef.current = chatMessagesLength;
   }, [isFetchingNextPage, chatMessagesLength, scrollRef]);
 }
