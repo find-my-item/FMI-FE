@@ -2,16 +2,16 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import ChatRoomMain from "./ChatRoomMain";
 import { ChatMessage } from "@/api/fetch/ChatMessage/types/ChatMessageTypes";
-import { useRef } from "react";
 
-jest.mock("./useChatScroll", () => ({
-  __esModule: true,
-  default: jest.fn(),
+jest.mock("./internal/hooks", () => ({
+  useChatScroll: jest.fn(),
+  useChatInfiniteScroll: jest.fn(),
+  useChatInitialScroll: jest.fn(() => true),
+  useChatScrollPreserve: jest.fn(),
 }));
 
-jest.mock("@/api/_base/query/useAppQuery", () => ({
-  __esModule: true,
-  default: jest.fn(() => ({
+jest.mock("@/api/fetch/user", () => ({
+  useGetUserData: jest.fn(() => ({
     data: { result: { userId: 1 } },
   })),
 }));
@@ -31,12 +31,26 @@ jest.mock("./internal", () => ({
       )}
     </div>
   ),
+  ChatDateDivider: ({ createdAt }: { createdAt: string }) => (
+    <div data-testid="chat-date-divider">{createdAt}</div>
+  ),
 }));
 
-const mockRef = { current: null };
+const noop = () => {};
 
-const renderWithMessages = (chatMessages: ChatMessage[] = []) => {
-  return render(<ChatRoomMain chatMessages={chatMessages} chatMessagesRef={mockRef} />);
+const renderWithMessages = (
+  chatMessages: ChatMessage[] = [],
+  hasNextPage: boolean | undefined = false,
+  isFetchingNextPage: boolean = false
+) => {
+  return render(
+    <ChatRoomMain
+      chatMessages={chatMessages}
+      fetchNextPage={noop}
+      hasNextPage={hasNextPage}
+      isFetchingNextPage={isFetchingNextPage}
+    />
+  );
 };
 
 describe("ChatRoomMain", () => {
@@ -62,7 +76,6 @@ describe("ChatRoomMain", () => {
     const mockChats: ChatMessage[] = [
       {
         messageId: 1,
-        roomId: 1,
         senderId: 1,
         content: "안녕하세요",
         messageType: "TEXT",
@@ -71,7 +84,6 @@ describe("ChatRoomMain", () => {
       },
       {
         messageId: 2,
-        roomId: 1,
         senderId: 2,
         content: "반갑습니다",
         messageType: "TEXT",
@@ -90,7 +102,6 @@ describe("ChatRoomMain", () => {
     const mockChats: ChatMessage[] = [
       {
         messageId: 1,
-        roomId: 1,
         senderId: 1,
         content: "첫 번째 메시지",
         messageType: "TEXT",
@@ -99,7 +110,6 @@ describe("ChatRoomMain", () => {
       },
       {
         messageId: 2,
-        roomId: 1,
         senderId: 2,
         content: "두 번째 메시지",
         messageType: "TEXT",
@@ -127,7 +137,6 @@ describe("ChatRoomMain", () => {
     const mockChats: ChatMessage[] = [
       {
         messageId: 1,
-        roomId: 1,
         senderId: 1,
         content: "테스트 메시지",
         messageType: "TEXT",
@@ -145,7 +154,6 @@ describe("ChatRoomMain", () => {
     const mockChats: ChatMessage[] = [
       {
         messageId: 1,
-        roomId: 1,
         senderId: 1,
         content: "",
         messageType: "IMAGE",
@@ -163,7 +171,6 @@ describe("ChatRoomMain", () => {
     const mockChats: ChatMessage[] = [
       {
         messageId: 1,
-        roomId: 1,
         senderId: 1,
         content: "메시지 1",
         messageType: "TEXT",
@@ -172,7 +179,6 @@ describe("ChatRoomMain", () => {
       },
       {
         messageId: 2,
-        roomId: 1,
         senderId: 2,
         content: "메시지 2",
         messageType: "TEXT",
@@ -181,7 +187,6 @@ describe("ChatRoomMain", () => {
       },
       {
         messageId: 3,
-        roomId: 1,
         senderId: 1,
         content: "메시지 3",
         messageType: "TEXT",
@@ -190,7 +195,6 @@ describe("ChatRoomMain", () => {
       },
       {
         messageId: 4,
-        roomId: 1,
         senderId: 2,
         content: "메시지 4",
         messageType: "TEXT",
@@ -209,7 +213,6 @@ describe("ChatRoomMain", () => {
     const mockChats: ChatMessage[] = [
       {
         messageId: 1,
-        roomId: 1,
         senderId: 1,
         content: "첫 번째",
         messageType: "TEXT",
@@ -218,7 +221,6 @@ describe("ChatRoomMain", () => {
       },
       {
         messageId: 2,
-        roomId: 1,
         senderId: 1,
         content: "두 번째",
         messageType: "TEXT",
@@ -227,7 +229,6 @@ describe("ChatRoomMain", () => {
       },
       {
         messageId: 3,
-        roomId: 1,
         senderId: 2,
         content: "세 번째",
         messageType: "TEXT",
@@ -254,7 +255,6 @@ describe("ChatRoomMain", () => {
     const mockChats: ChatMessage[] = [
       {
         messageId: 1,
-        roomId: 1,
         senderId: 1,
         content: "테스트 메시지",
         messageType: "TEXT",
