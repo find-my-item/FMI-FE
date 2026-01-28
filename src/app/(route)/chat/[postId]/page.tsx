@@ -54,13 +54,6 @@ const ChatRoom = ({ postId }: { postId: number }) => {
     ["userInfo"],
     `/users/me`
   );
-  const timeoutRefs = useRef<Map<number, NodeJS.Timeout>>(new Map());
-  useEffect(() => {
-    return () => {
-      timeoutRefs.current.forEach((timeoutId) => clearTimeout(timeoutId));
-      timeoutRefs.current.clear();
-    };
-  }, []);
   const isPostMode: "find" | "lost" = chatRoomData?.postInfo.postType === "FOUND" ? "find" : "lost";
 
   const {
@@ -115,11 +108,6 @@ const ChatRoom = ({ postId }: { postId: number }) => {
       );
 
       if (optimisticMessage) {
-        const timeoutId = timeoutRefs.current.get(optimisticMessage.messageId);
-        if (timeoutId) {
-          clearTimeout(timeoutId);
-          timeoutRefs.current.delete(optimisticMessage.messageId);
-        }
         replaceMessageInCache(queryClient, roomId, optimisticMessage.messageId, chatMessage);
       } else {
         const messageExists = firstPage.result.messages.some(
@@ -146,24 +134,11 @@ const ChatRoom = ({ postId }: { postId: number }) => {
 
     addMessageToCache(queryClient, roomId, optimisticMessage);
 
-    sendChatSocketMessage(`/app/chats/${roomId}/send`, { content });
+    const sendSucceeded = sendChatSocketMessage(`/app/chats/${roomId}/send`, { content });
+    if (!sendSucceeded) {
+      removeMessageFromCache(queryClient, roomId, optimisticId);
+    }
 
-    const timeoutId = setTimeout(() => {
-      const oldData = queryClient.getQueryData<
-        InfiniteData<ApiBaseResponseType<ChatMessageResponse>>
-      >(["chatMessages", roomId]);
-
-      const firstPage = oldData?.pages[0];
-      if (firstPage) {
-        const stillOptimistic = firstPage.result.messages.find((m) => m.messageId === optimisticId);
-        if (stillOptimistic) {
-          removeMessageFromCache(queryClient, roomId, optimisticId);
-        }
-      }
-      timeoutRefs.current.delete(optimisticId);
-    }, 3000);
-
-    timeoutRefs.current.set(optimisticId, timeoutId);
     methods.reset();
   };
 
