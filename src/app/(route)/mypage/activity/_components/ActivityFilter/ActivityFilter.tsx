@@ -20,14 +20,20 @@ const ActivityFilter = () => {
           ariaLabel={item.label}
           icon={item.icon}
           onSelected={false}
-          onClick={() => setIsBottomSheet((prev) => ({ ...prev, mode: item.name }))}
+          onClick={() => setIsBottomSheet({ isOpen: true, mode: item.name })}
           iconPosition={item.iconPosition}
         >
           {item.label}
         </Filter>
       ))}
 
-      {isBottomSheet.isOpen && <ActivityBottomSheet mode={isBottomSheet.mode} />}
+      {isBottomSheet.isOpen && (
+        <ActivityBottomSheet
+          mode={isBottomSheet.mode}
+          isOpen={isBottomSheet.isOpen}
+          onClose={() => setIsBottomSheet((prev) => ({ ...prev, isOpen: false }))}
+        />
+      )}
     </section>
   );
 };
