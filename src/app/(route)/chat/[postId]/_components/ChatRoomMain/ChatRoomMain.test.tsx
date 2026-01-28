@@ -122,14 +122,14 @@ describe("ChatRoomMain", () => {
 
     const chatBoxes = screen.getAllByTestId("chat-box");
 
-    // 첫 번째 ChatBox (i=0, 마지막 채팅, nextSender는 undefined)
+    // 첫 번째 ChatBox (i=0, nextSender는 undefined)
     expect(chatBoxes[0]).toHaveAttribute("data-sender-id", "1");
-    expect(chatBoxes[0]).toHaveAttribute("data-last-chat", "true");
+    expect(chatBoxes[0]).toHaveAttribute("data-last-chat", "false");
     expect(chatBoxes[0]).toHaveAttribute("data-next-sender", "undefined");
 
-    // 두 번째 ChatBox (i=1, nextSender는 첫 번째 채팅의 sender)
+    // 두 번째 ChatBox (i=1, 마지막 채팅, nextSender는 첫 번째 채팅의 sender)
     expect(chatBoxes[1]).toHaveAttribute("data-sender-id", "2");
-    expect(chatBoxes[1]).toHaveAttribute("data-last-chat", "false");
+    expect(chatBoxes[1]).toHaveAttribute("data-last-chat", "true");
     expect(chatBoxes[1]).toHaveAttribute("data-next-sender", "me");
   });
 

@@ -2,7 +2,6 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { FormProvider, useForm } from "react-hook-form";
 import InputChat from "./InputChat";
-import { ChatRoomProvider } from "@/providers/ChatRoomProvider";
 import "@testing-library/jest-dom";
 
 jest.mock("@/utils", () => ({
@@ -18,12 +17,11 @@ jest.mock("@/components/common/Icon/Icon", () => {
   };
 });
 
-const renderComponent = (
-  props: Partial<React.ComponentProps<typeof InputChat>> = {},
-  initialImages: File[] = []
-) => {
+const renderComponent = (props: Partial<React.ComponentProps<typeof InputChat>> = {}) => {
   const defaultProps = {
     name: "test-chat",
+    roomId: 1,
+    userId: 1,
   };
   const mergedProps = { ...defaultProps, ...props };
 
@@ -34,11 +32,7 @@ const renderComponent = (
       },
       mode: "onChange",
     });
-    return (
-      <ChatRoomProvider initialImages={initialImages}>
-        <FormProvider {...methods}>{children}</FormProvider>
-      </ChatRoomProvider>
-    );
+    return <FormProvider {...methods}>{children}</FormProvider>;
   };
 
   const user = userEvent.setup();
