@@ -9,7 +9,13 @@ import ChatRoomHeaderInfoButton from "../ChatRoomHeaderInfoButton/ChatRoomHeader
 import { ChatRoomResponse } from "@/api/fetch/chatRoom/types/ChatRoomType";
 import Link from "next/link";
 
-const ChatRoomHeader = ({ chatRoom }: { chatRoom: ChatRoomResponse | undefined }) => {
+const ChatRoomHeader = ({
+  chatRoom,
+  roomId,
+}: {
+  chatRoom: ChatRoomResponse | undefined;
+  roomId: number;
+}) => {
   const router = useRouter();
   if (!chatRoom) return null;
   const { address, postType, title, thumbnailUrl } = chatRoom.postInfo;
@@ -30,7 +36,7 @@ const ChatRoomHeader = ({ chatRoom }: { chatRoom: ChatRoomResponse | undefined }
           {chatRoom.opponentUser.nickname}
         </p>
 
-        <ChatRoomHeaderInfoButton />
+        <ChatRoomHeaderInfoButton roomId={roomId} />
       </nav>
 
       <Link href={`/list/${chatRoom.postInfo.postId}`} className="flex items-center gap-4 px-4">

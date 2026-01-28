@@ -3,37 +3,24 @@
 import { ConfirmModal, Icon } from "@/components/common";
 import { cn } from "@/utils";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { INFO_OPTIONS } from "./INFO_OPTIONS";
+import useLeaveChatRoom from "@/api/fetch/chatRoom/api/useLeaveChatRoom";
+import useClickOutside from "./useClickOutside";
 
-const ChatRoomHeaderInfoButton = () => {
+const ChatRoomHeaderInfoButton = ({ roomId }: { roomId: number }) => {
   const [open, setOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useClickOutside(() => setOpen(false));
   const router = useRouter();
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
-        setOpen(false);
-      }
-    };
-    if (open) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [open]);
+  const { mutate: leaveChatRoom } = useLeaveChatRoom(roomId);
 
   const handleOptionClick = (value: "report" | "leave") => {
-    if (value === "leave") {
-      setModalOpen(true);
-    } else {
-      router.push(`/chat/1/report`);
+    if (value !== "leave") {
+      router.push(`/chat/${roomId}/report`);
+      return;
     }
+    setModalOpen(true);
   };
 
   return (
@@ -75,7 +62,7 @@ const ChatRoomHeaderInfoButton = () => {
         onClose={() => setModalOpen(false)}
         title="채팅방을 나가시겠어요?"
         content="채팅방을 나가면 채팅 목록 및 대화 내용이 삭제되고 복구할 수 없어요, 채팅방에서 나가시겠어요?"
-        onConfirm={() => router.back()}
+        onConfirm={() => leaveChatRoom(undefined)}
         onCancel={() => setModalOpen(false)}
       />
     </>
