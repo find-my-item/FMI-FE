@@ -1,7 +1,7 @@
 export const HEADER_LINK = [
   { name: "로그인", href: "/login" },
   { name: "회원가입", href: "/sign-up" },
-  { name: "이메일 로그인", href: "/email-login" },
+  { name: "이메일 로그인", href: "/login/email" },
   { name: "비밀번호 찾기", href: "/find-pw" },
   { name: "서비스 소개", href: "/hello" },
   { name: "매뉴얼", href: "/manual" },
