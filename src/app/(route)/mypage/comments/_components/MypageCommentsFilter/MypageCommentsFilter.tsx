@@ -3,7 +3,7 @@
 import { Filter, KebabMenu } from "@/components/common";
 import { useState } from "react";
 import { MYPAGE_COMMENTS_KEBAB_OPTIONS } from "../../_constant/MYPAGE_COMMENTS_KEBAB_OPTIONS";
-import DateRangeBottomSheet from "@/components/domain/DateRangeBottomSheet/DateRangeBottomSheet";
+import { DateRangeBottomSheet } from "@/components/domain";
 
 const MypageCommentsFilter = () => {
   const [isBottomSheet, setIsBottomSheet] = useState(false);
