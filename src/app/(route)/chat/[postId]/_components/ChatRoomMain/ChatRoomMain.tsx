@@ -1,9 +1,12 @@
 "use client";
 
 import { ChatBox, ChatDateDivider } from "./internal";
-import { useLayoutEffect, useRef, useState, useEffect } from "react";
-import useChatScroll from "./useChatScroll";
-import { useChatInfiniteScroll } from "./useChatInfiniteScroll";
+import { useRef } from "react";
+import useChatScroll from "./internal/utils/useChatScroll";
+import { useChatInfiniteScroll } from "./internal/utils/useChatInfiniteScroll";
+import { useChatInitialScroll } from "./internal/utils/useChatInitialScroll";
+import { useChatScrollPreserve } from "./internal/utils/useChatScrollPreserve";
+import { useChatScrollHeightTracking } from "./internal/utils/useChatScrollHeightTracking";
 import { ChatMessage } from "@/api/fetch/ChatMessage/types/ChatMessageTypes";
 import { cn } from "@/utils";
 import { useGetUserData } from "@/api/fetch/user";
@@ -24,7 +27,6 @@ const ChatRoomMain = ({
 }: ChatRoomMainProps) => {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const scrollHeightRef = useRef<number>(0);
-  const [ready, setReady] = useState(false);
   const { data: userInfo } = useGetUserData();
 
   useChatScroll(scrollRef, chatMessages, Number(userInfo?.result.userId) ?? 0);
@@ -35,31 +37,20 @@ const ChatRoomMain = ({
     isFetchingNextPage,
   });
 
-  useLayoutEffect(() => {
-    if (!scrollRef.current) return;
-    scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    scrollHeightRef.current = scrollRef.current.scrollHeight;
-    setReady(true);
-  }, []);
+  const ready = useChatInitialScroll(scrollRef, scrollHeightRef);
 
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el || isFetchingNextPage) return;
+  useChatScrollPreserve({
+    scrollRef,
+    scrollHeightRef,
+    isFetchingNextPage,
+    chatMessagesLength: chatMessages.length,
+  });
 
-    const prevScrollHeight = scrollHeightRef.current;
-    if (el.scrollHeight !== prevScrollHeight && prevScrollHeight > 0) {
-      const scrollDiff = el.scrollHeight - prevScrollHeight;
-      el.scrollTop = el.scrollTop + scrollDiff;
-    }
-    scrollHeightRef.current = el.scrollHeight;
-  }, [isFetchingNextPage, chatMessages.length]);
-
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el || !isFetchingNextPage) return;
-
-    scrollHeightRef.current = el.scrollHeight;
-  }, [isFetchingNextPage]);
+  useChatScrollHeightTracking({
+    scrollRef,
+    scrollHeightRef,
+    isFetchingNextPage,
+  });
 
   return (
     <div
