@@ -3,6 +3,7 @@ import useChatRoom from "@/api/fetch/chatRoom/api/useChatRoom";
 import useGetChatRoom from "@/api/fetch/chatRoom/api/useGetChatRoom";
 import { useGetUserData } from "@/api/fetch/user";
 import { getPostMode } from "../_utils/getPostMode";
+import { ChatRoomResponse } from "@/api/fetch/chatRoom/types/ChatRoomType";
 
 export const useChatRoomData = (postId: number) => {
   const searchParams = useSearchParams();
@@ -12,7 +13,7 @@ export const useChatRoomData = (postId: number) => {
 
   const { data: chatRoom } = useChatRoom({ postId, enabled: !hasRoomId });
   const { data: chatRoomDetail } = useGetChatRoom({ roomId });
-  const chatRoomData = chatRoomDetail?.result || chatRoom?.result;
+  const chatRoomData: ChatRoomResponse | undefined = chatRoomDetail?.result || chatRoom?.result;
   const { data: userInfo } = useGetUserData();
   const postMode = getPostMode(chatRoomData);
 
