@@ -1,7 +1,7 @@
 export const SELECTED_TEXT = {
-  oldest: "오래된순",
-  latest: "최신순",
-  all: "습득/분실",
-  found: "습득물",
-  lost: "분실물",
+  OLDEST: "오래된순",
+  LATEST: "최신순",
+  ALL: "습득/분실",
+  FOUND: "습득물",
+  LOST: "분실물",
 } as const;

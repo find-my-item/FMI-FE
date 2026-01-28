@@ -1,12 +1,12 @@
 export const TYPE_OPTIONS = [
-  { label: "전체", value: "all" },
-  { label: "습득물", value: "found" },
-  { label: "분실물", value: "lost" },
+  { label: "전체", value: "ALL" },
+  { label: "습득물", value: "FOUND" },
+  { label: "분실물", value: "LOST" },
 ] as const;
 
 export const SORT_OPTIONS = [
-  { label: "최신순", value: "latest" },
-  { label: "오래된순", value: "oldest" },
+  { label: "최신순", value: "LATEST" },
+  { label: "오래된순", value: "OLDEST" },
 ] as const;
 
 export const FilTER_DROPDOWN_OPTIONS = [
