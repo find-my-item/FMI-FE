@@ -1,2 +1,2 @@
 export { default as BottomSheet } from "./BottomSheet/BottomSheet";
-export { default as KakaoMap } from "./KakaoMap/KakaoMap";
+export { default as PostWriteKakaoMap } from "./PostWriteKakaoMap/PostWriteKakaoMap";
