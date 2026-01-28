@@ -60,7 +60,7 @@ const ChatRoomMain = ({
     <div
       ref={scrollRef}
       className={cn(
-        "flex flex-1 flex-col overflow-y-scroll bg-flatGray-25 px-[16px] py-[8px] no-scrollbar",
+        "flex flex-1 flex-col overflow-y-scroll bg-flatGray-25 px-4 py-2 no-scrollbar",
         !ready && "invisible"
       )}
     >

@@ -15,10 +15,10 @@ const ChatRoomHeader = ({ chatRoom }: { chatRoom: ChatRoomResponse | undefined }
   const { address, postType, title, thumbnailUrl } = chatRoom.postInfo;
 
   return (
-    <header className="pb-[12px]">
-      <nav className="flex items-center justify-between px-[16px] py-[4px]">
+    <header className="pb-3">
+      <nav className="flex items-center justify-between px-4 py-1">
         <button
-          className="flex h-[40px] w-[40px] items-center"
+          className="flex h-10 w-10 items-center"
           aria-label="뒤로 가기 버튼"
           onClick={() => router.back()}
           type="button"
@@ -33,17 +33,14 @@ const ChatRoomHeader = ({ chatRoom }: { chatRoom: ChatRoomResponse | undefined }
         <ChatRoomHeaderInfoButton />
       </nav>
 
-      <Link
-        href={`/list/${chatRoom.postInfo.postId}`}
-        className="flex items-center gap-[16px] px-[16px]"
-      >
+      <Link href={`/list/${chatRoom.postInfo.postId}`} className="flex items-center gap-4 px-4">
         {/* TODO(형준): 대체 이미지 수정 예정 */}
         <Image
           alt="게시글 썸네일 이미지"
           src={thumbnailUrl || MOCK_IMAGES[0]}
           width={40}
           height={40}
-          className="h-[40px] w-[40px] rounded"
+          className="h-10 w-10 rounded"
         />
 
         <div className="flex min-w-0 flex-col">
@@ -51,7 +48,7 @@ const ChatRoomHeader = ({ chatRoom }: { chatRoom: ChatRoomResponse | undefined }
             <ChatChip postMode={postType} />
             <h2 className="truncate text-body1-semibold text-layout-header-default">{title}</h2>
           </div>
-          <p className="h-[16px] text-caption1-medium text-layout-body-default">{address}</p>
+          <p className="h-4 text-caption1-medium text-layout-body-default">{address}</p>
         </div>
       </Link>
     </header>

@@ -40,7 +40,7 @@ const ChatRoomHeaderInfoButton = () => {
     <>
       <div ref={containerRef} className="relative">
         <button
-          className="flex h-[40px] w-[40px] items-center justify-end"
+          className="flex h-10 w-10 items-center justify-end"
           aria-label="채팅방 메뉴 열기 버튼"
           type="button"
           onClick={() => setOpen((prev) => !prev)}
@@ -56,7 +56,7 @@ const ChatRoomHeaderInfoButton = () => {
                   aria-label={option.label}
                   onClick={() => handleOptionClick(option.value)}
                   className={cn(
-                    "glass-card w-full text-nowrap border border-white bg-white/50 px-[28px] py-[16px] text-left text-h3-medium transition-colors hover:bg-white/70",
+                    "glass-card w-full text-nowrap border border-white bg-white/50 px-7 py-4 text-left text-h3-medium transition-colors hover:bg-white/70",
                     option.value === "report"
                       ? "text-neutral-normal-default"
                       : "text-system-warning",

@@ -26,7 +26,7 @@ const ChatBox = ({ chat, nextSender, lastChat }: ChatBoxProps) => {
       {messageType === "TEXT" && (
         <p
           className={cn(
-            "max-w-[272px] whitespace-pre-wrap break-words rounded-[24px] px-[16px] py-[12px]",
+            "max-w-[272px] whitespace-pre-wrap break-words rounded-[24px] px-4 py-3",
             style.bubbleColor,
             style.bubbleOrder
           )}
