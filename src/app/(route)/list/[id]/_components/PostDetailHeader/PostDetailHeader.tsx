@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button, ProfileAvatar } from "@/components/common";
 import ImageSection from "./_internal/ImageSection/ImageSection";
+import { formatCappedNumber } from "@/utils";
 
 type HeaderData = {
   imageUrls: string[];
@@ -32,9 +33,9 @@ const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
             <p className="text-body1-medium text-layout-header-default">{nickName}</p>
             <div className="text-body2-regular text-layout-body-default">
               <span className="after:mx-2 after:inline-block after:content-['·']">
-                작성글 {userPostCount || 0}
+                작성글 {formatCappedNumber(userPostCount)}
               </span>
-              <span>현재 채팅 {chatRoomCount || 0}</span>
+              <span>현재 채팅 {formatCappedNumber(chatRoomCount)}</span>
             </div>
           </div>
         </div>
