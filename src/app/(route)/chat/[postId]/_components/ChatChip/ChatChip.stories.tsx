@@ -35,12 +35,12 @@ type Story = StoryObj<typeof ChatChip>;
 
 export const Find: Story = {
   args: {
-    postMode: "find",
+    postMode: "FOUND",
   },
 };
 
 export const Lost: Story = {
   args: {
-    postMode: "lost",
+    postMode: "LOST",
   },
 };

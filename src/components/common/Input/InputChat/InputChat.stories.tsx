@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs";
 import { useForm, FormProvider } from "react-hook-form";
 import InputChat from "./InputChat";
-import { ChatRoomProvider } from "@/providers/ChatRoomProvider";
 
 const meta: Meta<typeof InputChat> = {
   title: "공통 컴포넌트/Input/InputChat",
@@ -10,18 +9,26 @@ const meta: Meta<typeof InputChat> = {
   parameters: {
     layout: "centered",
   },
+  argTypes: {
+    roomId: {
+      control: "number",
+      description: "채팅방 ID",
+    },
+    userId: {
+      control: "number",
+      description: "사용자 ID",
+    },
+  },
   decorators: [
     (Story) => {
       const methods = useForm();
 
       return (
-        <ChatRoomProvider>
-          <FormProvider {...methods}>
-            <form onSubmit={(e) => e.preventDefault()} className="w-[480px]">
-              <Story />
-            </form>
-          </FormProvider>
-        </ChatRoomProvider>
+        <FormProvider {...methods}>
+          <form onSubmit={(e) => e.preventDefault()} className="w-[480px]">
+            <Story />
+          </form>
+        </FormProvider>
       );
     },
   ],
@@ -32,6 +39,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    name: "테스트",
+    name: "content",
+    roomId: 1,
+    userId: 1,
   },
 };

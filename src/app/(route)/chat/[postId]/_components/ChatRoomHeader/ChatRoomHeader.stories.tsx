@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import ChatRoomHeader from "./ChatRoomHeader";
+import { ChatRoomResponse } from "@/api/fetch/chatRoom/types/ChatRoomType";
 
 const meta: Meta<typeof ChatRoomHeader> = {
   title: "페이지/채팅 상세 페이지/ChatRoomHeader",
@@ -15,10 +16,9 @@ const meta: Meta<typeof ChatRoomHeader> = {
     },
   },
   argTypes: {
-    postMode: {
-      control: "radio",
-      options: ["find", "lost"],
-      description: "게시글 유형 (습득물/분실물)",
+    chatRoom: {
+      control: "object",
+      description: "채팅방 정보 (없으면 null 반환)",
     },
   },
   decorators: [
@@ -33,14 +33,66 @@ const meta: Meta<typeof ChatRoomHeader> = {
 export default meta;
 type Story = StoryObj<typeof ChatRoomHeader>;
 
-export const Find: Story = {
+const mockChatRoomFound: ChatRoomResponse = {
+  roomId: 1,
+  opponentUser: {
+    opponentUserId: 2,
+    nickname: "사용자 닉네임",
+    profileImageUrl: "https://via.placeholder.com/40",
+    emailVerified: true,
+  },
+  postInfo: {
+    postId: 1,
+    postType: "FOUND",
+    title: "여기에 게시글명이 표기됩니다 여기에 게시글명이 표기됩니다. 여기에",
+    address: "서울시 중구 회현동",
+    thumbnailUrl: "https://via.placeholder.com/40",
+  },
+};
+
+const mockChatRoomLost: ChatRoomResponse = {
+  roomId: 2,
+  opponentUser: {
+    opponentUserId: 3,
+    nickname: "다른 사용자",
+    profileImageUrl: "https://via.placeholder.com/40",
+    emailVerified: true,
+  },
+  postInfo: {
+    postId: 2,
+    postType: "LOST",
+    title: "분실물 게시글 제목입니다",
+    address: "서울시 강남구 역삼동",
+    thumbnailUrl: "https://via.placeholder.com/40",
+  },
+};
+
+export const Found: Story = {
   args: {
-    postMode: "find",
+    chatRoom: mockChatRoomFound,
   },
 };
 
 export const Lost: Story = {
   args: {
-    postMode: "lost",
+    chatRoom: mockChatRoomLost,
+  },
+};
+
+export const WithoutThumbnail: Story = {
+  args: {
+    chatRoom: {
+      ...mockChatRoomFound,
+      postInfo: {
+        ...mockChatRoomFound.postInfo,
+        thumbnailUrl: "",
+      },
+    },
+  },
+};
+
+export const Undefined: Story = {
+  args: {
+    chatRoom: undefined,
   },
 };
