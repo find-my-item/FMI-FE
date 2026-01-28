@@ -3,10 +3,10 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import type { UserTabType } from "@/api/fetch/user";
 
-const DEFAULT_TAB: UserTabType = "post";
+const DEFAULT_TAB: UserTabType = "posts";
 
 const isUserTabType = (value: string | null): value is UserTabType => {
-  return value === "post" || value === "comment" || value === "favorite";
+  return value === "posts" || value === "comments" || value === "favorites";
 };
 
 export const useUserProfileTabQuery = () => {

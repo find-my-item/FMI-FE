@@ -68,8 +68,12 @@ const ImagePreviewList = ({ images, onRemove, onMove }: ImagePreviewListProps) =
             className="size-[104px] select-none rounded-[10px] object-cover"
           />
           {index === 0 && (
-            // TODO(지권): 디자인 토큰 이슈 해결 후 변경
-            <span className="absolute left-0 top-0 rounded-tl-[10px] bg-[#1EB87B] pb-[3px] pl-[9px] pr-2 pt-[5px] text-caption1-semibold text-white">
+            <span
+              className={cn(
+                "absolute left-0 top-0 rounded-tl-[10px] pb-[3px] pl-[9px] pr-2 pt-[5px]",
+                "bg-flatGreen-500 text-caption1-semibold text-white"
+              )}
+            >
               대표
             </span>
           )}

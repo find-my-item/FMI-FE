@@ -1,50 +1,61 @@
 "use client";
 
 import { PostListItem } from "@/components/domain";
-import { MOCK_POST_ITEM } from "@/mock/data";
+import { UserProfileIdDataType } from "@/api/fetch/user";
 import { UserProfileTabKey } from "../../_types/USER_TABS";
-import { CommentItem } from "../_internal";
+import { CommentItem, EmptyUI } from "../_internal";
+
+interface UserProfileQueryState {
+  isLoading: boolean;
+  data?: UserProfileIdDataType;
+}
 
 interface TabContentsProps {
   selectedTab: UserProfileTabKey;
-  isLoading: boolean;
+  query: UserProfileQueryState;
 }
 
-const TabContents = ({ selectedTab, isLoading }: TabContentsProps) => {
+const TabContents = ({ selectedTab, query }: TabContentsProps) => {
+  const { isLoading, data } = query;
   // TODO(지권): 로딩, 에러 상태 처리 필요
   if (isLoading) return "로딩 중....";
+
+  if (!data) return null;
+
+  const list =
+    selectedTab === "posts"
+      ? data.posts
+      : selectedTab === "comments"
+        ? data.comments
+        : data.favorites;
+
+  if (list.length === 0) {
+    return <EmptyUI selectedTab={selectedTab} />;
+  }
 
   return (
     <section aria-label="탭 콘텐츠">
       <ul>
-        {selectedTab === "post" && (
+        {selectedTab === "posts" && (
           <>
-            {Array.from({ length: 5 }).map((_, index) => (
-              <PostListItem post={MOCK_POST_ITEM} linkState="list" key={index} />
+            {data?.posts.map((post) => (
+              <PostListItem post={post} linkState="list" key={post.postId} />
             ))}
           </>
         )}
 
-        {selectedTab === "comment" && (
+        {selectedTab === "comments" && (
           <>
-            {Array.from({ length: 5 }).map((_, index) => (
-              <CommentItem
-                data={{
-                  postId: 1,
-                  likes: 5,
-                  comment: "여기에 댓글 내용이 표기됩니다",
-                  date: "2025.11.02",
-                }}
-                key={index}
-              />
+            {data?.comments.map((comment) => (
+              <CommentItem key={comment.commentId} data={comment} />
             ))}
           </>
         )}
 
-        {selectedTab === "favorite" && (
+        {selectedTab === "favorites" && (
           <>
-            {Array.from({ length: 5 }).map((_, index) => (
-              <PostListItem post={MOCK_POST_ITEM} linkState="list" key={index} />
+            {data?.posts.map((post) => (
+              <PostListItem post={post} linkState="list" key={post.postId} />
             ))}
           </>
         )}
