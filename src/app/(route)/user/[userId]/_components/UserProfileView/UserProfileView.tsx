@@ -26,7 +26,7 @@ const UserProfileView = () => {
 
       <Tab tabs={USER_TABS} selected={tab} onValueChange={updateTabQuery} aria-label="프로필 탭" />
 
-      <TabContents selectedTab={tab} isLoading={isLoading} />
+      <TabContents selectedTab={tab} query={{ isLoading, data: profileData }} />
     </div>
   );
 };
