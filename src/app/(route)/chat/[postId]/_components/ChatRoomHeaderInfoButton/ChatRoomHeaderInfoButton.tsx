@@ -4,7 +4,7 @@ import { ConfirmModal, Icon } from "@/components/common";
 import { cn } from "@/utils";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { INFO_OPTIONS } from "../../_constants/INFO_OPTIONS";
+import { INFO_OPTIONS } from "./INFO_OPTIONS";
 
 const ChatRoomHeaderInfoButton = () => {
   const [open, setOpen] = useState(false);

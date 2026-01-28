@@ -32,7 +32,10 @@ interface UserInfoResponse {
   profileImg: string;
 }
 
-const ChatRoom = ({ postId }: { postId: number }) => {
+const ChatRoom = ({ params }: { params: Promise<{ postId: string }> }) => {
+  const { postId: postIdString } = use(params);
+  const postId = Number(postIdString);
+
   const queryClient = useQueryClient();
   const methods = useForm<ChatFormValues>({
     mode: "onChange",
@@ -175,10 +178,4 @@ const ChatRoom = ({ postId }: { postId: number }) => {
   );
 };
 
-const page = ({ params }: { params: Promise<{ postId: string }> }) => {
-  const { postId } = use(params);
-
-  return <ChatRoom postId={Number(postId)} />;
-};
-
-export default page;
+export default ChatRoom;
