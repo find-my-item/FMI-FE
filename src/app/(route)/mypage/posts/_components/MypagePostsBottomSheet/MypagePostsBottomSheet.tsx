@@ -2,10 +2,9 @@
 
 import { cn } from "@/utils";
 import { Button, Filter } from "@/components/common";
-import { DateRangeSheet, PopupLayout } from "@/components/domain";
+import { DateRangeBottomSheet, PopupLayout } from "@/components/domain";
 import { MYPAGE_POSTS_SHEET_FILTER } from "../../_constants/MYPAGE_POSTS_SHEET_FILTER";
 import { FilterModeType } from "../../_types/FilterModeType";
-import DateRangeBottomSheet from "@/components/domain/DateRangeSheet/DateRangeSheet";
 
 interface MypagePostsBottomSheetProps {
   isOpen: boolean;

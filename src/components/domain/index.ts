@@ -6,7 +6,6 @@ export { default as CommentList } from "./CommentList/CommentList";
 export { default as FindPwForm } from "./FindPwForm/FindPwForm";
 export { default as FooterButton } from "./FooterButton/FooterButton";
 export { default as PostListItem } from "./PostListItem/PostListItem";
-export { default as DateRangeSheet } from "./DateRangeSheet/DateRangeSheet";
 export { default as MypageSearch } from "./MypageSearch/MypageSearch";
 export { default as MypageEmptyUI } from "./MypageEmptyUI/MypageEmptyUI";
 export { default as MypageRequestFilter } from "./MypageRequest/MypageRequestFilter/MypageRequestFilter";
@@ -14,3 +13,4 @@ export { default as MypageRequestList } from "./MypageRequest/MypageRequestList/
 export { default as MypageRequestDetailContainer } from "./MypageRequest/MypageRequestDetailContainer/MypageRequestDetailContainer";
 export { default as MypageCommentItem } from "./MypageRequest/MypageCommentItem/MypageCommentItem";
 export { default as CommentCard } from "./CommentCard/CommentCard";
+export { default as DateRangeBottomSheet } from "./DateRangeBottomSheet/DateRangeBottomSheet";
