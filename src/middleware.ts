@@ -16,8 +16,12 @@ export function middleware(request: NextRequest) {
     currentPath.startsWith("/write") ||
     currentPath.startsWith("/chat");
 
-  // 토큰이 있는데 로그인, 회원가입 페이지에 접근하려고 할때
-  if (isAuthPath && (accessToken || refreshToken)) {
+  const isSessionExpired = request.nextUrl.searchParams.get("reason") === "session-expired";
+
+  // 토큰이 있는데 로그인, 회원가입 페이지에 접근하려고 할때 (리프레쉬 토큰 만료됐을때는 제외)
+  const RedirectMypage = isAuthPath && (accessToken || refreshToken) && !isSessionExpired;
+
+  if (RedirectMypage) {
     return NextResponse.redirect(new URL("/mypage", request.url));
   }
 

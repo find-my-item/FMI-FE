@@ -3,7 +3,6 @@ export { default as ListSearch } from "./ListSearch/ListSearch";
 export { default as PopupLayout } from "./PopupLayout/PopupLayout";
 export { default as ImageViewerModal } from "./ImageViewerModal/ImageViewerModal";
 export { default as CommentList } from "./CommentList/CommentList";
-export { default as AuthLogoLink } from "./AuthLogoLink/AuthLogoLink";
 export { default as FindPwForm } from "./FindPwForm/FindPwForm";
 export { default as FooterButton } from "./FooterButton/FooterButton";
 export { default as PostListItem } from "./PostListItem/PostListItem";
