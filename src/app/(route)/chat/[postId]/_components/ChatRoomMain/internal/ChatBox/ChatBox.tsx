@@ -3,8 +3,7 @@ import { Sender } from "@/app/(route)/chat/_types/Sender";
 import { CHAT_SENDER_STYLE } from "../../constants/CHAT_SENDER_STYLE";
 import ChatImageBox from "../ChatImageBox/ChatImageBox";
 import { ChatMessage } from "@/api/fetch/ChatMessage/types/ChatMessageTypes";
-import useAppQuery from "@/api/_base/query/useAppQuery";
-import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
+import { useGetUserData } from "@/api/fetch/user";
 
 interface ChatBoxProps {
   chat: ChatMessage;
@@ -12,23 +11,11 @@ interface ChatBoxProps {
   lastChat?: boolean;
 }
 
-interface UserInfoResponse {
-  userId: number;
-  nickname: string;
-  email: string;
-  emailVerified: boolean;
-  profileImg: string;
-}
-
 const ChatBox = ({ chat, nextSender, lastChat }: ChatBoxProps) => {
   const { content, createdAt, imageUrls, messageType, senderId } = chat;
-  const { data: userInfo } = useAppQuery<ApiBaseResponseType<UserInfoResponse>>(
-    "auth",
-    ["userInfo"],
-    `/users/me`
-  );
+  const { data: userInfo } = useGetUserData();
 
-  const sender = userInfo?.result.userId === senderId ? "me" : "other";
+  const sender = Number(userInfo?.result.userId) === senderId ? "me" : "other";
   const marginBottom = lastChat ? "mb-0" : nextSender === sender ? "mb-2" : "mb-4";
 
   const style = CHAT_SENDER_STYLE[sender];

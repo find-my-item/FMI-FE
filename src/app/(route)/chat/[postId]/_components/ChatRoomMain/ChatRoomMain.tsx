@@ -5,17 +5,8 @@ import { useLayoutEffect, useRef, useState, useEffect } from "react";
 import useChatScroll from "./useChatScroll";
 import { useChatInfiniteScroll } from "./useChatInfiniteScroll";
 import { ChatMessage } from "@/api/fetch/ChatMessage/types/ChatMessageTypes";
-import useAppQuery from "@/api/_base/query/useAppQuery";
-import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 import { cn } from "@/utils";
-
-interface UserInfoResponse {
-  userId: number;
-  nickname: string;
-  email: string;
-  emailVerified: boolean;
-  profileImg: string;
-}
+import { useGetUserData } from "@/api/fetch/user";
 
 interface ChatRoomMainProps {
   chatMessages: ChatMessage[];
@@ -74,13 +65,9 @@ const ChatRoomMain = ({
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const scrollHeightRef = useRef<number>(0);
   const [ready, setReady] = useState(false);
-  const { data: userInfo } = useAppQuery<ApiBaseResponseType<UserInfoResponse>>(
-    "auth",
-    ["userInfo"],
-    `/users/me`
-  );
+  const { data: userInfo } = useGetUserData();
 
-  useChatScroll(scrollRef, chatMessages, userInfo?.result.userId ?? 0);
+  useChatScroll(scrollRef, chatMessages, Number(userInfo?.result.userId) ?? 0);
   useChatInfiniteScroll({
     scrollRef,
     fetchNextPage,
@@ -128,7 +115,7 @@ const ChatRoomMain = ({
 
         const isNewDate = i === 0 || getDateKey(chat.createdAt) !== getDateKey(prevChat.createdAt);
         const nextSender = prevChat
-          ? userInfo?.result.userId === prevChat.senderId
+          ? Number(userInfo?.result.userId) === prevChat.senderId
             ? "me"
             : "other"
           : undefined;

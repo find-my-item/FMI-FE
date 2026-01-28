@@ -12,24 +12,16 @@ import { ChatMessage } from "@/api/fetch/ChatMessage/types/ChatMessageTypes";
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 import { ChatMessageResponse } from "@/api/fetch/ChatMessage/types/ChatMessageTypes";
 import useChatRoom from "@/api/fetch/chatRoom/api/useChatRoom";
-import useAppQuery from "@/api/_base/query/useAppQuery";
 import {
   addMessageToCache,
   replaceMessageInCache,
   removeMessageFromCache,
 } from "@/utils/chatMessageCache/chatMessageCache";
 import useGetChatRoom from "@/api/fetch/chatRoom/api/useGetChatRoom";
+import { useGetUserData } from "@/api/fetch/user";
 
 interface ChatFormValues {
   content: string;
-}
-
-interface UserInfoResponse {
-  userId: number;
-  nickname: string;
-  email: string;
-  emailVerified: boolean;
-  profileImg: string;
 }
 
 const ChatRoom = ({ params }: { params: Promise<{ postId: string }> }) => {
@@ -52,11 +44,7 @@ const ChatRoom = ({ params }: { params: Promise<{ postId: string }> }) => {
   const { data: chatRoom } = useChatRoom({ postId, enabled: !hasRoomId });
   const { data: chatRoomDetail } = useGetChatRoom({ roomId });
   const chatRoomData = chatRoomDetail?.result || chatRoom?.result;
-  const { data: userInfo } = useAppQuery<ApiBaseResponseType<UserInfoResponse>>(
-    "auth",
-    ["userInfo"],
-    `/users/me`
-  );
+  const { data: userInfo } = useGetUserData();
   const isPostMode: "find" | "lost" = chatRoomData?.postInfo.postType === "FOUND" ? "find" : "lost";
 
   const {
@@ -129,7 +117,7 @@ const ChatRoom = ({ params }: { params: Promise<{ postId: string }> }) => {
     const optimisticMessage: ChatMessage = {
       messageId: optimisticId,
       messageType: "TEXT",
-      senderId: userInfo.result.userId,
+      senderId: Number(userInfo.result.userId),
       content,
       imageUrls: [],
       createdAt: new Date().toISOString(),
@@ -169,7 +157,7 @@ const ChatRoom = ({ params }: { params: Promise<{ postId: string }> }) => {
               name="content"
               aria-label="채팅 입력창"
               roomId={roomId}
-              userId={userInfo.result.userId}
+              userId={Number(userInfo.result.userId)}
             />
           </form>
         </FormProvider>
