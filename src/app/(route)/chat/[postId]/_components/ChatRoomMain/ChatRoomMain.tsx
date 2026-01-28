@@ -8,10 +8,10 @@ import {
   useChatInitialScroll,
   useChatScrollPreserve,
 } from "./internal/hooks";
-import { ChatMessage } from "@/api/fetch/ChatMessage/types/ChatMessageTypes";
 import { cn } from "@/utils";
 import { useGetUserData } from "@/api/fetch/user";
-import { getDateKey } from "./internal/ChatDateDivider";
+import { enrichChatMessagesWithMetadata } from "./utils";
+import { ChatMessage } from "@/api/fetch/ChatMessage/types/ChatMessageTypes";
 
 interface ChatRoomMainProps {
   chatMessages: ChatMessage[];
@@ -52,6 +52,10 @@ const ChatRoomMain = ({
     chatMessagesLength: chatMessages.length,
   });
 
+  const userId = userInfo?.result.userId ? Number(userInfo.result.userId) : undefined;
+
+  const chatMessagesWithMetadata = enrichChatMessagesWithMetadata(chatMessages, userId);
+
   return (
     <div
       ref={scrollRef}
@@ -61,23 +65,12 @@ const ChatRoomMain = ({
       )}
     >
       <h1 className="sr-only">채팅 표시 화면</h1>
-      {chatMessages.map((chat, i) => {
-        const prevChat = chatMessages[i - 1];
-
-        const isNewDate = i === 0 || getDateKey(chat.createdAt) !== getDateKey(prevChat.createdAt);
-        const nextSender = prevChat
-          ? Number(userInfo?.result.userId) === prevChat.senderId
-            ? "me"
-            : "other"
-          : undefined;
-        return (
-          <div key={chat.messageId}>
-            {isNewDate && <ChatDateDivider createdAt={chat.createdAt} />}
-
-            <ChatBox chat={chat} nextSender={nextSender} lastChat={i === chatMessages.length - 1} />
-          </div>
-        );
-      })}
+      {chatMessagesWithMetadata.map(({ chat, isNewDate, nextSender, lastChat }) => (
+        <div key={chat.messageId}>
+          {isNewDate && <ChatDateDivider createdAt={chat.createdAt} />}
+          <ChatBox chat={chat} nextSender={nextSender} lastChat={lastChat} />
+        </div>
+      ))}
     </div>
   );
 };
