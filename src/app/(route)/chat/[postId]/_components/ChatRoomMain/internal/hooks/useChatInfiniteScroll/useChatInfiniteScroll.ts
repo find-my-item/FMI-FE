@@ -8,13 +8,13 @@ interface UseChatInfiniteScrollOptions {
   chatMessagesLength: number;
 }
 
-export function useChatInfiniteScroll({
+const useChatInfiniteScroll = ({
   scrollRef,
   fetchNextPage,
   hasNextPage,
   isFetchingNextPage,
   chatMessagesLength,
-}: UseChatInfiniteScrollOptions) {
+}: UseChatInfiniteScrollOptions) => {
   const prevScrollHeightRef = useRef<number>(0);
   const prevScrollTopRef = useRef<number>(0);
   const prevLengthRef = useRef<number>(chatMessagesLength);
@@ -50,7 +50,6 @@ export function useChatInfiniteScroll({
       return;
     }
 
-    // useLayoutEffect는 DOM 업데이트 직후 실행되므로 더 정확한 타이밍
     const newScrollHeight = el.scrollHeight;
     const prevScrollHeight = prevScrollHeightRef.current;
     const scrollDiff = newScrollHeight - prevScrollHeight;
@@ -64,4 +63,6 @@ export function useChatInfiniteScroll({
     shouldPreserveScrollRef.current = false;
     prevLengthRef.current = chatMessagesLength;
   }, [isFetchingNextPage, chatMessagesLength, scrollRef]);
-}
+};
+
+export default useChatInfiniteScroll;

@@ -1,1 +1,0 @@
-export { useChatInitialScroll } from "./useChatInitialScroll";

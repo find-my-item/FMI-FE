@@ -7,7 +7,7 @@ interface UseChatScrollPreserveParams {
   chatMessagesLength: number;
 }
 
-export const useChatScrollPreserve = ({
+const useChatScrollPreserve = ({
   scrollRef,
   scrollHeightRef,
   isFetchingNextPage,
@@ -88,3 +88,5 @@ export const useChatScrollPreserve = ({
     };
   }, [isFetchingNextPage, chatMessagesLength, scrollRef, scrollHeightRef]);
 };
+
+export default useChatScrollPreserve;

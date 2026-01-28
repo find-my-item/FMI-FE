@@ -1,6 +1,6 @@
 import { useLayoutEffect, useState, RefObject } from "react";
 
-export const useChatInitialScroll = (
+const useChatInitialScroll = (
   scrollRef: RefObject<HTMLDivElement | null>,
   scrollHeightRef: RefObject<number>
 ) => {
@@ -11,8 +11,9 @@ export const useChatInitialScroll = (
     scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     scrollHeightRef.current = scrollRef.current.scrollHeight;
     setReady(true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return ready;
 };
+
+export default useChatInitialScroll;
