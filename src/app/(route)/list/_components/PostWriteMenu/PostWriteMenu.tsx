@@ -2,14 +2,18 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { cn } from "@/utils";
+import { useParams } from "next/navigation";
 import { Button, FloatingButton, Icon } from "@/components/common";
 import ModalLayout from "@/components/common/Modal/_internal/ModalLayout";
+import { cn } from "@/utils";
 import { WRITE_MENU_STYLES } from "./WRITE_MENU_STYLES";
 
 const PostWriteMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isFindModalOpen, setIsFindModalOpen] = useState(false);
+
+  const params = useParams();
+  if (params.id) return null;
 
   const handleClickFindButton = () => {
     setIsMenuOpen(false);

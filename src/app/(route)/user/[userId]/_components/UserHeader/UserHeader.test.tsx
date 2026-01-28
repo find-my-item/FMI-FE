@@ -1,11 +1,14 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import UserHeader from "./UserHeader";
-import { MOCK_USER_PROFILE } from "@/mock/data";
+import { MOCK_USER_PROFILE_HEADER } from "@/mock/data";
 
 jest.mock("@/components/common", () => ({
   Icon: ({ name, size, className }: any) => (
     <svg data-testid="icon" data-name={name} data-size={size} className={className} />
+  ),
+  ProfileAvatar: ({ src, alt, size }: any) => (
+    <img src={src || "/test_list.JPG"} alt={alt} data-size={size} />
   ),
 }));
 
@@ -16,7 +19,7 @@ jest.mock("next/image", () => ({
 
 describe("UserHeader", () => {
   it("프로필 이미지가 표시되어야 합니다", () => {
-    render(<UserHeader data={MOCK_USER_PROFILE} />);
+    render(<UserHeader data={MOCK_USER_PROFILE_HEADER} />);
     expect(screen.getByRole("img")).toBeInTheDocument();
   });
 
@@ -28,8 +31,8 @@ describe("UserHeader", () => {
   });
 
   it("닉네임이 표시되어야 합니다", () => {
-    render(<UserHeader data={MOCK_USER_PROFILE} />);
-    expect(screen.getByText(MOCK_USER_PROFILE.nickname)).toBeInTheDocument();
+    render(<UserHeader data={MOCK_USER_PROFILE_HEADER} />);
+    expect(screen.getByText(MOCK_USER_PROFILE_HEADER.nickname)).toBeInTheDocument();
   });
 
   it("닉네임이 없을 경우 로딩 중...이 표시되어야 합니다", () => {

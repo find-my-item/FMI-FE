@@ -48,3 +48,8 @@ export const MOCK_USER_PROFILE_DATA = {
   comments: [MOCK_USER_PROFILE_COMMENT_DATA],
   favorites: [MOCK_USER_PROFILE_FAVORITE_DATA],
 };
+
+export const MOCK_USER_PROFILE_HEADER = {
+  nickname: "짱구",
+  profileImg: "/test_list.JPG",
+};

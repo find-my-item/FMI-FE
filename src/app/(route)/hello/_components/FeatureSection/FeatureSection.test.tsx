@@ -43,7 +43,7 @@ describe("FeatureSection", () => {
 
     const section = container.querySelector("section");
     expect(section).toBeInTheDocument();
-    expect(section).toHaveClass("bg-[#EFFFF9]");
+    expect(section).toHaveClass("bg-layoutBrand");
   });
 
   it("aria-labelledby 값이 title 기반으로 설정된다", () => {
