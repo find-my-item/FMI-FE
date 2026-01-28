@@ -1,5 +1,4 @@
 import { cn, formatChatTime } from "@/utils";
-import { Sender } from "@/app/(route)/chat/_types/Sender";
 import { CHAT_SENDER_STYLE } from "../../constants/CHAT_SENDER_STYLE";
 import ChatImageBox from "../ChatImageBox/ChatImageBox";
 import { ChatMessage } from "@/api/fetch/ChatMessage/types/ChatMessageTypes";
@@ -7,7 +6,7 @@ import { useGetUserData } from "@/api/fetch/user";
 
 interface ChatBoxProps {
   chat: ChatMessage;
-  nextSender?: Sender;
+  nextSender?: "me" | "other";
   lastChat?: boolean;
 }
 
