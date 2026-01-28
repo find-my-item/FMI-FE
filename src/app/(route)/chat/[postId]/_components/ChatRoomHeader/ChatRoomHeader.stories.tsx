@@ -1,6 +1,17 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import ChatRoomHeader from "./ChatRoomHeader";
 import { ChatRoomResponse } from "@/api/fetch/chatRoom/types/ChatRoomType";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ToastProvider } from "@/providers/ToastProviders";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 const meta: Meta<typeof ChatRoomHeader> = {
   title: "페이지/채팅 상세 페이지/ChatRoomHeader",
@@ -23,9 +34,13 @@ const meta: Meta<typeof ChatRoomHeader> = {
   },
   decorators: [
     (Story) => (
-      <div className="w-[430px] border border-gray-200">
-        <Story />
-      </div>
+      <ToastProvider>
+        <QueryClientProvider client={queryClient}>
+          <div className="w-[430px] border border-gray-200">
+            <Story />
+          </div>
+        </QueryClientProvider>
+      </ToastProvider>
     ),
   ],
 };
