@@ -9,3 +9,4 @@ export { loadRegionRows } from "./loadRegionRows/loadRegionRows";
 export { getMapLevelByRadius } from "./getMapLevelByRadius/getMapLevelByRadius";
 export { normalizeEnumValue } from "./normalizeEnumValue/normalizeEnumValue";
 export { getRegionSearchResults } from "./getRegionSearchResults/getRegionSearchResults";
+export { formatViewCount } from "./formatViewCount/formatViewCount";

@@ -33,7 +33,7 @@ export const MOCK_POST_DEFAULT_DETAIL: GetDetailPostResponse = {
     postType: "FOUND",
     itemStatus: "FOUND",
     imageUrls: ["https://picsum.photos/400/300?random=2"],
-    radius: 0.1,
+    radius: 1000,
     category: "WALLET",
     favoriteCount: 0,
     favoriteStatus: false,

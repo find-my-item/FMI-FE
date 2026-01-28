@@ -18,11 +18,7 @@ const FeatureSection = ({ content, variant = "default", imageSlot }: FeatureSect
   return (
     <section
       aria-labelledby={`service-introduce-${title}`}
-      className={cn(
-        "px-10 py-[60px] flex-col-center",
-        // TODO(지권): 배경 색 수정 예정
-        variant === "highlight" && "bg-[#EFFFF9]"
-      )}
+      className={cn("px-10 py-[60px] flex-col-center", variant === "highlight" && "bg-layoutBrand")}
     >
       {imageSlot}
       <div className="mt-10 gap-5 text-center flex-col-center">

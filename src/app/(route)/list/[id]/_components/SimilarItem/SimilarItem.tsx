@@ -1,4 +1,4 @@
-import { Icon } from "@/components/common";
+import { Icon, ListItemImage } from "@/components/common";
 import { IconName } from "@/components/common/Icon/Icon";
 import { formatCappedNumber } from "@/utils";
 
@@ -18,8 +18,7 @@ const SimilarItem = () => {
 
   return (
     <article className="flex flex-col items-start justify-center gap-3">
-      {/* TODO(지권): 추후 이미지 컴포넌트 변경 */}
-      <div className="h-[126px] w-[126px] rounded-[6px] bg-flatGray-100" />
+      <ListItemImage src="/test_list.JPG" alt="" size={126} />
 
       <div className="flex flex-col gap-[3px]">
         <span className="font-semibold text-layout-header-default">게시글 제목</span>

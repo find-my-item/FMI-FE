@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { ProfileAvatar } from "@/components/common";
 
 interface UserHeaderProps {
   data?: {
@@ -10,22 +10,9 @@ interface UserHeaderProps {
 const UserHeader = ({ data }: UserHeaderProps) => {
   const { nickname, profileImg } = data || {};
 
-  // TODO(지권): 대체 이미지 경로 및 대체 텍스트 수정 필요
-  const imageSrc = profileImg || "/test_list.JPG";
-
   return (
     <section className="flex items-center gap-6 p-5">
-      <div className="relative h-[60px] w-[60px]">
-        <Image
-          alt={`${nickname || "익명"}의 프로필 이미지`}
-          src={imageSrc}
-          width={60}
-          height={60}
-          className="rounded-full"
-          priority
-          draggable={false}
-        />
-      </div>
+      <ProfileAvatar src={profileImg} alt={nickname} size={60} />
 
       <div className="flex flex-col items-start gap-1">
         <h2 className="text-body1-semibold text-layout-header-default">

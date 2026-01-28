@@ -36,14 +36,11 @@ describe("PostListItem", () => {
       getItemCategoryLabel(MOCK_POST_ITEM.category)
     );
 
-    // expect(screen.getByTestId("badge-new")).toBeInTheDocument();
-
     const starIcon = screen.getByTestId("icon-Star");
     expect(starIcon.parentElement).toHaveTextContent(String(MOCK_POST_ITEM.favoriteCount));
 
-    // TODO(지권): 백엔드 API 누락
-    // const eyeIcon = screen.getByTestId("icon-Eye");
-    // expect(eyeIcon.parentElement).toHaveTextContent(String(MOCK_POST_ITEM.viewCount));
+    const eyeIcon = screen.getByTestId("icon-Eye");
+    expect(eyeIcon.parentElement).toHaveTextContent(String(MOCK_POST_ITEM.viewCount));
 
     const img = screen.getByAltText("게시글 대표 이미지") as HTMLImageElement;
     expect(img).toBeInTheDocument();
