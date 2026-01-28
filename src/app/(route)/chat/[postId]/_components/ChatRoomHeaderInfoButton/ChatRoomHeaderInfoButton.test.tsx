@@ -2,13 +2,56 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 import ChatRoomHeaderInfoButton from "./ChatRoomHeaderInfoButton";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ToastProvider } from "@/providers/ToastProviders";
+import type { PropsWithChildren } from "react";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
+
+const Providers = ({ children }: PropsWithChildren) => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ToastProvider>{children}</ToastProvider>
+    </QueryClientProvider>
+  );
+};
+
+const renderWithProviders = (ui: React.ReactElement) => {
+  return render(ui, { wrapper: Providers });
+};
 
 const mockPush = jest.fn();
 const mockBack = jest.fn();
+const mockReplace = jest.fn();
 
 jest.mock("next/navigation", () => ({
-  useRouter: () => ({ push: mockPush, back: mockBack }),
+  useRouter: () => ({ push: mockPush, back: mockBack, replace: mockReplace }),
 }));
+
+const mockMutate = jest.fn();
+let onSuccessCallback: (() => void) | undefined;
+
+jest.mock("@/api/_base/query/useAppMutation", () => {
+  return jest.fn((apiType: string, url: string, method: string, options?: any) => {
+    onSuccessCallback = options?.onSuccess;
+    return {
+      mutate: (variables?: any, mutationOptions?: any) => {
+        mockMutate(variables, mutationOptions);
+        // mutate 호출 시 onSuccess 실행
+        if (onSuccessCallback) {
+          onSuccessCallback();
+        }
+      },
+    };
+  });
+});
 
 jest.mock("@/components/common", () => ({
   Icon: ({ name, ...rest }: any) => <span data-testid={`icon-${name}`} {...rest} />,
@@ -36,10 +79,11 @@ jest.mock("@/utils", () => ({
 describe("ChatRoomHeaderInfoButton", () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    onSuccessCallback = undefined;
   });
 
   it("정보 버튼이 렌더링됩니다", () => {
-    render(<ChatRoomHeaderInfoButton />);
+    renderWithProviders(<ChatRoomHeaderInfoButton roomId={1} />);
 
     const infoButton = screen.getByRole("button", { name: "채팅방 메뉴 열기 버튼" });
     expect(infoButton).toBeInTheDocument();
@@ -48,7 +92,7 @@ describe("ChatRoomHeaderInfoButton", () => {
 
   it("정보 버튼 클릭 시 메뉴가 열립니다", async () => {
     const user = userEvent.setup();
-    render(<ChatRoomHeaderInfoButton />);
+    renderWithProviders(<ChatRoomHeaderInfoButton roomId={1} />);
 
     const infoButton = screen.getByRole("button", { name: "채팅방 메뉴 열기 버튼" });
     await user.click(infoButton);
@@ -60,7 +104,7 @@ describe("ChatRoomHeaderInfoButton", () => {
 
   it("메뉴 옵션들이 올바르게 렌더링됩니다", async () => {
     const user = userEvent.setup();
-    render(<ChatRoomHeaderInfoButton />);
+    renderWithProviders(<ChatRoomHeaderInfoButton roomId={1} />);
 
     const infoButton = screen.getByRole("button", { name: "채팅방 메뉴 열기 버튼" });
     await user.click(infoButton);
@@ -71,7 +115,7 @@ describe("ChatRoomHeaderInfoButton", () => {
 
   it("차단, 신고하기 클릭 시 router.push가 호출됩니다", async () => {
     const user = userEvent.setup();
-    render(<ChatRoomHeaderInfoButton />);
+    renderWithProviders(<ChatRoomHeaderInfoButton roomId={1} />);
 
     const infoButton = screen.getByRole("button", { name: "채팅방 메뉴 열기 버튼" });
     await user.click(infoButton);
@@ -85,7 +129,7 @@ describe("ChatRoomHeaderInfoButton", () => {
 
   it("채팅방 나가기 클릭 시 모달이 열립니다", async () => {
     const user = userEvent.setup();
-    render(<ChatRoomHeaderInfoButton />);
+    renderWithProviders(<ChatRoomHeaderInfoButton roomId={1} />);
 
     const infoButton = screen.getByRole("button", { name: "채팅방 메뉴 열기 버튼" });
     await user.click(infoButton);
@@ -102,9 +146,9 @@ describe("ChatRoomHeaderInfoButton", () => {
     ).toBeInTheDocument();
   });
 
-  it("모달에서 확인 클릭 시 router.back()이 호출됩니다", async () => {
+  it("모달에서 확인 클릭 시 router.replace가 호출됩니다", async () => {
     const user = userEvent.setup();
-    render(<ChatRoomHeaderInfoButton />);
+    renderWithProviders(<ChatRoomHeaderInfoButton roomId={1} />);
 
     // 메뉴 열기
     const infoButton = screen.getByRole("button", { name: "채팅방 메뉴 열기 버튼" });
@@ -118,12 +162,14 @@ describe("ChatRoomHeaderInfoButton", () => {
     const confirmButton = screen.getByTestId("modal-confirm");
     await user.click(confirmButton);
 
-    expect(mockBack).toHaveBeenCalledTimes(1);
+    // mutate가 호출되어야 하고, onSuccess에서 router.replace가 호출됨
+    expect(mockMutate).toHaveBeenCalledTimes(1);
+    expect(mockReplace).toHaveBeenCalledWith("/chat");
   });
 
   it("모달에서 취소 클릭 시 모달이 닫힙니다", async () => {
     const user = userEvent.setup();
-    render(<ChatRoomHeaderInfoButton />);
+    renderWithProviders(<ChatRoomHeaderInfoButton roomId={1} />);
 
     // 메뉴 열기
     const infoButton = screen.getByRole("button", { name: "채팅방 메뉴 열기 버튼" });
@@ -144,7 +190,7 @@ describe("ChatRoomHeaderInfoButton", () => {
 
   it("외부 클릭 시 메뉴가 닫힙니다", async () => {
     const user = userEvent.setup();
-    render(<ChatRoomHeaderInfoButton />);
+    renderWithProviders(<ChatRoomHeaderInfoButton roomId={1} />);
 
     // 메뉴 열기
     const infoButton = screen.getByRole("button", { name: "채팅방 메뉴 열기 버튼" });
@@ -160,7 +206,7 @@ describe("ChatRoomHeaderInfoButton", () => {
 
   it("메뉴 내부 클릭 시 메뉴가 닫히지 않습니다", async () => {
     const user = userEvent.setup();
-    render(<ChatRoomHeaderInfoButton />);
+    renderWithProviders(<ChatRoomHeaderInfoButton roomId={1} />);
 
     // 메뉴 열기
     const infoButton = screen.getByRole("button", { name: "채팅방 메뉴 열기 버튼" });
@@ -177,7 +223,7 @@ describe("ChatRoomHeaderInfoButton", () => {
 
   it("정보 버튼을 다시 클릭하면 메뉴가 닫힙니다", async () => {
     const user = userEvent.setup();
-    render(<ChatRoomHeaderInfoButton />);
+    renderWithProviders(<ChatRoomHeaderInfoButton roomId={1} />);
 
     const infoButton = screen.getByRole("button", { name: "채팅방 메뉴 열기 버튼" });
 
