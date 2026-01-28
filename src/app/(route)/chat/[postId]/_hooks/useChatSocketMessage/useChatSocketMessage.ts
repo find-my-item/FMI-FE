@@ -20,12 +20,20 @@ const useChatSocketMessage = (roomId: number) => {
     onMessage: (message: WebSocketChatMessage) => {
       if (!roomId) return;
 
+      // 메시지의 roomId와 현재 roomId가 일치하는지 확인
+      if (message.roomId !== roomId) return;
+
       const oldData = queryClient.getQueryData<
         InfiniteData<ApiBaseResponseType<ChatMessageResponse>>
       >(["chatMessages", roomId]);
 
       const firstPage = oldData?.pages[0];
-      if (!firstPage) return;
+
+      // 쿼리 데이터가 아직 로드되지 않았을 때는 쿼리 무효화로 새로고침
+      if (!firstPage) {
+        queryClient.invalidateQueries({ queryKey: ["chatMessages", roomId] });
+        return;
+      }
 
       const chatMessage = transformWebSocketMessage(message);
       const optimisticMessage = findOptimisticMessage(firstPage.result.messages, message);
