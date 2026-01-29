@@ -4,6 +4,7 @@ import { ACTIVITY_STYLE_CONFIG } from "../../_constants/ACTIVITY_STYLE_CONFIG";
 import { ActivityDataType } from "../../_types/ActivityType";
 import transformActivityArray from "../../_utils/transformActivityArray";
 import formatTime from "../../_utils/formatTime";
+import { MypageEmptyUI } from "@/components/domain";
 
 interface ActivityItemProps {
   activityItem: ActivityDataType;
@@ -64,17 +65,21 @@ const ActivityContainer = ({ activityData }: ActivityContainerProps) => {
     <section className="w-full">
       <h2 className="sr-only">내 활동 내역 영역</h2>
 
-      <div className="flex w-full flex-col gap-7 px-5 py-5">
-        <ol className="flex flex-col gap-5">
-          {newActivityArray.map((item) => (
-            <ActivityGroupItem
-              key={item.groupId}
-              groupDate={item.groupDate}
-              activityItem={item.activityItem}
-            />
-          ))}
-        </ol>
-      </div>
+      {activityData && (
+        <div className="flex w-full flex-col gap-7 px-5 py-5">
+          <ol className="flex flex-col gap-5">
+            {newActivityArray.map((item) => (
+              <ActivityGroupItem
+                key={item.groupId}
+                groupDate={item.groupDate}
+                activityItem={item.activityItem}
+              />
+            ))}
+          </ol>
+        </div>
+      )}
+
+      {activityData.length === 0 && <MypageEmptyUI pageType="activity" />}
     </section>
   );
 };
