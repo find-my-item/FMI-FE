@@ -10,11 +10,19 @@ import { ChipProps, ChipType } from "./ChipTypes";
  * @param type - 칩의 종류를 지정합니다.
  * - `"status"`: 상세페이지 게시글의 상태를 나타냅니다.
  * - `"category"`: 상세페이지 게시글의 카테고리를 나타냅니다.
+ * - `"pending"`: 내 문의 내역 페이지/ 내 신고 내역 페이지의 '접수' 상태임을 나타냅니다.
+ * - `"received"`: 내 문의 내역 페이지/ 내 신고 내역 페이지의 '접수 중' 또는 '처리 중' 상태임을 나타냅니다.
+ * - `"resolved"`: 내 문의 내역 페이지/ 내 신고 내역 페이지의 '처리 완료' 상태임을 나타냅니다.
+ * - `"admin"`: 내 문의 내역 페이지/ 내 신고 내역 페이지의 관리자입을 나타냅니다.
  *
  * @example
  * ```tsx
  * <Chip label="찾는중" type="status" />
  * <Chip label="전자기기" type="category" />
+ * <Chip label="접수" type="pending" />
+ * <Chip label="처리 중" type="received" />
+ * <Chip label="처리 완료" type="resolved" />
+ * <Chip label="관리자" type="admin" />
  * ```
  */
 
