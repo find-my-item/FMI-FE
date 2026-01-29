@@ -60,7 +60,7 @@ export { default as NoPosts } from "@/assets/no-posts.svg";
 export { default as NoActivity } from "@/assets/no-activity.svg";
 export { default as Post } from "@/assets/post.svg";
 export { default as Comment } from "@/assets/comment.svg";
-export { default as EmptyStart } from "@/assets/empty-star.svg";
+export { default as EmptyStar } from "@/assets/empty-star.svg";
 export { default as Inquiry } from "@/assets/inquiry.svg";
 export { default as Report } from "@/assets/report.svg";
 export { default as Alert } from "@/assets/alert.svg";

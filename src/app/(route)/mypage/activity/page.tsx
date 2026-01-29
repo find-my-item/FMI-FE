@@ -2,6 +2,7 @@ import { MypageSearch } from "@/components/domain";
 import { DetailHeader } from "@/components/layout";
 import ActivityFilter from "./_components/ActivityFilter/ActivityFilter";
 import ActivityContainer from "./_components/ActivityContainer/ActivityContainer";
+import { MOCK_MYPAGE_ACTIVITY } from "@/mock/data";
 
 const page = () => {
   return (
@@ -13,7 +14,7 @@ const page = () => {
 
         <ActivityFilter />
 
-        <ActivityContainer />
+        <ActivityContainer activityGroup={MOCK_MYPAGE_ACTIVITY} />
       </div>
     </>
   );
