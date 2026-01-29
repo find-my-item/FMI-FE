@@ -14,8 +14,7 @@ const page = () => {
 
         <ActivityFilter />
 
-        <ActivityContainer activityData={[]} />
-        {/* <ActivityContainer activityData={MOCK_MYPAGE_ACTIVITY} /> */}
+        <ActivityContainer activityData={MOCK_MYPAGE_ACTIVITY} />
       </div>
     </>
   );
