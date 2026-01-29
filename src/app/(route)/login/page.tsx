@@ -37,7 +37,7 @@ const page = () => {
         <Button
           as={Link}
           href={
-            reason === "session-expired" ? "/login/email?reason=session-expired" : "/email-login"
+            reason === "session-expired" ? "/login/email?reason=session-expired" : "/login/email"
           }
           ignoreBase
           className={cn(ButtonStyle, "text-white bg-fill-brand-normal-default")}
