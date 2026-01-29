@@ -29,12 +29,8 @@ describe("PostListItem", () => {
     expect(screen.getByText(MOCK_POST_ITEM.title)).toBeInTheDocument();
     expect(screen.getByText(MOCK_POST_ITEM.summary)).toBeInTheDocument();
 
-    expect(screen.getByTestId("chip-status")).toHaveTextContent(
-      getItemStatusLabel(MOCK_POST_ITEM.itemStatus)
-    );
-    expect(screen.getByTestId("chip-category")).toHaveTextContent(
-      getItemCategoryLabel(MOCK_POST_ITEM.category)
-    );
+    expect(screen.getByText(getItemStatusLabel(MOCK_POST_ITEM.itemStatus))).toBeInTheDocument();
+    expect(screen.getByText(getItemCategoryLabel(MOCK_POST_ITEM.category))).toBeInTheDocument();
 
     const starIcon = screen.getByTestId("icon-Star");
     expect(starIcon.parentElement).toHaveTextContent(String(MOCK_POST_ITEM.favoriteCount));
