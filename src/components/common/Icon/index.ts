@@ -58,3 +58,5 @@ export { default as NoInquiries } from "@/assets/no-inquiries.svg";
 export { default as NoReports } from "@/assets/no-reports.svg";
 export { default as NoPosts } from "@/assets/no-posts.svg";
 export { default as NoActivity } from "@/assets/no-activity.svg";
+export { default as ArrowDownSmall } from "@/assets/arrow-down-small.svg";
+export { default as CommentLikeIcon } from "@/assets/comment-like-icon.svg";

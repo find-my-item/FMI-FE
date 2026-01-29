@@ -1,9 +1,10 @@
 "use client";
 
-import { Bookmark, Icon, KebabMenuButton, ViewMoreReply } from "@/components/common";
-import { cn } from "@/utils";
 import { useState } from "react";
+import { Bookmark, Icon, KebabMenuButton, ProfileAvatar, ViewMoreReply } from "@/components/common";
+import { cn } from "@/utils";
 import type { Comment } from "./types/commentItem";
+import CommentCard from "./Comment";
 
 interface CommentItemProps {
   comment: Comment;
@@ -21,7 +22,7 @@ const CommentItem = ({ comment, replies = [] }: CommentItemProps) => {
 
   return (
     <>
-      <section
+      {/* <section
         className={cn(
           "space-y-[8px] px-[20px]",
           comment.replyTo ? "pl-[30px] pr-[20px] pt-[8px]" : "px-[20px] pt-[24px]"
@@ -29,18 +30,20 @@ const CommentItem = ({ comment, replies = [] }: CommentItemProps) => {
       >
         <div className="flex items-start justify-between gap-[16px]">
           <div className="flex gap-[14px]">
-            <div className="h-[40px] w-[40px] rounded-full bg-gray-300" />
+            <ProfileAvatar src={comment.authorImage} alt={comment.author} size={40} />
             <div className="flex flex-col justify-center gap-[2px]">
-              <p className="text-body1-medium text-[#242424]">{comment.author}</p>
-              <time className="text-body2-regular text-[#9D9D9D]">{comment.date}</time>
+              <p className="text-body1-medium text-layout-header-default">{comment.author}</p>
+              <time className="text-body2-regular text-layout-body-default">{comment.date}</time>
             </div>
           </div>
           <KebabMenuButton size="small" ariaLabel="댓글 메뉴" />
         </div>
+
         <p className="text-body1-regular text-[#242424]">
           {comment.replyTo && <span className="mr-1 text-green-600">@{comment.replyTo}</span>}
           {comment.content}
         </p>
+
         <div className="flex items-center gap-1">
           <Bookmark isActive size="small" />
           <div className="flex items-center gap-[12px]">
@@ -70,7 +73,8 @@ const CommentItem = ({ comment, replies = [] }: CommentItemProps) => {
             답글 쓰기
           </button>
         )}
-      </section>
+      </section> */}
+      <CommentCard />
 
       {!comment.replyTo && viewReply && hasReplies && (
         <div>
