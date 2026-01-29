@@ -75,6 +75,7 @@ const CommentItem = ({ comment, replies = [] }: CommentItemProps) => {
         )}
       </section> */}
       <CommentCard />
+      <CommentCard isReply />
 
       {!comment.replyTo && viewReply && hasReplies && (
         <div>
