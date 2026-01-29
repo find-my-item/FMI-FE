@@ -1,10 +1,11 @@
 import Icon, { IconName } from "@/components/common/Icon/Icon";
 import { cn } from "@/utils";
 import { ACTIVITY_STYLE_CONFIG } from "../../_constants/ACTIVITY_STYLE_CONFIG";
-import { ActivityGroupType, ActivityItemType, ActivityType } from "../../_types/ActivityType";
+import { ActivityDataType } from "../../_types/ActivityType";
+import transformActivityArray from "../../_utils/transformActivityArray";
 
 interface ActivityItemProps {
-  activityItem: ActivityItemType;
+  activityItem: ActivityDataType;
 }
 
 function ActivityItem({ activityItem }: ActivityItemProps) {
@@ -32,19 +33,31 @@ function ActivityItem({ activityItem }: ActivityItemProps) {
   );
 }
 
-export interface ActivityDataType {
-  activityId: number;
-  type: ActivityType;
-  createdAt: string;
-  title: string;
-  subText?: string;
+interface ActivityGroupItemProps {
+  groupDate: string;
+  activityItem: readonly ActivityDataType[];
 }
+
+const ActivityGroupItem = ({ groupDate, activityItem }: ActivityGroupItemProps) => {
+  return (
+    <li className="flex flex-col gap-7">
+      <h3 className="text-h3-semibold text-layout-header-default">{groupDate}</h3>
+
+      <ol className="flex flex-col gap-9">
+        {activityItem.map((item) => (
+          <ActivityItem key={item.activityId} activityItem={item} />
+        ))}
+      </ol>
+    </li>
+  );
+};
+
 interface ActivityContainerProps {
   activityData: readonly ActivityDataType[];
 }
 
 const ActivityContainer = ({ activityData }: ActivityContainerProps) => {
-  const newGroupArray = activityData.split("T");
+  const newActivityArray = transformActivityArray(activityData);
 
   return (
     <section className="w-full">
@@ -52,16 +65,12 @@ const ActivityContainer = ({ activityData }: ActivityContainerProps) => {
 
       <div className="flex w-full flex-col gap-7 px-5 py-5">
         <ol className="flex flex-col gap-5">
-          {activityData.map((item) => (
-            <li key={item.groupId} className="flex flex-col gap-7">
-              <h3 className="text-h3-semibold text-layout-header-default">{item.groupDate}</h3>
-
-              <ol className="flex flex-col gap-9">
-                {item.activityItem.map((item) => (
-                  <ActivityItem key={item.activityId} activityItem={item} />
-                ))}
-              </ol>
-            </li>
+          {newActivityArray.map((item) => (
+            <ActivityGroupItem
+              key={item.groupId}
+              groupDate={item.groupDate}
+              activityItem={item.activityItem}
+            />
           ))}
         </ol>
       </div>

@@ -9,7 +9,7 @@ export type ActivityType =
   | "ALERT_SETTING";
 
 // TODO(수현): api 연결 시 api 스키마에 따라 변수 이름 변경 필요
-export interface ActivityItemType {
+export interface ActivityDataType {
   activityId: number;
   type: ActivityType;
   createdAt: string;
@@ -21,5 +21,5 @@ export interface ActivityItemType {
 export interface ActivityGroupType {
   groupId: number;
   groupDate: string;
-  activityItem: readonly ActivityItemType[];
+  activityItem: readonly ActivityDataType[];
 }
