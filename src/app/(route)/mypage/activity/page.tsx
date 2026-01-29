@@ -1,6 +1,7 @@
 import { MypageSearch } from "@/components/domain";
 import { DetailHeader } from "@/components/layout";
 import ActivityFilter from "./_components/ActivityFilter/ActivityFilter";
+import ActivityContainer from "./_components/ActivityContainer/ActivityContainer";
 
 const page = () => {
   return (
@@ -11,6 +12,8 @@ const page = () => {
         <MypageSearch />
 
         <ActivityFilter />
+
+        <ActivityContainer />
       </div>
     </>
   );
