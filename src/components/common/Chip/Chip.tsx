@@ -28,11 +28,6 @@ const TypeMap: Record<ChipType, string> = {
   brandNormal: "bg-fill-brand-normal-default text-white",
   admin:
     "bg-fill-brand-subtle-default text-brand-normal-default text-caption2-semibold !py-1 !px-2",
-  // status: "bg-fill-brand-subtle-default text-brand-normal-default",
-  // category: "bg-fill-neutral-strong-default text-neutral-strong-default",
-  // pending: "bg-fill-brand-subtle-default text-brand-normal-default",
-  // received: "bg-fill-brand-subtle-default text-brand-normal-default",
-  // resolved: "bg-fill-brand-normal-default text-white",
 };
 
 const Chip = ({ label, type = "brandSubtle" }: ChipProps) => {

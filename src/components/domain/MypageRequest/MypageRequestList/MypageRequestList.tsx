@@ -31,7 +31,7 @@ const MypageListLink = ({ listType, ...props }: MypageListLinkProps) => {
     >
       <Chip
         label={LIST_STATUS_CHIP[props.status as keyof typeof LIST_STATUS_CHIP].label}
-        type={LIST_STATUS_CHIP[props.status as keyof typeof LIST_STATUS_CHIP].type}
+        type={LIST_STATUS_CHIP[props.status as keyof typeof LIST_STATUS_CHIP].chipType}
       />
       <h3 className="mt-2 text-h3-semibold text-layout-header-default">{props.targetTitle}</h3>
       <span className="mt-[3px] text-body2-regular text-layout-body-default">
