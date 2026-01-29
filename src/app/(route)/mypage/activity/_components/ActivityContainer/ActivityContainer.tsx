@@ -1,7 +1,7 @@
 import Icon, { IconName } from "@/components/common/Icon/Icon";
-import { cn, formatDate } from "@/utils";
+import { cn } from "@/utils";
 import { ACTIVITY_STYLE_CONFIG } from "../../_constants/ACTIVITY_STYLE_CONFIG";
-import { ActivityGroupType, ActivityItemType } from "../../_types/ActivityType";
+import { ActivityGroupType, ActivityItemType, ActivityType } from "../../_types/ActivityType";
 
 interface ActivityItemProps {
   activityItem: ActivityItemType;
@@ -32,26 +32,35 @@ function ActivityItem({ activityItem }: ActivityItemProps) {
   );
 }
 
+export interface ActivityDataType {
+  activityId: number;
+  type: ActivityType;
+  createdAt: string;
+  title: string;
+  subText?: string;
+}
 interface ActivityContainerProps {
-  activityGroup: readonly ActivityGroupType[];
+  activityData: readonly ActivityDataType[];
 }
 
-const ActivityContainer = ({ activityGroup }: ActivityContainerProps) => {
+const ActivityContainer = ({ activityData }: ActivityContainerProps) => {
+  const newGroupArray = activityData.split("T");
+
   return (
     <section className="w-full">
       <h2 className="sr-only">내 활동 내역 영역</h2>
 
       <div className="flex w-full flex-col gap-7 px-5 py-5">
         <ol className="flex flex-col gap-5">
-          {activityGroup.map((item) => (
+          {activityData.map((item) => (
             <li key={item.groupId} className="flex flex-col gap-7">
               <h3 className="text-h3-semibold text-layout-header-default">{item.groupDate}</h3>
 
-              <ul className="flex flex-col gap-9">
+              <ol className="flex flex-col gap-9">
                 {item.activityItem.map((item) => (
                   <ActivityItem key={item.activityId} activityItem={item} />
                 ))}
-              </ul>
+              </ol>
             </li>
           ))}
         </ol>

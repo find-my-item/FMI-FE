@@ -195,63 +195,46 @@ export const MOCK_MYPAGE_REQUEST_COMMENTS = [
 
 export const MOCK_MYPAGE_ACTIVITY = [
   {
-    groupId: 1,
-    groupDate: "2026.01.30",
-    activityItem: [
-      {
-        activityId: 101,
-        type: "POST",
-        createdAt: "2026-01-30T18:00:00",
-        title: "게시글을 작성했습니다.",
-        subText: "제주도 여행 맛집 리스트 공유합니다!",
-      },
-      {
-        activityId: 102,
-        type: "COMMENT",
-        createdAt: "2026-01-30T17:30:00",
-        title: "댓글을 작성했습니다.",
-        subText: "정말 좋은 정보네요. 감사합니다.",
-      },
-      {
-        activityId: 103,
-        type: "FAVORITE",
-        createdAt: "2026-01-30T16:15:00",
-        title: "게시글을 즐겨찾기했습니다.",
-        subText: "2024년 프론트엔드 개발자 로드맵",
-      },
-    ],
+    activityId: 101,
+    type: "POST",
+    createdAt: "2026-01-30T18:00:00",
+    title: "게시글을 작성했습니다.",
+    subText: "제주도 여행 맛집 리스트 공유합니다!",
   },
   {
-    groupId: 2,
-    groupDate: "2026.01.29",
-    activityItem: [
-      {
-        activityId: 201,
-        type: "INQUIRY",
-        createdAt: "2026-01-29T14:00:00",
-        title: "1:1 문의를 작성했습니다.",
-        subText: "결제 오류 관련하여 문의드립니다.",
-      },
-      {
-        activityId: 202,
-        type: "INQUIRY_REPLY",
-        createdAt: "2026-01-29T13:00:00",
-        title: "1:1 문의 답변이 완료되었습니다.",
-        subText: "문의하신 내용에 대한 답변입니다.",
-      },
-    ],
+    activityId: 102,
+    type: "COMMENT",
+    createdAt: "2026-01-30T17:30:00",
+    title: "댓글을 작성했습니다.",
+    subText: "정말 좋은 정보네요. 감사합니다.",
   },
   {
-    groupId: 3,
-    groupDate: "2026.01.15",
-    activityItem: [
-      {
-        activityId: 301,
-        type: "ALERT_SETTING",
-        createdAt: "2026-01-15T09:00:00",
-        title: "알림 설정을 변경했습니다.",
-        subText: "",
-      },
-    ],
+    activityId: 103,
+    type: "FAVORITE",
+    createdAt: "2026-01-30T16:15:00",
+    title: "게시글을 즐겨찾기했습니다.",
+    subText: "2024년 프론트엔드 개발자 로드맵",
+  },
+
+  {
+    activityId: 201,
+    type: "INQUIRY",
+    createdAt: "2026-01-29T14:00:00",
+    title: "1:1 문의를 작성했습니다.",
+    subText: "결제 오류 관련하여 문의드립니다.",
+  },
+  {
+    activityId: 202,
+    type: "INQUIRY_REPLY",
+    createdAt: "2026-01-29T13:00:00",
+    title: "1:1 문의 답변이 완료되었습니다.",
+    subText: "문의하신 내용에 대한 답변입니다.",
+  },
+  {
+    activityId: 301,
+    type: "ALERT_SETTING",
+    createdAt: "2026-01-15T09:00:00",
+    title: "알림 설정을 변경했습니다.",
+    subText: "마케팅 정보 수신 동의",
   },
 ] as const;
