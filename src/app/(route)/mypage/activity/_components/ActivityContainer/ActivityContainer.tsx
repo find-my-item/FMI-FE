@@ -3,6 +3,7 @@ import { cn } from "@/utils";
 import { ACTIVITY_STYLE_CONFIG } from "../../_constants/ACTIVITY_STYLE_CONFIG";
 import { ActivityDataType } from "../../_types/ActivityType";
 import transformActivityArray from "../../_utils/transformActivityArray";
+import formatTime from "../../_utils/formatTime";
 
 interface ActivityItemProps {
   activityItem: ActivityDataType;
@@ -25,7 +26,7 @@ function ActivityItem({ activityItem }: ActivityItemProps) {
       </div>
 
       <div className="w-full px-5">
-        <span className="text-body2-regular text-layout-body-default">{createdAt}</span>
+        <span className="text-body2-regular text-layout-body-default">{formatTime(createdAt)}</span>
         <p className="mt-[6px] text-body1-semibold text-neutral-strong-default">{title}</p>
         <span className="mt-[2px] text-body2-regular text-neutral-normal-default">{subText}</span>
       </div>
