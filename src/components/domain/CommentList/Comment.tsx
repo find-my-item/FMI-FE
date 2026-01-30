@@ -13,9 +13,13 @@ interface CommentCardProps {
 }
 
 // TODO: 답글 더보기 추가
-// TODO: 대댓글 유저 언급 표시
 
-let userId = "1";
+const COMMENT_MOCK_DATA = {
+  id: "1",
+  replyNickname: "a1",
+  content:
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate ex omnis ullam maiores nihil consequuntur!",
+};
 
 const CommentCard = ({ level = "comment", className }: CommentCardProps) => {
   const isReply = level === "reply";
@@ -33,8 +37,8 @@ const CommentCard = ({ level = "comment", className }: CommentCardProps) => {
         <div className="flex-1">
           <div className="space-y-2">
             <div className="flex flex-col gap-3">
-              <CommentMeta userId={userId} isThreadItem={isThreadItem} />
-              <CommentBody />
+              <CommentMeta userId={COMMENT_MOCK_DATA.id} isThreadItem={isThreadItem} />
+              <CommentBody isNestedReply={isNestedReply} commentData={COMMENT_MOCK_DATA} />
             </div>
 
             <CommentFooter
@@ -44,7 +48,6 @@ const CommentCard = ({ level = "comment", className }: CommentCardProps) => {
             />
           </div>
 
-          {/* 답글 */}
           <CommentActions
             isThreadItem={isThreadItem}
             isReplyFormOpen={isReplyFormOpen}

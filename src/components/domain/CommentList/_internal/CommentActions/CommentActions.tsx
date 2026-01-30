@@ -2,7 +2,7 @@ import type { Dispatch, SetStateAction } from "react";
 import { Icon } from "@/components/common";
 import { cn } from "@/utils";
 
-interface CommentActions {
+interface CommentActionsProps {
   isThreadItem: boolean;
   viewReply: boolean;
   setViewReply: Dispatch<SetStateAction<boolean>>;
@@ -16,9 +16,10 @@ const CommentActions = ({
   setViewReply,
   isReplyFormOpen,
   setIsReplyFormOpen,
-}: CommentActions) => {
+}: CommentActionsProps) => {
   return (
     <div className="flex items-center gap-3 py-2">
+      {/* 답글 */}
       {!isThreadItem && (
         <button className="flex items-center gap-1" onClick={() => setViewReply((prev) => !prev)}>
           <span

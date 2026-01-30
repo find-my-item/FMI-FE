@@ -1,17 +1,17 @@
 import { Icon } from "@/components/common";
 import { cn } from "@/utils";
 
-interface CommentActionsProps {
+interface CommentFooterProps {
   isThreadItem: boolean;
   isReplyFormOpen: boolean;
   setIsReplyFormOpen: (value: boolean) => void;
 }
 
-const CommentActions = ({
+const CommentFooter = ({
   isThreadItem,
   isReplyFormOpen,
   setIsReplyFormOpen,
-}: CommentActionsProps) => {
+}: CommentFooterProps) => {
   return (
     <div className="flex items-center gap-3">
       {/* 댓글 좋아요 / (답글·대댓글) 답글 작성 */}
@@ -34,4 +34,4 @@ const CommentActions = ({
   );
 };
 
-export default CommentActions;
+export default CommentFooter;
