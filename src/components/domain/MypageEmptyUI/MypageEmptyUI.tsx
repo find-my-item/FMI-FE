@@ -14,7 +14,7 @@ const MypageEmptyUI = ({ pageType }: MypageEmptyUIProps) => {
       <Icon
         name={target.iconName}
         size={70}
-        className={cn(pageType == "activity" && "w-[160px]")}
+        className={pageType == "activity" ? "w-[160px]" : ""}
       />
       <h2 className="text-h2-bold text-layout-header-default">아직 {target.titleText}이 없어요.</h2>
       <p className="text-body2-regular text-layout-body-default">
