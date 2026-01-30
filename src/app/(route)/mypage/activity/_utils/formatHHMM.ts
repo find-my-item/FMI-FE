@@ -1,6 +1,8 @@
 const formatHHMM = (dateString: string) => {
+  const fallback = "-";
+
   if (!dateString || !dateString.includes("T")) {
-    return "";
+    return fallback;
   }
 
   const timePart = dateString.split("T")[1];
