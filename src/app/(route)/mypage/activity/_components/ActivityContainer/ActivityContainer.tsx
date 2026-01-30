@@ -21,7 +21,7 @@ function ActivityItem({ activityItem }: ActivityItemProps) {
         <div className={cn("h-9 w-9 rounded-full flex-center", bgColor)}>
           <Icon name={iconName} size={18} />
         </div>
-        <hr className="h-[54px] border border-divider-default" />
+        <hr className="h-[54px] border border-divider-default" aria-hidden={true} />
       </div>
 
       <div className="min-w-0 flex-1 px-5">
