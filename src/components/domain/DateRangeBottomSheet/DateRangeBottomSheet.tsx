@@ -49,8 +49,8 @@ const DateWheel = ({
         }}
       >
         {/* 중앙 선택 영역 강조를 위한 오버레이 */}
-        <div className="pointer-events-none absolute left-0 top-0 z-10 h-[40%] w-full bg-gradient-to-b from-white via-white/70 to-transparent" />
-        <div className="pointer-events-none absolute bottom-0 left-0 z-10 h-[40%] w-full bg-gradient-to-t from-white via-white/70 to-transparent" />
+        <div className="pointer-events-none absolute left-0 top-0 z-10 h-[40%] w-full bg-white opacity-50" />
+        <div className="pointer-events-none absolute bottom-0 left-0 z-10 h-[40%] w-full bg-white opacity-50" />
 
         {dateArray.map((item) => (
           <SwiperSlide
@@ -86,7 +86,7 @@ const DateRangeBottomSheet = ({ isOpen, onClose }: DateRangeBottomSheetProps) =>
       className="w-full gap-12 px-5 py-10 flex-col-center"
     >
       <div className="w-full gap-8 flex-col-center">
-        <h2 className="text-h2-medium">기간설정</h2>
+        <h2 className="text-h2-medium">기간 설정</h2>
 
         {/* 상단 탭 버튼 */}
         <div className="flex gap-[14px]">
