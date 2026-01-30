@@ -1,10 +1,13 @@
+// TODO(수현): 피그마 시안 변경되어 수정될 컴포넌트
+
 "use client";
 
 import { cn } from "@/utils";
 import { Button, Filter } from "@/components/common";
-import { DateRangeBottomSheet, PopupLayout } from "@/components/domain";
+import { PopupLayout } from "@/components/domain";
 import { MYPAGE_POSTS_SHEET_FILTER } from "../../_constants/MYPAGE_POSTS_SHEET_FILTER";
 import { FilterModeType } from "../../_types/FilterModeType";
+import { DateRangeBottomSheet } from "../../../_internal";
 
 interface MypagePostsBottomSheetProps {
   isOpen: boolean;
