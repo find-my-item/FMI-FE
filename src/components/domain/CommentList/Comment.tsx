@@ -1,12 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { cn } from "@/utils";
 import { Icon, KebabMenuButton, ProfileAvatar } from "@/components/common";
+import { cn } from "@/utils";
+
+type CommentCardLevel = "comment" | "reply" | "nestedReply";
 
 interface CommentCardProps {
-  isReply?: boolean;
-  isReply2?: boolean;
+  level?: CommentCardLevel;
   className?: string;
 }
 
@@ -14,14 +15,18 @@ interface CommentCardProps {
 // TODO: 답글 더보기 추가
 // TODO: 대댓글 유저 언급 표시
 
-const CommentCard = ({ isReply, isReply2, className }: CommentCardProps) => {
+const CommentCard = ({ level = "comment", className }: CommentCardProps) => {
+  const isReply = level === "reply";
+  const isNestedReply = level === "nestedReply";
+  const isThreadItem = isReply || isNestedReply;
+
   const [viewReply, setViewReply] = useState(false);
   const [isReplyFormOpen, setIsReplyFormOpen] = useState(false);
 
   return (
     <div className={cn("my-[18px] px-5", className)}>
-      <div className={cn("flex", isReply && "gap-2")}>
-        {isReply && <Icon name="CommentReplyIcon" size={24} />}
+      <div className="flex">
+        {isThreadItem && <Icon name="CommentReplyIcon" size={24} />}
 
         <div className="flex-1">
           <div className="space-y-2">
@@ -29,11 +34,11 @@ const CommentCard = ({ isReply, isReply2, className }: CommentCardProps) => {
               {/* 댓글 메타 */}
               <div className="flex items-start justify-between">
                 <div className="flex gap-[14px]">
-                  <ProfileAvatar size={isReply ? 30 : 40} />
+                  <ProfileAvatar size={isThreadItem ? 30 : 40} />
                   <div
                     className={cn(
                       "flex items-start",
-                      isReply ? "flex-row items-center gap-2" : "flex-col items-start"
+                      isThreadItem ? "flex-row items-center gap-2" : "flex-col items-start"
                     )}
                   >
                     <p className="text-body1-medium text-layout-header-default">asdasdasd</p>
@@ -68,7 +73,7 @@ const CommentCard = ({ isReply, isReply2, className }: CommentCardProps) => {
               <span
                 className={cn(
                   "text-body1-medium",
-                  isReply ? "text-brand-normal-enteredSelected" : "text-layout-header-default"
+                  isThreadItem ? "text-brand-normal-enteredSelected" : "text-layout-header-default"
                 )}
               >
                 답글 <span>0</span>개
@@ -81,32 +86,38 @@ const CommentCard = ({ isReply, isReply2, className }: CommentCardProps) => {
             </button>
             <button
               className={cn(
-                "text-neutral-strong-default",
-                isReply2 ? "text-body1-regular" : "text-body1-medium",
+                "text-body1-medium text-neutral-strong-default",
                 isReplyFormOpen && "text-[#0AA874]"
               )}
               onClick={() => setIsReplyFormOpen((prev) => !prev)}
             >
-              답글
+              답글 작성
             </button>
           </div>
         </div>
       </div>
 
-      {isReplyFormOpen && isReply2 && (
+      {isReplyFormOpen && (
         <form action="" className="w-full">
           <input
             type="text"
             placeholder="답글 작성란"
             className={cn(
               "mt-2 w-full rounded-3xl px-4 py-[10px]",
-              "bg-fill-neutral-normal-default placeholder:text-body1-medium placeholder:text-neutral-strong-placeholder"
+              "placeholder:text-body1-medium placeholder:text-neutral-strong-placeholder",
+              isThreadItem ? "bg-[#FFFFFF]" : "bg-[#F5F5F5]"
             )}
           />
         </form>
       )}
 
-      {viewReply && <CommentCard className="rounded-[10px] bg-layout_2depth p-4" isReply />}
+      {viewReply && (
+        <div className="rounded-[10px] bg-layout_2depth">
+          <CommentCard level="comment" className="pt-4" />
+          <CommentCard level="reply" />
+          <CommentCard level="nestedReply" className="ml-2" />
+        </div>
+      )}
     </div>
   );
 };

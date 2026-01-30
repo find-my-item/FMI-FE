@@ -74,16 +74,15 @@ const CommentItem = ({ comment, replies = [] }: CommentItemProps) => {
           </button>
         )}
       </section> */}
-      <CommentCard />
-      <CommentCard isReply />
+      <CommentCard level="comment" />
 
-      {!comment.replyTo && viewReply && hasReplies && (
+      {/* {!comment.replyTo && viewReply && hasReplies && (
         <div>
           {replies.map((reply) => (
             <CommentItem key={reply.id} comment={reply} />
           ))}
         </div>
-      )}
+      )} */}
     </>
   );
 };
