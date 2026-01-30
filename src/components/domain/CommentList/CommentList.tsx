@@ -41,9 +41,8 @@ const CommentList = ({ comments }: CommentListProps) => {
           <CommentItem key={c.id} comment={c} replies={repliesMap[c.id] || []} />
         ))}
       </div>
-      <div className="border-b pb-[18px] pt-[24px]">
-        <ViewMoreComment text="댓글 5개" />
-      </div>
+
+      <ViewMoreComment count={5} />
     </>
   );
 };

@@ -12,8 +12,6 @@ interface CommentCardProps {
   className?: string;
 }
 
-// TODO: 답글 더보기 추가
-
 const COMMENT_MOCK_DATA = {
   id: "1",
   replyNickname: "a1",
