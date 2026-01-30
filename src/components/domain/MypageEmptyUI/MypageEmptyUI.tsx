@@ -1,6 +1,5 @@
 import { Icon } from "@/components/common";
 import { EMPTY_CONSTANTS } from "./_constants/EMPTY_CONSTANTS";
-import { cn } from "@/utils";
 
 interface MypageEmptyUIProps {
   pageType: "posts" | "comments" | "reports" | "inquiries" | "activity" | "favorites";
