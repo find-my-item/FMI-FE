@@ -8,6 +8,13 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <ul className="w-[380px] border border-[#E5E5E5]">
+        <Story />
+      </ul>
+    ),
+  ],
 } satisfies Meta<typeof CommentList>;
 
 export default meta;
@@ -54,13 +61,6 @@ const mockComments = [
 
 // 기본 스토리
 export const Default: Story = {
-  decorators: [
-    (Story) => (
-      <div className="w-[600px]">
-        <Story />
-      </div>
-    ),
-  ],
   args: {
     comments: mockComments,
   },
@@ -68,13 +68,6 @@ export const Default: Story = {
 
 // 원댓글만 있는 경우
 export const OnlyParentComments: Story = {
-  decorators: [
-    (Story) => (
-      <div className="w-[600px]">
-        <Story />
-      </div>
-    ),
-  ],
   args: {
     comments: [
       {
@@ -104,13 +97,6 @@ export const OnlyParentComments: Story = {
 
 // 대댓글이 많은 경우
 export const ManyReplies: Story = {
-  decorators: [
-    (Story) => (
-      <div className="w-[600px]">
-        <Story />
-      </div>
-    ),
-  ],
   args: {
     comments: [
       {
@@ -161,13 +147,6 @@ export const ManyReplies: Story = {
 
 // 긴 내용의 댓글
 export const LongContent: Story = {
-  decorators: [
-    (Story) => (
-      <div className="w-[600px]">
-        <Story />
-      </div>
-    ),
-  ],
   args: {
     comments: [
       {
@@ -192,13 +171,6 @@ export const LongContent: Story = {
 
 // 단일 댓글 스레드
 export const SingleThread: Story = {
-  decorators: [
-    (Story) => (
-      <div className="w-[600px]">
-        <Story />
-      </div>
-    ),
-  ],
   args: {
     comments: [
       {
