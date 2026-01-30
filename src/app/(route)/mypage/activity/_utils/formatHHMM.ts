@@ -1,4 +1,4 @@
-const formatTime = (dateString: string) => {
+const formatHHMM = (dateString: string) => {
   if (!dateString || !dateString.includes("T")) {
     return "";
   }
@@ -10,4 +10,4 @@ const formatTime = (dateString: string) => {
   return `${hour}:${minute}`;
 };
 
-export default formatTime;
+export default formatHHMM;

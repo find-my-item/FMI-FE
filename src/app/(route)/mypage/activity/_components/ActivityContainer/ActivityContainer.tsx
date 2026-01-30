@@ -3,8 +3,8 @@ import { cn } from "@/utils";
 import { ACTIVITY_STYLE_CONFIG } from "../../_constants/ACTIVITY_STYLE_CONFIG";
 import { ActivityDataType } from "../../_types/ActivityType";
 import transformActivityArray from "../../_utils/transformActivityArray";
-import formatTime from "../../_utils/formatTime";
 import { MypageEmptyUI } from "@/components/domain";
+import formatHHMM from "../../_utils/formatHHMM";
 
 interface ActivityItemProps {
   activityItem: ActivityDataType;
@@ -25,7 +25,7 @@ function ActivityItem({ activityItem }: ActivityItemProps) {
       </div>
 
       <div className="min-w-0 flex-1 px-5">
-        <time className="text-body2-regular text-layout-body-default">{formatTime(createdAt)}</time>
+        <time className="text-body2-regular text-layout-body-default">{formatHHMM(createdAt)}</time>
         <p className="mt-[6px] text-body1-semibold text-neutral-strong-default">{title}</p>
         <p className="mt-[2px] truncate text-body2-regular text-neutral-normal-default">
           {subText}
