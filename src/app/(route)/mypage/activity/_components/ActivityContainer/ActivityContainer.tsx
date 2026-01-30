@@ -17,19 +17,19 @@ function ActivityItem({ activityItem }: ActivityItemProps) {
 
   return (
     <li className="flex gap-[10px]">
-      <div className="flex-col-center">
-        {/* 아이콘 영역 */}
+      <div className="shrink-0 flex-col-center">
         <div className={cn("h-9 w-9 rounded-full flex-center", bgColor)}>
           <Icon name={iconName} size={18} />
         </div>
-        {/* 구분선 영역 */}
         <hr className="h-[54px] border border-divider-default" />
       </div>
 
-      <div className="w-full px-5">
-        <span className="text-body2-regular text-layout-body-default">{formatTime(createdAt)}</span>
+      <div className="min-w-0 flex-1 px-5">
+        <time className="text-body2-regular text-layout-body-default">{formatTime(createdAt)}</time>
         <p className="mt-[6px] text-body1-semibold text-neutral-strong-default">{title}</p>
-        <span className="mt-[2px] text-body2-regular text-neutral-normal-default">{subText}</span>
+        <p className="mt-[2px] truncate text-body2-regular text-neutral-normal-default">
+          {subText}
+        </p>
       </div>
     </li>
   );
@@ -62,11 +62,13 @@ const ActivityContainer = ({ activityData }: ActivityContainerProps) => {
   const newActivityArray = transformActivityArray(activityData);
 
   return (
-    <section className="w-full">
+    <section>
       <h2 className="sr-only">내 활동 내역 영역</h2>
 
-      {activityData && (
-        <div className="flex w-full flex-col gap-7 px-5 py-5">
+      {activityData.length === 0 ? (
+        <MypageEmptyUI pageType="activity" />
+      ) : (
+        <div className="flex flex-col gap-7 p-5">
           <ol className="flex flex-col gap-5">
             {newActivityArray.map((item) => (
               <ActivityGroupItem
@@ -78,8 +80,6 @@ const ActivityContainer = ({ activityData }: ActivityContainerProps) => {
           </ol>
         </div>
       )}
-
-      {activityData.length === 0 && <MypageEmptyUI pageType="activity" />}
     </section>
   );
 };
