@@ -2,12 +2,12 @@ import { Filter } from "@/components/common";
 import { MYPAGE_POSTS_FILTER } from "../../_constants/MYPAGE_POSTS_FILTER";
 import MypagePostsBottomSheet from "../MypagePostsBottomSheet/MypagePostsBottomSheet";
 import { useState } from "react";
-import { FilterModeType } from "../../_types/FilterModeType";
+import { BottomSheetModeType } from "../../../_internal";
 
 const MypagePostsFilter = () => {
   const [isBottomSheet, setIsBottomSheet] = useState<{
     isOpen: boolean;
-    mode: FilterModeType;
+    mode: BottomSheetModeType;
   }>({
     isOpen: false,
     mode: "Date",
