@@ -1,8 +1,7 @@
 import axios from "axios";
-import getBaseURL from "./getBaseURL";
 
 const authApi = axios.create({
-  baseURL: getBaseURL(),
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
   withCredentials: true,
   timeout: 5000,
 });
