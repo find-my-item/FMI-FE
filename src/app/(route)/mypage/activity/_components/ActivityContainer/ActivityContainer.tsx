@@ -1,4 +1,4 @@
-import Icon, { IconName } from "@/components/common/Icon/Icon";
+import Icon from "@/components/common/Icon/Icon";
 import { cn } from "@/utils";
 import { ACTIVITY_STYLE_CONFIG } from "../../_constants/ACTIVITY_STYLE_CONFIG";
 import { ActivityDataType } from "../../_types/ActivityType";
@@ -20,7 +20,7 @@ function ActivityItem({ activityItem }: ActivityItemProps) {
       <div className="flex-col-center">
         {/* 아이콘 영역 */}
         <div className={cn("h-9 w-9 rounded-full flex-center", bgColor)}>
-          <Icon name={iconName as IconName} size={18} />
+          <Icon name={iconName} size={18} />
         </div>
         {/* 구분선 영역 */}
         <hr className="h-[54px] border border-divider-default" />
