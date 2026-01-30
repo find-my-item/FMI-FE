@@ -4,9 +4,13 @@ import { Filter } from "@/components/common";
 import { useState } from "react";
 import { ACTIVITY_FILTER } from "../../_constants/ACTIVITY_FILTER";
 import ActivityBottomSheet from "../ActivityBottomSheet/ActivityBottomSheet";
+import { BottomSheetModeType } from "../../../_internal";
 
 const ActivityFilter = () => {
-  const [isBottomSheet, setIsBottomSheet] = useState<{ isOpen: boolean; mode: "Date" | "Type" }>({
+  const [isBottomSheet, setIsBottomSheet] = useState<{
+    isOpen: boolean;
+    mode: BottomSheetModeType;
+  }>({
     isOpen: false,
     mode: "Date",
   });

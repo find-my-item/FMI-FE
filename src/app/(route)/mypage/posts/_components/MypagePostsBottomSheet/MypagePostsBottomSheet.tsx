@@ -6,16 +6,17 @@ import { cn } from "@/utils";
 import { Button, Filter } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
 import { MYPAGE_POSTS_SHEET_FILTER } from "../../_constants/MYPAGE_POSTS_SHEET_FILTER";
-import { FilterModeType } from "../../_types/FilterModeType";
-import { DateRangeBottomSheet } from "../../../_internal";
+import { BottomSheetModeType, DateRangeBottomSheet } from "../../../_internal";
 
 interface MypagePostsBottomSheetProps {
   isOpen: boolean;
   onClose: () => void;
-  mode: FilterModeType;
+  mode: BottomSheetModeType | null;
 }
 
 const MypagePostsBottomSheet = ({ isOpen, onClose, mode }: MypagePostsBottomSheetProps) => {
+  if (mode === null) return;
+
   if (mode === "Date") {
     return <DateRangeBottomSheet isOpen={isOpen} onClose={onClose} />;
   }

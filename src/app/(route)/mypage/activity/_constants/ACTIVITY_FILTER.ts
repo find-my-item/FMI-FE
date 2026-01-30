@@ -6,7 +6,7 @@ export const ACTIVITY_FILTER = [
     iconPosition: "leading",
   },
   {
-    name: "Type",
+    name: "Filter",
     label: "유형",
     icon: { name: "ArrowDown", size: 16 },
     iconPosition: "trailing",
