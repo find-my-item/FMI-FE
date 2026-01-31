@@ -2,7 +2,6 @@
 
 "use client";
 
-import { cn } from "@/utils";
 import { Button, Filter } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
 import { MYPAGE_POSTS_SHEET_FILTER } from "../../_constants/MYPAGE_POSTS_SHEET_FILTER";
@@ -25,7 +24,7 @@ const MypagePostsBottomSheet = ({ isOpen, onClose, mode }: MypagePostsBottomShee
       <PopupLayout
         isOpen={isOpen}
         onClose={onClose}
-        className={cn("w-full gap-12 px-5 py-10 flex-col-center")}
+        className="w-full gap-12 px-5 py-10 flex-col-center"
       >
         <div className="flex gap-8 flex-col-center">
           <h2 className="text-h2-medium text-layout-header-default">필터</h2>
