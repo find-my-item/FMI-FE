@@ -1,3 +1,5 @@
+// TODO(수현): api 응답 바디에 따라 사용 유무 결정될 파일입니다. (삭제 가능성 있음)
+
 import { ActivityDataType, ActivityGroupType } from "../_types/ActivityType";
 
 const transformActivityArray = (
