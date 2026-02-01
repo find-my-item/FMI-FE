@@ -9,8 +9,9 @@ export function middleware(request: NextRequest) {
   const isAuthPath = currentPath.startsWith("/login") || currentPath.startsWith("/sign-up");
 
   const isProtectPath =
-    // currentPath.startsWith("/mypage/") ||
-    currentPath.startsWith("/write") || currentPath.startsWith("/chat");
+    currentPath.startsWith("/mypage/") ||
+    currentPath.startsWith("/write") ||
+    currentPath.startsWith("/chat");
 
   const isSessionExpired = request.nextUrl.searchParams.get("reason") === "session-expired";
 
