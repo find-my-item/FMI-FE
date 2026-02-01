@@ -31,8 +31,8 @@ const PostListItem = ({ post, linkState = "list" }: PostListItemProps) => {
         <div className="min-w-0 flex-1">
           {linkState === "list" && (
             <div className="mb-2 flex gap-2">
-              <Chip label={getItemStatusLabel(itemStatus)} type="status" />
-              <Chip label={getItemCategoryLabel(category)} type="category" />
+              <Chip label={getItemStatusLabel(itemStatus)} type="brandSubtle" />
+              <Chip label={getItemCategoryLabel(category)} type="neutralStrong" />
             </div>
           )}
 
