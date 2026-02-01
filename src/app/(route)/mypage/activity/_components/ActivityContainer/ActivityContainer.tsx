@@ -8,23 +8,28 @@ import formatHHMM from "../../_utils/formatHHMM";
 
 interface ActivityItemProps {
   activityItem: ActivityDataType;
+  isLast?: boolean;
 }
 
-function ActivityItem({ activityItem }: ActivityItemProps) {
+function ActivityItem({ activityItem, isLast }: ActivityItemProps) {
   const { type, createdAt, title, subText } = activityItem;
 
   const { bgColor, iconName } = ACTIVITY_STYLE_CONFIG[type];
 
   return (
-    <li className="flex gap-[10px]">
-      <div className="shrink-0 flex-col-center">
+    <li className={cn("flex gap-[10px]")}>
+      {/* 아이콘 영역 */}
+      <div className="relative flex flex-col items-center">
         <div className={cn("h-9 w-9 rounded-full flex-center", bgColor)}>
           <Icon name={iconName} size={18} />
         </div>
-        <hr className="h-[54px] border border-divider-default" aria-hidden={true} />
+        {!isLast && (
+          <hr className="h-[76px] w-[1px] border border-divider-default" aria-hidden={true} />
+        )}
       </div>
 
-      <div className="min-w-0 flex-1 px-5">
+      {/* 텍스트 영역 */}
+      <div className="min-w-0 flex-1 px-5 pb-9">
         <time className="text-body2-regular text-layout-body-default">{formatHHMM(createdAt)}</time>
         <p className="mt-[6px] text-body1-semibold text-neutral-strong-default">{title}</p>
         <p className="mt-[2px] truncate text-body2-regular text-neutral-normal-default">
@@ -42,12 +47,16 @@ interface ActivityGroupItemProps {
 
 const ActivityGroupItem = ({ groupDate, activityItem }: ActivityGroupItemProps) => {
   return (
-    <li className="flex flex-col gap-7">
+    <li className="flex flex-col gap-7 p-5">
       <h3 className="text-h3-semibold text-layout-header-default">{groupDate}</h3>
 
-      <ol className="flex flex-col gap-9">
-        {activityItem.map((item) => (
-          <ActivityItem key={item.activityId} activityItem={item} />
+      <ol className="flex flex-col">
+        {activityItem.map((item, index) => (
+          <ActivityItem
+            key={item.activityId}
+            activityItem={item}
+            isLast={index === activityItem.length - 1}
+          />
         ))}
       </ol>
     </li>
@@ -68,17 +77,15 @@ const ActivityContainer = ({ activityData }: ActivityContainerProps) => {
       {activityData.length === 0 ? (
         <MypageEmptyUI pageType="activity" />
       ) : (
-        <div className="flex flex-col gap-7 p-5">
-          <ol className="flex flex-col gap-5">
-            {newActivityArray.map((item) => (
-              <ActivityGroupItem
-                key={item.groupId}
-                groupDate={item.groupDate}
-                activityItem={item.activityItem}
-              />
-            ))}
-          </ol>
-        </div>
+        <ol className="flex flex-col">
+          {newActivityArray.map((item) => (
+            <ActivityGroupItem
+              key={item.groupId}
+              groupDate={item.groupDate}
+              activityItem={item.activityItem}
+            />
+          ))}
+        </ol>
       )}
     </section>
   );
