@@ -47,10 +47,11 @@ const DateWheel = ({
           sensitivity: 0.5, // 휠 감도 조절
           thresholdDelta: 10, // 작은 떨림 무시
         }}
+        spaceBetween={8}
       >
         {/* 중앙 선택 영역 강조를 위한 오버레이 */}
-        <div className="pointer-events-none absolute left-0 top-0 z-10 h-[40%] w-full bg-white opacity-50" />
-        <div className="pointer-events-none absolute bottom-0 left-0 z-10 h-[40%] w-full bg-white opacity-50" />
+        <div className="pointer-events-none absolute left-0 top-0 z-10 h-[40%] w-full border-b border-neutral-normal-default bg-white opacity-50" />
+        <div className="pointer-events-none absolute bottom-0 left-0 z-10 h-[40%] w-full border-t border-neutral-normal-default bg-white opacity-50" />
 
         {dateArray.map((item) => (
           <SwiperSlide
