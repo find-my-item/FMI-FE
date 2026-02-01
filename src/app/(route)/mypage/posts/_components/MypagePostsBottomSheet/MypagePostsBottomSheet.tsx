@@ -1,27 +1,31 @@
+// TODO(수현): 피그마 시안 변경되어 수정될 컴포넌트
+
 "use client";
 
-import { cn } from "@/utils";
 import { Button, Filter } from "@/components/common";
-import { DateRangeSheet, PopupLayout } from "@/components/domain";
+import { PopupLayout } from "@/components/domain";
 import { MYPAGE_POSTS_SHEET_FILTER } from "../../_constants/MYPAGE_POSTS_SHEET_FILTER";
-import { FilterModeType } from "../../_types/FilterModeType";
+import { BottomSheetModeType, DateRangeBottomSheet } from "../../../_internal";
 
 interface MypagePostsBottomSheetProps {
   isOpen: boolean;
   onClose: () => void;
-  mode: FilterModeType;
+  mode: BottomSheetModeType | null;
 }
 
 const MypagePostsBottomSheet = ({ isOpen, onClose, mode }: MypagePostsBottomSheetProps) => {
-  return (
-    <PopupLayout
-      isOpen={isOpen}
-      onClose={onClose}
-      className={cn("w-full gap-12 px-5 py-10 flex-col-center")}
-    >
-      {mode === "Date" && <DateRangeSheet />}
+  if (mode === null) return;
 
-      {mode === "Filter" && (
+  if (mode === "Date") {
+    return <DateRangeBottomSheet isOpen={isOpen} onClose={onClose} />;
+  }
+  if (mode === "Filter") {
+    return (
+      <PopupLayout
+        isOpen={isOpen}
+        onClose={onClose}
+        className="w-full gap-12 px-5 py-10 flex-col-center"
+      >
         <div className="flex gap-8 flex-col-center">
           <h2 className="text-h2-medium text-layout-header-default">필터</h2>
           {MYPAGE_POSTS_SHEET_FILTER.map((item) => (
@@ -37,13 +41,13 @@ const MypagePostsBottomSheet = ({ isOpen, onClose, mode }: MypagePostsBottomShee
             </div>
           ))}
         </div>
-      )}
 
-      <Button onClick={onClose} size="big" className="h-[44px] w-full">
-        적용하기
-      </Button>
-    </PopupLayout>
-  );
+        <Button onClick={onClose} size="big" className="h-[44px] w-full">
+          적용하기
+        </Button>
+      </PopupLayout>
+    );
+  }
 };
 
 export default MypagePostsBottomSheet;
