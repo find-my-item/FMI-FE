@@ -28,7 +28,7 @@ interface ErrorBoundaryProps {
    * 에러 발생 시 호출되는 콜백
    * - Sentry 로깅, 리포팅, 분석 등에 활용
    */
-  onError?: (error: Error, errorInfo: React.ErrorInfo) => void;
+  onError?: (error: Error, errorInfo: ErrorInfo) => void;
 }
 
 /**
