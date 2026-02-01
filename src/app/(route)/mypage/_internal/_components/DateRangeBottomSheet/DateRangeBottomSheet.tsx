@@ -5,8 +5,9 @@ import { Swiper as SwiperType } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Mousewheel } from "swiper/modules";
 import { cn } from "@/utils";
-import { Filter } from "@/components/common";
-import useMakeDate from "./_hooks/useMakeDate";
+import { Button, Filter } from "@/components/common";
+import useMakeDate from "./useMakeDate";
+import PopupLayout from "../../../../../../components/domain/PopupLayout/PopupLayout";
 
 const DateWheel = ({
   dateArray,
@@ -46,10 +47,11 @@ const DateWheel = ({
           sensitivity: 0.5, // 휠 감도 조절
           thresholdDelta: 10, // 작은 떨림 무시
         }}
+        spaceBetween={8}
       >
         {/* 중앙 선택 영역 강조를 위한 오버레이 */}
-        <div className="pointer-events-none absolute left-0 top-0 z-10 h-[40%] w-full bg-gradient-to-b from-white via-white/70 to-transparent" />
-        <div className="pointer-events-none absolute bottom-0 left-0 z-10 h-[40%] w-full bg-gradient-to-t from-white via-white/70 to-transparent" />
+        <div className="pointer-events-none absolute left-0 top-0 z-10 h-[40%] w-full border-b border-neutral-normal-default bg-white opacity-50" />
+        <div className="pointer-events-none absolute bottom-0 left-0 z-10 h-[40%] w-full border-t border-neutral-normal-default bg-white opacity-50" />
 
         {dateArray.map((item) => (
           <SwiperSlide
@@ -70,46 +72,61 @@ const DateWheel = ({
   );
 };
 
-const DateRangeSheet = () => {
+interface DateRangeBottomSheetProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const DateRangeBottomSheet = ({ isOpen, onClose }: DateRangeBottomSheetProps) => {
   const { years, months, days, selectDate, handleDateChange } = useMakeDate();
 
   return (
-    <div className="w-full gap-8 flex-col-center">
-      <h2 className="text-h2-medium">기간설정</h2>
+    <PopupLayout
+      isOpen={isOpen}
+      onClose={onClose}
+      className="w-full gap-12 px-5 py-10 flex-col-center"
+    >
+      <div className="w-full gap-8 flex-col-center">
+        <h2 className="text-h2-medium">기간 설정</h2>
 
-      {/* 상단 탭 버튼 */}
-      <div className="flex gap-[14px]">
-        <Filter ariaLabel="시작일" onSelected={true} className="!px-10 !py-2">
-          시작일
-        </Filter>
-        <Filter ariaLabel="종료일" onSelected={false} className="!px-10 !py-2">
-          종료일
-        </Filter>
+        {/* 상단 탭 버튼 */}
+        <div className="flex gap-[14px]">
+          <Filter ariaLabel="시작일" onSelected={true} className="!px-10 !py-2">
+            시작일
+          </Filter>
+          <Filter ariaLabel="종료일" onSelected={false} className="!px-10 !py-2">
+            종료일
+          </Filter>
+        </div>
+
+        <div className="flex w-full items-center justify-between px-4">
+          <DateWheel
+            dateArray={years}
+            selected={selectDate.year}
+            onSelected={(val) => handleDateChange("year", val)}
+          />
+
+          <DateWheel
+            dateArray={months}
+            selected={selectDate.month}
+            onSelected={(val) => handleDateChange("month", val)}
+            label="월"
+          />
+
+          <DateWheel
+            dateArray={days}
+            selected={selectDate.day}
+            onSelected={(val) => handleDateChange("day", val)}
+            label="일"
+          />
+        </div>
       </div>
 
-      <div className="flex w-full items-center justify-between px-4">
-        <DateWheel
-          dateArray={years}
-          selected={selectDate.year}
-          onSelected={(val) => handleDateChange("year", val)}
-        />
-
-        <DateWheel
-          dateArray={months}
-          selected={selectDate.month}
-          onSelected={(val) => handleDateChange("month", val)}
-          label="월"
-        />
-
-        <DateWheel
-          dateArray={days}
-          selected={selectDate.day}
-          onSelected={(val) => handleDateChange("day", val)}
-          label="일"
-        />
-      </div>
-    </div>
+      <Button onClick={onClose} size="big" className="h-11 w-full">
+        적용하기
+      </Button>
+    </PopupLayout>
   );
 };
 
-export default DateRangeSheet;
+export default DateRangeBottomSheet;
