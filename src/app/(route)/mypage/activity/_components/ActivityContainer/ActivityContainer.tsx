@@ -16,10 +16,10 @@ function ActivityItem({ activityItem }: ActivityItemProps) {
   const { bgColor, iconName } = ACTIVITY_STYLE_CONFIG[type];
 
   return (
-    <li className={cn("group flex gap-[10px]")}>
+    <li className="group flex gap-[10px]">
       {/* 아이콘 영역 */}
       <div className="relative flex flex-col items-center">
-        <div className={cn("h-9 w-9 rounded-full flex-center", bgColor)}>
+        <div className={cn("size-9 rounded-full flex-center", bgColor)}>
           <Icon name={iconName} size={18} />
         </div>
         <hr
