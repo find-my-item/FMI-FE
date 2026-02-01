@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Bookmark, Icon, KebabMenuButton, ProfileAvatar, ViewMoreReply } from "@/components/common";
 import { cn } from "@/utils";
 import type { Comment } from "./types/commentItem";
-import CommentCard from "./Comment";
+import CommentCard from "./CommentCard";
 
 interface CommentItemProps {
   comment: Comment;
