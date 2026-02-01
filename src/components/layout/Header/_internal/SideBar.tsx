@@ -5,6 +5,10 @@ import { useState } from "react";
 import { HEADER_LINK } from "../CONST_HEADER";
 import { useModalBackdrop, useModalLockAndEsc } from "@/hooks";
 import Icon from "@/components/common/Icon/Icon";
+import { Button } from "@/components/common";
+import useApiLogout from "@/api/fetch/auth/api/useApiLogout";
+import { useToast } from "@/context/ToastContext";
+import useLogout from "@/hooks/useLogout/useLogout";
 
 // TODO(지권): 추후 디자인 수정 필요
 
@@ -31,6 +35,7 @@ const SideBar = ({ isOpen, onClose }: SideBarProps) => {
   const onBackdropMouseDown = useModalBackdrop({ onClose });
   const [manualPopup, setManualPopup] = useState(false);
 
+  const { handleLogout } = useLogout();
   return (
     <AnimatePresence initial={false} mode="wait">
       {isOpen && (
@@ -83,6 +88,10 @@ const SideBar = ({ isOpen, onClose }: SideBarProps) => {
                   매뉴얼 보기 버튼
                 </button>
                 <ManualPopup isOpen={manualPopup} onClose={() => setManualPopup(false)} />
+              </li>
+
+              <li>
+                <Button onClick={handleLogout}>로그아웃</Button>
               </li>
             </ul>
           </motion.aside>
