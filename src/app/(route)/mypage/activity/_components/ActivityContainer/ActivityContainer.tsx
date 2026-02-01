@@ -8,24 +8,24 @@ import formatHHMM from "../../_utils/formatHHMM";
 
 interface ActivityItemProps {
   activityItem: ActivityDataType;
-  isLast?: boolean;
 }
 
-function ActivityItem({ activityItem, isLast }: ActivityItemProps) {
+function ActivityItem({ activityItem }: ActivityItemProps) {
   const { type, createdAt, title, subText } = activityItem;
 
   const { bgColor, iconName } = ACTIVITY_STYLE_CONFIG[type];
 
   return (
-    <li className={cn("flex gap-[10px]")}>
+    <li className={cn("group flex gap-[10px]")}>
       {/* 아이콘 영역 */}
       <div className="relative flex flex-col items-center">
         <div className={cn("h-9 w-9 rounded-full flex-center", bgColor)}>
           <Icon name={iconName} size={18} />
         </div>
-        {!isLast && (
-          <hr className="h-[76px] w-[1px] border border-divider-default" aria-hidden={true} />
-        )}
+        <hr
+          className="h-[76px] w-[1px] border border-divider-default group-last:hidden"
+          aria-hidden={true}
+        />
       </div>
 
       {/* 텍스트 영역 */}
@@ -52,11 +52,7 @@ const ActivityGroupItem = ({ groupDate, activityItem }: ActivityGroupItemProps) 
 
       <ol className="flex flex-col">
         {activityItem.map((item, index) => (
-          <ActivityItem
-            key={item.activityId}
-            activityItem={item}
-            isLast={index === activityItem.length - 1}
-          />
+          <ActivityItem key={item.activityId} activityItem={item} />
         ))}
       </ol>
     </li>
