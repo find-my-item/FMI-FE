@@ -35,7 +35,7 @@ const ListItemImage = ({
   if (!src) return null;
 
   return (
-    <div className="relative overflow-hidden rounded-[10px]">
+    <div className="relative overflow-hidden rounded-[10px]" style={{ width: size, height: size }}>
       <Image
         src={src}
         alt={alt}
@@ -44,7 +44,8 @@ const ListItemImage = ({
         sizes={`${size}px`}
         draggable={false}
         priority={priority}
-        className={cn("object-cover", className, `h-[${size}px] w-[${size}px]`)}
+        className={cn("object-cover", className)}
+        style={{ width: size, height: size }}
       />
 
       {typeof imageCount === "number" && imageCount > 1 && (
