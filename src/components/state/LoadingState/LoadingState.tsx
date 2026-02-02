@@ -1,6 +1,19 @@
 import { Icon } from "@/components/common";
 import BaseStateLayout from "../BaseStateLayout/BaseStateLayout";
 
+/**
+ * @author jikwon
+ *
+ * @description
+ * - 로딩 중일 때 표시하는 state 컴포넌트입니다.
+ * - BaseStateLayout을 사용하여 공통 레이아웃을 적용합니다.
+ *
+ * @param title - 제목
+ *
+ * @example
+ * <LoadingState title="로딩 중..." />
+ */
+
 interface LoadingStateProps {
   title?: string;
 }
