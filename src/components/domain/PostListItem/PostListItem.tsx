@@ -10,6 +10,7 @@ interface PostListItemProps {
 
 const PostListItem = ({ post, linkState = "list" }: PostListItemProps) => {
   const { itemStatus, category, createdAt, new: isNew, hot: isHot } = post;
+  console.log(category);
 
   const VIEW_ITEM = [
     {
@@ -69,9 +70,12 @@ const PostListItem = ({ post, linkState = "list" }: PostListItemProps) => {
           </div>
         </div>
 
-        {post.thumbnailUrl && (
-          <ListItemImage src={post.thumbnailUrl} alt="게시글 대표 이미지" size={90} />
-        )}
+        <ListItemImage
+          src={post.thumbnailUrl}
+          alt="게시글 대표 이미지"
+          size={90}
+          category={category}
+        />
       </Link>
     </li>
   );
