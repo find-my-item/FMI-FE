@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import { cn } from "@/utils";
-import { Button } from "@/components/common";
+import { Button, RadioOptionItem } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
 import { CategoryType } from "@/types";
 import { CATEGORY_OPTIONS } from "@/constants";
@@ -29,31 +29,12 @@ const CategoryPopup = ({ isOpen, onClose, onSelect }: CategoryPopupProps) => {
 
         <div className="flex flex-col gap-[2px]">
           {CATEGORY_OPTIONS.map((option) => (
-            <label
+            <RadioOptionItem
               key={option.value}
-              aria-checked={selected === option.value}
-              className={cn(
-                "flex h-[61px] w-full cursor-pointer items-center gap-3 px-5 py-[18px] text-h3-medium text-neutral-normal-default",
-                selected === option.value && "rounded-[4px] bg-fill-neutral-strong-default"
-              )}
-            >
-              <input
-                type="radio"
-                name="category"
-                value={option.value}
-                checked={selected === option.value}
-                onChange={(e) => setSelected(e.target.value as CategoryType)}
-                className="peer hidden"
-              />
-              <span
-                className={cn(
-                  "relative h-4 w-4 rounded-full border border-brand-normal-enteredSelected peer-checked:border-brand-normal-enteredSelected",
-                  "before:absolute before:inset-[3px] before:scale-0 before:rounded-full before:transition-transform before:bg-fill-brand-normal-enteredSelected",
-                  "peer-checked:before:scale-100"
-                )}
-              />
-              <span>{option.label}</span>
-            </label>
+              option={option}
+              selected={selected}
+              setSelected={(value) => setSelected(value as CategoryType)}
+            />
           ))}
         </div>
       </section>
