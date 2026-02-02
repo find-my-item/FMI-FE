@@ -1,12 +1,17 @@
 import { Dispatch, SetStateAction } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/utils";
-import { Button, Icon } from "@/components/common";
+import { Button, Icon, InputSearch } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
-import { FilterTab } from "./types";
-import { tabs, categories, sort, status } from "./CONSTANTS";
-import { applyFiltersToUrl } from "./applyFiltersToUrl";
-import { FiltersState } from "../FilterSection/filtersStateType";
+import { FilterTab } from "@/app/(route)/list/_components/_internal/FilterBottomSheet/types";
+import { FiltersState } from "@/app/(route)/list/_components/_internal/FilterSection/filtersStateType";
+import { applyFiltersToUrl } from "@/app/(route)/list/_components/_internal/FilterBottomSheet/applyFiltersToUrl";
+import {
+  categories,
+  sort,
+  tabs,
+  status,
+} from "@/app/(route)/list/_components/_internal/FilterBottomSheet/CONSTANTS";
 
 interface FilterBottomSheetProps {
   isOpen: boolean;
@@ -70,27 +75,13 @@ const FilterBottomSheet = ({
 
         {/* 지역선택 */}
         {selectedTab === "region" && (
-          <div className="relative w-full">
-            <Icon
-              name="Search"
-              size={16}
-              className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"
-            />
-            <input
-              className="w-full rounded-full px-5 py-[10px] pl-10 bg-fill-neutral-subtle-default"
-              placeholder="검색어를 입력하세요"
-              value={filters.region}
-              onChange={(e) => setFilters((prev) => ({ ...prev, region: e.target.value }))}
-            />
-            <button
-              type="button"
-              onClick={() => setFilters((prev) => ({ ...prev, region: "" }))}
-              className="absolute right-3 top-1/2 -translate-y-1/2"
-              aria-label="지역 검색어 지우기"
-            >
-              <Icon name="Delete" size={16} className="text-gray-400" />
-            </button>
-          </div>
+          <InputSearch
+            mode="onChange"
+            name="regionSearch"
+            placeholder="검색어를 입력하세요."
+            value={filters.region}
+            onChange={(e) => setFilters((prev) => ({ ...prev, region: e.target.value }))}
+          />
         )}
 
         {/* 카테고리 선택 */}
