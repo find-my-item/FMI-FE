@@ -10,7 +10,6 @@ interface PostListItemProps {
 
 const PostListItem = ({ post, linkState = "list" }: PostListItemProps) => {
   const { itemStatus, category, createdAt, new: isNew, hot: isHot } = post;
-  console.log(category);
 
   const VIEW_ITEM = [
     {
