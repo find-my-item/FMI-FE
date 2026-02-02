@@ -2,7 +2,6 @@
 "use no memo";
 
 import { useState } from "react";
-import { cn } from "@/utils";
 import { Button, RadioOptionItem } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
 import { CategoryType } from "@/types";
