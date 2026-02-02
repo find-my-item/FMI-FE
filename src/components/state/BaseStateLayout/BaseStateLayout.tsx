@@ -1,5 +1,5 @@
-import { cn } from "@/utils";
 import { ReactNode } from "react";
+import { cn } from "@/utils";
 
 interface BaseStateLayoutProps {
   children: ReactNode;
@@ -8,9 +8,7 @@ interface BaseStateLayoutProps {
 
 const BaseStateLayout = ({ children, className }: BaseStateLayoutProps) => {
   return (
-    <section className={cn("h-full w-full gap-5 py-20 flex-col-center", className)}>
-      {children}
-    </section>
+    <div className={cn("h-full w-full gap-5 py-20 flex-col-center", className)}>{children}</div>
   );
 };
 
