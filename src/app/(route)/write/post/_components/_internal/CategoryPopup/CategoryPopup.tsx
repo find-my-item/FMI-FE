@@ -33,7 +33,8 @@ const CategoryPopup = ({ isOpen, onClose, onSelect }: CategoryPopupProps) => {
               key={option.value}
               option={option}
               selected={selected}
-              setSelected={(value) => setSelected(value as CategoryType)}
+              onChange={(value) => setSelected(value as CategoryType)}
+              inputName="category"
             />
           ))}
         </div>

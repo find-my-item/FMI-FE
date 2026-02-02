@@ -1,30 +1,56 @@
 import { cn } from "@/utils";
 
+/**
+ * @author jikwon
+ *
+ * @description
+ * 라디오 옵션 아이템 컴포넌트입니다.
+ *
+ * - option.value 를 기준으로 선택 상태를 판단합니다.
+ * - controlled 방식으로 동작합니다.
+ *
+ * @param option 라디오 옵션 객체 (value, label)
+ * @param selected 현재 선택된 값
+ * @param onChange 선택 값 변경 함수
+ * @param inputName 라디오 그룹 이름
+ *
+ * @example
+ * ```tsx
+ * <RadioOptionItem
+ *   option={{ value: "FOOD", label: "음식" }}
+ *   selected={selected}
+ *   onChange={setSelected}
+ *   inputName="category"
+ * />
+ * ```
+ */
+
 interface RadioOptionItemProps {
   option: {
     value: string;
     label: string;
   };
   selected: string;
-  setSelected: (value: string) => void;
+  onChange: (value: string) => void;
+  inputName: string;
 }
 
-const RadioOptionItem = ({ option, selected, setSelected }: RadioOptionItemProps) => {
+const RadioOptionItem = ({ option, selected, onChange, inputName }: RadioOptionItemProps) => {
+  const { value, label } = option;
+
   return (
     <label
-      key={option.value}
-      aria-checked={selected === option.value}
       className={cn(
         "flex h-[61px] w-full cursor-pointer items-center gap-3 px-5 py-[18px] text-h3-medium text-neutral-normal-default",
-        selected === option.value && "rounded-[4px] bg-fill-neutral-strong-default"
+        selected === value && "rounded-[4px] bg-fill-neutral-strong-default"
       )}
     >
       <input
         type="radio"
-        name="category"
-        value={option.value}
-        checked={selected === option.value}
-        onChange={(e) => setSelected(e.target.value)}
+        name={inputName}
+        value={value}
+        checked={selected === value}
+        onChange={(e) => onChange(e.target.value)}
         className="peer hidden"
       />
       <span
@@ -34,7 +60,7 @@ const RadioOptionItem = ({ option, selected, setSelected }: RadioOptionItemProps
           "peer-checked:before:scale-100"
         )}
       />
-      <span>{option.label}</span>
+      <span>{label}</span>
     </label>
   );
 };
