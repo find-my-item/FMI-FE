@@ -24,7 +24,7 @@ interface ListItemImageProps {
   priority?: boolean;
   className?: string;
   imageCount?: number;
-  category: CategoryType;
+  category?: CategoryType;
 }
 
 const CATEGORY_ICON_MAP: Record<CategoryType, IconName> = {
@@ -46,7 +46,7 @@ const ListItemImage = ({
   imageCount,
   category,
 }: ListItemImageProps) => {
-  const iconName = CATEGORY_ICON_MAP[category] ?? CATEGORY_ICON_MAP.ETC;
+  if (!src && !category) return null;
 
   return (
     <div className="relative overflow-hidden rounded-[10px]" style={{ width: size, height: size }}>
@@ -61,8 +61,8 @@ const ListItemImage = ({
           className="object-cover"
         />
       ) : (
-        <div className="h-full w-full flex-center" aria-label={`${category} 기본 이미지`}>
-          <Icon name={iconName} size={size} />
+        <div className="h-full w-full flex-center" aria-label={`${category ?? "ETC"} 기본 이미지`}>
+          <Icon name={CATEGORY_ICON_MAP[category!]} size={size} />
         </div>
       )}
 
