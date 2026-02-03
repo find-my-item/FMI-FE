@@ -1,40 +1,23 @@
+import { Fragment, ReactNode } from "react";
 import Link from "next/link";
 import { Icon } from "@/components/common";
+import { ADMIN_NAV_SECTIONS } from "../../_constants/ADMIN_NAV_SECTIONS";
+import { AdminLogoutButton } from "../_internal";
 
 const AdminMenuSection = () => {
   return (
     <nav aria-label="관리자 메뉴" className="flex flex-col gap-[6px]">
-      <AdminSectionNavItem
-        label="공지사항"
-        items={[{ href: "/admin/notice", title: "공지사항" }]}
-      />
+      {ADMIN_NAV_SECTIONS.map((section, index) => (
+        <Fragment key={section.id}>
+          <AdminSectionNavItem
+            label={section.label}
+            items={section.items}
+            footer={section.id === "account" && <AdminLogoutButton />}
+          />
 
-      <hr className="mx-5" />
-
-      <AdminSectionNavItem
-        label="신고/문의"
-        items={[
-          { href: "/admin/report", title: "신고/문의 내역" },
-          { href: "/admin/inquiry", title: "비로그인 문의 내역" },
-        ]}
-      />
-
-      <hr className="mx-5" />
-
-      <AdminSectionNavItem
-        label="유저 관리"
-        items={[{ href: "/admin/reason", title: "유저 탈퇴 사유" }]}
-      />
-
-      <hr className="mx-5" />
-
-      <AdminSectionNavItem
-        label="계정 설정"
-        items={[
-          { href: "/admin/password", title: "비밀번호 변경" },
-          { href: "/admin/logout", title: "로그아웃" },
-        ]}
-      />
+          {index < ADMIN_NAV_SECTIONS.length - 1 && <hr aria-hidden className="mx-5" />}
+        </Fragment>
+      ))}
     </nav>
   );
 };
@@ -48,20 +31,27 @@ interface AdminSectionNavItem {
 
 interface AdminSectionNavProps {
   label: string;
-  items: AdminSectionNavItem[];
+  items: readonly AdminSectionNavItem[];
+  footer?: ReactNode;
 }
 
-const AdminSectionNavItem = ({ label, items }: AdminSectionNavProps) => {
+const AdminSectionNavItem = ({ label, items, footer }: AdminSectionNavProps) => {
   return (
-    <div className="flex flex-col gap-[2px] px-5 py-6">
-      <span className="text-body2-regular text-layout-body-default">{label}</span>
+    <section aria-label={label} className="flex flex-col gap-[2px] px-5 py-6">
+      <h2 className="text-body2-regular text-layout-body-default">{label}</h2>
 
-      {items.map(({ href, title }) => (
-        <Link key={href} href={href} className="flex items-center justify-between py-[10px]">
-          <span className="text-body1-semibold text-neutral-strong-default">{title}</span>
-          <Icon name="ArrowRightSmall" size={24} />
-        </Link>
-      ))}
-    </div>
+      <ul>
+        {items.map(({ href, title }) => (
+          <li key={href}>
+            <Link href={href} className="flex items-center justify-between py-[10px]">
+              <span className="text-body1-semibold text-neutral-strong-default">{title}</span>
+              <Icon name="ArrowRightSmall" size={24} />
+            </Link>
+          </li>
+        ))}
+
+        {footer && <li>{footer}</li>}
+      </ul>
+    </section>
   );
 };
