@@ -6,7 +6,6 @@ export { default as CommentList } from "./CommentList/CommentList";
 export { default as FindPwForm } from "./FindPwForm/FindPwForm";
 export { default as FooterButton } from "./FooterButton/FooterButton";
 export { default as PostListItem } from "./PostListItem/PostListItem";
-export { default as DateRangeSheet } from "./DateRangeSheet/DateRangeSheet";
 export { default as MypageSearch } from "./MypageSearch/MypageSearch";
 export { default as MypageEmptyUI } from "./MypageEmptyUI/MypageEmptyUI";
 export { default as MypageRequestFilter } from "./MypageRequest/MypageRequestFilter/MypageRequestFilter";

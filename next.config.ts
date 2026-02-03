@@ -33,7 +33,14 @@ const nextConfig: NextConfig = {
   experimental: {
     reactCompiler: true,
   },
-
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: `${process.env.NEXT_PUBLIC_API_URL}/:path*`,
+      },
+    ];
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
