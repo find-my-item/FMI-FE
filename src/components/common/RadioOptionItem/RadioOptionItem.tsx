@@ -1,3 +1,4 @@
+import { InputHTMLAttributes } from "react";
 import { cn } from "@/utils";
 
 /**
@@ -13,6 +14,7 @@ import { cn } from "@/utils";
  * @param selected 현재 선택된 값
  * @param onChange 선택 값 변경 함수
  * @param inputName 라디오 그룹 이름
+ * @param labelClassName 최상위 label 요소에 적용할 클래스 이름
  *
  * @example
  * ```tsx
@@ -25,33 +27,49 @@ import { cn } from "@/utils";
  * ```
  */
 
-interface RadioOptionItemProps {
-  option: {
-    value: string;
-    label: string;
-  };
+type RadioOption = {
+  value: string;
+  label: string;
+};
+
+interface RadioOptionItemProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  "type" | "name" | "value" | "checked" | "onChange"
+> {
+  option: RadioOption;
   selected: string;
   onChange: (value: string) => void;
   inputName: string;
+  labelClassName?: string;
 }
 
-const RadioOptionItem = ({ option, selected, onChange, inputName }: RadioOptionItemProps) => {
+const RadioOptionItem = ({
+  option,
+  selected,
+  onChange,
+  inputName,
+  labelClassName,
+  ...inputProps
+}: RadioOptionItemProps) => {
   const { value, label } = option;
+  const isChecked = selected === value;
 
   return (
     <label
       className={cn(
         "flex h-[61px] w-full cursor-pointer items-center gap-3 px-5 py-[18px] text-h3-medium text-neutral-normal-default",
-        selected === value && "rounded-[4px] bg-fill-neutral-strong-default"
+        isChecked && "rounded-[4px] bg-fill-neutral-strong-default",
+        labelClassName
       )}
     >
       <input
         type="radio"
         name={inputName}
         value={value}
-        checked={selected === value}
+        checked={isChecked}
         onChange={(e) => onChange(e.target.value)}
         className="peer hidden"
+        {...inputProps}
       />
       <span
         className={cn(
