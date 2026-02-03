@@ -8,14 +8,14 @@ export const ADMIN_NAV_SECTIONS = [
     id: "support",
     label: "신고/문의",
     items: [
-      { href: "/admin/report", title: "신고/문의 내역" },
-      { href: "/admin/inquiry", title: "비로그인 문의 내역" },
+      { href: "/admin/reports", title: "신고/문의 내역" },
+      { href: "/admin/guest-inquiries", title: "비로그인 문의 내역" },
     ],
   },
   {
     id: "user",
     label: "유저 관리",
-    items: [{ href: "/admin/reason", title: "유저 탈퇴 사유" }],
+    items: [{ href: "/admin/withdrawal-reasons", title: "유저 탈퇴 사유" }],
   },
   {
     id: "account",
