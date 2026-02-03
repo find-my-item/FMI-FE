@@ -4,7 +4,7 @@ import { formatDate, getItemCategoryLabel, getItemStatusLabel } from "@/utils";
 import { PostItem } from "@/api/fetch/post";
 
 interface PostListItemProps {
-  post: PostItem;
+  post: PostItem | any; // TODO(지권): 각 페이지에 맞는 타입 추가해주세요
   linkState?: "notice" | "list";
 }
 

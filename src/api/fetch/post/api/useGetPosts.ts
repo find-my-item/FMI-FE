@@ -1,7 +1,7 @@
+import { InfiniteData, keepPreviousData } from "@tanstack/react-query";
 import useAppInfiniteQuery from "@/api/_base/query/useAppInfiniteQuery";
 import { SortFilterValue } from "@/app/(route)/list/_components/_internal/FilterBottomSheet/types";
 import { ItemStatus, PostType } from "@/types";
-import { InfiniteData } from "@tanstack/react-query";
 import { PostItem, PostSearchResponse } from "../types/PostItemType";
 
 interface UseGetPostsParams {
@@ -35,6 +35,7 @@ export const useGetPosts = ({
     ["posts", address, postType, postStatus, category, sortType, size],
     `/posts/search?${params.toString()}`,
     {
+      placeholderData: keepPreviousData,
       getNextPageParam: (lastPage) => lastPage.result.nextCursor ?? undefined,
       select: (data: InfiniteData<PostSearchResponse>) =>
         data.pages.flatMap((page) => page.result.postList),

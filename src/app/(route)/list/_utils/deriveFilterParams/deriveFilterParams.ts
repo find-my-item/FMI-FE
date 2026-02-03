@@ -13,9 +13,9 @@ type Params = {
 };
 
 export const normalizedFilterValues = ({ region, category, sort, status }: Params) => {
-  const normalizedCategory = normalizeEnumValue<CategoryFilterValue>(category);
+  const normalizedCategory = normalizeEnumValue<Exclude<CategoryFilterValue, undefined>>(category);
   const normalizedSort = normalizeEnumValue<SortFilterValue>(sort);
-  const normalizedStatus = normalizeEnumValue<StatusFilterValue>(status);
+  const normalizedStatus = normalizeEnumValue<Exclude<StatusFilterValue, undefined>>(status);
 
   return {
     normalizedCategory,

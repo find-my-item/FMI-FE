@@ -13,8 +13,10 @@ export const useListParams = () => {
 
   return {
     type: normalizeEnumValue(searchParams.get("type")),
-    status: normalizeEnumValue<StatusFilterValue>(searchParams.get("status")),
-    category: normalizeEnumValue<CategoryFilterValue>(searchParams.get("category")),
+    status: normalizeEnumValue<Exclude<StatusFilterValue, undefined>>(searchParams.get("status")),
+    category: normalizeEnumValue<Exclude<CategoryFilterValue, undefined>>(
+      searchParams.get("category")
+    ),
     sort: normalizeEnumValue<SortFilterValue>(searchParams.get("sort")),
     region: searchParams.get("region"),
   };
