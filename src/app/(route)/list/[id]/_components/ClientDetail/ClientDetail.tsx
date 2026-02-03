@@ -15,7 +15,7 @@ interface ClientDetailProps {
 
 const ClientDetail = ({ id }: ClientDetailProps) => {
   const { data, isLoading, isError } = useGetDetailPost({ id });
-  console.log(data);
+
   // TODO(지권): 추후 게시글 데이터, 유저 데이터 비교 후 상세페이지 옵션 UI 구현
   // const { data: userData } = useGetUserData();
 

@@ -27,10 +27,13 @@ export const Single: Story = {
         { id: 1, imgUrl: "https://picsum.photos/400/300?random=1", imageType: "NORMAL" },
       ],
       id: "1",
-      nickName: "사용자 닉네임",
-      profileUrl: null,
-      userPostCount: 4,
-      chatRoomCount: 0,
+      userData: {
+        userId: 1,
+        nickName: "사용자 닉네임",
+        profileImage: "",
+        postCount: 4,
+        chattingCount: 0,
+      },
     },
   },
 };

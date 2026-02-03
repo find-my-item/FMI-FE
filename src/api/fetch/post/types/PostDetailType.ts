@@ -20,9 +20,8 @@ export type PostDetailData = {
   isNew: boolean;
   isHot: boolean;
   createdAt: string;
-  chatRoomCount: number;
-  userPostCount: number;
   imageResponseList: ImageResponse[];
+  postUserInformation: userInformation;
 };
 
 export type ImageType = "THUMBNAIL" | "NORMAL";
@@ -32,3 +31,11 @@ export type ImageResponse = {
   imgUrl: string;
   imageType: ImageType;
 };
+
+export interface userInformation {
+  userId: number;
+  nickName: string;
+  profileImage: string;
+  postCount: number;
+  chattingCount: number;
+}

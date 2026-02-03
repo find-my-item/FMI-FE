@@ -5,8 +5,8 @@ jest.mock("swiper/css", () => ({}));
 jest.mock("swiper/css/pagination", () => ({}));
 
 const mockData = {
-  imageResponseList: [],
-  id: "1",
+  imageUrls: [],
+  postId: "1",
   nickName: "글자확인용임시닉네임",
   profileUrl: null,
   userPostCount: 0,

@@ -19,11 +19,7 @@ const PostDetail = ({ type, data }: PostDetailProps) => {
   return (
     <article className="w-full">
       {isBoardType ? (
-        <PostDetailHeader
-          headerData={{
-            ...data,
-          }}
-        />
+        <PostDetailHeader headerData={{ ...data, userData: data.postUserInformation }} />
       ) : (
         <NoticeDetailHeader backPath={backPath} />
       )}

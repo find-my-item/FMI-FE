@@ -2,22 +2,19 @@ import Link from "next/link";
 import { Button, ProfileAvatar } from "@/components/common";
 import ImageSection from "./_internal/ImageSection/ImageSection";
 import { formatCappedNumber } from "@/utils";
-import { ImageResponse } from "@/api/fetch/post";
+import { ImageResponse, userInformation } from "@/api/fetch/post";
 
 type HeaderData = {
-  imageResponseList: ImageResponse[];
   id: string;
-  nickName: string;
-  profileUrl: string | null;
-  userPostCount: number;
-  chatRoomCount: number;
+  imageResponseList: ImageResponse[];
+  userData: userInformation;
 };
 
 interface PostDetailHeaderType {
   headerData: HeaderData;
 }
 const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
-  const { imageResponseList, id, nickName, profileUrl, userPostCount, chatRoomCount } = headerData;
+  const { id, imageResponseList, userData } = headerData;
 
   return (
     <>
@@ -28,15 +25,20 @@ const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
         className="flex flex-col items-start justify-center gap-5 border-b border-divider-default p-5"
       >
         <div className="flex items-center justify-start gap-[14px]">
-          <ProfileAvatar size={40} src={profileUrl} alt={nickName} priority={true} />
+          <ProfileAvatar
+            size={40}
+            src={userData.profileImage}
+            alt={userData.nickName}
+            priority={true}
+          />
 
           <div className="flex flex-col items-start justify-center">
-            <p className="text-body1-medium text-layout-header-default">{nickName}</p>
+            <p className="text-body1-medium text-layout-header-default">{userData.nickName}</p>
             <div className="text-body2-regular text-layout-body-default">
               <span className="after:mx-2 after:inline-block after:content-['·']">
-                작성글 {formatCappedNumber(userPostCount)}
+                작성글 {formatCappedNumber(userData.postCount)}
               </span>
-              <span>현재 채팅 {formatCappedNumber(chatRoomCount)}</span>
+              <span>현재 채팅 {formatCappedNumber(userData.chattingCount)}</span>
             </div>
           </div>
         </div>
