@@ -2,10 +2,11 @@ import Link from "next/link";
 import { Button, ProfileAvatar } from "@/components/common";
 import ImageSection from "./_internal/ImageSection/ImageSection";
 import { formatCappedNumber } from "@/utils";
+import { ImageResponse } from "@/api/fetch/post";
 
 type HeaderData = {
-  imageUrls: string[];
-  postId: string;
+  imageResponseList: ImageResponse[];
+  id: string;
   nickName: string;
   profileUrl: string | null;
   userPostCount: number;
@@ -16,11 +17,11 @@ interface PostDetailHeaderType {
   headerData: HeaderData;
 }
 const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
-  const { imageUrls, postId, nickName, profileUrl, userPostCount, chatRoomCount } = headerData;
+  const { imageResponseList, id, nickName, profileUrl, userPostCount, chatRoomCount } = headerData;
 
   return (
     <>
-      <ImageSection imageUrls={imageUrls} />
+      <ImageSection imageUrls={imageResponseList.map((item) => item.imgUrl)} />
 
       <section
         aria-label="게시글 작성자 정보"
@@ -40,7 +41,7 @@ const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
           </div>
         </div>
 
-        <Button as={Link} href={`/chat/${postId}`} className="min-h-11 w-full py-[10px]">
+        <Button as={Link} href={`/chat/${id}`} className="min-h-11 w-full py-[10px]">
           채팅하러 가기
         </Button>
       </section>

@@ -18,12 +18,13 @@ export const MOCK_POST_ITEM: PostItem = {
 
 export const MOCK_POST_ITEMS: PostItem[] = [MOCK_POST_ITEM];
 
+// TODO(지권): 백엔드 유저 프로필, 닉네임 누락
 export const MOCK_POST_DEFAULT_DETAIL: GetDetailPostResponse = {
   isSuccess: true,
   code: "COMMON200",
   message: "성공입니다.",
   result: {
-    postId: 2,
+    id: 2,
     title: "홍대입구역 8번 출구 앞에서 검정 지갑 습득",
     content:
       "검정색 반지갑을 습득했습니다. 안에 카드/신분증이 일부 들어있습니다. 본인 확인 후 전달드릴게요.",
@@ -31,19 +32,21 @@ export const MOCK_POST_DEFAULT_DETAIL: GetDetailPostResponse = {
     latitude: 37.5565,
     longitude: 126.9239,
     postType: "FOUND",
-    itemStatus: "FOUND",
-    imageUrls: ["https://picsum.photos/400/300?random=2"],
+    postStatus: "FOUND",
+    imageResponseList: [
+      { id: 1, imgUrl: "https://picsum.photos/400/300?random=2", imageType: "NORMAL" },
+    ],
     radius: 1000,
     category: "WALLET",
     favoriteCount: 0,
     favoriteStatus: false,
     viewCount: 0,
-    profileUrl: null,
-    nickName: "tester01",
+    // profileUrl: null,
+    // nickName: "tester01",
     createdAt: "2025-12-26T10:22:58",
     chatRoomCount: 0,
     userPostCount: 4,
-    new: false,
-    hot: false,
+    isNew: false,
+    isHot: false,
   },
 };

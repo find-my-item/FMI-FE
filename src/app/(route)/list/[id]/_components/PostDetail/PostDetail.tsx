@@ -21,12 +21,7 @@ const PostDetail = ({ type, data }: PostDetailProps) => {
       {isBoardType ? (
         <PostDetailHeader
           headerData={{
-            imageUrls: data.imageUrls,
-            postId: data.postId.toString(),
-            nickName: data.nickName,
-            profileUrl: data.profileUrl,
-            userPostCount: data.userPostCount,
-            chatRoomCount: data.chatRoomCount,
+            ...data,
           }}
         />
       ) : (
