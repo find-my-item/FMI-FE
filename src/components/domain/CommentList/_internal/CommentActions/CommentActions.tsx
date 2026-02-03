@@ -19,7 +19,6 @@ const CommentActions = ({
 }: CommentActionsProps) => {
   return (
     <div className="flex items-center gap-3 py-2">
-      {/* 답글 */}
       {!isThreadItem && (
         <button className="flex items-center gap-1" onClick={() => setViewReply((prev) => !prev)}>
           <span

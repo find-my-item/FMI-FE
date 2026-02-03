@@ -2,11 +2,12 @@ import { cn } from "@/utils";
 
 interface ReplyFormProps {
   isThreadItem: boolean;
+  className?: string;
 }
 
-const ReplyForm = ({ isThreadItem }: ReplyFormProps) => {
+const ReplyForm = ({ isThreadItem, className }: ReplyFormProps) => {
   return (
-    <form action="" className="w-full">
+    <form action="" className={cn("w-full", className)}>
       <input
         type="text"
         placeholder="답글 작성란"

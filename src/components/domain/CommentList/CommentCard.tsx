@@ -56,7 +56,9 @@ const CommentCard = ({ level = "comment", className }: CommentCardProps) => {
         </div>
       </div>
 
-      {isReplyFormOpen && <ReplyForm isThreadItem={isThreadItem} />}
+      {isReplyFormOpen && (
+        <ReplyForm isThreadItem={isThreadItem} className={isNestedReply ? "pb-[7px]" : undefined} />
+      )}
 
       {viewReply && (
         <div className="rounded-[10px] bg-layout_2depth">
