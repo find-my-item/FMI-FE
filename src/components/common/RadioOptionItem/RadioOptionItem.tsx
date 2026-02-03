@@ -1,0 +1,86 @@
+import { InputHTMLAttributes } from "react";
+import { cn } from "@/utils";
+
+/**
+ * @author jikwon
+ *
+ * @description
+ * 라디오 옵션 아이템 컴포넌트입니다.
+ *
+ * - option.value 를 기준으로 선택 상태를 판단합니다.
+ * - controlled 방식으로 동작합니다.
+ *
+ * @param option 라디오 옵션 객체 (value, label)
+ * @param selected 현재 선택된 값
+ * @param onChange 선택 값 변경 함수
+ * @param inputName 라디오 그룹 이름
+ * @param labelClassName 최상위 label 요소에 적용할 클래스 이름
+ *
+ * @example
+ * ```tsx
+ * <RadioOptionItem
+ *   option={{ value: "FOOD", label: "음식" }}
+ *   selected={selected}
+ *   onChange={setSelected}
+ *   inputName="category"
+ * />
+ * ```
+ */
+
+type RadioOption = {
+  value: string;
+  label: string;
+};
+
+interface RadioOptionItemProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  "type" | "name" | "value" | "checked" | "onChange"
+> {
+  option: RadioOption;
+  selected: string;
+  onChange: (value: string) => void;
+  inputName: string;
+  labelClassName?: string;
+}
+
+const RadioOptionItem = ({
+  option,
+  selected,
+  onChange,
+  inputName,
+  labelClassName,
+  ...inputProps
+}: RadioOptionItemProps) => {
+  const { value, label } = option;
+  const isChecked = selected === value;
+
+  return (
+    <label
+      className={cn(
+        "flex h-[61px] w-full cursor-pointer items-center gap-3 px-5 py-[18px] text-h3-medium text-neutral-normal-default",
+        isChecked && "rounded-[4px] bg-fill-neutral-strong-default",
+        labelClassName
+      )}
+    >
+      <input
+        type="radio"
+        name={inputName}
+        value={value}
+        checked={isChecked}
+        onChange={(e) => onChange(e.target.value)}
+        className="peer hidden"
+        {...inputProps}
+      />
+      <span
+        className={cn(
+          "relative h-4 w-4 rounded-full border border-brand-normal-enteredSelected peer-checked:border-brand-normal-enteredSelected",
+          "before:absolute before:inset-[3px] before:scale-0 before:rounded-full before:transition-transform before:bg-fill-brand-normal-enteredSelected",
+          "peer-checked:before:scale-100"
+        )}
+      />
+      <span>{label}</span>
+    </label>
+  );
+};
+
+export default RadioOptionItem;
