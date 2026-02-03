@@ -69,9 +69,12 @@ const PostListItem = ({ post, linkState = "list" }: PostListItemProps) => {
           </div>
         </div>
 
-        {post.thumbnailUrl && (
-          <ListItemImage src={post.thumbnailUrl} alt="게시글 대표 이미지" size={90} />
-        )}
+        <ListItemImage
+          src={post.thumbnailUrl}
+          alt="게시글 대표 이미지"
+          size={90}
+          category={category}
+        />
       </Link>
     </li>
   );

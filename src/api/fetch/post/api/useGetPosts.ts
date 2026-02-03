@@ -13,6 +13,8 @@ export const useGetPosts = ({
   return useAppQuery<GetListResponse>(
     "public",
     ["posts", page, size, type],
-    `/posts?type=${type}&page=${page}&size=${size}`
+    `/posts?type=${type}&page=${page}&size=${size}`,
+    { throwOnError: true }
+    // TODO(지권): suspense 추가 필요
   );
 };

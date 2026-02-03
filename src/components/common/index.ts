@@ -24,3 +24,4 @@ export { default as InputSearch } from "./Input/InputSearch/InputSearch";
 export { default as RequiredText } from "./RequiredText/RequiredText";
 export { default as ProfileAvatar } from "./ProfileAvatar/ProfileAvatar";
 export { default as ListItemImage } from "./ListItemImage/ListItemImage";
+export { default as RadioOptionItem } from "./RadioOptionItem/RadioOptionItem";
