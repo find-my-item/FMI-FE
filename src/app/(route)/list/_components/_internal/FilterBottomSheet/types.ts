@@ -5,6 +5,6 @@ export type FilterTab = "region" | "category" | "sort" | "status";
 
 export type CategoryFilterValue = "" | CategoryType;
 
-export type SortFilterValue = "" | "OLDEST" | "MOST_FAVORITED" | "MOST_VIWED";
+export type SortFilterValue = "LATEST" | "OLDEST" | "MOST_FAVORITED" | "MOST_VIWED";
 
 export type StatusFilterValue = "" | ItemStatus;

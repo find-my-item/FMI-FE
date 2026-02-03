@@ -9,7 +9,7 @@ interface PostListItemProps {
 }
 
 const PostListItem = ({ post, linkState = "list" }: PostListItemProps) => {
-  const { itemStatus, category, createdAt, new: isNew, hot: isHot } = post;
+  const { id, postStatus, category, createdAt, isNew, isHot } = post;
 
   const VIEW_ITEM = [
     {
@@ -25,13 +25,13 @@ const PostListItem = ({ post, linkState = "list" }: PostListItemProps) => {
   return (
     <li>
       <Link
-        href={linkState === "list" ? `/list/${post.postId}` : `/notice/${post.postId}`}
+        href={linkState === "list" ? `/list/${id}` : `/notice/${id}`}
         className="duration-130 flex w-full cursor-pointer items-center gap-[14px] border-b border-b-flatGray-50 px-[20px] py-[30px] transition-colors hover:bg-flatGray-25"
       >
         <div className="min-w-0 flex-1">
           {linkState === "list" && (
             <div className="mb-2 flex gap-2">
-              <Chip label={getItemStatusLabel(itemStatus)} type="brandSubtle" />
+              <Chip label={getItemStatusLabel(postStatus)} type="brandSubtle" />
               <Chip label={getItemCategoryLabel(category)} type="neutralStrong" />
             </div>
           )}
@@ -69,8 +69,8 @@ const PostListItem = ({ post, linkState = "list" }: PostListItemProps) => {
           </div>
         </div>
 
-        {post.thumbnailUrl && (
-          <ListItemImage src={post.thumbnailUrl} alt="게시글 대표 이미지" size={90} />
+        {post.thumbnailImageUrl && (
+          <ListItemImage src={post.thumbnailImageUrl} alt="게시글 대표 이미지" size={90} />
         )}
       </Link>
     </li>
