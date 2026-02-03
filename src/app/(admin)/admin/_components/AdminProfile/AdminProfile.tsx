@@ -5,8 +5,8 @@ const AdminProfile = () => {
   return (
     <header className="flex items-center justify-between px-5 py-[30px]">
       <div className="flex items-center gap-6">
-        <div className="h-[60px] w-[60px] rounded-full bg-fill-brand-subtle-default">
-          <Icon name="Logo" size={60} />
+        <div className="h-[60px] w-[60px] rounded-full bg-fill-brand-subtle-default flex-center">
+          <Icon name="AdminLogo" size={50} />
         </div>
         <div>
           <p className="text-body1-semibold text-layout-header-default">찾아줘 관리자</p>
