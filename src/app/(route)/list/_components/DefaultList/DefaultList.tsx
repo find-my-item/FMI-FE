@@ -1,7 +1,10 @@
 "use client";
 
-import { PostListItem, Tab } from "@/components/domain";
+import { Suspense } from "react";
 import { useGetPosts } from "@/api/fetch/post";
+import { ErrorBoundary } from "@/app/ErrorBoundary";
+import { PostListItem, Tab } from "@/components/domain";
+import { EmptyState, LoadingState } from "@/components/state";
 import { TABS } from "../../_constants/TABS";
 import FilterSection from "../_internal/FilterSection/FilterSection";
 import { useListParams } from "../../_hooks/useListParams/useListParams";
@@ -31,13 +34,27 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
 
       <FilterSection />
 
-      <section aria-label="게시글 목록" className="w-full">
-        <ul>
-          {listData?.result?.posts?.map((item) => (
-            <PostListItem key={item.postId} post={item} linkState="list" />
-          ))}
-        </ul>
-      </section>
+      {/* TODO(지권): 에러 UI 추가 필요 */}
+      <ErrorBoundary fallback={<div>에러 발생</div>}>
+        <Suspense fallback={<LoadingState />}>
+          <section aria-label="게시글 목록" className="w-full">
+            {listData?.result?.posts?.length === 0 ? (
+              <EmptyState
+                icon={{
+                  iconName: "EmptyPostList",
+                  iconSize: 200,
+                }}
+              />
+            ) : (
+              <ul>
+                {listData?.result?.posts?.map((item) => (
+                  <PostListItem key={item.postId} post={item} linkState="list" />
+                ))}
+              </ul>
+            )}
+          </section>
+        </Suspense>
+      </ErrorBoundary>
     </section>
   );
 };

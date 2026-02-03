@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { cn } from "@/utils";
+import { CategoryType } from "@/types";
+import Icon, { IconName } from "../Icon/Icon";
 
 /**
  * @author jikwon
@@ -22,7 +24,18 @@ interface ListItemImageProps {
   priority?: boolean;
   className?: string;
   imageCount?: number;
+  category?: CategoryType;
 }
+
+const CATEGORY_ICON_MAP: Record<CategoryType, IconName> = {
+  ELECTRONICS: "Electronics",
+  WALLET: "Wallet",
+  ID_CARD: "IdCard",
+  JEWELRY: "Jewelry",
+  BAG: "Bag",
+  CARD: "Card",
+  ETC: "Etc",
+};
 
 const ListItemImage = ({
   src,
@@ -31,21 +44,27 @@ const ListItemImage = ({
   priority = false,
   className,
   imageCount,
+  category,
 }: ListItemImageProps) => {
-  if (!src) return null;
+  if (!src && !category) return null;
 
   return (
-    <div className="relative overflow-hidden rounded-[10px]">
-      <Image
-        src={src}
-        alt={alt}
-        width={size}
-        height={size}
-        sizes={`${size}px`}
-        draggable={false}
-        priority={priority}
-        className={cn("object-cover", className, `h-[${size}px] w-[${size}px]`)}
-      />
+    <div className="relative overflow-hidden rounded-[10px]" style={{ width: size, height: size }}>
+      {src ? (
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          sizes={`${size}px`}
+          draggable={false}
+          priority={priority}
+          className="object-cover"
+        />
+      ) : (
+        <div className="h-full w-full flex-center" aria-label={`${category ?? "ETC"} 기본 이미지`}>
+          <Icon name={CATEGORY_ICON_MAP[category!]} size={size} />
+        </div>
+      )}
 
       {typeof imageCount === "number" && imageCount > 1 && (
         <div
