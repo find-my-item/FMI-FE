@@ -32,7 +32,7 @@ const CATEGORY_ICON_MAP: Record<CategoryType, IconName> = {
   WALLET: "Wallet",
   ID_CARD: "IdCard",
   JEWELRY: "Jewelry",
-  BAG: "ArrowDown", // TODO(지권): 가방 아이콘 수정
+  BAG: "Bag",
   CARD: "Card",
   ETC: "Etc",
 };
