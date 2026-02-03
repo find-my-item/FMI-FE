@@ -13,6 +13,7 @@ type HeaderData = {
 interface PostDetailHeaderType {
   headerData: HeaderData;
 }
+
 const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
   const { id, imageResponseList, userData } = headerData;
 

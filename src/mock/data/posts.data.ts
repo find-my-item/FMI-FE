@@ -20,7 +20,6 @@ export const MOCK_POST_ITEM: PostItem = {
 
 export const MOCK_POST_ITEMS: PostItem[] = [MOCK_POST_ITEM];
 
-// TODO(지권): 백엔드 유저 프로필, 닉네임 누락
 export const MOCK_POST_DEFAULT_DETAIL: GetDetailPostResponse = {
   isSuccess: true,
   code: "COMMON200",
