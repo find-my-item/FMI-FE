@@ -64,3 +64,4 @@ export { default as EmptyStar } from "@/assets/empty-star.svg";
 export { default as Inquiry } from "@/assets/inquiry.svg";
 export { default as Report } from "@/assets/report.svg";
 export { default as Alert } from "@/assets/alert.svg";
+export { default as EmptyPostList } from "@/assets/empty-post-list.svg";

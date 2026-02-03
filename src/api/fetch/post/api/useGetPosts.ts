@@ -39,6 +39,7 @@ export const useGetPosts = ({
       getNextPageParam: (lastPage) => lastPage.result.nextCursor ?? undefined,
       select: (data: InfiniteData<PostSearchResponse>) =>
         data.pages.flatMap((page) => page.result.postList),
+      throwOnError: true,
     }
   );
 };
