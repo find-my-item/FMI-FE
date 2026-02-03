@@ -1,25 +1,23 @@
 import { Dispatch, SetStateAction } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/utils";
-import { Button, Icon, InputSearch } from "@/components/common";
+import { Button, InputSearch } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
-import { FilterTab } from "@/app/(route)/list/_components/_internal/FilterBottomSheet/types";
-import { FiltersState } from "@/app/(route)/list/_components/_internal/FilterSection/filtersStateType";
+import { TABS } from "./_constants/TABS";
+import { FilterTab, tabsType } from "./_types/FilterType";
+import { categories, findStatus, sort } from "./_constants/CATEGORY";
+import { FiltersStateType } from "./_types/filtersStateType";
+
 import { applyFiltersToUrl } from "@/app/(route)/list/_components/_internal/FilterBottomSheet/applyFiltersToUrl";
-import {
-  categories,
-  sort,
-  tabs,
-  status,
-} from "@/app/(route)/list/_components/_internal/FilterBottomSheet/CONSTANTS";
 
 interface FilterBottomSheetProps {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
   selectedTab: FilterTab;
   setSelectedTab: (tab: FilterTab) => void;
-  filters: FiltersState;
-  setFilters: Dispatch<SetStateAction<FiltersState>>;
+  filters: FiltersStateType;
+  setFilters: Dispatch<SetStateAction<FiltersStateType>>;
+  pageType?: tabsType;
 }
 
 const FilterBottomSheet = ({
@@ -29,6 +27,7 @@ const FilterBottomSheet = ({
   setSelectedTab,
   filters,
   setFilters,
+  pageType = "listsTabs",
 }: FilterBottomSheetProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -44,13 +43,16 @@ const FilterBottomSheet = ({
     setIsOpen(false);
   };
 
+  //새로 추가 되는 코드
+  const currentTabs = TABS[pageType];
+
   return (
     <PopupLayout isOpen={isOpen} onClose={() => setIsOpen(false)} className="min-h-[530px] py-10">
       <div className="w-full gap-6 flex-col-center">
         <h2 className="text-h2-medium text-layout-header-default">필터</h2>
 
         <section role="tablist" className="w-full flex-center">
-          {tabs.map((tab) => {
+          {currentTabs.map((tab) => {
             const isSelected = selectedTab === tab.value;
 
             return (
@@ -119,18 +121,32 @@ const FilterBottomSheet = ({
         )}
 
         {/* 찾음 여부 상태 */}
-        {selectedTab === "status" && (
-          <div role="radiogroup" aria-label="상태 선택" className="flex w-full flex-wrap gap-2">
-            {status.map((statusItem, index) => (
+        {selectedTab === "findStatus" && (
+          <div
+            role="radiogroup"
+            aria-label="찾음 상태 선택"
+            className="flex w-full flex-wrap gap-2"
+          >
+            {findStatus.map((findStatusItem, index) => (
               <ChipButton
                 key={index}
-                label={statusItem.label}
-                value={statusItem.value}
-                selected={filters.status === statusItem.value}
-                onSelect={() => setFilters((prev) => ({ ...prev, status: statusItem.value }))}
+                label={findStatusItem.label}
+                value={findStatusItem.value}
+                selected={filters.status === findStatusItem.value}
+                onSelect={() =>
+                  setFilters((prev) => ({ ...prev, findStatus: findStatusItem.value }))
+                }
               />
             ))}
           </div>
+        )}
+
+        {selectedTab === "status" && (
+          <div
+            role="radiogroup"
+            aria-label="상태 선택"
+            className="flex w-full flex-wrap gap-2"
+          ></div>
         )}
       </div>
 
