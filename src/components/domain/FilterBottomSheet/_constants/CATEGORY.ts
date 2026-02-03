@@ -31,6 +31,6 @@ export const findStatus = [
 
 export const status = [
   { label: "전체", value: "" },
-  { label: "분실", value: "LOSE" },
-  { label: "습득", value: "FIND" },
+  { label: "분실", value: "LOST" },
+  { label: "습득", value: "FOUND" },
 ];

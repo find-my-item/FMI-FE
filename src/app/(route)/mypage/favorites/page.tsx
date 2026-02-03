@@ -1,7 +1,7 @@
 "use client";
 
 import { MypageSearch } from "@/components/domain";
-import SelectFilter from "@/components/domain/SelectFilter/SelectFilter";
+import SelectFilter from "@/components/domain/FilterBottomSheet/_components/SelectFilter";
 import { DetailHeader } from "@/components/layout";
 import { useSearchUpdateQueryString } from "@/hooks";
 
