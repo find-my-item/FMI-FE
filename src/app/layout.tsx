@@ -24,7 +24,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const isVercel = process.env.VERCEL === "1";
+  const isProd = process.env.VERCEL_ENV === "production";
+  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+  const clarityId = process.env.NEXT_PUBLIC_CLARITY_ID;
 
   return (
     <html lang="ko" className={pretendard.variable}>
@@ -33,23 +35,29 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="찾아줘!" />
         <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
-        <Script
-          async
-          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
-        />
-        <Script
-          id="gtag-init"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
-    `,
-          }}
-        />
-        {process.env.NODE_ENV === "production" && (
+      </head>
+      <body className="mx-auto max-w-[390px] border-2 flex-col-center">
+        {isProd && gaId && (
+          <>
+            <Script
+              strategy="afterInteractive"
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+            />
+            <Script
+              id="gtag-init"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${gaId}');
+                `,
+              }}
+            />
+          </>
+        )}
+        {isProd && clarityId && (
           <Script
             id="clarity-script"
             strategy="afterInteractive"
@@ -59,13 +67,11 @@ export default function RootLayout({
                 c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
                 t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
                 y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-              })(window, document, "clarity", "script", "${process.env.NEXT_PUBLIC_CLARITY_ID}");
+              })(window, document, "clarity", "script", "${clarityId}");
             `,
             }}
           />
         )}
-      </head>
-      <body className="mx-auto max-w-[390px] border-2 flex-col-center">
         <Providers>
           <ToastProvider>
             <MSWProvider />
@@ -79,8 +85,12 @@ export default function RootLayout({
             crossOrigin="anonymous"
             strategy="afterInteractive"
           />
-          <Analytics />
-          {isVercel && <SpeedInsights />}
+          {isProd && (
+            <>
+              <Analytics />
+              <SpeedInsights />
+            </>
+          )}
         </Providers>
       </body>
     </html>
