@@ -12,7 +12,7 @@ interface AdminListItemProps {
 const AdminListItem = ({ data, imageAlt, link }: AdminListItemProps) => {
   const { title, viewCount, createdAt, likeCount, isNew, isHot, thumbnailUrl } = data;
 
-  const VIEW_ITEM = [
+  const viewItem = [
     {
       icon: "Star",
       count: likeCount,
@@ -45,7 +45,7 @@ const AdminListItem = ({ data, imageAlt, link }: AdminListItemProps) => {
             </div>
           </div>
           <div className="mt-2 flex gap-2">
-            {VIEW_ITEM.map((item) => (
+            {viewItem.map((item) => (
               <span
                 key={item.icon}
                 className="flex items-center gap-1 text-body2-regular text-neutral-strong-placeholder"
