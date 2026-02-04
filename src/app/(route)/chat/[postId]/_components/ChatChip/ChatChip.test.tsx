@@ -30,7 +30,7 @@ describe("ChatChip", () => {
 
     const chip = screen.getByRole("note");
     expect(chip).toHaveClass("h-[18px]");
-    expect(chip).toHaveClass("w-[40px]");
+    expect(chip).toHaveClass("w-10");
     expect(chip).toHaveClass("shrink-0");
     expect(chip).toHaveClass("rounded");
     expect(chip).toHaveClass("text-caption2-semibold");
@@ -50,7 +50,7 @@ describe("ChatChip", () => {
     const chip = screen.getByRole("note");
     expect(chip).toHaveTextContent("습득물");
     expect(chip).toHaveClass(
-      "h-[18px] w-[40px] shrink-0 rounded text-caption2-semibold flex-center text-accent-foundItem bg-fill-accent-foundItem"
+      "h-[18px] w-10 shrink-0 rounded text-caption2-semibold flex-center text-accent-foundItem bg-fill-accent-foundItem"
     );
   });
 
@@ -60,7 +60,7 @@ describe("ChatChip", () => {
     const chip = screen.getByRole("note");
     expect(chip).toHaveTextContent("분실물");
     expect(chip).toHaveClass(
-      "h-[18px] w-[40px] shrink-0 rounded text-caption2-semibold flex-center text-accent-lostItem bg-fill-accent-lostItem"
+      "h-[18px] w-10 shrink-0 rounded text-caption2-semibold flex-center text-accent-lostItem bg-fill-accent-lostItem"
     );
   });
 });
