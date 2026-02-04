@@ -1,5 +1,4 @@
 import { AdminInquiryItem, AdminReportItem } from "@/api/fetch/admin";
-import { ReplyStatus, ReportsType } from "@/types";
 import { AdminReportsItemData } from "../../_types";
 import {
   ProcessStatusBadgeConfig,

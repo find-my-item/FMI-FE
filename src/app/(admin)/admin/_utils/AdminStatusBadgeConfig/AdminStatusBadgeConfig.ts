@@ -1,6 +1,7 @@
 import { ReplyStatus, ReportsType } from "@/types";
+import { StatusBadgeConfig } from "../../_types";
 
-export const ProcessStatusBadgeConfig: Record<ReportsType, { label: string; className: string }> = {
+export const ProcessStatusBadgeConfig: Record<ReportsType, StatusBadgeConfig> = {
   PENDING: {
     label: "접수",
     className: "text-neutral-strong-default bg-fill-neutral-strong-default",
@@ -15,7 +16,7 @@ export const ProcessStatusBadgeConfig: Record<ReportsType, { label: string; clas
   },
 };
 
-export const ReplyStatusBadgeConfig: Record<ReplyStatus, { label: string; className: string }> = {
+export const ReplyStatusBadgeConfig: Record<ReplyStatus, StatusBadgeConfig> = {
   UNANSWERED: {
     label: "미답변",
     className: "text-neutral-strong-default bg-fill-neutral-strong-default",
