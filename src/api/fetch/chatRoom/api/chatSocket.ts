@@ -1,7 +1,7 @@
 import { Client, IMessage, StompSubscription } from "@stomp/stompjs";
 import authApi from "@/api/_base/axios/authApi";
 
-type MessageHandler<T = any> = (message: T) => void;
+export type MessageHandler<T = any> = (message: T) => void;
 
 let client: Client | null = null;
 const subscriptions = new Map<string, StompSubscription>();

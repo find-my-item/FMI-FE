@@ -7,6 +7,7 @@ import {
   subscribeChatSocket,
   unsubscribeChatSocket,
 } from "./chatSocket";
+import type { MessageHandler } from "./chatSocket";
 import { ChatListUpdateResponse, WebSocketChatMessage } from "../types/ChatRoomType";
 
 interface UseChatSocketOptions {
@@ -22,36 +23,30 @@ export const useChatSocket = ({
   onReadReceipt,
   manageConnection = false,
 }: UseChatSocketOptions = {}) => {
+  const subscriptions = [
+    { destination: "/user/queue/messages", handler: onMessage },
+    { destination: "/user/queue/list-updates", handler: onListUpdate },
+    { destination: "/user/queue/read-receipts", handler: onReadReceipt },
+  ];
+
   useEffect(() => {
     if (manageConnection) {
       connectChatSocket();
-      return () => {
-        disconnectChatSocket();
-      };
+      return () => disconnectChatSocket();
     }
 
-    if (onMessage) {
-      subscribeChatSocket("/user/queue/messages", onMessage);
-    }
-
-    if (onListUpdate) {
-      subscribeChatSocket("/user/queue/list-updates", onListUpdate);
-    }
-
-    if (onReadReceipt) {
-      subscribeChatSocket("/user/queue/read-receipts", onReadReceipt);
-    }
+    subscriptions.forEach(({ destination, handler }) => {
+      if (handler) {
+        subscribeChatSocket(destination, handler as MessageHandler);
+      }
+    });
 
     return () => {
-      if (onMessage) {
-        unsubscribeChatSocket("/user/queue/messages", onMessage);
-      }
-      if (onListUpdate) {
-        unsubscribeChatSocket("/user/queue/list-updates", onListUpdate);
-      }
-      if (onReadReceipt) {
-        unsubscribeChatSocket("/user/queue/read-receipts", onReadReceipt);
-      }
+      subscriptions.forEach(({ destination, handler }) => {
+        if (handler) {
+          unsubscribeChatSocket(destination, handler as MessageHandler);
+        }
+      });
     };
   }, [onMessage, onListUpdate, onReadReceipt, manageConnection]);
 };
