@@ -50,6 +50,7 @@ type Story = StoryObj<typeof ChatRoomHeader>;
 
 const mockChatRoomFound: ChatRoomResponse = {
   roomId: 1,
+  unreadCount: 0,
   opponentUser: {
     opponentUserId: 2,
     nickname: "사용자 닉네임",
@@ -67,6 +68,7 @@ const mockChatRoomFound: ChatRoomResponse = {
 
 const mockChatRoomLost: ChatRoomResponse = {
   roomId: 2,
+  unreadCount: 0,
   opponentUser: {
     opponentUserId: 3,
     nickname: "다른 사용자",
