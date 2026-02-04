@@ -1,6 +1,7 @@
 import { AdminInquiryItem, AdminReportItem } from "@/api/fetch/admin";
 import { ReplyStatus, ReportsType } from "@/types";
 import { AdminReportsItemData } from "../../_types";
+import { StatusBadgeConfig } from "./StatusBadgeConfig";
 
 const getReportTitle = (item: AdminReportItem): string => {
   switch (item.targetType) {
@@ -17,7 +18,7 @@ const getReportTitle = (item: AdminReportItem): string => {
   }
 };
 
-const ProcessStatusBadgeConfig: Record<ReportsType, { label: string; className: string }> = {
+const ProcessStatusBadgeConfig: Record<ReportsType, StatusBadgeConfig> = {
   PENDING: {
     label: "접수",
     className: "text-neutral-strong-default bg-fill-neutral-strong-default",
@@ -32,7 +33,7 @@ const ProcessStatusBadgeConfig: Record<ReportsType, { label: string; className: 
   },
 };
 
-const ReplyStatusBadgeConfig: Record<ReplyStatus, { label: string; className: string }> = {
+const ReplyStatusBadgeConfig: Record<ReplyStatus, StatusBadgeConfig> = {
   UNANSWERED: {
     label: "미답변",
     className: "text-neutral-strong-default bg-fill-neutral-strong-default",
