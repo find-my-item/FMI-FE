@@ -3,7 +3,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/utils";
 import { Button, Icon } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
-import { FilterTab } from "./types";
+import { CategoryFilterValue, FilterTab, SortFilterValue, StatusFilterValue } from "./types";
 import { tabs, categories, sort, status } from "./CONSTANTS";
 import { applyFiltersToUrl } from "./applyFiltersToUrl";
 import { FiltersState } from "../FilterSection/filtersStateType";
@@ -154,6 +154,8 @@ const FilterBottomSheet = ({
 
 export default FilterBottomSheet;
 
+type ChipValue = SortFilterValue | CategoryFilterValue | StatusFilterValue;
+
 const ChipButton = ({
   label,
   value,
@@ -161,9 +163,9 @@ const ChipButton = ({
   onSelect,
 }: {
   label: string;
-  value: string;
+  value: ChipValue;
   selected: boolean;
-  onSelect: (value: string) => void;
+  onSelect: (value: ChipValue) => void;
 }) => {
   return (
     <button

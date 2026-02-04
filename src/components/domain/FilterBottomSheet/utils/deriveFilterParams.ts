@@ -17,11 +17,11 @@ type Params = {
 };
 
 export const normalizedFilterValues = ({ region, category, sort, status, findStatus }: Params) => {
-  const normalizedCategory = normalizeEnumValue<CategoryFilterValue>(category);
+  const normalizedCategory = normalizeEnumValue<Exclude<CategoryFilterValue, undefined>>(category);
   const normalizedSort = normalizeEnumValue<SortFilterValue>(sort);
-  const normalizedStatus = normalizeEnumValue<StatusFilterValue>(status);
-  const normalizedFindStatus = normalizeEnumValue<FindStatusFilterValue>(findStatus);
-
+  const normalizedStatus = normalizeEnumValue<Exclude<StatusFilterValue, undefined>>(status);
+  const normalizedFindStatus =
+    normalizeEnumValue<Exclude<FindStatusFilterValue, undefined>>(findStatus);
   return {
     normalizedCategory,
     normalizedSort,
