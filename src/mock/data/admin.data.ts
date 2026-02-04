@@ -14,6 +14,7 @@ export const MOCK_NOTICE_LIST: NoticeItem = {
 };
 
 import { AdminInquiryItem, AdminReportItem } from "@/api/fetch/admin";
+import { ReplyStatus, ReportsType } from "@/types";
 
 export const MOCK_ADMIN_REPORT_LIST: AdminReportItem[] = [
   {
@@ -142,6 +143,8 @@ export const MOCK_REPORTS_DETAIL_DATA = {
   userName: "유저닉네임",
   createdAt: "2025-05-06",
   content: "여기에 신고 내용이 표기됩니다.",
+  status: "RECEIVED" as ReportsType,
+  replyStatus: "ANSWERED" as ReplyStatus,
 };
 
 export const MOCK_COMMENT_DATA = [

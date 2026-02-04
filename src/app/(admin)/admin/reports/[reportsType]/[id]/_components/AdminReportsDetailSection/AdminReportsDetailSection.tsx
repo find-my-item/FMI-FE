@@ -1,5 +1,10 @@
+import {
+  ProcessStatusBadgeConfig,
+  ReplyStatusBadgeConfig,
+} from "@/app/(admin)/admin/_utils/AdminStatusBadgeConfig/AdminStatusBadgeConfig";
 import { Icon } from "@/components/common";
-import { formatDate } from "@/utils";
+import { ReplyStatus, ReportsType } from "@/types";
+import { cn, formatDate } from "@/utils";
 
 interface AdminReportsDetailSectionProps {
   data: {
@@ -7,11 +12,13 @@ interface AdminReportsDetailSectionProps {
     userName: string;
     createdAt: string;
     content: string;
+    status: ReportsType;
+    replyStatus: ReplyStatus;
   };
 }
 
 const AdminReportsDetailSection = ({ data }: AdminReportsDetailSectionProps) => {
-  const { title, userName, createdAt, content } = data;
+  const { title, userName, createdAt, content, status, replyStatus } = data;
 
   return (
     <section
@@ -19,17 +26,30 @@ const AdminReportsDetailSection = ({ data }: AdminReportsDetailSectionProps) => 
       className="space-y-[14px] border-b border-flatGray-50 px-5 py-[30px]"
     >
       <div className="flex items-center gap-2">
-        <button className="flex items-center gap-1">
-          접수 <Icon name="ArrowDown" size={10} />
+        <button
+          className={cn(
+            "flex items-center gap-1 rounded-full px-3 py-1 text-caption1-semibold",
+            ProcessStatusBadgeConfig[status].className
+          )}
+        >
+          <span>{ProcessStatusBadgeConfig[status].label}</span> <Icon name="ArrowDown" size={10} />
         </button>
-        <span>답변 완료</span>
+        <span
+          className={cn(
+            "rounded-full px-3 py-1 text-caption1-semibold",
+            ReplyStatusBadgeConfig[replyStatus].className
+          )}
+        >
+          {ReplyStatusBadgeConfig[replyStatus].label}
+        </span>
       </div>
-      <div className="flex flex-col gap-2">
+
+      <div className="space-y-2">
         <div className="flex flex-col gap-1">
           {/* TODO(지권): 디자인 토큰 누락 */}
           <h2 className="text-[20px] font-semibold text-layout-header-default">{title}</h2>
-          <div className="flex items-center gap-2 text-body2-regular text-layout-body-default">
-            <span className="block after:mx-2 after:content-['·']">{userName}</span>
+          <div className="flex items-center text-body2-regular text-layout-body-default">
+            <span className="block after:mx-1 after:content-['·']">{userName}</span>
             <time dateTime={createdAt}>{formatDate(createdAt)}</time>
           </div>
         </div>
