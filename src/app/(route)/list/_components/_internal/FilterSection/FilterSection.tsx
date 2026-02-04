@@ -3,12 +3,12 @@ import { normalizeEnumValue } from "@/utils";
 import { Filter } from "@/components/common";
 import FilterBottomSheet from "../FilterBottomSheet/FilterBottomSheet";
 import { FiltersState } from "./filtersStateType";
-import { DEFAULT_FILTERS } from "./DEFAULT_FILTERS";
+import { DEFAULT_FILTERS } from "../../../../../../components/domain/FilterBottomSheet/_types/DEFAULT_FILTERS";
 import { CATEGORY_LABEL_MAP, SORT_LABEL_MAP, STATUS_LABEL_MAP } from "../FilterBottomSheet/LABELS";
 import {
   filterSelectionState,
   normalizedFilterValues,
-} from "../../../_utils/deriveFilterParams/deriveFilterParams";
+} from "../../../../../../components/domain/FilterBottomSheet/utils/deriveFilterParams";
 import {
   CategoryFilterValue,
   FilterTab,

@@ -1,4 +1,6 @@
-import { FiltersStateType } from "../_types/filtersStateType";
+// 사용자가 선택한 필터 상태를 웹 브라우저 주소창(URL)의 쿼리 스트링으로 변환해주는 유틸리티
+
+import { FiltersStateType } from "../_types/FiltersStateType";
 import {
   CategoryFilterValue,
   FindStatusFilterValue,

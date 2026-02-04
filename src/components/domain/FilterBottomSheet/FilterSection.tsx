@@ -2,15 +2,20 @@ import { useState } from "react";
 import { normalizeEnumValue } from "@/utils";
 import { Filter } from "@/components/common";
 import { useListParams } from "@/app/(route)/list/_hooks/useListParams/useListParams";
-import { FiltersState } from "@/app/(route)/list/_components/_internal/FilterSection/filtersStateType";
-import { DEFAULT_FILTERS } from "@/app/(route)/list/_components/_internal/FilterSection/DEFAULT_FILTERS";
-import { filterSelectionState } from "@/app/(route)/list/_utils/deriveFilterParams/deriveFilterParams";
+import { DEFAULT_FILTERS } from "@/components/domain/FilterBottomSheet/_types/DEFAULT_FILTERS";
+import {
+  filterSelectionState,
+  normalizedFilterValues,
+} from "@/components/domain/FilterBottomSheet/utils/deriveFilterParams";
 import { CATEGORY_LABEL_MAP } from "@/app/(route)/list/_components/_internal/FilterBottomSheet/LABELS";
+import BottomSheet from "./BottomSheet";
+
+import { FiltersStateType } from "./_types/FiltersStateType";
 
 const FilterSection = () => {
   const { region, category, sort, status } = useListParams();
 
-  const [filters, setFilters] = useState<FiltersState>(DEFAULT_FILTERS);
+  const [filters, setFilters] = useState<FiltersStateType>(DEFAULT_FILTERS);
 
   const { normalizedCategory, normalizedSort, normalizedStatus } = normalizedFilterValues({
     region,
@@ -99,7 +104,7 @@ const FilterSection = () => {
       </section>
 
       {isOpen && (
-        <FilterBottomSheet
+        <BottomSheet
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           selectedTab={selectedTab}

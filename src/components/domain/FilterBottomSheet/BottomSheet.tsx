@@ -6,11 +6,10 @@ import { PopupLayout } from "@/components/domain";
 import { TABS } from "./_constants/TABS";
 import { FilterTab, tabsType } from "./_types/FilterType";
 import { categories, findStatus, sort } from "./_constants/CATEGORY";
-import { FiltersStateType } from "./_types/filtersStateType";
+import { FiltersStateType } from "./_types/FiltersStateType";
+import { applyFiltersToUrl } from "./utils/applyFiltersToUrl";
 
-import { applyFiltersToUrl } from "@/app/(route)/list/_components/_internal/FilterBottomSheet/applyFiltersToUrl";
-
-interface FilterBottomSheetProps {
+interface BottomSheetProps {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
   selectedTab: FilterTab;
@@ -20,7 +19,7 @@ interface FilterBottomSheetProps {
   pageType?: tabsType;
 }
 
-const FilterBottomSheet = ({
+const BottomSheet = ({
   isOpen,
   setIsOpen,
   selectedTab,
@@ -28,7 +27,7 @@ const FilterBottomSheet = ({
   filters,
   setFilters,
   pageType = "listsTabs",
-}: FilterBottomSheetProps) => {
+}: BottomSheetProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -159,7 +158,7 @@ const FilterBottomSheet = ({
   );
 };
 
-export default FilterBottomSheet;
+export default BottomSheet;
 
 const ChipButton = ({
   label,
