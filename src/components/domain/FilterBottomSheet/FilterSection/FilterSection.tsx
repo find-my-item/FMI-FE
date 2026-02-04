@@ -1,41 +1,60 @@
+// 최신화 완료 된 FilterSection.tsx
+
 import { useState } from "react";
 import { normalizeEnumValue } from "@/utils";
 import { Filter } from "@/components/common";
-import { useListParams } from "@/app/(route)/list/_hooks/useListParams/useListParams";
-import { DEFAULT_FILTERS } from "@/components/domain/FilterBottomSheet/_types/DEFAULT_FILTERS";
+import FilterBottomSheet from "../FilterBottomSheet/FilterBottomSheet";
 import {
-  filterSelectionState,
-  normalizedFilterValues,
-} from "@/components/domain/FilterBottomSheet/utils/deriveFilterParams";
-import { CATEGORY_LABEL_MAP } from "@/app/(route)/list/_components/_internal/FilterBottomSheet/LABELS";
-import BottomSheet from "./BottomSheet";
-
-import { FiltersStateType } from "./_types/FiltersStateType";
+  CATEGORY_LABEL_MAP,
+  FIND_STATUS_LABEL_MAP,
+  SORT_LABEL_MAP,
+  STATUS_LABEL_MAP,
+} from "../FilterBottomSheet/LABELS";
+import {
+  CategoryFilterValue,
+  FilterTab,
+  SortFilterValue,
+  StatusFilterValue,
+} from "../FilterBottomSheet/types";
+import { FiltersStateType } from "./filtersStateType";
+import { DEFAULT_FILTERS } from "./DEFAULT_FILTERS";
+import { filterSelectionState, normalizedFilterValues } from "../utils/deriveFilterParams";
+import { useListParams } from "@/components/domain/FilterBottomSheet/useListParams/useListParams";
 
 const FilterSection = () => {
-  const { region, category, sort, status } = useListParams();
+  const { region, category, sort, status, findStatus } = useListParams();
 
   const [filters, setFilters] = useState<FiltersStateType>(DEFAULT_FILTERS);
 
-  const { normalizedCategory, normalizedSort, normalizedStatus } = normalizedFilterValues({
-    region,
-    category,
-    sort,
-    status,
-  });
-
-  const { isRegionSelected, isCategorySelected, isSortSelected, isStatusSelected } =
-    filterSelectionState({
+  const { normalizedCategory, normalizedSort, normalizedStatus, normalizedFindStatus } =
+    normalizedFilterValues({
       region,
       category,
       sort,
       status,
+      findStatus,
     });
+
+  const {
+    isRegionSelected,
+    isCategorySelected,
+    isSortSelected,
+    isStatusSelected,
+    isFindStatusSelected,
+  } = filterSelectionState({
+    region,
+    category,
+    sort,
+    status,
+    findStatus,
+  });
 
   const categoryLabel =
     (normalizedCategory && CATEGORY_LABEL_MAP[normalizedCategory]) ?? "카테고리";
   const sortLabel = (normalizedSort && SORT_LABEL_MAP[normalizedSort]) ?? "최신순";
   const statusLabel = (normalizedStatus && STATUS_LABEL_MAP[normalizedStatus]) ?? "전체";
+  const findStatusLabel =
+    (normalizedFindStatus && FIND_STATUS_LABEL_MAP[normalizedFindStatus]) ?? "전체";
 
   const [selectedTab, setSelectedTab] = useState<FilterTab>("region");
   const [isOpen, setIsOpen] = useState(false);
@@ -44,9 +63,9 @@ const FilterSection = () => {
     setFilters({
       ...DEFAULT_FILTERS,
       region: region ?? "",
-      category: (normalizeEnumValue<CategoryFilterValue>(category) ?? "") as CategoryFilterValue,
-      sort: (normalizeEnumValue<SortFilterValue>(sort) ?? "") as SortFilterValue,
-      status: (normalizeEnumValue<StatusFilterValue>(status) ?? "") as StatusFilterValue,
+      category: normalizeEnumValue<Exclude<CategoryFilterValue, undefined>>(category),
+      sort: normalizeEnumValue<SortFilterValue>(sort) ?? "LATEST",
+      status: normalizeEnumValue<Exclude<StatusFilterValue, undefined>>(status),
     });
 
     setSelectedTab(tab);
@@ -93,6 +112,17 @@ const FilterSection = () => {
 
         <Filter
           ariaLabel="찾음여부 필터"
+          onSelected={isFindStatusSelected}
+          iconPosition="trailing"
+          icon={{ name: "ArrowDown", size: 12 }}
+          className="flex-shrink-0"
+          onClick={() => openSheet("findStatus")}
+        >
+          {findStatusLabel}
+        </Filter>
+
+        <Filter
+          ariaLabel="분류 필터"
           onSelected={isStatusSelected}
           iconPosition="trailing"
           icon={{ name: "ArrowDown", size: 12 }}
@@ -104,7 +134,7 @@ const FilterSection = () => {
       </section>
 
       {isOpen && (
-        <BottomSheet
+        <FilterBottomSheet
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           selectedTab={selectedTab}

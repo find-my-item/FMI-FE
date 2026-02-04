@@ -1,15 +1,24 @@
+// 최신화 완료
+
 import { Dispatch, SetStateAction } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/utils";
-import { Button, InputSearch } from "@/components/common";
+import { Button, Icon } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
-import { TABS } from "./_constants/TABS";
-import { FilterTab, tabsType } from "./_types/FilterType";
-import { categories, findStatus, sort } from "./_constants/CATEGORY";
-import { FiltersStateType } from "./_types/FiltersStateType";
-import { applyFiltersToUrl } from "./utils/applyFiltersToUrl";
+import {
+  CategoryFilterValue,
+  FilterTab,
+  FindStatusFilterValue,
+  SortFilterValue,
+  StatusFilterValue,
+  tabsType,
+} from "./types";
+import { tabs, categories, sort, status, findStatus } from "./CONSTANTS";
+import { applyFiltersToUrl } from "./applyFiltersToUrl";
+import { FiltersStateType } from "../FilterSection/filtersStateType";
+import { TABS } from "./TABS";
 
-interface BottomSheetProps {
+interface FilterBottomSheetProps {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
   selectedTab: FilterTab;
@@ -19,7 +28,7 @@ interface BottomSheetProps {
   pageType?: tabsType;
 }
 
-const BottomSheet = ({
+const FilterBottomSheet = ({
   isOpen,
   setIsOpen,
   selectedTab,
@@ -27,7 +36,7 @@ const BottomSheet = ({
   filters,
   setFilters,
   pageType = "listsTabs",
-}: BottomSheetProps) => {
+}: FilterBottomSheetProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -76,13 +85,27 @@ const BottomSheet = ({
 
         {/* 지역선택 */}
         {selectedTab === "region" && (
-          <InputSearch
-            mode="onChange"
-            name="regionSearch"
-            placeholder="검색어를 입력하세요."
-            value={filters.region}
-            onChange={(e) => setFilters((prev) => ({ ...prev, region: e.target.value }))}
-          />
+          <div className="relative w-full">
+            <Icon
+              name="Search"
+              size={16}
+              className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"
+            />
+            <input
+              className="w-full rounded-full px-5 py-[10px] pl-10 bg-fill-neutral-subtle-default"
+              placeholder="검색어를 입력하세요"
+              value={filters.region}
+              onChange={(e) => setFilters((prev) => ({ ...prev, region: e.target.value }))}
+            />
+            <button
+              type="button"
+              onClick={() => setFilters((prev) => ({ ...prev, region: "" }))}
+              className="absolute right-3 top-1/2 -translate-y-1/2"
+              aria-label="지역 검색어 지우기"
+            >
+              <Icon name="Delete" size={16} className="text-gray-400" />
+            </button>
+          </div>
         )}
 
         {/* 카테고리 선택 */}
@@ -140,12 +163,23 @@ const BottomSheet = ({
           </div>
         )}
 
+        {/* 분류 상태 */}
         {selectedTab === "status" && (
           <div
             role="radiogroup"
-            aria-label="상태 선택"
+            aria-label="분류 상태 선택"
             className="flex w-full flex-wrap gap-2"
-          ></div>
+          >
+            {status.map((statusItem, index) => (
+              <ChipButton
+                key={index}
+                label={statusItem.label}
+                value={statusItem.value}
+                selected={filters.status === statusItem.value}
+                onSelect={() => setFilters((prev) => ({ ...prev, status: statusItem.value }))}
+              />
+            ))}
+          </div>
         )}
       </div>
 
@@ -158,7 +192,9 @@ const BottomSheet = ({
   );
 };
 
-export default BottomSheet;
+export default FilterBottomSheet;
+
+type ChipValue = SortFilterValue | CategoryFilterValue | StatusFilterValue | FindStatusFilterValue;
 
 const ChipButton = ({
   label,
@@ -167,9 +203,9 @@ const ChipButton = ({
   onSelect,
 }: {
   label: string;
-  value: string;
+  value: ChipValue;
   selected: boolean;
-  onSelect: (value: string) => void;
+  onSelect: (value: ChipValue) => void;
 }) => {
   return (
     <button

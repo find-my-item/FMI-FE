@@ -3,7 +3,7 @@ import {
   FindStatusFilterValue,
   SortFilterValue,
   StatusFilterValue,
-} from "./FilterType";
+} from "../FilterBottomSheet/types";
 
 export type FiltersStateType = {
   region: string;

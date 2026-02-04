@@ -7,7 +7,7 @@ import { PostListItem, Tab } from "@/components/domain";
 import { EmptyState, LoadingState } from "@/components/state";
 import { TABS } from "../../_constants/TABS";
 import FilterSection from "../_internal/FilterSection/FilterSection";
-import { useListParams } from "../../_hooks/useListParams/useListParams";
+import { useListParams } from "../../../../../components/domain/FilterBottomSheet/useListParams/useListParams";
 import { ItemStatus } from "@/types";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll/useInfiniteScroll";
 

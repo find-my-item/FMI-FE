@@ -6,7 +6,7 @@ import {
   FindStatusFilterValue,
   SortFilterValue,
   StatusFilterValue,
-} from "../_types/FilterType";
+} from "../FilterBottomSheet/types";
 
 type Params = {
   region?: string | null;

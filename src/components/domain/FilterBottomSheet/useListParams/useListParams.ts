@@ -4,9 +4,10 @@ import { useSearchParams } from "next/navigation";
 import { normalizeEnumValue } from "@/utils";
 import {
   CategoryFilterValue,
+  FindStatusFilterValue,
   SortFilterValue,
   StatusFilterValue,
-} from "../../_components/_internal/FilterBottomSheet/types";
+} from "../FilterBottomSheet/types";
 
 export const useListParams = () => {
   const searchParams = useSearchParams();
@@ -19,5 +20,8 @@ export const useListParams = () => {
     ),
     sort: normalizeEnumValue<SortFilterValue>(searchParams.get("sort")),
     region: searchParams.get("region"),
+    findStatus: normalizeEnumValue<Exclude<FindStatusFilterValue, undefined>>(
+      searchParams.get("findStatus")
+    ),
   };
 };

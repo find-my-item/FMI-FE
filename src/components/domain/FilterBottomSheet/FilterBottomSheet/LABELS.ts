@@ -1,5 +1,5 @@
-import { CategoryType, ItemStatus } from "@/types";
-import { CategoryFilterValue, SortFilterValue, StatusFilterValue } from "./types";
+import { CategoryType, ItemStatus, PostType } from "@/types";
+import { SortFilterValue } from "./types";
 
 export const CATEGORY_DEFAULT_LABEL = "카테고리";
 export const CATEGORY_LABEL_MAP: Record<CategoryType, string> = {
@@ -19,8 +19,14 @@ export const SORT_LABEL_MAP: Record<SortFilterValue, string> = {
   MOST_VIEWED: "조회수 많은 순",
 };
 
-export const STATUS_DEFAULT_LABEL = "전체";
-export const STATUS_LABEL_MAP: Record<ItemStatus, string> = {
+export const FIND_STATUS_DEFAULT_LABEL = "전체";
+export const FIND_STATUS_LABEL_MAP: Record<ItemStatus, string> = {
   SEARCHING: "찾는중",
   FOUND: "찾았음",
+};
+
+export const STATUS_DEFAULT_LABEL = "전체";
+export const STATUS_LABEL_MAP: Record<PostType, string> = {
+  LOST: "분실",
+  FOUND: "습득",
 };
