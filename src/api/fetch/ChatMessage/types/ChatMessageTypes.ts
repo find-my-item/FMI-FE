@@ -1,7 +1,3 @@
-export interface SendImageRequestBody {
-  images: string[];
-}
-
 export interface ChatMessage {
   messageId: number;
   messageType: "TEXT" | "IMAGE";
