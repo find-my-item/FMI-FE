@@ -1,7 +1,7 @@
-import AdminReportsItem from "../../../_components/AdminReportsItem/AdminReportsItem";
 import { MOCK_ADMIN_INQUIRY_LIST, MOCK_ADMIN_REPORT_LIST } from "@/mock/data";
 import { toInquiryItemVM, toReportItemVM } from "../../../_utils/toReportsItemVM/toReportsItemVM";
 import { ReportsTabType } from "../../_types/ReportsTabType";
+import { AdminReportsItem } from "../../../_components";
 
 interface ReportsListProps {
   activeTab: ReportsTabType;
