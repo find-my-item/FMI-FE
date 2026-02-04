@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ApiFindPwType, useApiFindPw } from "@/api/fetch/auth";
-import useErrorToast from "./useErrorToast";
 import { FIND_PW_ERROR } from "@/constants";
+import useErrorToast from "../useErrorToast/useErrorToast";
 
 const useFindPwSubmit = () => {
   const [email, setEmail] = useState("");

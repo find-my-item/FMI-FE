@@ -7,9 +7,9 @@ import {
   FindStatusFilterValue,
   SortFilterValue,
   StatusFilterValue,
-} from "../FilterBottomSheet/types";
+} from "../../../components/domain/FilterSectionBottomSheet/FilterBottomSheet/types";
 
-export const useListParams = () => {
+export const useFilterParams = () => {
   const searchParams = useSearchParams();
 
   return {

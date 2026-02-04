@@ -19,7 +19,7 @@ import {
 import { FiltersStateType } from "./filtersStateType";
 import { DEFAULT_FILTERS } from "./DEFAULT_FILTERS";
 import { filterSelectionState, normalizedFilterValues } from "../utils/deriveFilterParams";
-import { useListParams } from "@/components/domain/FilterBottomSheet/useListParams/useListParams";
+import { useListParams } from "@/hooks/domain/useFilterParams/useFilterParams";
 
 const FilterSection = () => {
   const { region, category, sort, status, findStatus } = useListParams();
