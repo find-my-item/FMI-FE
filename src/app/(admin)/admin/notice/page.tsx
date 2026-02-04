@@ -1,8 +1,14 @@
+import { DetailHeader } from "@/components/layout";
+import { NoticeView } from "./_components";
+
 const page = () => {
   return (
-    <div>
+    <>
+      <DetailHeader title="공지사항" />
       <h1 className="sr-only">관리자 공지사항</h1>
-    </div>
+
+      <NoticeView />
+    </>
   );
 };
 

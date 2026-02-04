@@ -74,3 +74,5 @@ export { default as Bag } from "@/assets/bag.svg";
 export { default as EmptyPostList } from "@/assets/empty-post-list.svg";
 export { default as ServerError } from "@/assets/server-error.svg";
 export { default as AdminLogo } from "@/assets/admin-logo.svg";
+export { default as Pencil } from "@/assets/pencil.svg";
+export { default as Like } from "@/assets/like.svg";
