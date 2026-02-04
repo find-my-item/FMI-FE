@@ -1,31 +1,24 @@
 "use client";
 
-import { Filter, InputSearch } from "@/components/common";
 import NoticeList from "../NoticeList/NoticeList";
+import { AdminFilter, AdminSearch } from "../../../_components";
+import { AdminFilterItemType } from "../../../_types";
+
+// TODO(지권): 필터 기능 추가
+const filters: AdminFilterItemType[] = [
+  {
+    label: "최신순",
+    onSelected: false,
+    onClick: () => {},
+  },
+];
 
 const NoticeView = () => {
   return (
-    <div>
-      <div className="px-5 py-[10px]">
-        <InputSearch
-          placeholder="제목, 내용을 입력해 주세요."
-          name="search"
-          mode="onChange"
-          onEnter={() => {}}
-        />
-      </div>
+    <div className="h-base">
+      <AdminSearch onEnter={() => {}} />
 
-      <div className="px-5 py-[10px]">
-        <Filter
-          ariaLabel="최신순"
-          onSelected={false}
-          icon={{ name: "ArrowDown", size: 12 }}
-          iconPosition="trailing"
-          onClick={() => {}}
-        >
-          최신순
-        </Filter>
-      </div>
+      <AdminFilter filters={filters} />
 
       <NoticeList />
     </div>
