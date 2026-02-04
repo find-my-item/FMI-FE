@@ -1,7 +1,8 @@
+import { CategoryType, ItemStatus } from "@/types";
 import { CategoryFilterValue, SortFilterValue, StatusFilterValue } from "./types";
 
-export const CATEGORY_LABEL_MAP: Partial<Record<CategoryFilterValue, string>> = {
-  "": "카테고리",
+export const CATEGORY_DEFAULT_LABEL = "카테고리";
+export const CATEGORY_LABEL_MAP: Record<CategoryType, string> = {
   ELECTRONICS: "전자기기",
   WALLET: "지갑",
   ID_CARD: "신분증",
@@ -12,14 +13,14 @@ export const CATEGORY_LABEL_MAP: Partial<Record<CategoryFilterValue, string>> = 
 };
 
 export const SORT_LABEL_MAP: Record<SortFilterValue, string> = {
-  "": "최신순",
+  LATEST: "최신순",
   OLDEST: "오래된 순",
   MOST_FAVORITED: "즐겨찾기 많은 순",
-  MOST_VIWED: "조회수 많은 순",
+  MOST_VIEWED: "조회수 많은 순",
 };
 
-export const STATUS_LABEL_MAP: Record<StatusFilterValue, string> = {
-  "": "전체",
+export const STATUS_DEFAULT_LABEL = "전체";
+export const STATUS_LABEL_MAP: Record<ItemStatus, string> = {
   SEARCHING: "찾는중",
   FOUND: "찾았음",
 };

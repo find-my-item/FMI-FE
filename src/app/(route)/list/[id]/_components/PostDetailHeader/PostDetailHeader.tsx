@@ -2,45 +2,49 @@ import Link from "next/link";
 import { Button, ProfileAvatar } from "@/components/common";
 import ImageSection from "./_internal/ImageSection/ImageSection";
 import { formatCappedNumber } from "@/utils";
+import { ImageResponse, userInformation } from "@/api/fetch/post";
 
 type HeaderData = {
-  imageUrls: string[];
-  postId: string;
-  nickName: string;
-  profileUrl: string | null;
-  userPostCount: number;
-  chatRoomCount: number;
+  id: string;
+  imageResponseList: ImageResponse[];
+  userData: userInformation;
 };
 
 interface PostDetailHeaderType {
   headerData: HeaderData;
 }
+
 const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
-  const { imageUrls, postId, nickName, profileUrl, userPostCount, chatRoomCount } = headerData;
+  const { id, imageResponseList, userData } = headerData;
 
   return (
     <>
-      <ImageSection imageUrls={imageUrls} />
+      <ImageSection imageUrls={imageResponseList.map((item) => item.imgUrl)} />
 
       <section
         aria-label="게시글 작성자 정보"
         className="flex flex-col items-start justify-center gap-5 border-b border-divider-default p-5"
       >
         <div className="flex items-center justify-start gap-[14px]">
-          <ProfileAvatar size={40} src={profileUrl} alt={nickName} priority={true} />
+          <ProfileAvatar
+            size={40}
+            src={userData.profileImage}
+            alt={userData.nickName}
+            priority={true}
+          />
 
           <div className="flex flex-col items-start justify-center">
-            <p className="text-body1-medium text-layout-header-default">{nickName}</p>
+            <p className="text-body1-medium text-layout-header-default">{userData.nickName}</p>
             <div className="text-body2-regular text-layout-body-default">
               <span className="after:mx-2 after:inline-block after:content-['·']">
-                작성글 {formatCappedNumber(userPostCount)}
+                작성글 {formatCappedNumber(userData.postCount)}
               </span>
-              <span>현재 채팅 {formatCappedNumber(chatRoomCount)}</span>
+              <span>현재 채팅 {formatCappedNumber(userData.chattingCount)}</span>
             </div>
           </div>
         </div>
 
-        <Button as={Link} href={`/chat/${postId}`} className="min-h-11 w-full py-[10px]">
+        <Button as={Link} href={`/chat/${id}`} className="min-h-11 w-full py-[10px]">
           채팅하러 가기
         </Button>
       </section>

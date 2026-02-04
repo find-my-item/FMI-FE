@@ -49,9 +49,9 @@ const FilterSection = () => {
     setFilters({
       ...DEFAULT_FILTERS,
       region: region ?? "",
-      category: (normalizeEnumValue<CategoryFilterValue>(category) ?? "") as CategoryFilterValue,
-      sort: (normalizeEnumValue<SortFilterValue>(sort) ?? "") as SortFilterValue,
-      status: (normalizeEnumValue<StatusFilterValue>(status) ?? "") as StatusFilterValue,
+      category: normalizeEnumValue<Exclude<CategoryFilterValue, undefined>>(category),
+      sort: normalizeEnumValue<SortFilterValue>(sort) ?? "LATEST",
+      status: normalizeEnumValue<Exclude<StatusFilterValue, undefined>>(status),
     });
 
     setSelectedTab(tab);

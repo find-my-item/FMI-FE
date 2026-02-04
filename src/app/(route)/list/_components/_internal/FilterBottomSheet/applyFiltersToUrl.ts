@@ -1,46 +1,41 @@
 import { FiltersState } from "../FilterSection/filtersStateType";
 import { CategoryFilterValue, SortFilterValue, StatusFilterValue } from "./types";
+import { CategoryType, ItemStatus } from "@/types";
 
-const categoryToQueryValue = (category: CategoryFilterValue) => {
-  if (!category) return "";
-
-  const map: Record<CategoryFilterValue, string> = {
-    "": "",
-    ELECTRONICS: "electronics",
-    WALLET: "wallet",
-    ID_CARD: "id_card",
-    JEWELRY: "jewelry",
-    BAG: "bag",
-    CARD: "card",
-    ETC: "etc",
-  };
-
-  return map[category];
+const CATEGORY_QUERY_VALUE_MAP: Record<CategoryType, string> = {
+  ELECTRONICS: "electronics",
+  WALLET: "wallet",
+  ID_CARD: "id_card",
+  JEWELRY: "jewelry",
+  BAG: "bag",
+  CARD: "card",
+  ETC: "etc",
 };
 
-const sortToQueryValue = (sort: SortFilterValue) => {
-  if (!sort) return "";
-
-  const map: Record<SortFilterValue, string> = {
-    "": "",
-    OLDEST: "oldest",
-    MOST_FAVORITED: "most_favorited",
-    MOST_VIWED: "most_viwed",
-  };
-
-  return map[sort];
+const SORT_QUERY_VALUE_MAP: Record<SortFilterValue, string> = {
+  LATEST: "latest",
+  OLDEST: "oldest",
+  MOST_FAVORITED: "most_favorited",
+  MOST_VIEWED: "most_viewed",
 };
 
-const statusToQueryValue = (status: StatusFilterValue) => {
-  if (!status) return "";
+const STATUS_QUERY_VALUE_MAP: Record<ItemStatus, string> = {
+  FOUND: "found",
+  SEARCHING: "searching",
+};
 
-  const map: Record<StatusFilterValue, string> = {
-    "": "",
-    FOUND: "found",
-    SEARCHING: "searching",
-  };
+const categoryToQueryValue = (category: CategoryFilterValue): string | undefined => {
+  if (!category) return undefined;
+  return CATEGORY_QUERY_VALUE_MAP[category];
+};
 
-  return map[status];
+const sortToQueryValue = (sort: SortFilterValue): string => {
+  return SORT_QUERY_VALUE_MAP[sort];
+};
+
+const statusToQueryValue = (status: StatusFilterValue): string | undefined => {
+  if (!status) return undefined;
+  return STATUS_QUERY_VALUE_MAP[status];
 };
 
 type ApplyFiltersToUrlProps = {
@@ -51,7 +46,7 @@ type ApplyFiltersToUrlProps = {
 export const applyFiltersToUrl = ({ filters, searchParams }: ApplyFiltersToUrlProps): string => {
   const params = new URLSearchParams(searchParams.toString());
 
-  const upsert = (key: string, value: string) => {
+  const upsert = (key: string, value?: string) => {
     if (!value) params.delete(key);
     else params.set(key, value);
   };
