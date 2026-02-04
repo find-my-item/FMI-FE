@@ -14,7 +14,7 @@ const AdminListItem = ({ data, imageAlt, link }: AdminListItemProps) => {
 
   const viewItem = [
     {
-      icon: "Star",
+      icon: "Like",
       count: likeCount,
     },
     {
