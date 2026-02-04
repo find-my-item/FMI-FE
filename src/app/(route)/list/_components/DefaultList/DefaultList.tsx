@@ -8,7 +8,8 @@ import { EmptyState, LoadingState } from "@/components/state";
 import { TABS } from "../../_constants/TABS";
 import FilterSection from "../_internal/FilterSection/FilterSection";
 import { useListParams } from "../../_hooks/useListParams/useListParams";
-import { useListDataWithFilters } from "../../_hooks/useListDataWithFilters/useListDataWithFilters";
+import { ItemStatus } from "@/types";
+import { useInfiniteScroll } from "@/hooks/useInfiniteScroll/useInfiniteScroll";
 
 type PostType = "LOST" | "FOUND";
 
@@ -19,10 +20,28 @@ interface DefaultListProps {
 const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
   const { type, region, category, sort, status } = useListParams();
   const selectedType = (type ?? "lost") as "lost" | "found";
-  const postType: PostType = selectedType === "lost" ? "LOST" : "FOUND";
+  const postType: PostType = selectedType === "found" ? "FOUND" : "LOST";
 
-  const { data } = useGetPosts({ page: 0, size: 10, type: postType });
-  const { listData } = useListDataWithFilters({ baseData: data, region, category, sort, status });
+  const postStatus: ItemStatus | undefined =
+    status && status.trim() !== "" ? (status as ItemStatus) : undefined;
+
+  const {
+    data: listData,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useGetPosts({
+    address: region ?? "서울특별시",
+    postType,
+    postStatus,
+    category,
+    sortType: sort ?? "LATEST",
+  });
+  const { ref: listRef } = useInfiniteScroll({
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  });
 
   return (
     <section className="h-base">
@@ -38,7 +57,7 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
       <ErrorBoundary fallback={<div>에러 발생</div>}>
         <Suspense fallback={<LoadingState />}>
           <section aria-label="게시글 목록" className="w-full">
-            {listData?.result?.posts?.length === 0 ? (
+            {listData?.length === 0 ? (
               <EmptyState
                 icon={{
                   iconName: "EmptyPostList",
@@ -46,11 +65,15 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
                 }}
               />
             ) : (
-              <ul>
-                {listData?.result?.posts?.map((item) => (
-                  <PostListItem key={item.postId} post={item} linkState="list" />
-                ))}
-              </ul>
+              <>
+                <ul>
+                  {listData?.map((item) => (
+                    <PostListItem key={item.id} post={item} linkState="list" />
+                  ))}
+                </ul>
+
+                {hasNextPage && <div ref={listRef} className="h-10 w-full" />}
+              </>
             )}
           </section>
         </Suspense>
