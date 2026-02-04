@@ -83,7 +83,7 @@ const FilterSection = ({ pageType = "LIST" }: FilterSectionProps) => {
       ariaLabel: "분류 필터",
       onSelected: selectionState.isStatusSelected,
       icon: { name: "ArrowDown", size: 12 },
-      label: (normalizedStatus && STATUS_LABEL_MAP[normalizedStatus]) ?? "전체",
+      label: (normalizedStatus && STATUS_LABEL_MAP[normalizedStatus]) ?? "분류",
       iconPosition: "trailing",
     },
   };

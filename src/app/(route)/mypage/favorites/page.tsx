@@ -1,7 +1,6 @@
 "use client";
 
-import { MypageSearch } from "@/components/domain";
-import SelectFilter from "@/components/domain/FilterBottomSheet/_components/SelectFilter";
+import { FilterSection, MypageSearch } from "@/components/domain";
 import { DetailHeader } from "@/components/layout";
 import { useSearchUpdateQueryString } from "@/hooks";
 
@@ -15,7 +14,7 @@ const page = () => {
       <div className="w-full h-base">
         <MypageSearch />
 
-        {searchMode === "default" && <SelectFilter searchUpdateQuery={searchUpdateQuery} />}
+        <FilterSection pageType="MY_FAVORITES" />
       </div>
     </>
   );
