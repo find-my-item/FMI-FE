@@ -3,6 +3,7 @@
 import { useParams, notFound } from "next/navigation";
 import { DetailHeader } from "@/components/layout";
 import { AdminReportsView } from "./_components";
+import { CommentForm } from "@/app/(route)/list/[id]/_components";
 
 const page = () => {
   const params = useParams();
@@ -18,6 +19,8 @@ const page = () => {
       <h1 className="sr-only">신고/문의 상세</h1>
 
       <AdminReportsView id={Number(id)} />
+      {/* TODO(지권): 임시 댓글 입력 폼 추가 */}
+      <CommentForm />
     </>
   );
 };

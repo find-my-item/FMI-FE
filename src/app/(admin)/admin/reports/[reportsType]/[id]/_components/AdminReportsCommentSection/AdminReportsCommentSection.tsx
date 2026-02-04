@@ -28,11 +28,7 @@ interface CommentItemData {
   createdAt: string;
 }
 
-interface CommentItemProps {
-  data: CommentItemData;
-}
-
-const CommentItem = ({ data }: CommentItemProps) => {
+const CommentItem = ({ data }: { data: CommentItemData }) => {
   const { isAdmin, userImageUrl, userName, content, createdAt } = data;
 
   return (
