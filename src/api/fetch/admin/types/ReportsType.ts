@@ -1,11 +1,12 @@
-import { ReportStatus, ReportTargetType, ReportType } from "@/types";
+import { PageableInfo, SortInfo } from "@/api/_base/types/ApiBasePagebleInfoType";
+import { ReportsType, ReportTargetType, ReportType } from "@/types";
 
 export interface AdminReportItem {
   reportId: number;
   targetType: ReportTargetType;
   targetId: number;
   reportType: ReportType;
-  status: ReportStatus;
+  status: ReportsType;
   reason: string;
   adminNote: string | null;
   createdAt: string;
@@ -14,23 +15,6 @@ export interface AdminReportItem {
   reporterId: number;
   reporterNickname: string;
   reporterEmail: string;
-}
-
-export interface SortInfo {
-  empty: boolean;
-  unsorted: boolean;
-  sorted: boolean;
-}
-
-export interface PageableSortInfo extends SortInfo {}
-
-export interface PageableInfo {
-  offset: number;
-  sort: PageableSortInfo;
-  unpaged: boolean;
-  paged: boolean;
-  pageNumber: number;
-  pageSize: number;
 }
 
 export interface AdminReportPageResponse {

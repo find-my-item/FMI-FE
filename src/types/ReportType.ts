@@ -43,6 +43,4 @@ export type ReportType =
   | "COPYRIGHT"
   | "ETC";
 
-export type ReportStatus = "PENDING" | "REVIEWED" | "RESOLVED";
-
 export type ReplyStatus = "UNANSWERED" | "ANSWERED";

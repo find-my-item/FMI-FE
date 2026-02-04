@@ -7,9 +7,9 @@ const ReportsList = () => {
       <ul className="flex flex-col gap-2">
         {Array.from({ length: 10 }).map((_, index) => (
           <Fragment key={index}>
-            <AdminReportsItem status="PENDING" replyStatus="UNANSWERED" />
-            <AdminReportsItem status="REVIEWED" replyStatus="UNANSWERED" />
-            <AdminReportsItem status="RESOLVED" replyStatus="ANSWERED" />
+            <AdminReportsItem />
+            <AdminReportsItem />
+            <AdminReportsItem />
           </Fragment>
         ))}
       </ul>
