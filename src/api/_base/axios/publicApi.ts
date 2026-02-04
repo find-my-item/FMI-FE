@@ -1,7 +1,8 @@
 import axios from "axios";
+import { getBaseURL } from "./getBaseURL";
 
 const publicApi = axios.create({
-  baseURL: "/api",
+  baseURL: getBaseURL(),
   timeout: 5000,
 });
 
