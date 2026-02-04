@@ -43,6 +43,7 @@ export interface ChatListUpdateResponse {
 
 export interface ChatRoomResponse {
   roomId: number;
+  unreadCount: number;
   opponentUser: {
     opponentUserId: number;
     nickname: string;

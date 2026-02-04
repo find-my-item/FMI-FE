@@ -9,9 +9,11 @@ import {
 } from "@/utils/chatMessageCache/chatMessageCache";
 import { transformWebSocketMessage, findOptimisticMessage } from "../../_utils";
 import { ChatMessage } from "@/api/fetch/ChatMessage/types/ChatMessageTypes";
+import useReadMessage from "@/api/fetch/ChatMessage/api/useReadMessage";
 
-const useChatSocketMessage = (roomId: number) => {
+const useChatSocketMessage = (roomId: number, currentUserId?: number) => {
   const queryClient = useQueryClient();
+  const { mutate: readMessage } = useReadMessage(roomId);
 
   useChatSocket({
     onListUpdate: () => {
@@ -22,6 +24,13 @@ const useChatSocketMessage = (roomId: number) => {
 
       // 메시지의 roomId와 현재 roomId가 일치하는지 확인
       if (message.roomId !== roomId) return;
+
+      // 상대방이 보낸 새 메시지일 때만 읽음 처리 (본인 메시지는 제외)
+      // currentUserId가 없으면 수신 메시지마다 읽음 호출 (초기 로딩 시 누락 방지)
+      const isFromOpponent = currentUserId == null || message.senderId !== currentUserId;
+      if (isFromOpponent) {
+        readMessage(undefined);
+      }
 
       const oldData = queryClient.getQueryData<
         InfiniteData<ApiBaseResponseType<ChatMessageResponse>>

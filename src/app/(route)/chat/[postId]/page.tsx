@@ -3,7 +3,7 @@
 import { ChatRoomHeader, EmptyChatRoom, ChatRoomMain } from "./_components";
 import { InputChat } from "@/components/common";
 import { FormProvider, useForm } from "react-hook-form";
-import { use } from "react";
+import { use, useEffect } from "react";
 import useChatMessages from "@/api/fetch/ChatMessage/api/useChatMessages";
 import {
   useChatRoomData,
@@ -11,6 +11,7 @@ import {
   useChatSocketMessage,
   useChatMessageSubmit,
 } from "./_hooks";
+import useReadMessage from "@/api/fetch/ChatMessage/api/useReadMessage";
 
 interface ChatFormValues {
   content: string;
@@ -28,8 +29,8 @@ const ChatRoom = ({ params }: { params: Promise<{ postId: string }> }) => {
     },
   });
 
-  const { roomId, chatRoomData, userInfo, postMode } = useChatRoomData(postId);
-
+  const { roomId, chatRoomData, userInfo, postMode, unreadCount } = useChatRoomData(postId);
+  const { mutate: readMessage } = useReadMessage(roomId);
   const {
     data: chatMessages,
     fetchNextPage,
@@ -44,7 +45,15 @@ const ChatRoom = ({ params }: { params: Promise<{ postId: string }> }) => {
     fetchNextPage,
   });
 
-  useChatSocketMessage(roomId);
+  const currentUserId =
+    userInfo?.result.userId != null ? Number(userInfo.result.userId) : undefined;
+  useChatSocketMessage(roomId, currentUserId);
+
+  useEffect(() => {
+    if (unreadCount && unreadCount > 0 && roomId) {
+      readMessage(roomId);
+    }
+  }, [unreadCount, roomId]);
 
   const { onSubmit } = useChatMessageSubmit({
     roomId,

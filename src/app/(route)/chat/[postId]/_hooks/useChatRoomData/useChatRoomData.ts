@@ -17,12 +17,14 @@ const useChatRoomData = (postId: number) => {
   const { data: userInfo } = useGetUserData();
   const postMode = getPostMode(chatRoomData);
 
+  const unreadCount = chatRoomData?.unreadCount || chatRoom?.result?.unreadCount;
   return {
     roomId,
     hasRoomId,
     chatRoomData,
     userInfo,
     postMode,
+    unreadCount,
   };
 };
 
