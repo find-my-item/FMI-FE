@@ -2,13 +2,13 @@
  * applyFiltersToUrl 사용자가 선택한 필터 상태를 웹 브라우저 주소창(URL)의 쿼리 스트링으로 변환해주는 유틸리티
  */
 
-import { FiltersStateType } from "../FilterSection/filtersStateType";
+import { FiltersStateType } from "../_types/filtersStateType";
 import {
   CategoryFilterValue,
   FindStatusFilterValue,
   SortFilterValue,
   StatusFilterValue,
-} from "./types";
+} from "../_types/types";
 import { CategoryType, ItemStatus, PostType } from "@/types";
 
 const CATEGORY_QUERY_VALUE_MAP: Record<CategoryType, string> = {

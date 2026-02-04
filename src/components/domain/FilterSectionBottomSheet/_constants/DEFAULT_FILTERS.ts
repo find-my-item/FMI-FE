@@ -1,4 +1,4 @@
-import { FiltersStateType } from "./filtersStateType";
+import { FiltersStateType } from "../_types/filtersStateType";
 
 export const DEFAULT_FILTERS: FiltersStateType = {
   region: "",

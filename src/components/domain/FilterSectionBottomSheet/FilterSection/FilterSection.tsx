@@ -1,5 +1,3 @@
-// // 최신화 완료 된 FilterSection.tsx
-
 import { useState } from "react";
 import { normalizeEnumValue } from "@/utils";
 import { Filter } from "@/components/common";
@@ -9,18 +7,18 @@ import {
   FIND_STATUS_LABEL_MAP,
   SORT_LABEL_MAP,
   STATUS_LABEL_MAP,
-} from "../FilterBottomSheet/LABELS";
+} from "../_constants/LABELS";
 import {
   CategoryFilterValue,
   FilterTab,
   SortFilterValue,
   StatusFilterValue,
-} from "../FilterBottomSheet/types";
-import { FiltersStateType } from "./filtersStateType";
-import { DEFAULT_FILTERS } from "./DEFAULT_FILTERS";
+} from "../_types/types";
+import { FiltersStateType } from "../_types/filtersStateType";
+import { DEFAULT_FILTERS } from "../_constants/DEFAULT_FILTERS";
 import { filterSelectionState, normalizedFilterValues } from "../utils/deriveFilterParams";
 import { useFilterParams } from "@/hooks/domain";
-import { TABS } from "../FilterBottomSheet/TABS";
+import { TABS } from "../_constants/TABS";
 
 interface FilterSectionProps {
   pageType?: "LIST" | "MY_POSTS" | "MY_FAVORITES";
@@ -94,7 +92,6 @@ const FilterSection = ({ pageType = "LIST" }: FilterSectionProps) => {
         aria-label="필터 영역"
         className="flex h-[67px] w-full items-center gap-2 overflow-x-auto overflow-y-hidden whitespace-nowrap px-5 no-scrollbar"
       >
-        {/* 3. TABS 상수를 기준으로 순서대로 렌더링 */}
         {TABS[pageType].map((tab) => {
           const config = filterConfigs[tab.value as FilterTab];
           if (!config) return null;

@@ -1,5 +1,3 @@
-// 최신화 완료
-
 import { Dispatch, SetStateAction } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/utils";
@@ -12,11 +10,11 @@ import {
   SortFilterValue,
   StatusFilterValue,
   tabsType,
-} from "./types";
-import { categories, sort, status, findStatus } from "./CONSTANTS";
-import { applyFiltersToUrl } from "./applyFiltersToUrl";
-import { FiltersStateType } from "../FilterSection/filtersStateType";
-import { TABS } from "./TABS";
+} from "../_types/types";
+import { categories, sort, status, findStatus } from "../_constants/CONSTANTS";
+import { applyFiltersToUrl } from "../utils/applyFiltersToUrl";
+import { FiltersStateType } from "../_types/filtersStateType";
+import { TABS } from "../_constants/TABS";
 
 interface FilterBottomSheetProps {
   isOpen: boolean;

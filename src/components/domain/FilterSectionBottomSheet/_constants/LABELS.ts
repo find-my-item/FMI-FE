@@ -1,5 +1,5 @@
 import { CategoryType, ItemStatus, PostType } from "@/types";
-import { SortFilterValue } from "./types";
+import { SortFilterValue } from "../_types/types";
 
 export const CATEGORY_DEFAULT_LABEL = "카테고리";
 export const CATEGORY_LABEL_MAP: Record<CategoryType, string> = {

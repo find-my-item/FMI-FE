@@ -1,6 +1,6 @@
 import { InfiniteData, keepPreviousData } from "@tanstack/react-query";
 import useAppInfiniteQuery from "@/api/_base/query/useAppInfiniteQuery";
-import { SortFilterValue } from "@/components/domain/FilterSectionBottomSheet/FilterBottomSheet/types";
+import { SortFilterValue } from "@/components/domain/FilterSectionBottomSheet/_types/types";
 import { ItemStatus, PostType } from "@/types";
 import { PostItem, PostSearchResponse } from "../types/PostItemType";
 
