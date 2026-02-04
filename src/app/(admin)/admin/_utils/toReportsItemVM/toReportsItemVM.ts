@@ -45,7 +45,7 @@ const ReplyStatusBadgeConfig: Record<ReplyStatus, { label: string; className: st
 
 export const toReportItemVM = (item: AdminReportItem): AdminReportsItemData => {
   return {
-    href: `/admin/reports/${item.reportId}`,
+    href: `/admin/reports/report/${item.reportId}`,
     title: getReportTitle(item),
     content: item.reason,
     nickname: item.reporterNickname,
@@ -58,7 +58,7 @@ export const toReportItemVM = (item: AdminReportItem): AdminReportsItemData => {
 
 export const toInquiryItemVM = (item: AdminInquiryItem): AdminReportsItemData => {
   return {
-    href: `/admin/inquiries/${item.inquiryId}`,
+    href: `/admin/inquiries/inquiry/${item.inquiryId}`,
     title: item.title,
     content: "",
     nickname: item.userNickname,
