@@ -72,4 +72,5 @@ export { default as IdCard } from "@/assets/id-card.svg";
 export { default as Jewelry } from "@/assets/jewelry.svg";
 export { default as Bag } from "@/assets/bag.svg";
 export { default as EmptyPostList } from "@/assets/empty-post-list.svg";
+export { default as ServerError } from "@/assets/server-error.svg";
 export { default as AdminLogo } from "@/assets/admin-logo.svg";
