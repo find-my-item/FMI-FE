@@ -1,8 +1,9 @@
 import { cn } from "@/utils";
 import { CHAT_CHIP_MODE, ChatChipMode } from "./CHAT_CHIP_MODE";
+import { PostType } from "@/types";
 
 interface ChatChipProps {
-  postMode: "FOUND" | "LOST";
+  postMode: PostType;
 }
 
 const ChatChip = ({ postMode }: ChatChipProps) => {
