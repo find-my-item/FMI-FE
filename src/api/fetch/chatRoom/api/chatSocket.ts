@@ -1,5 +1,4 @@
 import { Client, IMessage, StompSubscription } from "@stomp/stompjs";
-import getBaseURL from "@/api/_base/axios/getBaseURL";
 import authApi from "@/api/_base/axios/authApi";
 
 type MessageHandler<T = any> = (message: T) => void;
@@ -73,7 +72,7 @@ export const connectChatSocket = () => {
   }
 
   client = new Client({
-    brokerURL: `${getBaseURL()}/ws`,
+    brokerURL: `/api/ws`,
     reconnectDelay: 5000,
 
     debug: (msg) => {
