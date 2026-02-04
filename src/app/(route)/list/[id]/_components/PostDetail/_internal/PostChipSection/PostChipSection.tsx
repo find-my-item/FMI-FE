@@ -4,17 +4,17 @@ import { getItemCategoryLabel, getItemStatusLabel } from "@/utils";
 
 interface PostChipSectionProps {
   chipData: {
-    itemStatus: ItemStatus;
+    postStatus: ItemStatus;
     category: CategoryType;
   };
 }
 
 const PostChipSection = ({ chipData }: PostChipSectionProps) => {
-  const { itemStatus, category } = chipData;
+  const { postStatus, category } = chipData;
 
   return (
     <div className="flex gap-2">
-      <Chip type="brandSubtle" label={getItemStatusLabel(itemStatus)} />
+      <Chip type="brandSubtle" label={getItemStatusLabel(postStatus)} />
       <Chip type="neutralStrong" label={getItemCategoryLabel(category)} />
     </div>
   );
