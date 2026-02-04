@@ -24,18 +24,18 @@ const AdminMenuSection = () => {
 
 export default AdminMenuSection;
 
-interface AdminSectionNavItem {
+interface AdminSectionNavItemType {
   href: string;
   title: string;
 }
 
-interface AdminSectionNavProps {
+interface AdminSectionNavItemProps {
   label: string;
-  items: readonly AdminSectionNavItem[];
+  items: readonly AdminSectionNavItemType[];
   footer?: ReactNode;
 }
 
-const AdminSectionNavItem = ({ label, items, footer }: AdminSectionNavProps) => {
+const AdminSectionNavItem = ({ label, items, footer }: AdminSectionNavItemProps) => {
   return (
     <section aria-label={label} className="flex flex-col gap-[2px] px-5 py-6">
       <h2 className="text-body2-regular text-layout-body-default">{label}</h2>
