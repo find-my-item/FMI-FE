@@ -2,7 +2,10 @@ import { Icon } from "@/components/common";
 
 const AdminReportsDetailSection = () => {
   return (
-    <section aria-label="신고/문의 내용" className="space-y-[14px] px-5 py-[30px]">
+    <section
+      aria-label="신고/문의 내용"
+      className="space-y-[14px] border-b border-flatGray-50 px-5 py-[30px]"
+    >
       <div className="flex items-center gap-2">
         <button className="flex items-center gap-1">
           접수 <Icon name="ArrowDown" size={10} />
@@ -24,7 +27,7 @@ const AdminReportsDetailSection = () => {
         <p className="text-body1-regular text-layout-header-default">
           여기에 신고 내용이 표기됩니다.
         </p>
-      </div>{" "}
+      </div>
     </section>
   );
 };

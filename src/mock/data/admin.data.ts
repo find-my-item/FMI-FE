@@ -136,3 +136,20 @@ export const MOCK_ADMIN_INQUIRY_LIST: AdminInquiryItem[] = [
     ip: "192.168.0.48",
   },
 ];
+
+export const MOCK_COMMENT_DATA = [
+  {
+    isAdmin: true,
+    userImageUrl: "",
+    userName: "관리자닉네임",
+    content: "여기에 댓글 내용이 표기됩니다.",
+    createdAt: "2025-05-06",
+  },
+  {
+    isAdmin: false,
+    userImageUrl: "",
+    userName: "유저닉네임",
+    content: "여기에 댓글 내용이 표기됩니다.",
+    createdAt: "2025-05-06",
+  },
+];
