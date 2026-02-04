@@ -13,13 +13,13 @@ interface PostDetailBodyProps {
 }
 
 const PostDetailBody = ({ isBoardType, label, data }: PostDetailBodyProps) => {
-  const { title, content, favoriteCount, itemStatus, category, createdAt, viewCount } = data;
-  const { handleToggleFavorite, isPending } = useToggleFavorite({ postId: data.postId });
+  const { title, content, favoriteCount, postStatus, category, createdAt, viewCount } = data;
+  const { handleToggleFavorite, isPending } = useToggleFavorite({ postId: data.id });
 
   return (
     <article>
       {isBoardType ? (
-        <PostChipSection chipData={{ itemStatus, category }} />
+        <PostChipSection chipData={{ postStatus, category }} />
       ) : (
         <NoticeChip label={LABELS[label].label} />
       )}

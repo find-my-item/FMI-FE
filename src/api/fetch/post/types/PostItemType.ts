@@ -10,17 +10,27 @@ export interface ListResult {
 }
 
 export interface PostItem {
-  postId: number;
+  id: number;
   title: string;
   summary: string;
-  thumbnailUrl: string;
+  thumbnailImageUrl: string;
   address: string;
-  itemStatus: ItemStatus;
+  postStatus: ItemStatus;
   postType: PostType;
   category: CategoryType;
   favoriteCount: number;
+  favoriteStatus: boolean;
   viewCount: number;
+  isNew: boolean;
+  isHot: boolean;
   createdAt: string;
-  hot: boolean;
-  new: boolean;
+  imageCount: number;
 }
+
+export type PostSearchResult = {
+  postList: PostItem[];
+  nextCursor: string | null;
+  hasNext: boolean;
+};
+
+export type PostSearchResponse = ApiBaseResponseType<PostSearchResult>;
