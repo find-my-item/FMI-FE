@@ -14,7 +14,7 @@ const ChatChip = ({ postMode }: ChatChipProps) => {
     <span
       role="note"
       className={cn(
-        "h-[18px] w-[40px] shrink-0 rounded text-caption2-semibold flex-center",
+        "h-[18px] w-10 shrink-0 rounded text-caption2-semibold flex-center",
         chipConfig.style
       )}
     >
