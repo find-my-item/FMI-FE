@@ -21,12 +21,16 @@ export interface Pageable {
 }
 
 export interface ContentItems {
-  Items: {
+  items: {
     noticeId: number;
     title: string;
     category: string;
     pinned: boolean;
+    likeCount: number;
     viewCount: number;
     createdAt: string;
+    thumbnailUrl: string;
+    isNew: boolean;
+    isHot: boolean;
   };
 }
