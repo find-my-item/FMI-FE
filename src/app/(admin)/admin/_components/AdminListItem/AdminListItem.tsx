@@ -1,16 +1,16 @@
 import Link from "next/link";
 import { Badge, Icon, ListItemImage } from "@/components/common";
 import { formatDate } from "@/utils";
-import { ContentItems } from "@/api/fetch/admin";
+import { NoticeItem } from "@/api/fetch/notice";
 
 interface AdminListItemProps {
-  data: ContentItems;
+  data: NoticeItem;
   imageAlt: string;
   link: string;
 }
 
 const AdminListItem = ({ data, imageAlt, link }: AdminListItemProps) => {
-  const { title, viewCount, createdAt, likeCount, isNew, isHot, thumbnailUrl } = data.items;
+  const { title, viewCount, createdAt, likeCount, isNew, isHot, thumbnailUrl } = data;
 
   const VIEW_ITEM = [
     {
