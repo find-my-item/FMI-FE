@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { cn } from "@/utils";
+import { cn, formatDate } from "@/utils";
 import { AdminReportsItemData } from "../../_types";
 
 interface AdminReportsItemProps {
@@ -27,7 +27,7 @@ const AdminReportsItem = ({ data }: AdminReportsItemProps) => {
 
           <div className="text-body2-regular text-layout-body-default">
             <span className="after:mx-[2px] after:content-['·']">{nickname}</span>
-            <span>{createdAt}</span>
+            <span>{formatDate(createdAt)}</span>
           </div>
 
           <p className="truncate text-body2-regular text-neutral-normal-default">{content}</p>
