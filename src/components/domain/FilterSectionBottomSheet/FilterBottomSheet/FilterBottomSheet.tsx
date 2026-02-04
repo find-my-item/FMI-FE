@@ -13,7 +13,7 @@ import {
   StatusFilterValue,
   tabsType,
 } from "./types";
-import { tabs, categories, sort, status, findStatus } from "./CONSTANTS";
+import { categories, sort, status, findStatus } from "./CONSTANTS";
 import { applyFiltersToUrl } from "./applyFiltersToUrl";
 import { FiltersStateType } from "../FilterSection/filtersStateType";
 import { TABS } from "./TABS";
@@ -35,7 +35,7 @@ const FilterBottomSheet = ({
   setSelectedTab,
   filters,
   setFilters,
-  pageType = "listsTabs",
+  pageType = "LIST",
 }: FilterBottomSheetProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
