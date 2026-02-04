@@ -27,7 +27,7 @@ const AdminListItem = ({ data, imageAlt, link }: AdminListItemProps) => {
     <li>
       <Link
         href={link}
-        className="duration-130 flex w-full cursor-pointer items-center gap-[14px] border-b border-b-flatGray-50 px-[20px] py-[30px] transition-colors hover:bg-flatGray-25"
+        className="duration-130 flex w-full cursor-pointer items-center gap-[14px] border-b border-b-flatGray-50 px-5 py-[30px] transition-colors hover:bg-flatGray-25"
       >
         <div className="min-w-0 flex-1">
           <div className="flex flex-col gap-2">
