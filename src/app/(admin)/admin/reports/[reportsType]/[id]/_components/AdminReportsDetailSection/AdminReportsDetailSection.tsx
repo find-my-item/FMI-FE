@@ -1,6 +1,18 @@
 import { Icon } from "@/components/common";
+import { formatDate } from "@/utils";
 
-const AdminReportsDetailSection = () => {
+interface AdminReportsDetailSectionProps {
+  data: {
+    title: string;
+    userName: string;
+    createdAt: string;
+    content: string;
+  };
+}
+
+const AdminReportsDetailSection = ({ data }: AdminReportsDetailSectionProps) => {
+  const { title, userName, createdAt, content } = data;
+
   return (
     <section
       aria-label="신고/문의 내용"
@@ -15,18 +27,14 @@ const AdminReportsDetailSection = () => {
       <div className="flex flex-col gap-2">
         <div className="flex flex-col gap-1">
           {/* TODO(지권): 디자인 토큰 누락 */}
-          <h2 className="text-[20px] font-semibold text-layout-header-default">
-            실제 분실물/습득물이 아닌 내용이에요.
-          </h2>
+          <h2 className="text-[20px] font-semibold text-layout-header-default">{title}</h2>
           <div className="flex items-center gap-2 text-body2-regular text-layout-body-default">
-            <span className="block after:mx-2 after:content-['·']">닉네임최대열글자확인</span>
-            <time dateTime="2025-05-06">2025.05.06</time>
+            <span className="block after:mx-2 after:content-['·']">{userName}</span>
+            <time dateTime={createdAt}>{formatDate(createdAt)}</time>
           </div>
         </div>
 
-        <p className="text-body1-regular text-layout-header-default">
-          여기에 신고 내용이 표기됩니다.
-        </p>
+        <p className="text-body1-regular text-layout-header-default">{content}</p>
       </div>
     </section>
   );

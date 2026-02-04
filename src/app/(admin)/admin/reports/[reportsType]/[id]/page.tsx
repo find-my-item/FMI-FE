@@ -8,7 +8,7 @@ const page = () => {
   const params = useParams();
 
   const reportsType = params.reportsType;
-  // const id = params.id;
+  const id = params.id;
 
   if (reportsType !== "report" && reportsType !== "inquiry") return notFound();
 
@@ -17,7 +17,7 @@ const page = () => {
       <DetailHeader title="신고/문의 내역" />
       <h1 className="sr-only">신고/문의 상세</h1>
 
-      <AdminReportsView />
+      <AdminReportsView id={Number(id)} />
     </>
   );
 };
