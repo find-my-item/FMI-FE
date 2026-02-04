@@ -1,19 +1,12 @@
 "use client";
 
 import { Filter } from "@/components/common";
-import { IconName } from "@/components/common/Icon/Icon";
 import { AdminFilterItemType } from "../../_types";
+import { DEFAULT_ICON, DEFAULT_ICON_POSITION } from "./DEFAULT_FILTER_ICON";
 
 interface AdminFilterProps {
   filters: AdminFilterItemType[];
 }
-
-const DEFAULT_ICON = {
-  name: "ArrowDown" as IconName,
-  size: 16,
-};
-
-const DEFAULT_ICON_POSITION = "trailing" as const;
 
 const AdminFilter = ({ filters }: AdminFilterProps) => {
   return (
