@@ -87,14 +87,14 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  // async headers() {
-  //   return [
-  //     {
-  //       source: "/:path*",
-  //       headers: securityHeaders,
-  //     },
-  //   ];
-  // },
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: securityHeaders,
+      },
+    ];
+  },
 };
 
 // export default nextConfig;
