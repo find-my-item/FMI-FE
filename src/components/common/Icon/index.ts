@@ -73,3 +73,4 @@ export { default as Jewelry } from "@/assets/jewelry.svg";
 export { default as Bag } from "@/assets/bag.svg";
 export { default as EmptyPostList } from "@/assets/empty-post-list.svg";
 export { default as AdminLogo } from "@/assets/admin-logo.svg";
+export { default as Pencil } from "@/assets/pencil.svg";
