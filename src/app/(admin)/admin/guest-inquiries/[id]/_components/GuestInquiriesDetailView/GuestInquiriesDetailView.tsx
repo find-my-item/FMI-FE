@@ -1,6 +1,8 @@
 "use client";
 
+import { Suspense } from "react";
 import { Button } from "@/components/common";
+import { LoadingState } from "@/components/state";
 import { useToast } from "@/context/ToastContext";
 import { MOCK_GUEST_INQUIRY_DETAIL_DATA } from "@/mock/data";
 import { AdminDetailSection } from "@/app/(admin)/admin/_components";
@@ -19,17 +21,19 @@ const GuestInquiriesDetailView = () => {
   };
 
   return (
-    <div className="flex flex-col h-base">
-      <article className="flex-1">
-        <AdminDetailSection data={MOCK_GUEST_INQUIRY_DETAIL_DATA} />
-      </article>
+    <Suspense fallback={<LoadingState />}>
+      <div className="flex flex-col h-base">
+        <article className="flex-1">
+          <AdminDetailSection data={MOCK_GUEST_INQUIRY_DETAIL_DATA} />
+        </article>
 
-      <div className="sticky bottom-0 border-t border-divider-default bg-white px-5 pb-8 pt-3">
-        <Button className="min-h-11 w-full" onClick={copyEmail}>
-          이메일 복사하기
-        </Button>
+        <div className="sticky bottom-0 border-t border-divider-default bg-white px-5 pb-8 pt-3">
+          <Button className="min-h-11 w-full" onClick={copyEmail}>
+            이메일 복사하기
+          </Button>
+        </div>
       </div>
-    </div>
+    </Suspense>
   );
 };
 
