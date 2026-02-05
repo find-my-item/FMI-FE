@@ -14,6 +14,7 @@ export const MOCK_NOTICE_LIST: NoticeItem = {
 };
 
 import { AdminInquiryItem, AdminReportItem } from "@/api/fetch/admin";
+import { ReplyStatus, ReportsType } from "@/types";
 
 export const MOCK_ADMIN_REPORT_LIST: AdminReportItem[] = [
   {
@@ -134,5 +135,31 @@ export const MOCK_ADMIN_INQUIRY_LIST: AdminInquiryItem[] = [
     userEmail: "maenggu@example.com",
 
     ip: "192.168.0.48",
+  },
+];
+
+export const MOCK_REPORTS_DETAIL_DATA = {
+  title: "실제 분실물/습득물이 아닌 내용이에요.",
+  userName: "유저닉네임",
+  createdAt: "2025-05-06",
+  content: "여기에 신고 내용이 표기됩니다.",
+  status: "RECEIVED" as ReportsType,
+  replyStatus: "ANSWERED" as ReplyStatus,
+};
+
+export const MOCK_COMMENT_DATA = [
+  {
+    isAdmin: true,
+    userImageUrl: "",
+    userName: "관리자닉네임",
+    content: "여기에 댓글 내용이 표기됩니다.",
+    createdAt: "2025-05-06",
+  },
+  {
+    isAdmin: false,
+    userImageUrl: "",
+    userName: "유저닉네임",
+    content: "여기에 댓글 내용이 표기됩니다.",
+    createdAt: "2025-05-06",
   },
 ];
