@@ -20,6 +20,6 @@ export const ADMIN_NAV_SECTIONS = [
   {
     id: "account",
     label: "계정 설정",
-    items: [{ href: "/admin/password", title: "비밀번호 변경" }],
+    items: [{ href: "/change-password", title: "비밀번호 변경" }],
   },
 ] as const;
