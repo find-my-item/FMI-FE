@@ -19,21 +19,26 @@ import { ApiBaseResponseType } from "../types/ApiBaseResponseType";
 // queryKey: tanstack query query key (ex: ["chats"], ["chats", type])
 // url: api 요청 엔드포인트 (쿼리 파라미터 제외한 base url)
 // options: 추가 useInfiniteQuery option
+// suspense: true 시 Suspense boundary에서 로딩 상태 감지 가능
 
 // nextCursor를 가진 타입을 위한 헬퍼 타입
 type WithNextCursor = { nextCursor: string | null };
+
+// UseInfiniteQueryOptions는 suspense를 omit하므로, suspense 옵션을 포함한 확장 타입 사용
+type UseAppInfiniteQueryOptions<TQueryFnData, TError, TData> = Omit<
+  UseInfiniteQueryOptions<TQueryFnData, TError, TData, QueryKey, unknown>,
+  "queryKey" | "queryFn" | "getNextPageParam" | "initialPageParam"
+> & {
+  getNextPageParam?: (lastPage: TQueryFnData) => unknown;
+  initialPageParam?: unknown;
+  suspense?: boolean;
+};
 
 const useAppInfiniteQuery = <TQueryFnData, TError = unknown, TData = TQueryFnData>(
   apiType: "auth" | "public",
   queryKey: QueryKey,
   url: string,
-  options?: Omit<
-    UseInfiniteQueryOptions<TQueryFnData, TError, TData, QueryKey, unknown>,
-    "queryKey" | "queryFn" | "getNextPageParam" | "initialPageParam"
-  > & {
-    getNextPageParam?: (lastPage: TQueryFnData) => unknown;
-    initialPageParam?: unknown;
-  }
+  options?: UseAppInfiniteQueryOptions<TQueryFnData, TError, TData>
 ): UseInfiniteQueryResult<TData, TError> => {
   const axios = useAxios(apiType);
 
@@ -72,7 +77,7 @@ const useAppInfiniteQuery = <TQueryFnData, TError = unknown, TData = TQueryFnDat
     refetchOnWindowFocus: false,
     staleTime: 1000 * 60,
     ...rest,
-  });
+  } as UseInfiniteQueryOptions<TQueryFnData, TError, TData, QueryKey, unknown>);
 };
 
 export default useAppInfiniteQuery;
