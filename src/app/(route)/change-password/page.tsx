@@ -1,8 +1,8 @@
 "use client";
 
-import { DetailHeader } from "@/components/layout";
 import { FormProvider, useForm } from "react-hook-form";
-import { MypageChangePwForm } from "./_components";
+import { DetailHeader } from "@/components/layout";
+import { ChangePasswordForm } from "./_components";
 
 interface ChangePasswordFormType {
   currentPassword: string;
@@ -20,8 +20,9 @@ const page = () => {
     <div className="w-full h-base">
       <DetailHeader title="비밀번호 변경" />
       <h1 className="sr-only">비밀번호 변경 페이지</h1>
+
       <FormProvider {...methods}>
-        <MypageChangePwForm />
+        <ChangePasswordForm />
       </FormProvider>
     </div>
   );
