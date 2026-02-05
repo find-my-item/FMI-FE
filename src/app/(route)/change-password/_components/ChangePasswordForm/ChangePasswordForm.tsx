@@ -2,7 +2,7 @@ import { InputText } from "@/components/common";
 import { FooterButton } from "@/components/domain";
 import { CHANGE_PASSWORD_CONFIG } from "../../_constants/CHANGE_PASSWORD_CONFIG";
 
-const MypageChangePwForm = () => {
+const ChangePasswordForm = () => {
   return (
     <form className="flex h-dvh flex-col">
       <fieldset className="flex w-full flex-col gap-5 px-5 py-[30px]">
@@ -22,4 +22,4 @@ const MypageChangePwForm = () => {
   );
 };
 
-export default MypageChangePwForm;
+export default ChangePasswordForm;
