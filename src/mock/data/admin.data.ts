@@ -176,3 +176,12 @@ export const MOCK_ADMIN_GUEST_INQUIRY_LIST: AdminGuestInquiryItem = {
   ip: "192.168.0.10",
   userEmail: "[EMAIL_ADDRESS]",
 };
+
+export const MOCK_GUEST_INQUIRY_DETAIL_DATA = {
+  title: "여기에 문의 제목이 표기됩니다.",
+  userName: "asdfasdfasdfasda@naver.com",
+  createdAt: "2025-10-20",
+  content: "여기에 신고 내용이 표기됩니다.",
+  status: "RECEIVED" as ReportsType,
+  replyStatus: "ANSWERED" as ReplyStatus,
+};
