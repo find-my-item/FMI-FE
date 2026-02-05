@@ -6,6 +6,7 @@ export const HEADER_LINK = [
   { name: "서비스 소개", href: "/hello" },
   { name: "매뉴얼", href: "/manual" },
   { name: "마이페이지", href: "/mypage" },
+  { name: "관리자 페이지", href: "/admin" },
   { name: "타인 유저 프로필", href: "/user/1" },
   { name: "알림", href: "/alert" },
   { name: "채팅", href: "/chat" },
