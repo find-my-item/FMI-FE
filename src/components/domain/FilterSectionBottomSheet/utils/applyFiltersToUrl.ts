@@ -1,5 +1,8 @@
 /**
- * applyFiltersToUrl 사용자가 선택한 필터 상태를 웹 브라우저 주소창(URL)의 쿼리 스트링으로 변환해주는 유틸리티
+ * @author jikwon
+ *
+ * 필터 상태 객체를 URL 쿼리 스트링으로 변환하기 위한 매핑 정보와 변환 함수들을 포함하는 유틸리티입니다.
+ * 내부에 정의된 각 MAP 객체는 클라이언트의 상태 값(Enum/Type)을 URL에 적합한 문자열로 매핑합니다.
  */
 
 import { FiltersStateType } from "../_types/filtersStateType";

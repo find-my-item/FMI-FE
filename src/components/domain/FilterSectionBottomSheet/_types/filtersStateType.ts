@@ -1,3 +1,10 @@
+/**
+ * @author jikwon
+ *
+ *  필터 바텀시트에서 관리하는 전체 필터 상태 객체의 타입 정의입니다.
+ * 사용자가 선택한 지역, 카테고리, 정렬 기준 및 게시글/물건의 상태 값을 포함합니다.
+ */
+
 import {
   CategoryFilterValue,
   FindStatusFilterValue,
@@ -8,7 +15,7 @@ import {
 export type FiltersStateType = {
   region: string;
   category: CategoryFilterValue;
-  sort: SortFilterValue; // 정렬 (최신 순, 오래된 순, 조회 순)
-  status: StatusFilterValue; // 분류 (분실, 습득)
-  findStatus: FindStatusFilterValue; // 찾음 여부 (찾음, 찾는 중)
+  sort: SortFilterValue;
+  status: StatusFilterValue;
+  findStatus: FindStatusFilterValue;
 };

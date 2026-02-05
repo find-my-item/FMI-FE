@@ -1,3 +1,9 @@
+/**
+ * @author suhyeon
+ *
+ *  필터 및 탭 시스템에서 사용되는 공통 타입 정의입니다.
+ */
+
 import { CategoryType, ItemStatus, PostType } from "@/types";
 
 // 탭 타입
