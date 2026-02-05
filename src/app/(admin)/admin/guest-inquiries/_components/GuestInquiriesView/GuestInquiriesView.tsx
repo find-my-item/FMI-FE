@@ -1,7 +1,8 @@
 import { AdminFilter, AdminSearch } from "../../../_components";
 import GuestInquiriesList from "../GuestInquiriesList/GuestInquiriesList";
 
-const filters = [
+// TODO(지권): 필터 기능 추가
+const guestInquiriesFilters = [
   {
     label: "상태",
     onSelected: false,
@@ -19,7 +20,7 @@ const GuestInquiriesView = () => {
     <div className="h-base">
       <AdminSearch onEnter={() => {}} />
 
-      <AdminFilter filters={filters} />
+      <AdminFilter filters={guestInquiriesFilters} />
 
       <GuestInquiriesList />
     </div>
