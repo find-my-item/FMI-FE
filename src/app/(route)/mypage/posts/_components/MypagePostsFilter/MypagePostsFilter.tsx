@@ -1,3 +1,5 @@
+// 피그마 시안 변경되어 삭제될 컴포넌트
+
 import { Filter } from "@/components/common";
 import { MYPAGE_POSTS_FILTER } from "../../_constants/MYPAGE_POSTS_FILTER";
 import MypagePostsBottomSheet from "../MypagePostsBottomSheet/MypagePostsBottomSheet";

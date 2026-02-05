@@ -19,6 +19,7 @@ import { DEFAULT_FILTERS } from "../_constants/DEFAULT_FILTERS";
 import { filterSelectionState, normalizedFilterValues } from "../utils/deriveFilterParams";
 import { useFilterParams } from "@/hooks/domain";
 import { TABS } from "../_constants/TABS";
+import { DateRangeBottomSheet } from "@/app/(route)/mypage/_internal";
 
 interface FilterSectionProps {
   pageType?: "LIST" | "MY_POSTS" | "MY_FAVORITES";
@@ -29,6 +30,7 @@ const FilterSection = ({ pageType = "LIST" }: FilterSectionProps) => {
   const [filters, setFilters] = useState<FiltersStateType>(DEFAULT_FILTERS);
   const [selectedTab, setSelectedTab] = useState<FilterTab>("region");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [isDateOpen, setIsDateOpen] = useState(false);
 
   const { normalizedCategory, normalizedSort, normalizedStatus, normalizedFindStatus } =
     normalizedFilterValues({ region, category, sort, status, findStatus });
@@ -36,6 +38,11 @@ const FilterSection = ({ pageType = "LIST" }: FilterSectionProps) => {
   const selectionState = filterSelectionState({ region, category, sort, status, findStatus });
 
   const openSheet = (tab: FilterTab) => {
+    if (tab === "date") {
+      setIsDateOpen(true);
+      return;
+    }
+
     setFilters({
       ...DEFAULT_FILTERS,
       region: region ?? "",
@@ -47,8 +54,14 @@ const FilterSection = ({ pageType = "LIST" }: FilterSectionProps) => {
     setIsFilterOpen(true);
   };
 
-  // 각 필터별 렌더링 설정 맵
   const filterConfigs: Record<FilterTab, any> = {
+    date: {
+      ariaLabel: "기간 필터",
+      onSelected: false,
+      icon: { name: "Calendar", size: 16 },
+      label: "기간",
+      iconPosition: "leading",
+    },
     region: {
       ariaLabel: "지역 선택 필터",
       onSelected: selectionState.isRegionSelected,
@@ -74,7 +87,7 @@ const FilterSection = ({ pageType = "LIST" }: FilterSectionProps) => {
       ariaLabel: "찾음여부 필터",
       onSelected: selectionState.isFindStatusSelected,
       icon: { name: "ArrowDown", size: 12 },
-      label: (normalizedFindStatus && FIND_STATUS_LABEL_MAP[normalizedFindStatus]) ?? "전체",
+      label: (normalizedFindStatus && FIND_STATUS_LABEL_MAP[normalizedFindStatus]) ?? "찾음여부",
       iconPosition: "trailing",
     },
     status: {
@@ -122,6 +135,10 @@ const FilterSection = ({ pageType = "LIST" }: FilterSectionProps) => {
           setFilters={setFilters}
           pageType={pageType}
         />
+      )}
+
+      {isDateOpen && (
+        <DateRangeBottomSheet isOpen={isDateOpen} onClose={() => setIsDateOpen(false)} />
       )}
     </>
   );

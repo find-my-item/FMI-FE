@@ -4,7 +4,7 @@ import { CategoryType, ItemStatus, PostType } from "@/types";
 export type tabsType = "LIST" | "MY_POSTS" | "MY_FAVORITES";
 
 // 필터 타입
-export type FilterTab = "region" | "category" | "sort" | "status" | "findStatus";
+export type FilterTab = "date" | "region" | "category" | "sort" | "status" | "findStatus";
 
 export type CategoryFilterValue = CategoryType | undefined;
 
