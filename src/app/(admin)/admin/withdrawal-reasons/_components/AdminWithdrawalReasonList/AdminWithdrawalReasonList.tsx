@@ -1,16 +1,23 @@
+import { Suspense } from "react";
+import { ErrorBoundary } from "@/app/ErrorBoundary";
 import { formatDate } from "@/utils";
 import { WithdrawReasonItem } from "@/api/fetch/admin";
 import { MOCK_WITHDRAW_REASON_LIST } from "@/mock/data";
+import { LoadingState } from "@/components/state";
 
 const AdminWithdrawalReasonList = () => {
   return (
-    <section aria-label="유저 탈퇴 사유 목록">
-      <ul>
-        {MOCK_WITHDRAW_REASON_LIST.map((item) => (
-          <WithdrawalReasonItem key={item.id} data={item} />
-        ))}
-      </ul>
-    </section>
+    <ErrorBoundary>
+      <Suspense fallback={<LoadingState />}>
+        <section aria-label="유저 탈퇴 사유 목록">
+          <ul>
+            {MOCK_WITHDRAW_REASON_LIST.map((item) => (
+              <WithdrawalReasonItem key={item.id} data={item} />
+            ))}
+          </ul>
+        </section>
+      </Suspense>
+    </ErrorBoundary>
   );
 };
 
