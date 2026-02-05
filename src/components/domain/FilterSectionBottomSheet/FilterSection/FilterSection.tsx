@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { normalizeEnumValue } from "@/utils";
 import { Filter } from "@/components/common";
@@ -19,7 +21,7 @@ import { DEFAULT_FILTERS } from "../_constants/DEFAULT_FILTERS";
 import { filterSelectionState, normalizedFilterValues } from "../utils/deriveFilterParams";
 import { useFilterParams } from "@/hooks/domain";
 import { TABS } from "../_constants/TABS";
-import { DateRangeBottomSheet } from "@/app/(route)/mypage/_internal";
+import DateRangeBottomSheet from "../../DateRangeBottomSheet/DateRangeBottomSheet";
 
 /**
  * @author jikwon (Original)

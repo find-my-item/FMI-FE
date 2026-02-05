@@ -1,3 +1,23 @@
+"use client";
+
+import { Dispatch, SetStateAction } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { cn } from "@/utils";
+import {
+  CategoryFilterValue,
+  FilterTab,
+  FindStatusFilterValue,
+  SortFilterValue,
+  StatusFilterValue,
+  tabsType,
+} from "../_types/types";
+import { categories, sort, status, findStatus } from "../_constants/CONSTANTS";
+import { applyFiltersToUrl } from "../utils/applyFiltersToUrl";
+import { FiltersStateType } from "../_types/filtersStateType";
+import { TABS } from "../_constants/TABS";
+import PopupLayout from "../../PopupLayout/PopupLayout";
+import { Button, Icon } from "@/components/common";
+
 /**
  * @author jikwon (Original)
  * @author suhyeon (Refactored)
@@ -29,24 +49,6 @@
  * />
  * ```
  */
-
-import { Dispatch, SetStateAction } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { cn } from "@/utils";
-import { Button, Icon } from "@/components/common";
-import { PopupLayout } from "@/components/domain";
-import {
-  CategoryFilterValue,
-  FilterTab,
-  FindStatusFilterValue,
-  SortFilterValue,
-  StatusFilterValue,
-  tabsType,
-} from "../_types/types";
-import { categories, sort, status, findStatus } from "../_constants/CONSTANTS";
-import { applyFiltersToUrl } from "../utils/applyFiltersToUrl";
-import { FiltersStateType } from "../_types/filtersStateType";
-import { TABS } from "../_constants/TABS";
 
 interface FilterBottomSheetProps {
   isOpen: boolean;
