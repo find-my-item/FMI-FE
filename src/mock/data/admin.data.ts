@@ -15,6 +15,7 @@ export const MOCK_NOTICE_LIST: NoticeItem = {
 
 import { AdminInquiryItem, AdminReportItem } from "@/api/fetch/admin";
 import { ReplyStatus, ReportsType } from "@/types";
+import { AdminGuestInquiryItem } from "@/api/fetch/admin/types/GuestInquiriesType";
 
 export const MOCK_ADMIN_REPORT_LIST: AdminReportItem[] = [
   {
@@ -163,3 +164,15 @@ export const MOCK_COMMENT_DATA = [
     createdAt: "2025-05-06",
   },
 ];
+
+export const MOCK_ADMIN_GUEST_INQUIRY_LIST: AdminGuestInquiryItem = {
+  inquiryId: 1,
+  inquiryType: "PRIVATE",
+  status: "PENDING",
+  category: "ACCOUNT",
+  reason: "여기에 문의 내용이 표기됩니다.",
+  title: "광고성 링크가 반복적으로 포함된 게시글입니다.",
+  createdAt: "2025-02-01T10:15:00",
+  ip: "192.168.0.10",
+  userEmail: "[EMAIL_ADDRESS]",
+};
