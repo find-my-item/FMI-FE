@@ -24,12 +24,12 @@ describe("PostListItem", () => {
     render(<PostListItem post={MOCK_POST_ITEM} linkState="list" />);
 
     const link = screen.getByRole("link");
-    expect(link).toHaveAttribute("href", `/list/${MOCK_POST_ITEM.postId}`);
+    expect(link).toHaveAttribute("href", `/list/${MOCK_POST_ITEM.id}`);
 
     expect(screen.getByText(MOCK_POST_ITEM.title)).toBeInTheDocument();
     expect(screen.getByText(MOCK_POST_ITEM.summary)).toBeInTheDocument();
 
-    expect(screen.getByText(getItemStatusLabel(MOCK_POST_ITEM.itemStatus))).toBeInTheDocument();
+    expect(screen.getByText(getItemStatusLabel(MOCK_POST_ITEM.postStatus))).toBeInTheDocument();
     expect(screen.getByText(getItemCategoryLabel(MOCK_POST_ITEM.category))).toBeInTheDocument();
 
     const starIcon = screen.getByTestId("icon-Star");

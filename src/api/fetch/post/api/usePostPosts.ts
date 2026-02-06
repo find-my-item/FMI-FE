@@ -16,7 +16,7 @@ export const usePostPosts = () => {
     {
       onSuccess: (data) => {
         addToast("게시글이 등록되었습니다.", "success");
-        router.replace(`/list/${data.result.postId}`);
+        router.replace(`/list/${data.result.id}`);
       },
       onError: () => {
         addToast("게시글 등록에 실패했습니다.", "error");

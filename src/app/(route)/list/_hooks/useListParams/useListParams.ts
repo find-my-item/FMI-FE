@@ -1,6 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
+import { normalizeEnumValue } from "@/utils";
 import {
   CategoryFilterValue,
   SortFilterValue,
@@ -10,13 +11,13 @@ import {
 export const useListParams = () => {
   const searchParams = useSearchParams();
 
-  const sortParam = searchParams.get("sort");
-
   return {
-    type: searchParams.get("type"),
-    status: searchParams.get("status") as StatusFilterValue,
-    category: searchParams.get("category") as CategoryFilterValue,
-    sort: (sortParam as SortFilterValue) ?? "latest",
+    type: normalizeEnumValue(searchParams.get("type")),
+    status: normalizeEnumValue<Exclude<StatusFilterValue, undefined>>(searchParams.get("status")),
+    category: normalizeEnumValue<Exclude<CategoryFilterValue, undefined>>(
+      searchParams.get("category")
+    ),
+    sort: normalizeEnumValue<SortFilterValue>(searchParams.get("sort")),
     region: searchParams.get("region"),
   };
 };
