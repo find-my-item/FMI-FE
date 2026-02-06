@@ -12,3 +12,8 @@ export const MOCK_COMMENT_ITEM_DATA: CommentItemType = {
   canEdit: false,
   canDelete: true,
 };
+
+export const MOCK_COMMENT_LIST_DATA: CommentItemType[] = [
+  MOCK_COMMENT_ITEM_DATA,
+  MOCK_COMMENT_ITEM_DATA,
+];

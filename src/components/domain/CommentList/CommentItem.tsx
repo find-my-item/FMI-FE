@@ -13,6 +13,8 @@ interface CommentCardProps {
   className?: string;
 }
 
+const data = MOCK_COMMENT_ITEM_DATA;
+
 const CommentItem = ({ level = "comment", className }: CommentCardProps) => {
   const isReply = level === "reply";
   const isNestedReply = level === "nestedReply";
@@ -20,8 +22,6 @@ const CommentItem = ({ level = "comment", className }: CommentCardProps) => {
 
   const [viewReply, setViewReply] = useState(false);
   const [isReplyFormOpen, setIsReplyFormOpen] = useState(false);
-
-  const data = MOCK_COMMENT_ITEM_DATA;
 
   return (
     <div className={cn("my-[18px] px-5", className)}>

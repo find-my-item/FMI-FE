@@ -1,22 +1,22 @@
 import { ViewMoreComment } from "@/components/common";
 import CommentItem from "./CommentItem";
 import { useMemo } from "react";
-import type { Comment } from "./types/commentItem";
+import { CommentItemType } from "@/types";
 
 interface CommentListProps {
-  comments: Comment[];
+  comments: CommentItemType[];
 }
 
 const CommentList = ({ comments }: CommentListProps) => {
   if (!comments.length) return null;
 
   const { parentComments, repliesMap } = useMemo(() => {
-    const parents: Comment[] = [];
-    const replies: Record<number, Comment[]> = {};
+    const parents: CommentItemType[] = [];
+    const replies: Record<number, CommentItemType[]> = {};
 
     comments.forEach((comment) => {
-      if (comment.replyTo) {
-        const parentComment = comments.find((c) => c.author === comment.replyTo);
+      if (comment.parentId) {
+        const parentComment = comments.find((c) => c.id === comment.parentId);
         if (parentComment) {
           if (!replies[parentComment.id]) {
             replies[parentComment.id] = [];
@@ -38,7 +38,7 @@ const CommentList = ({ comments }: CommentListProps) => {
       </header>
       <div>
         {parentComments.map((c) => (
-          <CommentItem key={c.id} comment={c} replies={repliesMap[c.id] || []} />
+          <CommentItem key={c.id} />
         ))}
       </div>
 
