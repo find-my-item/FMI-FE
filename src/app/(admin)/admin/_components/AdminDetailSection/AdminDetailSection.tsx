@@ -1,7 +1,10 @@
 import { ReplyStatus, ReportsType } from "@/types";
-import { DetailContent, DetailStatusHeader } from "../_internal";
+import {
+  DetailContent,
+  DetailStatusHeader,
+} from "../../reports/[reportsType]/[id]/_components/_internal";
 
-interface AdminReportsDetailSectionProps {
+interface AdminDetailSectionProps {
   data: {
     title: string;
     userName: string;
@@ -12,7 +15,7 @@ interface AdminReportsDetailSectionProps {
   };
 }
 
-const AdminReportsDetailSection = ({ data }: AdminReportsDetailSectionProps) => {
+const AdminDetailSection = ({ data }: AdminDetailSectionProps) => {
   const { status, replyStatus } = data;
 
   return (
@@ -29,4 +32,4 @@ const AdminReportsDetailSection = ({ data }: AdminReportsDetailSectionProps) => 
   );
 };
 
-export default AdminReportsDetailSection;
+export default AdminDetailSection;

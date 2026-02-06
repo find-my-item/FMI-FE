@@ -1,6 +1,6 @@
 import { MOCK_REPORTS_DETAIL_DATA } from "@/mock/data";
+import { AdminDetailSection } from "@/app/(admin)/admin/_components";
 import AdminReportsCommentSection from "../AdminReportsCommentSection/AdminReportsCommentSection";
-import AdminReportsDetailSection from "../AdminReportsDetailSection/AdminReportsDetailSection";
 
 interface AdminReportsViewProps {
   id: number;
@@ -9,7 +9,7 @@ interface AdminReportsViewProps {
 const AdminReportsView = ({ id }: AdminReportsViewProps) => {
   return (
     <div className="h-base">
-      <AdminReportsDetailSection data={MOCK_REPORTS_DETAIL_DATA} />
+      <AdminDetailSection data={MOCK_REPORTS_DETAIL_DATA} />
 
       <AdminReportsCommentSection />
     </div>
