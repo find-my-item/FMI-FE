@@ -1,7 +1,7 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import NotFound from "@/app/not-found";
+import { notFound } from "next/navigation";
 import { Tab } from "@/components/domain";
 import { useGetUserProfileById } from "@/api/fetch/user";
 import UserHeader from "../UserHeader/UserHeader";
@@ -15,7 +15,8 @@ const UserProfileView = () => {
   const { tab, updateTabQuery } = useUserProfileTabQuery();
   const { data, isLoading, isError } = useGetUserProfileById(userId, tab);
 
-  if (isError || !userId) return <NotFound />;
+  if (isError || !userId) return notFound();
+
   const profileData = data?.result;
 
   return (
@@ -26,7 +27,7 @@ const UserProfileView = () => {
 
       <Tab tabs={USER_TABS} selected={tab} onValueChange={updateTabQuery} aria-label="프로필 탭" />
 
-      <TabContents selectedTab={tab} query={{ isLoading, data: profileData }} />
+      <TabContents selectedTab={tab} data={profileData} isLoading={isLoading} />
     </div>
   );
 };
