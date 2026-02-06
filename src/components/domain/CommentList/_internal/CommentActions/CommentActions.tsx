@@ -39,8 +39,8 @@ const CommentActions = ({
       {!isThreadItem && (
         <button
           className={cn(
-            "text-body1-medium text-neutral-strong-default",
-            isReplyFormOpen && "text-[#0AA874]"
+            "text-body1-medium",
+            isReplyFormOpen ? "text-brand-normal-enteredSelected" : "text-neutral-strong-default"
           )}
           onClick={() => setIsReplyFormOpen((prev) => !prev)}
         >

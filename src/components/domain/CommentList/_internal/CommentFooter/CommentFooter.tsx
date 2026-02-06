@@ -36,7 +36,7 @@ const CommentFooter = ({
         <button
           className={cn(
             "text-body1-regular",
-            isReplyFormOpen ? "text-[#0AA874]" : "text-layout-header-default"
+            isReplyFormOpen ? "text-brand-normal-enteredSelected" : "text-neutral-strong-default"
           )}
           onClick={() => setIsReplyFormOpen(!isReplyFormOpen)}
         >

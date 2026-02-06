@@ -33,12 +33,14 @@ const CommentList = ({ comments }: CommentListProps) => {
 
   return (
     <>
-      <header className="mb-[2px] w-full border-t border-[#E4E4E4] px-[20px]">
-        <h2 className="mt-[26px] text-body1-semibold text-[#242424]">댓글 {comments.length}</h2>
+      <header className="w-full border-t border-divider-default px-5">
+        <h2 className="mt-[18px] flex items-center gap-1 py-2 text-body1-semibold text-layout-header-default">
+          댓글<span>{comments.length}</span>
+        </h2>
       </header>
       <div>
-        {parentComments.map((c) => (
-          <CommentItem key={c.id} />
+        {parentComments.map((_, index) => (
+          <CommentItem key={index} />
         ))}
       </div>
 
