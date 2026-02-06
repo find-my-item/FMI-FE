@@ -1,13 +1,19 @@
 import Link from "next/link";
 import { KebabMenuButton, ProfileAvatar } from "@/components/common";
-import { cn } from "@/utils";
+import { cn, formatDate } from "@/utils";
 
 interface CommentMetaHeaderProps {
-  userId: string;
+  data: {
+    authorId: string;
+    createdAt: string;
+    authorName: string;
+  };
   isThreadItem: boolean;
 }
 
-const CommentMetaHeader = ({ userId, isThreadItem }: CommentMetaHeaderProps) => {
+const CommentMetaHeader = ({ data, isThreadItem }: CommentMetaHeaderProps) => {
+  const { authorId, createdAt, authorName } = data;
+
   return (
     <>
       {/* 댓글 메타 */}
@@ -21,13 +27,13 @@ const CommentMetaHeader = ({ userId, isThreadItem }: CommentMetaHeaderProps) => 
             )}
           >
             <Link
-              href={`user/${userId}`}
+              href={`user/${authorId}`}
               className="line-clamp-2 break-all text-body1-medium text-layout-header-default"
             >
-              asdfasdf
+              {authorName}
             </Link>
-            <time dateTime="2025-05-06" className="text-body2-regular text-layout-body-default">
-              2025.05.06
+            <time dateTime={createdAt} className="text-body2-regular text-layout-body-default">
+              {formatDate(createdAt)}
             </time>
           </div>
         </div>

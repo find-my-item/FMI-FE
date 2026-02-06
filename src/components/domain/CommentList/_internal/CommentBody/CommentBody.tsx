@@ -1,13 +1,13 @@
 interface CommentBodyProps {
   isNestedReply: boolean;
-  commentData: {
+  bodyData: {
     replyNickname?: string;
     content: string;
   };
 }
 
-const CommentBody = ({ isNestedReply, commentData }: CommentBodyProps) => {
-  const { replyNickname, content } = commentData;
+const CommentBody = ({ isNestedReply, bodyData }: CommentBodyProps) => {
+  const { replyNickname, content } = bodyData;
 
   // 댓글 내용
   return (
