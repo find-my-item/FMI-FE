@@ -16,7 +16,6 @@ const TabContents = ({ selectedTab, data, isLoading }: TabContentsProps) => {
   if (isLoading) return <LoadingState />;
   if (!data) return null;
 
-  console.log(data);
   return (
     <section aria-label="탭 콘텐츠">
       <ul>
