@@ -8,18 +8,14 @@ import {
 import { UserTabType } from "../types/UserDataType";
 
 export const useGetUserProfileById = (userId: string | undefined, tab: UserTabType, size = 10) => {
-  const makeUrl = (cursor?: number) => {
-    const params = new URLSearchParams();
-    params.set("tab", tab);
-    params.set("size", String(size));
-    if (cursor !== undefined) params.set("cursor", String(cursor));
-    return `/users/${userId}/page?${params.toString()}`;
-  };
+  const params = new URLSearchParams();
+  params.set("tab", tab);
+  params.set("size", String(size));
 
   return useAppInfiniteQuery<GetUserProfileDataResponse, unknown, UserProfileInfiniteSelectedData>(
     "auth",
     ["user-data", userId, tab, size],
-    makeUrl(),
+    `/users/${userId}/page?${params.toString()}`,
     {
       placeholderData: keepPreviousData,
       enabled: !!userId,
