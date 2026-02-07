@@ -49,7 +49,11 @@ const ProfileAvatar = ({
       sizes={`${size}px`}
       priority={priority}
       draggable={false}
-      className={cn("pointer-events-none select-none rounded-full object-cover", className)}
+      className={cn(
+        "pointer-events-none select-none rounded-full object-cover",
+        `w-[${size}px] h-[${size}px]`,
+        className
+      )}
       onError={() => {
         if (imgSrc !== FALLBACK_SRC) setImgSrc(FALLBACK_SRC);
       }}
