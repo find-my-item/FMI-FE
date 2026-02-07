@@ -1,8 +1,8 @@
 import { useRouter } from "next/navigation";
 import { useToast } from "@/context/ToastContext";
 import { ApiSignUpType, useApiSignUp } from "@/api/fetch/auth";
-import { useErrorToast } from "@/hooks";
 import { SIGNUP_ERROR_MESSAGE } from "../_constants/SIGNUP_ERROR_MESSAGE";
+import { useErrorToast } from "@/hooks/domain";
 
 export const useSignUpSubmit = () => {
   const router = useRouter();

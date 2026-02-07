@@ -7,7 +7,7 @@ interface MypageSearchProps {
   searchMode?: "Posts" | "Comments" | "Favorite" | "Activity" | "Reports" | "Inquiries";
 }
 
-export const MypageSearch = ({ searchMode }: MypageSearchProps) => {
+const MypageSearch = ({ searchMode }: MypageSearchProps) => {
   return (
     <section className="w-full px-5 py-[10px]">
       <h2 className="sr-only">검색 영역</h2>
