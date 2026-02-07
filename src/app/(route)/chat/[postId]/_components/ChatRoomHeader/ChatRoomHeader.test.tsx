@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 import ChatRoomHeader from "./ChatRoomHeader";
 import { ChatRoomResponse } from "@/api/fetch/chatRoom/types/ChatRoomType";
+import { PostType } from "@/types";
 
 const mockBack = jest.fn();
 
@@ -20,9 +21,7 @@ jest.mock("@/components/common", () => ({
 
 jest.mock("../ChatChip/ChatChip", () => ({
   __esModule: true,
-  default: ({ postMode }: { postMode: "FOUND" | "LOST" }) => (
-    <div data-testid="chat-chip">{postMode}</div>
-  ),
+  default: ({ postMode }: { postMode: PostType }) => <div data-testid="chat-chip">{postMode}</div>,
 }));
 
 jest.mock("../ChatRoomHeaderInfoButton/ChatRoomHeaderInfoButton", () => ({
@@ -32,6 +31,7 @@ jest.mock("../ChatRoomHeaderInfoButton/ChatRoomHeaderInfoButton", () => ({
 
 const mockChatRoomFound: ChatRoomResponse = {
   roomId: 1,
+  unreadCount: 0,
   opponentUser: {
     opponentUserId: 2,
     nickname: "사용자 닉네임",
@@ -49,6 +49,7 @@ const mockChatRoomFound: ChatRoomResponse = {
 
 const mockChatRoomLost: ChatRoomResponse = {
   roomId: 2,
+  unreadCount: 0,
   opponentUser: {
     opponentUserId: 3,
     nickname: "다른 사용자",
@@ -70,13 +71,13 @@ describe("ChatRoomHeader", () => {
   });
 
   it("chatRoom이 undefined일 때 null을 반환합니다", () => {
-    const { container } = render(<ChatRoomHeader chatRoom={undefined} />);
+    const { container } = render(<ChatRoomHeader chatRoom={undefined} roomId={0} />);
     expect(container.firstChild).toBeNull();
   });
 
   it("뒤로가기 버튼이 렌더링되고 클릭 시 router.back()이 호출됩니다", async () => {
     const user = userEvent.setup();
-    render(<ChatRoomHeader chatRoom={mockChatRoomFound} />);
+    render(<ChatRoomHeader chatRoom={mockChatRoomFound} roomId={mockChatRoomFound.roomId} />);
 
     const backButton = screen.getByRole("button", { name: "뒤로 가기 버튼" });
     expect(backButton).toBeInTheDocument();
@@ -87,13 +88,13 @@ describe("ChatRoomHeader", () => {
   });
 
   it("사용자 닉네임이 렌더링됩니다", () => {
-    render(<ChatRoomHeader chatRoom={mockChatRoomFound} />);
+    render(<ChatRoomHeader chatRoom={mockChatRoomFound} roomId={mockChatRoomFound.roomId} />);
 
     expect(screen.getByText("사용자 닉네임")).toBeInTheDocument();
   });
 
   it("게시글 썸네일 이미지가 렌더링됩니다", () => {
-    render(<ChatRoomHeader chatRoom={mockChatRoomFound} />);
+    render(<ChatRoomHeader chatRoom={mockChatRoomFound} roomId={mockChatRoomFound.roomId} />);
 
     const image = screen.getByAltText("게시글 썸네일 이미지");
     expect(image).toBeInTheDocument();
@@ -101,7 +102,7 @@ describe("ChatRoomHeader", () => {
   });
 
   it("ChatChip이 postType과 함께 렌더링됩니다", () => {
-    render(<ChatRoomHeader chatRoom={mockChatRoomFound} />);
+    render(<ChatRoomHeader chatRoom={mockChatRoomFound} roomId={mockChatRoomFound.roomId} />);
 
     const chatChip = screen.getByTestId("chat-chip");
     expect(chatChip).toBeInTheDocument();
@@ -109,14 +110,14 @@ describe("ChatRoomHeader", () => {
   });
 
   it("postType이 LOST일 때 ChatChip에 LOST가 전달됩니다", () => {
-    render(<ChatRoomHeader chatRoom={mockChatRoomLost} />);
+    render(<ChatRoomHeader chatRoom={mockChatRoomLost} roomId={mockChatRoomLost.roomId} />);
 
     const chatChip = screen.getByTestId("chat-chip");
     expect(chatChip).toHaveTextContent("LOST");
   });
 
   it("게시글명이 렌더링됩니다", () => {
-    render(<ChatRoomHeader chatRoom={mockChatRoomFound} />);
+    render(<ChatRoomHeader chatRoom={mockChatRoomFound} roomId={mockChatRoomFound.roomId} />);
 
     expect(
       screen.getByText("여기에 게시글명이 표기됩니다 여기에 게시글명이 표기됩니다. 여기에")
@@ -124,19 +125,19 @@ describe("ChatRoomHeader", () => {
   });
 
   it("위치 정보가 렌더링됩니다", () => {
-    render(<ChatRoomHeader chatRoom={mockChatRoomFound} />);
+    render(<ChatRoomHeader chatRoom={mockChatRoomFound} roomId={mockChatRoomFound.roomId} />);
 
     expect(screen.getByText("서울시 중구 회현동")).toBeInTheDocument();
   });
 
   it("ChatRoomHeaderInfoButton이 렌더링됩니다", () => {
-    render(<ChatRoomHeader chatRoom={mockChatRoomFound} />);
+    render(<ChatRoomHeader chatRoom={mockChatRoomFound} roomId={mockChatRoomFound.roomId} />);
 
     expect(screen.getByTestId("chat-room-header-info-button")).toBeInTheDocument();
   });
 
   it("게시글 링크가 올바른 href를 가집니다", () => {
-    render(<ChatRoomHeader chatRoom={mockChatRoomFound} />);
+    render(<ChatRoomHeader chatRoom={mockChatRoomFound} roomId={mockChatRoomFound.roomId} />);
 
     const link = screen.getByRole("link");
     expect(link).toHaveAttribute("href", `/list/${mockChatRoomFound.postInfo.postId}`);
@@ -151,14 +152,19 @@ describe("ChatRoomHeader", () => {
       },
     };
 
-    render(<ChatRoomHeader chatRoom={chatRoomWithoutThumbnail} />);
+    render(
+      <ChatRoomHeader
+        chatRoom={chatRoomWithoutThumbnail}
+        roomId={chatRoomWithoutThumbnail.roomId}
+      />
+    );
 
     const image = screen.getByAltText("게시글 썸네일 이미지");
     expect(image).toBeInTheDocument();
   });
 
   it("모든 주요 요소가 함께 렌더링됩니다", () => {
-    render(<ChatRoomHeader chatRoom={mockChatRoomFound} />);
+    render(<ChatRoomHeader chatRoom={mockChatRoomFound} roomId={mockChatRoomFound.roomId} />);
 
     // 뒤로가기 버튼
     expect(screen.getByRole("button", { name: "뒤로 가기 버튼" })).toBeInTheDocument();
