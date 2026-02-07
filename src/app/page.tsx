@@ -1,20 +1,5 @@
-"use client";
-
-import InputComment from "@/components/common/Input/InputComment/InputComment";
-import { ComposeInputProvider } from "@/providers/ComposeInputProvider";
-import { FormProvider, useForm } from "react-hook-form";
-
 const Page = () => {
   const shades = [100, 200, 300, 400, 500, 600, 700, 800, 900];
-  const methods = useForm({
-    defaultValues: {
-      content: "",
-    },
-  });
-
-  const onSubmit = (data: any) => {
-    console.log(data);
-  };
 
   return (
     <div className="min-h-screen bg-white p-8 transition-colors duration-200 dark:bg-gray-900">
@@ -23,13 +8,6 @@ const Page = () => {
         <h1 className="font-heading mb-6 text-4xl font-bold text-gray-900 dark:text-gray-100 tablet:mb-10">
           Design System Showcase
         </h1>
-        <ComposeInputProvider>
-          <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit(onSubmit)}>
-              <InputComment name="content" />
-            </form>
-          </FormProvider>
-        </ComposeInputProvider>
         {/* Colors */}
         <section className="mb-12">
           <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-gray-100">Colors</h2>

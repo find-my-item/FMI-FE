@@ -30,7 +30,6 @@ const InputComment = ({ name, validation, disabled, ...props }: InputChatProps) 
         rules={validation}
         render={({ field }) => (
           <div className="flex w-full flex-row items-end gap-2 overflow-y-visible">
-            {/* 이미지 첨부 */}
             <label
               htmlFor="ImageAttach"
               className="relative h-11 w-11 shrink-0 rounded-full bg-fill-neutral-strong-default"
@@ -53,7 +52,6 @@ const InputComment = ({ name, validation, disabled, ...props }: InputChatProps) 
               onChange={(e) => appendImageFilesFromInput(e, images, setImages)}
             />
 
-            {/* 입력창 */}
             <textarea
               {...props}
               {...field}
@@ -68,17 +66,20 @@ const InputComment = ({ name, validation, disabled, ...props }: InputChatProps) 
               }}
               onKeyDown={(e) => handleTextareaSubmitKeyDown(e, textareaRef)}
               className={cn(
-                "max-h-[120px] min-h-11 min-w-0 flex-1 resize-none overflow-y-hidden rounded-[24px] px-4 py-[10px] text-body2-medium text-neutral-normal-placeholder bg-fill-neutral-strong-default hover:placeholder-black focus:text-black disabled:text-neutral-strong-disabled",
+                "max-h-[120px] min-h-11 min-w-0 flex-1 resize-none overflow-y-hidden rounded-[24px] px-4 py-[10px] text-body2-medium text-neutral-normal-placeholder bg-fill-neutral-strong-default",
+                "hover:placeholder-black focus:text-black disabled:text-neutral-strong-disabled",
                 field.value && "text-neutral-strong-focused"
               )}
               placeholder="메시지 보내기"
               disabled={disabled}
             />
 
-            {/* 전송 버튼 */}
             <button
               type="submit"
-              className="relative h-11 w-11 shrink-0 rounded-full bg-fill-brand-normal-default hover:bg-fill-brand-normal-disabled active:bg-fill-brand-normal-default disabled:bg-fill-brand-normal-disabled"
+              className={cn(
+                "relative h-11 w-11 shrink-0 rounded-full bg-fill-brand-normal-default",
+                "hover:bg-fill-brand-normal-disabled active:bg-fill-brand-normal-default disabled:bg-fill-brand-normal-disabled"
+              )}
               aria-label="전송 버튼"
               disabled={disabled || !field.value?.trim()}
             >
