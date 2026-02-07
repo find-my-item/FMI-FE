@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { FormProvider, useForm } from "react-hook-form";
 import InputChat from "./InputChat";
-import { ChatRoomProvider } from "@/providers/ChatRoomProvider";
+import { ComposeInputProvider } from "@/providers/ComposeInputProvider";
 import "@testing-library/jest-dom";
 
 jest.mock("@/utils", () => ({
@@ -35,9 +35,9 @@ const renderComponent = (
       mode: "onChange",
     });
     return (
-      <ChatRoomProvider initialImages={initialImages}>
+      <ComposeInputProvider initialImages={initialImages}>
         <FormProvider {...methods}>{children}</FormProvider>
-      </ChatRoomProvider>
+      </ComposeInputProvider>
     );
   };
 

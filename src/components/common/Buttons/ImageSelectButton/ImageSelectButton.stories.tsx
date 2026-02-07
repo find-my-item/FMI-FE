@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/nextjs";
 import ImageSelectButton from "./ImageSelectButton";
 import { ComponentProps, useState } from "react";
-import { ChatRoomProvider } from "@/providers/ChatRoomProvider";
+import { ComposeInputProvider } from "@/providers/ComposeInputProvider";
 
 type ImageSelectButtonProps = ComponentProps<typeof ImageSelectButton>;
 
@@ -54,9 +54,9 @@ const ImageSelectButtonWrapper = (args: ImageSelectButtonProps) => {
   const [mockImages] = useState<File[]>(() => createMockImagesFromBase64());
 
   return (
-    <ChatRoomProvider initialImages={mockImages}>
+    <ComposeInputProvider initialImages={mockImages}>
       <ImageSelectButton {...args} />
-    </ChatRoomProvider>
+    </ComposeInputProvider>
   );
 };
 

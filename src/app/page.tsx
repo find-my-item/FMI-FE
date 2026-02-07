@@ -1,7 +1,7 @@
 "use client";
 
 import InputComment from "@/components/common/Input/InputComment/InputComment";
-import { ChatRoomProvider } from "@/providers/ChatRoomProvider";
+import { ComposeInputProvider } from "@/providers/ComposeInputProvider";
 import { FormProvider, useForm } from "react-hook-form";
 
 const Page = () => {
@@ -23,13 +23,13 @@ const Page = () => {
         <h1 className="font-heading mb-6 text-4xl font-bold text-gray-900 dark:text-gray-100 tablet:mb-10">
           Design System Showcase
         </h1>
-        <ChatRoomProvider>
+        <ComposeInputProvider>
           <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)}>
               <InputComment name="content" />
             </form>
           </FormProvider>
-        </ChatRoomProvider>
+        </ComposeInputProvider>
         {/* Colors */}
         <section className="mb-12">
           <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-gray-100">Colors</h2>

@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import ChatRoomMain from "./ChatRoomMain";
-import { ChatRoomProvider } from "@/providers/ChatRoomProvider";
+import { ComposeInputProvider } from "@/providers/ComposeInputProvider";
 import { MOCK_CHAT_DATA } from "./constants/MOCK_CHAT_DATA";
 
 const meta: Meta<typeof ChatRoomMain> = {
@@ -30,16 +30,16 @@ type Story = StoryObj<typeof ChatRoomMain>;
 
 export const Default: Story = {
   render: () => (
-    <ChatRoomProvider initialChats={MOCK_CHAT_DATA}>
+    <ComposeInputProvider initialChats={MOCK_CHAT_DATA}>
       <ChatRoomMain />
-    </ChatRoomProvider>
+    </ComposeInputProvider>
   ),
 };
 
 export const Empty: Story = {
   render: () => (
-    <ChatRoomProvider initialChats={[]}>
+    <ComposeInputProvider initialChats={[]}>
       <ChatRoomMain />
-    </ChatRoomProvider>
+    </ComposeInputProvider>
   ),
 };

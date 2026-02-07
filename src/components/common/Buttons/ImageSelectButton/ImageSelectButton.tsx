@@ -5,7 +5,7 @@ import { cn } from "@/utils";
 import Image from "next/image";
 import { handleClick } from "./_utils/handleClick";
 import { getImageButtonState } from "./_utils/getImageButtonState";
-import { useChatRoom } from "@/providers/ChatRoomProvider";
+import { useComposeInput } from "@/providers/ComposeInputProvider";
 import { useObjectURLs } from "@/hooks";
 import Icon from "../../Icon/Icon";
 import { appendImageFilesFromInput } from "@/utils";
@@ -38,7 +38,7 @@ interface ToggleImageButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
 }
 
 const ToggleImageButton = ({ ariaLabel }: ToggleImageButtonProps) => {
-  const { images, setImages, selectedImages, setSelectedImages } = useChatRoom();
+  const { images, setImages, selectedImages, setSelectedImages } = useComposeInput();
   const urls = useObjectURLs(images);
   const isDisabled = images.length >= 5;
 

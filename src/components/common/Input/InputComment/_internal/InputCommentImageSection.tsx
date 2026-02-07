@@ -1,10 +1,10 @@
 import Icon from "@/components/common/Icon/Icon";
 import { useDragScroll, useObjectURLs } from "@/hooks";
-import { useChatRoom } from "@/providers/ChatRoomProvider";
+import { useComposeInput } from "@/providers/ComposeInputProvider";
 import Image from "next/image";
 
 const InputCommentImageSection = () => {
-  const { images, setImages } = useChatRoom();
+  const { images, setImages } = useComposeInput();
   const urls = useObjectURLs(images);
   const { ref: scrollRef, onMouseDown } = useDragScroll();
 

@@ -3,7 +3,7 @@
 import { ChatRoomHeader, EmptyChatRoom, ChatRoomMain } from "./_components";
 import { InputChat } from "@/components/common";
 import { FormProvider, useForm } from "react-hook-form";
-import { ChatRoomProvider, useChatRoom } from "@/providers/ChatRoomProvider";
+import { ComposeInputProvider, useComposeInput } from "@/providers/ComposeInputProvider";
 import { MOCK_CHAT_DATA } from "./_components/ChatRoomMain/constants/MOCK_CHAT_DATA";
 import { use } from "react";
 
@@ -19,7 +19,7 @@ const ChatRoom = ({ postId }: { postId: number }) => {
       chatRoom: "",
     },
   });
-  const { setChats } = useChatRoom();
+  const { setChats } = useComposeInput();
   const isEmpty = false;
   const isPostMode: "find" | "lost" = "find";
 
@@ -53,9 +53,9 @@ const ChatRoom = ({ postId }: { postId: number }) => {
 const page = ({ params }: { params: Promise<{ roomId: string }> }) => {
   const { roomId } = use(params);
   return (
-    <ChatRoomProvider initialChats={[...MOCK_CHAT_DATA].reverse()}>
+    <ComposeInputProvider initialChats={[...MOCK_CHAT_DATA].reverse()}>
       <ChatRoom postId={Number(roomId)} />
-    </ChatRoomProvider>
+    </ComposeInputProvider>
   );
 };
 

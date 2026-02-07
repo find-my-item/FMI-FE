@@ -9,7 +9,7 @@ import {
   appendImageFilesFromInput,
   handleTextareaSubmitKeyDown,
 } from "@/utils";
-import { useChatRoom } from "@/providers/ChatRoomProvider";
+import { useComposeInput } from "@/providers/ComposeInputProvider";
 import Icon from "../../Icon/Icon";
 
 /**
@@ -47,7 +47,7 @@ interface InputChatProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 const InputChat = ({ name, validation, disabled, ...props }: InputChatProps) => {
   const { control } = useFormContext();
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
-  const { images, setImages } = useChatRoom();
+  const { images, setImages } = useComposeInput();
 
   return (
     <>

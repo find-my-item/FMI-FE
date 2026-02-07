@@ -2,10 +2,10 @@
 
 import { Icon, ImageSelectButton } from "@/components/common";
 import { handleSendImage } from "../utils/handleSendImage";
-import { useChatRoom } from "@/providers/ChatRoomProvider";
+import { useComposeInput } from "@/providers/ComposeInputProvider";
 
 const InputChatImageSection = () => {
-  const { setChats, images, setImages, selectedImages, setSelectedImages } = useChatRoom();
+  const { setChats, images, setImages, selectedImages, setSelectedImages } = useComposeInput();
 
   return (
     <>

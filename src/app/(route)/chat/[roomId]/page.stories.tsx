@@ -1,11 +1,11 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import page from "./page";
-import { ChatRoomProvider } from "@/providers/ChatRoomProvider";
+import { ComposeInputProvider } from "@/providers/ComposeInputProvider";
 import { MOCK_CHAT_DATA } from "./_components/ChatRoomMain/constants/MOCK_CHAT_DATA";
 import { ChatRoomHeader, EmptyChatRoom, ChatRoomMain } from "./_components";
 import { InputChat } from "@/components/common";
 import { FormProvider, useForm } from "react-hook-form";
-import { useChatRoom } from "@/providers/ChatRoomProvider";
+import { useComposeInput } from "@/providers/ComposeInputProvider";
 
 interface ChatFormValues {
   chatRoom: string;
@@ -25,7 +25,7 @@ const ChatRoom = ({
       chatRoom: "",
     },
   });
-  const { setChats } = useChatRoom();
+  const { setChats } = useComposeInput();
 
   const onSubmit = ({ chatRoom }: ChatFormValues) => {
     if (chatRoom.trim() === "") return;
@@ -85,17 +85,17 @@ type Story = StoryObj<typeof page>;
 
 export const Default: Story = {
   render: () => (
-    <ChatRoomProvider initialChats={[...MOCK_CHAT_DATA].reverse()}>
+    <ComposeInputProvider initialChats={[...MOCK_CHAT_DATA].reverse()}>
       <ChatRoom isEmpty={false} postMode="find" />
-    </ChatRoomProvider>
+    </ComposeInputProvider>
   ),
 };
 
 export const Empty: Story = {
   render: () => (
-    <ChatRoomProvider initialChats={[]}>
+    <ComposeInputProvider initialChats={[]}>
       <ChatRoom isEmpty={true} postMode="find" />
-    </ChatRoomProvider>
+    </ComposeInputProvider>
   ),
   parameters: {
     docs: {
@@ -108,9 +108,9 @@ export const Empty: Story = {
 
 export const LostMode: Story = {
   render: () => (
-    <ChatRoomProvider initialChats={[...MOCK_CHAT_DATA].reverse()}>
+    <ComposeInputProvider initialChats={[...MOCK_CHAT_DATA].reverse()}>
       <ChatRoom isEmpty={false} postMode="lost" />
-    </ChatRoomProvider>
+    </ComposeInputProvider>
   ),
   parameters: {
     docs: {
@@ -123,9 +123,9 @@ export const LostMode: Story = {
 
 export const EmptyLostMode: Story = {
   render: () => (
-    <ChatRoomProvider initialChats={[]}>
+    <ComposeInputProvider initialChats={[]}>
       <ChatRoom isEmpty={true} postMode="lost" />
-    </ChatRoomProvider>
+    </ComposeInputProvider>
   ),
   parameters: {
     docs: {

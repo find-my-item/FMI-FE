@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import ChatRoomMain from "./ChatRoomMain";
-import { ChatRoomProvider } from "@/providers/ChatRoomProvider";
+import { ComposeInputProvider } from "@/providers/ComposeInputProvider";
 import { MockChatDataType } from "@/app/(route)/chat/_types/MockChatDataType";
 
 jest.mock("./useChatScroll", () => ({
@@ -26,9 +26,9 @@ jest.mock("./internal", () => ({
 
 const renderWithProvider = (initialChats: MockChatDataType[] = []) => {
   return render(
-    <ChatRoomProvider initialChats={initialChats}>
+    <ComposeInputProvider initialChats={initialChats}>
       <ChatRoomMain />
-    </ChatRoomProvider>
+    </ComposeInputProvider>
   );
 };
 

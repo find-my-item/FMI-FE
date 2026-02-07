@@ -1,4 +1,4 @@
-import { useChatRoom } from "@/providers/ChatRoomProvider";
+import { useComposeInput } from "@/providers/ComposeInputProvider";
 import { ChangeEvent, TextareaHTMLAttributes, useRef } from "react";
 import { Controller, RegisterOptions, useFormContext } from "react-hook-form";
 import Icon from "../../Icon/Icon";
@@ -19,7 +19,7 @@ interface InputChatProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 const InputComment = ({ name, validation, disabled, ...props }: InputChatProps) => {
   const { control } = useFormContext();
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
-  const { images, setImages } = useChatRoom();
+  const { images, setImages } = useComposeInput();
 
   return (
     <>

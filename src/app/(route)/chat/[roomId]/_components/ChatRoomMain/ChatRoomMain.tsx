@@ -1,12 +1,12 @@
 "use client";
 
 import { ChatBox } from "./internal";
-import { useChatRoom } from "@/providers/ChatRoomProvider";
+import { useComposeInput } from "@/providers/ComposeInputProvider";
 import { useRef } from "react";
 import useChatScroll from "./useChatScroll";
 
 const ChatRoomMain = () => {
-  const { chats } = useChatRoom();
+  const { chats } = useComposeInput();
   const scrollRef = useRef<HTMLDivElement>(null);
   useChatScroll(scrollRef, chats);
 
