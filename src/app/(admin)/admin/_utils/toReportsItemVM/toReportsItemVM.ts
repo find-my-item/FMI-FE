@@ -1,4 +1,4 @@
-import { AdminInquiryItem, AdminReportItem } from "@/api/fetch/admin";
+import { AdminGuestInquiryItem, AdminInquiryItem, AdminReportItem } from "@/api/fetch/admin";
 import { AdminReportsItemData } from "../../_types";
 import {
   ProcessStatusBadgeConfig,
@@ -44,5 +44,18 @@ export const toInquiryItemVM = (item: AdminInquiryItem): AdminReportsItemData =>
     processStatus: ProcessStatusBadgeConfig[item.status],
 
     answerStatus: ReplyStatusBadgeConfig.ANSWERED, // TODO(지권): 백엔드 API 누락
+  };
+};
+
+export const toGuestInquiryItemVM = (item: AdminGuestInquiryItem): AdminReportsItemData => {
+  return {
+    href: `/admin/guest-inquiries/${item.inquiryId}`,
+    title: item.title,
+    content: item.reason,
+    nickname: item.userEmail,
+    createdAt: item.createdAt,
+
+    processStatus: ProcessStatusBadgeConfig[item.status],
+    answerStatus: ReplyStatusBadgeConfig.UNANSWERED, // TODO(지권): 백엔드 API 누락
   };
 };

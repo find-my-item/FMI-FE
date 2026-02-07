@@ -6,8 +6,8 @@ import PostDetailTopHeader from "../PostDetailTopHeader/PostDetailTopHeader";
 import SimilarItemsSection from "../SimilarItemsSection/SimilarItemsSection";
 import CommentForm from "../CommentForm/CommentForm";
 import { useGetDetailPost } from "@/api/fetch/post/api/useGetDetailPost";
-import { commentListObject } from "@/app/(route)/notice/_constant/commentListObject";
 import { useGetUserData } from "@/api/fetch/user";
+import { MOCK_COMMENT_LIST_DATA } from "@/mock/data";
 
 interface ClientDetailProps {
   id: number;
@@ -26,7 +26,7 @@ const ClientDetail = ({ id }: ClientDetailProps) => {
     <>
       <PostDetailTopHeader postId={id} />
       <PostDetail type="find" data={data.result} />
-      <CommentList comments={commentListObject} />
+      <CommentList comments={MOCK_COMMENT_LIST_DATA} />
       <SimilarItemsSection />
       <CommentForm />
     </>
