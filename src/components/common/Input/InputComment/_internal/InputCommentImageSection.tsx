@@ -1,4 +1,4 @@
-import Icon from "@/components/common/Icon/Icon";
+import { Icon } from "@/components/common";
 import { useDragScroll, useObjectURLs } from "@/hooks";
 import { useComposeInput } from "@/providers/ComposeInputProvider";
 import Image from "next/image";
