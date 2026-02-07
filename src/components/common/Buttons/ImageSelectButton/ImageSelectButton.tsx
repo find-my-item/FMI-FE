@@ -1,14 +1,12 @@
 "use client";
 
 import { ButtonHTMLAttributes } from "react";
-import { cn } from "@/utils";
 import Image from "next/image";
-import { handleClick } from "./_utils/handleClick";
-import { getImageButtonState } from "./_utils/getImageButtonState";
+import { handleClick, getImageButtonState } from "./_utils";
 import { useComposeInput } from "@/providers/ComposeInputProvider";
 import { useObjectURLs } from "@/hooks";
-import Icon from "../../Icon/Icon";
-import { mergeImageFile } from "@/utils";
+import { Icon } from "@/components/common";
+import { mergeImageFile, cn } from "@/utils";
 
 /**
  * @author hyungjun
