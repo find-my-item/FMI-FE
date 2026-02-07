@@ -1,12 +1,11 @@
 "use client";
 
 import { ChangeEvent, TextareaHTMLAttributes, useRef } from "react";
-import { cn } from "@/utils";
 import { Controller, RegisterOptions, useFormContext } from "react-hook-form";
 import InputChatImageSection from "./_internal/InputChatImageSection";
-import { autoResizeTextarea, mergeImageFile, submitFormOnEnter } from "@/utils";
+import { autoResizeTextarea, mergeImageFile, submitFormOnEnter, cn } from "@/utils";
 import { useComposeInput } from "@/providers/ComposeInputProvider";
-import Icon from "../../Icon/Icon";
+import { Icon } from "@/components/common";
 
 /**
  * @author suhyeon

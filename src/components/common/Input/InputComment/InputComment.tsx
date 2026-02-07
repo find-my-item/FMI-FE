@@ -4,8 +4,7 @@ import { useComposeInput } from "@/providers/ComposeInputProvider";
 import { ChangeEvent, TextareaHTMLAttributes, useRef } from "react";
 import { Controller, RegisterOptions, useFormContext } from "react-hook-form";
 import { Icon } from "@/components/common";
-import { autoResizeTextarea, mergeImageFile, submitFormOnEnter } from "@/utils";
-import { cn } from "@/utils";
+import { autoResizeTextarea, mergeImageFile, submitFormOnEnter, cn } from "@/utils";
 import InputCommentImageSection from "./_internal/InputCommentImageSection";
 
 interface InputCommentProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
