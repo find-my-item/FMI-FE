@@ -47,9 +47,9 @@ const config: Config = {
   darkMode: "class",
   theme: {
     screens: {
-      mobile: { min: "320px", max: "390px" },
-      tablet: { min: "391px", max: "810px" },
-      pc: "811px",
+      mobile: "320px",
+      tablet: "768px",
+      pc: "1280px",
     },
     extend: {
       fill: (typedConfig.theme?.extend as any)?.fill ?? {},

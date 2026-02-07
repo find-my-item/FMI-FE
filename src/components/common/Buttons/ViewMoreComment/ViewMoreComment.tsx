@@ -1,38 +1,41 @@
 import { ButtonHTMLAttributes } from "react";
+import Icon from "../../Icon/Icon";
 
 /**
  * @author hyungjun
  *
- * 댓글 목록에서 "더보기" 버튼으로 사용되는 컴포넌트입니다.
- * 버튼을 클릭하면 추가 댓글을 불러오는 액션을 수행할 수 있습니다.
+ * 댓글 목록에서 "더보기" 버튼으로 사용되는 컴포넌트입니다
  *
- * @param text - 버튼에 표시할 텍스트입니다.
- *
- * @param ariaLabel - 접근성을 위한 버튼 라벨 텍스트입니다. (기본값: `"댓글 더보기"`)
+ * @param count - 총 댓글 수 입니다
  *
  * @example
- * ```tsx
  * <ViewMoreComment
- *   text="댓글 더보기"
- *   onClick={handleLoadMoreComments}
+ *   count={5}
+ *   onClick={() => {}}
  * />
- * ```
  */
 
-interface ViewMoreComment extends ButtonHTMLAttributes<HTMLButtonElement> {
-  text: string;
-  ariaLabel?: string;
+interface ViewMoreCommentProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  count: number;
 }
 
-const ViewMoreComment = ({ text, ariaLabel = "댓글 더보기", ...props }: ViewMoreComment) => {
+const ViewMoreComment = ({ count, ...props }: ViewMoreCommentProps) => {
+  if (count <= 0) return null;
+
   return (
-    <button
-      {...props}
-      aria-label={ariaLabel}
-      className="flex min-h-[41px] w-full text-h3-medium text-brand-subtle-default flex-center hover:text-brand-subtle-hover active:text-brand-subtle-pressed disabled:text-brand-subtle-disabled"
-    >
-      <span>{text}</span>
-    </button>
+    <div className="pb-[14px] pt-6 flex-center">
+      <button
+        type="button"
+        aria-label="댓글 더 보기"
+        className="flex items-center gap-1 px-5 py-2 text-h3-medium text-layout-header-default"
+        {...props}
+      >
+        <span>댓글</span>
+        <span>{count}개</span>
+        <span>더 보기</span>
+        <Icon name="ArrowDownSmall" size={24} />
+      </button>
+    </div>
   );
 };
 

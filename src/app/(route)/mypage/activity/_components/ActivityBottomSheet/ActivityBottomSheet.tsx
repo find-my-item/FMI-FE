@@ -1,5 +1,6 @@
 import { ACTIVITY_OPTIONS } from "../../_constants/ACTIVITY_OPTIONS";
-import { BottomSheetModeType, DateRangeBottomSheet, SelectBottomSheet } from "../../../_internal";
+import { BottomSheetModeType, SelectBottomSheet } from "../../../_internal";
+import { DateRangeBottomSheet } from "@/components/domain";
 
 interface ActivityBottomSheetProps {
   mode: BottomSheetModeType | null;
