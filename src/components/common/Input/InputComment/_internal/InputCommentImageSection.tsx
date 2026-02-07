@@ -1,12 +1,12 @@
 import { Icon } from "@/components/common";
-import { useDragScroll, useObjectURLs } from "@/hooks";
+import { useHorizontalDragScroll, useObjectURLs } from "@/hooks";
 import { useComposeInput } from "@/providers/ComposeInputProvider";
 import Image from "next/image";
 
 const InputCommentImageSection = () => {
   const { images, setImages } = useComposeInput();
   const urls = useObjectURLs(images);
-  const { ref: scrollRef, onMouseDown } = useDragScroll();
+  const { ref: scrollRef, onMouseDown } = useHorizontalDragScroll();
 
   return (
     <div

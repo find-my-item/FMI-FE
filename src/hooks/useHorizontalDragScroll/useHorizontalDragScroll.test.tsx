@@ -1,15 +1,15 @@
 import "@testing-library/jest-dom";
 import { render, renderHook, fireEvent } from "@testing-library/react";
-import { useDragScroll } from "./useDragScroll";
+import { useHorizontalDragScroll } from "./useHorizontalDragScroll";
 
-describe("useDragScroll", () => {
+describe("useHorizontalDragScroll", () => {
   beforeEach(() => {
     document.body.style.cursor = "";
     document.body.style.userSelect = "";
   });
 
   it("ref와 onMouseDown을 반환한다", () => {
-    const { result } = renderHook(() => useDragScroll());
+    const { result } = renderHook(() => useHorizontalDragScroll());
 
     expect(result.current.ref).toBeDefined();
     expect(result.current.ref.current).toBeNull();
@@ -18,7 +18,7 @@ describe("useDragScroll", () => {
 
   it("mousedown 시 preventDefault가 호출된다", () => {
     const TestComponent = () => {
-      const { ref, onMouseDown } = useDragScroll();
+      const { ref, onMouseDown } = useHorizontalDragScroll();
       return (
         <div ref={ref} onMouseDown={onMouseDown} data-testid="scroll-area">
           content
@@ -38,7 +38,7 @@ describe("useDragScroll", () => {
 
   it("mousedown 시 document.body 스타일이 grabbing으로 설정된다", () => {
     const TestComponent = () => {
-      const { ref, onMouseDown } = useDragScroll();
+      const { ref, onMouseDown } = useHorizontalDragScroll();
       return (
         <div ref={ref} onMouseDown={onMouseDown} data-testid="scroll-area">
           content
@@ -58,7 +58,7 @@ describe("useDragScroll", () => {
   it("mousedown 시 document에 mousemove, mouseup 리스너가 등록된다", () => {
     const addSpy = jest.spyOn(document, "addEventListener");
     const TestComponent = () => {
-      const { ref, onMouseDown } = useDragScroll();
+      const { ref, onMouseDown } = useHorizontalDragScroll();
       return (
         <div ref={ref} onMouseDown={onMouseDown} data-testid="scroll-area">
           content
@@ -76,7 +76,7 @@ describe("useDragScroll", () => {
 
   it("mouseup 시 document 리스너가 제거되고 body 스타일이 복원된다", () => {
     const TestComponent = () => {
-      const { ref, onMouseDown } = useDragScroll();
+      const { ref, onMouseDown } = useHorizontalDragScroll();
       return (
         <div ref={ref} onMouseDown={onMouseDown} data-testid="scroll-area">
           content
@@ -106,7 +106,7 @@ describe("useDragScroll", () => {
 
   it("ref가 연결되지 않은 상태에서 onMouseDown 호출 시 body 스타일이 변경되지 않는다", () => {
     const TestComponent = () => {
-      const { onMouseDown } = useDragScroll();
+      const { onMouseDown } = useHorizontalDragScroll();
       return (
         <div onMouseDown={onMouseDown} data-testid="no-ref-area">
           content

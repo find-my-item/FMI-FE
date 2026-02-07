@@ -8,7 +8,7 @@ import { type MouseEvent, useCallback, useRef } from "react";
  * @returns ref - 스크롤 컨테이너에 연결할 ref
  * @returns onMouseDown - 스크롤 컨테이너에 바인딩할 mousedown 핸들러
  */
-export function useDragScroll() {
+export function useHorizontalDragScroll() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const startXRef = useRef(0);
   const scrollLeftStartRef = useRef(0);
