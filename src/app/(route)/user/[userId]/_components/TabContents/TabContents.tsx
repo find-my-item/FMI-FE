@@ -23,7 +23,7 @@ const TabContents = ({ selectedTab, data, isLoading }: TabContentsProps) => {
           (data.posts.length === 0 ? (
             <li>
               <EmptyState
-                icon={{ iconName: "UserEmptyPost", iconSize: 70 }}
+                icon={{ iconName: "NoPosts", iconSize: 70 }}
                 title="아직 작성한 게시글이 없어요"
                 description={"아직 작성한 게시글이 없습니다.\n지금 바로 글을 남겨보세요!"}
               />
@@ -38,7 +38,7 @@ const TabContents = ({ selectedTab, data, isLoading }: TabContentsProps) => {
           (data.comments.length === 0 ? (
             <li>
               <EmptyState
-                icon={{ iconName: "UserEmptyComment", iconSize: 70 }}
+                icon={{ iconName: "NoComments", iconSize: 70 }}
                 title="아직 작성한 댓글이 없어요"
                 description={"아직 작성한 댓글이 없습니다.\n지금 바로 댓글을 남겨보세요!"}
               />
@@ -51,7 +51,7 @@ const TabContents = ({ selectedTab, data, isLoading }: TabContentsProps) => {
           (data.favorites.length === 0 ? (
             <li>
               <EmptyState
-                icon={{ iconName: "UserEmptyFavorite", iconSize: 70 }}
+                icon={{ iconName: "EmptyFavorite", iconSize: 70 }}
                 title="아직 즐겨찾기한 게시글이 없어요"
                 description={
                   "아직 즐겨찾기한 게시글이 없습니다.\n나중에 다시 보고 싶은 게시글을 모아보세요!"
