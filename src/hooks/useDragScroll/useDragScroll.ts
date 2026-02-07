@@ -22,6 +22,8 @@ export function useDragScroll() {
   const handleMouseUp = useCallback(() => {
     document.removeEventListener("mousemove", handleMouseMove);
     document.removeEventListener("mouseup", handleMouseUp);
+    document.body.style.cursor = "";
+    document.body.style.userSelect = "";
   }, [handleMouseMove]);
 
   const onMouseDown = useCallback(
@@ -30,6 +32,8 @@ export function useDragScroll() {
       e.preventDefault();
       startXRef.current = e.pageX;
       scrollLeftStartRef.current = scrollRef.current.scrollLeft;
+      document.body.style.cursor = "grabbing";
+      document.body.style.userSelect = "none";
       document.addEventListener("mousemove", handleMouseMove);
       document.addEventListener("mouseup", handleMouseUp);
     },
