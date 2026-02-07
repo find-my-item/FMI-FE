@@ -1,6 +1,7 @@
-import { useCallback, useRef } from "react";
+import { type MouseEvent, useCallback, useRef } from "react";
 
 /**
+ * @author hyungjun
  * 가로 스크롤 가능한 요소에 드래그로 스크롤하는 동작을 부여하는 훅입니다.
  * 반환된 ref를 스크롤 컨테이너에 연결하고, onMouseDown을 해당 요소에 전달하면 됩니다.
  *
@@ -12,7 +13,7 @@ export function useDragScroll() {
   const startXRef = useRef(0);
   const scrollLeftStartRef = useRef(0);
 
-  const handleMouseMove = useCallback((e: MouseEvent) => {
+  const handleMouseMove = useCallback((e: DocumentEventMap["mousemove"]) => {
     if (!scrollRef.current) return;
     const dx = e.pageX - startXRef.current;
     scrollRef.current.scrollLeft = scrollLeftStartRef.current - dx;
@@ -26,7 +27,7 @@ export function useDragScroll() {
   }, [handleMouseMove]);
 
   const onMouseDown = useCallback(
-    (e: React.MouseEvent) => {
+    (e: MouseEvent<HTMLDivElement>) => {
       if (!scrollRef.current) return;
       e.preventDefault();
       startXRef.current = e.pageX;
