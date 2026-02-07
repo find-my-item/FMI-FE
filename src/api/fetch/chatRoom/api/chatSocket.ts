@@ -44,7 +44,7 @@ const reconnectChatSocket = async () => {
       client = null;
     }
 
-    // 🔑 상황 1 해결: 웹소켓이 끊겼을 때 토큰 재발급 시도
+    // 상황 1 해결: 웹소켓이 끊겼을 때 토큰 재발급 시도
     // 토큰이 만료되었을 가능성이 있으므로 재발급 시도
     try {
       await authApi.post("/auth/refresh");
@@ -85,11 +85,11 @@ export const connectChatSocket = () => {
       console.log("[STOMP] connected");
       isReconnecting = false;
 
-      // 🔑 연결 완료 후 대기 중이던 구독 처리
+      // 연결 완료 후 대기 중이던 구독 처리
       pendingSubscriptions.forEach((subscribe) => subscribe());
       pendingSubscriptions = [];
 
-      // 🔑 백업된 구독 정보 복원
+      // 백업된 구독 정보 복원
       savedSubscriptions.forEach((handlerSet, destination) => {
         handlerSet.forEach((handler) => {
           subscribeChatSocket(destination, handler);
@@ -113,7 +113,7 @@ export const connectChatSocket = () => {
 
     onDisconnect: () => {
       console.log("[STOMP] disconnected");
-      // 🔑 상황 1 해결: 연결이 끊겼을 때 재연결 시도
+      // 상황 1 해결: 연결이 끊겼을 때 재연결 시도
       // 타임스탬프 기반 쓰로틀로 연속 재연결 방지 (타이머 대신)
       if (client && !client.connected && handlers.size > 0) {
         const now = Date.now();
@@ -124,14 +124,14 @@ export const connectChatSocket = () => {
     },
 
     onWebSocketError: () => {
-      // 🔑 상황 1 해결: 웹소켓 에러 발생 시 재연결 시도
+      // 상황 1 해결: 웹소켓 에러 발생 시 재연결 시도
       if (client && !client.connected && handlers.size > 0) {
         reconnectChatSocket();
       }
     },
   });
 
-  // 🔑 상황 2 해결: 토큰 재발급 이벤트 리스닝
+  // 상황 2 해결: 토큰 재발급 이벤트 리스닝
   if (typeof window !== "undefined") {
     // 기존 핸들러가 있으면 제거
     if (tokenRefreshHandler) {

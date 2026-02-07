@@ -28,7 +28,7 @@ authApi.interceptors.response.use(
       try {
         await authApi.post("/auth/refresh");
 
-        // 🔑 토큰 재발급 성공 시 커스텀 이벤트 발생
+        // 토큰 재발급 성공 시 커스텀 이벤트 발생
         if (typeof window !== "undefined") {
           window.dispatchEvent(new CustomEvent("tokenRefreshed"));
         }
