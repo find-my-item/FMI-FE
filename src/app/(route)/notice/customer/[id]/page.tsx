@@ -1,7 +1,7 @@
 import { customerListObject } from "../../_constant/customerListObject";
 import { CommentForm, PostDetail } from "@/app/(route)/list/[id]/_components";
 import { CommentList } from "@/components/domain";
-import { commentListObject } from "../../_constant/commentListObject";
+import { MOCK_COMMENT_LIST_DATA } from "@/mock/data";
 
 interface CustomerDetailProps {
   params: Promise<{ id: string }>;
@@ -16,7 +16,7 @@ const CustomerDetail = async ({ params }: CustomerDetailProps) => {
   return (
     <>
       <PostDetail data={customerItem} type="customer" />
-      <CommentList comments={commentListObject} />
+      <CommentList comments={MOCK_COMMENT_LIST_DATA} />
       <CommentForm />
     </>
   );

@@ -1,11 +1,11 @@
 import { useFormContext, useWatch } from "react-hook-form";
 import { useToast } from "@/context/ToastContext";
 import { useEffect, useMemo, useState } from "react";
-import { useErrorToast } from "@/hooks";
 import { useNicknameCheck } from "./useNicknameCheck";
 import { EMAIL_ERROR_MESSAGE, EMAIL_CHECK_CODE_MESSAGE } from "../_constants/SIGNUP_ERROR_MESSAGE";
 import { throttle } from "lodash";
 import { useApiCheckCode, useApiSendEmail } from "@/api/fetch/auth";
+import { useErrorToast } from "@/hooks/domain";
 
 export const useSignUpBtnClick = () => {
   const { getValues, trigger, control } = useFormContext();
