@@ -1,20 +1,16 @@
+"use client";
+
 import { useComposeInput } from "@/providers/ComposeInputProvider";
 import { ChangeEvent, TextareaHTMLAttributes, useRef } from "react";
 import { Controller, RegisterOptions, useFormContext } from "react-hook-form";
-import Icon from "../../Icon/Icon";
+import { Icon } from "@/components/common";
 import { autoResizeTextarea, mergeImageFile, submitFormOnEnter } from "@/utils";
 import { cn } from "@/utils";
 import InputCommentImageSection from "./_internal/InputCommentImageSection";
 
-/**
- * InputComment 컴포넌트에 전달하는 props입니다.
- */
 interface InputCommentProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
-  /** react-hook-form 필드 이름 (register/Controller용) */
   name: string;
-  /** react-hook-form 유효성 검사 옵션 */
   validation?: RegisterOptions;
-  /** 이미지 첨부, 입력창, 전송 버튼 일괄 비활성화 */
   disabled?: boolean;
 }
 
