@@ -184,7 +184,6 @@ export const subscribeChatSocket = <T>(destination: string, handler: MessageHand
     }
 
     const sub = client.subscribe(destination, (message: IMessage) => {
-      console.log(`[STOMP] Received message on ${destination}:`, message.body);
       try {
         const parsed = JSON.parse(message.body);
         handlers.get(destination)?.forEach((h) => h(parsed));
@@ -194,7 +193,6 @@ export const subscribeChatSocket = <T>(destination: string, handler: MessageHand
     });
 
     subscriptions.set(destination, sub);
-    console.log(`[STOMP] Subscribed to ${destination}`);
   };
 
   // 아직 연결 안 됐으면 대기열에 저장
@@ -218,7 +216,6 @@ export const unsubscribeChatSocket = (destination: string, handler?: MessageHand
         subscriptions.delete(destination);
         handlers.delete(destination);
         savedSubscriptions.delete(destination);
-        console.log(`[STOMP] Unsubscribed from ${destination}`);
       }
     }
   } else {
@@ -228,7 +225,6 @@ export const unsubscribeChatSocket = (destination: string, handler?: MessageHand
       subscriptions.delete(destination);
       handlers.delete(destination);
       savedSubscriptions.delete(destination);
-      console.log(`[STOMP] Unsubscribed from ${destination}`);
     }
   }
 };
