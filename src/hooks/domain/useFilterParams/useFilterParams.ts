@@ -1,14 +1,17 @@
 "use client";
 
+// TODO(지권): TsDoc 주석 작성
+
 import { useSearchParams } from "next/navigation";
 import { normalizeEnumValue } from "@/utils";
 import {
   CategoryFilterValue,
+  FindStatusFilterValue,
   SortFilterValue,
   StatusFilterValue,
-} from "../../_components/_internal/FilterBottomSheet/types";
+} from "../../../components/domain/FilterSectionBottomSheet/_types/types";
 
-export const useListParams = () => {
+export const useFilterParams = () => {
   const searchParams = useSearchParams();
 
   return {
@@ -19,5 +22,8 @@ export const useListParams = () => {
     ),
     sort: normalizeEnumValue<SortFilterValue>(searchParams.get("sort")),
     region: searchParams.get("region"),
+    findStatus: normalizeEnumValue<Exclude<FindStatusFilterValue, undefined>>(
+      searchParams.get("findStatus")
+    ),
   };
 };

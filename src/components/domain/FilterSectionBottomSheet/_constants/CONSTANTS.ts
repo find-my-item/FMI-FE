@@ -23,8 +23,14 @@ export const sort = [
   { label: "조회수 많은 순", value: "MOST_VIEWED" },
 ] as const;
 
-export const status = [
+export const findStatus = [
   { label: "전체", value: undefined },
   { label: "찾는중", value: "SEARCHING" },
   { label: "찾았음", value: "FOUND" },
+] as const;
+
+export const status = [
+  { label: "전체", value: undefined },
+  { label: "분실", value: "LOST" },
+  { label: "습득", value: "FOUND" },
 ] as const;

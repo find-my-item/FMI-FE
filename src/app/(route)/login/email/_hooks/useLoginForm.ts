@@ -1,5 +1,4 @@
 import useApiEmailLogin from "@/api/fetch/auth/api/useApiEmailLogin";
-import { useErrorToast } from "@/hooks";
 import { deleteCookie, getCookie, setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -7,6 +6,7 @@ import { useFormContext } from "react-hook-form";
 import { EMAIL_LOGIN_ERROR_MESSAGE } from "../_constants/EMAIL_LOGIN_ERROR_MESSAGE";
 import { useToast } from "@/context/ToastContext";
 import { LoginFormType } from "../_types/LoginFormType";
+import { useErrorToast } from "@/hooks/domain";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 

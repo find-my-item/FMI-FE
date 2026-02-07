@@ -1,20 +1,63 @@
+"use client";
+
 import { Dispatch, SetStateAction } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/utils";
+import {
+  CategoryFilterValue,
+  FilterTab,
+  FindStatusFilterValue,
+  SortFilterValue,
+  StatusFilterValue,
+  tabsType,
+} from "../_types/types";
+import { categories, sort, status, findStatus } from "../_constants/CONSTANTS";
+import { applyFiltersToUrl } from "../utils/applyFiltersToUrl";
+import { FiltersStateType } from "../_types/filtersStateType";
+import { TABS } from "../_constants/TABS";
+import PopupLayout from "../../PopupLayout/PopupLayout";
 import { Button, Icon } from "@/components/common";
-import { PopupLayout } from "@/components/domain";
-import { CategoryFilterValue, FilterTab, SortFilterValue, StatusFilterValue } from "./types";
-import { tabs, categories, sort, status } from "./CONSTANTS";
-import { applyFiltersToUrl } from "./applyFiltersToUrl";
-import { FiltersState } from "../FilterSection/filtersStateType";
+
+/**
+ * @author jikwon (Original)
+ * @author suhyeon (Refactored)
+ *
+ * 필터 옵션을 선택하고 적용하는 바텀시트 컴포넌트입니다.
+ *
+ * 지역 검색, 카테고리, 정렬, 상태(분류/찾음여부) 등 다양한 필터링 기능을 탭 인터페이스로 제공합니다.
+ * `pageType`에 따라 상단에 노출되는 탭의 종류와 순서가 동적으로 변경됩니다.
+ * '적용하기' 버튼 클릭 시 선택된 필터값들을 URL 쿼리 파라미터로 변환하여 페이지를 이동(replace)시킵니다.
+ *
+ * @param isOpen - 바텀시트의 노출 여부
+ * @param setIsOpen - 바텀시트 열림/닫힘 상태를 제어하는 함수
+ * @param selectedTab - 현재 활성화된 필터 탭 (region, category, sort 등)
+ * @param setSelectedTab - 활성화된 탭을 변경하는 함수
+ * @param filters - 현재 선택된 필터 값들의 상태 객체
+ * @param setFilters - 필터 상태 객체를 업데이트하는 Dispatch 함수
+ * @param pageType - 페이지 유형에 따른 탭 구성을 결정하는 타입 ('LIST' | 'MY_POSTS' | 'MY_FAVORITES')
+ *
+ * @example
+ * ```tsx
+ * <FilterBottomSheet
+ * isOpen={isFilterOpen}
+ * setIsOpen={setIsFilterOpen}
+ * selectedTab={selectedTab}
+ * setSelectedTab={setSelectedTab}
+ * filters={filters}
+ * setFilters={setFilters}
+ * pageType="LIST"
+ * />
+ * ```
+ */
 
 interface FilterBottomSheetProps {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
   selectedTab: FilterTab;
   setSelectedTab: (tab: FilterTab) => void;
-  filters: FiltersState;
-  setFilters: Dispatch<SetStateAction<FiltersState>>;
+  filters: FiltersStateType;
+  setFilters: Dispatch<SetStateAction<FiltersStateType>>;
+  pageType?: tabsType;
 }
 
 const FilterBottomSheet = ({
@@ -24,6 +67,7 @@ const FilterBottomSheet = ({
   setSelectedTab,
   filters,
   setFilters,
+  pageType = "LIST",
 }: FilterBottomSheetProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -39,13 +83,15 @@ const FilterBottomSheet = ({
     setIsOpen(false);
   };
 
+  const currentTabs = TABS[pageType];
+
   return (
     <PopupLayout isOpen={isOpen} onClose={() => setIsOpen(false)} className="min-h-[530px] py-10">
       <div className="w-full gap-6 flex-col-center">
         <h2 className="text-h2-medium text-layout-header-default">필터</h2>
 
         <section role="tablist" className="w-full flex-center">
-          {tabs.map((tab) => {
+          {currentTabs.map((tab) => {
             const isSelected = selectedTab === tab.value;
 
             return (
@@ -68,6 +114,7 @@ const FilterBottomSheet = ({
           })}
         </section>
 
+        {/* 지역선택 */}
         {selectedTab === "region" && (
           <div className="relative w-full">
             <Icon
@@ -92,6 +139,7 @@ const FilterBottomSheet = ({
           </div>
         )}
 
+        {/* 카테고리 선택 */}
         {selectedTab === "category" && (
           <div role="radiogroup" aria-label="카테고리 선택" className="flex w-full flex-wrap gap-2">
             {categories.map((category) => (
@@ -106,6 +154,7 @@ const FilterBottomSheet = ({
           </div>
         )}
 
+        {/* 정렬 선택 - 최신순, 오래된순 ... */}
         {selectedTab === "sort" && (
           <div
             role="radiogroup"
@@ -124,8 +173,34 @@ const FilterBottomSheet = ({
           </div>
         )}
 
+        {/* 찾음 여부 상태 */}
+        {selectedTab === "findStatus" && (
+          <div
+            role="radiogroup"
+            aria-label="찾음 상태 선택"
+            className="flex w-full flex-wrap gap-2"
+          >
+            {findStatus.map((findStatusItem, index) => (
+              <ChipButton
+                key={index}
+                label={findStatusItem.label}
+                value={findStatusItem.value}
+                selected={filters.status === findStatusItem.value}
+                onSelect={() =>
+                  setFilters((prev) => ({ ...prev, findStatus: findStatusItem.value }))
+                }
+              />
+            ))}
+          </div>
+        )}
+
+        {/* 분류 상태 */}
         {selectedTab === "status" && (
-          <div role="radiogroup" aria-label="상태 선택" className="flex w-full flex-wrap gap-2">
+          <div
+            role="radiogroup"
+            aria-label="분류 상태 선택"
+            className="flex w-full flex-wrap gap-2"
+          >
             {status.map((statusItem, index) => (
               <ChipButton
                 key={index}
@@ -150,7 +225,7 @@ const FilterBottomSheet = ({
 
 export default FilterBottomSheet;
 
-type ChipValue = SortFilterValue | CategoryFilterValue | StatusFilterValue;
+type ChipValue = SortFilterValue | CategoryFilterValue | StatusFilterValue | FindStatusFilterValue;
 
 const ChipButton = ({
   label,

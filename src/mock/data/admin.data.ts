@@ -165,7 +165,6 @@ export const MOCK_COMMENT_DATA = [
   },
 ];
 
-
 export const MOCK_WITHDRAW_REASON_LIST: WithdrawReasonItem[] = [
   {
     id: 1,
