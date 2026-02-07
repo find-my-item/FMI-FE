@@ -4,11 +4,7 @@ import { ChangeEvent, TextareaHTMLAttributes, useRef } from "react";
 import { cn } from "@/utils";
 import { Controller, RegisterOptions, useFormContext } from "react-hook-form";
 import InputChatImageSection from "./_internal/InputChatImageSection";
-import {
-  adjustTextareaHeight,
-  appendImageFilesFromInput,
-  handleTextareaSubmitKeyDown,
-} from "@/utils";
+import { autoResizeTextarea, mergeImageFile, submitFormOnEnter } from "@/utils";
 import { useComposeInput } from "@/providers/ComposeInputProvider";
 import Icon from "../../Icon/Icon";
 
@@ -80,7 +76,7 @@ const InputChat = ({ name, validation, disabled, ...props }: InputChatProps) => 
                 multiple
                 className="hidden"
                 disabled={disabled}
-                onChange={(e) => appendImageFilesFromInput(e, images, setImages)}
+                onChange={(e) => mergeImageFile(e, images, setImages)}
               />
 
               {/* 입력창 */}
@@ -94,9 +90,9 @@ const InputChat = ({ name, validation, disabled, ...props }: InputChatProps) => 
                 rows={1}
                 onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
                   field.onChange(e);
-                  adjustTextareaHeight(e.target);
+                  autoResizeTextarea(e.target);
                 }}
-                onKeyDown={(e) => handleTextareaSubmitKeyDown(e, textareaRef)}
+                onKeyDown={(e) => submitFormOnEnter(e, textareaRef)}
                 className={cn(
                   "max-h-[120px] min-h-11 min-w-0 flex-1 resize-none overflow-y-hidden rounded-[24px] px-4 py-[10px] text-body2-medium text-neutral-normal-placeholder bg-fill-neutral-strong-default hover:placeholder-black focus:text-black disabled:text-neutral-strong-disabled",
                   field.value && "text-neutral-strong-focused"

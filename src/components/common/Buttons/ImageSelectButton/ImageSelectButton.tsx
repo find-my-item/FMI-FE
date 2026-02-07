@@ -8,7 +8,7 @@ import { getImageButtonState } from "./_utils/getImageButtonState";
 import { useComposeInput } from "@/providers/ComposeInputProvider";
 import { useObjectURLs } from "@/hooks";
 import Icon from "../../Icon/Icon";
-import { appendImageFilesFromInput } from "@/utils";
+import { mergeImageFile } from "@/utils";
 
 /**
  * @author hyungjun
@@ -67,7 +67,7 @@ const ToggleImageButton = ({ ariaLabel }: ToggleImageButtonProps) => {
         multiple
         className="hidden"
         disabled={isDisabled}
-        onChange={(e) => appendImageFilesFromInput(e, images, setImages)}
+        onChange={(e) => mergeImageFile(e, images, setImages)}
       />
 
       {urls.map((src, index) => {

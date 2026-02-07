@@ -2,11 +2,7 @@ import { useComposeInput } from "@/providers/ComposeInputProvider";
 import { ChangeEvent, TextareaHTMLAttributes, useRef } from "react";
 import { Controller, RegisterOptions, useFormContext } from "react-hook-form";
 import Icon from "../../Icon/Icon";
-import {
-  adjustTextareaHeight,
-  appendImageFilesFromInput,
-  handleTextareaSubmitKeyDown,
-} from "@/utils";
+import { autoResizeTextarea, mergeImageFile, submitFormOnEnter } from "@/utils";
 import { cn } from "@/utils";
 import InputCommentImageSection from "./_internal/InputCommentImageSection";
 
@@ -75,7 +71,7 @@ const InputComment = ({ name, validation, disabled, ...props }: InputCommentProp
               multiple
               className="hidden"
               disabled={disabled}
-              onChange={(e) => appendImageFilesFromInput(e, images, setImages)}
+              onChange={(e) => mergeImageFile(e, images, setImages)}
             />
 
             <textarea
@@ -88,9 +84,9 @@ const InputComment = ({ name, validation, disabled, ...props }: InputCommentProp
               rows={1}
               onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
                 field.onChange(e);
-                adjustTextareaHeight(e.target);
+                autoResizeTextarea(e.target);
               }}
-              onKeyDown={(e) => handleTextareaSubmitKeyDown(e, textareaRef)}
+              onKeyDown={(e) => submitFormOnEnter(e, textareaRef)}
               className={cn(
                 "max-h-[120px] min-h-11 min-w-0 flex-1 resize-none overflow-y-hidden rounded-[24px] px-4 py-[10px] text-body2-medium text-neutral-normal-placeholder bg-fill-neutral-strong-default",
                 "hover:placeholder-black focus:text-black disabled:text-neutral-strong-disabled",

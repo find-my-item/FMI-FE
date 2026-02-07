@@ -1,5 +1,5 @@
-export { adjustTextareaHeight } from "./adjustTextareaHeight/adjustTextareaHeight";
-export { appendImageFilesFromInput } from "./appendImageFilesFromInput/appendImageFilesFromInput";
+export { autoResizeTextarea } from "./autoResizeTextarea/autoResizeTextarea";
+export { mergeImageFile } from "./mergeImageFile/mergeImageFile";
 export { cn } from "./cn/cn";
 export { formatCappedNumber } from "./formatCappedNumber/formatCappedNumber";
 export { default as formatDate } from "./formatDate/formatDate";
@@ -11,4 +11,4 @@ export { getMapLevelByRadius } from "./getMapLevelByRadius/getMapLevelByRadius";
 export { normalizeEnumValue } from "./normalizeEnumValue/normalizeEnumValue";
 export { getRegionSearchResults } from "./getRegionSearchResults/getRegionSearchResults";
 export { formatViewCount } from "./formatViewCount/formatViewCount";
-export { handleTextareaSubmitKeyDown } from "./handleTextareaSubmitKeyDown/handleTextareaSubmitKeyDown";
+export { submitFormOnEnter } from "./submitFormOnEnter/submitFormOnEnter";
