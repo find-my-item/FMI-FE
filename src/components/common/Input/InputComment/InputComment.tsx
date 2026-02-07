@@ -2,9 +2,11 @@ import { useChatRoom } from "@/providers/ChatRoomProvider";
 import { ChangeEvent, TextareaHTMLAttributes, useRef } from "react";
 import { Controller, RegisterOptions, useFormContext } from "react-hook-form";
 import Icon from "../../Icon/Icon";
-import { handleFileChange } from "../InputChat/utils/handleFileChange";
-import { adjustHeight } from "../InputChat/utils/adjustHeight";
-import { handleKeyDown } from "../InputChat/utils/handleKeydown";
+import {
+  adjustTextareaHeight,
+  appendImageFilesFromInput,
+  handleTextareaSubmitKeyDown,
+} from "@/utils";
 import { cn } from "@/utils";
 import InputCommentImageSection from "./_internal/InputCommentImageSection";
 
@@ -48,7 +50,7 @@ const InputComment = ({ name, validation, disabled, ...props }: InputChatProps) 
               multiple
               className="hidden"
               disabled={disabled}
-              onChange={(e) => handleFileChange(e, images, setImages)}
+              onChange={(e) => appendImageFilesFromInput(e, images, setImages)}
             />
 
             {/* 입력창 */}
@@ -62,9 +64,9 @@ const InputComment = ({ name, validation, disabled, ...props }: InputChatProps) 
               rows={1}
               onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
                 field.onChange(e);
-                adjustHeight(e.target);
+                adjustTextareaHeight(e.target);
               }}
-              onKeyDown={(e) => handleKeyDown(e, textareaRef)}
+              onKeyDown={(e) => handleTextareaSubmitKeyDown(e, textareaRef)}
               className={cn(
                 "max-h-[120px] min-h-11 min-w-0 flex-1 resize-none overflow-y-hidden rounded-[24px] px-4 py-[10px] text-body2-medium text-neutral-normal-placeholder bg-fill-neutral-strong-default hover:placeholder-black focus:text-black disabled:text-neutral-strong-disabled",
                 field.value && "text-neutral-strong-focused"

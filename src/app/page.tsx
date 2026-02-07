@@ -8,7 +8,7 @@ const Page = () => {
   const shades = [100, 200, 300, 400, 500, 600, 700, 800, 900];
   const methods = useForm({
     defaultValues: {
-      comment: "",
+      content: "",
     },
   });
 
@@ -26,7 +26,7 @@ const Page = () => {
         <ChatRoomProvider>
           <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)}>
-              <InputComment name="comment" />
+              <InputComment name="content" />
             </form>
           </FormProvider>
         </ChatRoomProvider>

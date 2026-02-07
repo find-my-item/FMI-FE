@@ -8,7 +8,7 @@ import { getImageButtonState } from "./_utils/getImageButtonState";
 import { useChatRoom } from "@/providers/ChatRoomProvider";
 import { useObjectURLs } from "@/hooks";
 import Icon from "../../Icon/Icon";
-import { handleFileChange } from "../../Input/InputChat/utils/handleFileChange";
+import { appendImageFilesFromInput } from "@/utils";
 
 /**
  * @author hyungjun
@@ -67,7 +67,7 @@ const ToggleImageButton = ({ ariaLabel }: ToggleImageButtonProps) => {
         multiple
         className="hidden"
         disabled={isDisabled}
-        onChange={(e) => handleFileChange(e, images, setImages)}
+        onChange={(e) => appendImageFilesFromInput(e, images, setImages)}
       />
 
       {urls.map((src, index) => {
