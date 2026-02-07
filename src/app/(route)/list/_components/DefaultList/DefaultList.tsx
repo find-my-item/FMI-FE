@@ -3,13 +3,12 @@
 import { Suspense } from "react";
 import { useGetPosts } from "@/api/fetch/post";
 import { ErrorBoundary } from "@/app/ErrorBoundary";
-import { PostListItem, Tab } from "@/components/domain";
+import { FilterSection, PostListItem, Tab } from "@/components/domain";
 import { EmptyState, LoadingState } from "@/components/state";
 import { TABS } from "../../_constants/TABS";
-import FilterSection from "../_internal/FilterSection/FilterSection";
-import { useListParams } from "../../_hooks/useListParams/useListParams";
 import { ItemStatus } from "@/types";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll/useInfiniteScroll";
+import { useFilterParams } from "@/hooks/domain";
 
 type PostType = "LOST" | "FOUND";
 
@@ -18,7 +17,7 @@ interface DefaultListProps {
 }
 
 const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
-  const { type, region, category, sort, status } = useListParams();
+  const { type, region, category, sort, status } = useFilterParams();
   const selectedType = (type ?? "lost") as "lost" | "found";
   const postType: PostType = selectedType === "found" ? "FOUND" : "LOST";
 

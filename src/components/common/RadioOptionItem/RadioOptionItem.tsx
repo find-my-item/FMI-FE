@@ -73,7 +73,7 @@ const RadioOptionItem = ({
       />
       <span
         className={cn(
-          "relative h-4 w-4 rounded-full border border-brand-normal-enteredSelected peer-checked:border-brand-normal-enteredSelected",
+          "relative h-4 w-4 rounded-full border border-neutral-normal-default peer-checked:border-brand-normal-enteredSelected",
           "before:absolute before:inset-[3px] before:scale-0 before:rounded-full before:transition-transform before:bg-fill-brand-normal-enteredSelected",
           "peer-checked:before:scale-100"
         )}

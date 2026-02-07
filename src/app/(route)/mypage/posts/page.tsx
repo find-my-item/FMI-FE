@@ -1,8 +1,8 @@
 "use client";
 
 import { DetailHeader } from "@/components/layout";
-import { MypagePostsFilter, MypagePostsList } from "./_components";
-import { MypageSearch } from "@/components/domain";
+import { MypagePostsList } from "./_components";
+import { FilterSection, MypageSearch } from "@/components/domain";
 
 const page = () => {
   return (
@@ -12,7 +12,7 @@ const page = () => {
       <div className="w-full h-base">
         <MypageSearch />
 
-        <MypagePostsFilter />
+        <FilterSection pageType="MY_POSTS" />
 
         <MypagePostsList data={[]} />
       </div>

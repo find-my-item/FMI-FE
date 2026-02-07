@@ -13,8 +13,9 @@ export const MOCK_NOTICE_LIST: NoticeItem = {
   category: "GENERAL",
 };
 
-import { AdminInquiryItem, AdminReportItem } from "@/api/fetch/admin";
+import { AdminInquiryItem, AdminReportItem, WithdrawReasonItem } from "@/api/fetch/admin";
 import { ReplyStatus, ReportsType } from "@/types";
+import { AdminGuestInquiryItem } from "@/api/fetch/admin/types/GuestInquiriesType";
 
 export const MOCK_ADMIN_REPORT_LIST: AdminReportItem[] = [
   {
@@ -163,3 +164,52 @@ export const MOCK_COMMENT_DATA = [
     createdAt: "2025-05-06",
   },
 ];
+
+export const MOCK_WITHDRAW_REASON_LIST: WithdrawReasonItem[] = [
+  {
+    id: 1,
+    nickname: "짱구",
+    email: "zzanggu@example.com",
+    createdAt: "2026-10-20",
+    reasons: ["잘 사용하지 않아요", "서비스에 대한 신뢰도가 낮아요", "사용이 어려워요"],
+  },
+  {
+    id: 2,
+    nickname: "철수",
+    email: "chulsoo@example.com",
+    createdAt: "2026-10-19",
+    reasons: [
+      "다른 계정이 있어요",
+      "불쾌감을 주는 사용자를 만났어요",
+      "억울하게 서비스 이용이 제한됐어요",
+    ],
+  },
+  {
+    id: 3,
+    nickname: "유리",
+    email: "yuri@example.com",
+    createdAt: "2026-10-18",
+    reasons: ["기타"],
+  },
+];
+
+export const MOCK_ADMIN_GUEST_INQUIRY_LIST: AdminGuestInquiryItem = {
+  inquiryId: 1,
+  inquiryType: "PRIVATE",
+  status: "PENDING",
+  category: "ACCOUNT",
+  reason: "여기에 문의 내용이 표기됩니다.",
+  title: "광고성 링크가 반복적으로 포함된 게시글입니다.",
+  createdAt: "2025-02-01T10:15:00",
+  ip: "192.168.0.10",
+  userEmail: "[EMAIL_ADDRESS]",
+};
+
+export const MOCK_GUEST_INQUIRY_DETAIL_DATA = {
+  title: "여기에 문의 제목이 표기됩니다.",
+  userName: "asdfasdfasdfasda@naver.com",
+  createdAt: "2025-10-20",
+  content: "여기에 신고 내용이 표기됩니다.",
+  status: "RECEIVED" as ReportsType,
+  replyStatus: "ANSWERED" as ReplyStatus,
+};

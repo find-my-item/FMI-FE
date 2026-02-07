@@ -7,11 +7,11 @@ import { LIST_SEARCH_PLACEHOLDER } from "./LIST_SEARCH_PLACEHOLDER";
 import { useEffect } from "react";
 import InputSearch from "@/components/common/Input/InputSearch/InputSearch";
 
-interface ListSearch {
+interface ListSearchProps {
   searchMode: "region" | "post";
 }
 
-const ListSearch = ({ searchMode }: ListSearch) => {
+const ListSearch = ({ searchMode }: ListSearchProps) => {
   const methods = useForm({
     mode: "onChange",
     reValidateMode: "onChange",
