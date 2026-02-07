@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { UserProfileView } from "..";
 import { MOCK_USER_PROFILE } from "@/mock/data";
 
+const mockNotFound = jest.fn();
 const mockUseParams = jest.fn();
 const mockUseGetUserProfileById = jest.fn();
 const mockUseUserProfileTabQuery = jest.fn();
@@ -11,6 +12,15 @@ jest.mock("next/navigation", () => ({
   useParams: () => mockUseParams(),
 }));
 
+jest.mock("next/navigation", () => {
+  const actual = jest.requireActual("next/navigation");
+  return {
+    ...actual,
+    useParams: () => mockUseParams(),
+    notFound: () => mockNotFound(),
+  };
+});
+
 jest.mock("@/api/fetch/user", () => ({
   useGetUserProfileById: (...args: unknown[]) => mockUseGetUserProfileById(...args),
 }));
@@ -18,8 +28,6 @@ jest.mock("@/api/fetch/user", () => ({
 jest.mock("../../_hooks/useUserProfileTabQuery", () => ({
   useUserProfileTabQuery: () => mockUseUserProfileTabQuery(),
 }));
-
-jest.mock("@/app/not-found", () => () => <div>NOT_FOUND</div>);
 
 jest.mock("@/components/domain", () => ({
   Tab: ({ selected, ariaLabel }: { selected: string; ariaLabel: string }) => (
@@ -65,7 +73,7 @@ describe("UserProfileView", () => {
 
     render(<UserProfileView />);
 
-    expect(screen.getByText("NOT_FOUND")).toBeInTheDocument();
+    expect(mockNotFound).toHaveBeenCalled();
   });
 
   it("data가 있을 때 UserProfileView가 렌더링되어야 합니다", () => {

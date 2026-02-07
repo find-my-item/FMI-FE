@@ -11,10 +11,8 @@ const meta: Meta<typeof TabContents> = {
   },
   args: {
     selectedTab: "posts",
-    query: {
-      isLoading: false,
-      data: undefined,
-    },
+    isLoading: false,
+    data: undefined,
   },
   decorators: [
     (Story) => (
@@ -31,29 +29,23 @@ type Story = StoryObj<typeof meta>;
 export const Post: Story = {
   args: {
     selectedTab: "posts",
-    query: {
-      isLoading: false,
-      data: MOCK_USER_PROFILE_DATA,
-    },
+    isLoading: false,
+    data: MOCK_USER_PROFILE_DATA,
   },
 };
 
 export const Comment: Story = {
   args: {
     selectedTab: "comments",
-    query: {
-      isLoading: false,
-      data: MOCK_USER_PROFILE_DATA,
-    },
+    isLoading: false,
+    data: MOCK_USER_PROFILE_DATA,
   },
 };
 
 export const Favorite: Story = {
   args: {
     selectedTab: "favorites",
-    query: {
-      isLoading: false,
-      data: MOCK_USER_PROFILE_DATA,
-    },
+    isLoading: false,
+    data: MOCK_USER_PROFILE_DATA,
   },
 };
