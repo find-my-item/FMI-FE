@@ -13,7 +13,7 @@ const InputCommentImageSection = () => {
       ref={scrollRef}
       role="region"
       aria-label="댓글 이미지 목록"
-      className="mb-4 flex h-[90px] w-full cursor-grab select-none gap-5 overflow-x-auto bg-white pl-5 pt-[10px] no-scrollbar active:cursor-grabbing"
+      className="mb-4 flex h-[90px] w-full select-none gap-5 overflow-x-auto bg-white pl-5 pt-[10px] no-scrollbar"
       onMouseDown={onMouseDown}
     >
       {urls.map((url, index) => (

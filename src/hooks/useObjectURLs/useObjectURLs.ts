@@ -13,7 +13,8 @@ const useObjectURLs = (images: File[]) => {
     setUrls(newUrls);
 
     return () => {
-      newUrls.forEach((url) => URL.revokeObjectURL(url));
+      const toRevoke = [...newUrls];
+      setTimeout(() => toRevoke.forEach((url) => URL.revokeObjectURL(url)), 0);
     };
   }, [images]);
 
