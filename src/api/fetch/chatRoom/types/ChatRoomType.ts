@@ -1,3 +1,7 @@
+import { PostType } from "@/types";
+
+export type MessageType = "TEXT" | "IMAGE";
+
 export interface ChatRoom {
   roomId: number;
   contactUser: {
@@ -7,12 +11,12 @@ export interface ChatRoom {
   };
   postInfo: {
     postId: number;
-    postType: "LOST" | "FOUND";
+    postType: PostType;
     title: string;
     address: string;
     thumbnailUrl: string | null;
   };
-  messageType: "TEXT" | "IMAGE" | null;
+  messageType: MessageType | null;
   lastMessage: string | null;
   lastMessageSentAt: string | null;
   unreadCount: number;
@@ -28,14 +32,14 @@ export interface WebSocketChatMessage {
   roomId: number;
   senderId: number;
   content: string;
-  messageType: "TEXT" | "IMAGE";
+  messageType: MessageType;
   imageUrls?: string[];
   createdAt: string;
 }
 
 export interface ChatListUpdateResponse {
   roomId: number;
-  messageType: "IMAGE" | "TEXT";
+  messageType: MessageType;
   lastMessage: string | null;
   lastMessageSentAt: string;
   unreadCount: number;
@@ -52,7 +56,7 @@ export interface ChatRoomResponse {
   };
   postInfo: {
     postId: number;
-    postType: "LOST" | "FOUND";
+    postType: PostType;
     title: string;
     address: string;
     thumbnailUrl: string;
