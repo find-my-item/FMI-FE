@@ -1,7 +1,7 @@
-"use client";
-
-import { RadioOptionItem } from "@/components/common";
 import { useState } from "react";
+import DeleteAccountRadioItem from "../DeleteAccountRadioItem/DeleteAccountRadioItem";
+import { useRouter, useSearchParams } from "next/navigation";
+import { FooterButton } from "@/components/domain";
 
 const RadioConfig = [
   { value: "NOT_USING", label: "잘 사용하지 않아요" },
@@ -13,38 +13,37 @@ const RadioConfig = [
   { value: "OTHER", label: "기타" },
 ];
 
-const DeleteAccountForm = () => {
+const DeleteAccountReason = () => {
+  const router = useRouter();
+
   const [isSelected, setIsSelected] = useState<string>("");
+
+  const handleNext = () => {
+    router.push("?state=passwordConfirm");
+  };
+
   return (
-    <section>
-      <h2 className="sr-only">탈퇴 선택 영역</h2>
-      <form className="w-full gap-7 px-5 py-[30px] h-base">
+    <>
+      <div className="flex w-full flex-col gap-7 px-5 py-[30px] h-base">
         <h3 className="text-h3-semibold">탈퇴하시려는 이유를 알려주세요.</h3>
 
-        <div className="">
+        <div className="flex flex-col gap-[14px]">
           {RadioConfig.map((item) => (
-            <RadioOptionItem
+            <DeleteAccountRadioItem
               key={item.value}
               option={item}
               selected={isSelected}
               onChange={setIsSelected}
-              labelClassName="text-body1-semibold"
+              labelClassName="text-body1-semibold py-[6px] px-0"
               inputName="회원 탈퇴 사유"
             />
           ))}
         </div>
-      </form>
-    </section>
+      </div>
+
+      <FooterButton label="다음" onClick={handleNext} type="button" />
+    </>
   );
 };
 
-export default DeleteAccountForm;
-
-// 탈퇴 사유 (WithdrawalReason):
-// - `NOT_USING`: 잘 사용하지 않아요
-// - `LOW_TRUST`: 서비스에 대한 신뢰도가 낮아요
-// - `DIFFICULT_TO_USE`: 사용이 어려워요
-// - `DUPLICATE_ACCOUNT`: 다른 계정이 있어요
-// - `UNPLEASANT_USER`: 불쾌감을 주는 사용자를 만났어요
-// - `UNFAIR_RESTRICTION`: 억울하게 서비스 이용이 제한됐어요
-// - `OTHER`: 기타
+export default DeleteAccountReason;
