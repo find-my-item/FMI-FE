@@ -10,7 +10,7 @@ import {
 } from "./_internal/hooks";
 import { cn } from "@/utils";
 import { useGetUserData } from "@/api/fetch/user";
-import { enrichChatMessagesWithMetadata } from "./utils/enrichChatMessagesWithMetadata";
+import { enrichMessages } from "./utils/enrichMessages";
 import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageTypes";
 
 interface ChatRoomMainProps {
@@ -56,7 +56,7 @@ const ChatRoomMain = ({
 
   const userId = userInfo?.result.userId ? Number(userInfo.result.userId) : undefined;
 
-  const chatMessagesWithMetadata = enrichChatMessagesWithMetadata(chatMessages, userId);
+  const chatMessagesWithMetadata = enrichMessages(chatMessages, userId);
 
   return (
     <div

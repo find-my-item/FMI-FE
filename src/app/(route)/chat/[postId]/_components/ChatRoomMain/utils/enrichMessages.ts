@@ -1,14 +1,14 @@
 import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageTypes";
 import { getDateKey } from "@/utils";
 
-interface ChatMessageWithMetadata {
+export interface ChatMessageWithMetadata {
   chat: ChatMessage;
   isNewDate: boolean;
   nextSender?: "me" | "other";
   lastChat: boolean;
 }
 
-export const enrichChatMessagesWithMetadata = (
+export const enrichMessages = (
   chatMessages: ChatMessage[],
   userId?: number
 ): ChatMessageWithMetadata[] => {
