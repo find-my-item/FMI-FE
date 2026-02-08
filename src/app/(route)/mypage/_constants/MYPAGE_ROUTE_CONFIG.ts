@@ -17,6 +17,7 @@ export const MYPAGE_MENU_LIST = [
     pages: [
       { pageName: "내 신고 내역", pageLink: "/mypage/reports" },
       { pageName: "내 문의 내역", pageLink: "/mypage/inquiries" },
+      { pageName: "자주 묻는 질문", pageLink: "/mypage/faq" },
     ],
   },
   {
@@ -30,6 +31,5 @@ export const MYPAGE_MENU_LIST = [
 
 export const MYPAGE_TAP_CONFIG = [
   { pageName: "공지사항", iconName: "AnnotationAlert", pageLink: "/notice" },
-  { pageName: "고객센터", iconName: "HeadPhone", pageLink: "/support" },
   { pageName: "채팅목록", iconName: "MessageTyping", pageLink: "/chat" },
 ] as const;
