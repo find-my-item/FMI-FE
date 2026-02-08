@@ -1,7 +1,8 @@
 import { useState } from "react";
 import DeleteAccountRadioItem from "../DeleteAccountRadioItem/DeleteAccountRadioItem";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { FooterButton } from "@/components/domain";
+import { RadioOptionItem } from "@/components/common";
 
 const RadioConfig = [
   { value: "NOT_USING", label: "잘 사용하지 않아요" },
@@ -29,12 +30,13 @@ const DeleteAccountReason = () => {
 
         <div className="flex flex-col gap-[14px]">
           {RadioConfig.map((item) => (
-            <DeleteAccountRadioItem
+            // <DeleteAccountRadioItem
+            <RadioOptionItem
               key={item.value}
               option={item}
               selected={isSelected}
               onChange={setIsSelected}
-              labelClassName="text-body1-semibold py-[6px] px-0"
+              labelClassName="flex w-full cursor-pointer items-center gap-2 py-[6px] text-body1-semibold text-neutral-normal-default"
               inputName="회원 탈퇴 사유"
             />
           ))}

@@ -29,12 +29,7 @@ const DeleteAccountRadioItem = ({
   const isChecked = selected === value;
 
   return (
-    <label
-      className={cn(
-        "flex w-full cursor-pointer items-center gap-2 py-[6px] text-body1-semibold text-neutral-normal-default",
-        labelClassName
-      )}
-    >
+    <label className="flex w-full cursor-pointer items-center gap-2 py-[6px] text-body1-semibold text-neutral-normal-default">
       <input
         type="radio"
         name={inputName}
