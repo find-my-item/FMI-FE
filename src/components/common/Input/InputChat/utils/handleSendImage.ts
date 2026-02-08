@@ -1,6 +1,6 @@
 import { SelectedImage } from "@/types/SelectedImage";
 import { Dispatch, SetStateAction } from "react";
-import { resizeImage } from "./resizeImage";
+import { resizeImage } from "@/utils";
 
 export const handleSendImage = async (
   selectedImages: SelectedImage[],

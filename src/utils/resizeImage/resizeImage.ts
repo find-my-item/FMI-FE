@@ -1,4 +1,6 @@
 /**
+ * @author hyungjun
+ *
  * 이미지를 리사이즈하고 압축하는 함수
  * @param file 원본 이미지 파일
  * @param maxWidth 최대 너비 (기본값: 1280)
@@ -7,6 +9,7 @@
  * @param initialQuality 초기 압축 품질 (0.1 ~ 1.0, 기본값: 0.7)
  * @returns 리사이즈된 이미지 File 객체
  */
+
 export const resizeImage = (
   file: File,
   maxWidth: number = 1280,
