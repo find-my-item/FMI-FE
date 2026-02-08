@@ -32,11 +32,9 @@ const ChatRoomMain = ({
   const scrollHeightRef = useRef<number>(0);
   const { data: userInfo } = useGetUserData();
 
-  useChatScroll(
-    scrollRef,
-    chatMessages,
-    userInfo?.result.userId ? Number(userInfo.result.userId) : 0
-  );
+  const userId = userInfo?.result.userId ? Number(userInfo.result.userId) : undefined;
+
+  useChatScroll(scrollRef, chatMessages, userId ?? 0);
   useChatInfiniteScroll({
     scrollRef,
     fetchNextPage,
@@ -53,8 +51,6 @@ const ChatRoomMain = ({
     isFetchingNextPage,
     chatMessagesLength: chatMessages.length,
   });
-
-  const userId = userInfo?.result.userId ? Number(userInfo.result.userId) : undefined;
 
   const chatMessagesWithMetadata = enrichMessages(chatMessages, userId);
 
