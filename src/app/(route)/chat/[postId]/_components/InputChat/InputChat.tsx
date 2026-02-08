@@ -52,12 +52,13 @@ const InputChat = ({ name, validation, disabled, roomId, userId, ...props }: Inp
     <>
       {images?.length !== 0 ? (
         <InputChatImageSection
-          roomId={roomId}
-          userId={userId}
-          images={images}
-          setImages={setImages}
-          selectedImages={selectedImages}
-          setSelectedImages={setSelectedImages}
+          ids={{ roomId, userId }}
+          imageState={{
+            images,
+            setImages,
+            selectedImages,
+            setSelectedImages,
+          }}
         />
       ) : (
         <Controller

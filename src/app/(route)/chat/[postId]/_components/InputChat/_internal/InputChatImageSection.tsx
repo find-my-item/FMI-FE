@@ -3,26 +3,19 @@
 import { Icon, ImageSelectButton } from "@/components/common";
 import { handleSendImage } from "../utils/handleSendImage";
 import useSendImage from "@/api/fetch/ChatMessage/api/useSendImage";
-import { Dispatch, SetStateAction } from "react";
-import { SelectedImage } from "@/types/SelectedImage";
+import {
+  InputChatImageSectionIds,
+  InputChatImageSectionImageState,
+} from "./InputChatImageSectionType";
 
 interface InputChatImageSectionProps {
-  roomId: number;
-  userId: number;
-  images: File[];
-  setImages: Dispatch<SetStateAction<File[]>>;
-  selectedImages: SelectedImage[];
-  setSelectedImages: Dispatch<SetStateAction<SelectedImage[]>>;
+  ids: InputChatImageSectionIds;
+  imageState: InputChatImageSectionImageState;
 }
 
-const InputChatImageSection = ({
-  roomId,
-  userId,
-  images,
-  setImages,
-  selectedImages,
-  setSelectedImages,
-}: InputChatImageSectionProps) => {
+const InputChatImageSection = ({ ids, imageState }: InputChatImageSectionProps) => {
+  const { roomId, userId } = ids;
+  const { images, setImages, selectedImages, setSelectedImages } = imageState;
   const { mutate: sendImage } = useSendImage(roomId, userId);
 
   return (
