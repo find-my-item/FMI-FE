@@ -3,12 +3,10 @@
 import { ChangeEvent, TextareaHTMLAttributes, useRef, useState } from "react";
 import { cn } from "@/utils";
 import { Controller, RegisterOptions, useFormContext } from "react-hook-form";
+import { Icon } from "@/components/common";
 import InputChatImageSection from "./_internal/InputChatImageSection";
-import { handleFileChange } from "./utils/handleFileChange";
-import { adjustHeight } from "./utils/adjustHeight";
-import { handleKeyDown } from "./utils/handleKeydown";
+import { handleFileChange, adjustHeight, handleKeyDown } from "./utils";
 import { SelectedImage } from "@/types/SelectedImage";
-import Icon from "../../Icon/Icon";
 
 /**
  * @author suhyeon

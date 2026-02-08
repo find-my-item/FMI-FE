@@ -1,6 +1,7 @@
 import { SelectedImage } from "@/types/SelectedImage";
 import { Dispatch, SetStateAction } from "react";
 import { resizeImage } from "@/utils";
+import { useToast } from "@/context/ToastContext";
 
 export const handleSendImage = async (
   selectedImages: SelectedImage[],
@@ -9,6 +10,8 @@ export const handleSendImage = async (
   setSelectedImages: Dispatch<SetStateAction<SelectedImage[]>>,
   sendImage: (data: FormData) => void
 ) => {
+  const { addToast } = useToast();
+
   if (selectedImages.length === 0) return;
 
   const sorted = [...selectedImages].sort((a, b) => a.order - b.order);
@@ -26,7 +29,6 @@ export const handleSendImage = async (
     setImages([]);
     setSelectedImages([]);
   } catch (error) {
-    console.error("이미지 리사이즈 실패:", error);
-    alert("이미지 처리 중 오류가 발생했습니다.");
+    addToast("이미지 처리 중 오류가 발생했습니다.", "error");
   }
 };

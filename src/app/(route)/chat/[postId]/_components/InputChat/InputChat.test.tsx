@@ -5,7 +5,7 @@ import InputChat from "./InputChat";
 import "@testing-library/jest-dom";
 
 jest.mock("@/utils", () => ({
-  cn: (...args: any[]) => args.filter(Boolean).join(" "),
+  cn: (...args: unknown[]) => args.filter(Boolean).join(" "),
 }));
 
 jest.mock("@/components/common/Icon/Icon", () => {

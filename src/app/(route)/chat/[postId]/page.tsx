@@ -1,7 +1,6 @@
 "use client";
 
-import { ChatRoomHeader, EmptyChatRoom, ChatRoomMain } from "./_components";
-import { InputChat } from "@/components/common";
+import { ChatRoomHeader, EmptyChatRoom, ChatRoomMain, InputChat } from "./_components";
 import { FormProvider, useForm } from "react-hook-form";
 import { use, useEffect } from "react";
 import useChatMessages from "@/api/fetch/ChatMessage/api/useChatMessages";

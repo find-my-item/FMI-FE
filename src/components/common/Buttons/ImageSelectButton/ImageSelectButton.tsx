@@ -3,11 +3,10 @@
 import { ButtonHTMLAttributes, Dispatch, SetStateAction } from "react";
 import { cn } from "@/utils";
 import Image from "next/image";
-import { handleClick } from "./_utils/handleClick";
-import { getImageButtonState } from "./_utils/getImageButtonState";
+import { handleClick, getImageButtonState } from "./_utils";
 import { useObjectURLs } from "@/hooks";
-import Icon from "../../Icon/Icon";
-import { handleFileChange } from "../../Input/InputChat/utils/handleFileChange";
+import { Icon } from "@/components/common";
+import { handleFileChange } from "@/app/(route)/chat/[postId]/_components/InputChat/utils";
 import { SelectedImage } from "@/types/SelectedImage";
 
 /**
