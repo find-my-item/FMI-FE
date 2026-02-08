@@ -1,4 +1,4 @@
-import { formatKoreanDate } from "@/app/(route)/chat/[postId]/_components/ChatRoomMain/internal/ChatDateDivider";
+import { formatKoreanDate } from "@/utils";
 import { formatChatTime } from "@/utils";
 
 const formatDateWithTime = (isoString: string): string => {

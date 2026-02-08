@@ -1,5 +1,5 @@
 import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageTypes";
-import { getDateKey } from "../_internal/ChatDateDivider";
+import { getDateKey } from "@/utils";
 
 export interface ChatMessageWithMetadata {
   chat: ChatMessage;
