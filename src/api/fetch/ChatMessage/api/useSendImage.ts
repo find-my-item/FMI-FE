@@ -1,10 +1,7 @@
 import useAppMutation from "@/api/_base/query/useAppMutation";
 import { useQueryClient } from "@tanstack/react-query";
 import { ChatMessage } from "../types/ChatMessageTypes";
-import {
-  addMessageToCache,
-  removeMessageFromCache,
-} from "@/utils/chatMessageCache/chatMessageCache";
+import { addMessageToCache, removeMessageFromCache } from "@/app/(route)/chat/[postId]/_utils";
 
 interface SendImageContext {
   optimisticId: number;
