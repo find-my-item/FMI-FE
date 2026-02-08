@@ -5,7 +5,7 @@ import { useChatSocket } from "@/api/fetch/chatRoom";
 
 const ChatLayoutClient = ({ children }: { children: ReactNode }) => {
   useChatSocket({ manageConnection: true });
-  return <>{children}</>;
+  return children;
 };
 
 export default ChatLayoutClient;
