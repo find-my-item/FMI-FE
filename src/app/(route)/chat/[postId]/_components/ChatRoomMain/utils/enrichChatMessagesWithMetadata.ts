@@ -1,7 +1,7 @@
 import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageTypes";
 import { getDateKey } from "@/utils";
 
-export interface ChatMessageWithMetadata {
+interface ChatMessageWithMetadata {
   chat: ChatMessage;
   isNewDate: boolean;
   nextSender?: "me" | "other";

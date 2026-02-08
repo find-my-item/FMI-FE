@@ -10,7 +10,7 @@ import {
 } from "./_internal/hooks";
 import { cn } from "@/utils";
 import { useGetUserData } from "@/api/fetch/user";
-import { enrichChatMessagesWithMetadata } from "./utils";
+import { enrichChatMessagesWithMetadata } from "./utils/enrichChatMessagesWithMetadata";
 import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageTypes";
 
 interface ChatRoomMainProps {
