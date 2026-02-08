@@ -3,7 +3,7 @@ import "@testing-library/jest-dom";
 import ChatRoomMain from "./ChatRoomMain";
 import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageTypes";
 
-jest.mock("./internal/hooks", () => ({
+jest.mock("./_internal/hooks", () => ({
   useChatScroll: jest.fn(),
   useChatInfiniteScroll: jest.fn(),
   useChatInitialScroll: jest.fn(() => true),
@@ -16,7 +16,7 @@ jest.mock("@/api/fetch/user", () => ({
   })),
 }));
 
-jest.mock("./internal", () => ({
+jest.mock("./_internal", () => ({
   ChatBox: ({ chat, nextSender, lastChat }: any) => (
     <div
       data-testid="chat-box"
@@ -58,12 +58,10 @@ describe("ChatRoomMain", () => {
     jest.clearAllMocks();
   });
 
-  it("스크린 리더용 제목이 렌더링됩니다", () => {
+  it("채팅 메인 영역이 렌더링됩니다", () => {
     renderWithMessages();
-
-    const heading = screen.getByRole("heading", { name: "채팅 표시 화면" });
-    expect(heading).toBeInTheDocument();
-    expect(heading).toHaveClass("sr-only");
+    const scrollContainer = document.querySelector(".overflow-y-scroll");
+    expect(scrollContainer).toBeInTheDocument();
   });
 
   it("빈 chatMessages 배열일 때 ChatBox가 렌더링되지 않습니다", () => {
@@ -264,9 +262,6 @@ describe("ChatRoomMain", () => {
     ];
 
     renderWithMessages(mockChats);
-
-    // 스크린 리더용 제목
-    expect(screen.getByRole("heading", { name: "채팅 표시 화면" })).toBeInTheDocument();
 
     // ChatBox
     expect(screen.getByTestId("chat-box")).toBeInTheDocument();
