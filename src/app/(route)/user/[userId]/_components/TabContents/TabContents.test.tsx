@@ -11,37 +11,34 @@ jest.mock("../_internal/CommentItem/CommentItem", () => () => (
   <li data-testid="comment-item">CommentItem</li>
 ));
 
-jest.mock("../_internal/EmptyUI/EmptyUI", () => () => <div>EmptyUI</div>);
+jest.mock("@/components/state", () => ({
+  EmptyState: () => <div data-testid="empty-state">EmptyState</div>,
+  LoadingState: () => <div data-testid="loading-state">LoadingState</div>,
+}));
 
 describe("TabContents", () => {
+  it("로딩 중일 때는 로딩 상태가 표시되어야 합니다", () => {
+    render(<TabContents selectedTab="posts" isLoading={true} data={MOCK_USER_PROFILE_DATA} />);
+
+    expect(screen.getByTestId("loading-state")).toBeInTheDocument();
+  });
+
   it("초기 상태에서는 게시글 탭 콘텐츠가 표시되어야 합니다", () => {
-    render(
-      <TabContents selectedTab="posts" query={{ isLoading: false, data: MOCK_USER_PROFILE_DATA }} />
-    );
+    render(<TabContents selectedTab="posts" isLoading={false} data={MOCK_USER_PROFILE_DATA} />);
 
     expect(screen.queryAllByTestId("list-item").length).toBeGreaterThan(0);
     expect(screen.queryAllByTestId("comment-item")).toHaveLength(0);
   });
 
   it("댓글 탭 선택 시 댓글 콘텐츠가 표시되어야 합니다", () => {
-    render(
-      <TabContents
-        selectedTab="comments"
-        query={{ isLoading: false, data: MOCK_USER_PROFILE_DATA }}
-      />
-    );
+    render(<TabContents selectedTab="comments" isLoading={false} data={MOCK_USER_PROFILE_DATA} />);
 
     expect(screen.queryAllByTestId("comment-item").length).toBeGreaterThan(0);
     expect(screen.queryAllByTestId("list-item")).toHaveLength(0);
   });
 
   it("즐겨찾기 탭 선택 시 즐겨찾기 콘텐츠가 표시되어야 합니다", () => {
-    render(
-      <TabContents
-        selectedTab="favorites"
-        query={{ isLoading: false, data: MOCK_USER_PROFILE_DATA }}
-      />
-    );
+    render(<TabContents selectedTab="favorites" isLoading={false} data={MOCK_USER_PROFILE_DATA} />);
 
     expect(screen.queryAllByTestId("list-item").length).toBeGreaterThan(0);
     expect(screen.queryAllByTestId("comment-item")).toHaveLength(0);
