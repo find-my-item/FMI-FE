@@ -1,10 +1,10 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import DeleteAccountReason from "../DeleteAccountReason/DeleteAccountReason";
 import { InputText } from "@/components/common";
 import { FormProvider, useForm } from "react-hook-form";
 import { FooterButton } from "@/components/domain";
+import DeleteAccountReason from "../DeleteAccountReason/DeleteAccountReason";
 
 const PasswordConfirm = () => {
   return (

@@ -1,5 +1,5 @@
 import { DetailHeader } from "@/components/layout";
-import DeleteAccountContainer from "./_components/DeleteAccountContainer/DeleteAccountContainer";
+import { DeleteAccountContainer } from "./_components";
 
 const page = () => {
   return (

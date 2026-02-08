@@ -1,18 +1,50 @@
+"use client";
+
 import { useState } from "react";
-import DeleteAccountRadioItem from "../DeleteAccountRadioItem/DeleteAccountRadioItem";
 import { useRouter } from "next/navigation";
 import { FooterButton } from "@/components/domain";
-import { RadioOptionItem } from "@/components/common";
+import { RadioConfig } from "../../_constants/RadioConfig";
+import { cn } from "@/utils";
 
-const RadioConfig = [
-  { value: "NOT_USING", label: "잘 사용하지 않아요" },
-  { value: "LOW_TRUST", label: "서비스에 대한 신뢰도가 낮아요" },
-  { value: "DIFFICULT_TO_USE", label: "사용이 어려워요" },
-  { value: "DUPLICATE_ACCOUNT", label: "다른 계정이 있어요" },
-  { value: "UNPLEASANT_USER", label: "불쾌감을 주는 사용자를 만났어요" },
-  { value: "UNFAIR_RESTRICTION", label: "억울하게 서비스 이용이 제한됐어요" },
-  { value: "OTHER", label: "기타" },
-];
+interface DeleteAccountRadioItemProps {
+  option: { value: string; label: string };
+  selected: string;
+  onChange: (value: string) => void;
+  inputName: string;
+}
+
+const DeleteAccountRadioItem = ({
+  option,
+  selected,
+  onChange,
+  inputName,
+  ...inputProps
+}: DeleteAccountRadioItemProps) => {
+  const { value, label } = option;
+  const isChecked = selected === value;
+
+  return (
+    <label className="flex w-full cursor-pointer items-center gap-2 py-[6px] text-body1-semibold text-neutral-normal-default">
+      <input
+        type="radio"
+        name={inputName}
+        value={value}
+        checked={isChecked}
+        onChange={(e) => onChange(e.target.value)}
+        className="peer hidden"
+        {...inputProps}
+      />
+      <span
+        className={cn(
+          "relative h-4 w-4 rounded-full border border-neutral-normal-default peer-checked:border-brand-normal-enteredSelected",
+          "before:absolute before:inset-[3px] before:scale-0 before:rounded-full before:transition-transform before:bg-fill-brand-normal-enteredSelected",
+          "peer-checked:before:scale-100"
+        )}
+      />
+      <span>{label}</span>
+    </label>
+  );
+};
 
 const DeleteAccountReason = () => {
   const router = useRouter();
@@ -30,13 +62,11 @@ const DeleteAccountReason = () => {
 
         <div className="flex flex-col gap-[14px]">
           {RadioConfig.map((item) => (
-            // <DeleteAccountRadioItem
-            <RadioOptionItem
+            <DeleteAccountRadioItem
               key={item.value}
               option={item}
               selected={isSelected}
               onChange={setIsSelected}
-              labelClassName="flex w-full cursor-pointer items-center gap-2 py-[6px] text-body1-semibold text-neutral-normal-default"
               inputName="회원 탈퇴 사유"
             />
           ))}
