@@ -15,11 +15,7 @@ export const enrichChatMessagesWithMetadata = (
   return chatMessages.map((chat, i) => {
     const prevChat = chatMessages[i - 1];
     const isNewDate = i === 0 || getDateKey(chat.createdAt) !== getDateKey(prevChat.createdAt);
-    const nextSender = prevChat
-      ? userId === prevChat.senderId
-        ? ("me" as const)
-        : ("other" as const)
-      : undefined;
+    const nextSender = prevChat ? (userId === prevChat.senderId ? "me" : "other") : undefined;
 
     return {
       chat,
