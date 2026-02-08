@@ -62,7 +62,6 @@ const ChatRoomMain = ({
         !ready && "invisible"
       )}
     >
-      <h1 className="sr-only">채팅 표시 화면</h1>
       {chatMessagesWithMetadata.map(({ chat, isNewDate, nextSender, lastChat }) => (
         <div key={chat.messageId}>
           {isNewDate && <ChatDateDivider createdAt={chat.createdAt} />}
