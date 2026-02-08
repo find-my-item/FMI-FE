@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, RefObject } from "react";
 
-interface UseChatInfiniteScrollOptions {
+interface UseChatInfiniteScroll {
   scrollRef: RefObject<HTMLDivElement | null>;
   fetchNextPage: () => void;
   hasNextPage: boolean | undefined;
@@ -14,7 +14,7 @@ const useChatInfiniteScroll = ({
   hasNextPage,
   isFetchingNextPage,
   chatMessagesLength,
-}: UseChatInfiniteScrollOptions) => {
+}: UseChatInfiniteScroll) => {
   const prevScrollHeightRef = useRef<number>(0);
   const prevScrollTopRef = useRef<number>(0);
   const prevLengthRef = useRef<number>(chatMessagesLength);
