@@ -9,16 +9,16 @@ import ChatRoomHeaderInfoButton from "../ChatRoomHeaderInfoButton/ChatRoomHeader
 import { ChatRoomResponse } from "@/api/fetch/chatRoom/types/ChatRoomType";
 import Link from "next/link";
 
-const ChatRoomHeader = ({
-  chatRoom,
-  roomId,
-}: {
+interface ChatRoomHeaderProps {
   chatRoom: ChatRoomResponse | undefined;
   roomId: number;
-}) => {
+}
+
+const ChatRoomHeader = ({ chatRoom, roomId }: ChatRoomHeaderProps) => {
   const router = useRouter();
   if (!chatRoom) return null;
-  const { address, postType, title, thumbnailUrl } = chatRoom.postInfo;
+  const { address, postType, title, thumbnailUrl, postId } = chatRoom.postInfo;
+  const { nickname } = chatRoom.opponentUser;
 
   return (
     <header className="pb-3">
@@ -32,14 +32,16 @@ const ChatRoomHeader = ({
           <Icon name="ArrowLeftSmall" size={18} />
         </button>
 
-        <p className="text-body2-semibold text-layout-body-default">
-          {chatRoom.opponentUser.nickname}
-        </p>
+        <p className="text-body2-semibold text-layout-body-default">{nickname}</p>
 
         <ChatRoomHeaderInfoButton roomId={roomId} />
       </nav>
 
-      <Link href={`/list/${chatRoom.postInfo.postId}`} className="flex items-center gap-4 px-4">
+      <Link
+        href={`/list/${postId}`}
+        className="flex items-center gap-4 px-4"
+        aria-label="게시글 상세 페이지 이동"
+      >
         {/* TODO(형준): 대체 이미지 수정 예정 */}
         <Image
           alt="게시글 썸네일 이미지"
