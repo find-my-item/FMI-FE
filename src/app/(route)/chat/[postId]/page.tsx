@@ -20,15 +20,12 @@ const ChatRoom = ({ params }: { params: Promise<{ postId: string }> }) => {
   const { postId: postIdString } = use(params);
   const postId = Number(postIdString);
 
-  const methods = useForm<ChatFormValues>({
-    mode: "onChange",
-    reValidateMode: "onChange",
-    defaultValues: {
-      content: "",
-    },
-  });
-
   const { roomId, chatRoomData, userInfo, postMode, unreadCount } = useChatRoomData(postId);
+  const userId = Number(userInfo?.result?.userId);
+  const currentUserId = userId != null ? userId : undefined;
+
+  useChatSocketMessage(roomId, currentUserId);
+
   const { mutate: readMessage } = useReadMessage(roomId);
   const {
     data: chatMessages,
@@ -44,19 +41,23 @@ const ChatRoom = ({ params }: { params: Promise<{ postId: string }> }) => {
     fetchNextPage,
   });
 
-  const currentUserId =
-    userInfo?.result.userId != null ? Number(userInfo.result.userId) : undefined;
-  useChatSocketMessage(roomId, currentUserId);
-
   useEffect(() => {
     if (unreadCount && unreadCount > 0 && roomId) {
       readMessage(roomId);
     }
   }, [unreadCount, roomId]);
 
+  const methods = useForm<ChatFormValues>({
+    mode: "onChange",
+    reValidateMode: "onChange",
+    defaultValues: {
+      content: "",
+    },
+  });
+
   const { onSubmit } = useChatMessageSubmit({
     roomId,
-    userId: Number(userInfo?.result.userId),
+    userId,
     reset: methods.reset,
   });
 
@@ -78,15 +79,10 @@ const ChatRoom = ({ params }: { params: Promise<{ postId: string }> }) => {
           <EmptyChatRoom postMode={postMode} />
         )}
       </div>
-      {roomId && userInfo?.result.userId && (
+      {roomId && userId && (
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)} className="px-4 pb-6 pt-3">
-            <InputChat
-              name="content"
-              aria-label="채팅 입력창"
-              roomId={roomId}
-              userId={Number(userInfo.result.userId)}
-            />
+            <InputChat name="content" aria-label="채팅 입력창" roomId={roomId} userId={userId} />
           </form>
         </FormProvider>
       )}
