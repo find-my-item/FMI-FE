@@ -1,5 +1,5 @@
 import { RefObject, useLayoutEffect, useRef } from "react";
-import { ChatMessage } from "@/api/fetch/ChatMessage/types/ChatMessageTypes";
+import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageTypes";
 
 const useChatScroll = (
   scrollRef: RefObject<HTMLDivElement | null>,

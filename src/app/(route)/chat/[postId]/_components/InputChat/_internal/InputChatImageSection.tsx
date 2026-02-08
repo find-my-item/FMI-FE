@@ -2,7 +2,7 @@
 
 import { Icon, ImageSelectButton } from "@/components/common";
 import { handleSendImage } from "../utils/handleSendImage";
-import useSendImage from "@/api/fetch/ChatMessage/api/useSendImage";
+import useSendImage from "@/api/fetch/chatMessage/api/useSendImage";
 import {
   InputChatImageSectionIds,
   InputChatImageSectionImageState,

@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import ChatRoomMain from "./ChatRoomMain";
-import { ChatMessage } from "@/api/fetch/ChatMessage/types/ChatMessageTypes";
+import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageTypes";
 
 jest.mock("./internal/hooks", () => ({
   useChatScroll: jest.fn(),

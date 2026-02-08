@@ -3,14 +3,14 @@
 import { ChatRoomHeader, EmptyChatRoom, ChatRoomMain, InputChat } from "./_components";
 import { FormProvider, useForm } from "react-hook-form";
 import { use, useEffect } from "react";
-import useChatMessages from "@/api/fetch/ChatMessage/api/useChatMessages";
+import useChatMessages from "@/api/fetch/chatMessage/api/useChatMessages";
 import {
   useChatRoomData,
   useInitialChatPagination,
   useChatSocketMessage,
   useChatMessageSubmit,
 } from "./_hooks";
-import useReadMessage from "@/api/fetch/ChatMessage/api/useReadMessage";
+import useReadMessage from "@/api/fetch/chatMessage/api/useReadMessage";
 
 interface ChatFormValues {
   content: string;

@@ -1,17 +1,17 @@
 "use client";
 
-import { ChatBox, ChatDateDivider } from "./internal";
+import { ChatBox, ChatDateDivider } from "./_internal";
 import { useRef } from "react";
 import {
   useChatScroll,
   useChatInfiniteScroll,
   useChatInitialScroll,
   useChatScrollPreserve,
-} from "./internal/hooks";
+} from "./_internal/hooks";
 import { cn } from "@/utils";
 import { useGetUserData } from "@/api/fetch/user";
 import { enrichChatMessagesWithMetadata } from "./utils";
-import { ChatMessage } from "@/api/fetch/ChatMessage/types/ChatMessageTypes";
+import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageTypes";
 
 interface ChatRoomMainProps {
   chatMessages: ChatMessage[];
