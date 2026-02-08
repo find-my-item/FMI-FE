@@ -9,7 +9,7 @@ import { handleFileChange, adjustHeight, handleKeyDown } from "./utils";
 import { SelectedImage } from "@/types/SelectedImage";
 
 /**
- * @author suhyeon
+ * @author hyungjun
  *
  * 채팅을 위한 input 공통 컴포넌트 입니다.
  * react-hook-form을 필수로 사용한다는 전제하에 개발하였습니다.
