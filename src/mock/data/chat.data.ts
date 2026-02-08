@@ -1,4 +1,5 @@
 import { ChatRoom, ChatRoomResponse } from "@/api/fetch/chatRoom/types/ChatRoomType";
+import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageTypes";
 
 export const MOCK_CHAT_ITEM = {
   roomId: 1,
@@ -56,3 +57,22 @@ export const MOCK_CHAT_ROOM_LOST: ChatRoomResponse = {
     thumbnailUrl: "https://via.placeholder.com/40",
   },
 };
+
+export const MOCK_CHAT_MESSAGES: ChatMessage[] = [
+  {
+    messageId: 1,
+    senderId: 1,
+    content: "안녕하세요!",
+    messageType: "TEXT",
+    createdAt: "2026-01-15T14:11:00.000Z",
+    imageUrls: [],
+  },
+  {
+    messageId: 2,
+    senderId: 2,
+    content: "네, 안녕하세요!",
+    messageType: "TEXT",
+    createdAt: "2026-01-15T14:12:00.000Z",
+    imageUrls: [],
+  },
+];

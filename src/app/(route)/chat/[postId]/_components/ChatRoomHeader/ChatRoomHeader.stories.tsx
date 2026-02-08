@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import ChatRoomHeader from "./ChatRoomHeader";
-import { ChatRoomResponse } from "@/api/fetch/chatRoom/types/ChatRoomType";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { MOCK_CHAT_ROOM_FOUND, MOCK_CHAT_ROOM_LOST } from "@/mock/data/chat.data";
 import { ToastProvider } from "@/providers/ToastProviders";
 
 const queryClient = new QueryClient({
@@ -48,60 +48,24 @@ const meta: Meta<typeof ChatRoomHeader> = {
 export default meta;
 type Story = StoryObj<typeof ChatRoomHeader>;
 
-const mockChatRoomFound: ChatRoomResponse = {
-  roomId: 1,
-  unreadCount: 0,
-  opponentUser: {
-    opponentUserId: 2,
-    nickname: "사용자 닉네임",
-    profileImageUrl: "https://via.placeholder.com/40",
-    emailVerified: true,
-  },
-  postInfo: {
-    postId: 1,
-    postType: "FOUND",
-    title: "여기에 게시글명이 표기됩니다 여기에 게시글명이 표기됩니다. 여기에",
-    address: "서울시 중구 회현동",
-    thumbnailUrl: "https://via.placeholder.com/40",
-  },
-};
-
-const mockChatRoomLost: ChatRoomResponse = {
-  roomId: 2,
-  unreadCount: 0,
-  opponentUser: {
-    opponentUserId: 3,
-    nickname: "다른 사용자",
-    profileImageUrl: "https://via.placeholder.com/40",
-    emailVerified: true,
-  },
-  postInfo: {
-    postId: 2,
-    postType: "LOST",
-    title: "분실물 게시글 제목입니다",
-    address: "서울시 강남구 역삼동",
-    thumbnailUrl: "https://via.placeholder.com/40",
-  },
-};
-
 export const Found: Story = {
   args: {
-    chatRoom: mockChatRoomFound,
+    chatRoom: MOCK_CHAT_ROOM_FOUND,
   },
 };
 
 export const Lost: Story = {
   args: {
-    chatRoom: mockChatRoomLost,
+    chatRoom: MOCK_CHAT_ROOM_LOST,
   },
 };
 
 export const WithoutThumbnail: Story = {
   args: {
     chatRoom: {
-      ...mockChatRoomFound,
+      ...MOCK_CHAT_ROOM_FOUND,
       postInfo: {
-        ...mockChatRoomFound.postInfo,
+        ...MOCK_CHAT_ROOM_FOUND.postInfo,
         thumbnailUrl: "",
       },
     },

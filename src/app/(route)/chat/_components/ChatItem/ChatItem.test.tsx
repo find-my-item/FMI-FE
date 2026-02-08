@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import ChatItem from "./ChatItem";
 import { ChatRoom } from "@/api/fetch/chatRoom/types/ChatRoomType";
+import { MOCK_CHAT_ITEM } from "@/mock/data/chat.data";
 
 jest.mock("next/image", () => (props: any) => {
   return <img {...props} />;
@@ -22,28 +23,11 @@ jest.mock("@/components/common", () => ({
 }));
 
 const createMockChatRoom = (overrides?: Partial<ChatRoom>): ChatRoom => {
-  const now = new Date();
-  const tenMinutesAgo = new Date(now.getTime() - 10 * 60 * 1000).toISOString();
-
+  const tenMinutesAgo = new Date(Date.now() - 10 * 60 * 1000).toISOString();
   return {
-    roomId: 1,
-    contactUser: {
-      userId: 1,
-      nickname: "사용자 닉네임",
-      profileImageUrl: null,
-    },
-    postInfo: {
-      postId: 1,
-      postType: "LOST",
-      title: "테스트 게시글",
-      address: "서울시 강남구 신사동",
-      thumbnailUrl: "test-thumbnail.jpg",
-    },
-    messageType: "TEXT",
-    lastMessage:
-      "안녕하세요! 혹시 올리신 검정색 카드 지갑, 명동에서 습득하신 지갑이실까요? 혹시나 해서",
+    ...MOCK_CHAT_ITEM,
+    contactUser: { ...MOCK_CHAT_ITEM.contactUser, profileImageUrl: null },
     lastMessageSentAt: tenMinutesAgo,
-    unreadCount: 1,
     ...overrides,
   };
 };

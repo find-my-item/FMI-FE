@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import ChatRoomMain from "./ChatRoomMain";
-import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageTypes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { MOCK_CHAT_MESSAGES } from "@/mock/data/chat.data";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -53,30 +53,11 @@ const meta: Meta<typeof ChatRoomMain> = {
 export default meta;
 type Story = StoryObj<typeof ChatRoomMain>;
 
-const mockChatMessages: ChatMessage[] = [
-  {
-    messageId: 1,
-    senderId: 1,
-    content: "안녕하세요!",
-    messageType: "TEXT",
-    createdAt: "2026-01-15T14:11:00.000Z",
-    imageUrls: [],
-  },
-  {
-    messageId: 2,
-    senderId: 2,
-    content: "네, 안녕하세요!",
-    messageType: "TEXT",
-    createdAt: "2026-01-15T14:12:00.000Z",
-    imageUrls: [],
-  },
-];
-
 const noop = () => {};
 
 export const Default: Story = {
   args: {
-    chatMessages: mockChatMessages,
+    chatMessages: MOCK_CHAT_MESSAGES,
     fetchNextPage: noop,
     hasNextPage: false,
     isFetchingNextPage: false,
@@ -94,7 +75,7 @@ export const Empty: Story = {
 
 export const WithNextPage: Story = {
   args: {
-    chatMessages: mockChatMessages,
+    chatMessages: MOCK_CHAT_MESSAGES,
     fetchNextPage: noop,
     hasNextPage: true,
     isFetchingNextPage: false,
@@ -103,7 +84,7 @@ export const WithNextPage: Story = {
 
 export const FetchingNextPage: Story = {
   args: {
-    chatMessages: mockChatMessages,
+    chatMessages: MOCK_CHAT_MESSAGES,
     fetchNextPage: noop,
     hasNextPage: true,
     isFetchingNextPage: true,

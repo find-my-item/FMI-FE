@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import ChatRoomMain from "./ChatRoomMain";
 import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageTypes";
+import { MOCK_CHAT_MESSAGES } from "@/mock/data/chat.data";
 
 jest.mock("./_internal/hooks", () => ({
   useChatScroll: jest.fn(),
@@ -71,52 +72,14 @@ describe("ChatRoomMain", () => {
   });
 
   it("chatMessages가 있을 때 ChatBox들이 렌더링됩니다", () => {
-    const mockChats: ChatMessage[] = [
-      {
-        messageId: 1,
-        senderId: 1,
-        content: "안녕하세요",
-        messageType: "TEXT",
-        createdAt: "2026-01-15T14:00:00.000Z",
-        imageUrls: [],
-      },
-      {
-        messageId: 2,
-        senderId: 2,
-        content: "반갑습니다",
-        messageType: "TEXT",
-        createdAt: "2026-01-15T14:01:00.000Z",
-        imageUrls: [],
-      },
-    ];
-
-    renderWithMessages(mockChats);
+    renderWithMessages(MOCK_CHAT_MESSAGES);
 
     const chatBoxes = screen.getAllByTestId("chat-box");
     expect(chatBoxes).toHaveLength(2);
   });
 
   it("ChatBox에 올바른 props가 전달됩니다", () => {
-    const mockChats: ChatMessage[] = [
-      {
-        messageId: 1,
-        senderId: 1,
-        content: "첫 번째 메시지",
-        messageType: "TEXT",
-        createdAt: "2026-01-15T14:00:00.000Z",
-        imageUrls: [],
-      },
-      {
-        messageId: 2,
-        senderId: 2,
-        content: "두 번째 메시지",
-        messageType: "TEXT",
-        createdAt: "2026-01-15T14:01:00.000Z",
-        imageUrls: [],
-      },
-    ];
-
-    renderWithMessages(mockChats);
+    renderWithMessages(MOCK_CHAT_MESSAGES);
 
     const chatBoxes = screen.getAllByTestId("chat-box");
 
@@ -132,110 +95,63 @@ describe("ChatRoomMain", () => {
   });
 
   it("ChatBox에 채팅 텍스트가 올바르게 전달됩니다", () => {
-    const mockChats: ChatMessage[] = [
-      {
-        messageId: 1,
-        senderId: 1,
-        content: "테스트 메시지",
-        messageType: "TEXT",
-        createdAt: "2026-01-15T14:00:00.000Z",
-        imageUrls: [],
-      },
-    ];
-
-    renderWithMessages(mockChats);
+    renderWithMessages([{ ...MOCK_CHAT_MESSAGES[0], content: "테스트 메시지" }]);
 
     expect(screen.getByText("테스트 메시지")).toBeInTheDocument();
   });
 
   it("이미지가 있는 채팅도 올바르게 렌더링됩니다", () => {
-    const mockChats: ChatMessage[] = [
+    renderWithMessages([
       {
-        messageId: 1,
-        senderId: 1,
+        ...MOCK_CHAT_MESSAGES[0],
         content: "",
-        messageType: "IMAGE",
-        createdAt: "2026-01-15T14:00:00.000Z",
+        messageType: "IMAGE" as const,
         imageUrls: ["image1.jpg", "image2.jpg"],
       },
-    ];
-
-    renderWithMessages(mockChats);
+    ]);
 
     expect(screen.getByText("2 images")).toBeInTheDocument();
   });
 
   it("여러 채팅이 있을 때 모든 ChatBox가 렌더링됩니다", () => {
-    const mockChats: ChatMessage[] = [
+    const fourMessages: ChatMessage[] = [
+      ...MOCK_CHAT_MESSAGES,
       {
-        messageId: 1,
-        senderId: 1,
-        content: "메시지 1",
-        messageType: "TEXT",
-        createdAt: "2026-01-15T14:00:00.000Z",
-        imageUrls: [],
-      },
-      {
-        messageId: 2,
-        senderId: 2,
-        content: "메시지 2",
-        messageType: "TEXT",
-        createdAt: "2026-01-15T14:01:00.000Z",
-        imageUrls: [],
-      },
-      {
+        ...MOCK_CHAT_MESSAGES[0],
         messageId: 3,
-        senderId: 1,
         content: "메시지 3",
-        messageType: "TEXT",
         createdAt: "2026-01-15T14:02:00.000Z",
-        imageUrls: [],
       },
       {
+        ...MOCK_CHAT_MESSAGES[1],
         messageId: 4,
-        senderId: 2,
         content: "메시지 4",
-        messageType: "TEXT",
         createdAt: "2026-01-15T14:03:00.000Z",
-        imageUrls: [],
       },
     ];
-
-    renderWithMessages(mockChats);
+    renderWithMessages(fourMessages);
 
     const chatBoxes = screen.getAllByTestId("chat-box");
     expect(chatBoxes).toHaveLength(4);
   });
 
   it("연속된 같은 발신자의 채팅에서 nextSender가 올바르게 전달됩니다", () => {
-    const mockChats: ChatMessage[] = [
+    const threeMessages: ChatMessage[] = [
+      { ...MOCK_CHAT_MESSAGES[0], content: "첫 번째" },
       {
-        messageId: 1,
-        senderId: 1,
-        content: "첫 번째",
-        messageType: "TEXT",
-        createdAt: "2026-01-15T14:00:00.000Z",
-        imageUrls: [],
-      },
-      {
+        ...MOCK_CHAT_MESSAGES[0],
         messageId: 2,
-        senderId: 1,
         content: "두 번째",
-        messageType: "TEXT",
         createdAt: "2026-01-15T14:01:00.000Z",
-        imageUrls: [],
       },
       {
+        ...MOCK_CHAT_MESSAGES[1],
         messageId: 3,
-        senderId: 2,
         content: "세 번째",
-        messageType: "TEXT",
         createdAt: "2026-01-15T14:02:00.000Z",
-        imageUrls: [],
       },
     ];
-
-    renderWithMessages(mockChats);
+    renderWithMessages(threeMessages);
 
     const chatBoxes = screen.getAllByTestId("chat-box");
 
@@ -250,18 +166,7 @@ describe("ChatRoomMain", () => {
   });
 
   it("모든 주요 요소가 함께 렌더링됩니다", () => {
-    const mockChats: ChatMessage[] = [
-      {
-        messageId: 1,
-        senderId: 1,
-        content: "테스트 메시지",
-        messageType: "TEXT",
-        createdAt: "2026-01-15T14:00:00.000Z",
-        imageUrls: [],
-      },
-    ];
-
-    renderWithMessages(mockChats);
+    renderWithMessages([{ ...MOCK_CHAT_MESSAGES[0], content: "테스트 메시지" }]);
 
     // ChatBox
     expect(screen.getByTestId("chat-box")).toBeInTheDocument();
