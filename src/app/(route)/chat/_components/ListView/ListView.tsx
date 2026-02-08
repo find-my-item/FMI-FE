@@ -6,8 +6,9 @@ import { useSearchUpdateQueryString } from "@/hooks";
 import DefaultList from "../DefaultList/DefaultList";
 import { useChatSocket } from "@/api/fetch/chatRoom/api/useChatSocket";
 import { useQueryClient } from "@tanstack/react-query";
+import { Suspense } from "react";
 
-const ListView = () => {
+const ListViewContent = () => {
   const { searchMode, searchUpdateQuery } = useSearchUpdateQueryString();
   const queryClient = useQueryClient();
 
@@ -18,7 +19,7 @@ const ListView = () => {
   });
 
   return (
-    <div className="w-full">
+    <>
       <DetailHeader title={searchMode === "region" ? "지역 선택" : "채팅"} />
 
       <h1 className="sr-only">채팅 목록 페이지</h1>
@@ -27,7 +28,17 @@ const ListView = () => {
       ) : (
         <ListSearch searchMode={searchMode} />
       )}
-    </div>
+    </>
+  );
+};
+
+const ListView = () => {
+  return (
+    <Suspense fallback="">
+      <div className="w-full h-base">
+        <ListViewContent />
+      </div>
+    </Suspense>
   );
 };
 
