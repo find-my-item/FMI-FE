@@ -8,6 +8,14 @@
  * @param maxFileSize 최대 파일 크기 (바이트, 기본값: 300KB)
  * @param initialQuality 초기 압축 품질 (0.1 ~ 1.0, 기본값: 0.7)
  * @returns 리사이즈된 이미지 File 객체
+ *
+ * @example
+ * // file만 사용 (기본값: 1280x1280, 300KB, 품질 0.7)
+ * const resized = await resizeImage(imageFile);
+ *
+ * @example
+ * // 최대 크기·파일 크기·품질 지정
+ * const resized = await resizeImage(imageFile, 1920, 1080, 500 * 1024, 0.8);
  */
 
 export const resizeImage = (
