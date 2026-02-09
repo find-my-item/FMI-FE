@@ -11,7 +11,7 @@ const PasswordConfirm = () => {
     <>
       <div className="flex w-full flex-col gap-[18px] px-5 py-[30px] h-base">
         <h3 className="text-h3-semibold text-[#171717]">비밀번호를 입력해 주세요.</h3>
-        {/* 디자인 업데이트 시 placeholder 변경예정 */}
+        {/* TODO(수현): 디자인 업데이트 시 placeholder 변경예정 */}
         <InputText
           name="passwordConfirm"
           type="password"
