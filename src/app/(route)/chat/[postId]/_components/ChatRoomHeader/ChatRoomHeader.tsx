@@ -42,7 +42,7 @@ const ChatRoomHeader = ({ chatRoom, roomId }: ChatRoomHeaderProps) => {
         className="flex items-center gap-4 px-4"
         aria-label="게시글 상세 페이지 이동"
       >
-        {/* TODO(형준): 대체 이미지 수정 예정 */}
+        {/* TODO(형준): API 카테고리 반영 후 ListItemImage로 대체 예정 */}
         <Image
           alt="게시글 썸네일 이미지"
           src={thumbnailUrl || MOCK_IMAGES[0]}

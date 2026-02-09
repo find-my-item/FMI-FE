@@ -30,7 +30,7 @@ const ChatItem = ({ chatRoom }: ChatItemProps) => {
           size={26}
           className="absolute left-0 top-0 z-10 rounded-full border-[1.5px] border-white"
         />
-        {/* TODO(형준): 대체 이미지 수정 예정 */}
+        {/* TODO(형준): API 카테고리 반영 후 ListItemImage로 대체 예정 */}
         <Image
           alt="게시글 썸네일 이미지"
           src={thumbnailUrl || MOCK_IMAGES[0]}
