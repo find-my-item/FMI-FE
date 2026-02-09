@@ -2,8 +2,8 @@
 
 import { FilterSection, MypageSearch } from "@/components/domain";
 import { DetailHeader } from "@/components/layout";
-import MypageFavoritesList from "./MypageFavoritesList/MypageFavoritesList";
 import { MOCK_MYPAGE_POSTS_LIST } from "@/mock/data";
+import { MypageFavoritesList } from "./_components";
 
 const page = () => {
   return (
