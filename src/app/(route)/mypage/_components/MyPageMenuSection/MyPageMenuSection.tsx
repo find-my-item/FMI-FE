@@ -17,7 +17,6 @@ const MyPageMenuSection = () => {
         {menu.pages.map((item) => (
           <Fragment key={item.pageName}>
             <Link
-              key={item.pageName}
               href={item.pageLink}
               className="flex w-full justify-between py-[10px] text-body1-semibold text-neutral-strong-default"
             >
