@@ -17,7 +17,7 @@ export const MYPAGE_MENU_LIST = [
     pages: [
       { pageName: "내 신고 내역", pageLink: "/mypage/reports" },
       { pageName: "내 문의 내역", pageLink: "/mypage/inquiries" },
-      { pageName: "자주 묻는 질문", pageLink: "/mypage/faq" },
+      { pageName: "자주 묻는 질문", pageLink: "/faq" },
     ],
   },
   {
