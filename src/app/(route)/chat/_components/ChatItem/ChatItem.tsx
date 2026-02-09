@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ChatRoom } from "@/api/fetch/chatRoom/types/ChatRoomType";
-import { Icon } from "@/components/common";
+import { ProfileAvatar } from "@/components/common";
 import { formatDate } from "@/utils";
 import { MOCK_IMAGES } from "./MOCK_IMAGES";
 
@@ -24,22 +24,12 @@ const ChatItem = ({ chatRoom }: ChatItemProps) => {
       className="flex min-h-[113px] w-full items-center gap-3 border-b border-divider-default px-4 py-6 transition-colors hover:bg-flatGray-25"
     >
       <div className="relative h-[58px] w-[58px] shrink-0">
-        {profileImageUrl ? (
-          <Image
-            alt="유저 프로필 이미지"
-            src={profileImageUrl}
-            width={26}
-            height={26}
-            className="absolute left-0 top-0 z-10 rounded-full border-[1.5px] border-white object-cover"
-            sizes="26px"
-          />
-        ) : (
-          <Icon
-            name="UserProfile"
-            size={26}
-            className="absolute left-0 top-0 z-10 rounded-full border-[1.5px] border-white"
-          />
-        )}
+        <ProfileAvatar
+          src={profileImageUrl}
+          alt="유저 프로필 이미지"
+          size={26}
+          className="absolute left-0 top-0 z-10 rounded-full border-[1.5px] border-white"
+        />
         {/* TODO(형준): 대체 이미지 수정 예정 */}
         <Image
           alt="게시글 썸네일 이미지"
