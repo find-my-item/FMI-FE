@@ -2,11 +2,10 @@
 
 import { FilterSection, MypageSearch } from "@/components/domain";
 import { DetailHeader } from "@/components/layout";
-import { useSearchUpdateQueryString } from "@/hooks";
+import MypageFavoritesList from "./MypageFavoritesList/MypageFavoritesList";
+import { MOCK_MYPAGE_POSTS_LIST } from "@/mock/data";
 
 const page = () => {
-  const { searchMode, searchUpdateQuery } = useSearchUpdateQueryString();
-
   return (
     <>
       <DetailHeader title="즐겨찾기 목록" />
@@ -15,6 +14,8 @@ const page = () => {
         <MypageSearch />
 
         <FilterSection pageType="MY_FAVORITES" />
+
+        <MypageFavoritesList data={MOCK_MYPAGE_POSTS_LIST} />
       </div>
     </>
   );
