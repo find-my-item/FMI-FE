@@ -20,6 +20,13 @@ jest.mock("next/link", () => ({
 jest.mock("@/components/common", () => ({
   __esModule: true,
   Icon: ({ name }: { name: string }) => <span data-testid={`icon-${name}`}>{name}</span>,
+  ProfileAvatar: (props: { alt?: string; src?: string | null }) => (
+    <img
+      alt={props.alt ?? "유저 프로필 이미지"}
+      data-testid="profile-avatar"
+      src={props.src ?? undefined}
+    />
+  ),
 }));
 
 const createMockChatRoom = (overrides?: Partial<ChatRoom>): ChatRoom => {
@@ -45,11 +52,11 @@ describe("ChatItem", () => {
   it("유저 프로필 이미지와 게시글 썸네일 이미지가 렌더링됩니다", () => {
     render(<ChatItem chatRoom={mockChatRoom} />);
 
+    const profileImage = screen.getByAltText("유저 프로필 이미지");
     const thumbnailImage = screen.getByAltText("게시글 썸네일 이미지");
-    const icon = screen.getByTestId("icon-UserProfile");
 
+    expect(profileImage).toBeInTheDocument();
     expect(thumbnailImage).toBeInTheDocument();
-    expect(icon).toBeInTheDocument();
   });
 
   it("프로필 이미지가 있을 때 Image가 렌더링됩니다", () => {
