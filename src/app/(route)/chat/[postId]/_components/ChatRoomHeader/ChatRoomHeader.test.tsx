@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 import ChatRoomHeader from "./ChatRoomHeader";
-import { ChatRoomResponse } from "@/api/fetch/chatRoom/types/ChatRoomType";
+import { ChatRoomResponse } from "@/api/fetch/chatRoom/types/ChatRoomResponse";
 import { PostType } from "@/types";
 import { MOCK_CHAT_ROOM_FOUND, MOCK_CHAT_ROOM_LOST } from "@/mock/data/chat.data";
 

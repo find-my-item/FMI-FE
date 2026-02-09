@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import ChatItem from "./ChatItem";
-import { ChatRoom } from "@/api/fetch/chatRoom/types/ChatRoomType";
+import { ChatRoom } from "@/api/fetch/chatRoom/types/ChatRoomResponse";
 import { MOCK_CHAT_ITEM } from "@/mock/data/chat.data";
 
 jest.mock("next/image", () => (props: any) => {

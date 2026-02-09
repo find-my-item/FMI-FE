@@ -1,5 +1,5 @@
 import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageTypes";
-import { WebSocketChatMessage } from "@/api/fetch/chatRoom/types/ChatRoomType";
+import { WebSocketChatMessage } from "@/api/fetch/chatRoom/types/ChatRoomResponse";
 
 const findOptimisticMessage = (
   messages: ChatMessage[],

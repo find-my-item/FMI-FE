@@ -1,5 +1,5 @@
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
-import { ChatRoomResponse } from "../types/ChatRoomType";
+import { ChatRoomResponse } from "../types/ChatRoomResponse";
 import useAppQuery from "@/api/_base/query/useAppQuery";
 
 const useGetChatRoom = ({ roomId }: { roomId: number }) => {

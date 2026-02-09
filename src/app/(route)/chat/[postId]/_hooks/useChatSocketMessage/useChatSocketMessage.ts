@@ -1,6 +1,6 @@
 import { useQueryClient, InfiniteData } from "@tanstack/react-query";
 import { useChatSocket } from "@/api/fetch/chatRoom";
-import { WebSocketChatMessage } from "@/api/fetch/chatRoom/types/ChatRoomType";
+import { WebSocketChatMessage } from "@/api/fetch/chatRoom/types/ChatRoomResponse";
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 import { ChatMessageResponse } from "@/api/fetch/chatMessage/types/ChatMessageTypes";
 import {

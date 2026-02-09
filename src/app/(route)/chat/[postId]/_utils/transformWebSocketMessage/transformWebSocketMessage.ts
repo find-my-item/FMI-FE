@@ -1,4 +1,4 @@
-import { WebSocketChatMessage } from "@/api/fetch/chatRoom/types/ChatRoomType";
+import { WebSocketChatMessage } from "@/api/fetch/chatRoom/types/ChatRoomResponse";
 import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageTypes";
 
 const transformWebSocketMessage = (message: WebSocketChatMessage): ChatMessage => {

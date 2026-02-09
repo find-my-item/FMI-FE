@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ChatRoom } from "@/api/fetch/chatRoom/types/ChatRoomType";
+import { ChatRoom } from "@/api/fetch/chatRoom/types/ChatRoomResponse";
 import { ProfileAvatar } from "@/components/common";
 import { formatDate } from "@/utils";
 import { MOCK_IMAGES } from "./MOCK_IMAGES";

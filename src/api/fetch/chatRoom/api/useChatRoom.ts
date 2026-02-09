@@ -1,5 +1,5 @@
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
-import { ChatRoomResponse } from "../types/ChatRoomType";
+import { ChatRoomResponse } from "../types/ChatRoomResponse";
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
 import useAxios from "@/api/_base/axios/useAxios";
 

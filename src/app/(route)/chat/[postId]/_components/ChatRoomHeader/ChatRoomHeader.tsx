@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { MOCK_IMAGES } from "../../../_components/ChatItem/MOCK_IMAGES";
 import ChatChip from "../ChatChip/ChatChip";
 import ChatRoomHeaderInfoButton from "../ChatRoomHeaderInfoButton/ChatRoomHeaderInfoButton";
-import { ChatRoomResponse } from "@/api/fetch/chatRoom/types/ChatRoomType";
+import { ChatRoomResponse } from "@/api/fetch/chatRoom/types/ChatRoomResponse";
 import Link from "next/link";
 
 interface ChatRoomHeaderProps {

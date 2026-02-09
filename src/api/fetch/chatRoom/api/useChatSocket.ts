@@ -8,7 +8,7 @@ import {
   unsubscribeChatSocket,
 } from "./chatSocket";
 import type { MessageHandler } from "./chatSocket";
-import { ChatListUpdateResponse, WebSocketChatMessage } from "../types/ChatRoomType";
+import { ChatListUpdateResponse, WebSocketChatMessage } from "../types/ChatRoomResponse";
 
 interface UseChatSocketOptions {
   onMessage?: (data: WebSocketChatMessage) => void;
