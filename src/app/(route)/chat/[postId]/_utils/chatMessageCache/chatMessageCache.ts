@@ -1,7 +1,7 @@
 import { QueryClient, InfiniteData } from "@tanstack/react-query";
-import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageTypes";
+import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageResponse";
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
-import { ChatMessageResponse } from "@/api/fetch/chatMessage/types/ChatMessageTypes";
+import { ChatMessageResponse } from "@/api/fetch/chatMessage/types/ChatMessageResponse";
 
 export const addMessageToCache = (
   queryClient: QueryClient,

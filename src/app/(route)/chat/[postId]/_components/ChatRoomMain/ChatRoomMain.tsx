@@ -11,7 +11,7 @@ import {
 import { cn } from "@/utils";
 import { useGetUserData } from "@/api/fetch/user";
 import { enrichMessages } from "./utils/enrichMessages";
-import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageTypes";
+import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageResponse";
 
 interface ChatRoomMainProps {
   chatMessages: ChatMessage[];

@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import ChatRoomMain from "./ChatRoomMain";
-import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageTypes";
+import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageResponse";
 import { MOCK_CHAT_MESSAGES } from "@/mock/data/chat.data";
 
 jest.mock("./_internal/hooks", () => ({

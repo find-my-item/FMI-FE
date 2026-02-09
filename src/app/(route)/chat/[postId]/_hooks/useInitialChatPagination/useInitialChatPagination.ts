@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageTypes";
+import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageResponse";
 
 interface UseInitialChatPaginationParams {
   chatMessages: ChatMessage[] | undefined;

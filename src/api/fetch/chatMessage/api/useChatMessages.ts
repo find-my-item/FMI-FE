@@ -1,5 +1,5 @@
 import useAppInfiniteQuery from "@/api/_base/query/useAppInfiniteQuery";
-import { ChatMessageResponse, ChatMessage } from "../types/ChatMessageTypes";
+import { ChatMessageResponse, ChatMessage } from "../types/ChatMessageResponse";
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 
 interface UseChatMessagesOptions {

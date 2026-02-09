@@ -1,6 +1,6 @@
 import { UseFormReset } from "react-hook-form";
 import { sendChatSocketMessage } from "@/api/fetch/chatRoom";
-import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageTypes";
+import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageResponse";
 import { addMessageToCache, removeMessageFromCache } from "../../_utils";
 import { useQueryClient } from "@tanstack/react-query";
 

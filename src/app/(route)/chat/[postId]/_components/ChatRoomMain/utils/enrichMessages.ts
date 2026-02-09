@@ -1,4 +1,4 @@
-import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageTypes";
+import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageResponse";
 import { getDateKey } from "@/utils";
 
 export interface ChatMessageWithMetadata {

@@ -1,5 +1,5 @@
 import { ChatRoom, ChatRoomResponse } from "@/api/fetch/chatRoom/types/ChatRoomResponse";
-import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageTypes";
+import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageResponse";
 
 export const MOCK_CHAT_ITEM = {
   roomId: 1,

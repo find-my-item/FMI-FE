@@ -1,7 +1,7 @@
 import { cn, formatChatTime } from "@/utils";
 import { CHAT_SENDER_STYLE } from "../../constants/CHAT_SENDER_STYLE";
 import ChatImageBox from "../ChatImageBox/ChatImageBox";
-import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageTypes";
+import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageResponse";
 import { useGetUserData } from "@/api/fetch/user";
 
 interface ChatBoxProps {

@@ -2,14 +2,14 @@ import { useQueryClient, InfiniteData } from "@tanstack/react-query";
 import { useChatSocket } from "@/api/fetch/chatRoom";
 import { WebSocketChatMessage } from "@/api/fetch/chatRoom/types/ChatRoomResponse";
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
-import { ChatMessageResponse } from "@/api/fetch/chatMessage/types/ChatMessageTypes";
+import { ChatMessageResponse } from "@/api/fetch/chatMessage/types/ChatMessageResponse";
 import {
   addMessageToCache,
   replaceMessageInCache,
   transformWebSocketMessage,
   findOptimisticMessage,
 } from "../../_utils";
-import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageTypes";
+import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageResponse";
 import useReadMessage from "@/api/fetch/chatMessage/api/useReadMessage";
 
 const useChatSocketMessage = (roomId: number, currentUserId?: number) => {
