@@ -5,11 +5,12 @@ import { useRouter } from "next/navigation";
 import { FooterButton } from "@/components/domain";
 import { RadioConfig } from "../../_constants/RadioConfig";
 import { cn } from "@/utils";
+import { DeleteUserRadioType } from "../../_types/RadioType";
 
 interface DeleteAccountRadioItemProps {
   option: { value: string; label: string };
   selected: string;
-  onChange: (value: string) => void;
+  onChange: (value: DeleteUserRadioType) => void;
   inputName: string;
 }
 
@@ -30,7 +31,7 @@ const DeleteAccountRadioItem = ({
         name={inputName}
         value={value}
         checked={isChecked}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => onChange(e.target.value as DeleteUserRadioType)}
         className="peer hidden"
         {...inputProps}
       />
@@ -49,7 +50,7 @@ const DeleteAccountRadioItem = ({
 const DeleteAccountReason = () => {
   const router = useRouter();
 
-  const [isSelected, setIsSelected] = useState<string>("");
+  const [isSelected, setIsSelected] = useState<DeleteUserRadioType | "">("");
 
   const handleNext = () => {
     router.push("?state=passwordConfirm");
