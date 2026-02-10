@@ -1,1 +1,0 @@
-export { handleSendImage } from "./handleSendImage";
