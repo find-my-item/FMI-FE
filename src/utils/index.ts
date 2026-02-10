@@ -14,3 +14,4 @@ export { formatViewCount } from "./formatViewCount/formatViewCount";
 export { resizeImage } from "./resizeImage/resizeImage";
 export { textareaAutoResize } from "./textareaAutoResize/textareaAutoResize";
 export { fileInputHandler } from "./fileInputHandler/fileInputHandler";
+export { textareaSubmitKeyHandler } from "./textareaSubmitKeyHandler/textareaSubmitKeyHandler";

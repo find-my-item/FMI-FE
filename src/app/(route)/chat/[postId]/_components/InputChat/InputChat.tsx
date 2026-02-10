@@ -1,11 +1,10 @@
 "use client";
 
 import { ChangeEvent, TextareaHTMLAttributes, useRef, useState } from "react";
-import { cn, textareaAutoResize, fileInputHandler } from "@/utils";
+import { cn, textareaAutoResize, fileInputHandler, textareaSubmitKeyHandler } from "@/utils";
 import { Controller, RegisterOptions, useFormContext } from "react-hook-form";
 import { Icon } from "@/components/common";
 import InputChatImageSection from "./_internal/InputChatImageSection";
-import { handleKeyDown } from "./utils";
 import { SelectedImage } from "@/types/SelectedImage";
 
 /**
@@ -103,7 +102,7 @@ const InputChat = ({ name, validation, disabled, roomId, userId, ...props }: Inp
                   field.onChange(e);
                   textareaAutoResize(e.target);
                 }}
-                onKeyDown={(e) => handleKeyDown(e, textareaRef)}
+                onKeyDown={(e) => textareaSubmitKeyHandler(e, textareaRef)}
                 className={cn(
                   "max-h-[120px] min-h-11 min-w-0 flex-1 resize-none overflow-y-hidden rounded-[24px] px-4 py-[10px] text-body2-medium text-neutral-normal-placeholder bg-fill-neutral-strong-default hover:placeholder-black focus:text-black disabled:text-neutral-strong-disabled",
                   field.value && "text-neutral-strong-focused"

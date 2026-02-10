@@ -3,8 +3,7 @@
 import { ChangeEvent, TextareaHTMLAttributes, useRef, useState } from "react";
 import { Controller, RegisterOptions, useFormContext } from "react-hook-form";
 import { Icon } from "@/components/common";
-import { cn, fileInputHandler, textareaAutoResize } from "@/utils";
-import { handleKeyDown } from "@/app/(route)/chat/[postId]/_components/InputChat/utils";
+import { cn, fileInputHandler, textareaAutoResize, textareaSubmitKeyHandler } from "@/utils";
 import InputCommentImageSection from "./_internal/InputCommentImageSection";
 
 interface InputCommentProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -82,7 +81,7 @@ const InputComment = ({ name, validation, disabled, ...props }: InputCommentProp
                 field.onChange(e);
                 textareaAutoResize(e.target);
               }}
-              onKeyDown={(e) => handleKeyDown(e, textareaRef)}
+              onKeyDown={(e) => textareaSubmitKeyHandler(e, textareaRef)}
               className={cn(
                 "max-h-[120px] min-h-11 min-w-0 flex-1 resize-none overflow-y-hidden rounded-[24px] px-4 py-[10px] text-body2-medium text-neutral-normal-placeholder bg-fill-neutral-strong-default",
                 "hover:placeholder-black focus:text-black disabled:text-neutral-strong-disabled",
