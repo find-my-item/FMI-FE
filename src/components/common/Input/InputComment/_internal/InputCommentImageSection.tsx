@@ -3,6 +3,7 @@
 import { useObjectURLs } from "@/hooks";
 import Image from "next/image";
 import { Icon } from "@/components/common";
+import useHorizontalDragScroll from "./useHorizontalDragScroll";
 
 interface InputCommentImageSectionProps {
   images: File[];
@@ -11,9 +12,12 @@ interface InputCommentImageSectionProps {
 
 const InputCommentImageSection = ({ images, setImages }: InputCommentImageSectionProps) => {
   const urls = useObjectURLs(images);
+  const { ref: scrollRef, onMouseDown } = useHorizontalDragScroll();
 
   return (
     <div
+      ref={scrollRef}
+      onMouseDown={onMouseDown}
       role="region"
       aria-label="댓글 이미지 목록"
       className="mb-4 flex h-[90px] w-full select-none gap-5 overflow-x-auto bg-white pl-5 pt-[10px] no-scrollbar"
