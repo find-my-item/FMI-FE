@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/utils";
-import { Icon } from "@/components/common";
+import Icon from "../../Icon/Icon";
 import { Props } from "@/components/common/Icon/Icon";
 
 /**

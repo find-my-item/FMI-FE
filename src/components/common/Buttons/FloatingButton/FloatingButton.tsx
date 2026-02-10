@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes } from "react";
-import { Icon } from "@/components/common";
+import Icon from "../../Icon/Icon";
 import { cn } from "@/utils";
 
 /**
