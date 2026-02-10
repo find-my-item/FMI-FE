@@ -1,16 +1,16 @@
 import { MypagePostListType } from "@/api/fetch/post";
 import { MypageEmptyUI, PostListItem } from "@/components/domain";
 
-interface MypagePostsListProps {
+interface MypageFavoritesListProps {
   data: MypagePostListType[];
 }
 
-const MypagePostsList = ({ data }: MypagePostsListProps) => {
+const MypageFavoritesList = ({ data }: MypageFavoritesListProps) => {
   return (
     <section>
-      <h2 className="sr-only">게시글 목록 영역</h2>
+      <h2 className="sr-only">내 즐겨찾기 목록 영역</h2>
       {data.length === 0 ? (
-        <MypageEmptyUI pageType="posts" />
+        <MypageEmptyUI pageType="favorites" />
       ) : (
         <ul>
           {data.map((item) => (
@@ -22,4 +22,4 @@ const MypagePostsList = ({ data }: MypagePostsListProps) => {
   );
 };
 
-export default MypagePostsList;
+export default MypageFavoritesList;
