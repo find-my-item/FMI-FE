@@ -1,12 +1,11 @@
 "use client";
 
 import { ChangeEvent, TextareaHTMLAttributes, useRef, useState } from "react";
-import { cn } from "@/utils";
+import { cn, textareaAutoResize, fileInputHandler } from "@/utils";
 import { Controller, RegisterOptions, useFormContext } from "react-hook-form";
 import { Icon } from "@/components/common";
 import InputChatImageSection from "./_internal/InputChatImageSection";
-import { handleFileChange, handleKeyDown } from "./utils";
-import { textareaAutoResize } from "@/utils";
+import { handleKeyDown } from "./utils";
 import { SelectedImage } from "@/types/SelectedImage";
 
 /**
@@ -88,7 +87,7 @@ const InputChat = ({ name, validation, disabled, roomId, userId, ...props }: Inp
                 multiple
                 className="hidden"
                 disabled={disabled}
-                onChange={(e) => handleFileChange(e, images, setImages)}
+                onChange={(e) => fileInputHandler(e, images, setImages)}
               />
 
               {/* 입력창 */}

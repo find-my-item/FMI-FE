@@ -3,12 +3,8 @@
 import { ChangeEvent, TextareaHTMLAttributes, useRef, useState } from "react";
 import { Controller, RegisterOptions, useFormContext } from "react-hook-form";
 import { Icon } from "@/components/common";
-import { cn } from "@/utils";
-import {
-  handleFileChange,
-  handleKeyDown,
-} from "@/app/(route)/chat/[postId]/_components/InputChat/utils";
-import { textareaAutoResize } from "@/utils";
+import { cn, fileInputHandler, textareaAutoResize } from "@/utils";
+import { handleKeyDown } from "@/app/(route)/chat/[postId]/_components/InputChat/utils";
 import InputCommentImageSection from "./_internal/InputCommentImageSection";
 
 interface InputCommentProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -71,7 +67,7 @@ const InputComment = ({ name, validation, disabled, ...props }: InputCommentProp
               multiple
               className="hidden"
               disabled={disabled}
-              onChange={(e) => handleFileChange(e, images, setImages)}
+              onChange={(e) => fileInputHandler(e, images, setImages)}
             />
 
             <textarea

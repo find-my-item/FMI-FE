@@ -1,6 +1,6 @@
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 
-export const handleFileChange = (
+export const fileInputHandler = (
   e: ChangeEvent<HTMLInputElement>,
   images: File[],
   setImages: Dispatch<SetStateAction<File[]>>

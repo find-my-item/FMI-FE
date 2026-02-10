@@ -13,3 +13,4 @@ export { getRegionSearchResults } from "./getRegionSearchResults/getRegionSearch
 export { formatViewCount } from "./formatViewCount/formatViewCount";
 export { resizeImage } from "./resizeImage/resizeImage";
 export { textareaAutoResize } from "./textareaAutoResize/textareaAutoResize";
+export { fileInputHandler } from "./fileInputHandler/fileInputHandler";
