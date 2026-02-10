@@ -13,8 +13,7 @@ const DetailContent = ({ data }: { data: DetailContentProps }) => {
   return (
     <div className="space-y-2">
       <div className="flex flex-col gap-1">
-        {/* TODO(지권): 디자인 토큰 누락 */}
-        <h2 className="text-[20px] font-semibold text-layout-header-default">{title}</h2>
+        <h2 className="text-h2-bold text-layout-header-default">{title}</h2>
         <div className="flex items-center text-body2-regular text-layout-body-default">
           <span className="block after:mx-1 after:content-['·']">{userName}</span>
           <time dateTime={createdAt}>{formatDate(createdAt)}</time>
