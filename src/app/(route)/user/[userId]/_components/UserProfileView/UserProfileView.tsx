@@ -8,16 +8,23 @@ import UserHeader from "../UserHeader/UserHeader";
 import TabContents from "../TabContents/TabContents";
 import { USER_TABS } from "../../_types/USER_TABS";
 import { useUserProfileTabQuery } from "../../_hooks/useUserProfileTabQuery";
+import { useInfiniteScroll } from "@/hooks/useInfiniteScroll/useInfiniteScroll";
 
 const UserProfileView = () => {
   const { userId } = useParams<{ userId: string }>();
 
   const { tab, updateTabQuery } = useUserProfileTabQuery();
-  const { data, isLoading, isError } = useGetUserProfileById(userId, tab);
+  const { data, isLoading, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useGetUserProfileById(userId, tab);
+  const { ref } = useInfiniteScroll({
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  });
 
   if (isError || !userId) return notFound();
-
-  const profileData = data?.result;
+  const profileData = data?.profile;
+  const listData = data?.list;
 
   return (
     <div className="h-base">
@@ -27,7 +34,9 @@ const UserProfileView = () => {
 
       <Tab tabs={USER_TABS} selected={tab} onValueChange={updateTabQuery} aria-label="프로필 탭" />
 
-      <TabContents selectedTab={tab} data={profileData} isLoading={isLoading} />
+      <TabContents selectedTab={tab} data={listData} isLoading={isLoading} />
+
+      <div ref={ref} className="h-10 w-full" />
     </div>
   );
 };
