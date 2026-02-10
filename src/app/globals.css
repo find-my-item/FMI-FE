@@ -71,3 +71,19 @@
 .animate-modal-slide-up {
   animation: modal-slide-up 350ms ease-out forwards;
 }
+
+/* Skeleton */
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(90deg, #e5e7eb 0%, #f3f4f6 50%, #e5e7eb 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2.2s infinite linear;
+}
