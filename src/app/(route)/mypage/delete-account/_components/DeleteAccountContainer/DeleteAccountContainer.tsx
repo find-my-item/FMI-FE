@@ -5,6 +5,7 @@ import { InputText } from "@/components/common";
 import { FormProvider, useForm } from "react-hook-form";
 import { FooterButton } from "@/components/domain";
 import DeleteAccountReason from "../DeleteAccountReason/DeleteAccountReason";
+import { Suspense } from "react";
 
 const PasswordConfirm = () => {
   return (
