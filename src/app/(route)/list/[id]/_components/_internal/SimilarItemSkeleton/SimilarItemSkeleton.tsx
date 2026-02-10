@@ -14,15 +14,12 @@ const SimilarItemSkeleton = () => {
       {/* Title + Meta */}
       <div className="flex w-full flex-col gap-[6px]">
         <div
-          className={cn(
-            "h-[12px] w-full rounded-full",
-            "skeleton-shimmer bg-labelsVibrant-quaternary"
-          )}
+          className={cn("h-3 w-full rounded-full", "skeleton-shimmer bg-labelsVibrant-quaternary")}
         />
         <div className="flex items-center gap-2">
           <div
             className={cn(
-              "h-[12px] w-full rounded-full",
+              "h-3 w-full rounded-full",
               "skeleton-shimmer bg-labelsVibrant-quaternary"
             )}
           />
@@ -33,28 +30,22 @@ const SimilarItemSkeleton = () => {
       <ul className="flex w-full items-center gap-2" aria-hidden="true">
         <li className="flex w-full items-center gap-1">
           <div
-            className={cn(
-              "h-[16px] w-[16px] rounded-full",
-              "skeleton-shimmer bg-labelsVibrant-quaternary"
-            )}
+            className={cn("size-4 rounded-full", "skeleton-shimmer bg-labelsVibrant-quaternary")}
           />
           <div
             className={cn(
-              "h-[12px] flex-1 rounded-full",
+              "h-3 flex-1 rounded-full",
               "skeleton-shimmer bg-labelsVibrant-quaternary"
             )}
           />
         </li>
         <li className="flex w-full items-center gap-1">
           <div
-            className={cn(
-              "h-[16px] w-[16px] rounded-full",
-              "skeleton-shimmer bg-labelsVibrant-quaternary"
-            )}
+            className={cn("size-4 rounded-full", "skeleton-shimmer bg-labelsVibrant-quaternary")}
           />
           <div
             className={cn(
-              "h-[12px] flex-1 rounded-full",
+              "h-3 flex-1 rounded-full",
               "skeleton-shimmer bg-labelsVibrant-quaternary"
             )}
           />

@@ -13,7 +13,7 @@ const ErrorSimilarSection = () => {
             다시 한 번 시도해 주세요.
           </span>
         </div>
-        <Button variant="outlined" className="h-[36px] w-[67px] px-3">
+        <Button variant="outlined" className="h-9 w-[67px] px-3">
           새로고침
         </Button>
       </div>
