@@ -1,7 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import ChatItem from "./ChatItem";
-import { ChatRoom } from "@/api/fetch/chatRoom/types/ChatListType";
+import { ChatRoom } from "@/api/fetch/chatRoom/types/ChatRoomResponse";
+import { MOCK_CHAT_ITEM } from "@/mock/data/chat.data";
 
 jest.mock("next/image", () => (props: any) => {
   return <img {...props} />;
@@ -19,31 +20,21 @@ jest.mock("next/link", () => ({
 jest.mock("@/components/common", () => ({
   __esModule: true,
   Icon: ({ name }: { name: string }) => <span data-testid={`icon-${name}`}>{name}</span>,
+  ProfileAvatar: (props: { alt?: string; src?: string | null }) => (
+    <img
+      alt={props.alt ?? "유저 프로필 이미지"}
+      data-testid="profile-avatar"
+      src={props.src ?? undefined}
+    />
+  ),
 }));
 
 const createMockChatRoom = (overrides?: Partial<ChatRoom>): ChatRoom => {
-  const now = new Date();
-  const tenMinutesAgo = new Date(now.getTime() - 10 * 60 * 1000).toISOString();
-
+  const tenMinutesAgo = new Date(Date.now() - 10 * 60 * 1000).toISOString();
   return {
-    roomId: 1,
-    contactUser: {
-      userId: 1,
-      nickname: "사용자 닉네임",
-      profileImageUrl: null,
-    },
-    postInfo: {
-      postId: 1,
-      postType: "LOST",
-      title: "테스트 게시글",
-      address: "서울시 강남구 신사동",
-      thumbnailUrl: "test-thumbnail.jpg",
-    },
-    messageType: "TEXT",
-    lastMessage:
-      "안녕하세요! 혹시 올리신 검정색 카드 지갑, 명동에서 습득하신 지갑이실까요? 혹시나 해서",
+    ...MOCK_CHAT_ITEM,
+    contactUser: { ...MOCK_CHAT_ITEM.contactUser, profileImageUrl: null },
     lastMessageSentAt: tenMinutesAgo,
-    unreadCount: 1,
     ...overrides,
   };
 };
@@ -55,17 +46,17 @@ describe("ChatItem", () => {
     render(<ChatItem chatRoom={mockChatRoom} />);
 
     const link = screen.getByRole("link");
-    expect(link).toHaveAttribute("href", "/chat/1");
+    expect(link).toHaveAttribute("href", "/chat/1?roomId=1");
   });
 
   it("유저 프로필 이미지와 게시글 썸네일 이미지가 렌더링됩니다", () => {
     render(<ChatItem chatRoom={mockChatRoom} />);
 
+    const profileImage = screen.getByAltText("유저 프로필 이미지");
     const thumbnailImage = screen.getByAltText("게시글 썸네일 이미지");
-    const icon = screen.getByTestId("icon-UserProfile");
 
+    expect(profileImage).toBeInTheDocument();
     expect(thumbnailImage).toBeInTheDocument();
-    expect(icon).toBeInTheDocument();
   });
 
   it("프로필 이미지가 있을 때 Image가 렌더링됩니다", () => {

@@ -28,6 +28,11 @@ authApi.interceptors.response.use(
       try {
         await authApi.post("/auth/refresh");
 
+        // 토큰 재발급 성공 시 커스텀 이벤트 발생
+        if (typeof window !== "undefined") {
+          window.dispatchEvent(new CustomEvent("tokenRefreshed"));
+        }
+
         return authApi(originalRequest);
       } catch (refreshError) {
         // 로그아웃 안내 토스트는 로그인 페이지에서 보여줌

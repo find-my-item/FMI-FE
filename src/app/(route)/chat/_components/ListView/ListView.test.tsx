@@ -1,6 +1,16 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import ListView from "./ListView";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 const mockSearchUpdateQuery = jest.fn();
 
@@ -33,6 +43,10 @@ jest.mock("../DefaultList/DefaultList", () => ({
 
 import { useSearchUpdateQueryString } from "@/hooks";
 
+const renderWithQueryClient = (component: React.ReactElement) => {
+  return render(<QueryClientProvider client={queryClient}>{component}</QueryClientProvider>);
+};
+
 describe("ListView", () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -44,7 +58,7 @@ describe("ListView", () => {
       searchUpdateQuery: mockSearchUpdateQuery,
     });
 
-    render(<ListView />);
+    renderWithQueryClient(<ListView />);
 
     const detailHeader = screen.getByTestId("detail-header");
     expect(detailHeader).toHaveTextContent("채팅");
@@ -59,7 +73,7 @@ describe("ListView", () => {
       searchUpdateQuery: mockSearchUpdateQuery,
     });
 
-    render(<ListView />);
+    renderWithQueryClient(<ListView />);
 
     const detailHeader = screen.getByTestId("detail-header");
     expect(detailHeader).toHaveTextContent("지역 선택");
@@ -75,7 +89,7 @@ describe("ListView", () => {
       searchUpdateQuery: mockSearchUpdateQuery,
     });
 
-    render(<ListView />);
+    renderWithQueryClient(<ListView />);
 
     const detailHeader = screen.getByTestId("detail-header");
     expect(detailHeader).toHaveTextContent("채팅");
@@ -91,7 +105,7 @@ describe("ListView", () => {
       searchUpdateQuery: mockSearchUpdateQuery,
     });
 
-    render(<ListView />);
+    renderWithQueryClient(<ListView />);
 
     const defaultList = screen.getByTestId("default-list");
     defaultList.click();
@@ -105,7 +119,7 @@ describe("ListView", () => {
       searchUpdateQuery: mockSearchUpdateQuery,
     });
 
-    render(<ListView />);
+    renderWithQueryClient(<ListView />);
 
     const listSearch = screen.getByTestId("list-search");
     expect(listSearch).toHaveTextContent("region");
