@@ -20,7 +20,6 @@ export { default as ImageSelectButton } from "./Buttons/ImageSelectButton/ImageS
 export { default as ScrollToTopButton } from "./Buttons/ScrollToTopButton/ScrollToTopButton";
 export { default as InputText } from "./Input/InputText/InputText";
 export { default as InputField } from "./Input/InputField/InputField";
-export { default as InputChat } from "./Input/InputChat/InputChat";
 export { default as InputSearch } from "./Input/InputSearch/InputSearch";
 export { default as RequiredText } from "./RequiredText/RequiredText";
 export { default as ProfileAvatar } from "./ProfileAvatar/ProfileAvatar";

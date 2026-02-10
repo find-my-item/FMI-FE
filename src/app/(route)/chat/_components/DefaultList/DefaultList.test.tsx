@@ -48,28 +48,32 @@ jest.mock("../FilterDropdown/FilterDropdown", () => ({
   ),
 }));
 
-jest.mock("@/api/fetch/chatRoom", () => ({
-  useChatList: jest.fn(() => ({
-    data: Array.from({ length: 5 }, (_, i) => ({
-      roomId: i + 1,
-      contactUser: { userId: i + 1, nickname: `User${i + 1}`, profileImageUrl: null },
-      postInfo: {
-        postId: i + 1,
-        postType: "LOST",
-        title: `Post${i + 1}`,
-        address: "서울시 강남구",
-        thumbnailUrl: null,
-      },
-      messageType: "TEXT",
-      lastMessage: "Test message",
-      lastMessageSentAt: new Date().toISOString(),
-      unreadCount: 0,
+jest.mock("@/api/fetch/chatRoom", () => {
+  const { MOCK_CHAT_ITEM } = require("@/mock/data/chat.data");
+  const { MOCK_POST_ITEM } = require("@/mock/data/posts.data");
+  return {
+    useChatList: jest.fn(() => ({
+      data: Array.from({ length: 5 }, (_, i) => ({
+        ...MOCK_CHAT_ITEM,
+        roomId: i + 1,
+        contactUser: { userId: i + 1, nickname: `User${i + 1}`, profileImageUrl: null },
+        postInfo: {
+          postId: i + 1,
+          postType: MOCK_POST_ITEM.postType,
+          title: MOCK_POST_ITEM.title,
+          address: MOCK_POST_ITEM.address,
+          thumbnailUrl: null,
+        },
+        lastMessage: "Test message",
+        lastMessageSentAt: new Date().toISOString(),
+        unreadCount: 0,
+      })),
+      fetchNextPage: jest.fn(),
+      isFetchingNextPage: false,
+      hasNextPage: false,
     })),
-    fetchNextPage: jest.fn(),
-    isFetchingNextPage: false,
-    hasNextPage: false,
-  })),
-}));
+  };
+});
 
 jest.mock("@/api/_base/query/useAppMutation", () => {
   return jest.fn(() => ({

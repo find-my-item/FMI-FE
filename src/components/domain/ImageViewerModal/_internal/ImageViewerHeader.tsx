@@ -4,6 +4,7 @@ import { downloadImage } from "../_utils/imageViewer";
 import type { Swiper as SwiperType } from "swiper";
 import { RefObject } from "react";
 import { ImageInfo } from "../_types/ImageInfo";
+import formatDateWithTime from "./formatDateWithTime";
 
 interface ImageViewerHeaderProps {
   onClose: () => void;
@@ -13,8 +14,7 @@ interface ImageViewerHeaderProps {
   imageInfo?: ImageInfo;
 }
 
-const NAV_BUTTON_STYLE =
-  "h-[40px] rounded-[10px] bg-fill-neutralInversed-strong-default flex-center";
+const NAV_BUTTON_STYLE = "h-10 rounded-[10px] bg-fill-neutralInversed-strong-default flex-center";
 
 const ImageViewerHeader = ({
   onClose,
@@ -32,7 +32,7 @@ const ImageViewerHeader = ({
     <header className="absolute left-0 right-0 top-0 flex items-center justify-between px-4 py-1">
       <button
         onClick={onClose}
-        className={cn(NAV_BUTTON_STYLE, "w-[40px]")}
+        className={cn(NAV_BUTTON_STYLE, "w-10")}
         aria-label="이미지 상세 보기 닫기"
       >
         <Icon name="ArrowLeftSmall" size={18} />
@@ -43,7 +43,7 @@ const ImageViewerHeader = ({
             {imageInfo.uploader}
           </span>
           <time className="text-caption1-medium text-layout-body-default">
-            {imageInfo.createdAt}
+            {formatDateWithTime(imageInfo.createdAt)}
           </time>
         </div>
       )}

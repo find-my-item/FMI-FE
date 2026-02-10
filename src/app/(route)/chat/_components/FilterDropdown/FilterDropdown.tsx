@@ -35,7 +35,7 @@ const FilterDropdown = ({
   const selectedValue = searchParams.get(keyName);
   const displayText =
     SELECTED_TEXT[
-      (selectedValue || (keyName === "sort" ? "latest" : "all")) as keyof typeof SELECTED_TEXT
+      (selectedValue || (keyName === "SORT" ? "LATEST" : "ALL")) as keyof typeof SELECTED_TEXT
     ];
   const isSelected = !!selectedValue;
 

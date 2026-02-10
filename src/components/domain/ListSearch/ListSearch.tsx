@@ -24,7 +24,7 @@ const ListSearch = ({ searchMode }: ListSearchProps) => {
   return (
     <>
       <FormProvider {...methods}>
-        <div className="px-[20px] py-[10px]">
+        <div className="px-5 py-[10px]">
           <InputSearch
             mode="RHF"
             name={`${searchMode}Search`}
