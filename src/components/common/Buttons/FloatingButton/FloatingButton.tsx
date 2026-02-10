@@ -47,7 +47,7 @@ const FloatingButton = ({
     <button
       aria-label={ariaLabel}
       className={cn(
-        "h-[70px] w-[70px] rounded-full p-3 flex-center",
+        "h-[70px] w-[70px] rounded-full p-3 transition-colors duration-150 flex-center",
         "glass-card bg-opacity-70 bg-fill-brand-strong-default",
         "hover:bg-fill-brand-strong-hover",
         "disabled:bg-fill-brand-strong-disabled",

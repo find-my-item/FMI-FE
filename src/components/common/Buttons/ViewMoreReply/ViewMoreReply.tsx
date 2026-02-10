@@ -60,14 +60,14 @@ const ViewMoreReply = ({
           aria-label={viewMoreAriaLabel}
           disabled={disabled}
         >
-          <span className="text-body1-medium text-brand-normal-default hover:text-brand-normal-hover active:text-brand-normal-pressed disabled:text-brand-normal-disabled">
+          <span className="text-body1-medium text-brand-normal-default transition-colors duration-150 hover:text-brand-normal-hover active:text-brand-normal-pressed disabled:text-brand-normal-disabled">
             {text}
           </span>
           <Icon name={isOpen ? "ArrowUp" : "ArrowDown"} size={20} />
         </button>
         <button
           onClick={onWriteReply}
-          className="text-body1-medium text-neutral-strong-default hover:text-black active:text-neutral-strong-preesed disabled:text-neutral-strong-disabled"
+          className="text-body1-medium text-neutral-strong-default transition-colors duration-150 hover:text-black active:text-neutral-strong-preesed disabled:text-neutral-strong-disabled"
           aria-label={writeReplyAriaLabel}
           disabled={disabled}
         >

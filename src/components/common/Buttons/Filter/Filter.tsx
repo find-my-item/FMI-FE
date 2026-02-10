@@ -65,7 +65,7 @@ const Filter = ({
       {...props}
       aria-label={`${ariaLabel} 필터`}
       className={cn(
-        "gap-[4px] whitespace-nowrap rounded-full px-[18px] py-[8px] text-body1-semibold flex-center",
+        "gap-[4px] whitespace-nowrap rounded-full px-[18px] py-[8px] text-body1-semibold transition-colors duration-150 flex-center",
         !onSelected &&
           "text-neutralInversed-normal-default bg-fill-neutralInversed-normal-default hover:text-black hover:bg-fill-neutralInversed-normal-hover active:text-neutralInversed-normal-pressed active:bg-fill-neutralInversed-normal-preesed disabled:text-neutralInversed-normal-disabled disabled:bg-fill-neutralInversed-normal-disabled",
         onSelected &&
