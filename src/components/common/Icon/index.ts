@@ -79,6 +79,5 @@ export { default as ServerError } from "@/assets/server-error.svg";
 export { default as AdminLogo } from "@/assets/admin-logo.svg";
 export { default as Pencil } from "@/assets/pencil.svg";
 export { default as Like } from "@/assets/like.svg";
-export { default as UserEmptyPost } from "@/assets/user-empty-post.svg";
-export { default as UserEmptyComment } from "@/assets/user-empty-comment.svg";
-export { default as UserEmptyFavorite } from "@/assets/user-empty-favorite.svg";
+export { default as EmptyFavorite } from "@/assets/empty-favorite.svg";
+export { default as ScrollTopArrow } from "@/assets/scrolltop-arrow-up.svg";
