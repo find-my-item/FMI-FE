@@ -1,4 +1,7 @@
-import Icon from "../../Icon/Icon";
+"use client";
+
+import { Icon } from "@/components/common";
+import { ReactNode, useState } from "react";
 
 /**
  * @author hyungjun
@@ -26,43 +29,48 @@ import Icon from "../../Icon/Icon";
 
 interface ViewMoreReplyProps {
   text: string;
-  onViewMore?: () => void;
   onWriteReply?: () => void;
   viewMoreAriaLabel?: string;
   writeReplyAriaLabel?: string;
   disabled?: boolean;
+  replyComponent?: ReactNode;
 }
 
 // TODO(형준): svgr 수정 시, 아이콘 색 수정
 const ViewMoreReply = ({
   text,
-  onViewMore,
   onWriteReply,
   viewMoreAriaLabel = "답글 더보기",
   writeReplyAriaLabel = "답글 쓰기",
   disabled = false,
+  replyComponent,
 }: ViewMoreReplyProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <div className="flex min-h-[40px] w-[390px] items-center gap-[12px]">
-      <button
-        onClick={onViewMore}
-        className="flex items-center gap-[4px]"
-        aria-label={viewMoreAriaLabel}
-        disabled={disabled}
-      >
-        <span className="text-body1-medium text-brand-normal-default hover:text-brand-normal-hover active:text-brand-normal-pressed disabled:text-brand-normal-disabled">
-          {text}
-        </span>
-        <Icon name="ArrowDown" size={20} />
-      </button>
-      <button
-        onClick={onWriteReply}
-        className="text-body1-medium text-neutral-strong-default hover:text-black active:text-neutral-strong-preesed disabled:text-neutral-strong-disabled"
-        aria-label={writeReplyAriaLabel}
-        disabled={disabled}
-      >
-        답글 쓰기
-      </button>
+    <div className="flex flex-col gap-2">
+      <div className="flex min-h-[40px] w-[390px] items-center gap-[12px]">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="flex items-center gap-[4px]"
+          aria-label={viewMoreAriaLabel}
+          disabled={disabled}
+        >
+          <span className="text-body1-medium text-brand-normal-default hover:text-brand-normal-hover active:text-brand-normal-pressed disabled:text-brand-normal-disabled">
+            {text}
+          </span>
+          <Icon name={isOpen ? "ArrowUp" : "ArrowDown"} size={20} />
+        </button>
+        <button
+          onClick={onWriteReply}
+          className="text-body1-medium text-neutral-strong-default hover:text-black active:text-neutral-strong-preesed disabled:text-neutral-strong-disabled"
+          aria-label={writeReplyAriaLabel}
+          disabled={disabled}
+        >
+          답글 쓰기
+        </button>
+      </div>
+      {isOpen && replyComponent}
     </div>
   );
 };
