@@ -62,6 +62,7 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
                   iconName: "EmptyPostList",
                   iconSize: 200,
                 }}
+                description={"아직 게시글이 없어요.\n가장 먼저 작성해보세요!"}
               />
             ) : (
               <>
