@@ -1,3 +1,5 @@
+import { MypagePostListType } from "@/api/fetch/post";
+
 export const MOCK_MYPAGE_COMMENTS_ITEM = [
   {
     commentId: 1,
@@ -109,7 +111,7 @@ export const MOCK_MYPAGE_INQUIRIES = [
   },
 ] as const;
 
-export const MOCK_MYPAGE_POSTS_LIST = [
+export const MOCK_MYPAGE_POSTS_LIST: MypagePostListType[] = [
   {
     postId: 1,
     title: "아이폰 15 프로 맥스 분실했습니다 ㅠㅠ",
@@ -149,7 +151,7 @@ export const MOCK_MYPAGE_POSTS_LIST = [
       "오늘 아침 출근길에 버스 정류장에서 떨어뜨린 것 같습니다. 뒷면에 서명이 되어있지 않습니다.",
     thumbnailUrl: "https://picsum.photos/400/300?random=3",
     address: "경기도 성남시 분당구",
-    itemStatus: "COMPLETED",
+    itemStatus: "SEARCHING",
     postType: "LOST",
     category: "CARD",
     favoriteCount: 2,
@@ -167,7 +169,7 @@ export const MOCK_MYPAGE_POSTS_LIST = [
     address: "서울특별시 송파구 잠실동",
     itemStatus: "SEARCHING",
     postType: "FOUND",
-    category: "ANIMAL",
+    category: "ETC",
     favoriteCount: 56,
     viewCount: 1200,
     createdAt: "30분 전",
