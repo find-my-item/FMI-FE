@@ -55,7 +55,7 @@ const FloatingButton = ({
       )}
       {...props}
     >
-      <Icon name="Plus" size={32} className={iconClassName} />
+      <Icon name="FloatingPlus" size={32} className={iconClassName} />
     </button>
   );
 };
