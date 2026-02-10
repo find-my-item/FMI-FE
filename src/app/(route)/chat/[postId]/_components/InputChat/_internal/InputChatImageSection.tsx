@@ -1,8 +1,8 @@
 "use client";
 
 import { Icon, ImageSelectButton } from "@/components/common";
-import { handleSendImage } from "./handleSendImage";
 import useSendImage from "@/api/fetch/chatMessage/api/useSendImage";
+import { useHandleSendImage } from "./useHandleSendImage";
 import {
   InputChatImageSectionIds,
   InputChatImageSectionImageState,
@@ -17,6 +17,7 @@ const InputChatImageSection = ({ ids, imageState }: InputChatImageSectionProps) 
   const { roomId, userId } = ids;
   const { images, setImages, selectedImages, setSelectedImages } = imageState;
   const { mutate: sendImage } = useSendImage(roomId, userId);
+  const handleSendImage = useHandleSendImage();
 
   return (
     <>
