@@ -1,5 +1,3 @@
-import { KebabMenu } from "@/components/common";
-
 const Page = () => {
   const shades = [100, 200, 300, 400, 500, 600, 700, 800, 900];
 
@@ -11,14 +9,6 @@ const Page = () => {
           Design System Showcase
         </h1>
         {/* Colors */}
-        <KebabMenu
-          items={[
-            { text: "TEXT", disabled: true },
-            { text: "TEXT", textColor: "text-yellow-500" },
-            { text: "TEXT" },
-            { text: "TEXT" },
-          ]}
-        />
         <section className="mb-12">
           <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-gray-100">Colors</h2>
 

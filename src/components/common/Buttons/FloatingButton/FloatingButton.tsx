@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes } from "react";
-import Icon from "../../Icon/Icon";
+import { Icon } from "@/components/common";
 import { cn } from "@/utils";
 
 /**
@@ -48,7 +48,9 @@ const FloatingButton = ({
       aria-label={ariaLabel}
       className={cn(
         "h-[70px] w-[70px] rounded-full p-3 flex-center",
-        "glass-card bg-opacity-70 bg-fill-brand-normal-default",
+        "glass-card bg-opacity-70 bg-fill-brand-strong-default",
+        "hover:bg-fill-brand-strong-hover",
+        "disabled:bg-fill-brand-strong-disabled",
         buttonClassName
       )}
       {...props}
