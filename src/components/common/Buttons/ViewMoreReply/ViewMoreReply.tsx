@@ -1,6 +1,6 @@
 "use client";
 
-import { Icon } from "@/components/common";
+import Icon from "../../Icon/Icon";
 import { ReactNode, useState } from "react";
 
 /**
