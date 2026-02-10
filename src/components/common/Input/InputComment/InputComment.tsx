@@ -1,85 +1,139 @@
 "use client";
 
-import { TextareaHTMLAttributes, useState } from "react";
-import { FormProvider, RegisterOptions, useForm } from "react-hook-form";
-import { useToast } from "@/context/ToastContext";
-import { resizeImage } from "@/utils";
-import InputCommentField from "./_internal/InputCommentField";
+import { Controller, RegisterOptions, useFormContext } from "react-hook-form";
+import { ChangeEvent, Dispatch, SetStateAction, useRef } from "react";
+import InputCommentImageSection from "./_internal/InputCommentImageSection";
+import { Icon } from "@/components/common";
+import { cn, fileInputHandler, textareaAutoResize, textareaSubmitKeyHandler } from "@/utils";
 
-export interface InputCommentSubmitPayload {
-  content: string;
-  images: File[];
-}
-
-export type InputCommentOnSubmitApi = (payload: InputCommentSubmitPayload) => Promise<void>;
-
-interface InputCommentProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "name"> {
-  name?: string;
+interface InputCommentFieldProps {
+  name: string;
   validation?: RegisterOptions;
   disabled?: boolean;
-  onSubmitApi: InputCommentOnSubmitApi;
+  images: File[];
+  setImages: Dispatch<SetStateAction<File[]>>;
 }
 
 /**
  * @author hyungjun
  *
- * 댓글 입력용 공통 컴포넌트입니다.
- * FormProvider·이미지 state·검증·리사이징·전송 후 클리어를 내부에서 처리하며,
- * 사용처는 onSubmitApi만 넘기면 됩니다.
+ * @description
+ * 댓글 입력 UI(텍스트 + 이미지 첨부 + 전송 버튼)를 제공하는 공통 컴포넌트입니다.
+ *
+ * **사용하는 쪽에서 처리할 작업**
+ * - `FormProvider` + `useForm`으로 폼을 감싸고, `form`의 `onSubmit`에서 전송 로직 처리
+ * - `images`, `setImages` state를 선언해 전달 (이미지 첨부 상태는 사용처에서 관리)
+ * - submit 시: form 값(`content`)과 `images`를 수집 후 API 호출. 이미지가 있으면 S3 업로드 → URL 수신 → 댓글 API에 `image: urls` 포함해 호출하는 식으로 구현
+ * - API 성공 시 `methods.reset()` 및 `setImages([])`로 초기화. `mutate`의 `onSuccess` 콜백에서 초기화 처리
+ * - (선택) `validation`, `disabled` 전달
+ *
+ * @param name - react-hook-form 필드명.
+ * @param validation - content 필드 검증 규칙. (선택)
+ * @param disabled - 입력·전송 비활성화. (기본값: `false`)
+ * @param images - 첨부 이미지 파일 배열. 사용처 state에서 전달.
+ * @param setImages - 첨부 이미지 state setter. 사용처에서 전달.
  *
  * @example
  * ```tsx
- * <InputComment
- *   onSubmitApi={async ({ content, images }) => {
- *     await createCommentApi({ postId, content, images });
- *   }}
- * />
+ * const [images, setImages] = useState<File[]>([]);
+ * const methods = useForm();
+ *
+ * const onSubmit = (data) => {
+ *   // 이미지/댓글 검증 작업
+ *   // 댓글 API 호출(이미지는 S3 업로드 후 URL 수신)
+ *   // 성공 시 methods.reset(); setImages([]);
+ * };
+ *
+ * <FormProvider {...methods}>
+ *   <form onSubmit={methods.handleSubmit(onSubmit)}>
+ *     <InputComment name="content" images={images} setImages={setImages} />
+ *   </form>
+ * </FormProvider>
  * ```
  */
 
-const DEFAULT_NAME = "content";
-
-const InputComment = ({
-  name = DEFAULT_NAME,
+const InputCommentField = ({
+  name,
   validation,
   disabled,
-  onSubmitApi,
-}: InputCommentProps) => {
-  const [images, setImages] = useState<File[]>([]);
-  const { addToast } = useToast();
-  const methods = useForm<{ [key: string]: string }>({
-    defaultValues: { [name]: "" },
-    mode: "onChange",
-  });
-
-  const handleSubmit = methods.handleSubmit(async (data) => {
-    const content = (data[name] as string)?.trim() ?? "";
-    if (!content && images.length === 0) return;
-
-    try {
-      const resizedImages =
-        images.length > 0 ? await Promise.all(images.map((file) => resizeImage(file))) : [];
-      await onSubmitApi({ content, images: resizedImages });
-      methods.reset();
-      setImages([]);
-    } catch {
-      addToast("전송에 실패했습니다.", "error");
-    }
-  });
+  images,
+  setImages,
+}: InputCommentFieldProps) => {
+  const { control } = useFormContext();
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
   return (
-    <FormProvider {...methods}>
-      <form onSubmit={handleSubmit}>
-        <InputCommentField
-          name={name}
-          validation={validation}
-          disabled={disabled}
-          images={images}
-          setImages={setImages}
-        />
-      </form>
-    </FormProvider>
+    <>
+      {images.length > 0 && <InputCommentImageSection images={images} setImages={setImages} />}
+      <Controller
+        name={name}
+        control={control}
+        rules={validation}
+        render={({ field }) => (
+          <div className="flex w-full flex-row items-end gap-2 overflow-y-visible">
+            <label
+              htmlFor="ImageAttach"
+              className="relative h-11 w-11 shrink-0 rounded-full bg-fill-neutral-strong-default"
+              aria-label="이미지 첨부"
+              role="button"
+            >
+              <Icon
+                name="Image"
+                size={20}
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+              />
+            </label>
+            <input
+              id="ImageAttach"
+              type="file"
+              accept="image/*"
+              multiple
+              className="hidden"
+              disabled={disabled}
+              onChange={(e) => fileInputHandler(e, images, setImages)}
+            />
+
+            <textarea
+              {...field}
+              ref={(el) => {
+                field.ref(el);
+                textareaRef.current = el;
+              }}
+              rows={1}
+              onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
+                field.onChange(e);
+                textareaAutoResize(e.target);
+              }}
+              onKeyDown={(e) => textareaSubmitKeyHandler(e, textareaRef)}
+              className={cn(
+                "max-h-[120px] min-h-11 min-w-0 flex-1 resize-none overflow-y-hidden rounded-[24px] px-4 py-[10px] text-body2-medium text-neutral-normal-placeholder bg-fill-neutral-strong-default",
+                "hover:placeholder-black focus:text-black disabled:text-neutral-strong-disabled",
+                field.value && "text-neutral-strong-focused"
+              )}
+              placeholder="메시지 보내기"
+              disabled={disabled}
+            />
+
+            <button
+              type="submit"
+              className={cn(
+                "relative h-11 w-11 shrink-0 rounded-full bg-fill-brand-normal-default",
+                "hover:bg-fill-brand-normal-disabled active:bg-fill-brand-normal-default disabled:bg-fill-brand-normal-disabled"
+              )}
+              aria-label="전송 버튼"
+              disabled={disabled || (!field.value?.trim() && images.length === 0)}
+            >
+              <Icon
+                name="Send"
+                size={20}
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+              />
+            </button>
+          </div>
+        )}
+      />
+    </>
   );
 };
 
-export default InputComment;
+export default InputCommentField;

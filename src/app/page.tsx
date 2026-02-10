@@ -1,35 +1,5 @@
-"use client";
-
-import useAppMutation from "@/api/_base/query/useAppMutation";
-import { InputComment } from "@/components/common";
-
 const Page = () => {
   const shades = [100, 200, 300, 400, 500, 600, 700, 800, 900];
-  const { mutate: sendComment } = useAppMutation("auth", `/comments/${1}`, "post");
-  const onSubmitApi = async ({ content, images }: { content: string; images: File[] }) => {
-    // 게시글 댓글 전송 api 호출
-    // sendComment({
-    //   request: {
-    //     content,
-    //     parentId,
-    //   },
-    //   image: images,
-    // });
-    // or
-    // 이미지 없는 댓글 전송 api 호출
-    // sendComment({
-    //   content,
-    //   parentId,
-    // });
-    console.log(content, images);
-    sendComment({
-      request: {
-        content,
-        parentId: 0,
-      },
-      image: images,
-    });
-  };
 
   return (
     <div className="min-h-screen bg-white p-8 transition-colors duration-200 dark:bg-gray-900">
@@ -38,7 +8,7 @@ const Page = () => {
         <h1 className="font-heading mb-6 text-4xl font-bold text-gray-900 dark:text-gray-100 tablet:mb-10">
           Design System Showcase
         </h1>
-        <InputComment onSubmitApi={onSubmitApi} />
+
         {/* Colors */}
         <section className="mb-12">
           <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-gray-100">Colors</h2>
