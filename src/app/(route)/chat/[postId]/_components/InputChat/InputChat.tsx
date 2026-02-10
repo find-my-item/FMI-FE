@@ -5,7 +5,8 @@ import { cn } from "@/utils";
 import { Controller, RegisterOptions, useFormContext } from "react-hook-form";
 import { Icon } from "@/components/common";
 import InputChatImageSection from "./_internal/InputChatImageSection";
-import { handleFileChange, adjustHeight, handleKeyDown } from "./utils";
+import { handleFileChange, handleKeyDown } from "./utils";
+import { textareaAutoResize } from "@/utils";
 import { SelectedImage } from "@/types/SelectedImage";
 
 /**
@@ -101,7 +102,7 @@ const InputChat = ({ name, validation, disabled, roomId, userId, ...props }: Inp
                 rows={1}
                 onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
                   field.onChange(e);
-                  adjustHeight(e.target);
+                  textareaAutoResize(e.target);
                 }}
                 onKeyDown={(e) => handleKeyDown(e, textareaRef)}
                 className={cn(

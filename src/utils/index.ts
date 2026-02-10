@@ -12,3 +12,4 @@ export { normalizeEnumValue } from "./normalizeEnumValue/normalizeEnumValue";
 export { getRegionSearchResults } from "./getRegionSearchResults/getRegionSearchResults";
 export { formatViewCount } from "./formatViewCount/formatViewCount";
 export { resizeImage } from "./resizeImage/resizeImage";
+export { textareaAutoResize } from "./textareaAutoResize/textareaAutoResize";

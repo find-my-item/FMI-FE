@@ -5,10 +5,10 @@ import { Controller, RegisterOptions, useFormContext } from "react-hook-form";
 import { Icon } from "@/components/common";
 import { cn } from "@/utils";
 import {
-  adjustHeight,
   handleFileChange,
   handleKeyDown,
 } from "@/app/(route)/chat/[postId]/_components/InputChat/utils";
+import { textareaAutoResize } from "@/utils";
 import InputCommentImageSection from "./_internal/InputCommentImageSection";
 
 interface InputCommentProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -84,7 +84,7 @@ const InputComment = ({ name, validation, disabled, ...props }: InputCommentProp
               rows={1}
               onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
                 field.onChange(e);
-                adjustHeight(e.target);
+                textareaAutoResize(e.target);
               }}
               onKeyDown={(e) => handleKeyDown(e, textareaRef)}
               className={cn(
