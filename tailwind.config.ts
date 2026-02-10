@@ -38,6 +38,7 @@ const {
   bg,
   accent,
   boxShadow,
+  labelsVibrant,
   ...validExtend
 } = typedConfig.theme?.extend ?? {};
 
@@ -54,7 +55,7 @@ const config: Config = {
     extend: {
       fill: (typedConfig.theme?.extend as any)?.fill ?? {},
       ...validExtend,
-      colors: { ...color, system },
+      colors: { ...color, system, labelsVibrant },
       fontFamily: { sans: ["var(--font-pretendard)", "Inter", "sans-serif"] },
       lineHeight: lineHeights,
       fontWeight: fontWeights,
