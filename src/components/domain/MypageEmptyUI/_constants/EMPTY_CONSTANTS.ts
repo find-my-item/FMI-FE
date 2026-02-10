@@ -12,7 +12,7 @@ export const EMPTY_CONSTANTS = {
   favorites: {
     titleText: "즐겨찾기한 게시글",
     subText: "나중에 다시 보고 싶은 게시글을 모아보세요!",
-    iconName: "NoReports",
+    iconName: "EmptyFavorite",
   },
   reports: {
     titleText: "신고 내역",
