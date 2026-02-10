@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { UserProfileView } from "..";
-import { MOCK_USER_PROFILE } from "@/mock/data";
+import { MOCK_USER_PROFILE_DATA_BY_POSTS } from "@/mock/data";
 
 const mockNotFound = jest.fn();
 const mockUseParams = jest.fn();
@@ -78,25 +78,25 @@ describe("UserProfileView", () => {
 
   it("data가 있을 때 UserProfileView가 렌더링되어야 합니다", () => {
     mockUseGetUserProfileById.mockReturnValue({
-      data: { result: MOCK_USER_PROFILE },
+      data: MOCK_USER_PROFILE_DATA_BY_POSTS,
       isLoading: false,
       isError: false,
     });
 
     render(<UserProfileView />);
 
-    expect(screen.getByText("tester01")).toBeInTheDocument();
+    expect(screen.getByText("짱구")).toBeInTheDocument();
   });
 
   it("h1 태그 스크린 리더 텍스트가 올바르게 설정되어야 합니다", () => {
     mockUseGetUserProfileById.mockReturnValue({
-      data: { result: MOCK_USER_PROFILE },
+      data: MOCK_USER_PROFILE_DATA_BY_POSTS,
       isLoading: false,
       isError: false,
     });
 
     render(<UserProfileView />);
 
-    expect(screen.getByRole("heading", { level: 1, name: "tester01 프로필" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1, name: "짱구 프로필" })).toBeInTheDocument();
   });
 });
