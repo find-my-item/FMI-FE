@@ -11,7 +11,6 @@ export const handleFileChange = (
   const totalFiles = images.length + selectedFiles.length;
 
   if (totalFiles > 5) {
-    alert("사진은 최대 5장까지 선택 가능합니다.");
     selectedFiles.splice(5 - images.length);
   }
 
