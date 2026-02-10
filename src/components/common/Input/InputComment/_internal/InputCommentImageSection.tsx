@@ -26,7 +26,7 @@ const InputCommentImageSection = ({ images, setImages }: InputCommentImageSectio
         <div key={url} className="relative h-[80px] w-[80px] shrink-0 rounded-[16px]">
           <Image
             src={url}
-            alt="image"
+            alt={`댓글 이미지 ${index + 1}`}
             className="h-[80px] w-[80px] rounded-[16px] object-cover"
             width={80}
             height={80}
