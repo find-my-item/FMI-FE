@@ -5,7 +5,7 @@ import { Button, Icon, InputField, RequiredText } from "@/components/common";
 import { cn } from "@/utils";
 import { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
-import { ReportReasonModal, ReportPopupLayout, ReportReason } from "./_internal";
+import { ReportReasonModal, ReportPopupLayout, ReportReason, TargetType } from "./_internal";
 
 type ReportFormValues = {
   reason: string;
@@ -14,7 +14,7 @@ type ReportFormValues = {
 interface ReportProps {
   isOpen: boolean;
   onClose: () => void;
-  targetType: "POST" | "COMMENT" | "USER" | "CHAT";
+  targetType: TargetType;
   targetId: number;
 }
 

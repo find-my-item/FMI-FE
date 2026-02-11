@@ -1,9 +1,10 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import { REPORT_REASONS, ReportReason } from "./REPORT_REASONS";
+import { REPORT_REASONS } from "./REPORT_REASONS";
 import { createPortal } from "react-dom";
 import { Button } from "@/components/common";
+import { ReportReason } from "./ReportTypes";
 
 interface ReportReasonModalProps {
   isOpen: boolean;
