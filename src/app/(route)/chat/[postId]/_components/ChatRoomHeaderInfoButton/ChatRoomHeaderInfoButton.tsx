@@ -1,26 +1,26 @@
 "use client";
 
 import { ConfirmModal, Icon } from "@/components/common";
+import { Report } from "@/components/domain";
 import { cn } from "@/utils";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { INFO_OPTIONS } from "./INFO_OPTIONS";
 import useLeaveChatRoom from "@/api/fetch/chatRoom/api/useLeaveChatRoom";
 import useClickOutside from "./useClickOutside";
 
 const ChatRoomHeaderInfoButton = ({ roomId }: { roomId: number }) => {
-  const [open, setOpen] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
-  const containerRef = useClickOutside(() => setOpen(false));
-  const router = useRouter();
+  const [chatMenuOpen, setChatMenuOpen] = useState(false);
+  const [leaveChatRoomModalOpen, setLeaveChatRoomModalOpen] = useState(false);
+  const [reportOpen, setReportOpen] = useState(false);
+  const containerRef = useClickOutside(() => setChatMenuOpen(false));
   const { mutate: leaveChatRoom } = useLeaveChatRoom(roomId);
 
   const handleOptionClick = (value: "report" | "leave") => {
-    if (value !== "leave") {
-      router.push(`/chat/${roomId}/report`);
+    if (value === "report") {
+      setReportOpen(true);
       return;
     }
-    setModalOpen(true);
+    setLeaveChatRoomModalOpen(true);
   };
 
   return (
@@ -30,11 +30,11 @@ const ChatRoomHeaderInfoButton = ({ roomId }: { roomId: number }) => {
           className="flex h-10 w-10 items-center justify-end"
           aria-label="채팅방 메뉴 열기 버튼"
           type="button"
-          onClick={() => setOpen((prev) => !prev)}
+          onClick={() => setChatMenuOpen((prev) => !prev)}
         >
           <Icon name="Information" size={18} />
         </button>
-        {open && (
+        {chatMenuOpen && (
           <ul className="absolute right-0 top-10 z-10 m-0 list-none p-0" role="menu">
             {INFO_OPTIONS.map((option, i) => (
               <li key={option.value} className="m-0 p-0" role="menuitem">
@@ -57,13 +57,14 @@ const ChatRoomHeaderInfoButton = ({ roomId }: { roomId: number }) => {
           </ul>
         )}
       </div>
+      <Report isOpen={reportOpen} onClose={() => setReportOpen(false)} />
       <ConfirmModal
-        isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
+        isOpen={leaveChatRoomModalOpen}
+        onClose={() => setLeaveChatRoomModalOpen(false)}
         title="채팅방을 나가시겠어요?"
         content="채팅방을 나가면 채팅 목록 및 대화 내용이 삭제되고 복구할 수 없어요, 채팅방에서 나가시겠어요?"
         onConfirm={() => leaveChatRoom(undefined)}
-        onCancel={() => setModalOpen(false)}
+        onCancel={() => setLeaveChatRoomModalOpen(false)}
       />
     </>
   );

@@ -9,12 +9,18 @@ import { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import ReportReasonModal from "./_internal/ReportReasonModal";
 import { ReportReason } from "./_internal/REPORT_REASONS";
+import PopupLayout from "../PopupLayout/PopupLayout";
 
 type ReportFormValues = {
   report: string;
 };
 
-const Report = () => {
+interface ReportProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const Report = ({ isOpen, onClose }: ReportProps) => {
   const [openReportReasonModal, setOpenReportReasonModal] = useState(false);
   const [selectedReportReason, setSelectedReportReason] = useState<ReportReason | null>(null);
   const { addToast } = useToast();
@@ -32,7 +38,7 @@ const Report = () => {
   };
 
   return (
-    <>
+    <PopupLayout isOpen={isOpen} onClose={onClose}>
       <DetailHeader title="신고하기" />
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
@@ -81,7 +87,7 @@ const Report = () => {
         selectedReportReason={selectedReportReason}
         setSelectedReportReason={setSelectedReportReason}
       />
-    </>
+    </PopupLayout>
   );
 };
 
