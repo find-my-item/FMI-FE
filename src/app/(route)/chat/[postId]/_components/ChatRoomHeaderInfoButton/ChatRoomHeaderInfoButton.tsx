@@ -9,6 +9,40 @@ import { INFO_OPTIONS } from "./INFO_OPTIONS";
 import useLeaveChatRoom from "@/api/fetch/chatRoom/api/useLeaveChatRoom";
 import useClickOutside from "./useClickOutside";
 
+const MenuItem = ({
+  chatMenuOpen,
+  onOptionClick,
+}: {
+  chatMenuOpen: boolean;
+  onOptionClick: (value: "report" | "leave") => void;
+}) => {
+  if (!chatMenuOpen) return null;
+
+  return (
+    <ul className="absolute right-0 top-10 z-10 m-0 list-none p-0" role="menu">
+      {INFO_OPTIONS.map((option) => {
+        const { label, textColor, position } = option;
+        return (
+          <li key={option.value} className="m-0 p-0" role="menuitem">
+            <button
+              type="button"
+              aria-label={label}
+              onClick={() => onOptionClick(option.value)}
+              className={cn(
+                "glass-card w-full text-nowrap border border-white bg-white/50 px-7 py-4 text-left text-h3-medium transition-colors hover:bg-white/70",
+                textColor,
+                position === "first" ? "rounded-t-[20px]" : "rounded-b-[20px]"
+              )}
+            >
+              {label}
+            </button>
+          </li>
+        );
+      })}
+    </ul>
+  );
+};
+
 const ChatRoomHeaderInfoButton = ({ roomId }: { roomId: number }) => {
   const [chatMenuOpen, setChatMenuOpen] = useState(false);
   const [leaveChatRoomModalOpen, setLeaveChatRoomModalOpen] = useState(false);
@@ -39,28 +73,7 @@ const ChatRoomHeaderInfoButton = ({ roomId }: { roomId: number }) => {
         >
           <Icon name="Information" size={18} />
         </button>
-        {chatMenuOpen && (
-          <ul className="absolute right-0 top-10 z-10 m-0 list-none p-0" role="menu">
-            {INFO_OPTIONS.map((option, i) => (
-              <li key={option.value} className="m-0 p-0" role="menuitem">
-                <button
-                  type="button"
-                  aria-label={option.label}
-                  onClick={() => handleOptionClick(option.value)}
-                  className={cn(
-                    "glass-card w-full text-nowrap border border-white bg-white/50 px-7 py-4 text-left text-h3-medium transition-colors hover:bg-white/70",
-                    option.value === "report"
-                      ? "text-neutral-normal-default"
-                      : "text-system-warning",
-                    i === 0 ? "rounded-t-[20px]" : "rounded-b-[20px]"
-                  )}
-                >
-                  {option.label}
-                </button>
-              </li>
-            ))}
-          </ul>
-        )}
+        <MenuItem chatMenuOpen={chatMenuOpen} onOptionClick={handleOptionClick} />
       </div>
       <Report
         isOpen={reportOpen}
