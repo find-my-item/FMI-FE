@@ -8,6 +8,7 @@ import { useForm, FormProvider } from "react-hook-form";
 import { ReportReasonModal, ReportPopupLayout, ReportReason, TargetType } from "./_internal";
 import useAppMutation from "@/api/_base/query/useAppMutation";
 import { useToast } from "@/context/ToastContext";
+import { useQueryClient } from "@tanstack/react-query";
 
 type ReportFormValues = {
   reason: string;
@@ -18,23 +19,25 @@ interface ReportProps {
   onClose: () => void;
   targetType: TargetType;
   targetId: number;
+  invalidateKey?: string[];
 }
 
-const Report = ({ isOpen, onClose, targetType, targetId }: ReportProps) => {
+const Report = ({ isOpen, onClose, targetType, targetId, invalidateKey }: ReportProps) => {
   const [openReportReasonModal, setOpenReportReasonModal] = useState(false);
   const [reportType, setReportType] = useState<ReportReason | null>(null);
   const { mutate: report, isPending } = useAppMutation("auth", "/reports", "post");
   const toast = useToast();
+  const queryClient = useQueryClient();
   const methods = useForm<ReportFormValues>({
     mode: "onChange",
     reValidateMode: "onChange",
   });
 
   const reasonValueCount = methods.watch("reason");
-  const submitButtonDisabled = !reportType || isPending || reasonValueCount.length < 10;
+  const isDisabled = !reportType || isPending || reasonValueCount.length < 10;
 
   const onSubmit = ({ reason }: ReportFormValues) => {
-    if (!reportType) return;
+    if (isDisabled) return;
 
     const reportRequest = {
       targetType,
@@ -48,6 +51,7 @@ const Report = ({ isOpen, onClose, targetType, targetId }: ReportProps) => {
         methods.reset();
         setReportType(null);
         toast.addToast("신고가 접수되었어요", "success");
+        invalidateKey && queryClient.invalidateQueries({ queryKey: invalidateKey });
         onClose();
       },
       onError: () => {
@@ -86,14 +90,13 @@ const Report = ({ isOpen, onClose, targetType, targetId }: ReportProps) => {
               placeholder="신고 사유를 입력해주세요. (최대 300자)"
               validation={{
                 minLength: { value: 10, message: "10자 이상 입력해주세요." },
-                maxLength: { value: 300, message: "300자 이내로 입력해주세요." },
               }}
               maxLength={300}
             />
           </div>
 
           <div className="fixed bottom-0 w-[390px] border-t border-flatGray-50 px-4 pb-8 pt-3">
-            <Button type="submit" className="w-full" disabled={submitButtonDisabled}>
+            <Button type="submit" className="w-full" disabled={isDisabled}>
               차단 및 신고하기
             </Button>
           </div>
