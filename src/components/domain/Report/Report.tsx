@@ -25,11 +25,13 @@ const Report = ({ isOpen, onClose, targetType, targetId }: ReportProps) => {
   const [reportType, setReportType] = useState<ReportReason | null>(null);
   const { mutate: report, isPending } = useAppMutation("auth", "/reports", "post");
   const toast = useToast();
-
   const methods = useForm<ReportFormValues>({
     mode: "onChange",
     reValidateMode: "onChange",
   });
+
+  const reasonValueCount = methods.watch("reason");
+  const submitButtonDisabled = !reportType || isPending || reasonValueCount.length < 10;
 
   const onSubmit = ({ reason }: ReportFormValues) => {
     if (!reportType) return;
@@ -82,13 +84,16 @@ const Report = ({ isOpen, onClose, targetType, targetId }: ReportProps) => {
               name="reason"
               label="신고 내용 (선택)"
               placeholder="신고 사유를 입력해주세요. (최대 300자)"
-              validation={{ maxLength: { value: 300, message: "300자 이내로 입력해주세요." } }}
-              maxLength={299}
+              validation={{
+                minLength: { value: 10, message: "10자 이상 입력해주세요." },
+                maxLength: { value: 300, message: "300자 이내로 입력해주세요." },
+              }}
+              maxLength={300}
             />
           </div>
 
           <div className="fixed bottom-0 w-[390px] border-t border-flatGray-50 px-4 pb-8 pt-3">
-            <Button type="submit" className="w-full" disabled={!reportType || isPending}>
+            <Button type="submit" className="w-full" disabled={submitButtonDisabled}>
               차단 및 신고하기
             </Button>
           </div>
