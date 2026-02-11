@@ -79,13 +79,13 @@ const ChatRoom = ({ params }: { params: Promise<{ postId: string }> }) => {
           <EmptyChatRoom postMode={postMode} />
         )}
       </div>
-      {roomId && userId && (
+      {roomId && userId ? (
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)} className="px-4 pb-6 pt-3">
             <InputChat name="content" aria-label="채팅 입력창" roomId={roomId} userId={userId} />
           </form>
         </FormProvider>
-      )}
+      ) : null}
     </div>
   );
 };
