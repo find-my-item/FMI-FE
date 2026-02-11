@@ -44,8 +44,7 @@ const Report = ({ isOpen, onClose, targetType, targetId, invalidateKey }: Report
       targetType,
       targetId,
       reason,
-      // reportType: reportType.value,
-      reportType: "FRAUD",
+      reportType: reportType.value,
     });
   };
 
