@@ -4,16 +4,9 @@ import { DetailHeader } from "@/components/layout";
 import { Button, InputField } from "@/components/common";
 import { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
-import {
-  ReportReasonModal,
-  ReportPopupLayout,
-  ReportReason,
-  TargetType,
-  ReportSelectBox,
-} from "./_internal";
-import useAppMutation from "@/api/_base/query/useAppMutation";
-import { useToast } from "@/context/ToastContext";
-import { useQueryClient } from "@tanstack/react-query";
+import { ReportReasonModal, ReportPopupLayout, ReportReason, ReportSelectBox } from "./_internal";
+import useReport from "@/api/fetch/report/api/useReport";
+import { ReportTargetType } from "@/types";
 
 type ReportFormValues = {
   reason: string;
@@ -22,7 +15,7 @@ type ReportFormValues = {
 interface ReportProps {
   isOpen: boolean;
   onClose: () => void;
-  targetType: TargetType;
+  targetType: ReportTargetType;
   targetId: number;
   invalidateKey?: string[];
 }
@@ -30,12 +23,15 @@ interface ReportProps {
 const Report = ({ isOpen, onClose, targetType, targetId, invalidateKey }: ReportProps) => {
   const [openReportReasonModal, setOpenReportReasonModal] = useState(false);
   const [reportType, setReportType] = useState<ReportReason | null>(null);
-  const { mutate: report, isPending } = useAppMutation("auth", "/reports", "post");
-  const toast = useToast();
-  const queryClient = useQueryClient();
   const methods = useForm<ReportFormValues>({
     mode: "onChange",
     reValidateMode: "onChange",
+  });
+  const { mutate: report, isPending } = useReport({
+    reset: () => methods.reset(),
+    setReportType: (reportType: ReportReason | null) => setReportType(reportType),
+    invalidateKey: invalidateKey,
+    onClose: onClose,
   });
 
   const reasonValueCount = methods.watch("reason");
@@ -44,24 +40,11 @@ const Report = ({ isOpen, onClose, targetType, targetId, invalidateKey }: Report
   const onSubmit = ({ reason }: ReportFormValues) => {
     if (isDisabled) return;
 
-    const reportRequest = {
+    report({
       targetType,
       targetId,
       reason,
       reportType: reportType.value,
-    };
-
-    report(reportRequest, {
-      onSuccess: () => {
-        methods.reset();
-        setReportType(null);
-        toast.addToast("신고가 접수되었어요", "success");
-        invalidateKey && queryClient.invalidateQueries({ queryKey: invalidateKey });
-        onClose();
-      },
-      onError: () => {
-        toast.addToast("신고에 실패했습니다.", "error");
-      },
     });
   };
 
