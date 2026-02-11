@@ -6,7 +6,6 @@ import { cn } from "@/utils";
 import { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { ReportReasonModal, ReportPopupLayout, ReportReason } from "./_internal";
-import { ReportMutateParams } from "@/types/ReportMutateParams";
 
 type ReportFormValues = {
   reason: string;
@@ -15,10 +14,11 @@ type ReportFormValues = {
 interface ReportProps {
   isOpen: boolean;
   onClose: () => void;
-  mutate: (params: ReportMutateParams) => void;
+  targetType: "POST" | "COMMENT" | "USER" | "CHAT";
+  targetId: number;
 }
 
-const Report = ({ isOpen, onClose, mutate }: ReportProps) => {
+const Report = ({ isOpen, onClose, targetType, targetId }: ReportProps) => {
   const [openReportReasonModal, setOpenReportReasonModal] = useState(false);
   const [reportType, setReportType] = useState<ReportReason | null>(null);
 
@@ -29,7 +29,6 @@ const Report = ({ isOpen, onClose, mutate }: ReportProps) => {
 
   const onSubmit = (data: ReportFormValues) => {
     if (!reportType) return;
-    mutate({ reason: data.reason, reportType });
   };
 
   return (

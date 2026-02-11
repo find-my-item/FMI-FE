@@ -10,4 +10,3 @@ export type { MetaDataType, ShareId } from "./MetaDataType";
 export type { RegionRow } from "./RegionRow";
 export type { Radius } from "./mapRadius";
 export type { CommentItemType } from "./CommentItemType";
-export type { ReportMutateParams } from "./ReportMutateParams";

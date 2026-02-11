@@ -2,7 +2,6 @@
 
 import { ConfirmModal, Icon } from "@/components/common";
 import { Report } from "@/components/domain";
-import { ReportMutateParams } from "@/types";
 import { cn } from "@/utils";
 import { useState } from "react";
 import { INFO_OPTIONS } from "./INFO_OPTIONS";
@@ -58,10 +57,6 @@ const ChatRoomHeaderInfoButton = ({ roomId }: { roomId: number }) => {
     setLeaveChatRoomModalOpen(true);
   };
 
-  const handleReportMutate = ({ reason, reportType }: ReportMutateParams) => {
-    console.log(reason, reportType);
-  };
-
   return (
     <>
       <div ref={containerRef} className="relative">
@@ -78,7 +73,8 @@ const ChatRoomHeaderInfoButton = ({ roomId }: { roomId: number }) => {
       <Report
         isOpen={reportOpen}
         onClose={() => setReportOpen(false)}
-        mutate={handleReportMutate}
+        targetId={roomId}
+        targetType="CHAT"
       />
       <ConfirmModal
         isOpen={leaveChatRoomModalOpen}
