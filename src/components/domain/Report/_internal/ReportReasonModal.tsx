@@ -5,26 +5,28 @@ import { REPORT_REASONS, ReportReason } from "./REPORT_REASONS";
 import { createPortal } from "react-dom";
 import { Button } from "@/components/common";
 
+interface ReportReasonModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  reportType: ReportReason | null;
+  setReportType: (reason: ReportReason) => void;
+}
+
 const ReportReasonModal = ({
   isOpen,
   onClose,
-  selectedReportReason,
-  setSelectedReportReason,
-}: {
-  isOpen: boolean;
-  onClose: () => void;
-  selectedReportReason: ReportReason | null;
-  setSelectedReportReason: (reason: ReportReason) => void;
-}) => {
+  reportType,
+  setReportType,
+}: ReportReasonModalProps) => {
   const [tempSelectedReportReason, setTempSelectedReportReason] = useState<ReportReason | null>(
-    selectedReportReason ?? null
+    reportType ?? null
   );
 
   useEffect(() => {
     if (isOpen) {
-      setTempSelectedReportReason(selectedReportReason ?? null);
+      setTempSelectedReportReason(reportType ?? null);
     }
-  }, [selectedReportReason, isOpen]);
+  }, [reportType, isOpen]);
 
   useEffect(() => {
     if (isOpen) {
@@ -39,7 +41,7 @@ const ReportReasonModal = ({
   const handleSelectReportReason = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (tempSelectedReportReason) {
-      setSelectedReportReason(tempSelectedReportReason);
+      setReportType(tempSelectedReportReason);
       onClose();
     }
   };

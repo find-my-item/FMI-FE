@@ -10,7 +10,8 @@ import { ReportReason } from "./_internal/REPORT_REASONS";
 import ReportPopupLayout from "./_internal/ReportPopupLayout";
 
 type ReportFormValues = {
-  report: ReportReason;
+  reason: string;
+  reportType: ReportReason;
 };
 
 interface ReportProps {
@@ -21,17 +22,17 @@ interface ReportProps {
 
 const Report = ({ isOpen, onClose, mutate }: ReportProps) => {
   const [openReportReasonModal, setOpenReportReasonModal] = useState(false);
-  const [selectedReportReason, setSelectedReportReason] = useState<ReportReason | null>(null);
+  const [reportType, setReportType] = useState<ReportReason | null>(null);
 
   const methods = useForm<ReportFormValues>({
     mode: "onChange",
     reValidateMode: "onChange",
   });
-  const watchReport = methods.watch("report");
+  const watchReason = methods.watch("reason");
 
   const onSubmit = (data: ReportFormValues) => {
-    if (!selectedReportReason || !data.report) return;
-    mutate(data);
+    if (!reportType) return;
+    mutate({ reason: data.reason, reportType });
   };
 
   return (
@@ -49,12 +50,12 @@ const Report = ({ isOpen, onClose, mutate }: ReportProps) => {
                 onClick={() => setOpenReportReasonModal(true)}
                 className={cn(
                   "flex items-center justify-between rounded-[10px] border border-neutral-normal-default px-5 py-[18px] text-body1-medium",
-                  selectedReportReason
+                  reportType
                     ? "text-neutral-normal-enteredSelected"
                     : "text-neutral-normal-placeholder"
                 )}
               >
-                {selectedReportReason ? selectedReportReason.label : "신고 사유를 선택해 주세요."}
+                {reportType ? reportType.label : "신고 사유를 선택해 주세요."}
                 <Icon name="ArrowDown" size={24} />
               </button>
             </div>
@@ -68,11 +69,7 @@ const Report = ({ isOpen, onClose, mutate }: ReportProps) => {
           </div>
 
           <div className="fixed bottom-0 w-[390px] border-t border-flatGray-50 px-4 pb-8 pt-3">
-            <Button
-              type="submit"
-              className="w-full"
-              disabled={!watchReport || !selectedReportReason}
-            >
+            <Button type="submit" className="w-full" disabled={!watchReason || !reportType}>
               차단 및 신고하기
             </Button>
           </div>
@@ -81,8 +78,8 @@ const Report = ({ isOpen, onClose, mutate }: ReportProps) => {
       <ReportReasonModal
         isOpen={openReportReasonModal}
         onClose={() => setOpenReportReasonModal(false)}
-        selectedReportReason={selectedReportReason}
-        setSelectedReportReason={setSelectedReportReason}
+        reportType={reportType}
+        setReportType={setReportType}
       />
     </ReportPopupLayout>
   );
