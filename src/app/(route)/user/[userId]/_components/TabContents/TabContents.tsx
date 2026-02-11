@@ -25,7 +25,7 @@ const TabContents = ({ selectedTab, data, isLoading }: TabContentsProps) => {
               <EmptyState
                 icon={{ iconName: "NoPosts", iconSize: 70 }}
                 title="아직 작성한 게시글이 없어요"
-                description={"아직 작성한 게시글이 없습니다.\n지금 바로 글을 남겨보세요!"}
+                description={"해당 유저가 작성한 게시글이 없습니다."}
               />
             </li>
           ) : (
@@ -55,9 +55,7 @@ const TabContents = ({ selectedTab, data, isLoading }: TabContentsProps) => {
               <EmptyState
                 icon={{ iconName: "EmptyFavorite", iconSize: 70 }}
                 title="아직 즐겨찾기한 게시글이 없어요"
-                description={
-                  "아직 즐겨찾기한 게시글이 없습니다.\n나중에 다시 보고 싶은 게시글을 모아보세요!"
-                }
+                description={"해당 유저가 즐겨찾기한 게시글이 없습니다."}
               />
             </li>
           ) : (

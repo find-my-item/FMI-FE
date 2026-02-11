@@ -5,7 +5,7 @@ const clearHeight = (textareaRef: HTMLTextAreaElement | null) => {
   textareaRef.style.height = "auto";
 };
 
-export const handleKeyDown = (
+export const textareaSubmitKeyHandler = (
   e: KeyboardEvent<HTMLTextAreaElement>,
   textareaRef: RefObject<HTMLTextAreaElement | null>
 ) => {

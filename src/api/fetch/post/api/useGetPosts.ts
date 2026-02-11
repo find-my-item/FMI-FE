@@ -40,6 +40,7 @@ export const useGetPosts = ({
       select: (data: InfiniteData<PostSearchResponse>) =>
         data.pages.flatMap((page) => page.result.postList),
       throwOnError: true,
+      suspense: true,
     }
   );
 };
