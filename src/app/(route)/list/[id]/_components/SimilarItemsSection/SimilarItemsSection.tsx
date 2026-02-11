@@ -1,8 +1,8 @@
-import SimilarItem from "../SimilarItem/SimilarItem";
+import { SimilarItem } from "../_internal";
 
 const SimilarItemsSection = () => {
   return (
-    <section className="flex flex-col gap-[16px] py-[18px] pl-[20px]">
+    <section className="flex flex-col gap-4 py-[18px] pl-5">
       <h2 className="text-h2-medium text-flatGray-900">비슷한 분실물</h2>
 
       <ul
