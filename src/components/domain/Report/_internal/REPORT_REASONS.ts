@@ -7,3 +7,5 @@ export const REPORT_REASONS = [
   { value: "6", label: "실제 주인이 아닌 사람이 소유를 주장해요." },
   { value: "7", label: "위 항목 외의 다른 문제를 신고해요." },
 ];
+
+export type ReportReason = (typeof REPORT_REASONS)[number];

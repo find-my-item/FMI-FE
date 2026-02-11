@@ -1,9 +1,8 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import { ReportReason } from "../_types/ReportReason";
+import { REPORT_REASONS, ReportReason } from "./REPORT_REASONS";
 import { createPortal } from "react-dom";
-import { REPORT_REASONS } from "../_constants/REPORT_REASONS";
 import { Button } from "@/components/common";
 
 const ReportReasonModal = ({
