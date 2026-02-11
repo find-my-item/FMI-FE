@@ -2,7 +2,7 @@ import useAppMutation from "@/api/_base/query/useAppMutation";
 import { ReportReason } from "@/components/domain/Report/_internal";
 import { useToast } from "@/context/ToastContext";
 import { QueryKey, useQueryClient } from "@tanstack/react-query";
-import { ReportRequest } from "../types/reportRequest";
+import { ReportRequest } from "../types/ReportRequest";
 
 interface UseReportParams {
   reset: () => void;

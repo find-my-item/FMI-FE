@@ -61,9 +61,9 @@ const ReportReasonModal = ({
           신고 사유 선택
         </h1>
         <fieldset className="flex flex-col gap-[2px]">
-          {REPORT_REASONS.map((reason) => (
+          {REPORT_REASONS.map((reason, i) => (
             <div
-              key={reason.value}
+              key={reason.value + i}
               className="w-full space-x-[12px] py-[18px] text-h3-medium text-neutral-normal-default"
             >
               <input
