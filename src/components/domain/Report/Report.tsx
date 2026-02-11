@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import ReportReasonModal from "./_internal/ReportReasonModal";
 import { ReportReason } from "./_internal/REPORT_REASONS";
-import PopupLayout from "../PopupLayout/PopupLayout";
+import ReportPopupLayout from "./_internal/ReportPopupLayout";
 
 type ReportFormValues = {
   report: ReportReason;
@@ -35,7 +35,7 @@ const Report = ({ isOpen, onClose, mutate }: ReportProps) => {
   };
 
   return (
-    <PopupLayout isOpen={isOpen} onClose={onClose}>
+    <ReportPopupLayout isOpen={isOpen} onClose={onClose}>
       <DetailHeader title="신고하기" onBack={onClose} />
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
@@ -84,7 +84,7 @@ const Report = ({ isOpen, onClose, mutate }: ReportProps) => {
         selectedReportReason={selectedReportReason}
         setSelectedReportReason={setSelectedReportReason}
       />
-    </PopupLayout>
+    </ReportPopupLayout>
   );
 };
 

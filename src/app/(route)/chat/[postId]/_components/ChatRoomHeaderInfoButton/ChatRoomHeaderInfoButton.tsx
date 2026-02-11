@@ -23,6 +23,10 @@ const ChatRoomHeaderInfoButton = ({ roomId }: { roomId: number }) => {
     setLeaveChatRoomModalOpen(true);
   };
 
+  const handleReportMutate = (data: any) => {
+    console.log(data);
+  };
+
   return (
     <>
       <div ref={containerRef} className="relative">
@@ -57,7 +61,11 @@ const ChatRoomHeaderInfoButton = ({ roomId }: { roomId: number }) => {
           </ul>
         )}
       </div>
-      <Report isOpen={reportOpen} onClose={() => setReportOpen(false)} />
+      <Report
+        isOpen={reportOpen}
+        onClose={() => setReportOpen(false)}
+        mutate={handleReportMutate}
+      />
       <ConfirmModal
         isOpen={leaveChatRoomModalOpen}
         onClose={() => setLeaveChatRoomModalOpen(false)}
