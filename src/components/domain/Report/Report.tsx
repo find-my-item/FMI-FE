@@ -2,9 +2,7 @@
 
 import { DetailHeader } from "@/components/layout";
 import { Button, Icon, InputField, RequiredText } from "@/components/common";
-import { useToast } from "@/context/ToastContext";
 import { cn } from "@/utils";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import ReportReasonModal from "./_internal/ReportReasonModal";
@@ -12,19 +10,19 @@ import { ReportReason } from "./_internal/REPORT_REASONS";
 import PopupLayout from "../PopupLayout/PopupLayout";
 
 type ReportFormValues = {
-  report: string;
+  report: ReportReason;
 };
 
 interface ReportProps {
   isOpen: boolean;
   onClose: () => void;
+  mutate: (data: ReportFormValues) => void;
 }
 
-const Report = ({ isOpen, onClose }: ReportProps) => {
+const Report = ({ isOpen, onClose, mutate }: ReportProps) => {
   const [openReportReasonModal, setOpenReportReasonModal] = useState(false);
   const [selectedReportReason, setSelectedReportReason] = useState<ReportReason | null>(null);
-  const { addToast } = useToast();
-  const router = useRouter();
+
   const methods = useForm<ReportFormValues>({
     mode: "onChange",
     reValidateMode: "onChange",
@@ -33,8 +31,7 @@ const Report = ({ isOpen, onClose }: ReportProps) => {
 
   const onSubmit = (data: ReportFormValues) => {
     if (!selectedReportReason || !data.report) return;
-    addToast("신고가 접수되었습니다.", "success");
-    router.replace("/chat");
+    mutate(data);
   };
 
   return (
@@ -42,7 +39,7 @@ const Report = ({ isOpen, onClose }: ReportProps) => {
       <DetailHeader title="신고하기" />
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
-          <div className="space-y-[40px] p-[20px]">
+          <div className="space-y-10 p-5">
             <div className="flex flex-col gap-1">
               <label className="text-body2-regular text-layout-body-default">
                 신고 사유 <RequiredText />
@@ -51,7 +48,7 @@ const Report = ({ isOpen, onClose }: ReportProps) => {
                 type="button"
                 onClick={() => setOpenReportReasonModal(true)}
                 className={cn(
-                  "flex items-center justify-between rounded-[10px] border border-neutral-normal-default px-[20px] py-[18px] text-body1-medium",
+                  "flex items-center justify-between rounded-[10px] border border-neutral-normal-default px-5 py-[18px] text-body1-medium",
                   selectedReportReason
                     ? "text-neutral-normal-enteredSelected"
                     : "text-neutral-normal-placeholder"
@@ -70,7 +67,7 @@ const Report = ({ isOpen, onClose }: ReportProps) => {
             />
           </div>
 
-          <div className="fixed bottom-0 w-[390px] border-t border-flatGray-50 px-[16px] pb-[32px] pt-[12px]">
+          <div className="fixed bottom-0 w-[390px] border-t border-flatGray-50 px-4 pb-8 pt-3">
             <Button
               type="submit"
               className="w-full"
