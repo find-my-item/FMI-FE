@@ -53,18 +53,18 @@ const ReportReasonModal = ({
       onClick={onClose}
     >
       <form
-        className="animate-modal-slide-up absolute bottom-0 flex h-[671px] w-full max-w-[390px] flex-col rounded-t-[20px] bg-white px-[20px] py-[40px]"
+        className="animate-modal-slide-up absolute bottom-0 flex h-[671px] w-full max-w-[390px] flex-col rounded-t-[20px] bg-white px-5 py-10"
         onClick={(e) => e.stopPropagation()}
         onSubmit={handleSelectReportReason}
       >
-        <h1 className="mb-[32px] text-center text-h2-medium text-layout-header-default">
+        <h1 className="mb-8 text-center text-h2-medium text-layout-header-default">
           신고 사유 선택
         </h1>
         <fieldset className="flex flex-col gap-[2px]">
           {REPORT_REASONS.map((reason) => (
             <div
               key={reason.id}
-              className="w-full space-x-[12px] py-[18px] text-h3-medium text-neutral-normal-default"
+              className="w-full space-x-3 py-4 text-h3-medium text-neutral-normal-default"
             >
               <input
                 type="radio"
