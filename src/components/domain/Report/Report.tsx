@@ -6,6 +6,8 @@ import { cn } from "@/utils";
 import { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { ReportReasonModal, ReportPopupLayout, ReportReason, TargetType } from "./_internal";
+import useAppMutation from "@/api/_base/query/useAppMutation";
+import { useToast } from "@/context/ToastContext";
 
 type ReportFormValues = {
   reason: string;
@@ -21,14 +23,35 @@ interface ReportProps {
 const Report = ({ isOpen, onClose, targetType, targetId }: ReportProps) => {
   const [openReportReasonModal, setOpenReportReasonModal] = useState(false);
   const [reportType, setReportType] = useState<ReportReason | null>(null);
+  const { mutate: report, isPending } = useAppMutation("auth", "/reports", "post");
+  const toast = useToast();
 
   const methods = useForm<ReportFormValues>({
     mode: "onChange",
     reValidateMode: "onChange",
   });
 
-  const onSubmit = (data: ReportFormValues) => {
+  const onSubmit = ({ reason }: ReportFormValues) => {
     if (!reportType) return;
+
+    const reportRequest = {
+      targetType,
+      targetId,
+      reason,
+      reportType: reportType.value,
+    };
+
+    report(reportRequest, {
+      onSuccess: () => {
+        methods.reset();
+        setReportType(null);
+        toast.addToast("신고가 접수되었어요", "success");
+        onClose();
+      },
+      onError: () => {
+        toast.addToast("신고에 실패했습니다.", "error");
+      },
+    });
   };
 
   return (
@@ -65,7 +88,7 @@ const Report = ({ isOpen, onClose, targetType, targetId }: ReportProps) => {
           </div>
 
           <div className="fixed bottom-0 w-[390px] border-t border-flatGray-50 px-4 pb-8 pt-3">
-            <Button type="submit" className="w-full" disabled={!reportType}>
+            <Button type="submit" className="w-full" disabled={!reportType || isPending}>
               차단 및 신고하기
             </Button>
           </div>

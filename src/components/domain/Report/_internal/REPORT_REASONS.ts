@@ -1,3 +1,4 @@
+// TODO(형준): reportType 파악 후 value를 실제 reportType으로 변경
 export const REPORT_REASONS = [
   { value: "1", label: "실제 분실물/습득물이 아닌 내용이에요." },
   { value: "2", label: "동일한 내용이 여러 번 올라왔어요." },
