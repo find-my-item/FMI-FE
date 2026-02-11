@@ -1,4 +1,5 @@
 export const SIGNUP_ERROR_MESSAGE = {
+  "AUTH400-WEAK_PASSWORD": { message: "비밀번호 규칙을 만족하지 않아요.", status: "warning" },
   "AUTH409-EMAIL_DUPLICATED": { message: "이미 가입된 이메일이에요.", status: "warning" },
   "AUTH409-EMAIL_RECENTLY_DELETED": {
     message: "최근 탈퇴한 이메일이에요. 7일 후 재가입 해주세요.",
@@ -8,11 +9,12 @@ export const SIGNUP_ERROR_MESSAGE = {
 } as const;
 
 export const EMAIL_ERROR_MESSAGE = {
-  _EMAIL_DUPLICATED: { message: "이미 존재하는 이메일이에요.", status: "warning" },
+  "AUTH409-EMAIL_DUPLICATED": { message: "이미 존재하는 이메일이에요.", status: "warning" },
   _EMAIL_RECENTLY_DELETED: {
     message: "최근 탈퇴한 이메일이에요. 7일 후 재가입 해주세요.",
     status: "warning",
   },
+  "AUTH500-EMAIL_SEND_FAILED": { message: "이메일 발송에 실패했어요.", status: "warning" },
 } as const;
 
 export const NICKNAME_ERROR_MESSAGE = {
