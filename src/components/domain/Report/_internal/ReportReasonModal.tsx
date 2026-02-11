@@ -61,21 +61,21 @@ const ReportReasonModal = ({
           신고 사유 선택
         </h1>
         <fieldset className="flex flex-col gap-[2px]">
-          {REPORT_REASONS.map((reason, i) => (
+          {REPORT_REASONS.map((reason) => (
             <div
-              key={reason.value + i}
+              key={reason.id}
               className="w-full space-x-[12px] py-[18px] text-h3-medium text-neutral-normal-default"
             >
               <input
                 type="radio"
                 name={"reportReason"}
-                id={reason.value}
+                id={reason.id}
                 className="cursor-pointer"
                 value={reason.value}
                 onChange={() => setTempSelectedReportReason(reason)}
-                checked={tempSelectedReportReason?.value === reason.value}
+                checked={tempSelectedReportReason?.id === reason.id}
               />
-              <label htmlFor={reason.value} className="cursor-pointer">
+              <label htmlFor={reason.id} className="cursor-pointer">
                 {reason.label}
               </label>
             </div>
