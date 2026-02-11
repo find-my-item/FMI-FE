@@ -68,7 +68,7 @@ const ReportReasonModal = ({
             >
               <input
                 type="radio"
-                name={"reportReason"}
+                name="reportReason"
                 id={reason.id}
                 className="cursor-pointer"
                 value={reason.value}
