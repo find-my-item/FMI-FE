@@ -7,9 +7,13 @@ export interface UserProfileIdDataType {
   userId: number;
   nickname: string;
   profileImg: string;
+
   posts: Array<UserPostsDataType>;
   comments: Array<UserCommentsDataType>;
   favorites: Array<UserPostsDataType>;
+
+  nextCursor?: number;
+  hasNext?: boolean;
 }
 
 export interface UserPostsDataType {
@@ -35,4 +39,15 @@ export interface UserCommentsDataType {
   postTitle: string;
   content: string;
   createdAt: string;
+}
+
+export type UserProfileItem = UserPostsDataType | UserCommentsDataType;
+
+export interface UserProfileInfiniteSelectedData {
+  profile: {
+    userId: number;
+    nickname: string;
+    profileImg: string;
+  };
+  list: UserProfileItem[];
 }
