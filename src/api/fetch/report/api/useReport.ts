@@ -3,6 +3,7 @@ import { ReportReason } from "@/components/domain/Report/_internal";
 import { useToast } from "@/context/ToastContext";
 import { QueryKey, useQueryClient } from "@tanstack/react-query";
 import { ReportRequest } from "../types/ReportRequest";
+import { AxiosError } from "axios";
 
 interface UseReportParams {
   reset: () => void;
@@ -15,7 +16,7 @@ const useReport = ({ reset, setReportType, invalidateKey, onClose }: UseReportPa
   const toast = useToast();
   const queryClient = useQueryClient();
 
-  return useAppMutation<ReportRequest>("auth", "/reports", "post", {
+  return useAppMutation<ReportRequest, unknown, AxiosError>("auth", "/reports", "post", {
     onSuccess: () => {
       reset();
       setReportType(null);
@@ -23,7 +24,11 @@ const useReport = ({ reset, setReportType, invalidateKey, onClose }: UseReportPa
       invalidateKey && queryClient.invalidateQueries({ queryKey: invalidateKey });
       onClose();
     },
-    onError: () => {
+    onError: (error) => {
+      if (error.response?.status === 409) {
+        toast.addToast("이미 접수된 신고입니다.", "error");
+        return;
+      }
       toast.addToast("신고에 실패했습니다.", "error");
     },
   });
