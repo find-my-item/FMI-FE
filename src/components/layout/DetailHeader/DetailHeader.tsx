@@ -9,14 +9,16 @@ import KebabMenuButton from "@/components/common/Buttons/KebabMenuButton/KebabMe
 interface DetailHeaderProps {
   title?: string;
   children?: ReactNode;
+  onBack?: () => void;
 }
 
 interface BaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   ariaLabel?: string;
 }
 
-const DetailHeader = ({ title = "", children }: DetailHeaderProps) => {
+const DetailHeader = ({ title = "", children, onBack }: DetailHeaderProps) => {
   const router = useRouter();
+  const handleBack = () => (onBack ? onBack() : router.back());
 
   return (
     <header className="sticky top-0 z-30 flex h-14 w-full items-center justify-between bg-white px-5">
@@ -24,7 +26,7 @@ const DetailHeader = ({ title = "", children }: DetailHeaderProps) => {
         <button
           className="h-[30px] w-[30px]"
           type="button"
-          onClick={() => router.back()}
+          onClick={handleBack}
           aria-label="뒤로가기"
         >
           <Icon name="ArrowLeftSmall" size={30} />

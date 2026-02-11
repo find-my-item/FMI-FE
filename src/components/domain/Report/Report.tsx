@@ -36,7 +36,7 @@ const Report = ({ isOpen, onClose, mutate }: ReportProps) => {
 
   return (
     <PopupLayout isOpen={isOpen} onClose={onClose}>
-      <DetailHeader title="신고하기" />
+      <DetailHeader title="신고하기" onBack={onClose} />
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <div className="space-y-10 p-5">
