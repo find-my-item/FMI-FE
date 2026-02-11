@@ -4,6 +4,7 @@ import { DetailHeader } from "@/components/layout";
 import { Button, InputField } from "@/components/common";
 import { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
+import { QueryKey } from "@tanstack/react-query";
 import { ReportReasonModal, ReportPopupLayout, ReportReason, ReportSelectBox } from "./_internal";
 import useReport from "@/api/fetch/report/api/useReport";
 import { ReportTargetType } from "@/types";
@@ -17,7 +18,7 @@ interface ReportProps {
   onClose: () => void;
   targetType: ReportTargetType;
   targetId: number;
-  invalidateKey?: string[];
+  invalidateKey?: QueryKey;
 }
 
 const Report = ({ isOpen, onClose, targetType, targetId, invalidateKey }: ReportProps) => {

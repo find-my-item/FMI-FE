@@ -1,13 +1,13 @@
 import useAppMutation from "@/api/_base/query/useAppMutation";
 import { ReportReason } from "@/components/domain/Report/_internal";
 import { useToast } from "@/context/ToastContext";
-import { useQueryClient } from "@tanstack/react-query";
+import { QueryKey, useQueryClient } from "@tanstack/react-query";
 import { ReportRequest } from "../types/reportRequest";
 
 interface UseReportParams {
   reset: () => void;
   setReportType: (reportType: ReportReason | null) => void;
-  invalidateKey?: string[];
+  invalidateKey?: QueryKey;
   onClose: () => void;
 }
 
