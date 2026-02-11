@@ -107,8 +107,7 @@ const InputCommentField = ({
                 }}
                 onKeyDown={(e) => textareaSubmitKeyHandler(e, textareaRef)}
                 className={cn(
-                  "max-h-[120px] min-h-11 min-w-0 flex-1 resize-none overflow-y-hidden rounded-[24px] px-4 py-[10px] text-body2-medium text-neutral-strong-focused bg-fill-neutral-strong-default placeholder:text-neutral-normal-placeholder",
-                  "hover:placeholder-black",
+                  "max-h-[120px] min-h-11 min-w-0 flex-1 resize-none overflow-y-hidden rounded-[24px] px-4 py-[10px] text-body1-medium text-neutral-strong-focused bg-fill-neutral-strong-default placeholder:text-neutral-normal-placeholder",
                   "disabled:text-neutral-strong-disabled"
                 )}
                 placeholder="메시지 보내기"
