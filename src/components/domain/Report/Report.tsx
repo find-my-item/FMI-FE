@@ -1,11 +1,16 @@
 "use client";
 
 import { DetailHeader } from "@/components/layout";
-import { Button, Icon, InputField, RequiredText } from "@/components/common";
-import { cn } from "@/utils";
+import { Button, InputField } from "@/components/common";
 import { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
-import { ReportReasonModal, ReportPopupLayout, ReportReason, TargetType } from "./_internal";
+import {
+  ReportReasonModal,
+  ReportPopupLayout,
+  ReportReason,
+  TargetType,
+  ReportSelectBox,
+} from "./_internal";
 import useAppMutation from "@/api/_base/query/useAppMutation";
 import { useToast } from "@/context/ToastContext";
 import { useQueryClient } from "@tanstack/react-query";
@@ -66,24 +71,10 @@ const Report = ({ isOpen, onClose, targetType, targetId, invalidateKey }: Report
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <div className="space-y-10 p-5">
-            <div className="flex flex-col gap-1">
-              <label className="text-body2-regular text-layout-body-default">
-                신고 사유 <RequiredText />
-              </label>
-              <button
-                type="button"
-                onClick={() => setOpenReportReasonModal(true)}
-                className={cn(
-                  "flex items-center justify-between rounded-[10px] border border-neutral-normal-default px-5 py-[18px] text-body1-medium",
-                  reportType
-                    ? "text-neutral-normal-enteredSelected"
-                    : "text-neutral-normal-placeholder"
-                )}
-              >
-                {reportType ? reportType.label : "신고 사유를 선택해 주세요."}
-                <Icon name="ArrowDown" size={24} />
-              </button>
-            </div>
+            <ReportSelectBox
+              reportType={reportType}
+              setOpenReportReasonModal={setOpenReportReasonModal}
+            />
             <InputField
               name="reason"
               label="신고 내용 (선택)"
