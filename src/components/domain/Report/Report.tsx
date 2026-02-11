@@ -5,19 +5,17 @@ import { Button, Icon, InputField, RequiredText } from "@/components/common";
 import { cn } from "@/utils";
 import { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
-import ReportReasonModal from "./_internal/ReportReasonModal";
-import { ReportReason } from "./_internal/REPORT_REASONS";
-import ReportPopupLayout from "./_internal/ReportPopupLayout";
+import { ReportReasonModal, ReportPopupLayout, ReportReason } from "./_internal";
+import { ReportMutateParams } from "@/types/ReportMutateParams";
 
 type ReportFormValues = {
   reason: string;
-  reportType: ReportReason;
 };
 
 interface ReportProps {
   isOpen: boolean;
   onClose: () => void;
-  mutate: (data: ReportFormValues) => void;
+  mutate: (params: ReportMutateParams) => void;
 }
 
 const Report = ({ isOpen, onClose, mutate }: ReportProps) => {
@@ -28,7 +26,6 @@ const Report = ({ isOpen, onClose, mutate }: ReportProps) => {
     mode: "onChange",
     reValidateMode: "onChange",
   });
-  const watchReason = methods.watch("reason");
 
   const onSubmit = (data: ReportFormValues) => {
     if (!reportType) return;
@@ -60,7 +57,7 @@ const Report = ({ isOpen, onClose, mutate }: ReportProps) => {
               </button>
             </div>
             <InputField
-              name="report"
+              name="reason"
               label="신고 내용 (선택)"
               placeholder="신고 사유를 입력해주세요. (최대 300자)"
               validation={{ maxLength: { value: 300, message: "300자 이내로 입력해주세요." } }}
@@ -69,7 +66,7 @@ const Report = ({ isOpen, onClose, mutate }: ReportProps) => {
           </div>
 
           <div className="fixed bottom-0 w-[390px] border-t border-flatGray-50 px-4 pb-8 pt-3">
-            <Button type="submit" className="w-full" disabled={!watchReason || !reportType}>
+            <Button type="submit" className="w-full" disabled={!reportType}>
               차단 및 신고하기
             </Button>
           </div>

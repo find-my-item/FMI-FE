@@ -2,6 +2,7 @@
 
 import { ConfirmModal, Icon } from "@/components/common";
 import { Report } from "@/components/domain";
+import { ReportMutateParams } from "@/types";
 import { cn } from "@/utils";
 import { useState } from "react";
 import { INFO_OPTIONS } from "./INFO_OPTIONS";
@@ -23,8 +24,8 @@ const ChatRoomHeaderInfoButton = ({ roomId }: { roomId: number }) => {
     setLeaveChatRoomModalOpen(true);
   };
 
-  const handleReportMutate = (data: any) => {
-    console.log(data);
+  const handleReportMutate = ({ reason, reportType }: ReportMutateParams) => {
+    console.log(reason, reportType);
   };
 
   return (
