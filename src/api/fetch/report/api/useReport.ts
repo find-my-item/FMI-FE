@@ -4,14 +4,14 @@ import { useToast } from "@/context/ToastContext";
 import { useQueryClient } from "@tanstack/react-query";
 import { ReportRequest } from "../types/reportRequest";
 
-interface UseReport {
+interface UseReportParams {
   reset: () => void;
   setReportType: (reportType: ReportReason | null) => void;
   invalidateKey?: string[];
   onClose: () => void;
 }
 
-const useReport = ({ reset, setReportType, invalidateKey, onClose }: UseReport) => {
+const useReport = ({ reset, setReportType, invalidateKey, onClose }: UseReportParams) => {
   const toast = useToast();
   const queryClient = useQueryClient();
 
