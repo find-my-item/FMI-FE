@@ -1,16 +1,12 @@
 "use client";
 
-import { ButtonHTMLAttributes, ReactNode } from "react";
+import { ReactNode } from "react";
 import { useRouter } from "next/navigation";
-import { Bookmark, Icon, KebabMenuButton } from "@/components/common";
+import { Icon } from "@/components/common";
 
 interface DetailHeaderProps {
   title?: string;
   children?: ReactNode;
-}
-
-interface BaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  ariaLabel?: string;
 }
 
 const DetailHeader = ({ title = "", children }: DetailHeaderProps) => {
@@ -35,49 +31,6 @@ const DetailHeader = ({ title = "", children }: DetailHeaderProps) => {
         </div>
       )}
     </header>
-  );
-};
-
-DetailHeader.Search = ({ ariaLabel = "검색", ...props }: BaseButtonProps) => {
-  return (
-    <button {...props} aria-label={ariaLabel}>
-      <Icon name="Search" />
-    </button>
-  );
-};
-
-DetailHeader.Save = ({ ariaLabel = "게시글 저장", ...props }: BaseButtonProps) => {
-  const isDisabledStyle = props.disabled ? "text-flatGreen-200" : "text-flatGreen-500";
-  return (
-    <button {...props} className={isDisabledStyle} aria-label={ariaLabel}>
-      임시 저장
-    </button>
-  );
-};
-
-DetailHeader.Star = (
-  props: BaseButtonProps & { isActive: boolean; size?: "large" | "medium" | "small" }
-) => {
-  return <Bookmark {...props} />;
-};
-
-DetailHeader.Share = ({ ariaLabel = "공유", ...props }: BaseButtonProps) => {
-  return (
-    <button {...props} aria-label={ariaLabel}>
-      <Icon name="Share" />
-    </button>
-  );
-};
-
-DetailHeader.Menu = (props: BaseButtonProps & { size?: "large" | "small" }) => {
-  return <KebabMenuButton {...props} />;
-};
-
-DetailHeader.Setting = ({ ariaLabel = "알림 설정", ...props }: BaseButtonProps) => {
-  return (
-    <button {...props} aria-label={ariaLabel}>
-      <Icon name="Setting" />
-    </button>
   );
 };
 
