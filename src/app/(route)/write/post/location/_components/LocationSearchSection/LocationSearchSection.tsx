@@ -14,7 +14,7 @@ interface LocationSearchSectionProps {
 const LocationSearchSection = ({ searchParams }: LocationSearchSectionProps) => {
   const router = useRouter();
 
-  const { regions, isLoading } = useRegionRows();
+  const { data: regions = [], isLoading } = useRegionRows();
 
   const methods = useForm({
     defaultValues: {

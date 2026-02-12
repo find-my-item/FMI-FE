@@ -75,7 +75,7 @@ const FilterBottomSheet = ({
   const router = useRouter();
   const pathname = usePathname();
 
-  const { regions, isLoading } = useRegionRows();
+  const { data: regions = [], isLoading } = useRegionRows();
 
   const regionResults = getRegionSearchResults({
     regions,
