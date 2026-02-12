@@ -1,6 +1,6 @@
 "use client";
 
-import { useModalLockAndEsc } from "@/hooks";
+import { useModalBackdrop } from "@/hooks";
 import { ReactNode } from "react";
 
 interface ReportPopupLayoutProps {
@@ -10,7 +10,7 @@ interface ReportPopupLayoutProps {
 }
 
 const ReportPopupLayout = ({ isOpen, onClose, children }: ReportPopupLayoutProps) => {
-  useModalLockAndEsc({ isOpen, onClose });
+  useModalBackdrop({ onClose });
 
   if (!isOpen) return null;
 
