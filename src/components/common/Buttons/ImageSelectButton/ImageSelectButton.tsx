@@ -1,12 +1,11 @@
 "use client";
 
 import { ButtonHTMLAttributes, Dispatch, SetStateAction } from "react";
-import { cn } from "@/utils";
+import { cn, fileInputHandler } from "@/utils";
 import Image from "next/image";
 import { handleClick, getImageButtonState } from "./_utils";
 import { useObjectURLs } from "@/hooks";
 import { Icon } from "@/components/common";
-import { handleFileChange } from "@/app/(route)/chat/[postId]/_components/InputChat/utils";
 import { SelectedImage } from "@/types/SelectedImage";
 
 /**
@@ -75,7 +74,7 @@ const ToggleImageButton = ({
         multiple
         className="hidden"
         disabled={isDisabled}
-        onChange={(e) => handleFileChange(e, images, setImages)}
+        onChange={(e) => fileInputHandler(e, images, setImages)}
       />
 
       {urls.map((src, index) => {
