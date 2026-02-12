@@ -1,6 +1,15 @@
-import { PostType } from "@/types";
+import { CategoryType, PostType } from "@/types";
 
 export type MessageType = "TEXT" | "IMAGE";
+
+export interface ChatRoomPostInfo {
+  postId: number;
+  postType: PostType;
+  category: CategoryType;
+  title: string;
+  address: string;
+  thumbnailUrl: string | null;
+}
 
 export interface ChatRoom {
   roomId: number;
@@ -9,13 +18,7 @@ export interface ChatRoom {
     nickname: string;
     profileImageUrl: string | null;
   };
-  postInfo: {
-    postId: number;
-    postType: PostType;
-    title: string;
-    address: string;
-    thumbnailUrl: string | null;
-  };
+  postInfo: ChatRoomPostInfo;
   messageType: MessageType | null;
   lastMessage: string | null;
   lastMessageSentAt: string | null;
@@ -54,11 +57,5 @@ export interface ChatRoomResponse {
     profileImageUrl: string;
     emailVerified: boolean;
   };
-  postInfo: {
-    postId: number;
-    postType: PostType;
-    title: string;
-    address: string;
-    thumbnailUrl: string;
-  };
+  postInfo: ChatRoomPostInfo;
 }
