@@ -2,9 +2,7 @@
 
 import { ButtonHTMLAttributes, ReactNode } from "react";
 import { useRouter } from "next/navigation";
-import Icon from "@/components/common/Icon/Icon";
-import Bookmark from "@/components/common/Buttons/Bookmark/Bookmark";
-import KebabMenuButton from "@/components/common/Buttons/KebabMenuButton/KebabMenuButton";
+import { Bookmark, Icon, KebabMenuButton } from "@/components/common";
 
 interface DetailHeaderProps {
   title?: string;
