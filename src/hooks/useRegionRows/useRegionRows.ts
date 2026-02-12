@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { loadRegionRows } from "@/utils";
 import { RegionRow } from "@/types";
 
@@ -30,35 +30,31 @@ type UseRegionRowsReturn = {
 };
 
 const useRegionRows = (): UseRegionRowsReturn => {
-  const [regions, setRegions] = useState<RegionRow[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
+  const {
+    data: regions = [],
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = useQuery({
+    queryKey: ["regions"],
+    queryFn: loadRegionRows,
+    staleTime: Infinity,
+    gcTime: Infinity,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+  });
 
-  const refetch = useCallback(async () => {
-    setIsLoading(true);
-    setError(null);
-
-    try {
-      const data = await loadRegionRows();
-      setRegions(data);
-    } catch (e) {
-      setRegions([]);
-      setError(e instanceof Error ? e : new Error("지역 정보를 불러오는데 실패했습니다."));
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    void refetch();
-  }, [refetch]);
+  const handleRefetch = async () => {
+    await refetch();
+  };
 
   return {
     regions,
     isLoading,
-    isError: Boolean(error),
+    isError,
     error,
-    refetch,
+    refetch: handleRefetch,
   };
 };
 
