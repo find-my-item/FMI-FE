@@ -98,6 +98,7 @@ const FilterBottomSheet = ({
   };
 
   const currentTabs = TABS[pageType];
+  const isEmptyRegionResult = !isLoading && filters.region && regionResults.length === 0;
 
   return (
     <PopupLayout isOpen={isOpen} onClose={() => setIsOpen(false)} className="min-h-[530px] py-10">
@@ -170,7 +171,7 @@ const FilterBottomSheet = ({
                   </li>
                 ))}
 
-              {!isLoading && filters.region && regionResults.length === 0 && (
+              {isEmptyRegionResult && (
                 <li className="mt-[6px] px-5 py-[10px]">
                   <p className="text-body1-medium text-layout-header-default">
                     검색 결과가 없습니다.
