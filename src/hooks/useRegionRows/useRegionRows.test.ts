@@ -29,7 +29,7 @@ describe("useRegionRows", () => {
     mockedLoadRegionRows.mockReset();
   });
 
-  it("마운트 시 지역 목록을 불러오고 성공하면 regions를 세팅한다", async () => {
+  it("마운트 시 지역 목록을 불러오고 성공하면 data를 세팅한다", async () => {
     const rows: RegionRow[] = [
       {
         sido: "서울",
@@ -45,14 +45,14 @@ describe("useRegionRows", () => {
       },
     ];
 
-    mockedLoadRegionRows.mockResolvedValue(rows as any);
+    mockedLoadRegionRows.mockResolvedValue(rows);
 
     const { result } = renderHook(() => useRegionRows(), {
       wrapper: createWrapper(),
     });
 
     expect(result.current.isLoading).toBe(true);
-    expect(result.current.regions).toEqual([]);
+    expect(result.current.data).toBeUndefined();
 
     await waitFor(() => {
       expect(result.current.isLoading).toBe(false);
@@ -60,10 +60,10 @@ describe("useRegionRows", () => {
 
     expect(result.current.isError).toBe(false);
     expect(result.current.error).toBeNull();
-    expect(result.current.regions).toEqual(rows);
+    expect(result.current.data).toEqual(rows);
   });
 
-  it("마운트 시 로딩에 실패하면 isError/error를 세팅하고 regions는 빈 배열이다", async () => {
+  it("마운트 시 로딩에 실패하면 isError/error가 세팅된다", async () => {
     const error = new Error("boom");
     mockedLoadRegionRows.mockRejectedValue(error);
 
@@ -77,10 +77,10 @@ describe("useRegionRows", () => {
 
     expect(result.current.isError).toBe(true);
     expect(result.current.error).toEqual(error);
-    expect(result.current.regions).toEqual([]);
+    expect(result.current.data).toBeUndefined();
   });
 
-  it("refetch를 호출하면 다시 로딩하고 최신 데이터로 regions를 갱신한다", async () => {
+  it("refetch 호출 시 최신 데이터로 갱신된다", async () => {
     const first: RegionRow[] = [
       {
         sido: "서울",
@@ -98,7 +98,7 @@ describe("useRegionRows", () => {
       },
     ];
 
-    mockedLoadRegionRows.mockResolvedValueOnce(first as any).mockResolvedValueOnce(second as any);
+    mockedLoadRegionRows.mockResolvedValueOnce(first).mockResolvedValueOnce(second);
 
     const { result } = renderHook(() => useRegionRows(), {
       wrapper: createWrapper(),
@@ -107,12 +107,13 @@ describe("useRegionRows", () => {
     await waitFor(() => {
       expect(result.current.isLoading).toBe(false);
     });
-    expect(result.current.regions).toEqual(first);
+
+    expect(result.current.data).toEqual(first);
 
     await result.current.refetch();
 
     await waitFor(() => {
-      expect(result.current.regions).toEqual(second);
+      expect(result.current.data).toEqual(second);
     });
 
     expect(result.current.isError).toBe(false);
