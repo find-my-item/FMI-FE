@@ -5,6 +5,7 @@ import { REPORT_REASONS } from "./REPORT_REASONS";
 import { createPortal } from "react-dom";
 import { Button } from "@/components/common";
 import { ReportReason } from "./ReportTypes";
+import { useModalLockAndEsc } from "@/hooks";
 
 interface ReportReasonModalProps {
   isOpen: boolean;
@@ -22,20 +23,13 @@ const ReportReasonModal = ({
   const [tempSelectedReportReason, setTempSelectedReportReason] = useState<ReportReason | null>(
     reportType ?? null
   );
+  useModalLockAndEsc({ isOpen, onClose });
 
   useEffect(() => {
     if (isOpen) {
       setTempSelectedReportReason(reportType ?? null);
     }
   }, [reportType, isOpen]);
-
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-  }, [isOpen]);
 
   if (!isOpen) return null;
 
