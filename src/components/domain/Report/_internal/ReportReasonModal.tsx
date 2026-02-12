@@ -41,13 +41,6 @@ const ReportReasonModal = ({
     }
   };
 
-  const handleRadioChange = (selectedId: string) => {
-    const selectedReason = REPORT_REASONS.find((reason) => reason.id === selectedId);
-    if (selectedReason) {
-      setTempSelectedReportReason(selectedReason);
-    }
-  };
-
   return createPortal(
     <div
       className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/60"
@@ -67,7 +60,7 @@ const ReportReasonModal = ({
               key={reason.id}
               option={{ value: reason.id, label: reason.label }}
               selected={tempSelectedReportReason?.id ?? ""}
-              onChange={handleRadioChange}
+              onChange={() => setTempSelectedReportReason(reason)}
               inputName="reportReason"
             />
           ))}
