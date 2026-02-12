@@ -30,12 +30,13 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
     hasNextPage,
     isFetchingNextPage,
   } = useGetPosts({
-    address: region ?? "서울특별시",
+    address: region ?? "",
     postType,
     postStatus,
     category,
     sortType: sort ?? "LATEST",
   });
+  console.log(listData);
   const { ref: listRef } = useInfiniteScroll({
     fetchNextPage,
     hasNextPage,

@@ -2,7 +2,10 @@
 
 import { Dispatch, SetStateAction } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { cn } from "@/utils";
+import { Button, Icon } from "@/components/common";
+import { useRegionRows } from "@/hooks";
+import { cn, getRegionSearchResults } from "@/utils";
+import { RegionRow } from "@/types";
 import {
   CategoryFilterValue,
   FilterTab,
@@ -16,7 +19,6 @@ import { applyFiltersToUrl } from "../utils/applyFiltersToUrl";
 import { FiltersStateType } from "../_types/filtersStateType";
 import { TABS } from "../_constants/TABS";
 import PopupLayout from "../../PopupLayout/PopupLayout";
-import { Button, Icon } from "@/components/common";
 
 /**
  * @author jikwon (Original)
@@ -73,6 +75,18 @@ const FilterBottomSheet = ({
   const router = useRouter();
   const pathname = usePathname();
 
+  const { regions, isLoading } = useRegionRows();
+
+  const regionResults = getRegionSearchResults({
+    regions,
+    query: filters.region,
+    maxResults: 10,
+  });
+
+  const handleRegionSelect = (row: RegionRow) => {
+    setFilters((prev) => ({ ...prev, region: row.display }));
+  };
+
   const handleApply = () => {
     const qs = applyFiltersToUrl({
       filters,
@@ -116,26 +130,54 @@ const FilterBottomSheet = ({
 
         {/* 지역선택 */}
         {selectedTab === "region" && (
-          <div className="relative w-full">
-            <Icon
-              name="Search"
-              size={16}
-              className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"
-            />
-            <input
-              className="w-full rounded-full px-5 py-[10px] pl-10 bg-fill-neutral-subtle-default"
-              placeholder="검색어를 입력하세요"
-              value={filters.region}
-              onChange={(e) => setFilters((prev) => ({ ...prev, region: e.target.value }))}
-            />
-            <button
-              type="button"
-              onClick={() => setFilters((prev) => ({ ...prev, region: "" }))}
-              className="absolute right-3 top-1/2 -translate-y-1/2"
-              aria-label="지역 검색어 지우기"
-            >
-              <Icon name="Delete" size={16} className="text-gray-400" />
-            </button>
+          <div className="flex w-full flex-col gap-4">
+            <div className="relative w-full">
+              <Icon
+                name="Search"
+                size={16}
+                className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"
+              />
+              <input
+                className="w-full rounded-full px-5 py-[10px] pl-10 bg-fill-neutral-subtle-default"
+                placeholder="검색어를 입력하세요"
+                value={filters.region}
+                onChange={(e) => setFilters((prev) => ({ ...prev, region: e.target.value }))}
+              />
+              <button
+                type="button"
+                onClick={() => setFilters((prev) => ({ ...prev, region: "" }))}
+                className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-[#787878] p-1"
+                aria-label="지역 검색어 지우기"
+              >
+                <Icon name="Delete" size={9} />
+              </button>
+            </div>
+
+            <ul className="h-[230px] w-full overflow-y-auto">
+              {filters.region &&
+                regionResults.map((row) => (
+                  <li
+                    key={`${row.sido}|${row.sigungu}|${row.location}`}
+                    className="border-b border-neutral-normal-default transition-colors hover:bg-gray-100"
+                  >
+                    <button
+                      type="button"
+                      className="w-full px-4 py-5 text-left text-body2-medium text-neutral-strong-default"
+                      onClick={() => handleRegionSelect(row)}
+                    >
+                      {row.display}
+                    </button>
+                  </li>
+                ))}
+
+              {!isLoading && filters.region && regionResults.length === 0 && (
+                <li className="mt-[6px] px-5 py-[10px]">
+                  <p className="text-body1-medium text-layout-header-default">
+                    검색 결과가 없습니다.
+                  </p>
+                </li>
+              )}
+            </ul>
           </div>
         )}
 
@@ -214,7 +256,7 @@ const FilterBottomSheet = ({
         )}
       </div>
 
-      <div className="h-[230px] w-full" />
+      {selectedTab !== "region" && <div className="h-[230px] w-full" />}
 
       <Button role="button" ariaLabel="필터 적용" className="w-full" onClick={handleApply}>
         적용하기
