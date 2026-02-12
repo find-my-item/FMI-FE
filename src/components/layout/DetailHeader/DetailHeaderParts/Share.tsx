@@ -1,3 +1,5 @@
+"use client";
+
 import { Icon } from "@/components/common";
 import { BaseButtonProps } from "./BaseButtonPropsType";
 

@@ -1,3 +1,5 @@
+"use client";
+
 import { KebabMenuButton } from "@/components/common";
 import { BaseButtonProps } from "./BaseButtonPropsType";
 

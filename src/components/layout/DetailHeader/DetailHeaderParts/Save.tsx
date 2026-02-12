@@ -1,3 +1,5 @@
+"use client";
+
 import { BaseButtonProps } from "./BaseButtonPropsType";
 
 const Save = ({ ariaLabel = "게시글 저장", ...props }: BaseButtonProps) => {
