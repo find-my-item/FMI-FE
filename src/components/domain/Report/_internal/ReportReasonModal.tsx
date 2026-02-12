@@ -3,7 +3,7 @@
 import { FormEvent, useEffect, useState } from "react";
 import { REPORT_REASONS } from "./REPORT_REASONS";
 import { createPortal } from "react-dom";
-import { Button } from "@/components/common";
+import { Button, RadioOptionItem } from "@/components/common";
 import { ReportReason } from "./ReportTypes";
 import { useModalLockAndEsc } from "@/hooks";
 
@@ -41,13 +41,20 @@ const ReportReasonModal = ({
     }
   };
 
+  const handleRadioChange = (selectedId: string) => {
+    const selectedReason = REPORT_REASONS.find((reason) => reason.id === selectedId);
+    if (selectedReason) {
+      setTempSelectedReportReason(selectedReason);
+    }
+  };
+
   return createPortal(
     <div
       className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/60"
       onClick={onClose}
     >
       <form
-        className="animate-modal-slide-up absolute bottom-0 flex h-[671px] w-full max-w-[390px] flex-col rounded-t-[20px] bg-white px-5 py-10"
+        className="animate-modal-slide-up absolute bottom-0 flex h-[671px] w-full max-w-[390px] flex-col rounded-t-[20px] bg-white py-10"
         onClick={(e) => e.stopPropagation()}
         onSubmit={handleSelectReportReason}
       >
@@ -56,27 +63,17 @@ const ReportReasonModal = ({
         </h1>
         <fieldset className="flex flex-col gap-[2px]">
           {REPORT_REASONS.map((reason) => (
-            <div
+            <RadioOptionItem
               key={reason.id}
-              className="w-full space-x-3 py-4 text-h3-medium text-neutral-normal-default"
-            >
-              <input
-                type="radio"
-                name="reportReason"
-                id={reason.id}
-                className="cursor-pointer"
-                value={reason.value}
-                onChange={() => setTempSelectedReportReason(reason)}
-                checked={tempSelectedReportReason?.id === reason.id}
-              />
-              <label htmlFor={reason.id} className="cursor-pointer">
-                {reason.label}
-              </label>
-            </div>
+              option={{ value: reason.id, label: reason.label }}
+              selected={tempSelectedReportReason?.id ?? ""}
+              onChange={handleRadioChange}
+              inputName="reportReason"
+            />
           ))}
         </fieldset>
-        <div className="mt-auto">
-          <Button className="w-full" disabled={tempSelectedReportReason === null} type="submit">
+        <div className="mt-auto px-5">
+          <Button className="w-full" disabled={!tempSelectedReportReason} type="submit">
             선택하기
           </Button>
         </div>
