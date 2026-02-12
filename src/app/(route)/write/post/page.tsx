@@ -17,6 +17,7 @@ import {
   LocationSection,
   TitleSection,
 } from "./_components";
+import { DetailHeaderSave } from "@/components/layout/DetailHeader/DetailHeaderParts";
 
 const WritePage = () => {
   const [saveModalOpen, setSaveModalOpen] = useState(false);
@@ -41,7 +42,7 @@ const WritePage = () => {
   return (
     <>
       <DetailHeader title={postType === "lost" ? "분실했어요 글쓰기" : "습득했어요 글쓰기"}>
-        <DetailHeader.Save onClick={() => setSaveModalOpen(true)} />
+        <DetailHeaderSave onClick={() => setSaveModalOpen(true)} />
       </DetailHeader>
       <h1 className="sr-only">분실/습득 등록 페이지</h1>
 

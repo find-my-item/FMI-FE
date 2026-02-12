@@ -4,6 +4,11 @@ import { useState } from "react";
 import { DetailHeader } from "@/components/layout";
 import PostShare from "../PostShare/PostShare";
 import PostActionMenu from "../PostActionMenu/PostActionMenu";
+import {
+  DetailHeaderMenu,
+  DetailHeaderShare,
+  DetailHeaderStar,
+} from "@/components/layout/DetailHeader/DetailHeaderParts";
 
 const PostDetailTopHeader = ({ postId }: { postId: number }) => {
   const [openShareModal, setOpenShareModal] = useState(false);
@@ -13,12 +18,9 @@ const PostDetailTopHeader = ({ postId }: { postId: number }) => {
     <>
       <div className="relative">
         <DetailHeader>
-          <DetailHeader.Star isActive ariaLabel="게시글 즐겨찾기" />
-          <DetailHeader.Share onClick={() => setOpenShareModal(true)} ariaLabel="게시글 공유" />
-          <DetailHeader.Menu
-            onClick={() => setOpenOptionModal((v) => !v)}
-            ariaLabel="게시글 메뉴"
-          />
+          <DetailHeaderStar isActive ariaLabel="게시글 즐겨찾기" />
+          <DetailHeaderShare onClick={() => setOpenShareModal(true)} ariaLabel="게시글 공유" />
+          <DetailHeaderMenu onClick={() => setOpenOptionModal((v) => !v)} ariaLabel="게시글 메뉴" />
         </DetailHeader>
 
         <PostActionMenu

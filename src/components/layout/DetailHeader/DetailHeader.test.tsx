@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import DetailHeader from "./DetailHeader";
+import { DetailHeaderSave, DetailHeaderSearch } from "./DetailHeaderParts";
 
 jest.mock("next/navigation", () => ({
   useRouter: () => ({ back: jest.fn() }),
@@ -20,7 +21,7 @@ test("내부 컴파운드 버튼 렌더링 여부 확인 및 클릭 시 이벤�
 
   render(
     <DetailHeader title="테스트">
-      <DetailHeader.Search onClick={handleSearch} />
+      <DetailHeaderSearch onClick={handleSearch} />
     </DetailHeader>
   );
 
@@ -30,6 +31,6 @@ test("내부 컴파운드 버튼 렌더링 여부 확인 및 클릭 시 이벤�
 
 // Save 버튼 테스트
 test("Save 버튼 disabled/활성화에 따라 클래스가 바뀌는지 확인", () => {
-  render(<DetailHeader.Save disabled />);
+  render(<DetailHeaderSave disabled />);
   expect(screen.getByText("임시 저장")).toHaveClass("text-flatGreen-200");
 });
