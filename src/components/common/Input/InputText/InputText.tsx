@@ -15,54 +15,48 @@ import Icon from "../../Icon/Icon";
 /**
  * @author suhyeon
  *
- * 일반 텍스트, 비밀번호를 입력받을 수 있고 버튼 결합 형태도 가능한 input 공통 컴포넌트 입니다.
- * react-hook-form를 필수로 사용한다는 전제하에 개발하였습니다.
- * react-hook-form으로 사용하실 곳은 상위 요소로 FormProvider를 사용해주시고 method는 onChange 모드로 설정하시면 됩니다.
+ * 일반 텍스트, 비밀번호 입력 및 버튼 결합이 가능한 공통 Input 컴포넌트입니다.
+ * `react-hook-form`의 `FormProvider` 하위에서 사용해야 하며, 실시간 검증을 위해 `mode: "onChange"` 설정을 권장합니다.
  *
+ * @param props - InputText 컴포넌트 속성
+ * @param props.inputOption - HTML Input 기본 속성 및 react-hook-form 설정 객체
+ * - `name`: (필수) 폼 상태 관리를 위한 고유 식별자
+ * - `type`: 입력 타입 (default: 'text')
+ * - `validation`: `RegisterOptions` 형태의 유효성 검사 규칙
+ * - `disabled`: 입력 필드 비활성화 여부
+ * @param props.label - 필드 상단에 표시될 라벨 텍스트
+ * @param props.btnOption - 우측 결합 버튼 설정 객체 (전달 시 버튼 렌더링)
+ * - `btnLabel`: 버튼에 표시될 텍스트
+ * - `btnOnClick`: 버튼 클릭 시 호출될 핸들러 (현재 입력값을 인자로 전달)
+ * - `btnType`: 버튼의 HTML 타입 ('button', 'submit', 'reset')
+ * @param props.caption - 하단 안내 문구 및 에러 메시지 설정 객체
+ * - `isSuccess`: 성공 상태 표시 여부 (true 시 successMessage 노출)
+ * - `successMessage`: 검증 성공 시 표시할 문구
+ * - `rule`: 평상시 또는 검증 전 노출할 입력 규칙 문구
  *
- * @param items -  일반 텍스트, 비밀번호를 입력받을 수 있고 버튼 결합 형태를 선택할 수 있는 props입니다.
- *  - 'name': 입력 필드의 id 및 register함수 사용을 위한 name
- *  - 'type': 입력 필드의 타입을 선택할 default로 'text'를 지정해놓았습니다. 그 외 타입들은 지정해주면 됩니다.
- *  - 'className': 입력필드의 스타일
- *  - `validation`: 입력 필드의 유효성 검사를 위한 RegisterOption
- *  - 'disabled': 입력필드, 버튼을 disabled처리
- *  - 'label': 라벨의 텍스트
- *  - 'children': 버튼 텍스트 (동시에 버튼 결합 형태를 사용할 것을 의미합니다.)
- *  - 'eyeShow': 비밀번호 타입을 사용할 때 비밀번호 숨기기/보이기 기능을 추가
- *  - 'btnOnClick': 버튼이 눌렸을때 발생할 이벤트를 넣을 수 있는 옵션
- *  - 'isSuccess': 성공 caption을 보여주기 위한 옵션
- *  - 'successMessage': caption에 나타날 성공 메시지
- *  - 'rule': caption에 나타날 입력 필드의 규칙
- *
- *
- * @example 입력필드만 사용
+ * @example
  * ```tsx
- * <FormProvider {...methods}>
- *   <form onSubmit={methods.handleSubmit(onSubmit)}>
- *     <InputText
- *       name="test"
- *       validation={{maxLength: {value: 10, message: "10자 이내로 입력해주세요."}}}
- *       label="테스트"
- *       rule="2~10자 이내로 입력해주세요."
- *     />
- *   </form>
- * </FormProvider>
+ * // 1. 기본 입력 필드 사용
+ * <InputText
+ * inputOption={{
+ * name: "password",
+ * type: "password",
+ * validation: { required: "비밀번호는 필수입니다." }
+ * }}
+ * label="비밀번호"
+ * caption={{ rule: "8~16자 영문, 숫자 조합" }}
+ * />
+ *
+ * // 2. 버튼 결합형 사용
+ * <InputText
+ * inputOption={{ name: "email" }}
+ * label="이메일"
+ * btnOption={{
+ * btnLabel: "중복확인",
+ * btnOnClick: (value) => handleCheckEmail(value)
+ * }}
+ * />
  * ```
- *
- * ```tsx 버튼 결합 형태
- * <FormProvider {...methods}>
- *   <form onSubmit={methods.handleSubmit(onSubmit)}>
- *     <InputText
- *       name="test"
- *       validation={{maxLength: {value: 10, message: "10자 이내로 입력해주세요."}}}
- *       label="테스트"
- *       rule="2~10자 이내로 입력해주세요."
- *       btnOnClick={(v) => console.log(v)}
- *     > 버튼이름
- *    </InputText>
- *   </form>
- * </FormProvider>
- *
  *
  */
 
