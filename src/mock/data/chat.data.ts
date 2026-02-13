@@ -11,6 +11,7 @@ export const MOCK_CHAT_ITEM = {
   postInfo: {
     postId: 1,
     postType: "LOST",
+    category: "WALLET",
     title: "테스트 게시글",
     address: "서울시 강남구 신사동",
     thumbnailUrl: "test-thumbnail.jpg",
@@ -34,6 +35,7 @@ export const MOCK_CHAT_ROOM_FOUND: ChatRoomResponse = {
   postInfo: {
     postId: 1,
     postType: "FOUND",
+    category: "WALLET",
     title: "여기에 게시글명이 표기됩니다 여기에 게시글명이 표기됩니다. 여기에",
     address: "서울시 중구 회현동",
     thumbnailUrl: "https://via.placeholder.com/40",
@@ -52,6 +54,7 @@ export const MOCK_CHAT_ROOM_LOST: ChatRoomResponse = {
   postInfo: {
     postId: 2,
     postType: "LOST",
+    category: "ETC",
     title: "분실물 게시글 제목입니다",
     address: "서울시 강남구 역삼동",
     thumbnailUrl: "https://via.placeholder.com/40",

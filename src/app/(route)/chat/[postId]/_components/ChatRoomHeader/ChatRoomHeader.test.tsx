@@ -18,6 +18,13 @@ jest.mock("next/image", () => (props: any) => {
 
 jest.mock("@/components/common", () => ({
   Icon: ({ name, ...rest }: any) => <span data-testid={`icon-${name}`} {...rest} />,
+  ListItemImage: (props: { alt?: string; src?: string | null; category?: string }) => (
+    <img
+      alt={props.alt ?? "게시글 썸네일"}
+      data-testid="list-item-image"
+      src={props.src ?? undefined}
+    />
+  ),
 }));
 
 jest.mock("../ChatChip/ChatChip", () => ({
@@ -61,7 +68,7 @@ describe("ChatRoomHeader", () => {
   it("게시글 썸네일 이미지가 렌더링됩니다", () => {
     render(<ChatRoomHeader chatRoom={MOCK_CHAT_ROOM_FOUND} roomId={MOCK_CHAT_ROOM_FOUND.roomId} />);
 
-    const image = screen.getByAltText("게시글 썸네일 이미지");
+    const image = screen.getByAltText("채팅방 게시글 썸네일");
     expect(image).toBeInTheDocument();
     expect(image).toHaveAttribute("src", MOCK_CHAT_ROOM_FOUND.postInfo.thumbnailUrl);
   });
@@ -108,12 +115,13 @@ describe("ChatRoomHeader", () => {
     expect(link).toHaveAttribute("href", `/list/${MOCK_CHAT_ROOM_FOUND.postInfo.postId}`);
   });
 
-  it("썸네일이 없을 때 MOCK_IMAGES를 사용합니다", () => {
+  it("썸네일이 없을 때 category를 사용하여 렌더링됩니다", () => {
     const chatRoomWithoutThumbnail: ChatRoomResponse = {
       ...MOCK_CHAT_ROOM_FOUND,
       postInfo: {
         ...MOCK_CHAT_ROOM_FOUND.postInfo,
-        thumbnailUrl: "",
+        thumbnailUrl: null,
+        category: "WALLET",
       },
     };
 
@@ -124,7 +132,7 @@ describe("ChatRoomHeader", () => {
       />
     );
 
-    const image = screen.getByAltText("게시글 썸네일 이미지");
+    const image = screen.getByAltText("채팅방 게시글 썸네일");
     expect(image).toBeInTheDocument();
   });
 
@@ -142,7 +150,7 @@ describe("ChatRoomHeader", () => {
     expect(screen.getByTestId("chat-room-header-info-button")).toBeInTheDocument();
 
     // 게시글 썸네일
-    expect(screen.getByAltText("게시글 썸네일 이미지")).toBeInTheDocument();
+    expect(screen.getByAltText("채팅방 게시글 썸네일")).toBeInTheDocument();
 
     // ChatChip
     expect(screen.getByTestId("chat-chip")).toBeInTheDocument();

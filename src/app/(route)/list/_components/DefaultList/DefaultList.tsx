@@ -18,7 +18,8 @@ interface DefaultListProps {
 
 const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
   const { type, region, category, sort, status } = useFilterParams();
-  const selectedType = (type ?? "lost") as "lost" | "found";
+  const normalizedType = type?.toLowerCase();
+  const selectedType = (normalizedType ?? "lost") as "lost" | "found";
   const postType: PostType = selectedType === "found" ? "FOUND" : "LOST";
 
   const postStatus: ItemStatus | undefined =
@@ -30,7 +31,7 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
     hasNextPage,
     isFetchingNextPage,
   } = useGetPosts({
-    address: region ?? "서울특별시",
+    address: region ?? "",
     postType,
     postStatus,
     category,

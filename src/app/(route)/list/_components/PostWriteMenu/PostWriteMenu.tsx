@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { Button, FloatingButton, Icon } from "@/components/common";
+import { Button, FloatingButton, Icon, ScrollToTopButton } from "@/components/common";
 import ModalLayout from "@/components/common/Modal/_internal/ModalLayout";
 import { cn } from "@/utils";
 import { WRITE_MENU_STYLES } from "./WRITE_MENU_STYLES";
@@ -22,7 +22,9 @@ const PostWriteMenu = () => {
 
   return (
     <>
-      <div className="fixed bottom-[30px] right-5">
+      <div className="fixed bottom-[30px] right-5 gap-2 flex-col-center">
+        <ScrollToTopButton />
+
         <div className="relative flex justify-end">
           {isMenuOpen && (
             <div className="absolute bottom-[65px] left-1/2 mb-3 -translate-x-[85%]">
