@@ -111,15 +111,15 @@ jest.mock("@/hooks", () => ({
   useModalLockAndEsc: () => {},
 }));
 
-jest.mock("@/components/domain/Report/_internal", () => ({
+jest.mock("@/components/domain/ReportModal/_internal", () => ({
   ReportPopupLayout: ({ isOpen, children }: any) => (isOpen ? <div>{children}</div> : null),
   ReportSelectBox: () => <div>ReportSelectBox</div>,
   ReportReasonModal: () => null,
 }));
 
 jest.mock("@/components/domain", () => ({
-  Report: ({ isOpen }: any) =>
-    isOpen ? <div data-testid="report-component">Report Component</div> : null,
+  ReportModal: ({ isOpen }: any) =>
+    isOpen ? <div data-testid="report-modal">Report Modal</div> : null,
 }));
 
 describe("ChatRoomHeaderInfoButton", () => {
@@ -169,7 +169,7 @@ describe("ChatRoomHeaderInfoButton", () => {
     const reportButton = screen.getByRole("button", { name: "차단, 신고하기" });
     await user.click(reportButton);
 
-    expect(screen.getByTestId("report-component")).toBeInTheDocument();
+    expect(screen.getByTestId("report-modal")).toBeInTheDocument();
   });
 
   it("채팅방 나가기 클릭 시 모달이 열립니다", async () => {

@@ -1,7 +1,7 @@
 "use client";
 
 import { ConfirmModal, Icon } from "@/components/common";
-import { Report } from "@/components/domain";
+import { ReportModal } from "@/components/domain";
 import { cn } from "@/utils";
 import { useState } from "react";
 import { INFO_OPTIONS } from "./INFO_OPTIONS";
@@ -70,7 +70,7 @@ const ChatRoomHeaderInfoButton = ({ roomId }: { roomId: number }) => {
         </button>
         <MenuItem chatMenuOpen={chatMenuOpen} onOptionClick={handleOptionClick} />
       </div>
-      <Report
+      <ReportModal
         isOpen={reportOpen}
         onClose={() => setReportOpen(false)}
         targetId={roomId}
