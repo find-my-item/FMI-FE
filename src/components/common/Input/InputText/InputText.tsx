@@ -84,12 +84,12 @@ export interface InputTextProps {
   };
 }
 
-const BaseInputStyle = `
-"flex flex-1 items-center relative h-10 py-3 px-2 bg-fill-neutral-strong-default rounded-[10px] text-body2-regular text-neutral-strong-entered",
-"placeholder:text-neutral-strong-placeholder hover:text-neutral-strong-hover border focus:outline-none focus:text-neutral-strong-focused",
-"disabled:text-neutral-strong-disabled disabled:bg-fill-neutral-strong-disabled autofill:text-neutral-strong-default",
-"autofill:shadow-[inset_0_0_0px_1000px_#f5f5f5] autofill:disabled:shadow-[inset_0_0_0px_1000px_#f5f5f5]"
-`;
+const BaseInputStyle = cn(
+  "flex flex-1 items-center relative h-10 py-3 px-2 bg-fill-neutral-strong-default rounded-[10px] text-body2-regular text-neutral-strong-entered",
+  "placeholder:text-neutral-strong-placeholder hover:text-neutral-strong-hover border focus:outline-none focus:text-neutral-strong-focused",
+  "disabled:text-neutral-strong-disabled disabled:bg-fill-neutral-strong-disabled autofill:text-neutral-strong-default",
+  "autofill:shadow-[inset_0_0_0px_1000px_#f5f5f5] autofill:disabled:shadow-[inset_0_0_0px_1000px_#f5f5f5]"
+);
 
 const InputText = ({
   inputOption = { name: "" },
@@ -144,8 +144,8 @@ const InputText = ({
               togglePassword && "pr-[60px]",
               showError && "border border-system-warning"
             )}
-            {...inputOption}
             disabled={disabled}
+            {...inputOption}
             type={actualType}
           />
 
