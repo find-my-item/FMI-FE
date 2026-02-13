@@ -138,8 +138,6 @@ const InputText = ({
           <input
             id={name}
             {...register(name, validation)}
-            type={actualType}
-            disabled={disabled}
             className={cn(
               BaseInputStyle,
               isValue && "pr-8",
@@ -147,6 +145,8 @@ const InputText = ({
               showError && "border border-system-warning"
             )}
             {...inputOption}
+            disabled={disabled}
+            type={actualType}
           />
 
           {/* 삭제 버튼 */}
