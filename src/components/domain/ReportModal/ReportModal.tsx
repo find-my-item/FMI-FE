@@ -13,7 +13,7 @@ type ReportFormValues = {
   reason: string;
 };
 
-interface ReportProps {
+interface ReportModalProps {
   isOpen: boolean;
   onClose: () => void;
   targetType: ReportTargetType;
@@ -39,7 +39,7 @@ interface ReportProps {
  * ```tsx
  * const [reportOpen, setReportOpen] = useState(false);
  *
- * <Report
+ * <ReportModal
  *   isOpen={reportOpen}
  *   onClose={() => setReportOpen(false)}
  *   targetType="CHAT"
@@ -49,7 +49,13 @@ interface ReportProps {
  * ```
  */
 
-const Report = ({ isOpen, onClose, targetType, targetId, invalidateKey }: ReportProps) => {
+const ReportModal = ({
+  isOpen,
+  onClose,
+  targetType,
+  targetId,
+  invalidateKey,
+}: ReportModalProps) => {
   const [openReportReasonModal, setOpenReportReasonModal] = useState(false);
   const [reportType, setReportType] = useState<ReportReason | null>(null);
   const methods = useForm<ReportFormValues>({
@@ -115,4 +121,4 @@ const Report = ({ isOpen, onClose, targetType, targetId, invalidateKey }: Report
   );
 };
 
-export default Report;
+export default ReportModal;
