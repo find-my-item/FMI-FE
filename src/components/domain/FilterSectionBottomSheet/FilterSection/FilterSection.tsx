@@ -102,7 +102,7 @@ const FilterSection = ({ pageType = "LIST" }: FilterSectionProps) => {
     },
     sort: {
       ariaLabel: "정렬 필터",
-      onSelected: selectionState.isSortSelected,
+      onSelected: selectionState.isSortSelected && normalizedSort !== "LATEST",
       icon: { name: "ArrowDown", size: 12 },
       label: (normalizedSort && SORT_LABEL_MAP[normalizedSort]) ?? "최신순",
       iconPosition: "trailing",

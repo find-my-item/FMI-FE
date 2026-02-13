@@ -1,9 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ChatRoom } from "@/api/fetch/chatRoom/types/ChatRoomResponse";
-import { ProfileAvatar } from "@/components/common";
+import { ListItemImage, ProfileAvatar } from "@/components/common";
 import { formatDate } from "@/utils";
-import { MOCK_IMAGES } from "./MOCK_IMAGES";
 
 interface ChatItemProps {
   chatRoom: ChatRoom;
@@ -11,7 +9,7 @@ interface ChatItemProps {
 
 const ChatItem = ({ chatRoom }: ChatItemProps) => {
   const { lastMessageSentAt, lastMessage, unreadCount, messageType } = chatRoom;
-  const { postId, address, thumbnailUrl } = chatRoom.postInfo;
+  const { postId, address, thumbnailUrl, category } = chatRoom.postInfo;
   const { nickname, profileImageUrl } = chatRoom.contactUser;
   const { roomId } = chatRoom;
 
@@ -30,15 +28,14 @@ const ChatItem = ({ chatRoom }: ChatItemProps) => {
           size={26}
           className="absolute left-0 top-0 z-10 rounded-full border-[1.5px] border-white"
         />
-        {/* TODO(형준): API 카테고리 반영 후 ListItemImage로 대체 예정 */}
-        <Image
-          alt="게시글 썸네일 이미지"
-          src={thumbnailUrl || MOCK_IMAGES[0]}
-          width={50}
-          height={50}
-          sizes="50px"
-          className="absolute bottom-0 right-0 h-[50px] w-[50px] rounded object-cover"
-        />
+        <div className="absolute bottom-0 right-0 rounded object-cover">
+          <ListItemImage
+            alt="채팅리스트 게시글 썸네일"
+            size={50}
+            src={thumbnailUrl}
+            category={category}
+          />
+        </div>
       </div>
 
       <div className="w-full min-w-0 space-y-[2px]">
