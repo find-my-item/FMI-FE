@@ -5,9 +5,9 @@ import { DetailHeader } from "@/components/layout";
 import PostShare from "../PostShare/PostShare";
 import PostActionMenu from "../PostActionMenu/PostActionMenu";
 import {
-  DetailHeaderMenu,
-  DetailHeaderShare,
-  DetailHeaderStar,
+  HeaderMenu,
+  HeaderShare,
+  HeaderStar,
 } from "@/components/layout/DetailHeader/DetailHeaderParts";
 
 const PostDetailTopHeader = ({ postId }: { postId: number }) => {
@@ -18,9 +18,9 @@ const PostDetailTopHeader = ({ postId }: { postId: number }) => {
     <>
       <div className="relative">
         <DetailHeader>
-          <DetailHeaderStar isActive ariaLabel="게시글 즐겨찾기" />
-          <DetailHeaderShare onClick={() => setOpenShareModal(true)} ariaLabel="게시글 공유" />
-          <DetailHeaderMenu onClick={() => setOpenOptionModal((v) => !v)} ariaLabel="게시글 메뉴" />
+          <HeaderStar isActive ariaLabel="게시글 즐겨찾기" />
+          <HeaderShare onClick={() => setOpenShareModal(true)} ariaLabel="게시글 공유" />
+          <HeaderMenu onClick={() => setOpenOptionModal((v) => !v)} ariaLabel="게시글 메뉴" />
         </DetailHeader>
 
         <PostActionMenu

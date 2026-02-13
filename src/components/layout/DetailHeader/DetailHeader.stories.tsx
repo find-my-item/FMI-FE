@@ -1,12 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs";
 import DetailHeader from "./DetailHeader";
-import {
-  DetailHeaderMenu,
-  DetailHeaderSave,
-  DetailHeaderSearch,
-  DetailHeaderShare,
-  DetailHeaderStar,
-} from "./DetailHeaderParts";
+import { HeaderMenu, HeaderSave, HeaderSearch, HeaderShare, HeaderStar } from "./DetailHeaderParts";
 
 const meta: Meta<typeof DetailHeader> = {
   title: "공통 컴포넌트/DetailHeader",
@@ -49,7 +43,7 @@ export const Write: Story = {
     title: "분실했어요 글쓰기",
     children: (
       <div className="flex gap-[23.5px]">
-        <DetailHeaderSave disabled={false} />
+        <HeaderSave disabled={false} />
       </div>
     ),
   },
@@ -60,7 +54,7 @@ export const List: Story = {
     title: "게시글",
     children: (
       <div className="flex gap-[23.5px]">
-        <DetailHeaderSearch />
+        <HeaderSearch />
       </div>
     ),
   },
@@ -71,9 +65,9 @@ export const PostDetail: Story = {
     children: (
       <div className="flex gap-[23.5px]">
         {/* storybook에서 사이즈 작게 뜨는 버그 */}
-        <DetailHeaderStar isActive />
-        <DetailHeaderShare />
-        <DetailHeaderMenu />
+        <HeaderStar isActive />
+        <HeaderShare />
+        <HeaderMenu />
       </div>
     ),
   },

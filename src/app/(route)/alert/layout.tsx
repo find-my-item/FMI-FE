@@ -1,14 +1,14 @@
 "use client";
 
 import { DetailHeader } from "@/components/layout";
-import { DetailHeaderSetting } from "@/components/layout/DetailHeader/DetailHeaderParts";
+import { HeaderSetting } from "@/components/layout/DetailHeader/DetailHeaderParts";
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <main className="flex h-[calc(100dvh-4px)] w-full flex-col">
       <h1 className="sr-only">알림 페이지</h1>
       <DetailHeader title="알림">
-        <DetailHeaderSetting />
+        <HeaderSetting />
       </DetailHeader>
       {children}
     </main>

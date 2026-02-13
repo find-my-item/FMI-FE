@@ -1,6 +1,6 @@
-export { default as DetailHeaderSearch } from "./DetailHeaderSearch";
-export { default as DetailHeaderSave } from "./DetailHeaderSave";
-export { default as DetailHeaderStar } from "./DetailHeaderStar";
-export { default as DetailHeaderShare } from "./DetailHeaderShare";
-export { default as DetailHeaderMenu } from "./DetailHeaderMenu";
-export { default as DetailHeaderSetting } from "./DetailHeaderSetting";
+export { default as HeaderSearch } from "./HeaderSearch";
+export { default as HeaderSave } from "./HeaderSave";
+export { default as HeaderStar } from "./HeaderStar";
+export { default as HeaderShare } from "./HeaderShare";
+export { default as HeaderMenu } from "./HeaderMenu";
+export { default as HeaderSetting } from "./HeaderSetting";
