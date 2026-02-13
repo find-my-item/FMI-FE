@@ -19,14 +19,13 @@ const MenuItem = ({
 
   return (
     <ul className="absolute right-0 top-10 z-10 m-0 list-none p-0" role="menu">
-      {INFO_OPTIONS.map((option) => {
-        const { label, textColor, position } = option;
+      {INFO_OPTIONS.map(({ value, label, textColor, position }) => {
         return (
-          <li key={option.value} className="m-0 p-0" role="menuitem">
+          <li key={value} role="menuitem">
             <button
               type="button"
               aria-label={label}
-              onClick={() => onOptionClick(option.value)}
+              onClick={() => onOptionClick(value)}
               className={cn(
                 "glass-card w-full text-nowrap border border-white bg-white/50 px-7 py-4 text-left text-h3-medium transition-colors hover:bg-white/70",
                 textColor,
