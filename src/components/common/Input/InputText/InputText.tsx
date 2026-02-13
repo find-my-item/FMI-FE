@@ -82,7 +82,6 @@ interface InputButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 interface CustomProps {
   label?: string;
-  eyeShow?: boolean;
   btnOption: InputButtonProps;
   caption: {
     isSuccess?: boolean;
@@ -105,7 +104,6 @@ const InputText = ({
   validation,
   disabled,
   label,
-  eyeShow = false,
   btnOption,
   caption,
   ...props
@@ -124,13 +122,11 @@ const InputText = ({
   const isValue = watch(name)?.trim();
   const isValueStr = (isValue ?? "").toString();
 
+  const isPasswordType = type === "password";
+  const togglePassword = isPasswordType;
   const [show, setShow] = useState(false);
-  const actualType = () => {
-    if (eyeShow && (name === "password" || name === "passwordConfirm")) {
-      return show ? "text" : "password";
-    }
-    return type;
-  };
+
+  const actualType = isPasswordType ? (show ? "text" : "password") : type;
 
   const maxLength =
     typeof validation?.maxLength === "number" ? validation.maxLength : validation?.maxLength?.value;
@@ -152,12 +148,12 @@ const InputText = ({
           <input
             id={name}
             {...register(name, validation)}
-            type={actualType()}
+            type={actualType}
             disabled={disabled}
             className={cn(
               BaseInputStyle,
               isValue && "pr-8",
-              eyeShow && "pr-[60px]",
+              togglePassword && "pr-[60px]",
               showError && "border border-system-warning"
             )}
             {...props}
@@ -167,14 +163,14 @@ const InputText = ({
           {disabled ||
             (!!isValue && (
               <DeleteButton
-                eyeShow={eyeShow}
+                eyeShow={togglePassword}
                 className="top-1/2 -translate-y-1/2"
                 value={isValue}
                 onDelete={() => onDelete(name)}
               />
             ))}
           {/* 비밀번호 눈 모양 버튼 */}
-          {eyeShow && (
+          {togglePassword && (
             <button
               className="absolute right-2 top-3 outline-none flex-center"
               type="button"
