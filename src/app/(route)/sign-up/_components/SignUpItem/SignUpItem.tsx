@@ -60,7 +60,6 @@ const SignUpItem = ({ isVerified, disabled, ...props }: SignUpItemProps) => {
   } = useController({
     name: name,
     control,
-    rules: inputValidationRules[name] as RegisterOptions<FormType, any>,
   });
 
   const isFieldSuccess = isDirty && !error && !!field.value;

@@ -188,7 +188,6 @@ const InputText = ({
             ignoreBase
             disabled={disabled}
             className="text-neutral-normal-default, w-auto whitespace-nowrap rounded-[10px] border border-neutral-normal-default px-[14px] py-[10px] text-body2-semibold disabled:text-neutral-normal-disabled disabled:bg-fill-neutral-strong-default"
-            aria-label={btnLabel}
             {...btnOption}
           >
             {btnLabel}
