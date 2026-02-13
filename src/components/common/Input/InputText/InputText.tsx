@@ -98,7 +98,7 @@ const InputText = ({
   caption = {},
 }: InputTextProps) => {
   const { name, type = "text", validation, disabled } = inputOption;
-  const { btnType = "button", btnOnClick, btnLabel } = btnOption;
+  const { btnType = "button", btnOnClick, btnLabel, ...restBtnOption } = btnOption;
   const { isSuccess, successMessage, rule } = caption;
 
   const {
@@ -182,7 +182,7 @@ const InputText = ({
             ignoreBase
             disabled={disabled}
             className="text-neutral-normal-default, w-auto whitespace-nowrap rounded-[10px] border border-neutral-normal-default px-[14px] py-[10px] text-body2-semibold disabled:text-neutral-normal-disabled disabled:bg-fill-neutral-strong-default"
-            {...btnOption}
+            {...restBtnOption}
           >
             {btnLabel}
           </Button>
