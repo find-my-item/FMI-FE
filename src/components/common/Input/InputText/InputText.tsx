@@ -82,8 +82,8 @@ interface InputButtonType extends ButtonHTMLAttributes<HTMLButtonElement> {
 interface InputTextProps {
   inputOption: InputType;
   label?: string;
-  btnOption: InputButtonType;
-  caption: {
+  btnOption?: InputButtonType;
+  caption?: {
     isSuccess?: boolean;
     successMessage?: string;
     rule?: string;
@@ -96,7 +96,12 @@ const BaseInputStyle = `
 "disabled:text-neutral-strong-disabled disabled:bg-fill-neutral-strong-disabled autofill:text-neutral-strong-default",
 "autofill:shadow-[inset_0_0_0px_1000px_#f5f5f5] autofill:disabled:shadow-[inset_0_0_0px_1000px_#f5f5f5]"
 `;
-const InputText = ({ inputOption, label, btnOption, caption }: InputTextProps) => {
+const InputText = ({
+  inputOption = { name: "" },
+  label,
+  btnOption = {},
+  caption = {},
+}: InputTextProps) => {
   const { name, type, validation, disabled } = inputOption;
   const { btnType, btnOnClick, btnLabel } = btnOption;
   const { isSuccess, successMessage, rule } = caption;
