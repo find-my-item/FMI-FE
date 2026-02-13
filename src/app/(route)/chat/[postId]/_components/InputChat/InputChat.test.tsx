@@ -6,6 +6,9 @@ import "@testing-library/jest-dom";
 
 jest.mock("@/utils", () => ({
   cn: (...args: unknown[]) => args.filter(Boolean).join(" "),
+  textareaAutoResize: jest.fn(),
+  fileInputHandler: jest.fn(),
+  textareaSubmitKeyHandler: jest.fn(),
 }));
 
 jest.mock("@/components/common/Icon/Icon", () => {

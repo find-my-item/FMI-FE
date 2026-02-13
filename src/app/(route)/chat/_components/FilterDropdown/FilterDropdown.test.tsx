@@ -44,7 +44,7 @@ describe("FilterDropdown", () => {
       );
 
       const filterButton = screen.getByTestId("filter-채팅 리스트 최신순");
-      expect(filterButton).toHaveTextContent("습득/분실");
+      expect(filterButton).toHaveTextContent("최신순");
     });
 
     it("sort 파라미터가 LATEST일 때 최신순이 표시됩니다", () => {

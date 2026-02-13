@@ -1,9 +1,7 @@
 "use client";
 
-import { Icon } from "@/components/common";
-import Image from "next/image";
+import { Icon, ListItemImage } from "@/components/common";
 import { useRouter } from "next/navigation";
-import { MOCK_IMAGES } from "../../../_components/ChatItem/MOCK_IMAGES";
 import ChatChip from "../ChatChip/ChatChip";
 import ChatRoomHeaderInfoButton from "../ChatRoomHeaderInfoButton/ChatRoomHeaderInfoButton";
 import { ChatRoomResponse } from "@/api/fetch/chatRoom/types/ChatRoomResponse";
@@ -17,7 +15,7 @@ interface ChatRoomHeaderProps {
 const ChatRoomHeader = ({ chatRoom, roomId }: ChatRoomHeaderProps) => {
   const router = useRouter();
   if (!chatRoom) return null;
-  const { address, postType, title, thumbnailUrl, postId } = chatRoom.postInfo;
+  const { address, postType, title, thumbnailUrl, postId, category } = chatRoom.postInfo;
   const { nickname } = chatRoom.opponentUser;
 
   return (
@@ -42,15 +40,14 @@ const ChatRoomHeader = ({ chatRoom, roomId }: ChatRoomHeaderProps) => {
         className="flex items-center gap-4 px-4"
         aria-label="게시글 상세 페이지 이동"
       >
-        {/* TODO(형준): API 카테고리 반영 후 ListItemImage로 대체 예정 */}
-        <Image
-          alt="게시글 썸네일 이미지"
-          src={thumbnailUrl || MOCK_IMAGES[0]}
-          width={40}
-          height={40}
-          className="h-10 w-10 rounded"
-        />
-
+        <div className="shrink-0">
+          <ListItemImage
+            alt="채팅방 게시글 썸네일"
+            size={40}
+            src={thumbnailUrl}
+            category={category}
+          />
+        </div>
         <div className="flex min-w-0 flex-col">
           <div className="flex items-center gap-1">
             <ChatChip postMode={postType} />
