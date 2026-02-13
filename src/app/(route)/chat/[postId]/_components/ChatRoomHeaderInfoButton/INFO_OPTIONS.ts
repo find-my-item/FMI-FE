@@ -1,6 +1,8 @@
+import { InfoButtonOptionValue } from "./InfoButtonOptionValueTypes";
+
 export interface InfoOption {
   label: string;
-  value: "report" | "leave";
+  value: InfoButtonOptionValue;
   textColor: "text-neutral-normal-default" | "text-system-warning";
   position: "first" | "last";
 }

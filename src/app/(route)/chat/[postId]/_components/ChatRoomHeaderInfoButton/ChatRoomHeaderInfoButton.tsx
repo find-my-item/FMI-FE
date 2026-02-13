@@ -7,13 +7,14 @@ import { useState } from "react";
 import { INFO_OPTIONS } from "./INFO_OPTIONS";
 import useLeaveChatRoom from "@/api/fetch/chatRoom/api/useLeaveChatRoom";
 import useClickOutside from "./useClickOutside";
+import { InfoButtonOptionValue } from "./InfoButtonOptionValueTypes";
 
 const MenuItem = ({
   chatMenuOpen,
   onOptionClick,
 }: {
   chatMenuOpen: boolean;
-  onOptionClick: (value: "report" | "leave") => void;
+  onOptionClick: (value: InfoButtonOptionValue) => void;
 }) => {
   if (!chatMenuOpen) return null;
 
@@ -48,7 +49,7 @@ const ChatRoomHeaderInfoButton = ({ roomId }: { roomId: number }) => {
   const containerRef = useClickOutside(() => setChatMenuOpen(false));
   const { mutate: leaveChatRoom } = useLeaveChatRoom(roomId);
 
-  const handleOptionClick = (value: "report" | "leave") => {
+  const handleOptionClick = (value: InfoButtonOptionValue) => {
     if (value === "report") {
       setReportOpen(true);
       return;
