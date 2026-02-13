@@ -1,48 +1,70 @@
 export const SIGNUP_INPUT_CONFIG = [
   {
-    name: "email",
+    inputOption: {
+      name: "email",
+      type: "text",
+      placeholder: "로그인에 사용할 이메일을 입력해주세요.",
+      maxLength: 256,
+    },
     label: "아이디(이메일)",
-    type: "text",
-    placeholder: "로그인에 사용할 이메일을 입력해주세요.",
-    children: "인증번호 발송",
-    maxLength: 256,
+    btnOption: {
+      btnLabel: "인증번호 발송",
+    },
   },
   {
-    name: "emailAuth",
+    inputOption: {
+      name: "emailAuth",
+      type: "text",
+      placeholder: "인증번호를 입력해주세요.",
+      maxLength: 6,
+    },
+    btnOption: {
+      btnLabel: "인증번호 확인",
+    },
+    caption: {
+      successMessage: "인증되었습니다.",
+    },
     label: "이메일 인증",
-    type: "text",
-    placeholder: "인증번호를 입력해주세요.",
-    children: "인증번호 확인",
-    successMessage: "인증되었습니다.",
-    maxLength: 6,
   },
   {
-    name: "password",
+    inputOption: {
+      name: "password",
+      type: "password",
+      maxLength: 16,
+      placeholder: "비밀번호을 입력해 주세요.",
+    },
+    caption: {
+      rule: "8~16자리, 대문자/소문자/숫자/특수 문자 포함",
+      successMessage: "대문자/소문자/숫자/특수 문자 포함 8~16자리 사이",
+    },
     label: "비밀번호",
-    type: "password",
-    placeholder: "비밀번호을 입력해 주세요.",
-    rule: "8~16자리, 대문자/소문자/숫자/특수 문자 포함",
-    eyeShow: true,
-    successMessage: "대문자/소문자/숫자/특수 문자 포함 8~16자리 사이",
-    maxLength: 16,
   },
   {
-    name: "passwordConfirm",
+    inputOption: {
+      name: "passwordConfirm",
+      type: "password",
+      placeholder: "비밀번호 입력해 주세요.",
+      maxLength: 16,
+    },
+    caption: {
+      successMessage: "비밀번호가 일치합니다.",
+    },
     label: "비밀번호 확인",
-    type: "password",
-    placeholder: "비밀번호 입력해 주세요.",
-    eyeShow: true,
-    successMessage: "비밀번호가 일치합니다.",
-    maxLength: 16,
   },
   {
-    name: "nickname",
+    inputOption: {
+      name: "nickname",
+      type: "text",
+      placeholder: "닉네임을 입력해 주세요.",
+      maxLength: 10,
+    },
+    btnOption: {
+      btnLabel: "중복 확인",
+    },
+    caption: {
+      rule: "2~10자, 특수문자/금칙어 제한",
+      successMessage: "사용할 수 있는 닉네임입니다.",
+    },
     label: "닉네임",
-    type: "text",
-    placeholder: "닉네임을 입력해 주세요.",
-    rule: "2~10자, 특수문자/금칙어 제한",
-    children: "중복 확인",
-    maxLength: 10,
-    successMessage: "사용할 수 있는 닉네임입니다.",
   },
-] as const;
+];

@@ -79,7 +79,7 @@ interface InputButtonType extends ButtonHTMLAttributes<HTMLButtonElement> {
   btnType?: "button" | "submit" | "reset";
 }
 
-interface InputTextProps {
+export interface InputTextProps {
   inputOption: InputType;
   label?: string;
   btnOption?: InputButtonType;
@@ -96,6 +96,7 @@ const BaseInputStyle = `
 "disabled:text-neutral-strong-disabled disabled:bg-fill-neutral-strong-disabled autofill:text-neutral-strong-default",
 "autofill:shadow-[inset_0_0_0px_1000px_#f5f5f5] autofill:disabled:shadow-[inset_0_0_0px_1000px_#f5f5f5]"
 `;
+
 const InputText = ({
   inputOption = { name: "" },
   label,
@@ -186,7 +187,8 @@ const InputText = ({
             onClick={() => btnOnClick?.(isValue)}
             ignoreBase
             disabled={disabled}
-            className={`"text-neutral-normal-default, text-body2-semibold", "border py-[10px]", "disabled:text-neutral-normal-disabled disabled:bg-fill-neutral-strong-default" w-auto whitespace-nowrap rounded-[10px] border-neutral-normal-default px-[14px]`}
+            className="text-neutral-normal-default, w-auto whitespace-nowrap rounded-[10px] border border-neutral-normal-default px-[14px] py-[10px] text-body2-semibold disabled:text-neutral-normal-disabled disabled:bg-fill-neutral-strong-default"
+            aria-label={btnLabel}
             {...btnOption}
           >
             {btnLabel}

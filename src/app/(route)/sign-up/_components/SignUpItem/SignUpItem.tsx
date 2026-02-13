@@ -2,11 +2,10 @@
 
 import { InputText } from "@/components/common";
 import { InputTextProps } from "@/components/common/Input/InputText/InputText";
-import { useFormContext, useController } from "react-hook-form";
+import { useFormContext, useController, RegisterOptions } from "react-hook-form";
 import { FormType } from "../../types/FormType";
-import { useEffect } from "react";
 
-const inputValidationRules = {
+const inputValidationRules: Partial<Record<keyof FormType, RegisterOptions<FormType, any>>> = {
   email: {
     required: true,
     pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "이메일 형식을 입력해 주세요." },
@@ -46,33 +45,43 @@ const inputValidationRules = {
 
 interface SignUpItemProps extends InputTextProps {
   isVerified: boolean;
+  disabled?: boolean;
 }
 
-const SignUpItem = ({ children, isVerified, ...props }: SignUpItemProps) => {
-  const { control } = useFormContext();
+const SignUpItem = ({ isVerified, disabled, ...props }: SignUpItemProps) => {
+  const { control } = useFormContext<FormType>();
+
+  const { inputOption, label, btnOption, caption } = props;
+  const name = inputOption.name as keyof FormType;
 
   const {
     field,
     fieldState: { error, isDirty },
   } = useController({
-    name: props.name,
+    name: name,
     control,
-    rules: props.validation,
+    rules: inputValidationRules[name] as RegisterOptions<FormType, any>,
   });
 
   const isFieldSuccess = isDirty && !error && !!field.value;
 
-  const isSuccessState =
-    props.name === "emailAuth" || props.name === "nickname" ? isVerified : isFieldSuccess;
-
-  const inputValidation = (name: string) =>
-    inputValidationRules[name as keyof typeof inputValidationRules];
+  const isSuccessState = name === "emailAuth" || name === "nickname" ? isVerified : isFieldSuccess;
 
   return (
     <div className="h-[96px]">
-      <InputText validation={inputValidation(props.name)} isSuccess={isSuccessState} {...props}>
-        {children}
-      </InputText>
+      <InputText
+        inputOption={{
+          ...inputOption,
+          disabled: disabled,
+          validation: inputValidationRules[name] as any,
+        }}
+        label={label}
+        btnOption={btnOption}
+        caption={{
+          ...caption,
+          isSuccess: isSuccessState,
+        }}
+      />
     </div>
   );
 };
