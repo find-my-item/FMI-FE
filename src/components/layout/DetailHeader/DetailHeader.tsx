@@ -1,19 +1,46 @@
 "use client";
 
-import { ButtonHTMLAttributes, ReactNode } from "react";
+import { ReactNode } from "react";
 import { useRouter } from "next/navigation";
-import Icon from "@/components/common/Icon/Icon";
-import Bookmark from "@/components/common/Buttons/Bookmark/Bookmark";
-import KebabMenuButton from "@/components/common/Buttons/KebabMenuButton/KebabMenuButton";
+import { Icon } from "@/components/common";
 
 interface DetailHeaderProps {
   title?: string;
   children?: ReactNode;
 }
 
-interface BaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  ariaLabel?: string;
-}
+/**
+ * @author hyungjun
+ *
+ * @description
+ * 상세 페이지에서 사용하는 헤더 컴포넌트입니다.
+ * 뒤로가기 버튼과 제목을 표시하며, 오른쪽에 추가 액션 버튼들을 배치할 수 있습니다.
+ * sticky 포지션으로 스크롤 시에도 상단에 고정됩니다.
+ *
+ * @param title - 헤더에 표시할 제목입니다. (선택)
+ * @param children - 헤더 오른쪽에 배치할 액션 버튼들입니다. (선택)
+ * `DetailHeaderParts`에서 제공하는 `DetailHeaderSave`, `DetailHeaderSearch`, `DetailHeaderStar`, `DetailHeaderMenu` 등의 컴포넌트를 사용할 수 있습니다.
+ *
+ * @example
+ * ```tsx
+ * import { DetailHeader } from "@/components/layout";
+ * import { DetailHeaderSave } from "@/components/layout/DetailHeader/DetailHeaderParts";
+ *
+ * // 제목만 있는 경우
+ * <DetailHeader title="자주 묻는 질문" />
+ *
+ * // 제목과 저장 버튼이 있는 경우
+ * <DetailHeader title="글쓰기">
+ *   <DetailHeaderSave onClick={handleSave} />
+ * </DetailHeader>
+ *
+ * // 여러 액션 버튼을 함께 사용하는 경우
+ * <DetailHeader title="게시글 상세">
+ *   <DetailHeaderStar isActive />
+ *   <DetailHeaderMenu onClick={handleMenu} />
+ * </DetailHeader>
+ * ```
+ */
 
 const DetailHeader = ({ title = "", children }: DetailHeaderProps) => {
   const router = useRouter();
@@ -37,49 +64,6 @@ const DetailHeader = ({ title = "", children }: DetailHeaderProps) => {
         </div>
       )}
     </header>
-  );
-};
-
-DetailHeader.Search = ({ ariaLabel = "검색", ...props }: BaseButtonProps) => {
-  return (
-    <button {...props} aria-label={ariaLabel}>
-      <Icon name="Search" />
-    </button>
-  );
-};
-
-DetailHeader.Save = ({ ariaLabel = "게시글 저장", ...props }: BaseButtonProps) => {
-  const isDisabledStyle = props.disabled ? "text-flatGreen-200" : "text-flatGreen-500";
-  return (
-    <button {...props} className={isDisabledStyle} aria-label={ariaLabel}>
-      임시 저장
-    </button>
-  );
-};
-
-DetailHeader.Star = (
-  props: BaseButtonProps & { isActive: boolean; size?: "large" | "medium" | "small" }
-) => {
-  return <Bookmark {...props} />;
-};
-
-DetailHeader.Share = ({ ariaLabel = "공유", ...props }: BaseButtonProps) => {
-  return (
-    <button {...props} aria-label={ariaLabel}>
-      <Icon name="Share" />
-    </button>
-  );
-};
-
-DetailHeader.Menu = (props: BaseButtonProps & { size?: "large" | "small" }) => {
-  return <KebabMenuButton {...props} />;
-};
-
-DetailHeader.Setting = ({ ariaLabel = "알림 설정", ...props }: BaseButtonProps) => {
-  return (
-    <button {...props} aria-label={ariaLabel}>
-      <Icon name="Setting" />
-    </button>
   );
 };
 
