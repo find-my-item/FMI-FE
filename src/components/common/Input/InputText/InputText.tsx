@@ -102,8 +102,8 @@ const InputText = ({
   btnOption = {},
   caption = {},
 }: InputTextProps) => {
-  const { name, type, validation, disabled } = inputOption;
-  const { btnType, btnOnClick, btnLabel } = btnOption;
+  const { name, type = "text", validation, disabled } = inputOption;
+  const { btnType = "button", btnOnClick, btnLabel } = btnOption;
   const { isSuccess, successMessage, rule } = caption;
 
   const {
