@@ -25,19 +25,22 @@ const MypageProfileForm = () => {
 
       <div className="flex w-full flex-col gap-5 p-5">
         <InputText
-          name="nickname"
-          label="닉네임"
-          // TODO(수현): 기존 닉네임이 placeholder로 들어갈 예정
-          placeholder="기존 닉네임 표기"
-          rule="2~10자, 특수문자/금칙어 제한"
-          maxLength={10}
-          validation={{
-            required: true,
+          inputOption={{
+            name: "nickname",
+            // TODO(수현): 기존 닉네임이 placeholder로 들어갈 예정
+            placeholder: "기존 닉네임 표기",
             maxLength: 10,
+            validation: {
+              required: true,
+              maxLength: 10,
+            },
           }}
-        >
-          중복 확인
-        </InputText>
+          label="닉네임"
+          btnOption={{
+            btnLabel: "중복 확인",
+          }}
+          caption={{ rule: "2~10자, 특수문자/금칙어 제한" }}
+        />
       </div>
 
       <FooterButton
