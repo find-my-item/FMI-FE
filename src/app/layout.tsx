@@ -75,9 +75,7 @@ export default function RootLayout({
         <Providers>
           <ToastProvider>
             <MSWProvider />
-            <Header />
             <main className="w-full flex-1">{children}</main>
-            <Footer />
           </ToastProvider>
           <Script
             src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.7/kakao.min.js"

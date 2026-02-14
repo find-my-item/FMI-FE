@@ -28,7 +28,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="sticky top-0 flex h-16 w-full items-center justify-between bg-gray-300 p-4">
+      <header className="fixed left-1/2 top-0 z-10 flex h-16 w-full max-w-[390px] -translate-x-1/2 items-center justify-between bg-gray-300 p-4">
         <Link href="/" aria-label="홈으로 이동">
           <Icon name="Logo" size={40} />
         </Link>

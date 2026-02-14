@@ -24,7 +24,7 @@ const Footer = () => {
   if (isHidden) return null;
 
   return (
-    <footer className="sticky bottom-0 w-full bg-gray-300 py-4 text-black">
+    <footer className="fixed bottom-0 left-1/2 z-10 w-full max-w-[390px] -translate-x-1/2 bg-gray-300 py-4 text-black">
       <div className="container mx-auto flex flex-col items-center gap-4 px-4">
         <nav className="flex gap-6 text-sm" aria-label="하단 네비게이션">
           {FOOTER_LINK.map((link) => (
