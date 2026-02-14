@@ -3,14 +3,16 @@ import { FormProvider, useForm } from "react-hook-form";
 import InputText from "./InputText";
 
 const meta: Meta<typeof InputText> = {
-  title: "공통컴포넌트/Input/InputText",
+  title: "공통 컴포넌트/Input/InputText",
   component: InputText,
   decorators: [
     (Story) => {
-      const methods = useForm({ mode: "onChange" });
+      const methods = useForm({ mode: "onChange", reValidateMode: "onChange" });
       return (
         <FormProvider {...methods}>
-          <Story />
+          <div className="h-auto w-[400px]">
+            <Story />
+          </div>
         </FormProvider>
       );
     },
@@ -74,6 +76,13 @@ export const ErrorState: Story = {
     label: "에러 필드",
     inputOption: {
       name: "errorField",
+      validation: {
+        required: true,
+        maxLength: {
+          value: 10,
+          message: "10자 이내",
+        },
+      },
     },
     caption: {
       rule: "이 필드는 에러 상태를 보여줍니다.",
