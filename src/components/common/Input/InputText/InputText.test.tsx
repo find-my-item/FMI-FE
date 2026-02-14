@@ -73,9 +73,6 @@ jest.mock("../_internal/_hooks/useFormInput", () => ({
   useFormInput: () => ({ onDelete: mockOnDelete }),
 }));
 
-/**
- * 렌더링 헬퍼 함수
- */
 const renderComponent = (
   props: Partial<InputTextProps> = {},
   formConfig: Partial<UseFormProps> = {}

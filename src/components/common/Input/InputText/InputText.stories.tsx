@@ -3,7 +3,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import InputText from "./InputText";
 
 const meta: Meta<typeof InputText> = {
-  title: "Components/Common/InputText",
+  title: "공통컴포넌트/Input/InputText",
   component: InputText,
   decorators: [
     (Story) => {
@@ -95,7 +95,6 @@ export const SuccessState: Story = {
   },
 };
 
-// 6. 비활성화 UI (Disabled)
 export const DisabledState: Story = {
   args: {
     label: "읽기 전용",
