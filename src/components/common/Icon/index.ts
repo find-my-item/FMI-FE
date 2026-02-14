@@ -82,3 +82,7 @@ export { default as Like } from "@/assets/like.svg";
 export { default as EmptyFavorite } from "@/assets/empty-favorite.svg";
 export { default as ScrollTopArrow } from "@/assets/scrolltop-arrow-up.svg";
 export { default as CommentImageClear } from "@/assets/comment-image-clear.svg";
+export { default as Home } from "@/assets/home.svg";
+export { default as Luggage } from "@/assets/luggage.svg";
+export { default as Chat } from "@/assets/chat.svg";
+export { default as UserProfileHome } from "@/assets/user-profile-home.svg";
