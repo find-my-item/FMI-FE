@@ -33,6 +33,7 @@ export const SIGNUP_INPUT_CONFIG = [
       maxLength: 16,
       placeholder: "비밀번호을 입력해 주세요.",
     },
+    btnOption: {},
     caption: {
       rule: "8~16자리, 대문자/소문자/숫자/특수 문자 포함",
       successMessage: "대문자/소문자/숫자/특수 문자 포함 8~16자리 사이",
@@ -46,6 +47,7 @@ export const SIGNUP_INPUT_CONFIG = [
       placeholder: "비밀번호 입력해 주세요.",
       maxLength: 16,
     },
+    btnOption: {},
     caption: {
       successMessage: "비밀번호가 일치합니다.",
     },
@@ -67,4 +69,4 @@ export const SIGNUP_INPUT_CONFIG = [
     },
     label: "닉네임",
   },
-];
+] as const;

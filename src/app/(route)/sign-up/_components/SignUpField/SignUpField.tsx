@@ -49,7 +49,6 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
           <SignUpItem
             key={item.inputOption.name}
             {...item}
-            disabled={handleDisabled(item.inputOption.name)}
             isVerified={handleVerified(item.inputOption.name)}
             inputOption={{
               disabled: handleDisabled(item.inputOption.name),

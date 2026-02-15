@@ -5,7 +5,7 @@ import { InputTextProps } from "@/components/common/Input/InputText/InputText";
 import { useFormContext, useController, RegisterOptions } from "react-hook-form";
 import { FormType } from "../../types/FormType";
 
-const inputValidationRules: Partial<Record<keyof FormType, RegisterOptions<FormType, any>>> = {
+const inputValidationRules: Record<keyof SignUpFieldType, RegisterOptions<SignUpFieldType>> = {
   email: {
     required: true,
     pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "이메일 형식을 입력해 주세요." },
@@ -22,7 +22,7 @@ const inputValidationRules: Partial<Record<keyof FormType, RegisterOptions<FormT
   },
   passwordConfirm: {
     required: true,
-    validate: (value: string, formValues: FormType) =>
+    validate: (value, formValues: SignUpFieldType) =>
       value === formValues.password || "비밀번호가 일치하지 않습니다.",
     deps: ["password"],
   },
@@ -43,24 +43,31 @@ const inputValidationRules: Partial<Record<keyof FormType, RegisterOptions<FormT
   },
 };
 
-interface SignUpItemProps extends InputTextProps {
+type SignUpFieldType = Omit<
+  FormType,
+  "termsOfServiceAgreed" | "privacyPolicyAgreed" | "marketingConsent"
+>;
+
+interface SignUpItemProps extends Omit<InputTextProps, "inputOption"> {
+  inputOption: Omit<InputTextProps["inputOption"], "name"> & {
+    name: keyof SignUpFieldType;
+  };
   isVerified: boolean;
-  disabled?: boolean;
 }
 
-const SignUpItem = ({ isVerified, disabled, ...props }: SignUpItemProps) => {
-  const { control } = useFormContext<FormType>();
+const SignUpItem = ({ isVerified, ...props }: SignUpItemProps) => {
+  const { control } = useFormContext<SignUpFieldType>();
 
   const { inputOption, label, btnOption, caption } = props;
-  const name = inputOption.name as keyof FormType;
+  const name = inputOption.name;
 
   const {
     field,
     fieldState: { error, isDirty },
   } = useController({
-    name: name,
+    name,
     control,
-    rules: inputValidationRules[name] as RegisterOptions<FormType, any>,
+    rules: inputValidationRules[name],
   });
 
   const isFieldSuccess = isDirty && !error && !!field.value;
@@ -72,7 +79,7 @@ const SignUpItem = ({ isVerified, disabled, ...props }: SignUpItemProps) => {
       <InputText
         inputOption={{
           ...inputOption,
-          disabled: disabled,
+          // disabled: disabled,
           validation: inputValidationRules[name] as any,
         }}
         label={label}
