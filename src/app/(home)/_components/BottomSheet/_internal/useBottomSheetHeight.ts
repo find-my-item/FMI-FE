@@ -4,6 +4,7 @@ import { animate, useMotionValue, useMotionValueEvent } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { INITIAL_HEIGHT_PX, MIN_HEIGHT_PX } from "./HEIGHT_PX";
 import { getMaxHeightPx, getSnapHeights } from "./heightUtils";
+import { useSearchParams } from "next/navigation";
 
 const FULLY_EXPANDED_TOLERANCE_PX = 2;
 
@@ -18,11 +19,21 @@ const useBottomSheetHeight = () => {
   const [isFullyExpanded, setIsFullyExpanded] = useState(false);
   const height = useMotionValue(INITIAL_HEIGHT_PX);
   const moveListenerRef = useRef<((e: PointerEvent) => void) | null>(null);
+  const searchParams = useSearchParams();
+  const searchValue = searchParams.get("search");
 
   useMotionValueEvent(height, "change", (latest: number) => {
     const max = getMaxHeightPx();
     setIsFullyExpanded(latest >= max - FULLY_EXPANDED_TOLERANCE_PX);
   });
+
+  useEffect(() => {
+    if (searchValue) {
+      height.set(getMaxHeightPx());
+      return;
+    }
+    height.set(INITIAL_HEIGHT_PX);
+  }, [searchValue]);
 
   useEffect(() => {
     const max = getMaxHeightPx();
