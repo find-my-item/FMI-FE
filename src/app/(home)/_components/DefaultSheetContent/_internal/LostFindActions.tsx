@@ -19,7 +19,14 @@ const LostFindActions = () => {
     <div className="flex gap-4">
       {LOST_FIND_ACTIONS.map(({ type, title, image }) => (
         <Link href={`/write/post?type=${type}`} key={type}>
-          <Image src={image} alt={title} width={167} height={106} property="true" />
+          <Image
+            src={image}
+            alt={title}
+            width={167}
+            height={106}
+            property="true"
+            draggable={false}
+          />
         </Link>
       ))}
     </div>
