@@ -54,7 +54,11 @@ const HomeFilterSection = () => {
   const { ref, onMouseDown } = useHorizontalDragScroll();
 
   return (
-    <div ref={ref} onMouseDown={onMouseDown} className="-mr-5 flex gap-2 no-scrollbar">
+    <div
+      ref={ref}
+      onMouseDown={onMouseDown}
+      className="-mx-5 flex gap-2 border-b border-divider-default pb-[14px] pl-5 no-scrollbar"
+    >
       {FILTER_ITEMS.map((item) => (
         <HomeFilter key={item.value} ariaLabel={item.label} onSelected={false}>
           {item.label}
