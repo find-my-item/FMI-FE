@@ -28,9 +28,7 @@ const BottomSheet = ({ children }: BottomSheetProps) => {
         >
           <div className="h-[3px] w-[50px] rounded-full bg-[#2D2D2D]" />
         </div>
-        <div className="min-h-0 flex-1 space-y-5 overflow-auto px-5 pb-[18px] no-scrollbar">
-          {children}
-        </div>
+        <div className="min-h-0 flex-1 overflow-auto px-5 pb-[18px] no-scrollbar">{children}</div>
       </div>
     </motion.div>
   );
