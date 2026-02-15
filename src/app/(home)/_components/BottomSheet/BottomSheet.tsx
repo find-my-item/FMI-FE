@@ -5,8 +5,9 @@ import { BOTTOM_OFFSET_PX, useBottomSheetHeight, MyLocationButton } from "./_int
 import { useSearchParams } from "next/navigation";
 import DefaultSheetContent from "../DefaultSheetContent/DefaultSheetContent";
 import PostSheetContent from "../PostSheetContent/PostSheetContent";
+import { Suspense } from "react";
 
-const BottomSheet = () => {
+const BottomSheetContent = () => {
   const { height, isFullyExpanded, handlePointerDown, handlePointerUp } = useBottomSheetHeight();
   const searchParams = useSearchParams();
   const searchValue = searchParams.get("search");
@@ -33,6 +34,14 @@ const BottomSheet = () => {
         </div>
       </div>
     </motion.div>
+  );
+};
+
+const BottomSheet = () => {
+  return (
+    <Suspense fallback="">
+      <BottomSheetContent />
+    </Suspense>
   );
 };
 
