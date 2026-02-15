@@ -86,3 +86,4 @@ export { default as Home } from "@/assets/home.svg";
 export { default as Luggage } from "@/assets/luggage.svg";
 export { default as Chat } from "@/assets/chat.svg";
 export { default as UserProfileHome } from "@/assets/user-profile-home.svg";
+export { default as MapMyLocation } from "@/assets/map-my-location.svg";

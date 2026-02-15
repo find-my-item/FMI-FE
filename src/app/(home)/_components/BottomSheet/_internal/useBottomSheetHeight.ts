@@ -1,9 +1,11 @@
 "use client";
 
-import { animate, useMotionValue } from "framer-motion";
+import { animate, useMotionValue, useMotionValueEvent } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { INITIAL_HEIGHT_PX, MIN_HEIGHT_PX } from "./HEIGHT_PX";
 import { getMaxHeightPx, getSnapHeights } from "./heightUtils";
+
+const FULLY_EXPANDED_TOLERANCE_PX = 2;
 
 interface PointerHandlerEvent {
   currentTarget: EventTarget & HTMLElement;
@@ -13,8 +15,14 @@ interface PointerHandlerEvent {
 
 const useBottomSheetHeight = () => {
   const [snapHeights, setSnapHeights] = useState<number[]>([]);
+  const [isFullyExpanded, setIsFullyExpanded] = useState(false);
   const height = useMotionValue(INITIAL_HEIGHT_PX);
   const moveListenerRef = useRef<((e: PointerEvent) => void) | null>(null);
+
+  useMotionValueEvent(height, "change", (latest: number) => {
+    const max = getMaxHeightPx();
+    setIsFullyExpanded(latest >= max - FULLY_EXPANDED_TOLERANCE_PX);
+  });
 
   useEffect(() => {
     const max = getMaxHeightPx();
@@ -74,7 +82,7 @@ const useBottomSheetHeight = () => {
     }
   };
 
-  return { height, handlePointerDown, handlePointerUp };
+  return { height, isFullyExpanded, handlePointerDown, handlePointerUp };
 };
 
 export default useBottomSheetHeight;

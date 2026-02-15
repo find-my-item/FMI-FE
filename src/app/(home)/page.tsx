@@ -1,5 +1,6 @@
 import { BaseKakaoMap } from "@/components/domain";
 import BottomSheet from "./_components/BottomSheet/BottomSheet";
+import { Icon } from "@/components/common";
 
 const Page = () => {
   return (
