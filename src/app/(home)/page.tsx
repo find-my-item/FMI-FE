@@ -1,5 +1,5 @@
 import { BaseKakaoMap } from "@/components/domain";
-import { BottomSheet, LostFoundActions } from "./_components";
+import { BottomSheet, LostFoundActions, RecentFoundItems } from "./_components";
 
 const Page = () => {
   return (
@@ -7,6 +7,7 @@ const Page = () => {
       <BaseKakaoMap center={{ lat: 37.5665, lng: 126.978 }} showMarker={false} />
       <BottomSheet>
         <LostFoundActions />
+        <RecentFoundItems />
       </BottomSheet>
     </div>
   );
