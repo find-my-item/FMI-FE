@@ -79,7 +79,6 @@ const SignUpItem = ({ isVerified, ...props }: SignUpItemProps) => {
       <InputText
         inputOption={{
           ...inputOption,
-          // disabled: disabled,
           validation: inputValidationRules[name] as any,
         }}
         label={label}

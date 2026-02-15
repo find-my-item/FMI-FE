@@ -84,7 +84,7 @@ export interface InputTextProps {
   };
 }
 
-const BaseInputStyle = cn(
+const BASE_INPUT_STYLE = cn(
   "flex flex-1 items-center relative h-10 py-3 px-2 bg-fill-neutral-strong-default rounded-[10px] text-body2-regular text-neutral-strong-entered",
   "placeholder:text-neutral-strong-placeholder hover:text-neutral-strong-hover border focus:outline-none focus:text-neutral-strong-focused",
   "disabled:text-neutral-strong-disabled disabled:bg-fill-neutral-strong-disabled autofill:text-neutral-strong-default",
@@ -139,7 +139,7 @@ const InputText = ({
             id={name}
             {...register(name, validation)}
             className={cn(
-              BaseInputStyle,
+              BASE_INPUT_STYLE,
               isValue && "pr-8",
               togglePassword && "pr-[60px]",
               showError && "border border-system-warning"
