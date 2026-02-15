@@ -19,6 +19,7 @@ export const getUserMeServer = async () => {
     });
 
     if (!response.ok) {
+      console.log("response!!! ", response);
       throw new Error(`API 호출 실패: ${response.status}`);
     }
 
