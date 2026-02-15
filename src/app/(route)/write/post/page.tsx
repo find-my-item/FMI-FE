@@ -41,7 +41,7 @@ const WritePage = () => {
 
   return (
     <>
-      <DetailHeader title={postType === "lost" ? "분실했어요 글쓰기" : "습득했어요 글쓰기"}>
+      <DetailHeader title={postType === "lost" ? "분실했어요 글쓰기" : "발견했어요 글쓰기"}>
         <HeaderSave onClick={() => setSaveModalOpen(true)} />
       </DetailHeader>
       <h1 className="sr-only">분실/습득 등록 페이지</h1>
