@@ -1,6 +1,12 @@
 import { Icon } from "@/components/common";
 
-const MyLocationButton = () => {
+interface MyLocationButtonProps {
+  isFullyExpanded: boolean;
+}
+
+const MyLocationButton = ({ isFullyExpanded }: MyLocationButtonProps) => {
+  if (isFullyExpanded) return null;
+
   return (
     <button
       aria-label="내 위치로 이동"
