@@ -3,7 +3,7 @@ import { FEATURES } from "./_constants/FEATURES";
 
 const page = () => {
   return (
-    <section className="flex-col-center h-base">
+    <section className="pb-[87px] flex-col-center h-base">
       {FEATURES.map((props, index) => (
         <FeatureSection key={index} {...props} />
       ))}
