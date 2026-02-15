@@ -11,7 +11,7 @@ const LostFoundActions = () => {
     <div className="flex gap-4">
       {LOST_FOUND_ACTIONS.map(({ type, title, image }) => (
         <Link href={`/write/post?type=${type}`} key={type}>
-          <Image src={image} alt={title} width={167} height={106} />
+          <Image src={image} alt={title} width={167} height={106} property="true" />
         </Link>
       ))}
     </div>
