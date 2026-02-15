@@ -5,14 +5,18 @@ import { MyPageIconNav, MyPageMenuSection, MyPageProfile } from "./_components";
 import { LoadingState } from "@/components/state";
 
 const page = () => {
-  const { data, isLoading, error } = useGetUserMe();
-  console.log("data>> ", data);
+  // const { data, isLoading, error } = useGetUserMe();
+  // console.log("data>> ", data);
 
-  if (isLoading) return <LoadingState />;
+  // if (isLoading) return <LoadingState />;
 
   return (
     <div className="flex w-full flex-col">
-      {data && <MyPageProfile email={data.result.email} userName={data.result.nickname} />}
+      {/* {data ?
+        <MyPageProfile email={data.result.email} userName={data.result.nickname} />
+        :  */}
+      <MyPageProfile />
+      {/* } */}
 
       <MyPageIconNav />
 
