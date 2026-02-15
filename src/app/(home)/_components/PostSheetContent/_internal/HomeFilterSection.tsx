@@ -57,7 +57,7 @@ const HomeFilterSection = () => {
     <div
       ref={ref}
       onMouseDown={onMouseDown}
-      className="-mx-5 flex gap-2 border-b border-divider-default pb-[14px] pl-5 no-scrollbar"
+      className="sticky top-0 z-10 -mx-5 flex gap-2 border-b border-divider-default bg-white pb-[14px] pl-5 no-scrollbar"
     >
       {FILTER_ITEMS.map((item) => (
         <HomeFilter key={item.value} ariaLabel={item.label} onSelected={false}>
