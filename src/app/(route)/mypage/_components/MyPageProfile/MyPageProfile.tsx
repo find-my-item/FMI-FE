@@ -2,8 +2,8 @@ import Link from "next/link";
 import { Button, ProfileAvatar } from "@/components/common";
 
 interface ProfileProps {
-  userName: string;
-  email: string;
+  userName?: string;
+  email?: string;
 }
 
 const MyPageProfile = ({ userName, email }: ProfileProps) => {
