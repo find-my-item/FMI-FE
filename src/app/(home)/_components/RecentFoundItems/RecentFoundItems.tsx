@@ -1,10 +1,11 @@
 "use client";
 
 import { useHorizontalDragScroll } from "@/hooks";
+import Link from "next/link";
 
 const RecentFoundItem = () => {
   return (
-    <div className="relative rounded-2xl border-[0.7px] border-divider-default">
+    <Link href="#" className="relative rounded-2xl border-[0.7px] border-divider-default">
       {/* TODO(형준): 이미지 컴포넌트로 변경 예정 */}
       <div className="h-[120px] w-[123px] rounded-2xl bg-slate-100" />
       <div className="absolute bottom-0 right-0 flex w-full flex-col gap-1 rounded-b-2xl bg-white px-3 py-[6px]">
@@ -13,7 +14,7 @@ const RecentFoundItem = () => {
         </span>
         <time className="text-caption2-regular text-layout-body-default">2026-00-00</time>
       </div>
-    </div>
+    </Link>
   );
 };
 
