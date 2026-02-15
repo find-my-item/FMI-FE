@@ -1,5 +1,5 @@
 import { BaseKakaoMap } from "@/components/domain";
-import { BottomSheet, LostFoundActions, RecentFoundItems } from "./_components";
+import { BottomSheet, LostFoundActions, PoliceSection, RecentFoundItems } from "./_components";
 
 const Page = () => {
   return (
@@ -8,6 +8,7 @@ const Page = () => {
       <BottomSheet>
         <LostFoundActions />
         <RecentFoundItems />
+        <PoliceSection />
       </BottomSheet>
     </div>
   );
