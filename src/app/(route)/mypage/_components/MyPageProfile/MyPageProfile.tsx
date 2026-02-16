@@ -3,33 +3,32 @@ import { Button, ProfileAvatar } from "@/components/common";
 
 interface ProfileProps {
   userData?: {
-    userName: string;
+    nickname: string;
     email: string;
-    profileUrl: string;
+    profileImg?: string;
   };
 }
 
 const MyPageProfile = ({ userData }: ProfileProps) => {
-  const { userName, email, profileUrl } = userData ?? {
-    userName: "",
+  const { nickname, email, profileImg } = userData ?? {
+    nickname: "",
     email: "",
-    profileUrl: "",
+    profileImg: "",
   };
 
   return (
     <div className="flex w-full items-center justify-between px-5 py-[30px]">
       <div className="flex w-[188px] items-center gap-6">
-        {/* TODO(수현): 프로필 추후 링크 연결 */}
         <ProfileAvatar
           size={60}
-          src={userData ? userData.profileUrl : null}
-          alt={userName}
+          src={profileImg ? profileImg : null}
+          alt={nickname}
           priority={true}
         />
         <div className="flex w-[160px] flex-col gap-1">
           {userData ? (
             <>
-              <span className="truncate text-body1-semibold">{userName}</span>
+              <span className="truncate text-body1-semibold">{nickname}</span>
               <span className="truncate text-body2-regular text-layout-body-default">{email}</span>
             </>
           ) : (
