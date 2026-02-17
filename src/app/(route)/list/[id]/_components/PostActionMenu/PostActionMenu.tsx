@@ -17,7 +17,7 @@ interface PostOptionBoxProps {
 }
 
 const PostActionMenu = ({ open, onClose, postId, postData }: PostOptionBoxProps) => {
-  const { isMine, userId } = postData;
+  const { isMine, writerId } = postData;
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
   if (!open) return null;
@@ -50,7 +50,12 @@ const PostActionMenu = ({ open, onClose, postId, postData }: PostOptionBoxProps)
             </button>
           </>
         ) : (
-          <PostReportBlockActions postId={postId} targetType="POST" userId={userId} />
+          <PostReportBlockActions
+            postId={postId}
+            targetType="POST"
+            userId={writerId}
+            onClose={onClose}
+          />
         )}
       </div>
 

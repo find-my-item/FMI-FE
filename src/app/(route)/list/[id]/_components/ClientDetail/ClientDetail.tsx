@@ -24,7 +24,10 @@ const ClientDetail = ({ id }: ClientDetailProps) => {
 
   return (
     <>
-      <PostDetailTopHeader postId={id} postData={{ isMine, userId: postUserInformation.userId }} />
+      <PostDetailTopHeader
+        postId={id}
+        postData={{ isMine, writerId: postUserInformation.userId }}
+      />
       <PostDetail type="find" data={data.result} />
       <CommentList comments={MOCK_COMMENT_LIST_DATA} />
       <ErrorBoundary fallback={<ErrorSimilarSection postId={id} />}>

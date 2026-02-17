@@ -1,4 +1,4 @@
 export interface PostActionData {
   isMine: boolean;
-  userId: number;
+  writerId: number;
 }
