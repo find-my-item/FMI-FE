@@ -6,7 +6,7 @@ import Link from "next/link";
 import { MYPAGE_MENU_LIST } from "../../_constants/MYPAGE_ROUTE_CONFIG";
 import useLogout from "@/hooks/useLogout/useLogout";
 
-const MyPageMenuSection = () => {
+const MyPageMenuSection = ({ isUserLogin }: { isUserLogin: boolean }) => {
   const { handleLogout } = useLogout();
 
   return MYPAGE_MENU_LIST.map((menu) => (
@@ -23,7 +23,7 @@ const MyPageMenuSection = () => {
               {item.pageName}
               <Icon name="ArrowRightSmall" size={24} />
             </Link>
-            {item.pageName === "회원 탈퇴" && (
+            {isUserLogin && item.pageName === "회원 탈퇴" && (
               <button
                 className="flex w-full py-[10px] text-body1-semibold text-neutral-strong-default"
                 onClick={handleLogout}
