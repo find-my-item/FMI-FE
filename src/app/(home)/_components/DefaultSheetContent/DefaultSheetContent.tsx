@@ -6,7 +6,7 @@ const DefaultSheetContent = () => {
       <LostFindActions />
       <RecentFoundItems />
       <PoliceSection />
-      <div className="w-full border-collapse border-[0.7px] border-divider-default" />
+      <hr className="w-full border-collapse border-[0.7px] border-divider-default" />
       <SupportMenu />
     </div>
   );
