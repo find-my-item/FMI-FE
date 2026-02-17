@@ -14,8 +14,7 @@ const GuestInquiriesDetailView = () => {
     try {
       navigator.clipboard.writeText(MOCK_GUEST_INQUIRY_DETAIL_DATA.userName);
       addToast("이메일을 클립보드에 복사했어요", "success");
-    } catch (error) {
-      console.error(error);
+    } catch {
       addToast("이메일 복사에 실패했어요", "error");
     }
   };

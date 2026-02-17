@@ -8,8 +8,8 @@ const ChangePasswordForm = () => {
       <fieldset className="flex w-full flex-col gap-5 px-5 py-[30px]">
         <legend className="sr-only">비밀번호 변경 정보 입력</legend>
         {CHANGE_PASSWORD_CONFIG.map((item) => (
-          <div key={item.name} className="h-[92px]">
-            <InputText {...item}>{item.children}</InputText>
+          <div key={item.inputOption.name} className="h-[92px]">
+            <InputText {...item} />
           </div>
         ))}
       </fieldset>
