@@ -4,10 +4,10 @@ import ModalLayout from "@/components/common/Modal/_internal/ModalLayout";
 interface UserBlockModalProps {
   isOpen: boolean;
   onClose: () => void;
-  userId: number;
+  writerId: number;
 }
 
-const UserBlockModal = ({ isOpen, onClose, userId }: UserBlockModalProps) => {
+const UserBlockModal = ({ isOpen, onClose, writerId }: UserBlockModalProps) => {
   return (
     <ModalLayout isOpen={isOpen} onClose={onClose} className="space-y-6 rounded-[8px] bg-white p-6">
       <div className="space-y-1 text-center">
