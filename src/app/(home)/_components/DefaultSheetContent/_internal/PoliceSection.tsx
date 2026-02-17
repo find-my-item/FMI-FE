@@ -18,10 +18,11 @@ const POLICE_ITEMS = [
 
 const PoliceSection = () => {
   return (
-    <div className="flex gap-[15px] rounded-2xl px-3 py-4 bg-fill-brand-subtle-default_2">
+    <div className="flex items-center gap-[15px] rounded-2xl px-3 py-4 bg-fill-brand-subtle-default_2">
       <Link
         href="https://minwon24.police.go.kr/main.do"
         target="_blank"
+        rel="noopener noreferrer"
         className="flex flex-col gap-[10px] px-3 py-[10px]"
       >
         <Image src="/main/police24-icon.svg" alt="경찰민원24로고" width={77} height={21} />
@@ -32,9 +33,10 @@ const PoliceSection = () => {
           key={item.href}
           href={item.href}
           target="_blank"
-          className="box-border flex h-14 w-[60px] flex-col items-center justify-center overflow-hidden rounded-2xl border border-brand-normal-disabled bg-white px-[14px] py-3"
+          rel="noopener noreferrer"
+          className="box-border h-14 w-[60px] overflow-hidden rounded-2xl border border-brand-normal-disabled bg-white px-[14px] py-3 flex-col-center"
         >
-          <span className="whitespace-pre text-center text-caption1-semibold leading-[130%] tracking-[2%] text-neutralInversed-normal-default">
+          <span className="whitespace-pre text-center text-caption1-semibold text-neutralInversed-normal-default">
             {item.label}
           </span>
         </Link>
