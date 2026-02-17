@@ -214,37 +214,37 @@ describe("FilterDropdown", () => {
   });
 
   describe("Type 필터", () => {
-    it("기본 상태에서 습득/분실이 표시됩니다", () => {
+    it("기본 상태에서 분실/발견이 표시됩니다", () => {
       (useSearchParams as jest.Mock).mockReturnValue(new URLSearchParams());
 
       render(
         <FilterDropdown
-          ariaLabel="채팅 리스트 습득/분실"
+          ariaLabel="채팅 리스트 분실/발견"
           options={TYPE_OPTIONS}
           keyName="type"
           searchUpdateQuery={mockSearchUpdateQuery}
         />
       );
 
-      expect(screen.getByText("습득/분실")).toBeInTheDocument();
+      expect(screen.getByText("분실/발견")).toBeInTheDocument();
     });
 
-    it("type 파라미터가 ALL일 때 습득/분실이 표시됩니다", () => {
+    it("type 파라미터가 ALL일 때 분실/발견이 표시됩니다", () => {
       const searchParams = new URLSearchParams();
       searchParams.set("type", "ALL");
       (useSearchParams as jest.Mock).mockReturnValue(searchParams);
 
       render(
         <FilterDropdown
-          ariaLabel="채팅 리스트 습득/분실"
+          ariaLabel="채팅 리스트 분실/발견"
           options={TYPE_OPTIONS}
           keyName="type"
           searchUpdateQuery={mockSearchUpdateQuery}
         />
       );
 
-      const filterButton = screen.getByTestId("filter-채팅 리스트 습득/분실");
-      expect(filterButton).toHaveTextContent("습득/분실");
+      const filterButton = screen.getByTestId("filter-채팅 리스트 분실/발견");
+      expect(filterButton).toHaveTextContent("분실/발견");
     });
 
     it("type 파라미터가 FOUND일 때 습득물이 표시됩니다", () => {
@@ -254,14 +254,14 @@ describe("FilterDropdown", () => {
 
       render(
         <FilterDropdown
-          ariaLabel="채팅 리스트 습득/분실"
+          ariaLabel="채팅 리스트 분실/발견"
           options={TYPE_OPTIONS}
           keyName="type"
           searchUpdateQuery={mockSearchUpdateQuery}
         />
       );
 
-      const filterButton = screen.getByTestId("filter-채팅 리스트 습득/분실");
+      const filterButton = screen.getByTestId("filter-채팅 리스트 분실/발견");
       expect(filterButton).toHaveTextContent("습득물");
     });
 
@@ -272,14 +272,14 @@ describe("FilterDropdown", () => {
 
       render(
         <FilterDropdown
-          ariaLabel="채팅 리스트 습득/분실"
+          ariaLabel="채팅 리스트 분실/발견"
           options={TYPE_OPTIONS}
           keyName="type"
           searchUpdateQuery={mockSearchUpdateQuery}
         />
       );
 
-      const filterButton = screen.getByTestId("filter-채팅 리스트 습득/분실");
+      const filterButton = screen.getByTestId("filter-채팅 리스트 분실/발견");
       expect(filterButton).toHaveTextContent("분실물");
     });
 
@@ -290,14 +290,14 @@ describe("FilterDropdown", () => {
 
       render(
         <FilterDropdown
-          ariaLabel="채팅 리스트 습득/분실"
+          ariaLabel="채팅 리스트 분실/발견"
           options={TYPE_OPTIONS}
           keyName="type"
           searchUpdateQuery={mockSearchUpdateQuery}
         />
       );
 
-      const filterButton = screen.getByTestId("filter-채팅 리스트 습득/분실");
+      const filterButton = screen.getByTestId("filter-채팅 리스트 분실/발견");
       expect(filterButton).toHaveAttribute("aria-selected", "true");
     });
 
@@ -306,14 +306,14 @@ describe("FilterDropdown", () => {
 
       render(
         <FilterDropdown
-          ariaLabel="채팅 리스트 습득/분실"
+          ariaLabel="채팅 리스트 분실/발견"
           options={TYPE_OPTIONS}
           keyName="type"
           searchUpdateQuery={mockSearchUpdateQuery}
         />
       );
 
-      const filterButton = screen.getByTestId("filter-채팅 리스트 습득/분실");
+      const filterButton = screen.getByTestId("filter-채팅 리스트 분실/발견");
       expect(filterButton).toHaveAttribute("aria-selected", "false");
     });
 
@@ -323,14 +323,14 @@ describe("FilterDropdown", () => {
 
       render(
         <FilterDropdown
-          ariaLabel="채팅 리스트 습득/분실"
+          ariaLabel="채팅 리스트 분실/발견"
           options={TYPE_OPTIONS}
           keyName="type"
           searchUpdateQuery={mockSearchUpdateQuery}
         />
       );
 
-      const filterButton = screen.getByTestId("filter-채팅 리스트 습득/분실");
+      const filterButton = screen.getByTestId("filter-채팅 리스트 분실/발견");
       await user.click(filterButton);
 
       expect(screen.getByText("전체")).toBeInTheDocument();
@@ -344,14 +344,14 @@ describe("FilterDropdown", () => {
 
       render(
         <FilterDropdown
-          ariaLabel="채팅 리스트 습득/분실"
+          ariaLabel="채팅 리스트 분실/발견"
           options={TYPE_OPTIONS}
           keyName="type"
           searchUpdateQuery={mockSearchUpdateQuery}
         />
       );
 
-      const filterButton = screen.getByTestId("filter-채팅 리스트 습득/분실");
+      const filterButton = screen.getByTestId("filter-채팅 리스트 분실/발견");
       await user.click(filterButton);
 
       const foundOption = screen.getByText("습득물");
