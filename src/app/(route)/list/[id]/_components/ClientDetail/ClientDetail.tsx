@@ -8,6 +8,8 @@ import CommentForm from "../CommentForm/CommentForm";
 import { useGetDetailPost } from "@/api/fetch/post/api/useGetDetailPost";
 import { useGetUserData } from "@/api/fetch/user";
 import { MOCK_COMMENT_LIST_DATA } from "@/mock/data";
+import { ErrorBoundary } from "@/app/ErrorBoundary";
+import { ErrorSimilarSection } from "../_internal";
 
 interface ClientDetailProps {
   id: number;
@@ -27,7 +29,9 @@ const ClientDetail = ({ id }: ClientDetailProps) => {
       <PostDetailTopHeader postId={id} />
       <PostDetail type="find" data={data.result} />
       <CommentList comments={MOCK_COMMENT_LIST_DATA} />
-      <SimilarItemsSection />
+      <ErrorBoundary fallback={<ErrorSimilarSection />}>
+        <SimilarItemsSection postId={id} />
+      </ErrorBoundary>
       <CommentForm />
     </>
   );
