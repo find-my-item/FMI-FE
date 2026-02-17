@@ -1,3 +1,4 @@
+import useBlock from "@/api/fetch/report/api/useBlock";
 import { Button } from "@/components/common";
 import ModalLayout from "@/components/common/Modal/_internal/ModalLayout";
 
@@ -8,6 +9,8 @@ interface UserBlockModalProps {
 }
 
 const UserBlockModal = ({ isOpen, onClose, writerId }: UserBlockModalProps) => {
+  const { mutate: blockUser } = useBlock({ onClose, userId: writerId });
+
   return (
     <ModalLayout isOpen={isOpen} onClose={onClose} className="space-y-6 rounded-[8px] bg-white p-6">
       <div className="space-y-1 text-center">
@@ -20,7 +23,9 @@ const UserBlockModal = ({ isOpen, onClose, writerId }: UserBlockModalProps) => {
         <Button variant="outlined" className="min-h-11 flex-1">
           취소
         </Button>
-        <Button className="min-h-11 flex-1">차단하기</Button>
+        <Button className="min-h-11 flex-1" onClick={() => blockUser()}>
+          차단하기
+        </Button>
       </div>
     </ModalLayout>
   );
