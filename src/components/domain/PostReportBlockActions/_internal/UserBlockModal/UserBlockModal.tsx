@@ -1,4 +1,4 @@
-import useBlock from "@/api/fetch/report/api/useBlock";
+import { useBlock, useGetBlock } from "@/api/fetch/report";
 import { Button } from "@/components/common";
 import ModalLayout from "@/components/common/Modal/_internal/ModalLayout";
 
@@ -9,7 +9,13 @@ interface UserBlockModalProps {
 }
 
 const UserBlockModal = ({ isOpen, onClose, writerId }: UserBlockModalProps) => {
-  const { mutate: blockUser } = useBlock({ onClose, userId: writerId });
+  const { mutate: blockUser } = useBlock({
+    onClose,
+    userId: writerId,
+    invalidateKey: ["user-block-list"],
+  });
+  const { data } = useGetBlock();
+  console.log(data);
 
   return (
     <ModalLayout isOpen={isOpen} onClose={onClose} className="space-y-6 rounded-[8px] bg-white p-6">
