@@ -20,9 +20,7 @@ const meta: Meta<typeof SimilarItemSkeleton> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Single: Story = {};
-
-export const Multiple: Story = {
+export const Default: Story = {
   decorators: [
     (Story) => (
       <div className="hide-scrollbar flex w-[450px] snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth">
