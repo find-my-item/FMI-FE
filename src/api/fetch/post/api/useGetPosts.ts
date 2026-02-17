@@ -33,7 +33,7 @@ export const useGetPosts = ({
   return useAppInfiniteQuery<PostSearchResponse, unknown, PostItem[]>(
     "public",
     ["posts", address, postType, postStatus, category, sortType, size],
-    `/posts2/search?${params.toString()}`,
+    `/posts/search?${params.toString()}`,
     {
       placeholderData: keepPreviousData,
       getNextPageParam: (lastPage) => lastPage.result.nextCursor ?? undefined,

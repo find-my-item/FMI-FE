@@ -11,7 +11,7 @@ describe("ChatChip", () => {
     render(<ChatChip postMode="FOUND" />);
 
     const chip = screen.getByRole("note");
-    expect(chip).toHaveTextContent("습득물");
+    expect(chip).toHaveTextContent("발견");
     expect(chip).toHaveClass("text-accent-foundItem");
     expect(chip).toHaveClass("bg-fill-accent-foundItem");
   });
@@ -20,7 +20,7 @@ describe("ChatChip", () => {
     render(<ChatChip postMode="LOST" />);
 
     const chip = screen.getByRole("note");
-    expect(chip).toHaveTextContent("분실물");
+    expect(chip).toHaveTextContent("분실");
     expect(chip).toHaveClass("text-accent-lostItem");
     expect(chip).toHaveClass("bg-fill-accent-lostItem");
   });
@@ -48,7 +48,7 @@ describe("ChatChip", () => {
     render(<ChatChip postMode="FOUND" />);
 
     const chip = screen.getByRole("note");
-    expect(chip).toHaveTextContent("습득물");
+    expect(chip).toHaveTextContent("발견");
     expect(chip).toHaveClass(
       "h-[18px] w-10 shrink-0 rounded text-caption2-semibold flex-center text-accent-foundItem bg-fill-accent-foundItem"
     );
@@ -58,7 +58,7 @@ describe("ChatChip", () => {
     render(<ChatChip postMode="LOST" />);
 
     const chip = screen.getByRole("note");
-    expect(chip).toHaveTextContent("분실물");
+    expect(chip).toHaveTextContent("분실");
     expect(chip).toHaveClass(
       "h-[18px] w-10 shrink-0 rounded text-caption2-semibold flex-center text-accent-lostItem bg-fill-accent-lostItem"
     );
