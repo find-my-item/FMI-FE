@@ -11,7 +11,7 @@ import { Header } from "@/components/layout";
 const Page = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="h-[calc(100dvh-4px)]">
+    <div className="h-dvh">
       <Header />
       <button onClick={() => setIsOpen(!isOpen)} className="absolute right-[410px] select-none">
         <Icon name="Menu" title="메뉴 열기" />
