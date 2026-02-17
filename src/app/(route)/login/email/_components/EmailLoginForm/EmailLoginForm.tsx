@@ -18,7 +18,7 @@ const EmailLoginForm = () => {
       <fieldset className="flex w-full flex-col gap-3">
         <legend className="sr-only">로그인 정보 입력</legend>
         {EMAIL_LOGIN_CONFIG.map((item) => (
-          <InputText key={item.name} {...item} />
+          <InputText key={item.inputOption.name} {...item} />
         ))}
         {/* 체크박스 */}
         <CheckBox

@@ -47,11 +47,17 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
       <div className="flex w-full flex-col gap-5 px-4 py-5">
         {SIGNUP_INPUT_CONFIG.map((item) => (
           <SignUpItem
-            key={item.name}
-            disabled={handleDisabled(item.name)}
-            btnOnClick={() => handlerToClick(item.name)}
-            isVerified={handleVerified(item.name)}
+            key={item.inputOption.name}
             {...item}
+            isVerified={handleVerified(item.inputOption.name)}
+            inputOption={{
+              disabled: handleDisabled(item.inputOption.name),
+              ...item.inputOption,
+            }}
+            btnOption={{
+              ...item.btnOption,
+              btnOnClick: () => handlerToClick(item.inputOption.name),
+            }}
           />
         ))}
       </div>
