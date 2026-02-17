@@ -19,7 +19,7 @@ const Footer = () => {
             key={link.name}
             href={link.href}
             className={cn(
-              "w-[60.2px] transition-colors duration-150 flex-col-center",
+              "w-[60.2px] transition-colors flex-col-center",
               "hover:text-neutral-strong-focused"
             )}
           >
