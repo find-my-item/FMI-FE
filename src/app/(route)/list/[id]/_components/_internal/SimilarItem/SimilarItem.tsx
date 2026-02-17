@@ -1,22 +1,23 @@
 import { SimilarDataItem } from "@/api/fetch/post";
 import { Icon, ListItemImage } from "@/components/common";
 import { IconName } from "@/components/common/Icon/Icon";
-import { formatCappedNumber } from "@/utils";
+import { formatCappedNumber, formatDate } from "@/utils";
 
 interface SimilarItemProps {
   data: SimilarDataItem;
 }
 
 const SimilarItem = ({ data }: SimilarItemProps) => {
+  const { title, thumbnailImageUrl, address, favoriteCount, favoriteStatus, createdAt } = data;
   const IconList = [
     {
       name: "Eye",
-      value: 99999,
+      value: favoriteCount,
       ariaLabel: "조회수",
     },
     {
       name: "Star",
-      value: 1234,
+      value: favoriteCount,
       ariaLabel: "즐겨찾기",
     },
   ];
@@ -24,13 +25,13 @@ const SimilarItem = ({ data }: SimilarItemProps) => {
   return (
     <li className="snap-start">
       <article className="flex flex-col items-start justify-center gap-3">
-        <ListItemImage src="/test_list.JPG" alt="" size={126} />
+        <ListItemImage src={thumbnailImageUrl} alt="" size={126} />
 
         <div className="flex flex-col gap-[3px]">
-          <p className="font-semibold text-layout-header-default">게시글 제목</p>
+          <p className="font-semibold text-layout-header-default">{title}</p>
           <p className="block text-[14px] leading-5 text-layout-body-default">
-            <span className="after:mx-1 after:content-['·']">노원구</span>
-            <time dateTime="2025-09-20T10:30:00Z">30분 전</time>
+            <span className="after:mx-1 after:content-['·']">{address}</span>
+            <time dateTime={createdAt}>{formatDate(createdAt)}</time>
           </p>
         </div>
 

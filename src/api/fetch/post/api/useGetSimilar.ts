@@ -9,6 +9,7 @@ export const useGetSimilar = ({ postId }: { postId: number }) => {
     {
       throwOnError: true,
       suspense: true,
+      enabled: !!postId,
     }
   );
 };

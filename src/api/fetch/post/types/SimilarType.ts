@@ -11,4 +11,5 @@ export interface SimilarDataItem {
   favoriteStatus: boolean;
   viewCount: number;
   createdAt: string;
+  // category: string;
 }

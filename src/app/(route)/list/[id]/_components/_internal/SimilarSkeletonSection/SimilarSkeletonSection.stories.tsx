@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
-import SimilarItemSkeleton from "./SimilarItemSkeleton";
+import SimilarItemSkeleton from "./SimilarSkeletonSection";
 
 const meta: Meta<typeof SimilarItemSkeleton> = {
   title: "페이지/상세 페이지/SimilarItemSkeleton",
