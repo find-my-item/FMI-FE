@@ -2,7 +2,7 @@ import useAppQuery from "@/api/_base/query/useAppQuery";
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 import { GetUsersMeResponse } from "../types/UserMeType";
 
-export const useGetUserMe = (hasToken: boolean) => {
+export const useGetUsersMe = (hasToken: boolean) => {
   return useAppQuery<GetUsersMeResponse, ApiBaseResponseType<null>>(
     "auth",
     ["user-me"],

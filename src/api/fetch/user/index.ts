@@ -3,4 +3,4 @@ export * from "./types/UserProfileIdDataType";
 
 export { useGetUserData } from "./api/useGetUserData";
 export { useGetUserProfileById } from "./api/useGetUserProfileById";
-export { getUserMeServer } from "./api/getUserMeServer";
+export { useGetUsersMe } from "./api/useGetUsersMe";
