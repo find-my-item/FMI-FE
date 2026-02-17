@@ -4,7 +4,7 @@ import { ButtonHTMLAttributes, ReactNode } from "react";
 import { cn } from "@/utils";
 import { useHorizontalDragScroll } from "@/hooks";
 
-interface FilterProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface HomeFilterProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   onSelected: boolean;
   ariaLabel: string;
@@ -31,7 +31,7 @@ const FILTER_ITEMS = [
 
 // TODO(형준): 필터 선택 쿼리스트링으로 관리하도록 변경 예정
 
-const HomeFilter = ({ children, onSelected, ariaLabel, ...props }: FilterProps) => {
+const HomeFilter = ({ children, onSelected, ariaLabel, ...props }: HomeFilterProps) => {
   return (
     <button
       aria-label={ariaLabel}
