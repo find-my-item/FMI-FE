@@ -6,14 +6,18 @@ import { Button, Icon } from "@/components/common";
 import { useDeleteDetailPost } from "@/api/fetch/post";
 import ModalLayout from "@/components/common/Modal/_internal/ModalLayout";
 import { ACTION_MENU } from "./ACTION_MENU_STYLES";
+import { PostReportBlockActions } from "@/components/domain";
+import { PostActionData } from "../../_types/PostActionType";
 
 interface PostOptionBoxProps {
   open: boolean;
   onClose: () => void;
   postId: number;
+  postData: PostActionData;
 }
 
-const PostActionMenu = ({ open, onClose, postId }: PostOptionBoxProps) => {
+const PostActionMenu = ({ open, onClose, postId, postData }: PostOptionBoxProps) => {
+  const { isMine, userId } = postData;
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
   if (!open) return null;
@@ -23,25 +27,31 @@ const PostActionMenu = ({ open, onClose, postId }: PostOptionBoxProps) => {
       <div
         className={cn(
           "absolute left-[40%] top-[60%] z-10 mt-2",
-          "min-h-[171px] w-[218px] overflow-hidden rounded-[20px] flex-col-center",
+          "min-h-[114px] w-[218px] overflow-hidden rounded-[20px] flex-col-center",
           "border border-white bg-fill-neutral-subtle-default",
           "text-nowrap text-h3-medium text-neutral-normal-default shadow-sm"
         )}
       >
-        <button className={ACTION_MENU.buttonStyle}>
-          <Icon name="Edit" size={20} />
-          <span>게시글 수정하기</span>
-        </button>
-        <hr className={ACTION_MENU.hrStyle} aria-hidden="true" />
-        <button className={ACTION_MENU.buttonStyle} onClick={() => setDeleteModalOpen(true)}>
-          <Icon name="Trash" size={20} />
-          <span className="text-system-warning">게시글 삭제하기</span>
-        </button>
-        <hr className={ACTION_MENU.hrStyle} aria-hidden="true" />
-        <button className={ACTION_MENU.buttonStyle}>
-          <Icon name="ArrowSwitchHorizontal" size={20} />
-          <span>찾았음 상태로 변경</span>
-        </button>
+        {isMine ? (
+          <>
+            <button className={ACTION_MENU.buttonStyle}>
+              <Icon name="Edit" size={20} />
+              <span>게시글 수정하기</span>
+            </button>
+            <hr className={ACTION_MENU.hrStyle} aria-hidden="true" />
+            <button className={ACTION_MENU.buttonStyle} onClick={() => setDeleteModalOpen(true)}>
+              <Icon name="Trash" size={20} />
+              <span className="text-system-warning">게시글 삭제하기</span>
+            </button>
+            <hr className={ACTION_MENU.hrStyle} aria-hidden="true" />
+            <button className={ACTION_MENU.buttonStyle}>
+              <Icon name="ArrowSwitchHorizontal" size={20} />
+              <span>찾았음 상태로 변경</span>
+            </button>
+          </>
+        ) : (
+          <PostReportBlockActions postId={postId} targetType="POST" userId={userId} />
+        )}
       </div>
 
       <PostDeleteModal
