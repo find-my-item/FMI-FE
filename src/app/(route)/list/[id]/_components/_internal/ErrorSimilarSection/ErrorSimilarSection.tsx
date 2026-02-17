@@ -1,6 +1,13 @@
 import { Button, Icon } from "@/components/common";
+import { useQueryClient } from "@tanstack/react-query";
 
-const ErrorSimilarSection = ({ onRetry }: { onRetry: () => void }) => {
+const ErrorSimilarSection = ({ postId }: { postId: number }) => {
+  const queryClient = useQueryClient();
+
+  const handleRefresh = () => {
+    queryClient.invalidateQueries({ queryKey: ["similar", postId] });
+  };
+
   return (
     <div className="flex flex-col gap-3 py-[18px]">
       <h2 className="pl-5 text-h2-medium text-flatGray-900">비슷한 분실물</h2>
@@ -16,7 +23,7 @@ const ErrorSimilarSection = ({ onRetry }: { onRetry: () => void }) => {
               다시 한 번 시도해 주세요.
             </span>
           </div>
-          <Button variant="outlined" className="px-3" onClick={() => onRetry()}>
+          <Button variant="outlined" className="px-3" onClick={handleRefresh}>
             새로고침
           </Button>
         </div>

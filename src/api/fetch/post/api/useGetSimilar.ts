@@ -5,7 +5,7 @@ export const useGetSimilar = ({ postId }: { postId: number }) => {
   return useAppQuery<GetSimilarResponse>(
     "public",
     ["similar", postId],
-    `/post2s/${postId}/similar`,
+    `/posts/${postId}/similar`,
     {
       throwOnError: true,
       suspense: true,
