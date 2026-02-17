@@ -27,6 +27,13 @@ jest.mock("@/components/common", () => ({
       src={props.src ?? undefined}
     />
   ),
+  ListItemImage: (props: { alt?: string; src?: string | null; category?: string }) => (
+    <img
+      alt={props.alt ?? "게시글 썸네일"}
+      data-testid="list-item-image"
+      src={props.src ?? undefined}
+    />
+  ),
 }));
 
 const createMockChatRoom = (overrides?: Partial<ChatRoom>): ChatRoom => {
@@ -53,7 +60,7 @@ describe("ChatItem", () => {
     render(<ChatItem chatRoom={mockChatRoom} />);
 
     const profileImage = screen.getByAltText("유저 프로필 이미지");
-    const thumbnailImage = screen.getByAltText("게시글 썸네일 이미지");
+    const thumbnailImage = screen.getByAltText("채팅리스트 게시글 썸네일");
 
     expect(profileImage).toBeInTheDocument();
     expect(thumbnailImage).toBeInTheDocument();
@@ -117,7 +124,7 @@ describe("ChatItem", () => {
     expect(screen.getByRole("link")).toBeInTheDocument();
 
     // 썸네일 이미지
-    expect(screen.getByAltText("게시글 썸네일 이미지")).toBeInTheDocument();
+    expect(screen.getByAltText("채팅리스트 게시글 썸네일")).toBeInTheDocument();
 
     // 텍스트 내용들
     expect(screen.getByText("사용자 닉네임")).toBeInTheDocument();

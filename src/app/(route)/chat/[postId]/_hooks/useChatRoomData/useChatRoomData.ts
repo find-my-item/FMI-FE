@@ -19,7 +19,7 @@ const useChatRoomData = (postId: number) => {
 
   const unreadCount = chatRoomData?.unreadCount || chatRoom?.result?.unreadCount;
   return {
-    roomId,
+    roomId: roomId || chatRoom?.result?.roomId || 0,
     hasRoomId,
     chatRoomData,
     userInfo,

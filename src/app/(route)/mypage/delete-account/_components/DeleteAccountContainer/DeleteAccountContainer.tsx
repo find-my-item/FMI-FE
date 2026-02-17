@@ -5,7 +5,6 @@ import { InputText } from "@/components/common";
 import { FormProvider, useForm } from "react-hook-form";
 import { FooterButton } from "@/components/domain";
 import DeleteAccountReason from "../DeleteAccountReason/DeleteAccountReason";
-import { Suspense } from "react";
 
 const PasswordConfirm = () => {
   return (
@@ -14,9 +13,11 @@ const PasswordConfirm = () => {
         <h3 className="text-h3-semibold text-[#171717]">비밀번호를 입력해 주세요.</h3>
         {/* TODO(수현): 디자인 업데이트 시 placeholder 변경예정 */}
         <InputText
-          name="passwordConfirm"
-          type="password"
-          placeholder="현재 비밀번호를 입력해 주세요."
+          inputOption={{
+            name: "passwordConfirm",
+            type: "password",
+            placeholder: "현재 비밀번호를 입력해 주세요.",
+          }}
         />
       </div>
 
