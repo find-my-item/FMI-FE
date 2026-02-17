@@ -247,7 +247,7 @@ describe("FilterDropdown", () => {
       expect(filterButton).toHaveTextContent("분실/발견");
     });
 
-    it("type 파라미터가 FOUND일 때 습득물이 표시됩니다", () => {
+    it("type 파라미터가 FOUND일 때 발견 게시물이 표시됩니다", () => {
       const searchParams = new URLSearchParams();
       searchParams.set("type", "FOUND");
       (useSearchParams as jest.Mock).mockReturnValue(searchParams);

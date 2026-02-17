@@ -7,7 +7,7 @@ jest.mock("@/utils", () => ({
 }));
 
 describe("ChatChip", () => {
-  it("postMode가 FOUND일 때 습득물 텍스트와 올바른 스타일이 적용됩니다", () => {
+  it("postMode가 FOUND일 때 발견 텍스트와 올바른 스타일이 적용됩니다", () => {
     render(<ChatChip postMode="FOUND" />);
 
     const chip = screen.getByRole("note");
@@ -16,7 +16,7 @@ describe("ChatChip", () => {
     expect(chip).toHaveClass("bg-fill-accent-foundItem");
   });
 
-  it("postMode가 LOST일 때 분실물 텍스트와 올바른 스타일이 적용됩니다", () => {
+  it("postMode가 LOST일 때 분실 텍스트와 올바른 스타일이 적용됩니다", () => {
     render(<ChatChip postMode="LOST" />);
 
     const chip = screen.getByRole("note");

@@ -39,12 +39,14 @@ const WritePage = () => {
   const values = methods.watch();
   const isSubmitDisabled = !canSubmit(values) || isPosting;
 
+  const title = postType === "lost" ? "분실했어요 글쓰기" : "발견했어요 글쓰기";
+
   return (
     <>
-      <DetailHeader title={postType === "lost" ? "분실했어요 글쓰기" : "발견했어요 글쓰기"}>
+      <DetailHeader title={title}>
         <HeaderSave onClick={() => setSaveModalOpen(true)} />
       </DetailHeader>
-      <h1 className="sr-only">분실/습득 등록 페이지</h1>
+      <h1 className="sr-only">{`${title} 페이지`}</h1>
 
       <form onSubmit={onSubmit} className="flex flex-col h-base">
         <ImageSection />
