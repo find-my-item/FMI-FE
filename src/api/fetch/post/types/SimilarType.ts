@@ -1,4 +1,5 @@
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
+import { CategoryType } from "@/types";
 
 export interface GetSimilarResponse extends ApiBaseResponseType<SimilarDataItem[]> {}
 
@@ -11,5 +12,5 @@ export interface SimilarDataItem {
   favoriteStatus: boolean;
   viewCount: number;
   createdAt: string;
-  // category: string;
+  category: CategoryType;
 }

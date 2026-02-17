@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import SimilarItem from "./SimilarItem";
+import SimilarItem from "./SimilarItemsList";
 
 jest.mock("@/components/common/ListItemImage/ListItemImage", () => {
   return {

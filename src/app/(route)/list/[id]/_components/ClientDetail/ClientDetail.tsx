@@ -1,14 +1,13 @@
 "use client";
 
 import { CommentList } from "@/components/domain";
+import { ErrorBoundary } from "@/app/ErrorBoundary";
+import { useGetDetailPost, useGetSimilar } from "@/api/fetch/post";
 import PostDetail from "../PostDetail/PostDetail";
 import PostDetailTopHeader from "../PostDetailTopHeader/PostDetailTopHeader";
 import SimilarItemsSection from "../SimilarItemsSection/SimilarItemsSection";
 import CommentForm from "../CommentForm/CommentForm";
-import { useGetDetailPost } from "@/api/fetch/post/api/useGetDetailPost";
-import { useGetUserData } from "@/api/fetch/user";
 import { MOCK_COMMENT_LIST_DATA } from "@/mock/data";
-import { ErrorBoundary } from "@/app/ErrorBoundary";
 import { ErrorSimilarSection } from "../_internal";
 
 interface ClientDetailProps {
@@ -17,6 +16,7 @@ interface ClientDetailProps {
 
 const ClientDetail = ({ id }: ClientDetailProps) => {
   const { data, isLoading, isError } = useGetDetailPost({ id });
+  const { data: similarData, refetch: refetchSimilar } = useGetSimilar({ postId: id });
 
   // TODO(지권): 추후 게시글 데이터, 유저 데이터 비교 후 상세페이지 옵션 UI 구현
   // const { data: userData } = useGetUserData();
@@ -29,8 +29,8 @@ const ClientDetail = ({ id }: ClientDetailProps) => {
       <PostDetailTopHeader postId={id} />
       <PostDetail type="find" data={data.result} />
       <CommentList comments={MOCK_COMMENT_LIST_DATA} />
-      <ErrorBoundary fallback={<ErrorSimilarSection />}>
-        <SimilarItemsSection postId={id} />
+      <ErrorBoundary fallback={<ErrorSimilarSection onRetry={refetchSimilar} />}>
+        {similarData?.result && <SimilarItemsSection similarData={similarData.result} />}
       </ErrorBoundary>
       <CommentForm />
     </>

@@ -14,3 +14,4 @@ export { useDeleteDetailPost } from "./api/useDeleteDetailPost";
 export { usePostFavorites } from "./api/usePostFavorites";
 export { useDeletePostFavorites } from "./api/useDeleteFavorites";
 export { useGetSimilar } from "./api/useGetSimilar";
+export { useGetDetailPost } from "./api/useGetDetailPost";
