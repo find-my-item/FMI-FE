@@ -61,7 +61,7 @@ const HeaderContent = () => {
         searchValue && "bg-white"
       )}
     >
-      <HeaderSearchForm key={searchValue ?? "__empty__"} searchValue={searchValue} />
+      <HeaderSearchForm key={searchValue ?? "empty"} searchValue={searchValue} />
     </header>
   );
 };
