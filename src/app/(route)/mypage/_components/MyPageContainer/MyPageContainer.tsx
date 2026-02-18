@@ -20,24 +20,21 @@ const MyPageContainer = ({ hasToken }: { hasToken: boolean }) => {
 
   if (isLoading) return <LoadingState />;
 
-  const isUserLogin = !!(data && data.result && data.result.nickname);
+  const userData = data?.result
+    ? {
+        email: data.result.email,
+        profileImg: data.result.profileImg || "",
+        nickname: data.result.nickname,
+      }
+    : undefined;
+
   return (
     <div className="flex w-full flex-col">
-      {isUserLogin ? (
-        <MyPageProfile
-          userData={{
-            email: data.result.email,
-            profileImg: data.result.profileImg || "",
-            nickname: data.result.nickname,
-          }}
-        />
-      ) : (
-        <MyPageProfile />
-      )}
+      <MyPageProfile userData={userData} />
 
       <MyPageIconNav />
 
-      <MyPageMenuSection isUserLogin={isUserLogin} />
+      <MyPageMenuSection isUserLogin={!!userData} />
     </div>
   );
 };
