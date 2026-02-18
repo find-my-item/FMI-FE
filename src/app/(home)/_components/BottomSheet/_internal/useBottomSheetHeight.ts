@@ -3,6 +3,7 @@
 import { animate, useMotionValue, useMotionValueEvent } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { INITIAL_HEIGHT_PX, MIN_HEIGHT_PX } from "./HEIGHT_PX";
+import type { DefaultSheetContentHeights } from "./heightUtils";
 import { getMaxHeightPx, getSnapHeights } from "./heightUtils";
 import { useSearchParams } from "next/navigation";
 
@@ -14,7 +15,7 @@ interface PointerHandlerEvent {
   clientY: number;
 }
 
-const useBottomSheetHeight = () => {
+const useBottomSheetHeight = (contentHeights: DefaultSheetContentHeights | null = null) => {
   const [snapHeights, setSnapHeights] = useState<number[]>([]);
   const [isFullyExpanded, setIsFullyExpanded] = useState(false);
   const height = useMotionValue(INITIAL_HEIGHT_PX);
@@ -37,20 +38,22 @@ const useBottomSheetHeight = () => {
 
   useEffect(() => {
     const max = getMaxHeightPx();
-    const points = getSnapHeights(max);
+    const points = getSnapHeights(max, { searchValue, contentHeights });
     setSnapHeights(points);
-    height.set(points[2]); // 초기: 50% 지점
-  }, [height]);
+    if (!searchValue) {
+      height.set(points[2]); // 초기: 세 번째 스냅 지점
+    }
+  }, [height, searchValue, contentHeights]);
 
   useEffect(() => {
     const onResize = () => {
       const max = getMaxHeightPx();
-      setSnapHeights(getSnapHeights(max));
+      setSnapHeights(getSnapHeights(max, { searchValue, contentHeights }));
       height.set(Math.min(height.get(), max));
     };
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
-  }, [height]);
+  }, [height, searchValue, contentHeights]);
 
   const snapToClosestHeight = (currentHeight: number) => {
     if (!snapHeights.length) return;
