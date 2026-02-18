@@ -1,9 +1,8 @@
-import { cookies } from "next/headers";
 import { MyPageContainer } from "./_components";
+import { hasValidToken } from "./_utils/hasValidToken";
 
 const page = async () => {
-  const cookieStore = await cookies();
-  const hasToken = cookieStore.has("refresh_token");
+  const hasToken = await hasValidToken();
 
   return <MyPageContainer hasToken={hasToken} />;
 };

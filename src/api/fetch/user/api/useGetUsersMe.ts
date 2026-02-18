@@ -5,7 +5,7 @@ import { GetUsersMeResponse } from "../types/UserMeType";
 export const useGetUsersMe = ({ hasToken = true }: { hasToken?: boolean }) => {
   return useAppQuery<GetUsersMeResponse, ApiBaseResponseType<null>>(
     "auth",
-    ["user-me"],
+    ["users-me"],
     "/users/me",
     {
       enabled: hasToken,
