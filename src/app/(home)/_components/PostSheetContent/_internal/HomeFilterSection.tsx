@@ -29,7 +29,7 @@ const FILTER_ITEMS = [
   },
 ];
 
-// TODO(형준): 필터 선택 쿼리스트링으로 관리하도록 변경 예정
+// TODO(형준): 필터 선택 쿼리스트링으로 관리하도록 변경 예정, 피그마 디자인 토큰 업데이트 후 반영 예정(#1EB87B)
 
 const HomeFilter = ({ children, onSelected, ariaLabel, ...props }: HomeFilterProps) => {
   return (
