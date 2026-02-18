@@ -4,7 +4,8 @@ import { useForm } from "react-hook-form";
 import { Icon } from "@/components/common";
 import { useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/utils";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
+import SideBar from "./_internal/SideBar";
 
 interface LocationFormValues {
   search: string;
@@ -67,9 +68,19 @@ const HeaderContent = () => {
 };
 
 const Header = () => {
+  // TODO(형준): 임시 사이드바 추가, 향후 제거
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <Suspense fallback={""}>
-      <HeaderContent />
+      <div className="relative">
+        <HeaderContent />
+
+        <button onClick={() => setIsOpen(!isOpen)} className="absolute right-[-25px] z-50">
+          <Icon name="Menu" title="메뉴 열기" />
+        </button>
+        <SideBar isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      </div>
     </Suspense>
   );
 };
