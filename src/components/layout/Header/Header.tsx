@@ -76,7 +76,7 @@ const Header = () => {
       <div className="relative">
         <HeaderContent />
 
-        <button onClick={() => setIsOpen(!isOpen)} className="absolute right-[-25px] z-50">
+        <button onClick={() => setIsOpen(!isOpen)} className="absolute right-5 top-5 z-50">
           <Icon name="Menu" title="메뉴 열기" />
         </button>
         <SideBar isOpen={isOpen} onClose={() => setIsOpen(false)} />
