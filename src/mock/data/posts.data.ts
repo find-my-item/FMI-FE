@@ -64,5 +64,5 @@ export const MOCK_SIMILAR_POST_ITEMS: SimilarDataItem = {
   favoriteCount: 0,
   favoriteStatus: false,
   viewCount: 2,
-  createdAt: "2025-12-26 10:22:58",
+  createdAt: "2026-02-15T10:30:00",
 };
