@@ -29,21 +29,25 @@ const MypageProfileForm = () => {
           <button
             className="absolute left-[52px] top-[52px] h-[28px] w-[28px] rounded-full bg-fill-neutral-strong-default flex-center"
             aria-label="프로필 이미지 변경 버튼"
-            onClick={() => console.log("버튼 클릭")}
+            onClick={() => setOpenMenu((prev) => !prev)}
+            type="button"
           >
             <Icon name="CameraBorder" size={16} />
           </button>
 
-          <KebabMenu
-            items={[
-              { text: "내 앨범에서 선택", onClick: () => console.log("선택") },
-              {
-                text: "프로필 이미지 삭제",
-                textColor: "text-system-warning",
-                onClick: () => console.log("선택"),
-              },
-            ]}
-          />
+          {/* 메뉴 */}
+          {openMenu && (
+            <KebabMenu
+              items={[
+                { text: "내 앨범에서 선택", onClick: () => console.log("선택") },
+                {
+                  text: "프로필 이미지 삭제",
+                  textColor: "text-system-warning",
+                  onClick: () => console.log("선택"),
+                },
+              ]}
+            />
+          )}
         </div>
       </div>
 
