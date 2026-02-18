@@ -8,7 +8,7 @@ import MyPageProfile from "../MyPageProfile/MyPageProfile";
 import MyPageIconNav from "../MyPageIconNav/MyPageIconNav";
 import MyPageMenuSection from "../MyPageMenuSection/MyPageMenuSection";
 
-const MypageContainer = ({ hasToken }: { hasToken: boolean }) => {
+const MyPageContainer = ({ hasToken }: { hasToken: boolean }) => {
   const { data, isLoading, error } = useGetUsersMe(hasToken);
   const { addToast } = useToast();
 
@@ -42,4 +42,4 @@ const MypageContainer = ({ hasToken }: { hasToken: boolean }) => {
   );
 };
 
-export default MypageContainer;
+export default MyPageContainer;
