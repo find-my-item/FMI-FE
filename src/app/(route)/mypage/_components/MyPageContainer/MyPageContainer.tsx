@@ -1,15 +1,15 @@
 "use client";
 
-import { useGetUsersMe } from "@/api/fetch/user/api/useGetUsersMe";
 import { LoadingState } from "@/components/state";
 import { useToast } from "@/context/ToastContext";
 import { useEffect } from "react";
 import MyPageProfile from "../MyPageProfile/MyPageProfile";
 import MyPageIconNav from "../MyPageIconNav/MyPageIconNav";
 import MyPageMenuSection from "../MyPageMenuSection/MyPageMenuSection";
+import { useGetUsersMe } from "@/api/fetch/user";
 
 const MyPageContainer = ({ hasToken }: { hasToken: boolean }) => {
-  const { data, isLoading, error } = useGetUsersMe(hasToken);
+  const { data, isLoading, error } = useGetUsersMe({ hasToken });
   const { addToast } = useToast();
 
   useEffect(() => {

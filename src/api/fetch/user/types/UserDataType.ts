@@ -1,3 +1,5 @@
+// TODO(지권): 파일 확인 필요
+
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 
 export interface GetUserDataResponse extends ApiBaseResponseType<UserDataType> {}

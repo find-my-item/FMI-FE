@@ -3,7 +3,7 @@ import { MyPageContainer } from "./_components";
 
 const page = async () => {
   const cookieStore = await cookies();
-  const hasToken = cookieStore.has("access_token");
+  const hasToken = cookieStore.has("refresh_token");
 
   return <MyPageContainer hasToken={hasToken} />;
 };
