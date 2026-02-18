@@ -9,7 +9,7 @@ import { cn } from "@/utils";
 import { useHandleClickOutside } from "@/app/(route)/chat/hooks";
 
 const UserProfileDetailHeader = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isReportOpen, setIsReportOpen] = useState(false);
 
   const { userId } = useParams<{ userId: string }>();
