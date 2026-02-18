@@ -53,8 +53,28 @@ jest.mock("@/api/_base/query/useAppMutation", () => {
   });
 });
 
+jest.mock("@/api/fetch/report/api/useReport", () => {
+  return jest.fn(() => ({
+    mutate: jest.fn(),
+    isPending: false,
+  }));
+});
+
 jest.mock("@/components/common", () => ({
   Icon: ({ name, ...rest }: any) => <span data-testid={`icon-${name}`} {...rest} />,
+  RequiredText: () => <span>*</span>,
+  Toast: ({ message }: any) => <div data-testid="toast">{message}</div>,
+  Button: ({ children, onClick, ...rest }: any) => (
+    <button onClick={onClick} {...rest}>
+      {children}
+    </button>
+  ),
+  InputField: ({ name, label, placeholder, ...rest }: any) => (
+    <div>
+      {label && <label>{label}</label>}
+      <textarea name={name} placeholder={placeholder} {...rest} />
+    </div>
+  ),
   ConfirmModal: ({ isOpen, onConfirm, onCancel, title, content }: any) => {
     if (!isOpen) return null;
     return (
@@ -74,6 +94,32 @@ jest.mock("@/components/common", () => ({
 
 jest.mock("@/utils", () => ({
   cn: (...args: any[]) => args.filter(Boolean).join(" "),
+}));
+
+jest.mock("@/components/layout", () => ({
+  DetailHeader: ({ title, onBack, children }: any) => (
+    <header>
+      <button onClick={onBack}>뒤로가기</button>
+      {title && <h2>{title}</h2>}
+      {children}
+    </header>
+  ),
+}));
+
+jest.mock("@/hooks", () => ({
+  useModalBackdrop: () => () => {},
+  useModalLockAndEsc: () => {},
+}));
+
+jest.mock("@/components/domain/ReportModal/_internal", () => ({
+  ReportPopupLayout: ({ isOpen, children }: any) => (isOpen ? <div>{children}</div> : null),
+  ReportSelectBox: () => <div>ReportSelectBox</div>,
+  ReportReasonModal: () => null,
+}));
+
+jest.mock("@/components/domain", () => ({
+  ReportModal: ({ isOpen }: any) =>
+    isOpen ? <div data-testid="report-modal">Report Modal</div> : null,
 }));
 
 describe("ChatRoomHeaderInfoButton", () => {
@@ -113,7 +159,7 @@ describe("ChatRoomHeaderInfoButton", () => {
     expect(screen.getByText("채팅방 나가기")).toBeInTheDocument();
   });
 
-  it("차단, 신고하기 클릭 시 router.push가 호출됩니다", async () => {
+  it("차단, 신고하기 클릭 시 Report 컴포넌트가 열립니다", async () => {
     const user = userEvent.setup();
     renderWithProviders(<ChatRoomHeaderInfoButton roomId={1} />);
 
@@ -123,8 +169,7 @@ describe("ChatRoomHeaderInfoButton", () => {
     const reportButton = screen.getByRole("button", { name: "차단, 신고하기" });
     await user.click(reportButton);
 
-    expect(mockPush).toHaveBeenCalledWith("/chat/1/report");
-    expect(mockPush).toHaveBeenCalledTimes(1);
+    expect(screen.getByTestId("report-modal")).toBeInTheDocument();
   });
 
   it("채팅방 나가기 클릭 시 모달이 열립니다", async () => {

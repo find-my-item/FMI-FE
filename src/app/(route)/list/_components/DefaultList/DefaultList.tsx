@@ -18,7 +18,8 @@ interface DefaultListProps {
 
 const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
   const { type, region, category, sort, status } = useFilterParams();
-  const selectedType = (type ?? "lost") as "lost" | "found";
+  const normalizedType = type?.toLowerCase();
+  const selectedType = (normalizedType ?? "lost") as "lost" | "found";
   const postType: PostType = selectedType === "found" ? "FOUND" : "LOST";
 
   const postStatus: ItemStatus | undefined =
@@ -30,7 +31,7 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
     hasNextPage,
     isFetchingNextPage,
   } = useGetPosts({
-    address: region ?? "서울특별시",
+    address: region ?? "",
     postType,
     postStatus,
     category,
@@ -52,8 +53,7 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
 
       <FilterSection />
 
-      {/* TODO(지권): 에러 UI 추가 필요 */}
-      <ErrorBoundary fallback={<div>에러 발생</div>}>
+      <ErrorBoundary showToast toastMessage="목록을 불러올 수 없어요. 다시 시도해 주세요.">
         <Suspense fallback={<LoadingState />}>
           <section aria-label="게시글 목록" className="w-full">
             {listData?.length === 0 ? (
@@ -62,6 +62,7 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
                   iconName: "EmptyPostList",
                   iconSize: 200,
                 }}
+                description={"아직 게시글이 없어요.\n가장 먼저 작성해보세요!"}
               />
             ) : (
               <>

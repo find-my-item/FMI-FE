@@ -2,11 +2,10 @@
 
 import { InputText } from "@/components/common";
 import { InputTextProps } from "@/components/common/Input/InputText/InputText";
-import { useFormContext, useController } from "react-hook-form";
+import { useFormContext, useController, RegisterOptions } from "react-hook-form";
 import { FormType } from "../../types/FormType";
-import { useEffect } from "react";
 
-const inputValidationRules = {
+const inputValidationRules: Record<keyof SignUpFieldType, RegisterOptions<SignUpFieldType>> = {
   email: {
     required: true,
     pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "이메일 형식을 입력해 주세요." },
@@ -23,7 +22,7 @@ const inputValidationRules = {
   },
   passwordConfirm: {
     required: true,
-    validate: (value: string, formValues: FormType) =>
+    validate: (value, formValues: SignUpFieldType) =>
       value === formValues.password || "비밀번호가 일치하지 않습니다.",
     deps: ["password"],
   },
@@ -44,35 +43,51 @@ const inputValidationRules = {
   },
 };
 
-interface SignUpItemProps extends InputTextProps {
+type SignUpFieldType = Omit<
+  FormType,
+  "termsOfServiceAgreed" | "privacyPolicyAgreed" | "marketingConsent"
+>;
+
+interface SignUpItemProps extends Omit<InputTextProps, "inputOption"> {
+  inputOption: Omit<InputTextProps["inputOption"], "name"> & {
+    name: keyof SignUpFieldType;
+  };
   isVerified: boolean;
 }
 
-const SignUpItem = ({ children, isVerified, ...props }: SignUpItemProps) => {
-  const { control } = useFormContext();
+const SignUpItem = ({ isVerified, ...props }: SignUpItemProps) => {
+  const { control } = useFormContext<SignUpFieldType>();
+
+  const { inputOption, label, btnOption, caption } = props;
+  const name = inputOption.name;
 
   const {
     field,
     fieldState: { error, isDirty },
   } = useController({
-    name: props.name,
+    name,
     control,
-    rules: props.validation,
+    rules: inputValidationRules[name],
   });
 
   const isFieldSuccess = isDirty && !error && !!field.value;
 
-  const isSuccessState =
-    props.name === "emailAuth" || props.name === "nickname" ? isVerified : isFieldSuccess;
-
-  const inputValidation = (name: string) =>
-    inputValidationRules[name as keyof typeof inputValidationRules];
+  const isSuccessState = name === "emailAuth" || name === "nickname" ? isVerified : isFieldSuccess;
 
   return (
     <div className="h-[96px]">
-      <InputText validation={inputValidation(props.name)} isSuccess={isSuccessState} {...props}>
-        {children}
-      </InputText>
+      <InputText
+        inputOption={{
+          ...inputOption,
+          validation: inputValidationRules[name] as any,
+        }}
+        label={label}
+        btnOption={btnOption}
+        caption={{
+          ...caption,
+          isSuccess: isSuccessState,
+        }}
+      />
     </div>
   );
 };

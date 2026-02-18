@@ -1,11 +1,12 @@
 "use client";
 
 import { DetailHeader } from "@/components/layout";
+import { HeaderMenu } from "@/components/layout/DetailHeader/DetailHeaderParts";
 
 const UserProfileDetailHeader = () => {
   return (
     <DetailHeader title="프로필">
-      <DetailHeader.Menu ariaLabel="더보기 메뉴" />
+      <HeaderMenu ariaLabel="더보기 메뉴" />
     </DetailHeader>
   );
 };

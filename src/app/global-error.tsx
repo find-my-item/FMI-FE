@@ -1,9 +1,9 @@
 "use client";
 
-import "@/app/globals.css";
-import { ErrorView } from "@/components/state";
-import * as Sentry from "@sentry/nextjs";
 import { useEffect } from "react";
+import * as Sentry from "@sentry/nextjs";
+import { ErrorView } from "@/components/state";
+import "@/app/globals.css";
 
 export default function GlobalError({ error }: { error: Error & { digest?: string } }) {
   useEffect(() => {
@@ -14,7 +14,6 @@ export default function GlobalError({ error }: { error: Error & { digest?: strin
     <html lang="ko">
       <body className="mx-auto max-w-[390px] border-2 flex-col-center">
         <ErrorView
-          // TODO(지권): 아이콘 크기 확인 필요
           iconName="ServerError"
           code="500"
           title="서버에 문제가 발생했습니다"
