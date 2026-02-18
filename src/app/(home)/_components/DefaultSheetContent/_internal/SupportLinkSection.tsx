@@ -12,9 +12,9 @@ const SUPPORT_MENU_ITEMS = [
   },
 ];
 
-const SupportMenu = () => {
+const SupportLinkSection = () => {
   return (
-    <div className="w-full">
+    <section className="w-full">
       {SUPPORT_MENU_ITEMS.map((item) => (
         <Link
           key={item.label}
@@ -25,8 +25,8 @@ const SupportMenu = () => {
           <Icon name="ArrowRightSmall" size={20} />
         </Link>
       ))}
-    </div>
+    </section>
   );
 };
 
-export default SupportMenu;
+export default SupportLinkSection;
