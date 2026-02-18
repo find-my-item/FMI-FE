@@ -12,7 +12,6 @@ const UserBlockModal = ({ isOpen, onClose, writerId }: UserBlockModalProps) => {
   const { mutate: blockUser } = useBlock({
     onClose,
     userId: writerId,
-    invalidateKey: ["user-block-list"],
   });
   const { data } = useGetBlock();
   console.log(data);
