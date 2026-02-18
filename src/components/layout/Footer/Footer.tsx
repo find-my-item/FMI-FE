@@ -17,13 +17,13 @@ const Footer = () => {
 
   return (
     <footer className="fixed bottom-0 left-1/2 z-10 w-full max-w-[390px] -translate-x-1/2 border-t-[1.2px] border-divider-default bg-white px-5 pb-[27px] pt-[14px]">
-      <div className="flex justify-center gap-3 text-caption2-medium text-labelsVibrant-secondary">
+      <div className="flex justify-between text-caption2-medium text-labelsVibrant-secondary">
         {FOOTER_LINK.map((link) => (
           <Link
             key={link.name}
             href={link.href}
             className={cn(
-              "w-[60.2px] transition-colors flex-col-center",
+              "w-[60px] transition-colors flex-col-center",
               "hover:text-neutral-strong-focused"
             )}
           >
