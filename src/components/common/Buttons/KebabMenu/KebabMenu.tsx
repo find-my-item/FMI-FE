@@ -50,7 +50,7 @@ interface KebabMenuProps {
 }
 
 const DEFAULT_TEXT_COLOR =
-  "text-neutral-normal-default hover:text-black active:text-neutral-normal-preesed disabled:text-neutral-normal-disabled";
+  "text-neutral-normal-default hover:text-black active:text-neutral-normal-pressed disabled:text-neutral-normal-disabled";
 
 const KebabMenu = ({ items }: KebabMenuProps) => {
   const finalIconPosition = (item: KebabMenuItem) => item.icon && (item.iconPosition ?? "leading");
@@ -64,7 +64,7 @@ const KebabMenu = ({ items }: KebabMenuProps) => {
           disabled={item.disabled || item.loading}
           onClick={item.onClick}
           className={cn(
-            "glass-card glass-card::before glass-card::after grid auto-cols-max grid-flow-col items-center justify-center gap-2 border-b border-white px-7 py-4 text-h3-medium transition-colors duration-150 bg-fill-neutral-subtle-default",
+            "glass-card glass-card::before glass-card::after z-[9999] grid auto-cols-max grid-flow-col items-center justify-center gap-2 border-b border-white px-7 py-4 text-h3-medium transition-colors duration-150 bg-fill-neutral-subtle-default",
             finalTextColor(item),
             "active:bg-fill-neutral-subtle-pressed",
             "disabled:bg-fill-neutral-subtle-disabled",
