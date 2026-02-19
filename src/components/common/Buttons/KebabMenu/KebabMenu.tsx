@@ -63,6 +63,7 @@ const KebabMenu = ({ items }: KebabMenuProps) => {
           key={index}
           disabled={item.disabled || item.loading}
           onClick={item.onClick}
+          type="button"
           className={cn(
             "glass-card glass-card::before glass-card::after z-[9999] grid auto-cols-max grid-flow-col items-center justify-center gap-2 border-b border-white px-7 py-4 text-h3-medium transition-colors duration-150 bg-fill-neutral-subtle-default",
             finalTextColor(item),

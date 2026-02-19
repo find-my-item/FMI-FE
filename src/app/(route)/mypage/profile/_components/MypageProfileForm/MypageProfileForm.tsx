@@ -9,12 +9,7 @@ const MypageProfileForm = () => {
 
   //   const { data, isLoading, error } = useGetUsersMe();
 
-  // useEffect(() => {
-  //   if(data?.result) {
-  //     reset
-  //   }
-  // })
-  const fileInputRef = useRef<HTMLInputElement>(null); // 파일 인풋 참조용
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [previewImageUrl, setPreviewImageUrl] = useState<string | null>(null);
 
   const handleButtonClick = () => {
@@ -22,17 +17,27 @@ const MypageProfileForm = () => {
   };
 
   const handleChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]; //선택된 첫 번째 파일
+    e.preventDefault();
+    e.stopPropagation();
+    const file = e.target.files?.[0];
 
     if (file) {
       const url = URL.createObjectURL(file);
       setPreviewImageUrl(url);
-
+      console.log("이미지>> ", previewImageUrl);
       setOpenMenu(false);
 
-      setValue("prefileImg", file);
+      // setValue("prefileImg", file);
     }
   };
+
+  useEffect(() => {
+    return () => {
+      if (previewImageUrl) {
+        URL.revokeObjectURL(previewImageUrl);
+      }
+    };
+  }, [previewImageUrl]);
 
   // 버튼 클릭 제어
   const [openMenu, setOpenMenu] = useState(false);
@@ -46,7 +51,7 @@ const MypageProfileForm = () => {
     <form onSubmit={handleSubmitMypageProfile} className="flex h-dvh w-full flex-col">
       <div className="flex justify-center py-[30px]">
         <div className="relative h-[80px] w-[80px]">
-          <ProfileAvatar size={80} src={""} alt="프로필" priority={true} />
+          <ProfileAvatar size={80} src={previewImageUrl} alt="프로필" priority={true} />
           {/* TODO(수현): 디자인 토큰 변경 요청 해놓은 상태로 등록 시 추후 변경 */}
           <button
             className="absolute left-[52px] top-[52px] h-[28px] w-[28px] rounded-full bg-fill-neutral-strong-default flex-center"

@@ -8,8 +8,6 @@ import { MypageProfileForm } from "./_components";
 interface MypageProfileFormType {
   profile: string;
   nickname: string;
-  email: string;
-  emailAuth: number;
 }
 
 const page = () => {
