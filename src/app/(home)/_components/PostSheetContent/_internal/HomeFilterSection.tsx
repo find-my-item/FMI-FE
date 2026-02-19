@@ -20,7 +20,7 @@ const FILTER_ITEMS = [
     value: "lost",
   },
   {
-    label: "습득물만",
+    label: "발견물만",
     value: "find",
   },
   {
