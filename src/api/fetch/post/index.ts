@@ -5,6 +5,7 @@ export * from "./types/PostWriteType";
 export * from "./types/PostDeleteDetailType";
 export * from "./types/PostFavoritesType";
 export * from "./types/MypagePostListType";
+export * from "./types/SimilarType";
 
 export { useGetPosts } from "./api/useGetPosts";
 export { useGetMetaData } from "./api/useGetMetaData";
@@ -13,3 +14,5 @@ export { useDeleteDetailPost } from "./api/useDeleteDetailPost";
 export { usePostFavorites } from "./api/usePostFavorites";
 export { useDeletePostFavorites } from "./api/useDeleteFavorites";
 export { useGetSearchKeyword } from "./api/useGetSearchKeyword";
+export { useGetSimilar } from "./api/useGetSimilar";
+export { useGetDetailPost } from "./api/useGetDetailPost";

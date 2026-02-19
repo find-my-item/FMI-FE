@@ -36,7 +36,7 @@ const PostWriteMenu = () => {
                 <hr className="h-px w-full bg-white" />
                 <button className={WRITE_MENU_STYLES.menuButton} onClick={handleClickFindButton}>
                   <Icon name="FindWriteBtn" size={20} />
-                  <span className={WRITE_MENU_STYLES.menuLabel}>습득했어요 글쓰기</span>
+                  <span className={WRITE_MENU_STYLES.menuLabel}>발견했어요 글쓰기</span>
                 </button>
               </div>
             </div>
@@ -75,7 +75,7 @@ const FindWarningModal = ({ isOpen, onClose }: FindWarningModalProps) => {
           게시글 작성 전 확인해 주세요!
         </h2>
         <span className="text-body5-regular text-center text-layout-body-default">
-          습득했어요 게시글 작성 시에는 경찰청에 우선 신고해 주시고 작성해 주시기 바랍니다.
+          발견했어요 게시글 작성 시에는 경찰청에 우선 신고해 주시고 작성해 주시기 바랍니다.
         </span>
       </div>
 

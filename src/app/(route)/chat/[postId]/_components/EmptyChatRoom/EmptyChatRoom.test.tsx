@@ -29,7 +29,7 @@ describe("EmptyChatRoom", () => {
     render(<EmptyChatRoom postMode="find" />);
 
     expect(screen.getByText("내 물건이 맞는지 확인해보세요.")).toBeInTheDocument();
-    expect(screen.getByText("습득자에게 메시지를 보내세요.")).toBeInTheDocument();
+    expect(screen.getByText("발견자에게 메시지를 보내세요.")).toBeInTheDocument();
   });
 
   it("postMode가 lost일 때 ChatLost 아이콘이 렌더링됩니다", () => {
@@ -58,7 +58,7 @@ describe("EmptyChatRoom", () => {
 
     // 도움말 텍스트
     expect(screen.getByText("내 물건이 맞는지 확인해보세요.")).toBeInTheDocument();
-    expect(screen.getByText("습득자에게 메시지를 보내세요.")).toBeInTheDocument();
+    expect(screen.getByText("발견자에게 메시지를 보내세요.")).toBeInTheDocument();
   });
 
   it("lost 모드일 때 모든 요소가 올바르게 렌더링됩니다", () => {
@@ -82,7 +82,7 @@ describe("EmptyChatRoom", () => {
     const findTexts = helpTexts.filter(
       (text) =>
         text.textContent === "내 물건이 맞는지 확인해보세요." ||
-        text.textContent === "습득자에게 메시지를 보내세요."
+        text.textContent === "발견자에게 메시지를 보내세요."
     );
     expect(findTexts.length).toBeGreaterThanOrEqual(2);
   });
