@@ -36,7 +36,7 @@ describe("비슷한 분실물 아이템", () => {
   it("시간이 렌더링되어야 한다.", () => {
     render(<SimilarItemsList data={[MOCK_SIMILAR_POST_ITEMS]} />);
 
-    const similarItemElement = screen.getByText("2025.12.26");
+    const similarItemElement = screen.getByText("2026.02.15");
     expect(similarItemElement).toBeInTheDocument();
   });
 });

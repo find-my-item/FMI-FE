@@ -45,6 +45,7 @@ const SimilarItem = ({ data }: SimilarItemProps) => {
         <ListItemImage src={thumbnailImageUrl} alt="" category={data.category} size={126} />
 
         <div className="flex flex-col gap-[3px]">
+          {/* TODO(지권): 디자인 토큰 누락 */}
           <p className="font-semibold text-layout-header-default">{title}</p>
           <p className="block text-[14px] leading-5 text-layout-body-default">
             <span className="after:mx-1 after:content-['·']">{address}</span>
