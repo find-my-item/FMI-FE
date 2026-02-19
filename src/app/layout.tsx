@@ -75,7 +75,7 @@ export default function RootLayout({
         <Providers>
           <ToastProvider>
             <MSWProvider />
-            <main className="w-full">{children}</main>
+            <main className="w-full flex-1">{children}</main>
             <Footer />
           </ToastProvider>
           <Script
