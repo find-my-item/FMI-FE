@@ -3,6 +3,7 @@
 import { cn } from "@/utils";
 import Icon from "../../Icon/Icon";
 import { Props } from "@/components/common/Icon/Icon";
+import { ButtonHTMLAttributes } from "react";
 
 /**
  * @author hyungjun
@@ -34,7 +35,7 @@ import { Props } from "@/components/common/Icon/Icon";
  * ```
  */
 
-interface KebabMenuItem {
+interface KebabMenuItem extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
   icon?: Props;
   iconPosition?: "leading" | "trailing";
@@ -63,7 +64,6 @@ const KebabMenu = ({ items }: KebabMenuProps) => {
           key={index}
           disabled={item.disabled || item.loading}
           onClick={item.onClick}
-          type="button"
           className={cn(
             "glass-card glass-card::before glass-card::after z-[9999] grid auto-cols-max grid-flow-col items-center justify-center gap-2 border-b border-white px-7 py-4 text-h3-medium transition-colors duration-150 bg-fill-neutral-subtle-default",
             finalTextColor(item),
@@ -72,6 +72,7 @@ const KebabMenu = ({ items }: KebabMenuProps) => {
             index === 0 && "rounded-t-[20px]",
             items.length === ++index && "rounded-b-[20px]"
           )}
+          {...item}
         >
           {item.loading ? (
             <Icon name="Loading" className="animate-spin" />

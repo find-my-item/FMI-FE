@@ -66,7 +66,7 @@ const MypageProfileForm = () => {
           {openMenu && (
             <KebabMenu
               items={[
-                { text: "내 앨범에서 선택", onClick: handleButtonClick },
+                { text: "내 앨범에서 선택", onClick: handleButtonClick, type: "button" },
                 {
                   text: "프로필 이미지 삭제",
                   textColor: "text-system-warning",
