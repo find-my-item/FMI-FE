@@ -1,4 +1,4 @@
-import { GetDetailPostResponse, PostItem } from "@/api/fetch/post";
+import { GetDetailPostResponse, PostItem, SimilarDataItem } from "@/api/fetch/post";
 
 export const MOCK_POST_ITEM: PostItem = {
   id: 1,
@@ -53,4 +53,16 @@ export const MOCK_POST_DEFAULT_DETAIL: GetDetailPostResponse = {
       chattingCount: 0,
     },
   },
+};
+
+export const MOCK_SIMILAR_POST_ITEMS: SimilarDataItem = {
+  postId: 1,
+  title: "아이폰 15 분실",
+  thumbnailImageUrl: "https://picsum.photos/400/300?random=1",
+  address: "서울시 노원구 상계동",
+  category: "ELECTRONICS" as const,
+  favoriteCount: 0,
+  favoriteStatus: false,
+  viewCount: 2,
+  createdAt: "2026-02-15T10:30:00",
 };
