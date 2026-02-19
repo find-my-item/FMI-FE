@@ -7,6 +7,6 @@ export const EMPTY_MODE_STYLE = {
   },
   find: {
     iconName: "ChatFind" as Props["name"],
-    helpText: ["내 물건이 맞는지 확인해보세요.", "습득자에게 메시지를 보내세요."],
+    helpText: ["내 물건이 맞는지 확인해보세요.", "발견자에게 메시지를 보내세요."],
   },
 };

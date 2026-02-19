@@ -22,9 +22,7 @@ const ErrorSimilarSection = ({ postId }: { postId: number }) => {
                 게시글을 불러올 수 없습니다.
               </p>
               <span className="block text-body2-regular text-layout-body-default">
-                오류가 발생해 게시글을 불러오지 못했습니다.
-                <br />
-                다시 한 번 시도해 주세요.
+                {`오류가 발생해 게시글을 불러오지 못했습니다.\n다시 한 번 시도해 주세요.`}
               </span>
             </div>
             <Button variant="outlined" className="px-3" onClick={handleRefresh}>
