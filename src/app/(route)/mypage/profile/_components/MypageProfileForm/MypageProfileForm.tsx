@@ -70,7 +70,8 @@ const MypageProfileForm = () => {
                 {
                   text: "프로필 이미지 삭제",
                   textColor: "text-system-warning",
-                  onClick: () => console.log("선택"),
+                  onClick: () => setPreviewImageUrl(""),
+                  type: "button",
                 },
               ]}
             />
