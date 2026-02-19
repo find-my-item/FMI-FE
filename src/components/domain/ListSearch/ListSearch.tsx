@@ -8,6 +8,8 @@ import { useGetSearchKeyword } from "@/api/fetch/post";
 import { LIST_SEARCH_PLACEHOLDER } from "./LIST_SEARCH_PLACEHOLDER";
 import PostSearchView from "./_internal/PostSearchView";
 import RegionSearchView from "./_internal/RegionSearchView";
+import { useInfiniteScroll } from "@/hooks/useInfiniteScroll/useInfiniteScroll";
+import { ErrorBoundary } from "@/app/ErrorBoundary";
 
 interface ListSearchProps {
   searchMode: "region" | "post";
@@ -27,9 +29,19 @@ const ListSearch = ({ searchMode }: ListSearchProps) => {
     methods.resetField(`${searchMode}Search`);
   }, [searchMode]);
 
-  const { data: listData } = useGetSearchKeyword({
+  const {
+    data: listData,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useGetSearchKeyword({
     keyword,
-    size: 10,
+    size: 2,
+  });
+  const { ref: searchRef } = useInfiniteScroll({
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
   });
   console.log("검색 데이터:", listData);
 
@@ -59,7 +71,14 @@ const ListSearch = ({ searchMode }: ListSearchProps) => {
         </div>
       </FormProvider>
 
-      {searchMode === "post" ? <PostSearchView data={listData ?? []} /> : <RegionSearchView />}
+      {searchMode === "post" ? (
+        <ErrorBoundary showToast toastMessage="목록을 불러올 수 없어요. 다시 시도해 주세요.">
+          <PostSearchView data={listData ?? []} />
+          {hasNextPage && <div ref={searchRef} className="h-10 w-full" />}
+        </ErrorBoundary>
+      ) : (
+        <RegionSearchView />
+      )}
     </div>
   );
 };

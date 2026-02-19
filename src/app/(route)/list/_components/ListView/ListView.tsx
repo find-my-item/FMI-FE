@@ -14,7 +14,12 @@ const ListView = () => {
   return (
     <>
       <DetailHeader title={SEARCH_HEADER_TITLE[searchMode]}>
-        <HeaderSearch ariaLabel="게시글 검색" onClick={() => searchUpdateQuery("search", "post")} />
+        {searchMode === "default" && (
+          <HeaderSearch
+            ariaLabel="게시글 검색"
+            onClick={() => searchUpdateQuery("search", "post")}
+          />
+        )}
       </DetailHeader>
 
       {searchMode === "default" ? (
