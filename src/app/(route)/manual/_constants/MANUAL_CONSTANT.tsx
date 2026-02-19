@@ -1,3 +1,5 @@
+// TODO(지권): 주소 일괄 변경
+
 import { ManualItemType, ManualKey } from "../_types/ManualType";
 
 export const MANUAL_LIST = [
@@ -6,7 +8,7 @@ export const MANUAL_LIST = [
     key: "LOST",
   },
   {
-    label: "습득",
+    label: "발견",
     key: "FOUND",
   },
   {
@@ -101,10 +103,10 @@ export const MANUAL_DATA: Manual = {
       btnText: "경찰청 바로가기",
     },
     {
-      title: "습득 게시글을 써보셨나요?",
+      title: "발견 게시글을 써보셨나요?",
       content: (
         <>
-          ‘찾아줘'에 습득 게시물을 작성하면 물건을 분실한 분이 게시글을 통해 연락할 수 있어 분실물을
+          ‘찾아줘'에 발견 게시물을 작성하면 물건을 분실한 분이 게시글을 통해 연락할 수 있어 분실물을
           찾는 데에 도움이 돼요.
         </>
       ),
