@@ -1,11 +1,10 @@
-import { cookies } from "next/headers";
-import { MypageContainer } from "./_components";
+import { hasValidToken } from "@/utils/hasValidToken/hasValidToken";
+import { MyPageContainer } from "./_components";
 
 const page = async () => {
-  const cookieStore = await cookies();
-  const hasToken = cookieStore.has("access_token");
+  const hasToken = await hasValidToken();
 
-  return <MypageContainer hasToken={hasToken} />;
+  return <MyPageContainer hasToken={hasToken} />;
 };
 
 export default page;

@@ -2,7 +2,7 @@ export const MYPAGE_MENU_LIST = [
   {
     title: "내 활동",
     pages: [
-      { pageName: "내가 쓴 게시물", pageLink: "/mypage/posts" },
+      { pageName: "내가 쓴 게시글", pageLink: "/mypage/posts" },
       { pageName: "내가 쓴 댓글", pageLink: "/mypage/comments" },
       { pageName: "즐겨찾기 목록", pageLink: "/mypage/favorites" },
       { pageName: "내 활동 내역", pageLink: "/mypage/activity" },

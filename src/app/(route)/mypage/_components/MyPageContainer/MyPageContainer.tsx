@@ -1,15 +1,15 @@
 "use client";
 
-import { useGetUsersMe } from "@/api/fetch/user/api/useGetUsersMe";
 import { LoadingState } from "@/components/state";
 import { useToast } from "@/context/ToastContext";
 import { useEffect } from "react";
 import MyPageProfile from "../MyPageProfile/MyPageProfile";
 import MyPageIconNav from "../MyPageIconNav/MyPageIconNav";
 import MyPageMenuSection from "../MyPageMenuSection/MyPageMenuSection";
+import { useGetUsersMe } from "@/api/fetch/user";
 
-const MypageContainer = ({ hasToken }: { hasToken: boolean }) => {
-  const { data, isLoading, error } = useGetUsersMe(hasToken);
+const MyPageContainer = ({ hasToken }: { hasToken: boolean }) => {
+  const { data, isLoading, error } = useGetUsersMe({ hasToken });
   const { addToast } = useToast();
 
   useEffect(() => {
@@ -20,26 +20,23 @@ const MypageContainer = ({ hasToken }: { hasToken: boolean }) => {
 
   if (isLoading) return <LoadingState />;
 
-  const isUserLogin = !!(data && data.result && data.result.nickname);
+  const userData = data?.result
+    ? {
+        email: data.result.email,
+        profileImg: data.result.profileImg || "",
+        nickname: data.result.nickname,
+      }
+    : undefined;
+
   return (
     <div className="flex w-full flex-col">
-      {isUserLogin ? (
-        <MyPageProfile
-          userData={{
-            email: data.result.email,
-            profileImg: data.result.profileImg || "",
-            nickname: data.result.nickname,
-          }}
-        />
-      ) : (
-        <MyPageProfile />
-      )}
+      <MyPageProfile userData={userData} />
 
       <MyPageIconNav />
 
-      <MyPageMenuSection isUserLogin={isUserLogin} />
+      <MyPageMenuSection isUserLogin={!!userData} />
     </div>
   );
 };
 
-export default MypageContainer;
+export default MyPageContainer;

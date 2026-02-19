@@ -110,21 +110,23 @@ const FilterBottomSheet = ({
             const isSelected = selectedTab === tab.value;
 
             return (
-              <button
-                key={tab.value}
-                role="tab"
-                aria-selected={isSelected}
-                aria-label={`${tab.label} 필터`}
-                className={cn(
-                  "min-h-[60px] flex-1 text-[20px] font-semibold",
-                  isSelected
-                    ? "border-b-2 border-brand-normal-default text-brand-normal-default"
-                    : "text-system-unselected"
-                )}
-                onClick={() => setSelectedTab(tab.value)}
-              >
-                {tab.label}
-              </button>
+              tab.value !== "date" && (
+                <button
+                  key={tab.value}
+                  role="tab"
+                  aria-selected={isSelected}
+                  aria-label={`${tab.label} 필터`}
+                  className={cn(
+                    "min-h-[60px] flex-1 text-[20px] font-semibold",
+                    isSelected
+                      ? "border-b-2 border-brand-normal-default text-brand-normal-default"
+                      : "text-system-unselected"
+                  )}
+                  onClick={() => setSelectedTab(tab.value)}
+                >
+                  {tab.label}
+                </button>
+              )
             );
           })}
         </section>

@@ -43,8 +43,8 @@ const MyPageProfile = ({ userData }: ProfileProps) => {
         as={Link}
         href={userData ? "/mypage/profile" : "/login"}
         variant="outlined"
-        ignoreBase
-        className="active:text-neutral-normal-pressed rounded-[10px] border border-neutral-normal-default px-3 py-[10px] text-caption1-semibold text-neutral-normal-default transition-all duration-150 hover:border-neutral-normal-hover hover:text-black focus:border-brand-normal-default/70 focus:text-brand-normal-default focus:outline-none active:border-neutral-normal-pressed active:bg-fill-neutral-normal-pressed disabled:border-neutral-normal-disabled disabled:text-neutral-normal-disabled disabled:bg-fill-neutral-normal-disabled"
+        size="small"
+        className="!min-w-0"
       >
         {userData ? "프로필 수정" : "로그인"}
       </Button>
