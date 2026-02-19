@@ -87,3 +87,7 @@ export { default as Luggage } from "@/assets/luggage.svg";
 export { default as Chat } from "@/assets/chat.svg";
 export { default as UserProfileHome } from "@/assets/user-profile-home.svg";
 export { default as MapMyLocation } from "@/assets/map-my-location.svg";
+export { default as StarFilled } from "@/assets/star-filled.svg";
+export { default as ErrorSimilarSection } from "@/assets/error-similar-section.svg";
+export { default as UserReport } from "@/assets/user-report.svg";
+export { default as UserBlock } from "@/assets/user-block.svg";

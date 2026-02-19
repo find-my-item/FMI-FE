@@ -5,6 +5,6 @@ export const TABS = [
   },
   {
     key: "found",
-    label: "습득",
+    label: "발견",
   },
 ];

@@ -7,20 +7,20 @@ jest.mock("@/utils", () => ({
 }));
 
 describe("ChatChip", () => {
-  it("postMode가 FOUND일 때 습득물 텍스트와 올바른 스타일이 적용됩니다", () => {
+  it("postMode가 FOUND일 때 발견 텍스트와 올바른 스타일이 적용됩니다", () => {
     render(<ChatChip postMode="FOUND" />);
 
     const chip = screen.getByRole("note");
-    expect(chip).toHaveTextContent("습득물");
+    expect(chip).toHaveTextContent("발견");
     expect(chip).toHaveClass("text-accent-foundItem");
     expect(chip).toHaveClass("bg-fill-accent-foundItem");
   });
 
-  it("postMode가 LOST일 때 분실물 텍스트와 올바른 스타일이 적용됩니다", () => {
+  it("postMode가 LOST일 때 분실 텍스트와 올바른 스타일이 적용됩니다", () => {
     render(<ChatChip postMode="LOST" />);
 
     const chip = screen.getByRole("note");
-    expect(chip).toHaveTextContent("분실물");
+    expect(chip).toHaveTextContent("분실");
     expect(chip).toHaveClass("text-accent-lostItem");
     expect(chip).toHaveClass("bg-fill-accent-lostItem");
   });
@@ -48,7 +48,7 @@ describe("ChatChip", () => {
     render(<ChatChip postMode="FOUND" />);
 
     const chip = screen.getByRole("note");
-    expect(chip).toHaveTextContent("습득물");
+    expect(chip).toHaveTextContent("발견");
     expect(chip).toHaveClass(
       "h-[18px] w-10 shrink-0 rounded text-caption2-semibold flex-center text-accent-foundItem bg-fill-accent-foundItem"
     );
@@ -58,7 +58,7 @@ describe("ChatChip", () => {
     render(<ChatChip postMode="LOST" />);
 
     const chip = screen.getByRole("note");
-    expect(chip).toHaveTextContent("분실물");
+    expect(chip).toHaveTextContent("분실");
     expect(chip).toHaveClass(
       "h-[18px] w-10 shrink-0 rounded text-caption2-semibold flex-center text-accent-lostItem bg-fill-accent-lostItem"
     );
