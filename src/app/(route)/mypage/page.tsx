@@ -1,5 +1,5 @@
+import { hasValidToken } from "@/utils/hasValidToken/hasValidToken";
 import { MyPageContainer } from "./_components";
-import { hasValidToken } from "./_utils/hasValidToken";
 
 const page = async () => {
   const hasToken = await hasValidToken();

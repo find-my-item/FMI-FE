@@ -6,7 +6,7 @@ import { ToastProvider } from "@/providers/ToastProviders";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: false, // 스토리북 테스트 시 실패한 요청을 재시도하지 않게 설정
+      retry: false,
     },
   },
 });
