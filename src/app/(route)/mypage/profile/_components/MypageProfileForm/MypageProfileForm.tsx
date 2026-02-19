@@ -1,11 +1,11 @@
 import { useGetUsersMe } from "@/api/fetch/user";
 import { Icon, InputText, KebabMenu, ProfileAvatar } from "@/components/common";
 import { FooterButton } from "@/components/domain";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 const MypageProfileForm = () => {
-  // const {reset, watch, handleSubmit} = useFormContext();
+  const { reset, watch, setValue, handleSubmit } = useFormContext();
 
   //   const { data, isLoading, error } = useGetUsersMe();
 
@@ -14,8 +14,30 @@ const MypageProfileForm = () => {
   //     reset
   //   }
   // })
+  const fileInputRef = useRef<HTMLInputElement>(null); // 파일 인풋 참조용
+  const [previewImageUrl, setPreviewImageUrl] = useState<string | null>(null);
+
+  const handleButtonClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]; //선택된 첫 번째 파일
+
+    if (file) {
+      const url = URL.createObjectURL(file);
+      setPreviewImageUrl(url);
+
+      setOpenMenu(false);
+
+      setValue("prefileImg", file);
+    }
+  };
+
+  // 버튼 클릭 제어
   const [openMenu, setOpenMenu] = useState(false);
 
+  // 폼 제출 함수
   const handleSubmitMypageProfile = () => {
     // TODO(수현): 폼 제출 함수 추가 예정
   };
@@ -39,7 +61,7 @@ const MypageProfileForm = () => {
           {openMenu && (
             <KebabMenu
               items={[
-                { text: "내 앨범에서 선택", onClick: () => console.log("선택") },
+                { text: "내 앨범에서 선택", onClick: handleButtonClick },
                 {
                   text: "프로필 이미지 삭제",
                   textColor: "text-system-warning",
@@ -48,9 +70,18 @@ const MypageProfileForm = () => {
               ]}
             />
           )}
+
+          <input
+            type="file"
+            accept="image/png, image/jpeg, image/jpg"
+            className="hidden"
+            ref={fileInputRef}
+            onChange={handleChangeImage}
+          />
         </div>
       </div>
 
+      {/* 닉네임 input */}
       <div className="flex w-full flex-col gap-5 p-5">
         <InputText
           inputOption={{
