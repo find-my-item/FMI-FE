@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { FOOTER_LINK, FooterLinkHref } from "./CONST_FOOTER";
 import { Icon } from "@/components/common";
-import { IconName } from "@/components/common/Icon/Icon";
 import { cn } from "@/utils";
 import { usePathname } from "next/navigation";
 import { useHiddenPath } from "@/hooks";
@@ -28,7 +27,7 @@ const Footer = () => {
             )}
           >
             <span>
-              <Icon name={link.icon as IconName} size={28} />
+              <Icon name={link.icon} size={28} />
             </span>
             <span className={cn("py-[2px]", isActive(link.href))}>{link.name}</span>
           </Link>

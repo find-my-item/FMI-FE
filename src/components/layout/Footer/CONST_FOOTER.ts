@@ -5,6 +5,6 @@ export const FOOTER_LINK = [
   // TODO(형준): 즐겨찾기 페이지 추가 시 href 변경
   { name: "즐겨찾기", href: "#", icon: "Star" },
   { name: "마이페이지", href: "/mypage", icon: "UserProfileHome" },
-];
+] as const;
 
 export type FooterLinkHref = (typeof FOOTER_LINK)[number]["href"];
