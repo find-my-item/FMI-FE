@@ -1,8 +1,23 @@
 import { cn } from "@/utils";
 
+const SimilarSkeletonSection = () => {
+  return (
+    <div className="hide-scrollbar flex flex-nowrap gap-4 overflow-x-auto scroll-smooth">
+      {Array.from({ length: 5 }).map((_, index) => (
+        <SimilarItemSkeleton key={index} />
+      ))}
+    </div>
+  );
+};
+
+export default SimilarSkeletonSection;
+
 const SimilarItemSkeleton = () => {
   return (
-    <article className="flex w-[126px] flex-col items-start justify-center gap-3" aria-busy="true">
+    <article
+      className="flex w-[126px] shrink-0 flex-col items-start justify-center gap-3"
+      aria-busy="true"
+    >
       {/* Image */}
       <div
         className={cn(
@@ -54,5 +69,3 @@ const SimilarItemSkeleton = () => {
     </article>
   );
 };
-
-export default SimilarItemSkeleton;

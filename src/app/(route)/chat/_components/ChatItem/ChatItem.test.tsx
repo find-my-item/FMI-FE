@@ -99,7 +99,7 @@ describe("ChatItem", () => {
 
     expect(
       screen.getByText(
-        "안녕하세요! 혹시 올리신 검정색 카드 지갑, 명동에서 습득하신 지갑이실까요? 혹시나 해서"
+        "안녕하세요! 혹시 올리신 검정색 카드 지갑, 명동에서 발견하신 지갑이실까요? 혹시나 해서"
       )
     ).toBeInTheDocument();
   });
@@ -132,7 +132,7 @@ describe("ChatItem", () => {
     expect(screen.getByText(/10분 전/)).toBeInTheDocument();
     expect(
       screen.getByText(
-        "안녕하세요! 혹시 올리신 검정색 카드 지갑, 명동에서 습득하신 지갑이실까요? 혹시나 해서"
+        "안녕하세요! 혹시 올리신 검정색 카드 지갑, 명동에서 발견하신 지갑이실까요? 혹시나 해서"
       )
     ).toBeInTheDocument();
     expect(screen.getByText("1")).toBeInTheDocument();

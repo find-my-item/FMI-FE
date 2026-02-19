@@ -14,7 +14,7 @@ const MypageFavoritesList = ({ data }: MypageFavoritesListProps) => {
       ) : (
         <ul>
           {data.map((item) => (
-            <PostListItem key={item.postId} post={data} />
+            <PostListItem key={item.postId} post={item} />
           ))}
         </ul>
       )}

@@ -140,7 +140,7 @@ export const MOCK_ADMIN_INQUIRY_LIST: AdminInquiryItem[] = [
 ];
 
 export const MOCK_REPORTS_DETAIL_DATA = {
-  title: "실제 분실물/습득물이 아닌 내용이에요.",
+  title: "실제 분실/발견한 물건이 아닌 내용이에요.",
   userName: "유저닉네임",
   createdAt: "2025-05-06",
   content: "여기에 신고 내용이 표기됩니다.",

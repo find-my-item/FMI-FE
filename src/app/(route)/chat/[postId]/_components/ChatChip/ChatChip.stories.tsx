@@ -10,7 +10,7 @@ const meta: Meta<typeof ChatChip> = {
     docs: {
       description: {
         component:
-          "채팅방에서 게시글의 유형을 표시하는 칩 컴포넌트입니다. 습득물 또는 분실물을 구분하여 표시합니다.",
+          "채팅방에서 게시글의 유형을 표시하는 칩 컴포넌트입니다. 발견 또는 분실을 구분하여 표시합니다.",
       },
     },
   },
@@ -18,7 +18,7 @@ const meta: Meta<typeof ChatChip> = {
     postMode: {
       control: "radio",
       options: ["find", "lost"],
-      description: "게시글 유형 (습득물/분실물)",
+      description: "게시글 유형 (발견/분실)",
     },
   },
   decorators: [

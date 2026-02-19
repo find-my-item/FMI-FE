@@ -130,7 +130,7 @@ export const MOCK_MYPAGE_POSTS_LIST: MypagePostListType[] = [
   },
   {
     postId: 2,
-    title: "검은색 가죽 지갑 습득했습니다",
+    title: "검은색 가죽 지갑 발견했습니다",
     summary:
       "홍대 놀이터 벤치 위에 올려져 있었습니다. 안에 현금이랑 영수증 몇 장 들어있네요. 보관하고 있으니 연락주세요.",
     thumbnailUrl: "https://picsum.photos/400/300?random=2",

@@ -1,3 +1,5 @@
+// TODO(지권): 확인 필요
+
 export const LABELS = {
   find: { label: "습득", backPath: "/find" },
   lost: { label: "분실", backPath: "/lost" },

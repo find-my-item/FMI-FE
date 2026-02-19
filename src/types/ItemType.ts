@@ -3,7 +3,7 @@
  *
  * 카테고리 타입 정의
  *
- * - 이 타입은 분실물 및 습득물 게시글의 타입을 표시합니다.
+ * - 이 타입은 분실 및 발견 게시글의 타입을 표시합니다.
  *
  * @description CategoryType
  * - "": 전체
@@ -15,15 +15,15 @@
  * - CARD: 카드
  * - ETC: 기타
  *
- * - LOST: 분실물
- * - FOUND: 습득물
+ * - LOST: 분실
+ * - FOUND: 제보
  *
  * - SEARCHING: 찾는중
  * - FOUND: 찾았음
  *
  * @description PostType
- * - LOST: 분실물
- * - FOUND: 습득물
+ * - LOST: 분실
+ * - FOUND: 제보
  *
  * @description ItemStatus
  * - SEARCHING: 찾는중

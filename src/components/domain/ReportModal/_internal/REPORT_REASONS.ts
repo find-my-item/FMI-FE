@@ -1,5 +1,5 @@
 export const REPORT_REASONS = [
-  { id: "1", value: "SPAM", label: "실제 분실물/습득물이 아닌 내용이에요." },
+  { id: "1", value: "SPAM", label: "실제 분실/발견한 물건이 아닌 내용이에요." },
   { id: "2", value: "SPAM", label: "동일한 내용이 여러 번 올라왔어요." },
   { id: "3", value: "SPAM", label: "분실물과 무관한 홍보성 게시글이에요." },
   { id: "4", value: "ABUSE", label: "채팅 또는 댓글에 모욕적 표현이 있어요." },

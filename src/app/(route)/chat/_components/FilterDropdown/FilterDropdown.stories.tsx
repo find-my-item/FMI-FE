@@ -49,7 +49,7 @@ export const SortFilter: Story = {
 
 export const TypeFilter: Story = {
   args: {
-    ariaLabel: "채팅 리스트 습득/분실",
+    ariaLabel: "채팅 리스트 분실/발견",
     options: TYPE_OPTIONS,
     keyName: "type",
     searchUpdateQuery: mockSearchUpdateQuery,
@@ -57,7 +57,7 @@ export const TypeFilter: Story = {
   parameters: {
     docs: {
       description: {
-        story: "타입 필터 드롭다운입니다. 기본값으로 '습득/분실'이 표시됩니다.",
+        story: "타입 필터 드롭다운입니다. 기본값으로 '분실/발견'이 표시됩니다.",
       },
     },
   },

@@ -28,5 +28,5 @@ export const FIND_STATUS_LABEL_MAP: Record<ItemStatus, string> = {
 export const STATUS_DEFAULT_LABEL = "전체";
 export const STATUS_LABEL_MAP: Record<PostType, string> = {
   LOST: "분실",
-  FOUND: "습득",
+  FOUND: "발견",
 };

@@ -5,7 +5,7 @@ import { PostDetailKakaoMap } from "./_components";
 const page = () => {
   return (
     <section className="flex h-screen flex-col">
-      <DetailHeader title="분실/습득 위치" />
+      <DetailHeader title="분실/발견 위치" />
 
       <div className="min-h-0 flex-1">
         <Suspense fallback={null}>

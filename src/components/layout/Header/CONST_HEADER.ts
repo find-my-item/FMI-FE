@@ -13,7 +13,7 @@ export const HEADER_LINK = [
   { name: "채팅", href: "/chat" },
   { name: "공지사항", href: "/notice?tab=notice" },
   { name: "일반 분실 글쓰기", href: "/write/post?type=lost" },
-  { name: "일반 습득 글쓰기", href: "/write/post?type=find" },
+  { name: "일반 발견 글쓰기", href: "/write/post?type=find" },
   { name: "일반 게시글 리스트", href: "/list" },
   { name: "일반 게시글 상세", href: "/list/1" },
 ];
