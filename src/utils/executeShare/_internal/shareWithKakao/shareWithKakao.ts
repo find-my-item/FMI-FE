@@ -1,5 +1,8 @@
 "use client";
 
+// TODO(지권): 카카오 공유하기 실제 데이터 변경 필요
+// https://developers.kakao.com/docs/latest/ko/message-template/default#location-object
+
 import { MetaDataType } from "@/types";
 
 const getKakaoKey = () => {
@@ -36,15 +39,31 @@ export const shareWithKakao = (data: MetaDataType) => {
   if (!sendDefault) return;
 
   sendDefault({
-    objectType: "feed",
+    objectType: "location",
+    address: "경기 성남시 분당구 판교역로 166 3층",
+    addressTitle: "분실 테스트",
     content: {
       title: data.title,
       description: data.summary,
-      imageUrl: data.thumbnailUrl,
+      imageUrl: data.thumbnailUrl || "/test_list.JPG",
       link: {
-        mobileWebUrl: data.link,
-        webUrl: data.link,
+        mobileWebUrl: "https://developers.kakao.com",
+        webUrl: "https://developers.kakao.com",
       },
     },
+    social: {
+      likeCount: 10,
+      commentCount: 45,
+      viewCount: 32,
+    },
+    buttons: [
+      {
+        title: "웹으로 보기",
+        link: {
+          mobileWebUrl: "https://developers.kakao.com",
+          webUrl: "https://developers.kakao.com",
+        },
+      },
+    ],
   });
 };
