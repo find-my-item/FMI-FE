@@ -34,6 +34,7 @@ const BottomSheetContent = () => {
           onPointerCancel={handlePointerUp}
           className="flex shrink-0 cursor-grab touch-none justify-center pb-5 pt-3"
         >
+          {/* TODO(형준): 토큰 업데이트 후 반영 예정(#2D2D2D) */}
           <div className="h-[3px] w-[50px] rounded-full bg-[#2D2D2D]" />
         </div>
         <div className="min-h-0 flex-1 overflow-auto px-5 pb-[18px] no-scrollbar">
