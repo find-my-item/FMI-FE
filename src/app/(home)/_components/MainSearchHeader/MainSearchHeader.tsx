@@ -67,7 +67,7 @@ const HeaderContent = () => {
   );
 };
 
-const Header = () => {
+const MainSearchHeader = () => {
   // TODO(형준): 임시 사이드바 추가, 향후 제거
   const [isOpen, setIsOpen] = useState(false);
 
@@ -85,4 +85,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default MainSearchHeader;
