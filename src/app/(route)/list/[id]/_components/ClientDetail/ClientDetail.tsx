@@ -20,9 +20,14 @@ const ClientDetail = ({ id }: ClientDetailProps) => {
   if (isLoading) return <div className="h-[600px] pt-4">로딩중</div>;
   if (isError || !data?.result) return <div className="h-[600px] pt-4">오류가 발생했습니다.</div>;
 
+  const { isMine, postUserInformation } = data.result;
+
   return (
     <>
-      <PostDetailTopHeader postId={id} />
+      <PostDetailTopHeader
+        postId={id}
+        postData={{ isMine, writerId: postUserInformation.userId }}
+      />
       <PostDetail type="find" data={data.result} />
       <CommentList comments={MOCK_COMMENT_LIST_DATA} />
       <ErrorBoundary fallback={<ErrorSimilarSection postId={id} />}>

@@ -84,3 +84,5 @@ export { default as ScrollTopArrow } from "@/assets/scrolltop-arrow-up.svg";
 export { default as CommentImageClear } from "@/assets/comment-image-clear.svg";
 export { default as StarFilled } from "@/assets/star-filled.svg";
 export { default as ErrorSimilarSection } from "@/assets/error-similar-section.svg";
+export { default as UserReport } from "@/assets/user-report.svg";
+export { default as UserBlock } from "@/assets/user-block.svg";
