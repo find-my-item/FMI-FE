@@ -1,8 +1,9 @@
 import useServerPrefetchQuery from "@/api/_base/query/useServerPrefetchQuery";
 import { QueryClient, dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { cookies } from "next/headers";
+import { ReactNode } from "react";
 
-export default async function PostLayout({ children }: { children: React.ReactNode }) {
+export default async function layout({ children }: { children: ReactNode }) {
   const queryClient = new QueryClient();
 
   const cookieStore = await cookies();
