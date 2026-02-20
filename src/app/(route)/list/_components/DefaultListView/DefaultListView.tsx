@@ -10,11 +10,12 @@ import DefaultListSearch from "../DefaultListSearch/DefaultListSearch";
 
 const DefaultListView = () => {
   const { searchMode, searchUpdateQuery } = useSearchUpdateQueryString();
+  const isDefaultMode = searchMode === "default";
 
   return (
     <>
       <DetailHeader title={SEARCH_HEADER_TITLE[searchMode]}>
-        {searchMode === "default" && (
+        {isDefaultMode && (
           <HeaderSearch
             ariaLabel="게시글 검색"
             onClick={() => searchUpdateQuery("search", "post")}
@@ -22,7 +23,7 @@ const DefaultListView = () => {
         )}
       </DetailHeader>
 
-      {searchMode === "default" ? (
+      {isDefaultMode ? (
         <ErrorBoundary showToast toastMessage="목록을 불러올 수 없어요. 다시 시도해 주세요.">
           <DefaultList searchUpdateQuery={searchUpdateQuery} />
         </ErrorBoundary>

@@ -25,7 +25,6 @@ const DefaultListSearch = () => {
     isFetchingNextPage,
   } = useGetSearchKeyword({
     keyword,
-    size: 2,
   });
   const { ref: searchRef } = useInfiniteScroll({
     fetchNextPage,
@@ -55,7 +54,7 @@ const DefaultListSearch = () => {
         </div>
       </FormProvider>
 
-      <ErrorBoundary showToast toastMessage="목록을 불러올 수 없어요. 다시 시도해 주세요.">
+      <ErrorBoundary showToast toastMessage="검색 결과를 불러올 수 없어요. 다시 시도해 주세요.">
         <PostSearchView data={listData ?? []} />
         {hasNextPage && <div ref={searchRef} className="h-10 w-full" />}
       </ErrorBoundary>
