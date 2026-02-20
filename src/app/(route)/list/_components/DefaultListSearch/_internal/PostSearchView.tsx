@@ -3,7 +3,7 @@ import { PostListItem } from "@/components/domain";
 import { EmptyState, LoadingState } from "@/components/state";
 import { PostItem } from "@/api/fetch/post";
 
-const PostSearchView = ({ data }: { data: PostItem[] }) => {
+const PostSearchView = ({ data, keyword }: { data: PostItem[]; keyword: string }) => {
   return (
     <Suspense fallback={<LoadingState />}>
       <section>
@@ -19,7 +19,7 @@ const PostSearchView = ({ data }: { data: PostItem[] }) => {
         ) : (
           <ul>
             {data?.map((item) => (
-              <PostListItem post={item} key={item.id} />
+              <PostListItem post={item} key={item.id} keyword={keyword} />
             ))}
           </ul>
         )}
