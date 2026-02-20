@@ -1,4 +1,4 @@
-// TODO(지권): 파일 확인 필요
+// TODO(형준): 파일 확인 필요
 
 import useAppQuery from "@/api/_base/query/useAppQuery";
 import { GetUserDataResponse } from "../types/UserDataType";

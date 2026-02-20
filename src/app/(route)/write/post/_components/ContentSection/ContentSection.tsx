@@ -7,14 +7,14 @@ const ContentSection = () => {
   const { register } = useFormContext<PostWriteFormValues>();
 
   return (
-    <section className="min-h-[248px] border-b border-flatGray-50 px-5 py-6">
+    <section className="flex-1 border-b border-flatGray-50 px-5 py-6">
       <div className="relative">
         <textarea
           id="content"
           rows={5}
           placeholder=" "
           className={cn(
-            "hide-scrollbar w-full resize-none py-1 text-body1-medium text-neutral-strong-default",
+            "w-full resize-none py-1 text-body1-medium text-neutral-strong-default",
             "peer placeholder:text-body2-regular placeholder:text-neutral-normal-placeholder focus:outline-none"
           )}
           {...register("content", {

@@ -49,15 +49,15 @@ const WritePage = () => {
       <h1 className="sr-only">{`${title} 페이지`}</h1>
 
       <form onSubmit={onSubmit} className="flex flex-col h-base">
-        <ImageSection />
+        <div className="flex min-h-0 flex-1 flex-col">
+          <ImageSection />
+          <CategorySection />
+          <TitleSection />
 
-        <CategorySection />
+          <ContentSection />
 
-        <TitleSection />
-
-        <ContentSection />
-
-        <LocationSection />
+          <LocationSection />
+        </div>
 
         <ActionSection disabled={isSubmitDisabled} />
       </form>

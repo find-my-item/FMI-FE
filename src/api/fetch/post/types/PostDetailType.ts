@@ -20,6 +20,7 @@ export type PostDetailData = {
   isNew: boolean;
   isHot: boolean;
   createdAt: string;
+  isMine: boolean;
   imageResponseList: ImageResponse[];
   postUserInformation: userInformation;
 };

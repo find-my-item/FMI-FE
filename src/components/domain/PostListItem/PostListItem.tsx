@@ -26,7 +26,7 @@ const PostListItem = ({ post, linkState = "list" }: PostListItemProps) => {
     <li>
       <Link
         href={linkState === "list" ? `/list/${id}` : `/notice/${id}`}
-        className="duration-130 flex w-full cursor-pointer items-center gap-[14px] border-b border-b-flatGray-50 px-5 py-[30px] transition-colors hover:bg-flatGray-25"
+        className="flex w-full items-center gap-[14px] border-b border-b-flatGray-50 px-5 py-[30px] transition-colors hover:bg-flatGray-25"
       >
         <div className="min-w-0 flex-1">
           {linkState === "list" && (
@@ -52,7 +52,7 @@ const PostListItem = ({ post, linkState = "list" }: PostListItemProps) => {
                 <time dateTime={createdAt}>{formatDate(createdAt)}</time>
               </span>
             </div>
-            <p className="w-full text-body2-regular text-neutral-normal-default u-ellipsis">
+            <p className="w-full text-body2-medium text-neutral-normal-default u-ellipsis">
               {post.summary}
             </p>
           </div>

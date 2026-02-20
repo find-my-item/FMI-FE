@@ -6,7 +6,7 @@ import { cn } from "@/utils";
 import { useState } from "react";
 import { INFO_OPTIONS } from "./INFO_OPTIONS";
 import useLeaveChatRoom from "@/api/fetch/chatRoom/api/useLeaveChatRoom";
-import useClickOutside from "./useClickOutside";
+import { useClickOutside } from "@/hooks";
 import { InfoButtonOptionValue } from "./InfoButtonOptionValueTypes";
 
 const MenuItem = ({

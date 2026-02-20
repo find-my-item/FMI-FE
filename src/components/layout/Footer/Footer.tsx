@@ -1,41 +1,37 @@
-// TODO(지권): 컴포넌트 사용 미확정
-
 "use client";
 
 import Link from "next/link";
-import { FOOTER_LINK } from "./CONST_FOOTER";
+import { FOOTER_LINK, FooterLinkHref } from "./CONST_FOOTER";
+import { Icon } from "@/components/common";
+import { cn } from "@/utils";
+import { usePathname } from "next/navigation";
 import { useHiddenPath } from "@/hooks";
 
-/**
- * @author jikwon
- *
- * 하단 footer 컴포넌트입니다.
- *
- * useHiddenPath 훅을 사용하여 / 메인 페이지에만 footer를 표시합니다.
- *
- * @example
- * ```tsx
- * <Footer />
- * ```
- */
-
 const Footer = () => {
+  const pathname = usePathname();
+  const isActive = (href: FooterLinkHref) => pathname === href && "text-neutral-strong-focused";
   const isHidden = useHiddenPath();
+
   if (isHidden) return null;
 
   return (
-    <footer className="sticky bottom-0 w-full bg-gray-300 py-4 text-black">
-      <div className="container mx-auto flex flex-col items-center gap-4 px-4">
-        <nav className="flex gap-6 text-sm" aria-label="하단 네비게이션">
-          {FOOTER_LINK.map((link) => (
-            <Link key={link.name} href={link.href} className="hover:underline">
-              {link.name}
-            </Link>
-          ))}
-        </nav>
-        <p className="text-xs text-gray-600">
-          &copy; {new Date().getFullYear()} FMI. All rights reserved.
-        </p>
+    <footer className="fixed bottom-0 left-1/2 z-10 w-full max-w-[390px] -translate-x-1/2 border-t-[1.2px] border-divider-default bg-white px-5 pb-[27px] pt-[14px]">
+      <div className="flex justify-between text-caption2-medium text-labelsVibrant-secondary">
+        {FOOTER_LINK.map((link) => (
+          <Link
+            key={link.name}
+            href={link.href}
+            className={cn(
+              "min-w-0 flex-1 transition-colors flex-col-center",
+              "hover:text-neutral-strong-focused"
+            )}
+          >
+            <span>
+              <Icon name={link.icon} size={28} />
+            </span>
+            <span className={cn("py-[2px]", isActive(link.href))}>{link.name}</span>
+          </Link>
+        ))}
       </div>
     </footer>
   );

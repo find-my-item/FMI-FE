@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Button, ProfileAvatar } from "@/components/common";
 import ImageSection from "./_internal/ImageSection/ImageSection";
-import { formatCappedNumber } from "@/utils";
+import { cn, formatCappedNumber } from "@/utils";
 import { ImageResponse, userInformation } from "@/api/fetch/post";
 
 type HeaderData = {
@@ -23,9 +23,12 @@ const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
 
       <section
         aria-label="게시글 작성자 정보"
-        className="flex flex-col items-start justify-center gap-5 border-b border-divider-default p-5"
+        className={cn(
+          "flex flex-col items-start justify-center gap-5 border-b border-divider-default p-5",
+          "tablet:flex-row tablet:items-center tablet:justify-between"
+        )}
       >
-        <div className="flex items-center justify-start gap-[14px]">
+        <div className={cn("flex items-center justify-start gap-[14px]", "tablet:w-[461px]")}>
           <ProfileAvatar
             size={40}
             src={userData.profileImage}
@@ -44,7 +47,11 @@ const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
           </div>
         </div>
 
-        <Button as={Link} href={`/chat/${id}`} className="min-h-11 w-full py-[10px]">
+        <Button
+          as={Link}
+          href={`/chat/${id}`}
+          className={cn("min-h-11 w-full py-[10px]", "tablet:flex-1")}
+        >
           채팅하러 가기
         </Button>
       </section>

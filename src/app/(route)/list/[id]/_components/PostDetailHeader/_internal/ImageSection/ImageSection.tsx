@@ -45,16 +45,18 @@ const ImageSection = ({ imageUrls }: ImageSectionProps) => {
           onClick={handleOpenIfTap}
         >
           {imageUrls?.map((url, index) => (
-            <SwiperSlide key={index}>
-              <Image
-                src={url}
-                alt={`게시글 이미지 ${index + 1}`}
-                width={390}
-                height={260}
-                draggable={false}
-                priority
-                className="h-[260px] w-[390px] object-cover"
-              />
+            <SwiperSlide>
+              <div className="relative h-[260px] w-full tablet:h-[420px]">
+                <Image
+                  src={url}
+                  alt={`게시글 이미지 ${index + 1}`}
+                  fill
+                  draggable={false}
+                  priority
+                  sizes="(min-width: 768px) 768px, 100vw"
+                  className="object-cover"
+                />
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>

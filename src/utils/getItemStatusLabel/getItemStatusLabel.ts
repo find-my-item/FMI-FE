@@ -10,8 +10,8 @@ import { ItemStatus } from "@/types";
  */
 export const getItemStatusLabel = (status: ItemStatus): string => {
   const STATUS_LABEL: Record<ItemStatus, string> = {
-    SEARCHING: "찾는중",
-    FOUND: "찾았음",
+    SEARCHING: "찾아요",
+    FOUND: "찾았어요",
   };
 
   return STATUS_LABEL[status];

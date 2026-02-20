@@ -45,6 +45,7 @@ export const MOCK_POST_DEFAULT_DETAIL: GetDetailPostResponse = {
     createdAt: "2025-12-26T10:22:58",
     isNew: false,
     isHot: false,
+    isMine: false,
     postUserInformation: {
       userId: 1,
       nickName: "사용자 닉네임",

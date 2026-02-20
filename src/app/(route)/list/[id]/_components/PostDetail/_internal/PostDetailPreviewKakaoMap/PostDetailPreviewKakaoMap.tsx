@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Icon } from "@/components/common";
 import { BaseKakaoMap } from "@/components/domain";
+import { cn } from "@/utils";
 
 type MapData = {
   address: string;
@@ -19,7 +20,12 @@ const PostDetailPreviewKakaoMap = ({ data }: PostDetailPreviewKakaoMapProps) => 
 
   return (
     <div className="flex flex-col gap-[18px]">
-      <div className="h-[147px] overflow-hidden rounded-md border border-divider-default">
+      <div
+        className={cn(
+          "h-[147px] overflow-hidden rounded-md border border-divider-default",
+          "tablet:h-[200px]"
+        )}
+      >
         <BaseKakaoMap center={{ lat: latitude, lng: longitude }} level={7} showMarker />
       </div>
 
@@ -37,6 +43,7 @@ const PostDetailPreviewKakaoMap = ({ data }: PostDetailPreviewKakaoMapProps) => 
                 className="fill-current text-brand-subtle-default"
               />
             )}
+            {/* TODO(지권): 디자인 토큰 누락 */}
             <p className="text-[14px] text-neutral-normal-default">
               {address || "위치 정보가 없어요"}
             </p>
