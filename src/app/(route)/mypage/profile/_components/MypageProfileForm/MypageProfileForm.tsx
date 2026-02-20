@@ -1,4 +1,6 @@
+import { useApiCheckNickname } from "@/api/fetch/auth";
 import { useGetUsersMe } from "@/api/fetch/user";
+import { useNicknameCheck } from "@/app/(route)/sign-up/_hooks/useNicknameCheck";
 import { Icon, InputText, KebabMenu, ProfileAvatar } from "@/components/common";
 import { FooterButton } from "@/components/domain";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
@@ -6,6 +8,8 @@ import { useFormContext } from "react-hook-form";
 
 const MypageProfileForm = () => {
   const { reset, watch, setValue, handleSubmit } = useFormContext();
+
+  const { handleClickNickname } = useNicknameCheck();
 
   const { data, isLoading, error } = useGetUsersMe({});
 
@@ -15,35 +19,35 @@ const MypageProfileForm = () => {
     if (data?.result?.nickname) setIsNickname(data.result?.nickname);
   }, [data]);
 
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const [previewImageUrl, setPreviewImageUrl] = useState<string | null>(null);
+  // const fileInputRef = useRef<HTMLInputElement>(null);
+  // const [previewImageUrl, setPreviewImageUrl] = useState<string | null>(null);
 
-  const handleButtonClick = () => {
-    fileInputRef.current?.click();
-  };
+  // const handleButtonClick = () => {
+  //   fileInputRef.current?.click();
+  // };
 
-  const handleChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const file = e.target.files?.[0];
+  // const handleChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+  //   const file = e.target.files?.[0];
 
-    if (file) {
-      const url = URL.createObjectURL(file);
-      setPreviewImageUrl(url);
-      console.log("이미지>> ", previewImageUrl);
-      setOpenMenu(false);
+  //   if (file) {
+  //     const url = URL.createObjectURL(file);
+  //     setPreviewImageUrl(url);
+  //     console.log("이미지>> ", previewImageUrl);
+  //     setOpenMenu(false);
 
-      // setValue("prefileImg", file);
-    }
-  };
+  //     // setValue("prefileImg", file);
+  //   }
+  // };
 
-  useEffect(() => {
-    return () => {
-      if (previewImageUrl) {
-        URL.revokeObjectURL(previewImageUrl);
-      }
-    };
-  }, [previewImageUrl]);
+  // useEffect(() => {
+  //   return () => {
+  //     if (previewImageUrl) {
+  //       URL.revokeObjectURL(previewImageUrl);
+  //     }
+  //   };
+  // }, [previewImageUrl]);
 
   // 버튼 클릭 제어
   const [openMenu, setOpenMenu] = useState(false);
@@ -99,7 +103,7 @@ const MypageProfileForm = () => {
           inputOption={{
             name: "nickname",
             // TODO(수현): 기존 닉네임이 placeholder로 들어갈 예정
-            placeholder: { isNickname },
+            placeholder: isNickname,
             maxLength: 10,
             validation: {
               required: true,
@@ -109,6 +113,7 @@ const MypageProfileForm = () => {
           label="닉네임"
           btnOption={{
             btnLabel: "중복 확인",
+            onClick: () => setIsNickname(),
           }}
           caption={{ rule: "2~10자, 특수문자/금칙어 제한" }}
         />
