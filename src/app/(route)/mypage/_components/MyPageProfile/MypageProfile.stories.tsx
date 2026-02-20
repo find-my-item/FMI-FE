@@ -25,7 +25,9 @@ type Story = StoryObj<typeof MyPageProfile>;
 
 export const Default: Story = {
   args: {
-    userName: "제미니",
-    email: "gemini@example.comㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹ",
+    userData: {
+      nickname: "제미니",
+      email: "gemini@example.comㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹ",
+    },
   },
 };
