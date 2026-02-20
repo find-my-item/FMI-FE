@@ -6,7 +6,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { InputSearch } from "@/components/common";
 import { useGetSearchKeyword } from "@/api/fetch/post";
 import { LIST_SEARCH_PLACEHOLDER } from "./LIST_SEARCH_PLACEHOLDER";
-import PostSearchView from "./_internal/PostSearchView";
+import PostSearchView from "../../../app/(route)/list/_components/DefaultListSearch/_internal/PostSearchView";
 import RegionSearchView from "./_internal/RegionSearchView";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll/useInfiniteScroll";
 import { ErrorBoundary } from "@/app/ErrorBoundary";

@@ -8,7 +8,7 @@ import { SEARCH_HEADER_TITLE } from "../../_constants/SEARCH_HEADER_TITLE";
 import { HeaderSearch } from "@/components/layout/DetailHeader/DetailHeaderParts";
 import { ErrorBoundary } from "@/app/ErrorBoundary";
 
-const ListView = () => {
+const DefaultListView = () => {
   const { searchMode, searchUpdateQuery } = useSearchUpdateQueryString();
 
   return (
@@ -33,4 +33,4 @@ const ListView = () => {
   );
 };
 
-export default ListView;
+export default DefaultListView;
