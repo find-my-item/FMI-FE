@@ -1,4 +1,4 @@
-import { Footer, Header } from "@/components/layout";
+import { Footer } from "@/components/layout";
 import "./globals.css";
 import Providers from "@/providers/QueryProviders";
 import { ToastProvider } from "@/providers/ToastProviders";
@@ -75,7 +75,6 @@ export default function RootLayout({
         <Providers>
           <ToastProvider>
             <MSWProvider />
-            <Header />
             <main className="w-full flex-1">{children}</main>
             <Footer />
           </ToastProvider>
