@@ -2,11 +2,11 @@
 
 import { useSearchUpdateQueryString } from "@/hooks";
 import { DetailHeader } from "@/components/layout";
-import { ListSearch } from "@/components/domain";
 import DefaultList from "../DefaultList/DefaultList";
 import { SEARCH_HEADER_TITLE } from "../../_constants/SEARCH_HEADER_TITLE";
 import { HeaderSearch } from "@/components/layout/DetailHeader/DetailHeaderParts";
 import { ErrorBoundary } from "@/app/ErrorBoundary";
+import DefaultListSearch from "../DefaultListSearch/DefaultListSearch";
 
 const DefaultListView = () => {
   const { searchMode, searchUpdateQuery } = useSearchUpdateQueryString();
@@ -27,7 +27,7 @@ const DefaultListView = () => {
           <DefaultList searchUpdateQuery={searchUpdateQuery} />
         </ErrorBoundary>
       ) : (
-        <ListSearch searchMode={searchMode} />
+        <DefaultListSearch />
       )}
     </>
   );
