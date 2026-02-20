@@ -15,7 +15,8 @@ export default async function layout({ children }: { children: ReactNode }) {
     fetcher: () =>
       fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/me`, {
         headers: {
-          Cookie: `access_token=${accessToken}`,
+          // Cookie: `access_token=${accessToken}`,
+          Cookie: cookieStore.toString(),
         },
         next: { revalidate: 0 },
       }).then((res) => res.json()),
