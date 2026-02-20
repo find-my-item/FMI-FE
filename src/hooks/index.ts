@@ -6,3 +6,4 @@ export { default as useObjectURLs } from "./useObjectURLs/useObjectURLs";
 export { default as useRegionRows } from "./useRegionRows/useRegionRows";
 export { default as useClickOutside } from "./useClickOutside/useClickOutside";
 export { default as useHorizontalDragScroll } from "./useHorizontalDragScroll/useHorizontalDragScroll";
+export { useInfiniteScroll } from "./useInfiniteScroll/useInfiniteScroll";
