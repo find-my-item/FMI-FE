@@ -10,7 +10,7 @@ interface PostListItemProps {
 }
 
 const PostListItem = ({ post, linkState = "list", keyword }: PostListItemProps) => {
-  const { id, postStatus, category, createdAt, isNew, isHot } = post;
+  const { id, postStatus, category, createdAt, isNew, isHot, imageCount } = post;
 
   const VIEW_ITEM = [
     {
@@ -75,6 +75,7 @@ const PostListItem = ({ post, linkState = "list", keyword }: PostListItemProps) 
           alt="게시글 대표 이미지"
           size={90}
           category={category}
+          imageCount={imageCount}
         />
       </Link>
     </li>
