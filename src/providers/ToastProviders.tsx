@@ -2,7 +2,7 @@
 
 import { createPortal } from "react-dom";
 import { useState, useCallback, useRef, useEffect } from "react";
-import { Toast } from "@/components";
+import { Toast } from "@/components/common";
 import { ToastType } from "@/types/ToastTypes";
 import { ToastContext } from "@/context/ToastContext";
 import { AnimatePresence, motion } from "framer-motion";
@@ -27,18 +27,21 @@ export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
       {children}
       {mounted &&
         createPortal(
-          <div className="pointer-events-none fixed right-4 top-4 flex flex-col gap-2">
+          <div className="pointer-events-none fixed inset-x-0 top-6 z-[9999] flex w-full flex-col items-stretch gap-2 px-4">
             <AnimatePresence>
               {toasts.map((toast) => (
                 <motion.div
                   key={toast.id}
                   layout
+                  className="w-full"
                   initial={{ opacity: 0, x: 40 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: 40 }}
                   transition={{ duration: 0.28, ease: "easeOut" }}
                 >
-                  <Toast message={toast.message} type={toast.type} />
+                  <div className="w-full">
+                    <Toast message={toast.message} type={toast.type} />
+                  </div>
                 </motion.div>
               ))}
             </AnimatePresence>

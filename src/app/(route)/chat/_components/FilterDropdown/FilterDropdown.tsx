@@ -1,6 +1,6 @@
 "use client";
 
-import { Filter } from "@/components";
+import { Filter } from "@/components/common";
 import { useSearchParams } from "next/navigation";
 import { useState, useRef } from "react";
 import { createPortal } from "react-dom";
@@ -35,7 +35,7 @@ const FilterDropdown = ({
   const selectedValue = searchParams.get(keyName);
   const displayText =
     SELECTED_TEXT[
-      (selectedValue || (keyName === "sort" ? "latest" : "all")) as keyof typeof SELECTED_TEXT
+      (selectedValue || (keyName === "sort" ? "LATEST" : "ALL")) as keyof typeof SELECTED_TEXT
     ];
   const isSelected = !!selectedValue;
 

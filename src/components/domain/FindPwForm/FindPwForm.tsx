@@ -1,10 +1,10 @@
 "use client";
 
 import { useFormContext } from "react-hook-form";
-import { Button, InputText } from "@/components";
+import { Button, InputText } from "@/components/common";
 import { cn } from "@/utils";
 import Link from "next/link";
-import { useFindPwSubmit } from "@/hooks";
+import { useFindPwSubmit } from "@/hooks/domain";
 import { ApiFindPwType } from "@/api/fetch/auth";
 
 interface FindPwFormProps {
@@ -25,22 +25,25 @@ const FindPwForm = ({ text, redirectLink }: FindPwFormProps) => {
       {!email ? (
         <InputText
           label="아이디(이메일)"
-          type="email"
-          placeholder="아이디(이메일)을 입력해 주세요."
-          name="email"
-          validation={{
-            required: true,
-            maxLength: 254,
-            minLength: 6,
-            pattern: {
-              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-              message: "이메일 형식을 입력해주세요.",
+          inputOption={{
+            name: "email",
+            type: "email",
+            placeholder: "아이디(이메일)을 입력해 주세요.",
+            validation: {
+              required: "이메일은 필수 입력 항목입니다.",
+              maxLength: { value: 254, message: "이메일이 너무 깁니다." },
+              minLength: { value: 6, message: "최소 6자 이상 입력해주세요." },
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "이메일 형식을 입력해주세요.",
+              },
             },
           }}
-          btnType="submit"
-        >
-          비밀번호 찾기
-        </InputText>
+          btnOption={{
+            btnLabel: "발송",
+            btnType: "submit",
+          }}
+        />
       ) : (
         <>
           <p className="flex flex-col items-center py-[18.5px] text-center text-body2-regular">

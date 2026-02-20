@@ -8,22 +8,29 @@ import { ChipProps, ChipType } from "./ChipTypes";
  * `type`에 따라 배경색과 라벨이 달라집니다.
  *
  * @param type - 칩의 종류를 지정합니다.
- * - `"status"`: 상세페이지 게시글의 상태를 나타냅니다.
- * - `"category"`: 상세페이지 게시글의 카테고리를 나타냅니다.
+ * - `"brandSubtle"`: bg-fill-brand-subtle-default text-brand-normal-default을 나타냅니다.
+ * - `"neutralStrong"`: bg-fill-neutral-strong-default text-neutral-strong-default을 나타냅니다.
+ * - `"brandNormal"`: bg-fill-brand-normal-default text-white을 나타냅니다.
+ * - `"admin"`: bg-fill-brand-subtle-default text-brand-normal-default text-caption2-semibold !py-1 !px-2을 나타냅니다.
  *
  * @example
  * ```tsx
- * <Chip label="찾는중" type="status" />
- * <Chip label="전자기기" type="category" />
+ * <Chip label="찾는중" type="brandSubtle" />
+ * <Chip label="카테고리" type="neutralStrong" />
+ * <Chip label="완료" type="brandNormal" />
+ * <Chip label="관리자" type="admin" />
  * ```
  */
 
 const TypeMap: Record<ChipType, string> = {
-  status: "bg-flatGreen-75 text-flatGreen-500",
-  category: "bg-flatGray-25 text-flatGray-500",
+  brandSubtle: "bg-fill-brand-subtle-default text-brand-normal-default",
+  neutralStrong: "bg-fill-neutral-strong-default text-neutral-strong-default",
+  brandNormal: "bg-fill-brand-normal-default text-white",
+  admin:
+    "bg-fill-brand-subtle-default text-brand-normal-default text-caption2-semibold !py-1 !px-2",
 };
 
-const Chip = ({ label, type = "status" }: ChipProps) => {
+const Chip = ({ label, type = "brandSubtle" }: ChipProps) => {
   return (
     <span className={cn("rounded-full px-3 py-1 text-caption1-semibold", TypeMap[type])}>
       {label}

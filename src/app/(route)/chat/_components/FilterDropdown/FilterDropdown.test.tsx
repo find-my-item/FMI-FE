@@ -11,7 +11,7 @@ jest.mock("next/navigation", () => ({
   useSearchParams: jest.fn(),
 }));
 
-jest.mock("@/components", () => ({
+jest.mock("@/components/common", () => ({
   Filter: ({ children, onClick, ariaLabel, onSelected, className }: any) => (
     <button
       data-testid={`filter-${ariaLabel}`}
@@ -43,12 +43,13 @@ describe("FilterDropdown", () => {
         />
       );
 
-      expect(screen.getByText("최신순")).toBeInTheDocument();
+      const filterButton = screen.getByTestId("filter-채팅 리스트 최신순");
+      expect(filterButton).toHaveTextContent("최신순");
     });
 
-    it("sort 파라미터가 latest일 때 최신순이 표시됩니다", () => {
+    it("sort 파라미터가 LATEST일 때 최신순이 표시됩니다", () => {
       const searchParams = new URLSearchParams();
-      searchParams.set("sort", "latest");
+      searchParams.set("sort", "LATEST");
       (useSearchParams as jest.Mock).mockReturnValue(searchParams);
 
       render(
@@ -60,12 +61,13 @@ describe("FilterDropdown", () => {
         />
       );
 
-      expect(screen.getByText("최신순")).toBeInTheDocument();
+      const filterButton = screen.getByTestId("filter-채팅 리스트 최신순");
+      expect(filterButton).toHaveTextContent("최신순");
     });
 
-    it("sort 파라미터가 oldest일 때 오래된순이 표시됩니다", () => {
+    it("sort 파라미터가 OLDEST일 때 오래된순이 표시됩니다", () => {
       const searchParams = new URLSearchParams();
-      searchParams.set("sort", "oldest");
+      searchParams.set("sort", "OLDEST");
       (useSearchParams as jest.Mock).mockReturnValue(searchParams);
 
       render(
@@ -77,12 +79,13 @@ describe("FilterDropdown", () => {
         />
       );
 
-      expect(screen.getByText("오래된순")).toBeInTheDocument();
+      const filterButton = screen.getByTestId("filter-채팅 리스트 최신순");
+      expect(filterButton).toHaveTextContent("오래된순");
     });
 
     it("sort 파라미터가 있을 때 Filter가 선택된 상태로 표시됩니다", () => {
       const searchParams = new URLSearchParams();
-      searchParams.set("sort", "latest");
+      searchParams.set("sort", "LATEST");
       (useSearchParams as jest.Mock).mockReturnValue(searchParams);
 
       render(
@@ -155,7 +158,7 @@ describe("FilterDropdown", () => {
       const oldestOption = screen.getByText("오래된순");
       await user.click(oldestOption);
 
-      expect(mockSearchUpdateQuery).toHaveBeenCalledWith("sort", "oldest");
+      expect(mockSearchUpdateQuery).toHaveBeenCalledWith("sort", "OLDEST");
       expect(screen.queryByText("오래된순")).not.toBeInTheDocument();
     });
 
@@ -211,87 +214,90 @@ describe("FilterDropdown", () => {
   });
 
   describe("Type 필터", () => {
-    it("기본 상태에서 습득/분실이 표시됩니다", () => {
+    it("기본 상태에서 분실/발견이 표시됩니다", () => {
       (useSearchParams as jest.Mock).mockReturnValue(new URLSearchParams());
 
       render(
         <FilterDropdown
-          ariaLabel="채팅 리스트 습득/분실"
+          ariaLabel="채팅 리스트 분실/발견"
           options={TYPE_OPTIONS}
           keyName="type"
           searchUpdateQuery={mockSearchUpdateQuery}
         />
       );
 
-      expect(screen.getByText("습득/분실")).toBeInTheDocument();
+      expect(screen.getByText("분실/발견")).toBeInTheDocument();
     });
 
-    it("type 파라미터가 all일 때 습득/분실이 표시됩니다", () => {
+    it("type 파라미터가 ALL일 때 분실/발견이 표시됩니다", () => {
       const searchParams = new URLSearchParams();
-      searchParams.set("type", "all");
+      searchParams.set("type", "ALL");
       (useSearchParams as jest.Mock).mockReturnValue(searchParams);
 
       render(
         <FilterDropdown
-          ariaLabel="채팅 리스트 습득/분실"
+          ariaLabel="채팅 리스트 분실/발견"
           options={TYPE_OPTIONS}
           keyName="type"
           searchUpdateQuery={mockSearchUpdateQuery}
         />
       );
 
-      expect(screen.getByText("습득/분실")).toBeInTheDocument();
+      const filterButton = screen.getByTestId("filter-채팅 리스트 분실/발견");
+      expect(filterButton).toHaveTextContent("분실/발견");
     });
 
-    it("type 파라미터가 found일 때 습득물이 표시됩니다", () => {
+    it("type 파라미터가 FOUND일 때 발견 게시물이 표시됩니다", () => {
       const searchParams = new URLSearchParams();
-      searchParams.set("type", "found");
+      searchParams.set("type", "FOUND");
       (useSearchParams as jest.Mock).mockReturnValue(searchParams);
 
       render(
         <FilterDropdown
-          ariaLabel="채팅 리스트 습득/분실"
+          ariaLabel="채팅 리스트 분실/발견"
           options={TYPE_OPTIONS}
           keyName="type"
           searchUpdateQuery={mockSearchUpdateQuery}
         />
       );
 
-      expect(screen.getByText("습득물")).toBeInTheDocument();
+      const filterButton = screen.getByTestId("filter-채팅 리스트 분실/발견");
+      expect(filterButton).toHaveTextContent("습득물");
     });
 
-    it("type 파라미터가 lost일 때 분실물이 표시됩니다", () => {
+    it("type 파라미터가 LOST일 때 분실물이 표시됩니다", () => {
       const searchParams = new URLSearchParams();
-      searchParams.set("type", "lost");
+      searchParams.set("type", "LOST");
       (useSearchParams as jest.Mock).mockReturnValue(searchParams);
 
       render(
         <FilterDropdown
-          ariaLabel="채팅 리스트 습득/분실"
+          ariaLabel="채팅 리스트 분실/발견"
           options={TYPE_OPTIONS}
           keyName="type"
           searchUpdateQuery={mockSearchUpdateQuery}
         />
       );
 
-      expect(screen.getByText("분실물")).toBeInTheDocument();
+      const filterButton = screen.getByTestId("filter-채팅 리스트 분실/발견");
+      expect(filterButton).toHaveTextContent("분실물");
     });
 
     it("type 파라미터가 있을 때 Filter가 선택된 상태로 표시됩니다", () => {
       const searchParams = new URLSearchParams();
-      searchParams.set("type", "found");
+      searchParams.set("type", "FOUND");
       (useSearchParams as jest.Mock).mockReturnValue(searchParams);
 
       render(
         <FilterDropdown
-          ariaLabel="채팅 리스트 습득/분실"
+          ariaLabel="채팅 리스트 분실/발견"
           options={TYPE_OPTIONS}
           keyName="type"
           searchUpdateQuery={mockSearchUpdateQuery}
         />
       );
 
-      const filterButton = screen.getByTestId("filter-채팅 리스트 습득/분실");
+      const filterButton = screen.getByTestId("filter-채팅 리스트 분실/발견");
       expect(filterButton).toHaveAttribute("aria-selected", "true");
     });
 
@@ -300,14 +306,14 @@ describe("FilterDropdown", () => {
 
       render(
         <FilterDropdown
-          ariaLabel="채팅 리스트 습득/분실"
+          ariaLabel="채팅 리스트 분실/발견"
           options={TYPE_OPTIONS}
           keyName="type"
           searchUpdateQuery={mockSearchUpdateQuery}
         />
       );
 
-      const filterButton = screen.getByTestId("filter-채팅 리스트 습득/분실");
+      const filterButton = screen.getByTestId("filter-채팅 리스트 분실/발견");
       expect(filterButton).toHaveAttribute("aria-selected", "false");
     });
 
@@ -317,14 +323,14 @@ describe("FilterDropdown", () => {
 
       render(
         <FilterDropdown
-          ariaLabel="채팅 리스트 습득/분실"
+          ariaLabel="채팅 리스트 분실/발견"
           options={TYPE_OPTIONS}
           keyName="type"
           searchUpdateQuery={mockSearchUpdateQuery}
         />
       );
 
-      const filterButton = screen.getByTestId("filter-채팅 리스트 습득/분실");
+      const filterButton = screen.getByTestId("filter-채팅 리스트 분실/발견");
       await user.click(filterButton);
 
       expect(screen.getByText("전체")).toBeInTheDocument();
@@ -338,20 +344,20 @@ describe("FilterDropdown", () => {
 
       render(
         <FilterDropdown
-          ariaLabel="채팅 리스트 습득/분실"
+          ariaLabel="채팅 리스트 분실/발견"
           options={TYPE_OPTIONS}
           keyName="type"
           searchUpdateQuery={mockSearchUpdateQuery}
         />
       );
 
-      const filterButton = screen.getByTestId("filter-채팅 리스트 습득/분실");
+      const filterButton = screen.getByTestId("filter-채팅 리스트 분실/발견");
       await user.click(filterButton);
 
       const foundOption = screen.getByText("습득물");
       await user.click(foundOption);
 
-      expect(mockSearchUpdateQuery).toHaveBeenCalledWith("type", "found");
+      expect(mockSearchUpdateQuery).toHaveBeenCalledWith("type", "FOUND");
     });
   });
 

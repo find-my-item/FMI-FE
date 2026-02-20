@@ -1,5 +1,5 @@
 import axios from "axios";
-import getBaseURL from "./getBaseURL";
+import { getBaseURL } from "./getBaseURL";
 
 const publicApi = axios.create({
   baseURL: getBaseURL(),

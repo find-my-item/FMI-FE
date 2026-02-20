@@ -1,12 +1,7 @@
-import { Suspense } from "react";
 import { ListView } from "@/app/(route)/chat/_components";
 
 const page = () => {
-  return (
-    <Suspense fallback="">
-      <ListView />
-    </Suspense>
-  );
+  return <ListView />;
 };
 
 export default page;

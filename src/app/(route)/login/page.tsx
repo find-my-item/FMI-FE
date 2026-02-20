@@ -2,20 +2,30 @@
 
 import Link from "next/link";
 import { cn } from "@/utils";
-import { Icon, Button, AuthLogoLink } from "@/components";
+import { Button, Icon } from "@/components/common";
+import useSessionNotification from "./_hooks/useSessionNotification";
+import { LogoLink } from "./_components";
 
-const ButtonStyle = "w-full h-[44px] flex-center gap-1 rounded-[10px] text-body1-semibold ";
+const ButtonStyle = "w-full h-11 flex-center gap-1 rounded-[10px] text-body1-semibold ";
 
-const Page = () => {
+const REST_API_KEY = process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY;
+const REDIRECT_URI = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI;
+const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+
+const page = () => {
+  const { reason } = useSessionNotification();
+
   return (
     <div className="min-h-screen w-full gap-8 flex-col-center">
-      <AuthLogoLink />
+      <LogoLink />
 
       {/* button */}
       <div className="flex w-full flex-col gap-3 px-5">
         <Button
           type="submit"
+          ignoreBase
           ariaLabel="카카오 로그인 버튼"
+          onClick={() => (window.location.href = kakaoURL)}
           className={cn(
             ButtonStyle,
             "text-flatGray-900 bg-fill-accent-kakao hover:bg-fill-accent-kakao"
@@ -26,7 +36,9 @@ const Page = () => {
         </Button>
         <Button
           as={Link}
-          href={"/email-login"}
+          href={
+            reason === "session-expired" ? "/login/email?reason=session-expired" : "/login/email"
+          }
           ignoreBase
           className={cn(ButtonStyle, "text-white bg-fill-brand-normal-default")}
           aria-label="로그인 버튼"
@@ -37,9 +49,9 @@ const Page = () => {
 
       {/* divider 구분선 */}
       <div className="flex h-[18px] w-full items-center px-5">
-        <hr className="h-px flex-1 bg-flatGray-50" />
+        <hr className="h-px flex-1 bg-flatGray-50" aria-hidden={true} />
         <span className="px-3 text-caption1-medium text-layout-body-default">또는</span>
-        <hr className="h-px flex-1 bg-flatGray-50" />
+        <hr className="h-px flex-1 bg-flatGray-50" aria-hidden={true} />
       </div>
 
       {/* 회원확인 여부 */}
@@ -60,4 +72,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default page;

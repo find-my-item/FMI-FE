@@ -11,7 +11,9 @@ jest.mock("next/link", () => {
   );
 });
 
-jest.mock("@/components", () => ({
+window.scrollTo = jest.fn();
+
+jest.mock("@/components/common", () => ({
   Icon: ({ name }: { name: string }) => <span data-testid="icon">{name}</span>,
   Button: ({ children }: any) => <button type="button">{children}</button>,
 }));

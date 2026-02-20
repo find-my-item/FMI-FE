@@ -1,5 +1,8 @@
-const layout = ({ children }: { children: React.ReactNode }) => {
-  return <main className="flex h-[calc(100dvh-4px)] w-full flex-col">{children}</main>;
+import { ReactNode } from "react";
+import { ChatLayoutClient } from "./_components";
+
+const Layout = ({ children }: { children: ReactNode }) => {
+  return <ChatLayoutClient>{children}</ChatLayoutClient>;
 };
 
-export default layout;
+export default Layout;

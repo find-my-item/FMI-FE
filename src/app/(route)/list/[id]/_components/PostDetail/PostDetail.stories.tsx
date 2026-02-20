@@ -1,5 +1,10 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import PostDetail from "./PostDetail";
+import { MOCK_POST_DEFAULT_DETAIL } from "@/mock/data";
+import { ToastProvider } from "@/providers/ToastProviders";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const meta: Meta<typeof PostDetail> = {
   title: "페이지/상세 페이지/PostDetail",
@@ -7,9 +12,13 @@ const meta: Meta<typeof PostDetail> = {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <div className="w-[400px] border border-gray-200">
-        <Story />
-      </div>
+      <ToastProvider>
+        <QueryClientProvider client={queryClient}>
+          <div className="w-[400px] border border-gray-200">
+            <Story />
+          </div>
+        </QueryClientProvider>
+      </ToastProvider>
     ),
   ],
   parameters: {
@@ -23,10 +32,6 @@ type Story = StoryObj<typeof PostDetail>;
 export const Single: Story = {
   args: {
     type: "find",
-    item: {
-      id: 1,
-      title: "여기에 게시글 제목이 들어갑니다",
-      body: "서울시 노원구 00동 건물 화장실에서 핸드폰을 분실했어요. 혹시 습득하신 분이 계시면 채팅 부탁드려요.",
-    },
+    data: MOCK_POST_DEFAULT_DETAIL.result,
   },
 };

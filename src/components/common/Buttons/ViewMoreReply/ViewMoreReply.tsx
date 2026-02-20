@@ -1,4 +1,7 @@
+"use client";
+
 import Icon from "../../Icon/Icon";
+import { ReactNode, useState } from "react";
 
 /**
  * @author hyungjun
@@ -9,60 +12,69 @@ import Icon from "../../Icon/Icon";
  * - 두 번째 버튼: 답글 쓰기 (답글 작성 액션)
  *
  * @param text - 더보기 버튼에 표시할 텍스트입니다. 예: "답글 5개"
- * @param onViewMore - 답글 더보기 버튼 클릭 핸들러입니다.
- * @param onWriteReply - 답글 쓰기 버튼 클릭 핸들러입니다.
+ * @param onWriteReply - 답글 쓰기 버튼 클릭 핸들러입니다. (선택적)
  * @param viewMoreAriaLabel - 더보기 버튼의 접근성 라벨입니다. (기본값: "답글 더보기")
  * @param writeReplyAriaLabel - 답글 쓰기 버튼의 접근성 라벨입니다. (기본값: "답글 쓰기")
+ * @param disabled - 버튼 비활성화 여부입니다. (기본값: false)
+ * @param replyComponent - 답글 컴포넌트입니다. (선택적)
  *
  * @example
  * ```tsx
  * <ViewMoreReply
  *   text="답글 5개"
- *   onViewMore={handleViewMore}
  *   onWriteReply={handleWriteReply}
+ *   viewMoreAriaLabel="답글 더보기"
+ *   writeReplyAriaLabel="답글 쓰기"
+ *   disabled={false}
+ *   replyComponent={<div>답글 컴포넌트</div>}
  * />
  * ```
  */
 
 interface ViewMoreReplyProps {
   text: string;
-  onViewMore?: () => void;
   onWriteReply?: () => void;
   viewMoreAriaLabel?: string;
   writeReplyAriaLabel?: string;
   disabled?: boolean;
+  replyComponent?: ReactNode;
 }
 
 // TODO(형준): svgr 수정 시, 아이콘 색 수정
 const ViewMoreReply = ({
   text,
-  onViewMore,
   onWriteReply,
   viewMoreAriaLabel = "답글 더보기",
   writeReplyAriaLabel = "답글 쓰기",
   disabled = false,
+  replyComponent,
 }: ViewMoreReplyProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <div className="flex min-h-[40px] w-[390px] items-center gap-[12px]">
-      <button
-        onClick={onViewMore}
-        className="flex items-center gap-[4px]"
-        aria-label={viewMoreAriaLabel}
-        disabled={disabled}
-      >
-        <span className="text-body1-medium text-brand-subtle-default hover:text-brand-subtle-hover active:text-brand-subtle-pressed disabled:text-brand-subtle-disabled">
-          {text}
-        </span>
-        <Icon name="ArrowDown" size={20} />
-      </button>
-      <button
-        onClick={onWriteReply}
-        className="text-body1-medium text-neutral-strong-default hover:text-black active:text-neutral-strong-preesed disabled:text-neutral-strong-disabled"
-        aria-label={writeReplyAriaLabel}
-        disabled={disabled}
-      >
-        답글 쓰기
-      </button>
+    <div className="flex flex-col gap-2">
+      <div className="flex min-h-10 w-full items-center gap-3">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="flex items-center gap-1"
+          aria-label={viewMoreAriaLabel}
+          disabled={disabled}
+        >
+          <span className="text-body1-medium text-brand-normal-default transition-colors duration-150 hover:text-brand-normal-hover active:text-brand-normal-pressed disabled:text-brand-normal-disabled">
+            {text}
+          </span>
+          <Icon name={isOpen ? "ArrowUp" : "ArrowDown"} size={20} />
+        </button>
+        <button
+          onClick={onWriteReply}
+          className="text-body1-medium text-neutral-strong-default transition-colors duration-150 hover:text-black active:text-neutral-strong-preesed disabled:text-neutral-strong-disabled"
+          aria-label={writeReplyAriaLabel}
+          disabled={disabled}
+        >
+          답글 쓰기
+        </button>
+      </div>
+      {isOpen && replyComponent}
     </div>
   );
 };

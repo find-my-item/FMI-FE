@@ -1,24 +1,42 @@
-import { CategoryType, ItemStatus, PostType } from "@/types";
+import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
+import { CategoryType, ItemStatus, PostType, Radius } from "@/types";
 
-export interface GetPostDetailResponse {
-  isSuccess: boolean;
-  code: string;
-  message: string;
-  result: PostDetail;
-}
+export interface GetDetailPostResponse extends ApiBaseResponseType<PostDetailData> {}
 
-export interface PostDetail {
-  postId: number;
+export type PostDetailData = {
+  id: number;
   title: string;
   content: string;
   address: string;
   latitude: number;
   longitude: number;
   postType: PostType;
-  itemStatus: ItemStatus;
-  imageUrls: Array<string>;
-  radius: number;
+  postStatus: ItemStatus;
+  radius: Radius;
   category: CategoryType;
   favoriteCount: number;
   favoriteStatus: boolean;
+  viewCount: number;
+  isNew: boolean;
+  isHot: boolean;
+  createdAt: string;
+  isMine: boolean;
+  imageResponseList: ImageResponse[];
+  postUserInformation: userInformation;
+};
+
+export type ImageType = "THUMBNAIL" | "NORMAL";
+
+export type ImageResponse = {
+  id: number;
+  imgUrl: string;
+  imageType: ImageType;
+};
+
+export interface userInformation {
+  userId: number;
+  nickName: string;
+  profileImage: string;
+  postCount: number;
+  chattingCount: number;
 }

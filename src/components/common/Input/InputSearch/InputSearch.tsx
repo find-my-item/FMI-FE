@@ -50,7 +50,7 @@ interface InputSearchProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   mode: "RHF" | "onChange";
   validation?: RegisterOptions;
-  onEnter: (value: string) => void;
+  onEnter?: (value: string) => void;
 }
 
 // RHF 모드용 컴포넌트
@@ -62,10 +62,6 @@ const InputSearchRHF = ({
 }: Omit<InputSearchProps, "mode">) => {
   const { register, watch, setValue } = useFormContext();
   const rhfValue = watch(name) || "";
-
-  const onChangeDelete = () => {
-    setValue(name, "");
-  };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== "Enter") return;
@@ -80,15 +76,11 @@ const InputSearchRHF = ({
         id={name}
         {...register(name, validation)}
         {...props}
-        className="h-11 min-w-0 flex-1 rounded-[24px] border px-10 text-body1-regular text-neutral-normal-placeholder bg-fill-neutral-subtle-default hover:text-neutral-normal-hover focus:border-black focus:text-neutral-normal-focused"
+        className="h-11 min-w-0 flex-1 rounded-[24px] border px-10 text-body1-regular bg-fill-neutral-subtle-default placeholder:text-neutral-normal-placeholder hover:text-neutral-normal-hover focus:border-black focus:text-neutral-normal-focused"
         onKeyDown={handleKeyDown}
       />
 
-      <DeleteButton
-        value={rhfValue}
-        className="right-5 top-1/2 -translate-y-1/2"
-        onDelete={onChangeDelete}
-      />
+      <InputSearchDeleteButton value={rhfValue} onDelete={() => setValue(name, "")} />
     </div>
   );
 };
@@ -100,10 +92,6 @@ const InputSearchOnChange = ({
   ...props
 }: Omit<InputSearchProps, "mode" | "validation">) => {
   const [innerValue, setInnerValue] = useState("");
-
-  const onChangeDelete = () => {
-    setInnerValue("");
-  };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== "Enter") return;
@@ -119,16 +107,25 @@ const InputSearchOnChange = ({
         value={innerValue}
         onChange={(e) => setInnerValue(e.target.value)}
         {...props}
-        className="h-11 min-w-0 flex-1 rounded-[24px] border px-10 text-body1-regular text-neutral-normal-placeholder bg-fill-neutral-subtle-default hover:text-neutral-normal-hover focus:border-black focus:text-neutral-normal-focused"
+        className="h-11 min-w-0 flex-1 rounded-[24px] border px-10 text-body1-regular bg-fill-neutral-subtle-default placeholder:text-neutral-normal-placeholder hover:text-neutral-normal-hover focus:border-black focus:text-neutral-normal-focused"
         onKeyDown={handleKeyDown}
       />
 
-      <DeleteButton
-        value={innerValue}
-        className="right-5 top-1/2 -translate-y-1/2"
-        onDelete={onChangeDelete}
-      />
+      <InputSearchDeleteButton value={innerValue} onDelete={() => setInnerValue("")} />
     </div>
+  );
+};
+
+// 삭제 버튼 컴포넌트
+const InputSearchDeleteButton = ({ value, onDelete }: { value: string; onDelete: () => void }) => {
+  return (
+    value && (
+      <DeleteButton
+        value={value}
+        className="right-5 top-1/2 -translate-y-1/2"
+        onDelete={onDelete}
+      />
+    )
   );
 };
 

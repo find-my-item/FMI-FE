@@ -1,6 +1,7 @@
 "use no memo";
 
-import { Icon, Button, CheckBox, DetailHeader } from "@/components";
+import { Icon, Button, CheckBox } from "@/components/common";
+import { DetailHeader } from "@/components/layout";
 import { useFormContext, useWatch } from "react-hook-form";
 import { TERMS_CONFIG } from "../../_constants/TERMS_CONFIG";
 import { useEffect } from "react";
@@ -69,7 +70,7 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
             {TERMS_CONFIG.map((item, index) => (
               <div
                 key={item.name}
-                className="flex h-[44px] w-full items-center justify-between text-body1-semibold text-neutral-normal-default"
+                className="flex h-11 w-full items-center justify-between text-body1-semibold text-neutral-normal-default"
               >
                 <CheckBox
                   id={item.name}

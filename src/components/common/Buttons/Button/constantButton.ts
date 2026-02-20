@@ -15,15 +15,15 @@ export const LOADING_SPINNER_SIZE = {
 export const VARIANT_STYLES = {
   solid: {
     normal:
-      "text-brand-subtle-default bg-fill-brand-normal-default bg-opacity-70 hover:bg-fill-brand-normal-hover active:bg-fill-brand-normal-pressed active:text-brand-subtle-pressed disabled:bg-fill-brand-normal-disabled disabled:text-brand-subtle-disabled",
+      "text-brand-subtle-default bg-fill-brand-strong-default bg-opacity-70 hover:bg-fill-brand-strong-hover active:bg-fill-brand-strong-pressed active:text-brand-strongUseThis-pressed disabled:bg-fill-brand-strong-disabled disabled:text-brand-subtle-disabled",
     subtle:
-      "text-brand-normal-default bg-fill-brand-subtle-default hover:bg-fill-brand-subtle-hover hover:text-brand-normal-hover active:bg-fill-brand-subtle-pressed active:text-brand-normal-pressed disabled:bg-fill-brand-subtle-disabled disabled:text-brand-normal-disabled",
+      "text-brand-strongUseThis-default bg-fill-brand-subtle-default hover:bg-fill-brand-subtle-hover hover:text-brand-strongUseThis-hover active:bg-fill-brand-subtle-pressed active:text-brand-strongUseThis-pressed disabled:bg-fill-brand-subtle-disabled disabled:text-brand-normal-disabled",
   },
   outlined: {
-    base: "text-neutral-normal-default border border-neutral-normal-default hover:text-black hover:border-neutral-normal-hover active:bg-fill-neutral-normal-pressed active:text-neutral-normal-pressed disabled:bg-fill-neutral-normal-disabled disabled:text-neutral-normal-disabled disabled:border-neutral-normal-disabled",
+    base: "text-neutral-normal-default border border-neutral-normal-default hover:text-black hover:border-neutral-normal-hover active:bg-fill-neutral-normal-pressed active:text-neutral-normal-pressed active:border-neutral-normal-pressed disabled:bg-fill-neutral-normal-disabled disabled:text-neutral-normal-disabled disabled:border-neutral-normal-disabled focus:outline-none focus:border-brand-normal-default/70 focus:text-brand-normal-default",
   },
   inversed: {
-    base: "text-neutralInversed-strong-default bg-fill-neutralInversed-strong-default bg-opacity-[4%] hover:bg-opacity-[8%] hover:text-neutralInversed-strong-hover active:bg-opacity-[8%] active:text-neutralInversed-strong-pressed disabled:text-neutralInversed-strong-disabled",
+    base: "text-neutralInversed-strong-default bg-fill-neutralInversed-strong-default bg-opacity-[4%] hover:bg-opacity-[8%] hover:text-neutralInversed-strong-hover hover:bg-fill-neutralInversed-strong-hover active:bg-opacity-[8%] active:text-neutralInversed-strong-pressed disabled:text-neutralInversed-strong-disabled disabled:bg-fill-neutralInversed-strong-disabled",
   },
   auth: {
     base: "w-full h-[44px] flex-center gap-1 rounded-[10px] bg-fill-brand-normal-default font-semibold text-brand-subtle-default disabled:bg-fill-brand-normal-disabled disabled:text-brand-subtle-disabled",

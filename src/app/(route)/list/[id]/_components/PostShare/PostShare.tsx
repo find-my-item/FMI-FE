@@ -1,19 +1,21 @@
 "use client";
 
 import Image from "next/image";
-import { handleShareClick } from "@/utils";
+import { executeShare } from "@/utils";
 import { useGetMetaData } from "@/api/fetch/post";
-import { Button, PopupLayout } from "@/components";
+import { Button } from "@/components/common";
+import { PopupLayout } from "@/components/domain";
 import { SHARE } from "./SHARE";
+import { ShareId } from "@/types";
 
 interface PostShareProps {
   isOpen: boolean;
   onClose: () => void;
-  postId: string;
+  postId: number;
 }
 
 const PostShare = ({ isOpen, onClose, postId }: PostShareProps) => {
-  const { data } = useGetMetaData({ postId: Number(postId) });
+  const { data } = useGetMetaData({ postId });
 
   const metaData = {
     title: data?.result?.title || "데이터 공유하기",
@@ -22,8 +24,8 @@ const PostShare = ({ isOpen, onClose, postId }: PostShareProps) => {
     link: "",
   };
 
-  const handleOption = (id: string) =>
-    handleShareClick({
+  const handleOption = (id: ShareId) =>
+    executeShare({
       id,
       metaData: {
         ...metaData,

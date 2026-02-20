@@ -1,1 +1,1 @@
-export { default as MapContent } from "./MapContent/MapContent";
+export { default as PostDetailKakaoMap } from "./PostDetailKakaoMap/PostDetailKakaoMap";

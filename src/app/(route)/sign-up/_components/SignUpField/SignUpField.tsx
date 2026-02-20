@@ -1,12 +1,12 @@
 "use no memo";
 
 import { SIGNUP_INPUT_CONFIG } from "../../_constants/SIGNUP_INPUT_CONFIG";
-import { Button, DetailHeader } from "@/components";
+import { Button } from "@/components/common";
+import { DetailHeader } from "@/components/layout";
 import { useFormContext, useWatch } from "react-hook-form";
 import { useSignUpBtnClick } from "../../_hooks/useSignUpBtnClick";
 import { useEffect } from "react";
 import SignUpItem from "../SignUpItem/SignUpItem";
-import { useNicknameCheck } from "../../_hooks/useNicknameCheck";
 
 const SignUpField = ({ onNext }: { onNext: () => void }) => {
   const {
@@ -21,35 +21,43 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
     void trigger("passwordConfirm");
   }, [password, trigger]);
 
-  const { isEmailDisabled, isEmailAuthDisabled, isEmailAuthVerified, handlerToClick } =
-    useSignUpBtnClick();
-
-  const { isNicknameVerified } = useNicknameCheck();
+  const {
+    isEmailDisabled,
+    isEmailAuthDisabled,
+    isEmailAuthVerified,
+    handlerToClick,
+    isNicknameVerified,
+  } = useSignUpBtnClick();
 
   const handleDisabled = (name: string) => {
     if (name === "emailAuth") return isEmailAuthDisabled;
     else if (name === "email") return isEmailDisabled;
   };
 
-  const handleSuccess = (name: string) => {
+  const handleVerified = (name: string) => {
     if (name === "emailAuth") return isEmailAuthVerified;
     else if (name === "nickname") return isNicknameVerified;
     else return false;
   };
 
   const isNextEnabled = isValid && isEmailAuthVerified && isNicknameVerified;
-
   return (
     <>
       <DetailHeader title="회원가입" />
       <div className="flex w-full flex-col gap-5 px-4 py-5">
         {SIGNUP_INPUT_CONFIG.map((item) => (
           <SignUpItem
-            key={item.name}
-            disabled={handleDisabled(item.name)}
-            btnOnClick={() => handlerToClick(item.name)}
-            isVerified={handleSuccess(item.name)}
+            key={item.inputOption.name}
             {...item}
+            isVerified={handleVerified(item.inputOption.name)}
+            inputOption={{
+              disabled: handleDisabled(item.inputOption.name),
+              ...item.inputOption,
+            }}
+            btnOption={{
+              ...item.btnOption,
+              btnOnClick: () => handlerToClick(item.inputOption.name),
+            }}
           />
         ))}
       </div>

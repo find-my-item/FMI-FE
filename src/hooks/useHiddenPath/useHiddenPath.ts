@@ -17,7 +17,7 @@ import { usePathname } from "next/navigation";
  * ```
  *
  */
-const shownPaths = ["/"];
+const shownPaths = ["/", "/list", "/chat", "/mypage"];
 
 export function useHiddenPath() {
   const pathname = usePathname();

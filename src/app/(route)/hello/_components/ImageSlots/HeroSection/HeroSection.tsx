@@ -1,30 +1,9 @@
-import Image from "next/image";
+import Image, { ImageProps } from "next/image";
 import "./HeroSection.css";
-
-interface HeroSectionImage {
-  src: string;
-  alt?: string;
-  width: number;
-  height: number;
-}
-
-const HeroSectionImage = ({ src, alt = "", width, height }: HeroSectionImage) => {
-  return (
-    <Image
-      src={src}
-      alt={alt}
-      width={width}
-      height={height}
-      draggable={false}
-      className="select-none"
-      priority
-    />
-  );
-};
 
 const HeroSection = () => {
   return (
-    <div className="relative min-h-[225px] w-full flex-center">
+    <div data-testid="intro-section" className="relative min-h-[225px] w-full flex-center">
       <div className="animate-fade-in-float absolute right-[250px]">
         <HeroSectionImage src="/hello/hero/service-hero-wallet.svg" width={120} height={57} />
       </div>
@@ -49,3 +28,7 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+
+const HeroSectionImage = (props: Omit<ImageProps, "alt">) => {
+  return <Image alt="" {...props} draggable={false} className="select-none" priority />;
+};

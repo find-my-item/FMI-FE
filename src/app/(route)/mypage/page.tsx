@@ -1,15 +1,10 @@
-import { MyPageIconNav, MyPageMenuSection, MyPageProfile } from "./_components";
+import { hasValidToken } from "@/utils/hasValidToken/hasValidToken";
+import { MyPageContainer } from "./_components";
 
-const page = () => {
-  return (
-    <div className="flex w-full flex-col">
-      <MyPageProfile email="abc@gmail.com" userName="사용자 닉네임" />
+const page = async () => {
+  const hasToken = await hasValidToken();
 
-      <MyPageIconNav />
-
-      <MyPageMenuSection />
-    </div>
-  );
+  return <MyPageContainer hasToken={hasToken} />;
 };
 
 export default page;

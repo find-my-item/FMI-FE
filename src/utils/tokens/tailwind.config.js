@@ -5,6 +5,16 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
+      labelsVibrant: {
+        secondary: "#999999",
+        primary: "#333333",
+        quaternary: "#d9d9d9",
+        tertiary: "#bfbfbf",
+      },
+      accents: {
+        red: "#ff383c",
+      },
+      mode: "Light",
       color: {
         cyan: {
           0: "#ffffff",
@@ -125,7 +135,7 @@ module.exports = {
           200: "#98e3bd",
           300: "#6ed5a7",
           400: "#46c691",
-          500: "#1eb87b",
+          500: "#0aa874",
           600: "#00b76e",
           700: "#009e53",
           800: "#00753e",
@@ -199,7 +209,7 @@ module.exports = {
           0: "#ffffff",
         },
         green: {
-          500: "#1eb87b",
+          500: "#0aa874",
         },
       },
       value: {
@@ -309,6 +319,14 @@ module.exports = {
             hover_2: "rgba(0, 183, 110, 0.7)",
             pressed_2: "rgba(0, 158, 83, 0.7)",
           },
+          strong: {
+            default: "#009e53",
+            hover: "#00753e",
+            focused: "#00753e",
+            enteredSelected: "#009e53",
+            pressed: "#00753e",
+            disabled: "#46c691",
+          },
         },
         neutralInversed: {
           normal: {
@@ -387,7 +405,7 @@ module.exports = {
         },
         neutral: {
           normal: {
-            placeholder: "#9d9d9d",
+            placeholder: "#787878",
             focused: "#000000",
             hover: "#000000",
             disabled: "#9d9d9d",
@@ -406,7 +424,7 @@ module.exports = {
             preesed: "#9d9d9d",
             enteredSelected: "#000000",
             default: "#5d5d5d",
-            placeholder: "#9d9d9d",
+            placeholder: "#787878",
             disabled: "#9d9d9d",
             focused: "#000000",
             hover: "#000000",
@@ -429,17 +447,17 @@ module.exports = {
             disabled: "#c2f1d4",
             disabled_2: "#98e3bd",
             pressed_2: "#6ed5a7",
-            enteredSelected_2: "#1eb87b",
+            enteredSelected_2: "#0aa874",
             focused_2: "#00b76e",
             hover_2: "#00b76e",
-            default_2: "#1eb87b",
+            default_2: "#0aa874",
           },
           normal: {
             disabled: "#98e3bd",
-            enteredSelected: "#1eb87b",
+            enteredSelected: "#0aa874",
             focused: "#00b76e",
             hover: "#00b76e",
-            default: "#1eb87b",
+            default: "#0aa874",
             pressed: "#6ed5a7",
             default_2: "#f6fffc",
             disabled_2: "#c2f1d4",
@@ -447,6 +465,22 @@ module.exports = {
             focused_2: "#f6fffc",
             hover_2: "#f6fffc",
             enteredSelected_2: "#f6fffc",
+          },
+          strongUseThis: {
+            default: "#009e53",
+            hover: "#00753e",
+            focused: "#00753e",
+            enteredSelected: "#00b76e",
+            pressed: "#009e53",
+            disabled: "#0aa874",
+          },
+          strong: {
+            default: "#009e53",
+            hover: "#00753e",
+            focused: "#00753e",
+            enteredSelected: "#009e53",
+            pressed: "#00753e",
+            disabled: "#0aa874",
           },
         },
         accent: {
@@ -534,6 +568,9 @@ module.exports = {
         success_3: "#00b76e",
         bookmark: "#ffc642",
         favorite: "#ff6363",
+        unselected: "#adadad",
+        announcement: "#ff9200",
+        report: "#ff6363",
       },
       bg: {
         layout_1depth: "#ffffff",
@@ -547,6 +584,7 @@ module.exports = {
         layout_2depth_2: "#f5f5f5",
         dimTransparent_2: "rgba(120, 120, 120, 0.1)",
         dimTransparent_3: "rgba(120, 120, 120, 0.1)",
+        layoutBrand: "#eefff6",
       },
       spacing: {
         padding: {

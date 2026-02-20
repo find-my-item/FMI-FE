@@ -1,4 +1,4 @@
-export type ChipType = "status" | "category";
+export type ChipType = "brandSubtle" | "neutralStrong" | "brandNormal" | "admin";
 
 export interface ChipProps {
   label: string;

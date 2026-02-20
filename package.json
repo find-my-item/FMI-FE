@@ -14,33 +14,43 @@
     "test:ci": "jest --ci --runInBand",
     "check:all": "run-s test build build-storybook",
     "check:fast": "run-p test build-storybook",
-    "analyze": "ANALYZE=true next build"
+    "analyze": "ANALYZE=true next build",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:ci": "npm run build && playwright test"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.4.0",
-    "@tanstack/react-query": "^5.85.5",
+    "@sentry/nextjs": "^10.34.0",
+    "@stomp/stompjs": "^7.2.1",
+    "@tanstack/react-query": "^5.90.19",
     "@tanstack/react-query-devtools": "^5.85.5",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
-    "axios": "^1.12.2",
+    "axios": "^1.13.5",
     "babel-plugin-react-compiler": "^1.0.0",
     "clsx": "^2.1.1",
-    "framer-motion": "^12.23.13",
-    "lodash": "^4.17.21",
+    "cookies-next": "^6.1.1",
+    "date-fns": "^4.1.0",
+    "framer-motion": "^12.27.0",
+    "lodash": "^4.17.23",
     "lodash.throttle": "^4.1.1",
-    "next": "^15.5.9",
+    "next": "^15.5.12",
     "react": "^19.1.4",
     "react-dom": "^19.1.4",
-    "react-hook-form": "^7.62.0",
+    "react-hook-form": "^7.71.1",
+    "react-intersection-observer": "^10.0.2",
     "react-kakao-maps-sdk": "^1.2.0",
+    "sockjs-client": "^1.6.1",
+    "swiper": "^12.1.2",
     "zod": "^4.1.5",
     "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.1.3",
-    "@commitlint/cli": "^20.1.0",
-    "@commitlint/config-conventional": "^20.0.0",
-    "@next/bundle-analyzer": "^16.0.1",
+    "@commitlint/cli": "^20.3.1",
+    "@commitlint/config-conventional": "^20.3.1",
+    "@next/bundle-analyzer": "^16.1.3",
     "@playwright/test": "^1.55.0",
     "@storybook/addon-a11y": "^9.1.17",
     "@storybook/addon-docs": "^9.1.17",
@@ -55,6 +65,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/sockjs-client": "^1.5.4",
     "autoprefixer": "^10.4.21",
     "babel-jest": "^29.7.0",
     "chromatic": "^13.3.4",
@@ -65,11 +76,12 @@
     "jest-junit": "^16.0.0",
     "jest-transformer-svg": "^2.1.0",
     "lint-staged": "^16.1.5",
+    "msw": "^2.12.7",
     "npm-run-all": "^4.1.5",
     "playwright": "^1.55.0",
     "postcss": "^8.5.6",
-    "prettier": "^3.6.2",
-    "prettier-plugin-tailwindcss": "^0.6.14",
+    "prettier": "^3.8.0",
+    "prettier-plugin-tailwindcss": "^0.7.2",
     "storybook": "^9.1.17",
     "tailwindcss": "^3.4.13",
     "ts-jest": "^29.4.1",
@@ -83,5 +95,10 @@
   "jest-junit": {
     "outputDirectory": "reports",
     "outputName": "junit.xml"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

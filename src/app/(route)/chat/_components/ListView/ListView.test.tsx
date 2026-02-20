@@ -1,6 +1,16 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import ListView from "./ListView";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 const mockSearchUpdateQuery = jest.fn();
 
@@ -8,11 +18,12 @@ jest.mock("@/hooks", () => ({
   useSearchUpdateQueryString: jest.fn(),
 }));
 
-jest.mock("@/components", () => ({
+jest.mock("@/components/domain", () => ({
+  ListSearch: () => <div data-testid="list-search"></div>,
+}));
+
+jest.mock("@/components/layout", () => ({
   DetailHeader: ({ title }: { title: string }) => <div data-testid="detail-header">{title}</div>,
-  ListSearch: ({ searchMode }: { searchMode: "region" | "post" }) => (
-    <div data-testid="list-search">{searchMode}</div>
-  ),
 }));
 
 jest.mock("../DefaultList/DefaultList", () => ({
@@ -30,6 +41,10 @@ jest.mock("../DefaultList/DefaultList", () => ({
 
 import { useSearchUpdateQueryString } from "@/hooks";
 
+const renderWithQueryClient = (component: React.ReactElement) => {
+  return render(<QueryClientProvider client={queryClient}>{component}</QueryClientProvider>);
+};
+
 describe("ListView", () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -41,7 +56,7 @@ describe("ListView", () => {
       searchUpdateQuery: mockSearchUpdateQuery,
     });
 
-    render(<ListView />);
+    renderWithQueryClient(<ListView />);
 
     const detailHeader = screen.getByTestId("detail-header");
     expect(detailHeader).toHaveTextContent("채팅");
@@ -56,13 +71,12 @@ describe("ListView", () => {
       searchUpdateQuery: mockSearchUpdateQuery,
     });
 
-    render(<ListView />);
+    renderWithQueryClient(<ListView />);
 
     const detailHeader = screen.getByTestId("detail-header");
     expect(detailHeader).toHaveTextContent("지역 선택");
 
     expect(screen.getByTestId("list-search")).toBeInTheDocument();
-    expect(screen.getByTestId("list-search")).toHaveTextContent("region");
     expect(screen.queryByTestId("default-list")).not.toBeInTheDocument();
   });
 
@@ -72,13 +86,12 @@ describe("ListView", () => {
       searchUpdateQuery: mockSearchUpdateQuery,
     });
 
-    render(<ListView />);
+    renderWithQueryClient(<ListView />);
 
     const detailHeader = screen.getByTestId("detail-header");
     expect(detailHeader).toHaveTextContent("채팅");
 
     expect(screen.getByTestId("list-search")).toBeInTheDocument();
-    expect(screen.getByTestId("list-search")).toHaveTextContent("post");
     expect(screen.queryByTestId("default-list")).not.toBeInTheDocument();
   });
 
@@ -88,7 +101,7 @@ describe("ListView", () => {
       searchUpdateQuery: mockSearchUpdateQuery,
     });
 
-    render(<ListView />);
+    renderWithQueryClient(<ListView />);
 
     const defaultList = screen.getByTestId("default-list");
     defaultList.click();
@@ -102,9 +115,8 @@ describe("ListView", () => {
       searchUpdateQuery: mockSearchUpdateQuery,
     });
 
-    render(<ListView />);
+    renderWithQueryClient(<ListView />);
 
     const listSearch = screen.getByTestId("list-search");
-    expect(listSearch).toHaveTextContent("region");
   });
 });

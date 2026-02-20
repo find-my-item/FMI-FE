@@ -1,13 +1,12 @@
-import { FloatingButton } from "@/components";
+import { ReactNode } from "react";
+import { PostWriteMenu } from "./_components";
 
-const layout = ({ children }: { children: React.ReactNode }) => {
+const layout = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="w-full h-base">
+    <>
       {children}
-      <div className="fixed bottom-5 right-5">
-        <FloatingButton ariaLabel="글쓰기" />
-      </div>
-    </div>
+      <PostWriteMenu />
+    </>
   );
 };
 

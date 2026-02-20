@@ -1,14 +1,12 @@
 "use client";
 
-import { ButtonHTMLAttributes } from "react";
-import { cn } from "@/utils";
+import { ButtonHTMLAttributes, Dispatch, SetStateAction } from "react";
+import { cn, fileInputHandler } from "@/utils";
 import Image from "next/image";
-import { handleClick } from "./_utils/handleClick";
-import { getImageButtonState } from "./_utils/getImageButtonState";
-import { useChatRoom } from "@/providers/ChatRoomProvider";
+import { handleClick, getImageButtonState } from "./_utils";
 import { useObjectURLs } from "@/hooks";
-import Icon from "../../Icon/Icon";
-import { handleFileChange } from "../../Input/InputChat/utils/handleFileChange";
+import { Icon } from "@/components/common";
+import { SelectedImage } from "@/types/SelectedImage";
 
 /**
  * @author hyungjun
@@ -35,10 +33,19 @@ import { handleFileChange } from "../../Input/InputChat/utils/handleFileChange";
 
 interface ToggleImageButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   ariaLabel?: string;
+  images: File[];
+  setImages: Dispatch<SetStateAction<File[]>>;
+  selectedImages: SelectedImage[];
+  setSelectedImages: Dispatch<SetStateAction<SelectedImage[]>>;
 }
 
-const ToggleImageButton = ({ ariaLabel }: ToggleImageButtonProps) => {
-  const { images, setImages, selectedImages, setSelectedImages } = useChatRoom();
+const ToggleImageButton = ({
+  ariaLabel,
+  images,
+  setImages,
+  selectedImages,
+  setSelectedImages,
+}: ToggleImageButtonProps) => {
   const urls = useObjectURLs(images);
   const isDisabled = images.length >= 5;
 
@@ -67,7 +74,7 @@ const ToggleImageButton = ({ ariaLabel }: ToggleImageButtonProps) => {
         multiple
         className="hidden"
         disabled={isDisabled}
-        onChange={(e) => handleFileChange(e, images, setImages)}
+        onChange={(e) => fileInputHandler(e, images, setImages)}
       />
 
       {urls.map((src, index) => {

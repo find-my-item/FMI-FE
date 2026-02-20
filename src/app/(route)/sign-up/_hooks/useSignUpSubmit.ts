@@ -1,8 +1,8 @@
 import { useRouter } from "next/navigation";
 import { useToast } from "@/context/ToastContext";
 import { ApiSignUpType, useApiSignUp } from "@/api/fetch/auth";
-import { useErrorToast } from "@/hooks";
 import { SIGNUP_ERROR_MESSAGE } from "../_constants/SIGNUP_ERROR_MESSAGE";
+import { useErrorToast } from "@/hooks/domain";
 
 export const useSignUpSubmit = () => {
   const router = useRouter();
@@ -13,7 +13,7 @@ export const useSignUpSubmit = () => {
   const submitSignUp = (data: ApiSignUpType) => {
     SignUpMutate(data, {
       onSuccess: () => {
-        router.push("/email-login");
+        router.replace("/login/email");
         addToast("회원가입이 완료되었어요.", "success");
       },
       onError: (error) => handlerApiError(SIGNUP_ERROR_MESSAGE, error.code),

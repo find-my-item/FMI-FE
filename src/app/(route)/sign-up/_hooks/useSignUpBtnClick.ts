@@ -1,19 +1,19 @@
-import { useFormContext } from "react-hook-form";
+import { useFormContext, useWatch } from "react-hook-form";
 import { useToast } from "@/context/ToastContext";
-import { useMemo, useState } from "react";
-import { useApiCheckCode, useApiSendEmail } from "@/api/fetch/auth";
-import { useErrorToast } from "@/hooks";
+import { useEffect, useMemo, useState } from "react";
 import { useNicknameCheck } from "./useNicknameCheck";
 import { EMAIL_ERROR_MESSAGE, EMAIL_CHECK_CODE_MESSAGE } from "../_constants/SIGNUP_ERROR_MESSAGE";
 import { throttle } from "lodash";
+import { useApiCheckCode, useApiSendEmail } from "@/api/fetch/auth";
+import { useErrorToast } from "@/hooks/domain";
 
 export const useSignUpBtnClick = () => {
-  const { getValues, trigger } = useFormContext();
+  const { getValues, trigger, control } = useFormContext();
 
   const [emailValue, setEmailValue] = useState("");
 
-  const [isEmailAuthDisabled, setIsEmailAuthDisabled] = useState(true);
   const [isEmailDisabled, setIsEmailDisabled] = useState(false);
+  const [isEmailAuthDisabled, setIsEmailAuthDisabled] = useState(true);
 
   const [isEmailAuthVerified, setIsEmailAuthVerified] = useState(false);
 
@@ -22,7 +22,16 @@ export const useSignUpBtnClick = () => {
 
   const { mutate: EmailMutate } = useApiSendEmail();
   const { mutate: CodeMutate } = useApiCheckCode();
-  const { handlerToClickNickname } = useNicknameCheck();
+  const { handleClickNickname, isNicknameVerified } = useNicknameCheck();
+
+  const currentEmailAuth = useWatch({
+    control,
+    name: "emailAuth",
+  });
+
+  useEffect(() => {
+    setIsEmailAuthVerified(false);
+  }, [currentEmailAuth]);
 
   const handlerToClick = useMemo(
     () =>
@@ -59,11 +68,13 @@ export const useSignUpBtnClick = () => {
                     setIsEmailDisabled(true);
                     setIsEmailAuthVerified(true);
                   },
-                  onError: (error) => handlerApiError(EMAIL_CHECK_CODE_MESSAGE, error.code),
+                  onError: (error) => {
+                    handlerApiError(EMAIL_CHECK_CODE_MESSAGE, error.code);
+                  },
                 }
               );
             } else if (name === "nickname") {
-              handlerToClickNickname(name);
+              handleClickNickname(name);
             }
           }
         },
@@ -78,7 +89,7 @@ export const useSignUpBtnClick = () => {
       handlerApiError,
       CodeMutate,
       emailValue,
-      handlerToClickNickname,
+      handleClickNickname,
     ]
   );
 
@@ -87,5 +98,6 @@ export const useSignUpBtnClick = () => {
     isEmailAuthDisabled,
     isEmailDisabled,
     isEmailAuthVerified,
+    isNicknameVerified,
   };
 };

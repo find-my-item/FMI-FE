@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Button } from "@/components";
+import { Button } from "@/components/common";
 
 const CTASection = () => {
   return (
@@ -25,7 +25,7 @@ const CTASection = () => {
         href="/"
         className="mt-[30px] min-h-[44px] w-full text-brand-subtle-default"
       >
-        찾아줘! 홈으로 이동
+        찾아줘 홈으로 이동
       </Button>
     </section>
   );
