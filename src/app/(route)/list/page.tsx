@@ -1,10 +1,10 @@
 import { Suspense } from "react";
-import { ListView } from "./_components";
+import { DefaultListView } from "./_components";
 
 const page = () => {
   return (
     <Suspense fallback="">
-      <ListView />
+      <DefaultListView />
     </Suspense>
   );
 };
