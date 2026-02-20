@@ -32,7 +32,8 @@ const PostActionMenu = ({ open, onClose, postId, postData }: PostOptionBoxProps)
           "absolute left-[40%] top-[60%] z-10 mt-2",
           "min-h-[114px] w-[218px] overflow-hidden rounded-[20px] flex-col-center",
           "border border-white bg-fill-neutral-subtle-default",
-          "text-nowrap text-h3-medium text-neutral-normal-default shadow-sm"
+          "text-nowrap text-h3-medium text-neutral-normal-default shadow-sm",
+          "tablet:left-[70%]"
         )}
       >
         {isMine ? (
@@ -102,7 +103,7 @@ const PostDeleteModal = ({ isOpen, onClose, postId }: PostDeleteModalProps) => {
     <ModalLayout
       isOpen={isOpen}
       onClose={onClose}
-      className="min-w-[350px] gap-6 p-6 flex-col-center"
+      className="min-w-[350px] gap-6 rounded-[8px] p-6 flex-col-center"
     >
       <div className="space-y-1 text-center">
         <h2 className="text-h3-semibold text-layout-header-default">정말로 삭제하시겠습니까?</h2>
@@ -110,7 +111,7 @@ const PostDeleteModal = ({ isOpen, onClose, postId }: PostDeleteModalProps) => {
           게시글 삭제 후에는 취소가 불가능합니다.
         </p>
       </div>
-      <div className="w-full gap-1 flex-center">
+      <div className="w-full gap-2 flex-center">
         <Button variant="outlined" onClick={onClose} className={ACTION_MENU.deleteButtonStyle}>
           취소
         </Button>
