@@ -3,7 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import { Icon } from "@/components/common";
 import { BaseKakaoMap } from "@/components/domain";
-import { getMapLevelByRadius } from "@/utils";
+import { cn, getMapLevelByRadius } from "@/utils";
 import { Radius } from "@/types";
 import { toNumber } from "../../_utils/toNumber";
 
@@ -35,7 +35,12 @@ const PostDetailKakaoMap = () => {
         radius={rawData.radius}
         draggable
       >
-        <div className="absolute bottom-9 left-1/2 z-10 flex w-[90%] -translate-x-1/2 gap-2 rounded-lg bg-white px-5 py-4 shadow-lg">
+        <div
+          className={cn(
+            "absolute bottom-9 left-1/2 z-10 flex w-[90%] -translate-x-1/2 gap-2 rounded-lg bg-white px-5 py-4 shadow-lg",
+            "tablet:w-[50%]"
+          )}
+        >
           <Icon name="Position" />
           <span className="text-h3-semibold text-flatGray-700">{address}</span>
         </div>

@@ -9,8 +9,14 @@ import {
   HeaderShare,
   HeaderStar,
 } from "@/components/layout/DetailHeader/DetailHeaderParts";
+import { PostActionData } from "../../_types/PostActionType";
 
-const PostDetailTopHeader = ({ postId }: { postId: number }) => {
+interface PostDetailTopHeaderProps {
+  postId: number;
+  postData: PostActionData;
+}
+
+const PostDetailTopHeader = ({ postId, postData }: PostDetailTopHeaderProps) => {
   const [openShareModal, setOpenShareModal] = useState(false);
   const [openOptionModal, setOpenOptionModal] = useState(false);
 
@@ -27,6 +33,7 @@ const PostDetailTopHeader = ({ postId }: { postId: number }) => {
           open={openOptionModal}
           onClose={() => setOpenOptionModal(false)}
           postId={postId}
+          postData={postData}
         />
       </div>
 
