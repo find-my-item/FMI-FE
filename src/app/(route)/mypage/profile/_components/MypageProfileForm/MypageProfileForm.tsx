@@ -7,7 +7,13 @@ import { useFormContext } from "react-hook-form";
 const MypageProfileForm = () => {
   const { reset, watch, setValue, handleSubmit } = useFormContext();
 
-  //   const { data, isLoading, error } = useGetUsersMe();
+  const { data, isLoading, error } = useGetUsersMe({});
+
+  const [isNickname, setIsNickname] = useState("");
+
+  useEffect(() => {
+    if (data?.result?.nickname) setIsNickname(data.result?.nickname);
+  }, [data]);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [previewImageUrl, setPreviewImageUrl] = useState<string | null>(null);
@@ -93,7 +99,7 @@ const MypageProfileForm = () => {
           inputOption={{
             name: "nickname",
             // TODO(수현): 기존 닉네임이 placeholder로 들어갈 예정
-            placeholder: "기존 닉네임 표기",
+            placeholder: { isNickname },
             maxLength: 10,
             validation: {
               required: true,
