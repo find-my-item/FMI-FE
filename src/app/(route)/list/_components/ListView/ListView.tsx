@@ -18,7 +18,7 @@ const ListView = () => {
       </DetailHeader>
 
       {searchMode === "default" ? (
-        <ErrorBoundary showToast toastMessage="목록을 불러올 수 없어요. 다시 시도해 주세요.">
+        <ErrorBoundary toastMessage="목록을 불러올 수 없어요. 다시 시도해 주세요.">
           <DefaultList searchUpdateQuery={searchUpdateQuery} />
         </ErrorBoundary>
       ) : (
