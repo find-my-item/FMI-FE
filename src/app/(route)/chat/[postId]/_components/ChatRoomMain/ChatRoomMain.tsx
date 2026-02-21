@@ -9,7 +9,7 @@ import {
   useChatScrollPreserve,
 } from "./_internal/hooks";
 import { cn } from "@/utils";
-import { useGetUserData } from "@/api/fetch/user";
+import { useGetUsersMe } from "@/api/fetch/user";
 import { enrichMessages } from "./utils/enrichMessages";
 import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageResponse";
 
@@ -30,7 +30,7 @@ const ChatRoomMain = ({
 }: ChatRoomMainProps) => {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const scrollHeightRef = useRef<number>(0);
-  const { data: userInfo } = useGetUserData();
+  const { data: userInfo } = useGetUsersMe({ hasToken: true });
 
   const userId = userInfo?.result.userId ? Number(userInfo.result.userId) : undefined;
 

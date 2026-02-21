@@ -2,7 +2,7 @@ import { cn, formatChatTime } from "@/utils";
 import { CHAT_SENDER_STYLE } from "../../constants/CHAT_SENDER_STYLE";
 import ChatImageBox from "../ChatImageBox/ChatImageBox";
 import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageResponse";
-import { useGetUserData } from "@/api/fetch/user";
+import { useGetUsersMe } from "@/api/fetch/user";
 
 interface ChatBoxProps {
   chat: ChatMessage;
@@ -13,7 +13,7 @@ interface ChatBoxProps {
 
 const ChatBox = ({ chat, nextSender, lastChat, opponentNickname }: ChatBoxProps) => {
   const { content, createdAt, imageUrls, messageType, senderId } = chat;
-  const { data: userInfo } = useGetUserData();
+  const { data: userInfo } = useGetUsersMe({ hasToken: true });
 
   const sender = Number(userInfo?.result.userId) === senderId ? "me" : "other";
   const marginBottom = lastChat ? "mb-0" : nextSender === sender ? "mb-2" : "mb-4";
