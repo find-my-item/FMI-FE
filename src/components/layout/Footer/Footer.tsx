@@ -27,7 +27,15 @@ const Footer = () => {
             )}
           >
             <span>
-              <Icon name={link.icon} size={28} />
+              <Icon
+                name={link.icon}
+                size={28}
+                className={
+                  isActive(link.href)
+                    ? "text-brand-normal-pressed"
+                    : "text-labelsVibrant-quaternary"
+                }
+              />
             </span>
             <span className={cn("py-[2px]", isActive(link.href))}>{link.name}</span>
           </Link>
