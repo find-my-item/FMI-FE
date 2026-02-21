@@ -1,3 +1,5 @@
+import { cn } from "@/utils";
+
 export const FOOTER_LINK = [
   { name: "홈", href: "/", icon: "Home" },
   { name: "게시글 목록", href: "/list", icon: "Luggage" },
@@ -8,3 +10,8 @@ export const FOOTER_LINK = [
 ] as const;
 
 export type FooterLinkHref = (typeof FOOTER_LINK)[number]["href"];
+
+export const FOOTER_ITEM_BASE_STYLE = cn(
+  "min-w-0 flex-1 transition-colors flex-col-center",
+  "hover:text-neutral-strong-focused"
+);
