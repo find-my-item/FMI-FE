@@ -8,7 +8,7 @@ const LOST_FIND_ACTIONS = [
     image: "/main/lost-report.svg",
   },
   {
-    type: "find",
+    type: "found",
     title: "습득 신고",
     image: "/main/found-report.svg",
   },
@@ -18,7 +18,7 @@ const LostFindActions = () => {
   return (
     <div className="flex gap-4">
       {LOST_FIND_ACTIONS.map(({ type, title, image }) => (
-        <Link href={`/write/post?type=${type}`} key={type} aria-label={`${title}로 글 작성`}>
+        <Link href={`/list?type=${type}`} key={type} aria-label={`${title}로 글 작성`}>
           <Image
             src={image}
             alt={title}
