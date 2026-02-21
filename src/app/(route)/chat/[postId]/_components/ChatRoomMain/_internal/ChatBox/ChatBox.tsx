@@ -13,7 +13,7 @@ interface ChatBoxProps {
 
 const ChatBox = ({ chat, nextSender, lastChat, opponentNickname }: ChatBoxProps) => {
   const { content, createdAt, imageUrls, messageType, senderId } = chat;
-  const { data: userInfo } = useGetUsersMe({ hasToken: true });
+  const { data: userInfo } = useGetUsersMe();
 
   const sender = Number(userInfo?.result.userId) === senderId ? "me" : "other";
   const marginBottom = lastChat ? "mb-0" : nextSender === sender ? "mb-2" : "mb-4";

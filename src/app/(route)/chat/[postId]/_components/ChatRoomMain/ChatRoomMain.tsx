@@ -30,7 +30,7 @@ const ChatRoomMain = ({
 }: ChatRoomMainProps) => {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const scrollHeightRef = useRef<number>(0);
-  const { data: userInfo } = useGetUsersMe({ hasToken: true });
+  const { data: userInfo } = useGetUsersMe();
 
   const userId = userInfo?.result.userId ? Number(userInfo.result.userId) : undefined;
 
