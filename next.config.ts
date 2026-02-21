@@ -55,8 +55,12 @@ const nextConfig: NextConfig = {
               plugins: [
                 { name: "removeViewBox", active: false },
                 { name: "removeDimensions", active: true },
-                // { name: "removeAttrs", params: { attrs: "(fill|stroke)" } },
               ],
+            },
+            replaceAttrValues: {
+              "#000": "currentColor",
+              "#000000": "currentColor",
+              "#D9D9D9": "currentColor",
             },
           },
         },

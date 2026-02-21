@@ -15,13 +15,7 @@ interface ErrorBoundaryProps {
    */
   fallback?: ReactNode | ((error: Error, reset: () => void) => ReactNode);
   /**
-   * 에러 발생 시 토스트 알림 표시 여부
-   * @default false
-   */
-  showToast?: boolean;
-  /**
-   * showToast가 true일 때 토스트에 표시할 메시지
-   * @default "잠시 후 다시 시도해 주세요."
+   * toast에 표시할 메시지
    */
   toastMessage?: string;
   /**
@@ -123,7 +117,7 @@ class ErrorBoundaryCore extends Component<
  *
  * @example 토스트만 사용
  * ```tsx
- * <ErrorBoundary showToast toastMessage="오류가 발생했습니다.">
+ * <ErrorBoundary toastMessage="오류가 발생했습니다.">
  *   <MyComponent />
  * </ErrorBoundary>
  * ```
@@ -132,7 +126,6 @@ class ErrorBoundaryCore extends Component<
  * ```tsx
  * <ErrorBoundary
  *   fallback={(error, reset) => <ErrorFallback error={error} onRetry={reset} />}
- *   showToast
  *   toastMessage="목록을 불러오는 중 오류가 발생했습니다."
  *   onError={(error) => Sentry.captureException(error)}
  * >
@@ -154,17 +147,17 @@ class ErrorBoundaryCore extends Component<
  * </ErrorBoundary>
  * ```
  */
+
 export const ErrorBoundary = ({
   children,
   fallback,
-  showToast = false,
-  toastMessage = "잠시 후 다시 시도해 주세요.",
+  toastMessage,
   onError,
 }: ErrorBoundaryProps) => {
   const { addToast } = useToast();
 
   const handleError = (error: Error, errorInfo: ErrorInfo) => {
-    if (showToast) {
+    if (toastMessage) {
       addToast(toastMessage, "error");
     }
     onError?.(error, errorInfo);

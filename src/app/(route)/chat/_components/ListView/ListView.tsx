@@ -26,7 +26,7 @@ const ListViewContent = () => {
       {searchMode === "default" ? (
         <DefaultList searchUpdateQuery={searchUpdateQuery} />
       ) : (
-        <ListSearch searchMode={searchMode} />
+        <ListSearch />
       )}
     </>
   );

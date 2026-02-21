@@ -1,25 +1,14 @@
 "use client";
 
 import { FormProvider, useForm } from "react-hook-form";
-import PostSearchView from "./_internal/PostSearchView";
 import RegionSearchView from "./_internal/RegionSearchView";
-import { LIST_SEARCH_PLACEHOLDER } from "./LIST_SEARCH_PLACEHOLDER";
-import { useEffect } from "react";
 import InputSearch from "@/components/common/Input/InputSearch/InputSearch";
 
-interface ListSearchProps {
-  searchMode: "region" | "post";
-}
-
-const ListSearch = ({ searchMode }: ListSearchProps) => {
+const ListSearch = () => {
   const methods = useForm({
     mode: "onChange",
     reValidateMode: "onChange",
   });
-
-  useEffect(() => {
-    methods.resetField(`${searchMode}Search`);
-  }, [searchMode]);
 
   return (
     <>
@@ -27,13 +16,14 @@ const ListSearch = ({ searchMode }: ListSearchProps) => {
         <div className="px-5 py-[10px]">
           <InputSearch
             mode="RHF"
-            name={`${searchMode}Search`}
-            placeholder={LIST_SEARCH_PLACEHOLDER[searchMode]}
+            name="regionSearch"
+            placeholder="시/군/구를 입력해 주세요."
             onEnter={() => {}}
           />
         </div>
       </FormProvider>
-      {searchMode === "post" ? <PostSearchView /> : <RegionSearchView />}
+
+      <RegionSearchView />
     </>
   );
 };

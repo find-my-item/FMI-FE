@@ -19,9 +19,7 @@ jest.mock("@/hooks", () => ({
 }));
 
 jest.mock("@/components/domain", () => ({
-  ListSearch: ({ searchMode }: { searchMode: "region" | "post" }) => (
-    <div data-testid="list-search">{searchMode}</div>
-  ),
+  ListSearch: () => <div data-testid="list-search"></div>,
 }));
 
 jest.mock("@/components/layout", () => ({
@@ -79,7 +77,6 @@ describe("ListView", () => {
     expect(detailHeader).toHaveTextContent("지역 선택");
 
     expect(screen.getByTestId("list-search")).toBeInTheDocument();
-    expect(screen.getByTestId("list-search")).toHaveTextContent("region");
     expect(screen.queryByTestId("default-list")).not.toBeInTheDocument();
   });
 
@@ -95,7 +92,6 @@ describe("ListView", () => {
     expect(detailHeader).toHaveTextContent("채팅");
 
     expect(screen.getByTestId("list-search")).toBeInTheDocument();
-    expect(screen.getByTestId("list-search")).toHaveTextContent("post");
     expect(screen.queryByTestId("default-list")).not.toBeInTheDocument();
   });
 
@@ -122,6 +118,5 @@ describe("ListView", () => {
     renderWithQueryClient(<ListView />);
 
     const listSearch = screen.getByTestId("list-search");
-    expect(listSearch).toHaveTextContent("region");
   });
 });
