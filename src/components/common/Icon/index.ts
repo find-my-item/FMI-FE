@@ -92,3 +92,4 @@ export { default as ErrorSimilarSection } from "@/assets/error-similar-section.s
 export { default as UserReport } from "@/assets/user-report.svg";
 export { default as UserBlock } from "@/assets/user-block.svg";
 export { default as EmptyPostSearch } from "@/assets/empty-post-search.svg";
+export { default as MainSearchWarning } from "@/assets/main-search-warning.svg";
