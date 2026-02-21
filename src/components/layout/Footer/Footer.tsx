@@ -15,7 +15,7 @@ const Footer = () => {
   if (isHidden) return null;
 
   return (
-    <footer className="fixed bottom-0 left-1/2 z-10 w-full max-w-[390px] -translate-x-1/2 border-t-[1.2px] border-divider-default bg-white px-5 pb-[27px] pt-[14px]">
+    <footer className="fixed bottom-0 left-1/2 z-10 w-full max-w-[768px] -translate-x-1/2 border-t-[1.2px] border-divider-default bg-white px-5 pb-[27px] pt-[14px]">
       <div className="flex justify-between text-caption2-medium text-labelsVibrant-secondary">
         {FOOTER_LINK.map((link) => (
           <Link
