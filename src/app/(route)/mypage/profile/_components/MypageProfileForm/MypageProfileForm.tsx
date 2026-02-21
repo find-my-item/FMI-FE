@@ -8,8 +8,6 @@ import { useFormContext } from "react-hook-form";
 import useChangeImg from "../../_hooks/useChangeImg";
 
 const MypageProfileForm = () => {
-  const { getValues } = useFormContext();
-
   const { handleClickNickname } = useNicknameCheck();
 
   const { data, isLoading, error } = useGetUsersMe({});
@@ -89,7 +87,6 @@ const MypageProfileForm = () => {
           btnOption={{
             btnLabel: "중복 확인",
             onClick: () => handleClickNickname("nickname"),
-            // onClick: () => setIsNickname(getValues("nickname").trim()),
           }}
           caption={{ rule: "2~10자, 특수문자/금칙어 제한" }}
         />
