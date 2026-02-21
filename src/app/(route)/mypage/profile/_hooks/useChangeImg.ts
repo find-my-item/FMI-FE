@@ -1,35 +1,45 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 
-const useChangeImage = () => {
+interface UseChangeImgProps {
+  setOpenMenu: (open: boolean) => void;
+}
+
+const useChangeImg = ({ setOpenMenu }: UseChangeImgProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [previewImageUrl, setPreviewImageUrl] = useState<string | null>(null);
+  const [previewImgUrl, setPreviewImgUrl] = useState<string | null>(null);
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
   };
 
-  const handleChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeImg = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     e.stopPropagation();
     const file = e.target.files?.[0];
 
     if (file) {
       const url = URL.createObjectURL(file);
-      setPreviewImageUrl(url);
-      console.log("이미지>> ", previewImageUrl);
-      // setOpenMenu(false);
+      setPreviewImgUrl(url);
 
-      // setValue("prefileImg", file);
+      setOpenMenu(false);
     }
   };
 
   useEffect(() => {
     return () => {
-      if (previewImageUrl) {
-        URL.revokeObjectURL(previewImageUrl);
+      if (previewImgUrl) {
+        URL.revokeObjectURL(previewImgUrl);
       }
     };
-  }, [previewImageUrl]);
+  }, [previewImgUrl]);
+
+  return {
+    handleChangeImg,
+    handleButtonClick,
+    previewImgUrl,
+    setPreviewImgUrl,
+    fileInputRef,
+  };
 };
 
-export default useChangeImage;
+export default useChangeImg;

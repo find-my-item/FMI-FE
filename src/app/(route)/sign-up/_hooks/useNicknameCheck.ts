@@ -46,5 +46,6 @@ export const useNicknameCheck = () => {
   return {
     handleClickNickname,
     isNicknameVerified,
+    nicknameValue,
   };
 };
