@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
 import { useToast } from "@/context/ToastContext";
-import { NICKNAME_ERROR_MESSAGE } from "../_constants/SIGNUP_ERROR_MESSAGE";
 import { useApiCheckNickname } from "@/api/fetch/auth";
+import { NICKNAME_ERROR_MESSAGE } from "./NICKNAME_ERROR_MESSAGE";
 
 export const useNicknameCheck = () => {
   const [nicknameValue, setNicknameValue] = useState("");

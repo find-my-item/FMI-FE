@@ -1,6 +1,6 @@
 import { useApiCheckNickname } from "@/api/fetch/auth";
 import { useGetUsersMe } from "@/api/fetch/user";
-import { useNicknameCheck } from "@/app/(route)/sign-up/_hooks/useNicknameCheck";
+import { useNicknameCheck } from "@/hooks/domain/useNicknameCheck/useNicknameCheck";
 import { Icon, InputText, KebabMenu, ProfileAvatar } from "@/components/common";
 import { FooterButton } from "@/components/domain";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
