@@ -36,7 +36,7 @@ const PoliceSection = () => {
           rel="noopener noreferrer"
           className="box-border h-14 w-[60px] overflow-hidden rounded-2xl border border-brand-normal-disabled bg-white px-[14px] py-3 flex-col-center"
         >
-          <span className="whitespace-pre text-center text-caption1-semibold text-neutralInversed-normal-default">
+          <span className="whitespace-pre text-center text-caption1-semibold text-neutralInversed-normal-default hover:text-flatGreen-500">
             {item.label}
           </span>
         </Link>
