@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   description: "분실물 찾기 서비스",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
