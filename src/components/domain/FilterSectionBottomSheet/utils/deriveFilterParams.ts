@@ -19,9 +19,17 @@ type Params = {
   sort?: string | null;
   status?: string | null;
   findStatus?: string | null;
+  date?: string | null;
 };
 
-export const normalizedFilterValues = ({ region, category, sort, status, findStatus }: Params) => {
+export const normalizedFilterValues = ({
+  region,
+  category,
+  sort,
+  status,
+  findStatus,
+  date,
+}: Params) => {
   const normalizedCategory = normalizeEnumValue<Exclude<CategoryFilterValue, undefined>>(category);
   const normalizedSort = normalizeEnumValue<SortFilterValue>(sort);
   const normalizedStatus = normalizeEnumValue<Exclude<StatusFilterValue, undefined>>(status);
@@ -35,12 +43,20 @@ export const normalizedFilterValues = ({ region, category, sort, status, findSta
   };
 };
 
-export const filterSelectionState = ({ region, category, sort, status, findStatus }: Params) => {
+export const filterSelectionState = ({
+  region,
+  category,
+  sort,
+  status,
+  findStatus,
+  date,
+}: Params) => {
   const isRegionSelected = Boolean(region);
   const isCategorySelected = Boolean(category);
   const isSortSelected = Boolean(sort);
   const isStatusSelected = Boolean(status);
   const isFindStatusSelected = Boolean(findStatus);
+  const isDateSelected = Boolean(date);
 
   return {
     isRegionSelected,
@@ -48,5 +64,6 @@ export const filterSelectionState = ({ region, category, sort, status, findStatu
     isSortSelected,
     isStatusSelected,
     isFindStatusSelected,
+    isDateSelected,
   };
 };

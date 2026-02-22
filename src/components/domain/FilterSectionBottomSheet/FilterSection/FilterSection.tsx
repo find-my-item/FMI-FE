@@ -22,6 +22,7 @@ import { filterSelectionState, normalizedFilterValues } from "../utils/deriveFil
 import { useFilterParams } from "@/hooks/domain";
 import { TABS } from "../_constants/TABS";
 import DateRangeBottomSheet from "../../DateRangeBottomSheet/DateRangeBottomSheet";
+import { YmdDate } from "../../DateRangeBottomSheet/YmdDate";
 
 /**
  * @author jikwon (Original)
@@ -78,12 +79,23 @@ const FilterSection = ({ pageType = "LIST" }: FilterSectionProps) => {
     setIsFilterOpen(true);
   };
 
+  const formatYmdLabel = (d: YmdDate) =>
+    `${d.year}.${String(d.month).padStart(2, "0")}.${String(d.day).padStart(2, "0")}`;
+
+  const [selectedDate, setSelectedDate] = useState<YmdDate | null>(null);
+
+  const handleDateApply = (date: YmdDate) => {
+    setSelectedDate(date);
+  };
+
+  const isDateSelected = selectedDate !== null;
+
   const filterConfigs: Record<FilterTab, any> = {
     date: {
       ariaLabel: "기간 필터",
-      onSelected: false,
+      onSelected: isDateSelected,
       icon: { name: "Calendar", size: 16 },
-      label: "기간",
+      label: selectedDate ? formatYmdLabel(selectedDate) : "기간",
       iconPosition: "leading",
     },
     region: {
@@ -162,7 +174,11 @@ const FilterSection = ({ pageType = "LIST" }: FilterSectionProps) => {
       )}
 
       {isDateOpen && (
-        <DateRangeBottomSheet isOpen={isDateOpen} onClose={() => setIsDateOpen(false)} />
+        <DateRangeBottomSheet
+          isOpen={isDateOpen}
+          onClose={() => setIsDateOpen(false)}
+          onApply={handleDateApply}
+        />
       )}
     </>
   );

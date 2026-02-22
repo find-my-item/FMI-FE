@@ -8,6 +8,7 @@ import { cn } from "@/utils";
 import useMakeDate from "./_hooks/useMakeDate";
 import PopupLayout from "../PopupLayout/PopupLayout";
 import { Button, Filter } from "@/components/common";
+import { YmdDate } from "./YmdDate";
 
 const DateWheel = ({
   dateArray,
@@ -75,10 +76,16 @@ const DateWheel = ({
 interface DateRangeBottomSheetProps {
   isOpen: boolean;
   onClose: () => void;
+  onApply: (date: YmdDate) => void;
 }
 
-const DateRangeBottomSheet = ({ isOpen, onClose }: DateRangeBottomSheetProps) => {
+const DateRangeBottomSheet = ({ isOpen, onClose, onApply }: DateRangeBottomSheetProps) => {
   const { years, months, days, selectDate, handleDateChange } = useMakeDate();
+
+  const handleApply = () => {
+    onApply(selectDate);
+    onClose();
+  };
 
   return (
     <PopupLayout
@@ -122,7 +129,7 @@ const DateRangeBottomSheet = ({ isOpen, onClose }: DateRangeBottomSheetProps) =>
         </div>
       </div>
 
-      <Button onClick={onClose} size="big" className="h-11 w-full">
+      <Button onClick={handleApply} size="big" className="h-11 w-full">
         적용하기
       </Button>
     </PopupLayout>
