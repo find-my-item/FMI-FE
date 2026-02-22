@@ -8,7 +8,8 @@ import { useState } from "react";
 const Footer = () => {
   const pathname = usePathname();
   const router = useRouter();
-  const isActive = (href: FooterLinkHref) => pathname === href && "text-neutral-strong-focused";
+  const isActive = (href: FooterLinkHref) =>
+    pathname === href ? "text-neutral-strong-focused" : "";
   const isHome = pathname === "/";
   const isHidden = useHiddenPath();
   const [showLoginRequiredNotice, setShowLoginRequiredNotice] = useState(false);
