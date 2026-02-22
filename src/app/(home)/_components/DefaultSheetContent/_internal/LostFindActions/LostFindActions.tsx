@@ -14,14 +14,14 @@ const LostFindActions = () => {
             <Link
               href={`/list?type=${type}`}
               key={type}
-              aria-label={`${title}로 글 작성`}
+              aria-label={`${title} 목록 페이지로 이동`}
               className="min-w-0 flex-1"
             >
               <div className={cn("relative h-[106px] w-full overflow-hidden rounded-2xl", bgColor)}>
-                <Image src={positionImage} alt="lost position" width={50} height={70} priority />
+                <Image src={positionImage} alt="" width={50} height={70} priority />
                 <Image
                   src={messageImage}
-                  alt="lost message"
+                  alt=""
                   width={58}
                   height={52}
                   className="absolute bottom-3 left-4"
@@ -29,7 +29,7 @@ const LostFindActions = () => {
                 />
                 <Image
                   src={src}
-                  alt="question"
+                  alt=""
                   width={size.width}
                   height={size.height}
                   className="absolute right-[18px] top-5 z-10"
@@ -37,7 +37,7 @@ const LostFindActions = () => {
                 />
                 <Image
                   src={bagImage}
-                  alt="lost bag"
+                  alt=""
                   width={57.69}
                   height={42.18}
                   className="absolute bottom-5 right-[14px]"
