@@ -6,7 +6,6 @@ import { useSearchParams } from "next/navigation";
 import { useFormContext } from "react-hook-form";
 import { useWriteStore } from "@/store";
 import { DetailHeader } from "@/components/layout";
-import { ConfirmModal } from "@/components/common";
 import { PostWriteFormValues } from "./_types/PostWriteType";
 import usePostWriteSubmit from "./_hooks/usePostWriteSubmit/usePostWriteSubmit";
 import {
@@ -19,9 +18,11 @@ import {
 } from "./_components";
 import { HeaderSave } from "@/components/layout/DetailHeader/DetailHeaderParts";
 import { useGetTempPost } from "@/api/fetch/post";
+import TempModal from "./_components/_internal/TempModal";
 
 const WritePage = () => {
   const [saveModalOpen, setSaveModalOpen] = useState(false);
+  const [overwriteModalOpen, setOverwriteModalOpen] = useState(false);
   const promptedRef = useRef(false);
 
   const searchParams = useSearchParams();
@@ -44,7 +45,6 @@ const WritePage = () => {
 
   const title = postType === "lost" ? "분실했어요 글쓰기" : "발견했어요 글쓰기";
   const { data: tempPost, isLoading } = useGetTempPost();
-  console.log(tempPost);
 
   useEffect(() => {
     if (promptedRef.current) return;
@@ -59,7 +59,7 @@ const WritePage = () => {
   return (
     <>
       <DetailHeader title={title}>
-        <HeaderSave onClick={() => setSaveModalOpen(true)} />
+        <HeaderSave onClick={() => setOverwriteModalOpen(true)} />
       </DetailHeader>
       <h1 className="sr-only">{`${title} 페이지`}</h1>
 
@@ -78,16 +78,28 @@ const WritePage = () => {
       </form>
 
       {tempPost?.result && (
-        <ConfirmModal
-          size="small"
+        <TempModal
           isOpen={saveModalOpen}
           onClose={() => setSaveModalOpen(false)}
           title="임시 저장한 게시글이 있습니다."
-          content="임시 저장한 내용을 불러오시겠어요?"
+          description="이전에 임시 저장한 내역이 있습니다."
           onConfirm={() => setSaveModalOpen(false)}
           onCancel={() => setSaveModalOpen(false)}
+          confirmText="불러올래요"
+          cancelText="아니요"
         />
       )}
+
+      <TempModal
+        isOpen={overwriteModalOpen}
+        onClose={() => setOverwriteModalOpen(false)}
+        title="임시 저장한 내용을 덮어씌우겠습니까?"
+        description="지금 임시 저장하면 이전 내용은 삭제됩니다."
+        onConfirm={() => setOverwriteModalOpen(false)}
+        onCancel={() => setOverwriteModalOpen(false)}
+        confirmText="덮어씌우기"
+        cancelText="아니요"
+      />
     </>
   );
 };
