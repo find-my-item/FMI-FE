@@ -7,6 +7,7 @@ import { Button } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
 import { SHARE } from "./SHARE";
 import { ShareId } from "@/types";
+import { useToast } from "@/context/ToastContext";
 
 interface PostShareProps {
   isOpen: boolean;
@@ -16,6 +17,7 @@ interface PostShareProps {
 
 const PostShare = ({ isOpen, onClose, postId }: PostShareProps) => {
   const { data } = useGetMetaData({ postId });
+  const { addToast } = useToast();
 
   const metaData = {
     title: data?.result?.title || "찾아줘 게시글 공유",
@@ -32,6 +34,7 @@ const PostShare = ({ isOpen, onClose, postId }: PostShareProps) => {
     executeShare({
       id,
       metaData,
+      addToast,
     });
 
   return (

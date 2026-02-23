@@ -23,7 +23,7 @@ describe("shareWithKakao", () => {
 
     expect(sendDefaultMock).toHaveBeenCalledTimes(1);
     expect(sendDefaultMock).toHaveBeenCalledWith({
-      objectType: "feed",
+      objectType: "location",
       content: {
         title: metaData.title,
         description: metaData.summary,

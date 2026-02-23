@@ -15,6 +15,8 @@ const metaData: MetaDataType = {
   link: "test",
 };
 
+const addToast = jest.fn();
+
 describe("executeShare", () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -24,6 +26,7 @@ describe("executeShare", () => {
     executeShare({
       id: "kakao",
       metaData,
+      addToast,
     });
 
     expect(shareWithKakao).toHaveBeenCalledTimes(1);
@@ -34,6 +37,7 @@ describe("executeShare", () => {
     executeShare({
       id: "native",
       metaData,
+      addToast,
     });
 
     expect(shareWithNative).toHaveBeenCalledTimes(1);
@@ -44,8 +48,10 @@ describe("executeShare", () => {
     executeShare({
       id: "copy",
       metaData,
+      addToast,
     });
 
     expect(shareWithCopyUrl).toHaveBeenCalledTimes(1);
+    expect(shareWithCopyUrl).toHaveBeenCalledWith(metaData.link, addToast);
   });
 });
