@@ -1,27 +1,24 @@
-import { MetaDataType, ShareId } from "@/types";
+import { ShareId } from "@/types";
 import { shareWithCopyUrl, shareWithKakao, shareWithNative } from "./_internal";
+import { PostMetaDataItemWithLink } from "@/types/MetaDataType";
 
 interface ExecuteShareProps {
   id: ShareId;
-  metaData: MetaDataType;
+  metaData: PostMetaDataItemWithLink;
 }
 
 export const executeShare = ({ id, metaData }: ExecuteShareProps) => {
   switch (id) {
     case "kakao":
-      shareWithKakao({
-        ...metaData,
-      });
+      shareWithKakao(metaData);
       break;
     case "native":
       shareWithNative({
-        metaData: {
-          ...metaData,
-        },
+        metaData,
       });
       break;
     case "copy":
-      shareWithCopyUrl();
+      shareWithCopyUrl(metaData.link);
       break;
     default:
       break;

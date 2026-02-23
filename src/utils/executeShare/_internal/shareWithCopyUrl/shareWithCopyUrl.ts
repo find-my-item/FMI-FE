@@ -1,8 +1,6 @@
 "use client";
 
-export const shareWithCopyUrl = async () => {
-  const url = window.location.href;
-
+export const shareWithCopyUrl = async (url: string) => {
   try {
     await navigator.clipboard.writeText(url);
     // TODO(지권): alert 대신 toast로 변경

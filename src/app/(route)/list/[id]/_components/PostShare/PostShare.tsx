@@ -18,19 +18,20 @@ const PostShare = ({ isOpen, onClose, postId }: PostShareProps) => {
   const { data } = useGetMetaData({ postId });
 
   const metaData = {
-    title: data?.result?.title || "데이터 공유하기",
-    summary: data?.result?.summary || "데이터 공유하기",
+    title: data?.result?.title || "찾아줘 게시글 공유",
+    summary: data?.result?.summary || "게시글을 확인해보세요.",
     thumbnailUrl: data?.result?.thumbnailUrl || "/test_list.JPG",
-    link: "",
+    address: data?.result?.address || "위치 정보 없음",
+    likeCount: data?.result?.likeCount || 0,
+    commentCount: data?.result?.commentCount || 0,
+    viewCount: data?.result?.viewCount || 0,
+    link: window.location.href,
   };
 
   const handleOption = (id: ShareId) =>
     executeShare({
       id,
-      metaData: {
-        ...metaData,
-        link: window.location.href,
-      },
+      metaData,
     });
 
   return (
