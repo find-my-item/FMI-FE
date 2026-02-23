@@ -58,7 +58,7 @@ const ImageSection = () => {
           onClick={openImagePicker}
           className="size-[104px] shrink-0 rounded-[6px] bg-flatGray-25 flex-col-center"
         >
-          <Icon name="Camera" size={32} />
+          <Icon name="Camera" size={32} className="text-neutralInversed-strong-default" />
           <span className="select-none text-caption1-regular text-flatGray-400">
             ({fields.length}/5)
           </span>
