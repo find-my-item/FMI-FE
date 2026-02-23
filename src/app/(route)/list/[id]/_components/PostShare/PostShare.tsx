@@ -22,6 +22,7 @@ const PostShare = ({ isOpen, onClose, postId }: PostShareProps) => {
   const metaData = {
     title: data?.result?.title || "찾아줘 게시글 공유",
     summary: data?.result?.summary || "게시글을 확인해보세요.",
+    // TODO(지권): 대체 이미지 변경
     thumbnailUrl: data?.result?.thumbnailUrl || "/test_list.JPG",
     address: data?.result?.address || "위치 정보 없음",
     likeCount: data?.result?.likeCount || 0,
