@@ -9,6 +9,7 @@ import { ACTION_MENU } from "./ACTION_MENU_STYLES";
 import { PostReportBlockActions, ReportModal } from "@/components/domain";
 import { PostActionData } from "../../_types/PostActionType";
 import UserBlockModal from "@/components/domain/PostReportBlockActions/_internal/UserBlockModal/UserBlockModal";
+import { usePutPostStatus } from "@/api/fetch/post/api/usePutPostStatus";
 
 interface PostOptionBoxProps {
   open: boolean;
@@ -22,6 +23,8 @@ const PostActionMenu = ({ open, onClose, postId, postData }: PostOptionBoxProps)
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [isReportOpen, setIsReportOpen] = useState(false);
   const [isBlockOpen, setIsBlockOpen] = useState(false);
+
+  const { mutate: putPostStatus } = usePutPostStatus(postId);
 
   if (!open) return null;
 
@@ -48,7 +51,10 @@ const PostActionMenu = ({ open, onClose, postId, postData }: PostOptionBoxProps)
               <span className="text-system-warning">게시글 삭제하기</span>
             </button>
             <hr className={ACTION_MENU.hrStyle} aria-hidden="true" />
-            <button className={ACTION_MENU.buttonStyle}>
+            <button
+              className={ACTION_MENU.buttonStyle}
+              onClick={() => putPostStatus({ postStatus: "FOUND" })}
+            >
               <Icon name="ArrowSwitchHorizontal" size={20} />
               <span>찾았음 상태로 변경</span>
             </button>
