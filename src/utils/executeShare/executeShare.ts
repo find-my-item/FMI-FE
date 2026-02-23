@@ -1,6 +1,6 @@
 import { ShareId } from "@/types";
 import { shareWithCopyUrl, shareWithKakao, shareWithNative } from "./_internal";
-import { PostMetaDataItemWithLink } from "@/types/MetaDataType";
+import { PostMetaDataItemWithLink } from "@/types";
 import { ToastType } from "@/types/ToastTypes";
 
 interface ExecuteShareProps {

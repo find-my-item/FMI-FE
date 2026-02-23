@@ -1,4 +1,5 @@
 import { GetDetailPostResponse, PostItem, SimilarDataItem } from "@/api/fetch/post";
+import { PostMetaDataItemWithLink } from "@/types";
 
 export const MOCK_POST_ITEM: PostItem = {
   id: 1,
@@ -66,4 +67,15 @@ export const MOCK_SIMILAR_POST_ITEMS: SimilarDataItem = {
   favoriteStatus: false,
   viewCount: 2,
   createdAt: "2026-02-15T10:30:00",
+};
+
+export const MOCK_POST_META_DATA: PostMetaDataItemWithLink = {
+  title: "제목",
+  summary: "설명",
+  thumbnailUrl: "https://example.com/image.png",
+  link: "https://example.com",
+  address: "주소",
+  likeCount: 1,
+  commentCount: 1,
+  viewCount: 1,
 };

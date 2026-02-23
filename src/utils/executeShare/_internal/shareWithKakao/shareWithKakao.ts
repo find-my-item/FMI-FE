@@ -1,6 +1,6 @@
 "use client";
 
-import { PostMetaDataItemWithLink } from "@/types/MetaDataType";
+import { PostMetaDataItemWithLink } from "@/types";
 
 const getKakaoKey = () => {
   const key = process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY;

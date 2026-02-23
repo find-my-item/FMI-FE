@@ -1,5 +1,5 @@
 import { shareWithKakao } from "./shareWithKakao";
-import { MetaDataType } from "@/types";
+import { MOCK_POST_META_DATA } from "@/mock/data";
 
 describe("shareWithKakao", () => {
   it("카카오톡 공유를 실행한다", () => {
@@ -11,28 +11,36 @@ describe("shareWithKakao", () => {
         sendDefault: sendDefaultMock,
       },
     };
-
-    const metaData: MetaDataType = {
-      title: "제목",
-      summary: "설명",
-      thumbnailUrl: "https://example.com/image.png",
-      link: "https://example.com",
-    };
-
-    shareWithKakao(metaData);
+    shareWithKakao(MOCK_POST_META_DATA);
 
     expect(sendDefaultMock).toHaveBeenCalledTimes(1);
     expect(sendDefaultMock).toHaveBeenCalledWith({
       objectType: "location",
+      address: MOCK_POST_META_DATA.address,
+      addressTitle: MOCK_POST_META_DATA.title,
       content: {
-        title: metaData.title,
-        description: metaData.summary,
-        imageUrl: metaData.thumbnailUrl,
+        title: MOCK_POST_META_DATA.title,
+        description: MOCK_POST_META_DATA.summary,
+        imageUrl: MOCK_POST_META_DATA.thumbnailUrl,
         link: {
-          mobileWebUrl: metaData.link,
-          webUrl: metaData.link,
+          mobileWebUrl: MOCK_POST_META_DATA.link,
+          webUrl: MOCK_POST_META_DATA.link,
         },
       },
+      social: {
+        likeCount: MOCK_POST_META_DATA.likeCount,
+        commentCount: MOCK_POST_META_DATA.commentCount,
+        viewCount: MOCK_POST_META_DATA.viewCount,
+      },
+      buttons: [
+        {
+          title: "웹으로 보기",
+          link: {
+            mobileWebUrl: MOCK_POST_META_DATA.link,
+            webUrl: MOCK_POST_META_DATA.link,
+          },
+        },
+      ],
     });
   });
 });
