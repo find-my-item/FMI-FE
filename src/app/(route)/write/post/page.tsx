@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import NotFound from "@/app/not-found";
 import { useSearchParams } from "next/navigation";
 import { useFormContext } from "react-hook-form";
@@ -18,9 +18,12 @@ import {
   TitleSection,
 } from "./_components";
 import { HeaderSave } from "@/components/layout/DetailHeader/DetailHeaderParts";
+import { useGetTempPost } from "@/api/fetch/post";
 
 const WritePage = () => {
   const [saveModalOpen, setSaveModalOpen] = useState(false);
+  const promptedRef = useRef(false);
+
   const searchParams = useSearchParams();
   const postType = searchParams.get("type");
 
@@ -40,6 +43,18 @@ const WritePage = () => {
   const isSubmitDisabled = !canSubmit(values) || isPosting;
 
   const title = postType === "lost" ? "분실했어요 글쓰기" : "발견했어요 글쓰기";
+  const { data: tempPost, isLoading } = useGetTempPost();
+  console.log(tempPost);
+
+  useEffect(() => {
+    if (promptedRef.current) return;
+    if (isLoading) return;
+
+    if (tempPost?.result) {
+      promptedRef.current = true;
+      setSaveModalOpen(true);
+    }
+  }, [tempPost?.result, isLoading]);
 
   return (
     <>
@@ -62,15 +77,17 @@ const WritePage = () => {
         <ActionSection disabled={isSubmitDisabled} />
       </form>
 
-      <ConfirmModal
-        size="small"
-        isOpen={saveModalOpen}
-        onClose={() => setSaveModalOpen(false)}
-        title="임시 저장한 게시글이 있습니다."
-        content="임시 저장한 내용을 불러오시겠어요?"
-        onConfirm={() => setSaveModalOpen(false)}
-        onCancel={() => setSaveModalOpen(false)}
-      />
+      {tempPost?.result && (
+        <ConfirmModal
+          size="small"
+          isOpen={saveModalOpen}
+          onClose={() => setSaveModalOpen(false)}
+          title="임시 저장한 게시글이 있습니다."
+          content="임시 저장한 내용을 불러오시겠어요?"
+          onConfirm={() => setSaveModalOpen(false)}
+          onCancel={() => setSaveModalOpen(false)}
+        />
+      )}
     </>
   );
 };
