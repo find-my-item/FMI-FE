@@ -3,13 +3,12 @@
 import { useState } from "react";
 import { cn } from "@/utils";
 import { Button, Icon } from "@/components/common";
-import { useDeleteDetailPost } from "@/api/fetch/post";
+import { useDeleteDetailPost, usePutPostStatus } from "@/api/fetch/post";
 import ModalLayout from "@/components/common/Modal/_internal/ModalLayout";
 import { ACTION_MENU } from "./ACTION_MENU_STYLES";
 import { PostReportBlockActions, ReportModal } from "@/components/domain";
 import { PostActionData } from "../../_types/PostActionType";
 import UserBlockModal from "@/components/domain/PostReportBlockActions/_internal/UserBlockModal/UserBlockModal";
-import { usePutPostStatus } from "@/api/fetch/post/api/usePutPostStatus";
 
 interface PostOptionBoxProps {
   open: boolean;
