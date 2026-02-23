@@ -20,6 +20,7 @@ const useBlock = ({ onClose, userId }: UseBlockParams) => {
       toast.addToast("작성자를 차단했어요", "success");
       queryClient.invalidateQueries({ queryKey: ["user-block-list"] });
       queryClient.invalidateQueries({ queryKey: ["posts"] });
+      // TODO(지권): 기획에 따라 변경 가능
       router.replace("/list");
       onClose();
     },
