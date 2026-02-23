@@ -1,4 +1,3 @@
-export * from "./types/BlockRequest";
 export * from "./types/BlockResponse";
 export * from "./types/ReportRequest";
 
