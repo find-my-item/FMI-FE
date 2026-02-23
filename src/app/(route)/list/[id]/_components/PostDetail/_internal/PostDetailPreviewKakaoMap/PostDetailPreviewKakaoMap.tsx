@@ -40,7 +40,7 @@ const PostDetailPreviewKakaoMap = ({ data }: PostDetailPreviewKakaoMapProps) => 
                 name="Position"
                 size={16}
                 aria-hidden="true"
-                className="fill-current text-brand-subtle-default"
+                className="text-brand-normal-default"
               />
             )}
             {/* TODO(지권): 디자인 토큰 누락 */}

@@ -16,10 +16,12 @@ const PostListItem = ({ post, linkState = "list", keyword }: PostListItemProps) 
     {
       icon: "Star",
       count: post.favoriteCount,
+      iconColor: "text-labelsVibrant-quaternary",
     },
     {
       icon: "Eye",
       count: post.viewCount,
+      iconColor: "text-labelsVibrant-quaternary",
     },
   ] as const;
 
@@ -63,7 +65,7 @@ const PostListItem = ({ post, linkState = "list", keyword }: PostListItemProps) 
                 key={item.icon}
                 className="flex items-center gap-1 text-body2-regular text-neutral-strong-placeholder"
               >
-                <Icon name={item.icon} size={16} />
+                <Icon name={item.icon} size={16} className={item.iconColor} />
                 {item.count}
               </span>
             ))}
