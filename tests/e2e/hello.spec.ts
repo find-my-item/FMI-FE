@@ -11,9 +11,10 @@ test.describe("서비스 소개 페이지", () => {
     // 3. 핵심 섹션 렌더링 확인
     await expect(page.locator("[data-testid='intro-section']")).toBeVisible();
 
-    // 4. 하단 CTA 버튼 확인
+    // 4. 하단 CTA 버튼 확인 (fixed 푸터에 가리지 않도록 상단 쪽으로 스크롤)
     const ctaButton = page.getByRole("link", { name: "찾아줘 홈으로 이동" });
     await expect(ctaButton).toBeVisible();
+    await ctaButton.scrollIntoViewIfNeeded({ block: "center" });
 
     // 5. CTA 버튼 클릭
     await ctaButton.click();

@@ -107,6 +107,7 @@ jest.mock("@/components/layout", () => ({
 }));
 
 jest.mock("@/hooks", () => ({
+  ...jest.requireActual("@/hooks"),
   useModalBackdrop: () => () => {},
   useModalLockAndEsc: () => {},
 }));

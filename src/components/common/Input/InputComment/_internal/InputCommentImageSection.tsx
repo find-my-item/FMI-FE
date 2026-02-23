@@ -1,9 +1,8 @@
 "use client";
 
-import { useObjectURLs } from "@/hooks";
+import { useObjectURLs, useHorizontalDragScroll } from "@/hooks";
 import Image from "next/image";
 import { Icon } from "@/components/common";
-import useHorizontalDragScroll from "./useHorizontalDragScroll";
 
 interface InputCommentImageSectionProps {
   images: File[];

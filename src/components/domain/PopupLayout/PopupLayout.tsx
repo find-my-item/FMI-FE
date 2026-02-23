@@ -39,7 +39,11 @@ const PopupLayout = ({ isOpen, onClose, children, className }: PopupLayoutProps)
       onMouseDown={onBackdropMouseDown}
     >
       <div
-        className={cn("w-full max-w-md rounded-t-2xl bg-white px-6", className)}
+        className={cn(
+          "w-full rounded-t-2xl bg-white px-6",
+          "tablet:max-w-[768px] tablet:px-20",
+          className
+        )}
         onClick={(e) => e.stopPropagation()}
       >
         {children}
