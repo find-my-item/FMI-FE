@@ -1,4 +1,4 @@
-import { Footer, Header } from "@/components/layout";
+import { Footer } from "@/components/layout";
 import "./globals.css";
 import Providers from "@/providers/QueryProviders";
 import { ToastProvider } from "@/providers/ToastProviders";
@@ -36,7 +36,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="찾아줘!" />
         <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
       </head>
-      <body className="mx-auto max-w-[390px] border-2 flex-col-center">
+      <body className="mx-auto max-w-[768px] border-2 flex-col-center">
         {isProd && gaId && (
           <>
             <Script
@@ -75,7 +75,6 @@ export default function RootLayout({
         <Providers>
           <ToastProvider>
             <MSWProvider />
-            <Header />
             <main className="w-full flex-1">{children}</main>
             <Footer />
           </ToastProvider>

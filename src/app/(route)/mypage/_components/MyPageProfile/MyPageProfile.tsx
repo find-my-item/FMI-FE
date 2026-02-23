@@ -2,24 +2,51 @@ import Link from "next/link";
 import { Button, ProfileAvatar } from "@/components/common";
 
 interface ProfileProps {
-  userName: string;
-  email: string;
+  userData?: {
+    nickname: string;
+    email: string;
+    profileImg?: string;
+  };
 }
 
-const MyPageProfile = ({ userName, email }: ProfileProps) => {
+const MyPageProfile = ({ userData }: ProfileProps) => {
+  const { nickname, email, profileImg } = userData ?? {
+    nickname: "",
+    email: "",
+    profileImg: "",
+  };
+
   return (
     <div className="flex w-full items-center justify-between px-5 py-[30px]">
       <div className="flex w-[188px] items-center gap-6">
-        {/* TODO(수현): 프로필 추후 링크 연결 */}
-        <ProfileAvatar size={60} src={null} alt={userName} priority={true} />
+        <ProfileAvatar
+          size={60}
+          src={profileImg ? profileImg : null}
+          alt={nickname}
+          priority={true}
+        />
         <div className="flex w-[160px] flex-col gap-1">
-          <span className="truncate text-body1-semibold">{userName}</span>
-          <span className="truncate text-body2-regular text-layout-body-default">{email}</span>
+          {userData ? (
+            <>
+              <span className="truncate text-body1-semibold">{nickname}</span>
+              <span className="truncate text-body2-regular text-layout-body-default">{email}</span>
+            </>
+          ) : (
+            <p className="text-nowrap text-body1-semibold text-layout-header-default">
+              로그인 시 이용 가능합니다.
+            </p>
+          )}
         </div>
       </div>
 
-      <Button as={Link} href="/mypage/profile" variant="outlined">
-        프로필 수정
+      <Button
+        as={Link}
+        href={userData ? "/mypage/profile" : "/login"}
+        variant="outlined"
+        size="small"
+        className="!min-w-0"
+      >
+        {userData ? "프로필 수정" : "로그인"}
       </Button>
     </div>
   );

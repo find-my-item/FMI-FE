@@ -3,7 +3,7 @@ import { useForm, FormProvider } from "react-hook-form";
 import InputChat from "./InputChat";
 
 const meta: Meta<typeof InputChat> = {
-  title: "채팅/InputChat",
+  title: "페이지/채팅 상세 페이지/InputChat",
   component: InputChat,
   tags: ["autodocs"],
   parameters: {
