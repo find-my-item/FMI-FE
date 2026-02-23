@@ -1,5 +1,5 @@
-export type PostStatus = "SEARCHING" | "FOUND";
+import { ItemStatus } from "@/types";
 
 export interface PutPostStatusRequestBody {
-  postStatus: PostStatus;
+  postStatus: ItemStatus;
 }
