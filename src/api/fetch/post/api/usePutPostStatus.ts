@@ -13,6 +13,7 @@ export const usePutPostStatus = (postId: number) => {
     onSuccess: () => {
       addToast("게시글 상태가 변경되었어요.", "success");
       queryClient.invalidateQueries({ queryKey: ["post-detail", postId] });
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
     },
     onError: () => {
       addToast("게시글 상태 변경에 실패했어요.", "error");
