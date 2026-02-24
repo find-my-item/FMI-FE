@@ -28,6 +28,7 @@ import TempModal from "./_components/_internal/TempModal";
 const WritePage = () => {
   const [saveModalOpen, setSaveModalOpen] = useState(false);
   const [overwriteModalOpen, setOverwriteModalOpen] = useState(false);
+  const [formKey, setFormKey] = useState(0);
   const promptedRef = useRef(false);
 
   const searchParams = useSearchParams();
@@ -35,7 +36,7 @@ const WritePage = () => {
 
   if (postType !== "lost" && postType !== "find") return <NotFound />;
 
-  const { setPostType } = useWriteStore();
+  const { setPostType, setLatLng, setAddress, setFullAddress, setRadius } = useWriteStore();
 
   useEffect(() => {
     if (postType === "lost") setPostType("LOST");
@@ -65,21 +66,32 @@ const WritePage = () => {
   const handleLoadTempPost = () => {
     if (!tempPost?.result) return;
     const { result } = tempPost;
-    methods.reset({
+
+    setPostType(result.postType);
+    setLatLng(result.latitude, result.longitude);
+    setAddress(result.address);
+    setFullAddress(result.address);
+    setRadius(result.radius);
+
+    const formattedData = {
       postType: result.postType,
-      title: result.title,
-      date: result.date,
-      address: result.address,
+      title: result.title || "",
+      date: result.date || new Date().toISOString(),
+      address: result.address || "",
       latitude: result.latitude,
       longitude: result.longitude,
-      content: result.content,
+      content: result.content || "",
       radius: result.radius,
       category: result.category,
       images: result.images.map((img) => ({
         id: img.id,
         previewUrl: img.imgUrl,
       })),
-    });
+      temporarySave: false,
+    };
+
+    methods.reset(formattedData);
+    setFormKey((prev) => prev + 1);
     setSaveModalOpen(false);
   };
 
@@ -117,7 +129,7 @@ const WritePage = () => {
       </DetailHeader>
       <h1 className="sr-only">{`${title} 페이지`}</h1>
 
-      <form onSubmit={onSubmit} className="flex flex-col h-base">
+      <form key={formKey} onSubmit={onSubmit} className="flex flex-col h-base">
         <div className="flex min-h-0 flex-1 flex-col">
           <ImageSection />
           <CategorySection />
@@ -135,7 +147,7 @@ const WritePage = () => {
         <TempModal
           isOpen={saveModalOpen}
           onClose={() => setSaveModalOpen(false)}
-          title="임시 저장한 게시글이 있습니다."
+          title="임시 저장한 내용을 불러오시겠습니까?"
           description="이전에 임시 저장한 내역이 있습니다."
           onConfirm={handleLoadTempPost}
           onCancel={() => setSaveModalOpen(false)}
