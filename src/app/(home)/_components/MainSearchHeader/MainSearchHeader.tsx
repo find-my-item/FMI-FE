@@ -88,12 +88,7 @@ const HeaderContent = ({ setFocused, focused }: FocusedProps) => {
         (searchValue || focused) && "bg-white"
       )}
     >
-      <HeaderSearchForm
-        key={searchValue ?? "empty"}
-        searchValue={searchValue}
-        setFocused={setFocused}
-        focused={focused}
-      />
+      <HeaderSearchForm searchValue={searchValue} setFocused={setFocused} focused={focused} />
     </header>
   );
 };
