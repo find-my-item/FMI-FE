@@ -9,7 +9,7 @@ const Footer = () => {
   const pathname = usePathname();
   const router = useRouter();
   const isActive = (href: FooterLinkHref) =>
-    pathname === href ? "text-neutral-strong-focused" : "";
+    pathname === href ? "text-neutral-strong-focused" : undefined;
   const isHidden = useHiddenPath();
   const [showLoginRequiredNotice, setShowLoginRequiredNotice] = useState(false);
 

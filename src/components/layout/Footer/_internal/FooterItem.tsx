@@ -10,7 +10,7 @@ const CHAT_LINK_NAME = "채팅";
 
 interface FooterItemProps {
   link: (typeof FOOTER_LINK)[number];
-  isActive: (href: FooterLinkHref) => string | boolean;
+  isActive: (href: FooterLinkHref) => string | undefined;
   showLoginRequiredNotice: boolean;
   onClick: () => void;
 }
