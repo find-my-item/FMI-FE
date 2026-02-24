@@ -1,6 +1,6 @@
 import { Icon } from "@/components/common";
 
-const SearchEmpty = () => {
+const RecentSearchEmpty = () => {
   return (
     <div role="status" className="w-full gap-5 py-3 flex-col-center">
       <div className="h-[32px] w-[32px] flex-shrink-0 rounded-full bg-fill-neutral-strong-default flex-center">
@@ -11,4 +11,4 @@ const SearchEmpty = () => {
   );
 };
 
-export default SearchEmpty;
+export default RecentSearchEmpty;
