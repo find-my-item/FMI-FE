@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/utils";
 import { Suspense, useState } from "react";
 import SideBar from "./_internal/SideBar";
-import SearchFocusDropdown from "./_internal/SearchFocusDropdown";
+import SearchFocusDropdown from "../SearchFocusDropdown/SearchFocusDropdown";
 
 interface LocationFormValues {
   search: string;
