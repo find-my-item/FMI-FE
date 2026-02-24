@@ -41,7 +41,7 @@ const PostDetailKakaoMap = () => {
             "tablet:w-[50%]"
           )}
         >
-          <Icon name="Position" />
+          <Icon name="Position" className="text-brand-normal-default" />
           <span className="text-h3-semibold text-flatGray-700">{address}</span>
         </div>
       </BaseKakaoMap>

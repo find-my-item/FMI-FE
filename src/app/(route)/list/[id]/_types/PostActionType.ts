@@ -1,4 +1,5 @@
 export interface PostActionData {
   isMine: boolean;
   writerId: number;
+  favoriteStatus: boolean;
 }
