@@ -1,8 +1,9 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { PostWriteFormValues } from "../../../_types/PostWriteType";
+import { useWriteFlowStore } from "@/store";
 
 const defaultValues: PostWriteFormValues = {
   postType: "",
@@ -25,6 +26,14 @@ const PostWriteFormProvider = ({ children }: { children: ReactNode }) => {
     reValidateMode: "onChange",
     shouldUnregister: false,
   });
+
+  const resetWriteFlow = useWriteFlowStore((s) => s.resetWriteFlow);
+
+  useEffect(() => {
+    return () => {
+      resetWriteFlow();
+    };
+  }, [resetWriteFlow]);
 
   return <FormProvider {...methods}>{children}</FormProvider>;
 };
