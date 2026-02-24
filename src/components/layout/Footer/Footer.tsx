@@ -16,6 +16,7 @@ const Footer = () => {
 
   if (isHidden) return null;
 
+  // TODO(형준): 채팅 페이지 클릭 시 로그인 알림 노출 후 2.5초 뒤 채팅 페이지로 이동(로그인 여부 판별 로직 추가 후 삭제 예정)
   const handleChatClick = () => {
     setShowLoginRequiredNotice(true);
     setTimeout(() => {
