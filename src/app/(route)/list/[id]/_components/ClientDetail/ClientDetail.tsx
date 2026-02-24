@@ -26,7 +26,12 @@ const ClientDetail = ({ id }: ClientDetailProps) => {
     <>
       <PostDetailTopHeader
         postId={id}
-        postData={{ isMine, writerId: postUserInformation.userId }}
+        postData={{
+          isMine,
+          writerId: postUserInformation.userId,
+          favoriteStatus: data.result.favoriteStatus,
+          postStatus: data.result.postStatus,
+        }}
       />
       <PostDetail type="find" data={data.result} />
       <CommentList comments={MOCK_COMMENT_LIST_DATA} />
