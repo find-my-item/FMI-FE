@@ -7,6 +7,7 @@ import { cn } from "@/utils";
 import { Suspense, useState } from "react";
 import SideBar from "./_internal/SideBar";
 import SearchFocusDropdown from "../SearchFocusDropdown/SearchFocusDropdown";
+import MainSearchLayout from "../MainSearchLayout/MainSearchLayout";
 
 interface LocationFormValues {
   search: string;
@@ -100,14 +101,16 @@ const MainSearchHeader = () => {
 
   return (
     <Suspense fallback={""}>
-      <div className="relative">
-        <HeaderContent setFocused={setFocused} focused={focused} />
-        <SearchFocusDropdown focused={focused} />
-        <button onClick={() => setIsOpen(!isOpen)} className="absolute right-5 top-5 z-50">
-          <Icon name="Menu" title="메뉴 열기" />
-        </button>
-        <SideBar isOpen={isOpen} onClose={() => setIsOpen(false)} />
-      </div>
+      <MainSearchLayout focused={focused}>
+        <div className="relative">
+          <HeaderContent setFocused={setFocused} focused={focused} />
+          <SearchFocusDropdown focused={focused} />
+          <button onClick={() => setIsOpen(!isOpen)} className="absolute right-5 top-5 z-50">
+            <Icon name="Menu" title="메뉴 열기" />
+          </button>
+          <SideBar isOpen={isOpen} onClose={() => setIsOpen(false)} />
+        </div>
+      </MainSearchLayout>
     </Suspense>
   );
 };
