@@ -5,6 +5,7 @@ import { FOOTER_LINK, FooterLinkHref, FOOTER_ITEM_BASE_STYLE } from "./CONST_FOO
 import { Icon } from "@/components/common";
 import LoginRequiredNotice from "./LoginRequiredNotice";
 import Link from "next/link";
+import { MouseEventHandler } from "react";
 
 const CHAT_LINK_HREF = "/chat";
 
@@ -22,25 +23,21 @@ const FooterItem = ({ link, isActive, showLoginRequiredNotice, onClick }: Footer
 
   const isChat = link.href === CHAT_LINK_HREF;
 
-  if (isChat) {
-    return (
-      <div
-        role="link"
-        tabIndex={0}
-        className={cn(FOOTER_ITEM_BASE_STYLE, "relative cursor-pointer overflow-visible")}
-        onClick={onClick}
-      >
-        <Icon name={link.icon} size={28} className={iconClassName} />
-        <span className={cn("py-[2px]", isActive(link.href))}>{link.name}</span>
-        {showLoginRequiredNotice ? <LoginRequiredNotice /> : null}
-      </div>
-    );
-  }
+  const handleClick: MouseEventHandler<HTMLAnchorElement> = (e) => {
+    if (!isChat) return;
+    e.preventDefault();
+    onClick();
+  };
 
   return (
-    <Link href={link.href} className={FOOTER_ITEM_BASE_STYLE}>
+    <Link
+      href={link.href}
+      className={cn(FOOTER_ITEM_BASE_STYLE, isChat && "relative overflow-visible")}
+      onClick={handleClick}
+    >
       <Icon name={link.icon} size={28} className={iconClassName} />
       <span className={cn("py-[2px]", isActive(link.href))}>{link.name}</span>
+      {isChat && showLoginRequiredNotice ? <LoginRequiredNotice /> : null}
     </Link>
   );
 };
