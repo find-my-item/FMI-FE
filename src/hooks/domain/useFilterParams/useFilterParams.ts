@@ -25,5 +25,6 @@ export const useFilterParams = () => {
     findStatus: normalizeEnumValue<Exclude<FindStatusFilterValue, undefined>>(
       searchParams.get("findStatus")
     ),
+    date: searchParams.get("date"),
   };
 };

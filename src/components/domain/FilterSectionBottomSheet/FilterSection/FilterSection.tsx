@@ -51,7 +51,7 @@ interface FilterSectionProps {
 }
 
 const FilterSection = ({ pageType = "LIST" }: FilterSectionProps) => {
-  const { region, category, sort, status, findStatus } = useFilterParams();
+  const { region, category, sort, status, findStatus, date } = useFilterParams();
   const [filters, setFilters] = useState<FiltersStateType>(DEFAULT_FILTERS);
   const [selectedTab, setSelectedTab] = useState<FilterTab>("region");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -60,10 +60,15 @@ const FilterSection = ({ pageType = "LIST" }: FilterSectionProps) => {
   const { normalizedCategory, normalizedSort, normalizedStatus, normalizedFindStatus } =
     normalizedFilterValues({ region, category, sort, status, findStatus });
 
-  const selectionState = filterSelectionState({ region, category, sort, status, findStatus });
+  const selectionState = filterSelectionState({ region, category, sort, status, findStatus, date });
 
   const openSheet = (tab: FilterTab) => {
     if (tab === "date") {
+      setFilters({
+        ...DEFAULT_FILTERS,
+        date: date ?? "",
+      });
+
       setIsDateOpen(true);
       return;
     }
@@ -86,14 +91,13 @@ const FilterSection = ({ pageType = "LIST" }: FilterSectionProps) => {
 
   const handleDateApply = (date: YmdDate) => {
     setSelectedDate(date);
+    console.log("타입 확인>>> ", typeof date);
   };
-
-  const isDateSelected = selectedDate !== null;
 
   const filterConfigs: Record<FilterTab, any> = {
     date: {
       ariaLabel: "기간 필터",
-      onSelected: isDateSelected,
+      onSelected: selectedDate,
       icon: { name: "Calendar", size: 16 },
       label: selectedDate ? formatYmdLabel(selectedDate) : "기간",
       iconPosition: "leading",
@@ -175,6 +179,8 @@ const FilterSection = ({ pageType = "LIST" }: FilterSectionProps) => {
 
       {isDateOpen && (
         <DateRangeBottomSheet
+          filters={filters}
+          setFilters={setFilters}
           isOpen={isDateOpen}
           onClose={() => setIsDateOpen(false)}
           onApply={handleDateApply}

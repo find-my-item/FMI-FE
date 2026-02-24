@@ -18,4 +18,5 @@ export type FiltersStateType = {
   sort: SortFilterValue;
   status: StatusFilterValue;
   findStatus: FindStatusFilterValue;
+  date?: string;
 };
