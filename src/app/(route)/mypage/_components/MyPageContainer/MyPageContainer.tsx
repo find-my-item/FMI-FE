@@ -9,7 +9,7 @@ import MyPageMenuSection from "../MyPageMenuSection/MyPageMenuSection";
 import { useGetUsersMe } from "@/api/fetch/user";
 
 const MyPageContainer = ({ hasToken }: { hasToken: boolean }) => {
-  const { data, isLoading, error } = useGetUsersMe({ hasToken });
+  const { data, isLoading, error } = useGetUsersMe(hasToken);
   const { addToast } = useToast();
 
   useEffect(() => {

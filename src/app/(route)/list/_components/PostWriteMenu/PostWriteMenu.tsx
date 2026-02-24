@@ -7,10 +7,13 @@ import { Button, FloatingButton, Icon, ScrollToTopButton } from "@/components/co
 import ModalLayout from "@/components/common/Modal/_internal/ModalLayout";
 import { cn } from "@/utils";
 import { WRITE_MENU_STYLES } from "./WRITE_MENU_STYLES";
+import { useClickOutside } from "@/hooks";
 
 const PostWriteMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isFindModalOpen, setIsFindModalOpen] = useState(false);
+
+  const containerRef = useClickOutside(() => setIsMenuOpen(false));
 
   const params = useParams();
   if (params.id) return null;
@@ -22,7 +25,7 @@ const PostWriteMenu = () => {
 
   return (
     <>
-      <div className="fixed bottom-[30px] right-5 gap-2 flex-col-center">
+      <div ref={containerRef} className="fixed bottom-[30px] right-5 gap-2 flex-col-center">
         <ScrollToTopButton />
 
         <div className="relative flex justify-end">

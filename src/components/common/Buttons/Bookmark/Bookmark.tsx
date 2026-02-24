@@ -36,7 +36,11 @@ const Bookmark = ({
 }: BookmarkProps) => {
   return (
     <button {...props} aria-label={ariaLabel} aria-pressed={isActive}>
-      <Icon name="Star" size={SIZES[size]} />
+      <Icon
+        name="Star"
+        size={SIZES[size]}
+        className={isActive ? "text-system-bookmark" : "text-neutralInversed-strong-pressed"}
+      />
     </button>
   );
 };

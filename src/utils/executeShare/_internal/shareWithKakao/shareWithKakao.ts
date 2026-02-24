@@ -1,6 +1,6 @@
 "use client";
 
-import { MetaDataType } from "@/types";
+import { PostMetaDataItemWithLink } from "@/types";
 
 const getKakaoKey = () => {
   const key = process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY;
@@ -22,7 +22,8 @@ const initKakao = () => {
   return true;
 };
 
-export const shareWithKakao = (data: MetaDataType) => {
+export const shareWithKakao = (data: PostMetaDataItemWithLink) => {
+  console.log(data);
   const Kakao = (window as any).Kakao;
   if (!Kakao) return;
 
@@ -36,7 +37,9 @@ export const shareWithKakao = (data: MetaDataType) => {
   if (!sendDefault) return;
 
   sendDefault({
-    objectType: "feed",
+    objectType: "location",
+    address: data.address,
+    addressTitle: data.title,
     content: {
       title: data.title,
       description: data.summary,
@@ -46,5 +49,19 @@ export const shareWithKakao = (data: MetaDataType) => {
         webUrl: data.link,
       },
     },
+    social: {
+      likeCount: data.likeCount,
+      commentCount: data.commentCount,
+      viewCount: data.viewCount,
+    },
+    buttons: [
+      {
+        title: "웹으로 보기",
+        link: {
+          mobileWebUrl: data.link,
+          webUrl: data.link,
+        },
+      },
+    ],
   });
 };

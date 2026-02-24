@@ -1,3 +1,5 @@
+import { PostMetaDataItem } from "@/api/fetch/post";
+
 /**
  * @author jikwon
  *
@@ -5,10 +7,8 @@
  *
  * - 이 타입은 메타데이터를 표시합니다.
  *
- * @description MetaDataType
- * - title: 메타데이터 제목
- * - summary: 메타데이터 요약
- * - thumbnailUrl: 메타데이터 썸네일 URL
+ * @description PostMetaDataItemWithLink
+ * - PostMetaDataItem: 메타데이터 아이템
  * - link: 메타데이터 링크
  *
  * @description ShareId
@@ -16,10 +16,8 @@
  * - native: 네이티브
  * - copy: 복사
  */
-export type MetaDataType = {
-  title: string;
-  summary: string;
-  thumbnailUrl: string;
+
+export type PostMetaDataItemWithLink = PostMetaDataItem & {
   link: string;
 };
 

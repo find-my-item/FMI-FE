@@ -22,4 +22,8 @@ const meta: Meta<typeof PostListItem> = {
 
 export default meta;
 
-export const PostListItemStory = () => <PostListItem post={MOCK_POST_ITEM} linkState="list" />;
+export const Default = () => <PostListItem post={MOCK_POST_ITEM} linkState="list" />;
+
+export const Found = () => (
+  <PostListItem post={{ ...MOCK_POST_ITEM, postStatus: "FOUND" }} linkState="list" />
+);

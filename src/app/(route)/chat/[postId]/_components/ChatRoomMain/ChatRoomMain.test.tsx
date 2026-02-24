@@ -12,7 +12,7 @@ jest.mock("./_internal/hooks", () => ({
 }));
 
 jest.mock("@/api/fetch/user", () => ({
-  useGetUserData: jest.fn(() => ({
+  useGetUsersMe: jest.fn(() => ({
     data: { result: { userId: 1 } },
   })),
 }));
