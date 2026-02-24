@@ -29,7 +29,9 @@ const HeaderSearchForm = ({
   const isDropdownOpen = searchValue || focused;
 
   const onSubmit = ({ search }: LocationFormValues) => {
-    router.push(`/?search=${search}`);
+    const trimmedSearch = search.trim();
+    if (!trimmedSearch) return;
+    router.push(`/?search=${trimmedSearch}`);
     setFocused(false);
   };
 
