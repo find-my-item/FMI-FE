@@ -1,8 +1,8 @@
 "use client";
 
-import { MetaDataType } from "@/types";
+import { PostMetaDataItemWithLink } from "@/types";
 
-type NativeMetaData = Omit<MetaDataType, "thumbnailUrl">;
+type NativeMetaData = Omit<PostMetaDataItemWithLink, "thumbnailUrl">;
 
 export const shareWithNative = async ({ metaData }: { metaData: NativeMetaData }) => {
   if (!navigator.share) return;
