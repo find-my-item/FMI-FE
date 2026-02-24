@@ -34,7 +34,7 @@ const WritePage = () => {
   const isSubmitDisabled = !canSubmit(values) || isPosting;
 
   const { data: tempPost, isLoading } = useGetTempPost();
-  const { open: saveModalOpen, setOpen: setSaveModalOpen } = useTempPostModal(tempPost, isLoading);
+  const { open, setOpen } = useTempPostModal(tempPost, isLoading);
 
   const { loadTempPost, saveTempPost } = useTempPostActions({
     methods,
@@ -65,15 +65,15 @@ const WritePage = () => {
 
       {tempPost?.result && (
         <TempModal
-          isOpen={saveModalOpen}
-          onClose={() => setSaveModalOpen(false)}
+          isOpen={open}
+          onClose={() => setOpen(false)}
           title="임시 저장한 내용을 불러오시겠습니까?"
           description="이전에 임시 저장한 내역이 있습니다."
           onConfirm={() => {
             loadTempPost();
-            setSaveModalOpen(false);
+            setOpen(false);
           }}
-          onCancel={() => setSaveModalOpen(false)}
+          onCancel={() => setOpen(false)}
           confirmText="불러올래요"
           cancelText="아니요"
         />

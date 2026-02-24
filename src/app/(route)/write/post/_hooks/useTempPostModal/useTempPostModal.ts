@@ -1,19 +1,20 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { GetTempPostResponse } from "@/api/fetch/post";
+import { useWriteFlowStore } from "@/store";
 
 const useTempPostModal = (tempPost: GetTempPostResponse | undefined, isLoading: boolean) => {
   const [open, setOpen] = useState(false);
-  const promptedRef = useRef(false);
+  const { tempModalShown, setTempModalShown } = useWriteFlowStore();
 
   useEffect(() => {
-    if (promptedRef.current) return;
+    if (tempModalShown) return;
     if (isLoading) return;
 
     if (tempPost?.result) {
-      promptedRef.current = true;
+      setTempModalShown(true);
       setOpen(true);
     }
-  }, [tempPost?.result, isLoading]);
+  }, [tempPost?.result, isLoading, tempModalShown, setTempModalShown]);
 
   return { open, setOpen };
 };
