@@ -17,8 +17,8 @@ interface ClientDetailProps {
 const ClientDetail = ({ id }: ClientDetailProps) => {
   const { data, isLoading, isError } = useGetDetailPost({ id });
 
-  if (isLoading) return <div className="h-[600px] pt-4">로딩중</div>;
-  if (isError || !data?.result) return <div className="h-[600px] pt-4">오류가 발생했습니다.</div>;
+  if (isLoading) return <div className="pt-4 h-base">로딩중</div>;
+  if (isError || !data?.result) return <div className="pt-4 h-base">오류가 발생했습니다.</div>;
 
   const { isMine, postUserInformation } = data.result;
 
@@ -30,6 +30,7 @@ const ClientDetail = ({ id }: ClientDetailProps) => {
           isMine,
           writerId: postUserInformation.userId,
           favoriteStatus: data.result.favoriteStatus,
+          postStatus: data.result.postStatus,
         }}
       />
       <PostDetail type="find" data={data.result} />

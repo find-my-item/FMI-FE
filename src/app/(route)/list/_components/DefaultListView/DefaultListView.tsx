@@ -2,10 +2,9 @@
 
 import { useSearchUpdateQueryString } from "@/hooks";
 import { DetailHeader } from "@/components/layout";
-import DefaultList from "../DefaultList/DefaultList";
+import DefaultListSection from "../DefaultListSection/DefaultListSection";
 import { SEARCH_HEADER_TITLE } from "../../_constants/SEARCH_HEADER_TITLE";
 import { HeaderSearch } from "@/components/layout/DetailHeader/DetailHeaderParts";
-import { ErrorBoundary } from "@/app/ErrorBoundary";
 import DefaultListSearch from "../DefaultListSearch/DefaultListSearch";
 
 const DefaultListView = () => {
@@ -24,9 +23,7 @@ const DefaultListView = () => {
       </DetailHeader>
 
       {isDefaultMode ? (
-        <ErrorBoundary toastMessage="목록을 불러올 수 없어요. 다시 시도해 주세요.">
-          <DefaultList searchUpdateQuery={searchUpdateQuery} />
-        </ErrorBoundary>
+        <DefaultListSection searchUpdateQuery={searchUpdateQuery} />
       ) : (
         <DefaultListSearch />
       )}
