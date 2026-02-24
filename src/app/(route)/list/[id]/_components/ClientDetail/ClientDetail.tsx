@@ -30,6 +30,7 @@ const ClientDetail = ({ id }: ClientDetailProps) => {
           isMine,
           writerId: postUserInformation.userId,
           favoriteStatus: data.result.favoriteStatus,
+          postStatus: data.result.postStatus,
         }}
       />
       <PostDetail type="find" data={data.result} />
