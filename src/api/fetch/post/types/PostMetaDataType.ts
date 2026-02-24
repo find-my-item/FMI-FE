@@ -6,4 +6,8 @@ export interface PostMetaDataItem {
   title: string;
   summary: string;
   thumbnailUrl: string;
+  address: string;
+  likeCount: number;
+  commentCount: number;
+  viewCount: number;
 }
