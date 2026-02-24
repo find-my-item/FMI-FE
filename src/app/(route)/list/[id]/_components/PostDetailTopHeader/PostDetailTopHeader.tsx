@@ -10,6 +10,7 @@ import {
   HeaderStar,
 } from "@/components/layout/DetailHeader/DetailHeaderParts";
 import { PostActionData } from "../../_types/PostActionType";
+import { useToggleFavorite } from "../../_hooks/useToggleFavorite";
 
 interface PostDetailTopHeaderProps {
   postId: number;
@@ -20,11 +21,18 @@ const PostDetailTopHeader = ({ postId, postData }: PostDetailTopHeaderProps) => 
   const [openShareModal, setOpenShareModal] = useState(false);
   const [openOptionModal, setOpenOptionModal] = useState(false);
 
+  const { handleToggleFavorite, isPending } = useToggleFavorite({ postId });
+
   return (
     <>
       <div className="relative">
         <DetailHeader>
-          <HeaderStar isActive={postData.favoriteStatus} ariaLabel="게시글 즐겨찾기" />
+          <HeaderStar
+            disabled={isPending}
+            isActive={postData.favoriteStatus}
+            onClick={() => handleToggleFavorite(postData.favoriteStatus)}
+            ariaLabel="게시글 즐겨찾기"
+          />
           <HeaderShare onClick={() => setOpenShareModal(true)} ariaLabel="게시글 공유" />
           <HeaderMenu onClick={() => setOpenOptionModal((v) => !v)} ariaLabel="게시글 메뉴" />
         </DetailHeader>
