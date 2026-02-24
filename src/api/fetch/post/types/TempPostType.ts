@@ -26,3 +26,21 @@ export interface TempPostData {
   updatedAt: string;
   createdAt: string;
 }
+
+export interface TempPostWriteRequestBody {
+  request: TempPostWriteRequest;
+  images: File[];
+}
+
+export interface TempPostWriteRequest {
+  latitude?: number;
+  date: string;
+  keepImageIdList?: string[];
+  longitude?: number;
+  radius?: number;
+  address?: string;
+  title?: string;
+  content?: string;
+  postType?: PostType;
+  category?: CategoryType;
+}

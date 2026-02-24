@@ -19,4 +19,5 @@ export { useGetSearchKeyword } from "./api/useGetSearchKeyword";
 export { useGetSimilar } from "./api/useGetSimilar";
 export { useGetDetailPost } from "./api/useGetDetailPost";
 export { useGetTempPost } from "./api/useGetTempPost";
+export { usePostTempPost } from "./api/usePostTempPost";
 export { usePutPostStatus } from "./api/usePutPostStatus";

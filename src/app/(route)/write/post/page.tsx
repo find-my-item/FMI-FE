@@ -17,7 +17,12 @@ import {
   TitleSection,
 } from "./_components";
 import { HeaderSave } from "@/components/layout/DetailHeader/DetailHeaderParts";
-import { useGetTempPost } from "@/api/fetch/post";
+import {
+  useGetTempPost,
+  usePostTempPost,
+  TempPostWriteRequest,
+  TempPostWriteRequestBody,
+} from "@/api/fetch/post";
 import TempModal from "./_components/_internal/TempModal";
 
 const WritePage = () => {
@@ -45,6 +50,7 @@ const WritePage = () => {
 
   const title = postType === "lost" ? "분실했어요 글쓰기" : "발견했어요 글쓰기";
   const { data: tempPost, isLoading } = useGetTempPost();
+  const { mutateAsync: postTempPost } = usePostTempPost();
 
   useEffect(() => {
     if (promptedRef.current) return;
@@ -55,6 +61,54 @@ const WritePage = () => {
       setSaveModalOpen(true);
     }
   }, [tempPost?.result, isLoading]);
+
+  const handleLoadTempPost = () => {
+    if (!tempPost?.result) return;
+    const { result } = tempPost;
+    methods.reset({
+      postType: result.postType,
+      title: result.title,
+      date: result.date,
+      address: result.address,
+      latitude: result.latitude,
+      longitude: result.longitude,
+      content: result.content,
+      radius: result.radius,
+      category: result.category,
+      images: result.images.map((img) => ({
+        id: img.id,
+        previewUrl: img.imgUrl,
+      })),
+    });
+    setSaveModalOpen(false);
+  };
+
+  const handlePostTempPost = () => {
+    const request: TempPostWriteRequest = {
+      latitude: values.latitude ?? undefined,
+      longitude: values.longitude ?? undefined,
+      date: values.date,
+      address: values.address,
+      title: values.title,
+      content: values.content,
+      postType: values.postType || undefined,
+      category: values.category || undefined,
+      radius: values.radius ?? undefined,
+      keepImageIdList: values.images.filter((image) => image.id).map((image) => String(image.id)),
+    };
+
+    const formData = new FormData();
+    formData.append("request", new Blob([JSON.stringify(request)], { type: "application/json" }));
+
+    values.images.forEach((image) => {
+      if (image.file) {
+        formData.append("images", image.file);
+      }
+    });
+
+    postTempPost(formData as unknown as TempPostWriteRequestBody);
+    setOverwriteModalOpen(false);
+  };
 
   return (
     <>
@@ -83,7 +137,7 @@ const WritePage = () => {
           onClose={() => setSaveModalOpen(false)}
           title="임시 저장한 게시글이 있습니다."
           description="이전에 임시 저장한 내역이 있습니다."
-          onConfirm={() => setSaveModalOpen(false)}
+          onConfirm={handleLoadTempPost}
           onCancel={() => setSaveModalOpen(false)}
           confirmText="불러올래요"
           cancelText="아니요"
@@ -95,7 +149,7 @@ const WritePage = () => {
         onClose={() => setOverwriteModalOpen(false)}
         title="임시 저장한 내용을 덮어씌우겠습니까?"
         description="지금 임시 저장하면 이전 내용은 삭제됩니다."
-        onConfirm={() => setOverwriteModalOpen(false)}
+        onConfirm={handlePostTempPost}
         onCancel={() => setOverwriteModalOpen(false)}
         confirmText="덮어씌우기"
         cancelText="아니요"
