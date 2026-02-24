@@ -29,7 +29,7 @@ const Footer = () => {
       <nav className="flex justify-between text-caption2-medium text-labelsVibrant-secondary">
         {FOOTER_LINK.map((link) => (
           <FooterItem
-            key={link.name}
+            key={link.href}
             link={link}
             isActive={isActive}
             showLoginRequiredNotice={showLoginRequiredNotice}

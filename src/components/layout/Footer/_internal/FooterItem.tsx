@@ -6,7 +6,7 @@ import { Icon } from "@/components/common";
 import LoginRequiredNotice from "./LoginRequiredNotice";
 import Link from "next/link";
 
-const CHAT_LINK_NAME = "채팅";
+const CHAT_LINK_HREF = "/chat";
 
 interface FooterItemProps {
   link: (typeof FOOTER_LINK)[number];
@@ -20,7 +20,7 @@ const FooterItem = ({ link, isActive, showLoginRequiredNotice, onClick }: Footer
     ? "text-brand-normal-pressed"
     : "text-labelsVibrant-quaternary";
 
-  const isChat = link.name === CHAT_LINK_NAME;
+  const isChat = link.href === CHAT_LINK_HREF;
 
   if (isChat) {
     return (
