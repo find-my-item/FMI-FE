@@ -5,7 +5,7 @@ const SearchFocusDropdown = ({ focused }: { focused: boolean }) => {
   if (!focused) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 top-[77.33px] z-[9999] mx-auto max-w-[768px] bg-white px-5 py-3">
+    <div className="fixed inset-x-0 bottom-0 top-[78px] z-[9999] mx-auto max-w-[768px] bg-white px-5 py-3">
       <AutoCompleteList />
       <LatestList />
     </div>
