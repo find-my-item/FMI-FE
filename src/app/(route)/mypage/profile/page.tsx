@@ -6,7 +6,7 @@ import { Suspense } from "react";
 import { MypageProfileForm } from "./_components";
 
 interface MypageProfileFormType {
-  profile: string;
+  profileImg: string;
   nickname: string;
 }
 

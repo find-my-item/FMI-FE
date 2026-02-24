@@ -2,11 +2,12 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 
 interface UseChangeImgProps {
   setOpenMenu: (open: boolean) => void;
+  profileImg?: string;
 }
 
-const useChangeImg = ({ setOpenMenu }: UseChangeImgProps) => {
+const useChangeImg = ({ setOpenMenu, profileImg }: UseChangeImgProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [previewImgUrl, setPreviewImgUrl] = useState<string | null>(null);
+  const [previewImgUrl, setPreviewImgUrl] = useState<string | null>(profileImg ?? "");
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
