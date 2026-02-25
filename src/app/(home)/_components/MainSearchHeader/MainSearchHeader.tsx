@@ -39,7 +39,6 @@ const HeaderSearchForm = ({
   const handleBack = () => {
     if (focused) {
       setFocused(false);
-      (document.activeElement as HTMLInputElement).blur();
       return;
     }
     router.back();
