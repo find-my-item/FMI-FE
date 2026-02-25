@@ -39,6 +39,7 @@ const HeaderSearchForm = ({
   const handleBack = () => {
     if (focused) {
       setFocused(false);
+      (document.activeElement as HTMLInputElement).blur();
       return;
     }
     router.back();
@@ -64,15 +65,15 @@ const HeaderSearchForm = ({
           <Icon name="Search" size={20} />
         </button>
       ) : (
-        <button
-          type="button"
-          onMouseDown={(e) => e.preventDefault()}
+        <div
+          role="button"
+          tabIndex={0}
           onClick={handleBack}
           aria-label="뒤로가기"
-          className="absolute left-5 top-[18.5px]"
+          className="absolute left-5 top-[18.5px] cursor-pointer"
         >
           <Icon name="ArrowLeftSmall" size={20} />
-        </button>
+        </div>
       )}
     </form>
   );
