@@ -86,7 +86,7 @@ const HeaderContent = ({ setFocused, focused }: FocusedProps) => {
     <header
       className={cn(
         "fixed left-1/2 top-0 z-10 w-full max-w-[768px] -translate-x-1/2 px-5 py-[10px]",
-        (searchValue || focused) && "bg-white"
+        (searchValue || focused) && "border-x-2 bg-white"
       )}
     >
       <HeaderSearchForm searchValue={searchValue} setFocused={setFocused} focused={focused} />
