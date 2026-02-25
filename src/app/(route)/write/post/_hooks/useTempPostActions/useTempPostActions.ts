@@ -2,12 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { useWriteStore } from "@/store";
 import { PostWriteFormValues } from "../../_types/PostWriteType";
-import {
-  GetTempPostResponse,
-  TempPostWriteRequest,
-  TempPostWriteRequestBody,
-  usePostTempPost,
-} from "@/api/fetch/post";
+import { GetTempPostResponse, TempPostWriteRequest, usePostTempPost } from "@/api/fetch/post";
 
 interface TempPostActionsParams {
   methods: UseFormReturn<PostWriteFormValues>;
@@ -72,7 +67,7 @@ const useTempPostActions = ({ methods, tempPost, values, setFormKey }: TempPostA
       if (image.file) formData.append("images", image.file);
     });
 
-    await postTempPost(formData as unknown as TempPostWriteRequestBody);
+    await postTempPost(formData);
   };
 
   return { loadTempPost, saveTempPost };

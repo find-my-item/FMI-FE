@@ -27,11 +27,6 @@ export interface TempPostData {
   createdAt: string;
 }
 
-export interface TempPostWriteRequestBody {
-  request: TempPostWriteRequest;
-  images: File[];
-}
-
 export interface TempPostWriteRequest {
   latitude?: number;
   date: string;
