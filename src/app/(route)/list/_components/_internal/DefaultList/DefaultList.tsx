@@ -10,7 +10,6 @@ interface DefaultListProps {
 }
 
 const DefaultList = ({ listData, listRef, hasNextPage }: DefaultListProps) => {
-  console.log(listData);
   return (
     <Suspense fallback={<LoadingState />}>
       <section aria-label="게시글 목록" className="w-full">
