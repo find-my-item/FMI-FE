@@ -36,8 +36,9 @@ authApi.interceptors.response.use(
         return authApi(originalRequest);
       } catch (refreshError) {
         // 로그아웃 안내 토스트는 로그인 페이지에서 보여줌
-        window.location.replace("/login?reason=session-expired");
 
+        if (window.location.pathname !== "/login")
+          window.location.replace("/login?reason=session-expired");
         return Promise.reject(refreshError);
       }
     }
