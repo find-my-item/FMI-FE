@@ -106,12 +106,12 @@ const MainSearchHeader = () => {
         <div className="relative">
           <HeaderContent setFocused={setFocused} focused={focused} />
           <SearchFocusDropdown focused={focused} />
-          <button onClick={() => setIsOpen(!isOpen)} className="absolute right-5 top-5 z-50">
+          <button onClick={() => setIsOpen(!isOpen)} className="absolute right-5 top-4 z-50">
             <Icon name="Menu" title="메뉴 열기" />
           </button>
-          <SideBar isOpen={isOpen} onClose={() => setIsOpen(false)} />
         </div>
       </MainSearchLayout>
+      <SideBar isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </Suspense>
   );
 };
