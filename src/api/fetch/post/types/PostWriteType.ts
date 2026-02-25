@@ -1,4 +1,4 @@
-import { CategoryType, PostType } from "@/types";
+import { CategoryType, PostType, Radius } from "@/types";
 import { PostDetailData } from "./PostDetailType";
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 
@@ -10,14 +10,16 @@ export interface PostPostsWriteRequestBody {
 export interface PostPostsWriteResponse extends ApiBaseResponseType<PostDetailData> {}
 
 export interface PostWriteRequest {
-  postType: PostType;
-  title: string;
-  date: string;
-  address: string;
+  thumbnailImageId?: number;
   latitude: number;
+  date: string;
+  keepImageIdList?: string[];
   longitude: number;
+  tempPostId?: number;
+  radius: Radius;
+  address: string;
+  title: string;
   content: string;
-  radius: number;
+  postType: PostType;
   category: CategoryType;
-  temporarySave: boolean;
 }

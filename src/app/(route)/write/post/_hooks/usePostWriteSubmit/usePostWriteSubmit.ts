@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { useWriteStore } from "@/store";
 import { PostWriteFormValues } from "../../_types/PostWriteType";
-import { PostPostsWriteRequestBody, usePostPosts } from "@/api/fetch/post";
+import { PostPostsWriteRequestBody, PostWriteRequest, usePostPosts } from "@/api/fetch/post";
 
 interface UsePostWriteSubmitProps {
   methods: UseFormReturn<PostWriteFormValues>;
@@ -35,7 +35,7 @@ const usePostWriteSubmit = ({ methods }: UsePostWriteSubmitProps) => {
     if (!postType || !values.category) return null;
     if (!address || lat == null || lng == null || radius == null) return null;
 
-    const request = {
+    const request: PostWriteRequest = {
       postType: postType,
       title: values.title,
       category: values.category,
@@ -45,7 +45,9 @@ const usePostWriteSubmit = ({ methods }: UsePostWriteSubmitProps) => {
       longitude: lng,
       radius: radius,
       date: new Date().toISOString(),
-      temporarySave: values.temporarySave,
+      tempPostId: values.tempPostId ?? undefined,
+      keepImageIdList: values.images.filter((img) => img.id).map((img) => String(img.id)),
+      thumbnailImageId: values.images.find((img) => img.id)?.id,
     };
 
     const formData = new FormData();
@@ -53,6 +55,10 @@ const usePostWriteSubmit = ({ methods }: UsePostWriteSubmitProps) => {
     values.images.forEach((image) => {
       if (image.file) formData.append("images", image.file);
     });
+
+    if (values.tempPostId) {
+      formData.append("tempPostId", String(values.tempPostId));
+    }
 
     return formData;
   };
@@ -62,7 +68,7 @@ const usePostWriteSubmit = ({ methods }: UsePostWriteSubmitProps) => {
 
     if (!formData) return;
 
-    postPosts(formData as unknown as PostPostsWriteRequestBody);
+    postPosts(formData);
     clearLocation();
   });
 
