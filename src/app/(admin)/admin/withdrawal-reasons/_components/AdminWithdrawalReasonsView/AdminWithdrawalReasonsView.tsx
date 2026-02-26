@@ -1,19 +1,24 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import { ErrorBoundary } from "@/app/ErrorBoundary";
 import { AdminFilter, AdminSearch } from "../../../_components";
-import AdminWithdrawalReasonList from "../AdminWithdrawalReasonList/AdminWithdrawalReasonList";
 import { PopupLayout } from "@/components/domain";
 import { Button, RadioOptionItem } from "@/components/common";
 import { WITHDRAWAL_REASON_OPTIONS } from "../../_constants/WITHDRAWAL_REASON_OPTIONS";
 import { WithdrawalReasonType } from "../../_types/WithdrawalReasonType";
 
+// 인증 API를 호출하므로 SSR에서 완전히 제외
+const AdminWithdrawalReasonList = dynamic(
+  () => import("../AdminWithdrawalReasonList/AdminWithdrawalReasonList"),
+  { ssr: false }
+);
+
 const AdminWithdrawalReasonsView = () => {
   const [reason, setReason] = useState<WithdrawalReasonType>("");
   const [pendingReason, setPendingReason] = useState<WithdrawalReasonType | null>(null);
 
-  // TODO(지권): 추후 필터 기능 추가
   const WithdrawalReasonsFilters = [
     {
       label: WITHDRAWAL_REASON_OPTIONS.find((option) => option.value === reason)?.label ?? "유형",

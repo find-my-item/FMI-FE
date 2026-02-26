@@ -17,12 +17,12 @@ jest.mock("@/app/ErrorBoundary", () => ({
 
 describe("AdminWithdrawalReasonList", () => {
   it("섹션 렌더링", () => {
-    render(<AdminWithdrawalReasonList />);
+    render(<AdminWithdrawalReasonList reason="" />);
     expect(screen.getByRole("region", { name: "유저 탈퇴 사유 목록" })).toBeInTheDocument();
   });
 
   it("mock 데이터 개수만큼 렌더링", () => {
-    render(<AdminWithdrawalReasonList />);
+    render(<AdminWithdrawalReasonList reason="" />);
 
     const region = screen.getByRole("region", { name: "유저 탈퇴 사유 목록" });
     const listItems = within(region).getAllByRole("listitem");
@@ -32,7 +32,7 @@ describe("AdminWithdrawalReasonList", () => {
   });
 
   it("mock 데이터 내용 렌더링", () => {
-    render(<AdminWithdrawalReasonList />);
+    render(<AdminWithdrawalReasonList reason="" />);
 
     MOCK_WITHDRAW_REASON_LIST.forEach((item) => {
       expect(screen.getByRole("heading", { name: item.nickname })).toBeInTheDocument();

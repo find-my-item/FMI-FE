@@ -1,3 +1,5 @@
+"use client";
+
 import { Suspense } from "react";
 import { useGetDeletedUsers, WithdrawUserItem } from "@/api/fetch/admin";
 import { LoadingState } from "@/components/state";

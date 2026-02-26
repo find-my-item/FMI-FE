@@ -11,3 +11,4 @@ export type { PostMetaDataItemWithLink, ShareId } from "./MetaDataType";
 export type { RegionRow } from "./RegionRow";
 export type { Radius } from "./mapRadius";
 export type { CommentItemType } from "./CommentItemType";
+export type { UserType } from "./UserType";
