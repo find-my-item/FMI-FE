@@ -1,12 +1,22 @@
 import { Suspense } from "react";
-import { formatDate } from "@/utils";
 import { useGetDeletedUsers, WithdrawUserItem } from "@/api/fetch/admin";
 import { LoadingState } from "@/components/state";
+import { useInfiniteScroll } from "@/hooks";
+import { formatDate } from "@/utils";
+import { WITHDRAWAL_REASON_OPTIONS } from "../../_constants/WITHDRAWAL_REASON_OPTIONS";
+import { WithdrawalReasonType } from "../../_types/WithdrawalReasonType";
 
-const AdminWithdrawalReasonList = () => {
-  const { data } = useGetDeletedUsers({
-    reason: "",
+// TODO(지권): 무한스크롤 cursor 기반 변경 후 추가 예정
+// TODO(지권): data.withdrawalReason 배열로 변경 후 수정 예정
+const AdminWithdrawalReasonList = ({ reason }: { reason: WithdrawalReasonType }) => {
+  const { data, hasNextPage, fetchNextPage, isFetchingNextPage } = useGetDeletedUsers({
+    reason,
   });
+  // const { ref: listRef } = useInfiniteScroll({
+  //   fetchNextPage,
+  //   hasNextPage,
+  //   isFetchingNextPage,
+  // });
 
   return (
     <Suspense fallback={<LoadingState />}>
@@ -16,6 +26,7 @@ const AdminWithdrawalReasonList = () => {
             <WithdrawalReasonItem key={item.userId} data={item} />
           ))}
         </ul>
+        {/* {hasNextPage && <div ref={listRef} className="h-10 w-full" />} */}
       </section>
     </Suspense>
   );
@@ -24,7 +35,6 @@ const AdminWithdrawalReasonList = () => {
 export default AdminWithdrawalReasonList;
 
 const WithdrawalReasonItem = ({ data }: { data: WithdrawUserItem }) => {
-  console.log("WithdrawalReasonItem: ", data);
   return (
     <li className="block space-y-2 border-b border-divider-default px-5 py-[30px]">
       <div className="space-y-1">
@@ -35,11 +45,16 @@ const WithdrawalReasonItem = ({ data }: { data: WithdrawUserItem }) => {
         </div>
       </div>
       <div className="text-body1-regular text-brand-normal-default">
-        {/* <ul className="space-y-[2px]">
-          {data.withdrawalReason.map((reason: string, index: number) => (
+        <ul className="space-y-[2px]">
+          {/* {data.withdrawalReason.map((reason: string, index: number) => (
             <li key={index}>- {reason}</li>
-          ))}
-        </ul> */}
+          ))} */}
+          <li>
+            -
+            {WITHDRAWAL_REASON_OPTIONS.find((opt) => opt.value === data.withdrawalReason)?.label ??
+              "확인할 수 없어요."}
+          </li>
+        </ul>
       </div>
     </li>
   );
