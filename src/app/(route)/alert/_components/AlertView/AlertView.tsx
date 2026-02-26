@@ -5,10 +5,13 @@ import { cn, formatDate } from "@/utils";
 import { MOCK_ALERT_ITEMS } from "../../_constants/MOCK_ALERT_ITEMS";
 import { useSearchParams } from "next/navigation";
 import { AlertCategoryKey } from "../../_types/alertKeyType";
+import Link from "next/link";
 
 const AlertItem = ({ item }: { item: (typeof MOCK_ALERT_ITEMS)[number] }) => {
   return (
-    <div
+    <Link
+      href="#"
+      aria-label="알림 확인, 외부 페이지 이동"
       key={item.id}
       className={cn(
         "flex min-h-[86px] w-full cursor-pointer gap-3 border-b border-divider-default p-5 transition-colors hover:bg-fill-flatGray-25",
@@ -34,7 +37,7 @@ const AlertItem = ({ item }: { item: (typeof MOCK_ALERT_ITEMS)[number] }) => {
           {item.body}
         </span>
       </div>
-    </div>
+    </Link>
   );
 };
 
