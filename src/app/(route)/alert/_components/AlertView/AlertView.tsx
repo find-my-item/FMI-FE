@@ -9,6 +9,7 @@ import Link from "next/link";
 
 const AlertItem = ({ item }: { item: (typeof MOCK_ALERT_ITEMS)[number] }) => {
   return (
+    // TODO(형준): 기능 구현 시 button 태그로 변경 가능성 있음
     <Link
       href="#"
       aria-label="알림 확인, 외부 페이지 이동"
