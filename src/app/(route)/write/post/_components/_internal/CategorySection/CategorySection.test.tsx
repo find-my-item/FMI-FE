@@ -18,7 +18,7 @@ jest.mock("@/components/common", () => ({
   RequiredText: () => <span data-testid="required-text">*</span>,
 }));
 
-jest.mock("../_internal/CategoryPopup/CategoryPopup", () => ({
+jest.mock("../CategoryPopup/CategoryPopup", () => ({
   __esModule: true,
   default: ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) =>
     isOpen && (
