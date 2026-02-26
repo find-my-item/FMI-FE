@@ -4,14 +4,15 @@ import { cn } from "@/utils";
 const AutoCompleteList = () => {
   return (
     <ul className="border-b-[3px] border-labelsVibrant-quaternary">
-      {Array.from({ length: 5 }).map((_, index) => (
+      {Array.from({ length: 5 }).map((_, index, array) => (
         <li key={index}>
           <button
             type="button"
             aria-label="자동완성 검색어 클릭"
             className={cn(
-              "w-full cursor-pointer border-b border-brand-normal-disabled py-4 transition-colors",
-              "[&:is(:hover,:focus)]:bg-fill-brand-subtle-default_2"
+              "w-full cursor-pointer border-b border-labelsVibrant-quaternary py-4 transition-colors",
+              "[&:is(:hover,:focus)]:bg-fill-brand-subtle-default_2",
+              index !== array.length - 1 && "hover:border-brand-normal-disabled"
             )}
           >
             <div className="flex items-center gap-3">
