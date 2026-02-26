@@ -11,7 +11,7 @@ const AlertItem = ({ item }: { item: (typeof MOCK_ALERT_ITEMS)[number] }) => {
     <div
       key={item.id}
       className={cn(
-        "flex min-h-[86px] w-full cursor-pointer gap-3 border-b border-divider-default p-[20px] hover:bg-fill-flatGray-25",
+        "flex min-h-[86px] w-full cursor-pointer gap-3 border-b border-divider-default p-5 transition-colors hover:bg-fill-flatGray-25",
         item.isRead
           ? "bg-white"
           : "bg-fill-brand-subtle-default_3 hover:bg-fill-brand-subtle-default_2"
@@ -20,11 +20,11 @@ const AlertItem = ({ item }: { item: (typeof MOCK_ALERT_ITEMS)[number] }) => {
       <div className={cn("h-[30px] w-[30px] flex-shrink-0 rounded-full flex-center", item.iconBg)}>
         <Icon name={item.icon} size={15} />
       </div>
-      <div className="flex w-full flex-col gap-[4px]">
+      <div className="flex w-full flex-col gap-1">
         <div className="flex items-center justify-between">
-          <div className="flex items-center">
-            <span className="text-body2-medium text-brand-normal-default">{item.category}</span>
-            <span className="text-body2-medium text-neutral-normal-default">{item.title}</span>
+          <div className="flex items-center text-body2-medium">
+            <span className="text-brand-normal-default">{item.category}</span>
+            <span className="text-neutral-normal-default">{item.title}</span>
           </div>
           <span className="text-caption1-regular text-neutral-normal-placeholder">
             {formatDate(item.createdAt)}
