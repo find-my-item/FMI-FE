@@ -1,11 +1,12 @@
 import { useNicknameCheck } from "@/hooks/domain/useNicknameCheck/useNicknameCheck";
-import { Icon, InputText, KebabMenu, ProfileAvatar } from "@/components/common";
+import { Button, Icon, InputText, KebabMenu, ProfileAvatar } from "@/components/common";
 import { FooterButton } from "@/components/domain";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import useChangeImg from "../../_hooks/useChangeImg";
 import { UsersMeType } from "@/api/fetch/user/types/UserMeType";
 import useProfileFormSubmit from "../../_hooks/useProfileFormSubmit";
+import MypageProfileModal from "../MypageProfileModal/MypageProfileModal";
 
 interface MypageProfileFormProps {
   user?: UsersMeType;
@@ -20,6 +21,9 @@ const MypageProfileForm = ({ user }: MypageProfileFormProps) => {
 
   // 버튼 클릭 제어
   const [openMenu, setOpenMenu] = useState(false);
+
+  // 모달 제어
+  const [openModal, setOpenModal] = useState(false);
 
   const { handleChangeImg, handleButtonClick, previewImgUrl, resetImage, fileInputRef } =
     useChangeImg({
@@ -96,6 +100,10 @@ const MypageProfileForm = ({ user }: MypageProfileFormProps) => {
           caption={{ rule: "2~10자, 특수문자/금칙어 제한" }}
         />
       </div>
+      <Button type="button" onClick={() => setOpenModal(true)}>
+        테스트 버튼
+      </Button>
+      <MypageProfileModal isOpen={openModal} onClose={() => setOpenModal(false)} />
 
       <FooterButton
         label="설정 완료"
