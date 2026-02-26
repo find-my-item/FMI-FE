@@ -13,16 +13,16 @@ authApi.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
+    // 서버환경에서 실행했을때 에러라는 것을 알려줌
+    if (typeof window === "undefined") return Promise.reject(error);
+
     const isAuthError = [401, 403].includes(error.response?.status);
     const isAlreadyRetried = originalRequest._retry;
     const isRefreshRequest = originalRequest.url === "/auth/refresh";
 
-    // 서버환경에서 실행했을때 에러라는 것을 알려줌
-    if (typeof window === "undefined") {
-      return Promise.reject(error);
-    }
+    if (isRefreshRequest) return Promise.reject(error);
 
-    if (isAuthError && !isAlreadyRetried && !isRefreshRequest) {
+    if (isAuthError && !isAlreadyRetried) {
       originalRequest._retry = true;
 
       try {

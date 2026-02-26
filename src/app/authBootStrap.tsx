@@ -10,10 +10,13 @@ export default function AuthBootstrap() {
   const { mutate: refreshTokenMutate } = useApiRefreshToken();
   const ranRef = useRef(false);
 
-  const isSessionExpiredRoute = pathname === "/login?reason=session-expired";
+  const KEY = "refresh_bootstrap_ran";
 
   useEffect(() => {
-    if (isSessionExpiredRoute) return;
+    if (sessionStorage.getItem(KEY)) return;
+    sessionStorage.setItem(KEY, "1");
+
+    if (pathname === "/login?reason=session-expired") return;
 
     if (ranRef.current) return;
     ranRef.current = true;
