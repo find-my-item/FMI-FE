@@ -1,48 +1,46 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
-import { useFormContext } from "react-hook-form";
 
 interface UseChangeImgProps {
   setOpenMenu: (open: boolean) => void;
-  profileImg?: string;
+  initialImg?: string;
+  onImageChange: (file: File | null) => void;
 }
 
-const useChangeImg = ({ setOpenMenu, profileImg }: UseChangeImgProps) => {
+const useChangeImg = ({ setOpenMenu, initialImg, onImageChange }: UseChangeImgProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [previewImgUrl, setPreviewImgUrl] = useState<string | null>(profileImg ?? "");
-
-  const { setValue } = useFormContext();
+  const [previewImgUrl, setPreviewImgUrl] = useState<string | null>(initialImg ?? "");
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
+    setOpenMenu(false);
   };
 
   const handleChangeImg = (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
     const file = e.target.files?.[0];
-
     if (file) {
+      if (previewImgUrl) {
+        URL.revokeObjectURL(previewImgUrl);
+      }
+
       const url = URL.createObjectURL(file);
       setPreviewImgUrl(url);
-      setValue("profileImg", url);
 
+      onImageChange(file);
       setOpenMenu(false);
     }
   };
 
-  useEffect(() => {
-    return () => {
-      if (previewImgUrl) {
-        URL.revokeObjectURL(previewImgUrl);
-      }
-    };
-  }, [previewImgUrl]);
+  const resetImage = () => {
+    setPreviewImgUrl(null);
+    onImageChange(null);
+    setOpenMenu(false);
+  };
 
   return {
     handleChangeImg,
     handleButtonClick,
     previewImgUrl,
-    setPreviewImgUrl,
+    resetImage,
     fileInputRef,
   };
 };
