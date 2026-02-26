@@ -35,7 +35,11 @@ const FooterItem = ({ link, isActive, showLoginRequiredNotice, onClick }: Footer
       className={cn(FOOTER_ITEM_BASE_STYLE, isChat && "relative overflow-visible")}
       onClick={handleClick}
     >
-      <Icon name={link.icon} size={28} className={iconClassName} />
+      <Icon
+        name={link.icon}
+        size={28}
+        className={cn(iconClassName, "group-hover:text-brand-normal-pressed")}
+      />
       <span className={cn("py-[2px]", isActive(link.href))}>{link.name}</span>
       {isChat && showLoginRequiredNotice ? <LoginRequiredNotice /> : null}
     </Link>

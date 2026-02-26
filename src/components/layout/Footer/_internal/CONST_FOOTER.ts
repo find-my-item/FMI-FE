@@ -10,4 +10,4 @@ export const FOOTER_LINK = [
 export type FooterLinkHref = (typeof FOOTER_LINK)[number]["href"];
 
 export const FOOTER_ITEM_BASE_STYLE =
-  "min-w-0 flex-1 transition-colors flex-col-center hover:text-neutral-strong-focused";
+  "group min-w-0 flex-1 transition-colors flex-col-center hover:text-neutral-strong-focused";

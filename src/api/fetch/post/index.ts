@@ -6,6 +6,7 @@ export * from "./types/PostDeleteDetailType";
 export * from "./types/PostFavoritesType";
 export * from "./types/MypagePostListType";
 export * from "./types/SimilarType";
+export * from "./types/TempPostType";
 export * from "./types/PutPostStatusType";
 
 export { useGetPosts } from "./api/useGetPosts";
@@ -17,4 +18,6 @@ export { useDeletePostFavorites } from "./api/useDeleteFavorites";
 export { useGetSearchKeyword } from "./api/useGetSearchKeyword";
 export { useGetSimilar } from "./api/useGetSimilar";
 export { useGetDetailPost } from "./api/useGetDetailPost";
+export { useGetTempPost } from "./api/useGetTempPost";
+export { usePostTempPost } from "./api/usePostTempPost";
 export { usePutPostStatus } from "./api/usePutPostStatus";

@@ -10,7 +10,9 @@ jest.mock("@/components/common", () => ({
 jest.mock("react-hook-form", () => ({
   useFormContext: () => ({
     register: registerMock,
+    control: {},
   }),
+  useWatch: jest.fn(),
 }));
 
 describe("ContentSection", () => {
