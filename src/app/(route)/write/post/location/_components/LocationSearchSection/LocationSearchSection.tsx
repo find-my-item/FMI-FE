@@ -43,12 +43,7 @@ const LocationSearchSection = ({ searchParams }: LocationSearchSectionProps) => 
     <>
       <section className="px-5 py-[10px]">
         <FormProvider {...methods}>
-          <InputSearch
-            placeholder="지역명을 입력해 주세요."
-            name="location"
-            mode="RHF"
-            onEnter={(value) => console.log(value)}
-          />
+          <InputSearch placeholder="지역명을 입력해 주세요." name="location" mode="RHF" />
         </FormProvider>
       </section>
 

@@ -23,7 +23,6 @@ const initKakao = () => {
 };
 
 export const shareWithKakao = (data: PostMetaDataItemWithLink) => {
-  console.log(data);
   const Kakao = (window as any).Kakao;
   if (!Kakao) return;
 
