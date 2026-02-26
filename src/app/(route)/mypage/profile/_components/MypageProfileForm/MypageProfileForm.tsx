@@ -145,7 +145,6 @@
 
 // export default MypageProfileForm;
 
-import { useGetUsersMe } from "@/api/fetch/user";
 import { useNicknameCheck } from "@/hooks/domain/useNicknameCheck/useNicknameCheck";
 import { Icon, InputText, KebabMenu, ProfileAvatar } from "@/components/common";
 import { FooterButton } from "@/components/domain";
@@ -163,7 +162,9 @@ interface MypageProfileFormProps {
 
 const MypageProfileForm = ({ user }: MypageProfileFormProps) => {
   const { nickname, profileImg } = user ?? {};
-  const { setValue, getValues } = useFormContext();
+  const { setValue, getValues, watch } = useFormContext();
+
+  const currentProfileImg = watch("profileImg");
 
   const { mutate: PatchUserMeMutate } = usePatchUsersMe();
   const router = useRouter();
@@ -177,7 +178,7 @@ const MypageProfileForm = ({ user }: MypageProfileFormProps) => {
 
   // 이미지 관련 로직
   const { handleChangeImg, handleButtonClick, previewImgUrl, setPreviewImgUrl, fileInputRef } =
-    useChangeImg({ setOpenMenu, profileImg: profileImg });
+    useChangeImg({ setOpenMenu, profileImg: currentProfileImg });
 
   // 폼 제출 함수
   const handleSubmitMypageProfile = (e: FormEvent) => {
@@ -222,7 +223,7 @@ const MypageProfileForm = ({ user }: MypageProfileFormProps) => {
     <form className="flex h-dvh w-full flex-col">
       <div className="flex justify-center py-[30px]">
         <div className="relative h-[80px] w-[80px]">
-          <ProfileAvatar size={80} src={previewImgUrl} alt="프로필" priority={true} />
+          <ProfileAvatar size={80} src={currentProfileImg} alt="프로필" priority={true} />
           {/* TODO(수현): 디자인 토큰 변경 요청 해놓은 상태로 등록 시 추후 변경 */}
           <button
             className="absolute left-[52px] top-[52px] h-[28px] w-[28px] rounded-full bg-fill-neutral-strong-default flex-center"

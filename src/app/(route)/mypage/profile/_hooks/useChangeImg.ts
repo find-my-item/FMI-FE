@@ -1,4 +1,5 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { useFormContext } from "react-hook-form";
 
 interface UseChangeImgProps {
   setOpenMenu: (open: boolean) => void;
@@ -8,6 +9,8 @@ interface UseChangeImgProps {
 const useChangeImg = ({ setOpenMenu, profileImg }: UseChangeImgProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [previewImgUrl, setPreviewImgUrl] = useState<string | null>(profileImg ?? "");
+
+  const { setValue } = useFormContext();
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
@@ -21,6 +24,7 @@ const useChangeImg = ({ setOpenMenu, profileImg }: UseChangeImgProps) => {
     if (file) {
       const url = URL.createObjectURL(file);
       setPreviewImgUrl(url);
+      setValue("profileImg", url);
 
       setOpenMenu(false);
     }
