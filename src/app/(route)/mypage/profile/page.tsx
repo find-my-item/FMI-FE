@@ -20,7 +20,7 @@ const page = () => {
     mode: "onChange",
     reValidateMode: "onChange",
     defaultValues: {
-      nickname: data?.result?.nickname ?? "",
+      nickname: "",
       profileImg: data?.result?.profileImg ?? "",
     },
   });
