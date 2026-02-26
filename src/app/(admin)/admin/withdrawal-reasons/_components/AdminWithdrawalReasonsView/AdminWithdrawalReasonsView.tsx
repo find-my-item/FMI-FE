@@ -9,7 +9,6 @@ import { Button, RadioOptionItem } from "@/components/common";
 import { WITHDRAWAL_REASON_OPTIONS } from "../../_constants/WITHDRAWAL_REASON_OPTIONS";
 import { WithdrawalReasonType } from "../../_types/WithdrawalReasonType";
 
-// 인증 API를 호출하므로 SSR에서 완전히 제외
 const AdminWithdrawalReasonList = dynamic(
   () => import("../AdminWithdrawalReasonList/AdminWithdrawalReasonList"),
   { ssr: false }
