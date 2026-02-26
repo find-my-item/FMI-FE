@@ -18,7 +18,7 @@ const LocationSection = () => {
           fullAddress ? "text-neutral-normal-default" : "text-flatGray-400"
         )}
       >
-        <Icon name="Location" size={16} />
+        <Icon name="Location" size={16} className="text-brand-normal-default" />
         <span>{displayText}</span>
         {!fullAddress && <RequiredText />}
       </span>

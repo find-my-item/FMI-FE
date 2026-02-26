@@ -36,7 +36,7 @@ const PostDetailBody = ({ isBoardType, label, data }: PostDetailBodyProps) => {
 
         <ul className="mt-8 flex gap-5 text-body2-medium text-layout-body-default">
           <li className="flex gap-1">
-            <Icon name="EyeOpen" size={20} />
+            <Icon name="EyeOpen" size={20} className="text-neutralInversed-strong-pressed" />
             <span>조회 {formatViewCount(viewCount)}</span>
           </li>
           <li>
@@ -46,8 +46,11 @@ const PostDetailBody = ({ isBoardType, label, data }: PostDetailBodyProps) => {
               disabled={isPending}
               onClick={() => handleToggleFavorite(data.favoriteStatus)}
             >
-              {/* TODO(지권): 즐겨찾기 true 상태 아이콘 추가 */}
-              <Icon name="Star" size={20} />
+              <Icon
+                name="Star"
+                size={20}
+                className={data.favoriteStatus ? "text-system-bookmark" : "text-[#D9D9D9]"}
+              />
               <span>즐겨찾기</span>
               <span>{formatViewCount(favoriteCount)}</span>
             </button>

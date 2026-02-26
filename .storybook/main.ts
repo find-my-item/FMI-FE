@@ -22,7 +22,26 @@ const config: StorybookConfig = {
     (config.module!.rules as any[]).push({
       test: /\.svg$/,
       issuer: /\.[jt]sx?$/,
-      use: ["@svgr/webpack"],
+      use: [
+        {
+          loader: "@svgr/webpack",
+          options: {
+            svgo: true,
+            titleProp: true,
+            svgoConfig: {
+              plugins: [
+                { name: "removeViewBox", active: false },
+                { name: "removeDimensions", active: true },
+              ],
+            },
+            replaceAttrValues: {
+              "#000": "currentColor",
+              "#000000": "currentColor",
+              "#D9D9D9": "currentColor",
+            },
+          },
+        },
+      ],
     });
 
     config.resolve ||= {};

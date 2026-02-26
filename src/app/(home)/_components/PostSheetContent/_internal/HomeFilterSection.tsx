@@ -50,8 +50,10 @@ const HomeFilter = ({ children, onSelected, ariaLabel, ...props }: HomeFilterPro
   );
 };
 
-const HomeFilterSection = () => {
+const HomeFilterSection = ({ isHidden = false }: { isHidden?: boolean }) => {
   const { ref, onMouseDown } = useHorizontalDragScroll();
+
+  if (isHidden) return null;
 
   return (
     <div

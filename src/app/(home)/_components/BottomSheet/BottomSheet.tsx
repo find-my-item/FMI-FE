@@ -22,7 +22,7 @@ const BottomSheetContent = () => {
   return (
     <motion.div
       style={{ height, bottom: `${BOTTOM_OFFSET_PX}px` }}
-      className="fixed left-0 right-0 z-50 mx-auto max-w-[390px] select-none"
+      className="fixed left-0 right-0 z-50 mx-auto max-w-[768px] select-none border-x-2"
     >
       <MyLocationButton isFullyExpanded={isFullyExpanded} />
       <div className="flex h-full flex-col overflow-hidden rounded-t-[20px] bg-white">

@@ -50,7 +50,9 @@ const usePostWriteSubmit = ({ methods }: UsePostWriteSubmitProps) => {
 
     const formData = new FormData();
     formData.append("request", new Blob([JSON.stringify(request)], { type: "application/json" }));
-    values.images.forEach(({ file }) => formData.append("image", file));
+    values.images.forEach((image) => {
+      if (image.file) formData.append("images", image.file);
+    });
 
     return formData;
   };
