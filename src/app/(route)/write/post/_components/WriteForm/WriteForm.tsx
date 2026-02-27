@@ -16,6 +16,7 @@ const WriteForm = ({ title }: { title: string }) => {
   const values = methods.watch();
   const { onSubmit, isPosting, canSubmit } = usePostWriteSubmit({ methods });
   const isSubmitDisabled = !canSubmit(values) || isPosting;
+
   return (
     <>
       <DetailHeader title={title} />

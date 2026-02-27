@@ -10,12 +10,9 @@ export interface PostPostsWriteRequestBody {
 export interface PostPostsWriteResponse extends ApiBaseResponseType<PostDetailData> {}
 
 export interface PostWriteRequest {
-  thumbnailImageId?: number;
   latitude: number;
   date: string;
-  keepImageIdList?: string[];
   longitude: number;
-  tempPostId?: number;
   radius: Radius;
   address: string;
   title: string;

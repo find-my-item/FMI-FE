@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { useWriteStore } from "@/store";
 import { PostWriteFormValues } from "../../_types/PostWriteType";
-import { PostPostsWriteRequestBody, PostWriteRequest, usePostPosts } from "@/api/fetch/post";
+import { PostWriteRequest, usePostPosts } from "@/api/fetch/post";
 
 interface UsePostWriteSubmitProps {
   methods: UseFormReturn<PostWriteFormValues>;
@@ -45,20 +45,13 @@ const usePostWriteSubmit = ({ methods }: UsePostWriteSubmitProps) => {
       longitude: lng,
       radius: radius,
       date: new Date().toISOString(),
-      tempPostId: values.tempPostId ?? undefined,
-      keepImageIdList: values.images.filter((img) => img.id).map((img) => String(img.id)),
-      thumbnailImageId: values.images.find((img) => img.id)?.id,
     };
 
     const formData = new FormData();
     formData.append("request", new Blob([JSON.stringify(request)], { type: "application/json" }));
     values.images.forEach((image) => {
-      if (image.file) formData.append("images", image.file);
+      if (image.file) formData.append("image", image.file);
     });
-
-    if (values.tempPostId) {
-      formData.append("tempPostId", String(values.tempPostId));
-    }
 
     return formData;
   };
