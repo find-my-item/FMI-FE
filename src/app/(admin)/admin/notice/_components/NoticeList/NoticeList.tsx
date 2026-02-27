@@ -3,8 +3,8 @@ import { AdminListItem } from "../../../_components";
 import { useGetNotices } from "@/api/fetch/notice";
 import { LoadingState } from "@/components/state";
 
-const NoticeList = () => {
-  const { data } = useGetNotices();
+const NoticeList = ({ keyword }: { keyword?: string }) => {
+  const { data } = useGetNotices({ keyword });
 
   return (
     <Suspense fallback={<LoadingState />}>
