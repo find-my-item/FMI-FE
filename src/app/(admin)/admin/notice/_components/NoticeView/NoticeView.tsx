@@ -4,11 +4,11 @@ import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ErrorBoundary } from "@/app/ErrorBoundary";
 import { normalizeEnumValue } from "@/utils";
+import { useClickOutside } from "@/hooks";
 import { NoticeSortType } from "@/types";
 import NoticeList from "../NoticeList/NoticeList";
 import { AdminFilter, AdminSearch } from "../../../_components";
 import { AdminFilterItemType } from "../../../_types";
-import { useClickOutside } from "@/hooks";
 
 // TODO(지권): 공지사항 무한 스크롤 cursor 기반 변경 후 작업 예정
 const getSortLabel = (sortValue: NoticeSortType) => {
@@ -30,19 +30,19 @@ const NoticeView = () => {
   const keyword = searchParams.get("keyword") ?? undefined;
   const sortParam = normalizeEnumValue<NoticeSortType>(searchParams.get("sort"));
   const sort = sortParam ?? "LATEST";
-  const containerRef = useClickOutside(() => setIsOpen(false));
+  const containerRef = useClickOutside(() => setIsFilterOpen(false));
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const handleSortChange = (newSort: string) => {
     if (searchParams.get("sort") === newSort.toLowerCase()) {
-      setIsOpen(false);
+      setIsFilterOpen(false);
       return;
     }
     const params = new URLSearchParams(searchParams.toString());
     params.set("sort", newSort.toLowerCase());
     router.replace(`/admin/notice?${params.toString()}`);
-    setIsOpen(false);
+    setIsFilterOpen(false);
   };
 
   const handleNoticeSearch = (newKeyword: string) => {
@@ -62,9 +62,9 @@ const NoticeView = () => {
     {
       label: getSortLabel(sort),
       onSelected: false,
-      onClick: () => setIsOpen((prev) => !prev),
+      onClick: () => setIsFilterOpen((prev) => !prev),
       icon: {
-        name: isOpen ? "ArrowUp" : "ArrowDown",
+        name: isFilterOpen ? "ArrowUp" : "ArrowDown",
         size: 16,
       },
       iconPosition: "trailing",
@@ -72,16 +72,13 @@ const NoticeView = () => {
   ];
 
   return (
-    <div className="relative flex flex-col h-base">
+    <div ref={containerRef} className="relative flex flex-col h-base">
       <AdminSearch onEnter={handleNoticeSearch} />
 
       <AdminFilter filters={filters} />
 
-      {isOpen && (
-        <div
-          ref={containerRef}
-          className="absolute left-5 top-[120px] z-10 flex overflow-hidden rounded-[20px] border border-gray-200 bg-white py-1 text-center shadow-lg flex-col-center"
-        >
+      {isFilterOpen && (
+        <div className="absolute left-5 top-[120px] z-10 flex overflow-hidden rounded-[20px] border border-gray-200 bg-white py-1 text-center shadow-lg flex-col-center">
           <button
             className="w-full px-7 py-4 text-h3-medium text-neutral-normal-default"
             onClick={() => handleSortChange("LATEST")}
