@@ -2,9 +2,15 @@ import { Suspense } from "react";
 import { AdminListItem } from "../../../_components";
 import { useGetNotices } from "@/api/fetch/notice";
 import { LoadingState } from "@/components/state";
+import { NoticeSortType } from "@/types/NoticeType";
 
-const NoticeList = ({ keyword }: { keyword?: string }) => {
-  const { data } = useGetNotices({ keyword });
+interface NoticeListProps {
+  keyword?: string;
+  sortType?: NoticeSortType;
+}
+
+const NoticeList = ({ keyword, sortType }: NoticeListProps) => {
+  const { data } = useGetNotices({ keyword, sortType });
 
   return (
     <Suspense fallback={<LoadingState />}>

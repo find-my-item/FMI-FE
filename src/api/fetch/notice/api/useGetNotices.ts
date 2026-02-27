@@ -26,7 +26,7 @@ export const useGetNotices = ({
   if (page) params.set("page", page);
 
   return useAppInfiniteQuery<GetNoticesResponse, unknown, NoticeItem[]>(
-    "auth",
+    "public",
     ["notices", category, keyword, sortType, page, size],
     `/notices?${params.toString()}`,
     {
