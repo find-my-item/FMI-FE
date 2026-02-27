@@ -13,7 +13,7 @@ const usePostEditInit = ({ data, methods }: UsePostEditInitProps) => {
   const { setPostType, setLatLng, setAddress, setFullAddress, setRadius } = useWriteStore();
 
   useEffect(() => {
-    if (!data) return;
+    if (!data || methods.getValues("tempPostId") === data.id) return;
 
     setPostType(data.postType);
     setLatLng(data.latitude, data.longitude);
@@ -37,6 +37,7 @@ const usePostEditInit = ({ data, methods }: UsePostEditInitProps) => {
         previewUrl: img.imgUrl,
       })),
       postStatus: data.postStatus,
+      tempPostId: data.id,
     });
   }, [data, methods, setPostType, setLatLng, setAddress, setFullAddress, setRadius]);
 };

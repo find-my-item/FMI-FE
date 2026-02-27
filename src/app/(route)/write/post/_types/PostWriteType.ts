@@ -13,6 +13,7 @@ export interface PostWriteFormValues {
   temporarySave: boolean;
   images: { id?: number; file?: File; previewUrl: string }[];
   postStatus: ItemStatusFormValue;
+  tempPostId?: number | null;
 }
 
 export type CategoryFormValue = "" | CategoryType;
