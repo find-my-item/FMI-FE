@@ -54,7 +54,7 @@ const usePostEditSubmit = ({ postId, methods }: UsePostEditSubmitProps) => {
       thumbnailImageId,
       postStatus: values.postStatus || "SEARCHING",
     };
-    console.log("request: ", request);
+
     const formData = new FormData();
     formData.append("request", new Blob([JSON.stringify(request)], { type: "application/json" }));
     values.images.forEach((image) => {
@@ -67,7 +67,6 @@ const usePostEditSubmit = ({ postId, methods }: UsePostEditSubmitProps) => {
   const onSubmit = methods.handleSubmit((values) => {
     const formData = toFormData(values);
     if (!formData) return;
-    console.log("formData: ", Object.fromEntries(formData.entries()));
     putPost(formData);
     clearLocation();
   });
