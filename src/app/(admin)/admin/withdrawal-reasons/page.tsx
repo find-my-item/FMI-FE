@@ -1,6 +1,8 @@
 import { DetailHeader } from "@/components/layout";
 import { AdminWithdrawalReasonsView } from "./_components";
 
+export const dynamic = "force-dynamic";
+
 const page = () => {
   return (
     <>
