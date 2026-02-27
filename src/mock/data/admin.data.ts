@@ -1,4 +1,7 @@
 import { NoticeItem } from "@/api/fetch/notice";
+import { AdminInquiryItem, AdminReportItem, WithdrawUserItem } from "@/api/fetch/admin";
+import { ReplyStatus, ReportsType } from "@/types";
+import { AdminGuestInquiryItem } from "@/api/fetch/admin/types/GuestInquiriesType";
 
 export const MOCK_NOTICE_LIST: NoticeItem = {
   noticeId: 1,
@@ -12,10 +15,6 @@ export const MOCK_NOTICE_LIST: NoticeItem = {
   pinned: false,
   category: "GENERAL",
 };
-
-import { AdminInquiryItem, AdminReportItem, WithdrawReasonItem } from "@/api/fetch/admin";
-import { ReplyStatus, ReportsType } from "@/types";
-import { AdminGuestInquiryItem } from "@/api/fetch/admin/types/GuestInquiriesType";
 
 export const MOCK_ADMIN_REPORT_LIST: AdminReportItem[] = [
   {
@@ -165,31 +164,36 @@ export const MOCK_COMMENT_DATA = [
   },
 ];
 
-export const MOCK_WITHDRAW_REASON_LIST: WithdrawReasonItem[] = [
+export const MOCK_WITHDRAW_REASON_LIST: WithdrawUserItem[] = [
   {
-    id: 1,
+    userId: 1,
     nickname: "짱구",
     email: "zzanggu@example.com",
+    role: "USER",
     createdAt: "2026-10-20",
-    reasons: ["잘 사용하지 않아요", "서비스에 대한 신뢰도가 낮아요", "사용이 어려워요"],
+    deletedAt: "2026-10-20",
+    withdrawalReason: "NOT_USING",
+    withdrawalOtherReason: null,
   },
   {
-    id: 2,
+    userId: 2,
     nickname: "철수",
     email: "chulsoo@example.com",
+    role: "USER",
     createdAt: "2026-10-19",
-    reasons: [
-      "다른 계정이 있어요",
-      "불쾌감을 주는 사용자를 만났어요",
-      "억울하게 서비스 이용이 제한됐어요",
-    ],
+    deletedAt: "2026-10-19",
+    withdrawalReason: "DUPLICATE_ACCOUNT",
+    withdrawalOtherReason: null,
   },
   {
-    id: 3,
+    userId: 3,
     nickname: "유리",
     email: "yuri@example.com",
+    role: "USER",
     createdAt: "2026-10-18",
-    reasons: ["기타"],
+    deletedAt: "2026-10-18",
+    withdrawalReason: "OTHER",
+    withdrawalOtherReason: "기타",
   },
 ];
 

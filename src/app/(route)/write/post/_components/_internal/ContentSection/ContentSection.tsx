@@ -1,8 +1,7 @@
 import { cn } from "@/utils";
 import { RequiredText } from "@/components/common";
 import { useFormContext, useWatch } from "react-hook-form";
-
-import { PostWriteFormValues } from "../../_types/PostWriteType";
+import { PostWriteFormValues } from "../../../_types/PostWriteType";
 
 const ContentSection = () => {
   const { register, control } = useFormContext<PostWriteFormValues>();

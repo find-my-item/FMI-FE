@@ -3,9 +3,9 @@
 import { useRef, useState } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { Icon } from "@/components/common";
-import { ImagePreviewList } from "../_internal";
+import ImagePreviewList from "../ImagePreviewList/ImagePreviewList";
 import { useToast } from "@/context/ToastContext";
-import { PostWriteFormValues } from "../../_types/PostWriteType";
+import { PostWriteFormValues } from "../../../_types/PostWriteType";
 
 const ImageSection = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
