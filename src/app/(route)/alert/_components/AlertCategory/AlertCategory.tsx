@@ -13,7 +13,7 @@ const AlertCategory = () => {
   const handleCategoryClick = (key: AlertCategoryKey) => router.push(`/alert?category=${key}`);
 
   return (
-    <div className="mx-auto flex gap-[8px] py-[14px]">
+    <div className="flex gap-2 px-5 py-[14px] no-scrollbar">
       {ALERT_CATEGORIES.map((category) => (
         <Filter
           key={category.key}
