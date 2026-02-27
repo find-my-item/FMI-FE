@@ -94,3 +94,4 @@ export { default as UserBlock } from "@/assets/user-block.svg";
 export { default as EmptyPostSearch } from "@/assets/empty-post-search.svg";
 export { default as MainSearchWarning } from "@/assets/main-search-warning.svg";
 export { default as Clock } from "@/assets/clock.svg";
+export { default as AlertBell } from "@/assets/alert-bell.svg";
