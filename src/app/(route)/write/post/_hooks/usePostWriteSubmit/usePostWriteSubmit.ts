@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { useWriteStore } from "@/store";
 import { PostWriteFormValues } from "../../_types/PostWriteType";
@@ -29,6 +29,9 @@ const usePostWriteSubmit = ({ methods }: UsePostWriteSubmitProps) => {
     return true;
   };
 
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const [pendingValues, setPendingValues] = useState<PostWriteFormValues | null>(null);
+
   const { mutateAsync: postPosts, isPending: isPosting } = usePostPosts();
 
   const toPostWriteFormData = (values: PostWriteFormValues): FormData | null => {
@@ -56,16 +59,47 @@ const usePostWriteSubmit = ({ methods }: UsePostWriteSubmitProps) => {
     return formData;
   };
 
-  const onSubmit = methods.handleSubmit((values) => {
+  const submitFormData = (values: PostWriteFormValues) => {
     const formData = toPostWriteFormData(values);
 
     if (!formData) return;
 
     postPosts(formData);
     clearLocation();
+  };
+
+  const onSubmit = methods.handleSubmit((values) => {
+    const validImages = values.images.filter((image) => image.file);
+    if (validImages.length === 0) {
+      setPendingValues(values);
+      setIsConfirmModalOpen(true);
+      return;
+    }
+
+    submitFormData(values);
   });
 
-  return { onSubmit, isPosting, canSubmit };
+  const onConfirmNoImageSubmit = () => {
+    if (pendingValues) {
+      submitFormData(pendingValues);
+    }
+    setIsConfirmModalOpen(false);
+    setPendingValues(null);
+  };
+
+  const onCancelSubmit = () => {
+    setIsConfirmModalOpen(false);
+    setPendingValues(null);
+  };
+
+  return {
+    onSubmit,
+    isPosting,
+    canSubmit,
+    isConfirmModalOpen,
+    onConfirmNoImageSubmit,
+    onCancelSubmit,
+  };
 };
 
 export default usePostWriteSubmit;
