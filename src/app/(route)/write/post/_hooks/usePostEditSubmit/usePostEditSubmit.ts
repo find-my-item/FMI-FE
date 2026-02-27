@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { useWriteStore } from "@/store";
 import { PostWriteFormValues } from "../../_types/PostWriteType";
-import { PostWriteRequest, usePutPost } from "@/api/fetch/post";
+import { usePutPost } from "@/api/fetch/post";
+import { PutPostEditRequest } from "@/api/fetch/post/types/PutPostEditType";
 
 interface UsePostEditSubmitProps {
   postId: number;
@@ -37,9 +38,9 @@ const usePostEditSubmit = ({ postId, methods }: UsePostEditSubmitProps) => {
     if (!address || lat == null || lng == null || radius == null) return null;
 
     const firstImage = values.images[0];
-    const thumbnailImageId = firstImage?.id ?? undefined;
+    const thumbnailImageId = firstImage?.id ?? null;
 
-    const request: PostWriteRequest = {
+    const request: PutPostEditRequest = {
       postType: postType,
       title: values.title,
       category: values.category,
@@ -49,14 +50,15 @@ const usePostEditSubmit = ({ postId, methods }: UsePostEditSubmitProps) => {
       longitude: lng,
       radius: radius,
       date: new Date().toISOString(),
-      keepImageIdList: values.images.filter((img) => img.id).map((img) => String(img.id)),
+      keepImageIdList: values.images.filter((img) => img.id).map((img) => Number(img.id)),
       thumbnailImageId,
+      postStatus: values.postStatus || "SEARCHING",
     };
-
+    console.log("request: ", request);
     const formData = new FormData();
     formData.append("request", new Blob([JSON.stringify(request)], { type: "application/json" }));
     values.images.forEach((image) => {
-      if (image.file) formData.append("images", image.file);
+      if (image.file) formData.append("image", image.file);
     });
 
     return formData;
@@ -65,7 +67,7 @@ const usePostEditSubmit = ({ postId, methods }: UsePostEditSubmitProps) => {
   const onSubmit = methods.handleSubmit((values) => {
     const formData = toFormData(values);
     if (!formData) return;
-
+    console.log("formData: ", Object.fromEntries(formData.entries()));
     putPost(formData);
     clearLocation();
   });

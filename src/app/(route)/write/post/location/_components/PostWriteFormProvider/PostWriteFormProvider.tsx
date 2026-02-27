@@ -17,7 +17,7 @@ const defaultValues: PostWriteFormValues = {
   content: "",
   images: [],
   temporarySave: false,
-  tempPostId: null,
+  postStatus: "",
 };
 
 const PostWriteFormProvider = ({ children }: { children: ReactNode }) => {

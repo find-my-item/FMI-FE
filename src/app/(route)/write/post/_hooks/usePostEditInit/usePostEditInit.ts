@@ -36,6 +36,7 @@ const usePostEditInit = ({ data, methods }: UsePostEditInitProps) => {
         id: img.id,
         previewUrl: img.imgUrl,
       })),
+      postStatus: data.postStatus,
     });
   }, [data, methods, setPostType, setLatLng, setAddress, setFullAddress, setRadius]);
 };
