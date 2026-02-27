@@ -52,7 +52,6 @@ const useProfileFormSubmit = ({ preNickname, preProfileImg }: useProfileFormSubm
     PatchUserMeMutate(
       {
         ...(ChangeNickname && { nickname: isNickname }),
-        // nickname: isNickname ?? preNickname,
         ...(ChangeImg && { profileImageUrl: isProfileImg }),
       },
       {

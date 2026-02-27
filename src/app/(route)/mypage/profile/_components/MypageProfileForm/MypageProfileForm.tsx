@@ -100,6 +100,8 @@ const MypageProfileForm = ({ user }: MypageProfileFormProps) => {
           caption={{ rule: "2~10자, 특수문자/금칙어 제한" }}
         />
       </div>
+
+      {/* TODO(수현): 삭제할 버튼 */}
       <Button type="button" onClick={() => setOpenModal(true)}>
         테스트 버튼
       </Button>
