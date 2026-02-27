@@ -14,7 +14,7 @@ import {
   ImageSection,
   LocationSection,
   TitleSection,
-} from "../../_components";
+} from "../../_components/_internal";
 
 interface PostEditPageProps {
   postId: number;
