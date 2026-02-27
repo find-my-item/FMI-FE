@@ -25,7 +25,7 @@ const PostWriteMenu = () => {
 
   return (
     <>
-      <div ref={containerRef} className="fixed bottom-[116px] right-5 gap-2 flex-col-center">
+      <div ref={containerRef} className="fixed bottom-[110px] right-5 gap-2 flex-col-center">
         <ScrollToTopButton />
 
         <div className="relative flex justify-end">
