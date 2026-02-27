@@ -62,7 +62,11 @@ const ListItemImage = ({
         />
       ) : (
         <div className="h-full w-full flex-center" aria-label={`${category ?? "ETC"} 기본 이미지`}>
-          <Icon name={CATEGORY_ICON_MAP[category!]} size={size} />
+          <Icon
+            name={CATEGORY_ICON_MAP[category!]}
+            size={size}
+            className="text-labelsVibrant-quaternary"
+          />
         </div>
       )}
 

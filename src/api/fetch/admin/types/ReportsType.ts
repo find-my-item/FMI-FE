@@ -1,4 +1,4 @@
-import { PageableInfo, SortInfo } from "@/api/_base/types/ApiBasePagebleInfoType";
+import { PageableInfo, SortInfo } from "@/api/_base/types/ApiBasePageableInfoType";
 import { ReportsType, ReportTargetType, ReportType } from "@/types";
 
 export interface AdminReportItem {

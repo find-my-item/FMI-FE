@@ -5,13 +5,17 @@ import { cn, formatDate } from "@/utils";
 import { MOCK_ALERT_ITEMS } from "../../_constants/MOCK_ALERT_ITEMS";
 import { useSearchParams } from "next/navigation";
 import { AlertCategoryKey } from "../../_types/alertKeyType";
+import Link from "next/link";
 
 const AlertItem = ({ item }: { item: (typeof MOCK_ALERT_ITEMS)[number] }) => {
   return (
-    <div
+    // TODO(형준): 기능 구현 시 button 태그로 변경 가능성 있음
+    <Link
+      href="#"
+      aria-label="알림 확인, 외부 페이지 이동"
       key={item.id}
       className={cn(
-        "flex min-h-[86px] w-full cursor-pointer gap-3 border-b border-divider-default p-[20px] hover:bg-fill-flatGray-25",
+        "flex min-h-[86px] w-full cursor-pointer gap-3 border-b border-divider-default p-5 transition-colors hover:bg-fill-flatGray-25",
         item.isRead
           ? "bg-white"
           : "bg-fill-brand-subtle-default_3 hover:bg-fill-brand-subtle-default_2"
@@ -20,11 +24,11 @@ const AlertItem = ({ item }: { item: (typeof MOCK_ALERT_ITEMS)[number] }) => {
       <div className={cn("h-[30px] w-[30px] flex-shrink-0 rounded-full flex-center", item.iconBg)}>
         <Icon name={item.icon} size={15} />
       </div>
-      <div className="flex w-full flex-col gap-[4px]">
+      <div className="flex w-full flex-col gap-1">
         <div className="flex items-center justify-between">
-          <div className="flex items-center">
-            <span className="text-body2-medium text-brand-normal-default">{item.category}</span>
-            <span className="text-body2-medium text-neutral-normal-default">{item.title}</span>
+          <div className="flex items-center text-body2-medium">
+            <span className="text-brand-normal-default">{item.category}</span>
+            <span className="text-neutral-normal-default">{item.title}</span>
           </div>
           <span className="text-caption1-regular text-neutral-normal-placeholder">
             {formatDate(item.createdAt)}
@@ -34,7 +38,7 @@ const AlertItem = ({ item }: { item: (typeof MOCK_ALERT_ITEMS)[number] }) => {
           {item.body}
         </span>
       </div>
-    </div>
+    </Link>
   );
 };
 

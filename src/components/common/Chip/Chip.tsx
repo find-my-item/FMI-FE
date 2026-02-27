@@ -12,6 +12,8 @@ import { ChipProps, ChipType } from "./ChipTypes";
  * - `"neutralStrong"`: bg-fill-neutral-strong-default text-neutral-strong-default을 나타냅니다.
  * - `"brandNormal"`: bg-fill-brand-normal-default text-white을 나타냅니다.
  * - `"admin"`: bg-fill-brand-subtle-default text-brand-normal-default text-caption2-semibold !py-1 !px-2을 나타냅니다.
+ * - `"toast"`: bg-toast text-white을 나타냅니다.
+ * - `"neutralDisabled"`: bg-fill-neutral-strong-disabled text-neutral-strong-default을 나타냅니다.
  *
  * @example
  * ```tsx
@@ -28,6 +30,8 @@ const TypeMap: Record<ChipType, string> = {
   brandNormal: "bg-fill-brand-normal-default text-white",
   admin:
     "bg-fill-brand-subtle-default text-brand-normal-default text-caption2-semibold !py-1 !px-2",
+  toast: "bg-toast text-white",
+  neutralDisabled: "bg-fill-neutral-strong-disabled text-neutral-strong-default",
 };
 
 const Chip = ({ label, type = "brandSubtle" }: ChipProps) => {

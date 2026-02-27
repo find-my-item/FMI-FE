@@ -13,29 +13,32 @@ const UserProfileDetailHeader = () => {
   const [isReportOpen, setIsReportOpen] = useState(false);
 
   const { userId } = useParams<{ userId: string }>();
-  const containerRef = useRef<HTMLDivElement>(null);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  useHandleClickOutside(isMenuOpen, containerRef, dropdownRef, setIsMenuOpen);
+  const menuWrapperRef = useRef<HTMLDivElement>(null);
+
+  useHandleClickOutside(isMenuOpen, menuWrapperRef, menuWrapperRef, setIsMenuOpen);
 
   return (
-    <div className="relative" ref={containerRef}>
+    <div className="relative">
       <DetailHeader title="프로필">
-        <HeaderMenu ariaLabel="더보기 메뉴" onClick={() => setIsMenuOpen(!isMenuOpen)} />
-      </DetailHeader>
-      {isMenuOpen && (
-        <div
-          ref={dropdownRef}
-          role="button"
-          className={cn(
-            "absolute left-[65%] top-[90%] z-10 mt-2 cursor-pointer px-7 py-4",
-            "border border-white bg-fill-neutral-subtle-default",
-            "h-[57px] w-[119px] text-nowrap rounded-[20px] shadow-sm"
+        <div className="relative" ref={menuWrapperRef}>
+          <HeaderMenu ariaLabel="더보기 메뉴" onClick={() => setIsMenuOpen((prev) => !prev)} />
+
+          {isMenuOpen && (
+            <button
+              type="button"
+              className={cn(
+                "absolute right-0 top-full z-10 mt-2",
+                "border border-white bg-fill-neutral-subtle-default",
+                "h-[57px] w-[119px] rounded-[20px] px-7 py-4 shadow-sm",
+                "text-nowrap"
+              )}
+              onClick={() => setIsReportOpen(true)}
+            >
+              <span className="text-h3-medium text-system-warning">신고하기</span>
+            </button>
           )}
-          onClick={() => setIsReportOpen(true)}
-        >
-          <span className="text-h3-medium text-system-warning">신고하기</span>
         </div>
-      )}
+      </DetailHeader>
 
       <ReportModal
         isOpen={isReportOpen}

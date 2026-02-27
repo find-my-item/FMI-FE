@@ -6,11 +6,10 @@ interface ApiEmailLoginType {
   password: string;
 }
 
-interface EmailLoginResponseType
-  extends ApiBaseResponseType<{
-    userId: string;
-    temporaryPassword: boolean;
-  }> {}
+interface EmailLoginResponseType extends ApiBaseResponseType<{
+  userId: string;
+  temporaryPassword: boolean;
+}> {}
 
 const useApiEmailLogin = () => {
   return useAppMutation<

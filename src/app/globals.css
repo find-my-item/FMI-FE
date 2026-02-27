@@ -87,3 +87,17 @@
   background-size: 200% 100%;
   animation: shimmer 2.2s infinite linear;
 }
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, -6px);
+  }
+}
+
+.animate-float {
+  animation: float 2s ease-in-out infinite;
+}

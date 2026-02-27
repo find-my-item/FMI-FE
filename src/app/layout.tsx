@@ -8,6 +8,7 @@ import localFont from "next/font/local";
 import Script from "next/script";
 import { Metadata } from "next";
 import MSWProvider from "@/providers/MSWProvider";
+import AuthBootstrap from "./authBootStrap";
 
 const pretendard = localFont({
   src: "../../public/fonts/PretendardVariable.woff2",
@@ -75,6 +76,7 @@ export default function RootLayout({
         <Providers>
           <ToastProvider>
             <MSWProvider />
+            <AuthBootstrap />
             <main className="w-full flex-1">{children}</main>
             <Footer />
           </ToastProvider>
