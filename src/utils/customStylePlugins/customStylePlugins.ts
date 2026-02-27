@@ -90,3 +90,17 @@ export const hBase = plugin(function ({ addUtilities }) {
 
   addUtilities(utilities);
 });
+
+/**
+ * fixed-button-position
+ */
+export const fixedButtonPosition = plugin(function ({ addUtilities }) {
+  const utilities: Record<string, CSSRuleObject> = {
+    ".fixed-button-position": {
+      bottom: "110px",
+      right: "20px",
+      position: "fixed",
+    },
+  };
+  addUtilities(utilities);
+});
