@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { cn } from "@/utils";
 import { Button, Icon } from "@/components/common";
 import { useDeleteDetailPost, usePutPostStatus } from "@/api/fetch/post";
@@ -18,6 +19,7 @@ interface PostOptionBoxProps {
 }
 
 const PostActionMenu = ({ open, onClose, postId, postData }: PostOptionBoxProps) => {
+  const router = useRouter();
   const { isMine, writerId, postStatus } = postData;
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [isReportOpen, setIsReportOpen] = useState(false);
@@ -25,6 +27,11 @@ const PostActionMenu = ({ open, onClose, postId, postData }: PostOptionBoxProps)
 
   const { mutate: putPostStatus } = usePutPostStatus(postId);
   const isFound = postStatus === "FOUND";
+
+  const handleEditPost = () => {
+    onClose();
+    router.push(`/write/post/${postId}`);
+  };
 
   const handleStatusChange = () => {
     putPostStatus({ postStatus: isFound ? "SEARCHING" : "FOUND" });
@@ -46,7 +53,7 @@ const PostActionMenu = ({ open, onClose, postId, postData }: PostOptionBoxProps)
       >
         {isMine ? (
           <>
-            <button className={ACTION_MENU.buttonStyle}>
+            <button className={ACTION_MENU.buttonStyle} onClick={handleEditPost}>
               <Icon name="Edit" size={20} />
               <span>게시글 수정하기</span>
             </button>

@@ -11,6 +11,16 @@ const renderWithProviders = (ui: React.ReactElement) => {
     const methods = useForm<PostWriteFormValues>({
       defaultValues: {
         images: [],
+        tempPostId: null,
+        temporarySave: false,
+        postType: "",
+        title: "",
+        content: "",
+        category: "",
+        address: "",
+        latitude: null,
+        longitude: null,
+        radius: null,
       },
     });
 

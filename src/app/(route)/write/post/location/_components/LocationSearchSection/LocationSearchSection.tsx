@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
-import { getRegionSearchResults } from "@/utils";
+import { getRegionSearchResults, highlightText } from "@/utils";
 import { InputSearch } from "@/components/common";
 import { useRegionRows } from "@/hooks";
 import { RegionRow } from "@/types";
@@ -69,7 +69,7 @@ const LocationSearchSection = ({ searchParams }: LocationSearchSectionProps) => 
                 className="w-full p-5 text-left text-body2-medium text-neutral-strong-default"
                 onClick={() => handleSelect(row)}
               >
-                {row.display}
+                {highlightText(row.display, locationValue)}
               </button>
             </li>
           ))}

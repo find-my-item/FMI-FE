@@ -7,7 +7,7 @@ interface ActionSectionProps {
 const ActionSection = ({ disabled }: ActionSectionProps) => {
   return (
     <section className="px-5 pb-8 pt-3">
-      <Button type="submit" variant="auth" disabled={disabled}>
+      <Button type="submit" className="w-full" disabled={disabled}>
         작성 완료
       </Button>
     </section>
