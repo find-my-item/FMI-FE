@@ -18,8 +18,9 @@ jest.mock("@/hooks", () => ({
   useSearchUpdateQueryString: jest.fn(),
 }));
 
-jest.mock("@/components/domain", () => ({
-  ListSearch: () => <div data-testid="list-search"></div>,
+jest.mock("../ListSearch/ListSearch", () => ({
+  __esModule: true,
+  default: () => <div data-testid="list-search"></div>,
 }));
 
 jest.mock("@/components/layout", () => ({
