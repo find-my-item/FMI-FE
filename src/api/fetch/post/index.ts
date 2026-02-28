@@ -21,3 +21,4 @@ export { useGetDetailPost } from "./api/useGetDetailPost";
 export { useGetTempPost } from "./api/useGetTempPost";
 export { usePostTempPost } from "./api/usePostTempPost";
 export { usePutPostStatus } from "./api/usePutPostStatus";
+export { usePutPost } from "./api/usePutPost";

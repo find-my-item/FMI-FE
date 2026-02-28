@@ -14,7 +14,9 @@ jest.mock("@/components/domain", () => ({
 
 describe("CategoryPopup", () => {
   it("isOpen=true이면 제목과 7개 옵션이 렌더링되어야 합니다", () => {
-    const { container } = render(<CategoryPopup isOpen={true} onClose={jest.fn()} />);
+    const { container } = render(
+      <CategoryPopup isOpen={true} onClose={jest.fn()} onSelect={jest.fn()} />
+    );
     expect(screen.getByText("카테고리 선택")).toBeInTheDocument();
 
     const inputs = container.querySelectorAll('input[type="radio"][name="category"]');
@@ -25,7 +27,7 @@ describe("CategoryPopup", () => {
   });
 
   it("옵션 클릭 시 해당 라디오가 선택되어야 합니다", async () => {
-    render(<CategoryPopup isOpen={true} onClose={jest.fn()} />);
+    render(<CategoryPopup isOpen={true} onClose={jest.fn()} onSelect={jest.fn()} />);
     const user = userEvent.setup();
 
     const walletInput = screen.getByLabelText("지갑") as HTMLInputElement;
@@ -37,7 +39,7 @@ describe("CategoryPopup", () => {
   });
 
   it("옵션 클릭 시 해당 라디오 배경 색이 변경되어야 합니다", async () => {
-    render(<CategoryPopup isOpen={true} onClose={jest.fn()} />);
+    render(<CategoryPopup isOpen={true} onClose={jest.fn()} onSelect={jest.fn()} />);
     const user = userEvent.setup();
 
     const walletLabel = screen.getByText("지갑").closest("label")!;

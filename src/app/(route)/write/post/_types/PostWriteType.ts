@@ -1,4 +1,4 @@
-import { CategoryType, PostType } from "@/types";
+import { CategoryType, PostType, ItemStatus } from "@/types";
 
 export interface PostWriteFormValues {
   postType: PostTypeFormValue;
@@ -12,7 +12,10 @@ export interface PostWriteFormValues {
   category: CategoryFormValue;
   temporarySave: boolean;
   images: { id?: number; file?: File; previewUrl: string }[];
+  postStatus: ItemStatusFormValue;
+  tempPostId?: number | null;
 }
 
 export type CategoryFormValue = "" | CategoryType;
 export type PostTypeFormValue = "" | PostType;
+export type ItemStatusFormValue = "" | ItemStatus;
