@@ -9,6 +9,8 @@ interface SimilarItemsSectionProps {
 const SimilarItemsSection = ({ postId }: SimilarItemsSectionProps) => {
   const { data: similarData } = useGetSimilar({ postId });
 
+  if (!similarData?.result || similarData.result.length === 0) return null;
+
   return (
     <>
       <hr className="w-full border-neutral-normal-default" />
@@ -16,7 +18,7 @@ const SimilarItemsSection = ({ postId }: SimilarItemsSectionProps) => {
         <h2 className="text-h2-medium text-flatGray-900">비슷한 분실물</h2>
 
         <Suspense fallback={<SimilarSkeletonSection />}>
-          <SimilarItemsList data={similarData?.result || []} />
+          <SimilarItemsList data={similarData?.result} />
         </Suspense>
       </section>
     </>

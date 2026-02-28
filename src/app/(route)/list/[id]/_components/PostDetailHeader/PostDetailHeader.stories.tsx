@@ -34,6 +34,7 @@ export const Single: Story = {
         postCount: 4,
         chattingCount: 0,
       },
+      isMine: false,
     },
   },
 };
