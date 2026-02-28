@@ -1,6 +1,6 @@
 "use client";
 
-import { ListSearch } from "@/components/domain";
+import ListSearch from "../ListSearch/ListSearch";
 import { DetailHeader } from "@/components/layout";
 import { useSearchUpdateQueryString } from "@/hooks";
 import DefaultList from "../DefaultList/DefaultList";
