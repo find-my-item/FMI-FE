@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { DetailHeader } from "@/components/layout";
 import { NoticeView } from "./_components";
 
@@ -7,7 +8,9 @@ const page = () => {
       <DetailHeader title="공지사항" />
       <h1 className="sr-only">관리자 공지사항</h1>
 
-      <NoticeView />
+      <Suspense fallback={null}>
+        <NoticeView />
+      </Suspense>
     </>
   );
 };
