@@ -1,4 +1,4 @@
-import { Badge, Icon } from "@/components/common";
+import { Badge, Icon, ListItemImage } from "@/components/common";
 import Link from "next/link";
 
 const NoticeItem = () => {
@@ -6,22 +6,34 @@ const NoticeItem = () => {
     <li>
       <Link
         href="/notice/1"
-        className="flex flex-col gap-2 border-b border-divider-default px-5 py-[30px] transition-colors hover:bg-flatGray-25"
+        className="flex min-w-0 items-center gap-2 border-b border-divider-default px-5 py-[30px] transition-colors hover:bg-flatGray-25"
       >
-        <div className="flex flex-col gap-[3px]">
-          <div className="flex items-center gap-1">
-            <Badge variant="new" />
-            <p className="text-body1-semibold text-layout-header-default">[공지] 공지사항 제목</p>
+        <div className="flex min-w-0 flex-col gap-2">
+          <div className="flex flex-col gap-[3px]">
+            <div className="flex items-center gap-1">
+              <div className="flex-shrink-0">
+                <Badge variant="new" />
+              </div>
+              <p className="truncate text-body1-semibold text-layout-header-default">
+                [공지] 공지사항 제목 [공지] 공지사항 제목 [공지] 공지사항 제목 [공지] 공지사항 제목
+                [공지] 공지사항 제목 [공지] 공지사항 제목 [공지] 공지사항 제목 [공지] 공지사항 제목
+                [공지] 공지사항 제목 [공지] 공지사항 제목
+              </p>
+            </div>
+            <time className="text-body2-regular text-layout-body-default">2025.10.15</time>
           </div>
-          <time className="text-body2-regular text-layout-body-default">2025.10.15</time>
-        </div>
 
-        <div className="flex items-center gap-1 text-body2-regular text-neutral-strong-placeholder">
-          <Icon name="Like" size={16} className="text-[#D9D9D9]" />
-          <span>12</span>
-          <Icon name="Eye" size={16} className="text-[#D9D9D9]" />
-          <span>24</span>
+          <div className="flex items-center gap-1 text-body2-regular text-neutral-strong-placeholder">
+            <Icon name="Like" size={16} className="text-[#D9D9D9]" />
+            <span>12</span>
+            <Icon name="Eye" size={16} className="text-[#D9D9D9]" />
+            <span>24</span>
+          </div>
         </div>
+        {/* TODO(형준): API 연동 시 이미지 처리 필요 */}
+        {/* <div className="flex-shrink-0">
+          <ListItemImage alt="공지사항 게시글 썸네일" size={90} category="BAG" />
+        </div> */}
       </Link>
     </li>
   );
