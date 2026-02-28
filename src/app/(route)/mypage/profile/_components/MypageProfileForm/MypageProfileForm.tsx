@@ -35,6 +35,7 @@ const MypageProfileForm = ({ user }: MypageProfileFormProps) => {
   const { handleSubmitMypageProfile } = useProfileFormSubmit({
     preNickname: nickname,
     preProfileImg: profileImg,
+    onNoChange: () => setOpenModal(true),
   });
 
   return (
