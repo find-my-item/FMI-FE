@@ -13,9 +13,6 @@ export default function AuthBootstrap() {
   const KEY = "refresh_bootstrap_ran";
 
   useEffect(() => {
-    if (sessionStorage.getItem(KEY)) return;
-    sessionStorage.setItem(KEY, "1");
-
     if (pathname === "/login?reason=session-expired") return;
 
     if (ranRef.current) return;
