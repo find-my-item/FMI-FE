@@ -7,6 +7,7 @@ import FilterDropdown from "../FilterDropdown/FilterDropdown";
 import { FilTER_DROPDOWN_OPTIONS } from "../../constants/FILTER";
 import { useChatList } from "@/api/fetch/chatRoom";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll/useInfiniteScroll";
+import { EmptyState, LoadingState } from "@/components/state";
 
 interface DefaultListProps {
   searchUpdateQuery: (key: string, value?: string) => void;
@@ -16,7 +17,13 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
   const searchParams = useSearchParams();
   const selectedRegion = searchParams.get("region");
   const regionDisplayText = selectedRegion || "지역 선택";
-  const { data: chatList, fetchNextPage, isFetchingNextPage, hasNextPage } = useChatList();
+  const {
+    data: chatList,
+    fetchNextPage,
+    isFetchingNextPage,
+    hasNextPage,
+    isLoading,
+  } = useChatList();
   const { ref: chatListRef } = useInfiniteScroll({
     fetchNextPage,
     hasNextPage,
@@ -39,9 +46,18 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
           <FilterDropdown key={option.keyName} {...option} searchUpdateQuery={searchUpdateQuery} />
         ))}
       </div>
-      {chatList?.map((chatRoom) => (
-        <ChatItem key={chatRoom.roomId} chatRoom={chatRoom} />
-      ))}
+
+      {isLoading && <LoadingState title="채팅 목록 불러오는 중..." />}
+      {chatList?.length !== 0 ? (
+        chatList?.map((chatRoom) => <ChatItem key={chatRoom.roomId} chatRoom={chatRoom} />)
+      ) : (
+        <EmptyState
+          icon={{ iconName: "ChatListEmpty", iconSize: 90 }}
+          title="아직 채팅 내역이 없어요"
+          description="채팅이 시작되면 여기에 채팅 목록이 표기돼요."
+        />
+      )}
+
       <div ref={chatListRef} className="h-[100px]" />
     </>
   );
