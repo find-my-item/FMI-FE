@@ -7,13 +7,20 @@ import { BottomSheet, PostWriteKakaoMap } from "../_internal";
 interface LocationRangeSectionProps {
   address: string | null;
   fullAddress: string | null;
+  initialLat?: number;
+  initialLng?: number;
 }
 
-const LocationRangeSection = ({ address, fullAddress }: LocationRangeSectionProps) => {
+const LocationRangeSection = ({
+  address,
+  fullAddress,
+  initialLat,
+  initialLng,
+}: LocationRangeSectionProps) => {
   const [radius, setRadius] = useState<Radius>(3000);
-  // TODO(지권): 목업 위도, 경도 수정 필요
-  const [lat, setLat] = useState(35.8737787566279);
-  const [lng, setLng] = useState(128.810871476804);
+
+  const lat = initialLat ?? 37.566370748;
+  const lng = initialLng ?? 126.977918341;
 
   return (
     <>
