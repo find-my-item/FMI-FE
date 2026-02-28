@@ -8,6 +8,7 @@ type HeaderData = {
   id: string;
   imageResponseList: ImageResponse[];
   userData: userInformation;
+  isMine: boolean;
 };
 
 interface PostDetailHeaderType {
@@ -15,7 +16,7 @@ interface PostDetailHeaderType {
 }
 
 const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
-  const { id, imageResponseList, userData } = headerData;
+  const { id, imageResponseList, userData, isMine } = headerData;
 
   return (
     <>
@@ -47,12 +48,13 @@ const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
           </div>
         </div>
 
+        {/* TODO(지권): 본인 게시글 텍스트 변경 필요 */}
         <Button
           as={Link}
-          href={`/chat/${id}`}
+          href={isMine ? "/chat" : `/chat/${id}`}
           className={cn("min-h-11 w-full py-[10px]", "tablet:flex-1")}
         >
-          채팅하러 가기
+          {isMine ? "채팅 목록으로 이동" : "채팅하러 가기"}
         </Button>
       </section>
     </>
