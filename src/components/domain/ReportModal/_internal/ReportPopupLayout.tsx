@@ -18,7 +18,7 @@ const ReportPopupLayout = ({ isOpen, onClose, children }: ReportPopupLayoutProps
   return (
     <div className="fixed inset-0 z-[9999] flex items-end justify-center">
       <div
-        className="h-[100dvh] w-full max-w-[390px] border bg-white"
+        className="h-dvh w-full max-w-[768px] border bg-white"
         onClick={(e) => e.stopPropagation()}
       >
         {children}
