@@ -23,14 +23,16 @@ const LocationRangeSection = ({
 
   const [radius, setRadius] = useState<Radius>(3000);
 
-  const [currentLat, setCurrentLat] = useState(initialLat ?? 37.566370748);
-  const [currentLng, setCurrentLng] = useState(initialLng ?? 126.977918341);
+  const [currentCoord, setCurrentCoord] = useState({
+    lat: initialLat ?? 37.566370748,
+    lng: initialLng ?? 126.977918341,
+  });
+
   const [currentAddress, setCurrentAddress] = useState(address);
   const [currentFullAddress, setCurrentFullAddress] = useState(fullAddress);
 
   const handleCenterChange = async (center: { lat: number; lng: number }) => {
-    setCurrentLat(center.lat);
-    setCurrentLng(center.lng);
+    setCurrentCoord(center);
 
     try {
       const data = await getKakaoLocalCoord2Address(center.lat, center.lng);
@@ -54,8 +56,8 @@ const LocationRangeSection = ({
     <>
       <div className="h-[calc(100vh-350px)] w-full">
         <PostWriteKakaoMap
-          lat={currentLat}
-          lng={currentLng}
+          lat={currentCoord.lat}
+          lng={currentCoord.lng}
           radius={radius}
           onCenterChange={handleCenterChange}
         />
@@ -65,8 +67,7 @@ const LocationRangeSection = ({
         locationInfo={{
           address: currentAddress,
           fullAddress: currentFullAddress,
-          lat: currentLat,
-          lng: currentLng,
+          ...currentCoord,
         }}
         radiusState={{ radius, setRadius }}
       />
