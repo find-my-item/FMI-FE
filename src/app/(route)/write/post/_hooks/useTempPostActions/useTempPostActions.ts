@@ -41,6 +41,7 @@ const useTempPostActions = ({ methods, tempPost, values, setFormKey }: TempPostA
         previewUrl: img.imgUrl,
       })),
       temporarySave: false,
+      tempPostId: result.postId,
     });
 
     setFormKey((prev) => prev + 1);
