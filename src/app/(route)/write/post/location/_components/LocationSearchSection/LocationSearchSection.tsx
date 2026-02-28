@@ -2,10 +2,12 @@
 
 import { useRouter } from "next/navigation";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
-import { getRegionSearchResults } from "@/utils";
+import { getKakaoLocalAddress } from "@/api/fetch/kakao";
 import { InputSearch } from "@/components/common";
+import { getRegionSearchResults, highlightText } from "@/utils";
 import { useRegionRows } from "@/hooks";
 import { RegionRow } from "@/types";
+import { useToast } from "@/context/ToastContext";
 
 interface LocationSearchSectionProps {
   searchParams: URLSearchParams;
@@ -13,6 +15,7 @@ interface LocationSearchSectionProps {
 
 const LocationSearchSection = ({ searchParams }: LocationSearchSectionProps) => {
   const router = useRouter();
+  const { addToast } = useToast();
 
   const { data: regions = [], isLoading } = useRegionRows();
 
@@ -30,11 +33,23 @@ const LocationSearchSection = ({ searchParams }: LocationSearchSectionProps) => 
 
   const results = getRegionSearchResults({ regions, query: locationValue });
 
-  const handleSelect = (row: RegionRow) => {
+  const handleSelect = async (row: RegionRow) => {
     methods.setValue("location", row.display);
 
     const params = new URLSearchParams(searchParams.toString());
     params.set("location", row.display);
+
+    try {
+      const data = await getKakaoLocalAddress(row.display);
+
+      if (data.documents && data.documents.length > 0) {
+        const { x, y } = data.documents[0];
+        params.set("lat", y);
+        params.set("lng", x);
+      }
+    } catch {
+      addToast("위치 정보를 불러오는데 실패했어요", "error");
+    }
 
     router.replace(`/write/post/location?${params.toString()}`, { scroll: false });
   };
@@ -69,7 +84,7 @@ const LocationSearchSection = ({ searchParams }: LocationSearchSectionProps) => 
                 className="w-full p-5 text-left text-body2-medium text-neutral-strong-default"
                 onClick={() => handleSelect(row)}
               >
-                {row.display}
+                {highlightText(row.display, locationValue)}
               </button>
             </li>
           ))}

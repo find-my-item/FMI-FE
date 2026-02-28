@@ -1,4 +1,8 @@
+import { PageResponse } from "@/api/_base/types/ApiBasePageableInfoType";
+import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 import { NoticeCategory } from "@/types";
+
+export interface GetNoticesResponse extends ApiBaseResponseType<PageResponse<NoticeItem>> {}
 
 export interface NoticeItem {
   noticeId: number;
@@ -11,37 +15,4 @@ export interface NoticeItem {
   thumbnailUrl: string;
   isNew: boolean;
   isHot: boolean;
-}
-
-export interface SortInfo {
-  empty: boolean;
-  unsorted: boolean;
-  sorted: boolean;
-}
-
-export interface PageableInfo {
-  offset: number;
-  sort: SortInfo;
-  unpaged: boolean;
-  paged: boolean;
-  pageNumber: number;
-  pageSize: number;
-}
-
-export interface NoticeListResponse {
-  totalElements: number;
-  totalPages: number;
-  size: number;
-  content: NoticeItem[];
-
-  number: number;
-  sort: SortInfo;
-  empty: boolean;
-  unsorted: boolean;
-  sorted: boolean;
-  numberOfElements: number;
-
-  pageable: PageableInfo;
-  first: boolean;
-  last: boolean;
 }

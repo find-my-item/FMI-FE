@@ -1,9 +1,22 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import MainSearchHeader from "./MainSearchHeader";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ToastProvider } from "@/providers/ToastProviders";
+
+const queryClient = new QueryClient();
 
 const meta = {
-  title: "공통 컴포넌트/Header",
+  title: "페이지/메인 페이지/MainSearchHeader",
   component: MainSearchHeader,
+  decorators: [
+    (Story) => (
+      <QueryClientProvider client={queryClient}>
+        <ToastProvider>
+          <Story />
+        </ToastProvider>
+      </QueryClientProvider>
+    ),
+  ],
 } satisfies Meta<typeof MainSearchHeader>;
 
 export default meta;

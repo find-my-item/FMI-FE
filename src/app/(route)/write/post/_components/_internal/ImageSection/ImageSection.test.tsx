@@ -1,16 +1,26 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import ImageSection from "./ImageSection";
 import { ToastProvider } from "@/providers/ToastProviders";
 import { FormProvider, useForm } from "react-hook-form";
-import { PostWriteFormValues } from "../../_types/PostWriteType";
+import { PostWriteFormValues } from "../../../_types/PostWriteType";
+import ImageSection from "./ImageSection";
 
 const renderWithProviders = (ui: React.ReactElement) => {
   const Wrapper = ({ children }: { children: React.ReactNode }) => {
     const methods = useForm<PostWriteFormValues>({
       defaultValues: {
         images: [],
+        tempPostId: null,
+        temporarySave: false,
+        postType: "",
+        title: "",
+        content: "",
+        category: "",
+        address: "",
+        latitude: null,
+        longitude: null,
+        radius: null,
       },
     });
 
@@ -28,8 +38,9 @@ jest.mock("@/components/common", () => ({
   Icon: ({ name }: { name: string }) => <span data-testid={`icon-${name}`}>{name}</span>,
 }));
 
-jest.mock("../_internal", () => ({
-  ImagePreviewList: () => <div data-testid="image-preview-list" />,
+jest.mock("../ImagePreviewList/ImagePreviewList", () => ({
+  __esModule: true,
+  default: () => <div data-testid="image-preview-list" />,
 }));
 
 beforeAll(() => {

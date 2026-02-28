@@ -15,3 +15,17 @@ export interface PageableInfo {
   pageNumber: number;
   pageSize: number;
 }
+
+export interface PageResponse<T> {
+  totalElements: number;
+  totalPages: number;
+  size: number;
+  content: T[];
+  number: number;
+  sort: SortInfo;
+  pageable: PageableInfo;
+  numberOfElements: number;
+  first: boolean;
+  last: boolean;
+  empty: boolean;
+}

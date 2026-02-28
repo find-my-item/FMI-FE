@@ -1,4 +1,4 @@
-import { PageableInfo, SortInfo } from "@/api/_base/types/ApiBasePagebleInfoType";
+import { PageableInfo, SortInfo } from "@/api/_base/types/ApiBasePageableInfoType";
 import { ReportsType } from "@/types";
 import { InquiryCategory, InquiryType } from "@/types/InquiryType";
 
