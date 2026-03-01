@@ -25,8 +25,8 @@ export const sort = [
 
 export const findStatus = [
   { label: "전체", value: undefined },
-  { label: "찾는중", value: "SEARCHING" },
-  { label: "찾았음", value: "FOUND" },
+  { label: "찾아요", value: "SEARCHING" },
+  { label: "찾았어요", value: "FOUND" },
 ] as const;
 
 export const status = [

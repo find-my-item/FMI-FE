@@ -57,13 +57,8 @@ const FilterSection = ({ pageType = "LIST" }: FilterSectionProps) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isDateOpen, setIsDateOpen] = useState(false);
 
-  const {
-    normalizedCategory,
-    normalizedSort,
-    normalizedStatus,
-    normalizedFindStatus,
-    normalizedDate,
-  } = normalizedFilterValues({ region, category, sort, status, findStatus, date });
+  const { normalizedCategory, normalizedSort, normalizedStatus, normalizedFindStatus } =
+    normalizedFilterValues({ region, category, sort, status, findStatus, date });
 
   const selectionState = filterSelectionState({ region, category, sort, status, findStatus, date });
 
