@@ -47,7 +47,7 @@ const ReportReasonModal = ({
       onClick={onClose}
     >
       <form
-        className="animate-modal-slide-up absolute bottom-0 flex h-[671px] w-full max-w-[390px] flex-col rounded-t-[20px] bg-white py-10"
+        className="animate-modal-slide-up absolute bottom-0 flex h-[671px] w-full max-w-[768px] flex-col rounded-t-[20px] bg-white py-10"
         onClick={(e) => e.stopPropagation()}
         onSubmit={handleSelectReportReason}
       >

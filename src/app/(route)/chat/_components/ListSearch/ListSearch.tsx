@@ -9,6 +9,7 @@ const ListSearch = () => {
     mode: "onChange",
     reValidateMode: "onChange",
   });
+  const searchQuery = methods.watch("regionSearch") ?? "";
 
   return (
     <>
@@ -19,11 +20,12 @@ const ListSearch = () => {
             name="regionSearch"
             placeholder="시/군/구를 입력해 주세요."
             onEnter={() => {}}
+            autoFocus
           />
         </div>
       </FormProvider>
 
-      <RegionSearchView />
+      <RegionSearchView searchQuery={searchQuery} />
     </>
   );
 };
