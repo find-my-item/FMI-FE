@@ -66,7 +66,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
           type="button"
           variant="auth"
           size="big"
-          ariaLabel="회원가입 폼 버튼"
+          ariaLabel="다음 버튼"
           onClick={onNext}
           disabled={!isNextEnabled}
         >
