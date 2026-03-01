@@ -1,3 +1,5 @@
+// TODO(수현): 필터링 리스트 구현 전
+
 import { useGetUsersMePosts } from "@/api/fetch/user/api/useGetUsersMePosts";
 import { ErrorBoundary } from "@/app/ErrorBoundary";
 import { MypageEmptyUI, PostListItem } from "@/components/domain";
