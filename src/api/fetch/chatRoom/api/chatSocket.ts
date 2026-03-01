@@ -72,7 +72,7 @@ export const connectChatSocket = () => {
   }
 
   client = new Client({
-    brokerURL: `/api/ws`,
+    brokerURL: process.env.NODE_ENV === "development" ? "/api/ws" : "wss://api.finditem.kr/ws",
     reconnectDelay: 5000,
 
     debug: (msg) => {

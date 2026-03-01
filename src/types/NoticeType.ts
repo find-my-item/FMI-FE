@@ -12,6 +12,12 @@
  * - IMPORTANT: 중요
  * - UPDATE: 업데이트
  *
+ * @description NoticeSortType
+ * - LATEST: 최신순
+ * - OLDEST: 오래된순
+ * - MOST_VIEWED: 조회순
  */
 
 export type NoticeCategory = "GENERAL" | "EVENT" | "MAINTENANCE" | "IMPORTANT" | "UPDATE";
+
+export type NoticeSortType = "LATEST" | "OLDEST" | "MOST_VIEWED";

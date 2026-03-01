@@ -1,14 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { useWriteStore } from "@/store";
 import { PostWriteFormValues } from "../../_types/PostWriteType";
-import { PostWriteRequest, usePostPosts } from "@/api/fetch/post";
+import { usePutPost } from "@/api/fetch/post";
+import { PutPostEditRequest } from "@/api/fetch/post/types/PutPostEditType";
 
-interface UsePostWriteSubmitProps {
+interface UsePostEditSubmitProps {
+  postId: number;
   methods: UseFormReturn<PostWriteFormValues>;
 }
 
-const usePostWriteSubmit = ({ methods }: UsePostWriteSubmitProps) => {
+const usePostEditSubmit = ({ postId, methods }: UsePostEditSubmitProps) => {
   const { lat, lng, address, radius, postType, clearLocation } = useWriteStore();
 
   useEffect(() => {
@@ -29,16 +31,16 @@ const usePostWriteSubmit = ({ methods }: UsePostWriteSubmitProps) => {
     return true;
   };
 
-  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
-  const [pendingValues, setPendingValues] = useState<PostWriteFormValues | null>(null);
+  const { mutateAsync: putPost, isPending: isPosting } = usePutPost(postId);
 
-  const { mutateAsync: postPosts, isPending: isPosting } = usePostPosts();
-
-  const toPostWriteFormData = (values: PostWriteFormValues): FormData | null => {
+  const toFormData = (values: PostWriteFormValues): FormData | null => {
     if (!postType || !values.category) return null;
     if (!address || lat == null || lng == null || radius == null) return null;
 
-    const request: PostWriteRequest = {
+    const firstImage = values.images[0];
+    const thumbnailImageId = firstImage?.id ?? null;
+
+    const request: PutPostEditRequest = {
       postType: postType,
       title: values.title,
       category: values.category,
@@ -48,6 +50,9 @@ const usePostWriteSubmit = ({ methods }: UsePostWriteSubmitProps) => {
       longitude: lng,
       radius: radius,
       date: new Date().toISOString(),
+      keepImageIdList: values.images.filter((img) => img.id).map((img) => Number(img.id)),
+      thumbnailImageId,
+      postStatus: values.postStatus || "SEARCHING",
     };
 
     const formData = new FormData();
@@ -59,47 +64,14 @@ const usePostWriteSubmit = ({ methods }: UsePostWriteSubmitProps) => {
     return formData;
   };
 
-  const submitFormData = (values: PostWriteFormValues) => {
-    const formData = toPostWriteFormData(values);
-
-    if (!formData) return;
-
-    postPosts(formData);
-    clearLocation();
-  };
-
   const onSubmit = methods.handleSubmit((values) => {
-    const validImages = values.images.filter((image) => image.file);
-    if (validImages.length === 0) {
-      setPendingValues(values);
-      setIsConfirmModalOpen(true);
-      return;
-    }
-
-    submitFormData(values);
+    const formData = toFormData(values);
+    if (!formData) return;
+    putPost(formData);
+    clearLocation();
   });
 
-  const onConfirmNoImageSubmit = () => {
-    if (pendingValues) {
-      submitFormData(pendingValues);
-    }
-    setIsConfirmModalOpen(false);
-    setPendingValues(null);
-  };
-
-  const onCancelSubmit = () => {
-    setIsConfirmModalOpen(false);
-    setPendingValues(null);
-  };
-
-  return {
-    onSubmit,
-    isPosting,
-    canSubmit,
-    isConfirmModalOpen,
-    onConfirmNoImageSubmit,
-    onCancelSubmit,
-  };
+  return { onSubmit, isPosting, canSubmit };
 };
 
-export default usePostWriteSubmit;
+export default usePostEditSubmit;

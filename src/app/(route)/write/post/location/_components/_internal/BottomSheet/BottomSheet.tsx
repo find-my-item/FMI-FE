@@ -1,7 +1,8 @@
 import { useRouter, useSearchParams } from "next/navigation";
-import { useWriteStore } from "@/store";
-import { Radius } from "@/types";
 import { Button } from "@/components/common";
+import { useWriteStore } from "@/store";
+import { cn } from "@/utils";
+import { Radius } from "@/types";
 import { DISTANCE_OPTIONS } from "./DISTANCE_OPTIONS";
 
 type LocationInfo = {
@@ -65,7 +66,12 @@ const BottomSheet = ({ locationInfo, radiusState }: BottomSheetProps) => {
               role="radio"
               aria-checked={option.value === radius}
               variant="outlined"
-              className="min-h-11 text-body1-semibold text-neutral-normal-default transition-colors hover:bg-gray-100"
+              className={cn(
+                "min-h-11 text-body1-semibold transition-colors hover:bg-gray-100",
+                option.value === radius
+                  ? "!border-brand-normal-default !text-brand-normal-default"
+                  : "!border-neutral-normal-default !text-neutral-normal-default"
+              )}
               onClick={() => setRadius(option.value)}
             >
               {option.label}

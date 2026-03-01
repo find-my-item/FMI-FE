@@ -2,7 +2,7 @@ import { InputSearch } from "@/components/common";
 
 interface AdminSearchProps {
   placeholder?: string;
-  onEnter: () => void;
+  onEnter: (keyword: string) => void;
 }
 
 const AdminSearch = ({
