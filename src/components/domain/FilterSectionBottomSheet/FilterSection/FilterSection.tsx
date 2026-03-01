@@ -22,7 +22,7 @@ import { filterSelectionState, normalizedFilterValues } from "../utils/deriveFil
 import { useFilterParams } from "@/hooks/domain";
 import { TABS } from "../_constants/TABS";
 import DateRangeBottomSheet from "../../DateRangeBottomSheet/DateRangeBottomSheet";
-import { YmdDate } from "../../DateRangeBottomSheet/YmdDate";
+import { formatYmdLabel, parseYmd } from "../utils/parseDateFilter";
 
 /**
  * @author jikwon (Original)
@@ -57,49 +57,44 @@ const FilterSection = ({ pageType = "LIST" }: FilterSectionProps) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isDateOpen, setIsDateOpen] = useState(false);
 
-  const { normalizedCategory, normalizedSort, normalizedStatus, normalizedFindStatus } =
-    normalizedFilterValues({ region, category, sort, status, findStatus });
+  const {
+    normalizedCategory,
+    normalizedSort,
+    normalizedStatus,
+    normalizedFindStatus,
+    normalizedDate,
+  } = normalizedFilterValues({ region, category, sort, status, findStatus, date });
 
   const selectionState = filterSelectionState({ region, category, sort, status, findStatus, date });
 
   const openSheet = (tab: FilterTab) => {
-    if (tab === "date") {
-      setFilters({
-        ...DEFAULT_FILTERS,
-        date: date ?? "",
-      });
-
-      setIsDateOpen(true);
-      return;
-    }
-
     setFilters({
       ...DEFAULT_FILTERS,
+      date: date ?? "",
       region: region ?? "",
       category: normalizeEnumValue<Exclude<CategoryFilterValue, undefined>>(category),
       sort: normalizeEnumValue<SortFilterValue>(sort) ?? "LATEST",
       status: normalizeEnumValue<Exclude<StatusFilterValue, undefined>>(status),
     });
     setSelectedTab(tab);
+
+    if (tab === "date") {
+      setIsDateOpen(true);
+      return;
+    }
+
     setIsFilterOpen(true);
   };
 
-  const formatYmdLabel = (d: YmdDate) =>
-    `${d.year}.${String(d.month).padStart(2, "0")}.${String(d.day).padStart(2, "0")}`;
-
-  const [selectedDate, setSelectedDate] = useState<YmdDate | null>(null);
-
-  const handleDateApply = (date: YmdDate) => {
-    setSelectedDate(date);
-    console.log("타입 확인>>> ", typeof date);
-  };
+  const dateObj = parseYmd(date);
+  const dateLabel = dateObj ? formatYmdLabel(dateObj) : "기간";
 
   const filterConfigs: Record<FilterTab, any> = {
     date: {
       ariaLabel: "기간 필터",
-      onSelected: selectedDate,
+      onSelected: selectionState.isDateSelected,
       icon: { name: "Calendar", size: 16 },
-      label: selectedDate ? formatYmdLabel(selectedDate) : "기간",
+      label: dateLabel,
       iconPosition: "leading",
     },
     region: {
@@ -183,7 +178,6 @@ const FilterSection = ({ pageType = "LIST" }: FilterSectionProps) => {
           setFilters={setFilters}
           isOpen={isDateOpen}
           onClose={() => setIsDateOpen(false)}
-          onApply={handleDateApply}
         />
       )}
     </>

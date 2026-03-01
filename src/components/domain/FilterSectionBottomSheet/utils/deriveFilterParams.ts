@@ -12,7 +12,6 @@ import {
   SortFilterValue,
   StatusFilterValue,
 } from "../_types/types";
-import { YmdDate } from "../../DateRangeBottomSheet/YmdDate";
 
 type Params = {
   region?: string | null;
@@ -21,15 +20,6 @@ type Params = {
   status?: string | null;
   findStatus?: string | null;
   date?: string | null;
-};
-
-const formatStringDate = (date: YmdDate) => {
-  const { year, month, day } = date;
-
-  const m = String(month).padStart(2, "0");
-  const d = String(day).padStart(2, "0");
-
-  return `${year}-${m}-${d}`;
 };
 
 export const normalizedFilterValues = ({

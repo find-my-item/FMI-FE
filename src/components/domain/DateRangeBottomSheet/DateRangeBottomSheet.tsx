@@ -8,10 +8,8 @@ import { cn } from "@/utils";
 import useMakeDate from "./_hooks/useMakeDate";
 import PopupLayout from "../PopupLayout/PopupLayout";
 import { Button, Filter } from "@/components/common";
-import { YmdDate } from "./YmdDate";
 import { applyFiltersToUrl } from "../FilterSectionBottomSheet/utils/applyFiltersToUrl";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useFilterParams } from "@/hooks/domain";
 import { FiltersStateType } from "../FilterSectionBottomSheet/_types/filtersStateType";
 
 const DateWheel = ({
@@ -80,29 +78,36 @@ const DateWheel = ({
 interface DateRangeBottomSheetProps {
   isOpen: boolean;
   onClose: () => void;
-  onApply: (date: YmdDate) => void;
   filters: FiltersStateType;
   setFilters: Dispatch<SetStateAction<FiltersStateType>>;
 }
 
-const DateRangeBottomSheet = ({ isOpen, onClose, onApply, filters }: DateRangeBottomSheetProps) => {
+const DateRangeBottomSheet = ({
+  isOpen,
+  onClose,
+  filters,
+  setFilters,
+}: DateRangeBottomSheetProps) => {
   const { years, months, days, selectDate, handleDateChange } = useMakeDate();
 
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const currentFilters = useFilterParams();
 
   const handleApply = () => {
     const formattedDate = `${selectDate.year}-${String(selectDate.month).padStart(2, "0")}-${String(selectDate.day).padStart(2, "0")}`;
 
+    const nextFilters = { ...filters, date: formattedDate };
+
     const qs = applyFiltersToUrl({
-      filters,
+      filters: nextFilters,
       searchParams: new URLSearchParams(searchParams.toString()),
     });
 
     router.replace(qs ? `${pathname}?${qs}` : pathname);
-    onApply(selectDate);
+
+    setFilters(nextFilters);
+
     onClose();
   };
 

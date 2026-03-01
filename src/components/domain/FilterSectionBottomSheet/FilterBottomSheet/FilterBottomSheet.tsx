@@ -230,7 +230,7 @@ const FilterBottomSheet = ({
                 key={index}
                 label={findStatusItem.label}
                 value={findStatusItem.value}
-                selected={filters.status === findStatusItem.value}
+                selected={filters.findStatus === findStatusItem.value}
                 onSelect={() =>
                   setFilters((prev) => ({ ...prev, findStatus: findStatusItem.value }))
                 }
