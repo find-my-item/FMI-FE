@@ -11,6 +11,8 @@ import { Button, Filter } from "@/components/common";
 import { applyFiltersToUrl } from "../FilterSectionBottomSheet/utils/applyFiltersToUrl";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FiltersStateType } from "../FilterSectionBottomSheet/_types/filtersStateType";
+import { useFilterParams } from "@/hooks/domain";
+import { parseYmd } from "../FilterSectionBottomSheet/utils/parseDateFilter";
 
 const DateWheel = ({
   dateArray,
@@ -88,7 +90,10 @@ const DateRangeBottomSheet = ({
   filters,
   setFilters,
 }: DateRangeBottomSheetProps) => {
-  const { years, months, days, selectDate, handleDateChange } = useMakeDate();
+  const { date } = useFilterParams();
+  const queryDate = parseYmd(date);
+
+  const { years, months, days, selectDate, handleDateChange } = useMakeDate(queryDate ?? undefined);
 
   const router = useRouter();
   const pathname = usePathname();

@@ -1,15 +1,22 @@
 import { getDaysInMonth } from "date-fns";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
-const useMakeDate = () => {
+const useMakeDate = (queryDate?: { year: number; month: number; day: number }) => {
   const today = new Date();
   const startYear = 2025;
 
-  const [selectDate, setSelectDate] = useState({
-    year: today.getFullYear(),
-    month: today.getMonth() + 1,
-    day: today.getDate(),
-  });
+  const [selectDate, setSelectDate] = useState(
+    queryDate ?? { year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate() }
+  );
+
+  useEffect(() => {
+    if (!queryDate) return;
+    setSelectDate((prev) =>
+      prev.year === queryDate.year && prev.month === queryDate.month && prev.day === queryDate.day
+        ? prev
+        : queryDate
+    );
+  }, [queryDate?.year, queryDate?.month, queryDate?.day]);
 
   const years = Array.from(
     { length: today.getFullYear() - startYear + 1 },
