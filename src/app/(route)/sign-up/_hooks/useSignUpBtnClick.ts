@@ -22,7 +22,7 @@ export const useSignUpBtnClick = () => {
 
   const { mutate: EmailMutate } = useApiSendEmail();
   const { mutate: CodeMutate } = useApiCheckCode();
-  const { handleClickNickname, isNicknameVerified } = useNicknameCheck();
+  const { handleClickNickname, isNicknameVerified, isNicknameDisabled } = useNicknameCheck();
 
   const currentEmailAuth = useWatch({
     control,
@@ -30,8 +30,9 @@ export const useSignUpBtnClick = () => {
   });
 
   useEffect(() => {
+    if (isEmailAuthDisabled) return;
     setIsEmailAuthVerified(false);
-  }, [currentEmailAuth]);
+  }, [currentEmailAuth, isEmailAuthDisabled]);
 
   const handlerToClick = useMemo(
     () =>
@@ -99,5 +100,6 @@ export const useSignUpBtnClick = () => {
     isEmailDisabled,
     isEmailAuthVerified,
     isNicknameVerified,
+    isNicknameDisabled,
   };
 };

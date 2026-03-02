@@ -27,11 +27,13 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
     isEmailAuthVerified,
     handlerToClick,
     isNicknameVerified,
+    isNicknameDisabled,
   } = useSignUpBtnClick();
 
   const handleDisabled = (name: string) => {
     if (name === "emailAuth") return isEmailAuthDisabled;
     else if (name === "email") return isEmailDisabled;
+    else if (name === "nickname") return isNicknameDisabled;
   };
 
   const handleVerified = (name: string) => {
@@ -41,6 +43,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
   };
 
   const isNextEnabled = isValid && isEmailAuthVerified && isNicknameVerified;
+
   return (
     <>
       <DetailHeader title="회원가입" />
@@ -61,11 +64,12 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
           />
         ))}
       </div>
-      <div className="sticky bottom-0 mt-auto h-[88px] w-full max-w-[390px] border-t border-divider-default bg-white px-4 py-3">
+      <div className="sticky bottom-0 mt-auto h-[88px] w-full max-w-[768px] border-t border-divider-default bg-white px-4 py-3">
         <Button
           type="button"
           variant="auth"
-          ariaLabel="회원가입 폼 버튼"
+          size="big"
+          ariaLabel="다음 버튼"
           onClick={onNext}
           disabled={!isNextEnabled}
         >
