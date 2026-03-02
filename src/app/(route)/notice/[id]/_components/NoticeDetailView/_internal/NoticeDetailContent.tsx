@@ -1,6 +1,6 @@
 import { Icon } from "@/components/common";
 
-const NoticeDetailBadge = () => {
+const NoticeNewBadge = () => {
   return (
     <div className="inline-block rounded-full px-2 py-1 text-caption2-medium text-white bg-fill-brand-normal-default">
       NEW
@@ -11,7 +11,7 @@ const NoticeDetailBadge = () => {
 const NoticeDetailContent = () => {
   return (
     <section className="space-y-3 px-5 py-[30px]">
-      <NoticeDetailBadge />
+      <NoticeNewBadge />
 
       <div className="space-y-6">
         <div className="space-y-1">
