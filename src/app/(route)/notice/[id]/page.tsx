@@ -8,7 +8,7 @@ const NoticeDetail = async ({ params }: NoticeDetailProps) => {
   const { id } = await params;
 
   return (
-    <div className="h-base">
+    <div className="flex flex-col h-base">
       <NoticeDetailHeader />
       <h1 className="sr-only">공지사항 상세</h1>
       <NoticeDetailView />

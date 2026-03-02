@@ -7,11 +7,14 @@ import NoticeDetailContent from "./_internal/NoticeDetailContent";
 
 const NoticeDetailView = () => {
   return (
-    <>
+    <div className="flex min-h-0 flex-1 flex-col">
       <NoticeDetailContent />
-      <CommentList comments={MOCK_COMMENT_LIST_DATA} />
+      <div className="border-b border-divider-default">
+        <CommentList comments={MOCK_COMMENT_LIST_DATA} />
+      </div>
+      <div className="min-h-0 flex-1 overflow-y-auto" />
       <NoticeCommentForm />
-    </>
+    </div>
   );
 };
 
