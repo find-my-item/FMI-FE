@@ -25,7 +25,7 @@ const DeleteButton = ({
       aria-label="입력값 전체 삭제"
       onClick={onDelete}
       className={cn(
-        "absolute h-[16.67px] w-[16.67px] rounded-full bg-[#9D9D9D] outline-none flex-center",
+        "absolute h-[16.67px] w-[16.67px] rounded-full bg-[#787878] outline-none flex-center",
         eyeShow ? "right-8" : "right-2",
         className
       )}
