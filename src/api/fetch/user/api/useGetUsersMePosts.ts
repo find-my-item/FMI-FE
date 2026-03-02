@@ -7,6 +7,7 @@ interface GetMypagePostsType {
   size?: number;
 }
 
+// TODO(수현): api 수정에 따라 변경할 예정입니다.
 export const useGetUsersMePosts = ({ cursor, size }: GetMypagePostsType) => {
   const queryParams = new URLSearchParams();
 
