@@ -9,11 +9,11 @@ import { useChatList } from "@/api/fetch/chatRoom";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll/useInfiniteScroll";
 import { EmptyState, LoadingState } from "@/components/state";
 
-interface DefaultListProps {
+interface DefaultChatListProps {
   searchUpdateQuery: (key: string, value?: string) => void;
 }
 
-const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
+const DefaultChatList = ({ searchUpdateQuery }: DefaultChatListProps) => {
   const searchParams = useSearchParams();
   const selectedRegion = searchParams.get("region");
   const regionDisplayText = selectedRegion || "지역 선택";
@@ -63,4 +63,4 @@ const DefaultList = ({ searchUpdateQuery }: DefaultListProps) => {
   );
 };
 
-export default DefaultList;
+export default DefaultChatList;

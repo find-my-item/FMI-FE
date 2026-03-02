@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import DefaultList from "./DefaultList";
+import DefaultChatList from "./DefaultChatList";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const mockSearchUpdateQuery = jest.fn();
@@ -102,7 +102,7 @@ const renderWithQueryClient = (ui: React.ReactElement) => {
   return render(<QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>);
 };
 
-describe("DefaultList", () => {
+describe("DefaultChatList", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -110,7 +110,7 @@ describe("DefaultList", () => {
   it("필터 버튼들이 올바르게 렌더링됩니다", () => {
     (useSearchParams as jest.Mock).mockReturnValue(new URLSearchParams());
 
-    renderWithQueryClient(<DefaultList searchUpdateQuery={mockSearchUpdateQuery} />);
+    renderWithQueryClient(<DefaultChatList searchUpdateQuery={mockSearchUpdateQuery} />);
 
     expect(screen.getByTestId("filter-채팅 리스트 지역 선택")).toBeInTheDocument();
     expect(screen.getByTestId("filter-채팅 리스트 최신순")).toBeInTheDocument();
@@ -120,7 +120,7 @@ describe("DefaultList", () => {
   it("필터 버튼에 올바른 텍스트가 표시됩니다", () => {
     (useSearchParams as jest.Mock).mockReturnValue(new URLSearchParams());
 
-    renderWithQueryClient(<DefaultList searchUpdateQuery={mockSearchUpdateQuery} />);
+    renderWithQueryClient(<DefaultChatList searchUpdateQuery={mockSearchUpdateQuery} />);
 
     expect(screen.getByText("지역 선택")).toBeInTheDocument();
     expect(screen.getByText("최신순")).toBeInTheDocument();
@@ -130,7 +130,7 @@ describe("DefaultList", () => {
   it("지역 선택 버튼 클릭 시 searchUpdateQuery가 올바른 인자로 호출됩니다", () => {
     (useSearchParams as jest.Mock).mockReturnValue(new URLSearchParams());
 
-    renderWithQueryClient(<DefaultList searchUpdateQuery={mockSearchUpdateQuery} />);
+    renderWithQueryClient(<DefaultChatList searchUpdateQuery={mockSearchUpdateQuery} />);
 
     const regionButton = screen.getByTestId("filter-채팅 리스트 지역 선택");
     regionButton.click();
@@ -143,7 +143,7 @@ describe("DefaultList", () => {
     searchParams.set("region", "서울시 강남구");
     (useSearchParams as jest.Mock).mockReturnValue(searchParams);
 
-    renderWithQueryClient(<DefaultList searchUpdateQuery={mockSearchUpdateQuery} />);
+    renderWithQueryClient(<DefaultChatList searchUpdateQuery={mockSearchUpdateQuery} />);
 
     const regionButton = screen.getByTestId("filter-채팅 리스트 서울시 강남구");
     expect(regionButton).toHaveAttribute("aria-selected", "true");
@@ -154,7 +154,7 @@ describe("DefaultList", () => {
     searchParams.set("region", "서울시 강남구");
     (useSearchParams as jest.Mock).mockReturnValue(searchParams);
 
-    renderWithQueryClient(<DefaultList searchUpdateQuery={mockSearchUpdateQuery} />);
+    renderWithQueryClient(<DefaultChatList searchUpdateQuery={mockSearchUpdateQuery} />);
 
     expect(screen.getByText("서울시 강남구")).toBeInTheDocument();
     expect(screen.queryByText("지역 선택")).not.toBeInTheDocument();
@@ -163,7 +163,7 @@ describe("DefaultList", () => {
   it("region 파라미터가 없을 때 지역 선택 버튼이 선택되지 않은 상태로 표시됩니다", () => {
     (useSearchParams as jest.Mock).mockReturnValue(new URLSearchParams());
 
-    renderWithQueryClient(<DefaultList searchUpdateQuery={mockSearchUpdateQuery} />);
+    renderWithQueryClient(<DefaultChatList searchUpdateQuery={mockSearchUpdateQuery} />);
 
     const regionButton = screen.getByTestId("filter-채팅 리스트 지역 선택");
     expect(regionButton).toHaveAttribute("aria-selected", "false");
@@ -172,7 +172,7 @@ describe("DefaultList", () => {
   it("ChatItem 컴포넌트가 5개 렌더링됩니다", () => {
     (useSearchParams as jest.Mock).mockReturnValue(new URLSearchParams());
 
-    renderWithQueryClient(<DefaultList searchUpdateQuery={mockSearchUpdateQuery} />);
+    renderWithQueryClient(<DefaultChatList searchUpdateQuery={mockSearchUpdateQuery} />);
 
     const chatItems = screen.getAllByTestId("chat-item");
     expect(chatItems).toHaveLength(5);
@@ -181,7 +181,7 @@ describe("DefaultList", () => {
   it("모든 주요 요소가 함께 렌더링됩니다", () => {
     (useSearchParams as jest.Mock).mockReturnValue(new URLSearchParams());
 
-    renderWithQueryClient(<DefaultList searchUpdateQuery={mockSearchUpdateQuery} />);
+    renderWithQueryClient(<DefaultChatList searchUpdateQuery={mockSearchUpdateQuery} />);
 
     // Filter 버튼들
     expect(screen.getByTestId("filter-채팅 리스트 지역 선택")).toBeInTheDocument();
