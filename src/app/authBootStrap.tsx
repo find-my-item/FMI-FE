@@ -28,5 +28,14 @@ export default function AuthBootstrap() {
     });
   }, [refreshTokenMutate, router]);
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const currentCount = parseInt(sessionStorage.getItem("__fmi_history_count") || "0", 10);
+      if (currentCount < 2) {
+        sessionStorage.setItem("__fmi_history_count", (currentCount + 1).toString());
+      }
+    }
+  }, [pathname]);
+
   return null;
 }
