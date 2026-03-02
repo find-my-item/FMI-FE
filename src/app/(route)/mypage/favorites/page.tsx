@@ -4,6 +4,7 @@ import { FilterSection, MypageSearch } from "@/components/domain";
 import { DetailHeader } from "@/components/layout";
 import { MOCK_MYPAGE_POSTS_LIST } from "@/mock/data";
 import { MypageFavoritesList } from "./_components";
+import { ErrorBoundary } from "@/app/ErrorBoundary";
 
 const page = () => {
   return (
@@ -15,7 +16,9 @@ const page = () => {
 
         <FilterSection pageType="MY_FAVORITES" />
 
-        <MypageFavoritesList data={MOCK_MYPAGE_POSTS_LIST} />
+        <ErrorBoundary toastMessage="목록을 불러올 수 없어요. 다시 시도해 주세요.">
+          <MypageFavoritesList data={MOCK_MYPAGE_POSTS_LIST} />
+        </ErrorBoundary>
       </div>
     </>
   );
