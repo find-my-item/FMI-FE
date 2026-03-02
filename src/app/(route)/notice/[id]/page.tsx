@@ -1,7 +1,4 @@
-import { noticeListObject } from "../_constant/noticeListObject";
-import { CommentForm, PostDetail } from "@/app/(route)/list/[id]/_components";
-import { CommentList } from "@/components/domain";
-import { MOCK_COMMENT_LIST_DATA } from "@/mock/data";
+import { NoticeDetailHeader, NoticeDetailView } from "./_components";
 
 interface NoticeDetailProps {
   params: Promise<{ id: string }>;
@@ -9,16 +6,13 @@ interface NoticeDetailProps {
 
 const NoticeDetail = async ({ params }: NoticeDetailProps) => {
   const { id } = await params;
-  const noticeItem = noticeListObject.find((item) => item.id === Number(id));
-
-  if (!noticeItem) return <div className="h-[600px] pt-4">존재하지 않는 공지사항입니다.</div>;
 
   return (
-    <>
-      <PostDetail data={noticeItem} type="notice" />
-      <CommentList comments={MOCK_COMMENT_LIST_DATA} />
-      <CommentForm />
-    </>
+    <div className="h-base">
+      <NoticeDetailHeader />
+      <h1 className="sr-only">공지사항 상세</h1>
+      <NoticeDetailView />
+    </div>
   );
 };
 
