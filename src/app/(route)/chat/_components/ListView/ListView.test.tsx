@@ -27,15 +27,15 @@ jest.mock("@/components/layout", () => ({
   DetailHeader: ({ title }: { title: string }) => <div data-testid="detail-header">{title}</div>,
 }));
 
-jest.mock("../DefaultList/DefaultList", () => ({
+jest.mock("../DefaultChatList/DefaultChatList", () => ({
   __esModule: true,
   default: ({
     searchUpdateQuery,
   }: {
     searchUpdateQuery: (key: string, value?: string) => void;
   }) => (
-    <div data-testid="default-list" onClick={() => searchUpdateQuery("test", "value")}>
-      DefaultList
+    <div data-testid="default-chat-list" onClick={() => searchUpdateQuery("test", "value")}>
+      DefaultChatList
     </div>
   ),
 }));
@@ -62,7 +62,7 @@ describe("ListView", () => {
     const detailHeader = screen.getByTestId("detail-header");
     expect(detailHeader).toHaveTextContent("채팅");
 
-    expect(screen.getByTestId("default-list")).toBeInTheDocument();
+    expect(screen.getByTestId("default-chat-list")).toBeInTheDocument();
     expect(screen.queryByTestId("list-search")).not.toBeInTheDocument();
   });
 
@@ -78,7 +78,7 @@ describe("ListView", () => {
     expect(detailHeader).toHaveTextContent("지역 선택");
 
     expect(screen.getByTestId("list-search")).toBeInTheDocument();
-    expect(screen.queryByTestId("default-list")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("default-chat-list")).not.toBeInTheDocument();
   });
 
   it("searchMode가 post일 때 채팅 제목과 ListSearch가 렌더링됩니다", () => {
@@ -93,10 +93,10 @@ describe("ListView", () => {
     expect(detailHeader).toHaveTextContent("채팅");
 
     expect(screen.getByTestId("list-search")).toBeInTheDocument();
-    expect(screen.queryByTestId("default-list")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("default-chat-list")).not.toBeInTheDocument();
   });
 
-  it("DefaultList에 searchUpdateQuery가 올바르게 전달됩니다", () => {
+  it("DefaultChatList에 searchUpdateQuery가 올바르게 전달됩니다", () => {
     (useSearchUpdateQueryString as jest.Mock).mockReturnValue({
       searchMode: "default",
       searchUpdateQuery: mockSearchUpdateQuery,
@@ -104,8 +104,8 @@ describe("ListView", () => {
 
     renderWithQueryClient(<ListView />);
 
-    const defaultList = screen.getByTestId("default-list");
-    defaultList.click();
+    const defaultChatList = screen.getByTestId("default-chat-list");
+    defaultChatList.click();
 
     expect(mockSearchUpdateQuery).toHaveBeenCalledWith("test", "value");
   });
