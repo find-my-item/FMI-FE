@@ -27,11 +27,13 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
     isEmailAuthVerified,
     handlerToClick,
     isNicknameVerified,
+    isNicknameDisabled,
   } = useSignUpBtnClick();
 
   const handleDisabled = (name: string) => {
     if (name === "emailAuth") return isEmailAuthDisabled;
     else if (name === "email") return isEmailDisabled;
+    else if (name === "nickname") return isNicknameDisabled;
   };
 
   const handleVerified = (name: string) => {
@@ -41,6 +43,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
   };
 
   const isNextEnabled = isValid && isEmailAuthVerified && isNicknameVerified;
+
   return (
     <>
       <DetailHeader title="회원가입" />
