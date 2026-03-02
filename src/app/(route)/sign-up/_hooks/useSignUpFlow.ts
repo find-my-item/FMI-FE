@@ -45,14 +45,13 @@ export const useSignUpFlow = ({ onSubmit }: useSignUpFlowProps) => {
 
   // 약관 동의 -> 최종제출 전 데이터 필터링
   const completeTerms = useCallback(async () => {
-    const ok = await trigger(["termsOfServiceAgreed", "privacyPolicyAgreed", "marketingConsent"]);
+    const ok = await trigger(["privacyPolicyAgreed", "marketingConsent"]);
     if (ok) {
       const data = getValues();
       const selectedData = {
         email: data.email,
         password: data.password,
         nickname: data.nickname,
-        termsOfServiceAgreed: data.termsOfServiceAgreed,
         privacyPolicyAgreed: data.privacyPolicyAgreed,
         marketingConsent: data.marketingConsent,
       };
