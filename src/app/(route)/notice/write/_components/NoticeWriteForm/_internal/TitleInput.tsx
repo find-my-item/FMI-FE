@@ -9,6 +9,7 @@ const TitleInput = () => {
     <section className="relative flex items-center border-y border-divider-default px-5 py-6">
       <input
         type="text"
+        autoFocus
         placeholder="제목을 입력해 주세요."
         className="w-full pr-10 text-body1-medium placeholder:text-neutral-normal-placeholder"
         maxLength={50}
