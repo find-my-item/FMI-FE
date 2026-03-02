@@ -1,5 +1,5 @@
 export const AGREE_CONFIG: Record<string, { title: string; content: string }> = {
-  termsOfServiceAgreed: {
+  privacyPolicyAgreed: {
     title: "개인정보 수집 및 이용 동의 (필수)",
     content: `제1조(목적)
 
