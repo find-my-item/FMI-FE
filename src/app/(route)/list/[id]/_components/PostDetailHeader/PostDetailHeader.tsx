@@ -54,7 +54,7 @@ const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
           href={isMine ? "/chat" : `/chat/${id}`}
           className={cn("min-h-11 w-full py-[10px]", "tablet:flex-1")}
         >
-          {isMine ? "채팅 목록으로 이동" : "채팅하러 가기"}
+          {isMine ? "채팅 목록으로 이동하기" : "채팅하러 가기"}
         </Button>
       </section>
     </>

@@ -25,8 +25,8 @@ const PostActionMenu = ({ open, onClose, postId, postData }: PostOptionBoxProps)
   const [isReportOpen, setIsReportOpen] = useState(false);
   const [isBlockOpen, setIsBlockOpen] = useState(false);
 
-  const { mutate: putPostStatus } = usePutPostStatus(postId);
   const isFound = postStatus === "FOUND";
+  const { mutate: putPostStatus } = usePutPostStatus(postId, isFound);
 
   const handleEditPost = () => {
     onClose();
@@ -65,7 +65,7 @@ const PostActionMenu = ({ open, onClose, postId, postData }: PostOptionBoxProps)
             <hr className={ACTION_MENU.hrStyle} aria-hidden="true" />
             <button className={ACTION_MENU.buttonStyle} onClick={handleStatusChange}>
               <Icon name="ArrowSwitchHorizontal" size={20} />
-              <span>{isFound ? "찾는중 상태로 변경" : "찾았음 상태로 변경"}</span>
+              <span>{isFound ? "찾았어요 상태로 변경" : "찾아요 상태로 변경"}</span>
             </button>
           </>
         ) : (
