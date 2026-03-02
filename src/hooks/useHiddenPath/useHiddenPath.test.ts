@@ -6,40 +6,52 @@ jest.mock("next/navigation", () => ({
   usePathname: jest.fn(),
 }));
 
-describe("useHiddenPath", () => {
-  it("pathname이 '/'일 경우 false를 반환해야 한다(푸터 표시)", () => {
+describe("useHiddenPath - Footer가 노출되어야 하는 페이지", () => {
+  it("홈('/')에서는 Footer가 보여야 하므로 false를 반환한다", () => {
     (usePathname as jest.Mock).mockReturnValue("/");
     const { result } = renderHook(() => useHiddenPath());
     expect(result.current).toBe(false);
   });
 
-  it("pathname이 '/about'일 경우 false를 반환해야 한다(푸터 표시)", () => {
+  it("게시글 리스트('/list')에서는 Footer가 보여야 하므로 false를 반환한다", () => {
+    (usePathname as jest.Mock).mockReturnValue("/list");
+    const { result } = renderHook(() => useHiddenPath());
+    expect(result.current).toBe(false);
+  });
+
+  it("채팅 리스트('/chat')에서는 Footer가 보여야 하므로 false를 반환한다", () => {
+    (usePathname as jest.Mock).mockReturnValue("/chat");
+    const { result } = renderHook(() => useHiddenPath());
+    expect(result.current).toBe(false);
+  });
+
+  it("알림 리스트('/alert')에서는 Footer가 보여야 하므로 false를 반환한다", () => {
+    (usePathname as jest.Mock).mockReturnValue("/alert");
+    const { result } = renderHook(() => useHiddenPath());
+    expect(result.current).toBe(false);
+  });
+
+  it("마이페이지 메인('/mypage')에서는 Footer가 보여야 하므로 false를 반환한다", () => {
+    (usePathname as jest.Mock).mockReturnValue("/mypage");
+    const { result } = renderHook(() => useHiddenPath());
+    expect(result.current).toBe(false);
+  });
+});
+
+describe("useHiddenPath - 나머지 모든 페이지에서는 Footer가 숨겨져야 한다", () => {
+  it("정의된 5개 경로 이외의 일반 페이지('/about')에서는 Footer를 숨기므로 true를 반환한다", () => {
     (usePathname as jest.Mock).mockReturnValue("/about");
     const { result } = renderHook(() => useHiddenPath());
     expect(result.current).toBe(true);
   });
 
-  it("pathname이 null일 경우 false를 반환해야 한다", () => {
+  it("pathname이 null일 경우 빈 문자열로 처리되어 Footer를 숨기므로 true를 반환한다", () => {
     (usePathname as jest.Mock).mockReturnValue(null);
     const { result } = renderHook(() => useHiddenPath());
     expect(result.current).toBe(true);
   });
 
-  it("hiddenExactPaths: 알림 설정, 비밀번호 변경, 회원 탈퇴 경로일 경우 true를 반환해야 한다", () => {
-    ["/mypage/notifications", "/change-password", "/mypage/delete-account"].forEach((path) => {
-      (usePathname as jest.Mock).mockReturnValue(path);
-      const { result } = renderHook(() => useHiddenPath());
-      expect(result.current).toBe(true);
-    });
-  });
-
-  it("pathname이 /mypage일 경우 false를 반환해야 한다(마이페이지 목록, 푸터 표시)", () => {
-    (usePathname as jest.Mock).mockReturnValue("/mypage");
-    const { result } = renderHook(() => useHiddenPath());
-    expect(result.current).toBe(false);
-  });
-
-  it("pathname이 /mypage/posts, /mypage/reports, /mypage/inquiries일 경우 false를 반환해야 한다(리스트 페이지, 푸터 표시)", () => {
+  it("마이페이지 하위 리스트(/mypage/posts 등)에서는 Footer를 숨기므로 true를 반환한다", () => {
     ["/mypage/posts", "/mypage/reports", "/mypage/inquiries"].forEach((path) => {
       (usePathname as jest.Mock).mockReturnValue(path);
       const { result } = renderHook(() => useHiddenPath());
@@ -47,19 +59,19 @@ describe("useHiddenPath", () => {
     });
   });
 
-  it("pathname이 /list/1(게시글 상세)일 경우 false를 반환해야 한다(푸터 표시)", () => {
+  it("게시글 상세(/list/1)에서는 Footer를 숨기므로 true를 반환한다", () => {
     (usePathname as jest.Mock).mockReturnValue("/list/1");
     const { result } = renderHook(() => useHiddenPath());
     expect(result.current).toBe(true);
   });
 
-  it("pathname이 /chat/1(채팅방 상세)일 경우 true를 반환해야 한다(푸터 숨김)", () => {
+  it("채팅방 상세(/chat/1)에서는 Footer를 숨기므로 true를 반환한다", () => {
     (usePathname as jest.Mock).mockReturnValue("/chat/1");
     const { result } = renderHook(() => useHiddenPath());
     expect(result.current).toBe(true);
   });
 
-  it("pathname이 /mypage/reports/1, /mypage/inquiries/123일 경우 true를 반환해야 한다(마이페이지 상세, 푸터 숨김)", () => {
+  it("마이페이지 상세(/mypage/reports/1, /mypage/inquiries/123)에서는 Footer를 숨기므로 true를 반환한다", () => {
     ["/mypage/reports/1", "/mypage/inquiries/123"].forEach((path) => {
       (usePathname as jest.Mock).mockReturnValue(path);
       const { result } = renderHook(() => useHiddenPath());
