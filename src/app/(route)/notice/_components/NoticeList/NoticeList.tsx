@@ -1,11 +1,14 @@
 import { Badge, Icon, ListItemImage } from "@/components/common";
 import Link from "next/link";
+import { noticeListObject } from "../../_constant/noticeListObject";
 
-const NoticeItem = () => {
+type NoticeItem = (typeof noticeListObject)[number];
+
+const NoticeItem = ({ notice }: { notice: NoticeItem }) => {
   return (
     <li>
       <Link
-        href="/notice/1"
+        href={`/notice/${notice.id}`}
         className="flex min-w-0 items-center gap-2 border-b border-divider-default px-5 py-[30px] transition-colors hover:bg-flatGray-25"
       >
         <div className="flex min-w-0 flex-col gap-2">
@@ -15,12 +18,12 @@ const NoticeItem = () => {
                 <Badge variant="new" />
               </div>
               <p className="truncate text-body1-semibold text-layout-header-default">
-                [공지] 공지사항 제목 [공지] 공지사항 제목 [공지] 공지사항 제목 [공지] 공지사항 제목
-                [공지] 공지사항 제목 [공지] 공지사항 제목 [공지] 공지사항 제목 [공지] 공지사항 제목
-                [공지] 공지사항 제목 [공지] 공지사항 제목
+                {notice.title}
               </p>
             </div>
-            <time className="text-body2-regular text-layout-body-default">2025.10.15</time>
+            <time className="text-body2-regular text-layout-body-default">
+              {"date" in notice && notice.date ? notice.date : "2025.10.15"}
+            </time>
           </div>
 
           <div className="flex items-center gap-1 text-body2-regular text-neutral-strong-placeholder">
@@ -42,8 +45,8 @@ const NoticeItem = () => {
 const NoticeList = () => {
   return (
     <ul>
-      {Array.from({ length: 5 }).map((_, index) => (
-        <NoticeItem key={index} />
+      {noticeListObject.map((notice) => (
+        <NoticeItem key={notice.id} notice={notice} />
       ))}
     </ul>
   );
