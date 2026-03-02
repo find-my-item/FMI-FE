@@ -64,7 +64,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
           />
         ))}
       </div>
-      <div className="fixed bottom-[85px] z-40 h-[88px] w-full max-w-[767px] border-t border-divider-default px-4 pb-8 pt-3">
+      <div className="fixed bottom-0 z-40 h-[88px] w-full max-w-[767px] border-t border-divider-default px-4 pb-8 pt-3">
         <Button
           type="button"
           variant="auth"

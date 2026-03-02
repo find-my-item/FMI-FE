@@ -6,7 +6,7 @@ interface SignUpResponseType extends ApiBaseResponseType<{ id: string }> {}
 
 const useApiSignUp = () => {
   return useAppMutation<ApiSignUpType, SignUpResponseType, SignUpResponseType>(
-    "public",
+    "auth",
     "auth/signup",
     "post"
   );
