@@ -35,6 +35,7 @@ export const SIGNUP_INPUT_CONFIG = [
     },
     btnOption: {},
     caption: {
+      // TODO(수현): 문구 변경 예정
       rule: "8~16자리, 대문자/소문자/숫자/특수 문자 포함",
       successMessage: "대문자/소문자/숫자/특수 문자 포함 8~16자리 사이",
     },
