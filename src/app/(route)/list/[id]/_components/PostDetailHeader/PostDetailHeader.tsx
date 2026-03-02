@@ -48,7 +48,6 @@ const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
           </div>
         </div>
 
-        {/* TODO(지권): 본인 게시글 텍스트 변경 필요 */}
         <Button
           as={Link}
           href={isMine ? "/chat" : `/chat/${id}`}
