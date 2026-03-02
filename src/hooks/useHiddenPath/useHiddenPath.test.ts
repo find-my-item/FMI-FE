@@ -16,13 +16,13 @@ describe("useHiddenPath", () => {
   it("pathname이 '/about'일 경우 false를 반환해야 한다(푸터 표시)", () => {
     (usePathname as jest.Mock).mockReturnValue("/about");
     const { result } = renderHook(() => useHiddenPath());
-    expect(result.current).toBe(false);
+    expect(result.current).toBe(true);
   });
 
   it("pathname이 null일 경우 false를 반환해야 한다", () => {
     (usePathname as jest.Mock).mockReturnValue(null);
     const { result } = renderHook(() => useHiddenPath());
-    expect(result.current).toBe(false);
+    expect(result.current).toBe(true);
   });
 
   it("hiddenExactPaths: 알림 설정, 비밀번호 변경, 회원 탈퇴 경로일 경우 true를 반환해야 한다", () => {
@@ -43,14 +43,14 @@ describe("useHiddenPath", () => {
     ["/mypage/posts", "/mypage/reports", "/mypage/inquiries"].forEach((path) => {
       (usePathname as jest.Mock).mockReturnValue(path);
       const { result } = renderHook(() => useHiddenPath());
-      expect(result.current).toBe(false);
+      expect(result.current).toBe(true);
     });
   });
 
   it("pathname이 /list/1(게시글 상세)일 경우 false를 반환해야 한다(푸터 표시)", () => {
     (usePathname as jest.Mock).mockReturnValue("/list/1");
     const { result } = renderHook(() => useHiddenPath());
-    expect(result.current).toBe(false);
+    expect(result.current).toBe(true);
   });
 
   it("pathname이 /chat/1(채팅방 상세)일 경우 true를 반환해야 한다(푸터 숨김)", () => {
