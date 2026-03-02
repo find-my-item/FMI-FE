@@ -47,7 +47,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
   return (
     <>
       <DetailHeader title="회원가입" />
-      <div className="flex w-full flex-col gap-5 px-4 py-5">
+      <div className="flex w-full flex-1 flex-col gap-5 px-4 py-5">
         {SIGNUP_INPUT_CONFIG.map((item) => (
           <SignUpItem
             key={item.inputOption.name}
@@ -64,11 +64,10 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
           />
         ))}
       </div>
-      <div className="sticky bottom-0 mt-auto h-[88px] w-full max-w-[768px] border-t border-divider-default bg-white px-4 py-3">
+      <div className="fixed bottom-[85px] z-40 h-[88px] w-full max-w-[767px] border-t border-divider-default px-4 pb-8 pt-3">
         <Button
           type="button"
           variant="auth"
-          size="big"
           ariaLabel="다음 버튼"
           onClick={onNext}
           disabled={!isNextEnabled}
