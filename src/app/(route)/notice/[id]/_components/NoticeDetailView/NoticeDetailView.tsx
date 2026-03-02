@@ -2,8 +2,7 @@
 
 import { CommentList } from "@/components/domain";
 import { MOCK_COMMENT_LIST_DATA } from "@/mock/data";
-import NoticeCommentForm from "./_internal/NoticeCommentForm";
-import NoticeDetailContent from "./_internal/NoticeDetailContent";
+import { NoticeCommentForm, NoticeDetailContent } from "./_internal";
 
 const NoticeDetailView = () => {
   return (

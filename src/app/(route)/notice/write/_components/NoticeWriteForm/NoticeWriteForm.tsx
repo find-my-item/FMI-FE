@@ -1,7 +1,5 @@
 import { UseFormReturn } from "react-hook-form";
-import TitleInput from "./_internal/TitleInput";
-import ContentInput from "./_internal/ContentInput";
-import ImageInput from "./_internal/ImageInput";
+import { TitleInput, ContentInput, ImageInput } from "./_internal";
 import { ActionSection } from "@/app/(route)/write/post/_components/_internal";
 
 const NoticeWriteForm = ({ methods }: { methods: UseFormReturn }) => {
