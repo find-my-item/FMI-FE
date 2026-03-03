@@ -9,12 +9,20 @@ import { ImageViewerModal } from "@/components/domain";
 import "swiper/css";
 import "swiper/css/pagination";
 import "./swiper-pagination.css";
+import { ImageResponse } from "@/api/fetch/post";
 
 interface ImageSectionProps {
-  imageUrls: string[];
+  imageUrls: ImageResponse[];
 }
 
 const ImageSection = ({ imageUrls }: ImageSectionProps) => {
+  if (imageUrls.length === 0) return null;
+
+  const sortedData = [...imageUrls].sort((a, b) =>
+    a.imageType === "THUMBNAIL" ? -1 : b.imageType === "THUMBNAIL" ? 1 : 0
+  );
+  const imageUrlList = sortedData.map((img) => img.imgUrl);
+
   const [isOpen, setIsOpen] = useState(false);
 
   const isDraggingRef = useRef(false);
@@ -44,15 +52,15 @@ const ImageSection = ({ imageUrls }: ImageSectionProps) => {
           }}
           onClick={handleOpenIfTap}
         >
-          {imageUrls?.map((url, index) => (
-            <SwiperSlide>
+          {sortedData.map((image, index) => (
+            <SwiperSlide key={image.id}>
               <div className="relative h-[260px] w-full tablet:h-[420px]">
                 <Image
-                  src={url}
+                  src={image.imgUrl}
                   alt={`게시글 이미지 ${index + 1}`}
                   fill
                   draggable={false}
-                  priority
+                  priority={index === 0}
                   sizes="(min-width: 768px) 768px, 100vw"
                   className="object-cover"
                 />
@@ -63,7 +71,7 @@ const ImageSection = ({ imageUrls }: ImageSectionProps) => {
       </div>
 
       <ImageViewerModal
-        images={imageUrls}
+        images={imageUrlList}
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         initialIndex={0}
