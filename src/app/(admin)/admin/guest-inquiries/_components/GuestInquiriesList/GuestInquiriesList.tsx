@@ -8,11 +8,16 @@ import { useToast } from "@/context/ToastContext";
 import { AdminReportsItem } from "../../../_components";
 import { toGuestInquiryItemVM } from "../../../_utils/toReportsItemVM/toReportsItemVM";
 
-const GuestInquiriesList = () => {
+interface GuestInquiriesListProps {
+  status?: string;
+  answer?: string;
+}
+
+const GuestInquiriesList = ({ status, answer }: GuestInquiriesListProps) => {
   const { addToast } = useToast();
 
   const { data, isLoading, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useGetGuestInquiries();
+    useGetGuestInquiries({ status });
   const { ref: listRef } = useInfiniteScroll({
     fetchNextPage,
     hasNextPage,
