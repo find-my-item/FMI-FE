@@ -10,6 +10,7 @@ import {
 import { useClickOutside } from "@/hooks";
 import { useState } from "react";
 
+// TODO(형준): 별표 아이콘 -> 추천 아이콘으로 변경 필요
 const NoticeDetailHeader = () => {
   const [isKebabMenuOpen, setIsKebabMenuOpen] = useState(false);
   const kebabMenuRef = useClickOutside(() => setIsKebabMenuOpen(false));
