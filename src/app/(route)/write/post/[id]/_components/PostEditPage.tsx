@@ -8,13 +8,12 @@ import { PostWriteFormValues } from "../../_types/PostWriteType";
 import usePostEditSubmit from "../../_hooks/usePostEditSubmit/usePostEditSubmit";
 import usePostEditInit from "../../_hooks/usePostEditInit/usePostEditInit";
 import {
-  ActionSection,
   CategorySection,
   ContentSection,
   LocationSection,
   TitleSection,
 } from "../../_components/_internal";
-import { WriteImageSection } from "@/components/domain";
+import { WriteImageSection, WriteActionSection } from "@/components/domain";
 
 interface PostEditPageProps {
   postId: number;
@@ -52,7 +51,7 @@ const PostEditPage = ({ postId }: PostEditPageProps) => {
           <LocationSection />
         </div>
 
-        <ActionSection disabled={isSubmitDisabled} />
+        <WriteActionSection disabled={isSubmitDisabled} />
       </form>
     </>
   );

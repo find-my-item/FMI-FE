@@ -4,7 +4,7 @@ interface ActionSectionProps {
   disabled: boolean;
 }
 
-const ActionSection = ({ disabled }: ActionSectionProps) => {
+const WriteActionSection = ({ disabled }: ActionSectionProps) => {
   return (
     <section className="px-5 pb-8 pt-3">
       <Button type="submit" className="w-full" disabled={disabled}>
@@ -14,4 +14,4 @@ const ActionSection = ({ disabled }: ActionSectionProps) => {
   );
 };
 
-export default ActionSection;
+export default WriteActionSection;

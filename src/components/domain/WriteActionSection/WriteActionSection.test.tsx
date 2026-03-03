@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
-import ActionSection from "./ActionSection";
+import WriteActionSection from "./WriteActionSection";
 
 const ButtonMock = jest.fn(
   ({
@@ -24,7 +24,7 @@ describe("ActionSection", () => {
   });
 
   it("섹션과 제출 버튼이 렌더링되어야 합니다", () => {
-    render(<ActionSection disabled={false} />);
+    render(<WriteActionSection disabled={false} />);
 
     expect(screen.getByRole("button", { name: "작성 완료" })).toBeInTheDocument();
 
@@ -33,7 +33,7 @@ describe("ActionSection", () => {
   });
 
   it("disabled=false일 때 버튼이 비활성화되지 않아야 합니다", () => {
-    render(<ActionSection disabled={false} />);
+    render(<WriteActionSection disabled={false} />);
 
     expect(ButtonMock).toHaveBeenCalled();
     const props = ButtonMock.mock.calls[0][0];
@@ -41,7 +41,7 @@ describe("ActionSection", () => {
   });
 
   it("disabled=true일 때 버튼이 비활성화되어야 합니다", () => {
-    render(<ActionSection disabled={true} />);
+    render(<WriteActionSection disabled={true} />);
 
     expect(ButtonMock).toHaveBeenCalled();
     const props = ButtonMock.mock.calls[0][0];
