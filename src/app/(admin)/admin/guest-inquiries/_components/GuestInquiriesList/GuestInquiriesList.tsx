@@ -18,7 +18,6 @@ const GuestInquiriesList = () => {
     hasNextPage,
     isFetchingNextPage,
   });
-  console.log(data);
 
   useEffect(() => {
     if (isError) addToast("비회원 문의 내역을 불러오지 못했어요", "error");
