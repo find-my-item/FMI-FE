@@ -31,12 +31,12 @@ const NoticeDetailContent = () => {
         </p>
 
         <div className="flex gap-3 text-body2-regular text-neutral-strong-placeholder">
-          <div className="flex items-center gap-1">
-            <Icon name="Like" size={16} className="text-flatGray-100" />
+          <button aria-label="좋아요 버튼" className="flex items-center gap-1">
+            <Icon name="Like" size={16} className="text-border-divider-default" />
             <span>추천 12</span>
-          </div>
+          </button>
           <div className="flex items-center gap-1">
-            <Icon name="Eye" size={16} className="text-flatGray-100" />
+            <Icon name="Eye" size={16} className="text-border-divider-default" />
             <span>조회 24</span>
           </div>
         </div>
