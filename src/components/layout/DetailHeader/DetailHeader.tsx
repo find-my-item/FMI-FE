@@ -45,7 +45,24 @@ interface DetailHeaderProps {
 
 const DetailHeader = ({ title = "", children, onBack }: DetailHeaderProps) => {
   const router = useRouter();
-  const handleBack = () => (onBack ? onBack() : router.back());
+
+  const handleBack = () => {
+    if (onBack) {
+      onBack();
+      return;
+    }
+
+    if (typeof window !== "undefined") {
+      const historyCount = parseInt(sessionStorage.getItem("__fmi_history_count") || "0", 10);
+      if (historyCount > 1) {
+        router.back();
+      } else {
+        router.push("/");
+      }
+    } else {
+      router.push("/");
+    }
+  };
 
   return (
     <header className="sticky top-0 z-30 flex h-14 w-full items-center justify-between bg-white px-5">
