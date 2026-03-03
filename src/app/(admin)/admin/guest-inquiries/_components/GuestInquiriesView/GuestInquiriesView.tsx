@@ -6,18 +6,21 @@ import { AdminSearch } from "../../../_components";
 import { normalizeEnumValue } from "@/utils";
 import GuestInquiriesFilter from "../GuestInquiriesFilter/GuestInquiriesFilter";
 
-// TODO(지권): 필터 답변, 검색 기능 추가
+// TODO(지권): 검색 기능 추가
 const GuestInquiriesView = () => {
   const searchParams = useSearchParams();
-  const status = searchParams.get("status");
+  const params = Object.fromEntries(searchParams.entries());
 
   return (
     <div className="h-base">
       <AdminSearch onEnter={() => {}} />
 
-      <GuestInquiriesFilter />
+      <GuestInquiriesFilter currentParams={searchParams} />
 
-      <GuestInquiriesList status={normalizeEnumValue(status) ?? ""} />
+      <GuestInquiriesList
+        status={normalizeEnumValue(params.status) ?? ""}
+        answer={normalizeEnumValue(params.answer) ?? ""}
+      />
     </div>
   );
 };

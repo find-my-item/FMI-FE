@@ -9,8 +9,8 @@ import { AdminReportsItem } from "../../../_components";
 import { toGuestInquiryItemVM } from "../../../_utils/toReportsItemVM/toReportsItemVM";
 
 interface GuestInquiriesListProps {
-  status?: string;
-  answer?: string;
+  status: string;
+  answer: string;
 }
 
 const GuestInquiriesList = ({ status, answer }: GuestInquiriesListProps) => {
