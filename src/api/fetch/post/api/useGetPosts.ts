@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { InfiniteData, keepPreviousData } from "@tanstack/react-query";
 import useAppInfiniteQuery from "@/api/_base/query/useAppInfiniteQuery";
