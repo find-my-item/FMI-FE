@@ -1,5 +1,5 @@
 export const ACTIVITY_OPTIONS = [
-  { value: "ALL", label: "전체" },
+  { value: undefined, label: "전체" },
   { value: "POST", label: "게시글" },
   { value: "COMMENT", label: "댓글" },
   { value: "AUTHENTICATION", label: "인증" },

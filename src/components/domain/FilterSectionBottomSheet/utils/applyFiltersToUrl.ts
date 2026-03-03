@@ -79,6 +79,7 @@ export const applyFiltersToUrl = ({ filters, searchParams }: ApplyFiltersToUrlPr
   upsert("status", statusToQueryValue(filters.status));
   upsert("findStatus", findStatusToQueryValue(filters.findStatus));
   upsert("date", filters.date);
+  upsert("activity", filters.activity);
 
   return params.toString();
 };

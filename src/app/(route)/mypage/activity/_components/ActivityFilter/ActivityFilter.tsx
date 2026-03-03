@@ -3,9 +3,11 @@
 import { Filter } from "@/components/common";
 import { useState } from "react";
 import { ACTIVITY_FILTER } from "../../_constants/ACTIVITY_FILTER";
-import ActivityBottomSheet from "../ActivityBottomSheet/ActivityBottomSheet";
 import { BottomSheetModeType, SelectBottomSheet } from "../../../_internal";
 import { DateRangeBottomSheet } from "@/components/domain";
+import { ACTIVITY_OPTIONS } from "../../_constants/ACTIVITY_OPTIONS";
+import { FiltersStateType } from "@/components/domain/FilterSectionBottomSheet/_types/filtersStateType";
+import { DEFAULT_FILTERS } from "@/components/domain/FilterSectionBottomSheet/_constants/DEFAULT_FILTERS";
 
 const ActivityFilter = () => {
   const [isBottomSheet, setIsBottomSheet] = useState<{
@@ -15,6 +17,8 @@ const ActivityFilter = () => {
     isOpen: false,
     mode: "Date",
   });
+
+  const [filters, setFilters] = useState<FiltersStateType>(DEFAULT_FILTERS);
 
   return (
     <section className="flex w-full gap-2 px-5 py-[14px]">
@@ -35,7 +39,7 @@ const ActivityFilter = () => {
       {isBottomSheet.isOpen && isBottomSheet.mode === "Date" && (
         <DateRangeBottomSheet
           isOpen={isBottomSheet.isOpen}
-          onClose={handleClose}
+          onClose={() => setIsBottomSheet((prev) => ({ ...prev, isOpen: false }))}
           filters={filters}
           setFilters={setFilters}
         />
@@ -44,9 +48,11 @@ const ActivityFilter = () => {
       {isBottomSheet.isOpen && isBottomSheet.mode === "Filter" && (
         <SelectBottomSheet
           isOpen={isBottomSheet.isOpen}
-          onClose={handleClose}
+          onClose={() => setIsBottomSheet((prev) => ({ ...prev, isOpen: false }))}
           title="필터"
           option={ACTIVITY_OPTIONS}
+          filters={filters}
+          setFilters={setFilters}
         />
       )}
     </section>

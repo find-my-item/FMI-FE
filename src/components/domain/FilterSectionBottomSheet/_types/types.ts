@@ -19,3 +19,13 @@ export type SortFilterValue = "LATEST" | "OLDEST" | "MOST_FAVORITED" | "MOST_VIE
 export type StatusFilterValue = PostType | undefined;
 
 export type FindStatusFilterValue = ItemStatus | undefined;
+
+export type ActivityFilterValue = ActivityType | undefined;
+
+export type ActivityType =
+  | "POST"
+  | "COMMENT"
+  | "AUTHENTICATION"
+  | "FAVORITE"
+  | "INQUIRY"
+  | "REPORT";
