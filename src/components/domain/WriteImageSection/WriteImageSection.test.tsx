@@ -38,7 +38,7 @@ jest.mock("@/components/common", () => ({
   Icon: ({ name }: { name: string }) => <span data-testid={`icon-${name}`}>{name}</span>,
 }));
 
-jest.mock("../ImagePreviewList/ImagePreviewList", () => ({
+jest.mock("./_internal/ImagePreviewList", () => ({
   __esModule: true,
   default: () => <div data-testid="image-preview-list" />,
 }));
