@@ -30,7 +30,7 @@ export const useGetGuestInquiries = ({
       placeholderData: keepPreviousData,
       getNextPageParam: (lastPage) => lastPage.result.nextCursor ?? undefined,
       select: (data: InfiniteData<GetGuestInquiriesResponse>) =>
-        data.pages.flatMap((page) => page.result.content ?? []),
+        data.pages.flatMap((page) => page.result.items ?? []),
     }
   );
 };

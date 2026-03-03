@@ -5,7 +5,7 @@ import { InquiryType } from "@/types/InquiryType";
 export interface GetGuestInquiriesResponse extends ApiBaseResponseType<GuestInquiryResult> {}
 
 export interface GuestInquiryResult {
-  content: AdminGuestInquiryItem[];
+  items: AdminGuestInquiryItem[];
   nextCursor: number | null;
   hasNext: boolean;
 }
