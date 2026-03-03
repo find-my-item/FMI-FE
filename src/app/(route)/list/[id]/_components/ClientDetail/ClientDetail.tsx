@@ -8,7 +8,7 @@ import PostDetailTopHeader from "../PostDetailTopHeader/PostDetailTopHeader";
 import SimilarItemsSection from "../SimilarItemsSection/SimilarItemsSection";
 import CommentForm from "../CommentForm/CommentForm";
 import { MOCK_COMMENT_LIST_DATA } from "@/mock/data";
-import { ErrorSimilarSection } from "../_internal";
+import { DetailSkeleton, ErrorSimilarSection } from "../_internal";
 
 interface ClientDetailProps {
   id: number;
@@ -17,7 +17,7 @@ interface ClientDetailProps {
 const ClientDetail = ({ id }: ClientDetailProps) => {
   const { data, isLoading, isError } = useGetDetailPost({ id });
 
-  if (isLoading) return <div className="pt-4 h-base">로딩중</div>;
+  if (isLoading) return <DetailSkeleton />;
   if (isError || !data?.result) return <div className="pt-4 h-base">오류가 발생했습니다.</div>;
 
   const { isMine, postUserInformation } = data.result;

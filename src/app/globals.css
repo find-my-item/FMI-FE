@@ -19,7 +19,7 @@
   }
 }
 
-/* GlassMorphism */
+/* 글래스모피즘 */
 @layer components {
   .glass-card {
     backdrop-filter: blur(5px);
@@ -59,6 +59,7 @@
   }
 }
 
+/* 모달 슬라이드 애니메이션 */
 @keyframes modal-slide-up {
   from {
     transform: translateY(100%);
@@ -73,22 +74,7 @@
   animation: modal-slide-up 350ms ease-out forwards;
 }
 
-/* Skeleton */
-@keyframes shimmer {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
-}
-
-.skeleton-shimmer {
-  background: linear-gradient(90deg, #e5e7eb 0%, #f3f4f6 50%, #e5e7eb 100%);
-  background-size: 200% 100%;
-  animation: shimmer 2.2s infinite linear;
-}
-
+/* Footer 채팅 버튼 애니메이션 */
 @keyframes float {
   0%,
   100% {
@@ -101,4 +87,38 @@
 
 .animate-float {
   animation: float 2s ease-in-out infinite;
+}
+
+/* 스켈레톤 애니메이션 */
+@-webkit-keyframes skeleton-gradient {
+  0% {
+    background-color: rgba(165, 165, 165, 0.1);
+  }
+
+  50% {
+    background-color: rgba(165, 165, 165, 0.3);
+  }
+
+  100% {
+    background-color: rgba(165, 165, 165, 0.1);
+  }
+}
+
+@keyframes skeleton-gradient {
+  0% {
+    background-color: rgba(165, 165, 165, 0.1);
+  }
+
+  50% {
+    background-color: rgba(165, 165, 165, 0.3);
+  }
+
+  100% {
+    background-color: rgba(165, 165, 165, 0.1);
+  }
+}
+
+.skeleton-animation {
+  -webkit-animation: skeleton-gradient 1.8s infinite ease-in-out;
+  animation: skeleton-gradient 1.8s infinite ease-in-out;
 }
