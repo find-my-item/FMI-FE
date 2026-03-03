@@ -45,9 +45,8 @@ const SimilarItem = ({ data }: SimilarItemProps) => {
         <ListItemImage src={thumbnailImageUrl} alt="" category={data.category} size={126} />
 
         <div className="flex flex-col gap-[3px]">
-          {/* TODO(지권): 디자인 토큰 누락 */}
-          <p className="font-semibold text-layout-header-default">{title}</p>
-          <p className="block text-[14px] leading-5 text-layout-body-default">
+          <p className="text-body1-semibold text-layout-header-default">{title}</p>
+          <p className="block text-body2-regular text-layout-body-default">
             <span className="after:mx-1 after:content-['·']">{address}</span>
             <time dateTime={createdAt}>{formatDate(createdAt)}</time>
           </p>
@@ -56,7 +55,7 @@ const SimilarItem = ({ data }: SimilarItemProps) => {
         <ul className="flex items-center gap-2">
           {IconList.map((icon, index) => (
             <li key={index} className="flex items-center gap-1">
-              <Icon name={icon.name} size={18} />
+              <Icon name={icon.name} size={18} className="text-flatGray-100" />
               <span className="sr-only">{icon.ariaLabel}</span>
               <span className="text-caption1-regular text-neutral-normal-placeholder">
                 {formatCappedNumber(icon.value)}
