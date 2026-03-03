@@ -6,7 +6,7 @@ import { NoticeCommentForm, NoticeDetailContent } from "./_internal";
 
 const NoticeDetailView = () => {
   return (
-    <div className="flex min-h-0 flex-1 flex-col">
+    <div className="flex flex-col h-base">
       <NoticeDetailContent />
       <CommentList comments={MOCK_COMMENT_LIST_DATA} />
       <hr className="border border-divider-default" />
