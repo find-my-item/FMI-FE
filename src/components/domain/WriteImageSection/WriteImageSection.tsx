@@ -9,6 +9,24 @@ import { PostWriteFormValues } from "@/app/(route)/write/post/_types/PostWriteTy
 
 const DEFAULT_HELP_TEXT = "최대 10MB, 총 5장의 이미지를 첨부할 수 있습니다. (jpg, jpeg, png)";
 
+/**
+ * @author hyungjun
+ *
+ * @description
+ * 게시글 작성 시 이미지 업로드 섹션입니다.
+ * react-hook-form의 field array(images)와 연동하며, 최대 5장까지 첨부할 수 있습니다.
+ * 미리보기 목록에서 삭제·순서 변경이 가능합니다.
+ *
+ * @param helpText - 이미지 업로드 안내 문구. 미전달 시 기본 안내 문구가 사용됩니다.
+ *
+ * @example
+ * ```tsx
+ * <FormProvider {...methods}>
+ *   <WriteImageSection />
+ *   <WriteImageSection helpText="커스텀 안내 문구" />
+ * </FormProvider>
+ * ```
+ */
 const WriteImageSection = ({ helpText = DEFAULT_HELP_TEXT }: { helpText?: string }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { addToast } = useToast();
