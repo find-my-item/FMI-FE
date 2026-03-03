@@ -8,9 +8,8 @@ const NoticeDetailView = () => {
   return (
     <div className="flex min-h-0 flex-1 flex-col">
       <NoticeDetailContent />
-      <div className="border-b border-divider-default">
-        <CommentList comments={MOCK_COMMENT_LIST_DATA} />
-      </div>
+      <CommentList comments={MOCK_COMMENT_LIST_DATA} />
+      <hr className="border border-divider-default" />
       <div className="min-h-0 flex-1 overflow-y-auto" />
       <NoticeCommentForm />
     </div>
