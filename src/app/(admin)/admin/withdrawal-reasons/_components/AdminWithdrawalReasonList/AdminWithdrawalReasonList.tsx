@@ -57,9 +57,11 @@ const WithdrawalReasonItem = ({ data }: { data: WithdrawUserItem }) => {
         <ul className="space-y-[2px]">
           {data.withdrawalReason?.split(",").map((reason, index) => (
             <li key={index}>
-              -
-              {WITHDRAWAL_REASON_OPTIONS.find((opt) => opt.value === reason)?.label ??
-                "확인할 수 없어요."}
+              -{" "}
+              {reason === "OTHER"
+                ? `(기타) ${data.withdrawalOtherReason ?? ""}`
+                : (WITHDRAWAL_REASON_OPTIONS.find((opt) => opt.value === reason)?.label ??
+                  "확인할 수 없어요.")}
             </li>
           ))}
         </ul>
