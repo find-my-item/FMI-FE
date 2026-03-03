@@ -6,7 +6,7 @@ import NoticeFilter from "../NoticeFilter/NoticeFilter";
 
 const NoticeView = () => {
   return (
-    <>
+    <div className="h-base">
       <div className="px-5 py-[10px]">
         <InputSearch
           name="noticeSearch"
@@ -17,7 +17,7 @@ const NoticeView = () => {
       </div>
       <NoticeFilter />
       <NoticeList />
-    </>
+    </div>
   );
 };
 

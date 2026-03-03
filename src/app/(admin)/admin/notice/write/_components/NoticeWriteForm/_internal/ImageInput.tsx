@@ -41,7 +41,7 @@ const ImageInput = () => {
   };
 
   return (
-    <section className="flex flex-col items-start justify-center gap-4 px-5 py-6">
+    <section className="flex max-h-[400px] flex-col items-start gap-4 px-5 py-6">
       <input
         type="file"
         accept="image/png, image/jpeg, image/jpg"

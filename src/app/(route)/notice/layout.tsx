@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 const Layout = ({ children }: { children: ReactNode }) => {
-  return <div className="h-base">{children}</div>;
+  return <>{children}</>;
 };
 
 export default Layout;
