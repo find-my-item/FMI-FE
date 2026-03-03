@@ -27,9 +27,9 @@ const NoticeItem = ({ notice }: { notice: NoticeItem }) => {
           </div>
 
           <div className="flex items-center gap-1 text-body2-regular text-neutral-strong-placeholder">
-            <Icon name="Like" size={16} className="text-[#D9D9D9]" />
+            <Icon name="Like" size={16} className="text-border-divider-default" />
             <span>12</span>
-            <Icon name="Eye" size={16} className="text-[#D9D9D9]" />
+            <Icon name="Eye" size={16} className="text-border-divider-default" />
             <span>24</span>
           </div>
         </div>
