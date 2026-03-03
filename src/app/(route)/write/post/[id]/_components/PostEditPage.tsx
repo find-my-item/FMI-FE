@@ -11,10 +11,10 @@ import {
   ActionSection,
   CategorySection,
   ContentSection,
-  ImageSection,
   LocationSection,
   TitleSection,
 } from "../../_components/_internal";
+import { WriteImageSection } from "@/components/domain";
 
 interface PostEditPageProps {
   postId: number;
@@ -45,7 +45,7 @@ const PostEditPage = ({ postId }: PostEditPageProps) => {
 
       <form onSubmit={onSubmit} className="flex flex-col h-base">
         <div className="flex min-h-0 flex-1 flex-col">
-          <ImageSection />
+          <WriteImageSection />
           <CategorySection />
           <TitleSection />
           <ContentSection />

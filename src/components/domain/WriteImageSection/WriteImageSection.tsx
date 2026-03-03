@@ -1,13 +1,15 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { Icon } from "@/components/common";
-import ImagePreviewList from "../ImagePreviewList/ImagePreviewList";
+import ImagePreviewList from "./_internal/ImagePreviewList";
 import { useToast } from "@/context/ToastContext";
-import { PostWriteFormValues } from "../../../_types/PostWriteType";
+import { PostWriteFormValues } from "@/app/(route)/write/post/_types/PostWriteType";
 
-const ImageSection = () => {
+const DEFAULT_HELP_TEXT = "최대 10MB, 총 5장의 이미지를 첨부할 수 있습니다. (jpg, jpeg, png)";
+
+const WriteImageSection = ({ helpText = DEFAULT_HELP_TEXT }: { helpText?: string }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { addToast } = useToast();
 
@@ -65,11 +67,9 @@ const ImageSection = () => {
         </button>
         <ImagePreviewList images={fields} onRemove={remove} onMove={move} />
       </div>
-      <span className="text-caption1-regular text-neutral-normal-placeholder">
-        최대 10MB, 총 5장의 이미지를 첨부할 수 있습니다. (jpg, jpeg, png)
-      </span>
+      <span className="text-caption1-regular text-neutral-normal-placeholder">{helpText}</span>
     </section>
   );
 };
 
-export default ImageSection;
+export default WriteImageSection;

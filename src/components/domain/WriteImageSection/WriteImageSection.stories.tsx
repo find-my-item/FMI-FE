@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
-import ImageSection from "./ImageSection";
+import ImageSection from "./WriteImageSection";
 import { ToastProvider } from "@/providers/ToastProviders";
 import { FormProvider, useForm } from "react-hook-form";
 
