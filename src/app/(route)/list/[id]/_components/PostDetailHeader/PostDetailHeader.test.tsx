@@ -77,7 +77,7 @@ describe("상세페이지 상단 헤더", () => {
       />
     );
 
-    const postDetailHeaderElement = screen.getByRole("link", { name: "채팅 목록으로 이동" });
+    const postDetailHeaderElement = screen.getByRole("link", { name: "채팅 목록으로 이동하기" });
     expect(postDetailHeaderElement).toBeInTheDocument();
   });
 });
