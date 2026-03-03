@@ -15,7 +15,7 @@ const TitleInput = () => {
         maxLength={50}
         {...register("title", { required: true })}
       />
-      {!titleValue && <RequiredText className="absolute left-[155px]" />}
+      {!titleValue && <RequiredText className="absolute left-[156px]" />}
       <span className="absolute right-5 text-body2-regular text-neutral-normal-placeholder">
         {titleValue?.length || 0}/50
       </span>
