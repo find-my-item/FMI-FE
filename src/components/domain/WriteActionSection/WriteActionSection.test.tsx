@@ -18,7 +18,7 @@ jest.mock("@/components/common", () => ({
   Button: (props: any) => ButtonMock(props),
 }));
 
-describe("ActionSection", () => {
+describe("WriteActionSection", () => {
   beforeEach(() => {
     ButtonMock.mockClear();
   });

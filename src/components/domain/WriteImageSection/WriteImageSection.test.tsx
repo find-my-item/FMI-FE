@@ -47,7 +47,7 @@ beforeAll(() => {
   global.URL.createObjectURL = jest.fn(() => "blob:mock");
 });
 
-describe("ImageSection", () => {
+describe("WriteImageSection", () => {
   it("섹션이 렌더링되어야 한다", () => {
     renderWithProviders(<WriteImageSection />);
     expect(screen.getByLabelText("이미지 업로드")).toBeInTheDocument();
