@@ -1,36 +1,43 @@
 "use client";
 
-import { Suspense } from "react";
+import { useEffect } from "react";
 import { useGetDeletedUsers, WithdrawUserItem } from "@/api/fetch/admin";
 import { LoadingState } from "@/components/state";
+import { useToast } from "@/context/ToastContext";
 import { useInfiniteScroll } from "@/hooks";
 import { formatDate } from "@/utils";
 import { WITHDRAWAL_REASON_OPTIONS } from "../../_constants/WITHDRAWAL_REASON_OPTIONS";
 import { WithdrawalReasonType } from "../../_types/WithdrawalReasonType";
 
-// TODO(지권): 무한스크롤 cursor 기반 변경 후 추가 예정
-// TODO(지권): data.withdrawalReason 배열로 변경 후 수정 예정
 const AdminWithdrawalReasonList = ({ reason }: { reason: WithdrawalReasonType }) => {
-  const { data, hasNextPage, fetchNextPage, isFetchingNextPage } = useGetDeletedUsers({
-    reason,
+  const { addToast } = useToast();
+
+  const { data, isLoading, isError, hasNextPage, fetchNextPage, isFetchingNextPage } =
+    useGetDeletedUsers({
+      reason,
+    });
+  const { ref: listRef } = useInfiniteScroll({
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
   });
-  // const { ref: listRef } = useInfiniteScroll({
-  //   fetchNextPage,
-  //   hasNextPage,
-  //   isFetchingNextPage,
-  // });
+
+  useEffect(() => {
+    if (isError) addToast("유저 탈퇴 사유를 불러오지 못했어요", "error");
+  }, [isError, addToast]);
+
+  if (isLoading) return <LoadingState />;
+  if (isError) return null;
 
   return (
-    <Suspense fallback={<LoadingState />}>
-      <section aria-label="유저 탈퇴 사유 목록">
-        <ul>
-          {data?.map((item) => (
-            <WithdrawalReasonItem key={item.userId} data={item} />
-          ))}
-        </ul>
-        {/* {hasNextPage && <div ref={listRef} className="h-10 w-full" />} */}
-      </section>
-    </Suspense>
+    <section aria-label="유저 탈퇴 사유 목록">
+      <ul>
+        {data?.map((item) => (
+          <WithdrawalReasonItem key={item.userId} data={item} />
+        ))}
+      </ul>
+      {hasNextPage && <div ref={listRef} className="h-10 w-full" />}
+    </section>
   );
 };
 
@@ -48,14 +55,13 @@ const WithdrawalReasonItem = ({ data }: { data: WithdrawUserItem }) => {
       </div>
       <div className="text-body1-regular text-brand-normal-default">
         <ul className="space-y-[2px]">
-          {/* {data.withdrawalReason.map((reason: string, index: number) => (
-            <li key={index}>- {reason}</li>
-          ))} */}
-          <li>
-            -
-            {WITHDRAWAL_REASON_OPTIONS.find((opt) => opt.value === data.withdrawalReason)?.label ??
-              "확인할 수 없어요."}
-          </li>
+          {data.withdrawalReason?.split(",").map((reason, index) => (
+            <li key={index}>
+              -
+              {WITHDRAWAL_REASON_OPTIONS.find((opt) => opt.value === reason)?.label ??
+                "확인할 수 없어요."}
+            </li>
+          ))}
         </ul>
       </div>
     </li>
