@@ -53,7 +53,7 @@ const DefaultListSection = ({ searchUpdateQuery }: DefaultListProps) => {
       <FilterSection />
 
       <ErrorBoundary toastMessage="목록을 불러올 수 없어요. 다시 시도해 주세요.">
-        <DefaultList listData={listData ?? []} listRef={listRef} hasNextPage={hasNextPage} />
+        <DefaultList listData={listData} listRef={listRef} hasNextPage={hasNextPage} />
       </ErrorBoundary>
     </section>
   );
