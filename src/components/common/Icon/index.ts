@@ -96,3 +96,5 @@ export { default as MainSearchWarning } from "@/assets/main-search-warning.svg";
 export { default as Clock } from "@/assets/clock.svg";
 export { default as AlertBell } from "@/assets/alert-bell.svg";
 export { default as ChatListEmpty } from "@/assets/chat-list-empty.svg";
+export { default as LoadingSkeleton } from "@/assets/loading-skeleton.svg";
+export { default as AlertBellFooter } from "@/assets/alert-bell-footer.svg";
