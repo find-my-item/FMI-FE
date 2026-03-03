@@ -2,6 +2,7 @@ import { Footer } from "@/components/layout";
 import "./globals.css";
 import Providers from "@/providers/QueryProviders";
 import { ToastProvider } from "@/providers/ToastProviders";
+import { SnackBarProvider } from "@/providers/SnackBarProviders";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import localFont from "next/font/local";
@@ -74,12 +75,14 @@ export default function RootLayout({
           />
         )}
         <Providers>
-          <ToastProvider>
-            <MSWProvider />
-            <AuthBootstrap />
-            <main className="w-full flex-1">{children}</main>
-            <Footer />
-          </ToastProvider>
+          <SnackBarProvider>
+            <ToastProvider>
+              <MSWProvider />
+              <AuthBootstrap />
+              <main className="w-full flex-1">{children}</main>
+              <Footer />
+            </ToastProvider>
+          </SnackBarProvider>
           <Script
             src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.7/kakao.min.js"
             integrity="sha384-tJkjbtDbvoxO+diRuDtwRO9JXR7pjWnfjfRn5ePUpl7e7RJCxKCwwnfqUAdXh53p"

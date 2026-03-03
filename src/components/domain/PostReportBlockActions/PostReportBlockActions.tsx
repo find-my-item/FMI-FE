@@ -30,7 +30,6 @@ const PostReportBlockActions = ({ onOpenReport, onOpenBlock }: PostReportBlockAc
       <hr className="w-full border border-white" />
 
       <ActionButton
-        // TODO(지권): 차단 아이콘 변경 필요
         icon={<Icon name="UserBlock" size={20} />}
         label="작성자 차단하기"
         onClick={onOpenBlock}
