@@ -23,11 +23,6 @@ const ContentInput = () => {
         {contentValue?.length || 0}/500
       </span>
       {!contentValue && <RequiredText className="absolute left-[154px]" />}
-      {!contentValue && (
-        <span className="absolute left-5 top-20 text-body2-regular text-neutral-normal-placeholder">
-          안내문 작성란
-        </span>
-      )}
     </section>
   );
 };
