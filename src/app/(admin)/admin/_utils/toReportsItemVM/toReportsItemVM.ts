@@ -51,7 +51,7 @@ export const toGuestInquiryItemVM = (item: AdminGuestInquiryItem): AdminReportsI
   return {
     href: `/admin/guest-inquiries/${item.inquiryId}`,
     title: item.title,
-    content: item.reason,
+    content: item.content,
     nickname: item.userEmail,
     createdAt: item.createdAt,
 

@@ -1,33 +1,24 @@
-import { PageableInfo, SortInfo } from "@/api/_base/types/ApiBasePageableInfoType";
+import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 import { ReportsType } from "@/types";
-import { InquiryCategory, InquiryType } from "@/types/InquiryType";
+import { InquiryType } from "@/types/InquiryType";
+
+export interface GetGuestInquiriesResponse extends ApiBaseResponseType<GuestInquiryResult> {}
+
+export interface GuestInquiryResult {
+  content: AdminGuestInquiryItem[];
+  nextCursor: number | null;
+  hasNext: boolean;
+}
 
 export interface AdminGuestInquiryItem {
   inquiryId: number;
   title: string;
   inquiryType: InquiryType;
-  reason: string;
-  category: InquiryCategory;
   status: ReportsType;
   createdAt: string;
-
+  userId: number;
+  userNickname: string;
   userEmail: string;
-
+  content: string;
   ip: string;
-}
-
-export interface AdminGuestInquiryPageResponse {
-  totalElements: number;
-  totalPages: number;
-  size: number;
-  content: AdminGuestInquiryItem[];
-
-  number: number;
-  sort: SortInfo;
-  numberOfElements: number;
-  pageable: PageableInfo;
-
-  first: boolean;
-  last: boolean;
-  empty: boolean;
 }
