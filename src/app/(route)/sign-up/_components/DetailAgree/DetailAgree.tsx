@@ -21,12 +21,12 @@ const DetailAgree = ({ termName, onAgree }: DetailAgreeProps) => {
   return (
     <>
       <DetailHeader title={term.title} />
-      <div className="whitespace-pre-wrap px-4 py-6 text-body2-regular text-layout-body-default">
+      <div className="whitespace-pre-wrap px-4 pb-[calc(88px+24px)] pt-6 text-body2-regular text-layout-body-default h-base">
         {term.content}
       </div>
 
       {/* signUpFooter */}
-      <div className="fixed bottom-[85px] z-40 h-[88px] w-full max-w-[767px] border-t border-divider-default px-4 pb-8 pt-3">
+      <div className="fixed bottom-0 z-40 h-[88px] w-full max-w-[764px] border-t border-divider-default bg-white px-4 pb-8 pt-3">
         <Button type="button" variant="auth" onClick={handleAgreeClick} ariaLabel="동의 버튼">
           동의
         </Button>

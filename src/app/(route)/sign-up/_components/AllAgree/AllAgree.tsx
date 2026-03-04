@@ -48,7 +48,7 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
   return (
     <>
       <DetailHeader title="회원가입" />
-      <div className="flex w-full flex-col gap-7 p-4">
+      <div className="flex w-full flex-col gap-7 p-4 h-base">
         <p className="text-h3-semibold text-black">
           서비스 이용을 위해 <br />
           약관 동의가 필요합니다.
@@ -92,7 +92,7 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
         </div>
       </div>
       {/* signUpFooter */}
-      <div className="fixed bottom-[85px] z-40 h-[88px] w-full max-w-[767px] border-t border-divider-default px-4 pb-8 pt-3">
+      <div className="fixed bottom-0 z-40 h-[88px] w-full max-w-[764px] border-t border-divider-default bg-white px-4 pb-8 pt-3">
         <Button
           type="button"
           ariaLabel="가입 완료"
