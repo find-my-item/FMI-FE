@@ -3,13 +3,13 @@
 import { CommentList } from "@/components/domain";
 import { ErrorBoundary } from "@/app/ErrorBoundary";
 import { useGetDetailPost } from "@/api/fetch/post";
+import { useGetPostsComments } from "@/api/fetch/comment";
 import PostDetail from "../PostDetail/PostDetail";
 import PostDetailTopHeader from "../PostDetailTopHeader/PostDetailTopHeader";
 import SimilarItemsSection from "../SimilarItemsSection/SimilarItemsSection";
-import CommentForm from "../CommentForm/CommentForm";
 import { MOCK_COMMENT_LIST_DATA } from "@/mock/data";
 import { DetailSkeleton, ErrorSimilarSection } from "../_internal";
-import { useGetPostsComments } from "@/api/fetch/comment";
+import PostInputComment from "../PostInputComment/PostInputComment";
 
 interface ClientDetailProps {
   id: number;
@@ -41,7 +41,7 @@ const ClientDetail = ({ id }: ClientDetailProps) => {
       <ErrorBoundary fallback={<ErrorSimilarSection postId={id} />}>
         <SimilarItemsSection postId={id} />
       </ErrorBoundary>
-      <CommentForm />
+      <PostInputComment />
     </>
   );
 };
