@@ -19,7 +19,8 @@ export const useGetReports = ({ type = "REPORT", size = 10 }: UseGetReportsParam
     `/admin/customer-service?${params.toString()}`,
     {
       placeholderData: keepPreviousData,
-      getNextPageParam: (lastPage) => lastPage.result.nextCursor ?? undefined,
+      getNextPageParam: (lastPage) =>
+        lastPage.result.hasNext ? lastPage.result.nextCursor : undefined,
       select: (data: InfiniteData<GetReportsResponse>) =>
         data.pages.flatMap((page) => page.result.items ?? []),
     }

@@ -8,11 +8,13 @@ import { useToast } from "@/context/ToastContext";
 import { toInquiryItemVM, toReportItemVM } from "../../../_utils/toReportsItemVM/toReportsItemVM";
 import { ReportsTabType } from "../../_types/ReportsTabType";
 import { AdminReportsItem } from "../../../_components";
+import { EMPTY_STATE_CONFIG } from "./EMPTY_STATE_CONFIG";
 
 interface ReportsListProps {
   activeTab: ReportsTabType;
 }
 
+// TODO(지권): 무한 스크롤 확인 필요
 const ReportsList = ({ activeTab }: ReportsListProps) => {
   const { addToast } = useToast();
 
@@ -34,21 +36,15 @@ const ReportsList = ({ activeTab }: ReportsListProps) => {
   if (isLoading) return <LoadingState />;
   if (isError) return null;
 
+  const emptyState = EMPTY_STATE_CONFIG[activeTab];
+
   return (
     <section aria-label="신고/문의 목록">
       {data?.length === 0 ? (
         <EmptyState
-          icon={
-            isReport
-              ? { iconName: "NoReports", iconSize: 70 }
-              : { iconName: "NoInquiries", iconSize: 70 }
-          }
-          title={isReport ? "신고 내역이 없어요" : "문의 내역이 없어요"}
-          description={
-            isReport
-              ? "아직 신고 내역이 없습니다.\n신고가 접수되면 이곳에 표기됩니다."
-              : "아직 문의 내역이 없습니다.\n문의가 접수되면 이곳에 표기됩니다."
-          }
+          icon={emptyState.icon}
+          title={emptyState.title}
+          description={emptyState.description}
         />
       ) : (
         <ul className="flex flex-col gap-2">
