@@ -25,6 +25,7 @@ const DeleteButton = ({
       aria-label="입력값 전체 삭제"
       onClick={onDelete}
       className={cn(
+        // TODO(수현): 디자인 토큰 변경 필요
         "absolute h-[16.67px] w-[16.67px] rounded-full bg-[#787878] outline-none flex-center",
         eyeShow ? "right-8" : "right-2",
         className
