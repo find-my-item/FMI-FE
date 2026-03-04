@@ -1,34 +1,22 @@
-import { PageableInfo, SortInfo } from "@/api/_base/types/ApiBasePageableInfoType";
-import { ReportsType, ReportTargetType, ReportType } from "@/types";
+import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
+
+export interface GetReportsResponse extends ApiBaseResponseType<ReportResult> {}
+
+export interface ReportResult {
+  items: AdminReportItem[];
+  nextCursor: number | null;
+  hasNext: boolean;
+}
 
 export interface AdminReportItem {
-  reportId: number;
-  targetType: ReportTargetType;
-  targetId: number;
-  reportType: ReportType;
-  status: ReportsType;
-  reason: string;
-  adminNote: string | null;
+  type: ReportsServiceType;
+  id: number;
+  title: string;
+  content: string;
+  status: string;
+  writerNickname: string;
+  writerEmail: string;
   createdAt: string;
-  updatedAt: string;
-  resolvedAt: string | null;
-  reporterId: number;
-  reporterNickname: string;
-  reporterEmail: string;
 }
 
-export interface AdminReportPageResponse {
-  totalElements: number;
-  totalPages: number;
-  size: number;
-  content: AdminReportItem[];
-
-  number: number;
-  sort: SortInfo;
-  numberOfElements: number;
-  pageable: PageableInfo;
-
-  first: boolean;
-  last: boolean;
-  empty: boolean;
-}
+export type ReportsServiceType = "REPORT" | "INQUIRY";
