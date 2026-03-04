@@ -9,15 +9,16 @@ import { AdminReportsItem } from "../../../_components";
 import { toGuestInquiryItemVM } from "../../../_utils/toReportsItemVM/toReportsItemVM";
 
 interface GuestInquiriesListProps {
-  status?: string;
-  answer?: string;
+  status: string;
+  answer: string;
+  keyword: string;
 }
 
-const GuestInquiriesList = ({ status, answer }: GuestInquiriesListProps) => {
+const GuestInquiriesList = ({ status, answer, keyword }: GuestInquiriesListProps) => {
   const { addToast } = useToast();
 
   const { data, isLoading, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useGetGuestInquiries({ status });
+    useGetGuestInquiries({ status, keyword });
   const { ref: listRef } = useInfiniteScroll({
     fetchNextPage,
     hasNextPage,
