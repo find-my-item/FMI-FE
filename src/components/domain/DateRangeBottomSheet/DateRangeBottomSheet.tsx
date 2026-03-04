@@ -13,7 +13,6 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FiltersStateType } from "../FilterSectionBottomSheet/_types/filtersStateType";
 import { useFilterParams } from "@/hooks/domain";
 import { parseYmd } from "../FilterSectionBottomSheet/utils/parseDateFilter";
-import { ActivityFilterType } from "./_types/DateStateType";
 import { ActivityFilterState } from "@/app/(route)/mypage/activity/_types/ActivityFilterType";
 
 const DateWheel = ({
@@ -111,7 +110,6 @@ const DateRangeBottomSheet = <T extends FiltersStateType | ActivityFilterState>(
       searchParams: new URLSearchParams(searchParams.toString()),
     });
 
-    // console.log(qs);
     router.replace(qs ? `${pathname}?${qs}` : pathname);
 
     setFilters(nextFilters);

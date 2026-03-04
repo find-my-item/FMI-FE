@@ -8,7 +8,7 @@ import { DateRangeBottomSheet } from "@/components/domain";
 import { ACTIVITY_OPTIONS } from "../../_constants/ACTIVITY_OPTIONS";
 import { ACTIVITY_DEFAULT_FILTERS, ActivityFilterState } from "../../_types/ActivityFilterType";
 
-const ActivityFilter = () => {
+const ActivityFilterSection = () => {
   const [isBottomSheet, setIsBottomSheet] = useState<{
     isOpen: boolean;
     mode: BottomSheetModeType;
@@ -58,4 +58,4 @@ const ActivityFilter = () => {
   );
 };
 
-export default ActivityFilter;
+export default ActivityFilterSection;

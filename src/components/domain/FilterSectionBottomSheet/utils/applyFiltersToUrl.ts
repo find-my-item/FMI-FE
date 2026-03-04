@@ -102,26 +102,3 @@ export const applyFiltersToUrl = ({ filters, searchParams }: ApplyFiltersToUrlPr
 
   return params.toString();
 };
-
-// type ApplyFiltersToUrlProps = {
-//   filters: FiltersStateType;
-//   searchParams: URLSearchParams;
-// };
-
-// export const applyFiltersToUrl = ({ filters, searchParams }: ApplyFiltersToUrlProps): string => {
-//   const params = new URLSearchParams(searchParams.toString());
-
-//   const upsert = (key: string, value?: string) => {
-//     if (!value) params.delete(key);
-//     else params.set(key, value);
-//   };
-
-//   upsert("region", filters.region);
-//   upsert("category", categoryToQueryValue(filters.category));
-//   upsert("sort", sortToQueryValue(filters.sort));
-//   upsert("status", statusToQueryValue(filters.status));
-//   upsert("findStatus", findStatusToQueryValue(filters.findStatus));
-//   upsert("date", filters.date);
-
-//   return params.toString();
-// };
