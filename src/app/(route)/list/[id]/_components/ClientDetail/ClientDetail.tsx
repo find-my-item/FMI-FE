@@ -22,7 +22,6 @@ const ClientDetail = ({ id }: ClientDetailProps) => {
   if (isError || !data?.result) return <div className="pt-4 h-base">오류가 발생했습니다.</div>;
 
   const { isMine, postUserInformation } = data.result;
-  console.log(commentsData);
 
   return (
     <>
@@ -37,7 +36,7 @@ const ClientDetail = ({ id }: ClientDetailProps) => {
       />
 
       <PostDetail type="find" data={data.result} />
-      <CommentList comments={commentsData?.result?.comments || []} />
+      <CommentList comments={commentsData?.result} />
       <ErrorBoundary fallback={<ErrorSimilarSection postId={id} />}>
         <SimilarItemsSection postId={id} />
       </ErrorBoundary>

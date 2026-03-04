@@ -26,7 +26,7 @@ const CommentItem = ({ level = "comment", className, data }: CommentCardProps) =
   const authorName = data.authorResponse ? data.authorResponse.nickName : "";
 
   return (
-    <div className={cn("my-[18px] px-5", className)}>
+    <li className={cn("my-[18px] px-5", className)}>
       <div className="flex">
         {isNestedReply && <Icon name="CommentReplyIcon" size={24} />}
 
@@ -54,6 +54,7 @@ const CommentItem = ({ level = "comment", className, data }: CommentCardProps) =
             setIsReplyFormOpen={setIsReplyFormOpen}
             viewReply={viewReply}
             setViewReply={setViewReply}
+            replyCount={data.replyCount || 0}
           />
         </div>
       </div>
@@ -74,7 +75,7 @@ const CommentItem = ({ level = "comment", className, data }: CommentCardProps) =
           ))}
         </div>
       )}
-    </div>
+    </li>
   );
 };
 

@@ -1,28 +1,33 @@
 import { ViewMoreComment } from "@/components/common";
 import CommentItem from "./CommentItem";
-import { CommentItemType } from "@/types";
+import { GetPostsCommentsData } from "@/api/fetch/comment";
 
 interface CommentListProps {
-  comments: CommentItemType[];
+  comments?: GetPostsCommentsData;
 }
 
+// TODO(지권): 댓글 페이지네이션 백엔드 협의 필요
 const CommentList = ({ comments }: CommentListProps) => {
-  if (!comments?.length) return null;
+  if (!comments || !comments.comments?.length) return null;
+
+  const hasNext = comments.hasNext;
+  const data = comments.comments;
 
   return (
     <>
       <header className="w-full border-t border-divider-default px-5">
         <h2 className="mt-[18px] flex items-center gap-1 py-2 text-body1-semibold text-layout-header-default">
-          댓글<span>{comments.length}</span>
+          댓글<span>{data.length}</span>
         </h2>
       </header>
-      <div>
-        {comments.map((comment) => (
+      <ul>
+        {data.map((comment) => (
           <CommentItem key={comment.id} data={comment} />
         ))}
-      </div>
+      </ul>
 
-      <ViewMoreComment count={5} />
+      {/* TODO(지권): count 백엔드 누락 */}
+      {hasNext && <ViewMoreComment count={5} />}
     </>
   );
 };
