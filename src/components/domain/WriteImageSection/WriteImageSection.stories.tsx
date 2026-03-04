@@ -1,11 +1,11 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
-import ImageSection from "./ImageSection";
+import WriteImageSection from "./WriteImageSection";
 import { ToastProvider } from "@/providers/ToastProviders";
 import { FormProvider, useForm } from "react-hook-form";
 
-const meta: Meta<typeof ImageSection> = {
-  title: "페이지/글쓰기/ImageSection",
-  component: ImageSection,
+const meta: Meta<typeof WriteImageSection> = {
+  title: "공통 컴포넌트/WriteImageSection",
+  component: WriteImageSection,
   tags: ["autodocs"],
   parameters: {
     layout: "centered",
