@@ -2,6 +2,7 @@ import { Button } from "@/components/common";
 import { DetailHeader } from "@/components/layout";
 import { AGREE_CONFIG } from "../../_constants/AGREE_CONFIG";
 import { useFormContext } from "react-hook-form";
+import { FOOTER_BTN_STYLE } from "@/constants";
 
 interface DetailAgreeProps {
   termName: string;
@@ -26,7 +27,7 @@ const DetailAgree = ({ termName, onAgree }: DetailAgreeProps) => {
       </div>
 
       {/* signUpFooter */}
-      <div className="fixed bottom-0 z-40 h-[88px] w-full max-w-[764px] border-t border-divider-default bg-white px-4 pb-8 pt-3">
+      <div className={FOOTER_BTN_STYLE}>
         <Button type="button" variant="auth" onClick={handleAgreeClick} ariaLabel="동의 버튼">
           동의
         </Button>

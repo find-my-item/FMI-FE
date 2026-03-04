@@ -5,6 +5,7 @@ import { DetailHeader } from "@/components/layout";
 import { useFormContext, useWatch } from "react-hook-form";
 import { TERMS_CONFIG } from "../../_constants/TERMS_CONFIG";
 import { useEffect } from "react";
+import { FOOTER_BTN_STYLE } from "@/constants";
 
 interface AllAgreeProps {
   onOpenDetail: (termKey: string) => void;
@@ -92,7 +93,7 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
         </div>
       </div>
       {/* signUpFooter */}
-      <div className="fixed bottom-0 z-40 h-[88px] w-full max-w-[764px] border-t border-divider-default bg-white px-4 pb-8 pt-3">
+      <div className={FOOTER_BTN_STYLE}>
         <Button
           type="button"
           ariaLabel="가입 완료"

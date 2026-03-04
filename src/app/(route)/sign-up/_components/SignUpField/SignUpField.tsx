@@ -7,6 +7,7 @@ import { useFormContext, useWatch } from "react-hook-form";
 import { useSignUpBtnClick } from "../../_hooks/useSignUpBtnClick";
 import { useEffect } from "react";
 import SignUpItem from "../SignUpItem/SignUpItem";
+import { FOOTER_BTN_STYLE } from "@/constants";
 
 const SignUpField = ({ onNext }: { onNext: () => void }) => {
   const {
@@ -64,7 +65,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
           />
         ))}
       </div>
-      <div className="fixed bottom-0 z-40 h-[88px] w-full max-w-[764px] border-t border-divider-default bg-white px-4 pb-8 pt-3">
+      <div className={FOOTER_BTN_STYLE}>
         <Button
           type="button"
           variant="auth"
