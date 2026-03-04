@@ -2,17 +2,34 @@ import { ReactNode } from "react";
 import { render, screen } from "@testing-library/react";
 import GuestInquiriesList from "./GuestInquiriesList";
 
-jest.mock("@/app/ErrorBoundary", () => ({
-  ErrorBoundary: ({ children }: { children: ReactNode }) => <>{children}</>,
+jest.mock("@/context/ToastContext", () => ({
+  useToast: () => ({
+    addToast: jest.fn(),
+  }),
 }));
 
-jest.mock("react", () => {
-  const actual = jest.requireActual("react");
-  return {
-    ...actual,
-    Suspense: ({ children }: { children: ReactNode }) => <>{children}</>, // fallback 무시하고 children만 렌더
-  };
-});
+jest.mock("@/hooks", () => ({
+  useInfiniteScroll: () => ({
+    ref: jest.fn(),
+  }),
+}));
+
+jest.mock("@/api/fetch/admin", () => ({
+  useGetGuestInquiries: () => ({
+    data: [
+      { inquiryId: 1 },
+      { inquiryId: 2 },
+      { inquiryId: 3 },
+      { inquiryId: 4 },
+      { inquiryId: 5 },
+    ],
+    isLoading: false,
+    isError: false,
+    fetchNextPage: jest.fn(),
+    hasNextPage: false,
+    isFetchingNextPage: false,
+  }),
+}));
 
 jest.mock("@/components/state", () => ({
   LoadingState: () => <div>loading...</div>,

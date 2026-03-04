@@ -1,28 +1,23 @@
-import { AdminFilter, AdminSearch } from "../../../_components";
+"use client";
+
+import { useSearchParams } from "next/navigation";
 import GuestInquiriesList from "../GuestInquiriesList/GuestInquiriesList";
+import { AdminSearch } from "../../../_components";
+import { normalizeEnumValue } from "@/utils";
+import GuestInquiriesFilter from "../GuestInquiriesFilter/GuestInquiriesFilter";
 
-// TODO(지권): 필터 기능 추가
-const guestInquiriesFilters = [
-  {
-    label: "상태",
-    onSelected: false,
-    onClick: () => {},
-  },
-  {
-    label: "답변",
-    onSelected: false,
-    onClick: () => {},
-  },
-];
-
+// TODO(지권): 필터 답변, 검색 기능 추가
 const GuestInquiriesView = () => {
+  const searchParams = useSearchParams();
+  const status = searchParams.get("status");
+
   return (
     <div className="h-base">
       <AdminSearch onEnter={() => {}} />
 
-      <AdminFilter filters={guestInquiriesFilters} />
+      <GuestInquiriesFilter />
 
-      <GuestInquiriesList />
+      <GuestInquiriesList status={normalizeEnumValue(status) ?? ""} />
     </div>
   );
 };
