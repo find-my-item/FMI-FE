@@ -18,9 +18,11 @@ interface ImageSectionProps {
 const ImageSection = ({ imageUrls }: ImageSectionProps) => {
   if (imageUrls.length === 0) return null;
 
-  const sortedData = [...imageUrls].sort((a, b) =>
-    a.imageType === "THUMBNAIL" ? -1 : b.imageType === "THUMBNAIL" ? 1 : 0
-  );
+  const sortedData = [...imageUrls].sort((a, b) => {
+    if (a.imageType === "THUMBNAIL") return -1;
+    if (b.imageType === "THUMBNAIL") return 1;
+    return 0;
+  });
   const imageUrlList = sortedData.map((img) => img.imgUrl);
 
   const [isOpen, setIsOpen] = useState(false);
