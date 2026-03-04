@@ -38,9 +38,17 @@ const ReportsList = ({ activeTab }: ReportsListProps) => {
     <section aria-label="신고/문의 목록">
       {data?.length === 0 ? (
         <EmptyState
-          icon={{ iconName: "NoInquiries", iconSize: 70 }}
-          title="등록된 문의 내역이 없어요"
-          description={"아직 문의 내역이 없습니다.\n문의가 접수되면 이곳에 표기됩니다."}
+          icon={
+            isReport
+              ? { iconName: "NoReports", iconSize: 70 }
+              : { iconName: "NoInquiries", iconSize: 70 }
+          }
+          title={isReport ? "신고 내역이 없어요" : "문의 내역이 없어요"}
+          description={
+            isReport
+              ? "아직 신고 내역이 없습니다.\n신고가 접수되면 이곳에 표기됩니다."
+              : "아직 문의 내역이 없습니다.\n문의가 접수되면 이곳에 표기됩니다."
+          }
         />
       ) : (
         <ul className="flex flex-col gap-2">
