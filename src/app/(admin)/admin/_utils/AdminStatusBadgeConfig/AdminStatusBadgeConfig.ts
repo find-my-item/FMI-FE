@@ -7,7 +7,7 @@ export const ProcessStatusBadgeConfig: Record<ReportsType, StatusBadgeConfig> = 
     className: "text-neutral-strong-default bg-fill-neutral-strong-default",
   },
   RECEIVED: {
-    label: "검토",
+    label: "검토 중",
     className: "text-brand-normal-default bg-fill-brand-subtle-default",
   },
   ANSWERED: {
