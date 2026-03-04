@@ -1,41 +1,23 @@
-import { NoticeCustomerState } from "../../_types/noticeContainer";
-import { noticeListObject } from "../../_constant/noticeListObject";
-import Customer from "../Customer/Customer";
-import { PostListItem } from "@/components/domain";
+"use client";
 
-interface NoticeView {
-  noticeCustomerState: NoticeCustomerState;
-}
+import NoticeList from "../NoticeList/NoticeList";
+import { InputSearch } from "@/components/common";
+import NoticeFilter from "../NoticeFilter/NoticeFilter";
 
-const NoticeView = ({ noticeCustomerState }: NoticeView) => {
+const NoticeView = () => {
   return (
-    <>
-      {noticeCustomerState === "customer" ? (
-        <Customer />
-      ) : (
-        noticeListObject.map((item) => (
-          <PostListItem
-            key={item.id}
-            post={{
-              postId: item.id,
-              title: item.title,
-              summary: item.body,
-              thumbnailUrl: "",
-              address: "",
-              category: "ELECTRONICS",
-              itemStatus: "SEARCHING",
-              postType: "LOST",
-              favoriteCount: 0,
-              viewCount: 0,
-              createdAt: "",
-              new: false,
-              hot: false,
-            }}
-            linkState="notice"
-          />
-        ))
-      )}
-    </>
+    <div className="h-base">
+      <div className="px-5 py-[10px]">
+        <InputSearch
+          name="noticeSearch"
+          mode="onChange"
+          onEnter={() => {}}
+          placeholder="제목, 내용을 입력해 주세요."
+        />
+      </div>
+      <NoticeFilter />
+      <NoticeList />
+    </div>
   );
 };
 

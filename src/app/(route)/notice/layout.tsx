@@ -1,9 +1,7 @@
-import { Suspense } from "react";
+import { ReactNode } from "react";
 
-export default function NoticeLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return <Suspense>{children}</Suspense>;
-}
+const Layout = ({ children }: { children: ReactNode }) => {
+  return <>{children}</>;
+};
+
+export default Layout;
