@@ -20,7 +20,7 @@ const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
 
   return (
     <>
-      <ImageSection imageUrls={imageResponseList.map((item) => item.imgUrl)} />
+      <ImageSection imageUrls={imageResponseList} />
 
       <section
         aria-label="게시글 작성자 정보"
