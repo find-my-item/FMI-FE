@@ -1,10 +1,11 @@
-import { DetailHeader } from "@/components/layout";
+import { SupportSearchForm, SupportTab } from "./_components";
 
 const page = () => {
   return (
-    <>
-      <DetailHeader title="자주 묻는 질문" />
-    </>
+    <div className="space-y-[10px] h-base">
+      <SupportSearchForm />
+      <SupportTab />
+    </div>
   );
 };
 
