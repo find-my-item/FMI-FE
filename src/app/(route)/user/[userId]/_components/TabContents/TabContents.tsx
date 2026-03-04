@@ -2,7 +2,7 @@
 
 import { PostListItem } from "@/components/domain";
 import { EmptyState, LoadingState } from "@/components/state";
-import { UserCommentsDataType, UserProfileItem } from "@/api/fetch/user";
+import { UserCommentsDataType, UserPostsDataType, UserProfileItem } from "@/api/fetch/user";
 import { UserProfileTabKey } from "../../_types/USER_TABS";
 import { CommentItem } from "../_internal";
 
@@ -29,7 +29,10 @@ const TabContents = ({ selectedTab, data, isLoading }: TabContentsProps) => {
               />
             </li>
           ) : (
-            data.map((post) => <PostListItem post={post} linkState="list" key={post.postId} />)
+            data.map((post) => {
+              const p = post as UserPostsDataType & { id?: number };
+              return <PostListItem post={p} linkState="list" key={`post-${p.postId ?? p.id}`} />;
+            })
           ))}
 
         {selectedTab === "comments" &&
@@ -45,7 +48,10 @@ const TabContents = ({ selectedTab, data, isLoading }: TabContentsProps) => {
                 />
               </li>
             ) : (
-              comments.map((comment) => <CommentItem key={comment.commentId} data={comment} />)
+              comments.map((comment) => {
+                const c = comment as UserCommentsDataType & { id?: number };
+                return <CommentItem key={`comment-${c.commentId ?? c.id}`} data={c} />;
+              })
             );
           })()}
 
@@ -59,7 +65,12 @@ const TabContents = ({ selectedTab, data, isLoading }: TabContentsProps) => {
               />
             </li>
           ) : (
-            data.map((post) => <PostListItem post={post} linkState="list" key={post.postId} />)
+            data.map((post) => {
+              const p = post as UserPostsDataType & { id?: number };
+              return (
+                <PostListItem post={p} linkState="list" key={`favorite-${p.postId ?? p.id}`} />
+              );
+            })
           ))}
       </ul>
     </section>
