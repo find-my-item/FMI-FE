@@ -10,7 +10,7 @@ describe("ProcessStatusBadgeConfig", () => {
 
   it("RECEIVED config", () => {
     expect(ProcessStatusBadgeConfig.RECEIVED).toEqual({
-      label: "검토",
+      label: "검토 중",
       className: "text-brand-normal-default bg-fill-brand-subtle-default",
     });
   });
