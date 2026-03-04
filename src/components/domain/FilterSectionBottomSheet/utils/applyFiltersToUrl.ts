@@ -5,6 +5,10 @@
  * 내부에 정의된 각 MAP 객체는 클라이언트의 상태 값(Enum/Type)을 URL에 적합한 문자열로 매핑합니다.
  */
 
+import {
+  ActivityFilterState,
+  ActivityFilterValue,
+} from "@/app/(route)/mypage/activity/_types/ActivityFilterType";
 import { FiltersStateType } from "../_types/filtersStateType";
 import {
   CategoryFilterValue,
@@ -13,6 +17,7 @@ import {
   StatusFilterValue,
 } from "../_types/types";
 import { CategoryType, ItemStatus, PostType } from "@/types";
+import { ActivityType } from "@/app/(route)/mypage/activity/_types/ActivityType";
 
 const CATEGORY_QUERY_VALUE_MAP: Record<CategoryType, string> = {
   ELECTRONICS: "electronics",
@@ -60,8 +65,22 @@ const statusToQueryValue = (status: StatusFilterValue): string | undefined => {
   return STATUS_QUERY_VALUE_MAP[status];
 };
 
+const ACTIVITY_QUERY_VALUE_MAP: Record<ActivityType, string> = {
+  POST: "post",
+  COMMENT: "comment",
+  AUTHENTICATION: "authentication",
+  FAVORITE: "favorite",
+  INQUIRY: "inquiry",
+  REPORT: "report",
+};
+
+const activityToQueryValue = (activity: ActivityFilterValue): string | undefined => {
+  if (!activity) return undefined;
+  return ACTIVITY_QUERY_VALUE_MAP[activity];
+};
+
 type ApplyFiltersToUrlProps = {
-  filters: FiltersStateType;
+  filters: Partial<FiltersStateType & ActivityFilterState>;
   searchParams: URLSearchParams;
 };
 
@@ -73,13 +92,36 @@ export const applyFiltersToUrl = ({ filters, searchParams }: ApplyFiltersToUrlPr
     else params.set(key, value);
   };
 
-  upsert("region", filters.region);
-  upsert("category", categoryToQueryValue(filters.category));
-  upsert("sort", sortToQueryValue(filters.sort));
-  upsert("status", statusToQueryValue(filters.status));
-  upsert("findStatus", findStatusToQueryValue(filters.findStatus));
-  upsert("date", filters.date);
-  upsert("activity", filters.activity);
+  if ("region" in filters) upsert("region", filters.region);
+  if ("category" in filters) upsert("category", categoryToQueryValue(filters.category));
+  if ("sort" in filters) upsert("sort", filters.sort ? sortToQueryValue(filters.sort) : undefined);
+  if ("status" in filters) upsert("status", statusToQueryValue(filters.status));
+  if ("findStatus" in filters) upsert("findStatus", findStatusToQueryValue(filters.findStatus));
+  if ("activity" in filters) upsert("activity", activityToQueryValue(filters.activity));
+  if ("date" in filters) upsert("date", filters.date);
 
   return params.toString();
 };
+
+// type ApplyFiltersToUrlProps = {
+//   filters: FiltersStateType;
+//   searchParams: URLSearchParams;
+// };
+
+// export const applyFiltersToUrl = ({ filters, searchParams }: ApplyFiltersToUrlProps): string => {
+//   const params = new URLSearchParams(searchParams.toString());
+
+//   const upsert = (key: string, value?: string) => {
+//     if (!value) params.delete(key);
+//     else params.set(key, value);
+//   };
+
+//   upsert("region", filters.region);
+//   upsert("category", categoryToQueryValue(filters.category));
+//   upsert("sort", sortToQueryValue(filters.sort));
+//   upsert("status", statusToQueryValue(filters.status));
+//   upsert("findStatus", findStatusToQueryValue(filters.findStatus));
+//   upsert("date", filters.date);
+
+//   return params.toString();
+// };

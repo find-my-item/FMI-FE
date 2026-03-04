@@ -7,5 +7,4 @@ export const DEFAULT_FILTERS: FiltersStateType = {
   status: undefined,
   findStatus: undefined,
   date: "",
-  activity: undefined,
 };

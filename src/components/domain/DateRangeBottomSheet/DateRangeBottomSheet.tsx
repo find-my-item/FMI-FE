@@ -14,6 +14,7 @@ import { FiltersStateType } from "../FilterSectionBottomSheet/_types/filtersStat
 import { useFilterParams } from "@/hooks/domain";
 import { parseYmd } from "../FilterSectionBottomSheet/utils/parseDateFilter";
 import { ActivityFilterType } from "./_types/DateStateType";
+import { ActivityFilterState } from "@/app/(route)/mypage/activity/_types/ActivityFilterType";
 
 const DateWheel = ({
   dateArray,
@@ -78,19 +79,19 @@ const DateWheel = ({
   );
 };
 
-interface DateRangeBottomSheetProps {
+interface DateRangeBottomSheetProps<T> {
   isOpen: boolean;
   onClose: () => void;
-  filters: FiltersStateType;
-  setFilters: Dispatch<SetStateAction<FiltersStateType>>;
+  filters: T;
+  setFilters: Dispatch<SetStateAction<T>>;
 }
 
-const DateRangeBottomSheet = ({
+const DateRangeBottomSheet = <T extends FiltersStateType | ActivityFilterState>({
   isOpen,
   onClose,
   filters,
   setFilters,
-}: DateRangeBottomSheetProps) => {
+}: DateRangeBottomSheetProps<T>) => {
   const { date } = useFilterParams();
   const queryDate = parseYmd(date);
 
@@ -103,13 +104,14 @@ const DateRangeBottomSheet = ({
   const handleApply = () => {
     const formattedDate = `${selectDate.year}-${String(selectDate.month).padStart(2, "0")}-${String(selectDate.day).padStart(2, "0")}`;
 
-    const nextFilters = { ...filters, date: formattedDate };
+    const nextFilters = { ...filters, date: formattedDate } as T;
 
     const qs = applyFiltersToUrl({
       filters: nextFilters,
       searchParams: new URLSearchParams(searchParams.toString()),
     });
 
+    // console.log(qs);
     router.replace(qs ? `${pathname}?${qs}` : pathname);
 
     setFilters(nextFilters);

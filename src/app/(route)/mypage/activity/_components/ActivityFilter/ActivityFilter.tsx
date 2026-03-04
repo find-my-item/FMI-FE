@@ -6,8 +6,7 @@ import { ACTIVITY_FILTER } from "../../_constants/ACTIVITY_FILTER";
 import { BottomSheetModeType, SelectBottomSheet } from "../../../_internal";
 import { DateRangeBottomSheet } from "@/components/domain";
 import { ACTIVITY_OPTIONS } from "../../_constants/ACTIVITY_OPTIONS";
-import { FiltersStateType } from "@/components/domain/FilterSectionBottomSheet/_types/filtersStateType";
-import { DEFAULT_FILTERS } from "@/components/domain/FilterSectionBottomSheet/_constants/DEFAULT_FILTERS";
+import { ACTIVITY_DEFAULT_FILTERS, ActivityFilterState } from "../../_types/ActivityFilterType";
 
 const ActivityFilter = () => {
   const [isBottomSheet, setIsBottomSheet] = useState<{
@@ -18,7 +17,7 @@ const ActivityFilter = () => {
     mode: "Date",
   });
 
-  const [filters, setFilters] = useState<FiltersStateType>(DEFAULT_FILTERS);
+  const [filters, setFilters] = useState<ActivityFilterState>(ACTIVITY_DEFAULT_FILTERS);
 
   return (
     <section className="flex w-full gap-2 px-5 py-[14px]">
@@ -37,7 +36,7 @@ const ActivityFilter = () => {
       ))}
 
       {isBottomSheet.isOpen && isBottomSheet.mode === "Date" && (
-        <DateRangeBottomSheet
+        <DateRangeBottomSheet<ActivityFilterState>
           isOpen={isBottomSheet.isOpen}
           onClose={() => setIsBottomSheet((prev) => ({ ...prev, isOpen: false }))}
           filters={filters}
@@ -60,13 +59,3 @@ const ActivityFilter = () => {
 };
 
 export default ActivityFilter;
-
-// {isBottomSheet.isOpen && (
-//   // <ActivityBottomSheet
-//   //   mode={isBottomSheet.mode}
-//   //   isOpen={isBottomSheet.isOpen}
-//   //   onClose={() => setIsBottomSheet((prev) => ({ ...prev, isOpen: false }))}
-//   // />
-
-//   <DateRangeBottomSheet isOpen={isOpen} onClose={onClose} filters={filter} setFilters={setFilter} />
-// )}
