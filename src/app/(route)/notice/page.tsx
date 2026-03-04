@@ -14,7 +14,7 @@ const Notice = () => {
       <h1 className="sr-only">공지사항 목록</h1>
       <NoticeView />
 
-      <div className="fixed-button-position">
+      <div className="fixed bottom-6 right-6">
         <FloatingButton
           ariaLabel="공지사항 작성 페이지 이동"
           mode="notice"
