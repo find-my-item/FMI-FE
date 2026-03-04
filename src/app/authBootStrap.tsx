@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useApiRefreshToken } from "@/api/fetch/auth";
+import { useAuthStore } from "@/store";
 
 export default function AuthBootstrap() {
   const router = useRouter();
@@ -10,8 +11,13 @@ export default function AuthBootstrap() {
   const { mutate: refreshTokenMutate } = useApiRefreshToken();
   const ranRef = useRef(false);
 
+  const setAuthInitialized = useAuthStore((state) => state.setAuthInitialized);
+
   useEffect(() => {
-    if (pathname === "/login?reason=session-expired") return;
+    if (pathname === "/login?reason=session-expired") {
+      setAuthInitialized(true);
+      return;
+    }
 
     if (ranRef.current) return;
     ranRef.current = true;
@@ -25,8 +31,11 @@ export default function AuthBootstrap() {
       onError: (error) => {
         if (error.code === "AUTH401-INVALID_REFRESH") router.push("/login?reason=session-expired");
       },
+      onSettled: () => {
+        setAuthInitialized(true);
+      },
     });
-  }, [refreshTokenMutate, router]);
+  }, [refreshTokenMutate, router, pathname, setAuthInitialized]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
