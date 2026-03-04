@@ -1,48 +1,61 @@
 "use client";
 
-import { useState } from "react";
 import { Chip, Icon } from "@/components/common";
 import { cn } from "@/utils";
+import { MOCK_FAQ_ITEMS, FaqItem, useSupportFaqAccordion, getFaqAnchorId } from "./_internal";
+import { MouseEvent } from "react";
 
 interface SupportFaqAccordionItemProps {
+  item: FaqItem;
   isExpanded: boolean;
   onToggle: () => void;
 }
 
-const SupportFaqAccordionItem = ({ isExpanded, onToggle }: SupportFaqAccordionItemProps) => {
+const SupportFaqAccordionItem = ({ item, isExpanded, onToggle }: SupportFaqAccordionItemProps) => {
   const iconColor = isExpanded ? "text-layout-header-default" : "text-labelsVibrant-tertiary";
+  const id = getFaqAnchorId(item.id);
+
+  const onAnchorClick = (e: MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    onToggle();
+    if (isExpanded) return;
+    requestAnimationFrame(() =>
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" })
+    );
+  };
 
   return (
-    <li className="flex flex-col">
-      <button
-        type="button"
-        aria-expanded={isExpanded}
-        aria-label="FAQ 질문 접기/펼치기"
-        className="flex items-center gap-1 py-2"
-        onClick={onToggle}
-      >
-        <div className="flex items-center gap-[5px] px-2">
+    <li id={id} className="flex scroll-mt-14 flex-col">
+      <div className="flex items-center gap-1 py-2">
+        <button
+          type="button"
+          aria-expanded={isExpanded}
+          aria-label="FAQ 질문 접기/펼치기"
+          className="flex items-center gap-[5px] px-2"
+          onClick={onToggle}
+        >
           <div className={cn("transition-all", isExpanded && "rotate-90")}>
             <Icon name="AccordionToggle" size={12} className={iconColor} />
           </div>
           <Icon name="AccordionQMark" size={12} className={iconColor} />
-        </div>
-        <p
-          className={cn(
-            "text-h3-medium text-layout-body-default",
-            isExpanded && "text-layout-header-default"
-          )}
-        >
-          질문 제목이 들어갑니다.
-        </p>
-      </button>
-
+        </button>
+        <a href={`#${id}`} onClick={onAnchorClick}>
+          <p
+            className={cn(
+              "flex-1 text-left text-h3-medium text-layout-body-default",
+              isExpanded && "text-layout-header-default"
+            )}
+          >
+            {item.question}
+          </p>
+        </a>
+      </div>
       {isExpanded && (
         <div className="flex flex-col gap-3 rounded-2xl p-4 bg-fill-neutral-subtle-default">
           <div className="inline-block">
-            <Chip label="계정" type="brandSubtleHover" />
+            <Chip label={item.category} type="brandSubtleHover" />
           </div>
-          <p className="text-body1-medium text-layout-header-default">답변 영역입니다.</p>
+          <p className="text-body1-medium text-layout-header-default">{item.answer}</p>
         </div>
       )}
     </li>
@@ -50,16 +63,14 @@ const SupportFaqAccordionItem = ({ isExpanded, onToggle }: SupportFaqAccordionIt
 };
 
 const SupportFaqAccordion = () => {
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
-
-  const handleToggle = (index: number) =>
-    setExpandedIndex((prev) => (prev === index ? null : index));
+  const { expandedIndex, handleToggle } = useSupportFaqAccordion();
 
   return (
     <ul className="flex flex-col gap-4 px-[20.5px]">
-      {Array.from({ length: 6 }).map((_, index) => (
+      {MOCK_FAQ_ITEMS.map((item, index) => (
         <SupportFaqAccordionItem
-          key={index}
+          key={item.id}
+          item={item}
           isExpanded={expandedIndex === index}
           onToggle={() => handleToggle(index)}
         />
