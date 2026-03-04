@@ -62,7 +62,7 @@ const ChatRoom = ({ params }: { params: Promise<{ postId: string }> }) => {
   });
 
   return (
-    <div className="flex h-[calc(100dvh-48px)] flex-col overflow-hidden">
+    <div className="flex h-dvh flex-col overflow-hidden">
       <ChatRoomHeader chatRoom={chatRoomData} roomId={roomId} />
       <h1 className="sr-only">채팅 상세 페이지</h1>
 

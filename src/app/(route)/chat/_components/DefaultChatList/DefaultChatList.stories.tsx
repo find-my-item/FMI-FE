@@ -1,12 +1,12 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
-import DefaultList from "./DefaultList";
+import DefaultChatList from "./DefaultChatList";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
 
-const meta: Meta<typeof DefaultList> = {
-  title: "페이지/채팅 페이지/DefaultList",
-  component: DefaultList,
+const meta: Meta<typeof DefaultChatList> = {
+  title: "페이지/채팅 페이지/DefaultChatList",
+  component: DefaultChatList,
   tags: ["autodocs"],
   parameters: {
     layout: "centered",
@@ -29,7 +29,7 @@ const meta: Meta<typeof DefaultList> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof DefaultList>;
+type Story = StoryObj<typeof DefaultChatList>;
 
 export const Default: Story = {
   render: () => {
@@ -37,6 +37,6 @@ export const Default: Story = {
       console.log(`searchUpdateQuery called: ${key} = ${value}`);
     };
 
-    return <DefaultList searchUpdateQuery={searchUpdateQuery} />;
+    return <DefaultChatList searchUpdateQuery={searchUpdateQuery} />;
   },
 };

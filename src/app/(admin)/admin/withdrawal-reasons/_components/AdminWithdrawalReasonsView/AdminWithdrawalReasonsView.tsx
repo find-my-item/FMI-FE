@@ -1,18 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import dynamic from "next/dynamic";
 import { ErrorBoundary } from "@/app/ErrorBoundary";
 import { AdminFilter, AdminSearch } from "../../../_components";
 import { PopupLayout } from "@/components/domain";
 import { Button, RadioOptionItem } from "@/components/common";
 import { WITHDRAWAL_REASON_OPTIONS } from "../../_constants/WITHDRAWAL_REASON_OPTIONS";
 import { WithdrawalReasonType } from "../../_types/WithdrawalReasonType";
-
-const AdminWithdrawalReasonList = dynamic(
-  () => import("../AdminWithdrawalReasonList/AdminWithdrawalReasonList"),
-  { ssr: false }
-);
+import AdminWithdrawalReasonList from "../AdminWithdrawalReasonList/AdminWithdrawalReasonList";
 
 const AdminWithdrawalReasonsView = () => {
   const [reason, setReason] = useState<WithdrawalReasonType>("");
@@ -34,11 +29,11 @@ const AdminWithdrawalReasonsView = () => {
   return (
     <>
       <div className="h-base">
-        <AdminSearch placeholder="이메일 또는 사유를 입력해 주세요." onEnter={() => {}} />
+        <AdminSearch placeholder="유저 이메일 또는 사유를 작성해 주세요." onEnter={() => {}} />
 
         <AdminFilter filters={WithdrawalReasonsFilters} />
 
-        <ErrorBoundary toastMessage="유저 탈퇴 사유를 불러오는 중 오류가 발생했어요">
+        <ErrorBoundary toastMessage="유저 탈퇴 사유를 불러오지 못했어요">
           <AdminWithdrawalReasonList reason={reason} />
         </ErrorBoundary>
       </div>

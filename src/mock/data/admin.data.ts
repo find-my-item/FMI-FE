@@ -83,7 +83,7 @@ export const MOCK_ADMIN_INQUIRY_LIST: AdminInquiryItem[] = [
   {
     inquiryId: 1,
     title: "계정 로그인이 되지 않습니다",
-    inquiryType: "PRIVATE",
+    inquiryType: "ACCOUNT_LOGIN",
     category: "ACCOUNT",
     status: "RECEIVED",
     createdAt: "2025-02-01T09:20:00",
@@ -97,7 +97,7 @@ export const MOCK_ADMIN_INQUIRY_LIST: AdminInquiryItem[] = [
   {
     inquiryId: 2,
     title: "결제 내역 확인 요청드립니다",
-    inquiryType: "PRIVATE",
+    inquiryType: "USAGE",
     category: "PAYMENT",
     status: "PENDING",
     createdAt: "2025-02-02T13:45:00",
@@ -111,7 +111,7 @@ export const MOCK_ADMIN_INQUIRY_LIST: AdminInquiryItem[] = [
   {
     inquiryId: 3,
     title: "부적절한 게시글 신고 관련 문의",
-    inquiryType: "PRIVATE",
+    inquiryType: "BUG",
     category: "REPORT_ISSUE",
     status: "ANSWERED",
     createdAt: "2025-01-30T17:10:00",
@@ -125,7 +125,7 @@ export const MOCK_ADMIN_INQUIRY_LIST: AdminInquiryItem[] = [
   {
     inquiryId: 4,
     title: "서비스 이용 중 오류가 발생합니다",
-    inquiryType: "PRIVATE",
+    inquiryType: "SUGGESTION",
     category: "TECHNICAL",
     status: "RECEIVED",
     createdAt: "2025-02-04T08:00:00",
@@ -199,14 +199,15 @@ export const MOCK_WITHDRAW_REASON_LIST: WithdrawUserItem[] = [
 
 export const MOCK_ADMIN_GUEST_INQUIRY_LIST: AdminGuestInquiryItem = {
   inquiryId: 1,
-  inquiryType: "PRIVATE",
-  status: "PENDING",
-  category: "ACCOUNT",
-  reason: "여기에 문의 내용이 표기됩니다.",
   title: "광고성 링크가 반복적으로 포함된 게시글입니다.",
+  inquiryType: "SUGGESTION",
+  status: "PENDING",
   createdAt: "2025-02-01T10:15:00",
-  ip: "192.168.0.10",
+  userId: 1,
+  userNickname: "짱구",
   userEmail: "[EMAIL_ADDRESS]",
+  content: "여기에 문의 내용이 표기됩니다.",
+  ip: "192.168.0.10",
 };
 
 export const MOCK_GUEST_INQUIRY_DETAIL_DATA = {
