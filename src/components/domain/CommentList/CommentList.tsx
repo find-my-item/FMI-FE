@@ -1,6 +1,5 @@
 import { ViewMoreComment } from "@/components/common";
 import CommentItem from "./CommentItem";
-import { useMemo } from "react";
 import { CommentItemType } from "@/types";
 
 interface CommentListProps {
@@ -8,28 +7,7 @@ interface CommentListProps {
 }
 
 const CommentList = ({ comments }: CommentListProps) => {
-  if (!comments.length) return null;
-
-  const { parentComments, repliesMap } = useMemo(() => {
-    const parents: CommentItemType[] = [];
-    const replies: Record<number, CommentItemType[]> = {};
-
-    comments.forEach((comment) => {
-      if (comment.parentId) {
-        const parentComment = comments.find((c) => c.id === comment.parentId);
-        if (parentComment) {
-          if (!replies[parentComment.id]) {
-            replies[parentComment.id] = [];
-          }
-          replies[parentComment.id].push(comment);
-        }
-      } else {
-        parents.push(comment);
-      }
-    });
-
-    return { parentComments: parents, repliesMap: replies };
-  }, [comments]);
+  if (!comments?.length) return null;
 
   return (
     <>
@@ -39,8 +17,8 @@ const CommentList = ({ comments }: CommentListProps) => {
         </h2>
       </header>
       <div>
-        {parentComments.map((_, index) => (
-          <CommentItem key={index} />
+        {comments.map((comment) => (
+          <CommentItem key={comment.id} data={comment} />
         ))}
       </div>
 

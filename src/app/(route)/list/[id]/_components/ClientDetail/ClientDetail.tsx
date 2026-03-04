@@ -7,7 +7,6 @@ import { useGetPostsComments } from "@/api/fetch/comment";
 import PostDetail from "../PostDetail/PostDetail";
 import PostDetailTopHeader from "../PostDetailTopHeader/PostDetailTopHeader";
 import SimilarItemsSection from "../SimilarItemsSection/SimilarItemsSection";
-import { MOCK_COMMENT_LIST_DATA } from "@/mock/data";
 import { DetailSkeleton, ErrorSimilarSection } from "../_internal";
 import PostInputComment from "../PostInputComment/PostInputComment";
 
@@ -36,8 +35,9 @@ const ClientDetail = ({ id }: ClientDetailProps) => {
           postStatus: data.result.postStatus,
         }}
       />
+
       <PostDetail type="find" data={data.result} />
-      <CommentList comments={MOCK_COMMENT_LIST_DATA} />
+      <CommentList comments={commentsData?.result?.comments || []} />
       <ErrorBoundary fallback={<ErrorSimilarSection postId={id} />}>
         <SimilarItemsSection postId={id} />
       </ErrorBoundary>

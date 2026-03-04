@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Icon } from "@/components/common";
 import { cn } from "@/utils";
-import { MOCK_COMMENT_ITEM_DATA } from "@/mock/data";
+import { CommentItemType } from "@/types";
 import { CommentBody, CommentMeta, CommentActions, ReplyForm, CommentFooter } from "./_internal";
 
 type CommentCardLevel = "comment" | "reply" | "nestedReply";
@@ -11,17 +11,19 @@ type CommentCardLevel = "comment" | "reply" | "nestedReply";
 interface CommentCardProps {
   level?: CommentCardLevel;
   className?: string;
+  data: CommentItemType;
 }
 
-const data = MOCK_COMMENT_ITEM_DATA;
-
-const CommentItem = ({ level = "comment", className }: CommentCardProps) => {
+const CommentItem = ({ level = "comment", className, data }: CommentCardProps) => {
   const isReply = level === "reply";
   const isNestedReply = level === "nestedReply";
   const isThreadItem = isReply || isNestedReply;
 
   const [viewReply, setViewReply] = useState(false);
   const [isReplyFormOpen, setIsReplyFormOpen] = useState(false);
+
+  const authorId = data.authorResponse ? String(data.authorResponse.id) : "";
+  const authorName = data.authorResponse ? data.authorResponse.nickName : "";
 
   return (
     <div className={cn("my-[18px] px-5", className)}>
@@ -31,7 +33,10 @@ const CommentItem = ({ level = "comment", className }: CommentCardProps) => {
         <div className="flex-1">
           <div className="space-y-2">
             <div className="flex flex-col gap-3">
-              <CommentMeta data={data} isThreadItem={isThreadItem} />
+              <CommentMeta
+                data={{ authorId, createdAt: data.createdAt, authorName }}
+                isThreadItem={isThreadItem}
+              />
               <CommentBody bodyData={{ content: data.content }} isNestedReply={isNestedReply} />
             </div>
 
@@ -57,10 +62,16 @@ const CommentItem = ({ level = "comment", className }: CommentCardProps) => {
         <ReplyForm isThreadItem={isThreadItem} className={isNestedReply ? "pb-[7px]" : undefined} />
       )}
 
-      {viewReply && (
+      {viewReply && data.childrenCommentList && data.childrenCommentList.length > 0 && (
         <div className="rounded-[10px] bg-layout_2depth">
-          <CommentItem level="reply" className="pt-4" />
-          <CommentItem level="nestedReply" />
+          {data.childrenCommentList.map((child, index) => (
+            <CommentItem
+              key={child.id}
+              level={child.depth > 1 ? "nestedReply" : "reply"}
+              className={index === 0 ? "pt-4" : undefined}
+              data={child}
+            />
+          ))}
         </div>
       )}
     </div>

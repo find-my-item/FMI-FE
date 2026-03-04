@@ -1,5 +1,5 @@
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
-import { ImageList } from "./GetPostsComments";
+import { ImageList } from "@/types";
 
 export interface PostPostsCommentRequestBody {
   request: PostPostsCommentRequest;
