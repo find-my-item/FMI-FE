@@ -41,7 +41,7 @@ export interface CommentItemType {
   isLike: boolean;
 }
 
-interface AuthorResponse {
+export interface AuthorResponse {
   id: number;
   nickName: string;
   profileImageUrl: string;

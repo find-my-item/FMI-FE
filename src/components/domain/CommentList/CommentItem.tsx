@@ -5,6 +5,7 @@ import { Icon } from "@/components/common";
 import { cn } from "@/utils";
 import { CommentItemType } from "@/types";
 import { CommentBody, CommentMeta, CommentActions, ReplyForm, CommentFooter } from "./_internal";
+import { useGetRepliesPostsComments } from "@/api/fetch/comment";
 
 type CommentCardLevel = "comment" | "reply" | "nestedReply";
 
@@ -21,6 +22,11 @@ const CommentItem = ({ level = "comment", className, data }: CommentCardProps) =
 
   const [viewReply, setViewReply] = useState(false);
   const [isReplyFormOpen, setIsReplyFormOpen] = useState(false);
+
+  const { data: ReplyCommentData } = useGetRepliesPostsComments({
+    commentId: data.id,
+    enabled: viewReply,
+  });
 
   const authorId = data.authorResponse ? String(data.authorResponse.id) : "";
   const authorName = data.authorResponse ? data.authorResponse.nickName : "";
