@@ -14,10 +14,8 @@ export const usePostPostsComments = (postId: number) => {
     `/comments/posts/${postId}`,
     "post",
     {
-      onSuccess: (data, variables) => {
-        if (variables.has("postId")) {
-          queryClient.invalidateQueries({ queryKey: ["post-comments", variables.get("postId")] });
-        }
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["post-comments", postId] });
         addToast("댓글이 등록되었어요", "success");
       },
       onError: () => {
