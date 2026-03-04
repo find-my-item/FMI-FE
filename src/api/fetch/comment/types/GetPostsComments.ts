@@ -13,22 +13,22 @@ export type CommentData = {
   deleted: boolean;
   depth: number;
   createdAt: string;
-  authorResponse: authorResponse;
+  authorResponse: AuthorResponse;
   replyCount: number;
   nextReplyCursor: null;
-  imageList: imageList[];
+  imageList: ImageList[];
   childrenCommentList: CommentData[];
   likeCount: number;
   isLike: boolean;
 };
 
-interface authorResponse {
+interface AuthorResponse {
   id: number;
   nickname: string;
   profileImageUrl: string;
 }
 
-interface imageList {
+export interface ImageList {
   id: number;
   imageUrl: string;
 }

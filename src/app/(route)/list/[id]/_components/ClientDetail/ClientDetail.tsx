@@ -41,7 +41,8 @@ const ClientDetail = ({ id }: ClientDetailProps) => {
       <ErrorBoundary fallback={<ErrorSimilarSection postId={id} />}>
         <SimilarItemsSection postId={id} />
       </ErrorBoundary>
-      <PostInputComment />
+
+      <PostInputComment postId={id} />
     </>
   );
 };

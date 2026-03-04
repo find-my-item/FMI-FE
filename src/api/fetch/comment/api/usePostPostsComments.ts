@@ -1,0 +1,28 @@
+"use client";
+
+import { useQueryClient } from "@tanstack/react-query";
+import { useToast } from "@/context/ToastContext";
+import useAppMutation from "@/api/_base/query/useAppMutation";
+import { PostPostsCommentResponse } from "../types/PostPostsComment";
+
+export const usePostPostsComments = (postId: number) => {
+  const { addToast } = useToast();
+  const queryClient = useQueryClient();
+
+  return useAppMutation<FormData, PostPostsCommentResponse>(
+    "auth",
+    `/comments/posts/${postId}`,
+    "post",
+    {
+      onSuccess: (data, variables) => {
+        if (variables.has("postId")) {
+          queryClient.invalidateQueries({ queryKey: ["post-comments", variables.get("postId")] });
+        }
+        addToast("댓글이 등록되었어요", "success");
+      },
+      onError: () => {
+        addToast("댓글 등록에 실패했어요", "error");
+      },
+    }
+  );
+};
