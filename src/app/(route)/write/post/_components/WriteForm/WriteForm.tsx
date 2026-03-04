@@ -4,14 +4,8 @@ import usePostWriteSubmit from "../../_hooks/usePostWriteSubmit/usePostWriteSubm
 import { Button } from "@/components/common";
 import { DetailHeader } from "@/components/layout";
 import ModalLayout from "@/components/common/Modal/_internal/ModalLayout";
-import {
-  ImageSection,
-  ActionSection,
-  CategorySection,
-  ContentSection,
-  LocationSection,
-  TitleSection,
-} from "../_internal";
+import { CategorySection, ContentSection, LocationSection, TitleSection } from "../_internal";
+import { WriteImageSection, WriteActionSection } from "@/components/domain";
 
 const WriteForm = ({ title }: { title: string }) => {
   const methods = useFormContext<PostWriteFormValues>();
@@ -32,13 +26,13 @@ const WriteForm = ({ title }: { title: string }) => {
       <h1 className="sr-only">{`${title} 페이지`}</h1>
       <form onSubmit={onSubmit} className="flex flex-col h-base">
         <div className="flex min-h-0 flex-1 flex-col">
-          <ImageSection />
+          <WriteImageSection />
           <CategorySection />
           <TitleSection />
           <ContentSection />
           <LocationSection />
         </div>
-        <ActionSection disabled={isSubmitDisabled} />
+        <WriteActionSection disabled={isSubmitDisabled} />
       </form>
 
       {isConfirmModalOpen && (
