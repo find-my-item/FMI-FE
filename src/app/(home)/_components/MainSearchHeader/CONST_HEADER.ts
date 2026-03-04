@@ -11,7 +11,7 @@ export const HEADER_LINK = [
   { name: "타인 유저 프로필", href: "/user/1" },
   { name: "알림", href: "/alert" },
   { name: "채팅", href: "/chat" },
-  { name: "공지사항", href: "/notice?tab=notice" },
+  { name: "공지사항", href: "/notice" },
   { name: "일반 분실 글쓰기", href: "/write/post?type=lost" },
   { name: "일반 발견 글쓰기", href: "/write/post?type=find" },
   { name: "일반 게시글 리스트", href: "/list" },
