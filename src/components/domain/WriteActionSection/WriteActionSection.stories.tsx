@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
-import ActionSection from "./ActionSection";
+import WriteActionSection from "./WriteActionSection";
 
-const meta: Meta<typeof ActionSection> = {
-  title: "페이지/글쓰기/ActionSection",
-  component: ActionSection,
+const meta: Meta<typeof WriteActionSection> = {
+  title: "공통 컴포넌트/WriteActionSection",
+  component: WriteActionSection,
   tags: ["autodocs"],
   parameters: {
     layout: "centered",
