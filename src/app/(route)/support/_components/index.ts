@@ -1,2 +1,3 @@
 export { default as SupportSearchForm } from "./SupportSearchForm/SupportSearchForm";
 export { default as SupportTab } from "./SupportTab/SupportTab";
+export { default as SupportFaqAccordion } from "./SupportFaqAccordion/SupportFaqAccordion";
