@@ -7,7 +7,7 @@ import { useFormContext, useWatch } from "react-hook-form";
 import { useSignUpBtnClick } from "../../_hooks/useSignUpBtnClick";
 import { useEffect } from "react";
 import SignUpItem from "../SignUpItem/SignUpItem";
-import { FOOTER_BTN_STYLE } from "@/constants";
+import { FooterButton } from "@/components/domain";
 
 const SignUpField = ({ onNext }: { onNext: () => void }) => {
   const {
@@ -65,17 +65,10 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
           />
         ))}
       </div>
-      <div className={FOOTER_BTN_STYLE}>
-        <Button
-          type="button"
-          variant="auth"
-          ariaLabel="다음 버튼"
-          onClick={onNext}
-          disabled={!isNextEnabled}
-        >
-          다음
-        </Button>
-      </div>
+
+      <FooterButton aria-label="다음 버튼" onClick={onNext} disabled={!isNextEnabled}>
+        다음
+      </FooterButton>
     </>
   );
 };
