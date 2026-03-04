@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useGetReports } from "@/api/fetch/admin/api/useGetReports";
 import { useInfiniteScroll } from "@/hooks";
-import { LoadingState } from "@/components/state";
+import { EmptyState, LoadingState } from "@/components/state";
 import { useToast } from "@/context/ToastContext";
 import { toInquiryItemVM, toReportItemVM } from "../../../_utils/toReportsItemVM/toReportsItemVM";
 import { ReportsTabType } from "../../_types/ReportsTabType";
@@ -36,14 +36,22 @@ const ReportsList = ({ activeTab }: ReportsListProps) => {
 
   return (
     <section aria-label="신고/문의 목록">
-      <ul className="flex flex-col gap-2">
-        {data?.map((item) => (
-          <AdminReportsItem
-            key={item.id}
-            data={isReport ? toReportItemVM(item) : toInquiryItemVM(item)}
-          />
-        ))}
-      </ul>
+      {data?.length === 0 ? (
+        <EmptyState
+          icon={{ iconName: "NoInquiries", iconSize: 70 }}
+          title="등록된 문의 내역이 없어요"
+          description={"아직 문의 내역이 없습니다.\n문의가 접수되면 이곳에 표기됩니다."}
+        />
+      ) : (
+        <ul className="flex flex-col gap-2">
+          {data?.map((item) => (
+            <AdminReportsItem
+              key={item.id}
+              data={isReport ? toReportItemVM(item) : toInquiryItemVM(item)}
+            />
+          ))}
+        </ul>
+      )}
       {hasNextPage && <div ref={listRef} className="h-10 w-full" />}
     </section>
   );
