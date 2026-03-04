@@ -1,3 +1,4 @@
+import { GetPostsCommentsData } from "@/api/fetch/comment";
 import { CommentItemType } from "@/types";
 
 export const MOCK_COMMENT_ITEM_DATA: CommentItemType = {
@@ -32,3 +33,9 @@ export const MOCK_COMMENT_LIST_DATA: CommentItemType[] = [
     },
   },
 ];
+
+export const MOCK_COMMENT_RESPONSE_DATA: GetPostsCommentsData = {
+  comments: MOCK_COMMENT_LIST_DATA,
+  hasNext: false,
+  cursor: 0,
+};
