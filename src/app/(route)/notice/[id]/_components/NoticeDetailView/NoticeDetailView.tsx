@@ -10,7 +10,6 @@ const NoticeDetailView = () => {
       <NoticeDetailContent />
       <CommentList comments={MOCK_COMMENT_LIST_DATA} />
       <hr className="border border-divider-default" />
-      <div className="min-h-0 flex-1 overflow-y-auto" />
       <NoticeCommentForm />
     </div>
   );
