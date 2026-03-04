@@ -18,7 +18,7 @@ const PostInputComment = ({ postId }: PostInputCommentProps) => {
   return (
     <FormProvider {...methods}>
       <form
-        className="sticky bottom-0 left-0 right-0 z-[9999] mt-auto w-full border-t border-neutral-normal-default bg-white px-5 py-4"
+        className="sticky bottom-0 left-0 right-0 z-10 mt-auto w-full border-t border-neutral-normal-default bg-white px-5 py-4"
         onSubmit={methods.handleSubmit(handleCommentSubmit)}
       >
         <InputCommentField
