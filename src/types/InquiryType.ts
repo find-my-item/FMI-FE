@@ -6,7 +6,11 @@
  * - 이 타입은 문의와 관련된 타입을 정리합니다.
  *
  * @description InquiryType
- * - PRIVATE: 비공개
+ * - ACCOUNT_LOGIN: 계정/로그인
+ * - USAGE: 서비스 이용
+ * - BUG: 오류/버그
+ * - SUGGESTION: 건의사항
+ * - ETC: 기타
  *
  * @description InquiryCategory
  * - GENERAL: 일반
@@ -23,7 +27,7 @@
  * - ANSWERED: 완료
  */
 
-export type InquiryType = "PRIVATE";
+export type InquiryType = "ACCOUNT_LOGIN" | "USAGE" | "BUG" | "SUGGESTION" | "ETC";
 
 export type InquiryCategory =
   | "GENERAL"

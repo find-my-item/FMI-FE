@@ -74,7 +74,7 @@ describe("toGuestInquiryItemVM", () => {
     const item = {
       inquiryId: 5,
       title: "비회원 문의",
-      reason: "문의 내용",
+      content: "문의 내용",
       userEmail: "test@test.com",
       createdAt: "2026-01-03",
       status: "PENDING",
