@@ -1,4 +1,5 @@
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
+import { ReportsType } from "@/types";
 
 export interface GetReportsResponse extends ApiBaseResponseType<ReportResult> {}
 
@@ -13,7 +14,7 @@ export interface AdminReportItem {
   id: number;
   title: string;
   content: string;
-  status: string;
+  status: ReportsType;
   writerNickname: string;
   writerEmail: string;
   createdAt: string;

@@ -8,7 +8,7 @@ interface UseGetReportsParams {
   size?: number;
 }
 
-export const useGetReports = ({ type = "REPORT", cursor, size = 10 }: UseGetReportsParams = {}) => {
+export const useGetReports = ({ type = "REPORT", cursor, size = 1 }: UseGetReportsParams = {}) => {
   const params = new URLSearchParams();
   params.set("size", String(size));
 
