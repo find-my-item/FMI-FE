@@ -10,6 +10,8 @@ interface SupportFaqAccordionItemProps {
 }
 
 const SupportFaqAccordionItem = ({ isExpanded, onToggle }: SupportFaqAccordionItemProps) => {
+  const iconColor = isExpanded ? "text-layout-header-default" : "text-labelsVibrant-tertiary";
+
   return (
     <li className="flex flex-col">
       <button
@@ -20,10 +22,10 @@ const SupportFaqAccordionItem = ({ isExpanded, onToggle }: SupportFaqAccordionIt
         onClick={onToggle}
       >
         <div className="flex items-center gap-[5px] px-2">
-          <div className={cn("transition-transform", isExpanded && "rotate-90")}>
-            <Icon name="AccordionToggle" size={12} />
+          <div className={cn("transition-all", isExpanded && "rotate-90")}>
+            <Icon name="AccordionToggle" size={12} className={iconColor} />
           </div>
-          <Icon name="AccordionQMark" size={12} />
+          <Icon name="AccordionQMark" size={12} className={iconColor} />
         </div>
         <p
           className={cn(
