@@ -15,9 +15,9 @@ const NoticeDetailContent = () => {
 
       <div className="space-y-6">
         <div className="space-y-1">
-          <h2 className="text-h2-bold text-layout-header-default">
+          <h1 className="text-h2-bold text-layout-header-default">
             여기에 공지사항 제목이 들어갑니다.
-          </h2>
+          </h1>
           <div className="text-body2-regular text-layout-body-default">
             <time className="after:mx-2 after:content-['·']">2025.10.15</time>
             <span>관리자</span>
