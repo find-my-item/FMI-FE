@@ -14,7 +14,7 @@ const Page = () => {
   });
 
   return (
-    <div className="flex min-h-screen w-full flex-col-center">
+    <div className="flex w-full flex-col h-base">
       <Suspense fallback="">
         <FormProvider {...methods}>
           <SignUpContainer />
