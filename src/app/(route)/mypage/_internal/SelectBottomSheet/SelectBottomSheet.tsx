@@ -30,6 +30,7 @@ const SelectBottomSheet = ({
   const pathname = usePathname();
 
   const handleApply = () => {
+    console.log("확인용 콘솔 >> ", filters);
     const qs = applyFiltersToUrl({
       filters,
       searchParams: new URLSearchParams(searchParams.toString()),
@@ -43,24 +44,21 @@ const SelectBottomSheet = ({
     <PopupLayout className="w-full px-5 py-10 flex-col-center" isOpen={isOpen} onClose={onClose}>
       <h2 className="text-h2-medium text-layout-header-default">{title}</h2>
       <div className="mt-8 flex w-full flex-wrap gap-x-2 gap-y-3">
-        {option.map((item) => {
-          // const isSelected = selectedCategories === item.value;
-          return (
-            <Filter
-              key={`${item.label}-${item.value ?? "all"}`}
-              ariaLabel={item.label}
-              onSelected={filters.activity === item.value}
-              onClick={() =>
-                setFilters((prev) => ({
-                  ...prev,
-                  activity: item.value,
-                }))
-              }
-            >
-              {item.label}
-            </Filter>
-          );
-        })}
+        {option.map((item) => (
+          <Filter
+            key={`${item.label}-${item.value ?? "all"}`}
+            ariaLabel={item.label}
+            onSelected={filters.activity === item.value}
+            onClick={() =>
+              setFilters((prev) => ({
+                ...prev,
+                activity: item.value,
+              }))
+            }
+          >
+            {item.label}
+          </Filter>
+        ))}
       </div>
 
       <Button className="mt-12 w-full" onClick={handleApply}>
