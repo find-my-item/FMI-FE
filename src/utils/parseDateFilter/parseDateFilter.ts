@@ -1,3 +1,17 @@
+/**
+ * @author suhyeon
+ *
+ * YmdDate 객체를 UI 표시용 문자열(YYYY.MM.DD)로 변환하는 유틸 함수입니다.
+ *
+ * @param date - 연, 월, 일로 구성된 날짜 객체
+ *
+ * @returns YYYY.MM.DD 형식의 문자열
+ *
+ * @example
+ * formatYmdLabel({ year: 2026, month: 3, day: 5 })
+ * // "2026.03.05"
+ */
+
 type YmdDate = {
   year: number;
   month: number;
@@ -6,6 +20,36 @@ type YmdDate = {
 
 export const formatYmdLabel = (date: YmdDate) =>
   `${date.year}.${String(date.month).padStart(2, "0")}.${String(date.day).padStart(2, "0")}`;
+
+/**
+ * YYYY-MM-DD 형태의 문자열을 YmdDate 객체로 파싱하는 유틸함수입니다.
+ *
+ * URL query parameter로 전달되는 날짜 문자열을 검증하고
+ * `{ year, month, day }` 형태의 객체로 변환합니다.
+ *
+ * 허용 형식
+ * - YYYY-MM-DD
+ * - YYYY-M-D
+ *
+ * 검증 항목
+ * - 문자열 형식 검사 (정규식)
+ * - month: 1~12 범위
+ * - day: 1~31 범위
+ *
+ * 형식이 올바르지 않거나 범위를 벗어나는 경우 `null`을 반환한다.
+ *
+ * @param originQueryDate - URL query에서 전달된 날짜 문자열
+ *
+ * @returns 파싱된 YmdDate 객체 또는 null
+ *
+ * @example
+ * parseYmd("2026-03-05")
+ * // { year: 2026, month: 3, day: 5 }
+ *
+ * @example
+ * parseYmd("invalid")
+ * // null
+ */
 
 export const parseYmd = (originQueryDate: string | null) => {
   if (!originQueryDate) return null;

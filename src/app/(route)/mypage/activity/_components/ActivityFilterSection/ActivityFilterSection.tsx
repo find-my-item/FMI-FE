@@ -15,9 +15,13 @@ import { formatYmdLabel, parseYmd } from "@/utils/parseDateFilter/parseDateFilte
 import { normalizeEnumValue } from "@/utils";
 import { normalizedFilterValues } from "@/components/domain/FilterSectionBottomSheet/utils/deriveFilterParams";
 import { useFilterParams } from "@/hooks/domain";
-import { ACTIVITY_LABEL_MAP } from "../../_constants/ACTIVITY_LABEL";
+import { ACTIVITY_DEFAULT_LABEL, ACTIVITY_LABEL_MAP } from "../../_constants/ACTIVITY_LABEL";
 
 const ActivityFilterSection = () => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const [isBottomSheet, setIsBottomSheet] = useState<{
     isOpen: boolean;
     mode: "Date" | "Activity";
@@ -25,10 +29,6 @@ const ActivityFilterSection = () => {
     isOpen: false,
     mode: "Date",
   });
-
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   const { date, activity } = useFilterParams();
 
@@ -84,7 +84,7 @@ const ActivityFilterSection = () => {
         onSelected={!!activity}
         onClick={() => setIsBottomSheet({ isOpen: true, mode: "Activity" })}
       >
-        {(normalizedActivity && ACTIVITY_LABEL_MAP[normalizedActivity]) ?? "유형"}
+        {(normalizedActivity && ACTIVITY_LABEL_MAP[normalizedActivity]) ?? ACTIVITY_DEFAULT_LABEL}
       </Filter>
 
       {isBottomSheet.isOpen && isBottomSheet.mode === "Date" && (

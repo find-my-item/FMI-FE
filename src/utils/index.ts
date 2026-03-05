@@ -16,3 +16,4 @@ export { textareaAutoResize } from "./textareaAutoResize/textareaAutoResize";
 export { fileInputHandler } from "./fileInputHandler/fileInputHandler";
 export { textareaSubmitKeyHandler } from "./textareaSubmitKeyHandler/textareaSubmitKeyHandler";
 export { highlightText } from "./highlightText/highlightText";
+export * from "./parseDateFilter/parseDateFilter";
