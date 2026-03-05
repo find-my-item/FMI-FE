@@ -4,8 +4,6 @@ import { Icon, ToggleButton } from "@/components/common";
 import { NotificationType } from "../../_types/NotificationType";
 import { useState } from "react";
 import { NOTIFICATION_ITEM } from "../../_constants/NOTIFICATION_ITEM";
-import { CATEGORY_OPTIONS } from "@/constants";
-import { SelectBottomSheet } from "../../../_internal";
 
 interface NotificationSettingItem {
   settingName: NotificationType;
