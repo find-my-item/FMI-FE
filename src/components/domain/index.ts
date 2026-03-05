@@ -19,3 +19,5 @@ export { default as DateRangeBottomSheet } from "./DateRangeBottomSheet/DateRang
 export { default as ReadOnlyCommentItem } from "./ReadOnlyCommentItem/ReadOnlyCommentItem";
 export { default as ReportModal } from "./ReportModal/ReportModal";
 export { default as PostReportBlockActions } from "./PostReportBlockActions/PostReportBlockActions";
+export { default as WriteImageSection } from "./WriteImageSection/WriteImageSection";
+export { default as WriteActionSection } from "./WriteActionSection/WriteActionSection";

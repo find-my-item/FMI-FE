@@ -1,19 +1,27 @@
-import { RefObject, Suspense } from "react";
+import { RefObject, Suspense, useEffect, useState } from "react";
 import { PostItem } from "@/api/fetch/post";
 import { PostListItem } from "@/components/domain";
 import { EmptyState, LoadingState } from "@/components/state";
 
 interface DefaultListProps {
-  listData: PostItem[];
+  listData?: PostItem[];
   listRef?: React.Ref<HTMLDivElement>;
   hasNextPage: boolean;
 }
 
 const DefaultList = ({ listData, listRef, hasNextPage }: DefaultListProps) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted || listData === undefined) return <LoadingState />;
+
   return (
     <Suspense fallback={<LoadingState />}>
       <section aria-label="게시글 목록" className="w-full">
-        {listData?.length === 0 ? (
+        {listData.length === 0 ? (
           <EmptyState
             icon={{
               iconName: "EmptyPostList",

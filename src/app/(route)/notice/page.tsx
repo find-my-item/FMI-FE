@@ -1,39 +1,27 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { NoticeCustomerState } from "./_types/noticeContainer";
-import NoticeView from "./_components/NoticeView/NoticeView";
 import { DetailHeader } from "@/components/layout";
-import { Tab } from "@/components/domain";
-import { tabs } from "./_constant/noticeTab";
+import { NoticeView } from "./_components";
+import { FloatingButton } from "@/components/common";
 import { useRouter } from "next/navigation";
-import { useSearchParams } from "next/navigation";
 
 const Notice = () => {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const tab = searchParams.get("tab") as NoticeCustomerState;
-  const [noticeCustomerState, setNoticeCustomerState] = useState<NoticeCustomerState>(
-    tab ?? "notice"
-  );
-
-  useEffect(() => {
-    if (tab && tab !== noticeCustomerState) {
-      setNoticeCustomerState(tab);
-    }
-  }, [tab]);
-
-  const onChangeTab = (tab: NoticeCustomerState) => {
-    setNoticeCustomerState(tab);
-    router.push(`/notice?tab=${tab}`);
-  };
 
   return (
-    <div className="w-full">
-      <DetailHeader title={noticeCustomerState === "notice" ? "공지사항" : "고객센터"} />
-      <Tab onValueChange={onChangeTab} tabs={tabs} selected={noticeCustomerState} />
-      <NoticeView noticeCustomerState={noticeCustomerState} />
-    </div>
+    <>
+      <DetailHeader title="공지사항" />
+      <h1 className="sr-only">공지사항 목록</h1>
+      <NoticeView />
+
+      <div className="fixed bottom-6 right-6">
+        <FloatingButton
+          ariaLabel="공지사항 작성 페이지 이동"
+          mode="notice"
+          onClick={() => router.push("/admin/notice/write")}
+        />
+      </div>
+    </>
   );
 };
 
