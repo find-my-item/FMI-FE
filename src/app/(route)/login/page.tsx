@@ -5,6 +5,7 @@ import { cn } from "@/utils";
 import { Button, Icon } from "@/components/common";
 import useSessionNotification from "./_hooks/useSessionNotification";
 import { LogoLink } from "./_components";
+import { ErrorBoundary } from "@/app/ErrorBoundary";
 
 const ButtonStyle = "w-full h-11 flex-center gap-1 rounded-[10px] text-body1-semibold ";
 
@@ -16,59 +17,61 @@ const page = () => {
   const { reason } = useSessionNotification();
 
   return (
-    <div className="min-h-screen w-full gap-8 flex-col-center">
-      <LogoLink />
+    <ErrorBoundary toastMessage="로그인 중 오류가 발생했어요.">
+      <div className="min-h-screen w-full gap-8 flex-col-center">
+        <LogoLink />
 
-      {/* button */}
-      <div className="flex w-full flex-col gap-3 px-5">
-        <Button
-          type="submit"
-          ignoreBase
-          ariaLabel="카카오 로그인 버튼"
-          onClick={() => (window.location.href = kakaoURL)}
-          className={cn(
-            ButtonStyle,
-            "text-flatGray-900 bg-fill-accent-kakao hover:bg-fill-accent-kakao"
-          )}
-        >
-          <Icon name="KakaoLogin" size={14} />
-          카카오로 3초 만에 시작하기
-        </Button>
-        <Button
-          as={Link}
-          href={
-            reason === "session-expired" ? "/login/email?reason=session-expired" : "/login/email"
-          }
-          ignoreBase
-          className={cn(ButtonStyle, "text-white bg-fill-brand-normal-default")}
-          aria-label="로그인 버튼"
-        >
-          <Icon name="Mail" size={20} className="text-white" /> 이메일로 로그인
-        </Button>
-      </div>
+        {/* button */}
+        <div className="flex w-full flex-col gap-3 px-5">
+          <Button
+            type="submit"
+            ignoreBase
+            ariaLabel="카카오 로그인 버튼"
+            onClick={() => (window.location.href = kakaoURL)}
+            className={cn(
+              ButtonStyle,
+              "text-flatGray-900 bg-fill-accent-kakao hover:bg-fill-accent-kakao"
+            )}
+          >
+            <Icon name="KakaoLogin" size={14} />
+            카카오로 3초 만에 시작하기
+          </Button>
+          <Button
+            as={Link}
+            href={
+              reason === "session-expired" ? "/login/email?reason=session-expired" : "/login/email"
+            }
+            ignoreBase
+            className={cn(ButtonStyle, "text-white bg-fill-brand-normal-default")}
+            aria-label="로그인 버튼"
+          >
+            <Icon name="Mail" size={20} className="text-white" /> 이메일로 로그인
+          </Button>
+        </div>
 
-      {/* divider 구분선 */}
-      <div className="flex h-[18px] w-full items-center px-5">
-        <hr className="h-px flex-1 bg-flatGray-50" aria-hidden={true} />
-        <span className="px-3 text-caption1-medium text-layout-body-default">또는</span>
-        <hr className="h-px flex-1 bg-flatGray-50" aria-hidden={true} />
-      </div>
+        {/* divider 구분선 */}
+        <div className="flex h-[18px] w-full items-center px-5">
+          <hr className="h-px flex-1 bg-flatGray-50" aria-hidden={true} />
+          <span className="px-3 text-caption1-medium text-layout-body-default">또는</span>
+          <hr className="h-px flex-1 bg-flatGray-50" aria-hidden={true} />
+        </div>
 
-      {/* 회원확인 여부 */}
-      <div className="h-11">
-        <span className="text-caption1-medium text-neutral-normal-placeholder">
-          아직 회원이 아니신가요?
-        </span>
-        <Link
-          href="/sign-up"
-          className={cn(
-            "Inversed-strong-default p-3 text-caption1-semibold text-brand-normal-default"
-          )}
-        >
-          회원가입
-        </Link>
+        {/* 회원확인 여부 */}
+        <div className="h-11">
+          <span className="text-caption1-medium text-neutral-normal-placeholder">
+            아직 회원이 아니신가요?
+          </span>
+          <Link
+            href="/sign-up"
+            className={cn(
+              "Inversed-strong-default p-3 text-caption1-semibold text-brand-normal-default"
+            )}
+          >
+            회원가입
+          </Link>
+        </div>
       </div>
-    </div>
+    </ErrorBoundary>
   );
 };
 
