@@ -74,7 +74,7 @@ const DeleteAccountReason = () => {
         </div>
       </div>
 
-      <FooterButton label="다음" onClick={handleNext} type="button" />
+      <FooterButton onClick={handleNext}>다음</FooterButton>
     </>
   );
 };

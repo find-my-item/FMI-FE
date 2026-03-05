@@ -5,6 +5,7 @@ import { DetailHeader } from "@/components/layout";
 import { useFormContext, useWatch } from "react-hook-form";
 import { TERMS_CONFIG } from "../../_constants/TERMS_CONFIG";
 import { useEffect } from "react";
+import { FooterButton } from "@/components/domain";
 
 interface AllAgreeProps {
   onOpenDetail: (termKey: string) => void;
@@ -48,7 +49,7 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
   return (
     <>
       <DetailHeader title="회원가입" />
-      <div className="flex w-full flex-col gap-7 p-4">
+      <div className="flex w-full flex-col gap-7 p-4 h-base">
         <p className="text-h3-semibold text-black">
           서비스 이용을 위해 <br />
           약관 동의가 필요합니다.
@@ -91,19 +92,10 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
           </div>
         </div>
       </div>
-      {/* signUpFooter */}
-      <div className="sticky bottom-0 mt-auto h-[88px] w-full max-w-[768px] border-t border-divider-default bg-white px-4 py-3">
-        <Button
-          type="button"
-          ariaLabel="가입 완료"
-          onClick={onComplete}
-          variant="auth"
-          size="big"
-          disabled={!isValid}
-        >
-          가입 완료
-        </Button>
-      </div>
+
+      <FooterButton onClick={onComplete} disabled={!isValid}>
+        가입 완료
+      </FooterButton>
     </>
   );
 };
