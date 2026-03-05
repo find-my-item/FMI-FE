@@ -1,8 +1,12 @@
 import { DetailHeader } from "@/components/layout";
 import { GuestInquiriesDetailView } from "./_components";
 
-const page = ({ params }: { params: { id: string } }) => {
-  const { id } = params;
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
+
+const page = async ({ params }: PageProps) => {
+  const { id } = await params;
 
   return (
     <>
