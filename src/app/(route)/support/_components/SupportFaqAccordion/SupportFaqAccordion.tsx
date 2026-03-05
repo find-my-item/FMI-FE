@@ -2,7 +2,14 @@
 
 import { Chip, Icon } from "@/components/common";
 import { cn } from "@/utils";
-import { MOCK_FAQ_ITEMS, FaqItem, useSupportFaqAccordion, getFaqAnchorId } from "./_internal";
+import {
+  MOCK_FAQ_ITEMS,
+  FaqItem,
+  useSupportFaqAccordion,
+  getFaqAnchorId,
+  filterFaqItemsByTab,
+} from "./_internal";
+import { useSupportTabQuery } from "../SupportTab/_internal/useSupportTabQuery";
 import { MouseEvent } from "react";
 
 interface SupportFaqAccordionItemProps {
@@ -26,30 +33,29 @@ const SupportFaqAccordionItem = ({ item, isExpanded, onToggle }: SupportFaqAccor
 
   return (
     <li id={id} className="flex scroll-mt-14 flex-col">
-      <div className="flex items-center gap-1 py-2">
-        <button
-          type="button"
-          aria-expanded={isExpanded}
-          aria-label="FAQ 질문 접기/펼치기"
-          className="flex items-center gap-[5px] px-2"
-          onClick={onToggle}
-        >
+      <a
+        href={`#${id}`}
+        aria-label="FAQ 질문 접기/펼치기"
+        aria-expanded={isExpanded}
+        onClick={onAnchorClick}
+        className="flex items-center gap-1 py-2"
+      >
+        <div className="flex items-center gap-[5px] px-2">
           <div className={cn("transition-all", isExpanded && "rotate-90")}>
             <Icon name="AccordionToggle" size={12} className={iconColor} />
           </div>
           <Icon name="AccordionQMark" size={12} className={iconColor} />
-        </button>
-        <a href={`#${id}`} onClick={onAnchorClick}>
-          <p
-            className={cn(
-              "flex-1 text-h3-medium text-layout-body-default",
-              isExpanded && "text-layout-header-default"
-            )}
-          >
-            {item.question}
-          </p>
-        </a>
-      </div>
+        </div>
+        <p
+          className={cn(
+            "flex-1 text-h3-medium text-layout-body-default",
+            isExpanded && "text-layout-header-default"
+          )}
+        >
+          {item.question}
+        </p>
+      </a>
+
       {isExpanded && (
         <div className="flex flex-col gap-3 rounded-2xl p-4 bg-fill-neutral-subtle-default">
           <div className="inline-block">
@@ -63,16 +69,18 @@ const SupportFaqAccordionItem = ({ item, isExpanded, onToggle }: SupportFaqAccor
 };
 
 const SupportFaqAccordion = () => {
-  const { expandedIndex, handleToggle } = useSupportFaqAccordion();
+  const { tab } = useSupportTabQuery();
+  const { expandedId, handleToggle } = useSupportFaqAccordion();
+  const filteredItems = filterFaqItemsByTab(MOCK_FAQ_ITEMS, tab);
 
   return (
     <ul className="flex flex-col gap-4 px-[20.5px]">
-      {MOCK_FAQ_ITEMS.map((item, index) => (
+      {filteredItems.map((item) => (
         <SupportFaqAccordionItem
           key={item.id}
           item={item}
-          isExpanded={expandedIndex === index}
-          onToggle={() => handleToggle(index)}
+          isExpanded={expandedId === item.id}
+          onToggle={() => handleToggle(item.id)}
         />
       ))}
     </ul>

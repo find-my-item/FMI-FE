@@ -1,32 +1,31 @@
 import { useEffect, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { MOCK_FAQ_ITEMS } from "./MOCK_FAQ_ITEMS";
-import { getExpandedIndexFromHash, getFaqAnchorId } from "./supportFaqAccordionUtils";
+import { getExpandedIdFromHash, getFaqAnchorId } from "./supportFaqAccordionUtils";
 
 const useSupportFaqAccordion = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const [expandedId, setExpandedId] = useState<number | null>(null);
 
   useEffect(() => {
-    setExpandedIndex(getExpandedIndexFromHash());
-    const syncHash = () => setExpandedIndex(getExpandedIndexFromHash());
+    setExpandedId(getExpandedIdFromHash());
+    const syncHash = () => setExpandedId(getExpandedIdFromHash());
     window.addEventListener("hashchange", syncHash);
     return () => window.removeEventListener("hashchange", syncHash);
   }, []);
 
-  const handleToggle = (index: number) => {
-    const next = expandedIndex === index ? null : index;
-    setExpandedIndex(next);
+  const handleToggle = (itemId: number) => {
+    const next = expandedId === itemId ? null : itemId;
+    setExpandedId(next);
     const qs = searchParams.toString();
     const base = qs ? `${pathname}?${qs}` : pathname;
-    router.replace(next !== null ? `${base}#${getFaqAnchorId(MOCK_FAQ_ITEMS[index].id)}` : base, {
+    router.replace(next !== null ? `${base}#${getFaqAnchorId(itemId)}` : base, {
       scroll: false,
     });
   };
 
-  return { expandedIndex, handleToggle };
+  return { expandedId, handleToggle };
 };
 
 export default useSupportFaqAccordion;
