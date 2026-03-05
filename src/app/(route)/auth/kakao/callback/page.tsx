@@ -50,9 +50,8 @@ const KakaoCallbackPage = () => {
   return (
     <div className="flex min-h-screen w-full flex-col-center">
       <div className="flex flex-col items-center gap-4">
-        <Icon name="Loading" className="animate-spin" size={30} />
-        <p className="text-body1-bold text-gray-700">카카오 로그인 중입니다...</p>
-        <p className="text-caption1-medium text-gray-500">잠시만 기다려주세요.</p>
+        <Icon name="Loading" className="animate-spin" size={40} />
+        <p className="text-body1-regular text-gray-700">로그인 요청 중...</p>
       </div>
     </div>
   );
