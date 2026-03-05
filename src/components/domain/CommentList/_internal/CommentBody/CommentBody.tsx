@@ -11,7 +11,7 @@ const CommentBody = ({ isNestedReply, bodyData }: CommentBodyProps) => {
 
   // 댓글 내용
   return (
-    <p className="text-body1-regular text-layout-header-default">
+    <p className="whitespace-pre-wrap break-all text-body1-regular text-layout-header-default">
       {isNestedReply && (
         <span className="inline-block pr-[6px] text-brand-normal-default">@{replyNickname}</span>
       )}
