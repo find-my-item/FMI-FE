@@ -1,15 +1,21 @@
-import { ChangeEvent, useEffect, useId, useMemo, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useId, useMemo, useRef, useState } from "react";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 import { Button, Icon } from "@/components/common";
 import { cn } from "@/utils";
+import { usePostPostsComments } from "@/api/fetch/comment";
 
 interface ReplyFormProps {
   isThreadItem: boolean;
   className?: string;
   disabled?: boolean;
+  parentId: number;
 }
 
-const ReplyForm = ({ isThreadItem, className, disabled }: ReplyFormProps) => {
+const ReplyForm = ({ isThreadItem, className, disabled, parentId }: ReplyFormProps) => {
+  const { id } = useParams<{ id: string }>();
+  const postId = Number(id);
+  const { mutate, isPending } = usePostPostsComments(postId, parentId);
   const inputId = useId();
 
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -56,9 +62,33 @@ const ReplyForm = ({ isThreadItem, className, disabled }: ReplyFormProps) => {
     }
   };
 
+  // 분리 필요
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (isPending || !content.trim()) return;
+
+    const formData = new FormData();
+    const request = { postId, content, parentId };
+
+    formData.append("request", new Blob([JSON.stringify(request)], { type: "application/json" }));
+    if (image) {
+      formData.append("images", image);
+    }
+
+    mutate(formData, {
+      onSuccess: () => {
+        setContent("");
+        setImage(null);
+        if (textareaRef.current) {
+          textareaRef.current.style.height = "auto";
+        }
+      },
+    });
+  };
+
   return (
     <form
-      action=""
+      onSubmit={handleSubmit}
       className={cn(
         "mt-2 w-full rounded-[10px] px-4 py-[10px]",
         isThreadItem ? "bg-white" : "bg-fill-neutral-strong-default",
@@ -131,7 +161,7 @@ const ReplyForm = ({ isThreadItem, className, disabled }: ReplyFormProps) => {
             aria-label="댓글 등록"
             className="min-h-11 !min-w-[52px] rounded-full px-3"
             type="submit"
-            disabled={disabled || !content.trim()}
+            disabled={disabled || isPending || !content.trim()}
           >
             등록
           </Button>

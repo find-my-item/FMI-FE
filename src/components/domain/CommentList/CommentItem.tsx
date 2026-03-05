@@ -27,6 +27,7 @@ const CommentItem = ({ level = "comment", className, data }: CommentCardProps) =
     commentId: data.id,
     enabled: viewReply,
   });
+  console.log(ReplyCommentData);
 
   const authorId = data.authorResponse ? String(data.authorResponse.id) : "";
   const authorName = data.authorResponse ? data.authorResponse.nickName : "";
@@ -66,7 +67,11 @@ const CommentItem = ({ level = "comment", className, data }: CommentCardProps) =
       </div>
 
       {isReplyFormOpen && (
-        <ReplyForm isThreadItem={isThreadItem} className={isNestedReply ? "pb-[7px]" : undefined} />
+        <ReplyForm
+          isThreadItem={isThreadItem}
+          className={isNestedReply ? "pb-[7px]" : undefined}
+          parentId={data.id}
+        />
       )}
 
       {viewReply && data.childrenCommentList && data.childrenCommentList.length > 0 && (
