@@ -4,18 +4,24 @@ import { GetDeletedUsersResponse, WithdrawUserItem } from "../types/WithdrawalTy
 
 interface UseGetDeletedUsersParams {
   reason?: string;
+  keyword?: string;
   size?: number;
 }
 
-export const useGetDeletedUsers = ({ reason, size = 10 }: UseGetDeletedUsersParams = {}) => {
+export const useGetDeletedUsers = ({
+  reason,
+  keyword,
+  size = 10,
+}: UseGetDeletedUsersParams = {}) => {
   const params = new URLSearchParams();
   params.set("size", String(size));
 
   if (reason) params.set("reason", reason);
+  if (keyword) params.set("keyword", keyword);
 
   return useAppInfiniteQuery<GetDeletedUsersResponse, unknown, WithdrawUserItem[]>(
     "auth",
-    ["deletedUsers", reason, size],
+    ["deletedUsers", reason, keyword, size],
     `/admin/users/deleted?${params.toString()}`,
     {
       placeholderData: keepPreviousData,
