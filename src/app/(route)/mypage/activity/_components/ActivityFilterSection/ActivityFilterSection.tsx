@@ -2,7 +2,7 @@
 
 import { Filter } from "@/components/common";
 import { useEffect, useState } from "react";
-import { BottomSheetModeType, SelectBottomSheet } from "../../../_internal";
+import { SelectBottomSheet } from "../../../_internal";
 import { DateRangeBottomSheet } from "@/components/domain";
 import { ACTIVITY_OPTIONS } from "../../_constants/ACTIVITY_OPTIONS";
 import {
@@ -16,10 +16,7 @@ import {
   parseYmd,
 } from "@/components/domain/FilterSectionBottomSheet/utils/parseDateFilter";
 import { normalizeEnumValue } from "@/utils";
-import {
-  filterSelectionState,
-  normalizedFilterValues,
-} from "@/components/domain/FilterSectionBottomSheet/utils/deriveFilterParams";
+import { normalizedFilterValues } from "@/components/domain/FilterSectionBottomSheet/utils/deriveFilterParams";
 import { useFilterParams } from "@/hooks/domain";
 import { ACTIVITY_LABEL_MAP } from "../../_constants/ACTIVITY_LABEL";
 
@@ -37,8 +34,6 @@ const ActivityFilterSection = () => {
   const searchParams = useSearchParams();
 
   const { date, activity } = useFilterParams();
-
-  const selectionState = filterSelectionState({ date, activity });
 
   const [filters, setFilters] = useState<ActivityFilterState>({
     ...ACTIVITY_DEFAULT_FILTERS,

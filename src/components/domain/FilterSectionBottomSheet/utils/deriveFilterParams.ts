@@ -54,7 +54,6 @@ export const filterSelectionState = ({
   status,
   findStatus,
   date,
-  activity,
 }: Params) => {
   const isRegionSelected = Boolean(region);
   const isCategorySelected = Boolean(category);
@@ -62,7 +61,6 @@ export const filterSelectionState = ({
   const isStatusSelected = Boolean(status);
   const isFindStatusSelected = Boolean(findStatus);
   const isDateSelected = Boolean(date);
-  const isActivitySelected = Boolean(activity);
 
   return {
     isRegionSelected,
@@ -71,6 +69,5 @@ export const filterSelectionState = ({
     isStatusSelected,
     isFindStatusSelected,
     isDateSelected,
-    isActivitySelected,
   };
 };
