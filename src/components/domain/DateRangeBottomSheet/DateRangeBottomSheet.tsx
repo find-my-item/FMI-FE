@@ -12,7 +12,7 @@ import { applyFiltersToUrl } from "../FilterSectionBottomSheet/utils/applyFilter
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FiltersStateType } from "../FilterSectionBottomSheet/_types/filtersStateType";
 import { useFilterParams } from "@/hooks/domain";
-import { parseYmd } from "../FilterSectionBottomSheet/utils/parseDateFilter";
+import { parseYmd } from "../../../utils/parseDateFilter/parseDateFilter";
 import { ActivityFilterState } from "@/app/(route)/mypage/activity/_types/ActivityFilterType";
 
 const DateWheel = ({

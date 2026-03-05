@@ -11,10 +11,7 @@ import {
   ActivityFilterValue,
 } from "../../_types/ActivityFilterType";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import {
-  formatYmdLabel,
-  parseYmd,
-} from "@/components/domain/FilterSectionBottomSheet/utils/parseDateFilter";
+import { formatYmdLabel, parseYmd } from "@/utils/parseDateFilter/parseDateFilter";
 import { normalizeEnumValue } from "@/utils";
 import { normalizedFilterValues } from "@/components/domain/FilterSectionBottomSheet/utils/deriveFilterParams";
 import { useFilterParams } from "@/hooks/domain";
@@ -64,7 +61,6 @@ const ActivityFilterSection = () => {
 
   const { normalizedActivity } = normalizedFilterValues({ activity });
 
-  console.log("필터 확인 콘솔 >>> ", activity);
   return (
     <section className="flex w-full gap-2 px-5 py-[14px]">
       <h2 className="sr-only">필터링 영역</h2>

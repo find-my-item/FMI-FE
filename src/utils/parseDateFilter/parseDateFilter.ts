@@ -1,4 +1,8 @@
-import { YmdDate } from "../../DateRangeBottomSheet/_types/YmdDate";
+type YmdDate = {
+  year: number;
+  month: number;
+  day: number;
+};
 
 export const formatYmdLabel = (date: YmdDate) =>
   `${date.year}.${String(date.month).padStart(2, "0")}.${String(date.day).padStart(2, "0")}`;
