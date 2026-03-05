@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useApiKakaoLogin } from "@/api/fetch/auth";
 import { Icon } from "@/components/common";
@@ -17,6 +17,8 @@ const KakaoCallbackPage = () => {
 
   const { addToast } = useToast();
 
+  const appEnv = process.env.NEXT_PUBLIC_APP_ENV === "production" ? "prod" : "dev";
+
   useEffect(() => {
     if (!code) return;
     if (isRequesting.current) return;
@@ -26,7 +28,7 @@ const KakaoCallbackPage = () => {
     KakaoLoginMutate(
       {
         code: code,
-        environment: "dev",
+        environment: appEnv,
       },
       {
         onSuccess: () => {
