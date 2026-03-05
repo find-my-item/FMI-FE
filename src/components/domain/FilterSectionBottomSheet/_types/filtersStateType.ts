@@ -6,7 +6,6 @@
  */
 
 import {
-  // ActivityFilterValue,
   CategoryFilterValue,
   FindStatusFilterValue,
   SortFilterValue,
@@ -20,5 +19,4 @@ export type FiltersStateType = {
   status: StatusFilterValue;
   findStatus: FindStatusFilterValue;
   date: string;
-  // activity: ActivityFilterValue;
 };
