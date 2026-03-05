@@ -7,6 +7,7 @@ import { useFormContext, useWatch } from "react-hook-form";
 import { useSignUpBtnClick } from "../../_hooks/useSignUpBtnClick";
 import { useEffect } from "react";
 import SignUpItem from "../SignUpItem/SignUpItem";
+import { FooterButton } from "@/components/domain";
 
 const SignUpField = ({ onNext }: { onNext: () => void }) => {
   const {
@@ -47,7 +48,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
   return (
     <>
       <DetailHeader title="회원가입" />
-      <div className="flex w-full flex-col gap-5 px-4 py-5">
+      <div className="flex w-full flex-1 flex-col gap-5 px-4 py-5 h-base">
         {SIGNUP_INPUT_CONFIG.map((item) => (
           <SignUpItem
             key={item.inputOption.name}
@@ -64,18 +65,10 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
           />
         ))}
       </div>
-      <div className="sticky bottom-0 mt-auto h-[88px] w-full max-w-[768px] border-t border-divider-default bg-white px-4 py-3">
-        <Button
-          type="button"
-          variant="auth"
-          size="big"
-          ariaLabel="다음 버튼"
-          onClick={onNext}
-          disabled={!isNextEnabled}
-        >
-          다음
-        </Button>
-      </div>
+
+      <FooterButton aria-label="다음 버튼" onClick={onNext} disabled={!isNextEnabled}>
+        다음
+      </FooterButton>
     </>
   );
 };
