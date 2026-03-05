@@ -1,13 +1,15 @@
 import { DetailHeader } from "@/components/layout";
 import { GuestInquiriesDetailView } from "./_components";
 
-const page = () => {
+const page = ({ params }: { params: { id: string } }) => {
+  const { id } = params;
+
   return (
     <>
       <DetailHeader title="비회원 문의 내역" />
       <h1 className="sr-only">비회원 문의 상세 내역</h1>
 
-      <GuestInquiriesDetailView />
+      <GuestInquiriesDetailView id={Number(id)} />
     </>
   );
 };
