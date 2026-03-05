@@ -1,21 +1,19 @@
+import { AdminDetailGuestInquiry } from "@/api/fetch/admin";
 import { formatDate } from "@/utils";
 
 interface DetailContentProps {
-  title: string;
-  userName: string;
-  createdAt: string;
-  content: string;
+  data: AdminDetailGuestInquiry;
 }
 
-const DetailContent = ({ data }: { data: DetailContentProps }) => {
-  const { title, userName, createdAt, content } = data;
+const DetailContent = ({ data }: DetailContentProps) => {
+  const { title, userEmail, createdAt, content } = data;
 
   return (
     <div className="space-y-2">
       <div className="flex flex-col gap-1">
         <h2 className="text-h2-bold text-layout-header-default">{title}</h2>
         <div className="flex items-center text-body2-regular text-layout-body-default">
-          <span className="block after:mx-1 after:content-['·']">{userName}</span>
+          <span className="block after:mx-1 after:content-['·']">{userEmail}</span>
           <time dateTime={createdAt}>{formatDate(createdAt)}</time>
         </div>
       </div>

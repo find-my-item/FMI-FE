@@ -5,7 +5,6 @@ import { LoadingState } from "@/components/state";
 import { useToast } from "@/context/ToastContext";
 import { AdminDetailSection } from "@/app/(admin)/admin/_components";
 import { useGetDetailGuestInquiries } from "@/api/fetch/admin";
-import { MOCK_GUEST_INQUIRY_DETAIL_DATA } from "@/mock/data";
 
 interface GuestInquiriesDetailViewProps {
   id: number;
@@ -14,14 +13,18 @@ interface GuestInquiriesDetailViewProps {
 const GuestInquiriesDetailView = ({ id }: GuestInquiriesDetailViewProps) => {
   const { addToast } = useToast();
   const { data, isLoading, isError } = useGetDetailGuestInquiries({ inquiryId: id });
-  console.log(data);
 
   if (isLoading) return <LoadingState />;
-  if (isError) return null;
+  if (isError || !data?.result) return null;
 
   const copyEmail = () => {
+    if (!data.result.userEmail) {
+      addToast("이메일이 존재하지 않아요", "error");
+      return;
+    }
+
     try {
-      navigator.clipboard.writeText(MOCK_GUEST_INQUIRY_DETAIL_DATA.userName);
+      navigator.clipboard.writeText(data.result.userEmail);
       addToast("이메일을 클립보드에 복사했어요", "success");
     } catch {
       addToast("이메일 복사에 실패했어요", "error");
@@ -31,7 +34,7 @@ const GuestInquiriesDetailView = ({ id }: GuestInquiriesDetailViewProps) => {
   return (
     <div className="flex flex-col h-base">
       <article className="flex-1">
-        <AdminDetailSection data={MOCK_GUEST_INQUIRY_DETAIL_DATA} />
+        <AdminDetailSection data={data.result} />
       </article>
 
       <div className="sticky bottom-0 border-t border-divider-default bg-white px-5 pb-8 pt-3">
