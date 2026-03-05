@@ -43,7 +43,7 @@ describe("toInquiryItemVM", () => {
     const result = toInquiryItemVM(item);
 
     expect(result).toEqual({
-      href: "/admin/inquiries/inquiry/10",
+      href: "/admin/reports/inquiry/10",
       title: "로그인 문의",
       content: "",
       nickname: "유리",
