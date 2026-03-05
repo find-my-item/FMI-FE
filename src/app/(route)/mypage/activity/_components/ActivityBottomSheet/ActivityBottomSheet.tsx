@@ -5,10 +5,10 @@ import { PopupLayout } from "@/components/domain";
 import { applyFiltersToUrl } from "@/components/domain/FilterSectionBottomSheet/utils/applyFiltersToUrl";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
-import { ActivityFilterState } from "../../activity/_types/ActivityFilterType";
-import { ActivityType } from "../../activity/_types/ActivityType";
+import { ActivityFilterState } from "../../_types/ActivityFilterType";
+import { ActivityType } from "../../_types/ActivityType";
 
-interface SelectBottomSheetProps {
+interface ActivityBottomSheetProps {
   isOpen: boolean;
   onClose: () => void;
   title: string;
@@ -17,20 +17,19 @@ interface SelectBottomSheetProps {
   setFilters: Dispatch<SetStateAction<ActivityFilterState>>;
 }
 
-const SelectBottomSheet = ({
+const ActivityBottomSheet = ({
   isOpen,
   onClose,
   title,
   option,
   filters,
   setFilters,
-}: SelectBottomSheetProps) => {
+}: ActivityBottomSheetProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
 
   const handleApply = () => {
-    console.log("확인용 콘솔 >> ", filters);
     const qs = applyFiltersToUrl({
       filters,
       searchParams: new URLSearchParams(searchParams.toString()),
@@ -68,4 +67,4 @@ const SelectBottomSheet = ({
   );
 };
 
-export default SelectBottomSheet;
+export default ActivityBottomSheet;

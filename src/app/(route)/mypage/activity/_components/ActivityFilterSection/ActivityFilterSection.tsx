@@ -2,7 +2,6 @@
 
 import { Filter } from "@/components/common";
 import { useState } from "react";
-import { SelectBottomSheet } from "../../../_internal";
 import { DateRangeBottomSheet } from "@/components/domain";
 import { ACTIVITY_OPTIONS } from "../../_constants/ACTIVITY_OPTIONS";
 import { ActivityFilterState } from "../../_types/ActivityFilterType";
@@ -10,6 +9,7 @@ import { formatYmdLabel, parseYmd } from "@/utils/parseDateFilter/parseDateFilte
 import { normalizedFilterValues } from "@/components/domain/FilterSectionBottomSheet/utils/deriveFilterParams";
 import { ACTIVITY_DEFAULT_LABEL, ACTIVITY_LABEL_MAP } from "../../_constants/ACTIVITY_LABEL";
 import { useActivityFilter } from "../../_hooks/useActivityFilter";
+import ActivityBottomSheet from "../ActivityBottomSheet/ActivityBottomSheet";
 
 const ActivityFilterSection = () => {
   const { filters, setFilters, dateQuery, activityQuery } = useActivityFilter();
@@ -60,7 +60,7 @@ const ActivityFilterSection = () => {
       )}
 
       {isBottomSheet.isOpen && isBottomSheet.mode === "Activity" && (
-        <SelectBottomSheet
+        <ActivityBottomSheet
           isOpen={isBottomSheet.isOpen}
           onClose={() => setIsBottomSheet((prev) => ({ ...prev, isOpen: false }))}
           title="필터"

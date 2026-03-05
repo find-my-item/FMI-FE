@@ -18,6 +18,7 @@ import {
 } from "../_types/types";
 import { CategoryType, ItemStatus, PostType } from "@/types";
 import { ActivityType } from "@/app/(route)/mypage/activity/_types/ActivityType";
+import { filter } from "lodash";
 
 const CATEGORY_QUERY_VALUE_MAP: Record<CategoryType, string> = {
   ELECTRONICS: "electronics",

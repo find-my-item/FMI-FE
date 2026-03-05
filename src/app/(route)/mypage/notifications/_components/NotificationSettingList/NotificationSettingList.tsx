@@ -41,12 +41,13 @@ const NotificationSettingItem = ({ settingName }: NotificationSettingItem) => {
         </button>
       )}
 
-      <SelectBottomSheet
+      {/* TODO(수현): 바텀 시트 변경으로 인한 수정 필요 */}
+      {/* <SelectBottomSheet
         isOpen={isBottomSheetOpen}
         onClose={() => setIsBottomSheetOpen(false)}
         title="카테고리 키워드"
         option={CATEGORY_OPTIONS}
-      />
+      /> */}
     </>
   );
 };
