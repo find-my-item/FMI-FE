@@ -11,14 +11,18 @@ interface AdminReportsViewProps {
 const AdminReportsView = ({ id, type }: AdminReportsViewProps) => {
   const { data, isLoading, isError } = useGetDetailReports({ type, id });
 
-  if (isLoading) return <LoadingState />;
   if (isError) return null;
 
   return (
-    <div className="h-base">
-      <AdminDetailSection data={data?.result} />
-
-      <AdminReportsCommentSection />
+    <div className="flex flex-col h-base">
+      {isLoading ? (
+        <LoadingState />
+      ) : (
+        <>
+          <AdminDetailSection data={data?.result} />
+          <AdminReportsCommentSection />
+        </>
+      )}
     </div>
   );
 };

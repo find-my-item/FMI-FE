@@ -6,8 +6,7 @@ import { DetailHeader } from "@/components/layout";
 import { normalizeEnumValue } from "@/utils";
 import { AdminReportsView } from "./_components";
 import { PostInputComment } from "@/app/(route)/list/[id]/_components";
-
-const VALID_TYPES = ["report", "inquiry"] as const;
+import { VALID_TYPES } from "./_types/VALID_TYPES";
 
 const page = () => {
   const { reportsType, id } = useParams();
