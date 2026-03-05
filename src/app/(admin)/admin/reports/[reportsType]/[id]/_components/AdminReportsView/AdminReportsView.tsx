@@ -1,5 +1,5 @@
-import { MOCK_REPORTS_DETAIL_DATA } from "@/mock/data";
 import { DetailReportsType, useGetDetailReports } from "@/api/fetch/admin";
+import { LoadingState } from "@/components/state";
 import { AdminDetailSection } from "@/app/(admin)/admin/_components";
 import AdminReportsCommentSection from "../AdminReportsCommentSection/AdminReportsCommentSection";
 
@@ -9,11 +9,14 @@ interface AdminReportsViewProps {
 }
 
 const AdminReportsView = ({ id, type }: AdminReportsViewProps) => {
-  const { data } = useGetDetailReports({ type, id });
+  const { data, isLoading, isError } = useGetDetailReports({ type, id });
+
+  if (isLoading) return <LoadingState />;
+  if (isError) return null;
 
   return (
     <div className="h-base">
-      <AdminDetailSection data={MOCK_REPORTS_DETAIL_DATA} />
+      <AdminDetailSection data={data?.result} />
 
       <AdminReportsCommentSection />
     </div>
