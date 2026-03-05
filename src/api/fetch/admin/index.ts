@@ -7,3 +7,4 @@ export * from "./types/DetailReportsType";
 export { useGetDeletedUsers } from "./api/useGetDeletedUsers";
 export { useGetGuestInquiries } from "./api/useGetGuestInquiries";
 export { useGetDetailReports } from "./api/useGetDetailReports";
+export { useGetDetailGuestInquiries } from "./api/useGetDetailGuestInquiries";
