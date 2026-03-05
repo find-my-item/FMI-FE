@@ -42,7 +42,7 @@ const SupportFaqAccordionItem = ({ item, isExpanded, onToggle }: SupportFaqAccor
         <a href={`#${id}`} onClick={onAnchorClick}>
           <p
             className={cn(
-              "flex-1 text-left text-h3-medium text-layout-body-default",
+              "flex-1 text-h3-medium text-layout-body-default",
               isExpanded && "text-layout-header-default"
             )}
           >
