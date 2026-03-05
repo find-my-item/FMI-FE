@@ -1,1 +1,1 @@
-export type BottomSheetModeType = "Date" | "Filter";
+export type BottomSheetModeType = "Date" | "Activity";

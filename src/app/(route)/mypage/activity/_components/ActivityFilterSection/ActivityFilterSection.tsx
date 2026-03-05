@@ -1,39 +1,100 @@
 "use client";
 
 import { Filter } from "@/components/common";
-import { useState } from "react";
-import { ACTIVITY_FILTER } from "../../_constants/ACTIVITY_FILTER";
+import { useEffect, useState } from "react";
 import { BottomSheetModeType, SelectBottomSheet } from "../../../_internal";
 import { DateRangeBottomSheet } from "@/components/domain";
 import { ACTIVITY_OPTIONS } from "../../_constants/ACTIVITY_OPTIONS";
-import { ACTIVITY_DEFAULT_FILTERS, ActivityFilterState } from "../../_types/ActivityFilterType";
+import {
+  ACTIVITY_DEFAULT_FILTERS,
+  ActivityFilterState,
+  ActivityFilterValue,
+} from "../../_types/ActivityFilterType";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import {
+  formatYmdLabel,
+  parseYmd,
+} from "@/components/domain/FilterSectionBottomSheet/utils/parseDateFilter";
+import { normalizeEnumValue } from "@/utils";
+import {
+  filterSelectionState,
+  normalizedFilterValues,
+} from "@/components/domain/FilterSectionBottomSheet/utils/deriveFilterParams";
+import { useFilterParams } from "@/hooks/domain";
+import { ACTIVITY_LABEL_MAP } from "../../_constants/ACTIVITY_LABEL";
 
 const ActivityFilterSection = () => {
   const [isBottomSheet, setIsBottomSheet] = useState<{
     isOpen: boolean;
-    mode: BottomSheetModeType;
+    mode: "Date" | "Activity";
   }>({
     isOpen: false,
     mode: "Date",
   });
 
-  const [filters, setFilters] = useState<ActivityFilterState>(ACTIVITY_DEFAULT_FILTERS);
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
+  const { date, activity } = useFilterParams();
+
+  const selectionState = filterSelectionState({ date, activity });
+
+  const [filters, setFilters] = useState<ActivityFilterState>({
+    ...ACTIVITY_DEFAULT_FILTERS,
+    date: date ?? "",
+    activity: normalizeEnumValue<Exclude<ActivityFilterValue, undefined>>(activity),
+  });
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (filters.date) {
+      params.set("date", filters.date);
+    } else {
+      params.delete("date");
+    }
+
+    if (filters.activity && filters.activity !== undefined) {
+      params.set("activity", filters.activity);
+    } else {
+      params.delete("activity");
+    }
+
+    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+  }, [filters, pathname, router, searchParams]);
+
+  const dateObj = parseYmd(date);
+  const dateLabel = dateObj ? formatYmdLabel(dateObj) : "기간";
+
+  const { normalizedActivity } = normalizedFilterValues({ activity });
+
+  console.log("필터 확인 콘솔 >>> ", activity);
   return (
     <section className="flex w-full gap-2 px-5 py-[14px]">
       <h2 className="sr-only">필터링 영역</h2>
-      {ACTIVITY_FILTER.map((item) => (
-        <Filter
-          key={item.name}
-          ariaLabel={item.label}
-          icon={item.icon}
-          onSelected={false}
-          onClick={() => setIsBottomSheet({ isOpen: true, mode: item.name })}
-          iconPosition={item.iconPosition}
-        >
-          {item.label}
-        </Filter>
-      ))}
+
+      <Filter
+        name="date"
+        ariaLabel="기간"
+        icon={{ name: "Calendar", size: 16 }}
+        iconPosition="leading"
+        onSelected={!!date}
+        onClick={() => setIsBottomSheet({ isOpen: true, mode: "Date" })}
+      >
+        {date ? dateLabel : "기간"}
+      </Filter>
+
+      <Filter
+        name="activity"
+        ariaLabel="활동 유형"
+        icon={{ name: "ArrowDown", size: 16 }}
+        iconPosition="trailing"
+        onSelected={!!activity}
+        onClick={() => setIsBottomSheet({ isOpen: true, mode: "Activity" })}
+      >
+        {(normalizedActivity && ACTIVITY_LABEL_MAP[normalizedActivity]) ?? "유형"}
+      </Filter>
 
       {isBottomSheet.isOpen && isBottomSheet.mode === "Date" && (
         <DateRangeBottomSheet<ActivityFilterState>
@@ -44,7 +105,7 @@ const ActivityFilterSection = () => {
         />
       )}
 
-      {isBottomSheet.isOpen && isBottomSheet.mode === "Filter" && (
+      {isBottomSheet.isOpen && isBottomSheet.mode === "Activity" && (
         <SelectBottomSheet
           isOpen={isBottomSheet.isOpen}
           onClose={() => setIsBottomSheet((prev) => ({ ...prev, isOpen: false }))}
