@@ -14,6 +14,8 @@ import { cn } from "@/utils";
  *
  * @param onValueChange - 탭이 변경될 때 호출됩니다.
  *
+ * @param className - 탭의 추가 클래스입니다. (기본값: "")
+ *
  * @example
  * ```tsx
  * <Tab
@@ -27,11 +29,23 @@ interface TabProps<T extends string> {
   tabs: ReadonlyArray<{ key: T; label: string }>;
   selected: T;
   onValueChange: (key: T) => void;
+  className?: string;
 }
 
-const Tab = <T extends string>({ tabs, selected, onValueChange, ...buttonProps }: TabProps<T>) => {
+const Tab = <T extends string>({
+  tabs,
+  selected,
+  onValueChange,
+  className,
+  ...buttonProps
+}: TabProps<T>) => {
   return (
-    <div className="flex w-full border-b border-divider-default px-[20px]">
+    <div
+      className={cn(
+        "z-10 flex w-full border-b border-divider-default bg-white px-[20px]",
+        className
+      )}
+    >
       {tabs.map((tab) => (
         <button
           key={tab.key}
