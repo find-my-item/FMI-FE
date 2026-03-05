@@ -168,7 +168,11 @@ const InputText = ({
               aria-label={show ? "비밀번호 숨기기" : "비밀번호 보기"}
               onClick={() => setShow((prev) => !prev)}
             >
-              <Icon name={show ? "EyeOpen" : "EyeOff"} size={16} />
+              <Icon
+                name={show ? "EyeOpen" : "EyeOff"}
+                className="text-neutral-strong-enteredSelected"
+                size={16}
+              />
             </button>
           )}
         </div>

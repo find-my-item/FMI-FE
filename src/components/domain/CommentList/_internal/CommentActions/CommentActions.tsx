@@ -8,6 +8,7 @@ interface CommentActionsProps {
   setViewReply: Dispatch<SetStateAction<boolean>>;
   isReplyFormOpen: boolean;
   setIsReplyFormOpen: Dispatch<SetStateAction<boolean>>;
+  replyCount: number;
 }
 
 const CommentActions = ({
@@ -16,18 +17,23 @@ const CommentActions = ({
   setViewReply,
   isReplyFormOpen,
   setIsReplyFormOpen,
+  replyCount,
 }: CommentActionsProps) => {
   return (
     <div className="flex items-center gap-3 py-2">
       {!isThreadItem && (
-        <button className="flex items-center gap-1" onClick={() => setViewReply((prev) => !prev)}>
+        <button
+          className={cn("flex items-center gap-1", replyCount === 0 && "cursor-not-allowed")}
+          onClick={() => setViewReply((prev) => !prev)}
+          disabled={replyCount === 0}
+        >
           <span
             className={cn(
               "text-body1-medium",
               isThreadItem ? "text-brand-normal-enteredSelected" : "text-layout-header-default"
             )}
           >
-            답글 <span>0</span>개
+            답글 <span>{replyCount}</span>개
           </span>
           <Icon
             name="ArrowDownSmall"
