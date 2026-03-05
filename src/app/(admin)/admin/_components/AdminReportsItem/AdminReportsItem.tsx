@@ -13,13 +13,17 @@ const AdminReportsItem = ({ data }: AdminReportsItemProps) => {
     <li className="transition-colors after:block after:border-b after:border-divider-default after:content-[''] hover:bg-flatGray-25">
       <Link href={href} className="block space-y-2 px-5 py-[30px]">
         <div className="flex gap-2 text-caption1-semibold">
-          <span className={cn("rounded-full px-3 py-1", processStatus.className)}>
-            {processStatus.label}
-          </span>
+          {processStatus && (
+            <span className={cn("rounded-full px-3 py-1", processStatus.className)}>
+              {processStatus.label}
+            </span>
+          )}
 
-          <span className={cn("rounded-full px-3 py-1", answerStatus.className)}>
-            {answerStatus.label}
-          </span>
+          {answerStatus && (
+            <span className={cn("rounded-full px-3 py-1", answerStatus.className)}>
+              {answerStatus.label}
+            </span>
+          )}
         </div>
 
         <div className="flex flex-col gap-2">
