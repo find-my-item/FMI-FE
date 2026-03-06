@@ -1,40 +1,37 @@
-import {
-  ChangeEvent,
-  Dispatch,
-  FormEvent,
-  SetStateAction,
-  useEffect,
-  useId,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+"use client";
+
+import { ChangeEvent, FormEvent, useEffect, useId, useMemo, useRef, useState } from "react";
 import Image from "next/image";
-import { useParams } from "next/navigation";
 import { Button, Icon } from "@/components/common";
 import { cn } from "@/utils";
-import { usePostPostsComments } from "@/api/fetch/comment";
 
 interface ReplyFormProps {
   isThreadItem: boolean;
   className?: string;
   disabled?: boolean;
-  setIsReplyFormOpen: Dispatch<SetStateAction<boolean>>;
-  parentId: number;
+  onSubmit: (content: string, image: File | null) => void;
+  isPending?: boolean;
 }
 
-const ReplyForm = ({
-  isThreadItem,
-  className,
-  disabled,
-  parentId,
-  setIsReplyFormOpen,
-}: ReplyFormProps) => {
-  const { id } = useParams<{ id: string }>();
-  const postId = Number(id);
-  const { mutate, isPending } = usePostPostsComments(postId, parentId);
+/**
+ * @description
+ * 댓글의 답글(대댓글)을 작성하기 위한 공통 UI 컴포넌트입니다.
+ *
+ * - 텍스트 입력 및 자동 높이 조절
+ * - 이미지 첨부 및 미리보기/삭제
+ * - 글자 수 제한 표시 (500자)
+ *
+ * - `onSubmit` 핸들러에서 API 호출 로직 구현
+ * - `isPending` 상태를 넘겨주어 등록 중 버튼 비활성화 처리
+ *
+ * @param isThreadItem - 스레드(답글) 형태의 배경색 적용 여부
+ * @param className - 추가적인 스타일 클래스
+ * @param disabled - 전체 비활성화 여부
+ * @param onSubmit - 등록 버튼 클릭 시 실행될 콜백 (내용, 이미지 전달)
+ * @param isPending - 등록 중 상태 (버튼 비활성화)
+ */
+const ReplyForm = ({ isThreadItem, className, disabled, onSubmit, isPending }: ReplyFormProps) => {
   const inputId = useId();
-
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
   const [content, setContent] = useState("");
@@ -79,29 +76,13 @@ const ReplyForm = ({
     }
   };
 
-  // 분리 필요
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isPending || !content.trim()) return;
 
-    const formData = new FormData();
-    const request = { postId, content, parentId };
-
-    formData.append("request", new Blob([JSON.stringify(request)], { type: "application/json" }));
-    if (image) {
-      formData.append("images", image);
-    }
-
-    mutate(formData, {
-      onSuccess: () => {
-        setContent("");
-        setImage(null);
-        if (textareaRef.current) {
-          textareaRef.current.style.height = "auto";
-        }
-        setIsReplyFormOpen(false);
-      },
-    });
+    setContent("");
+    setImage(null);
+    onSubmit(content, image);
   };
 
   return (

@@ -4,18 +4,17 @@ import { keepPreviousData } from "@tanstack/react-query";
 
 interface UseGetPostsCommentsParams {
   postId: number;
-  cursor?: number;
-  size?: number;
+  page?: number;
 }
 
-export const useGetPostsComments = ({ postId, cursor, size = 5 }: UseGetPostsCommentsParams) => {
+export const useGetPostsComments = ({ postId, page = 0 }: UseGetPostsCommentsParams) => {
   const params = new URLSearchParams();
   params.set("postId", String(postId));
-  params.set("size", String(size));
+  params.set("page", String(page));
 
   return useAppQuery<GetPostsCommentsResponse>(
     "auth",
-    ["post-comments", postId, cursor, size],
+    ["post-comments", postId, page],
     `/comments/posts/${postId}?${params.toString()}`,
     {
       enabled: !!postId,

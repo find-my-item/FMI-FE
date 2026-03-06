@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Icon } from "@/components/common";
 import { cn } from "@/utils";
 import { CommentItemType } from "@/types";
-import { CommentBody, CommentMeta, CommentActions, ReplyForm, CommentFooter } from "./_internal";
+import { CommentBody, CommentMeta, CommentActions, CommentFooter, ReplyForm } from "./_internal";
 import { useGetRepliesPostsComments } from "@/api/fetch/comment";
 
 type CommentCardLevel = "comment" | "reply" | "nestedReply";
@@ -13,15 +13,31 @@ interface CommentCardProps {
   level?: CommentCardLevel;
   className?: string;
   data: CommentItemType;
+  postId: number;
+  onSubmit?: (content: string, image: File | null, parentId: number) => void;
+  isPending?: boolean;
 }
 
-const CommentItem = ({ level = "comment", className, data }: CommentCardProps) => {
+const CommentItem = ({
+  level = "comment",
+  className,
+  data,
+  postId,
+  onSubmit,
+  isPending,
+}: CommentCardProps) => {
   const isReply = level === "reply";
   const isNestedReply = level === "nestedReply";
   const isThreadItem = isReply || isNestedReply;
 
   const [viewReply, setViewReply] = useState(false);
   const [isReplyFormOpen, setIsReplyFormOpen] = useState(false);
+
+  const handleReplySubmit = (content: string, image: File | null) => {
+    onSubmit?.(content, image, data.id);
+    setViewReply(true);
+    setIsReplyFormOpen(false);
+  };
 
   const { data: ReplyCommentData } = useGetRepliesPostsComments({
     commentId: data.id,
@@ -72,8 +88,8 @@ const CommentItem = ({ level = "comment", className, data }: CommentCardProps) =
         <ReplyForm
           isThreadItem={isThreadItem}
           className={isNestedReply ? "pb-[7px]" : undefined}
-          setIsReplyFormOpen={setIsReplyFormOpen}
-          parentId={data.id}
+          onSubmit={handleReplySubmit}
+          isPending={isPending}
         />
       )}
 
@@ -82,6 +98,7 @@ const CommentItem = ({ level = "comment", className, data }: CommentCardProps) =
           {replyComments.map((child, index) => (
             <CommentItem
               key={child.id}
+              postId={postId}
               level={child.depth > 1 ? "nestedReply" : "reply"}
               className={index === 0 ? "pt-4" : undefined}
               data={child}
