@@ -25,9 +25,7 @@ const ActivityFilterSection = () => {
   const { normalizedActivity } = normalizedFilterValues({ activity: activityQuery });
 
   return (
-    <section className="flex w-full gap-2 px-5 py-[14px]">
-      <h2 className="sr-only">필터링 영역</h2>
-
+    <section className="flex w-full gap-2 px-5 py-[14px]" aria-label="필터 선택 영역">
       <Filter
         name="date"
         ariaLabel="기간"
