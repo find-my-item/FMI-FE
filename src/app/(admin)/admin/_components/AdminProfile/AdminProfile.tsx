@@ -3,20 +3,25 @@
 import Link from "next/link";
 import { Button, ProfileAvatar } from "@/components/common";
 import { useGetUsersMe } from "@/api/fetch/user";
+import { SkeletonAdminProfile } from "../_internal";
 
 const AdminProfile = () => {
-  const { data } = useGetUsersMe();
+  const { data, isLoading } = useGetUsersMe();
   const { email, nickname, profileImg } = data?.result || {};
 
   return (
     <header className="flex items-center justify-between px-5 py-[30px]">
-      <div className="flex items-center gap-6">
-        <ProfileAvatar src={profileImg} alt={nickname} size={60} priority />
-        <div>
-          <p className="text-body1-semibold text-layout-header-default">{nickname}</p>
-          <span className="text-body2-regular text-layout-body-default">{email}</span>
+      {isLoading ? (
+        <SkeletonAdminProfile />
+      ) : (
+        <div className="flex items-center gap-6">
+          <ProfileAvatar src={profileImg} alt={nickname} size={60} priority />
+          <div>
+            <p className="text-body1-semibold text-layout-header-default">{nickname}</p>
+            <span className="text-body2-regular text-layout-body-default">{email}</span>
+          </div>
         </div>
-      </div>
+      )}
 
       <Button
         as={Link}
