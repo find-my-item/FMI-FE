@@ -21,7 +21,7 @@ const PasswordConfirm = () => {
         />
       </div>
 
-      <FooterButton label="탈퇴하기" />
+      <FooterButton>탈퇴하기</FooterButton>
     </>
   );
 };

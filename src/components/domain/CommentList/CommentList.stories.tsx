@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs";
 import CommentList from "./CommentList";
-import { MOCK_COMMENT_LIST_DATA } from "@/mock/data";
+import { MOCK_COMMENT_RESPONSE_DATA } from "@/mock/data";
 
 const meta = {
   title: "공통 컴포넌트/CommentList",
@@ -63,6 +63,6 @@ const mockComments = [
 // 기본 스토리
 export const Default: Story = {
   args: {
-    comments: MOCK_COMMENT_LIST_DATA,
+    comments: MOCK_COMMENT_RESPONSE_DATA,
   },
 };
