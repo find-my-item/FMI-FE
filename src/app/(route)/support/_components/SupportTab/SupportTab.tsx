@@ -15,7 +15,7 @@ const SupportTab = () => {
           className={cn(
             "flex-1 py-[10px] text-body1-medium text-neutral-normal-default flex-center",
             tab === item.key &&
-              "border-b-[1.4px] border-labelsVibrant-primary text-body1-semibold text-layout-header-default"
+              "border-b-2 border-brand-normal-default text-body1-semibold text-layout-header-default"
           )}
           onClick={() => updateTabQuery(item.key)}
         >
