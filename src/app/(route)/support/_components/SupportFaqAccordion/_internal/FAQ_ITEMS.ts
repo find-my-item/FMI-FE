@@ -1,7 +1,14 @@
 type FaqItemCategory = "전체" | "계정" | "이용 방법" | "기타";
 
-type FaqAnswerTextSegment = { type: "text"; content: string };
-type FaqAnswerLinkSegment = { type: "link"; href: string; text: string };
+interface FaqAnswerTextSegment {
+  type: "text";
+  content: string;
+}
+interface FaqAnswerLinkSegment {
+  type: "link";
+  href: string;
+  text: string;
+}
 export type FaqAnswerSegment = FaqAnswerTextSegment | FaqAnswerLinkSegment;
 
 export interface FaqItem {
