@@ -41,7 +41,7 @@ const FooterItem = ({ link, isActive, showLoginRequiredNotice, onClick }: Footer
           size={28}
           className={cn(iconClassName, "group-hover:text-brand-normal-pressed")}
         />
-        {"alert" in link && link.alert && <div className="footer-alert-dot" />}
+        {"alert" in link && link.alert && <div className={cn("footer-alert-dot", link.alert)} />}
       </div>
       <span className={cn("py-[2px]", isActive(link.href))}>{link.name}</span>
       {isChat && showLoginRequiredNotice ? <LoginRequiredNotice /> : null}
