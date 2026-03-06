@@ -1,8 +1,12 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import { InfiniteData, keepPreviousData } from "@tanstack/react-query";
 import useAppInfiniteQuery from "@/api/_base/query/useAppInfiniteQuery";
 import { SortFilterValue } from "@/components/domain/FilterSectionBottomSheet/_types/types";
 import { ItemStatus, PostType } from "@/types";
 import { PostItem, PostSearchResponse } from "../types/PostItemType";
+import { useAuthStore } from "@/store";
 
 interface UseGetPostsParams {
   address?: string;
@@ -30,6 +34,13 @@ export const useGetPosts = ({
   if (postType) params.set("postType", postType);
   if (category) params.set("category", category);
 
+  const isAuthInitialized = useAuthStore((state) => state.isAuthInitialized);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   return useAppInfiniteQuery<PostSearchResponse, unknown, PostItem[]>(
     "public",
     ["posts", address, postType, postStatus, category, sortType, size],
@@ -40,7 +51,7 @@ export const useGetPosts = ({
       select: (data: InfiniteData<PostSearchResponse>) =>
         data.pages.flatMap((page) => page.result.postList),
       throwOnError: true,
-      suspense: true,
+      enabled: isMounted && isAuthInitialized,
     }
   );
 };

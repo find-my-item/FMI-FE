@@ -8,7 +8,7 @@ const SUPPORT_MENU_ITEMS = [
   },
   {
     label: "공지사항",
-    href: "#",
+    href: "/notice",
   },
 ];
 

@@ -19,12 +19,9 @@ export const useGetDeletedUsers = ({ reason, size = 10 }: UseGetDeletedUsersPara
     `/admin/users/deleted?${params.toString()}`,
     {
       placeholderData: keepPreviousData,
-      getNextPageParam: (lastPage) =>
-        lastPage.result.last ? undefined : lastPage.result.number + 1,
+      getNextPageParam: (lastPage) => lastPage.result.nextCursor ?? undefined,
       select: (data: InfiniteData<GetDeletedUsersResponse>) =>
         data.pages.flatMap((page) => page.result.content),
-      throwOnError: true,
-      suspense: true,
     }
   );
 };

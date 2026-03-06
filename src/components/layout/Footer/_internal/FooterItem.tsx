@@ -15,7 +15,7 @@ interface FooterItemProps {
   showLoginRequiredNotice: boolean;
   onClick: () => void;
 }
-
+// TODO(형준): 알림있을 경우 알림 아이콘에 초록점 표시
 const FooterItem = ({ link, isActive, showLoginRequiredNotice, onClick }: FooterItemProps) => {
   const iconClassName = isActive(link.href)
     ? "text-brand-normal-pressed"

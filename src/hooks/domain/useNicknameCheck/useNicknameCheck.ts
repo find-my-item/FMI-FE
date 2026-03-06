@@ -7,6 +7,7 @@ import { NICKNAME_ERROR_MESSAGE } from "./NICKNAME_ERROR_MESSAGE";
 export const useNicknameCheck = () => {
   const [nicknameValue, setNicknameValue] = useState("");
   const [isNicknameVerified, setIsNicknameVerified] = useState(false);
+  const [isNicknameDisabled, setIsNicknameDisabled] = useState(false);
 
   const { addToast } = useToast();
   const { getValues, control } = useFormContext();
@@ -17,13 +18,15 @@ export const useNicknameCheck = () => {
   });
 
   useEffect(() => {
+    if (isNicknameDisabled) return;
     setIsNicknameVerified(false);
-  }, [currentNickname]);
+  }, [currentNickname, isNicknameDisabled]);
 
   const { data, isSuccess, isError } = useApiCheckNickname(nicknameValue);
 
   const handleClickNickname = (name: string) => {
-    const nickname = getValues(name);
+    const nickname = getValues(name).trim();
+    if (!nickname) return;
 
     setIsNicknameVerified(false);
     setNicknameValue(nickname);
@@ -34,6 +37,8 @@ export const useNicknameCheck = () => {
     if (!data) return;
     if (isSuccess) {
       setIsNicknameVerified(true);
+      setIsNicknameDisabled(true);
+
       addToast("사용할 수 있는 닉네임이에요.", "success");
     } else {
       setIsNicknameVerified(false);
@@ -47,5 +52,6 @@ export const useNicknameCheck = () => {
     handleClickNickname,
     isNicknameVerified,
     nicknameValue,
+    isNicknameDisabled,
   };
 };

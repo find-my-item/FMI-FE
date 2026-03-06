@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { cn } from "@/utils";
 import { Button, Icon } from "@/components/common";
 import { useDeleteDetailPost, usePutPostStatus } from "@/api/fetch/post";
@@ -18,13 +19,19 @@ interface PostOptionBoxProps {
 }
 
 const PostActionMenu = ({ open, onClose, postId, postData }: PostOptionBoxProps) => {
+  const router = useRouter();
   const { isMine, writerId, postStatus } = postData;
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [isReportOpen, setIsReportOpen] = useState(false);
   const [isBlockOpen, setIsBlockOpen] = useState(false);
 
-  const { mutate: putPostStatus } = usePutPostStatus(postId);
   const isFound = postStatus === "FOUND";
+  const { mutate: putPostStatus } = usePutPostStatus(postId, isFound);
+
+  const handleEditPost = () => {
+    onClose();
+    router.push(`/write/post/${postId}`);
+  };
 
   const handleStatusChange = () => {
     putPostStatus({ postStatus: isFound ? "SEARCHING" : "FOUND" });
@@ -46,7 +53,7 @@ const PostActionMenu = ({ open, onClose, postId, postData }: PostOptionBoxProps)
       >
         {isMine ? (
           <>
-            <button className={ACTION_MENU.buttonStyle}>
+            <button className={ACTION_MENU.buttonStyle} onClick={handleEditPost}>
               <Icon name="Edit" size={20} />
               <span>게시글 수정하기</span>
             </button>
@@ -58,7 +65,7 @@ const PostActionMenu = ({ open, onClose, postId, postData }: PostOptionBoxProps)
             <hr className={ACTION_MENU.hrStyle} aria-hidden="true" />
             <button className={ACTION_MENU.buttonStyle} onClick={handleStatusChange}>
               <Icon name="ArrowSwitchHorizontal" size={20} />
-              <span>{isFound ? "찾는중 상태로 변경" : "찾았음 상태로 변경"}</span>
+              <span>{isFound ? "찾았어요 상태로 변경" : "찾아요 상태로 변경"}</span>
             </button>
           </>
         ) : (

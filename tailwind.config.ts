@@ -7,6 +7,7 @@ import {
   uEllipsis,
   noScrollbar,
   hBase,
+  fixedButtonPosition,
 } from "./src/utils/customStylePlugins/customStylePlugins";
 import customFonts from "./src/utils/customFonts/customFonts";
 import plugin from "tailwindcss/plugin";
@@ -55,7 +56,7 @@ const config: Config = {
     extend: {
       fill: (typedConfig.theme?.extend as any)?.fill ?? {},
       ...validExtend,
-      colors: { ...color, system, labelsVibrant },
+      colors: { ...color, system, labelsVibrant, border },
       fontFamily: { sans: ["var(--font-pretendard)", "Inter", "sans-serif"] },
       lineHeight: lineHeights,
       fontWeight: fontWeights,
@@ -70,7 +71,16 @@ const config: Config = {
       borderColor: border,
     },
   },
-  plugins: [fillBgUtilities, flexCenter, flexColCenter, mouseHover, uEllipsis, noScrollbar, hBase],
+  plugins: [
+    fillBgUtilities,
+    flexCenter,
+    flexColCenter,
+    mouseHover,
+    uEllipsis,
+    noScrollbar,
+    hBase,
+    fixedButtonPosition,
+  ],
   safelist: [
     "flex-center",
     "flex-col-center",
@@ -78,6 +88,7 @@ const config: Config = {
     "u-ellipsis",
     "no-scrollbar",
     "h-base",
+    "fixed-button-position",
   ],
 };
 

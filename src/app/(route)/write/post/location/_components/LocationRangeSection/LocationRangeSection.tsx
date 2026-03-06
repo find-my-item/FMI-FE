@@ -3,26 +3,72 @@
 import { useState } from "react";
 import { Radius } from "@/types";
 import { BottomSheet, PostWriteKakaoMap } from "../_internal";
+import { getKakaoLocalCoord2Address } from "@/api/fetch/kakao";
+import { useToast } from "@/context/ToastContext";
 
 interface LocationRangeSectionProps {
   address: string | null;
   fullAddress: string | null;
+  initialLat?: number;
+  initialLng?: number;
 }
 
-const LocationRangeSection = ({ address, fullAddress }: LocationRangeSectionProps) => {
+const LocationRangeSection = ({
+  address,
+  fullAddress,
+  initialLat,
+  initialLng,
+}: LocationRangeSectionProps) => {
+  const { addToast } = useToast();
+
   const [radius, setRadius] = useState<Radius>(3000);
-  // TODO(지권): 목업 위도, 경도 수정 필요
-  const [lat, setLat] = useState(35.8737787566279);
-  const [lng, setLng] = useState(128.810871476804);
+
+  const [currentCoord, setCurrentCoord] = useState({
+    lat: initialLat ?? 37.566370748,
+    lng: initialLng ?? 126.977918341,
+  });
+
+  const [currentAddress, setCurrentAddress] = useState(address);
+  const [currentFullAddress, setCurrentFullAddress] = useState(fullAddress);
+
+  const handleCenterChange = async (center: { lat: number; lng: number }) => {
+    setCurrentCoord(center);
+
+    try {
+      const data = await getKakaoLocalCoord2Address(center.lat, center.lng);
+      if (data.documents && data.documents.length > 0) {
+        const { address: addressDoc } = data.documents[0];
+
+        const newFullAddress =
+          `${addressDoc.region_1depth_name} ${addressDoc.region_2depth_name} ${addressDoc.region_3depth_name}`.trim();
+
+        const newAddress = addressDoc.region_3depth_name || addressDoc.region_2depth_name;
+
+        setCurrentFullAddress(newFullAddress);
+        setCurrentAddress(newAddress);
+      }
+    } catch {
+      addToast("위치 정보를 불러오는데 실패했어요", "error");
+    }
+  };
 
   return (
     <>
       <div className="h-[calc(100vh-350px)] w-full">
-        <PostWriteKakaoMap lat={lat} lng={lng} radius={radius} />
+        <PostWriteKakaoMap
+          lat={currentCoord.lat}
+          lng={currentCoord.lng}
+          radius={radius}
+          onCenterChange={handleCenterChange}
+        />
       </div>
 
       <BottomSheet
-        locationInfo={{ address, fullAddress, lat, lng }}
+        locationInfo={{
+          address: currentAddress,
+          fullAddress: currentFullAddress,
+          ...currentCoord,
+        }}
         radiusState={{ radius, setRadius }}
       />
     </>

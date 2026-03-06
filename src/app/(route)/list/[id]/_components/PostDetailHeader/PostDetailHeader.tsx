@@ -8,6 +8,7 @@ type HeaderData = {
   id: string;
   imageResponseList: ImageResponse[];
   userData: userInformation;
+  isMine: boolean;
 };
 
 interface PostDetailHeaderType {
@@ -15,11 +16,11 @@ interface PostDetailHeaderType {
 }
 
 const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
-  const { id, imageResponseList, userData } = headerData;
+  const { id, imageResponseList, userData, isMine } = headerData;
 
   return (
     <>
-      <ImageSection imageUrls={imageResponseList.map((item) => item.imgUrl)} />
+      <ImageSection imageUrls={imageResponseList} />
 
       <section
         aria-label="게시글 작성자 정보"
@@ -49,10 +50,10 @@ const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
 
         <Button
           as={Link}
-          href={`/chat/${id}`}
+          href={isMine ? "/chat" : `/chat/${id}`}
           className={cn("min-h-11 w-full py-[10px]", "tablet:flex-1")}
         >
-          채팅하러 가기
+          {isMine ? "채팅 목록으로 이동하기" : "채팅하러 가기"}
         </Button>
       </section>
     </>

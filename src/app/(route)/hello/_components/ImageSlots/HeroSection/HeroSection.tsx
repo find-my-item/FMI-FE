@@ -3,8 +3,11 @@ import "./HeroSection.css";
 
 const HeroSection = () => {
   return (
-    <div data-testid="intro-section" className="relative min-h-[225px] w-full flex-center">
-      <div className="animate-fade-in-float absolute right-[250px]">
+    <div
+      data-testid="intro-section"
+      className="relative min-h-[225px] w-full overflow-hidden flex-center"
+    >
+      <div className="animate-fade-in-float absolute right-[calc(50%+75px)]">
         <HeroSectionImage src="/hello/hero/service-hero-wallet.svg" width={120} height={57} />
       </div>
 
@@ -17,10 +20,11 @@ const HeroSection = () => {
         </div>
       </div>
 
-      <div className="animate-fade-in-float absolute left-[220px] top-[20px]">
+      <div className="animate-fade-in-float absolute left-[calc(50%+55px)] top-[20px]">
         <HeroSectionImage src="/hello/hero/service-hero-phone.svg" width={80} height={57} />
       </div>
-      <div className="animate-fade-in-float absolute left-[250px] top-[130px]">
+
+      <div className="animate-fade-in-float absolute left-[calc(50%+85px)] top-[130px]">
         <HeroSectionImage src="/hello/hero/service-hero-bag.svg" width={80} height={57} />
       </div>
     </div>

@@ -1,10 +1,13 @@
-import { PageResponse } from "@/api/_base/types/ApiBasePageableInfoType";
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
-import { UserType, WithdrawalReason } from "@/types";
+import { UserType } from "@/types";
 
-export interface GetDeletedUsersResponse extends ApiBaseResponseType<
-  PageResponse<WithdrawUserItem>
-> {}
+export interface GetDeletedUsersResponse extends ApiBaseResponseType<WithdrawUseResult> {}
+
+export interface WithdrawUseResult {
+  content: WithdrawUserItem[];
+  nextCursor: number | null;
+  hasNext: boolean;
+}
 
 export interface WithdrawUserItem {
   userId: number;
@@ -13,7 +16,6 @@ export interface WithdrawUserItem {
   role: UserType;
   createdAt: string;
   deletedAt: string;
-  // withdrawalReason: WithdrawalReason[];
-  withdrawalReason: WithdrawalReason;
+  withdrawalReason: string;
   withdrawalOtherReason: string | null;
 }

@@ -1,5 +1,4 @@
 export { default as Tab } from "./Tab/Tab";
-export { default as ListSearch } from "./ListSearch/ListSearch";
 export { default as PopupLayout } from "./PopupLayout/PopupLayout";
 export { default as ImageViewerModal } from "./ImageViewerModal/ImageViewerModal";
 export { default as CommentList } from "./CommentList/CommentList";
@@ -20,3 +19,5 @@ export { default as DateRangeBottomSheet } from "./DateRangeBottomSheet/DateRang
 export { default as ReadOnlyCommentItem } from "./ReadOnlyCommentItem/ReadOnlyCommentItem";
 export { default as ReportModal } from "./ReportModal/ReportModal";
 export { default as PostReportBlockActions } from "./PostReportBlockActions/PostReportBlockActions";
+export { default as WriteImageSection } from "./WriteImageSection/WriteImageSection";
+export { default as WriteActionSection } from "./WriteActionSection/WriteActionSection";
