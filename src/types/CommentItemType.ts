@@ -9,8 +9,7 @@
  * - depth: 댓글 깊이
  * - createdAt: 댓글 작성 시간
  * - authorResponse: 댓글 작성자 정보
- * - replyCount: 댓글 답글 개수
- * - nextReplyCursor: 댓글 답글 커서
+ * - childCommentCount: 댓글 답글 개수
  * - imageList: 댓글 이미지 리스트
  * - likeCount: 댓글 좋아요 개수
  * - isLike: 댓글 좋아요 여부
@@ -32,8 +31,7 @@ export interface CommentItemType {
   content: string;
   createdAt: string;
   authorResponse: AuthorResponse;
-  replyCount: number;
-  nextReplyCursor: null;
+  childCommentCount: number;
   imageList: ImageList[];
   likeCount: number;
   isLike: boolean;

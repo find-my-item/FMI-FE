@@ -13,10 +13,8 @@ export const MOCK_COMMENT_ITEM_DATA: CommentItemType = {
     nickName: "짱구",
     profileImageUrl: "https://picsum.photos/200",
   },
-  replyCount: 0,
-  nextReplyCursor: null,
+  childCommentCount: 0,
   imageList: [],
-  childrenCommentList: [],
   likeCount: 2,
   isLike: false,
 };
@@ -37,5 +35,6 @@ export const MOCK_COMMENT_LIST_DATA: CommentItemType[] = [
 export const MOCK_COMMENT_RESPONSE_DATA: GetPostsCommentsData = {
   comments: MOCK_COMMENT_LIST_DATA,
   hasNext: false,
-  cursor: 0,
+  nextPage: 0,
+  remainingCount: 0,
 };

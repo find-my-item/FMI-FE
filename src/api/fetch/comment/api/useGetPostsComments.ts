@@ -8,7 +8,7 @@ interface UseGetPostsCommentsParams {
   size?: number;
 }
 
-export const useGetPostsComments = ({ postId, cursor, size = 10 }: UseGetPostsCommentsParams) => {
+export const useGetPostsComments = ({ postId, cursor, size = 5 }: UseGetPostsCommentsParams) => {
   const params = new URLSearchParams();
   params.set("postId", String(postId));
   params.set("size", String(size));

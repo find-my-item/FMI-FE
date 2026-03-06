@@ -63,7 +63,7 @@ const CommentItem = ({ level = "comment", className, data }: CommentCardProps) =
             setIsReplyFormOpen={setIsReplyFormOpen}
             viewReply={viewReply}
             setViewReply={setViewReply}
-            replyCount={data.replyCount || 0}
+            replyCount={data.childCommentCount || 0}
           />
         </div>
       </div>
