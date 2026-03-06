@@ -27,10 +27,12 @@ const CommentItem = ({ level = "comment", className, data }: CommentCardProps) =
     commentId: data.id,
     enabled: viewReply,
   });
-  console.log(ReplyCommentData);
 
   const authorId = data.authorResponse ? String(data.authorResponse.id) : "";
   const authorName = data.authorResponse ? data.authorResponse.nickName : "";
+
+  const replyComments = ReplyCommentData?.result.comments ?? [];
+  const hasReplyComments = viewReply && replyComments.length > 0;
 
   return (
     <li className={cn("my-[18px] px-5", className)}>
@@ -70,13 +72,14 @@ const CommentItem = ({ level = "comment", className, data }: CommentCardProps) =
         <ReplyForm
           isThreadItem={isThreadItem}
           className={isNestedReply ? "pb-[7px]" : undefined}
+          setIsReplyFormOpen={setIsReplyFormOpen}
           parentId={data.id}
         />
       )}
 
-      {viewReply && data.childrenCommentList && data.childrenCommentList.length > 0 && (
-        <div className="rounded-[10px] bg-layout_2depth">
-          {data.childrenCommentList.map((child, index) => (
+      {hasReplyComments && (
+        <ul className="rounded-[10px] bg-layout_2depth">
+          {replyComments.map((child, index) => (
             <CommentItem
               key={child.id}
               level={child.depth > 1 ? "nestedReply" : "reply"}
@@ -84,7 +87,7 @@ const CommentItem = ({ level = "comment", className, data }: CommentCardProps) =
               data={child}
             />
           ))}
-        </div>
+        </ul>
       )}
     </li>
   );

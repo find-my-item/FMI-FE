@@ -30,7 +30,9 @@ const CommentActions = ({
           <span
             className={cn(
               "text-body1-medium",
-              isThreadItem ? "text-brand-normal-enteredSelected" : "text-layout-header-default"
+              isThreadItem || viewReply
+                ? "text-brand-normal-enteredSelected"
+                : "text-layout-header-default"
             )}
           >
             답글 <span>{replyCount}</span>개

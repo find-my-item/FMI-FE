@@ -12,7 +12,6 @@
  * - replyCount: 댓글 답글 개수
  * - nextReplyCursor: 댓글 답글 커서
  * - imageList: 댓글 이미지 리스트
- * - childrenCommentList: 댓글 답글 리스트
  * - likeCount: 댓글 좋아요 개수
  * - isLike: 댓글 좋아요 여부
  *
@@ -36,7 +35,6 @@ export interface CommentItemType {
   replyCount: number;
   nextReplyCursor: null;
   imageList: ImageList[];
-  childrenCommentList: CommentItemType[];
   likeCount: number;
   isLike: boolean;
 }

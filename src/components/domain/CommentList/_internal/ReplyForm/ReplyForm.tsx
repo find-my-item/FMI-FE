@@ -1,4 +1,14 @@
-import { ChangeEvent, FormEvent, useEffect, useId, useMemo, useRef, useState } from "react";
+import {
+  ChangeEvent,
+  Dispatch,
+  FormEvent,
+  SetStateAction,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { Button, Icon } from "@/components/common";
@@ -9,10 +19,17 @@ interface ReplyFormProps {
   isThreadItem: boolean;
   className?: string;
   disabled?: boolean;
+  setIsReplyFormOpen: Dispatch<SetStateAction<boolean>>;
   parentId: number;
 }
 
-const ReplyForm = ({ isThreadItem, className, disabled, parentId }: ReplyFormProps) => {
+const ReplyForm = ({
+  isThreadItem,
+  className,
+  disabled,
+  parentId,
+  setIsReplyFormOpen,
+}: ReplyFormProps) => {
   const { id } = useParams<{ id: string }>();
   const postId = Number(id);
   const { mutate, isPending } = usePostPostsComments(postId, parentId);
@@ -82,6 +99,7 @@ const ReplyForm = ({ isThreadItem, className, disabled, parentId }: ReplyFormPro
         if (textareaRef.current) {
           textareaRef.current.style.height = "auto";
         }
+        setIsReplyFormOpen(false);
       },
     });
   };
