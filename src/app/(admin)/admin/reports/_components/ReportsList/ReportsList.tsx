@@ -14,7 +14,6 @@ interface ReportsListProps {
   activeTab: ReportsTabType;
 }
 
-// TODO(지권): 무한 스크롤 확인 필요
 const ReportsList = ({ activeTab }: ReportsListProps) => {
   const { addToast } = useToast();
 
