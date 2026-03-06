@@ -3,14 +3,15 @@
 import { Chip, Icon } from "@/components/common";
 import { cn } from "@/utils";
 import {
-  MOCK_FAQ_ITEMS,
+  FAQ_ITEMS,
   FaqItem,
   useSupportFaqAccordion,
   getFaqAnchorId,
   filterFaqItemsByTab,
 } from "./_internal";
 import { useSupportTabQuery } from "../SupportTab/_internal/useSupportTabQuery";
-import { MouseEvent } from "react";
+import { Fragment, MouseEvent } from "react";
+import Link from "next/link";
 
 interface SupportFaqAccordionItemProps {
   item: FaqItem;
@@ -61,7 +62,22 @@ const SupportFaqAccordionItem = ({ item, isExpanded, onToggle }: SupportFaqAccor
           <div className="inline-block">
             <Chip label={item.category} type="brandSubtleHover" />
           </div>
-          <p className="text-body1-medium text-layout-header-default">{item.answer}</p>
+          <p className="whitespace-pre-line text-body1-medium text-layout-header-default">
+            {item.answer.map((segment, index) =>
+              segment.type === "text" ? (
+                <Fragment key={index}>{segment.content}</Fragment>
+              ) : (
+                <Link
+                  key={index}
+                  href={segment.href}
+                  className="text-brand-normal-default underline"
+                >
+                  {/* TODO(형준): 링크 텍스트 스타일 수정 필요 */}
+                  {segment.text}
+                </Link>
+              )
+            )}
+          </p>
         </div>
       )}
     </li>
@@ -71,7 +87,7 @@ const SupportFaqAccordionItem = ({ item, isExpanded, onToggle }: SupportFaqAccor
 const SupportFaqAccordion = () => {
   const { tab } = useSupportTabQuery();
   const { expandedId, handleToggle } = useSupportFaqAccordion();
-  const filteredItems = filterFaqItemsByTab(MOCK_FAQ_ITEMS, tab);
+  const filteredItems = filterFaqItemsByTab(FAQ_ITEMS, tab);
 
   return (
     <ul className="flex flex-col gap-4 px-[20.5px]">
