@@ -3,7 +3,7 @@ import { InquiryType, ReplyStatus, ReportsType } from "@/types";
 
 export interface GetDetailGuestInquiriesResponse extends ApiBaseResponseType<AdminDetailGuestInquiry> {}
 
-// TODO(지권): requestStatus, userEmail 누락
+// TODO(지권): requestStatus 누락
 export interface AdminDetailGuestInquiry {
   inquiryId: number;
   title: string;
@@ -11,7 +11,7 @@ export interface AdminDetailGuestInquiry {
   inquiryType: InquiryType;
   requestStatus: ReportsType;
   createdAt: string;
-  userEmail: string;
+  email: string;
   status: ReplyStatus;
   comments: GuestInquiryComments[];
 }

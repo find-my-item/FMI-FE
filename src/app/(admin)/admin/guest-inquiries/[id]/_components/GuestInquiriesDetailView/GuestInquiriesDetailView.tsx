@@ -18,13 +18,13 @@ const GuestInquiriesDetailView = ({ id }: GuestInquiriesDetailViewProps) => {
   if (isError || !data?.result) return null;
 
   const copyEmail = () => {
-    if (!data.result.userEmail) {
+    if (!data.result.email) {
       addToast("이메일이 존재하지 않아요", "error");
       return;
     }
 
     try {
-      navigator.clipboard.writeText(data.result.userEmail);
+      navigator.clipboard.writeText(data.result.email);
       addToast("이메일을 클립보드에 복사했어요", "success");
     } catch {
       addToast("이메일 복사에 실패했어요", "error");
