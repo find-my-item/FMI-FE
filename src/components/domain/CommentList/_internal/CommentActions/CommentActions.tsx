@@ -40,7 +40,12 @@ const CommentActions = ({
           <Icon
             name="ArrowDownSmall"
             size={24}
-            className={cn("transition-all", viewReply && "rotate-180")}
+            className={cn(
+              "transition-all",
+              viewReply
+                ? "rotate-180 text-brand-strongUseThis-default"
+                : "text-layout-header-default"
+            )}
           />
         </button>
       )}
