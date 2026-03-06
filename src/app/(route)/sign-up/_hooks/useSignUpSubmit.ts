@@ -13,7 +13,7 @@ export const useSignUpSubmit = () => {
   const submitSignUp = (data: ApiSignUpType) => {
     SignUpMutate(data, {
       onSuccess: () => {
-        router.replace("/login/email");
+        router.replace("/");
         addToast("회원가입이 완료되었어요.", "success");
       },
       onError: (error) => handlerApiError(SIGNUP_ERROR_MESSAGE, error.code),
