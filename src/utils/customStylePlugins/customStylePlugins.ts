@@ -104,3 +104,21 @@ export const fixedButtonPosition = plugin(function ({ addUtilities }) {
   };
   addUtilities(utilities);
 });
+
+/**
+ * footer-alert-dot
+ */
+export const footerAlertDot = plugin(function ({ addUtilities }) {
+  const utilities: Record<string, CSSRuleObject> = {
+    ".footer-alert-dot": {
+      position: "absolute",
+      top: "6px",
+      right: "0",
+      backgroundColor: "#00B76E",
+      width: "4px",
+      height: "4px",
+      borderRadius: "100%",
+    },
+  };
+  addUtilities(utilities);
+});

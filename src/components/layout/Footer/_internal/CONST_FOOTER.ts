@@ -1,8 +1,8 @@
 export const FOOTER_LINK = [
   { name: "홈", href: "/", icon: "Home" },
   { name: "게시글 목록", href: "/list", icon: "Luggage" },
-  { name: "채팅", href: "/chat", icon: "Chat" },
-  { name: "알림", href: "alert", icon: "AlertBellFooter" },
+  { name: "채팅", href: "/chat", icon: "Chat", alert: true },
+  { name: "알림", href: "alert", icon: "AlertBellFooter", alert: true },
   { name: "마이페이지", href: "/mypage", icon: "UserProfileHome" },
 ] as const;
 
