@@ -1,18 +1,30 @@
 "use client";
 
-import { Suspense } from "react";
 import { Button } from "@/components/common";
 import { LoadingState } from "@/components/state";
 import { useToast } from "@/context/ToastContext";
-import { MOCK_GUEST_INQUIRY_DETAIL_DATA } from "@/mock/data";
 import { AdminDetailSection } from "@/app/(admin)/admin/_components";
+import { useGetDetailGuestInquiries } from "@/api/fetch/admin";
 
-const GuestInquiriesDetailView = () => {
+interface GuestInquiriesDetailViewProps {
+  id: number;
+}
+
+const GuestInquiriesDetailView = ({ id }: GuestInquiriesDetailViewProps) => {
   const { addToast } = useToast();
+  const { data, isLoading, isError } = useGetDetailGuestInquiries({ inquiryId: id });
+
+  if (isLoading) return <LoadingState />;
+  if (isError || !data?.result) return null;
 
   const copyEmail = () => {
+    if (!data.result.userEmail) {
+      addToast("이메일이 존재하지 않아요", "error");
+      return;
+    }
+
     try {
-      navigator.clipboard.writeText(MOCK_GUEST_INQUIRY_DETAIL_DATA.userName);
+      navigator.clipboard.writeText(data.result.userEmail);
       addToast("이메일을 클립보드에 복사했어요", "success");
     } catch {
       addToast("이메일 복사에 실패했어요", "error");
@@ -20,19 +32,17 @@ const GuestInquiriesDetailView = () => {
   };
 
   return (
-    <Suspense fallback={<LoadingState />}>
-      <div className="flex flex-col h-base">
-        <article className="flex-1">
-          <AdminDetailSection data={MOCK_GUEST_INQUIRY_DETAIL_DATA} />
-        </article>
+    <div className="flex flex-col h-base">
+      <article className="flex-1">
+        <AdminDetailSection data={data.result} />
+      </article>
 
-        <div className="sticky bottom-0 border-t border-divider-default bg-white px-5 pb-8 pt-3">
-          <Button className="min-h-11 w-full" onClick={copyEmail}>
-            이메일 복사하기
-          </Button>
-        </div>
+      <div className="sticky bottom-0 border-t border-divider-default bg-white px-5 pb-8 pt-3">
+        <Button className="min-h-11 w-full" onClick={copyEmail}>
+          이메일 복사하기
+        </Button>
       </div>
-    </Suspense>
+    </div>
   );
 };
 

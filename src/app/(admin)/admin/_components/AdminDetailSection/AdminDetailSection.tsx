@@ -1,22 +1,15 @@
-import { ReplyStatus, ReportsType } from "@/types";
+import { AdminDetailGuestInquiry } from "@/api/fetch/admin";
 import {
   DetailContent,
   DetailStatusHeader,
 } from "../../reports/[reportsType]/[id]/_components/_internal";
 
 interface AdminDetailSectionProps {
-  data: {
-    title: string;
-    userName: string;
-    createdAt: string;
-    content: string;
-    status: ReportsType;
-    replyStatus: ReplyStatus;
-  };
+  data: AdminDetailGuestInquiry;
 }
 
 const AdminDetailSection = ({ data }: AdminDetailSectionProps) => {
-  const { status, replyStatus } = data;
+  const { requestStatus, status } = data;
 
   return (
     <>
@@ -24,7 +17,7 @@ const AdminDetailSection = ({ data }: AdminDetailSectionProps) => {
         aria-label="신고/문의 내용"
         className="space-y-[14px] border-b border-flatGray-50 px-5 py-[30px]"
       >
-        <DetailStatusHeader status={status} replyStatus={replyStatus} />
+        <DetailStatusHeader requestStatus={requestStatus} status={status} />
 
         <DetailContent data={data} />
       </section>
