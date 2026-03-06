@@ -68,7 +68,7 @@ const config: Config = {
       textColor: fg,
       width: dimension,
       height: dimension,
-      borderColor: border,
+      borderColor: { ...border, fg },
     },
   },
   plugins: [
