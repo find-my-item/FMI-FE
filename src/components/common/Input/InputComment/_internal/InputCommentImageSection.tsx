@@ -19,7 +19,7 @@ const InputCommentImageSection = ({ images, setImages }: InputCommentImageSectio
       onMouseDown={onMouseDown}
       role="region"
       aria-label="댓글 이미지 목록"
-      className="mb-4 flex h-[90px] w-full select-none gap-5 overflow-x-auto bg-white pl-5 pt-[10px] no-scrollbar"
+      className="mb-4 flex h-[90px] w-full select-none gap-5 overflow-x-auto bg-white pt-[10px] no-scrollbar"
     >
       {urls.map((url, index) => (
         <div key={url} className="relative h-[80px] w-[80px] shrink-0 rounded-[16px]">
