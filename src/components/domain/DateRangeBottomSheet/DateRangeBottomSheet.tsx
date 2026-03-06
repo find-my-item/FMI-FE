@@ -81,8 +81,8 @@ const DateWheel = ({
 interface DateRangeBottomSheetProps<T> {
   isOpen: boolean;
   onClose: () => void;
-  filters: T;
-  setFilters: Dispatch<SetStateAction<T>>;
+  filters?: T;
+  setFilters?: Dispatch<SetStateAction<T>>;
 }
 
 const DateRangeBottomSheet = <T extends FiltersStateType | ActivityFilterState>({
@@ -103,7 +103,7 @@ const DateRangeBottomSheet = <T extends FiltersStateType | ActivityFilterState>(
   const handleApply = () => {
     const formattedDate = `${selectDate.year}-${String(selectDate.month).padStart(2, "0")}-${String(selectDate.day).padStart(2, "0")}`;
 
-    const nextFilters = { ...filters, date: formattedDate } as T;
+    const nextFilters = { ...(filters ?? ({} as T)), date: formattedDate } as T;
 
     const qs = applyFiltersToUrl({
       filters: nextFilters,
@@ -112,7 +112,7 @@ const DateRangeBottomSheet = <T extends FiltersStateType | ActivityFilterState>(
 
     router.replace(qs ? `${pathname}?${qs}` : pathname);
 
-    setFilters(nextFilters);
+    setFilters?.(nextFilters);
 
     onClose();
   };

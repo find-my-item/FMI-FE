@@ -2,58 +2,84 @@
 
 import { Filter, KebabMenu } from "@/components/common";
 import { useState } from "react";
-import { MYPAGE_COMMENTS_KEBAB_OPTIONS } from "../../_constant/MYPAGE_COMMENTS_KEBAB_OPTIONS";
 import { DateRangeBottomSheet } from "@/components/domain";
+import { useFilterParams } from "@/hooks/domain";
+import { formatYmdLabel, parseYmd } from "@/utils";
+import { normalizedFilterValues } from "@/components/domain/FilterSectionBottomSheet/utils/deriveFilterParams";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+
+type SortFilterValue = "LATEST" | "OLDEST";
+
+const SORT_DEFAULT_LABEL = "최신순";
+const SORT_LABEL_MAP = [{ LATEST: "최신순" }, { OLDEST: "오래된 순" }];
 
 const MypageCommentsFilter = () => {
-  const [isBottomSheet, setIsBottomSheet] = useState(false);
-  const [isKebabMenu, setIsKebabMenu] = useState<{ menu: string; open: boolean }>({
-    menu: "최신순",
-    open: false,
-  });
+  const [isFilterSheet, setIsFilterSheet] = useState<{
+    isOpen: boolean;
+    mode: "Date" | "Sort";
+  }>({ isOpen: false, mode: "Date" });
 
-  const kebabMenuItems = MYPAGE_COMMENTS_KEBAB_OPTIONS.map((item) => ({
-    text: item.text,
-    onClick: () => setIsKebabMenu({ menu: item.text, open: false }),
+  const kebabMenuItems = SORT_LABEL_MAP.map((item) => ({
+    text: item,
+    onClick: () => {
+      const searchParams = useSearchParams();
+      const pathname = usePathname();
+      const router = useRouter();
+    },
   }));
+
+  const { date, sort } = useFilterParams();
+  const { normalizedSort } = normalizedFilterValues({ sort: sort });
+
+  const dateObj = parseYmd(date);
+  const dateLabel = dateObj ? formatYmdLabel(dateObj) : "기간";
+
+  // const [filters, setFilters] = useState<CommentFilterState>({
+  //   ...SORT_DEFAULT_LABEL,
+  //   date: date ?? "",
+  //   activity: normalizeEnumValue<Exclude<CommentFilterState, undefined>>(activity),
+  // });
 
   return (
     <section className="flex w-full gap-2 px-5 py-[14px]">
       <h2 className="sr-only">필터링 영역</h2>
 
       <Filter
+        name="date"
         ariaLabel="기간"
         icon={{ name: "Calendar", size: 16 }}
-        onSelected={false}
-        onClick={() => setIsBottomSheet(true)}
         iconPosition="leading"
+        onSelected={!!date}
+        onClick={() => setIsFilterSheet({ isOpen: true, mode: "Date" })}
       >
-        기간
+        {date ? dateLabel : "기간"}
       </Filter>
 
       <div className="relative">
         <Filter
-          ariaLabel={isKebabMenu.menu}
+          ariaLabel="정렬 필터"
           icon={{ name: "ArrowDown", size: 16 }}
           onSelected={false}
-          onClick={() => setIsKebabMenu((prev) => ({ ...prev, open: true }))}
+          onClick={() => setIsFilterSheet((prev) => ({ ...prev, open: true }))}
           iconPosition="trailing"
         >
-          {isKebabMenu.menu}
+          {/* {(normalizedSort && SORT_LABEL_MAP[normalizedSort]) ?? SORT_DEFAULT_LABEL} */}
+          최신순
         </Filter>
-        {isKebabMenu.open && (
+
+        {isFilterSheet.isOpen && isFilterSheet.mode === "Sort" && (
           <div className="absolute left-1/2 top-full z-50 mt-2 -translate-x-1/2">
             <KebabMenu items={kebabMenuItems} />
           </div>
         )}
       </div>
 
-      {/* TODO(수현): 변경된 DateRangeBottomSheet에 따라 props 변경  */}
-      {/* 
-      <DateRangeBottomSheet 
-      onClose={() => setIsBottomSheet(false)} 
-      isOpen={isBottomSheet} 
-      /> */}
+      {isFilterSheet.isOpen && isFilterSheet.mode === "Date" && (
+        <DateRangeBottomSheet
+          onClose={() => setIsFilterSheet((prev) => ({ ...prev, isOpen: false }))}
+          isOpen={isFilterSheet.isOpen}
+        />
+      )}
     </section>
   );
 };
