@@ -1,6 +1,7 @@
 "use client";
 
 import { useLogout } from "@/hooks";
+import { cn } from "@/utils";
 
 const AdminLogoutButton = () => {
   const { handleLogout, isPending } = useLogout();
@@ -8,7 +9,10 @@ const AdminLogoutButton = () => {
   return (
     <button
       type="button"
-      className="flex w-full items-center justify-between py-[10px]"
+      className={cn(
+        "flex w-full items-center justify-between py-[10px]",
+        isPending && "cursor-not-allowed"
+      )}
       onClick={handleLogout}
       disabled={isPending}
     >
