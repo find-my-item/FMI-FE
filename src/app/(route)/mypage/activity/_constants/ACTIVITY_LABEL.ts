@@ -1,6 +1,5 @@
-import { ActivityType } from "../_types/ActivityType";
+import { ActivityType } from "@/types";
 
-export const ACTIVITY_DEFAULT_LABEL = "유형";
 export const ACTIVITY_LABEL_MAP: Record<ActivityType, string> = {
   POST: "게시글",
   COMMENT: "댓글",

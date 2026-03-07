@@ -15,7 +15,7 @@ import {
   tabsType,
 } from "../_types/types";
 import { categories, sort, status, findStatus } from "../_constants/CONSTANTS";
-import { applyFiltersToUrl } from "../utils/applyFiltersToUrl";
+import { applyFiltersToUrl } from "../../../../utils/applyFiltersToUrl/applyFiltersToUrl";
 import { FiltersStateType } from "../_types/filtersStateType";
 import { TABS } from "../_constants/TABS";
 import PopupLayout from "../../PopupLayout/PopupLayout";

@@ -2,17 +2,16 @@
 
 import { Button, Filter } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
-import { applyFiltersToUrl } from "@/components/domain/FilterSectionBottomSheet/utils/applyFiltersToUrl";
+import { applyFiltersToUrl } from "@/utils/applyFiltersToUrl/applyFiltersToUrl";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
-import { ActivityFilterState } from "../../_types/ActivityFilterType";
-import { ActivityType } from "../../_types/ActivityType";
+import { ActivityFilterState, ActivityFilterValue } from "../../_types/ActivityFilterType";
 
 interface ActivityBottomSheetProps {
   isOpen: boolean;
   onClose: () => void;
   title: string;
-  option: readonly { value: ActivityType | undefined; label: string }[];
+  option: readonly { value: ActivityFilterValue; label: string }[];
   filters: ActivityFilterState;
   setFilters: Dispatch<SetStateAction<ActivityFilterState>>;
 }

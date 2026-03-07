@@ -17,3 +17,4 @@ export { fileInputHandler } from "./fileInputHandler/fileInputHandler";
 export { textareaSubmitKeyHandler } from "./textareaSubmitKeyHandler/textareaSubmitKeyHandler";
 export { highlightText } from "./highlightText/highlightText";
 export * from "./parseDateFilter/parseDateFilter";
+export * from "./applyFiltersToUrl/applyFiltersToUrl";

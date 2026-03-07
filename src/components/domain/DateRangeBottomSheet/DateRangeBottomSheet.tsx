@@ -8,7 +8,7 @@ import { cn } from "@/utils";
 import useMakeDate from "./_hooks/useMakeDate";
 import PopupLayout from "../PopupLayout/PopupLayout";
 import { Button, Filter } from "@/components/common";
-import { applyFiltersToUrl } from "../FilterSectionBottomSheet/utils/applyFiltersToUrl";
+import { applyFiltersToUrl } from "../../../utils/applyFiltersToUrl/applyFiltersToUrl";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FiltersStateType } from "../FilterSectionBottomSheet/_types/filtersStateType";
 import { useFilterParams } from "@/hooks/domain";

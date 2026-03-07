@@ -9,16 +9,14 @@ import {
   ActivityFilterState,
   ActivityFilterValue,
 } from "@/app/(route)/mypage/activity/_types/ActivityFilterType";
-import { FiltersStateType } from "../_types/filtersStateType";
+import { FiltersStateType } from "../../components/domain/FilterSectionBottomSheet/_types/filtersStateType";
 import {
   CategoryFilterValue,
   FindStatusFilterValue,
   SortFilterValue,
   StatusFilterValue,
-} from "../_types/types";
-import { CategoryType, ItemStatus, PostType } from "@/types";
-import { ActivityType } from "@/app/(route)/mypage/activity/_types/ActivityType";
-import { filter } from "lodash";
+} from "../../components/domain/FilterSectionBottomSheet/_types/types";
+import { ActivityType, CategoryType, ItemStatus, PostType } from "@/types";
 
 const CATEGORY_QUERY_VALUE_MAP: Record<CategoryType, string> = {
   ELECTRONICS: "electronics",
