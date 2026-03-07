@@ -15,7 +15,7 @@
  * - isLike: 댓글 좋아요 여부
  *
  * @description AuthorResponse
- * - id: 작성자 고유 아이디
+ * - userId: 작성자 고유 아이디
  * - nickname: 작성자 닉네임
  * - profileImageUrl: 작성자 프로필 이미지
  *
@@ -38,7 +38,7 @@ export interface CommentItemType {
 }
 
 export interface AuthorResponse {
-  id: number;
+  userId: number;
   nickName: string;
   profileImageUrl: string;
 }

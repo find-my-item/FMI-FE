@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useGetRepliesPostsComments } from "@/api/fetch/comment";
 import { Icon } from "@/components/common";
 import { cn } from "@/utils";
 import { CommentItemType } from "@/types";
 import { CommentBody, CommentMeta, CommentActions, CommentFooter, ReplyForm } from "./_internal";
-import { useGetRepliesPostsComments } from "@/api/fetch/comment";
 
 type CommentCardLevel = "comment" | "reply" | "nestedReply";
 
@@ -47,7 +47,7 @@ const CommentItem = ({
     setIsReplyFormOpen(false);
   };
 
-  const authorId = data.authorResponse ? String(data.authorResponse.id) : "";
+  const authorId = data.authorResponse ? String(data.authorResponse.userId) : "";
   const authorName = data.authorResponse ? data.authorResponse.nickName : "";
 
   const replyComments = replyCommentData?.result?.comments ?? [];
@@ -70,7 +70,7 @@ const CommentItem = ({
             </div>
 
             <CommentFooter
-              footerData={{ likeCount: data.likeCount, id: data.id }}
+              footerData={{ likeCount: data.likeCount, id: data.id, isLike: data.isLike }}
               isThreadItem={isThreadItem}
               isReplyFormOpen={isReplyFormOpen}
               setIsReplyFormOpen={setIsReplyFormOpen}

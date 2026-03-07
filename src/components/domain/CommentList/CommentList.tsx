@@ -1,6 +1,6 @@
 import { ViewMoreComment } from "@/components/common";
-import CommentItem from "./CommentItem";
 import { GetPostsCommentsData, useGetRepliesPostsComments } from "@/api/fetch/comment";
+import CommentItem from "./CommentItem";
 
 interface CommentListProps {
   postId: number;

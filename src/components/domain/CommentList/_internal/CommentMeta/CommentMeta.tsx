@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { KebabMenuButton, ProfileAvatar } from "@/components/common";
-import { cn, formatDate } from "@/utils";
+import { formatDate } from "@/utils";
 
 interface CommentMetaHeaderProps {
   data: {
@@ -20,14 +20,9 @@ const CommentMetaHeader = ({ data, isThreadItem }: CommentMetaHeaderProps) => {
       <div className="flex items-start justify-between">
         <div className="flex gap-[14px]">
           <ProfileAvatar size={isThreadItem ? 30 : 40} />
-          <div
-            className={cn(
-              "flex flex-wrap items-start",
-              isThreadItem ? "flex-row items-center gap-2" : "flex-col items-start"
-            )}
-          >
+          <div className="flex flex-col flex-wrap items-start">
             <Link
-              href={`user/${authorId}`}
+              href={`/user/${authorId}`}
               className="line-clamp-2 break-all text-body1-medium text-layout-header-default"
             >
               {authorName}
