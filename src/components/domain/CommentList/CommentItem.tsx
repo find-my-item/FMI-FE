@@ -16,6 +16,7 @@ interface CommentCardProps {
   postId: number;
   onSubmit?: (content: string, image: File | null, parentId: number) => void;
   isPending?: boolean;
+  autoOpenReplies?: boolean;
 
   useFetchReplies: typeof useGetRepliesPostsComments;
 }
@@ -27,18 +28,22 @@ const CommentItem = ({
   postId,
   onSubmit,
   isPending,
+  autoOpenReplies = false,
   useFetchReplies,
 }: CommentCardProps) => {
   const isReply = level === "reply";
   const isNestedReply = level === "nestedReply";
   const isThreadItem = isReply || isNestedReply;
+  const isTopLevelComment = level === "comment";
 
   const [viewReply, setViewReply] = useState(false);
   const [isReplyFormOpen, setIsReplyFormOpen] = useState(false);
 
+  const shouldFetchReplies = (isTopLevelComment && viewReply) || (isReply && autoOpenReplies);
+
   const { data: replyCommentData } = useFetchReplies({
     commentId: data.id,
-    enabled: viewReply,
+    enabled: shouldFetchReplies,
   });
 
   const handleReplySubmit = (content: string, image: File | null) => {
@@ -51,12 +56,13 @@ const CommentItem = ({
   const authorName = data.authorResponse ? data.authorResponse.nickName : "";
 
   const replyComments = replyCommentData?.result?.comments ?? [];
-  const hasReplyComments = viewReply && replyComments.length > 0;
+  const isRepliesVisible = shouldFetchReplies;
+  const hasReplyComments = isRepliesVisible && replyComments.length > 0;
 
   return (
-    <li className={cn("my-[18px] px-5", className)}>
+    <li className={cn("my-[18px]", !isNestedReply && "px-5", className)}>
       <div className="flex">
-        {isNestedReply && <Icon name="CommentReplyIcon" size={24} />}
+        {isNestedReply && <Icon name="CommentReplyIcon" size={24} className="text-[#D9D9D9]" />}
 
         <div className="flex-1">
           <div className="space-y-2">
@@ -66,7 +72,13 @@ const CommentItem = ({
                 isThreadItem={isThreadItem}
               />
 
-              <CommentBody bodyData={{ content: data.content }} isNestedReply={isNestedReply} />
+              <CommentBody
+                bodyData={{
+                  replyNickname: data.authorResponse.nickName,
+                  content: data.content,
+                }}
+                isNestedReply={isNestedReply}
+              />
             </div>
 
             <CommentFooter
@@ -81,7 +93,7 @@ const CommentItem = ({
             isThreadItem={isThreadItem}
             isReplyFormOpen={isReplyFormOpen}
             setIsReplyFormOpen={setIsReplyFormOpen}
-            viewReply={viewReply}
+            viewReply={isTopLevelComment ? viewReply : autoOpenReplies}
             setViewReply={setViewReply}
             replyCount={data.childCommentCount || 0}
           />
@@ -104,8 +116,11 @@ const CommentItem = ({
               key={child.id}
               postId={postId}
               level={child.depth > 1 ? "nestedReply" : "reply"}
-              className={index === 0 ? "pt-4" : undefined}
+              className={index === 0 && child.depth === 1 ? "pt-4" : undefined}
               data={child}
+              onSubmit={onSubmit}
+              isPending={isPending}
+              autoOpenReplies={isTopLevelComment && viewReply}
               useFetchReplies={useFetchReplies}
             />
           ))}
