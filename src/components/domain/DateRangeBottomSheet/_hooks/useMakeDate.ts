@@ -1,3 +1,41 @@
+/**
+ * @author suhyeon
+ *
+ * 날짜 선택 UI에서 사용할 연/월/일 상태와 선택 핸들러를 생성하는 커스텀 훅입니다.
+ *
+ * @param queryDate - URL query 등에서 전달되는 초기 날짜 값
+ * @param queryDate.year - 연도
+ * @param queryDate.month - 월 (1 ~ 12)
+ * @param queryDate.day - 일 (1 ~ 31)
+ *
+ * @returns {{
+ *  years: number[]
+ *  months: number[]
+ *  days: number[]
+ *  selectDate: { year: number; month: number; day: number }
+ *  handleDateChange: (type: "year" | "month" | "day", value: number) => void
+ * }}
+ *
+ * 반환 값 설명
+ *
+ * - years
+ *   선택 가능한 연도 목록 (startYear ~ 현재 연도)
+ *
+ * - months
+ *   선택 가능한 월 목록 (1 ~ 12)
+ *
+ * - days
+ *   선택된 year/month 기준 해당 월의 일 목록
+ *
+ * - selectDate
+ *   현재 선택된 날짜 상태
+ *
+ * - handleDateChange
+ *   연/월/일 변경 핸들러
+ *   - year/month 변경 시 해당 월의 최대 일수를 계산하여 day 자동 보정
+ *
+ */
+
 import { getDaysInMonth } from "date-fns";
 import { useEffect, useMemo, useState } from "react";
 
@@ -18,14 +56,11 @@ const useMakeDate = (queryDate?: { year: number; month: number; day: number }) =
     );
   }, [queryDate?.year, queryDate?.month, queryDate?.day]);
 
-  const years = Array.from(
-    { length: today.getFullYear() - startYear + 1 },
-    (_, i) => startYear + i
-  );
+  const year = Array.from({ length: today.getFullYear() - startYear + 1 }, (_, i) => startYear + i);
 
-  const months = Array.from({ length: 12 }, (_, i) => i + 1);
+  const month = Array.from({ length: 12 }, (_, i) => i + 1);
 
-  const days = useMemo(() => {
+  const day = useMemo(() => {
     const date = new Date(selectDate.year, selectDate.month - 1);
     const daysCount = getDaysInMonth(date);
     return Array.from({ length: daysCount }, (_, i) => i + 1);
@@ -46,9 +81,9 @@ const useMakeDate = (queryDate?: { year: number; month: number; day: number }) =
   };
 
   return {
-    years,
-    months,
-    days,
+    year,
+    month,
+    day,
     selectDate,
     handleDateChange,
   };

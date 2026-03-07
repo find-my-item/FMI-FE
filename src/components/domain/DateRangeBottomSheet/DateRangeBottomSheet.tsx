@@ -91,31 +91,49 @@ const DateRangeBottomSheet = <T extends FiltersStateType | ActivityFilterState>(
   filters,
   setFilters,
 }: DateRangeBottomSheetProps<T>) => {
-  const { date } = useFilterParams();
-  const queryDate = parseYmd(date);
+  const { startDate, endDate } = useFilterParams();
+  const queryStartDate = parseYmd(startDate);
+  const queryEndDate = parseYmd(endDate);
 
-  const { years, months, days, selectDate, handleDateChange } = useMakeDate(queryDate ?? undefined);
+  const {
+    year: startYear,
+    month: startMonth,
+    day: startDay,
+    selectDate: selectStartDate,
+    handleDateChange: handleStartDateChange,
+  } = useMakeDate(queryStartDate ?? undefined);
+  const {
+    year: EndYear,
+    month: EndMonth,
+    day: EndDay,
+    selectDate: selectEndDate,
+    handleDateChange: handleEndDateChange,
+  } = useMakeDate(queryEndDate ?? undefined);
 
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const handleApply = () => {
-    const formattedDate = `${selectDate.year}-${String(selectDate.month).padStart(2, "0")}-${String(selectDate.day).padStart(2, "0")}`;
+    const formattedStartDate = `${selectStartDate.year}-${String(selectStartDate.month).padStart(2, "0")}-${String(selectStartDate.day).padStart(2, "0")}`;
+    const formattedEndDate = `${selectEndDate.year}-${String(selectEndDate.month).padStart(2, "0")}-${String(selectEndDate.day).padStart(2, "0")}`;
 
-    const nextFilters = { ...filters, date: formattedDate } as T;
+    const nextFilters = { ...filters, startDate: formattedStartDate, endDate: formattedEndDate };
 
     const qs = applyFiltersToUrl({
       filters: nextFilters,
       searchParams: new URLSearchParams(searchParams.toString()),
     });
 
+    console.log("qs>> ", qs);
     router.replace(qs ? `${pathname}?${qs}` : pathname);
 
     setFilters(nextFilters);
 
     onClose();
   };
+
+  const [activeTab, setActiveTab] = useState<"startDate" | "endDate">("startDate");
 
   return (
     <PopupLayout
@@ -128,32 +146,54 @@ const DateRangeBottomSheet = <T extends FiltersStateType | ActivityFilterState>(
 
         {/* 상단 탭 버튼 */}
         <div className="flex gap-[14px]">
-          <Filter ariaLabel="시작일" onSelected={true} className="!px-10 !py-2">
+          <Filter
+            ariaLabel="시작일"
+            onSelected={activeTab === "startDate"}
+            onClick={() => setActiveTab("startDate")}
+            className="!px-10 !py-2"
+          >
             시작일
           </Filter>
-          <Filter ariaLabel="종료일" onSelected={false} className="!px-10 !py-2">
+          <Filter
+            ariaLabel="종료일"
+            onSelected={activeTab === "endDate"}
+            className="!px-10 !py-2"
+            onClick={() => setActiveTab("endDate")}
+          >
             종료일
           </Filter>
         </div>
 
         <div className="flex w-full items-center justify-between px-4">
           <DateWheel
-            dateArray={years}
-            selected={selectDate.year}
-            onSelected={(val) => handleDateChange("year", val)}
+            dateArray={activeTab === "startDate" ? startYear : EndYear}
+            selected={activeTab === "startDate" ? selectStartDate.year : selectEndDate.year}
+            onSelected={(val) =>
+              activeTab === "startDate"
+                ? handleStartDateChange("year", val)
+                : handleEndDateChange("year", val)
+            }
           />
 
           <DateWheel
-            dateArray={months}
-            selected={selectDate.month}
-            onSelected={(val) => handleDateChange("month", val)}
+            dateArray={activeTab === "startDate" ? startMonth : EndMonth}
+            selected={activeTab === "startDate" ? selectStartDate.month : selectEndDate.month}
+            onSelected={(val) =>
+              activeTab === "startDate"
+                ? handleStartDateChange("month", val)
+                : handleEndDateChange("month", val)
+            }
             label="월"
           />
 
           <DateWheel
-            dateArray={days}
-            selected={selectDate.day}
-            onSelected={(val) => handleDateChange("day", val)}
+            dateArray={activeTab === "startDate" ? startDay : EndDay}
+            selected={activeTab === "startDate" ? selectStartDate.day : selectEndDate.day}
+            onSelected={(val) =>
+              activeTab === "startDate"
+                ? handleStartDateChange("day", val)
+                : handleEndDateChange("day", val)
+            }
             label="일"
           />
         </div>

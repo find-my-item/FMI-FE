@@ -20,7 +20,8 @@ type Params = {
   sort?: string | null;
   status?: string | null;
   findStatus?: string | null;
-  date?: string | null;
+  startDate?: string | null;
+  endDate?: string | null;
   activity?: string | null;
 };
 
@@ -53,14 +54,15 @@ export const filterSelectionState = ({
   sort,
   status,
   findStatus,
-  date,
+  startDate,
+  endDate,
 }: Params) => {
   const isRegionSelected = Boolean(region);
   const isCategorySelected = Boolean(category);
   const isSortSelected = Boolean(sort);
   const isStatusSelected = Boolean(status);
   const isFindStatusSelected = Boolean(findStatus);
-  const isDateSelected = Boolean(date);
+  const isDateSelected = Boolean(startDate || endDate);
 
   return {
     isRegionSelected,
