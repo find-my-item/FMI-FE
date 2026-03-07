@@ -1,20 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import dynamic from "next/dynamic";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ErrorBoundary } from "@/app/ErrorBoundary";
-import { AdminFilter, AdminSearch } from "../../../_components";
 import { PopupLayout } from "@/components/domain";
 import { Button, RadioOptionItem } from "@/components/common";
+import { AdminFilter, AdminSearch } from "../../../_components";
 import { WITHDRAWAL_REASON_OPTIONS } from "../../_constants/WITHDRAWAL_REASON_OPTIONS";
 import { WithdrawalReasonType } from "../../_types/WithdrawalReasonType";
-
-const AdminWithdrawalReasonList = dynamic(
-  () => import("../AdminWithdrawalReasonList/AdminWithdrawalReasonList"),
-  { ssr: false }
-);
+import AdminWithdrawalReasonList from "../AdminWithdrawalReasonList/AdminWithdrawalReasonList";
 
 const AdminWithdrawalReasonsView = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const keyword = searchParams.get("keyword") || "";
+
   const [reason, setReason] = useState<WithdrawalReasonType>("");
   const [pendingReason, setPendingReason] = useState<WithdrawalReasonType | null>(null);
 
@@ -31,15 +31,29 @@ const AdminWithdrawalReasonsView = () => {
     setPendingReason(null);
   };
 
+  const handleSearch = (newKeyword: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (newKeyword) {
+      params.set("keyword", newKeyword);
+    } else {
+      params.delete("keyword");
+    }
+    router.replace(`?${params.toString()}`);
+  };
+
   return (
     <>
       <div className="h-base">
-        <AdminSearch placeholder="이메일 또는 사유를 입력해 주세요." onEnter={() => {}} />
+        <AdminSearch
+          placeholder="유저 이메일 또는 사유를 작성해 주세요."
+          onEnter={handleSearch}
+          defaultValue={keyword}
+        />
 
         <AdminFilter filters={WithdrawalReasonsFilters} />
 
-        <ErrorBoundary toastMessage="유저 탈퇴 사유를 불러오는 중 오류가 발생했어요">
-          <AdminWithdrawalReasonList reason={reason} />
+        <ErrorBoundary toastMessage="유저 탈퇴 사유를 불러오지 못했어요">
+          <AdminWithdrawalReasonList reason={reason} keyword={keyword} />
         </ErrorBoundary>
       </div>
 

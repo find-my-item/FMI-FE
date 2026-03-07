@@ -8,6 +8,7 @@ import {
   noScrollbar,
   hBase,
   fixedButtonPosition,
+  footerAlertDot,
 } from "./src/utils/customStylePlugins/customStylePlugins";
 import customFonts from "./src/utils/customFonts/customFonts";
 import plugin from "tailwindcss/plugin";
@@ -56,7 +57,7 @@ const config: Config = {
     extend: {
       fill: (typedConfig.theme?.extend as any)?.fill ?? {},
       ...validExtend,
-      colors: { ...color, system, labelsVibrant },
+      colors: { ...color, system, labelsVibrant, border },
       fontFamily: { sans: ["var(--font-pretendard)", "Inter", "sans-serif"] },
       lineHeight: lineHeights,
       fontWeight: fontWeights,
@@ -68,7 +69,7 @@ const config: Config = {
       textColor: fg,
       width: dimension,
       height: dimension,
-      borderColor: border,
+      borderColor: { ...border, fg },
     },
   },
   plugins: [
@@ -80,6 +81,7 @@ const config: Config = {
     noScrollbar,
     hBase,
     fixedButtonPosition,
+    footerAlertDot,
   ],
   safelist: [
     "flex-center",
@@ -89,6 +91,7 @@ const config: Config = {
     "no-scrollbar",
     "h-base",
     "fixed-button-position",
+    "footer-alert-dot",
   ],
 };
 

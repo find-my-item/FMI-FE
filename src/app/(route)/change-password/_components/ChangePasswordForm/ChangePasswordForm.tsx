@@ -14,10 +14,12 @@ const ChangePasswordForm = () => {
         ))}
       </fieldset>
       <FooterButton
-        label="변경 완료"
         // TODO(수현): 기능 구현 브랜치로 disabled 제어 함수 추가 예정
         // disabled={ }
-      />
+        type="submit"
+      >
+        변경 완료
+      </FooterButton>
     </form>
   );
 };

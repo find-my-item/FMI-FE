@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { DetailHeader } from "@/components/layout";
 import { GuestInquiriesView } from "./_components";
 
@@ -8,7 +9,9 @@ const page = () => {
     <>
       <DetailHeader title="비회원 문의 내역" />
 
-      <GuestInquiriesView />
+      <Suspense fallback={null}>
+        <GuestInquiriesView />
+      </Suspense>
     </>
   );
 };

@@ -2,6 +2,7 @@ import { Button } from "@/components/common";
 import { DetailHeader } from "@/components/layout";
 import { AGREE_CONFIG } from "../../_constants/AGREE_CONFIG";
 import { useFormContext } from "react-hook-form";
+import { FooterButton } from "@/components/domain";
 
 interface DetailAgreeProps {
   termName: string;
@@ -21,16 +22,11 @@ const DetailAgree = ({ termName, onAgree }: DetailAgreeProps) => {
   return (
     <>
       <DetailHeader title={term.title} />
-      <div className="whitespace-pre-wrap px-4 py-6 text-body2-regular text-layout-body-default">
+      <div className="whitespace-pre-wrap px-4 pb-[calc(88px+24px)] pt-6 text-body2-regular text-layout-body-default h-base">
         {term.content}
       </div>
 
-      {/* signUpFooter */}
-      <div className="sticky bottom-0 mt-auto h-[88px] w-full max-w-[390px] border-t border-divider-default bg-white px-4 py-3">
-        <Button type="button" variant="auth" onClick={handleAgreeClick} ariaLabel="동의 버튼">
-          동의
-        </Button>
-      </div>
+      <FooterButton onClick={handleAgreeClick}>동의</FooterButton>
     </>
   );
 };

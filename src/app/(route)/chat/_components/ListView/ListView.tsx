@@ -1,9 +1,9 @@
 "use client";
 
-import { ListSearch } from "@/components/domain";
+import ListSearch from "../ListSearch/ListSearch";
 import { DetailHeader } from "@/components/layout";
 import { useSearchUpdateQueryString } from "@/hooks";
-import DefaultList from "../DefaultList/DefaultList";
+import DefaultChatList from "../DefaultChatList/DefaultChatList";
 import { useChatSocket } from "@/api/fetch/chatRoom/api/useChatSocket";
 import { useQueryClient } from "@tanstack/react-query";
 import { Suspense } from "react";
@@ -24,7 +24,7 @@ const ListViewContent = () => {
 
       <h1 className="sr-only">채팅 목록 페이지</h1>
       {searchMode === "default" ? (
-        <DefaultList searchUpdateQuery={searchUpdateQuery} />
+        <DefaultChatList searchUpdateQuery={searchUpdateQuery} />
       ) : (
         <ListSearch />
       )}

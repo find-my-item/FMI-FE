@@ -104,7 +104,7 @@ const ReportModal = ({
             />
           </div>
 
-          <div className="fixed bottom-0 w-[390px] border-t border-flatGray-50 px-4 pb-8 pt-3">
+          <div className="fixed bottom-0 w-full max-w-[768px] border-t border-flatGray-50 px-4 pb-8 pt-3">
             <Button type="submit" className="w-full" disabled={isDisabled}>
               차단 및 신고하기
             </Button>

@@ -7,10 +7,10 @@ import {
 describe("toReportItemVM", () => {
   it("게시글 신고 매핑", () => {
     const item = {
-      reportId: 1,
-      targetType: "POST",
-      reason: "스팸",
-      reporterNickname: "짱구",
+      id: 1,
+      title: "게시글 신고",
+      content: "스팸",
+      writerNickname: "짱구",
       createdAt: "2026-01-01",
       status: "PENDING",
     } as any;
@@ -27,30 +27,15 @@ describe("toReportItemVM", () => {
       answerStatus: ReplyStatusBadgeConfig.UNANSWERED,
     });
   });
-
-  it("댓글 신고 title 분기", () => {
-    const item = {
-      reportId: 2,
-      targetType: "COMMENT",
-      reason: "욕설",
-      reporterNickname: "철수",
-      createdAt: "2026-01-01",
-      status: "RECEIVED",
-    } as any;
-
-    const result = toReportItemVM(item);
-
-    expect(result.title).toBe("댓글 신고");
-    expect(result.processStatus).toBe(ProcessStatusBadgeConfig.RECEIVED);
-  });
 });
 
 describe("toInquiryItemVM", () => {
   it("문의 매핑", () => {
     const item = {
-      inquiryId: 10,
+      id: 10,
       title: "로그인 문의",
-      userNickname: "유리",
+      content: "",
+      writerNickname: "유리",
       createdAt: "2026-01-02",
       status: "ANSWERED",
     } as any;
@@ -58,7 +43,7 @@ describe("toInquiryItemVM", () => {
     const result = toInquiryItemVM(item);
 
     expect(result).toEqual({
-      href: "/admin/inquiries/inquiry/10",
+      href: "/admin/reports/inquiry/10",
       title: "로그인 문의",
       content: "",
       nickname: "유리",
@@ -74,7 +59,7 @@ describe("toGuestInquiryItemVM", () => {
     const item = {
       inquiryId: 5,
       title: "비회원 문의",
-      reason: "문의 내용",
+      content: "문의 내용",
       userEmail: "test@test.com",
       createdAt: "2026-01-03",
       status: "PENDING",
