@@ -18,7 +18,7 @@ export interface NoticeItem {
   viewCount: number;
   createdAt: string;
   likeCount: number;
-  thumbnailUrl: string;
+  thumbnailUrl: string | null;
   isNew: boolean;
   isHot: boolean;
 }

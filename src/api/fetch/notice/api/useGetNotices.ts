@@ -7,19 +7,24 @@ import { useSearchParams } from "next/navigation";
 
 const DEFAULT_SIZE = 10;
 
-export const useGetNotices = () => {
+interface UseGetNoticesParams {
+  keyword?: string;
+  sortType?: string;
+}
+
+export const useGetNotices = ({ keyword, sortType }: UseGetNoticesParams = {}) => {
   const searchParams = useSearchParams();
 
   const category = searchParams.get("category") ?? undefined;
-  const keyword = searchParams.get("keyword") ?? undefined;
-  const sortType = searchParams.get("sortType") ?? undefined;
+  const keywordParam = searchParams.get("keyword") ?? keyword;
+  const sortTypeParam = searchParams.get("sortType") ?? sortType;
   const size = Number(searchParams.get("size")) || DEFAULT_SIZE;
 
   const params = new URLSearchParams();
   params.set("size", String(size));
   if (category) params.set("category", category);
-  if (keyword) params.set("keyword", keyword);
-  if (sortType) params.set("sortType", sortType);
+  if (keywordParam) params.set("keyword", keywordParam);
+  if (sortTypeParam) params.set("sortType", sortTypeParam);
 
   return useAppInfiniteQuery<GetNoticesResponse, unknown, NoticeItem[]>(
     "public",
