@@ -31,6 +31,7 @@ const ReportsView = () => {
         tabs={REPORTS_TAB}
         selected={activeTab}
         onValueChange={(key) => setActiveTab(key as ReportsTabType)}
+        className="sticky left-0 top-[56px]"
       />
 
       <AdminSearch onEnter={() => {}} />

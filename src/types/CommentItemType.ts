@@ -1,22 +1,53 @@
 /**
  * @author jikwon
  *
- * @description
- * 기본 댓글 타입입니다.
+ * 댓글 기본 타입입니다.
  *
+ * @description CommentItemType
+ * - id: 댓글 고유 아이디
+ * - deleted: 댓글 삭제 여부
+ * - depth: 댓글 깊이
+ * - createdAt: 댓글 작성 시간
+ * - authorResponse: 댓글 작성자 정보
+ * - replyCount: 댓글 답글 개수
+ * - nextReplyCursor: 댓글 답글 커서
+ * - imageList: 댓글 이미지 리스트
+ * - childrenCommentList: 댓글 답글 리스트
+ * - likeCount: 댓글 좋아요 개수
+ * - isLike: 댓글 좋아요 여부
+ *
+ * @description AuthorResponse
+ * - id: 작성자 고유 아이디
+ * - nickname: 작성자 닉네임
+ * - profileImageUrl: 작성자 프로필 이미지
+ *
+ * @description ImageList
+ * - id: 이미지 고유 아이디
+ * - imageUrl: 이미지 URL
  */
-
-// TODO(지권): 백엔드 필드 누락, 추후 변경 예정
 
 export interface CommentItemType {
   id: number;
+  deleted: boolean;
+  depth: number;
   content: string;
-  authorId: string;
-  authorName: string;
   createdAt: string;
+  authorResponse: AuthorResponse;
+  replyCount: number;
+  nextReplyCursor: null;
+  imageList: ImageList[];
+  childrenCommentList: CommentItemType[];
   likeCount: number;
-  parentId: number | null;
-  canEdit: boolean;
-  canDelete: boolean;
-  // authorImage?: string;
+  isLike: boolean;
+}
+
+interface AuthorResponse {
+  id: number;
+  nickName: string;
+  profileImageUrl: string;
+}
+
+export interface ImageList {
+  id: number;
+  imageUrl: string;
 }

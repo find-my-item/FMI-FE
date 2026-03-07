@@ -1,6 +1,6 @@
 import { NoticeItem } from "@/api/fetch/notice";
 import { AdminReportItem, WithdrawUserItem } from "@/api/fetch/admin";
-import { ReplyStatus, ReportsType } from "@/types";
+import { InquiryType, ReplyStatus, ReportsType } from "@/types";
 import { AdminGuestInquiryItem } from "@/api/fetch/admin/types/GuestInquiriesType";
 
 export const MOCK_NOTICE_LIST: NoticeItem = {
@@ -123,12 +123,15 @@ export const MOCK_ADMIN_INQUIRY_LIST: AdminReportItem[] = [
 ];
 
 export const MOCK_REPORTS_DETAIL_DATA = {
-  title: "실제 분실/발견한 물건이 아닌 내용이에요.",
-  userName: "유저닉네임",
-  createdAt: "2025-05-06",
-  content: "여기에 신고 내용이 표기됩니다.",
-  status: "RECEIVED" as ReportsType,
-  replyStatus: "ANSWERED" as ReplyStatus,
+  inquiryId: 1,
+  title: "비회원 문의 제목입니다.",
+  content: "문의 내용입니다.",
+  inquiryType: "ACCOUNT_LOGIN" as InquiryType,
+  userEmail: "asd@asd.com",
+  createdAt: "2026-01-01T00:00:00",
+  requestStatus: "RECEIVED" as ReportsType,
+  status: "UNANSWERED" as ReplyStatus,
+  comments: [],
 };
 
 export const MOCK_COMMENT_DATA = [

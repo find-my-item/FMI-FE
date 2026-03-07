@@ -9,7 +9,7 @@ export const ADMIN_NAV_SECTIONS = [
     label: "신고/문의",
     items: [
       { href: "/admin/reports", title: "신고/문의 내역" },
-      { href: "/admin/guest-inquiries", title: "비로그인 문의 내역" },
+      { href: "/admin/guest-inquiries", title: "비회원 문의 내역" },
     ],
   },
   {

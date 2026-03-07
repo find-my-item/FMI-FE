@@ -27,3 +27,4 @@ export { default as ListItemImage } from "./ListItemImage/ListItemImage";
 export { default as RadioOptionItem } from "./RadioOptionItem/RadioOptionItem";
 export { default as InputComment } from "./Input/InputComment/InputComment";
 export { default as SnackBar } from "./SnackBar/SnackBar";
+export { default as InputCommentField } from "./Input/InputComment/InputComment";

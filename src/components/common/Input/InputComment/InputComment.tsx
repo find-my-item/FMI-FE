@@ -112,6 +112,7 @@ const InputCommentField = ({
                 )}
                 placeholder="메시지 보내기"
                 disabled={disabled}
+                maxLength={250}
                 {...fieldRest}
               />
 
