@@ -13,6 +13,7 @@ import {
 import { ACTIVITY_LABEL_MAP } from "../../_constants/ACTIVITY_LABEL";
 import { useActivityFilter } from "../../_hooks/useActivityFilter";
 import ActivityBottomSheet from "../ActivityBottomSheet/ActivityBottomSheet";
+import { cn } from "@/utils";
 
 const ActivityFilterSection = () => {
   const { filters, setFilters, startDate, endDate, activity } = useActivityFilter();
@@ -39,7 +40,14 @@ const ActivityFilterSection = () => {
       <Filter
         name="date"
         ariaLabel="기간"
-        icon={{ name: "Calendar", size: 16 }}
+        icon={{
+          name: "Calendar",
+          size: 16,
+          className: cn(
+            "text-neutral-normal-default",
+            selectionState.isDateSelected && "text-white"
+          ),
+        }}
         iconPosition="leading"
         onSelected={selectionState.isDateSelected}
         onClick={() => setIsBottomSheet({ isOpen: true, mode: "Date" })}
@@ -50,7 +58,14 @@ const ActivityFilterSection = () => {
       <Filter
         name="activity"
         ariaLabel="활동 유형"
-        icon={{ name: "ArrowDown", size: 16 }}
+        icon={{
+          name: "ArrowDown",
+          size: 16,
+          className: cn(
+            "text-neutral-normal-default",
+            selectionState.isActivitySelected && "text-white"
+          ),
+        }}
         iconPosition="trailing"
         onSelected={selectionState.isActivitySelected}
         onClick={() => setIsBottomSheet({ isOpen: true, mode: "Activity" })}

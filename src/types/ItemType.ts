@@ -43,10 +43,4 @@ export type PostType = "LOST" | "FOUND";
 
 export type ItemStatus = "SEARCHING" | "FOUND";
 
-export type ActivityType =
-  | "POST"
-  | "COMMENT"
-  | "AUTHENTICATION"
-  | "FAVORITE"
-  | "INQUIRY"
-  | "REPORT";
+export type ActivityType = "POST" | "COMMENT" | "FAVORITE" | "INQUIRY" | "REPORT";
