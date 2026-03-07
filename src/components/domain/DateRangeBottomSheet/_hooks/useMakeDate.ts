@@ -43,6 +43,11 @@ const useMakeDate = (queryDate?: { year: number; month: number; day: number }) =
   const today = new Date();
   const startYear = 2025;
 
+  // 현재 날짜
+  const currentYear = today.getFullYear();
+  const currentMonth = today.getMonth() + 1;
+  const currentDate = today.getDate();
+
   const [selectDate, setSelectDate] = useState(
     queryDate ?? { year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate() }
   );
@@ -56,15 +61,28 @@ const useMakeDate = (queryDate?: { year: number; month: number; day: number }) =
     );
   }, [queryDate?.year, queryDate?.month, queryDate?.day]);
 
-  const year = Array.from({ length: today.getFullYear() - startYear + 1 }, (_, i) => startYear + i);
+  // 날짜 배열 (년, 월, 일)
+  const years = Array.from(
+    { length: today.getFullYear() - startYear + 1 },
+    (_, i) => startYear + i
+  );
 
-  const month = Array.from({ length: 12 }, (_, i) => i + 1);
+  const months = useMemo(() => {
+    const isYearMax = selectDate.year === currentYear;
+    const length = isYearMax ? currentMonth : 12;
+    return Array.from({ length }, (_, i) => i + 1);
+  }, [selectDate.year, currentMonth, currentYear]);
 
-  const day = useMemo(() => {
+  const days = useMemo(() => {
+    const isYearMax = selectDate.year === currentYear;
+    const isMonthMax = selectDate.month === currentMonth;
+
     const date = new Date(selectDate.year, selectDate.month - 1);
-    const daysCount = getDaysInMonth(date);
-    return Array.from({ length: daysCount }, (_, i) => i + 1);
-  }, [selectDate.year, selectDate.month]);
+    const maxDaysInMonth = getDaysInMonth(date);
+
+    const length = isYearMax && isMonthMax ? currentDate : maxDaysInMonth;
+    return Array.from({ length }, (_, i) => i + 1);
+  }, [selectDate.year, selectDate.month, currentYear, currentMonth, currentDate]);
 
   const handleDateChange = (type: "year" | "month" | "day", value: number) => {
     setSelectDate((prev) => {
@@ -81,9 +99,9 @@ const useMakeDate = (queryDate?: { year: number; month: number; day: number }) =
   };
 
   return {
-    year,
-    month,
-    day,
+    years,
+    months,
+    days,
     selectDate,
     handleDateChange,
   };

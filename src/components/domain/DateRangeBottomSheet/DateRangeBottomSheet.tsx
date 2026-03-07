@@ -97,16 +97,16 @@ const DateRangeBottomSheet = <T extends FiltersStateType | ActivityFilterState>(
   const queryEndDate = parseYmd(endDate);
 
   const {
-    year: startYear,
-    month: startMonth,
-    day: startDay,
+    years: startYears,
+    months: startMonths,
+    days: startDays,
     selectDate: selectStartDate,
     handleDateChange: handleStartDateChange,
   } = useMakeDate(queryStartDate ?? undefined);
   const {
-    year: EndYear,
-    month: EndMonth,
-    day: EndDay,
+    years: EndYears,
+    months: EndMonths,
+    days: EndDays,
     selectDate: selectEndDate,
     handleDateChange: handleEndDateChange,
   } = useMakeDate(queryEndDate ?? undefined);
@@ -178,7 +178,7 @@ const DateRangeBottomSheet = <T extends FiltersStateType | ActivityFilterState>(
 
         <div className="flex w-full items-center justify-between px-4">
           <DateWheel
-            dateArray={activeTab === "startDate" ? startYear : EndYear}
+            dateArray={activeTab === "startDate" ? startYears : EndYears}
             selected={activeTab === "startDate" ? selectStartDate.year : selectEndDate.year}
             onSelected={(val) =>
               activeTab === "startDate"
@@ -188,7 +188,7 @@ const DateRangeBottomSheet = <T extends FiltersStateType | ActivityFilterState>(
           />
 
           <DateWheel
-            dateArray={activeTab === "startDate" ? startMonth : EndMonth}
+            dateArray={activeTab === "startDate" ? startMonths : EndMonths}
             selected={activeTab === "startDate" ? selectStartDate.month : selectEndDate.month}
             onSelected={(val) =>
               activeTab === "startDate"
@@ -199,7 +199,7 @@ const DateRangeBottomSheet = <T extends FiltersStateType | ActivityFilterState>(
           />
 
           <DateWheel
-            dateArray={activeTab === "startDate" ? startDay : EndDay}
+            dateArray={activeTab === "startDate" ? startDays : EndDays}
             selected={activeTab === "startDate" ? selectStartDate.day : selectEndDate.day}
             onSelected={(val) =>
               activeTab === "startDate"
