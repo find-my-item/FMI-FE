@@ -1,7 +1,7 @@
 interface CommentBodyProps {
   isNestedReply: boolean;
   bodyData: {
-    replyNickname?: string;
+    replyNickname: string;
     content: string;
   };
 }

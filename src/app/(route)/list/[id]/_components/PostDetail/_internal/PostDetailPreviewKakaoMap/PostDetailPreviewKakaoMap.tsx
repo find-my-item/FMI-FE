@@ -43,8 +43,7 @@ const PostDetailPreviewKakaoMap = ({ data }: PostDetailPreviewKakaoMapProps) => 
                 className="text-brand-normal-default"
               />
             )}
-            {/* TODO(지권): 디자인 토큰 누락 */}
-            <p className="text-[14px] text-neutral-normal-default">
+            <p className="text-body2-medium text-neutral-normal-default">
               {address || "위치 정보가 없어요"}
             </p>
           </span>
