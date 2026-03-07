@@ -16,6 +16,8 @@ interface CommentCardProps {
   postId: number;
   onSubmit?: (content: string, image: File | null, parentId: number) => void;
   isPending?: boolean;
+
+  useFetchReplies: typeof useGetRepliesPostsComments;
 }
 
 const CommentItem = ({
@@ -25,6 +27,7 @@ const CommentItem = ({
   postId,
   onSubmit,
   isPending,
+  useFetchReplies,
 }: CommentCardProps) => {
   const isReply = level === "reply";
   const isNestedReply = level === "nestedReply";
@@ -33,21 +36,21 @@ const CommentItem = ({
   const [viewReply, setViewReply] = useState(false);
   const [isReplyFormOpen, setIsReplyFormOpen] = useState(false);
 
+  const { data: replyCommentData } = useFetchReplies({
+    commentId: data.id,
+    enabled: viewReply,
+  });
+
   const handleReplySubmit = (content: string, image: File | null) => {
     onSubmit?.(content, image, data.id);
     setViewReply(true);
     setIsReplyFormOpen(false);
   };
 
-  const { data: ReplyCommentData } = useGetRepliesPostsComments({
-    commentId: data.id,
-    enabled: viewReply,
-  });
-
   const authorId = data.authorResponse ? String(data.authorResponse.id) : "";
   const authorName = data.authorResponse ? data.authorResponse.nickName : "";
 
-  const replyComments = ReplyCommentData?.result.comments ?? [];
+  const replyComments = replyCommentData?.result?.comments ?? [];
   const hasReplyComments = viewReply && replyComments.length > 0;
 
   return (
@@ -62,6 +65,7 @@ const CommentItem = ({
                 data={{ authorId, createdAt: data.createdAt, authorName }}
                 isThreadItem={isThreadItem}
               />
+
               <CommentBody bodyData={{ content: data.content }} isNestedReply={isNestedReply} />
             </div>
 
@@ -102,6 +106,7 @@ const CommentItem = ({
               level={child.depth > 1 ? "nestedReply" : "reply"}
               className={index === 0 ? "pt-4" : undefined}
               data={child}
+              useFetchReplies={useFetchReplies}
             />
           ))}
         </ul>

@@ -3,7 +3,7 @@
 import { CommentList } from "@/components/domain";
 import { ErrorBoundary } from "@/app/ErrorBoundary";
 import { useGetDetailPost } from "@/api/fetch/post";
-import { useGetPostsComments } from "@/api/fetch/comment";
+import { useGetPostsComments, useGetRepliesPostsComments } from "@/api/fetch/comment";
 import PostDetail from "../PostDetail/PostDetail";
 import PostDetailTopHeader from "../PostDetailTopHeader/PostDetailTopHeader";
 import SimilarItemsSection from "../SimilarItemsSection/SimilarItemsSection";
@@ -44,6 +44,7 @@ const ClientDetail = ({ id }: ClientDetailProps) => {
         comments={commentsData?.result}
         onSubmit={handleReplySubmit}
         isPending={isPending}
+        useFetchReplies={useGetRepliesPostsComments}
       />
 
       <ErrorBoundary fallback={<ErrorSimilarSection postId={id} />}>

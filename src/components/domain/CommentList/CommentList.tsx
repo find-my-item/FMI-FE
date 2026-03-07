@@ -1,17 +1,24 @@
 import { ViewMoreComment } from "@/components/common";
 import CommentItem from "./CommentItem";
-import { GetPostsCommentsData } from "@/api/fetch/comment";
+import { GetPostsCommentsData, useGetRepliesPostsComments } from "@/api/fetch/comment";
 
 interface CommentListProps {
   postId: number;
   comments?: GetPostsCommentsData;
   onSubmit: (content: string, image: File | null, parentId: number) => void;
   isPending: boolean;
+  useFetchReplies: typeof useGetRepliesPostsComments;
 }
 
 // TODO(지권): 댓글 페이지네이션 백엔드 협의 필요
 // TODO(지권): 댓글 전체 수 백엔드 누락
-const CommentList = ({ postId, comments, onSubmit, isPending }: CommentListProps) => {
+const CommentList = ({
+  postId,
+  comments,
+  onSubmit,
+  isPending,
+  useFetchReplies,
+}: CommentListProps) => {
   if (!comments || !comments.comments?.length) return null;
 
   const hasNext = comments.hasNext;
@@ -24,6 +31,7 @@ const CommentList = ({ postId, comments, onSubmit, isPending }: CommentListProps
           댓글<span>{data.length}</span>
         </h2>
       </header>
+
       <ul>
         {data.map((comment) => (
           <CommentItem
@@ -32,6 +40,7 @@ const CommentList = ({ postId, comments, onSubmit, isPending }: CommentListProps
             data={comment}
             onSubmit={onSubmit}
             isPending={isPending}
+            useFetchReplies={useFetchReplies}
           />
         ))}
       </ul>
