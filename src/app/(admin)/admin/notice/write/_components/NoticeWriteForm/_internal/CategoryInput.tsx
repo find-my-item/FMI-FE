@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
 import { NoticeCategory } from "@/types";
+import { NoticeWriteFormValues } from "../../../_types/NoticeWriteType";
 import { Icon, RequiredText } from "@/components/common";
 import { CategoryPopup } from "@/components/domain";
 
@@ -19,7 +20,7 @@ const getNoticeCategoryLabel = (category: NoticeCategory): string => CATEGORY_LA
 const CategoryInput = () => {
   const [categoryPopupOpen, setCategoryPopupOpen] = useState(false);
 
-  const { control, setValue } = useFormContext();
+  const { control, setValue } = useFormContext<NoticeWriteFormValues>();
   const category = useWatch({ control, name: "category" });
 
   const onSelectCategory = (category: NoticeCategory) => {

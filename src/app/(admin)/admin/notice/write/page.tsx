@@ -5,19 +5,18 @@ import { FormProvider, useForm } from "react-hook-form";
 import { NoticeWriteForm } from "./_components";
 import { NoticeWriteFormValues } from "./_types/NoticeWriteType";
 
-const defaultValues: NoticeWriteFormValues = {
+const DEFAULT_VALUES: NoticeWriteFormValues = {
   title: "",
   content: "",
-  category: "GENERAL",
+  category: "",
   images: [],
 };
 
 const NoticeWrite = () => {
   const methods = useForm<NoticeWriteFormValues>({
-    defaultValues,
+    defaultValues: DEFAULT_VALUES,
     mode: "onChange",
     reValidateMode: "onChange",
-    shouldUnregister: false,
   });
 
   return (

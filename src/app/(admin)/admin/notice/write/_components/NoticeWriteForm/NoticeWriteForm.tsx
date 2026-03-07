@@ -1,13 +1,19 @@
 "use client";
 
-import { UseFormReturn } from "react-hook-form";
+import { UseFormReturn, useWatch } from "react-hook-form";
 import { NoticeWriteFormValues } from "../../_types/NoticeWriteType";
 import { TitleInput, ContentInput, CategoryInput } from "./_internal";
 import { WriteImageSection, WriteActionSection } from "@/components/domain";
 
 const IMAGE_HELP_TEXT = "*사진은 최대 5장 첨부가 가능합니다. (선택)";
 
+const canSubmit = (values: NoticeWriteFormValues): boolean =>
+  Boolean(values.title?.trim() && values.category && values.content?.trim());
+
 const NoticeWriteForm = ({ methods }: { methods: UseFormReturn<NoticeWriteFormValues> }) => {
+  const values = useWatch({ control: methods.control });
+  const isSubmitDisabled = !canSubmit(values as NoticeWriteFormValues);
+
   const onSubmit = (data: NoticeWriteFormValues) => {
     console.log(data);
   };
@@ -20,7 +26,7 @@ const NoticeWriteForm = ({ methods }: { methods: UseFormReturn<NoticeWriteFormVa
       <ContentInput />
       <WriteImageSection helpText={IMAGE_HELP_TEXT} />
       <div className="sticky bottom-0 w-full max-w-[764px] border-t border-divider-default bg-white">
-        <WriteActionSection disabled={false} />
+        <WriteActionSection disabled={isSubmitDisabled} />
       </div>
     </form>
   );
