@@ -5,8 +5,6 @@ import { GetNoticesResponse, NoticeItem } from "../types/NoticesType";
 import { InfiniteData, keepPreviousData } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 
-const DEFAULT_SIZE = 10;
-
 interface UseGetNoticesParams {
   keyword?: string;
   sortType?: string;
@@ -18,7 +16,7 @@ export const useGetNotices = ({ keyword, sortType }: UseGetNoticesParams = {}) =
   const category = searchParams.get("category") ?? undefined;
   const keywordParam = searchParams.get("keyword") ?? keyword;
   const sortTypeParam = searchParams.get("sortType") ?? sortType;
-  const size = Number(searchParams.get("size")) || DEFAULT_SIZE;
+  const size = Number(searchParams.get("size")) || 10;
 
   const params = new URLSearchParams();
   params.set("size", String(size));
