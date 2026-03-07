@@ -14,6 +14,7 @@ import { FiltersStateType } from "../FilterSectionBottomSheet/_types/filtersStat
 import { useFilterParams } from "@/hooks/domain";
 import { parseYmd } from "../../../utils/parseDateFilter/parseDateFilter";
 import { ActivityFilterState } from "@/app/(route)/mypage/activity/_types/ActivityFilterType";
+import { useToast } from "@/context/ToastContext";
 
 const DateWheel = ({
   dateArray,
@@ -114,9 +115,20 @@ const DateRangeBottomSheet = <T extends FiltersStateType | ActivityFilterState>(
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
+  const { addToast } = useToast();
+
   const handleApply = () => {
     const formattedStartDate = `${selectStartDate.year}-${String(selectStartDate.month).padStart(2, "0")}-${String(selectStartDate.day).padStart(2, "0")}`;
     const formattedEndDate = `${selectEndDate.year}-${String(selectEndDate.month).padStart(2, "0")}-${String(selectEndDate.day).padStart(2, "0")}`;
+
+    const start = new Date(formattedStartDate);
+    const end = new Date(formattedEndDate);
+
+    if (start > end) {
+      // TODO(수현): 문구 확인 필요
+      addToast("종료일은 시작일보다 이전일 수 없어요.", "warning");
+      return;
+    }
 
     const nextFilters = { ...filters, startDate: formattedStartDate, endDate: formattedEndDate };
 
