@@ -29,8 +29,7 @@ const FILTER_ITEMS = [
   },
 ];
 
-// TODO(형준): 필터 선택 쿼리스트링으로 관리하도록 변경 예정, 피그마 디자인 토큰 업데이트 후 반영 예정(#1EB87B)
-
+// TODO(형준): 필터 선택 쿼리스트링으로 관리하도록 변경 예정
 const HomeFilter = ({ children, onSelected, ariaLabel, ...props }: HomeFilterProps) => {
   return (
     <button
@@ -40,7 +39,7 @@ const HomeFilter = ({ children, onSelected, ariaLabel, ...props }: HomeFilterPro
         !onSelected &&
           "text-neutralInversed-normal-default bg-fill-neutralInversed-normal-default hover:text-black hover:bg-fill-neutralInversed-normal-hover active:text-neutralInversed-normal-pressed active:bg-fill-neutralInversed-normal-preesed disabled:text-neutralInversed-normal-disabled disabled:bg-fill-neutralInversed-normal-disabled",
         onSelected &&
-          "border border-[#1EB87B] text-[#1EB87B] bg-fill-neutralInversed-normal-default hover:text-[#1EB87B] active:text-[#1EB87B] active:bg-fill-neutralInversed-normal-default",
+          "border border-fg-brand-strongUseThis-default text-brand-strongUseThis-default bg-fill-neutralInversed-normal-default hover:text-brand-strongUseThis-hover active:text-brand-strongUseThis-pressed active:bg-fill-neutralInversed-normal-default",
         props.className
       )}
       {...props}

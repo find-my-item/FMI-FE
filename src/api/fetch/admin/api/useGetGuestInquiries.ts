@@ -5,6 +5,7 @@ import { AdminGuestInquiryItem, GetGuestInquiriesResponse } from "../types/Guest
 interface UseGetGuestInquiriesParams {
   status?: string;
   keyword?: string;
+  answered?: boolean;
   cursor?: string;
   size?: number;
 }
@@ -12,6 +13,7 @@ interface UseGetGuestInquiriesParams {
 export const useGetGuestInquiries = ({
   status,
   keyword,
+  answered,
   cursor,
   size = 10,
 }: UseGetGuestInquiriesParams = {}) => {
@@ -21,10 +23,11 @@ export const useGetGuestInquiries = ({
   if (status) params.set("status", status);
   if (keyword) params.set("keyword", keyword);
   if (cursor) params.set("cursor", cursor);
+  if (answered !== undefined) params.set("answered", String(answered));
 
   return useAppInfiniteQuery<GetGuestInquiriesResponse, unknown, AdminGuestInquiryItem[]>(
     "auth",
-    ["guestInquiries", status, keyword, cursor, size],
+    ["guestInquiries", status, keyword, answered, cursor, size],
     `/admin/guest-inquiries?${params.toString()}`,
     {
       placeholderData: keepPreviousData,

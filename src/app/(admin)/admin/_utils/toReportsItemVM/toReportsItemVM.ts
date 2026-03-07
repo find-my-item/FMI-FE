@@ -20,7 +20,7 @@ export const toReportItemVM = (item: AdminReportItem): AdminReportsItemData => {
 
 export const toInquiryItemVM = (item: AdminReportItem): AdminReportsItemData => {
   return {
-    href: `/admin/inquiries/inquiry/${item.id}`,
+    href: `/admin/reports/inquiry/${item.id}`,
     title: item.title,
     content: item.content,
     nickname: item.writerNickname,
