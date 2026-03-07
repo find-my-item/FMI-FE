@@ -19,6 +19,7 @@ const CommentMetaHeader = ({ data, isThreadItem }: CommentMetaHeaderProps) => {
       {/* 댓글 메타 */}
       <div className="flex items-start justify-between">
         <div className="flex gap-[14px]">
+          {/* <ProfileAvatar src={"링크추가필요"} size={isThreadItem ? 30 : 40} /> */}
           <ProfileAvatar size={isThreadItem ? 30 : 40} />
           <div className="flex flex-col flex-wrap items-start">
             <Link

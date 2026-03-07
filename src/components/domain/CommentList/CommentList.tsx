@@ -1,13 +1,14 @@
 import { ViewMoreComment } from "@/components/common";
 import { GetPostsCommentsData, useGetRepliesPostsComments } from "@/api/fetch/comment";
 import CommentItem from "./CommentItem";
-import { EmptyCommentUI } from "./_internal";
+import { EmptyCommentUI, GuestCommentUI } from "./_internal";
 
 interface CommentListProps {
   postId: number;
   comments?: GetPostsCommentsData;
   onSubmit: (content: string, image: File | null, parentId: number) => void;
   isPending: boolean;
+  isLoggedIn?: boolean;
   useFetchReplies?: typeof useGetRepliesPostsComments;
 }
 
@@ -18,8 +19,10 @@ const CommentList = ({
   comments,
   onSubmit,
   isPending,
+  isLoggedIn,
   useFetchReplies,
 }: CommentListProps) => {
+  if (!isLoggedIn) return <GuestCommentUI />;
   if (!comments) return null;
 
   const hasNext = comments.hasNext;
@@ -34,7 +37,7 @@ const CommentList = ({
         </h2>
       </header>
 
-      {isEmpty ? (
+      {isEmpty || isLoggedIn ? (
         <EmptyCommentUI />
       ) : (
         <ul>

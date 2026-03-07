@@ -13,9 +13,10 @@ import { useHandleReplySubmit } from "../../_hooks/useHandleReplySubmit/useHandl
 
 interface ClientDetailProps {
   id: number;
+  isLoggedIn: boolean;
 }
 
-const ClientDetail = ({ id }: ClientDetailProps) => {
+const ClientDetail = ({ id, isLoggedIn }: ClientDetailProps) => {
   const { data, isLoading, isError } = useGetDetailPost({ id });
   const { data: commentsData } = useGetPostsComments({ postId: id });
   const { handleReplySubmit, isPending } = useHandleReplySubmit(id);
@@ -45,6 +46,7 @@ const ClientDetail = ({ id }: ClientDetailProps) => {
           comments={commentsData?.result}
           onSubmit={handleReplySubmit}
           isPending={isPending}
+          isLoggedIn={isLoggedIn}
           useFetchReplies={useGetRepliesPostsComments}
         />
 
