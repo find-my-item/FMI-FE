@@ -17,10 +17,10 @@ const GuestLoginModal = ({ isOpen, onClose }: GuestLoginModalProps) => {
         <p className="text-body2-regular text-layout-body-default">로그인하고 의견을 남겨보세요.</p>
       </div>
       <div className="w-full gap-2 flex-center">
-        <Button variant="outlined" className="min-h-11 min-w-[147px] flex-1" onClick={onClose}>
+        <Button variant="outlined" className="min-h-11 w-[147px] flex-1" onClick={onClose}>
           취소
         </Button>
-        <Button as={Link} href="/login" className="min-h-11 min-w-[147px] flex-1">
+        <Button as={Link} href="/login" className="min-h-11 w-[147px] flex-1">
           로그인
         </Button>
       </div>

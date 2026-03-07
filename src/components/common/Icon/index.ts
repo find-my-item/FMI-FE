@@ -101,3 +101,4 @@ export { default as AlertBellFooter } from "@/assets/alert-bell-footer.svg";
 export { default as LikeActive } from "@/assets/like-active.svg";
 export { default as AccordionToggle } from "@/assets/accordion-toggle.svg";
 export { default as AccordionQMark } from "@/assets/accordion-q-mark.svg";
+export { default as EyeDetail } from "@/assets/eye-detail.svg";

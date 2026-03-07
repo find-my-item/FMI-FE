@@ -25,7 +25,7 @@ const page = () => {
         type={normalizeEnumValue(reportsType as DetailReportsType) || "REPORT"}
       />
       {/* TODO(지권): 임시 댓글 입력 폼 추가, 빌드 에러 임시 해결 */}
-      <PostInputComment postId={123} />
+      <PostInputComment postId={123} isLoggedIn={false} />
     </>
   );
 };
