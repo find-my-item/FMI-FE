@@ -48,7 +48,6 @@ const STATUS_QUERY_VALUE_MAP: Record<PostType, string> = {
 const ACTIVITY_QUERY_VALUE_MAP: Record<ActivityType, string> = {
   POST: "post",
   COMMENT: "comment",
-  AUTHENTICATION: "authentication",
   FAVORITE: "favorite",
   INQUIRY: "inquiry",
   REPORT: "report",
