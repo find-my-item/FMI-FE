@@ -7,7 +7,7 @@ interface CommentListProps {
   comments?: GetPostsCommentsData;
   onSubmit: (content: string, image: File | null, parentId: number) => void;
   isPending: boolean;
-  useFetchReplies: typeof useGetRepliesPostsComments;
+  useFetchReplies?: typeof useGetRepliesPostsComments;
 }
 
 // TODO(지권): 댓글 페이지네이션 백엔드 협의 필요
@@ -40,7 +40,7 @@ const CommentList = ({
             data={comment}
             onSubmit={onSubmit}
             isPending={isPending}
-            useFetchReplies={useFetchReplies}
+            useFetchReplies={useFetchReplies!}
           />
         ))}
       </ul>
