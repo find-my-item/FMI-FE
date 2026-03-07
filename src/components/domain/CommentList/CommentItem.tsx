@@ -19,6 +19,8 @@ interface CommentCardProps {
   autoOpenReplies?: boolean;
 
   useFetchReplies: typeof useGetRepliesPostsComments;
+
+  isGuest?: boolean;
 }
 
 const CommentItem = ({
@@ -30,6 +32,7 @@ const CommentItem = ({
   isPending,
   autoOpenReplies = false,
   useFetchReplies,
+  isGuest = false,
 }: CommentCardProps) => {
   const isReply = level === "reply";
   const isNestedReply = level === "nestedReply";
@@ -43,7 +46,7 @@ const CommentItem = ({
 
   const { data: replyCommentData } = useFetchReplies({
     commentId: data.id,
-    enabled: shouldFetchReplies,
+    enabled: !isGuest && shouldFetchReplies,
   });
 
   const handleReplySubmit = (content: string, image: File | null) => {
@@ -54,6 +57,7 @@ const CommentItem = ({
 
   const authorId = data.authorResponse ? String(data.authorResponse.userId) : "";
   const authorName = data.authorResponse ? data.authorResponse.nickName : "";
+  const profileImageUrl = data.authorResponse ? data.authorResponse.profileImageUrl : "";
 
   const replyComments = replyCommentData?.result?.comments ?? [];
   const isRepliesVisible = shouldFetchReplies;
@@ -68,7 +72,8 @@ const CommentItem = ({
           <div className="space-y-2">
             <div className="flex flex-col gap-3">
               <CommentMeta
-                data={{ authorId, createdAt: data.createdAt, authorName }}
+                data={{ authorId, createdAt: data.createdAt, authorName, profileImageUrl }}
+                isGuest={isGuest}
                 isThreadItem={isThreadItem}
               />
 
@@ -84,6 +89,7 @@ const CommentItem = ({
             <CommentFooter
               footerData={{ likeCount: data.likeCount, id: data.id, isLike: data.isLike }}
               isThreadItem={isThreadItem}
+              isGuest={isGuest}
               isReplyFormOpen={isReplyFormOpen}
               setIsReplyFormOpen={setIsReplyFormOpen}
             />
@@ -96,6 +102,7 @@ const CommentItem = ({
             viewReply={isTopLevelComment ? viewReply : autoOpenReplies}
             setViewReply={setViewReply}
             replyCount={data.childCommentCount || 0}
+            isGuest={isGuest}
           />
         </div>
       </div>
@@ -122,6 +129,7 @@ const CommentItem = ({
               isPending={isPending}
               autoOpenReplies={isTopLevelComment && viewReply}
               useFetchReplies={useFetchReplies}
+              isGuest={isGuest}
             />
           ))}
         </ul>

@@ -15,7 +15,7 @@ export const MOCK_COMMENT_DATA: CommentItemType[] = [
     authorResponse: {
       userId: 1,
       nickName: "console.log",
-      profileImageUrl: "https://placehold.co/40x40?text=JS",
+      profileImageUrl: "/user/default-profile.svg",
     },
     childCommentCount: 0,
     imageList: [],
@@ -31,7 +31,7 @@ export const MOCK_COMMENT_DATA: CommentItemType[] = [
     authorResponse: {
       userId: 2,
       nickName: "undefined",
-      profileImageUrl: "https://placehold.co/40x40",
+      profileImageUrl: "/user/default-profile.svg",
     },
     childCommentCount: 0,
     imageList: [],
@@ -71,6 +71,7 @@ const GuestCommentUI = () => {
               postId={0}
               key={item.id}
               useFetchReplies={mockUseFetchReplies}
+              isGuest={true}
             />
           ))}
         </ul>

@@ -18,7 +18,7 @@ interface ClientDetailProps {
 
 const ClientDetail = ({ id, isLoggedIn }: ClientDetailProps) => {
   const { data, isLoading, isError } = useGetDetailPost({ id });
-  const { data: commentsData } = useGetPostsComments({ postId: id });
+  const { data: commentsData } = useGetPostsComments({ postId: id, enabled: isLoggedIn });
   const { handleReplySubmit, isPending } = useHandleReplySubmit(id);
 
   if (isLoading) return <DetailSkeleton />;
