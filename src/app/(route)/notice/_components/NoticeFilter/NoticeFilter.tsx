@@ -5,7 +5,8 @@ import { useClickOutside } from "@/hooks";
 import { cn } from "@/utils";
 import { useSearchParams } from "next/navigation";
 import { useRef, useState } from "react";
-import { FILTER_OPTIONS, FilterOptionValue } from "./FILTER_OPTIONS";
+import { FILTER_OPTIONS } from "./FILTER_OPTIONS";
+import { NoticeSortType } from "@/types";
 
 interface NoticeFilterProps {
   searchUpdateQuery: (key: string, value?: string) => void;
@@ -20,7 +21,7 @@ const NoticeFilter = ({ searchUpdateQuery }: NoticeFilterProps) => {
   const sortTypeDisplayText =
     FILTER_OPTIONS.find((option) => option.value === selectedSortType)?.label ?? "최신순";
 
-  const handleOptionClick = (value: FilterOptionValue) => {
+  const handleOptionClick = (value: NoticeSortType) => {
     searchUpdateQuery("sortType", value === "LATEST" ? undefined : value);
     setIsOpen(false);
   };
