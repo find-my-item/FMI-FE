@@ -54,7 +54,7 @@ const ClientDetail = ({ id, isLoggedIn }: ClientDetailProps) => {
           <SimilarItemsSection postId={id} />
         </ErrorBoundary>
       </div>
-      <PostInputComment postId={id} />
+      <PostInputComment postId={id} isLoggedIn={isLoggedIn} />
     </>
   );
 };
