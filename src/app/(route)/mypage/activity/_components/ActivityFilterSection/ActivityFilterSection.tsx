@@ -5,7 +5,6 @@ import { useState } from "react";
 import { DateRangeBottomSheet } from "@/components/domain";
 import { ACTIVITY_OPTIONS } from "../../_constants/ACTIVITY_OPTIONS";
 import { ActivityFilterState } from "../../_types/ActivityFilterType";
-import { formatYmdLabel, parseYmd } from "@/utils/parseDateFilter/parseDateFilter";
 import {
   filterSelectionState,
   normalizedFilterValues,
@@ -14,6 +13,7 @@ import { ACTIVITY_LABEL_MAP } from "../../_constants/ACTIVITY_LABEL";
 import { useActivityFilter } from "../../_hooks/useActivityFilter";
 import ActivityBottomSheet from "../ActivityBottomSheet/ActivityBottomSheet";
 import { cn } from "@/utils";
+import { getDateRangeLabel } from "@/utils/getDateRangeLabel/getDateRangeLabel";
 
 const ActivityFilterSection = () => {
   const { filters, setFilters, startDate, endDate, activity } = useActivityFilter();
@@ -23,14 +23,7 @@ const ActivityFilterSection = () => {
     mode: "Date" | "Activity";
   }>({ isOpen: false, mode: "Date" });
 
-  const startDateObj = parseYmd(startDate);
-  const endDateObj = parseYmd(endDate);
-
-  const startLabel = startDateObj ? formatYmdLabel(startDateObj) : "";
-  const endLabel = endDateObj ? formatYmdLabel(endDateObj) : "";
-
-  const dateLabel =
-    startLabel && endLabel ? `${startLabel} ~ ${endLabel}` : startLabel || endLabel || "기간";
+  const dateLabel = getDateRangeLabel(startDate, endDate);
 
   const { normalizedActivity } = normalizedFilterValues({ activity: activity });
   const selectionState = filterSelectionState({ startDate, endDate, activity });
