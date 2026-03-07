@@ -1,38 +1,34 @@
+"use client";
+
 import useAppInfiniteQuery from "@/api/_base/query/useAppInfiniteQuery";
 import { GetNoticesResponse, NoticeItem } from "../types/NoticesType";
 import { InfiniteData, keepPreviousData } from "@tanstack/react-query";
+import { useSearchParams } from "next/navigation";
 
-interface UseGetDeletedUsersParams {
-  category?: string;
-  keyword?: string;
-  sortType?: string;
-  page?: string;
-  size?: number;
-}
+const DEFAULT_SIZE = 10;
 
-export const useGetNotices = ({
-  category,
-  keyword,
-  sortType,
-  page,
-  size = 10,
-}: UseGetDeletedUsersParams = {}) => {
+export const useGetNotices = () => {
+  const searchParams = useSearchParams();
+
+  const category = searchParams.get("category") ?? undefined;
+  const keyword = searchParams.get("keyword") ?? undefined;
+  const sortType = searchParams.get("sortType") ?? undefined;
+  const size = Number(searchParams.get("size")) || DEFAULT_SIZE;
+
   const params = new URLSearchParams();
   params.set("size", String(size));
-
   if (category) params.set("category", category);
   if (keyword) params.set("keyword", keyword);
   if (sortType) params.set("sortType", sortType);
-  if (page) params.set("page", page);
 
   return useAppInfiniteQuery<GetNoticesResponse, unknown, NoticeItem[]>(
     "public",
-    ["notices", category, keyword, sortType, page, size],
+    ["notices", category, keyword, sortType, size],
     `/notices?${params.toString()}`,
     {
       placeholderData: keepPreviousData,
       getNextPageParam: (lastPage) =>
-        lastPage.result.last ? undefined : lastPage.result.number + 1,
+        lastPage.result.hasNext ? (lastPage.result.nextCursor ?? undefined) : undefined,
       select: (data: InfiniteData<GetNoticesResponse>) =>
         data.pages.flatMap((page) => page.result.content),
       throwOnError: true,
