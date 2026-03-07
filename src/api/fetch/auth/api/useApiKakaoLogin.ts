@@ -1,12 +1,30 @@
 import useAppMutation from "@/api/_base/query/useAppMutation";
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
+import { useToast } from "@/context/ToastContext";
+import { useRouter } from "next/navigation";
 
 const useApiKakaoLogin = () => {
+  const router = useRouter();
+
+  const { addToast } = useToast();
+
   return useAppMutation<
     { code: string; environment: string },
     ApiBaseResponseType<{ userId: number; isTemporaryPassword: boolean }>,
     ApiBaseResponseType<null>
-  >("auth", "/auth/kakao", "post");
+  >("auth", "/auth/kakao", "post", {
+    onSuccess: () => {
+      router.replace("/");
+    },
+    onError: (error) => {
+      if (error.code === "AUTH400-KAKAO_CODE_INVALID")
+        addToast("카카오 인증코드가 유효하지 않거나 이미 사용되었어요.", "warning");
+      else if (error.code === "AUTH500-KAKAO_USERINFO_FAILED")
+        addToast("카카오 사용자 정보 조회에 실패했어요.", "warning");
+      else addToast("잠시 후 다시 시도해 주세요.", "warning");
+      router.replace("/login");
+    },
+  });
 };
 
 export default useApiKakaoLogin;
