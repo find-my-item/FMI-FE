@@ -4,13 +4,28 @@ import { Filter, KebabMenu } from "@/components/common";
 import { useState } from "react";
 import { DateRangeBottomSheet } from "@/components/domain";
 import { useFilterParams } from "@/hooks/domain";
-import { formatYmdLabel, parseYmd } from "@/utils";
-import { normalizedFilterValues } from "@/components/domain/FilterSectionBottomSheet/utils/deriveFilterParams";
+import { formatYmdLabel, getDateRangeLabel, parseYmd } from "@/utils";
+import {
+  filterSelectionState,
+  normalizedFilterValues,
+} from "@/components/domain/FilterSectionBottomSheet/utils/deriveFilterParams";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-type SortFilterValue = "LATEST" | "OLDEST";
+export interface ActivityFilterState {
+  startDate: string;
+  endDate: string;
+  sort: "";
+}
 
-const SORT_DEFAULT_LABEL = "최신순";
+// { label: "최신순", value: "LATEST" },
+// { label: "오래된순", value: "OLDEST" },
+
+export const COMMENT_DEFAULT_FILTERS: ActivityFilterState = {
+  startDate: "",
+  endDate: "",
+  sort: undefined,
+};
+
 const SORT_LABEL_MAP = [{ LATEST: "최신순" }, { OLDEST: "오래된 순" }];
 
 const MypageCommentsFilter = () => {
@@ -21,24 +36,24 @@ const MypageCommentsFilter = () => {
 
   const kebabMenuItems = SORT_LABEL_MAP.map((item) => ({
     text: item,
-    onClick: () => {
-      const searchParams = useSearchParams();
-      const pathname = usePathname();
-      const router = useRouter();
-    },
+    // onClick: () => {
+    //   const searchParams = useSearchParams();
+    //   const pathname = usePathname();
+    //   const router = useRouter();
+    // },
   }));
 
-  const { date, sort } = useFilterParams();
+  const { startDate, endDate, sort } = useFilterParams();
   const { normalizedSort } = normalizedFilterValues({ sort: sort });
+  const selectionState = filterSelectionState({ startDate, endDate, sort });
 
-  const dateObj = parseYmd(date);
-  const dateLabel = dateObj ? formatYmdLabel(dateObj) : "기간";
+  const dateLabel = getDateRangeLabel(startDate, endDate);
 
-  // const [filters, setFilters] = useState<CommentFilterState>({
-  //   ...SORT_DEFAULT_LABEL,
-  //   date: date ?? "",
-  //   activity: normalizeEnumValue<Exclude<CommentFilterState, undefined>>(activity),
-  // });
+  const [filters, setFilters] = useState<CommentFilterState>({
+    ...SORT_DEFAULT_LABEL,
+    date: date ?? "",
+    activity: normalizeEnumValue<Exclude<CommentFilterState, undefined>>(activity),
+  });
 
   return (
     <section className="flex w-full gap-2 px-5 py-[14px]">
@@ -49,21 +64,21 @@ const MypageCommentsFilter = () => {
         ariaLabel="기간"
         icon={{ name: "Calendar", size: 16 }}
         iconPosition="leading"
-        onSelected={!!date}
+        onSelected={selectionState.isDateSelected}
         onClick={() => setIsFilterSheet({ isOpen: true, mode: "Date" })}
       >
-        {date ? dateLabel : "기간"}
+        {dateLabel}
       </Filter>
 
       <div className="relative">
         <Filter
           ariaLabel="정렬 필터"
           icon={{ name: "ArrowDown", size: 16 }}
-          onSelected={false}
+          onSelected={selectionState.isSortSelected}
           onClick={() => setIsFilterSheet((prev) => ({ ...prev, open: true }))}
           iconPosition="trailing"
         >
-          {/* {(normalizedSort && SORT_LABEL_MAP[normalizedSort]) ?? SORT_DEFAULT_LABEL} */}
+          {(normalizedSort && SORT_LABEL_MAP[normalizedSort]) ?? "최신순"}
           최신순
         </Filter>
 
@@ -76,8 +91,10 @@ const MypageCommentsFilter = () => {
 
       {isFilterSheet.isOpen && isFilterSheet.mode === "Date" && (
         <DateRangeBottomSheet
-          onClose={() => setIsFilterSheet((prev) => ({ ...prev, isOpen: false }))}
           isOpen={isFilterSheet.isOpen}
+          onClose={() => setIsFilterSheet((prev) => ({ ...prev, isOpen: false }))}
+          filters={}
+          setFilters={}
         />
       )}
     </section>
