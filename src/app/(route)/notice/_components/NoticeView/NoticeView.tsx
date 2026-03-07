@@ -40,7 +40,7 @@ const NoticeView = () => {
           </form>
         </FormProvider>
       </div>
-      <NoticeFilter />
+      <NoticeFilter searchUpdateQuery={searchUpdateQuery} />
       {notices && notices.length > 0 && <NoticeList notices={notices} />}
       <div ref={noticeListRef} className="h-[100px]" />
     </div>
