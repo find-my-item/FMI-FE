@@ -1,8 +1,8 @@
 import { cn } from "@/utils";
 
-const NoticeDetailSkeleton = () => {
-  const SKELETON_STYLE = "rounded-2xl bg-labelsVibrant-quaternary skeleton-animation";
+const SKELETON_STYLE = "rounded-2xl bg-labelsVibrant-quaternary skeleton-animation";
 
+const NoticeDetailSkeleton = () => {
   return (
     <div className="space-y-3 px-5 py-[30px]">
       <div className={cn("h-[21px] w-[39px]", SKELETON_STYLE)} />
