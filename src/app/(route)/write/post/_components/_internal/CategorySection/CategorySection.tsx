@@ -5,7 +5,7 @@ import { useFormContext, useWatch } from "react-hook-form";
 import { CategoryType } from "@/types";
 import { getItemCategoryLabel } from "@/utils";
 import { Icon, RequiredText } from "@/components/common";
-import CategoryPopup from "../CategoryPopup/CategoryPopup";
+import { CategoryPopup } from "@/components/domain";
 import { PostWriteFormValues } from "../../../_types/PostWriteType";
 
 const CategorySection = () => {

@@ -21,3 +21,4 @@ export { default as ReportModal } from "./ReportModal/ReportModal";
 export { default as PostReportBlockActions } from "./PostReportBlockActions/PostReportBlockActions";
 export { default as WriteImageSection } from "./WriteImageSection/WriteImageSection";
 export { default as WriteActionSection } from "./WriteActionSection/WriteActionSection";
+export { default as CategoryPopup } from "./CategoryPopup/CategoryPopup";
