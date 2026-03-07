@@ -2,10 +2,19 @@
 
 import { useState } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
-import { CategoryType } from "@/types";
-import { getItemCategoryLabel } from "@/utils";
+import { NoticeCategory } from "@/types";
 import { Icon, RequiredText } from "@/components/common";
 import { CategoryPopup } from "@/components/domain";
+
+const CATEGORY_LABEL: Record<NoticeCategory, string> = {
+  IMPORTANT: "중요",
+  UPDATE: "업데이트",
+  MAINTENANCE: "점검",
+  EVENT: "이벤트",
+  GENERAL: "일반",
+};
+
+const getNoticeCategoryLabel = (category: NoticeCategory): string => CATEGORY_LABEL[category];
 
 const CategoryInput = () => {
   const [categoryPopupOpen, setCategoryPopupOpen] = useState(false);
@@ -13,7 +22,7 @@ const CategoryInput = () => {
   const { control, setValue } = useFormContext();
   const category = useWatch({ control, name: "category" });
 
-  const onSelectCategory = (category: CategoryType) => {
+  const onSelectCategory = (category: NoticeCategory) => {
     setValue("category", category, {
       shouldDirty: true,
       shouldValidate: true,
@@ -21,7 +30,7 @@ const CategoryInput = () => {
     setCategoryPopupOpen(false);
   };
 
-  const categoryLabel = category ? getItemCategoryLabel(category) : "";
+  const categoryLabel = category ? getNoticeCategoryLabel(category as NoticeCategory) : "";
 
   return (
     <>
@@ -38,9 +47,10 @@ const CategoryInput = () => {
       </section>
 
       <CategoryPopup
+        mode="notice"
         isOpen={categoryPopupOpen}
         onClose={() => setCategoryPopupOpen(false)}
-        onSelect={onSelectCategory}
+        onSelect={(c) => onSelectCategory(c as NoticeCategory)}
       />
     </>
   );
