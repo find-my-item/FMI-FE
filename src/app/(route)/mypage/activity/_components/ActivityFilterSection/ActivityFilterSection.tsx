@@ -5,7 +5,6 @@ import { useState } from "react";
 import { DateRangeBottomSheet } from "@/components/domain";
 import { ACTIVITY_OPTIONS } from "../../_constants/ACTIVITY_OPTIONS";
 import { ActivityFilterState } from "../../_types/ActivityFilterType";
-import { formatYmdLabel, parseYmd } from "@/utils/parseDateFilter/parseDateFilter";
 import {
   filterSelectionState,
   normalizedFilterValues,

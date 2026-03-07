@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Swiper as SwiperType } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Mousewheel } from "swiper/modules";
-import { cn } from "@/utils";
+import { cn, parseYmd } from "@/utils";
 import useMakeDate from "./_hooks/useMakeDate";
 import PopupLayout from "../PopupLayout/PopupLayout";
 import { Button, Filter } from "@/components/common";
@@ -12,7 +12,6 @@ import { applyFiltersToUrl } from "../../../utils/applyFiltersToUrl/applyFilters
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FiltersStateType } from "../FilterSectionBottomSheet/_types/filtersStateType";
 import { useFilterParams } from "@/hooks/domain";
-import { parseYmd } from "../../../utils/parseDateFilter/parseDateFilter";
 import { ActivityFilterState } from "@/app/(route)/mypage/activity/_types/ActivityFilterType";
 import { useToast } from "@/context/ToastContext";
 
@@ -93,6 +92,7 @@ const DateRangeBottomSheet = <T extends FiltersStateType | ActivityFilterState>(
   setFilters,
 }: DateRangeBottomSheetProps<T>) => {
   const { startDate, endDate } = useFilterParams();
+
   const queryStartDate = parseYmd(startDate);
   const queryEndDate = parseYmd(endDate);
 
@@ -126,7 +126,7 @@ const DateRangeBottomSheet = <T extends FiltersStateType | ActivityFilterState>(
 
     if (start > end) {
       // TODO(수현): 문구 확인 필요
-      addToast("종료일은 시작일보다 이전일 수 없어요.", "warning");
+      addToast("종료일은 시작일보다 이전일 수 없어요", "warning");
       return;
     }
 
