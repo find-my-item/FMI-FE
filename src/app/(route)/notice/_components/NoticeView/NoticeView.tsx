@@ -14,7 +14,7 @@ const NoticeView = () => {
     reValidateMode: "onChange",
   });
   const noticeSearch = methods.watch("noticeSearch") ?? "";
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetNotices();
+  const { data: notices, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetNotices();
   const { ref: noticeListRef } = useInfiniteScroll({
     fetchNextPage,
     hasNextPage,
@@ -41,7 +41,7 @@ const NoticeView = () => {
         </FormProvider>
       </div>
       <NoticeFilter />
-      <NoticeList notices={data ?? []} />
+      {notices && notices.length > 0 && <NoticeList notices={notices} />}
       <div ref={noticeListRef} className="h-[100px]" />
     </div>
   );
