@@ -5,14 +5,18 @@
  * 내부에 정의된 각 MAP 객체는 클라이언트의 상태 값(Enum/Type)을 URL에 적합한 문자열로 매핑합니다.
  */
 
-import { FiltersStateType } from "../_types/filtersStateType";
+import {
+  ActivityFilterState,
+  ActivityFilterValue,
+} from "@/app/(route)/mypage/activity/_types/ActivityFilterType";
+import { FiltersStateType } from "../../components/domain/FilterSectionBottomSheet/_types/filtersStateType";
 import {
   CategoryFilterValue,
   FindStatusFilterValue,
   SortFilterValue,
   StatusFilterValue,
-} from "../_types/types";
-import { CategoryType, ItemStatus, PostType } from "@/types";
+} from "../../components/domain/FilterSectionBottomSheet/_types/types";
+import { ActivityType, CategoryType, ItemStatus, PostType } from "@/types";
 
 const CATEGORY_QUERY_VALUE_MAP: Record<CategoryType, string> = {
   ELECTRONICS: "electronics",
@@ -41,6 +45,14 @@ const STATUS_QUERY_VALUE_MAP: Record<PostType, string> = {
   FOUND: "found",
 };
 
+const ACTIVITY_QUERY_VALUE_MAP: Record<ActivityType, string> = {
+  POST: "post",
+  COMMENT: "comment",
+  FAVORITE: "favorite",
+  INQUIRY: "inquiry",
+  REPORT: "report",
+};
+
 const categoryToQueryValue = (category: CategoryFilterValue): string | undefined => {
   if (!category) return undefined;
   return CATEGORY_QUERY_VALUE_MAP[category];
@@ -60,8 +72,13 @@ const statusToQueryValue = (status: StatusFilterValue): string | undefined => {
   return STATUS_QUERY_VALUE_MAP[status];
 };
 
+const activityToQueryValue = (activity: ActivityFilterValue): string | undefined => {
+  if (!activity) return undefined;
+  return ACTIVITY_QUERY_VALUE_MAP[activity];
+};
+
 type ApplyFiltersToUrlProps = {
-  filters: FiltersStateType;
+  filters: Partial<FiltersStateType & ActivityFilterState>;
   searchParams: URLSearchParams;
 };
 
@@ -73,11 +90,14 @@ export const applyFiltersToUrl = ({ filters, searchParams }: ApplyFiltersToUrlPr
     else params.set(key, value);
   };
 
-  upsert("region", filters.region);
-  upsert("category", categoryToQueryValue(filters.category));
-  upsert("sort", sortToQueryValue(filters.sort));
-  upsert("status", statusToQueryValue(filters.status));
-  upsert("findStatus", findStatusToQueryValue(filters.findStatus));
+  if ("region" in filters) upsert("region", filters.region);
+  if ("category" in filters) upsert("category", categoryToQueryValue(filters.category));
+  if ("sort" in filters) upsert("sort", filters.sort ? sortToQueryValue(filters.sort) : undefined);
+  if ("status" in filters) upsert("status", statusToQueryValue(filters.status));
+  if ("findStatus" in filters) upsert("findStatus", findStatusToQueryValue(filters.findStatus));
+  if ("activity" in filters) upsert("activity", activityToQueryValue(filters.activity));
+  if ("startDate" in filters) upsert("startDate", filters.startDate);
+  if ("endDate" in filters) upsert("endDate", filters.endDate);
 
   return params.toString();
 };
