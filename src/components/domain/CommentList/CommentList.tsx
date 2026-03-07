@@ -1,6 +1,7 @@
 import { ViewMoreComment } from "@/components/common";
 import { GetPostsCommentsData, useGetRepliesPostsComments } from "@/api/fetch/comment";
 import CommentItem from "./CommentItem";
+import { EmptyCommentUI } from "./_internal";
 
 interface CommentListProps {
   postId: number;
@@ -19,10 +20,11 @@ const CommentList = ({
   isPending,
   useFetchReplies,
 }: CommentListProps) => {
-  if (!comments || !comments.comments?.length) return null;
+  if (!comments) return null;
 
   const hasNext = comments.hasNext;
   const data = comments.comments;
+  const isEmpty = data.length === 0;
 
   return (
     <>
@@ -32,18 +34,22 @@ const CommentList = ({
         </h2>
       </header>
 
-      <ul>
-        {data.map((comment) => (
-          <CommentItem
-            key={comment.id}
-            postId={postId}
-            data={comment}
-            onSubmit={onSubmit}
-            isPending={isPending}
-            useFetchReplies={useFetchReplies!}
-          />
-        ))}
-      </ul>
+      {isEmpty ? (
+        <EmptyCommentUI />
+      ) : (
+        <ul>
+          {data.map((comment) => (
+            <CommentItem
+              key={comment.id}
+              postId={postId}
+              data={comment}
+              onSubmit={onSubmit}
+              isPending={isPending}
+              useFetchReplies={useFetchReplies!}
+            />
+          ))}
+        </ul>
+      )}
 
       {hasNext && <ViewMoreComment count={comments.remainingCount} />}
     </>

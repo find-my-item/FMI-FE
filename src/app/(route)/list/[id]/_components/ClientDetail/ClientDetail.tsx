@@ -37,20 +37,21 @@ const ClientDetail = ({ id }: ClientDetailProps) => {
         }}
       />
 
-      <PostDetail type="find" data={data.result} />
+      <div className="h-base">
+        <PostDetail type="find" data={data.result} />
 
-      <CommentList
-        postId={id}
-        comments={commentsData?.result}
-        onSubmit={handleReplySubmit}
-        isPending={isPending}
-        useFetchReplies={useGetRepliesPostsComments}
-      />
+        <CommentList
+          postId={id}
+          comments={commentsData?.result}
+          onSubmit={handleReplySubmit}
+          isPending={isPending}
+          useFetchReplies={useGetRepliesPostsComments}
+        />
 
-      <ErrorBoundary fallback={<ErrorSimilarSection postId={id} />}>
-        <SimilarItemsSection postId={id} />
-      </ErrorBoundary>
-
+        <ErrorBoundary fallback={<ErrorSimilarSection postId={id} />}>
+          <SimilarItemsSection postId={id} />
+        </ErrorBoundary>
+      </div>
       <PostInputComment postId={id} />
     </>
   );
