@@ -3,11 +3,13 @@ import { useToast } from "@/context/ToastContext";
 import { useRouter } from "next/navigation";
 
 const useLogout = () => {
-  const { mutate: logoutMutate } = useApiLogout();
+  const { mutate: logoutMutate, isPending } = useApiLogout();
   const { addToast } = useToast();
   const router = useRouter();
 
   const handleLogout = () => {
+    if (isPending) return;
+
     logoutMutate(undefined, {
       onSuccess: () => {
         addToast("로그아웃 되었어요.", "success");
@@ -19,7 +21,7 @@ const useLogout = () => {
     });
   };
 
-  return { handleLogout };
+  return { handleLogout, isPending };
 };
 
 export default useLogout;

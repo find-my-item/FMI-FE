@@ -24,7 +24,7 @@ import { usePathname } from "next/navigation";
  * ```
  *
  */
-const visibleExactPaths = ["/", "/list", "/chat", "/alert", "/mypage"];
+const visibleExactPaths = ["/", "/list", "/chat", "/alert", "/mypage", "/admin"];
 
 export const useHiddenPath = () => {
   const pathname = usePathname() ?? "";
