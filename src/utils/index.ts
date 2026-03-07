@@ -18,3 +18,4 @@ export { textareaSubmitKeyHandler } from "./textareaSubmitKeyHandler/textareaSub
 export { highlightText } from "./highlightText/highlightText";
 export * from "./parseDateFilter/parseDateFilter";
 export * from "./applyFiltersToUrl/applyFiltersToUrl";
+export * from "./getDateRangeLabel/getDateRangeLabel";

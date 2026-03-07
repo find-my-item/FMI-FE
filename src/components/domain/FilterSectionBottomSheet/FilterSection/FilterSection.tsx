@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { normalizeEnumValue } from "@/utils";
+import { getDateKey, normalizeEnumValue } from "@/utils";
 import { Filter } from "@/components/common";
 import FilterBottomSheet from "../FilterBottomSheet/FilterBottomSheet";
 import {
@@ -23,6 +23,8 @@ import { useFilterParams } from "@/hooks/domain";
 import { TABS } from "../_constants/TABS";
 import DateRangeBottomSheet from "../../DateRangeBottomSheet/DateRangeBottomSheet";
 import { formatYmdLabel, parseYmd } from "../../../../utils/parseDateFilter/parseDateFilter";
+import { getDateRangeLabel } from "@/utils/getDateRangeLabel/getDateRangeLabel";
+import { start } from "repl";
 
 /**
  * @author jikwon (Original)
@@ -90,14 +92,7 @@ const FilterSection = ({ pageType = "LIST" }: FilterSectionProps) => {
     setIsFilterOpen(true);
   };
 
-  const startDateObj = parseYmd(startDate);
-  const endDateObj = parseYmd(endDate);
-
-  const startLabel = startDateObj ? formatYmdLabel(startDateObj) : "";
-  const endLabel = endDateObj ? formatYmdLabel(endDateObj) : "";
-
-  const dateLabel =
-    startLabel && endLabel ? `${startLabel} ~ ${endLabel}` : startLabel || endLabel || "기간";
+  const dateLabel = getDateRangeLabel(startDate, endDate);
 
   const filterConfigs: Record<FilterTab, any> = {
     date: {
