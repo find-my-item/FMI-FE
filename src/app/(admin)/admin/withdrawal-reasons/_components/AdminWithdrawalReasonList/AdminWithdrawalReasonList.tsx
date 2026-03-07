@@ -9,12 +9,19 @@ import { formatDate } from "@/utils";
 import { WITHDRAWAL_REASON_OPTIONS } from "../../_constants/WITHDRAWAL_REASON_OPTIONS";
 import { WithdrawalReasonType } from "../../_types/WithdrawalReasonType";
 
-const AdminWithdrawalReasonList = ({ reason }: { reason: WithdrawalReasonType }) => {
+const AdminWithdrawalReasonList = ({
+  reason,
+  keyword,
+}: {
+  reason: WithdrawalReasonType;
+  keyword: string;
+}) => {
   const { addToast } = useToast();
 
   const { data, isLoading, isError, hasNextPage, fetchNextPage, isFetchingNextPage } =
     useGetDeletedUsers({
       reason,
+      keyword,
     });
   const { ref: listRef } = useInfiniteScroll({
     fetchNextPage,

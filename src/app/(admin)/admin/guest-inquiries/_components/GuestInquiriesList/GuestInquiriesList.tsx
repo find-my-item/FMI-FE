@@ -10,15 +10,15 @@ import { toGuestInquiryItemVM } from "../../../_utils/toReportsItemVM/toReportsI
 
 interface GuestInquiriesListProps {
   status: string;
-  answer: string;
+  answered?: boolean;
   keyword: string;
 }
 
-const GuestInquiriesList = ({ status, answer, keyword }: GuestInquiriesListProps) => {
+const GuestInquiriesList = ({ status, answered, keyword }: GuestInquiriesListProps) => {
   const { addToast } = useToast();
 
   const { data, isLoading, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useGetGuestInquiries({ status, keyword });
+    useGetGuestInquiries({ status, keyword, answered });
   const { ref: listRef } = useInfiniteScroll({
     fetchNextPage,
     hasNextPage,
