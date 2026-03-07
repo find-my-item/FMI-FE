@@ -2,7 +2,7 @@
 
 import { DetailHeader } from "@/components/layout";
 import { NoticeView } from "./_components";
-import { FloatingButton } from "@/components/common";
+import { FloatingButton, ScrollToTopButton } from "@/components/common";
 import { useRouter } from "next/navigation";
 import { Suspense } from "react";
 
@@ -17,7 +17,8 @@ const Notice = () => {
         <NoticeView />
       </Suspense>
 
-      <div className="fixed bottom-6 right-6">
+      <div className="fixed bottom-[30px] right-6 space-y-2">
+        <ScrollToTopButton />
         <FloatingButton
           ariaLabel="공지사항 작성 페이지 이동"
           mode="notice"
