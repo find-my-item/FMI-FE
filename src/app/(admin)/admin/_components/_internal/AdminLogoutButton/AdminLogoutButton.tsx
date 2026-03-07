@@ -1,15 +1,20 @@
 "use client";
 
+import { useLogout } from "@/hooks";
+import { cn } from "@/utils";
+
 const AdminLogoutButton = () => {
-  const handleAdminLogout = () => {
-    // TODO(지권): 관리자 로그아웃 기능 추가
-  };
+  const { handleLogout, isPending } = useLogout();
 
   return (
     <button
       type="button"
-      className="flex w-full items-center justify-between py-[10px]"
-      onClick={handleAdminLogout}
+      className={cn(
+        "flex w-full items-center justify-between py-[10px]",
+        isPending && "cursor-not-allowed"
+      )}
+      onClick={handleLogout}
+      disabled={isPending}
     >
       <span className="text-body1-semibold text-neutral-strong-default">로그아웃</span>
     </button>
