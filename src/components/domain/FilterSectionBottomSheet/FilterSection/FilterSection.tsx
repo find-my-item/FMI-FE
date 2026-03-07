@@ -129,10 +129,10 @@ const FilterSection = ({ pageType = "LIST" }: FilterSectionProps) => {
       iconPosition: "trailing",
     },
     findStatus: {
-      ariaLabel: "찾음여부 필터",
+      ariaLabel: "찾음 여부 필터",
       onSelected: selectionState.isFindStatusSelected,
       icon: { name: "ArrowDown", size: 12 },
-      label: (normalizedFindStatus && FIND_STATUS_LABEL_MAP[normalizedFindStatus]) ?? "찾음여부",
+      label: (normalizedFindStatus && FIND_STATUS_LABEL_MAP[normalizedFindStatus]) ?? "찾음 여부",
       iconPosition: "trailing",
     },
     status: {
