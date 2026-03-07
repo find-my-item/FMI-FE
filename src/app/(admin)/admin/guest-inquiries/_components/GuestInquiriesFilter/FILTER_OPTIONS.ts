@@ -7,6 +7,6 @@ export const STATUS_OPTIONS = [
 
 export const ANSWER_OPTIONS = [
   { label: "답변", value: "" },
-  { label: "미답변", value: "unanswered" },
-  { label: "답변완료", value: "answered" },
+  { label: "미답변", value: "false" },
+  { label: "답변완료", value: "true" },
 ];

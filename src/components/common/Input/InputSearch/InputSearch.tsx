@@ -20,6 +20,7 @@ import DeleteButton from "../_internal/DeleteButton/DeleteButton";
  *  - `mode`: react-hook-from모드와 onChange모드 중 하나를 선택한다는 걸 InputSearch에 알려줍니다.
  *  - `validation`: 입력 필드의 유효성 검사를 위한 RegisterOption입니다. (기본적으로는 name만 사용하셔도 무방하지만 혹시모르기에 props로 추가해두었습니다.)
  *  - 'onEnter': 엔터 키 클릭 함수
+ *  - 'defaultValue': 입력 필드의 기본값입니다. onChange 모드에서 사용됩니다.
  *
  *
  * @example onChange 모드 사용 (독립형)
@@ -89,9 +90,10 @@ const InputSearchRHF = ({
 const InputSearchOnChange = ({
   name,
   onEnter,
+  defaultValue,
   ...props
 }: Omit<InputSearchProps, "mode" | "validation">) => {
-  const [innerValue, setInnerValue] = useState("");
+  const [innerValue, setInnerValue] = useState(defaultValue ? String(defaultValue) : "");
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== "Enter") return;

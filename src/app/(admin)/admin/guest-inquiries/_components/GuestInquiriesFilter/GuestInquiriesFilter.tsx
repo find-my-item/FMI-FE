@@ -10,13 +10,13 @@ interface GuestInquiriesFilterProps {
 
 const GuestInquiriesFilter = ({ currentParams }: GuestInquiriesFilterProps) => {
   const router = useRouter();
-  const [activeDropdown, setActiveDropdown] = useState<"status" | "answer" | null>(null);
+  const [activeDropdown, setActiveDropdown] = useState<"status" | "answered" | null>(null);
 
   const currentStatusValue = currentParams.get("status") ?? "";
   const currentStatusLabel =
     STATUS_OPTIONS.find((opt) => opt.value === currentStatusValue)?.label || "상태";
 
-  const currentAnswerValue = currentParams.get("answer") ?? "";
+  const currentAnswerValue = currentParams.get("answered") ?? "";
   const currentAnswerLabel =
     ANSWER_OPTIONS.find((opt) => opt.value === currentAnswerValue)?.label || "답변";
 
@@ -43,8 +43,8 @@ const GuestInquiriesFilter = ({ currentParams }: GuestInquiriesFilterProps) => {
     },
     {
       label: currentAnswerLabel,
-      onSelected: activeDropdown === "answer",
-      onClick: () => setActiveDropdown((prev) => (prev === "answer" ? null : "answer")),
+      onSelected: activeDropdown === "answered",
+      onClick: () => setActiveDropdown((prev) => (prev === "answered" ? null : "answered")),
     },
   ];
 
@@ -61,12 +61,12 @@ const GuestInquiriesFilter = ({ currentParams }: GuestInquiriesFilterProps) => {
         />
       )}
 
-      {activeDropdown === "answer" && (
+      {activeDropdown === "answered" && (
         <AdminDropdown
           open={true}
           className="left-[100px]"
           options={ANSWER_OPTIONS}
-          onSelect={(value) => handleFilterChange("answer", value)}
+          onSelect={(value) => handleFilterChange("answered", value)}
         />
       )}
     </div>

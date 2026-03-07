@@ -12,7 +12,7 @@ const DetailContent = ({ data }: DetailContentProps) => {
       ? data.type === "REPORT"
         ? data.reporterEmail
         : data.userEmail
-      : data.userEmail || "";
+      : data.email || "";
 
   return (
     <div className="space-y-2">

@@ -26,7 +26,9 @@ const GuestInquiriesView = () => {
 
       <GuestInquiriesList
         status={normalizeEnumValue(params.status) ?? ""}
-        answer={normalizeEnumValue(params.answer) ?? ""}
+        answered={
+          params.answered === "true" ? true : params.answered === "false" ? false : undefined
+        }
         keyword={params.q ?? ""}
       />
     </div>

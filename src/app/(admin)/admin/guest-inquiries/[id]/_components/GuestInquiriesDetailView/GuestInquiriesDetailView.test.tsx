@@ -18,7 +18,7 @@ jest.mock("@/components/state", () => ({
 
 jest.mock("@/app/(admin)/admin/_components", () => ({
   AdminDetailSection: ({ data }: any) => (
-    <div data-testid="detail-section" data-username={data?.userName} />
+    <div data-testid="detail-section" data-username={data?.email} />
   ),
 }));
 
@@ -54,8 +54,7 @@ describe("GuestInquiriesDetailView", () => {
     mockedUseGetDetailGuestInquiries.mockReturnValue({
       data: {
         result: {
-          userName: "admin@gmail.com",
-          userEmail: "admin@gmail.com",
+          email: "admin@gmail.com",
         },
       },
       isLoading: false,
@@ -95,8 +94,7 @@ describe("GuestInquiriesDetailView", () => {
     mockedUseGetDetailGuestInquiries.mockReturnValue({
       data: {
         result: {
-          userName: "admin@gmail.com",
-          userEmail: "",
+          email: "",
         },
       },
       isLoading: false,
