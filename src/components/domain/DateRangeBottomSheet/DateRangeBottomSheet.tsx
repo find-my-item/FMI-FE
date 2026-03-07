@@ -137,7 +137,6 @@ const DateRangeBottomSheet = <T extends FiltersStateType | ActivityFilterState>(
       searchParams: new URLSearchParams(searchParams.toString()),
     });
 
-    console.log("qs>> ", qs);
     router.replace(qs ? `${pathname}?${qs}` : pathname);
 
     setFilters(nextFilters);
