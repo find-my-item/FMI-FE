@@ -8,18 +8,20 @@ import {
 } from "../_types/ActivityFilterType";
 
 export const useActivityFilter = () => {
-  const { date, activity } = useFilterParams();
+  const { startDate, endDate, activity } = useFilterParams();
 
   const [filters, setFilters] = useState<ActivityFilterState>({
     ...ACTIVITY_DEFAULT_FILTERS,
-    date: date ?? "",
+    startDate: startDate ?? "",
+    endDate: endDate ?? "",
     activity: normalizeEnumValue<Exclude<ActivityFilterValue, undefined>>(activity),
   });
 
   return {
     filters,
     setFilters,
-    dateQuery: date,
-    activityQuery: activity,
+    startDate,
+    endDate,
+    activity,
   };
 };

@@ -9,16 +9,14 @@ import {
   ActivityFilterState,
   ActivityFilterValue,
 } from "@/app/(route)/mypage/activity/_types/ActivityFilterType";
-import { FiltersStateType } from "../_types/filtersStateType";
+import { FiltersStateType } from "../../components/domain/FilterSectionBottomSheet/_types/filtersStateType";
 import {
   CategoryFilterValue,
   FindStatusFilterValue,
   SortFilterValue,
   StatusFilterValue,
-} from "../_types/types";
-import { CategoryType, ItemStatus, PostType } from "@/types";
-import { ActivityType } from "@/app/(route)/mypage/activity/_types/ActivityType";
-import { filter } from "lodash";
+} from "../../components/domain/FilterSectionBottomSheet/_types/types";
+import { ActivityType, CategoryType, ItemStatus, PostType } from "@/types";
 
 const CATEGORY_QUERY_VALUE_MAP: Record<CategoryType, string> = {
   ELECTRONICS: "electronics",
@@ -47,6 +45,14 @@ const STATUS_QUERY_VALUE_MAP: Record<PostType, string> = {
   FOUND: "found",
 };
 
+const ACTIVITY_QUERY_VALUE_MAP: Record<ActivityType, string> = {
+  POST: "post",
+  COMMENT: "comment",
+  FAVORITE: "favorite",
+  INQUIRY: "inquiry",
+  REPORT: "report",
+};
+
 const categoryToQueryValue = (category: CategoryFilterValue): string | undefined => {
   if (!category) return undefined;
   return CATEGORY_QUERY_VALUE_MAP[category];
@@ -64,15 +70,6 @@ const findStatusToQueryValue = (findStatus: FindStatusFilterValue): string | und
 const statusToQueryValue = (status: StatusFilterValue): string | undefined => {
   if (!status) return undefined;
   return STATUS_QUERY_VALUE_MAP[status];
-};
-
-const ACTIVITY_QUERY_VALUE_MAP: Record<ActivityType, string> = {
-  POST: "post",
-  COMMENT: "comment",
-  AUTHENTICATION: "authentication",
-  FAVORITE: "favorite",
-  INQUIRY: "inquiry",
-  REPORT: "report",
 };
 
 const activityToQueryValue = (activity: ActivityFilterValue): string | undefined => {
@@ -99,7 +96,8 @@ export const applyFiltersToUrl = ({ filters, searchParams }: ApplyFiltersToUrlPr
   if ("status" in filters) upsert("status", statusToQueryValue(filters.status));
   if ("findStatus" in filters) upsert("findStatus", findStatusToQueryValue(filters.findStatus));
   if ("activity" in filters) upsert("activity", activityToQueryValue(filters.activity));
-  if ("date" in filters) upsert("date", filters.date);
+  if ("startDate" in filters) upsert("startDate", filters.startDate);
+  if ("endDate" in filters) upsert("endDate", filters.endDate);
 
   return params.toString();
 };

@@ -8,12 +8,13 @@ import { cn } from "@/utils";
 import useMakeDate from "./_hooks/useMakeDate";
 import PopupLayout from "../PopupLayout/PopupLayout";
 import { Button, Filter } from "@/components/common";
-import { applyFiltersToUrl } from "../FilterSectionBottomSheet/utils/applyFiltersToUrl";
+import { applyFiltersToUrl } from "../../../utils/applyFiltersToUrl/applyFiltersToUrl";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FiltersStateType } from "../FilterSectionBottomSheet/_types/filtersStateType";
 import { useFilterParams } from "@/hooks/domain";
 import { parseYmd } from "../../../utils/parseDateFilter/parseDateFilter";
 import { ActivityFilterState } from "@/app/(route)/mypage/activity/_types/ActivityFilterType";
+import { useToast } from "@/context/ToastContext";
 
 const DateWheel = ({
   dateArray,
@@ -81,8 +82,8 @@ const DateWheel = ({
 interface DateRangeBottomSheetProps<T> {
   isOpen: boolean;
   onClose: () => void;
-  filters?: T;
-  setFilters?: Dispatch<SetStateAction<T>>;
+  filters: T;
+  setFilters: Dispatch<SetStateAction<T>>;
 }
 
 const DateRangeBottomSheet = <T extends FiltersStateType | ActivityFilterState>({
@@ -91,31 +92,60 @@ const DateRangeBottomSheet = <T extends FiltersStateType | ActivityFilterState>(
   filters,
   setFilters,
 }: DateRangeBottomSheetProps<T>) => {
-  const { date } = useFilterParams();
-  const queryDate = parseYmd(date);
+  const { startDate, endDate } = useFilterParams();
+  const queryStartDate = parseYmd(startDate);
+  const queryEndDate = parseYmd(endDate);
 
-  const { years, months, days, selectDate, handleDateChange } = useMakeDate(queryDate ?? undefined);
+  const {
+    years: startYears,
+    months: startMonths,
+    days: startDays,
+    selectDate: selectStartDate,
+    handleDateChange: handleStartDateChange,
+  } = useMakeDate(queryStartDate ?? undefined);
+  const {
+    years: EndYears,
+    months: EndMonths,
+    days: EndDays,
+    selectDate: selectEndDate,
+    handleDateChange: handleEndDateChange,
+  } = useMakeDate(queryEndDate ?? undefined);
 
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const handleApply = () => {
-    const formattedDate = `${selectDate.year}-${String(selectDate.month).padStart(2, "0")}-${String(selectDate.day).padStart(2, "0")}`;
+  const { addToast } = useToast();
 
-    const nextFilters = { ...(filters ?? ({} as T)), date: formattedDate } as T;
+  const handleApply = () => {
+    const formattedStartDate = `${selectStartDate.year}-${String(selectStartDate.month).padStart(2, "0")}-${String(selectStartDate.day).padStart(2, "0")}`;
+    const formattedEndDate = `${selectEndDate.year}-${String(selectEndDate.month).padStart(2, "0")}-${String(selectEndDate.day).padStart(2, "0")}`;
+
+    const start = new Date(formattedStartDate);
+    const end = new Date(formattedEndDate);
+
+    if (start > end) {
+      // TODO(수현): 문구 확인 필요
+      addToast("종료일은 시작일보다 이전일 수 없어요.", "warning");
+      return;
+    }
+
+    const nextFilters = { ...filters, startDate: formattedStartDate, endDate: formattedEndDate };
 
     const qs = applyFiltersToUrl({
       filters: nextFilters,
       searchParams: new URLSearchParams(searchParams.toString()),
     });
 
+    console.log("qs>> ", qs);
     router.replace(qs ? `${pathname}?${qs}` : pathname);
 
-    setFilters?.(nextFilters);
+    setFilters(nextFilters);
 
     onClose();
   };
+
+  const [activeTab, setActiveTab] = useState<"startDate" | "endDate">("startDate");
 
   return (
     <PopupLayout
@@ -128,32 +158,54 @@ const DateRangeBottomSheet = <T extends FiltersStateType | ActivityFilterState>(
 
         {/* 상단 탭 버튼 */}
         <div className="flex gap-[14px]">
-          <Filter ariaLabel="시작일" onSelected={true} className="!px-10 !py-2">
+          <Filter
+            ariaLabel="시작일"
+            onSelected={activeTab === "startDate"}
+            onClick={() => setActiveTab("startDate")}
+            className="!px-10 !py-2"
+          >
             시작일
           </Filter>
-          <Filter ariaLabel="종료일" onSelected={false} className="!px-10 !py-2">
+          <Filter
+            ariaLabel="종료일"
+            onSelected={activeTab === "endDate"}
+            className="!px-10 !py-2"
+            onClick={() => setActiveTab("endDate")}
+          >
             종료일
           </Filter>
         </div>
 
         <div className="flex w-full items-center justify-between px-4">
           <DateWheel
-            dateArray={years}
-            selected={selectDate.year}
-            onSelected={(val) => handleDateChange("year", val)}
+            dateArray={activeTab === "startDate" ? startYears : EndYears}
+            selected={activeTab === "startDate" ? selectStartDate.year : selectEndDate.year}
+            onSelected={(val) =>
+              activeTab === "startDate"
+                ? handleStartDateChange("year", val)
+                : handleEndDateChange("year", val)
+            }
           />
 
           <DateWheel
-            dateArray={months}
-            selected={selectDate.month}
-            onSelected={(val) => handleDateChange("month", val)}
+            dateArray={activeTab === "startDate" ? startMonths : EndMonths}
+            selected={activeTab === "startDate" ? selectStartDate.month : selectEndDate.month}
+            onSelected={(val) =>
+              activeTab === "startDate"
+                ? handleStartDateChange("month", val)
+                : handleEndDateChange("month", val)
+            }
             label="월"
           />
 
           <DateWheel
-            dateArray={days}
-            selected={selectDate.day}
-            onSelected={(val) => handleDateChange("day", val)}
+            dateArray={activeTab === "startDate" ? startDays : EndDays}
+            selected={activeTab === "startDate" ? selectStartDate.day : selectEndDate.day}
+            onSelected={(val) =>
+              activeTab === "startDate"
+                ? handleStartDateChange("day", val)
+                : handleEndDateChange("day", val)
+            }
             label="일"
           />
         </div>

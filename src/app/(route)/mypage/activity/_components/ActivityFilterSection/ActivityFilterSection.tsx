@@ -6,48 +6,71 @@ import { DateRangeBottomSheet } from "@/components/domain";
 import { ACTIVITY_OPTIONS } from "../../_constants/ACTIVITY_OPTIONS";
 import { ActivityFilterState } from "../../_types/ActivityFilterType";
 import { formatYmdLabel, parseYmd } from "@/utils/parseDateFilter/parseDateFilter";
-import { normalizedFilterValues } from "@/components/domain/FilterSectionBottomSheet/utils/deriveFilterParams";
-import { ACTIVITY_DEFAULT_LABEL, ACTIVITY_LABEL_MAP } from "../../_constants/ACTIVITY_LABEL";
+import {
+  filterSelectionState,
+  normalizedFilterValues,
+} from "@/components/domain/FilterSectionBottomSheet/utils/deriveFilterParams";
+import { ACTIVITY_LABEL_MAP } from "../../_constants/ACTIVITY_LABEL";
 import { useActivityFilter } from "../../_hooks/useActivityFilter";
 import ActivityBottomSheet from "../ActivityBottomSheet/ActivityBottomSheet";
+import { cn } from "@/utils";
 
 const ActivityFilterSection = () => {
-  const { filters, setFilters, dateQuery, activityQuery } = useActivityFilter();
+  const { filters, setFilters, startDate, endDate, activity } = useActivityFilter();
 
   const [isBottomSheet, setIsBottomSheet] = useState<{
     isOpen: boolean;
     mode: "Date" | "Activity";
   }>({ isOpen: false, mode: "Date" });
 
-  const dateObj = parseYmd(dateQuery);
-  const dateLabel = dateObj ? formatYmdLabel(dateObj) : "기간";
+  const startDateObj = parseYmd(startDate);
+  const endDateObj = parseYmd(endDate);
 
-  const { normalizedActivity } = normalizedFilterValues({ activity: activityQuery });
+  const startLabel = startDateObj ? formatYmdLabel(startDateObj) : "";
+  const endLabel = endDateObj ? formatYmdLabel(endDateObj) : "";
+
+  const dateLabel =
+    startLabel && endLabel ? `${startLabel} ~ ${endLabel}` : startLabel || endLabel || "기간";
+
+  const { normalizedActivity } = normalizedFilterValues({ activity: activity });
+  const selectionState = filterSelectionState({ startDate, endDate, activity });
 
   return (
-    <section className="flex w-full gap-2 px-5 py-[14px]">
-      <h2 className="sr-only">필터링 영역</h2>
-
+    <section className="flex w-full gap-2 px-5 py-[14px]" aria-label="필터 선택 영역">
       <Filter
         name="date"
         ariaLabel="기간"
-        icon={{ name: "Calendar", size: 16 }}
+        icon={{
+          name: "Calendar",
+          size: 16,
+          className: cn(
+            "text-neutral-normal-default",
+            selectionState.isDateSelected && "text-white"
+          ),
+        }}
         iconPosition="leading"
-        onSelected={!!dateQuery}
+        onSelected={selectionState.isDateSelected}
         onClick={() => setIsBottomSheet({ isOpen: true, mode: "Date" })}
       >
-        {dateQuery ? dateLabel : "기간"}
+        {dateLabel}
       </Filter>
 
       <Filter
         name="activity"
         ariaLabel="활동 유형"
-        icon={{ name: "ArrowDown", size: 16 }}
+        icon={{
+          name: "ArrowDown",
+          size: 16,
+          className: cn(
+            "text-neutral-normal-default",
+            selectionState.isActivitySelected && "text-white"
+          ),
+        }}
         iconPosition="trailing"
-        onSelected={!!activityQuery}
+        onSelected={selectionState.isActivitySelected}
         onClick={() => setIsBottomSheet({ isOpen: true, mode: "Activity" })}
       >
-        {(normalizedActivity && ACTIVITY_LABEL_MAP[normalizedActivity]) ?? ACTIVITY_DEFAULT_LABEL}
+        {(normalizedActivity && ACTIVITY_LABEL_MAP[normalizedActivity]) ?? "유형"}
       </Filter>
 
       {isBottomSheet.isOpen && isBottomSheet.mode === "Date" && (

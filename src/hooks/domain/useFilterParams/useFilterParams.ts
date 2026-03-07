@@ -66,7 +66,8 @@ export const useFilterParams = () => {
     findStatus: normalizeEnumValue<Exclude<FindStatusFilterValue, undefined>>(
       searchParams.get("findStatus")
     ),
-    date: searchParams.get("date"),
+    startDate: searchParams.get("startDate"),
+    endDate: searchParams.get("endDate"),
     activity: normalizeEnumValue<Exclude<ActivityFilterValue, undefined>>(
       searchParams.get("activity")
     ),

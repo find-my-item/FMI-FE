@@ -2,7 +2,7 @@ export const tabs = [
   { label: "지역", value: "region" },
   { label: "카테고리", value: "category" },
   { label: "정렬", value: "sort" },
-  { label: "찾음여부", value: "status" },
+  { label: "찾음 여부", value: "status" },
 ] as const;
 
 export const categories = [

@@ -2,10 +2,7 @@
 
 import { PostItem } from "@/api/fetch/post";
 import { useGetUsersMePosts } from "@/api/fetch/user/api/useGetUsersMePosts";
-import { ErrorBoundary } from "@/app/ErrorBoundary";
 import { MypageEmptyUI, PostListItem } from "@/components/domain";
-import { LoadingState } from "@/components/state";
-import { Suspense } from "react";
 
 const MypagePostsList = () => {
   // const { data: PostsData } = useGetUsersMePosts({});
@@ -15,20 +12,16 @@ const MypagePostsList = () => {
 
   return (
     <section>
-      <ErrorBoundary>
-        <Suspense fallback={<LoadingState />}>
-          <h2 className="sr-only">게시글 목록 영역</h2>
-          {posts.length === 0 ? (
-            <MypageEmptyUI pageType="posts" />
-          ) : (
-            <ul>
-              {posts.map((item) => (
-                <PostListItem key={item.id} post={item} />
-              ))}
-            </ul>
-          )}
-        </Suspense>
-      </ErrorBoundary>
+      <h2 className="sr-only">게시글 목록 영역</h2>
+      {posts.length === 0 ? (
+        <MypageEmptyUI pageType="posts" />
+      ) : (
+        <ul>
+          {posts.map((item) => (
+            <PostListItem key={item.id} post={item} />
+          ))}
+        </ul>
+      )}
     </section>
   );
 };

@@ -1,13 +1,15 @@
-import { ActivityType } from "./ActivityType";
+import { ActivityType } from "@/types";
 
 export type ActivityFilterValue = ActivityType | undefined;
 
 export interface ActivityFilterState {
-  date: string;
+  startDate: string;
+  endDate: string;
   activity: ActivityFilterValue;
 }
 
 export const ACTIVITY_DEFAULT_FILTERS: ActivityFilterState = {
-  date: "",
+  startDate: "",
+  endDate: "",
   activity: undefined,
 };

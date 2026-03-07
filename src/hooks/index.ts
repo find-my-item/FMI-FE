@@ -7,3 +7,4 @@ export { default as useRegionRows } from "./useRegionRows/useRegionRows";
 export { default as useClickOutside } from "./useClickOutside/useClickOutside";
 export { default as useHorizontalDragScroll } from "./useHorizontalDragScroll/useHorizontalDragScroll";
 export { useInfiniteScroll } from "./useInfiniteScroll/useInfiniteScroll";
+export { default as useLogout } from "./useLogout/useLogout";
