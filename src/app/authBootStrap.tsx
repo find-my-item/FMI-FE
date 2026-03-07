@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useApiRefreshToken } from "@/api/fetch/auth";
 import { useAuthStore } from "@/store";
 
