@@ -1,15 +1,16 @@
 import { Badge, Icon, ListItemImage } from "@/components/common";
 import Link from "next/link";
-import { noticeListObject } from "../../_constant/noticeListObject";
+import { NoticeItem } from "@/api/fetch/notice";
+import { formatDate } from "@/utils";
 
-type NoticeItem = (typeof noticeListObject)[number];
+const NoticeListItem = ({ notice }: { notice: NoticeItem }) => {
+  const { noticeId, title, createdAt, likeCount, viewCount, thumbnailUrl } = notice;
 
-const NoticeItem = ({ notice }: { notice: NoticeItem }) => {
   return (
     <li>
       <Link
-        href={`/notice/${notice.id}`}
-        className="flex min-w-0 items-center gap-2 border-b border-divider-default px-5 py-[30px] transition-colors hover:bg-flatGray-25"
+        href={`/notice/${noticeId}`}
+        className="flex min-w-0 items-center justify-between gap-2 border-b border-divider-default px-5 py-[30px] transition-colors hover:bg-flatGray-25"
       >
         <div className="flex min-w-0 flex-col gap-2">
           <div className="flex flex-col gap-[3px]">
@@ -17,36 +18,36 @@ const NoticeItem = ({ notice }: { notice: NoticeItem }) => {
               <div className="flex-shrink-0">
                 <Badge variant="new" />
               </div>
-              <p className="truncate text-body1-semibold text-layout-header-default">
-                {notice.title}
-              </p>
+              <p className="truncate text-body1-semibold text-layout-header-default">{title}</p>
             </div>
             <time className="text-body2-regular text-layout-body-default">
-              {"date" in notice && notice.date ? notice.date : "2025.10.15"}
+              {formatDate(createdAt)}
             </time>
           </div>
 
           <div className="flex items-center gap-1 text-body2-regular text-neutral-strong-placeholder">
             <Icon name="Like" size={16} className="text-border-divider-default" />
-            <span>12</span>
+            <span>{likeCount}</span>
             <Icon name="Eye" size={16} className="text-border-divider-default" />
-            <span>24</span>
+            <span>{viewCount}</span>
           </div>
         </div>
-        {/* TODO(형준): API 연동 시 이미지 처리 필요 */}
-        {/* <div className="flex-shrink-0">
-          <ListItemImage alt="공지사항 게시글 썸네일" size={90} category="BAG" />
-        </div> */}
+
+        {thumbnailUrl && (
+          <div className="flex-shrink-0">
+            <ListItemImage src={thumbnailUrl} alt="공지사항 게시글 썸네일" size={90} />
+          </div>
+        )}
       </Link>
     </li>
   );
 };
 
-const NoticeList = () => {
+const NoticeList = ({ notices }: { notices: NoticeItem[] }) => {
   return (
     <ul>
-      {noticeListObject.map((notice) => (
-        <NoticeItem key={notice.id} notice={notice} />
+      {notices.map((notice) => (
+        <NoticeListItem key={notice.noticeId} notice={notice} />
       ))}
     </ul>
   );
