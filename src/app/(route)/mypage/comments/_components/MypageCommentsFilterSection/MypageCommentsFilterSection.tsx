@@ -4,12 +4,11 @@ import { Filter, KebabMenu } from "@/components/common";
 import { useState } from "react";
 import { DateRangeBottomSheet } from "@/components/domain";
 import { useFilterParams } from "@/hooks/domain";
-import { applyFiltersToUrl, getDateRangeLabel, normalizeEnumValue } from "@/utils";
+import { getDateRangeLabel, normalizeEnumValue } from "@/utils";
 import {
   filterSelectionState,
   normalizedFilterValues,
 } from "@/utils/deriveFilterParams/deriveFilterParams";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { CommentFilterState } from "../../_types/commentFilterType";
 import {
   COMMENT_DEFAULT_FILTERS,
@@ -17,42 +16,34 @@ import {
   SORT_KEBAB_ITEM,
 } from "../../_constants/COMMENT_FILTER";
 import { SimpleSortType } from "@/types";
+import { useFilterSync } from "../../_hooks/useFilterSync";
 
 const MypageCommentsFilterSection = () => {
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const router = useRouter();
+  const { startDate, endDate, simpleSort } = useFilterParams();
+
+  const { filters, setFilters, updateFilters } = useFilterSync<CommentFilterState>({
+    defaultFilters: COMMENT_DEFAULT_FILTERS,
+    currentFiltersFromUrl: {
+      startDate: startDate ?? "",
+      endDate: endDate ?? "",
+      simpleSort: normalizeEnumValue<SimpleSortType>(simpleSort) ?? "LATEST",
+    },
+  });
 
   const [isFilterSheet, setIsFilterSheet] = useState<{
     isOpen: boolean;
     mode: "Date" | "Sort";
   }>({ isOpen: false, mode: "Date" });
 
-  const { startDate, endDate, simpleSort } = useFilterParams();
-  const { normalizedSimpleSort } = normalizedFilterValues({ simpleSort: simpleSort });
+  const { normalizedSimpleSort } = normalizedFilterValues({ simpleSort });
   const selectionState = filterSelectionState({ startDate, endDate, simpleSort });
-
   const dateLabel = getDateRangeLabel(startDate, endDate);
-
-  const [filters, setFilters] = useState<CommentFilterState>({
-    ...COMMENT_DEFAULT_FILTERS,
-    startDate: startDate ?? "",
-    endDate: endDate ?? "",
-    simpleSort: normalizeEnumValue<SimpleSortType>(simpleSort) ?? "LATEST",
-  });
 
   const kebabMenuItems = SORT_KEBAB_ITEM.map((item) => ({
     text: item.label,
     onClick: () => {
-      setFilters((prev) => ({ ...prev, simpleSort: item.value }));
-
+      updateFilters({ simpleSort: item.value });
       setIsFilterSheet((prev) => ({ ...prev, isOpen: false }));
-      const qs = applyFiltersToUrl({
-        filters: filters,
-        searchParams: new URLSearchParams(searchParams.toString()),
-      });
-      console.log("filter>> ", filters);
-      router.replace(qs ? `${pathname}?${qs}` : pathname);
     },
   }));
 
@@ -73,7 +64,7 @@ const MypageCommentsFilterSection = () => {
         <Filter
           ariaLabel="정렬 필터"
           icon={{ name: "ArrowDown", size: 16 }}
-          onSelected={selectionState.isSortSelected}
+          onSelected={selectionState.isSimpleSortSelected}
           onClick={() => setIsFilterSheet({ mode: "Sort", isOpen: true })}
           iconPosition="trailing"
         >
