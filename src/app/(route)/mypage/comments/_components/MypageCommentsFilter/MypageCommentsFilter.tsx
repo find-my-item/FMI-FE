@@ -48,7 +48,12 @@ const MypageCommentsFilter = () => {
         )}
       </div>
 
-      <DateRangeBottomSheet onClose={() => setIsBottomSheet(false)} isOpen={isBottomSheet} />
+      {/* TODO(수현): 변경된 DateRangeBottomSheet에 따라 props 변경  */}
+      {/* 
+      <DateRangeBottomSheet 
+      onClose={() => setIsBottomSheet(false)} 
+      isOpen={isBottomSheet} 
+      /> */}
     </section>
   );
 };

@@ -2,7 +2,7 @@ export const tabs = [
   { label: "지역", value: "region" },
   { label: "카테고리", value: "category" },
   { label: "정렬", value: "sort" },
-  { label: "찾음여부", value: "status" },
+  { label: "찾음 여부", value: "status" },
 ] as const;
 
 export const categories = [
@@ -25,8 +25,8 @@ export const sort = [
 
 export const findStatus = [
   { label: "전체", value: undefined },
-  { label: "찾는중", value: "SEARCHING" },
-  { label: "찾았음", value: "FOUND" },
+  { label: "찾아요", value: "SEARCHING" },
+  { label: "찾았어요", value: "FOUND" },
 ] as const;
 
 export const status = [

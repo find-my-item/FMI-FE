@@ -227,16 +227,9 @@ export const MOCK_MYPAGE_ACTIVITY = [
   },
   {
     activityId: 202,
-    type: "INQUIRY_REPLY",
+    type: "INQUIRY",
     createdAt: "2026-01-29T13:00:00",
     title: "1:1 문의 답변이 완료되었습니다.",
     subText: "문의하신 내용에 대한 답변입니다.",
-  },
-  {
-    activityId: 301,
-    type: "ALERT_SETTING",
-    createdAt: "2026-01-15T09:00:00",
-    title: "알림 설정을 변경했습니다.",
-    subText: "마케팅 정보 수신 동의",
   },
 ] as const;
