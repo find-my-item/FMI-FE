@@ -142,29 +142,3 @@ export const applyFiltersToUrl = <T extends object>({
 
   return params.toString();
 };
-
-// type ApplyFiltersToUrlProps<T extends object>  = {
-//   filters:Partial<T>;
-//   searchParams: URLSearchParams;
-// };
-
-// export const applyFiltersToUrl = ({ filters, searchParams }: ApplyFiltersToUrlProps<T): string => {
-//   const params = new URLSearchParams(searchParams.toString());
-
-//   const upsert = (key: string, value?: string) => {
-//     if (!value) params.delete(key);
-//     else params.set(key, value);
-//   };
-
-//   if ("region" in filters) upsert("region", filters.region);
-//   if ("category" in filters) upsert("category", categoryToQueryValue(filters.category));
-//   if ("sort" in filters) upsert("sort", filters.sort ? sortToQueryValue(filters.sort) : undefined);
-//   if ("status" in filters) upsert("status", statusToQueryValue(filters.status));
-//   if ("findStatus" in filters) upsert("findStatus", findStatusToQueryValue(filters.findStatus));
-//   if ("activity" in filters) upsert("activity", activityToQueryValue(filters.activity));
-//   if ("startDate" in filters) upsert("startDate", filters.startDate);
-//   if ("endDate" in filters) upsert("endDate", filters.endDate);
-// if("simpleSort" in filters) upsert("simpleSort", simpleSortToQueryValue(filters.simpleSort));
-
-//   return params.toString();
-// };
