@@ -10,7 +10,7 @@ export const usePostNotices = () => {
   return useAppMutation<unknown, ApiBaseResponseType<number>>("auth", "/admin/notices", "post", {
     onSuccess: ({ result }) => {
       addToast("공지사항이 등록되었습니다.", "success");
-      router.push(`/notice/${result}`);
+      router.replace(`/notice/${result}`);
     },
   });
 };
