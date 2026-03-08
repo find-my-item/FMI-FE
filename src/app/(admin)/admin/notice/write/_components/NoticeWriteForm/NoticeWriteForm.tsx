@@ -16,7 +16,10 @@ const NoticeWriteForm = ({ methods }: { methods: UseFormReturn<NoticeWriteFormVa
   const isSubmitDisabled = !canSubmit(values as NoticeWriteFormValues);
   const { mutate: postNotice } = usePostNotices();
 
-  const onSubmit = (data: NoticeWriteFormValues) => postNotice(data);
+  const onSubmit = (data: NoticeWriteFormValues) => {
+    const { images: imageUrls, ...rest } = data;
+    postNotice({ ...rest, imageUrls });
+  };
 
   return (
     // TODO(형준): 내부 input 컴포넌트 value 있을 때 스타일 구현 필요
