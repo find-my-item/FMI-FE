@@ -6,5 +6,6 @@ export interface GetPostsCommentsResponse extends ApiBaseResponseType<GetPostsCo
 export type GetPostsCommentsData = {
   comments: CommentItemType[];
   hasNext: boolean;
-  cursor: number;
+  nextPage: number;
+  remainingCount: number;
 };

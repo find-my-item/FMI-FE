@@ -8,6 +8,7 @@ interface CommentActionsProps {
   setViewReply: Dispatch<SetStateAction<boolean>>;
   isReplyFormOpen: boolean;
   setIsReplyFormOpen: Dispatch<SetStateAction<boolean>>;
+  isGuest: boolean;
   replyCount: number;
 }
 
@@ -17,20 +18,21 @@ const CommentActions = ({
   setViewReply,
   isReplyFormOpen,
   setIsReplyFormOpen,
+  isGuest,
   replyCount,
 }: CommentActionsProps) => {
   return (
-    <div className="flex items-center gap-3 py-2">
-      {!isThreadItem && (
+    !isThreadItem && (
+      <div className="flex items-center gap-3 py-2">
         <button
           className={cn("flex items-center gap-1", replyCount === 0 && "cursor-not-allowed")}
-          onClick={() => setViewReply((prev) => !prev)}
-          disabled={replyCount === 0}
+          onClick={isGuest ? undefined : () => setViewReply((prev) => !prev)}
+          disabled={replyCount === 0 || isGuest}
         >
           <span
             className={cn(
               "text-body1-medium",
-              isThreadItem ? "text-brand-normal-enteredSelected" : "text-layout-header-default"
+              viewReply ? "text-brand-normal-enteredSelected" : "text-layout-header-default"
             )}
           >
             답글 <span>{replyCount}</span>개
@@ -38,22 +40,27 @@ const CommentActions = ({
           <Icon
             name="ArrowDownSmall"
             size={24}
-            className={cn("transition-all", viewReply && "rotate-180")}
+            className={cn(
+              "transition-all",
+              viewReply
+                ? "rotate-180 text-brand-strongUseThis-default"
+                : "text-layout-header-default"
+            )}
           />
         </button>
-      )}
-      {!isThreadItem && (
+
         <button
           className={cn(
             "text-body1-medium",
             isReplyFormOpen ? "text-brand-normal-enteredSelected" : "text-neutral-strong-default"
           )}
-          onClick={() => setIsReplyFormOpen((prev) => !prev)}
+          onClick={isGuest ? undefined : () => setIsReplyFormOpen((prev) => !prev)}
+          disabled={undefined}
         >
           답글 작성
         </button>
-      )}
-    </div>
+      </div>
+    )
   );
 };
 

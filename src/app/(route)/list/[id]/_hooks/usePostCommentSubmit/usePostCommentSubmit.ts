@@ -4,16 +4,28 @@ import { useState } from "react";
 import { usePostPostsComments } from "@/api/fetch/comment";
 import { UseFormReturn } from "react-hook-form";
 
-interface usePostCommentSubmitProps {
+interface UsePostCommentSubmitProps {
   postId: number;
   methods: UseFormReturn<{ content: string }>;
+  isLoggedIn: boolean;
+  openGuestModal: () => void;
 }
 
-export const usePostCommentSubmit = ({ postId, methods }: usePostCommentSubmitProps) => {
+export const usePostCommentSubmit = ({
+  postId,
+  methods,
+  isLoggedIn,
+  openGuestModal,
+}: UsePostCommentSubmitProps) => {
   const [images, setImages] = useState<File[]>([]);
   const { mutate, isPending } = usePostPostsComments(postId);
 
   const handleCommentSubmit = (data: { content: string }) => {
+    if (!isLoggedIn) {
+      openGuestModal();
+      return;
+    }
+
     if (isPending) return;
 
     const formData = new FormData();
