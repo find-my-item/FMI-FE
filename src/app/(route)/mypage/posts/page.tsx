@@ -14,7 +14,7 @@ const page = () => {
 
         <FilterSection pageType="MY_POSTS" />
 
-        <MypagePostsList data={[]} />
+        <MypagePostsList />
       </div>
     </>
   );
