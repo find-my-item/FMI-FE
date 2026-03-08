@@ -5,6 +5,7 @@ interface CommentFooterProps {
   footerData: {
     likeCount: number;
     id: number;
+    isLike: boolean;
   };
   isThreadItem: boolean;
   isReplyFormOpen: boolean;
@@ -17,7 +18,7 @@ const CommentFooter = ({
   isReplyFormOpen,
   setIsReplyFormOpen,
 }: CommentFooterProps) => {
-  const { likeCount, id } = footerData;
+  const { likeCount, id, isLike } = footerData;
 
   const handleLikeClick = () => {
     console.log(id);
@@ -26,10 +27,16 @@ const CommentFooter = ({
   return (
     <div className="flex items-center gap-3">
       <button
+        aria-label={isLike ? "좋아요 취소" : "좋아요"}
         className="flex items-center gap-1 text-body2-regular text-neutral-strong-placeholder"
         onClick={handleLikeClick}
       >
-        <Icon name="CommentLikeIcon" size={16} /> <span>추천 {likeCount}</span>
+        <Icon
+          name="Heart"
+          size={16}
+          className={cn(isLike ? "text-system-favorite" : "text-border-divider-default")}
+        />
+        <span>좋아요 {likeCount}</span>
       </button>
 
       {isThreadItem && (
