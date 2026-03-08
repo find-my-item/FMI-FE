@@ -4,7 +4,7 @@ import { CommentFilterState } from "../_types/commentFilterType";
 export const COMMENT_DEFAULT_FILTERS: CommentFilterState = {
   startDate: "",
   endDate: "",
-  simpleSort: undefined,
+  simpleSort: "LATEST",
 };
 
 export const SIMPLE_SORT_LABEL_MAP: Record<SimpleSortType, string> = {

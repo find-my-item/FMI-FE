@@ -13,7 +13,7 @@ import {
   StatusFilterValue,
 } from "../../components/domain/FilterSectionBottomSheet/_types/types";
 import { ActivityFilterValue } from "@/app/(route)/mypage/activity/_types/ActivityFilterType";
-import { SimpleSortFilterValue } from "@/app/(route)/mypage/comments/_types/commentFilterType";
+import { SimpleSortType } from "@/types";
 
 type Params = {
   region?: string | null;
@@ -41,8 +41,7 @@ export const normalizedFilterValues = ({
   const normalizedFindStatus =
     normalizeEnumValue<Exclude<FindStatusFilterValue, undefined>>(findStatus);
   const normalizedActivity = normalizeEnumValue<Exclude<ActivityFilterValue, undefined>>(activity);
-  const normalizedSimpleSort =
-    normalizeEnumValue<Exclude<SimpleSortFilterValue, undefined>>(simpleSort);
+  const normalizedSimpleSort = normalizeEnumValue<SimpleSortType>(simpleSort);
 
   return {
     normalizedCategory,

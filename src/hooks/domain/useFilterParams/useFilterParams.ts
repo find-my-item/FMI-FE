@@ -52,7 +52,7 @@ import {
   StatusFilterValue,
 } from "../../../components/domain/FilterSectionBottomSheet/_types/types";
 import { ActivityFilterValue } from "@/app/(route)/mypage/activity/_types/ActivityFilterType";
-import { SimpleSortFilterValue } from "@/app/(route)/mypage/comments/_types/commentFilterType";
+import { SimpleSortType } from "@/types";
 
 export const useFilterParams = () => {
   const searchParams = useSearchParams();
@@ -73,8 +73,6 @@ export const useFilterParams = () => {
     activity: normalizeEnumValue<Exclude<ActivityFilterValue, undefined>>(
       searchParams.get("activity")
     ),
-    simpleSort: normalizeEnumValue<Exclude<SimpleSortFilterValue, undefined>>(
-      searchParams.get("simpleSort")
-    ),
+    simpleSort: normalizeEnumValue<SimpleSortType>(searchParams.get("simpleSort")),
   };
 };
