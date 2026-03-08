@@ -7,7 +7,7 @@ import { ACTIVITY_OPTIONS } from "../../_constants/ACTIVITY_OPTIONS";
 import {
   filterSelectionState,
   normalizedFilterValues,
-} from "@/components/domain/FilterSectionBottomSheet/utils/deriveFilterParams";
+} from "@/utils/deriveFilterParams/deriveFilterParams";
 import { ACTIVITY_LABEL_MAP } from "../../_constants/ACTIVITY_LABEL";
 import { useActivityFilter } from "../../_hooks/useActivityFilter";
 import ActivityBottomSheet from "../ActivityBottomSheet/ActivityBottomSheet";

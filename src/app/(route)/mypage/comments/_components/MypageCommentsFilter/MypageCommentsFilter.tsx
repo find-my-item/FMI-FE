@@ -4,49 +4,39 @@ import { Filter, KebabMenu } from "@/components/common";
 import { useState } from "react";
 import { DateRangeBottomSheet } from "@/components/domain";
 import { useFilterParams } from "@/hooks/domain";
-import { formatYmdLabel, getDateRangeLabel, normalizeEnumValue, parseYmd } from "@/utils";
+import { applyFiltersToUrl, getDateRangeLabel, normalizeEnumValue } from "@/utils";
 import {
   filterSelectionState,
   normalizedFilterValues,
-} from "@/components/domain/FilterSectionBottomSheet/utils/deriveFilterParams";
+} from "@/utils/deriveFilterParams/deriveFilterParams";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { SimpleSortType } from "@/types";
+import { CommentFilterState, SimpleSortFilterValue } from "../../_types/commentFilterType";
 
-export type CommentFilterValue = "LATEST" | "OLDEST" | undefined;
-export interface CommentFilterState {
-  startDate: string;
-  endDate: string;
-  sort: CommentFilterValue;
-}
-
-export const COMMENT_DEFAULT_FILTERS: CommentFilterState = {
+const COMMENT_DEFAULT_FILTERS: CommentFilterState = {
   startDate: "",
   endDate: "",
-  sort: undefined,
+  simpleSort: undefined,
 };
 
-const SORT_LABEL_MAP = [
-  { label: "최신순", value: "LATEST" },
-  { label: "오래된순", value: "OLDEST" },
-];
+const SIMPLE_SORT_LABEL_MAP: Record<SimpleSortType, string> = {
+  LATEST: "최신순",
+  OLDEST: "오래된순",
+};
 
 const MypageCommentsFilter = () => {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const router = useRouter();
+
   const [isFilterSheet, setIsFilterSheet] = useState<{
     isOpen: boolean;
     mode: "Date" | "Sort";
   }>({ isOpen: false, mode: "Date" });
 
-  const kebabMenuItems = SORT_LABEL_MAP.map((item) => ({
-    text: item.label,
-    // onClick: () => {
-    //   const searchParams = useSearchParams();
-    //   const pathname = usePathname();
-    //   const router = useRouter();
-    // },
-  }));
-
-  const { startDate, endDate, sort } = useFilterParams();
-  const { normalizedSort } = normalizedFilterValues({ sort: sort });
-  const selectionState = filterSelectionState({ startDate, endDate, sort });
+  const { startDate, endDate, simpleSort } = useFilterParams();
+  const { normalizedSimpleSort } = normalizedFilterValues({ simpleSort: simpleSort });
+  const selectionState = filterSelectionState({ startDate, endDate, simpleSort });
 
   const dateLabel = getDateRangeLabel(startDate, endDate);
 
@@ -54,8 +44,26 @@ const MypageCommentsFilter = () => {
     ...COMMENT_DEFAULT_FILTERS,
     startDate: startDate ?? "",
     endDate: endDate ?? "",
-    sort: normalizeEnumValue<Exclude<CommentFilterValue, undefined>>(sort),
+    simpleSort: normalizeEnumValue<Exclude<SimpleSortFilterValue, undefined>>(simpleSort),
   });
+
+  const SORT_KEBAB_ITEM: { label: "최신순" | "오래된순"; value: SimpleSortType }[] = [
+    { label: "최신순", value: "LATEST" },
+    { label: "오래된순", value: "OLDEST" },
+  ];
+  const kebabMenuItems = SORT_KEBAB_ITEM.map((item) => ({
+    text: item.label,
+    onClick: () => {
+      setFilters((prev) => ({ ...prev, simpleSort: item.value }));
+
+      const qs = applyFiltersToUrl({
+        filters,
+        searchParams: new URLSearchParams(searchParams.toString()),
+      });
+
+      router.replace(qs ? `${pathname}?${qs}` : pathname);
+    },
+  }));
 
   return (
     <section className="flex w-full gap-2 px-5 py-[14px]">
@@ -80,7 +88,7 @@ const MypageCommentsFilter = () => {
           onClick={() => setIsFilterSheet((prev) => ({ ...prev, open: true }))}
           iconPosition="trailing"
         >
-          {(normalizedSort && SORT_LABEL_MAP[normalizedSort]) ?? "최신순"}
+          {(normalizedSimpleSort && SIMPLE_SORT_LABEL_MAP[normalizedSimpleSort]) ?? "최신순"}
           최신순
         </Filter>
 
@@ -95,8 +103,8 @@ const MypageCommentsFilter = () => {
         <DateRangeBottomSheet
           isOpen={isFilterSheet.isOpen}
           onClose={() => setIsFilterSheet((prev) => ({ ...prev, isOpen: false }))}
-          filters={}
-          setFilters={}
+          filters={filters}
+          setFilters={setFilters}
         />
       )}
     </section>

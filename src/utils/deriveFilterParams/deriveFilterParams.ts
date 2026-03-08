@@ -11,8 +11,9 @@ import {
   FindStatusFilterValue,
   SortFilterValue,
   StatusFilterValue,
-} from "../_types/types";
+} from "../../components/domain/FilterSectionBottomSheet/_types/types";
 import { ActivityFilterValue } from "@/app/(route)/mypage/activity/_types/ActivityFilterType";
+import { SimpleSortFilterValue } from "@/app/(route)/mypage/comments/_types/commentFilterType";
 
 type Params = {
   region?: string | null;
@@ -23,6 +24,7 @@ type Params = {
   startDate?: string | null;
   endDate?: string | null;
   activity?: string | null;
+  simpleSort?: string | null;
 };
 
 export const normalizedFilterValues = ({
@@ -31,6 +33,7 @@ export const normalizedFilterValues = ({
   status,
   findStatus,
   activity,
+  simpleSort,
 }: Params) => {
   const normalizedCategory = normalizeEnumValue<Exclude<CategoryFilterValue, undefined>>(category);
   const normalizedSort = normalizeEnumValue<SortFilterValue>(sort);
@@ -38,6 +41,8 @@ export const normalizedFilterValues = ({
   const normalizedFindStatus =
     normalizeEnumValue<Exclude<FindStatusFilterValue, undefined>>(findStatus);
   const normalizedActivity = normalizeEnumValue<Exclude<ActivityFilterValue, undefined>>(activity);
+  const normalizedSimpleSort =
+    normalizeEnumValue<Exclude<SimpleSortFilterValue, undefined>>(simpleSort);
 
   return {
     normalizedCategory,
@@ -45,6 +50,7 @@ export const normalizedFilterValues = ({
     normalizedStatus,
     normalizedFindStatus,
     normalizedActivity,
+    normalizedSimpleSort,
   };
 };
 
@@ -57,6 +63,7 @@ export const filterSelectionState = ({
   startDate,
   endDate,
   activity,
+  simpleSort,
 }: Params) => {
   const isRegionSelected = Boolean(region);
   const isCategorySelected = Boolean(category);
@@ -65,6 +72,7 @@ export const filterSelectionState = ({
   const isFindStatusSelected = Boolean(findStatus);
   const isDateSelected = Boolean(startDate || endDate);
   const isActivitySelected = Boolean(activity);
+  const isSimpleSortSelected = Boolean(simpleSort);
 
   return {
     isRegionSelected,
@@ -74,5 +82,6 @@ export const filterSelectionState = ({
     isFindStatusSelected,
     isDateSelected,
     isActivitySelected,
+    isSimpleSortSelected,
   };
 };
