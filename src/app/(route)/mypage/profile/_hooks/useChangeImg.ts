@@ -30,6 +30,7 @@ const useChangeImg = ({ setOpenMenu, initialImg, onImageChange }: UseChangeImgPr
     }
   };
 
+  // 이미지 삭제
   const resetImage = () => {
     setPreviewImgUrl(null);
     onImageChange(null);
