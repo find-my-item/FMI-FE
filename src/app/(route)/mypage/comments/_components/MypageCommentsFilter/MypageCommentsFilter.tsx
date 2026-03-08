@@ -4,29 +4,30 @@ import { Filter, KebabMenu } from "@/components/common";
 import { useState } from "react";
 import { DateRangeBottomSheet } from "@/components/domain";
 import { useFilterParams } from "@/hooks/domain";
-import { formatYmdLabel, getDateRangeLabel, parseYmd } from "@/utils";
+import { formatYmdLabel, getDateRangeLabel, normalizeEnumValue, parseYmd } from "@/utils";
 import {
   filterSelectionState,
   normalizedFilterValues,
 } from "@/components/domain/FilterSectionBottomSheet/utils/deriveFilterParams";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-export interface ActivityFilterState {
+export type CommentFilterValue = "LATEST" | "OLDEST" | undefined;
+export interface CommentFilterState {
   startDate: string;
   endDate: string;
-  sort: "";
+  sort: CommentFilterValue;
 }
 
-// { label: "최신순", value: "LATEST" },
-// { label: "오래된순", value: "OLDEST" },
-
-export const COMMENT_DEFAULT_FILTERS: ActivityFilterState = {
+export const COMMENT_DEFAULT_FILTERS: CommentFilterState = {
   startDate: "",
   endDate: "",
   sort: undefined,
 };
 
-const SORT_LABEL_MAP = [{ LATEST: "최신순" }, { OLDEST: "오래된 순" }];
+const SORT_LABEL_MAP = [
+  { label: "최신순", value: "LATEST" },
+  { label: "오래된순", value: "OLDEST" },
+];
 
 const MypageCommentsFilter = () => {
   const [isFilterSheet, setIsFilterSheet] = useState<{
@@ -35,7 +36,7 @@ const MypageCommentsFilter = () => {
   }>({ isOpen: false, mode: "Date" });
 
   const kebabMenuItems = SORT_LABEL_MAP.map((item) => ({
-    text: item,
+    text: item.label,
     // onClick: () => {
     //   const searchParams = useSearchParams();
     //   const pathname = usePathname();
@@ -50,9 +51,10 @@ const MypageCommentsFilter = () => {
   const dateLabel = getDateRangeLabel(startDate, endDate);
 
   const [filters, setFilters] = useState<CommentFilterState>({
-    ...SORT_DEFAULT_LABEL,
-    date: date ?? "",
-    activity: normalizeEnumValue<Exclude<CommentFilterState, undefined>>(activity),
+    ...COMMENT_DEFAULT_FILTERS,
+    startDate: startDate ?? "",
+    endDate: endDate ?? "",
+    sort: normalizeEnumValue<Exclude<CommentFilterValue, undefined>>(sort),
   });
 
   return (

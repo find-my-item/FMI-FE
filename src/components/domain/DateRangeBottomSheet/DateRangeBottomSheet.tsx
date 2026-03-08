@@ -78,14 +78,19 @@ const DateWheel = ({
   );
 };
 
-interface DateRangeBottomSheetProps<T> {
+type DateRangeFilterBase = {
+  startDate?: string;
+  endDate?: string;
+};
+
+interface DateRangeBottomSheetProps<T extends DateRangeFilterBase> {
   isOpen: boolean;
   onClose: () => void;
   filters: T;
   setFilters: Dispatch<SetStateAction<T>>;
 }
 
-const DateRangeBottomSheet = <T extends FiltersStateType | ActivityFilterState>({
+const DateRangeBottomSheet = <T extends DateRangeFilterBase>({
   isOpen,
   onClose,
   filters,
