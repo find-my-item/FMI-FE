@@ -63,6 +63,9 @@ const CommentItem = ({
   const isRepliesVisible = shouldFetchReplies;
   const hasReplyComments = isRepliesVisible && replyComments.length > 0;
 
+  const queryKey =
+    level === "comment" ? ["post-comments", postId] : ["replies-post-comments", data.id];
+
   return (
     <li className={cn("my-[18px]", !isNestedReply && "px-5", className)}>
       <div className="flex">
@@ -92,6 +95,7 @@ const CommentItem = ({
               isGuest={isGuest}
               isReplyFormOpen={isReplyFormOpen}
               setIsReplyFormOpen={setIsReplyFormOpen}
+              queryKey={queryKey}
             />
           </div>
 

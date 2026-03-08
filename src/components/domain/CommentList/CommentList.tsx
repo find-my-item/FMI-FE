@@ -37,7 +37,7 @@ const CommentList = ({
         </h2>
       </header>
 
-      {isEmpty || isLoggedIn ? (
+      {isEmpty && isLoggedIn ? (
         <EmptyCommentUI />
       ) : (
         <ul>
