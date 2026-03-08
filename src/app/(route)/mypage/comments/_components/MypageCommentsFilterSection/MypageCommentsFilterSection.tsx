@@ -10,21 +10,14 @@ import {
   normalizedFilterValues,
 } from "@/utils/deriveFilterParams/deriveFilterParams";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { SimpleSortType } from "@/types";
 import { CommentFilterState, SimpleSortFilterValue } from "../../_types/commentFilterType";
+import {
+  COMMENT_DEFAULT_FILTERS,
+  SIMPLE_SORT_LABEL_MAP,
+  SORT_KEBAB_ITEM,
+} from "../../_constants/COMMENT_FILTER";
 
-const COMMENT_DEFAULT_FILTERS: CommentFilterState = {
-  startDate: "",
-  endDate: "",
-  simpleSort: undefined,
-};
-
-const SIMPLE_SORT_LABEL_MAP: Record<SimpleSortType, string> = {
-  LATEST: "최신순",
-  OLDEST: "오래된순",
-};
-
-const MypageCommentsFilter = () => {
+const MypageCommentsFilterSection = () => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
@@ -47,10 +40,6 @@ const MypageCommentsFilter = () => {
     simpleSort: normalizeEnumValue<Exclude<SimpleSortFilterValue, undefined>>(simpleSort),
   });
 
-  const SORT_KEBAB_ITEM: { label: "최신순" | "오래된순"; value: SimpleSortType }[] = [
-    { label: "최신순", value: "LATEST" },
-    { label: "오래된순", value: "OLDEST" },
-  ];
   const kebabMenuItems = SORT_KEBAB_ITEM.map((item) => ({
     text: item.label,
     onClick: () => {
@@ -66,9 +55,7 @@ const MypageCommentsFilter = () => {
   }));
 
   return (
-    <section className="flex w-full gap-2 px-5 py-[14px]">
-      <h2 className="sr-only">필터링 영역</h2>
-
+    <section className="flex w-full gap-2 px-5 py-[14px]" aria-label="필터 영역">
       <Filter
         name="date"
         ariaLabel="기간"
@@ -111,4 +98,4 @@ const MypageCommentsFilter = () => {
   );
 };
 
-export default MypageCommentsFilter;
+export default MypageCommentsFilterSection;
