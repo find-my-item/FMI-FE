@@ -75,9 +75,16 @@ const CommentItem = ({
           <div className="space-y-2">
             <div className="flex flex-col gap-3">
               <CommentMeta
-                data={{ authorId, createdAt: data.createdAt, authorName, profileImageUrl }}
+                data={{
+                  authorId,
+                  createdAt: data.createdAt,
+                  authorName,
+                  profileImageUrl,
+                  commentId: data.id,
+                }}
                 isGuest={isGuest}
                 isThreadItem={isThreadItem}
+                queryKey={queryKey}
               />
 
               <CommentBody

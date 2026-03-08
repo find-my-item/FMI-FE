@@ -1,7 +1,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/context/ToastContext";
 import useAppMutation from "@/api/_base/query/useAppMutation";
-import { PostCommentLikeResponse, PostLikeRequestBody } from "../types/CommentType";
+import { PostCommentLikeResponse } from "../types/CommentType";
 import { GetPostsCommentsResponse } from "../types/GetPostsComments";
 
 type LikeOptimisticContext = {
