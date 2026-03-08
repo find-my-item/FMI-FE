@@ -8,7 +8,12 @@ const NoticeDetailView = () => {
   return (
     <div className="flex flex-col h-base">
       <NoticeDetailContent />
-      <CommentList comments={MOCK_COMMENT_RESPONSE_DATA} />
+      <CommentList
+        postId={1}
+        onSubmit={() => {}}
+        isPending={false}
+        comments={MOCK_COMMENT_RESPONSE_DATA}
+      />
       <hr className="border border-divider-default" />
       <NoticeCommentForm />
     </div>

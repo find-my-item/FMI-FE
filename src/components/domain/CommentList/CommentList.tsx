@@ -1,17 +1,33 @@
 import { ViewMoreComment } from "@/components/common";
+import { GetPostsCommentsData, useGetRepliesPostsComments } from "@/api/fetch/comment";
 import CommentItem from "./CommentItem";
-import { GetPostsCommentsData } from "@/api/fetch/comment";
+import { EmptyCommentUI, GuestCommentUI } from "./_internal";
 
 interface CommentListProps {
+  postId: number;
   comments?: GetPostsCommentsData;
+  onSubmit: (content: string, image: File | null, parentId: number) => void;
+  isPending: boolean;
+  isLoggedIn?: boolean;
+  useFetchReplies?: typeof useGetRepliesPostsComments;
 }
 
 // TODO(지권): 댓글 페이지네이션 백엔드 협의 필요
-const CommentList = ({ comments }: CommentListProps) => {
-  if (!comments || !comments.comments?.length) return null;
+// TODO(지권): 댓글 전체 수 백엔드 누락
+const CommentList = ({
+  postId,
+  comments,
+  onSubmit,
+  isPending,
+  isLoggedIn,
+  useFetchReplies,
+}: CommentListProps) => {
+  if (!isLoggedIn) return <GuestCommentUI />;
+  if (!comments) return null;
 
   const hasNext = comments.hasNext;
   const data = comments.comments;
+  const isEmpty = data.length === 0;
 
   return (
     <>
@@ -20,14 +36,25 @@ const CommentList = ({ comments }: CommentListProps) => {
           댓글<span>{data.length}</span>
         </h2>
       </header>
-      <ul>
-        {data.map((comment) => (
-          <CommentItem key={comment.id} data={comment} />
-        ))}
-      </ul>
 
-      {/* TODO(지권): count 백엔드 누락 */}
-      {hasNext && <ViewMoreComment count={5} />}
+      {isEmpty || isLoggedIn ? (
+        <EmptyCommentUI />
+      ) : (
+        <ul>
+          {data.map((comment) => (
+            <CommentItem
+              key={comment.id}
+              postId={postId}
+              data={comment}
+              onSubmit={onSubmit}
+              isPending={isPending}
+              useFetchReplies={useFetchReplies!}
+            />
+          ))}
+        </ul>
+      )}
+
+      {hasNext && <ViewMoreComment count={comments.remainingCount} />}
     </>
   );
 };
