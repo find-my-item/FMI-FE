@@ -7,7 +7,7 @@ const page = () => {
     <>
       <DetailHeader title="내 문의 내역" />
       <MypageRequestDetailContainer />
-      <PostInputComment postId={123} />
+      <PostInputComment postId={123} isLoggedIn={false} />
     </>
   );
 };

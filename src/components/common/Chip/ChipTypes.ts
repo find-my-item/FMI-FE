@@ -4,7 +4,8 @@ export type ChipType =
   | "brandNormal"
   | "admin"
   | "toast"
-  | "neutralDisabled";
+  | "neutralDisabled"
+  | "brandSubtleHover";
 
 export interface ChipProps {
   label: string;

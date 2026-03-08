@@ -6,4 +6,6 @@ export const DEFAULT_FILTERS: FiltersStateType = {
   sort: "LATEST",
   status: undefined,
   findStatus: undefined,
+  startDate: "",
+  endDate: "",
 };

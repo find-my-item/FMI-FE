@@ -365,6 +365,7 @@ module.exports = {
           foundItem_2: "#eaf2fe",
           lostItem_2: "#fef4e6",
           kakao_2: "#fee500",
+          lostItem2: "#ffefad",
         },
       },
       fg: {

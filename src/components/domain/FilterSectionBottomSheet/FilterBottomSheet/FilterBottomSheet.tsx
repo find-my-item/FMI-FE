@@ -15,7 +15,7 @@ import {
   tabsType,
 } from "../_types/types";
 import { categories, sort, status, findStatus } from "../_constants/CONSTANTS";
-import { applyFiltersToUrl } from "../utils/applyFiltersToUrl";
+import { applyFiltersToUrl } from "../../../../utils/applyFiltersToUrl/applyFiltersToUrl";
 import { FiltersStateType } from "../_types/filtersStateType";
 import { TABS } from "../_constants/TABS";
 import PopupLayout from "../../PopupLayout/PopupLayout";
@@ -26,7 +26,7 @@ import PopupLayout from "../../PopupLayout/PopupLayout";
  *
  * 필터 옵션을 선택하고 적용하는 바텀시트 컴포넌트입니다.
  *
- * 지역 검색, 카테고리, 정렬, 상태(분류/찾음여부) 등 다양한 필터링 기능을 탭 인터페이스로 제공합니다.
+ * 지역 검색, 카테고리, 정렬, 상태(분류/찾음 여부) 등 다양한 필터링 기능을 탭 인터페이스로 제공합니다.
  * `pageType`에 따라 상단에 노출되는 탭의 종류와 순서가 동적으로 변경됩니다.
  * '적용하기' 버튼 클릭 시 선택된 필터값들을 URL 쿼리 파라미터로 변환하여 페이지를 이동(replace)시킵니다.
  *
@@ -230,7 +230,7 @@ const FilterBottomSheet = ({
                 key={index}
                 label={findStatusItem.label}
                 value={findStatusItem.value}
-                selected={filters.status === findStatusItem.value}
+                selected={filters.findStatus === findStatusItem.value}
                 onSelect={() =>
                   setFilters((prev) => ({ ...prev, findStatus: findStatusItem.value }))
                 }

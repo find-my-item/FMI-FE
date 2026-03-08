@@ -1,15 +1,21 @@
 import useApiLogout from "@/api/fetch/auth/api/useApiLogout";
 import { useToast } from "@/context/ToastContext";
+import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
 const useLogout = () => {
-  const { mutate: logoutMutate } = useApiLogout();
+  const { mutate: logoutMutate, isPending } = useApiLogout();
   const { addToast } = useToast();
   const router = useRouter();
 
+  const queryClient = useQueryClient();
+
   const handleLogout = () => {
+    if (isPending) return;
+
     logoutMutate(undefined, {
       onSuccess: () => {
+        queryClient.clear();
         addToast("로그아웃 되었어요.", "success");
         router.replace("/");
       },
@@ -19,7 +25,7 @@ const useLogout = () => {
     });
   };
 
-  return { handleLogout };
+  return { handleLogout, isPending };
 };
 
 export default useLogout;
