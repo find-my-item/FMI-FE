@@ -14,6 +14,7 @@ import {
 } from "../../components/domain/FilterSectionBottomSheet/_types/types";
 import { ActivityFilterValue } from "@/app/(route)/mypage/activity/_types/ActivityFilterType";
 import { SimpleSortType } from "@/types";
+import { RequestStatusFilterValue } from "@/components/domain/MypageRequest/_types/MypageRequestFilterType";
 
 type Params = {
   region?: string | null;
@@ -25,6 +26,7 @@ type Params = {
   endDate?: string | null;
   activity?: string | null;
   simpleSort?: string | null;
+  requestStatus?: string | null;
 };
 
 export const normalizedFilterValues = ({
@@ -34,6 +36,7 @@ export const normalizedFilterValues = ({
   findStatus,
   activity,
   simpleSort,
+  requestStatus,
 }: Params) => {
   const normalizedCategory = normalizeEnumValue<Exclude<CategoryFilterValue, undefined>>(category);
   const normalizedSort = normalizeEnumValue<SortFilterValue>(sort);
@@ -42,6 +45,8 @@ export const normalizedFilterValues = ({
     normalizeEnumValue<Exclude<FindStatusFilterValue, undefined>>(findStatus);
   const normalizedActivity = normalizeEnumValue<Exclude<ActivityFilterValue, undefined>>(activity);
   const normalizedSimpleSort = normalizeEnumValue<SimpleSortType>(simpleSort);
+  const normalizedRequestStatus =
+    normalizeEnumValue<Exclude<RequestStatusFilterValue, undefined>>(requestStatus);
 
   return {
     normalizedCategory,
@@ -50,6 +55,7 @@ export const normalizedFilterValues = ({
     normalizedFindStatus,
     normalizedActivity,
     normalizedSimpleSort,
+    normalizedRequestStatus,
   };
 };
 
@@ -63,6 +69,7 @@ export const filterSelectionState = ({
   endDate,
   activity,
   simpleSort,
+  requestStatus,
 }: Params) => {
   const isRegionSelected = Boolean(region);
   const isCategorySelected = Boolean(category);
@@ -72,6 +79,7 @@ export const filterSelectionState = ({
   const isDateSelected = Boolean(startDate || endDate);
   const isActivitySelected = Boolean(activity);
   const isSimpleSortSelected = Boolean(simpleSort);
+  const isRequestStatusSelected = Boolean(requestStatus);
 
   return {
     isRegionSelected,
@@ -82,5 +90,6 @@ export const filterSelectionState = ({
     isDateSelected,
     isActivitySelected,
     isSimpleSortSelected,
+    isRequestStatusSelected,
   };
 };

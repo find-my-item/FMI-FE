@@ -16,7 +16,7 @@ import {
   SORT_KEBAB_ITEM,
 } from "../../_constants/COMMENT_FILTER";
 import { SimpleSortType } from "@/types";
-import { useFilterSync } from "../../_hooks/useFilterSync";
+import { useFilterSync } from "../../../../../../hooks/domain/useFilterSync/useFilterSync";
 
 const MypageCommentsFilterSection = () => {
   const { startDate, endDate, simpleSort } = useFilterParams();
