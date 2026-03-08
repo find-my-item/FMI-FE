@@ -12,7 +12,15 @@ import {
   SortFilterValue,
   StatusFilterValue,
 } from "../../components/domain/FilterSectionBottomSheet/_types/types";
-import { ActivityType, CategoryType, ItemStatus, PostType, SimpleSortType } from "@/types";
+import {
+  ActivityType,
+  CategoryType,
+  ItemStatus,
+  PostType,
+  RequestType,
+  SimpleSortType,
+} from "@/types";
+import { RequestStatusFilterValue } from "@/components/domain/MypageRequest/_types/MypageRequestFilterType";
 
 const CATEGORY_QUERY_VALUE_MAP: Record<CategoryType, string> = {
   ELECTRONICS: "electronics",
@@ -54,6 +62,13 @@ export const SIMPLE_SORT_QUERY_VALUE_MAP: Record<SimpleSortType, string> = {
   OLDEST: "oldest",
 };
 
+const REQUEST_STATUS_QUERY_VALUE_MAP: Record<RequestType, string> = {
+  ALL: "all",
+  PENDING: "pending",
+  REVIEWED: "reviewed",
+  RESOLVED: "resolved",
+};
+
 const categoryToQueryValue = (category: CategoryFilterValue): string | undefined => {
   if (!category) return undefined;
   return CATEGORY_QUERY_VALUE_MAP[category];
@@ -82,6 +97,11 @@ const simpleSortToQueryValue = (simpleSort: SimpleSortType): string => {
   return SIMPLE_SORT_QUERY_VALUE_MAP[simpleSort];
 };
 
+const requestStatusToQueryValue = (requestStatus: RequestStatusFilterValue): string | undefined => {
+  if (!requestStatus) return undefined;
+  return REQUEST_STATUS_QUERY_VALUE_MAP[requestStatus];
+};
+
 const FILTER_TRANSFORMERS: Record<string, (val: any) => string | undefined> = {
   category: (val) => categoryToQueryValue(val),
   sort: (val) => (val ? sortToQueryValue(val) : undefined),
@@ -89,6 +109,7 @@ const FILTER_TRANSFORMERS: Record<string, (val: any) => string | undefined> = {
   findStatus: (val) => findStatusToQueryValue(val),
   activity: (val) => activityToQueryValue(val),
   simpleSort: (val) => (val ? simpleSortToQueryValue(val) : undefined),
+  requestStatus: (val) => requestStatusToQueryValue(val),
   region: (val) => val,
   startDate: (val) => val,
   endDate: (val) => val,
