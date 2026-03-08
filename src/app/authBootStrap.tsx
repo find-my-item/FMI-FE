@@ -8,13 +8,27 @@ import { useAuthStore } from "@/store";
 export default function AuthBootstrap() {
   const router = useRouter();
   const pathname = usePathname();
+
   const { mutate: refreshTokenMutate } = useApiRefreshToken();
   const ranRef = useRef(false);
 
   const setAuthInitialized = useAuthStore((state) => state.setAuthInitialized);
 
+  const isMainPage = pathname === "/";
+  const isAuthPage = pathname.startsWith("/login") || pathname.startsWith("/sign-up");
+  const isProtectPath =
+    pathname.startsWith("/mypage/") ||
+    pathname.startsWith("/write") ||
+    pathname.startsWith("/chat") ||
+    pathname.startsWith("/change-password");
+
   useEffect(() => {
-    if (pathname === "/login?reason=session-expired") {
+    if (isAuthPage) {
+      setAuthInitialized(true);
+      return;
+    }
+
+    if (!isMainPage && !isProtectPath) {
       setAuthInitialized(true);
       return;
     }
@@ -29,7 +43,9 @@ export default function AuthBootstrap() {
         }
       },
       onError: (error) => {
-        if (error.code === "AUTH401-INVALID_REFRESH") router.push("/login?reason=session-expired");
+        if (error.code === "AUTH401-INVALID_REFRESH" && isProtectPath) {
+          router.replace("/login?reason=session-expired");
+        }
       },
       onSettled: () => {
         setAuthInitialized(true);
