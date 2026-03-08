@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useGetRepliesPostsComments } from "@/api/fetch/comment";
+import { DeleteCommentVariables, useGetRepliesPostsComments } from "@/api/fetch/comment";
 import { Icon } from "@/components/common";
 import { cn } from "@/utils";
 import { CommentItemType } from "@/types";
@@ -19,6 +19,7 @@ interface CommentCardProps {
   autoOpenReplies?: boolean;
 
   useFetchReplies: typeof useGetRepliesPostsComments;
+  onDeleteComment: (commentVariables: DeleteCommentVariables) => void;
 
   isGuest?: boolean;
 }
@@ -33,6 +34,7 @@ const CommentItem = ({
   autoOpenReplies = false,
   useFetchReplies,
   isGuest = false,
+  onDeleteComment,
 }: CommentCardProps) => {
   const isReply = level === "reply";
   const isNestedReply = level === "nestedReply";
@@ -81,10 +83,12 @@ const CommentItem = ({
                   authorName,
                   profileImageUrl,
                   commentId: data.id,
+                  deleted: data.deleted,
                 }}
                 isGuest={isGuest}
                 isThreadItem={isThreadItem}
                 queryKey={queryKey}
+                onDeleteComment={onDeleteComment}
               />
 
               <CommentBody
@@ -103,6 +107,7 @@ const CommentItem = ({
               isReplyFormOpen={isReplyFormOpen}
               setIsReplyFormOpen={setIsReplyFormOpen}
               queryKey={queryKey}
+              deleted={data.deleted}
             />
           </div>
 
@@ -141,6 +146,7 @@ const CommentItem = ({
               autoOpenReplies={isTopLevelComment && viewReply}
               useFetchReplies={useFetchReplies}
               isGuest={isGuest}
+              onDeleteComment={onDeleteComment}
             />
           ))}
         </ul>

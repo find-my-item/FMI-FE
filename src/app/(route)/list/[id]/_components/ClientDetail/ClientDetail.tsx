@@ -3,7 +3,11 @@
 import { CommentList } from "@/components/domain";
 import { ErrorBoundary } from "@/app/ErrorBoundary";
 import { useGetDetailPost } from "@/api/fetch/post";
-import { useGetPostsComments, useGetRepliesPostsComments } from "@/api/fetch/comment";
+import {
+  useDeleteComment,
+  useGetPostsComments,
+  useGetRepliesPostsComments,
+} from "@/api/fetch/comment";
 import PostDetail from "../PostDetail/PostDetail";
 import PostDetailTopHeader from "../PostDetailTopHeader/PostDetailTopHeader";
 import SimilarItemsSection from "../SimilarItemsSection/SimilarItemsSection";
@@ -20,6 +24,7 @@ const ClientDetail = ({ id, isLoggedIn }: ClientDetailProps) => {
   const { data, isLoading, isError } = useGetDetailPost({ id });
   const { data: commentsData } = useGetPostsComments({ postId: id, enabled: isLoggedIn });
   const { handleReplySubmit, isPending } = useHandleReplySubmit(id);
+  const { mutate: deleteComment } = useDeleteComment();
 
   if (isLoading) return <DetailSkeleton />;
   if (isError || !data?.result) return <div className="pt-4 h-base">오류가 발생했습니다.</div>;
@@ -48,6 +53,7 @@ const ClientDetail = ({ id, isLoggedIn }: ClientDetailProps) => {
           isPending={isPending}
           isLoggedIn={isLoggedIn}
           useFetchReplies={useGetRepliesPostsComments}
+          onDeleteComment={deleteComment}
         />
 
         <ErrorBoundary fallback={<ErrorSimilarSection postId={id} />}>

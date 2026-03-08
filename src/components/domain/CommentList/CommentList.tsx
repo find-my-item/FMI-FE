@@ -1,5 +1,9 @@
 import { ViewMoreComment } from "@/components/common";
-import { GetPostsCommentsData, useGetRepliesPostsComments } from "@/api/fetch/comment";
+import {
+  DeleteCommentVariables,
+  GetPostsCommentsData,
+  useGetRepliesPostsComments,
+} from "@/api/fetch/comment";
 import CommentItem from "./CommentItem";
 import { EmptyCommentUI, GuestCommentUI } from "./_internal";
 
@@ -10,6 +14,7 @@ interface CommentListProps {
   isPending: boolean;
   isLoggedIn?: boolean;
   useFetchReplies?: typeof useGetRepliesPostsComments;
+  onDeleteComment: (commentVariables: DeleteCommentVariables) => void;
 }
 
 // TODO(지권): 댓글 페이지네이션 백엔드 협의 필요
@@ -21,6 +26,7 @@ const CommentList = ({
   isPending,
   isLoggedIn,
   useFetchReplies,
+  onDeleteComment,
 }: CommentListProps) => {
   if (!isLoggedIn) return <GuestCommentUI />;
   if (!comments) return null;
@@ -49,6 +55,7 @@ const CommentList = ({
               onSubmit={onSubmit}
               isPending={isPending}
               useFetchReplies={useFetchReplies!}
+              onDeleteComment={onDeleteComment}
             />
           ))}
         </ul>
