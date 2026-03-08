@@ -13,11 +13,12 @@ import { useHandleReplySubmit } from "../../_hooks/useHandleReplySubmit/useHandl
 
 interface ClientDetailProps {
   id: number;
+  isLoggedIn: boolean;
 }
 
-const ClientDetail = ({ id }: ClientDetailProps) => {
+const ClientDetail = ({ id, isLoggedIn }: ClientDetailProps) => {
   const { data, isLoading, isError } = useGetDetailPost({ id });
-  const { data: commentsData } = useGetPostsComments({ postId: id });
+  const { data: commentsData } = useGetPostsComments({ postId: id, enabled: isLoggedIn });
   const { handleReplySubmit, isPending } = useHandleReplySubmit(id);
 
   if (isLoading) return <DetailSkeleton />;
@@ -37,21 +38,24 @@ const ClientDetail = ({ id }: ClientDetailProps) => {
         }}
       />
 
-      <PostDetail type="find" data={data.result} />
+      <div className="h-base">
+        <PostDetail type="find" data={data.result} />
 
-      <CommentList
-        postId={id}
-        comments={commentsData?.result}
-        onSubmit={handleReplySubmit}
-        isPending={isPending}
-        useFetchReplies={useGetRepliesPostsComments}
-      />
+        <CommentList
+          postId={id}
+          comments={commentsData?.result}
+          onSubmit={handleReplySubmit}
+          isPending={isPending}
+          isLoggedIn={isLoggedIn}
+          useFetchReplies={useGetRepliesPostsComments}
+        />
 
-      <ErrorBoundary fallback={<ErrorSimilarSection postId={id} />}>
-        <SimilarItemsSection postId={id} />
-      </ErrorBoundary>
+        <ErrorBoundary fallback={<ErrorSimilarSection postId={id} />}>
+          <SimilarItemsSection postId={id} />
+        </ErrorBoundary>
+      </div>
 
-      <PostInputComment postId={id} />
+      <PostInputComment postId={id} isLoggedIn={isLoggedIn} />
     </>
   );
 };

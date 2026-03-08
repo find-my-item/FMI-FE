@@ -7,34 +7,39 @@ interface CommentMetaHeaderProps {
     authorId: string;
     createdAt: string;
     authorName: string;
+    profileImageUrl: string;
   };
+  isGuest: boolean;
   isThreadItem: boolean;
 }
 
-const CommentMetaHeader = ({ data, isThreadItem }: CommentMetaHeaderProps) => {
-  const { authorId, createdAt, authorName } = data;
+const authorStyle = "line-clamp-2 break-all text-body1-medium text-layout-header-default";
+
+const CommentMetaHeader = ({ data, isGuest, isThreadItem }: CommentMetaHeaderProps) => {
+  const { authorId, createdAt, authorName, profileImageUrl } = data;
 
   return (
-    <>
-      {/* 댓글 메타 */}
-      <div className="flex items-start justify-between">
-        <div className="flex gap-[14px]">
-          <ProfileAvatar size={isThreadItem ? 30 : 40} />
-          <div className="flex flex-col flex-wrap items-start">
-            <Link
-              href={`/user/${authorId}`}
-              className="line-clamp-2 break-all text-body1-medium text-layout-header-default"
-            >
+    <div className="flex items-start justify-between">
+      <div className="flex gap-[14px]">
+        <ProfileAvatar src={profileImageUrl} size={isThreadItem ? 30 : 40} />
+
+        <div className="flex flex-col flex-wrap items-start">
+          {isGuest ? (
+            <span className={authorStyle}>{authorName}</span>
+          ) : (
+            <Link href={`/user/${authorId}`} className={authorStyle}>
               {authorName}
             </Link>
-            <time dateTime={createdAt} className="text-body2-regular text-layout-body-default">
-              {formatDate(createdAt)}
-            </time>
-          </div>
+          )}
+
+          <time dateTime={createdAt} className="text-body2-regular text-layout-body-default">
+            {formatDate(createdAt)}
+          </time>
         </div>
-        <KebabMenuButton size="small" ariaLabel="댓글 메뉴" />
       </div>
-    </>
+
+      <KebabMenuButton size="small" ariaLabel="댓글 메뉴" disabled={isGuest} />
+    </div>
   );
 };
 

@@ -8,6 +8,7 @@ interface CommentActionsProps {
   setViewReply: Dispatch<SetStateAction<boolean>>;
   isReplyFormOpen: boolean;
   setIsReplyFormOpen: Dispatch<SetStateAction<boolean>>;
+  isGuest: boolean;
   replyCount: number;
 }
 
@@ -17,6 +18,7 @@ const CommentActions = ({
   setViewReply,
   isReplyFormOpen,
   setIsReplyFormOpen,
+  isGuest,
   replyCount,
 }: CommentActionsProps) => {
   return (
@@ -24,8 +26,8 @@ const CommentActions = ({
       <div className="flex items-center gap-3 py-2">
         <button
           className={cn("flex items-center gap-1", replyCount === 0 && "cursor-not-allowed")}
-          onClick={() => setViewReply((prev) => !prev)}
-          disabled={replyCount === 0}
+          onClick={isGuest ? undefined : () => setViewReply((prev) => !prev)}
+          disabled={replyCount === 0 || isGuest}
         >
           <span
             className={cn(
@@ -52,7 +54,8 @@ const CommentActions = ({
             "text-body1-medium",
             isReplyFormOpen ? "text-brand-normal-enteredSelected" : "text-neutral-strong-default"
           )}
-          onClick={() => setIsReplyFormOpen((prev) => !prev)}
+          onClick={isGuest ? undefined : () => setIsReplyFormOpen((prev) => !prev)}
+          disabled={undefined}
         >
           답글 작성
         </button>

@@ -8,6 +8,7 @@ interface CommentFooterProps {
     isLike: boolean;
   };
   isThreadItem: boolean;
+  isGuest: boolean;
   isReplyFormOpen: boolean;
   setIsReplyFormOpen: (value: boolean) => void;
 }
@@ -15,6 +16,7 @@ interface CommentFooterProps {
 const CommentFooter = ({
   footerData,
   isThreadItem,
+  isGuest,
   isReplyFormOpen,
   setIsReplyFormOpen,
 }: CommentFooterProps) => {
@@ -28,8 +30,8 @@ const CommentFooter = ({
     <div className="flex items-center gap-3">
       <button
         aria-label={isLike ? "좋아요 취소" : "좋아요"}
-        className="flex items-center gap-1 text-body2-regular text-neutral-strong-placeholder"
-        onClick={handleLikeClick}
+        className="flex items-center gap-1 text-body2-regular text-neutral-strong-placeholder disabled:cursor-not-allowed disabled:opacity-40"
+        onClick={isGuest ? undefined : handleLikeClick}
       >
         <Icon
           name="Heart"
@@ -45,7 +47,7 @@ const CommentFooter = ({
             "text-body1-regular",
             isReplyFormOpen ? "text-brand-normal-enteredSelected" : "text-neutral-strong-default"
           )}
-          onClick={() => setIsReplyFormOpen(!isReplyFormOpen)}
+          onClick={isGuest ? undefined : () => setIsReplyFormOpen(!isReplyFormOpen)}
         >
           답글 작성
         </button>

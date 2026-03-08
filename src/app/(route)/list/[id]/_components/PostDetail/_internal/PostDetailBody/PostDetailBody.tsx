@@ -35,21 +35,23 @@ const PostDetailBody = ({ isBoardType, label, data }: PostDetailBodyProps) => {
         <p className="mt-6 text-body1-regular text-layout-header-default">{content}</p>
 
         <ul className="mt-8 flex gap-5 text-body2-medium text-layout-body-default">
-          <li className="flex gap-1">
-            <Icon name="EyeOpen" size={20} className="text-neutralInversed-strong-pressed" />
+          <li className="flex items-center gap-1">
+            <Icon name="EyeDetail" size={20} className="text-border-divider-default" />
             <span>조회 {formatViewCount(viewCount)}</span>
           </li>
           <li>
             <button
               type="button"
-              className="flex gap-1"
+              className="flex items-center gap-1"
               disabled={isPending}
               onClick={() => handleToggleFavorite(data.favoriteStatus)}
             >
               <Icon
                 name="Star"
                 size={20}
-                className={data.favoriteStatus ? "text-system-bookmark" : "text-[#D9D9D9]"}
+                className={
+                  data.favoriteStatus ? "text-system-bookmark" : "text-border-divider-default"
+                }
               />
               <span>즐겨찾기</span>
               <span>{formatViewCount(favoriteCount)}</span>
