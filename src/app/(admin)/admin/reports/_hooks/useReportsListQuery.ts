@@ -1,33 +1,29 @@
 import { useGetInquiries, useGetReport } from "@/api/fetch/admin";
 import { ReportsTabType } from "../_types/ReportsTabType";
-import { InquiryStatus, InquiryTargetType, ReportStatus, ReportTargetType } from "@/types";
+import { InquiryStatus, ReportStatus } from "@/types";
 
 interface UseReportsListQueryParams {
   activeTab: ReportsTabType;
-  status?: ReportStatus;
-  answered?: boolean;
-  targetType?: ReportTargetType;
   keyword?: string;
-  inquiryType?: InquiryTargetType;
+  reportStatus?: ReportStatus;
   inquiryStatus?: InquiryStatus;
+  answered?: boolean;
 }
 
 export const useReportsListQuery = ({
   activeTab,
-  status,
-  answered,
-  targetType,
   keyword,
-  inquiryType,
+  reportStatus,
   inquiryStatus,
+  answered,
 }: UseReportsListQueryParams) => {
   const reportQuery = useGetReport(
-    { status, targetType, answered, keyword },
+    { status: reportStatus, answered, keyword },
     { enabled: activeTab === "report" }
   );
 
   const inquiryQuery = useGetInquiries(
-    { status: inquiryStatus, type: inquiryType, answered, keyword },
+    { status: inquiryStatus, answered, keyword },
     { enabled: activeTab === "inquiry" }
   );
 

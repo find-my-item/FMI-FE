@@ -1,33 +1,30 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Tab } from "@/components/domain";
-import { AdminFilter, AdminSearch } from "../../../_components";
-import { AdminFilterItemType } from "../../../_types";
+import { AdminSearch } from "../../../_components";
 import ReportsList from "../ReportsList/ReportsList";
 import { ReportsTabType } from "../../_types/ReportsTabType";
 import { REPORTS_TAB } from "../../_constants/REPORTS_TAB";
-
-// TODO(지권): 추후 필터 기능 추가
-const reportsFilters: AdminFilterItemType[] = [
-  {
-    label: "상태",
-    onSelected: false,
-    onClick: () => {},
-  },
-  {
-    label: "답변",
-    onSelected: false,
-    onClick: () => {},
-  },
-];
+import { ReportsFilter } from "../_internal";
+import { InquiryStatus, ReportStatus } from "@/types";
+import { normalizeEnumValue } from "@/utils";
 
 const ReportsView = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const keyword = searchParams.get("keyword") ?? undefined;
   const [activeTab, setActiveTab] = useState<ReportsTabType>("report");
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    params.delete("status");
+    params.delete("answered");
+
+    router.replace(`/admin/reports?${params.toString()}`);
+  }, [activeTab]);
 
   const handleKeywordSearch = (newKeyword: string) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -42,6 +39,12 @@ const ReportsView = () => {
     router.replace(`/admin/reports?${params.toString()}`);
   };
 
+  const reportStatus = normalizeEnumValue<ReportStatus>(searchParams.get("status"));
+  const inquiryStatus = normalizeEnumValue<InquiryStatus>(searchParams.get("status"));
+
+  const answered =
+    searchParams.get("answered") !== null ? searchParams.get("answered") === "true" : undefined;
+
   return (
     <div className="h-base">
       <Tab
@@ -53,17 +56,14 @@ const ReportsView = () => {
 
       <AdminSearch onEnter={handleKeywordSearch} defaultValue={keyword} />
 
-      <AdminFilter filters={reportsFilters} />
+      <ReportsFilter currentParams={searchParams} activeTab={activeTab} />
 
-      {/* TODO(지권): 기능 추가하면서 수정 예정 */}
       <ReportsList
         activeTab={activeTab}
-        // status="REVIEWED"
-        // answered={true}
-        // targetType="CHAT"
         keyword={keyword}
-        // inquiryType="ACCOUNT_LOGIN"
-        // inquiryStatus="RECEIVED"
+        reportStatus={activeTab === "report" ? reportStatus : undefined}
+        inquiryStatus={activeTab === "inquiry" ? inquiryStatus : undefined}
+        answered={answered}
       />
     </div>
   );

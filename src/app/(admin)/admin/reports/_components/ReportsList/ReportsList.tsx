@@ -8,39 +8,33 @@ import { toInquiryItemVM, toReportItemVM } from "../../../_utils/toReportsItemVM
 import { ReportsTabType } from "../../_types/ReportsTabType";
 import { AdminReportsItem } from "../../../_components";
 import { EMPTY_STATE_CONFIG } from "./EMPTY_STATE_CONFIG";
-import { InquiryStatus, InquiryTargetType, ReportStatus, ReportTargetType } from "@/types";
+import { InquiryStatus, ReportStatus } from "@/types";
 import { useReportsListQuery } from "../../_hooks/useReportsListQuery";
 
 interface ReportsListProps {
   activeTab: ReportsTabType;
-  status?: ReportStatus;
-  answered?: boolean;
-  targetType?: ReportTargetType;
   keyword?: string;
-  inquiryType?: InquiryTargetType;
+  reportStatus?: ReportStatus;
   inquiryStatus?: InquiryStatus;
+  answered?: boolean;
 }
 
 const ReportsList = ({
   activeTab,
-  status,
-  answered,
-  targetType,
   keyword,
+  reportStatus,
   inquiryStatus,
-  inquiryType,
+  answered,
 }: ReportsListProps) => {
   const { addToast } = useToast();
 
   const { data, isLoading, isError, hasNextPage, fetchNextPage, isFetchingNextPage } =
     useReportsListQuery({
       activeTab,
-      status,
-      answered,
-      targetType,
       keyword,
-      inquiryType,
+      reportStatus,
       inquiryStatus,
+      answered,
     });
 
   const { ref: listRef } = useInfiniteScroll({
@@ -50,7 +44,7 @@ const ReportsList = ({
   });
 
   useEffect(() => {
-    if (isError) addToast("유저 탈퇴 사유를 불러오지 못했어요", "error");
+    if (isError) addToast("신고/문의 내역을 불러오지 못했어요", "error");
   }, [isError, addToast]);
 
   if (isLoading) return <LoadingState />;
