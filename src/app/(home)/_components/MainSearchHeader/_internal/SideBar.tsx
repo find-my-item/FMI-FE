@@ -6,11 +6,9 @@ import { HEADER_LINK } from "../CONST_HEADER";
 import { useModalBackdrop, useModalLockAndEsc } from "@/hooks";
 import Icon from "@/components/common/Icon/Icon";
 import { Button } from "@/components/common";
-import useApiLogout from "@/api/fetch/auth/api/useApiLogout";
-import { useToast } from "@/context/ToastContext";
 import useLogout from "@/hooks/useLogout/useLogout";
 
-// TODO(지권): 추후 디자인 수정 필요
+// TODO(지권): 작업 후 삭제 필요
 
 /**
  * @author jikwon

@@ -1,6 +1,5 @@
 export { default as Icon } from "./Icon/Icon";
 export { default as ConfirmModal } from "./Modal/ConfirmModal";
-export { default as Dropdown } from "./Dropdown/Dropdown";
 export { default as Toast } from "./Toast/Toast";
 export { default as Input } from "./Input/InputText/InputText";
 export { default as Chip } from "./Chip/Chip";
