@@ -1,8 +1,9 @@
 import { RequiredText } from "@/components/common";
 import { useFormContext, useWatch } from "react-hook-form";
+import { NoticeWriteFormValues } from "../../../_types/NoticeWriteType";
 
 const TitleInput = () => {
-  const { register, control } = useFormContext();
+  const { register, control } = useFormContext<NoticeWriteFormValues>();
   const titleValue = useWatch({ control, name: "title" });
 
   return (
@@ -13,7 +14,13 @@ const TitleInput = () => {
         placeholder="제목을 입력해 주세요."
         className="w-full pr-10 text-body1-medium placeholder:text-neutral-normal-placeholder"
         maxLength={50}
-        {...register("title", { required: true })}
+        {...register("title", {
+          required: "제목을 입력해 주세요.",
+          maxLength: {
+            value: 50,
+            message: "제목은 50자 이내로 입력해 주세요.",
+          },
+        })}
       />
       {!titleValue && <RequiredText className="absolute left-[156px]" />}
       <span className="absolute right-5 text-body2-regular text-neutral-normal-placeholder">

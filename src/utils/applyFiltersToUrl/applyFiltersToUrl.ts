@@ -5,18 +5,22 @@
  * 내부에 정의된 각 MAP 객체는 클라이언트의 상태 값(Enum/Type)을 URL에 적합한 문자열로 매핑합니다.
  */
 
-import {
-  ActivityFilterState,
-  ActivityFilterValue,
-} from "@/app/(route)/mypage/activity/_types/ActivityFilterType";
-import { FiltersStateType } from "../../components/domain/FilterSectionBottomSheet/_types/filtersStateType";
+import { ActivityFilterValue } from "@/app/(route)/mypage/activity/_types/ActivityFilterType";
 import {
   CategoryFilterValue,
   FindStatusFilterValue,
   SortFilterValue,
   StatusFilterValue,
 } from "../../components/domain/FilterSectionBottomSheet/_types/types";
-import { ActivityType, CategoryType, ItemStatus, PostType } from "@/types";
+import {
+  ActivityType,
+  CategoryType,
+  ItemStatus,
+  PostType,
+  RequestType,
+  SimpleSortType,
+} from "@/types";
+import { RequestStatusFilterValue } from "@/components/domain/MypageRequest/_types/MypageRequestFilterType";
 
 const CATEGORY_QUERY_VALUE_MAP: Record<CategoryType, string> = {
   ELECTRONICS: "electronics",
@@ -53,6 +57,18 @@ const ACTIVITY_QUERY_VALUE_MAP: Record<ActivityType, string> = {
   REPORT: "report",
 };
 
+export const SIMPLE_SORT_QUERY_VALUE_MAP: Record<SimpleSortType, string> = {
+  LATEST: "latest",
+  OLDEST: "oldest",
+};
+
+const REQUEST_STATUS_QUERY_VALUE_MAP: Record<RequestType, string> = {
+  ALL: "all",
+  PENDING: "pending",
+  REVIEWED: "reviewed",
+  RESOLVED: "resolved",
+};
+
 const categoryToQueryValue = (category: CategoryFilterValue): string | undefined => {
   if (!category) return undefined;
   return CATEGORY_QUERY_VALUE_MAP[category];
@@ -77,27 +93,52 @@ const activityToQueryValue = (activity: ActivityFilterValue): string | undefined
   return ACTIVITY_QUERY_VALUE_MAP[activity];
 };
 
-type ApplyFiltersToUrlProps = {
-  filters: Partial<FiltersStateType & ActivityFilterState>;
+const simpleSortToQueryValue = (simpleSort: SimpleSortType): string => {
+  return SIMPLE_SORT_QUERY_VALUE_MAP[simpleSort];
+};
+
+const requestStatusToQueryValue = (requestStatus: RequestStatusFilterValue): string | undefined => {
+  if (!requestStatus) return undefined;
+  return REQUEST_STATUS_QUERY_VALUE_MAP[requestStatus];
+};
+
+const FILTER_TRANSFORMERS: Record<string, (val: any) => string | undefined> = {
+  category: (val) => categoryToQueryValue(val),
+  sort: (val) => (val ? sortToQueryValue(val) : undefined),
+  status: (val) => statusToQueryValue(val),
+  findStatus: (val) => findStatusToQueryValue(val),
+  activity: (val) => activityToQueryValue(val),
+  simpleSort: (val) => (val ? simpleSortToQueryValue(val) : undefined),
+  requestStatus: (val) => requestStatusToQueryValue(val),
+  region: (val) => val,
+  startDate: (val) => val,
+  endDate: (val) => val,
+};
+
+type ApplyFiltersToUrlProps<T extends object> = {
+  filters: Partial<T>;
   searchParams: URLSearchParams;
 };
 
-export const applyFiltersToUrl = ({ filters, searchParams }: ApplyFiltersToUrlProps): string => {
+export const applyFiltersToUrl = <T extends object>({
+  filters,
+  searchParams,
+}: ApplyFiltersToUrlProps<T>): string => {
   const params = new URLSearchParams(searchParams.toString());
 
-  const upsert = (key: string, value?: string) => {
-    if (!value) params.delete(key);
-    else params.set(key, value);
-  };
+  (Object.keys(filters) as Array<keyof T>).forEach((key) => {
+    const value = filters[key];
+    const stringKey = String(key);
 
-  if ("region" in filters) upsert("region", filters.region);
-  if ("category" in filters) upsert("category", categoryToQueryValue(filters.category));
-  if ("sort" in filters) upsert("sort", filters.sort ? sortToQueryValue(filters.sort) : undefined);
-  if ("status" in filters) upsert("status", statusToQueryValue(filters.status));
-  if ("findStatus" in filters) upsert("findStatus", findStatusToQueryValue(filters.findStatus));
-  if ("activity" in filters) upsert("activity", activityToQueryValue(filters.activity));
-  if ("startDate" in filters) upsert("startDate", filters.startDate);
-  if ("endDate" in filters) upsert("endDate", filters.endDate);
+    const transformer = FILTER_TRANSFORMERS[stringKey];
+    const transformedValue = transformer ? transformer(value) : (value as string | undefined);
+
+    if (!transformedValue) {
+      params.delete(stringKey);
+    } else {
+      params.set(stringKey, transformedValue);
+    }
+  });
 
   return params.toString();
 };

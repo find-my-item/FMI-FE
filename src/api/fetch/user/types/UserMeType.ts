@@ -7,4 +7,5 @@ export interface UsersMeType {
   nickname: string;
   email: string;
   profileImg: string;
+  role: "USER" | "ADMIN";
 }

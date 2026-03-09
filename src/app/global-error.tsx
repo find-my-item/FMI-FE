@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import * as Sentry from "@sentry/nextjs";
 import { ErrorView } from "@/components/state";
+import { cn } from "@/utils";
 import "@/app/globals.css";
 
 export default function GlobalError({ error }: { error: Error & { digest?: string } }) {
@@ -12,7 +13,9 @@ export default function GlobalError({ error }: { error: Error & { digest?: strin
 
   return (
     <html lang="ko">
-      <body className="mx-auto max-w-[390px] border-2 flex-col-center">
+      <body
+        className={cn("mx-auto max-w-[390px] border-2 flex-col-center", "tablet:max-w-[768px]")}
+      >
         <ErrorView
           iconName="ServerError"
           code="500"
