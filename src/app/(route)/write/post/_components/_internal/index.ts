@@ -1,4 +1,3 @@
-export { default as CategoryPopup } from "./CategoryPopup/CategoryPopup";
 export { default as TempModal } from "./TempModal/TempModal";
 export { default as CategorySection } from "./CategorySection/CategorySection";
 export { default as LocationSection } from "./LocationSection/LocationSection";

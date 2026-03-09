@@ -1,9 +1,10 @@
 import { cn } from "@/utils";
 import { RequiredText } from "@/components/common";
 import { useFormContext, useWatch } from "react-hook-form";
+import { NoticeWriteFormValues } from "../../../_types/NoticeWriteType";
 
 const ContentInput = () => {
-  const { register, control } = useFormContext();
+  const { register, control } = useFormContext<NoticeWriteFormValues>();
   const contentValue = useWatch({ control, name: "content" });
 
   return (
@@ -16,7 +17,13 @@ const ContentInput = () => {
           "h-[208px] w-full resize-none py-1 text-body1-medium text-neutral-strong-default",
           "peer placeholder:text-neutral-normal-placeholder focus:outline-none"
         )}
-        {...register("content", { required: true })}
+        {...register("content", {
+          required: "내용을 입력해주세요.",
+          maxLength: {
+            value: 500,
+            message: "내용은 500자 이내로 입력해주세요.",
+          },
+        })}
         maxLength={500}
       />
       <span className="absolute bottom-6 right-5 text-body2-regular text-neutral-normal-placeholder">

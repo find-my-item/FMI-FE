@@ -6,6 +6,7 @@ export const MYPAGE_MENU_LIST = [
       { pageName: "내가 쓴 댓글", pageLink: "/mypage/comments" },
       { pageName: "즐겨찾기 목록", pageLink: "/mypage/favorites" },
       { pageName: "내 활동 내역", pageLink: "/mypage/activity" },
+      { pageName: "내가 차단한 계정", pageLink: "/mypage/blocked-users" },
     ],
   },
   {
@@ -25,6 +26,14 @@ export const MYPAGE_MENU_LIST = [
     pages: [
       { pageName: "비밀번호 변경", pageLink: "/change-password" },
       { pageName: "회원 탈퇴", pageLink: "/mypage/delete-account" },
+    ],
+  },
+  {
+    title: "서비스 정책",
+    pages: [
+      { pageName: "서비스 소개", pageLink: "/hello" },
+      { pageName: "개인정보 수집 및 이용 약관", pageLink: "/terms/privacy" },
+      { pageName: "마케팅 수신 동의", pageLink: "/terms/marketing" },
     ],
   },
 ] as const;
