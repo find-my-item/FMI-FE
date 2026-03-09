@@ -1,7 +1,7 @@
 import { usePatchProfile } from "@/api/fetch/user";
 import { useToast } from "@/context/ToastContext";
 import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { FormEvent } from "react";
 import { useFormContext } from "react-hook-form";
 
 interface useProfileFormSubmitProps {
@@ -19,9 +19,8 @@ const useProfileFormSubmit = ({
   const { addToast } = useToast();
 
   const { getValues } = useFormContext();
-  // const [isProfileImg, setIsProfileImg] = useState(false);
 
-  const { mutate: PatchProfileMutate } = usePatchProfile();
+  const { mutate: PatchUserMeMutate } = usePatchProfile();
 
   // 폼 제출 함수
   const handleSubmitMypageProfile = (e: FormEvent) => {
@@ -45,12 +44,16 @@ const useProfileFormSubmit = ({
       formData.append("nickname", isNickname);
     }
 
-    if (ChangeImg && isProfileImg) {
-      formData.append("profileImageUrl", isProfileImg);
+    if (ChangeImg) {
+      if (isProfileImg) {
+        formData.append("profileImageUrl", isProfileImg);
+      } else {
+        formData.append("profileImageUrl", "null");
+      }
     }
 
     console.log("닉네임>> ", isNickname, "이미지>>> ", isProfileImg);
-    // PatchProfileMutate(formData, {
+    // PatchUserMeMutate(formData, {
     //   onSuccess: () => {
     //     // router.push("/mypage");
     //     addToast("프로필 이미지 변경 성공", "success");

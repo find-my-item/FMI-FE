@@ -17,7 +17,7 @@ const MypageProfileForm = ({ user }: MypageProfileFormProps) => {
 
   const { setValue } = useFormContext();
 
-  const { handleClickNickname } = useNicknameCheck();
+  const { handleClickNickname, isNicknameVerified, isNicknameDisabled } = useNicknameCheck();
 
   // 버튼 클릭 제어
   const [openMenu, setOpenMenu] = useState(false);
@@ -40,6 +40,9 @@ const MypageProfileForm = ({ user }: MypageProfileFormProps) => {
     onNoChange: () => setOpenModal(true),
   });
 
+  const {
+    formState: { isValid },
+  } = useFormContext();
   return (
     <form className="flex w-full flex-col h-base">
       <div className="flex-1">
@@ -86,7 +89,7 @@ const MypageProfileForm = ({ user }: MypageProfileFormProps) => {
           <InputText
             inputOption={{
               name: "nickname",
-              // TODO(수현): 기존 닉네임이 placeholder로 들어갈 예정
+              disabled: isNicknameDisabled,
               placeholder: nickname,
               maxLength: 10,
               validation: {
@@ -111,7 +114,7 @@ const MypageProfileForm = ({ user }: MypageProfileFormProps) => {
       <FooterButton
         type="button"
         // TODO(수현): 기능 구현 브랜치로 disabled 제어 함수 추가 예정
-        // disabled={ }
+        disabled={!(isValid && isNicknameVerified)}
         onClick={handleSubmitMypageProfile}
       >
         설정 완료
