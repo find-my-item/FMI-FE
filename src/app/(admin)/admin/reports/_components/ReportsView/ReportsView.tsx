@@ -38,6 +38,7 @@ const ReportsView = () => {
 
       <AdminFilter filters={reportsFilters} />
 
+      {/* TODO(지권): 기능 추가하면서 수정 예정 */}
       <ReportsList
         activeTab={activeTab}
         // status="REVIEWED"
