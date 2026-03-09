@@ -38,7 +38,15 @@ const ReportsView = () => {
 
       <AdminFilter filters={reportsFilters} />
 
-      <ReportsList activeTab={activeTab} />
+      <ReportsList
+        activeTab={activeTab}
+        status="REVIEWED"
+        answered={true}
+        targetType="CHAT"
+        keyword="s"
+        inquiryType="ACCOUNT_LOGIN"
+        inquiryStatus="RECEIVED"
+      />
     </div>
   );
 };

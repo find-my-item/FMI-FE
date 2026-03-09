@@ -1,4 +1,4 @@
-import { AdminGuestInquiryItem, AdminReportItem } from "@/api/fetch/admin";
+import { AdminGuestInquiryItem, AdminInquiriesItem, AdminReportItem } from "@/api/fetch/admin";
 import { AdminReportsItemData } from "../../_types";
 import {
   ProcessStatusBadgeConfig,
@@ -7,10 +7,10 @@ import {
 
 export const toReportItemVM = (item: AdminReportItem): AdminReportsItemData => {
   return {
-    href: `/admin/reports/report/${item.id}`,
-    title: item.title,
-    content: item.content,
-    nickname: item.writerNickname,
+    href: `/admin/reports/report/${item.reportId}`,
+    title: item.reportType,
+    content: item.reason,
+    nickname: item.reporterNickname,
     createdAt: item.createdAt,
 
     processStatus: ProcessStatusBadgeConfig[item.status],
@@ -18,16 +18,16 @@ export const toReportItemVM = (item: AdminReportItem): AdminReportsItemData => {
   };
 };
 
-export const toInquiryItemVM = (item: AdminReportItem): AdminReportsItemData => {
+export const toInquiryItemVM = (item: AdminInquiriesItem): AdminReportsItemData => {
   return {
-    href: `/admin/reports/inquiry/${item.id}`,
+    href: `/admin/reports/inquiry/${item.inquiryId}`,
     title: item.title,
     content: item.content,
-    nickname: item.writerNickname,
+    nickname: item.userNickname,
     createdAt: item.createdAt,
 
     processStatus: ProcessStatusBadgeConfig[item.status],
-    answerStatus: ReplyStatusBadgeConfig(false), // TODO(지권): 백엔드 API 누락
+    answerStatus: ReplyStatusBadgeConfig(item.answered),
   };
 };
 
