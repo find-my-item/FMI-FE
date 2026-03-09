@@ -25,7 +25,7 @@ const meta: Meta<typeof AdminDetailSection> = {
       inquiryId: 1,
       title: "비회원 문의 제목입니다.",
       content: "문의 내용입니다.",
-      inquiryType: "ACCOUNT_LOGIN",
+      inquiryType: "TECHNICAL",
       email: "asd@asd.com",
       createdAt: "2026-01-01T00:00:00",
       status: "RECEIVED",

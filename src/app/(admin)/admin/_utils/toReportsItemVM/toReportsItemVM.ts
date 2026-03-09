@@ -27,7 +27,7 @@ export const toInquiryItemVM = (item: AdminInquiriesItem): AdminReportsItemData 
     nickname: item.userNickname,
     createdAt: item.createdAt,
 
-    processStatus: ProcessStatusBadgeConfig[item.status], // status 확인 필요
+    processStatus: ProcessStatusBadgeConfig[item.status],
     answerStatus: ReplyStatusBadgeConfig(item.answered),
   };
 };
