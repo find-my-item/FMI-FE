@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Tab } from "@/components/domain";
 import { AdminFilter, AdminSearch } from "../../../_components";
 import { AdminFilterItemType } from "../../../_types";
@@ -23,7 +24,23 @@ const reportsFilters: AdminFilterItemType[] = [
 ];
 
 const ReportsView = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const keyword = searchParams.get("keyword") ?? undefined;
   const [activeTab, setActiveTab] = useState<ReportsTabType>("report");
+
+  const handleKeywordSearch = (newKeyword: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (newKeyword === params.get("keyword")) return;
+
+    if (!newKeyword) {
+      params.delete("keyword");
+    } else {
+      params.set("keyword", newKeyword);
+    }
+
+    router.replace(`/admin/reports?${params.toString()}`);
+  };
 
   return (
     <div className="h-base">
@@ -34,7 +51,7 @@ const ReportsView = () => {
         className="sticky left-0 top-[56px]"
       />
 
-      <AdminSearch onEnter={() => {}} />
+      <AdminSearch onEnter={handleKeywordSearch} defaultValue={keyword} />
 
       <AdminFilter filters={reportsFilters} />
 
@@ -44,7 +61,7 @@ const ReportsView = () => {
         // status="REVIEWED"
         // answered={true}
         // targetType="CHAT"
-        // keyword="s"
+        keyword={keyword}
         // inquiryType="ACCOUNT_LOGIN"
         // inquiryStatus="RECEIVED"
       />
