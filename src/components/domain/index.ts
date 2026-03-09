@@ -22,3 +22,4 @@ export { default as PostReportBlockActions } from "./PostReportBlockActions/Post
 export { default as WriteImageSection } from "./WriteImageSection/WriteImageSection";
 export { default as WriteActionSection } from "./WriteActionSection/WriteActionSection";
 export { default as CategoryPopup } from "./CategoryPopup/CategoryPopup";
+export { default as GuestLoginModal } from "./GuestLoginModal/GuestLoginModal";

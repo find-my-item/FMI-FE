@@ -20,7 +20,7 @@ export const MYPAGE_POSTS_FILTER = [
     iconPosition: "trailing",
   },
   {
-    name: "찾음여부",
+    name: "찾음 여부",
     icon: { name: "ArrowDown", size: 16 },
     iconPosition: "trailing",
   },

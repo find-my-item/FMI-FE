@@ -42,3 +42,5 @@ export type CategoryType =
 export type PostType = "LOST" | "FOUND";
 
 export type ItemStatus = "SEARCHING" | "FOUND";
+
+export type ActivityType = "POST" | "COMMENT" | "FAVORITE" | "INQUIRY" | "REPORT";
