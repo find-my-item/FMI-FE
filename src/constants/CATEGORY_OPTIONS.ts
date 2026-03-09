@@ -7,3 +7,11 @@ export const CATEGORY_OPTIONS = [
   { value: "CARD", label: "카드" },
   { value: "ETC", label: "기타" },
 ] as const;
+
+export const NOTICE_WRITE_CATEGORY_OPTIONS = [
+  { value: "IMPORTANT", label: "중요" },
+  { value: "UPDATE", label: "업데이트" },
+  { value: "MAINTENANCE", label: "점검" },
+  { value: "EVENT", label: "이벤트" },
+  { value: "GENERAL", label: "일반" },
+] as const;
