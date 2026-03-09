@@ -4,10 +4,10 @@ import { InquiryStatus, InquiryTargetType } from "@/types";
 import { AdminInquiriesItem, GetInquiriesResponse } from "../types/InquiriesType";
 
 interface UseGetInquiriesParams {
-  type: InquiryTargetType;
-  status: InquiryStatus;
-  answered: boolean;
-  keyword: string;
+  type?: InquiryTargetType;
+  status?: InquiryStatus;
+  answered?: boolean;
+  keyword?: string;
   size?: number;
 }
 
@@ -16,7 +16,7 @@ interface UseGetInquiriesOptions {
 }
 
 export const useGetInquiries = (
-  { status, type, answered, keyword, size = 10 }: UseGetInquiriesParams,
+  { status, type, answered = false, keyword, size = 10 }: UseGetInquiriesParams,
   { enabled = true }: UseGetInquiriesOptions = {}
 ) => {
   const params = new URLSearchParams();

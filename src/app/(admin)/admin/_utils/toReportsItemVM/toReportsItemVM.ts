@@ -4,17 +4,18 @@ import {
   ProcessStatusBadgeConfig,
   ReplyStatusBadgeConfig,
 } from "../AdminStatusBadgeConfig/AdminStatusBadgeConfig";
+import { REPORT_TYPE_TITLE } from "../../_constants/REPORT_TYPE_TITLE";
 
 export const toReportItemVM = (item: AdminReportItem): AdminReportsItemData => {
   return {
     href: `/admin/reports/report/${item.reportId}`,
-    title: item.reportType,
+    title: REPORT_TYPE_TITLE[item.reportType],
     content: item.reason,
     nickname: item.reporterNickname,
     createdAt: item.createdAt,
 
     processStatus: ProcessStatusBadgeConfig[item.status],
-    answerStatus: ReplyStatusBadgeConfig(false), // TODO(지권): 백엔드 API 누락
+    answerStatus: ReplyStatusBadgeConfig(item.answered),
   };
 };
 
@@ -26,7 +27,7 @@ export const toInquiryItemVM = (item: AdminInquiriesItem): AdminReportsItemData 
     nickname: item.userNickname,
     createdAt: item.createdAt,
 
-    processStatus: ProcessStatusBadgeConfig[item.status],
+    processStatus: ProcessStatusBadgeConfig[item.status], // status 확인 필요
     answerStatus: ReplyStatusBadgeConfig(item.answered),
   };
 };

@@ -13,12 +13,12 @@ import { useReportsListQuery } from "../../_hooks/useReportsListQuery";
 
 interface ReportsListProps {
   activeTab: ReportsTabType;
-  status: ReportStatus;
-  answered: boolean;
-  targetType: ReportTargetType;
-  keyword: string;
-  inquiryType: InquiryTargetType;
-  inquiryStatus: InquiryStatus;
+  status?: ReportStatus;
+  answered?: boolean;
+  targetType?: ReportTargetType;
+  keyword?: string;
+  inquiryType?: InquiryTargetType;
+  inquiryStatus?: InquiryStatus;
 }
 
 const ReportsList = ({

@@ -8,10 +8,10 @@ interface UseGetReportOptions {
 }
 
 interface UseGetReportParams {
-  status: ReportStatus;
-  targetType: ReportTargetType;
-  answered: boolean;
-  keyword: string;
+  status?: ReportStatus;
+  targetType?: ReportTargetType;
+  answered?: boolean;
+  keyword?: string;
   size?: number;
 }
 
@@ -24,7 +24,7 @@ export const useGetReport = (
 
   if (status) params.set("status", status);
   if (targetType) params.set("targetType", targetType);
-  params.set("answered", String(answered));
+  if (answered !== undefined) params.set("answered", String(answered));
   if (keyword) params.set("keyword", keyword);
 
   return useAppInfiniteQuery<GetReportResponse, unknown, AdminReportItem[]>(

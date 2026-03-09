@@ -40,12 +40,12 @@ const ReportsView = () => {
 
       <ReportsList
         activeTab={activeTab}
-        status="REVIEWED"
-        answered={true}
-        targetType="CHAT"
-        keyword="s"
-        inquiryType="ACCOUNT_LOGIN"
-        inquiryStatus="RECEIVED"
+        // status="REVIEWED"
+        // answered={true}
+        // targetType="CHAT"
+        // keyword="s"
+        // inquiryType="ACCOUNT_LOGIN"
+        // inquiryStatus="RECEIVED"
       />
     </div>
   );

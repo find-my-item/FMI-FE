@@ -4,12 +4,12 @@ import { InquiryStatus, InquiryTargetType, ReportStatus, ReportTargetType } from
 
 interface UseReportsListQueryParams {
   activeTab: ReportsTabType;
-  status: ReportStatus;
-  answered: boolean;
-  targetType: ReportTargetType;
-  keyword: string;
-  inquiryType: InquiryTargetType;
-  inquiryStatus: InquiryStatus;
+  status?: ReportStatus;
+  answered?: boolean;
+  targetType?: ReportTargetType;
+  keyword?: string;
+  inquiryType?: InquiryTargetType;
+  inquiryStatus?: InquiryStatus;
 }
 
 export const useReportsListQuery = ({
