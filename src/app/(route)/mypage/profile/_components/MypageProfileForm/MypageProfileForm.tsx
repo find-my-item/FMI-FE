@@ -41,8 +41,13 @@ const MypageProfileForm = ({ user }: MypageProfileFormProps) => {
   });
 
   const {
+    watch,
     formState: { isValid },
   } = useFormContext();
+
+  const currentProfileImg = watch("profileImg");
+  const isImageChanged = currentProfileImg instanceof File || currentProfileImg === null;
+  const canSubmit = isImageChanged || (isValid && isNicknameVerified);
   return (
     <form className="flex w-full flex-col h-base">
       <div className="flex-1">
@@ -114,7 +119,7 @@ const MypageProfileForm = ({ user }: MypageProfileFormProps) => {
       <FooterButton
         type="button"
         // TODO(수현): 기능 구현 브랜치로 disabled 제어 함수 추가 예정
-        disabled={!(isValid && isNicknameVerified)}
+        disabled={!canSubmit}
         onClick={handleSubmitMypageProfile}
       >
         설정 완료

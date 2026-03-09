@@ -15,6 +15,7 @@ const useChangeImg = ({ setOpenMenu, initialImg, onImageChange }: UseChangeImgPr
     setOpenMenu(false);
   };
 
+  // 이미지 변경
   const handleChangeImg = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {

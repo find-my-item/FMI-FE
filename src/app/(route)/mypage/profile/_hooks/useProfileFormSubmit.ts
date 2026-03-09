@@ -1,5 +1,6 @@
 import { usePatchProfile } from "@/api/fetch/user";
 import { useToast } from "@/context/ToastContext";
+import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { FormEvent } from "react";
 import { useFormContext } from "react-hook-form";
@@ -53,20 +54,26 @@ const useProfileFormSubmit = ({
     }
 
     console.log("닉네임>> ", isNickname, "이미지>>> ", isProfileImg);
-    // PatchUserMeMutate(formData, {
-    //   onSuccess: () => {
-    //     // router.push("/mypage");
-    //     addToast("프로필 이미지 변경 성공", "success");
-    //   },
-    //   onError: (error) => {
-    //     if (error.code === "USER404-NOT_FOUND") {
-    //       addToast("회원이 아니에요. 로그인을 해주세요", "warning");
-    //     }
-    //     if (error.code === "AUTH409-NICKNAME_DUPLICATED") {
-    //       addToast("이미 사용 중인 닉네임이에요. 다른 닉네임으로 다시 시도해 주세요.", "warning");
-    //     }
-    //   },
-    // });
+    for (const [key, value] of formData.entries()) {
+      console.log(key, value);
+    }
+    const queryClient = useQueryClient();
+    PatchUserMeMutate(formData, {
+      onSuccess: (updateProfile) => {
+        router.push("/mypage");
+        addToast("프로필 이미지 변경 성공", "success");
+        queryClient.setQueryData(["users-me"], updateProfile);
+      },
+      onError: (error) => {
+        if (error.code === "USER404-NOT_FOUND") {
+          addToast("회원이 아니에요. 로그인을 해주세요", "warning");
+          router.replace("/login?reason=session-expired");
+        }
+        if (error.code === "AUTH409-NICKNAME_DUPLICATED") {
+          addToast("이미 사용 중인 닉네임이에요. 다른 닉네임으로 다시 시도해 주세요", "warning");
+        }
+      },
+    });
   };
 
   return {
