@@ -3,7 +3,7 @@ import { cn } from "@/utils";
 
 interface FeatureSectionContent {
   title: string;
-  description: string;
+  description: ReactNode;
 }
 
 interface FeatureSectionProps {
