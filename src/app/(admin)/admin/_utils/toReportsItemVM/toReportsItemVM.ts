@@ -14,7 +14,7 @@ export const toReportItemVM = (item: AdminReportItem): AdminReportsItemData => {
     createdAt: item.createdAt,
 
     processStatus: ProcessStatusBadgeConfig[item.status],
-    answerStatus: ReplyStatusBadgeConfig.UNANSWERED, // TODO(지권): 백엔드 API 누락
+    answerStatus: ReplyStatusBadgeConfig(false), // TODO(지권): 백엔드 API 누락
   };
 };
 
@@ -27,7 +27,7 @@ export const toInquiryItemVM = (item: AdminReportItem): AdminReportsItemData => 
     createdAt: item.createdAt,
 
     processStatus: ProcessStatusBadgeConfig[item.status],
-    answerStatus: ReplyStatusBadgeConfig.ANSWERED, // TODO(지권): 백엔드 API 누락
+    answerStatus: ReplyStatusBadgeConfig(false), // TODO(지권): 백엔드 API 누락
   };
 };
 
@@ -40,6 +40,6 @@ export const toGuestInquiryItemVM = (item: AdminGuestInquiryItem): AdminReportsI
     createdAt: item.createdAt,
 
     processStatus: ProcessStatusBadgeConfig[item.status],
-    answerStatus: ReplyStatusBadgeConfig.UNANSWERED, // TODO(지권): 백엔드 API 누락
+    answerStatus: ReplyStatusBadgeConfig(item.answered),
   };
 };
