@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs";
 import CategoryPopup from "./CategoryPopup";
 
 const meta: Meta<typeof CategoryPopup> = {
-  title: "페이지/글쓰기/CategoryPopup",
+  title: "공통 컴포넌트/CategoryPopup",
   component: CategoryPopup,
   tags: ["autodocs"],
   parameters: {
