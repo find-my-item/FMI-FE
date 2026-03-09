@@ -1,4 +1,14 @@
 export const MYPAGE_KEBAB_OPTIONS = {
-  reports: [{ text: "접수" }, { text: "처리 중" }, { text: "처리 완료" }],
-  inquiries: [{ text: "접수" }, { text: "접수 중" }, { text: "답변 완료" }],
+  reports: [
+    { label: "전체", value: "ALL" },
+    { label: "접수", value: "PENDING" },
+    { label: "검토 중", value: "REVIEWED" },
+    { label: "처리 완료", value: "RESOLVED" },
+  ],
+  inquiries: [
+    { label: "전체", value: "ALL" },
+    { label: "접수", value: "PENDING" },
+    { label: "접수 중", value: "REVIEWED" },
+    { label: "처리 완료", value: "RESOLVED" },
+  ],
 } as const;

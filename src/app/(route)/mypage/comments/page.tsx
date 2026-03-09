@@ -1,5 +1,5 @@
 import { DetailHeader } from "@/components/layout";
-import { MypageCommentsFilter, MypageCommentsList } from "./_components";
+import { MypageCommentsFilterSection, MypageCommentsList } from "./_components";
 import { MypageSearch } from "@/components/domain";
 
 const page = () => {
@@ -10,7 +10,7 @@ const page = () => {
       <div className="w-full h-base">
         <MypageSearch />
 
-        <MypageCommentsFilter />
+        <MypageCommentsFilterSection />
 
         <MypageCommentsList />
       </div>
