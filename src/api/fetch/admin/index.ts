@@ -11,3 +11,4 @@ export { useGetDetailReports } from "./api/useGetDetailReports";
 export { useGetDetailGuestInquiries } from "./api/useGetDetailGuestInquiries";
 export { useGetReport } from "./api/useGetReport";
 export { useGetInquiries } from "./api/useGetInquiries";
+export { usePostNotices } from "./api/usePostNotices";

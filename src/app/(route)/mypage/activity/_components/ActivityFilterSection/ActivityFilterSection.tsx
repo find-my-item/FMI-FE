@@ -4,11 +4,10 @@ import { Filter } from "@/components/common";
 import { useState } from "react";
 import { DateRangeBottomSheet } from "@/components/domain";
 import { ACTIVITY_OPTIONS } from "../../_constants/ACTIVITY_OPTIONS";
-import { ActivityFilterState } from "../../_types/ActivityFilterType";
 import {
   filterSelectionState,
   normalizedFilterValues,
-} from "@/components/domain/FilterSectionBottomSheet/utils/deriveFilterParams";
+} from "@/utils/deriveFilterParams/deriveFilterParams";
 import { ACTIVITY_LABEL_MAP } from "../../_constants/ACTIVITY_LABEL";
 import { useActivityFilter } from "../../_hooks/useActivityFilter";
 import ActivityBottomSheet from "../ActivityBottomSheet/ActivityBottomSheet";
@@ -67,7 +66,7 @@ const ActivityFilterSection = () => {
       </Filter>
 
       {isBottomSheet.isOpen && isBottomSheet.mode === "Date" && (
-        <DateRangeBottomSheet<ActivityFilterState>
+        <DateRangeBottomSheet
           isOpen={isBottomSheet.isOpen}
           onClose={() => setIsBottomSheet((prev) => ({ ...prev, isOpen: false }))}
           filters={filters}

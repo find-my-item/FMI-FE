@@ -11,8 +11,10 @@ import {
   FindStatusFilterValue,
   SortFilterValue,
   StatusFilterValue,
-} from "../_types/types";
+} from "../../components/domain/FilterSectionBottomSheet/_types/types";
 import { ActivityFilterValue } from "@/app/(route)/mypage/activity/_types/ActivityFilterType";
+import { SimpleSortType } from "@/types";
+import { RequestStatusFilterValue } from "@/components/domain/MypageRequest/_types/MypageRequestFilterType";
 
 type Params = {
   region?: string | null;
@@ -23,6 +25,8 @@ type Params = {
   startDate?: string | null;
   endDate?: string | null;
   activity?: string | null;
+  simpleSort?: string | null;
+  requestStatus?: string | null;
 };
 
 export const normalizedFilterValues = ({
@@ -31,6 +35,8 @@ export const normalizedFilterValues = ({
   status,
   findStatus,
   activity,
+  simpleSort,
+  requestStatus,
 }: Params) => {
   const normalizedCategory = normalizeEnumValue<Exclude<CategoryFilterValue, undefined>>(category);
   const normalizedSort = normalizeEnumValue<SortFilterValue>(sort);
@@ -38,6 +44,9 @@ export const normalizedFilterValues = ({
   const normalizedFindStatus =
     normalizeEnumValue<Exclude<FindStatusFilterValue, undefined>>(findStatus);
   const normalizedActivity = normalizeEnumValue<Exclude<ActivityFilterValue, undefined>>(activity);
+  const normalizedSimpleSort = normalizeEnumValue<SimpleSortType>(simpleSort);
+  const normalizedRequestStatus =
+    normalizeEnumValue<Exclude<RequestStatusFilterValue, undefined>>(requestStatus);
 
   return {
     normalizedCategory,
@@ -45,6 +54,8 @@ export const normalizedFilterValues = ({
     normalizedStatus,
     normalizedFindStatus,
     normalizedActivity,
+    normalizedSimpleSort,
+    normalizedRequestStatus,
   };
 };
 
@@ -57,6 +68,8 @@ export const filterSelectionState = ({
   startDate,
   endDate,
   activity,
+  simpleSort,
+  requestStatus,
 }: Params) => {
   const isRegionSelected = Boolean(region);
   const isCategorySelected = Boolean(category);
@@ -65,6 +78,8 @@ export const filterSelectionState = ({
   const isFindStatusSelected = Boolean(findStatus);
   const isDateSelected = Boolean(startDate || endDate);
   const isActivitySelected = Boolean(activity);
+  const isSimpleSortSelected = Boolean(simpleSort);
+  const isRequestStatusSelected = Boolean(requestStatus);
 
   return {
     isRegionSelected,
@@ -74,5 +89,7 @@ export const filterSelectionState = ({
     isFindStatusSelected,
     isDateSelected,
     isActivitySelected,
+    isSimpleSortSelected,
+    isRequestStatusSelected,
   };
 };
