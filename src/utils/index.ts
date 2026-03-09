@@ -20,3 +20,7 @@ export { formatYmdLabel } from "./formatYmdLabel/formatYmdLabel";
 export { parseYmd } from "./parseYmd/parseYmd";
 export { getDateRangeLabel } from "./getDateRangeLabel/getDateRangeLabel";
 export { applyFiltersToUrl } from "./applyFiltersToUrl/applyFiltersToUrl";
+export {
+  normalizedFilterValues,
+  filterSelectionState,
+} from "./deriveFilterParams/deriveFilterParams";

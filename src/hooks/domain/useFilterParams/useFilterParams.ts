@@ -33,6 +33,8 @@
  *  findStatus: FindStatusFilterValue | undefined
  *  date: string | null
  *  activity: ActivityFilterValue | null
+ *  simpleSort : SimpleSortFilterValue | undefined
+ * requestStatus: RequestStatusFilterValue | undefined
  * }}
  *
  * @example
@@ -51,6 +53,8 @@ import {
   StatusFilterValue,
 } from "../../../components/domain/FilterSectionBottomSheet/_types/types";
 import { ActivityFilterValue } from "@/app/(route)/mypage/activity/_types/ActivityFilterType";
+import { SimpleSortType } from "@/types";
+import { RequestStatusFilterValue } from "@/components/domain/MypageRequest/_types/MypageRequestFilterType";
 
 export const useFilterParams = () => {
   const searchParams = useSearchParams();
@@ -70,6 +74,10 @@ export const useFilterParams = () => {
     endDate: searchParams.get("endDate"),
     activity: normalizeEnumValue<Exclude<ActivityFilterValue, undefined>>(
       searchParams.get("activity")
+    ),
+    simpleSort: normalizeEnumValue<SimpleSortType>(searchParams.get("simpleSort")),
+    requestStatus: normalizeEnumValue<Exclude<RequestStatusFilterValue, undefined>>(
+      searchParams.get("requestStatus")
     ),
   };
 };

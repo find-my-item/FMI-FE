@@ -18,5 +18,7 @@ export const getDateRangeLabel = (startDate?: string | null, endDate?: string | 
   const startLabel = startDateObj ? formatYmdLabel(startDateObj) : "";
   const endLabel = endDateObj ? formatYmdLabel(endDateObj) : "";
 
-  return `${startLabel} ~ ${endLabel}` || "기간";
+  if (!startLabel && !endLabel) return "기간";
+
+  return `${startLabel} ~ ${endLabel}`;
 };
