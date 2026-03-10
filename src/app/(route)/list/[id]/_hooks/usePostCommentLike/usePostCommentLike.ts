@@ -1,30 +1,23 @@
 import { useMemo } from "react";
 import { throttle } from "lodash";
 import { useDeleteLikeComment, usePostLikeComment } from "@/api/fetch/comment";
+import { ToggleCommentLikeVariables } from "@/api/fetch/comment/types/CommentType";
 
-interface ToggleCommentLikeProps {
-  commentId: number;
-  queryKey: unknown[];
+interface ToggleFavoriteProps extends ToggleCommentLikeVariables {
+  isLike: boolean;
 }
 
-export const useToggleCommentLike = ({ commentId, queryKey }: ToggleCommentLikeProps) => {
-  const { mutate: postCommentLike, isPending: postPending } = usePostLikeComment({
-    commentId,
-    queryKey,
-  });
-
-  const { mutate: deleteCommentLike, isPending: deletePending } = useDeleteLikeComment({
-    commentId,
-    queryKey,
-  });
+export const useToggleCommentLike = () => {
+  const { mutate: postCommentLike, isPending: postPending } = usePostLikeComment();
+  const { mutate: deleteCommentLike, isPending: deletePending } = useDeleteLikeComment();
 
   const handleToggleFavorite = useMemo(
     () =>
-      throttle((isLike: boolean) => {
+      throttle(({ isLike, commentId, queryKey }: ToggleFavoriteProps) => {
         if (isLike) {
-          deleteCommentLike();
+          deleteCommentLike({ commentId, queryKey });
         } else {
-          postCommentLike();
+          postCommentLike({ commentId, queryKey });
         }
       }, 300),
     [postCommentLike, deleteCommentLike]

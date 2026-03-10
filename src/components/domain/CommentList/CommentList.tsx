@@ -13,8 +13,10 @@ interface CommentListProps {
   onSubmit: (content: string, image: File | null, parentId: number) => void;
   isPending: boolean;
   isLoggedIn?: boolean;
+
   useFetchReplies?: typeof useGetRepliesPostsComments;
   onDeleteComment: (commentVariables: DeleteCommentVariables) => void;
+  onFavoriteComment: (commentId: number, isLike: boolean, queryKey: unknown[]) => void;
 }
 
 // TODO(지권): 댓글 페이지네이션 백엔드 협의 필요
@@ -27,6 +29,7 @@ const CommentList = ({
   isLoggedIn,
   useFetchReplies,
   onDeleteComment,
+  onFavoriteComment,
 }: CommentListProps) => {
   if (!isLoggedIn) return <GuestCommentUI />;
   if (!comments) return null;
@@ -56,6 +59,7 @@ const CommentList = ({
               isPending={isPending}
               useFetchReplies={useFetchReplies!}
               onDeleteComment={onDeleteComment}
+              onFavoriteComment={onFavoriteComment}
             />
           ))}
         </ul>

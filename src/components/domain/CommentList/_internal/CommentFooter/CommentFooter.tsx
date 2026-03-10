@@ -1,4 +1,3 @@
-import { useToggleCommentLike } from "@/app/(route)/list/[id]/_hooks/usePostCommentLike/usePostCommentLike";
 import { Icon } from "@/components/common";
 import { cn } from "@/utils";
 
@@ -14,6 +13,7 @@ interface CommentFooterProps {
   setIsReplyFormOpen: (value: boolean) => void;
   queryKey: unknown[];
   deleted: boolean;
+  onFavoriteComment: (commentId: number, isLike: boolean, queryKey: unknown[]) => void;
 }
 
 const CommentFooter = ({
@@ -24,13 +24,12 @@ const CommentFooter = ({
   setIsReplyFormOpen,
   queryKey,
   deleted,
+  onFavoriteComment,
 }: CommentFooterProps) => {
   const { likeCount, id, isLike } = footerData;
-  console.log(id);
-  const { handleToggleFavorite } = useToggleCommentLike({ commentId: id, queryKey });
 
   const handleLikeClick = () => {
-    handleToggleFavorite(isLike);
+    onFavoriteComment(id, isLike, queryKey);
   };
 
   return (

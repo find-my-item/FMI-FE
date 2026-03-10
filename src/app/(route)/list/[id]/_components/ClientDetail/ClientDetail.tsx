@@ -14,6 +14,7 @@ import SimilarItemsSection from "../SimilarItemsSection/SimilarItemsSection";
 import PostInputComment from "../PostInputComment/PostInputComment";
 import { DetailSkeleton, ErrorSimilarSection } from "../_internal";
 import { useHandleReplySubmit } from "../../_hooks/useHandleReplySubmit/useHandleReplySubmit";
+import { useToggleCommentLike } from "../../_hooks/usePostCommentLike/usePostCommentLike";
 
 interface ClientDetailProps {
   id: number;
@@ -25,6 +26,7 @@ const ClientDetail = ({ id, isLoggedIn }: ClientDetailProps) => {
   const { data: commentsData } = useGetPostsComments({ postId: id, enabled: isLoggedIn });
   const { handleReplySubmit, isPending } = useHandleReplySubmit(id);
   const { mutate: deleteComment } = useDeleteComment();
+  const { handleToggleFavorite } = useToggleCommentLike();
 
   if (isLoading) return <DetailSkeleton />;
   if (isError || !data?.result) return <div className="pt-4 h-base">오류가 발생했습니다.</div>;
@@ -54,6 +56,9 @@ const ClientDetail = ({ id, isLoggedIn }: ClientDetailProps) => {
           isLoggedIn={isLoggedIn}
           useFetchReplies={useGetRepliesPostsComments}
           onDeleteComment={deleteComment}
+          onFavoriteComment={(commentId, isLike, queryKey) =>
+            handleToggleFavorite({ commentId, isLike, queryKey })
+          }
         />
 
         <ErrorBoundary fallback={<ErrorSimilarSection postId={id} />}>

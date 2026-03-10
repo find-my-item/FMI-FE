@@ -20,8 +20,10 @@ interface CommentCardProps {
 
   useFetchReplies: typeof useGetRepliesPostsComments;
   onDeleteComment: (commentVariables: DeleteCommentVariables) => void;
+  onFavoriteComment: (commentId: number, isLike: boolean, queryKey: unknown[]) => void;
 
   isGuest?: boolean;
+  parentQueryKey?: unknown[];
 }
 
 const CommentItem = ({
@@ -34,7 +36,9 @@ const CommentItem = ({
   autoOpenReplies = false,
   useFetchReplies,
   isGuest = false,
+  parentQueryKey,
   onDeleteComment,
+  onFavoriteComment,
 }: CommentCardProps) => {
   const isReply = level === "reply";
   const isNestedReply = level === "nestedReply";
@@ -65,8 +69,8 @@ const CommentItem = ({
   const isRepliesVisible = shouldFetchReplies;
   const hasReplyComments = isRepliesVisible && replyComments.length > 0;
 
-  const queryKey =
-    level === "comment" ? ["post-comments", postId] : ["replies-post-comments", data.id];
+  const itemQueryKey = parentQueryKey ?? ["post-comments", postId, 0];
+  const childrenQueryKey = ["replies-post-comments", data.id, undefined, 10];
 
   return (
     <li className={cn("my-[18px]", !isNestedReply && "px-5", className)}>
@@ -87,7 +91,7 @@ const CommentItem = ({
                 }}
                 isGuest={isGuest}
                 isThreadItem={isThreadItem}
-                queryKey={queryKey}
+                queryKey={itemQueryKey}
                 onDeleteComment={onDeleteComment}
               />
 
@@ -106,8 +110,9 @@ const CommentItem = ({
               isGuest={isGuest}
               isReplyFormOpen={isReplyFormOpen}
               setIsReplyFormOpen={setIsReplyFormOpen}
-              queryKey={queryKey}
+              queryKey={itemQueryKey}
               deleted={data.deleted}
+              onFavoriteComment={onFavoriteComment}
             />
           </div>
 
@@ -139,14 +144,16 @@ const CommentItem = ({
               key={child.id}
               postId={postId}
               level={child.depth > 1 ? "nestedReply" : "reply"}
-              className={index === 0 && child.depth === 1 ? "pt-4" : undefined}
+              className={index === 0 && child.depth === 1 ? "pt-4" : "pb-4"}
               data={child}
               onSubmit={onSubmit}
               isPending={isPending}
               autoOpenReplies={isTopLevelComment && viewReply}
               useFetchReplies={useFetchReplies}
               isGuest={isGuest}
+              parentQueryKey={childrenQueryKey}
               onDeleteComment={onDeleteComment}
+              onFavoriteComment={onFavoriteComment}
             />
           ))}
         </ul>

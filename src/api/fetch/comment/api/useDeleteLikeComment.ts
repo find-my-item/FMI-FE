@@ -1,29 +1,23 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/context/ToastContext";
 import useAppMutation from "@/api/_base/query/useAppMutation";
+import { PostCommentLikeResponse, ToggleCommentLikeVariables } from "../types/CommentType";
 import { GetPostsCommentsResponse } from "../types/GetPostsComments";
-import { PostCommentLikeResponse, PostLikeRequestBody } from "../types/CommentType";
 
 type LikeOptimisticContext = {
   previous?: GetPostsCommentsResponse;
 };
 
-export const useDeleteLikeComment = ({
-  commentId,
-  queryKey,
-}: {
-  commentId: number;
-  queryKey: unknown[];
-}) => {
+export const useDeleteLikeComment = () => {
   const { addToast } = useToast();
   const queryClient = useQueryClient();
 
-  return useAppMutation<void, PostCommentLikeResponse>(
+  return useAppMutation<ToggleCommentLikeVariables, PostCommentLikeResponse>(
     "auth",
-    `/comments/${commentId}/likes`,
+    ({ commentId }) => `/comments/${commentId}/likes`,
     "delete",
     {
-      onMutate: async () => {
+      onMutate: async ({ commentId, queryKey }) => {
         await queryClient.cancelQueries({ queryKey });
 
         const previous = queryClient.getQueryData<GetPostsCommentsResponse>(queryKey);
@@ -56,7 +50,7 @@ export const useDeleteLikeComment = ({
         addToast("좋아요가 삭제되었어요.", "success");
       },
 
-      onError: (_error, _variables, context) => {
+      onError: (_error, { queryKey }, context) => {
         const typedContext = context as LikeOptimisticContext | undefined;
 
         if (typedContext?.previous) {
@@ -66,7 +60,7 @@ export const useDeleteLikeComment = ({
         addToast("좋아요 삭제에 실패했어요.", "error");
       },
 
-      onSettled: () => {
+      onSettled: (_, __, { queryKey }) => {
         queryClient.invalidateQueries({ queryKey });
       },
     }
