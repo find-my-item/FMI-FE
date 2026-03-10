@@ -16,8 +16,8 @@ export interface AdminInquiriesItem {
   status: InquiryStatus;
   createdAt: string;
   userId: number;
-  userNickname: string;
-  userEmail: string;
+  nickname: string;
+  email: string;
   content: string;
   ip: string;
   answered: false;
