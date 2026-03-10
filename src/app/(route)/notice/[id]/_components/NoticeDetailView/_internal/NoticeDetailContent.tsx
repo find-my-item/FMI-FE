@@ -49,6 +49,7 @@ const NoticeDetailContent = ({ noticeDetail }: { noticeDetail?: NoticeDetail }) 
         <div className="flex gap-3 text-body2-regular text-neutral-strong-placeholder">
           <button aria-label="좋아요 버튼" className="flex items-center gap-1">
             <Icon name="Like" size={16} className="text-border-divider-default" />
+            {/* TODO(형준): 공지사항 상세 응답 값 likeStatus 추가 확인 후 추천 기능 작업 필요 */}
             <span>추천 {likeCount}</span>
           </button>
           <div className="flex items-center gap-1">

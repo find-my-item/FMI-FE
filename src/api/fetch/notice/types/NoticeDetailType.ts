@@ -18,6 +18,7 @@ export interface NoticeDetail {
   isHot: boolean;
   createdAt: string;
   updatedAt: string;
+  likeStatus: boolean;
 }
 
 export interface NoticeDetailResponse extends ApiBaseResponseType<NoticeDetail> {}
