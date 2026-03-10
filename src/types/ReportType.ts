@@ -23,10 +23,6 @@
  * - COPYRIGHT: 저작권
  * - ETC: 기타
  *
- * @description ReportStatus
- * - PENDING: 접수
- * - REVIEWED: 검토
- * - RESOLVED: 완료
  */
 
 export type ReportTargetType = "POST" | "COMMENT" | "USER" | "CHAT";
@@ -42,5 +38,3 @@ export type ReportType =
   | "PRIVACY"
   | "COPYRIGHT"
   | "ETC";
-
-export type ReplyStatus = "UNANSWERED" | "ANSWERED";

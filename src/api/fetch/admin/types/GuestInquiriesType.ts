@@ -21,4 +21,5 @@ export interface AdminGuestInquiryItem {
   userEmail: string;
   content: string;
   ip: string;
+  answered: boolean;
 }

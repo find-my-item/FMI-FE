@@ -24,7 +24,7 @@ describe("toReportItemVM", () => {
       nickname: "짱구",
       createdAt: "2026-01-01",
       processStatus: ProcessStatusBadgeConfig.PENDING,
-      answerStatus: ReplyStatusBadgeConfig.UNANSWERED,
+      answerStatus: ReplyStatusBadgeConfig(false),
     });
   });
 });
@@ -49,7 +49,7 @@ describe("toInquiryItemVM", () => {
       nickname: "유리",
       createdAt: "2026-01-02",
       processStatus: ProcessStatusBadgeConfig.ANSWERED,
-      answerStatus: ReplyStatusBadgeConfig.ANSWERED,
+      answerStatus: ReplyStatusBadgeConfig(false),
     });
   });
 });
@@ -74,7 +74,7 @@ describe("toGuestInquiryItemVM", () => {
       nickname: "test@test.com",
       createdAt: "2026-01-03",
       processStatus: ProcessStatusBadgeConfig.PENDING,
-      answerStatus: ReplyStatusBadgeConfig.UNANSWERED,
+      answerStatus: ReplyStatusBadgeConfig(false),
     });
   });
 });

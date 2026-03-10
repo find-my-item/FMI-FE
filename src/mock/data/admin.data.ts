@@ -1,6 +1,6 @@
 import { NoticeItem } from "@/api/fetch/notice";
 import { AdminReportItem, WithdrawUserItem } from "@/api/fetch/admin";
-import { InquiryType, ReplyStatus, ReportsType } from "@/types";
+import { InquiryType, ReportsType } from "@/types";
 import { AdminGuestInquiryItem } from "@/api/fetch/admin/types/GuestInquiriesType";
 
 export const MOCK_NOTICE_LIST: NoticeItem = {
@@ -130,7 +130,7 @@ export const MOCK_REPORTS_DETAIL_DATA = {
   userEmail: "asd@asd.com",
   createdAt: "2026-01-01T00:00:00",
   requestStatus: "RECEIVED" as ReportsType,
-  status: "UNANSWERED" as ReplyStatus,
+  status: true,
   comments: [],
 };
 
@@ -195,6 +195,7 @@ export const MOCK_ADMIN_GUEST_INQUIRY_LIST: AdminGuestInquiryItem = {
   userEmail: "[EMAIL_ADDRESS]",
   content: "여기에 문의 내용이 표기됩니다.",
   ip: "192.168.0.10",
+  answered: true,
 };
 
 export const MOCK_GUEST_INQUIRY_DETAIL_DATA = {
@@ -203,5 +204,5 @@ export const MOCK_GUEST_INQUIRY_DETAIL_DATA = {
   createdAt: "2025-10-20",
   content: "여기에 신고 내용이 표기됩니다.",
   status: "RECEIVED" as ReportsType,
-  replyStatus: "ANSWERED" as ReplyStatus,
+  replyStatus: false,
 };
