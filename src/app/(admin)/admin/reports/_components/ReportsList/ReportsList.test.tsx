@@ -2,10 +2,10 @@ import { render, screen } from "@testing-library/react";
 import ReportsList from "./ReportsList";
 import { MOCK_ADMIN_REPORT_LIST, MOCK_ADMIN_INQUIRY_LIST } from "@/mock/data";
 
-const mockUseGetReports = jest.fn();
+const mockUseReportsListQuery = jest.fn();
 
-jest.mock("@/api/fetch/admin/api/useGetReports", () => ({
-  useGetReports: (args: any) => mockUseGetReports(args),
+jest.mock("../../_hooks/useReportsListQuery", () => ({
+  useReportsListQuery: (args: any) => mockUseReportsListQuery(args),
 }));
 
 jest.mock("@/hooks", () => ({
@@ -31,7 +31,7 @@ jest.mock("../../../_components", () => ({
 
 describe("ReportsList", () => {
   it("섹션 렌더링", () => {
-    mockUseGetReports.mockReturnValue({
+    mockUseReportsListQuery.mockReturnValue({
       data: [],
       isLoading: false,
       isError: false,
@@ -46,7 +46,7 @@ describe("ReportsList", () => {
   });
 
   it("activeTab이 report인 경우 신고 목록 개수만큼 렌더", () => {
-    mockUseGetReports.mockReturnValue({
+    mockUseReportsListQuery.mockReturnValue({
       data: MOCK_ADMIN_REPORT_LIST,
       isLoading: false,
       isError: false,
@@ -61,7 +61,7 @@ describe("ReportsList", () => {
   });
 
   it("activeTab이 inquiry인 경우 문의 목록 개수만큼 렌더", () => {
-    mockUseGetReports.mockReturnValue({
+    mockUseReportsListQuery.mockReturnValue({
       data: MOCK_ADMIN_INQUIRY_LIST,
       isLoading: false,
       isError: false,

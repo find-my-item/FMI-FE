@@ -1,30 +1,22 @@
 import { Icon } from "@/components/common";
 import { PostDetailData } from "@/api/fetch/post";
 import { formatDate, formatViewCount } from "@/utils";
-import { NoticeChip } from "@/app/(route)/notice/_components";
 import PostChipSection from "../PostChipSection/PostChipSection";
-import { LABELS } from "../../LABELS";
 import { useToggleFavorite } from "../../../../_hooks/useToggleFavorite";
 
 interface PostDetailBodyProps {
-  isBoardType: boolean;
-  label: "find" | "lost" | "notice" | "customer";
   data: PostDetailData;
 }
 
-const PostDetailBody = ({ isBoardType, label, data }: PostDetailBodyProps) => {
+const PostDetailBody = ({ data }: PostDetailBodyProps) => {
   const { title, content, favoriteCount, postStatus, category, createdAt, viewCount } = data;
   const { handleToggleFavorite, isPending } = useToggleFavorite({ postId: data.id });
 
   return (
     <article>
-      {isBoardType ? (
-        <PostChipSection chipData={{ postStatus, category }} />
-      ) : (
-        <NoticeChip label={LABELS[label].label} />
-      )}
+      <PostChipSection chipData={{ postStatus, category }} />
 
-      <div className={isBoardType ? "mt-[14px]" : "space-y-7"}>
+      <div className="mt-[14px]">
         <div>
           <h1 className="text-[20px] font-semibold text-layout-header-default">{title}</h1>
           <time className="text-[14px] leading-[140%] text-layout-body-default">

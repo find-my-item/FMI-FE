@@ -5,14 +5,19 @@
  *
  * - 이 타입은 문의와 관련된 타입을 정리합니다.
  *
- * @description InquiryType
+ * @description InquiryStatus
+ * - RECEIVED: 문의가 접수됨
+ * - PENDING: 문의에 대한 답변이 진행 중
+ * - ANSWERED: 문의에 대한 답변이 완료됨
+ *
+ * @description InquiryTargetType
  * - ACCOUNT_LOGIN: 계정/로그인
  * - USAGE: 서비스 이용
  * - BUG: 오류/버그
  * - SUGGESTION: 건의사항
  * - ETC: 기타
  *
- * @description InquiryCategory
+ * @description InquiryType
  * - GENERAL: 일반
  * - TECHNICAL: 기술
  * - ACCOUNT: 계정
@@ -20,16 +25,13 @@
  * - REPORT_ISSUE: 신고
  * - SERVICE: 서비스
  * - ETC: 기타
- *
- * @description InquiryStatus
- * - RECEIVED: 접수
- * - PENDING: 검토
- * - ANSWERED: 완료
  */
 
-export type InquiryType = "ACCOUNT_LOGIN" | "USAGE" | "BUG" | "SUGGESTION" | "ETC";
+export type InquiryStatus = "RECEIVED" | "PENDING" | "ANSWERED";
 
-export type InquiryCategory =
+export type InquiryTargetType = "ACCOUNT_LOGIN" | "USAGE" | "BUG" | "SUGGESTION" | "ETC";
+
+export type InquiryType =
   | "GENERAL"
   | "TECHNICAL"
   | "ACCOUNT"
