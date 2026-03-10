@@ -1,6 +1,6 @@
 import { usePostInquiryComments } from "@/api/fetch/InquiryComment";
-import { ReportsType } from "../_types/ReportsType";
 import { usePostReportComments } from "@/api/fetch/ReportComment";
+import { ReportsType } from "../_types/ReportsType";
 
 interface UsePostReportsCommentParams {
   reportsId: number;

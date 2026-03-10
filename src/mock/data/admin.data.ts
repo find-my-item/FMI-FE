@@ -1,5 +1,10 @@
 import { NoticeItem } from "@/api/fetch/notice";
-import { AdminInquiriesItem, AdminReportItem, WithdrawUserItem } from "@/api/fetch/admin";
+import {
+  AdminInquiriesItem,
+  AdminReportItem,
+  InquiryComments,
+  WithdrawUserItem,
+} from "@/api/fetch/admin";
 import { InquiryType, InquiryStatus, ReportStatus } from "@/types";
 import { AdminGuestInquiryItem } from "@/api/fetch/admin/types/GuestInquiriesType";
 
@@ -150,19 +155,20 @@ export const MOCK_REPORTS_DETAIL_DATA = {
   comments: [],
 };
 
-export const MOCK_COMMENT_DATA = [
+export const MOCK_ADMIN_DETAIL_COMMENT_DATA: InquiryComments[] = [
   {
-    isAdmin: true,
-    userImageUrl: "",
-    userName: "관리자닉네임",
+    id: 1,
     content: "여기에 댓글 내용이 표기됩니다.",
+    // userImageUrl: "",
+    authorId: 1,
+    authorName: "관리자닉네임",
     createdAt: "2025-05-06",
   },
   {
-    isAdmin: false,
-    userImageUrl: "",
-    userName: "유저닉네임",
+    id: 2,
     content: "여기에 댓글 내용이 표기됩니다.",
+    authorId: 2,
+    authorName: "유저닉네임",
     createdAt: "2025-05-06",
   },
 ];
