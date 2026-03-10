@@ -3,12 +3,13 @@
 import { useNicknameCheck } from "@/hooks/domain/useNicknameCheck/useNicknameCheck";
 import { Icon, InputText, KebabMenu, ProfileAvatar } from "@/components/common";
 import { FooterButton } from "@/components/domain";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import useChangeImg from "../../_hooks/useChangeImg";
 import { UsersMeType } from "@/api/fetch/user/types/UserMeType";
 import useProfileFormSubmit from "../../_hooks/useProfileFormSubmit";
 import MypageProfileModal from "../MypageProfileModal/MypageProfileModal";
+import { usePreventLeave } from "../../_hooks/usePreventLeave";
 
 interface MypageProfileFormProps {
   user?: UsersMeType;
@@ -49,8 +50,13 @@ const MypageProfileForm = ({ user }: MypageProfileFormProps) => {
 
   const currentProfileImg = watch("profileImg");
   const isImageChanged = currentProfileImg instanceof File || currentProfileImg === null;
-  console.log("currentProfileImg", isImageChanged);
-  const canSubmit = isImageChanged || (isValid && isNicknameVerified);
+
+  const isNicknameChanged = watch("nickname");
+
+  const canSubmit = isImageChanged || (isNicknameChanged && isValid && isNicknameVerified);
+
+  const hasChanges = isImageChanged || isNicknameChanged;
+  usePreventLeave(hasChanges, () => setOpenModal(true));
 
   return (
     <form className="flex w-full flex-col h-base">
