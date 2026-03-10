@@ -1,4 +1,4 @@
 export interface MypageProfileFormType {
   nickname: string;
-  profileImg: string | null;
+  profileImage: string | null;
 }

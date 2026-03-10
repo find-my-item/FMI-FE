@@ -21,7 +21,7 @@ const page = () => {
     reValidateMode: "onChange",
     defaultValues: {
       nickname: "",
-      profileImg: data?.result?.profileImg ?? "",
+      profileImage: data?.result?.profileImg ?? "",
     },
   });
 

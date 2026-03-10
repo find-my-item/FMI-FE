@@ -1,5 +1,5 @@
 import { useNicknameCheck } from "@/hooks/domain/useNicknameCheck/useNicknameCheck";
-import { Button, Icon, InputText, KebabMenu, ProfileAvatar } from "@/components/common";
+import { Icon, InputText, KebabMenu, ProfileAvatar } from "@/components/common";
 import { FooterButton } from "@/components/domain";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
@@ -41,13 +41,12 @@ const MypageProfileForm = ({ user }: MypageProfileFormProps) => {
   });
 
   const {
-    watch,
     formState: { isValid },
   } = useFormContext();
 
-  const currentProfileImg = watch("profileImg");
-  const isImageChanged = currentProfileImg instanceof File || currentProfileImg === null;
-  const canSubmit = isImageChanged || (isValid && isNicknameVerified);
+  // const currentProfileImg = watch("profileImg");
+  // const canSubmit = isImageChanged || (isValid && isNicknameVerified);
+
   return (
     <form className="flex w-full flex-col h-base">
       <div className="flex-1">
@@ -119,7 +118,7 @@ const MypageProfileForm = ({ user }: MypageProfileFormProps) => {
       <FooterButton
         type="button"
         // TODO(수현): 기능 구현 브랜치로 disabled 제어 함수 추가 예정
-        disabled={!canSubmit}
+        // disabled={!canSubmit}
         onClick={handleSubmitMypageProfile}
       >
         설정 완료
