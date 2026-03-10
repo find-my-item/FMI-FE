@@ -13,4 +13,6 @@ export interface AdminDetailReport {
   adminNote: string;
   createdAt: string;
   resolvedAt: string;
+  answered: boolean;
+  nickname: string;
 }

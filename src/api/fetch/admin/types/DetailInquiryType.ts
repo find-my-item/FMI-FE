@@ -10,7 +10,7 @@ export interface AdminDetailInquiry {
   inquiryType: InquiryType;
   status: InquiryStatus;
   createdAt: string;
-  email: string;
+  nickname: string;
   ip: string;
   answered: boolean;
   comments: InquiryComments[];

@@ -16,6 +16,9 @@ export const useGetDetailInquiry = (
   return useAppQuery<GetDetailInquiryResponse>(
     "auth",
     ["detail-inquiry", inquiryId],
-    `/admin/inquiries/${inquiryId}`
+    `/admin/inquiries/${inquiryId}`,
+    {
+      enabled,
+    }
   );
 };

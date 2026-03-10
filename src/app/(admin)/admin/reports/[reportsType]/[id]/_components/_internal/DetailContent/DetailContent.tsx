@@ -1,18 +1,17 @@
-import { AdminDetailGuestInquiry, AdminDetailReports } from "@/api/fetch/admin";
+import { AdminDetailGuestInquiry, AdminDetailInquiry, AdminDetailReport } from "@/api/fetch/admin";
 import { formatDate } from "@/utils";
+import { getDetailContentVM } from "../../../_utils/DetailContentVM";
 
 interface DetailContentProps {
-  data: AdminDetailGuestInquiry | AdminDetailReports;
+  data: AdminDetailGuestInquiry | AdminDetailReport | AdminDetailInquiry;
 }
 
 const DetailContent = ({ data }: DetailContentProps) => {
-  const { title, createdAt, content } = data;
-  const userEmailLabel =
-    "type" in data
-      ? data.type === "REPORT"
-        ? data.reporterEmail
-        : data.userEmail
-      : data.email || "";
+  const viewModel = getDetailContentVM(data);
+
+  if (!viewModel) return null;
+
+  const { title, content, createdAt, userEmailLabel } = viewModel;
 
   return (
     <div className="space-y-2">
@@ -30,3 +29,8 @@ const DetailContent = ({ data }: DetailContentProps) => {
 };
 
 export default DetailContent;
+function getDetailViewModel(
+  data: AdminDetailGuestInquiry | AdminDetailReport | AdminDetailInquiry
+) {
+  throw new Error("Function not implemented.");
+}
