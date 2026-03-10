@@ -3,6 +3,7 @@ import { AdminDetailSection } from "@/app/(admin)/admin/_components";
 import AdminReportsCommentSection from "../AdminReportsCommentSection/AdminReportsCommentSection";
 import { ReportsType } from "../../_types/ReportsType";
 import { useReportsDetailQuery } from "../../_hooks/useReportsDetailQuery";
+import { AdminDetailInquiry } from "@/api/fetch/admin";
 
 interface AdminReportsViewProps {
   id: number;
@@ -14,6 +15,13 @@ const AdminReportsView = ({ id, type }: AdminReportsViewProps) => {
 
   if (isError) return null;
 
+  let comments;
+
+  // TODO(지권): 신고 댓글 추가 후 확인 필요
+  if (type === "inquiry" && data?.result) {
+    comments = (data.result as AdminDetailInquiry).comments;
+  }
+
   return (
     <div className="flex flex-col h-base">
       {isLoading ? (
@@ -21,7 +29,7 @@ const AdminReportsView = ({ id, type }: AdminReportsViewProps) => {
       ) : (
         <>
           <AdminDetailSection data={data?.result} type={type} />
-          <AdminReportsCommentSection />
+          <AdminReportsCommentSection comments={comments} />
         </>
       )}
     </div>

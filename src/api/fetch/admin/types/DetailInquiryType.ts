@@ -21,11 +21,5 @@ export interface InquiryComments {
   content: string;
   authorId: number;
   authorName: string;
-  authorEmail: string;
-  parentId: number;
-  replies: string[];
   createdAt: string;
-  updatedAt: string;
-  canEdit: boolean;
-  canDelete: boolean;
 }

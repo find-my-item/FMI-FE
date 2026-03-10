@@ -11,3 +11,4 @@ export type { RegionRow } from "./RegionRow";
 export type { Radius } from "./mapRadius";
 export type { CommentItemType, AuthorResponse, ImageList } from "./CommentItemType";
 export type { UserType } from "./UserType";
+export type { ReadOnlyCommentItemProps } from "./ReadOnlyCommentType";

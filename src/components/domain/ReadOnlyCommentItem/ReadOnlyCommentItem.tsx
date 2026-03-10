@@ -1,5 +1,6 @@
 import { cn, formatDate } from "@/utils";
 import { ProfileAvatar } from "@/components/common";
+import { ReadOnlyCommentItemProps } from "@/types";
 
 /**
  * @author jikwon
@@ -15,14 +16,6 @@ import { ProfileAvatar } from "@/components/common";
  * ```
  *
  */
-
-interface ReadOnlyCommentItemProps {
-  isAdmin: boolean;
-  userImageUrl: string;
-  userName: string;
-  content: string;
-  createdAt: string;
-}
 
 const ReadOnlyCommentItem = ({ data }: { data: ReadOnlyCommentItemProps }) => {
   const { isAdmin, userImageUrl, userName, content, createdAt } = data;
