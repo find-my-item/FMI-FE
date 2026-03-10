@@ -6,6 +6,7 @@ import ChatChip from "../ChatChip/ChatChip";
 import ChatRoomHeaderInfoButton from "../ChatRoomHeaderInfoButton/ChatRoomHeaderInfoButton";
 import { ChatRoomResponse } from "@/api/fetch/chatRoom/types/ChatRoomResponse";
 import Link from "next/link";
+import { cn } from "@/utils";
 
 interface ChatRoomHeaderProps {
   chatRoom: ChatRoomResponse | undefined;
@@ -15,7 +16,7 @@ interface ChatRoomHeaderProps {
 const ChatRoomHeader = ({ chatRoom, roomId }: ChatRoomHeaderProps) => {
   const router = useRouter();
   if (!chatRoom) return null;
-  const { address, postType, title, thumbnailUrl, postId, category, postStatus } =
+  const { address, postType, title, thumbnailUrl, postId, category, postStatus, deleted } =
     chatRoom.postInfo;
   const { nickname } = chatRoom.opponentUser;
 
@@ -38,7 +39,10 @@ const ChatRoomHeader = ({ chatRoom, roomId }: ChatRoomHeaderProps) => {
 
       <Link
         href={`/list/${postId}`}
-        className="flex items-center gap-4 px-4"
+        className={cn(
+          "flex items-center gap-4 px-4",
+          deleted && "pointer-events-none select-none opacity-30"
+        )}
         aria-label="게시글 상세 페이지 이동"
       >
         <div className="shrink-0">
@@ -52,7 +56,9 @@ const ChatRoomHeader = ({ chatRoom, roomId }: ChatRoomHeaderProps) => {
         <div className="flex min-w-0 flex-col">
           <div className="flex items-center gap-1">
             <ChatChip postMode={postType} postStatus={postStatus} />
-            <h2 className="truncate text-body1-semibold text-layout-header-default">{title}</h2>
+            <h2 className="truncate text-body1-semibold text-layout-header-default">
+              {deleted ? `삭제됨 ${title}` : title}
+            </h2>
           </div>
           <p className="h-4 text-caption1-medium text-layout-body-default">{address}</p>
         </div>
