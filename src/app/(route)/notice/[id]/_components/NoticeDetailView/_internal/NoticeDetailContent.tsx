@@ -24,7 +24,9 @@ const NoticeDetailContent = ({ noticeDetail }: { noticeDetail?: NoticeDetail }) 
         <div className="space-y-1">
           <h1 className="text-h2-bold text-layout-header-default">{title}</h1>
           <div className="text-body2-regular text-layout-body-default">
-            <time className="after:mx-2 after:content-['·']">{formatDate(createdAt)}</time>
+            <time dateTime={createdAt} className="after:mx-2 after:content-['·']">
+              {formatDate(createdAt)}
+            </time>
             <span>{authorName}</span>
           </div>
         </div>
