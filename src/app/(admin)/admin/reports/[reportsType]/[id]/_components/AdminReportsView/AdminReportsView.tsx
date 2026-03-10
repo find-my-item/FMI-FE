@@ -20,7 +20,7 @@ const AdminReportsView = ({ id, type }: AdminReportsViewProps) => {
         <LoadingState />
       ) : (
         <>
-          <AdminDetailSection data={data?.result} />
+          <AdminDetailSection data={data?.result} type={type} />
           <AdminReportsCommentSection />
         </>
       )}
