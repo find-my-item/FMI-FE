@@ -5,10 +5,10 @@ import { FooterButton } from "@/components/domain";
 interface TermsProps {
   termName: string;
   onAgree?: () => void;
-  showButton: boolean;
+  showButton?: boolean;
 }
 
-const Terms = ({ termName, onAgree, showButton }: TermsProps) => {
+const Terms = ({ termName, onAgree, showButton = false }: TermsProps) => {
   const term = AGREE_CONFIG[termName as keyof typeof AGREE_CONFIG];
 
   if (!term) {
