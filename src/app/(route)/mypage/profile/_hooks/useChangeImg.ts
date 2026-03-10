@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 
 interface UseChangeImgProps {
   setOpenMenu: (open: boolean) => void;

@@ -1,3 +1,5 @@
+"use no memo";
+
 import { useNicknameCheck } from "@/hooks/domain/useNicknameCheck/useNicknameCheck";
 import { Icon, InputText, KebabMenu, ProfileAvatar } from "@/components/common";
 import { FooterButton } from "@/components/domain";
@@ -41,11 +43,14 @@ const MypageProfileForm = ({ user }: MypageProfileFormProps) => {
   });
 
   const {
+    watch,
     formState: { isValid },
   } = useFormContext();
 
-  // const currentProfileImg = watch("profileImg");
-  // const canSubmit = isImageChanged || (isValid && isNicknameVerified);
+  const currentProfileImg = watch("profileImg");
+  const isImageChanged = currentProfileImg instanceof File || currentProfileImg === null;
+  console.log("currentProfileImg", isImageChanged);
+  const canSubmit = isImageChanged || (isValid && isNicknameVerified);
 
   return (
     <form className="flex w-full flex-col h-base">
@@ -53,7 +58,6 @@ const MypageProfileForm = ({ user }: MypageProfileFormProps) => {
         <div className="flex justify-center py-[30px]">
           <div className="relative h-[80px] w-[80px]">
             <ProfileAvatar size={80} src={previewImgUrl} alt="프로필" priority={true} />
-            {/* TODO(수현): 디자인 토큰 변경 요청 해놓은 상태로 등록 시 추후 변경 */}
             <button
               className="absolute left-[52px] top-[52px] h-[28px] w-[28px] rounded-full bg-fill-neutral-strong-default flex-center"
               aria-label="프로필 이미지 변경 버튼"
@@ -115,12 +119,7 @@ const MypageProfileForm = ({ user }: MypageProfileFormProps) => {
         <MypageProfileModal isOpen={openModal} onClose={() => setOpenModal(false)} />
       </div>
 
-      <FooterButton
-        type="button"
-        // TODO(수현): 기능 구현 브랜치로 disabled 제어 함수 추가 예정
-        // disabled={!canSubmit}
-        onClick={handleSubmitMypageProfile}
-      >
+      <FooterButton type="button" disabled={!canSubmit} onClick={handleSubmitMypageProfile}>
         설정 완료
       </FooterButton>
     </form>
