@@ -19,8 +19,8 @@ interface CommentCardProps {
   autoOpenReplies?: boolean;
 
   useFetchReplies: typeof useGetRepliesPostsComments;
-  onDeleteComment: (commentVariables: DeleteCommentVariables) => void;
-  onFavoriteComment: (commentId: number, isLike: boolean, queryKey: unknown[]) => void;
+  onDeleteComment?: (commentVariables: DeleteCommentVariables) => void;
+  onFavoriteComment?: (commentId: number, isLike: boolean, queryKey: unknown[]) => void;
 
   isGuest?: boolean;
   parentQueryKey?: unknown[];
@@ -93,7 +93,7 @@ const CommentItem = ({
                 isGuest={isGuest}
                 isThreadItem={isThreadItem}
                 queryKey={itemQueryKey}
-                onDeleteComment={onDeleteComment}
+                onDeleteComment={onDeleteComment!}
               />
 
               <CommentBody
@@ -113,7 +113,7 @@ const CommentItem = ({
               setIsReplyFormOpen={setIsReplyFormOpen}
               queryKey={itemQueryKey}
               deleted={data.deleted}
-              onFavoriteComment={onFavoriteComment}
+              onFavoriteComment={onFavoriteComment!}
             />
           </div>
 

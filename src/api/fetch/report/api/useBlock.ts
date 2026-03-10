@@ -1,3 +1,5 @@
+"use client";
+
 import { AxiosError } from "axios";
 import { useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/context/ToastContext";

@@ -15,8 +15,8 @@ interface CommentListProps {
   isLoggedIn?: boolean;
 
   useFetchReplies?: typeof useGetRepliesPostsComments;
-  onDeleteComment: (commentVariables: DeleteCommentVariables) => void;
-  onFavoriteComment: (commentId: number, isLike: boolean, queryKey: unknown[]) => void;
+  onDeleteComment?: (commentVariables: DeleteCommentVariables) => void;
+  onFavoriteComment?: (commentId: number, isLike: boolean, queryKey: unknown[]) => void;
 }
 
 // TODO(지권): 댓글 페이지네이션 백엔드 협의 필요
@@ -58,8 +58,8 @@ const CommentList = ({
               onSubmit={onSubmit}
               isPending={isPending}
               useFetchReplies={useFetchReplies!}
-              onDeleteComment={onDeleteComment}
-              onFavoriteComment={onFavoriteComment}
+              onDeleteComment={onDeleteComment!}
+              onFavoriteComment={onFavoriteComment!}
             />
           ))}
         </ul>
