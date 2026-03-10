@@ -28,7 +28,9 @@ const NoticeDetailContent = ({ noticeDetail }: { noticeDetail?: NoticeDetail }) 
             <span>{authorName}</span>
           </div>
         </div>
-        <p className="text-body1-regular text-layout-header-default">{content}</p>
+        <p className="whitespace-pre-line text-body1-regular text-layout-header-default">
+          {content}
+        </p>
         {/* TODO(형준): 이미지 임시 스타일 적용 상태, 피그마 디자인 추가 시 변경 필요 */}
         {images &&
           images.map((image) => (
