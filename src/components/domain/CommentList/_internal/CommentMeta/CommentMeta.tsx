@@ -7,6 +7,7 @@ import { cn, formatDate } from "@/utils";
 import { useClickOutside } from "@/hooks";
 import { DeleteCommentVariables } from "@/api/fetch/comment";
 import { QueryKey } from "@tanstack/react-query";
+import { IconName } from "@/components/common/Icon/Icon";
 
 interface CommentMetaHeaderProps {
   data: {
@@ -16,6 +17,7 @@ interface CommentMetaHeaderProps {
     profileImageUrl: string;
     commentId: number;
     deleted: boolean;
+    canDelete: boolean;
   };
   isGuest: boolean;
   isThreadItem: boolean;
@@ -32,7 +34,7 @@ const CommentMetaHeader = ({
   queryKey,
   onDeleteComment,
 }: CommentMetaHeaderProps) => {
-  const { authorId, createdAt, authorName, profileImageUrl, commentId, deleted } = data;
+  const { authorId, createdAt, authorName, profileImageUrl, commentId, deleted, canDelete } = data;
 
   const [isKebabMenuOpen, setIsKebabMenuOpen] = useState(false);
   const ref = useClickOutside(() => setIsKebabMenuOpen(false));
@@ -72,36 +74,28 @@ const CommentMetaHeader = ({
 
         {isKebabMenuOpen && (
           <div className="absolute right-0 top-full z-10 mt-1">
-            <button
-              className={cn(
-                "glass-card min-h-[57px] min-w-[182px] gap-2 text-nowrap rounded-[20px] border px-7 py-4 flex-center",
-                "border-white bg-fill-neutral-subtle-default",
-                deleted && "cursor-not-allowed"
-              )}
-              onClick={handleDeleteComment}
-              disabled={deleted}
-            >
-              <Icon name="Trash" size={20} />
-              <span className="text-h3-medium text-system-warning">댓글 삭제하기</span>
-            </button>
+            {canDelete ? (
+              <button
+                className={cn(
+                  "glass-card min-h-[57px] min-w-[182px] gap-2 text-nowrap rounded-[20px] border px-7 py-4 flex-center",
+                  "border-white bg-fill-neutral-subtle-default",
+                  deleted && "cursor-not-allowed"
+                )}
+                onClick={handleDeleteComment}
+                disabled={deleted}
+              >
+                <Icon name="Trash" size={20} />
+                <span className="text-h3-medium text-system-warning">댓글 삭제하기</span>
+              </button>
+            ) : (
+              <div className="glass-card rounded-[20px] border border-white bg-fill-neutral-subtle-default">
+                <MenuItem icon="UserReport" label="작성자 신고하기" onClick={() => {}} />
 
-            <div className="glass-card rounded-[20px] border border-white bg-fill-neutral-subtle-default">
-              <button
-                className="min-h-[57px] min-w-[182px] gap-2 text-nowrap px-7 py-4 flex-center"
-                onClick={handleDeleteComment}
-              >
-                <Icon name="UserReport" size={18} />
-                <span className="text-h3-medium text-system-warning">작성자 신고하기</span>
-              </button>
-              <hr className="w-full border border-white" />
-              <button
-                className="min-h-[57px] min-w-[182px] gap-2 text-nowrap px-7 py-4 flex-center"
-                onClick={handleDeleteComment}
-              >
-                <Icon name="UserBlock" size={18} />
-                <span className="text-h3-medium text-system-warning">작성자 차단하기</span>
-              </button>
-            </div>
+                <hr className="w-full border border-white" />
+
+                <MenuItem icon="UserBlock" label="작성자 차단하기" onClick={() => {}} />
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -110,3 +104,26 @@ const CommentMetaHeader = ({
 };
 
 export default CommentMetaHeader;
+
+const MenuItem = ({
+  icon,
+  label,
+  onClick,
+  disabled,
+}: {
+  icon: IconName;
+  label: string;
+  onClick: () => void;
+  disabled?: boolean;
+}) => {
+  return (
+    <button
+      className="min-h-[57px] min-w-[182px] gap-2 text-nowrap px-7 py-4 flex-center"
+      onClick={onClick}
+      disabled={disabled}
+    >
+      <Icon name={icon} size={18} />
+      <span className="text-h3-medium text-system-warning">{label}</span>
+    </button>
+  );
+};

@@ -88,6 +88,7 @@ const CommentItem = ({
                   profileImageUrl,
                   commentId: data.id,
                   deleted: data.deleted,
+                  canDelete: data.canDelete,
                 }}
                 isGuest={isGuest}
                 isThreadItem={isThreadItem}
