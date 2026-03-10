@@ -34,7 +34,7 @@ const PostDetailTopHeader = ({ postId, postData }: PostDetailTopHeaderProps) => 
             ariaLabel="게시글 즐겨찾기"
           />
           <HeaderShare onClick={() => setOpenShareModal(true)} ariaLabel="게시글 공유" />
-          <div className="relative">
+          <div className="relative flex items-center">
             <HeaderMenu onClick={() => setOpenOptionModal((v) => !v)} ariaLabel="게시글 메뉴" />
             <PostActionMenu
               open={openOptionModal}
