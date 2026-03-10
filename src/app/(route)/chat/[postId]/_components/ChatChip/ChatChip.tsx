@@ -2,24 +2,29 @@ import { cn } from "@/utils";
 import { CHAT_CHIP_MODE, ChatChipMode } from "./CHAT_CHIP_MODE";
 import { PostType } from "@/types";
 
+const CHIP_BASE_CLASS = "shrink-0 rounded text-caption2-semibold flex-center";
+
 interface ChatChipProps {
   postMode: PostType;
+  postStatus?: "SEARCHING" | "FOUND";
 }
 
-const ChatChip = ({ postMode }: ChatChipProps) => {
+const ChatChip = ({ postMode, postStatus }: ChatChipProps) => {
   const chipMode: ChatChipMode = postMode === "FOUND" ? "FIND" : "LOST";
-  const chipConfig = CHAT_CHIP_MODE[chipMode];
+  const typeChipConfig = CHAT_CHIP_MODE[chipMode];
+  const foundStatusConfig = CHAT_CHIP_MODE.FOUND_STATUS;
 
   return (
-    <span
-      role="note"
-      className={cn(
-        "h-[18px] w-10 shrink-0 rounded text-caption2-semibold flex-center",
-        chipConfig.style
+    <>
+      <span role="note" className={cn("h-[18px] w-10", CHIP_BASE_CLASS, typeChipConfig.style)}>
+        {typeChipConfig.text}
+      </span>
+      {postStatus === "FOUND" && (
+        <span role="note" className={cn(CHIP_BASE_CLASS, foundStatusConfig.style)}>
+          {foundStatusConfig.text}
+        </span>
       )}
-    >
-      {chipConfig.text}
-    </span>
+    </>
   );
 };
 

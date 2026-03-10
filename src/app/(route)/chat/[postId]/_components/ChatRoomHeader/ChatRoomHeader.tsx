@@ -15,7 +15,8 @@ interface ChatRoomHeaderProps {
 const ChatRoomHeader = ({ chatRoom, roomId }: ChatRoomHeaderProps) => {
   const router = useRouter();
   if (!chatRoom) return null;
-  const { address, postType, title, thumbnailUrl, postId, category } = chatRoom.postInfo;
+  const { address, postType, title, thumbnailUrl, postId, category, postStatus } =
+    chatRoom.postInfo;
   const { nickname } = chatRoom.opponentUser;
 
   return (
@@ -50,7 +51,7 @@ const ChatRoomHeader = ({ chatRoom, roomId }: ChatRoomHeaderProps) => {
         </div>
         <div className="flex min-w-0 flex-col">
           <div className="flex items-center gap-1">
-            <ChatChip postMode={postType} />
+            <ChatChip postMode={postType} postStatus={postStatus} />
             <h2 className="truncate text-body1-semibold text-layout-header-default">{title}</h2>
           </div>
           <p className="h-4 text-caption1-medium text-layout-body-default">{address}</p>
