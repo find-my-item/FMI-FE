@@ -5,12 +5,15 @@ import { InquiryStatus, ReportStatus } from "@/types";
 interface UseReportsDetailStatusParams {
   id: number;
   type: ReportsType;
+  isGuest: boolean;
 }
 
-export const useReportsDetailStatus = ({ id, type }: UseReportsDetailStatusParams) => {
+export const useReportsDetailStatus = ({ id, type, isGuest }: UseReportsDetailStatusParams) => {
   const { mutate: updateReportStatus, isPending: isReportPending } = usePutReportStatus(id);
-
-  const { mutate: updateInquiryStatus, isPending: isInquiryPending } = usePutInquiryStatus(id);
+  const { mutate: updateInquiryStatus, isPending: isInquiryPending } = usePutInquiryStatus({
+    inquiryId: id,
+    isGuest,
+  });
 
   const changeStatus = (value: string) => {
     if (type === "report") {

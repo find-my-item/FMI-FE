@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { useParams } from "next/navigation";
 import { cn } from "@/utils";
 import { Icon } from "@/components/common";
+import { useClickOutside } from "@/hooks";
 import { InquiryStatus, ReportStatus } from "@/types";
 import {
   ProcessStatusBadgeConfig,
@@ -11,23 +13,21 @@ import {
 import { AdminDropdown } from "@/app/(admin)/admin/_components";
 import { DETAIL_STATUS_CONFIG } from "./DETAIL_STATUS_CONFIG";
 import { ReportsType } from "../../../_types/ReportsType";
-import { useClickOutside } from "@/hooks";
-import { useParams } from "next/navigation";
-import { usePutInquiryStatus, usePutReportStatus } from "@/api/fetch/admin";
 import { useReportsDetailStatus } from "../../../_hooks/useReportsDetailStatus";
 
 interface DetailStatusHeaderProps {
   requestStatus: ReportStatus | InquiryStatus;
   status: boolean;
   type: ReportsType;
+  isGuest: boolean;
 }
 
-const DetailStatusHeader = ({ requestStatus, status, type }: DetailStatusHeaderProps) => {
+const DetailStatusHeader = ({ requestStatus, status, type, isGuest }: DetailStatusHeaderProps) => {
   const { id } = useParams();
   const [open, setOpen] = useState(false);
   const ref = useClickOutside(() => setOpen(false));
 
-  const { changeStatus, isPending } = useReportsDetailStatus({ id: Number(id), type });
+  const { changeStatus, isPending } = useReportsDetailStatus({ id: Number(id), type, isGuest });
 
   const { statusOptions } = DETAIL_STATUS_CONFIG[type];
 

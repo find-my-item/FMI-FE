@@ -8,9 +8,14 @@ interface UpdateInquiryStatusRequest {
   status: InquiryStatus;
 }
 
-export const usePutInquiryStatus = (inquiryId: number) => {
+interface UsePutInquiryStatusParams {
+  inquiryId: number;
+  isGuest: boolean;
+}
+
+export const usePutInquiryStatus = ({ inquiryId, isGuest }: UsePutInquiryStatusParams) => {
   const { addToast } = useToast();
-  const queryclient = useQueryClient();
+  const queryClient = useQueryClient();
 
   return useAppMutation<UpdateInquiryStatusRequest, ApiBaseResponseType<string>>(
     "auth",
@@ -18,12 +23,14 @@ export const usePutInquiryStatus = (inquiryId: number) => {
     "put",
     {
       onSuccess: () => {
-        queryclient.invalidateQueries({
-          queryKey: ["detail-inquiry", inquiryId],
+        queryClient.invalidateQueries({
+          queryKey: [isGuest ? "guest-inquiries-detail" : "detail-inquiry", inquiryId],
         });
-        queryclient.invalidateQueries({
-          queryKey: ["inquiries"],
+
+        queryClient.invalidateQueries({
+          queryKey: [isGuest ? "guest-inquiries" : "inquiries"],
         });
+
         addToast("상태가 변경되었습니다.", "success");
       },
     }
