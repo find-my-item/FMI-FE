@@ -3,10 +3,10 @@
 import { DetailHeader } from "@/components/layout";
 import { FormProvider, useForm } from "react-hook-form";
 import { Suspense } from "react";
-import { MypageProfileForm } from "./_components";
 import { MypageProfileFormType } from "./_types/MypageProfileFormType";
 import { useGetUsersMe } from "@/api/fetch/user";
 import { useToast } from "@/context/ToastContext";
+import { ProfileForm } from "@/components/domain";
 
 const page = () => {
   const { addToast } = useToast();
@@ -29,7 +29,7 @@ const page = () => {
     <Suspense fallback="">
       <DetailHeader title="프로필 설정" />
       <FormProvider {...methods}>
-        <MypageProfileForm user={data?.result} />
+        <ProfileForm user={data?.result} />
       </FormProvider>
     </Suspense>
   );

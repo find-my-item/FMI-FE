@@ -1,21 +1,22 @@
+"use client";
 "use no memo";
 
 import { useNicknameCheck } from "@/hooks/domain/useNicknameCheck/useNicknameCheck";
 import { Icon, InputText, KebabMenu, ProfileAvatar } from "@/components/common";
 import { FooterButton } from "@/components/domain";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useFormContext } from "react-hook-form";
-import useChangeImg from "../../_hooks/useChangeImg";
+import useChangeImg from "./_hooks/useChangeImg";
 import { UsersMeType } from "@/api/fetch/user/types/UserMeType";
-import useProfileFormSubmit from "../../_hooks/useProfileFormSubmit";
-import MypageProfileModal from "../MypageProfileModal/MypageProfileModal";
-import { usePreventLeave } from "../../_hooks/usePreventLeave";
+import useProfileFormSubmit from "./_hooks/useProfileFormSubmit";
+import MypageProfileModal from "./MypageProfileModal/MypageProfileModal";
+import { usePreventLeave } from "./_hooks/usePreventLeave";
 
-interface MypageProfileFormProps {
+interface ProfileFormProps {
   user?: UsersMeType;
 }
 
-const MypageProfileForm = ({ user }: MypageProfileFormProps) => {
+const ProfileForm = ({ user }: ProfileFormProps) => {
   const { nickname, profileImg } = user ?? {};
 
   const { setValue } = useFormContext();
@@ -50,7 +51,6 @@ const MypageProfileForm = ({ user }: MypageProfileFormProps) => {
 
   const currentProfileImg = watch("profileImg");
   const isImageChanged = currentProfileImg instanceof File || currentProfileImg === null;
-
   const isNicknameChanged = watch("nickname");
 
   const canSubmit = isImageChanged || (isNicknameChanged && isValid && isNicknameVerified);
@@ -132,4 +132,4 @@ const MypageProfileForm = ({ user }: MypageProfileFormProps) => {
   );
 };
 
-export default MypageProfileForm;
+export default ProfileForm;
