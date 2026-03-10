@@ -1,47 +1,17 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
 import { Tab } from "@/components/domain";
-import { AdminSearch } from "../../../_components";
+import { normalizeEnumValue } from "@/utils";
+import { InquiryStatus, ReportStatus } from "@/types";
 import ReportsList from "../ReportsList/ReportsList";
-import { ReportsTabType } from "../../_types/ReportsTabType";
+import { AdminSearch } from "../../../_components";
 import { REPORTS_TAB } from "../../_constants/REPORTS_TAB";
 import { ReportsFilter } from "../_internal";
-import { InquiryStatus, ReportStatus } from "@/types";
-import { normalizeEnumValue } from "@/utils";
+import { useReportsQuery } from "../../_hooks/useReportsQuery";
 
 const ReportsView = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  const keyword = searchParams.get("keyword") ?? undefined;
-
-  const activeTab: ReportsTabType = searchParams.get("type") === "inquiry" ? "inquiry" : "report";
-
-  const handleKeywordSearch = (newKeyword: string) => {
-    const params = new URLSearchParams(searchParams.toString());
-
-    if (newKeyword === params.get("keyword")) return;
-
-    if (!newKeyword) {
-      params.delete("keyword");
-    } else {
-      params.set("keyword", newKeyword);
-    }
-
-    router.replace(`/admin/reports?${params.toString()}`);
-  };
-
-  const handleTabChange = (key: ReportsTabType) => {
-    const params = new URLSearchParams(searchParams.toString());
-
-    params.set("type", key);
-
-    params.delete("status");
-    params.delete("answered");
-
-    router.replace(`/admin/reports?${params.toString()}`);
-  };
+  const { searchParams, keyword, activeTab, handleKeywordSearch, handleTabChange } =
+    useReportsQuery();
 
   const reportStatus = normalizeEnumValue<ReportStatus>(searchParams.get("status"));
   const inquiryStatus = normalizeEnumValue<InquiryStatus>(searchParams.get("status"));
@@ -54,7 +24,7 @@ const ReportsView = () => {
       <Tab
         tabs={REPORTS_TAB}
         selected={activeTab}
-        onValueChange={(key) => handleTabChange(key as ReportsTabType)}
+        onValueChange={(key) => handleTabChange(key)}
         className="sticky left-0 top-[56px]"
       />
 
