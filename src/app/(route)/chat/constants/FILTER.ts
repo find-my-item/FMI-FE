@@ -1,8 +1,7 @@
-// TODO(지권): 분실/발견 텍스트 변경
 export const TYPE_OPTIONS = [
   { label: "전체", value: "ALL" },
-  { label: "습득물", value: "FOUND" },
-  { label: "분실물", value: "LOST" },
+  { label: "발견", value: "FOUND" },
+  { label: "분실", value: "LOST" },
 ] as const;
 
 export const SORT_OPTIONS = [
@@ -20,7 +19,7 @@ export const FilTER_DROPDOWN_OPTIONS = [
   {
     ariaLabel: "채팅 리스트 분실/발견",
     options: TYPE_OPTIONS,
-    buttonText: "분실/발견",
+    buttonText: "발견/분실",
     keyName: "type",
   },
 ] as const;

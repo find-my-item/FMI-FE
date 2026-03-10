@@ -18,7 +18,10 @@ import {
 } from "../_types/types";
 import { FiltersStateType } from "../_types/filtersStateType";
 import { DEFAULT_FILTERS } from "../_constants/DEFAULT_FILTERS";
-import { filterSelectionState, normalizedFilterValues } from "../utils/deriveFilterParams";
+import {
+  filterSelectionState,
+  normalizedFilterValues,
+} from "../../../../utils/deriveFilterParams/deriveFilterParams";
 import { useFilterParams } from "@/hooks/domain";
 import { TABS } from "../_constants/TABS";
 import DateRangeBottomSheet from "../../DateRangeBottomSheet/DateRangeBottomSheet";

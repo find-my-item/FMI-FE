@@ -25,14 +25,14 @@ describe("ProcessStatusBadgeConfig", () => {
 
 describe("ReplyStatusBadgeConfig", () => {
   it("UNANSWERED config", () => {
-    expect(ReplyStatusBadgeConfig.UNANSWERED).toEqual({
+    expect(ReplyStatusBadgeConfig(false)).toEqual({
       label: "미답변",
       className: "text-neutral-strong-default bg-fill-neutral-strong-default",
     });
   });
 
   it("ANSWERED config", () => {
-    expect(ReplyStatusBadgeConfig.ANSWERED).toEqual({
+    expect(ReplyStatusBadgeConfig(true)).toEqual({
       label: "답변 완료",
       className: "text-white bg-toast",
     });

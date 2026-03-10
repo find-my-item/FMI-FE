@@ -18,15 +18,14 @@ jest.mock("@/components/common", () => ({
   RequiredText: () => <span data-testid="required-text">*</span>,
 }));
 
-jest.mock("../CategoryPopup/CategoryPopup", () => ({
-  __esModule: true,
-  default: ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) =>
-    isOpen && (
+jest.mock("@/components/domain", () => ({
+  CategoryPopup: ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) =>
+    isOpen ? (
       <div data-testid="category-popup">
         <p>카테고리 팝업</p>
         <button onClick={onClose}>닫기</button>
       </div>
-    ),
+    ) : null,
 }));
 
 describe("CategorySection", () => {

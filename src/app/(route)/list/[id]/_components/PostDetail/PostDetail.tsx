@@ -1,4 +1,3 @@
-import { cn } from "@/utils";
 import type { PostDetailData } from "@/api/fetch/post/types/PostDetailType";
 import { PostDetailBody, PostDetailPreviewKakaoMap } from "./_internal";
 import PostDetailHeader from "../PostDetailHeader/PostDetailHeader";
@@ -9,8 +8,6 @@ interface PostDetailProps {
 }
 
 const PostDetail = ({ type, data }: PostDetailProps) => {
-  const isBoardType = type === "find" || type === "lost";
-
   if (!data) return null;
 
   const headerData = {
@@ -32,10 +29,10 @@ const PostDetail = ({ type, data }: PostDetailProps) => {
     <article className="w-full">
       <PostDetailHeader headerData={headerData} />
 
-      <section className={cn("flex flex-col px-5", isBoardType && "gap-9 py-[27px]")}>
-        <PostDetailBody isBoardType={isBoardType} label={type} data={data} />
+      <section className="flex flex-col gap-9 px-5 py-[27px]">
+        <PostDetailBody data={data} />
 
-        {isBoardType && <PostDetailPreviewKakaoMap data={mapData} />}
+        <PostDetailPreviewKakaoMap data={mapData} />
       </section>
     </article>
   );

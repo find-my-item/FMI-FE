@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
-import { CategoryType } from "@/types";
+import { CategoryType, NoticeCategory } from "@/types";
 import { getItemCategoryLabel } from "@/utils";
 import { Icon, RequiredText } from "@/components/common";
-import CategoryPopup from "../CategoryPopup/CategoryPopup";
+import { CategoryPopup } from "@/components/domain";
 import { PostWriteFormValues } from "../../../_types/PostWriteType";
 
 const CategorySection = () => {
@@ -14,8 +14,8 @@ const CategorySection = () => {
   const { control, setValue } = useFormContext<PostWriteFormValues>();
   const category = useWatch({ control, name: "category" });
 
-  const onSelectCategory = (category: CategoryType) => {
-    setValue("category", category, {
+  const onSelectCategory = (category: CategoryType | NoticeCategory) => {
+    setValue("category", category as CategoryType, {
       shouldDirty: true,
       shouldValidate: true,
     });

@@ -1,12 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/common";
+import { cn } from "@/utils";
 
 const CTASection = () => {
   return (
     <section
       aria-labelledby="service-introduce-cta-title"
-      className="gap-5 px-9 py-[60px] text-center flex-col-center"
+      className="w-full gap-5 px-9 py-[60px] text-center flex-col-center"
     >
       <Image
         src="/hello/CTA/service-CTA.svg"
@@ -23,7 +24,10 @@ const CTASection = () => {
       <Button
         as={Link}
         href="/"
-        className="mt-[30px] min-h-[44px] w-full text-brand-subtle-default"
+        className={cn(
+          "mt-[30px] min-h-[44px] w-full text-brand-subtle-default",
+          "tablet:max-w-[696px]"
+        )}
       >
         찾아줘 홈으로 이동
       </Button>

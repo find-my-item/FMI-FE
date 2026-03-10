@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Icon } from "@/components/common";
 import { UserCommentsDataType } from "@/api/fetch/user";
 
-// TODO(지권): 임시 타입 변환 로직
 interface NormalizedCommentItem {
   postId: number;
   comment: string;
