@@ -8,6 +8,8 @@ import { useClickOutside } from "@/hooks";
 import { DeleteCommentVariables } from "@/api/fetch/comment";
 import { QueryKey } from "@tanstack/react-query";
 import { IconName } from "@/components/common/Icon/Icon";
+import ReportModal from "@/components/domain/ReportModal/ReportModal";
+import UserBlockModal from "@/components/domain/PostReportBlockActions/UserBlockModal/UserBlockModal";
 
 interface CommentMetaHeaderProps {
   data: {
@@ -37,6 +39,8 @@ const CommentMetaHeader = ({
   const { authorId, createdAt, authorName, profileImageUrl, commentId, deleted, canDelete } = data;
 
   const [isKebabMenuOpen, setIsKebabMenuOpen] = useState(false);
+  const [reportOpen, setReportOpen] = useState(false);
+  const [blockOpen, setBlockOpen] = useState(false);
   const ref = useClickOutside(() => setIsKebabMenuOpen(false));
 
   const handleDeleteComment = () => {
@@ -45,61 +49,88 @@ const CommentMetaHeader = ({
   };
 
   return (
-    <div className="flex items-start justify-between">
-      <div className="flex gap-[14px]">
-        <ProfileAvatar src={profileImageUrl} size={isThreadItem ? 30 : 40} />
+    <>
+      <div className="flex items-start justify-between">
+        <div className="flex gap-[14px]">
+          <ProfileAvatar src={profileImageUrl} size={isThreadItem ? 30 : 40} />
 
-        <div className="flex flex-col flex-wrap items-start">
-          {isGuest ? (
-            <span className={authorStyle}>{authorName}</span>
-          ) : (
-            <Link href={`/user/${authorId}`} className={authorStyle}>
-              {authorName}
-            </Link>
+          <div className="flex flex-col flex-wrap items-start">
+            {isGuest ? (
+              <span className={authorStyle}>{authorName}</span>
+            ) : (
+              <Link href={`/user/${authorId}`} className={authorStyle}>
+                {authorName}
+              </Link>
+            )}
+
+            <time dateTime={createdAt} className="text-body2-regular text-layout-body-default">
+              {formatDate(createdAt)}
+            </time>
+          </div>
+        </div>
+
+        <div ref={ref} className="relative">
+          <KebabMenuButton
+            size="small"
+            ariaLabel={isKebabMenuOpen ? "댓글 메뉴 닫기" : "댓글 메뉴 열기"}
+            disabled={isGuest}
+            onClick={() => setIsKebabMenuOpen((prev) => !prev)}
+          />
+
+          {isKebabMenuOpen && (
+            <div className="absolute right-0 top-full z-10 mt-1">
+              {canDelete ? (
+                <button
+                  className={cn(
+                    "glass-card min-h-[57px] min-w-[182px] gap-2 text-nowrap rounded-[20px] border px-7 py-4 flex-center",
+                    "border-white bg-fill-neutral-subtle-default",
+                    deleted && "cursor-not-allowed"
+                  )}
+                  onClick={handleDeleteComment}
+                  disabled={deleted}
+                >
+                  <Icon name="Trash" size={20} />
+                  <span className="text-h3-medium text-system-warning">댓글 삭제하기</span>
+                </button>
+              ) : (
+                <div className="glass-card rounded-[20px] border border-white bg-fill-neutral-subtle-default">
+                  <MenuItem
+                    icon="UserReport"
+                    label="작성자 신고하기"
+                    onClick={() => setReportOpen(true)}
+                  />
+
+                  <hr className="w-full border border-white" />
+
+                  <MenuItem
+                    icon="UserBlock"
+                    label="작성자 차단하기"
+                    onClick={() => setBlockOpen(true)}
+                  />
+                </div>
+              )}
+            </div>
           )}
-
-          <time dateTime={createdAt} className="text-body2-regular text-layout-body-default">
-            {formatDate(createdAt)}
-          </time>
         </div>
       </div>
 
-      <div ref={ref} className="relative">
-        <KebabMenuButton
-          size="small"
-          ariaLabel={isKebabMenuOpen ? "댓글 메뉴 닫기" : "댓글 메뉴 열기"}
-          disabled={isGuest}
-          onClick={() => setIsKebabMenuOpen((prev) => !prev)}
+      {reportOpen && (
+        <ReportModal
+          isOpen={reportOpen}
+          onClose={() => setReportOpen(false)}
+          targetType="COMMENT"
+          targetId={commentId}
         />
+      )}
 
-        {isKebabMenuOpen && (
-          <div className="absolute right-0 top-full z-10 mt-1">
-            {canDelete ? (
-              <button
-                className={cn(
-                  "glass-card min-h-[57px] min-w-[182px] gap-2 text-nowrap rounded-[20px] border px-7 py-4 flex-center",
-                  "border-white bg-fill-neutral-subtle-default",
-                  deleted && "cursor-not-allowed"
-                )}
-                onClick={handleDeleteComment}
-                disabled={deleted}
-              >
-                <Icon name="Trash" size={20} />
-                <span className="text-h3-medium text-system-warning">댓글 삭제하기</span>
-              </button>
-            ) : (
-              <div className="glass-card rounded-[20px] border border-white bg-fill-neutral-subtle-default">
-                <MenuItem icon="UserReport" label="작성자 신고하기" onClick={() => {}} />
-
-                <hr className="w-full border border-white" />
-
-                <MenuItem icon="UserBlock" label="작성자 차단하기" onClick={() => {}} />
-              </div>
-            )}
-          </div>
-        )}
-      </div>
-    </div>
+      {blockOpen && (
+        <UserBlockModal
+          isOpen={blockOpen}
+          onClose={() => setBlockOpen(false)}
+          writerId={Number(authorId)}
+        />
+      )}
+    </>
   );
 };
 
