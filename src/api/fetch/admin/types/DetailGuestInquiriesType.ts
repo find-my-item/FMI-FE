@@ -1,18 +1,17 @@
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
-import { InquiryType, ReplyStatus, ReportsType } from "@/types";
+import { InquiryType, InquiryStatus } from "@/types";
 
 export interface GetDetailGuestInquiriesResponse extends ApiBaseResponseType<AdminDetailGuestInquiry> {}
 
-// TODO(지권): requestStatus 누락
 export interface AdminDetailGuestInquiry {
   inquiryId: number;
   title: string;
   content: string;
   inquiryType: InquiryType;
-  requestStatus: ReportsType;
+  status: InquiryStatus;
   createdAt: string;
   email: string;
-  status: ReplyStatus;
+  answered: boolean;
   comments: GuestInquiryComments[];
 }
 
