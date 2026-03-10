@@ -9,6 +9,8 @@ export interface ChatRoomPostInfo {
   title: string;
   address: string;
   thumbnailUrl: string | null;
+  deleted: boolean;
+  postStatus: "SEARCHING" | "FOUND";
 }
 
 export interface ChatRoom {
