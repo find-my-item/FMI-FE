@@ -12,6 +12,9 @@ import { AdminDropdown } from "@/app/(admin)/admin/_components";
 import { DETAIL_STATUS_CONFIG } from "./DETAIL_STATUS_CONFIG";
 import { ReportsType } from "../../../_types/ReportsType";
 import { useClickOutside } from "@/hooks";
+import { useParams } from "next/navigation";
+import { usePutInquiryStatus, usePutReportStatus } from "@/api/fetch/admin";
+import { useReportsDetailStatus } from "../../../_hooks/useReportsDetailStatus";
 
 interface DetailStatusHeaderProps {
   requestStatus: ReportStatus | InquiryStatus;
@@ -20,10 +23,18 @@ interface DetailStatusHeaderProps {
 }
 
 const DetailStatusHeader = ({ requestStatus, status, type }: DetailStatusHeaderProps) => {
+  const { id } = useParams();
   const [open, setOpen] = useState(false);
   const ref = useClickOutside(() => setOpen(false));
 
+  const { changeStatus, isPending } = useReportsDetailStatus({ id: Number(id), type });
+
   const { statusOptions } = DETAIL_STATUS_CONFIG[type];
+
+  const handleStatusChange = (value: string) => {
+    changeStatus(value);
+    setOpen(false);
+  };
 
   return (
     <div ref={ref} className="relative flex items-center gap-2">
@@ -40,7 +51,13 @@ const DetailStatusHeader = ({ requestStatus, status, type }: DetailStatusHeaderP
       </button>
 
       {open && (
-        <AdminDropdown open={open} options={statusOptions} onSelect={() => {}} className="mt-2" />
+        <AdminDropdown
+          open={open}
+          options={statusOptions}
+          onSelect={handleStatusChange}
+          className="mt-2"
+          isPending={isPending}
+        />
       )}
 
       <span
