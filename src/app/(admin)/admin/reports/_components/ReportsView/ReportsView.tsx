@@ -38,7 +38,16 @@ const ReportsView = () => {
 
       <AdminFilter filters={reportsFilters} />
 
-      <ReportsList activeTab={activeTab} />
+      {/* TODO(지권): 기능 추가하면서 수정 예정 */}
+      <ReportsList
+        activeTab={activeTab}
+        // status="REVIEWED"
+        // answered={true}
+        // targetType="CHAT"
+        // keyword="s"
+        // inquiryType="ACCOUNT_LOGIN"
+        // inquiryStatus="RECEIVED"
+      />
     </div>
   );
 };

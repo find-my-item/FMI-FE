@@ -1,5 +1,5 @@
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
-import { InquiryType, ReportsType } from "@/types";
+import { InquiryType, InquiryStatus } from "@/types";
 
 export interface GetDetailGuestInquiriesResponse extends ApiBaseResponseType<AdminDetailGuestInquiry> {}
 
@@ -8,7 +8,7 @@ export interface AdminDetailGuestInquiry {
   title: string;
   content: string;
   inquiryType: InquiryType;
-  status: ReportsType;
+  status: InquiryStatus;
   createdAt: string;
   email: string;
   answered: boolean;
