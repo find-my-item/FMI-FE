@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Tab } from "@/components/domain";
 import { AdminSearch } from "../../../_components";
@@ -14,20 +13,14 @@ import { normalizeEnumValue } from "@/utils";
 const ReportsView = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
+
   const keyword = searchParams.get("keyword") ?? undefined;
-  const [activeTab, setActiveTab] = useState<ReportsTabType>("report");
 
-  useEffect(() => {
-    const params = new URLSearchParams(searchParams.toString());
-
-    params.delete("status");
-    params.delete("answered");
-
-    router.replace(`/admin/reports?${params.toString()}`);
-  }, [activeTab]);
+  const activeTab: ReportsTabType = searchParams.get("type") === "inquiry" ? "inquiry" : "report";
 
   const handleKeywordSearch = (newKeyword: string) => {
     const params = new URLSearchParams(searchParams.toString());
+
     if (newKeyword === params.get("keyword")) return;
 
     if (!newKeyword) {
@@ -35,6 +28,17 @@ const ReportsView = () => {
     } else {
       params.set("keyword", newKeyword);
     }
+
+    router.replace(`/admin/reports?${params.toString()}`);
+  };
+
+  const handleTabChange = (key: ReportsTabType) => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    params.set("type", key);
+
+    params.delete("status");
+    params.delete("answered");
 
     router.replace(`/admin/reports?${params.toString()}`);
   };
@@ -50,7 +54,7 @@ const ReportsView = () => {
       <Tab
         tabs={REPORTS_TAB}
         selected={activeTab}
-        onValueChange={(key) => setActiveTab(key as ReportsTabType)}
+        onValueChange={(key) => handleTabChange(key as ReportsTabType)}
         className="sticky left-0 top-[56px]"
       />
 
