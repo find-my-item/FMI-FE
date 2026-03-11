@@ -27,7 +27,7 @@ export const useGetGuestInquiries = ({
 
   return useAppInfiniteQuery<GetGuestInquiriesResponse, unknown, AdminGuestInquiryItem[]>(
     "auth",
-    ["guestInquiries", status, keyword, answered, cursor, size],
+    ["guest-inquiries", status, keyword, answered, cursor, size],
     `/admin/guest-inquiries?${params.toString()}`,
     {
       placeholderData: keepPreviousData,
