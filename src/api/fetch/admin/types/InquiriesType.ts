@@ -1,15 +1,15 @@
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 import { InquiryStatus, InquiryType } from "@/types";
 
-export interface GetGuestInquiriesResponse extends ApiBaseResponseType<GuestInquiryResult> {}
+export interface GetInquiriesResponse extends ApiBaseResponseType<InquiriesResult> {}
 
-export interface GuestInquiryResult {
-  items: AdminGuestInquiryItem[];
+export interface InquiriesResult {
+  content: AdminInquiriesItem[];
   nextCursor: number | null;
   hasNext: boolean;
 }
 
-export interface AdminGuestInquiryItem {
+export interface AdminInquiriesItem {
   inquiryId: number;
   title: string;
   inquiryType: InquiryType;
@@ -20,5 +20,5 @@ export interface AdminGuestInquiryItem {
   userEmail: string;
   content: string;
   ip: string;
-  answered: boolean;
+  answered: false;
 }

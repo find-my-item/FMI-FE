@@ -4,7 +4,6 @@ export type * from "./CommentCardType";
 export type * from "./NoticeType";
 export type * from "./ReportType";
 export type * from "./InquiryType";
-export type * from "./ReportsType";
 export type * from "./WithdrawalType";
 
 export type { PostMetaDataItemWithLink, ShareId } from "./MetaDataType";

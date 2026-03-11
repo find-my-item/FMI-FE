@@ -5,6 +5,11 @@
  *
  * - 이 타입은 신고와 관련된 타입을 정리합니다.
  *
+ * @description ReportStatus
+ * - PENDING: 신고에 대한 답변이 접수 됨
+ * - REVIEWED: 신고에 대한 답변이 진행 중
+ * - RESOLVED: 신고에 대한 답변이 완료됨
+ *
  * @description ReportTargetType
  * - POST: 게시글
  * - COMMENT: 댓글
@@ -24,6 +29,8 @@
  * - ETC: 기타
  *
  */
+
+export type ReportStatus = "PENDING" | "REVIEWED" | "RESOLVED";
 
 export type ReportTargetType = "POST" | "COMMENT" | "USER" | "CHAT";
 

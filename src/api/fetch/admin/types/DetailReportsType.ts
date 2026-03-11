@@ -1,5 +1,5 @@
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
-import { InquiryType, ReportsType, ReportTargetType, ReportType } from "@/types";
+import { InquiryType, InquiryStatus, ReportTargetType, ReportType, ReportStatus } from "@/types";
 
 export interface GetDetailReportsResponse extends ApiBaseResponseType<AdminDetailReports> {}
 
@@ -11,7 +11,7 @@ export interface AdminDetailReports {
   targetId: number;
   reportType: ReportType;
   reason: string;
-  reportStatus: ReportsType;
+  reportStatus: ReportStatus;
   adminNote: string;
   resolvedAt: string;
   answered: boolean;
@@ -21,7 +21,7 @@ export interface AdminDetailReports {
   title: string;
   content: string;
   inquiryType: InquiryType;
-  inquiryStatus: ReportsType;
+  inquiryStatus: InquiryStatus;
   userId: number;
   userNickname: string;
   userEmail: string;

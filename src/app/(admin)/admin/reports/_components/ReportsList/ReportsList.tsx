@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect } from "react";
-import { useGetReports } from "@/api/fetch/admin/api/useGetReports";
 import { useInfiniteScroll } from "@/hooks";
 import { EmptyState, LoadingState } from "@/components/state";
 import { useToast } from "@/context/ToastContext";
@@ -9,19 +8,35 @@ import { toInquiryItemVM, toReportItemVM } from "../../../_utils/toReportsItemVM
 import { ReportsTabType } from "../../_types/ReportsTabType";
 import { AdminReportsItem } from "../../../_components";
 import { EMPTY_STATE_CONFIG } from "./EMPTY_STATE_CONFIG";
+import { InquiryStatus, ReportStatus } from "@/types";
+import { useReportsListQuery } from "../../_hooks/useReportsListQuery";
 
 interface ReportsListProps {
   activeTab: ReportsTabType;
+  keyword?: string;
+  reportStatus?: ReportStatus;
+  inquiryStatus?: InquiryStatus;
+  answered?: boolean;
 }
 
-const ReportsList = ({ activeTab }: ReportsListProps) => {
+const ReportsList = ({
+  activeTab,
+  keyword,
+  reportStatus,
+  inquiryStatus,
+  answered,
+}: ReportsListProps) => {
   const { addToast } = useToast();
 
-  const isReport = activeTab === "report";
   const { data, isLoading, isError, hasNextPage, fetchNextPage, isFetchingNextPage } =
-    useGetReports({
-      type: isReport ? "REPORT" : "INQUIRY",
+    useReportsListQuery({
+      activeTab,
+      keyword,
+      reportStatus,
+      inquiryStatus,
+      answered,
     });
+
   const { ref: listRef } = useInfiniteScroll({
     fetchNextPage,
     hasNextPage,
@@ -29,7 +44,7 @@ const ReportsList = ({ activeTab }: ReportsListProps) => {
   });
 
   useEffect(() => {
-    if (isError) addToast("유저 탈퇴 사유를 불러오지 못했어요", "error");
+    if (isError) addToast("신고/문의 내역을 불러오지 못했어요", "error");
   }, [isError, addToast]);
 
   if (isLoading) return <LoadingState />;
@@ -47,12 +62,13 @@ const ReportsList = ({ activeTab }: ReportsListProps) => {
         />
       ) : (
         <ul className="flex flex-col gap-2">
-          {data?.map((item) => (
-            <AdminReportsItem
-              key={item.id}
-              data={isReport ? toReportItemVM(item) : toInquiryItemVM(item)}
-            />
-          ))}
+          {data?.map((item) => {
+            if ("reportId" in item) {
+              return <AdminReportsItem key={item.reportId} data={toReportItemVM(item)} />;
+            }
+
+            return <AdminReportsItem key={item.inquiryId} data={toInquiryItemVM(item)} />;
+          })}
         </ul>
       )}
       {hasNextPage && <div ref={listRef} className="h-10 w-full" />}
