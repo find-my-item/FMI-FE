@@ -1,4 +1,5 @@
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
+import { UserType } from "@/types";
 
 export interface GetUsersMeResponse extends ApiBaseResponseType<UsersMeType> {}
 
@@ -7,5 +8,5 @@ export interface UsersMeType {
   nickname: string;
   email: string;
   profileImg: string;
-  role: "USER" | "ADMIN";
+  role: UserType;
 }
