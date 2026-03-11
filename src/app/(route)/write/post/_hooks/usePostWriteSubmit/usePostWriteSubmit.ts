@@ -9,19 +9,19 @@ interface UsePostWriteSubmitProps {
 }
 
 const usePostWriteSubmit = ({ methods }: UsePostWriteSubmitProps) => {
-  const { lat, lng, address, radius, postType, clearLocation } = useWriteStore();
+  const { lat, lng, fullAddress, radius, postType, clearLocation } = useWriteStore();
 
   useEffect(() => {
     methods.setValue("postType", postType ?? "", { shouldValidate: true });
-    methods.setValue("address", address ?? "", { shouldValidate: true });
+    methods.setValue("address", fullAddress ?? "", { shouldValidate: true });
     methods.setValue("latitude", lat ?? null, { shouldValidate: true });
     methods.setValue("longitude", lng ?? null, { shouldValidate: true });
     methods.setValue("radius", radius ?? null, { shouldValidate: true });
-  }, [postType, address, lat, lng, radius, methods]);
+  }, [postType, fullAddress, lat, lng, radius, methods]);
 
   const canSubmit = (values: PostWriteFormValues) => {
     if (!postType) return false;
-    if (!address) return false;
+    if (!fullAddress) return false;
     if (lat == null || lng == null || radius == null) return false;
     if (!values.category) return false;
     if (!values.title || !values.content) return false;
@@ -36,14 +36,14 @@ const usePostWriteSubmit = ({ methods }: UsePostWriteSubmitProps) => {
 
   const toPostWriteFormData = (values: PostWriteFormValues): FormData | null => {
     if (!postType || !values.category) return null;
-    if (!address || lat == null || lng == null || radius == null) return null;
+    if (!fullAddress || lat == null || lng == null || radius == null) return null;
 
     const request: PostWriteRequest = {
       postType: postType,
       title: values.title,
       category: values.category,
       content: values.content,
-      address: address,
+      address: fullAddress,
       latitude: lat,
       longitude: lng,
       radius: radius,

@@ -24,3 +24,4 @@ export { default as WriteActionSection } from "./WriteActionSection/WriteActionS
 export { default as CategoryPopup } from "./CategoryPopup/CategoryPopup";
 export { default as GuestLoginModal } from "./GuestLoginModal/GuestLoginModal";
 export { default as Terms } from "./Terms/Terms";
+export { default as BlockUserModal } from "./PostReportBlockActions/UserBlockModal/UserBlockModal";

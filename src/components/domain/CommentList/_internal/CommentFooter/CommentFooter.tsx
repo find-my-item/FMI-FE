@@ -11,6 +11,9 @@ interface CommentFooterProps {
   isGuest: boolean;
   isReplyFormOpen: boolean;
   setIsReplyFormOpen: (value: boolean) => void;
+  queryKey: unknown[];
+  deleted: boolean;
+  onFavoriteComment: (commentId: number, isLike: boolean, queryKey: unknown[]) => void;
 }
 
 const CommentFooter = ({
@@ -19,19 +22,26 @@ const CommentFooter = ({
   isGuest,
   isReplyFormOpen,
   setIsReplyFormOpen,
+  queryKey,
+  deleted,
+  onFavoriteComment,
 }: CommentFooterProps) => {
   const { likeCount, id, isLike } = footerData;
 
   const handleLikeClick = () => {
-    console.log(id);
+    onFavoriteComment(id, isLike, queryKey);
   };
 
   return (
     <div className="flex items-center gap-3">
       <button
         aria-label={isLike ? "좋아요 취소" : "좋아요"}
-        className="flex items-center gap-1 text-body2-regular text-neutral-strong-placeholder disabled:cursor-not-allowed disabled:opacity-40"
-        onClick={isGuest ? undefined : handleLikeClick}
+        className={cn(
+          "flex items-center gap-1 text-body2-regular text-neutral-strong-placeholder",
+          "disabled:cursor-not-allowed disabled:opacity-40"
+        )}
+        onClick={isGuest || deleted ? undefined : handleLikeClick}
+        disabled={isGuest || deleted}
       >
         <Icon
           name="Heart"

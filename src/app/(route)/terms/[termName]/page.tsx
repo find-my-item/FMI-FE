@@ -1,6 +1,5 @@
 import NotFound from "@/app/not-found";
 import { Terms } from "@/components/domain";
-import { ErrorView } from "@/components/state";
 
 interface PageProps {
   params: Promise<{ termName: string }>;
