@@ -14,3 +14,5 @@ export { useGetReport } from "./api/useGetReport";
 export { useGetInquiries } from "./api/useGetInquiries";
 export { usePostNotices } from "./api/usePostNotices";
 export { useGetDetailInquiry } from "./api/useGetDetailInquiry";
+export { usePutReportStatus } from "./api/usePutReportStatus";
+export { usePutInquiryStatus } from "./api/usePutInquiryStatus";

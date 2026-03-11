@@ -34,7 +34,7 @@ const GuestInquiriesDetailView = ({ id }: GuestInquiriesDetailViewProps) => {
   return (
     <div className="flex flex-col h-base">
       <article className="flex-1">
-        <AdminDetailSection data={data.result} />
+        <AdminDetailSection data={data.result} type="inquiry" isGuest={true} />
       </article>
 
       <div className="sticky bottom-0 border-t border-divider-default bg-white px-5 pb-8 pt-3">
