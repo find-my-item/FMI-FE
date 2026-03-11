@@ -1,0 +1,41 @@
+import { AdminDetailGuestInquiry, AdminDetailInquiry, AdminDetailReport } from "@/api/fetch/admin";
+import { REPORT_TYPE_TITLE } from "@/app/(admin)/admin/_constants/REPORT_TYPE_TITLE";
+
+type DetailContentVMProps = {
+  title: string;
+  content: string;
+  createdAt: string;
+  userEmailLabel: string;
+};
+
+export const getDetailContentVM = (
+  data: AdminDetailGuestInquiry | AdminDetailReport | AdminDetailInquiry
+): DetailContentVMProps | null => {
+  let title = "";
+  let content = "";
+  let createdAt = "";
+
+  if ("reportId" in data) {
+    title = REPORT_TYPE_TITLE[data.reportType];
+    content = data.reason;
+    createdAt = data.createdAt;
+  } else if ("title" in data) {
+    title = data.title;
+    content = data.content;
+    createdAt = data.createdAt;
+  } else {
+    return null;
+  }
+
+  let userEmailLabel = "";
+
+  if ("nickname" in data) userEmailLabel = data.nickname as string;
+  else if ("userEmail" in data) userEmailLabel = data.userEmail as string;
+
+  return {
+    title,
+    content,
+    createdAt,
+    userEmailLabel,
+  };
+};

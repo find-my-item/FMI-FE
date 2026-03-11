@@ -1,22 +1,20 @@
-import { AdminDetailGuestInquiry, AdminDetailReports } from "@/api/fetch/admin";
+import { AdminDetailGuestInquiry, AdminDetailInquiry, AdminDetailReport } from "@/api/fetch/admin";
 import {
   DetailContent,
   DetailStatusHeader,
 } from "../../reports/[reportsType]/[id]/_components/_internal";
 
 interface AdminDetailSectionProps {
-  data?: AdminDetailGuestInquiry | AdminDetailReports;
+  data?: AdminDetailGuestInquiry | AdminDetailReport | AdminDetailInquiry;
 }
 
 const AdminDetailSection = ({ data }: AdminDetailSectionProps) => {
   if (!data) return null;
 
-  const { requestStatus, answered } =
-    "type" in data
-      ? data.type === "REPORT"
-        ? { requestStatus: data.reportStatus, answered: data.answered }
-        : { requestStatus: data.inquiryStatus, answered: data.answered }
-      : { requestStatus: data.status, answered: data.answered };
+  const { requestStatus, answered } = {
+    requestStatus: data.status,
+    answered: data.answered,
+  };
 
   return (
     <>
