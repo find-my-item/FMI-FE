@@ -1,15 +1,16 @@
-import { DetailReportsType, useGetDetailReports } from "@/api/fetch/admin";
 import { LoadingState } from "@/components/state";
 import { AdminDetailSection } from "@/app/(admin)/admin/_components";
 import AdminReportsCommentSection from "../AdminReportsCommentSection/AdminReportsCommentSection";
+import { ReportsType } from "../../_types/ReportsType";
+import { useReportsDetailQuery } from "../../_hooks/useReportsDetailQuery";
 
 interface AdminReportsViewProps {
   id: number;
-  type: DetailReportsType;
+  type: ReportsType;
 }
 
 const AdminReportsView = ({ id, type }: AdminReportsViewProps) => {
-  const { data, isLoading, isError } = useGetDetailReports({ type, id });
+  const { data, isLoading, isError } = useReportsDetailQuery({ id, type });
 
   if (isError) return null;
 
@@ -19,7 +20,7 @@ const AdminReportsView = ({ id, type }: AdminReportsViewProps) => {
         <LoadingState />
       ) : (
         <>
-          <AdminDetailSection data={data?.result} />
+          <AdminDetailSection data={data?.result} type={type} />
           <AdminReportsCommentSection />
         </>
       )}

@@ -21,6 +21,8 @@ export const MOCK_COMMENT_DATA: CommentItemType[] = [
     imageList: [],
     likeCount: 3,
     isLike: false,
+    canEdit: true,
+    canDelete: true,
   },
   {
     id: 2,
@@ -37,6 +39,8 @@ export const MOCK_COMMENT_DATA: CommentItemType[] = [
     imageList: [],
     likeCount: 1,
     isLike: false,
+    canEdit: false,
+    canDelete: false,
   },
 ];
 
