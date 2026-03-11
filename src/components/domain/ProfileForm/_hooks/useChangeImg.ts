@@ -1,18 +1,18 @@
 import { ChangeEvent, useRef, useState } from "react";
 
 interface UseChangeImgProps {
-  setOpenMenu: (open: boolean) => void;
+  setOpenKebabMenu: (open: boolean) => void;
   initialImg?: string;
   onImageChange: (file: File | null) => void;
 }
 
-const useChangeImg = ({ setOpenMenu, initialImg, onImageChange }: UseChangeImgProps) => {
+const useChangeImg = ({ setOpenKebabMenu, initialImg, onImageChange }: UseChangeImgProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [previewImgUrl, setPreviewImgUrl] = useState<string | null>(initialImg ?? "");
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
-    setOpenMenu(false);
+    setOpenKebabMenu(false);
   };
 
   // 이미지 변경
@@ -27,7 +27,7 @@ const useChangeImg = ({ setOpenMenu, initialImg, onImageChange }: UseChangeImgPr
       setPreviewImgUrl(url);
 
       onImageChange(file);
-      setOpenMenu(false);
+      setOpenKebabMenu(false);
     }
   };
 
@@ -35,7 +35,7 @@ const useChangeImg = ({ setOpenMenu, initialImg, onImageChange }: UseChangeImgPr
   const resetImage = () => {
     setPreviewImgUrl(null);
     onImageChange(null);
-    setOpenMenu(false);
+    setOpenKebabMenu(false);
   };
 
   return {

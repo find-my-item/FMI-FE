@@ -66,7 +66,7 @@ const KebabMenu = ({ items }: KebabMenuProps) => {
           onClick={item.onClick}
           type={item.type ?? "submit"}
           className={cn(
-            "glass-card glass-card::before glass-card::after z-[9999] grid auto-cols-max grid-flow-col items-center justify-center gap-2 border-b border-white px-7 py-4 text-h3-medium transition-colors duration-150 bg-fill-neutral-subtle-default",
+            "glass-card glass-card::before glass-card::after grid auto-cols-max grid-flow-col items-center justify-center gap-2 border-b border-white px-7 py-4 text-h3-medium transition-colors duration-150 bg-fill-neutral-subtle-default",
             finalTextColor(item),
             "active:bg-fill-neutral-subtle-pressed",
             "disabled:bg-fill-neutral-subtle-disabled",

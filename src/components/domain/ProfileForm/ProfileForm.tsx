@@ -19,20 +19,22 @@ interface ProfileFormProps {
 const ProfileForm = ({ user }: ProfileFormProps) => {
   const { nickname, profileImg } = user ?? {};
 
-  const { setValue } = useFormContext();
+  const {
+    setValue,
+    watch,
+    formState: { isValid },
+  } = useFormContext();
 
   const { handleClickNickname, isNicknameVerified, isNicknameDisabled } = useNicknameCheck();
 
-  // 버튼 클릭 제어
-  const [openMenu, setOpenMenu] = useState(false);
+  const [openKebabMenu, setOpenKebabMenu] = useState(false);
 
-  // 모달 제어
   const [openModal, setOpenModal] = useState(false);
 
   // 이미지 관련 처리
   const { handleChangeImg, handleButtonClick, previewImgUrl, resetImage, fileInputRef } =
     useChangeImg({
-      setOpenMenu,
+      setOpenKebabMenu,
       initialImg: profileImg,
       onImageChange: (file) => setValue("profileImg", file, { shouldDirty: true }),
     });
@@ -43,11 +45,6 @@ const ProfileForm = ({ user }: ProfileFormProps) => {
     preProfileImg: profileImg,
     onNoChange: () => setOpenModal(true),
   });
-
-  const {
-    watch,
-    formState: { isValid },
-  } = useFormContext();
 
   const currentProfileImg = watch("profileImg");
   const isImageChanged = currentProfileImg instanceof File || currentProfileImg === null;
@@ -67,14 +64,14 @@ const ProfileForm = ({ user }: ProfileFormProps) => {
             <button
               className="absolute left-[52px] top-[52px] h-[28px] w-[28px] rounded-full bg-fill-neutral-strong-default flex-center"
               aria-label="프로필 이미지 변경 버튼"
-              onClick={() => setOpenMenu((prev) => !prev)}
+              onClick={() => setOpenKebabMenu((prev) => !prev)}
               type="button"
             >
               <Icon name="CameraBorder" size={16} />
             </button>
 
             {/* 메뉴 */}
-            {openMenu && (
+            {openKebabMenu && (
               <KebabMenu
                 items={[
                   { text: "내 앨범에서 선택", onClick: handleButtonClick, type: "button" },
