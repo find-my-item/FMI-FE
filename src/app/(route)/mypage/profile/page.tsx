@@ -2,7 +2,7 @@
 
 import { DetailHeader } from "@/components/layout";
 import { FormProvider, useForm } from "react-hook-form";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import { MypageProfileFormType } from "./_types/MypageProfileFormType";
 import { useGetUsersMe } from "@/api/fetch/user";
 import { useToast } from "@/context/ToastContext";
@@ -11,10 +11,13 @@ import { ProfileForm } from "@/components/domain";
 const page = () => {
   const { addToast } = useToast();
 
-  const { data, error } = useGetUsersMe();
-  if (error) {
-    addToast("프로필 정보를 불러오지 못했어요.", "error");
-  }
+  const { data, isError } = useGetUsersMe();
+
+  useEffect(() => {
+    if (isError) {
+      addToast("프로필 정보를 불러오지 못했어요.", "error");
+    }
+  }, [isError]);
 
   const methods = useForm<MypageProfileFormType>({
     mode: "onChange",
