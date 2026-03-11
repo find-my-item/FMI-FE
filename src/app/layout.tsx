@@ -11,6 +11,7 @@ import { Metadata } from "next";
 import MSWProvider from "@/providers/MSWProvider";
 import AuthBootstrap from "./authBootStrap";
 import { NotificationSSEProvider } from "@/providers/NotificationSSEProvider";
+import { cookies } from "next/headers";
 
 const pretendard = localFont({
   src: "../../public/fonts/PretendardVariable.woff2",
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
   description: "분실물 찾기 서비스",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -30,6 +31,8 @@ export default function RootLayout({
   const isProd = process.env.VERCEL_ENV === "production";
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
   const clarityId = process.env.NEXT_PUBLIC_CLARITY_ID;
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get("access_token")?.value;
 
   return (
     <html lang="ko" className={pretendard.variable}>
@@ -80,7 +83,7 @@ export default function RootLayout({
             <ToastProvider>
               <MSWProvider />
               <AuthBootstrap />
-              <NotificationSSEProvider>
+              <NotificationSSEProvider accessToken={accessToken}>
                 <main className="w-full flex-1">{children}</main>
                 <Footer />
               </NotificationSSEProvider>

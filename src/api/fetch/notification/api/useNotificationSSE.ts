@@ -12,6 +12,8 @@ export interface UseNotificationSSEOptions {
   onConnect?: (message: string) => void;
   /** 알림 수신 시 (notification 이벤트) */
   onNotification?: (data: NotificationEventData) => void;
+  /** 액세스 토큰 (쿼리 파라미터로 전달) */
+  accessToken?: string;
   /** 연결 실패/끊김 시 재연결 대기 시간(ms). 기본 5초 */
   reconnectDelayMs?: number;
 }
@@ -41,6 +43,7 @@ export function useNotificationSSE({
   enabled = true,
   onConnect,
   onNotification,
+  accessToken,
   reconnectDelayMs = RECONNECT_DELAY_MS,
 }: UseNotificationSSEOptions = {}): UseNotificationSSEReturn {
   const [isConnected, setIsConnected] = useState(false);
@@ -66,8 +69,8 @@ export function useNotificationSSE({
 
     disconnect();
 
-    const url = `${getSSEBaseURL()}/notifications/subscribe`;
-    const eventSource = new EventSource(url, { withCredentials: true });
+    const url = `${getSSEBaseURL()}/notifications/subscribe?token=${accessToken}`;
+    const eventSource = new EventSource(url);
     eventSourceRef.current = eventSource;
 
     eventSource.addEventListener("connect", (e: MessageEvent) => {
@@ -89,12 +92,12 @@ export function useNotificationSSE({
       eventSourceRef.current = null;
       setIsConnected(false);
 
-      if (!enabledRef.current) return;
-
-      reconnectTimeoutRef.current = setTimeout(() => {
-        reconnectTimeoutRef.current = null;
-        connect();
-      }, reconnectDelayMs);
+      // 자동 재연결 비활성화 (실패 시 요청 반복 방지)
+      // if (!enabledRef.current) return;
+      // reconnectTimeoutRef.current = setTimeout(() => {
+      //   reconnectTimeoutRef.current = null;
+      //   connect();
+      // }, reconnectDelayMs);
     };
   }, [disconnect, onConnect, onNotification, reconnectDelayMs]);
 
