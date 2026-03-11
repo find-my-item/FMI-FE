@@ -15,14 +15,19 @@ export const useGetPostsComments = ({ postId, enabled }: UseGetPostsCommentsPara
     {
       enabled: !!postId && enabled,
       pageParamName: "page",
-      initialPageParam: 1,
+      initialPageParam: 0,
       getNextPageParam: (lastPage) =>
         lastPage.result.hasNext ? lastPage.result.nextPage : undefined,
       select: (data: InfiniteData<GetPostsCommentsResponse>) => {
         const lastPage = data.pages[data.pages.length - 1];
+        const result = lastPage?.result;
+
         return {
-          ...lastPage.result,
-          comments: data.pages.flatMap((page) => page.result.comments),
+          comments: data.pages.flatMap((page) => page.result?.comments ?? []),
+          hasNext: result?.hasNext ?? false,
+          nextPage: result?.nextPage ?? 0,
+          remainingCount: result?.remainingCount ?? 0,
+          totalCommentCount: result?.totalCommentCount ?? 0,
         };
       },
       placeholderData: keepPreviousData,

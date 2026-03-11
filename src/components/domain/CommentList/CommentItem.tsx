@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { DeleteCommentVariables, useGetRepliesPostsComments } from "@/api/fetch/comment";
-import { Icon } from "@/components/common";
+import { Icon, ViewMoreComment } from "@/components/common";
 import { cn } from "@/utils";
 import { CommentItemType } from "@/types";
 import { CommentBody, CommentMeta, CommentActions, CommentFooter, ReplyForm } from "./_internal";
@@ -71,7 +71,7 @@ const CommentItem = ({
 
   const shouldFetchReplies = (isTopLevelComment && viewReply) || (isReply && autoOpenReplies);
 
-  const { data: replyCommentData } = useFetchReplies({
+  const { data: replyCommentData, fetchNextPage } = useFetchReplies({
     commentId: data.id,
     enabled: !isGuest && shouldFetchReplies,
   });
@@ -86,12 +86,14 @@ const CommentItem = ({
   const authorName = data.authorResponse ? data.authorResponse.nickName : "";
   const profileImageUrl = data.authorResponse ? data.authorResponse.profileImageUrl : "";
 
-  const replyComments = replyCommentData?.result?.comments ?? [];
+  const replyComments = replyCommentData?.comments ?? [];
   const isRepliesVisible = shouldFetchReplies;
   const hasReplyComments = isRepliesVisible && replyComments.length > 0;
 
-  const itemQueryKey = parentQueryKey ?? ["post-comments", postId, 0];
-  const childrenQueryKey = ["replies-post-comments", data.id, undefined, 10];
+  const itemQueryKey = parentQueryKey ?? ["post-comments", postId];
+  const childrenQueryKey = ["replies-post-comments", data.id, 10];
+
+  // console.log(replyCommentData?.hasNext);
 
   return (
     <li className={cn("my-[18px]", !isNestedReply && "px-5", className)}>
@@ -175,6 +177,16 @@ const CommentItem = ({
               parentQueryKey={childrenQueryKey}
             />
           ))}
+
+          {/* TODO(지권): 댓글 더보기 임시 디자인 */}
+          {replyCommentData?.hasNext && (
+            <div className="px-5 py-2">
+              <ViewMoreComment
+                count={replyCommentData.remainingCount}
+                onClick={() => fetchNextPage()}
+              />
+            </div>
+          )}
         </ul>
       )}
     </li>
