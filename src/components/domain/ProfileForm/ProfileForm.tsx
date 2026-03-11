@@ -46,13 +46,12 @@ const ProfileForm = ({ user }: ProfileFormProps) => {
     onNoChange: () => setOpenModal(true),
   });
 
-  const currentProfileImg = watch("profileImg");
-  const isImageChanged = currentProfileImg instanceof File || currentProfileImg === null;
-  const isNicknameChanged = watch("nickname");
+  const [profileImgValue, nicknameValue] = watch(["profileImg", "nickname"]);
+  const isImageChanged = profileImgValue instanceof File || profileImgValue === null;
 
-  const canSubmit = isImageChanged || (isNicknameChanged && isValid && isNicknameVerified);
+  const canSubmit = isImageChanged || (nicknameValue && isValid && isNicknameVerified);
 
-  const hasChanges = isImageChanged || isNicknameChanged;
+  const hasChanges = isImageChanged || nicknameValue;
   usePreventLeave(hasChanges, () => setOpenModal(true));
 
   return (
@@ -62,7 +61,7 @@ const ProfileForm = ({ user }: ProfileFormProps) => {
           <div className="relative h-[80px] w-[80px]">
             <ProfileAvatar size={80} src={previewImgUrl} alt="프로필" priority={true} />
             <button
-              className="absolute left-[52px] top-[52px] h-[28px] w-[28px] rounded-full bg-fill-neutral-strong-default flex-center"
+              className="absolute left-[52px] top-[52px] size-7 rounded-full bg-fill-neutral-strong-default flex-center"
               aria-label="프로필 이미지 변경 버튼"
               onClick={() => setOpenKebabMenu((prev) => !prev)}
               type="button"

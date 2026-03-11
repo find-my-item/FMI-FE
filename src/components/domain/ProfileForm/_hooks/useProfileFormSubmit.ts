@@ -27,7 +27,6 @@ const useProfileFormSubmit = ({
     const ChangeImg = preProfileImg !== isProfileImg;
     const ChangeNickname = preNickname !== isNickname;
 
-    // 바뀐 항목이 없음
     if (!ChangeImg && !ChangeNickname) {
       onNoChange?.();
       return;
