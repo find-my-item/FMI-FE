@@ -1,14 +1,18 @@
 export * from "./types/GuestInquiriesType";
 export * from "./types/WithdrawalType";
 export * from "./types/DetailGuestInquiriesType";
-export * from "./types/DetailReportsType";
+export * from "./types/DetailReportType";
 export * from "./types/ReportType";
 export * from "./types/InquiriesType";
+export * from "./types/DetailInquiryType";
 
 export { useGetDeletedUsers } from "./api/useGetDeletedUsers";
 export { useGetGuestInquiries } from "./api/useGetGuestInquiries";
-export { useGetDetailReports } from "./api/useGetDetailReports";
+export { useGetDetailReport } from "./api/useGetDetailReport";
 export { useGetDetailGuestInquiries } from "./api/useGetDetailGuestInquiries";
 export { useGetReport } from "./api/useGetReport";
 export { useGetInquiries } from "./api/useGetInquiries";
 export { usePostNotices } from "./api/usePostNotices";
+export { useGetDetailInquiry } from "./api/useGetDetailInquiry";
+export { usePutReportStatus } from "./api/usePutReportStatus";
+export { usePutInquiryStatus } from "./api/usePutInquiryStatus";

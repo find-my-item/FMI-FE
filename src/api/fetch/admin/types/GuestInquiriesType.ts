@@ -16,8 +16,8 @@ export interface AdminGuestInquiryItem {
   status: InquiryStatus;
   createdAt: string;
   userId: number;
-  userNickname: string;
-  userEmail: string;
+  nickname: null;
+  email: string;
   content: string;
   ip: string;
   answered: boolean;
