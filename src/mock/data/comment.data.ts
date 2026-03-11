@@ -17,6 +17,8 @@ export const MOCK_COMMENT_ITEM_DATA: CommentItemType = {
   imageList: [],
   likeCount: 2,
   isLike: false,
+  canEdit: true,
+  canDelete: true,
 };
 
 export const MOCK_COMMENT_LIST_DATA: CommentItemType[] = [

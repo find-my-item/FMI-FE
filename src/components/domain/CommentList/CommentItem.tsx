@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useGetRepliesPostsComments } from "@/api/fetch/comment";
+import { DeleteCommentVariables, useGetRepliesPostsComments } from "@/api/fetch/comment";
 import { Icon } from "@/components/common";
 import { cn } from "@/utils";
 import { CommentItemType } from "@/types";
@@ -19,8 +19,11 @@ interface CommentCardProps {
   autoOpenReplies?: boolean;
 
   useFetchReplies: typeof useGetRepliesPostsComments;
+  onDeleteComment?: (commentVariables: DeleteCommentVariables) => void;
+  onFavoriteComment?: (commentId: number, isLike: boolean, queryKey: unknown[]) => void;
 
   isGuest?: boolean;
+  parentQueryKey?: unknown[];
 }
 
 const CommentItem = ({
@@ -33,6 +36,9 @@ const CommentItem = ({
   autoOpenReplies = false,
   useFetchReplies,
   isGuest = false,
+  parentQueryKey,
+  onDeleteComment,
+  onFavoriteComment,
 }: CommentCardProps) => {
   const isReply = level === "reply";
   const isNestedReply = level === "nestedReply";
@@ -63,6 +69,9 @@ const CommentItem = ({
   const isRepliesVisible = shouldFetchReplies;
   const hasReplyComments = isRepliesVisible && replyComments.length > 0;
 
+  const itemQueryKey = parentQueryKey ?? ["post-comments", postId, 0];
+  const childrenQueryKey = ["replies-post-comments", data.id, undefined, 10];
+
   return (
     <li className={cn("my-[18px]", !isNestedReply && "px-5", className)}>
       <div className="flex">
@@ -72,9 +81,19 @@ const CommentItem = ({
           <div className="space-y-2">
             <div className="flex flex-col gap-3">
               <CommentMeta
-                data={{ authorId, createdAt: data.createdAt, authorName, profileImageUrl }}
+                data={{
+                  authorId,
+                  createdAt: data.createdAt,
+                  authorName,
+                  profileImageUrl,
+                  commentId: data.id,
+                  deleted: data.deleted,
+                  canDelete: data.canDelete,
+                }}
                 isGuest={isGuest}
                 isThreadItem={isThreadItem}
+                queryKey={itemQueryKey}
+                onDeleteComment={onDeleteComment!}
               />
 
               <CommentBody
@@ -92,6 +111,9 @@ const CommentItem = ({
               isGuest={isGuest}
               isReplyFormOpen={isReplyFormOpen}
               setIsReplyFormOpen={setIsReplyFormOpen}
+              queryKey={itemQueryKey}
+              deleted={data.deleted}
+              onFavoriteComment={onFavoriteComment!}
             />
           </div>
 
@@ -123,13 +145,16 @@ const CommentItem = ({
               key={child.id}
               postId={postId}
               level={child.depth > 1 ? "nestedReply" : "reply"}
-              className={index === 0 && child.depth === 1 ? "pt-4" : undefined}
+              className={index === 0 && child.depth === 1 ? "pt-4" : "pb-4"}
               data={child}
               onSubmit={onSubmit}
               isPending={isPending}
               autoOpenReplies={isTopLevelComment && viewReply}
               useFetchReplies={useFetchReplies}
               isGuest={isGuest}
+              parentQueryKey={childrenQueryKey}
+              onDeleteComment={onDeleteComment}
+              onFavoriteComment={onFavoriteComment}
             />
           ))}
         </ul>
