@@ -26,25 +26,24 @@ const PostDetailTopHeader = ({ postId, postData }: PostDetailTopHeaderProps) => 
   return (
     <>
       <div className="sticky right-0 top-0 z-10 mx-auto">
-        <div className="relative">
-          <DetailHeader>
-            <HeaderStar
-              disabled={isPending}
-              isActive={postData.favoriteStatus}
-              onClick={() => handleToggleFavorite(postData.favoriteStatus)}
-              ariaLabel="게시글 즐겨찾기"
-            />
-            <HeaderShare onClick={() => setOpenShareModal(true)} ariaLabel="게시글 공유" />
+        <DetailHeader>
+          <HeaderStar
+            disabled={isPending}
+            isActive={postData.favoriteStatus}
+            onClick={() => handleToggleFavorite(postData.favoriteStatus)}
+            ariaLabel="게시글 즐겨찾기"
+          />
+          <HeaderShare onClick={() => setOpenShareModal(true)} ariaLabel="게시글 공유" />
+          <div className="relative flex items-center">
             <HeaderMenu onClick={() => setOpenOptionModal((v) => !v)} ariaLabel="게시글 메뉴" />
-          </DetailHeader>
-        </div>
-
-        <PostActionMenu
-          open={openOptionModal}
-          onClose={() => setOpenOptionModal(false)}
-          postId={postId}
-          postData={postData}
-        />
+            <PostActionMenu
+              open={openOptionModal}
+              onClose={() => setOpenOptionModal(false)}
+              postId={postId}
+              postData={postData}
+            />
+          </div>
+        </DetailHeader>
       </div>
 
       <PostShare isOpen={openShareModal} onClose={() => setOpenShareModal(false)} postId={postId} />
