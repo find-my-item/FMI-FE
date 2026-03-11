@@ -99,6 +99,7 @@ const CommentItem = ({
               <CommentBody
                 bodyData={{
                   content: data.content,
+                  images: data.imageList,
                 }}
               />
             </div>
