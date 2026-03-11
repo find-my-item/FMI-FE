@@ -7,7 +7,7 @@ interface NoticeDetailProps {
 const NoticeDetail = async ({ params }: NoticeDetailProps) => {
   const { id } = await params;
 
-  return <NoticeDetailView />;
+  return <NoticeDetailView id={Number(id)} />;
 };
 
 export default NoticeDetail;
