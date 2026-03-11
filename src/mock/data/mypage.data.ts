@@ -233,3 +233,18 @@ export const MOCK_MYPAGE_ACTIVITY = [
     subText: "문의하신 내용에 대한 답변입니다.",
   },
 ] as const;
+
+export const MOCK_MYPAGE_BLOCK_USER = [
+  {
+    profileImg: "",
+    nickname: "사용자닉네임최대열자",
+  },
+  {
+    profileImg: "",
+    nickname: "사용자닉네임최대열자",
+  },
+  {
+    profileImg: "",
+    nickname: "사용자닉네임최대열자",
+  },
+];

@@ -1,26 +1,12 @@
 "use client";
 
 import { Button, ProfileAvatar } from "@/components/common";
-
-const BLOCK_USER_MOCK_DATA = [
-  {
-    profileImg: "",
-    nickname: "사용자닉네임최대열자",
-  },
-  {
-    profileImg: "",
-    nickname: "사용자닉네임최대열자",
-  },
-  {
-    profileImg: "",
-    nickname: "사용자닉네임최대열자",
-  },
-];
+import { MOCK_MYPAGE_BLOCK_USER } from "@/mock/data";
 
 const ReportUserList = () => {
   return (
     <ul className="flex flex-col gap-3 py-4">
-      {BLOCK_USER_MOCK_DATA.map((item, index) => (
+      {MOCK_MYPAGE_BLOCK_USER.map((item, index) => (
         <ReportUserItem key={index} {...item} />
       ))}
     </ul>
