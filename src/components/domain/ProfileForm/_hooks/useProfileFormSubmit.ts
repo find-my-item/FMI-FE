@@ -3,9 +3,9 @@ import { FormEvent } from "react";
 import { useFormContext } from "react-hook-form";
 
 interface useProfileFormSubmitProps {
-  preNickname?: string;
+  preNickname: string;
   preProfileImg?: string;
-  onNoChange?: () => void;
+  onNoChange: () => void;
 }
 
 const useProfileFormSubmit = ({

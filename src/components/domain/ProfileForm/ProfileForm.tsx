@@ -39,7 +39,7 @@ const ProfileForm = ({ user }: ProfileFormProps) => {
 
   // 최종 버튼 제출 함수
   const { handleSubmitMypageProfile } = useProfileFormSubmit({
-    preNickname: nickname,
+    preNickname: nickname ?? "",
     preProfileImg: profileImg,
     onNoChange: () => setOpenModal(true),
   });
