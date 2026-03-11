@@ -1,13 +1,13 @@
 import { cn } from "@/utils";
 import { Icon } from "@/components/common";
-import { ReportsType } from "@/types";
+import { InquiryStatus, ReportStatus } from "@/types";
 import {
   ProcessStatusBadgeConfig,
   ReplyStatusBadgeConfig,
 } from "@/app/(admin)/admin/_utils/AdminStatusBadgeConfig/AdminStatusBadgeConfig";
 
 interface DetailStatusHeaderProps {
-  requestStatus: ReportsType;
+  requestStatus: ReportStatus | InquiryStatus;
   status: boolean;
 }
 

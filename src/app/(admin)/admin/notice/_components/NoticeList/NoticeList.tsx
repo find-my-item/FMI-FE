@@ -11,7 +11,6 @@ interface NoticeListProps {
 
 const NoticeList = ({ keyword, sortType }: NoticeListProps) => {
   const { data } = useGetNotices({ keyword, sortType });
-  console.log(data);
 
   return (
     <Suspense fallback={<LoadingState />}>
