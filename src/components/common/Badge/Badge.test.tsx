@@ -2,23 +2,31 @@ import { render, screen } from "@testing-library/react";
 import Badge from "./Badge";
 
 describe("Badge", () => {
-  it("variant가 new일 때 라벨이 NEW로 렌더링됩니다", () => {
+  it("variant가 new일 때 '최신 글' 라벨이 렌더링됩니다", () => {
     render(<Badge variant="new" />);
-    expect(screen.getByText("N")).toBeInTheDocument();
+
+    const badge = screen.getByLabelText("최신 글");
+    expect(badge).toBeInTheDocument();
   });
 
-  it("variant가 hot일 때 라벨이 HOT로 렌더링됩니다", () => {
+  it("variant가 hot일 때 '인기 글' 라벨이 렌더링됩니다", () => {
     render(<Badge variant="hot" />);
-    expect(screen.getByText("H")).toBeInTheDocument();
+
+    const badge = screen.getByLabelText("인기 글");
+    expect(badge).toBeInTheDocument();
   });
 
-  it("variant가 new일 때 배경색이 #1EB87B로 렌더링됩니다", () => {
+  it("variant가 new일 때 NewBadge 아이콘이 렌더링됩니다", () => {
     render(<Badge variant="new" />);
-    expect(screen.getByText("N")).toHaveClass("bg-[#1EB87B]");
+
+    const badge = screen.getByLabelText("최신 글");
+    expect(badge.querySelector("svg")).toBeInTheDocument();
   });
 
-  it("variant가 hot일 때 배경색이 FF4242로 렌더링됩니다", () => {
+  it("variant가 hot일 때 HotBadge 아이콘이 렌더링됩니다", () => {
     render(<Badge variant="hot" />);
-    expect(screen.getByText("H")).toHaveClass("bg-[#FF4242]");
+
+    const badge = screen.getByLabelText("인기 글");
+    expect(badge.querySelector("svg")).toBeInTheDocument();
   });
 });
