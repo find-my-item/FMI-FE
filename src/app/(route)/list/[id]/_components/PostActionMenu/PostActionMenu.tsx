@@ -9,7 +9,7 @@ import ModalLayout from "@/components/common/Modal/_internal/ModalLayout";
 import { ACTION_MENU } from "./ACTION_MENU_STYLES";
 import { PostReportBlockActions, ReportModal } from "@/components/domain";
 import { PostActionData } from "../../_types/PostActionType";
-import UserBlockModal from "@/components/domain/PostReportBlockActions/_internal/UserBlockModal/UserBlockModal";
+import UserBlockModal from "@/components/domain/PostReportBlockActions/UserBlockModal/UserBlockModal";
 
 interface PostOptionBoxProps {
   open: boolean;
@@ -44,11 +44,10 @@ const PostActionMenu = ({ open, onClose, postId, postData }: PostOptionBoxProps)
     <>
       <div
         className={cn(
-          "absolute left-[40%] top-[60%] z-10 mt-2",
+          "absolute right-0 top-full z-10 mt-2",
           "min-h-[114px] w-[218px] overflow-hidden rounded-[20px] flex-col-center",
           "border border-white bg-fill-neutral-subtle-default",
-          "text-nowrap text-h3-medium text-neutral-normal-default shadow-sm",
-          "tablet:left-[70%]"
+          "text-nowrap text-h3-medium text-neutral-normal-default shadow-sm"
         )}
       >
         {isMine ? (

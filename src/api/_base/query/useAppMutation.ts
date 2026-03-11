@@ -15,12 +15,16 @@ import { useMutation, UseMutationOptions, UseMutationResult } from "@tanstack/re
 // 파라미터
 // apiType: 'auth' -> 토큰이 필요한 요청, 'public' -> 공개 API
 // url: api 요청 엔드포인트
+//      string 또는 function 형태로 전달 가능
+//      - string: 고정된 API endpoint (ex: "/posts")
+//      - function: mutate 시 전달된 variables를 기반으로 동적으로 URL 생성
+//                  (ex: ({ commentId }) => `/comments/${commentId}`)
 // method: HTTP method
 // option: 추가 useMutation option (ex: {onSuccess: (data)=> ...} (객체로 삽입))
 
 const useAppMutation = <TVariables, TData = unknown, TError = unknown, TContext = unknown>(
   apiType: "auth" | "public",
-  url: string,
+  url: string | ((variables: TVariables) => string),
   method: "post" | "put" | "patch" | "delete",
   options?: UseMutationOptions<TData, TError, TVariables, TContext>
 ): UseMutationResult<TData, TError, TVariables, TContext> => {
@@ -28,7 +32,9 @@ const useAppMutation = <TVariables, TData = unknown, TError = unknown, TContext 
 
   return useMutation({
     mutationFn: async (variables: TVariables) => {
-      const { data } = await axios[method]<TData>(url, variables);
+      const requestUrl = typeof url === "function" ? url(variables) : url;
+
+      const { data } = await axios[method]<TData>(requestUrl, variables);
       return data;
     },
     retry: 0,

@@ -11,7 +11,7 @@ export const toReportItemVM = (item: AdminReportItem): AdminReportsItemData => {
     href: `/admin/reports/report/${item.reportId}`,
     title: REPORT_TYPE_TITLE[item.reportType],
     content: item.reason,
-    nickname: item.reporterNickname,
+    nickname: item.nickname,
     createdAt: item.createdAt,
 
     processStatus: ProcessStatusBadgeConfig[item.status],
@@ -24,7 +24,7 @@ export const toInquiryItemVM = (item: AdminInquiriesItem): AdminReportsItemData 
     href: `/admin/reports/inquiry/${item.inquiryId}`,
     title: item.title,
     content: item.content,
-    nickname: item.userNickname,
+    nickname: item.nickname,
     createdAt: item.createdAt,
 
     processStatus: ProcessStatusBadgeConfig[item.status],
@@ -37,7 +37,7 @@ export const toGuestInquiryItemVM = (item: AdminGuestInquiryItem): AdminReportsI
     href: `/admin/guest-inquiries/${item.inquiryId}`,
     title: item.title,
     content: item.content,
-    nickname: item.userEmail,
+    nickname: item.email,
     createdAt: item.createdAt,
 
     processStatus: ProcessStatusBadgeConfig[item.status],

@@ -20,7 +20,7 @@ export const useDeleteDetailPost = (id: number) => {
     "delete",
     {
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ["post-detail", id] });
+        queryClient.invalidateQueries({ queryKey: ["posts"] });
         addToast("게시글 삭제가 완료되었어요", "success");
         router.replace("/list");
       },

@@ -4,7 +4,7 @@ import { NoticeItem } from "@/api/fetch/notice";
 import { formatDate } from "@/utils";
 
 const NoticeListItem = ({ notice }: { notice: NoticeItem }) => {
-  const { noticeId, title, createdAt, likeCount, viewCount, thumbnailUrl } = notice;
+  const { noticeId, title, createdAt, likeCount, viewCount, thumbnailUrl, isNew, isHot } = notice;
 
   return (
     <li>
@@ -15,8 +15,9 @@ const NoticeListItem = ({ notice }: { notice: NoticeItem }) => {
         <div className="flex min-w-0 flex-col gap-2">
           <div className="flex flex-col gap-[3px]">
             <div className="flex items-center gap-1">
-              <div className="flex-shrink-0">
-                <Badge variant="new" />
+              <div className="flex flex-shrink-0 gap-1">
+                {isNew && <Badge variant="new" />}
+                {isHot && <Badge variant="hot" />}
               </div>
               <p className="truncate text-body1-semibold text-layout-header-default">{title}</p>
             </div>

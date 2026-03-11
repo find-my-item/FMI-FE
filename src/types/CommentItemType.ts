@@ -35,6 +35,8 @@ export interface CommentItemType {
   imageList: ImageList[];
   likeCount: number;
   isLike: boolean;
+  canEdit: boolean;
+  canDelete: boolean;
 }
 
 export interface AuthorResponse {
