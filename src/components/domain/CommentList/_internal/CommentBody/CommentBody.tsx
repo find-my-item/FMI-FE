@@ -1,9 +1,17 @@
 import { ImageList } from "@/types";
 import Image from "next/image";
 
+/**
+ * 댓글 내용 및 이미지
+ *
+ * @author jikwon
+ */
+
 interface CommentBodyProps {
   bodyData: {
+    /** 댓글 내용 */
     content: string;
+    /** 댓글 이미지 목록 */
     images: ImageList[];
   };
 }
@@ -11,7 +19,6 @@ interface CommentBodyProps {
 const CommentBody = ({ bodyData }: CommentBodyProps) => {
   const { content, images } = bodyData;
 
-  // 댓글 내용
   // TODO(지권): 이미지 있을 때 디자인 추가 필요, 현재 임시 구현
   return (
     <div>

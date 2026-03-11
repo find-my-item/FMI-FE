@@ -1,18 +1,34 @@
 import { Icon } from "@/components/common";
 import { cn } from "@/utils";
 
+/**
+ * 댓글 좋아요 및 답글 작성
+ *
+ * @author jikwon
+ */
+
 interface CommentFooterProps {
   footerData: {
-    likeCount: number;
+    /** 댓글 ID */
     id: number;
+    /** 좋아요 수 */
+    likeCount: number;
+    /** 좋아요 여부 */
     isLike: boolean;
+    /** 댓글 삭제 여부 */
+    deleted: boolean;
   };
+  /** 1번 댓글 여부 */
   isReply: boolean;
+  /** 비회원 여부 */
   isGuest: boolean;
+  /** 답글 폼 열림 상태 */
   isReplyFormOpen: boolean;
+  /** 답글 폼 열림 상태 변경 함수 */
   setIsReplyFormOpen: (value: boolean) => void;
+  /** 쿼리 키 */
   queryKey: unknown[];
-  deleted: boolean;
+  /** 댓글 좋아요 함수 */
   onFavoriteComment: (commentId: number, isLike: boolean, queryKey: unknown[]) => void;
 }
 
@@ -23,10 +39,9 @@ const CommentFooter = ({
   isReplyFormOpen,
   setIsReplyFormOpen,
   queryKey,
-  deleted,
   onFavoriteComment,
 }: CommentFooterProps) => {
-  const { likeCount, id, isLike } = footerData;
+  const { likeCount, id, isLike, deleted } = footerData;
 
   const handleLikeClick = () => {
     onFavoriteComment(id, isLike, queryKey);

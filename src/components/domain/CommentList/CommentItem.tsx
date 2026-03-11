@@ -7,23 +7,44 @@ import { cn } from "@/utils";
 import { CommentItemType } from "@/types";
 import { CommentBody, CommentMeta, CommentActions, CommentFooter, ReplyForm } from "./_internal";
 
+/**
+ * 댓글 및 답글을 렌더링하는 개별 댓글 아이템 컴포넌트입니다.
+ * 댓글 트리 구조를 재귀적으로 렌더링합니다.
+ *
+ * 이 컴포넌트의 props 중 일부(onSubmit, useFetchReplies 등)는
+ * 답글 기능을 처리하기 위한 props입니다.
+ *
+ * @author jikwon
+ */
+
+/** 댓글 레벨 */
 type CommentCardLevel = "comment" | "reply" | "nestedReply";
 
 interface CommentCardProps {
-  level?: CommentCardLevel;
+  /** 추가 스타일 */
   className?: string;
+  /** 댓글 데이터 */
   data: CommentItemType;
+  /** 게시글 ID */
   postId: number;
+  /** 답글 작성 함수 */
   onSubmit?: (content: string, image: File | null, parentId: number) => void;
+  /** 답글 작성 중 로딩 상태 */
   isPending?: boolean;
-  autoOpenReplies?: boolean;
-
+  /** 답글 목록 조회 함수 */
   useFetchReplies: typeof useGetRepliesPostsComments;
-  onDeleteComment?: (commentVariables: DeleteCommentVariables) => void;
-  onFavoriteComment?: (commentId: number, isLike: boolean, queryKey: unknown[]) => void;
-
-  isGuest?: boolean;
+  /** 답글 삭제 함수 */
+  onDeleteComment: (commentVariables: DeleteCommentVariables) => void;
+  /** 답글 좋아요 함수 */
+  onFavoriteComment: (commentId: number, isLike: boolean, queryKey: unknown[]) => void;
+  /** 댓글 레벨, 재귀 구조 전용 */
+  level?: CommentCardLevel;
+  /** 답글 자동 열림 여부, 재귀 구조 전용 */
+  autoOpenReplies?: boolean;
+  /** 부모 쿼리 키, 재귀 구조 전용 */
   parentQueryKey?: unknown[];
+  /** 비회원 여부, Empty UI 전용 */
+  isGuest?: boolean;
 }
 
 const CommentItem = ({
@@ -105,13 +126,17 @@ const CommentItem = ({
             </div>
 
             <CommentFooter
-              footerData={{ likeCount: data.likeCount, id: data.id, isLike: data.isLike }}
+              footerData={{
+                likeCount: data.likeCount,
+                id: data.id,
+                isLike: data.isLike,
+                deleted: data.deleted,
+              }}
               isReply={isReply}
               isGuest={isGuest}
               isReplyFormOpen={isReplyFormOpen}
               setIsReplyFormOpen={setIsReplyFormOpen}
               queryKey={itemQueryKey}
-              deleted={data.deleted}
               onFavoriteComment={onFavoriteComment!}
             />
           </div>
@@ -137,17 +162,17 @@ const CommentItem = ({
           {replyComments.map((child) => (
             <CommentItem
               key={child.id}
-              postId={postId}
               level={child.depth > 1 ? "nestedReply" : "reply"}
               data={child}
+              postId={postId}
               onSubmit={onSubmit}
               isPending={isPending}
-              autoOpenReplies={isTopLevelComment && viewReply}
               useFetchReplies={useFetchReplies}
-              isGuest={isGuest}
-              parentQueryKey={childrenQueryKey}
               onDeleteComment={onDeleteComment}
               onFavoriteComment={onFavoriteComment}
+              isGuest={isGuest}
+              autoOpenReplies={isTopLevelComment && viewReply}
+              parentQueryKey={childrenQueryKey}
             />
           ))}
         </ul>
