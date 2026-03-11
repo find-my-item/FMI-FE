@@ -1,7 +1,9 @@
-import { ReportsType } from "@/types";
+import { InquiryStatus, ReportStatus } from "@/types";
 import { StatusBadgeConfig } from "../../_types";
 
-export const ProcessStatusBadgeConfig: Record<ReportsType, StatusBadgeConfig> = {
+type ProcessStatus = InquiryStatus | ReportStatus;
+
+export const ProcessStatusBadgeConfig: Record<ProcessStatus, StatusBadgeConfig> = {
   PENDING: {
     label: "접수",
     className: "text-neutral-strong-default bg-fill-neutral-strong-default",
@@ -10,7 +12,15 @@ export const ProcessStatusBadgeConfig: Record<ReportsType, StatusBadgeConfig> = 
     label: "검토 중",
     className: "text-brand-normal-default bg-fill-brand-subtle-default",
   },
+  REVIEWED: {
+    label: "처리 중",
+    className: "text-brand-normal-default bg-fill-brand-subtle-default",
+  },
   ANSWERED: {
+    label: "처리 완료",
+    className: "text-white bg-toast",
+  },
+  RESOLVED: {
     label: "처리 완료",
     className: "text-white bg-toast",
   },
