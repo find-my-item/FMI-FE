@@ -10,9 +10,10 @@ interface AdminDropdownProps {
   options: DropdownOption[];
   onSelect: (value: string) => void;
   className?: string;
+  isPending?: boolean;
 }
 
-const AdminDropdown = ({ open, options, onSelect, className }: AdminDropdownProps) => {
+const AdminDropdown = ({ open, options, onSelect, className, isPending }: AdminDropdownProps) => {
   if (!open) return null;
 
   return (
@@ -27,8 +28,12 @@ const AdminDropdown = ({ open, options, onSelect, className }: AdminDropdownProp
         {options.map((option) => (
           <button
             key={option.value}
-            className="px-7 py-4 text-h3-medium text-neutral-normal-default"
+            className={cn(
+              "px-7 py-4 text-h3-medium text-neutral-normal-default",
+              "disabled:cursor-not-allowed disabled:opacity-40"
+            )}
             onClick={() => onSelect(option.value)}
+            disabled={isPending}
           >
             {option.label}
           </button>
