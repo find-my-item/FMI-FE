@@ -1,4 +1,5 @@
 import { MypagePostListType } from "@/api/fetch/post";
+import { BlockUserResult } from "@/api/fetch/report";
 
 export const MOCK_MYPAGE_COMMENTS_ITEM = [
   {
@@ -234,17 +235,20 @@ export const MOCK_MYPAGE_ACTIVITY = [
   },
 ] as const;
 
-export const MOCK_MYPAGE_BLOCK_USER = [
+export const MOCK_MYPAGE_BLOCK_USER: BlockUserResult[] = [
   {
-    profileImg: "",
+    userId: 1,
+    profileImage: "",
     nickname: "사용자닉네임최대열자",
   },
   {
-    profileImg: "",
+    userId: 2,
+    profileImage: "",
     nickname: "사용자닉네임최대열자",
   },
   {
-    profileImg: "",
+    userId: 3,
+    profileImage: "",
     nickname: "사용자닉네임최대열자",
   },
 ];
