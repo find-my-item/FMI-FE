@@ -1,6 +1,8 @@
+import { useQueryClient } from "@tanstack/react-query";
 import { usePostPostsComments } from "@/api/fetch/comment";
 
 export const useHandleReplySubmit = (id: number) => {
+  const queryClient = useQueryClient();
   const { mutate, isPending } = usePostPostsComments(id);
 
   const handleReplySubmit = (content: string, image: File | null, parentId: number) => {
@@ -10,7 +12,13 @@ export const useHandleReplySubmit = (id: number) => {
     formData.append("request", new Blob([JSON.stringify(request)], { type: "application/json" }));
     if (image) formData.append("images", image);
 
-    mutate(formData);
+    mutate(formData, {
+      onSuccess: () => {
+        if (parentId) {
+          queryClient.invalidateQueries({ queryKey: ["replies-post-comments", parentId] });
+        }
+      },
+    });
   };
 
   return {
