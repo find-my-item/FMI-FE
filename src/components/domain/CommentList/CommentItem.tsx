@@ -40,10 +40,10 @@ const CommentItem = ({
   onDeleteComment,
   onFavoriteComment,
 }: CommentCardProps) => {
+  const isTopLevelComment = level === "comment";
   const isReply = level === "reply";
   const isNestedReply = level === "nestedReply";
   const isThreadItem = isReply || isNestedReply;
-  const isTopLevelComment = level === "comment";
 
   const [viewReply, setViewReply] = useState(false);
   const [isReplyFormOpen, setIsReplyFormOpen] = useState(false);
@@ -98,16 +98,14 @@ const CommentItem = ({
 
               <CommentBody
                 bodyData={{
-                  replyNickname: data.authorResponse.nickName,
                   content: data.content,
                 }}
-                isNestedReply={isNestedReply}
               />
             </div>
 
             <CommentFooter
               footerData={{ likeCount: data.likeCount, id: data.id, isLike: data.isLike }}
-              isThreadItem={isThreadItem}
+              isReply={isReply}
               isGuest={isGuest}
               isReplyFormOpen={isReplyFormOpen}
               setIsReplyFormOpen={setIsReplyFormOpen}
@@ -129,23 +127,17 @@ const CommentItem = ({
         </div>
       </div>
 
-      {isReplyFormOpen && (
-        <ReplyForm
-          isThreadItem={isThreadItem}
-          className={isNestedReply ? "pb-[7px]" : undefined}
-          onSubmit={handleReplySubmit}
-          isPending={isPending}
-        />
+      {isReplyFormOpen && !isNestedReply && (
+        <ReplyForm isThreadItem={isThreadItem} onSubmit={handleReplySubmit} isPending={isPending} />
       )}
 
       {hasReplyComments && (
-        <ul className="rounded-[10px] bg-layout_2depth">
-          {replyComments.map((child, index) => (
+        <ul className={cn("rounded-[10px] bg-layout_2depth", viewReply && "py-1")}>
+          {replyComments.map((child) => (
             <CommentItem
               key={child.id}
               postId={postId}
               level={child.depth > 1 ? "nestedReply" : "reply"}
-              className={index === 0 && child.depth === 1 ? "pt-4" : "pb-4"}
               data={child}
               onSubmit={onSubmit}
               isPending={isPending}

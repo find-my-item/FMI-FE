@@ -7,7 +7,7 @@ interface CommentFooterProps {
     id: number;
     isLike: boolean;
   };
-  isThreadItem: boolean;
+  isReply: boolean;
   isGuest: boolean;
   isReplyFormOpen: boolean;
   setIsReplyFormOpen: (value: boolean) => void;
@@ -18,7 +18,7 @@ interface CommentFooterProps {
 
 const CommentFooter = ({
   footerData,
-  isThreadItem,
+  isReply,
   isGuest,
   isReplyFormOpen,
   setIsReplyFormOpen,
@@ -51,7 +51,7 @@ const CommentFooter = ({
         <span>좋아요 {likeCount}</span>
       </button>
 
-      {isThreadItem && (
+      {isReply && (
         <button
           className={cn(
             "text-body1-regular",

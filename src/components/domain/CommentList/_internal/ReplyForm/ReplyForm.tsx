@@ -102,6 +102,7 @@ const ReplyForm = ({ isThreadItem, className, disabled, onSubmit, isPending }: R
           maxLength={500}
           value={content}
           onChange={handleChange}
+          autoFocus={true}
           rows={1}
           className={cn(
             "flex-1 resize-none overflow-hidden pt-1",

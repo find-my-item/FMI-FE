@@ -38,6 +38,8 @@ const CommentList = ({
   const data = comments.comments;
   const isEmpty = data.length === 0;
 
+  console.log(comments);
+
   return (
     <>
       <header className="w-full border-t border-divider-default px-5">
