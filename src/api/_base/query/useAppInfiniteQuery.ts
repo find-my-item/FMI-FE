@@ -32,6 +32,7 @@ type UseAppInfiniteQueryOptions<TQueryFnData, TError, TData> = Omit<
   getNextPageParam?: (lastPage: TQueryFnData) => unknown;
   initialPageParam?: unknown;
   suspense?: boolean;
+  pageParamName?: string;
 };
 
 const useAppInfiniteQuery = <TQueryFnData, TError = unknown, TData = TQueryFnData>(
@@ -53,16 +54,17 @@ const useAppInfiniteQuery = <TQueryFnData, TError = unknown, TData = TQueryFnDat
 
   const getNextPageParam = options?.getNextPageParam ?? defaultGetNextPageParam;
   const initialPageParam = options?.initialPageParam ?? undefined;
+  const pageParamName = options?.pageParamName ?? "cursor";
 
-  const { getNextPageParam: _, initialPageParam: __, ...rest } = options ?? {};
+  const { getNextPageParam: _, initialPageParam: __, pageParamName: ___, ...rest } = options ?? {};
 
   return useInfiniteQuery<TQueryFnData, TError, TData, QueryKey, unknown>({
     queryKey,
     queryFn: async ({ pageParam }) => {
       const params = new URLSearchParams();
 
-      if (pageParam) {
-        params.append("cursor", String(pageParam));
+      if (pageParam !== undefined && pageParam !== null) {
+        params.append(pageParamName, String(pageParam));
       }
 
       const separator = url.includes("?") ? "&" : "?";
