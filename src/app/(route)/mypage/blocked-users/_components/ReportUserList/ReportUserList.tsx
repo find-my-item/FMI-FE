@@ -1,6 +1,6 @@
 "use client";
 
-import { BlockUserResult, useGetBlockUser } from "@/api/fetch/report";
+import { BlockUserResult, useDeleteBlockUser, useGetBlockUser } from "@/api/fetch/report";
 import { Button, ProfileAvatar } from "@/components/common";
 import { LoadingState } from "@/components/state";
 import { useToast } from "@/context/ToastContext";
@@ -28,7 +28,12 @@ const ReportUserList = () => {
 export default ReportUserList;
 
 const ReportUserItem = ({ data }: { data: BlockUserResult }) => {
-  const { profileImage, nickname } = data;
+  const { profileImage, nickname, userId } = data;
+  const { mutateAsync: deleteBlockUser } = useDeleteBlockUser();
+
+  const handleDeleteBlockUser = () => {
+    deleteBlockUser({ userId });
+  };
 
   return (
     <li className="flex items-center justify-between px-5 py-2">
@@ -41,7 +46,7 @@ const ReportUserItem = ({ data }: { data: BlockUserResult }) => {
         variant="outlined"
         ariaLabel={`${nickname} 차단 해제`}
         className="px-3"
-        onClick={() => {}}
+        onClick={handleDeleteBlockUser}
       >
         차단 해제
       </Button>
