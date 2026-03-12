@@ -64,6 +64,12 @@ const mockUseFetchReplies: typeof useGetRepliesPostsComments = () =>
     refetch: async () => ({}) as any,
   }) as unknown as UseQueryResult<GetPostsCommentsResponse, unknown>;
 
+/**
+ * 비회원 전용 댓글 UI
+ *
+ * @author jikwon
+ */
+
 const GuestCommentUI = () => {
   return (
     <section className="border-t pt-[18px]">
@@ -75,6 +81,8 @@ const GuestCommentUI = () => {
               postId={0}
               key={item.id}
               useFetchReplies={mockUseFetchReplies}
+              onDeleteComment={() => {}}
+              onFavoriteComment={() => {}}
               isGuest={true}
             />
           ))}
