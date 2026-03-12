@@ -2,9 +2,11 @@
 
 import { Icon } from "@/components/common";
 import { cn, formatDate } from "@/utils";
-import Link from "next/link";
-import { useNotificationList } from "@/api/fetch/notification/api/useNotificationList";
-import { NotificationListItem } from "@/api/fetch/notification";
+import {
+  NotificationListItem,
+  useNotificationList,
+  useNotificationRead,
+} from "@/api/fetch/notification";
 import { useInfiniteScroll } from "@/hooks";
 import {
   getAlertIconBackgroundColor,
@@ -14,23 +16,30 @@ import {
 import { IconName } from "@/components/common/Icon/Icon";
 import { EmptyState } from "@/components/state";
 import { alertRouteUrl } from "./_internal/alertRouteUrl";
+import { useRouter } from "next/navigation";
 
 const AlertItem = ({ item }: { item: NotificationListItem }) => {
+  const router = useRouter();
   const { notificationId, type, title, message, referenceType, referenceId, isRead, createdAt } =
     item;
+  const { mutate: readNotification } = useNotificationRead();
   const { icon, bg } = getAlertIconBackgroundColor(type, referenceType);
   const IconSize = referenceType === "NOTICE" ? 20 : 15;
   const alertTitle = getAlertTitle(type, referenceType);
   const alertMessage = referenceType === "NOTICE" ? title : message;
 
+  const handleAlertRoute = () => {
+    readNotification({ ids: [notificationId] });
+    router.push(alertRouteUrl(referenceType, referenceId));
+  };
+
   return (
-    // TODO(형준): 기능 구현 시 button 태그로 변경 가능성 있음
-    <Link
-      href={alertRouteUrl(referenceType, referenceId)}
+    <button
+      onClick={handleAlertRoute}
       aria-label="알림 확인, 외부 페이지 이동"
       key={notificationId}
       className={cn(
-        "flex min-h-[86px] w-full cursor-pointer gap-3 border-b border-divider-default p-5 transition-colors hover:bg-fill-flatGray-25",
+        "flex min-h-[86px] w-full cursor-pointer gap-3 border-b border-divider-default p-5 text-left transition-colors hover:bg-fill-flatGray-25",
         isRead ? "bg-white" : "bg-fill-brand-subtle-default_3 hover:bg-fill-brand-subtle-default_2"
       )}
     >
@@ -48,7 +57,7 @@ const AlertItem = ({ item }: { item: NotificationListItem }) => {
           {alertMessage}
         </span>
       </div>
-    </Link>
+    </button>
   );
 };
 

@@ -3,7 +3,7 @@ import useAppInfiniteQuery from "@/api/_base/query/useAppInfiniteQuery";
 import { NotificationListResponse, NotificationListItem } from "../types/notificationListType";
 import { useSearchParams } from "next/navigation";
 
-export const useNotificationList = () => {
+const useNotificationList = () => {
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get("category");
   const category = categoryParam && categoryParam !== "all" ? categoryParam : undefined;
@@ -26,3 +26,5 @@ export const useNotificationList = () => {
     }
   );
 };
+
+export default useNotificationList;
