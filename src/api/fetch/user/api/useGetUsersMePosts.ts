@@ -1,24 +1,74 @@
-import { MypagePostsResponseType } from "../types/MypagePostsResponseType";
+import { MypagePostsResponseType, MypagePostsType } from "../types/MypagePostsResponseType";
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
-import useAppQuery from "@/api/_base/query/useAppQuery";
+import useAppInfiniteQuery from "@/api/_base/query/useAppInfiniteQuery";
+import { CategoryType, ItemStatus, PostType, SortType } from "@/types";
+import { InfiniteData, keepPreviousData } from "@tanstack/react-query";
+import { PostItem } from "../../post";
+import { useAuthStore } from "@/store";
+import { useEffect, useState } from "react";
 
-interface GetMypagePostsType {
-  cursor?: number;
+interface useGetUsersMePostsParams {
+  postType?: PostType;
+  postStatus?: ItemStatus;
+  category?: CategoryType;
+  sortType?: SortType;
+  startDate?: string | null;
+  endDate?: string | null;
+  keyword?: string;
   size?: number;
 }
 
-// TODO(수현): api 수정에 따라 변경할 예정입니다.
-export const useGetUsersMePosts = ({ cursor, size }: GetMypagePostsType) => {
+export const useGetUsersMePosts = ({
+  postType,
+  postStatus,
+  category,
+  sortType = "LATEST",
+  startDate,
+  endDate,
+  keyword,
+  size = 10,
+}: useGetUsersMePostsParams) => {
+  const isAuthInitialized = useAuthStore((state) => state.isAuthInitialized);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const queryParams = new URLSearchParams();
 
-  if (cursor !== undefined) queryParams.append("cursor", cursor.toString());
-  if (size !== undefined) queryParams.append("size", size.toString());
+  if (postType) queryParams.set("postType", postType);
+  if (postStatus) queryParams.set("postStatus", postStatus);
+  if (category) queryParams.set("category", category);
+  if (startDate && endDate) {
+    queryParams.set("startDate", startDate);
+    queryParams.set("endDate", endDate);
+  }
+  if (keyword) queryParams.set("keyword", keyword);
 
-  const queryPath = `/users/me/posts?${queryParams.toString()}`;
+  queryParams.set("size", size.toString());
 
-  return useAppQuery<MypagePostsResponseType, ApiBaseResponseType<null>>(
+  return useAppInfiniteQuery<MypagePostsResponseType, ApiBaseResponseType<null>, PostItem[]>(
     "auth",
-    ["/users/me/posts", cursor, size],
-    queryPath
+    [
+      "/users/me/posts",
+      postType,
+      postStatus,
+      category,
+      sortType,
+      startDate,
+      endDate,
+      keyword,
+      size,
+    ],
+    `/users/me/posts?${queryParams.toString()}`,
+    {
+      placeholderData: keepPreviousData,
+      getNextPageParam: (lastPage) => lastPage.result.nextCursor ?? undefined,
+      select: (data: InfiniteData<MypagePostsResponseType>) =>
+        data.pages.flatMap((page) => page.result.posts),
+      throwOnError: true,
+      enabled: isMounted && isAuthInitialized,
+    }
   );
 };

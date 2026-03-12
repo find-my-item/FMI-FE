@@ -5,6 +5,7 @@ export interface MypagePostsResponseType extends ApiBaseResponseType<MypagePosts
 
 export interface MypagePostsType {
   posts: PostItem[];
+  postCount: number;
   nextCursor: number;
   hasNext: boolean;
 }
