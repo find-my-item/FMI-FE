@@ -3,7 +3,7 @@ export const CHANGE_PASSWORD_CONFIG = [
     inputOption: {
       name: "currentPassword",
       type: "password",
-      placeholder: "비밀번호을 입력해 주세요.",
+      placeholder: "비밀번호를 입력해 주세요.",
       maxLength: 16,
       validation: {
         required: true,
@@ -12,13 +12,14 @@ export const CHANGE_PASSWORD_CONFIG = [
     label: "현재 비밀번호",
     btnOption: {
       btnLabel: "비밀번호 확인",
+      action: "verifyPassword",
     },
   },
   {
     inputOption: {
       name: "newPassword",
       type: "password",
-      placeholder: "비밀번호을 입력해 주세요.",
+      placeholder: "비밀번호를 입력해 주세요.",
       validation: {
         required: true,
       },
