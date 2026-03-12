@@ -39,6 +39,8 @@ export const MOCK_CHAT_ROOM_FOUND: ChatRoomResponse = {
     title: "여기에 게시글명이 표기됩니다 여기에 게시글명이 표기됩니다. 여기에",
     address: "서울시 중구 회현동",
     thumbnailUrl: "https://via.placeholder.com/40",
+    deleted: false,
+    postStatus: "FOUND",
   },
 };
 
@@ -58,6 +60,8 @@ export const MOCK_CHAT_ROOM_LOST: ChatRoomResponse = {
     title: "분실물 게시글 제목입니다",
     address: "서울시 강남구 역삼동",
     thumbnailUrl: "https://via.placeholder.com/40",
+    deleted: false,
+    postStatus: "SEARCHING",
   },
 };
 

@@ -26,11 +26,6 @@ export const EMAIL_ERROR_MESSAGE = {
   "AUTH500-EMAIL_SEND_FAILED": { message: "이메일 발송에 실패했어요.", status: "warning" },
 } as const;
 
-export const NICKNAME_ERROR_MESSAGE = {
-  NICKNAME_INVALID: { message: "닉네임에 금칙어가 포함되어 있습니다.", status: "warning" },
-  NICKNAME_DUPLICATE: { message: "중복된 닉네임입니다.", status: "warning" },
-} as const;
-
 export const EMAIL_CHECK_CODE_MESSAGE = {
   _INVALID_CREDENTIALS: { message: "인증번호가 일치하지 않아요.", status: "warning" },
   "AUTH400-EMAIL_VERIFY_FAILED": {

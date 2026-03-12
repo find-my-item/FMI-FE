@@ -32,7 +32,7 @@ const ChatRoomMain = ({
   const scrollHeightRef = useRef<number>(0);
   const { data: userInfo } = useGetUsersMe();
 
-  const userId = userInfo?.result.userId ? Number(userInfo.result.userId) : undefined;
+  const userId = userInfo?.result?.userId != null ? Number(userInfo.result.userId) : undefined;
 
   useChatScroll(scrollRef, chatMessages, userId ?? 0);
   useChatInfiniteScroll({
