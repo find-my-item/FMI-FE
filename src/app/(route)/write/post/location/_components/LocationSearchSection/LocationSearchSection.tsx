@@ -2,12 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
-import { getKakaoLocalAddress } from "@/api/fetch/kakao";
 import { InputSearch } from "@/components/common";
-import { getRegionSearchResults, highlightText } from "@/utils";
-import { useRegionRows } from "@/hooks";
-import { RegionRow } from "@/types";
-import { useToast } from "@/context/ToastContext";
+import { highlightText } from "@/utils";
+import { useVWorldAddressSearch } from "@/hooks";
 
 interface LocationSearchSectionProps {
   searchParams: URLSearchParams;
@@ -15,9 +12,6 @@ interface LocationSearchSectionProps {
 
 const LocationSearchSection = ({ searchParams }: LocationSearchSectionProps) => {
   const router = useRouter();
-  const { addToast } = useToast();
-
-  const { data: regions = [], isLoading } = useRegionRows();
 
   const methods = useForm({
     defaultValues: {
@@ -31,24 +25,18 @@ const LocationSearchSection = ({ searchParams }: LocationSearchSectionProps) => 
     name: "location",
   });
 
-  const results = getRegionSearchResults({ regions, query: locationValue });
+  const { data: results = [], isLoading } = useVWorldAddressSearch(locationValue);
 
-  const handleSelect = async (row: RegionRow) => {
-    methods.setValue("location", row.display);
+  const handleSelect = async (item: any) => {
+    const address = item.address.road || item.address.parcel;
+    methods.setValue("location", address);
 
     const params = new URLSearchParams(searchParams.toString());
-    params.set("location", row.display);
+    params.set("location", address);
 
-    try {
-      const data = await getKakaoLocalAddress(row.display);
-
-      if (data.documents && data.documents.length > 0) {
-        const { x, y } = data.documents[0];
-        params.set("lat", y);
-        params.set("lng", x);
-      }
-    } catch {
-      addToast("위치 정보를 불러오는데 실패했어요", "error");
+    if (item.point) {
+      params.set("lat", item.point.y);
+      params.set("lng", item.point.x);
     }
 
     router.replace(`/write/post/location?${params.toString()}`, { scroll: false });
@@ -74,20 +62,23 @@ const LocationSearchSection = ({ searchParams }: LocationSearchSectionProps) => 
         <ul>
           {!locationValue?.trim() && <LocationGuideUI variant="initial" />}
 
-          {results.map((row) => (
-            <li
-              key={`${row.sido}|${row.sigungu}|${row.location}`}
-              className="border-b border-neutral-normal-default transition-colors hover:bg-gray-100"
-            >
-              <button
-                type="button"
-                className="w-full p-5 text-left text-body2-medium text-neutral-strong-default"
-                onClick={() => handleSelect(row)}
+          {results.map((item: any, index: number) => {
+            const address = item.address.road || item.address.parcel;
+            return (
+              <li
+                key={index}
+                className="border-b border-neutral-normal-default transition-colors hover:bg-gray-100"
               >
-                {highlightText(row.display, locationValue)}
-              </button>
-            </li>
-          ))}
+                <button
+                  type="button"
+                  className="w-full p-5 text-left text-body2-medium text-neutral-strong-default"
+                  onClick={() => handleSelect(item)}
+                >
+                  {highlightText(address, locationValue)}
+                </button>
+              </li>
+            );
+          })}
 
           {!isLoading && locationValue?.trim() && results.length === 0 && (
             <LocationGuideUI variant="empty" />
