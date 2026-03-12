@@ -11,19 +11,36 @@ import { IconName } from "@/components/common/Icon/Icon";
 import ReportModal from "@/components/domain/ReportModal/ReportModal";
 import UserBlockModal from "@/components/domain/PostReportBlockActions/UserBlockModal/UserBlockModal";
 
+/**
+ * 댓글 작성자 정보 및 메뉴
+ *
+ * @author jikwon
+ */
+
 interface CommentMetaHeaderProps {
   data: {
+    /** 작성자 ID */
     authorId: string;
+    /** 작성 시간 */
     createdAt: string;
+    /** 작성자 이름 */
     authorName: string;
+    /** 작성자 프로필 이미지 URL */
     profileImageUrl: string;
+    /** 댓글 ID */
     commentId: number;
+    /** 댓글 삭제 여부 */
     deleted: boolean;
+    /** 댓글 삭제 가능 여부 */
     canDelete: boolean;
   };
+  /** 비회원 여부 */
   isGuest: boolean;
+  /** 답글 여부 */
   isThreadItem: boolean;
+  /** 쿼리 키 */
   queryKey: QueryKey;
+  /** 댓글 삭제 함수 */
   onDeleteComment: (commentVariables: DeleteCommentVariables) => void;
 }
 

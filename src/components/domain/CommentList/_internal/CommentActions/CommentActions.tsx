@@ -2,13 +2,26 @@ import type { Dispatch, SetStateAction } from "react";
 import { Icon } from "@/components/common";
 import { cn } from "@/utils";
 
+/**
+ * 답글 작성 및 답글 보기 버튼
+ *
+ * @author jikwon
+ */
+
 interface CommentActionsProps {
+  /** 답글 여부 */
   isThreadItem: boolean;
+  /** 답글 보기 상태 */
   viewReply: boolean;
+  /** 답글 보기 상태 변경 함수 */
   setViewReply: Dispatch<SetStateAction<boolean>>;
+  /** 답글 폼 열기 상태 */
   isReplyFormOpen: boolean;
+  /** 답글 폼 열기 상태 변경 함수 */
   setIsReplyFormOpen: Dispatch<SetStateAction<boolean>>;
+  /** 비회원 여부 */
   isGuest: boolean;
+  /** 답글 수 */
   replyCount: number;
 }
 

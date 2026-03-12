@@ -47,22 +47,37 @@ export const MOCK_COMMENT_DATA: CommentItemType[] = [
 const mockUseFetchReplies: typeof useGetRepliesPostsComments = () =>
   ({
     data: {
-      isSuccess: true,
-      code: "COMMON200",
-      message: "성공입니다.",
-      result: {
-        comments: [],
-        hasNext: false,
-        nextPage: 0,
-        remainingCount: 0,
-      },
+      comments: [],
+      hasNext: false,
+      nextPage: 0,
+      remainingCount: 0,
+      totalCommentCount: 0,
     },
     isLoading: false,
     isError: false,
     isSuccess: true,
+    isFetching: false,
+    isFetchingNextPage: false,
+    isFetchingPreviousPage: false,
+    hasNextPage: false,
+    hasPreviousPage: false,
+    fetchNextPage: async () => ({}) as any,
+    fetchPreviousPage: async () => ({}) as any,
     error: null,
     refetch: async () => ({}) as any,
-  }) as unknown as UseQueryResult<GetPostsCommentsResponse, unknown>;
+  }) as any;
+
+/**
+ * 비회원 전용 댓글 UI
+ *
+ * @author jikwon
+ */
+
+/**
+ * 비회원 전용 댓글 UI
+ *
+ * @author jikwon
+ */
 
 const GuestCommentUI = () => {
   return (
@@ -75,6 +90,8 @@ const GuestCommentUI = () => {
               postId={0}
               key={item.id}
               useFetchReplies={mockUseFetchReplies}
+              onDeleteComment={() => {}}
+              onFavoriteComment={() => {}}
               isGuest={true}
             />
           ))}

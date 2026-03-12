@@ -1,5 +1,11 @@
 import { Icon } from "@/components/common";
 
+/**
+ * 댓글 Empty UI
+ *
+ * @author jikwon
+ */
+
 const EmptyCommentUI = () => {
   return (
     <div className="gap-5 py-8 text-center flex-col-center">

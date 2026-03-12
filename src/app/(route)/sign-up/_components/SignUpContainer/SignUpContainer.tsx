@@ -3,8 +3,9 @@
 import { useSignUpFlow } from "../../_hooks/useSignUpFlow";
 import SignUpField from "../SignUpField/SignUpField";
 import AllAgree from "../AllAgree/AllAgree";
-import DetailAgree from "../DetailAgree/DetailAgree";
 import { useSignUpSubmit } from "../../_hooks/useSignUpSubmit";
+import { useFormContext } from "react-hook-form";
+import { Terms } from "@/components/domain";
 
 const SignUpContainer = () => {
   const { submitSignUp } = useSignUpSubmit();
@@ -13,6 +14,8 @@ const SignUpContainer = () => {
     onSubmit: submitSignUp,
   });
 
+  const { setValue } = useFormContext();
+
   return (
     <form className="flex w-full flex-1 flex-col justify-between">
       {step === "1" && <SignUpField onNext={() => onNext(2)} />}
@@ -20,7 +23,14 @@ const SignUpContainer = () => {
         <AllAgree onOpenDetail={openTermDetail} onComplete={completeTerms} />
       )}
       {step === "2" && termName && (
-        <DetailAgree termName={termName} onAgree={() => onAgreeTerm(2)} />
+        <Terms
+          termName={termName}
+          onAgree={() => {
+            setValue(termName, true, { shouldDirty: true, shouldValidate: true });
+            onAgreeTerm(2);
+          }}
+          showButton={true}
+        />
       )}
     </form>
   );

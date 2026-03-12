@@ -2,28 +2,49 @@
 
 import { useState } from "react";
 import { DeleteCommentVariables, useGetRepliesPostsComments } from "@/api/fetch/comment";
-import { Icon } from "@/components/common";
+import { Icon, ViewMoreComment } from "@/components/common";
 import { cn } from "@/utils";
 import { CommentItemType } from "@/types";
 import { CommentBody, CommentMeta, CommentActions, CommentFooter, ReplyForm } from "./_internal";
 
+/**
+ * 댓글 및 답글을 렌더링하는 개별 댓글 아이템 컴포넌트입니다.
+ * 댓글 트리 구조를 재귀적으로 렌더링합니다.
+ *
+ * 이 컴포넌트의 props 중 일부(onSubmit, useFetchReplies 등)는
+ * 답글 기능을 처리하기 위한 props입니다.
+ *
+ * @author jikwon
+ */
+
+/** 댓글 레벨 */
 type CommentCardLevel = "comment" | "reply" | "nestedReply";
 
 interface CommentCardProps {
-  level?: CommentCardLevel;
+  /** 추가 스타일 */
   className?: string;
+  /** 댓글 데이터 */
   data: CommentItemType;
+  /** 게시글 ID */
   postId: number;
+  /** 답글 작성 함수 */
   onSubmit?: (content: string, image: File | null, parentId: number) => void;
+  /** 답글 작성 중 로딩 상태 */
   isPending?: boolean;
-  autoOpenReplies?: boolean;
-
+  /** 답글 목록 조회 함수 */
   useFetchReplies: typeof useGetRepliesPostsComments;
-  onDeleteComment?: (commentVariables: DeleteCommentVariables) => void;
-  onFavoriteComment?: (commentId: number, isLike: boolean, queryKey: unknown[]) => void;
-
-  isGuest?: boolean;
+  /** 답글 삭제 함수 */
+  onDeleteComment: (commentVariables: DeleteCommentVariables) => void;
+  /** 답글 좋아요 함수 */
+  onFavoriteComment: (commentId: number, isLike: boolean, queryKey: unknown[]) => void;
+  /** 댓글 레벨, 재귀 구조 전용 */
+  level?: CommentCardLevel;
+  /** 답글 자동 열림 여부, 재귀 구조 전용 */
+  autoOpenReplies?: boolean;
+  /** 부모 쿼리 키, 재귀 구조 전용 */
   parentQueryKey?: unknown[];
+  /** 비회원 여부, Empty UI 전용 */
+  isGuest?: boolean;
 }
 
 const CommentItem = ({
@@ -40,17 +61,17 @@ const CommentItem = ({
   onDeleteComment,
   onFavoriteComment,
 }: CommentCardProps) => {
+  const isTopLevelComment = level === "comment";
   const isReply = level === "reply";
   const isNestedReply = level === "nestedReply";
   const isThreadItem = isReply || isNestedReply;
-  const isTopLevelComment = level === "comment";
 
   const [viewReply, setViewReply] = useState(false);
   const [isReplyFormOpen, setIsReplyFormOpen] = useState(false);
 
   const shouldFetchReplies = (isTopLevelComment && viewReply) || (isReply && autoOpenReplies);
 
-  const { data: replyCommentData } = useFetchReplies({
+  const { data: replyCommentData, fetchNextPage } = useFetchReplies({
     commentId: data.id,
     enabled: !isGuest && shouldFetchReplies,
   });
@@ -65,12 +86,14 @@ const CommentItem = ({
   const authorName = data.authorResponse ? data.authorResponse.nickName : "";
   const profileImageUrl = data.authorResponse ? data.authorResponse.profileImageUrl : "";
 
-  const replyComments = replyCommentData?.result?.comments ?? [];
+  const replyComments = replyCommentData?.comments ?? [];
   const isRepliesVisible = shouldFetchReplies;
   const hasReplyComments = isRepliesVisible && replyComments.length > 0;
 
-  const itemQueryKey = parentQueryKey ?? ["post-comments", postId, 0];
-  const childrenQueryKey = ["replies-post-comments", data.id, undefined, 10];
+  const itemQueryKey = parentQueryKey ?? ["post-comments", postId];
+  const childrenQueryKey = ["replies-post-comments", data.id, 10];
+
+  // console.log(replyCommentData?.hasNext);
 
   return (
     <li className={cn("my-[18px]", !isNestedReply && "px-5", className)}>
@@ -98,21 +121,24 @@ const CommentItem = ({
 
               <CommentBody
                 bodyData={{
-                  replyNickname: data.authorResponse.nickName,
                   content: data.content,
+                  images: data.imageList,
                 }}
-                isNestedReply={isNestedReply}
               />
             </div>
 
             <CommentFooter
-              footerData={{ likeCount: data.likeCount, id: data.id, isLike: data.isLike }}
-              isThreadItem={isThreadItem}
+              footerData={{
+                likeCount: data.likeCount,
+                id: data.id,
+                isLike: data.isLike,
+                deleted: data.deleted,
+              }}
+              isReply={isReply}
               isGuest={isGuest}
               isReplyFormOpen={isReplyFormOpen}
               setIsReplyFormOpen={setIsReplyFormOpen}
               queryKey={itemQueryKey}
-              deleted={data.deleted}
               onFavoriteComment={onFavoriteComment!}
             />
           </div>
@@ -129,34 +155,38 @@ const CommentItem = ({
         </div>
       </div>
 
-      {isReplyFormOpen && (
-        <ReplyForm
-          isThreadItem={isThreadItem}
-          className={isNestedReply ? "pb-[7px]" : undefined}
-          onSubmit={handleReplySubmit}
-          isPending={isPending}
-        />
+      {isReplyFormOpen && !isNestedReply && (
+        <ReplyForm isThreadItem={isThreadItem} onSubmit={handleReplySubmit} isPending={isPending} />
       )}
 
       {hasReplyComments && (
-        <ul className="rounded-[10px] bg-layout_2depth">
-          {replyComments.map((child, index) => (
+        <ul className={cn("rounded-[10px] bg-layout_2depth", viewReply && "py-1")}>
+          {replyComments.map((child) => (
             <CommentItem
               key={child.id}
-              postId={postId}
               level={child.depth > 1 ? "nestedReply" : "reply"}
-              className={index === 0 && child.depth === 1 ? "pt-4" : "pb-4"}
               data={child}
+              postId={postId}
               onSubmit={onSubmit}
               isPending={isPending}
-              autoOpenReplies={isTopLevelComment && viewReply}
               useFetchReplies={useFetchReplies}
-              isGuest={isGuest}
-              parentQueryKey={childrenQueryKey}
               onDeleteComment={onDeleteComment}
               onFavoriteComment={onFavoriteComment}
+              isGuest={isGuest}
+              autoOpenReplies={isTopLevelComment && viewReply}
+              parentQueryKey={childrenQueryKey}
             />
           ))}
+
+          {/* TODO(지권): 댓글 더보기 임시 디자인 */}
+          {replyCommentData?.hasNext && (
+            <div className="px-5 py-2">
+              <ViewMoreComment
+                count={replyCommentData.remainingCount}
+                onClick={() => fetchNextPage()}
+              />
+            </div>
+          )}
         </ul>
       )}
     </li>
