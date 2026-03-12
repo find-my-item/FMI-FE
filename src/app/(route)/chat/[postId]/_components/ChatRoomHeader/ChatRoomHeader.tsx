@@ -6,12 +6,36 @@ import ChatChip from "../ChatChip/ChatChip";
 import ChatRoomHeaderInfoButton from "../ChatRoomHeaderInfoButton/ChatRoomHeaderInfoButton";
 import { ChatRoomResponse } from "@/api/fetch/chatRoom/types/ChatRoomResponse";
 import Link from "next/link";
-import { cn } from "@/utils";
+import { ReactNode } from "react";
+
+interface LinkWrapperProps {
+  deleted: boolean;
+  children: ReactNode;
+  href: string;
+}
 
 interface ChatRoomHeaderProps {
   chatRoom: ChatRoomResponse | undefined;
   roomId: number;
 }
+
+const LinkWrapper = ({ deleted, children, href }: LinkWrapperProps) => {
+  return (
+    <>
+      {deleted ? (
+        <div className="flex select-none items-center gap-4 px-4 opacity-30">{children}</div>
+      ) : (
+        <Link
+          href={href}
+          aria-label="게시글 상세 페이지 이동"
+          className="flex items-center gap-4 px-4"
+        >
+          {children}
+        </Link>
+      )}
+    </>
+  );
+};
 
 const ChatRoomHeader = ({ chatRoom, roomId }: ChatRoomHeaderProps) => {
   const router = useRouter();
@@ -37,14 +61,7 @@ const ChatRoomHeader = ({ chatRoom, roomId }: ChatRoomHeaderProps) => {
         <ChatRoomHeaderInfoButton roomId={roomId} />
       </nav>
 
-      <Link
-        href={deleted ? "#" : `/list/${postId}`}
-        className={cn(
-          "flex items-center gap-4 px-4",
-          deleted && "pointer-events-none select-none opacity-30"
-        )}
-        aria-label="게시글 상세 페이지 이동"
-      >
+      <LinkWrapper deleted={deleted} href={`/list/${postId}`}>
         <div className="shrink-0">
           <ListItemImage
             alt="채팅방 게시글 썸네일"
@@ -62,7 +79,7 @@ const ChatRoomHeader = ({ chatRoom, roomId }: ChatRoomHeaderProps) => {
           </div>
           <p className="h-4 text-caption1-medium text-layout-body-default">{address}</p>
         </div>
-      </Link>
+      </LinkWrapper>
     </header>
   );
 };
