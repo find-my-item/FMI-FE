@@ -38,7 +38,7 @@ const ChatRoomHeader = ({ chatRoom, roomId }: ChatRoomHeaderProps) => {
       </nav>
 
       <Link
-        href={`/list/${postId}`}
+        href={deleted ? "#" : `/list/${postId}`}
         className={cn(
           "flex items-center gap-4 px-4",
           deleted && "pointer-events-none select-none opacity-30"
