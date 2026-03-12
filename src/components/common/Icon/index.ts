@@ -104,3 +104,6 @@ export { default as AccordionQMark } from "@/assets/accordion-q-mark.svg";
 export { default as EyeDetail } from "@/assets/eye-detail.svg";
 export { default as HotBadge } from "@/assets/hot-badge.svg";
 export { default as NewBadge } from "@/assets/new-badge.svg";
+export { default as AlertInquiry } from "@/assets/alert-inquiry.svg";
+export { default as AlertNotice } from "@/assets/alert-notice.svg";
+export { default as AlertReportResult } from "@/assets/alert-report-result.svg";
