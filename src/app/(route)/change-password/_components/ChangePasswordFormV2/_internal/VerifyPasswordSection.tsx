@@ -33,17 +33,16 @@ const VerifyPasswordSection = () => {
 
   return (
     <section className="flex min-h-[92px] flex-col gap-2">
-      <label htmlFor="currentPassword" className="text-body2-medium text-layout-header-default">
-        현재 비밀번호
-        <RequiredText />
-      </label>
-
       <InputText
+        label="현재 비밀번호"
         inputOption={{
           name: "currentPassword",
           type: "password",
           placeholder: "현재 비밀번호를 입력해주세요.",
           disabled: isVerifySuccess,
+          validation: {
+            required: "현재 비밀번호",
+          },
         }}
         btnOption={{
           btnLabel: "비밀번호 확인",
