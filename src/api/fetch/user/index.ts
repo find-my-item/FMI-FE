@@ -5,3 +5,4 @@ export { useGetUserProfileById } from "./api/useGetUserProfileById";
 export { useGetUsersMe } from "./api/useGetUsersMe";
 export { usePatchProfile } from "./api/usePatchProfile";
 export { usePostVerifyPassword } from "./api/usePostVerifyPassword";
+export { usePostChangePassword } from "./api/usePostChangePassword";

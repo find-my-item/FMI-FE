@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { usePostVerifyPassword } from "@/api/fetch/user";
-import { InputText, RequiredText } from "@/components/common";
+import { InputText } from "@/components/common";
 
 const VerifyPasswordSection = () => {
   const { getValues, setError, clearErrors } = useFormContext();
