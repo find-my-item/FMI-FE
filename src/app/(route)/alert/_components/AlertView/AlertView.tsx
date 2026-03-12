@@ -12,6 +12,7 @@ import {
   renderTitle,
 } from "./_internal/alertViewMapper";
 import { IconName } from "@/components/common/Icon/Icon";
+import { EmptyState } from "@/components/state";
 
 const AlertItem = ({ item }: { item: NotificationListItem }) => {
   const { notificationId, type, title, message, referenceType, referenceId, isRead, createdAt } =
@@ -62,6 +63,16 @@ const AlertView = () => {
     hasNextPage,
     isFetchingNextPage,
   });
+
+  if (notifications?.length === 0) {
+    return (
+      <EmptyState
+        icon={{ iconName: "AlertBell", iconSize: 70 }}
+        title="아직 새 소식이 없어요"
+        description={`주변을 계속 살펴보고 있어요.\n새로운 알림이 생기면 바로 알려드릴게요.`}
+      />
+    );
+  }
 
   return (
     <>
