@@ -18,10 +18,14 @@ import {
 } from "../_types/types";
 import { FiltersStateType } from "../_types/filtersStateType";
 import { DEFAULT_FILTERS } from "../_constants/DEFAULT_FILTERS";
-import { filterSelectionState, normalizedFilterValues } from "../utils/deriveFilterParams";
+import {
+  filterSelectionState,
+  normalizedFilterValues,
+} from "../../../../utils/deriveFilterParams/deriveFilterParams";
 import { useFilterParams } from "@/hooks/domain";
 import { TABS } from "../_constants/TABS";
 import DateRangeBottomSheet from "../../DateRangeBottomSheet/DateRangeBottomSheet";
+import { getDateRangeLabel } from "@/utils/getDateRangeLabel/getDateRangeLabel";
 
 /**
  * @author jikwon (Original)
@@ -50,7 +54,7 @@ interface FilterSectionProps {
 }
 
 const FilterSection = ({ pageType = "LIST" }: FilterSectionProps) => {
-  const { region, category, sort, status, findStatus } = useFilterParams();
+  const { region, category, sort, status, findStatus, startDate, endDate } = useFilterParams();
   const [filters, setFilters] = useState<FiltersStateType>(DEFAULT_FILTERS);
   const [selectedTab, setSelectedTab] = useState<FilterTab>("region");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -59,31 +63,44 @@ const FilterSection = ({ pageType = "LIST" }: FilterSectionProps) => {
   const { normalizedCategory, normalizedSort, normalizedStatus, normalizedFindStatus } =
     normalizedFilterValues({ region, category, sort, status, findStatus });
 
-  const selectionState = filterSelectionState({ region, category, sort, status, findStatus });
+  const selectionState = filterSelectionState({
+    region,
+    category,
+    sort,
+    status,
+    findStatus,
+    startDate,
+    endDate,
+  });
 
   const openSheet = (tab: FilterTab) => {
-    if (tab === "date") {
-      setIsDateOpen(true);
-      return;
-    }
-
     setFilters({
       ...DEFAULT_FILTERS,
+      startDate: startDate ?? "",
+      endDate: endDate ?? "",
       region: region ?? "",
       category: normalizeEnumValue<Exclude<CategoryFilterValue, undefined>>(category),
       sort: normalizeEnumValue<SortFilterValue>(sort) ?? "LATEST",
       status: normalizeEnumValue<Exclude<StatusFilterValue, undefined>>(status),
     });
     setSelectedTab(tab);
+
+    if (tab === "date") {
+      setIsDateOpen(true);
+      return;
+    }
+
     setIsFilterOpen(true);
   };
+
+  const dateLabel = getDateRangeLabel(startDate, endDate);
 
   const filterConfigs: Record<FilterTab, any> = {
     date: {
       ariaLabel: "기간 필터",
-      onSelected: false,
+      onSelected: selectionState.isDateSelected,
       icon: { name: "Calendar", size: 16 },
-      label: "기간",
+      label: dateLabel,
       iconPosition: "leading",
     },
     region: {
@@ -108,10 +125,10 @@ const FilterSection = ({ pageType = "LIST" }: FilterSectionProps) => {
       iconPosition: "trailing",
     },
     findStatus: {
-      ariaLabel: "찾음여부 필터",
+      ariaLabel: "찾음 여부 필터",
       onSelected: selectionState.isFindStatusSelected,
       icon: { name: "ArrowDown", size: 12 },
-      label: (normalizedFindStatus && FIND_STATUS_LABEL_MAP[normalizedFindStatus]) ?? "찾음여부",
+      label: (normalizedFindStatus && FIND_STATUS_LABEL_MAP[normalizedFindStatus]) ?? "찾음 여부",
       iconPosition: "trailing",
     },
     status: {
@@ -162,7 +179,12 @@ const FilterSection = ({ pageType = "LIST" }: FilterSectionProps) => {
       )}
 
       {isDateOpen && (
-        <DateRangeBottomSheet isOpen={isDateOpen} onClose={() => setIsDateOpen(false)} />
+        <DateRangeBottomSheet
+          filters={filters}
+          setFilters={setFilters}
+          isOpen={isDateOpen}
+          onClose={() => setIsDateOpen(false)}
+        />
       )}
     </>
   );

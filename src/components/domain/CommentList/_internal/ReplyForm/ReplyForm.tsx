@@ -1,17 +1,31 @@
-import { ChangeEvent, useEffect, useId, useMemo, useRef, useState } from "react";
+"use client";
+
+import { ChangeEvent, FormEvent, useEffect, useId, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { Button, Icon } from "@/components/common";
 import { cn } from "@/utils";
 
+/**
+ * 답글에 대한 답글 전송 폼
+ *
+ * @author jikwon
+ */
+
 interface ReplyFormProps {
+  /** 답글 여부 */
   isThreadItem: boolean;
+  /** 추가적인 스타일 클래스 */
   className?: string;
+  /** 답글 등록 비활성화 여부 */
   disabled?: boolean;
+  /** 답글 등록 중 상태 */
+  isPending?: boolean;
+  /** 답글 등록 함수 */
+  onSubmit: (content: string, image: File | null) => void;
 }
 
-const ReplyForm = ({ isThreadItem, className, disabled }: ReplyFormProps) => {
+const ReplyForm = ({ isThreadItem, className, disabled, onSubmit, isPending }: ReplyFormProps) => {
   const inputId = useId();
-
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
   const [content, setContent] = useState("");
@@ -56,11 +70,20 @@ const ReplyForm = ({ isThreadItem, className, disabled }: ReplyFormProps) => {
     }
   };
 
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (isPending || !content.trim()) return;
+
+    setContent("");
+    setImage(null);
+    onSubmit(content, image);
+  };
+
   return (
     <form
-      action=""
+      onSubmit={handleSubmit}
       className={cn(
-        "mt-2 w-full rounded-[10px] px-4 py-[10px]",
+        "mb-4 mt-2 w-full rounded-[10px] px-4 py-[10px]",
         isThreadItem ? "bg-white" : "bg-fill-neutral-strong-default",
         className
       )}
@@ -73,6 +96,7 @@ const ReplyForm = ({ isThreadItem, className, disabled }: ReplyFormProps) => {
           maxLength={500}
           value={content}
           onChange={handleChange}
+          autoFocus={true}
           rows={1}
           className={cn(
             "flex-1 resize-none overflow-hidden pt-1",
@@ -131,7 +155,7 @@ const ReplyForm = ({ isThreadItem, className, disabled }: ReplyFormProps) => {
             aria-label="댓글 등록"
             className="min-h-11 !min-w-[52px] rounded-full px-3"
             type="submit"
-            disabled={disabled || !content.trim()}
+            disabled={disabled || isPending || !content.trim()}
           >
             등록
           </Button>

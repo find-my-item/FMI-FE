@@ -219,14 +219,14 @@ describe("FilterDropdown", () => {
 
       render(
         <FilterDropdown
-          ariaLabel="채팅 리스트 분실/발견"
+          ariaLabel="채팅 리스트 발견/분실"
           options={TYPE_OPTIONS}
           keyName="type"
           searchUpdateQuery={mockSearchUpdateQuery}
         />
       );
 
-      expect(screen.getByText("분실/발견")).toBeInTheDocument();
+      expect(screen.getByText("발견/분실")).toBeInTheDocument();
     });
 
     it("type 파라미터가 ALL일 때 분실/발견이 표시됩니다", () => {
@@ -236,15 +236,15 @@ describe("FilterDropdown", () => {
 
       render(
         <FilterDropdown
-          ariaLabel="채팅 리스트 분실/발견"
+          ariaLabel="채팅 리스트 발견/분실"
           options={TYPE_OPTIONS}
           keyName="type"
           searchUpdateQuery={mockSearchUpdateQuery}
         />
       );
 
-      const filterButton = screen.getByTestId("filter-채팅 리스트 분실/발견");
-      expect(filterButton).toHaveTextContent("분실/발견");
+      const filterButton = screen.getByTestId("filter-채팅 리스트 발견/분실");
+      expect(filterButton).toHaveTextContent("발견/분실");
     });
 
     it("type 파라미터가 FOUND일 때 발견 게시물이 표시됩니다", () => {
@@ -254,15 +254,15 @@ describe("FilterDropdown", () => {
 
       render(
         <FilterDropdown
-          ariaLabel="채팅 리스트 분실/발견"
+          ariaLabel="채팅 리스트 발견/분실"
           options={TYPE_OPTIONS}
           keyName="type"
           searchUpdateQuery={mockSearchUpdateQuery}
         />
       );
 
-      const filterButton = screen.getByTestId("filter-채팅 리스트 분실/발견");
-      expect(filterButton).toHaveTextContent("습득물");
+      const filterButton = screen.getByTestId("filter-채팅 리스트 발견/분실");
+      expect(filterButton).toHaveTextContent("발견");
     });
 
     it("type 파라미터가 LOST일 때 분실물이 표시됩니다", () => {
@@ -272,15 +272,15 @@ describe("FilterDropdown", () => {
 
       render(
         <FilterDropdown
-          ariaLabel="채팅 리스트 분실/발견"
+          ariaLabel="채팅 리스트 발견/분실"
           options={TYPE_OPTIONS}
           keyName="type"
           searchUpdateQuery={mockSearchUpdateQuery}
         />
       );
 
-      const filterButton = screen.getByTestId("filter-채팅 리스트 분실/발견");
-      expect(filterButton).toHaveTextContent("분실물");
+      const filterButton = screen.getByTestId("filter-채팅 리스트 발견/분실");
+      expect(filterButton).toHaveTextContent("분실");
     });
 
     it("type 파라미터가 있을 때 Filter가 선택된 상태로 표시됩니다", () => {
@@ -334,8 +334,8 @@ describe("FilterDropdown", () => {
       await user.click(filterButton);
 
       expect(screen.getByText("전체")).toBeInTheDocument();
-      expect(screen.getByText("습득물")).toBeInTheDocument();
-      expect(screen.getByText("분실물")).toBeInTheDocument();
+      expect(screen.getByText("발견")).toBeInTheDocument();
+      expect(screen.getByText("분실")).toBeInTheDocument();
     });
 
     it("옵션 클릭 시 searchUpdateQuery가 올바른 인자로 호출됩니다", async () => {
@@ -354,7 +354,7 @@ describe("FilterDropdown", () => {
       const filterButton = screen.getByTestId("filter-채팅 리스트 분실/발견");
       await user.click(filterButton);
 
-      const foundOption = screen.getByText("습득물");
+      const foundOption = screen.getByText("발견");
       await user.click(foundOption);
 
       expect(mockSearchUpdateQuery).toHaveBeenCalledWith("type", "FOUND");

@@ -3,13 +3,12 @@ import { ImageList } from "@/types";
 
 export interface PostPostsCommentRequestBody {
   request: PostPostsCommentRequest;
-  images: File[];
+  image: File[];
 }
 
 export interface PostPostsCommentRequest {
-  postId: number;
   content: string;
-  parentId?: number;
+  parentId?: number | null;
 }
 
 export interface PostPostsCommentResponse extends ApiBaseResponseType<CommentData> {}

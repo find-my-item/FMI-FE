@@ -3,9 +3,9 @@
 import { Dispatch, SetStateAction } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Button, Icon } from "@/components/common";
-import { useRegionRows } from "@/hooks";
-import { cn, getRegionSearchResults } from "@/utils";
-import { RegionRow } from "@/types";
+import { useVWorldAddressSearch } from "@/hooks";
+import { VWorldAddressItem } from "@/types";
+import { applyFiltersToUrl, cn, highlightText } from "@/utils";
 import {
   CategoryFilterValue,
   FilterTab,
@@ -15,7 +15,6 @@ import {
   tabsType,
 } from "../_types/types";
 import { categories, sort, status, findStatus } from "../_constants/CONSTANTS";
-import { applyFiltersToUrl } from "../utils/applyFiltersToUrl";
 import { FiltersStateType } from "../_types/filtersStateType";
 import { TABS } from "../_constants/TABS";
 import PopupLayout from "../../PopupLayout/PopupLayout";
@@ -26,7 +25,7 @@ import PopupLayout from "../../PopupLayout/PopupLayout";
  *
  * 필터 옵션을 선택하고 적용하는 바텀시트 컴포넌트입니다.
  *
- * 지역 검색, 카테고리, 정렬, 상태(분류/찾음여부) 등 다양한 필터링 기능을 탭 인터페이스로 제공합니다.
+ * 지역 검색, 카테고리, 정렬, 상태(분류/찾음 여부) 등 다양한 필터링 기능을 탭 인터페이스로 제공합니다.
  * `pageType`에 따라 상단에 노출되는 탭의 종류와 순서가 동적으로 변경됩니다.
  * '적용하기' 버튼 클릭 시 선택된 필터값들을 URL 쿼리 파라미터로 변환하여 페이지를 이동(replace)시킵니다.
  *
@@ -41,13 +40,13 @@ import PopupLayout from "../../PopupLayout/PopupLayout";
  * @example
  * ```tsx
  * <FilterBottomSheet
- * isOpen={isFilterOpen}
- * setIsOpen={setIsFilterOpen}
- * selectedTab={selectedTab}
- * setSelectedTab={setSelectedTab}
- * filters={filters}
- * setFilters={setFilters}
- * pageType="LIST"
+ *   isOpen={isFilterOpen}
+ *   setIsOpen={setIsFilterOpen}
+ *   selectedTab={selectedTab}
+ *   setSelectedTab={setSelectedTab}
+ *   filters={filters}
+ *   setFilters={setFilters}
+ *   pageType="LIST"
  * />
  * ```
  */
@@ -75,16 +74,11 @@ const FilterBottomSheet = ({
   const router = useRouter();
   const pathname = usePathname();
 
-  const { data: regions = [], isLoading } = useRegionRows();
+  const { data: results = [], isLoading } = useVWorldAddressSearch(filters.region);
 
-  const regionResults = getRegionSearchResults({
-    regions,
-    query: filters.region,
-    maxResults: 10,
-  });
-
-  const handleRegionSelect = (row: RegionRow) => {
-    setFilters((prev) => ({ ...prev, region: row.display }));
+  const handleRegionSelect = (item: VWorldAddressItem) => {
+    const address = item.address.road || item.address.parcel;
+    setFilters((prev) => ({ ...prev, region: address }));
   };
 
   const handleApply = () => {
@@ -98,7 +92,8 @@ const FilterBottomSheet = ({
   };
 
   const currentTabs = TABS[pageType];
-  const isEmptyRegionResult = !isLoading && filters.region && regionResults.length === 0;
+  const isEmptyRegionResult =
+    !isLoading && filters.region.trim().length >= 2 && results.length === 0;
 
   return (
     <PopupLayout isOpen={isOpen} onClose={() => setIsOpen(false)} className="min-h-[530px] py-10">
@@ -157,21 +152,24 @@ const FilterBottomSheet = ({
             </div>
 
             <ul className="h-[230px] w-full overflow-y-auto">
-              {filters.region &&
-                regionResults.map((row) => (
-                  <li
-                    key={`${row.sido}|${row.sigungu}|${row.location}`}
-                    className="border-b border-neutral-normal-default transition-colors hover:bg-gray-100"
-                  >
-                    <button
-                      type="button"
-                      className="w-full px-4 py-5 text-left text-body2-medium text-neutral-strong-default"
-                      onClick={() => handleRegionSelect(row)}
+              {filters.region.trim().length >= 2 &&
+                results.map((item: VWorldAddressItem, index: number) => {
+                  const address = item.address.road || item.address.parcel;
+                  return (
+                    <li
+                      key={index}
+                      className="border-b border-neutral-normal-default transition-colors hover:bg-gray-100"
                     >
-                      {row.display}
-                    </button>
-                  </li>
-                ))}
+                      <button
+                        type="button"
+                        className="w-full px-4 py-5 text-left text-body2-medium text-neutral-strong-default"
+                        onClick={() => handleRegionSelect(item)}
+                      >
+                        {highlightText(address, filters.region.trim())}
+                      </button>
+                    </li>
+                  );
+                })}
 
               {isEmptyRegionResult && (
                 <li className="mt-[6px] px-5 py-[10px]">
@@ -230,7 +228,7 @@ const FilterBottomSheet = ({
                 key={index}
                 label={findStatusItem.label}
                 value={findStatusItem.value}
-                selected={filters.status === findStatusItem.value}
+                selected={filters.findStatus === findStatusItem.value}
                 onSelect={() =>
                   setFilters((prev) => ({ ...prev, findStatus: findStatusItem.value }))
                 }

@@ -13,7 +13,7 @@ interface MyPageTapItemProps {
 const MyPageIconNavItem = ({ pageName, iconName, pageLink }: MyPageTapItemProps) => {
   return (
     <>
-      <Link href={pageLink} className="gap-2 py-4 flex-col-center">
+      <Link href={pageLink} className="w-full gap-2 py-4 flex-col-center">
         <Icon name={iconName} size={24} />
         <span className="whitespace-nowrap px-[50px] text-body2-medium text-neutral-strong-default">
           {pageName}

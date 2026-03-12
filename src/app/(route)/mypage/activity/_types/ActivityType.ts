@@ -1,12 +1,4 @@
-export type ActivityType =
-  | "POST"
-  | "COMMENT"
-  | "FAVORITE"
-  | "INQUIRY"
-  | "INQUIRY_REPLY"
-  | "REPORT"
-  | "REPORT_COMPLETE"
-  | "ALERT_SETTING";
+import { ActivityType } from "@/types";
 
 // TODO(수현): api 연결 시 api 스키마에 따라 변수 이름 변경 필요
 export interface ActivityDataType {

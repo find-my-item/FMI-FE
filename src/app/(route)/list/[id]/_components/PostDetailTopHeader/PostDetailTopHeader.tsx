@@ -25,7 +25,7 @@ const PostDetailTopHeader = ({ postId, postData }: PostDetailTopHeaderProps) => 
 
   return (
     <>
-      <div className="relative">
+      <div className="sticky right-0 top-0 z-10 mx-auto">
         <DetailHeader>
           <HeaderStar
             disabled={isPending}
@@ -34,15 +34,16 @@ const PostDetailTopHeader = ({ postId, postData }: PostDetailTopHeaderProps) => 
             ariaLabel="게시글 즐겨찾기"
           />
           <HeaderShare onClick={() => setOpenShareModal(true)} ariaLabel="게시글 공유" />
-          <HeaderMenu onClick={() => setOpenOptionModal((v) => !v)} ariaLabel="게시글 메뉴" />
+          <div className="relative flex items-center">
+            <HeaderMenu onClick={() => setOpenOptionModal((v) => !v)} ariaLabel="게시글 메뉴" />
+            <PostActionMenu
+              open={openOptionModal}
+              onClose={() => setOpenOptionModal(false)}
+              postId={postId}
+              postData={postData}
+            />
+          </div>
         </DetailHeader>
-
-        <PostActionMenu
-          open={openOptionModal}
-          onClose={() => setOpenOptionModal(false)}
-          postId={postId}
-          postData={postData}
-        />
       </div>
 
       <PostShare isOpen={openShareModal} onClose={() => setOpenShareModal(false)} postId={postId} />

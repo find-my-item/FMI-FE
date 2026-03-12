@@ -1,44 +1,78 @@
 import { Icon } from "@/components/common";
 import { cn } from "@/utils";
 
+/**
+ * 댓글 좋아요 및 답글 작성
+ *
+ * @author jikwon
+ */
+
 interface CommentFooterProps {
   footerData: {
-    likeCount: number;
+    /** 댓글 ID */
     id: number;
+    /** 좋아요 수 */
+    likeCount: number;
+    /** 좋아요 여부 */
+    isLike: boolean;
+    /** 댓글 삭제 여부 */
+    deleted: boolean;
   };
-  isThreadItem: boolean;
+  /** 1번 댓글 여부 */
+  isReply: boolean;
+  /** 비회원 여부 */
+  isGuest: boolean;
+  /** 답글 폼 열림 상태 */
   isReplyFormOpen: boolean;
+  /** 답글 폼 열림 상태 변경 함수 */
   setIsReplyFormOpen: (value: boolean) => void;
+  /** 쿼리 키 */
+  queryKey: unknown[];
+  /** 댓글 좋아요 함수 */
+  onFavoriteComment: (commentId: number, isLike: boolean, queryKey: unknown[]) => void;
 }
 
 const CommentFooter = ({
   footerData,
-  isThreadItem,
+  isReply,
+  isGuest,
   isReplyFormOpen,
   setIsReplyFormOpen,
+  queryKey,
+  onFavoriteComment,
 }: CommentFooterProps) => {
-  const { likeCount, id } = footerData;
+  const { likeCount, id, isLike, deleted } = footerData;
 
   const handleLikeClick = () => {
-    console.log(id);
+    onFavoriteComment(id, isLike, queryKey);
   };
 
   return (
     <div className="flex items-center gap-3">
       <button
-        className="flex items-center gap-1 text-body2-regular text-neutral-strong-placeholder"
-        onClick={handleLikeClick}
+        aria-label={isLike ? "좋아요 취소" : "좋아요"}
+        className={cn(
+          "flex items-center gap-1 text-body2-regular text-neutral-strong-placeholder",
+          "disabled:cursor-not-allowed disabled:opacity-40"
+        )}
+        onClick={isGuest || deleted ? undefined : handleLikeClick}
+        disabled={isGuest || deleted}
       >
-        <Icon name="CommentLikeIcon" size={16} /> <span>추천 {likeCount}</span>
+        <Icon
+          name="Heart"
+          size={16}
+          className={cn(isLike ? "text-system-favorite" : "text-border-divider-default")}
+        />
+        <span>좋아요 {likeCount}</span>
       </button>
 
-      {isThreadItem && (
+      {isReply && (
         <button
           className={cn(
             "text-body1-regular",
             isReplyFormOpen ? "text-brand-normal-enteredSelected" : "text-neutral-strong-default"
           )}
-          onClick={() => setIsReplyFormOpen(!isReplyFormOpen)}
+          onClick={isGuest ? undefined : () => setIsReplyFormOpen(!isReplyFormOpen)}
         >
           답글 작성
         </button>

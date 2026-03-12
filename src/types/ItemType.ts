@@ -42,3 +42,9 @@ export type CategoryType =
 export type PostType = "LOST" | "FOUND";
 
 export type ItemStatus = "SEARCHING" | "FOUND";
+
+export type ActivityType = "POST" | "COMMENT" | "FAVORITE" | "INQUIRY" | "REPORT";
+
+export type SimpleSortType = "LATEST" | "OLDEST";
+
+export type RequestType = "ALL" | "PENDING" | "REVIEWED" | "RESOLVED";

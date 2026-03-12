@@ -1,23 +1,23 @@
-import { AdminDetailGuestInquiry, AdminDetailReports } from "@/api/fetch/admin";
-import { ReplyStatus } from "@/types";
+import { AdminDetailGuestInquiry, AdminDetailInquiry, AdminDetailReport } from "@/api/fetch/admin";
 import {
   DetailContent,
   DetailStatusHeader,
 } from "../../reports/[reportsType]/[id]/_components/_internal";
+import { ReportsType } from "../../reports/[reportsType]/[id]/_types/ReportsType";
 
 interface AdminDetailSectionProps {
-  data?: AdminDetailGuestInquiry | AdminDetailReports;
+  data?: AdminDetailGuestInquiry | AdminDetailReport | AdminDetailInquiry;
+  type: ReportsType;
+  isGuest?: boolean;
 }
 
-const AdminDetailSection = ({ data }: AdminDetailSectionProps) => {
+const AdminDetailSection = ({ data, type, isGuest = false }: AdminDetailSectionProps) => {
   if (!data) return null;
 
-  const { requestStatus, status } =
-    "type" in data
-      ? data.type === "REPORT"
-        ? { requestStatus: data.reportStatus, status: data.reportStatus }
-        : { requestStatus: data.inquiryStatus, status: data.inquiryStatus }
-      : { requestStatus: data.requestStatus, status: data.status };
+  const { requestStatus, answered } = {
+    requestStatus: data.status,
+    answered: data.answered,
+  };
 
   return (
     <>
@@ -27,7 +27,9 @@ const AdminDetailSection = ({ data }: AdminDetailSectionProps) => {
       >
         <DetailStatusHeader
           requestStatus={requestStatus}
-          status={status as unknown as ReplyStatus}
+          status={answered}
+          type={type}
+          isGuest={isGuest}
         />
 
         <DetailContent data={data} />

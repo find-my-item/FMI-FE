@@ -10,7 +10,7 @@ interface ActivityItemProps {
   activityItem: ActivityDataType;
 }
 
-function ActivityItem({ activityItem }: ActivityItemProps) {
+const ActivityItem = ({ activityItem }: ActivityItemProps) => {
   const { type, createdAt, title, subText } = activityItem;
 
   const { bgColor, iconName } = ACTIVITY_STYLE_CONFIG[type];
@@ -38,7 +38,7 @@ function ActivityItem({ activityItem }: ActivityItemProps) {
       </div>
     </li>
   );
-}
+};
 
 interface ActivityGroupItemProps {
   groupDate: string;
