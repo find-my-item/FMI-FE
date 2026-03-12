@@ -28,11 +28,19 @@ export const usePostCommentSubmit = ({
 
     if (isPending) return;
 
+    const trimmedContent = data.content.trim();
+    if (!trimmedContent && images.length === 0) return;
+
     const formData = new FormData();
-    const request = { content: data.content };
+
+    const request = {
+      content: trimmedContent,
+      parentId: null,
+    };
 
     formData.append("request", new Blob([JSON.stringify(request)], { type: "application/json" }));
-    images.forEach((image) => formData.append("images", image));
+
+    images.forEach((image) => formData.append("image", image));
 
     mutate(formData, {
       onSuccess: () => {
