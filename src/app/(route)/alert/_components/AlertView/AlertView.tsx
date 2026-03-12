@@ -13,6 +13,7 @@ import {
 } from "./_internal/alertViewMapper";
 import { IconName } from "@/components/common/Icon/Icon";
 import { EmptyState } from "@/components/state";
+import { alertRouteUrl } from "./_internal/alertRouteUrl";
 
 const AlertItem = ({ item }: { item: NotificationListItem }) => {
   const { notificationId, type, title, message, referenceType, referenceId, isRead, createdAt } =
@@ -25,7 +26,7 @@ const AlertItem = ({ item }: { item: NotificationListItem }) => {
   return (
     // TODO(형준): 기능 구현 시 button 태그로 변경 가능성 있음
     <Link
-      href="#"
+      href={alertRouteUrl(referenceType, referenceId)}
       aria-label="알림 확인, 외부 페이지 이동"
       key={notificationId}
       className={cn(
