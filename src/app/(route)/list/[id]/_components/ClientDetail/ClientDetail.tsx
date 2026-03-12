@@ -45,7 +45,7 @@ const ClientDetail = ({ id, isLoggedIn }: ClientDetailProps) => {
         }}
       />
 
-      <div className="h-base">
+      <div className="flex flex-col h-base">
         <PostDetail type="find" data={data.result} />
 
         <CommentList
@@ -64,9 +64,9 @@ const ClientDetail = ({ id, isLoggedIn }: ClientDetailProps) => {
         <ErrorBoundary fallback={<ErrorSimilarSection postId={id} />}>
           <SimilarItemsSection postId={id} />
         </ErrorBoundary>
-      </div>
 
-      <PostInputComment postId={id} isLoggedIn={isLoggedIn} />
+        <PostInputComment postId={id} isLoggedIn={isLoggedIn} />
+      </div>
     </>
   );
 };
