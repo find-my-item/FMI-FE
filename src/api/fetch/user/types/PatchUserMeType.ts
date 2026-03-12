@@ -1,9 +1,9 @@
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 import { UserType } from "@/types";
 
-export interface GetUsersMeResponse extends ApiBaseResponseType<UsersMeType> {}
+export interface PatchUsersMeResponse extends ApiBaseResponseType<PatchUserMeType> {}
 
-export interface UsersMeType {
+interface PatchUserMeType {
   userId: number;
   nickname: string;
   email: string;

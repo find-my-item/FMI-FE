@@ -26,22 +26,25 @@ type Story = StoryObj<typeof meta>;
 const mockUseFetchReplies: typeof useGetRepliesPostsComments = () =>
   ({
     data: {
-      isSuccess: true,
-      code: "COMMON200",
-      message: "성공입니다.",
-      result: {
-        comments: [],
-        hasNext: false,
-        nextPage: 0,
-        remainingCount: 0,
-      },
+      comments: [],
+      hasNext: false,
+      nextPage: 0,
+      remainingCount: 0,
+      totalCommentCount: 0,
     },
     isLoading: false,
     isError: false,
     isSuccess: true,
+    isFetching: false,
+    isFetchingNextPage: false,
+    isFetchingPreviousPage: false,
+    hasNextPage: false,
+    hasPreviousPage: false,
+    fetchNextPage: async () => ({}) as any,
+    fetchPreviousPage: async () => ({}) as any,
     error: null,
     refetch: async () => ({}) as any,
-  }) as unknown as UseQueryResult<GetPostsCommentsResponse, unknown>;
+  }) as any;
 
 export const Default: Story = {
   args: {
