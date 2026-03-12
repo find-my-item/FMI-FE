@@ -3,9 +3,9 @@
 import { Dispatch, SetStateAction } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Button, Icon } from "@/components/common";
-import { useRegionRows } from "@/hooks";
-import { cn, getRegionSearchResults } from "@/utils";
-import { RegionRow } from "@/types";
+import { useVWorldAddressSearch } from "@/hooks";
+import { VWorldAddressItem } from "@/types";
+import { applyFiltersToUrl, cn, highlightText } from "@/utils";
 import {
   CategoryFilterValue,
   FilterTab,
@@ -15,7 +15,6 @@ import {
   tabsType,
 } from "../_types/types";
 import { categories, sort, status, findStatus } from "../_constants/CONSTANTS";
-import { applyFiltersToUrl } from "../../../../utils/applyFiltersToUrl/applyFiltersToUrl";
 import { FiltersStateType } from "../_types/filtersStateType";
 import { TABS } from "../_constants/TABS";
 import PopupLayout from "../../PopupLayout/PopupLayout";
@@ -41,13 +40,13 @@ import PopupLayout from "../../PopupLayout/PopupLayout";
  * @example
  * ```tsx
  * <FilterBottomSheet
- * isOpen={isFilterOpen}
- * setIsOpen={setIsFilterOpen}
- * selectedTab={selectedTab}
- * setSelectedTab={setSelectedTab}
- * filters={filters}
- * setFilters={setFilters}
- * pageType="LIST"
+ *   isOpen={isFilterOpen}
+ *   setIsOpen={setIsFilterOpen}
+ *   selectedTab={selectedTab}
+ *   setSelectedTab={setSelectedTab}
+ *   filters={filters}
+ *   setFilters={setFilters}
+ *   pageType="LIST"
  * />
  * ```
  */
@@ -75,16 +74,11 @@ const FilterBottomSheet = ({
   const router = useRouter();
   const pathname = usePathname();
 
-  const { data: regions = [], isLoading } = useRegionRows();
+  const { data: results = [], isLoading } = useVWorldAddressSearch(filters.region);
 
-  const regionResults = getRegionSearchResults({
-    regions,
-    query: filters.region,
-    maxResults: 10,
-  });
-
-  const handleRegionSelect = (row: RegionRow) => {
-    setFilters((prev) => ({ ...prev, region: row.display }));
+  const handleRegionSelect = (item: VWorldAddressItem) => {
+    const address = item.address.road || item.address.parcel;
+    setFilters((prev) => ({ ...prev, region: address }));
   };
 
   const handleApply = () => {
@@ -98,7 +92,8 @@ const FilterBottomSheet = ({
   };
 
   const currentTabs = TABS[pageType];
-  const isEmptyRegionResult = !isLoading && filters.region && regionResults.length === 0;
+  const isEmptyRegionResult =
+    !isLoading && filters.region.trim().length >= 2 && results.length === 0;
 
   return (
     <PopupLayout isOpen={isOpen} onClose={() => setIsOpen(false)} className="min-h-[530px] py-10">
@@ -157,21 +152,24 @@ const FilterBottomSheet = ({
             </div>
 
             <ul className="h-[230px] w-full overflow-y-auto">
-              {filters.region &&
-                regionResults.map((row) => (
-                  <li
-                    key={`${row.sido}|${row.sigungu}|${row.location}`}
-                    className="border-b border-neutral-normal-default transition-colors hover:bg-gray-100"
-                  >
-                    <button
-                      type="button"
-                      className="w-full px-4 py-5 text-left text-body2-medium text-neutral-strong-default"
-                      onClick={() => handleRegionSelect(row)}
+              {filters.region.trim().length >= 2 &&
+                results.map((item: VWorldAddressItem, index: number) => {
+                  const address = item.address.road || item.address.parcel;
+                  return (
+                    <li
+                      key={index}
+                      className="border-b border-neutral-normal-default transition-colors hover:bg-gray-100"
                     >
-                      {row.display}
-                    </button>
-                  </li>
-                ))}
+                      <button
+                        type="button"
+                        className="w-full px-4 py-5 text-left text-body2-medium text-neutral-strong-default"
+                        onClick={() => handleRegionSelect(item)}
+                      >
+                        {highlightText(address, filters.region.trim())}
+                      </button>
+                    </li>
+                  );
+                })}
 
               {isEmptyRegionResult && (
                 <li className="mt-[6px] px-5 py-[10px]">

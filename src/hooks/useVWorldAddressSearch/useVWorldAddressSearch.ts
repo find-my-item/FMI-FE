@@ -1,17 +1,6 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-
-export interface VWorldAddressItem {
-  address: {
-    road: string;
-    parcel: string;
-  };
-  point: {
-    x: string;
-    y: string;
-  };
-  title: string;
-}
+import { VWorldAddressItem } from "@/types";
 
 interface VWorldSearchResponse {
   response: {
