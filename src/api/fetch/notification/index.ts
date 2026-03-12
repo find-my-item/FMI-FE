@@ -1,9 +1,7 @@
-export type {
-  NotificationEventData,
-  NotificationType,
-  ReferenceType,
-} from "./types/notificationSSETypes";
-export { NOTIFICATION_TYPE, REFERENCE_TYPE } from "./types/notificationSSETypes";
+export type * from "./types/notificationSSETypes";
+export * from "./types/notificationSSETypes";
+export * from "./types/notificationListType";
+
 export {
   useNotificationSSE,
   type UseNotificationSSEOptions,
