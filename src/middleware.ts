@@ -12,7 +12,8 @@ export function middleware(request: NextRequest) {
     currentPath.startsWith("/mypage/") ||
     currentPath.startsWith("/write") ||
     currentPath.startsWith("/chat") ||
-    currentPath.startsWith("/change-password");
+    currentPath.startsWith("/change-password") ||
+    currentPath.startsWith("/alert");
 
   const isSessionExpired = request.nextUrl.searchParams.get("reason") === "session-expired";
 
@@ -42,5 +43,6 @@ export const config = {
     "/write/:path*",
     "/chat/:path*",
     "/change-password",
+    "/alert",
   ],
 };
