@@ -1,5 +1,4 @@
 import { useQueryClient } from "@tanstack/react-query";
-import { useToast } from "@/context/ToastContext";
 import useAppMutation from "@/api/_base/query/useAppMutation";
 import { PostCommentLikeResponse, ToggleCommentLikeVariables } from "../types/CommentType";
 import { GetPostsCommentsResponse } from "../types/GetPostsComments";
@@ -9,7 +8,6 @@ type LikeOptimisticContext = {
 };
 
 export const useDeleteLikeComment = () => {
-  const { addToast } = useToast();
   const queryClient = useQueryClient();
 
   return useAppMutation<ToggleCommentLikeVariables, PostCommentLikeResponse>(
@@ -46,18 +44,12 @@ export const useDeleteLikeComment = () => {
         return { previous };
       },
 
-      onSuccess: () => {
-        addToast("좋아요가 삭제되었어요.", "success");
-      },
-
       onError: (_error, { queryKey }, context) => {
         const typedContext = context as LikeOptimisticContext | undefined;
 
         if (typedContext?.previous) {
           queryClient.setQueryData(queryKey, typedContext.previous);
         }
-
-        addToast("좋아요 삭제에 실패했어요.", "error");
       },
 
       onSettled: (_, __, { queryKey }) => {
