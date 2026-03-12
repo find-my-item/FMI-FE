@@ -73,6 +73,12 @@ const mockUseFetchReplies: typeof useGetRepliesPostsComments = () =>
  * @author jikwon
  */
 
+/**
+ * 비회원 전용 댓글 UI
+ *
+ * @author jikwon
+ */
+
 const GuestCommentUI = () => {
   return (
     <section className="border-t pt-[18px]">
