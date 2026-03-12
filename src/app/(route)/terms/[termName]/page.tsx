@@ -10,9 +10,7 @@ export default async function Page({ params }: PageProps) {
 
   if (termName === "privacy") {
     return <Terms termName="privacyPolicyAgreed" />;
-  }
-
-  if (termName === "marketingConsent") {
+  } else if (termName === "marketingConsent") {
     return <Terms termName="marketingConsentAgreed" />;
-  } else return <NotFound />;
+  } else return NotFound();
 }
