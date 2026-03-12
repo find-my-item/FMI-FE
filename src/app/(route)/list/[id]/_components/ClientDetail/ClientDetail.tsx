@@ -23,7 +23,10 @@ interface ClientDetailProps {
 
 const ClientDetail = ({ id, isLoggedIn }: ClientDetailProps) => {
   const { data, isLoading, isError } = useGetDetailPost({ id });
-  const { data: commentsData } = useGetPostsComments({ postId: id, enabled: isLoggedIn });
+  const { data: commentsData, fetchNextPage } = useGetPostsComments({
+    postId: id,
+    enabled: isLoggedIn,
+  });
   const { handleReplySubmit, isPending } = useHandleReplySubmit(id);
   const { mutate: deleteComment } = useDeleteComment();
   const { handleToggleFavorite } = useToggleCommentLike();
@@ -50,7 +53,7 @@ const ClientDetail = ({ id, isLoggedIn }: ClientDetailProps) => {
 
         <CommentList
           postId={id}
-          comments={commentsData?.result}
+          comments={commentsData}
           onSubmit={handleReplySubmit}
           isPending={isPending}
           isLoggedIn={isLoggedIn}
@@ -59,6 +62,7 @@ const ClientDetail = ({ id, isLoggedIn }: ClientDetailProps) => {
           onFavoriteComment={(commentId, isLike, queryKey) =>
             handleToggleFavorite({ commentId, isLike, queryKey })
           }
+          onCommentLoadMore={() => fetchNextPage()}
         />
 
         <ErrorBoundary fallback={<ErrorSimilarSection postId={id} />}>
