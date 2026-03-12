@@ -66,7 +66,7 @@ export const useGetUsersMePosts = ({
       placeholderData: keepPreviousData,
       getNextPageParam: (lastPage) => lastPage.result.nextCursor ?? undefined,
       select: (data: InfiniteData<MypagePostsResponseType>) =>
-        data.pages.flatMap((page) => page.result.posts),
+        data.pages.flatMap((page) => page.result.postList),
       throwOnError: true,
       enabled: isMounted && isAuthInitialized,
     }
