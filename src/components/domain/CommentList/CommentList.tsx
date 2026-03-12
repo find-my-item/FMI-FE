@@ -7,15 +7,30 @@ import {
 import CommentItem from "./CommentItem";
 import { EmptyCommentUI, GuestCommentUI } from "./_internal";
 
-interface CommentListProps {
-  postId: number;
-  comments?: GetPostsCommentsData;
-  onSubmit: (content: string, image: File | null, parentId: number) => void;
-  isPending: boolean;
-  isLoggedIn?: boolean;
+/**
+ * 댓글 목록을 렌더링하는 컴포넌트입니다.
+ *
+ * !!현재 타입 에러를 방지하기 위해 타입 단언이 설정되어 있습니다. 공지사항 작업 후 제거 필요합니다.!!
+ *
+ * @author jikwon
+ */
 
+interface CommentListProps {
+  /** 게시글 ID */
+  postId: number;
+  /** 댓글 목록 데이터 */
+  comments?: GetPostsCommentsData;
+  /** 답글 작성 함수 */
+  onSubmit: (content: string, image: File | null, parentId: number) => void;
+  /** 답글 작성 중 로딩 상태 */
+  isPending: boolean;
+  /** 로그인 여부 */
+  isLoggedIn?: boolean;
+  /** 답글 조회 함수 */
   useFetchReplies?: typeof useGetRepliesPostsComments;
+  /** 답글 삭제 함수 */
   onDeleteComment?: (commentVariables: DeleteCommentVariables) => void;
+  /** 답글 좋아요 함수 */
   onFavoriteComment?: (commentId: number, isLike: boolean, queryKey: unknown[]) => void;
 }
 
