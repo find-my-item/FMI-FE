@@ -10,9 +10,10 @@ export interface AdminDetailReport {
   reportType: ReportType;
   reason: string;
   status: ReportStatus;
-  adminNote: string;
+  answered: boolean;
+  adminAnswer: string;
+  reporterNickname: string;
+  reporterEmail: string;
   createdAt: string;
   resolvedAt: string;
-  answered: boolean;
-  nickname: string;
 }
