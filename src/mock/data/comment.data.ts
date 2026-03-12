@@ -39,4 +39,5 @@ export const MOCK_COMMENT_RESPONSE_DATA: GetPostsCommentsData = {
   hasNext: false,
   nextPage: 0,
   remainingCount: 0,
+  totalCommentCount: 2,
 };

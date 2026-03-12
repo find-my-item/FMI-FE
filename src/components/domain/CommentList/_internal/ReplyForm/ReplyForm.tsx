@@ -83,7 +83,7 @@ const ReplyForm = ({ isThreadItem, className, disabled, onSubmit, isPending }: R
     <form
       onSubmit={handleSubmit}
       className={cn(
-        "mt-2 w-full rounded-[10px] px-4 py-[10px]",
+        "mb-4 mt-2 w-full rounded-[10px] px-4 py-[10px]",
         isThreadItem ? "bg-white" : "bg-fill-neutral-strong-default",
         className
       )}
