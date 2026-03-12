@@ -1,12 +1,12 @@
 import { cn } from "@/utils";
 import { CHAT_CHIP_MODE, ChatChipMode } from "./CHAT_CHIP_MODE";
-import { PostType } from "@/types";
+import { ItemStatus, PostType } from "@/types";
 
 const CHIP_BASE_CLASS = "shrink-0 rounded text-caption2-semibold flex-center";
 
 interface ChatChipProps {
   postMode: PostType;
-  postStatus?: "SEARCHING" | "FOUND";
+  postStatus?: ItemStatus;
 }
 
 const ChatChip = ({ postMode, postStatus }: ChatChipProps) => {
