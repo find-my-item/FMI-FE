@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { NotificationEventData } from "../types/notificationSSETypes";
 
 const RECONNECT_DELAY_MS = 5000;
+const MAX_RECONNECT_ATTEMPTS = 3;
 
 export interface UseNotificationSSEOptions {
   /** 로그인 등 연결 조건이 true일 때만 연결/유지 */
@@ -24,21 +25,6 @@ export interface UseNotificationSSEReturn {
   disconnect: () => void;
 }
 
-// 프록시(/api) 경로를 사용하지 않고, 백엔드 오리진으로 직접 연결
-// - NEXT_PUBLIC_API_URL 이 있으면 그 오리진을 사용
-// - 없으면 개발 환경에서 window.location.origin에 붙도록 fallback
-const getSSEBaseURL = () => {
-  if (process.env.NEXT_PUBLIC_API_URL) return process.env.NEXT_PUBLIC_API_URL;
-  if (typeof window !== "undefined") return window.location.origin;
-  return "";
-};
-
-/**
- * FMI 알림 SSE 구독 훅
- * - GET /notifications/subscribe, 쿠키(access_token) 또는 Authorization 인증
- * - event: connect / notification 처리
- * - 오류 시 재연결 (기본 5초 후)
- */
 export function useNotificationSSE({
   enabled = true,
   onConnect,
@@ -49,6 +35,7 @@ export function useNotificationSSE({
   const [isConnected, setIsConnected] = useState(false);
   const eventSourceRef = useRef<EventSource | null>(null);
   const reconnectTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const reconnectAttemptRef = useRef(0);
   const enabledRef = useRef(enabled);
   enabledRef.current = enabled;
 
@@ -69,22 +56,19 @@ export function useNotificationSSE({
 
     disconnect();
 
-    const url = `${getSSEBaseURL()}/notifications/subscribe?token=${accessToken}`;
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/notifications/subscribe?token=${accessToken}`;
     const eventSource = new EventSource(url);
     eventSourceRef.current = eventSource;
 
     eventSource.addEventListener("connect", (e: MessageEvent) => {
+      reconnectAttemptRef.current = 0;
       setIsConnected(true);
       onConnect?.(typeof e.data === "string" ? e.data : "");
     });
 
     eventSource.addEventListener("notification", (e: MessageEvent) => {
-      try {
-        const data = JSON.parse(e.data) as NotificationEventData;
-        onNotification?.(data);
-      } catch {
-        // ignore parse error
-      }
+      const data = JSON.parse(e.data) as NotificationEventData;
+      onNotification?.(data);
     });
 
     eventSource.onerror = () => {
@@ -92,17 +76,20 @@ export function useNotificationSSE({
       eventSourceRef.current = null;
       setIsConnected(false);
 
-      // 자동 재연결 비활성화 (실패 시 요청 반복 방지)
-      // if (!enabledRef.current) return;
-      // reconnectTimeoutRef.current = setTimeout(() => {
-      //   reconnectTimeoutRef.current = null;
-      //   connect();
-      // }, reconnectDelayMs);
+      if (!enabledRef.current) return;
+      if (reconnectAttemptRef.current >= MAX_RECONNECT_ATTEMPTS) return;
+
+      reconnectAttemptRef.current += 1;
+      reconnectTimeoutRef.current = setTimeout(() => {
+        reconnectTimeoutRef.current = null;
+        connect();
+      }, reconnectDelayMs);
     };
-  }, [disconnect, onConnect, onNotification, reconnectDelayMs]);
+  }, [disconnect, onConnect, onNotification, reconnectDelayMs, accessToken]);
 
   useEffect(() => {
     if (enabled) {
+      reconnectAttemptRef.current = 0;
       connect();
     } else {
       disconnect();
