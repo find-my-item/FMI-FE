@@ -1,24 +1,20 @@
 "use client";
 
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { useRegionRows } from "@/hooks";
-import { getRegionSearchResults, highlightText } from "@/utils";
+import { useVWorldAddressSearch } from "@/hooks";
+import { highlightText } from "@/utils";
+import { VWorldAddressItem } from "@/types";
 
 interface RegionSearchViewProps {
   searchQuery: string;
 }
 
 const RegionSearchView = ({ searchQuery }: RegionSearchViewProps) => {
+  const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const router = useRouter();
 
-  const { data: regions = [] } = useRegionRows();
-  const regionResults = getRegionSearchResults({
-    regions,
-    query: searchQuery,
-    maxResults: 10,
-  });
+  const { data: results = [], isLoading } = useVWorldAddressSearch(searchQuery);
 
   const handleRegionClick = (regionValue: string) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -27,20 +23,23 @@ const RegionSearchView = ({ searchQuery }: RegionSearchViewProps) => {
     router.push(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
-  const isEmptyResult = searchQuery.trim() && regionResults.length === 0;
+  const isEmptyResult = !isLoading && searchQuery.trim().length >= 2 && results.length === 0;
 
   return (
     <section className="flex flex-col">
-      {regionResults.map((row) => (
-        <button
-          key={`${row.sido}|${row.sigungu}|${row.location}`}
-          type="button"
-          onClick={() => handleRegionClick(row.display)}
-          className="min-h-[60px] w-full border-b border-neutral-normal-default bg-white p-5 text-left text-body2-medium text-neutral-strong-default transition-colors hover:bg-flatGray-25"
-        >
-          {highlightText(row.display, searchQuery.trim())}
-        </button>
-      ))}
+      {results.map((item: VWorldAddressItem, index: number) => {
+        const address = item.address.road || item.address.parcel;
+        return (
+          <button
+            key={index}
+            type="button"
+            onClick={() => handleRegionClick(address)}
+            className="min-h-[60px] w-full border-b border-neutral-normal-default bg-white p-5 text-left text-body2-medium text-neutral-strong-default transition-colors hover:bg-flatGray-25"
+          >
+            {highlightText(address, searchQuery.trim())}
+          </button>
+        );
+      })}
 
       {isEmptyResult && (
         <p className="px-5 py-[10px] text-body1-medium text-layout-header-default">
