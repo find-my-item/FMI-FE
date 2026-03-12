@@ -12,11 +12,8 @@ interface ChangePasswordFormType {
 }
 
 // 기존 비밀번호와 동일한 비밀번호 사용 못함
-// 변경 완료 disabled 상태 추가
 // 화면 마우스 스크롤
 // Input 클리어 버튼
-// 관리자 비밀번호 변경
-// 비밀번호 실패 시 스낵바 표시
 const page = () => {
   const methods = useForm<ChangePasswordFormType>({
     mode: "onChange",
