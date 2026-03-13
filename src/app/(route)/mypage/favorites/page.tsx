@@ -2,7 +2,6 @@
 
 import { FilterSection, MypageSearch } from "@/components/domain";
 import { DetailHeader } from "@/components/layout";
-import { MOCK_MYPAGE_POSTS_LIST } from "@/mock/data";
 import { MypageFavoritesList } from "./_components";
 
 // TODO(수현): 바로 다음 Pr에 수정되서 올라갈 예정입니다. 지금은 빌드에러가 나기 때문에 주석처리했습니다.
