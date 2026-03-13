@@ -1,17 +1,18 @@
-import { MypagePostsResponseType, MypagePostsType } from "../types/MypagePostsResponseType";
+import { MypagePostsResponseType } from "../types/MypagePostsResponseType";
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 import useAppInfiniteQuery from "@/api/_base/query/useAppInfiniteQuery";
-import { CategoryType, ItemStatus, PostType, SortType } from "@/types";
+import { CategoryType, ItemStatus, PostType } from "@/types";
 import { InfiniteData, keepPreviousData } from "@tanstack/react-query";
 import { PostItem } from "../../post";
 import { useAuthStore } from "@/store";
 import { useEffect, useState } from "react";
+import { SortFilterValue } from "@/components/domain/FilterSectionBottomSheet/_types/types";
 
 interface useGetUsersMePostsParams {
   postType?: PostType;
   postStatus?: ItemStatus;
   category?: CategoryType;
-  sortType?: SortType;
+  sortType?: SortFilterValue;
   startDate?: string | null;
   endDate?: string | null;
   keyword?: string;
