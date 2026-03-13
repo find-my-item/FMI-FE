@@ -1,4 +1,4 @@
-import { CategoryType, PostType } from "@/types";
+import { CategoryType, ItemStatus, PostType } from "@/types";
 
 export type MessageType = "TEXT" | "IMAGE";
 
@@ -9,6 +9,8 @@ export interface ChatRoomPostInfo {
   title: string;
   address: string;
   thumbnailUrl: string | null;
+  deleted: boolean;
+  postStatus: ItemStatus;
 }
 
 export interface ChatRoom {

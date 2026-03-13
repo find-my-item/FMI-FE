@@ -32,10 +32,10 @@ interface CommentListProps {
   onDeleteComment?: (commentVariables: DeleteCommentVariables) => void;
   /** 답글 좋아요 함수 */
   onFavoriteComment?: (commentId: number, isLike: boolean, queryKey: unknown[]) => void;
+  /** 댓글 페이지네이션 함수 */
+  onCommentLoadMore?: () => void;
 }
 
-// TODO(지권): 댓글 페이지네이션 백엔드 협의 필요
-// TODO(지권): 댓글 전체 수 백엔드 누락
 const CommentList = ({
   postId,
   comments,
@@ -45,6 +45,7 @@ const CommentList = ({
   useFetchReplies,
   onDeleteComment,
   onFavoriteComment,
+  onCommentLoadMore,
 }: CommentListProps) => {
   if (!isLoggedIn) return <GuestCommentUI />;
   if (!comments) return null;
@@ -57,7 +58,7 @@ const CommentList = ({
     <>
       <header className="w-full border-t border-divider-default px-5">
         <h2 className="mt-[18px] flex items-center gap-1 py-2 text-body1-semibold text-layout-header-default">
-          댓글<span>{data.length}</span>
+          댓글<span>{comments.totalCommentCount}</span>
         </h2>
       </header>
 
@@ -80,7 +81,7 @@ const CommentList = ({
         </ul>
       )}
 
-      {hasNext && <ViewMoreComment count={comments.remainingCount} />}
+      {hasNext && <ViewMoreComment count={comments.remainingCount} onClick={onCommentLoadMore} />}
     </>
   );
 };
