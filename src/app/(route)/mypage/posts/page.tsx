@@ -10,21 +10,9 @@ import {
   FindStatusFilterValue,
   StatusFilterValue,
 } from "@/components/domain/FilterSectionBottomSheet/_types/types";
-import { useEffect } from "react";
-import { MOCK_MYPAGE_POSTS_LIST } from "@/mock/data";
 
 const page = () => {
-  const { type, status, category, sort, startDate, endDate } = useFilterParams();
-  console.log(
-    "type>> ",
-    type,
-    "status>> ",
-    status,
-    "startDate>> ",
-    startDate,
-    "endDate>>> ",
-    endDate
-  );
+  const { status, findStatus, category, sort, startDate, endDate } = useFilterParams();
 
   const {
     data: PostsData,
@@ -32,19 +20,13 @@ const page = () => {
     hasNextPage,
     isFetchingNextPage,
   } = useGetUsersMePosts({
-    postType: type as StatusFilterValue,
-    postStatus: status as FindStatusFilterValue,
+    postType: status as StatusFilterValue,
+    postStatus: findStatus as FindStatusFilterValue,
     category,
     startDate,
     endDate,
     sortType: sort ?? "LATEST",
   });
-
-  useEffect(() => {
-    if (PostsData) {
-      console.log("데이터 도착! >> ", PostsData);
-    }
-  }, [PostsData]);
 
   return (
     <>
@@ -54,10 +36,6 @@ const page = () => {
         <MypageSearch />
 
         <FilterSection pageType="MY_POSTS" />
-
-        {/* <ErrorBoundary toastMessage="목록을 불러올 수 없어요. 다시 시도해 주세요.">
-          <MypagePostsList postsData={MOCK_MYPAGE_POSTS_LIST} />
-        </ErrorBoundary> */}
 
         <ErrorBoundary toastMessage="목록을 불러올 수 없어요. 다시 시도해 주세요.">
           <MypagePostsList
