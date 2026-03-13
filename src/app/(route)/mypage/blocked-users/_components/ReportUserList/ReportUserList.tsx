@@ -2,7 +2,7 @@
 
 import { BlockUserItem, useDeleteBlockUser, useGetBlockUser } from "@/api/fetch/report";
 import { Button, ProfileAvatar } from "@/components/common";
-import { LoadingState } from "@/components/state";
+import { EmptyState, LoadingState } from "@/components/state";
 import { useToast } from "@/context/ToastContext";
 import { useInfiniteScroll } from "@/hooks";
 import { useEffect } from "react";
@@ -25,6 +25,12 @@ const ReportUserList = () => {
 
   return isLoading ? (
     <LoadingState />
+  ) : blockUserList?.length === 0 ? (
+    <EmptyState
+      icon={{ iconName: "NoComments", iconSize: 70 }}
+      title="차단한 유저가 없어요"
+      description={"아직 차단한 유저가 없습니다.\n유저를 차단하면 이곳에 표기됩니다."}
+    />
   ) : (
     <ul className="flex flex-col gap-3 py-4">
       {blockUserList?.map((item) => (
