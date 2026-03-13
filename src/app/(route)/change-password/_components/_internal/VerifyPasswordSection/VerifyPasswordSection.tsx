@@ -51,7 +51,7 @@ const VerifyPasswordSection = () => {
             maxLength: 16,
             disabled: isVerifySuccess,
             validation: {
-              required: "현재 비밀번호",
+              required: true,
             },
           }}
           btnOption={{

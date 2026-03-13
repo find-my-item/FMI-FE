@@ -1,3 +1,6 @@
+"use client";
+"use no memo";
+
 import { FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { useFormContext } from "react-hook-form";

@@ -30,6 +30,7 @@ const PasswordConfirmSection = () => {
             minLength: 8,
             maxLength: 16,
             validation: {
+              required: true,
               deps: ["newPasswordConfirm"],
               pattern: {
                 value:
@@ -56,10 +57,10 @@ const PasswordConfirmSection = () => {
             name: "newPasswordConfirm",
             type: "password",
             placeholder: "비밀번호를 한 번 더 입력해 주세요.",
-            required: true,
             minLength: 8,
             maxLength: 16,
             validation: {
+              required: true,
               validate: (value: string) =>
                 value === getValues("newPassword") || "비밀번호가 일치하지 않습니다.",
             },
