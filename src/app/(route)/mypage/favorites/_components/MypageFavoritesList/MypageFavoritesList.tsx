@@ -1,26 +1,44 @@
-import { MypagePostListType } from "@/api/fetch/post";
-import { useGetUserMeFavorites } from "@/api/fetch/user/api/useGetUserMeFavorites";
+import { PostItem } from "@/api/fetch/post";
 import { MypageEmptyUI, PostListItem } from "@/components/domain";
+import { LoadingState } from "@/components/state";
+import { useInfiniteScroll } from "@/hooks";
 
 interface MypageFavoritesListProps {
-  data: MypagePostListType[];
+  favoritesData?: PostItem[];
+  hasNextPage?: boolean;
+  fetchNextPage: () => void;
+  isFetchingNextPage: boolean;
 }
 
-const MypageFavoritesList = ({ data }: MypageFavoritesListProps) => {
-  // const { data: FavoritesData } = useGetUserMeFavorites({});
+const MypageFavoritesList = ({
+  favoritesData,
+  fetchNextPage,
+  hasNextPage,
+  isFetchingNextPage,
+}: MypageFavoritesListProps) => {
+  const { ref } = useInfiniteScroll({
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  });
 
+  if (favoritesData === undefined) return <LoadingState />;
   return (
     <section>
       <h2 className="sr-only">내 즐겨찾기 목록 영역</h2>
 
-      {data.length === 0 ? (
+      {favoritesData.length === 0 ? (
         <MypageEmptyUI pageType="favorites" />
       ) : (
-        <ul>
-          {data.map((item) => (
-            <PostListItem key={item.postId} post={item} />
-          ))}
-        </ul>
+        <>
+          <ul>
+            {favoritesData.map((item, index) => (
+              <PostListItem key={index} post={item} />
+            ))}
+          </ul>
+
+          <div ref={ref} className="h-10" />
+        </>
       )}
     </section>
   );

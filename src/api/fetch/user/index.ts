@@ -4,3 +4,4 @@ export * from "./types/UserProfileIdDataType";
 export { useGetUserProfileById } from "./api/useGetUserProfileById";
 export { useGetUsersMe } from "./api/useGetUsersMe";
 export { usePatchProfile } from "./api/usePatchProfile";
+export { useGetUserMeFavorites } from "./api/useGetUserMeFavorites";
