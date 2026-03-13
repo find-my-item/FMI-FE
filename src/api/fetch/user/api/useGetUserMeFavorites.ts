@@ -1,6 +1,6 @@
 import { MypagePostsResponseType } from "../types/MypagePostsResponseType";
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
-import { CategoryType, ItemStatus, PostType, SortType } from "@/types";
+import { CategoryType, PostType, SortType } from "@/types";
 import useAppInfiniteQuery from "@/api/_base/query/useAppInfiniteQuery";
 import { PostItem } from "../../post";
 import { InfiniteData, keepPreviousData } from "@tanstack/react-query";
