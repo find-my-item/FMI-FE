@@ -1,5 +1,5 @@
 import { Icon } from "@/components/common";
-import { cn } from "@/utils";
+import { cn, formatCappedNumber } from "@/utils";
 
 /**
  * 댓글 좋아요 및 답글 작성
@@ -63,7 +63,7 @@ const CommentFooter = ({
           size={16}
           className={cn(isLike ? "text-system-favorite" : "text-border-divider-default")}
         />
-        <span>좋아요 {likeCount}</span>
+        <span>좋아요 {formatCappedNumber(likeCount, 999)}</span>
       </button>
 
       {isReply && (
