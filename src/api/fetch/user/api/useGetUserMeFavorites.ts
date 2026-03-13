@@ -1,51 +1,56 @@
 import { MypagePostsResponseType } from "../types/MypagePostsResponseType";
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
-import { ItemStatus, PostType } from "@/types";
-import { SortFilterValue } from "@/components/domain/FilterSectionBottomSheet/_types/types";
+import { CategoryType, ItemStatus, PostType, SortType } from "@/types";
 import useAppInfiniteQuery from "@/api/_base/query/useAppInfiniteQuery";
 import { PostItem } from "../../post";
 import { InfiniteData, keepPreviousData } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import { useAuthStore } from "@/store";
 
 interface useGetUserMeFavoritesProps {
-  cursor?: number;
-  size?: number;
+  address?: string;
   postType?: PostType;
-  postStatus?: ItemStatus;
-  sortType?: SortFilterValue;
-  category?: string;
+  category?: CategoryType;
+  sortType?: SortType;
+  keyword?: string;
+  size?: number;
 }
 
 export const useGetUserMeFavorites = ({
-  cursor,
-  size = 10,
+  address,
   postType,
-  postStatus = "SEARCHING",
   category,
   sortType = "LATEST",
+  keyword,
+  size = 10,
 }: useGetUserMeFavoritesProps) => {
-  const queryParams = new URLSearchParams();
+  const isAuthInitialized = useAuthStore((state) => state.isAuthInitialized);
+  const [isMounted, setIsMounted] = useState(false);
 
-  queryParams.set("size", String(size));
-  queryParams.set("postStatus", postStatus);
-  queryParams.set("sortType", sortType);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const queryParams = new URLSearchParams();
+  queryParams.set("address", address ?? "");
 
   if (postType) queryParams.set("postType", postType);
   if (category) queryParams.set("category", category);
+  if (keyword) queryParams.set("keyword", keyword);
 
-  if (cursor !== undefined) queryParams.append("cursor", cursor.toString());
-  if (size !== undefined) queryParams.append("size", size.toString());
+  queryParams.set("size", size.toString());
 
   return useAppInfiniteQuery<MypagePostsResponseType, ApiBaseResponseType<null>, PostItem[]>(
     "auth",
-    ["/users/me/favorites", postType, postStatus, category, sortType, size],
+    ["/users/me/favorites", address, postType, category, sortType, keyword, size],
     `/users/me/favorites?${queryParams.toString()}`,
     {
       placeholderData: keepPreviousData,
       getNextPageParam: (lastPage) => lastPage.result.nextCursor ?? undefined,
       select: (data: InfiniteData<MypagePostsResponseType>) =>
-        data.pages.flatMap((page) => page.result.posts),
+        data.pages.flatMap((page) => page.result.postList),
       throwOnError: true,
-      suspense: true,
+      enabled: isMounted && isAuthInitialized,
     }
   );
 };

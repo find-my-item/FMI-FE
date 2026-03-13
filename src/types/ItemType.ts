@@ -45,6 +45,8 @@ export type ItemStatus = "SEARCHING" | "FOUND";
 
 export type ActivityType = "POST" | "COMMENT" | "FAVORITE" | "INQUIRY" | "REPORT";
 
+export type SortType = "LATEST" | "OLDEST" | "MOST_FAVORITED" | "MOST_VIEWED";
+
 export type SimpleSortType = "LATEST" | "OLDEST";
 
 export type RequestType = "ALL" | "PENDING" | "REVIEWED" | "RESOLVED";
