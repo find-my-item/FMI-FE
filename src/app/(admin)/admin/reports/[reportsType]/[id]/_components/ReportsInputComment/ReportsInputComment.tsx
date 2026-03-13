@@ -23,19 +23,24 @@ const ReportsInputComment = ({ reportsId, reportsType }: ReportsInputCommentProp
   });
 
   const onSubmit = async (data: { content: string; images: string[] }) => {
-    let uploadedImages: string[] = [];
+    if (reportsType === "inquiry") {
+      await mutateAsync({ content: data.content, images: [], fileImages: images });
+    } else {
+      let uploadedImages: string[] = [];
 
-    if (images.length > 0) {
-      const formData = new FormData();
-      images.forEach((image) => {
-        formData.append("image", image);
-      });
+      if (images.length > 0) {
+        const formData = new FormData();
+        images.forEach((image) => {
+          formData.append("image", image);
+        });
 
-      const response = await uploadImages(formData);
-      uploadedImages = response.result || [];
+        const response = await uploadImages(formData);
+        uploadedImages = response.result || [];
+      }
+
+      await mutateAsync({ content: data.content, images: uploadedImages });
     }
 
-    await mutateAsync({ content: data.content, images: uploadedImages });
     methods.reset({ content: "", images: [] });
     setImages([]);
   };

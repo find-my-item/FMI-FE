@@ -24,4 +24,5 @@ export interface InquiryComments {
   profileImg: string;
   createdAt: string;
   imageList: string[];
+  admin?: boolean;
 }

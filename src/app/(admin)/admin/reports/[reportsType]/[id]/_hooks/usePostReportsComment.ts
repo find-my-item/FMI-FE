@@ -11,9 +11,20 @@ export const usePostReportsComment = ({ reportsId, reportsType }: UsePostReports
   const inquiryMutation = usePostInquiryComments(reportsId);
   const reportMutation = usePostReportComments(reportsId);
 
-  const mutateAsync = async (data: { content: string; images: string[] }) => {
+  const mutateAsync = async (data: { content: string; images: string[]; fileImages?: File[] }) => {
     if (reportsType === "inquiry") {
-      return inquiryMutation.mutateAsync(data);
+      const formData = new FormData();
+      const request = {
+        content: data.content,
+      };
+
+      formData.append("comment", new Blob([JSON.stringify(request)], { type: "application/json" }));
+
+      data.fileImages?.forEach((file) => {
+        formData.append("images", file);
+      });
+
+      return inquiryMutation.mutateAsync(formData);
     }
     return reportMutation.mutateAsync({ adminAnswer: data.content, images: data.images });
   };

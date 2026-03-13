@@ -11,7 +11,7 @@ const AdminReportsCommentSection = ({ comments }: AdminReportsCommentSectionProp
 
   const commentItemVM = (item: InquiryComments): ReadOnlyCommentItemProps => {
     return {
-      isAdmin: false,
+      isAdmin: !!item.admin,
       userImageUrl: item.profileImg || "",
       userName: item.authorName,
       content: item.content,

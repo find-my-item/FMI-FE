@@ -19,4 +19,7 @@ export interface InquiryCommentsItem {
   createdAt: string;
   canEdit: boolean;
   canDelete: boolean;
+  profileImg: string;
+  imageList: string[];
+  admin: boolean;
 }

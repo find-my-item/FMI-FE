@@ -33,6 +33,7 @@ const AdminReportsView = ({ id, type }: AdminReportsViewProps) => {
             profileImg: reportData.adminProfileImg,
             createdAt: reportData.answeredAt,
             imageList: reportData.answerImageList || [],
+            admin: true,
           },
         ];
       }
