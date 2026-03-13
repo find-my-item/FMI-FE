@@ -7,6 +7,11 @@ import { ReportStatus } from "@/types";
 interface UpdateReportStatusRequest {
   status: ReportStatus;
 }
+const STATUS_TOAST_MESSAGE: Record<ReportStatus, string> = {
+  PENDING: "접수 상태로 변경되었어요",
+  REVIEWED: "처리 중 상태로 변경되었어요",
+  RESOLVED: "처리 완료 상태로 변경되었어요",
+};
 
 export const usePutReportStatus = (reportId: number) => {
   const { addToast } = useToast();
@@ -17,14 +22,17 @@ export const usePutReportStatus = (reportId: number) => {
     `/admin/reports/${reportId}/status`,
     "put",
     {
-      onSuccess: () => {
+      onSuccess: (_, variables) => {
         queryclient.invalidateQueries({
           queryKey: ["detail-report", reportId],
         });
         queryclient.invalidateQueries({
           queryKey: ["reports"],
         });
-        addToast("상태가 변경되었습니다.", "success");
+        addToast(STATUS_TOAST_MESSAGE[variables.status], "success");
+      },
+      onError: () => {
+        addToast("게시글 상태 변경에 실패했어요", "error");
       },
     }
   );
