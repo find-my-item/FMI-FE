@@ -1,7 +1,12 @@
 import { NextResponse, NextRequest } from "next/server";
+import { jwtDecode } from "jwt-decode";
+
+interface JwtPayload {
+  role?: string;
+}
 
 export function middleware(request: NextRequest) {
-  const accessToken = request.cookies.has("access_token");
+  const accessToken = request.cookies.get("access_token")?.value;
   const refreshToken = request.cookies.has("refresh_token");
 
   const currentPath = request.nextUrl.pathname;
@@ -14,6 +19,11 @@ export function middleware(request: NextRequest) {
     currentPath.startsWith("/chat") ||
     currentPath.startsWith("/change-password") ||
     currentPath.startsWith("/alert");
+  currentPath.startsWith("/alert") ||
+    currentPath.startsWith("/change-password") ||
+    currentPath.startsWith("/admin");
+
+  const isAdminPath = currentPath.startsWith("/admin");
 
   const isSessionExpired = request.nextUrl.searchParams.get("reason") === "session-expired";
 
@@ -32,6 +42,23 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
+  // 관리자 페이지 접근하려고 할 때
+  if (isAdminPath) {
+    if (!accessToken) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+
+    try {
+      const payload = jwtDecode<JwtPayload>(accessToken);
+
+      if (payload.role !== "ADMIN") {
+        return NextResponse.redirect(new URL("/", request.url));
+      }
+    } catch {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+  }
+
   return NextResponse.next();
 }
 
@@ -42,7 +69,9 @@ export const config = {
     "/sign-up",
     "/write/:path*",
     "/chat/:path*",
+    "/alert/:path*",
     "/change-password",
     "/alert",
+    "/admin/:path*",
   ],
 };
