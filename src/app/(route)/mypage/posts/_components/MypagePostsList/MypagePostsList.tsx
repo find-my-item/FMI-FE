@@ -1,12 +1,27 @@
 import { PostItem } from "@/api/fetch/post";
 import { MypageEmptyUI, PostListItem } from "@/components/domain";
 import { LoadingState } from "@/components/state";
+import { useInfiniteScroll } from "@/hooks";
 
 interface MypagePostsListProps {
   postsData?: PostItem[];
+  fetchNextPage: () => void;
+  hasNextPage?: boolean;
+  isFetchingNextPage: boolean;
 }
 
-const MypagePostsList = ({ postsData }: MypagePostsListProps) => {
+const MypagePostsList = ({
+  postsData,
+  fetchNextPage,
+  hasNextPage,
+  isFetchingNextPage,
+}: MypagePostsListProps) => {
+  const { ref } = useInfiniteScroll({
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  });
+
   if (postsData === undefined) return <LoadingState />;
 
   return (
@@ -15,11 +30,15 @@ const MypagePostsList = ({ postsData }: MypagePostsListProps) => {
       {postsData.length === 0 ? (
         <MypageEmptyUI pageType="posts" />
       ) : (
-        <ul>
-          {postsData.map((item, index) => (
-            <PostListItem key={index} post={item} />
-          ))}
-        </ul>
+        <>
+          <ul>
+            {postsData.map((item, index) => (
+              <PostListItem key={index} post={item} />
+            ))}
+          </ul>
+
+          <div ref={ref} className="h-10" />
+        </>
       )}
     </section>
   );
