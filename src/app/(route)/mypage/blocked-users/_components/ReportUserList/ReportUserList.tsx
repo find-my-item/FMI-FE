@@ -1,14 +1,23 @@
 "use client";
 
-import { BlockUserResult, useDeleteBlockUser, useGetBlockUser } from "@/api/fetch/report";
+import { BlockUserItem, useDeleteBlockUser, useGetBlockUser } from "@/api/fetch/report";
 import { Button, ProfileAvatar } from "@/components/common";
 import { LoadingState } from "@/components/state";
 import { useToast } from "@/context/ToastContext";
+import { useInfiniteScroll } from "@/hooks";
 import { useEffect } from "react";
 
 const ReportUserList = () => {
   const { addToast } = useToast();
-  const { data: blockUserList, isLoading, isError } = useGetBlockUser();
+  const {
+    data: blockUserList,
+    isLoading,
+    isError,
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useGetBlockUser();
+  const { ref } = useInfiniteScroll({ hasNextPage, fetchNextPage, isFetchingNextPage });
 
   useEffect(() => {
     if (isError) addToast("차단된 유저 데이터를 가져오는데 실패했어요", "error");
@@ -18,16 +27,17 @@ const ReportUserList = () => {
     <LoadingState />
   ) : (
     <ul className="flex flex-col gap-3 py-4">
-      {blockUserList?.result?.map((item) => (
+      {blockUserList?.map((item) => (
         <ReportUserItem key={item.userId} data={item} />
       ))}
+      <div ref={ref} className="h-[100px]" />
     </ul>
   );
 };
 
 export default ReportUserList;
 
-const ReportUserItem = ({ data }: { data: BlockUserResult }) => {
+const ReportUserItem = ({ data }: { data: BlockUserItem }) => {
   const { profileImage, nickname, userId } = data;
   const { mutateAsync: deleteBlockUser } = useDeleteBlockUser();
 
