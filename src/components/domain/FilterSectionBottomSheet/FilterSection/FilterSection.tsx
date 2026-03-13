@@ -18,11 +18,14 @@ import {
 } from "../_types/types";
 import { FiltersStateType } from "../_types/filtersStateType";
 import { DEFAULT_FILTERS } from "../_constants/DEFAULT_FILTERS";
-import { filterSelectionState, normalizedFilterValues } from "../utils/deriveFilterParams";
+import {
+  filterSelectionState,
+  normalizedFilterValues,
+} from "../../../../utils/deriveFilterParams/deriveFilterParams";
 import { useFilterParams } from "@/hooks/domain";
 import { TABS } from "../_constants/TABS";
 import DateRangeBottomSheet from "../../DateRangeBottomSheet/DateRangeBottomSheet";
-import { formatYmdLabel, parseYmd } from "../utils/parseDateFilter";
+import { getDateRangeLabel } from "@/utils/getDateRangeLabel/getDateRangeLabel";
 
 /**
  * @author jikwon (Original)
@@ -51,21 +54,30 @@ interface FilterSectionProps {
 }
 
 const FilterSection = ({ pageType = "LIST" }: FilterSectionProps) => {
-  const { region, category, sort, status, findStatus, date } = useFilterParams();
+  const { region, category, sort, status, findStatus, startDate, endDate } = useFilterParams();
   const [filters, setFilters] = useState<FiltersStateType>(DEFAULT_FILTERS);
   const [selectedTab, setSelectedTab] = useState<FilterTab>("region");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isDateOpen, setIsDateOpen] = useState(false);
 
   const { normalizedCategory, normalizedSort, normalizedStatus, normalizedFindStatus } =
-    normalizedFilterValues({ region, category, sort, status, findStatus, date });
+    normalizedFilterValues({ region, category, sort, status, findStatus });
 
-  const selectionState = filterSelectionState({ region, category, sort, status, findStatus, date });
+  const selectionState = filterSelectionState({
+    region,
+    category,
+    sort,
+    status,
+    findStatus,
+    startDate,
+    endDate,
+  });
 
   const openSheet = (tab: FilterTab) => {
     setFilters({
       ...DEFAULT_FILTERS,
-      date: date ?? "",
+      startDate: startDate ?? "",
+      endDate: endDate ?? "",
       region: region ?? "",
       category: normalizeEnumValue<Exclude<CategoryFilterValue, undefined>>(category),
       sort: normalizeEnumValue<SortFilterValue>(sort) ?? "LATEST",
@@ -81,8 +93,7 @@ const FilterSection = ({ pageType = "LIST" }: FilterSectionProps) => {
     setIsFilterOpen(true);
   };
 
-  const dateObj = parseYmd(date);
-  const dateLabel = dateObj ? formatYmdLabel(dateObj) : "기간";
+  const dateLabel = getDateRangeLabel(startDate, endDate);
 
   const filterConfigs: Record<FilterTab, any> = {
     date: {
@@ -114,10 +125,10 @@ const FilterSection = ({ pageType = "LIST" }: FilterSectionProps) => {
       iconPosition: "trailing",
     },
     findStatus: {
-      ariaLabel: "찾음여부 필터",
+      ariaLabel: "찾음 여부 필터",
       onSelected: selectionState.isFindStatusSelected,
       icon: { name: "ArrowDown", size: 12 },
-      label: (normalizedFindStatus && FIND_STATUS_LABEL_MAP[normalizedFindStatus]) ?? "찾음여부",
+      label: (normalizedFindStatus && FIND_STATUS_LABEL_MAP[normalizedFindStatus]) ?? "찾음 여부",
       iconPosition: "trailing",
     },
     status: {

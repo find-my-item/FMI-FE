@@ -14,7 +14,10 @@ const PostChipSection = ({ chipData }: PostChipSectionProps) => {
 
   return (
     <div className="flex gap-2">
-      <Chip type="brandSubtle" label={getItemStatusLabel(postStatus)} />
+      <Chip
+        type={postStatus === "FOUND" ? "toast" : "brandSubtle"}
+        label={getItemStatusLabel(postStatus)}
+      />
       <Chip type="neutralStrong" label={getItemCategoryLabel(category)} />
     </div>
   );

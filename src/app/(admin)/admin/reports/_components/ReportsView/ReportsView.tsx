@@ -1,43 +1,44 @@
 "use client";
 
-import { useState } from "react";
 import { Tab } from "@/components/domain";
-import { AdminFilter, AdminSearch } from "../../../_components";
-import { AdminFilterItemType } from "../../../_types";
+import { normalizeEnumValue } from "@/utils";
+import { InquiryStatus, ReportStatus } from "@/types";
 import ReportsList from "../ReportsList/ReportsList";
-import { ReportsTabType } from "../../_types/ReportsTabType";
+import { AdminSearch } from "../../../_components";
 import { REPORTS_TAB } from "../../_constants/REPORTS_TAB";
-
-// TODO(지권): 추후 필터 기능 추가
-const reportsFilters: AdminFilterItemType[] = [
-  {
-    label: "상태",
-    onSelected: false,
-    onClick: () => {},
-  },
-  {
-    label: "답변",
-    onSelected: false,
-    onClick: () => {},
-  },
-];
+import { ReportsFilter } from "../_internal";
+import { useReportsQuery } from "../../_hooks/useReportsQuery";
 
 const ReportsView = () => {
-  const [activeTab, setActiveTab] = useState<ReportsTabType>("report");
+  const { searchParams, keyword, activeTab, handleKeywordSearch, handleTabChange } =
+    useReportsQuery();
+
+  const reportStatus = normalizeEnumValue<ReportStatus>(searchParams.get("status"));
+  const inquiryStatus = normalizeEnumValue<InquiryStatus>(searchParams.get("status"));
+
+  const answered =
+    searchParams.get("answered") !== null ? searchParams.get("answered") === "true" : undefined;
 
   return (
     <div className="h-base">
       <Tab
         tabs={REPORTS_TAB}
         selected={activeTab}
-        onValueChange={(key) => setActiveTab(key as ReportsTabType)}
+        onValueChange={(key) => handleTabChange(key)}
+        className="sticky left-0 top-[56px]"
       />
 
-      <AdminSearch onEnter={() => {}} />
+      <AdminSearch onEnter={handleKeywordSearch} defaultValue={keyword} />
 
-      <AdminFilter filters={reportsFilters} />
+      <ReportsFilter currentParams={searchParams} activeTab={activeTab} />
 
-      <ReportsList activeTab={activeTab} />
+      <ReportsList
+        activeTab={activeTab}
+        keyword={keyword}
+        reportStatus={activeTab === "report" ? reportStatus : undefined}
+        inquiryStatus={activeTab === "inquiry" ? inquiryStatus : undefined}
+        answered={answered}
+      />
     </div>
   );
 };

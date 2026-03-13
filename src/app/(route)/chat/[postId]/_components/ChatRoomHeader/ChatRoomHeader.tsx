@@ -6,16 +6,42 @@ import ChatChip from "../ChatChip/ChatChip";
 import ChatRoomHeaderInfoButton from "../ChatRoomHeaderInfoButton/ChatRoomHeaderInfoButton";
 import { ChatRoomResponse } from "@/api/fetch/chatRoom/types/ChatRoomResponse";
 import Link from "next/link";
+import { ReactNode } from "react";
+
+interface LinkWrapperProps {
+  deleted: boolean;
+  children: ReactNode;
+  href: string;
+}
 
 interface ChatRoomHeaderProps {
   chatRoom: ChatRoomResponse | undefined;
   roomId: number;
 }
 
+const LinkWrapper = ({ deleted, children, href }: LinkWrapperProps) => {
+  return (
+    <>
+      {deleted ? (
+        <div className="flex select-none items-center gap-4 px-4 opacity-30">{children}</div>
+      ) : (
+        <Link
+          href={href}
+          aria-label="게시글 상세 페이지 이동"
+          className="flex items-center gap-4 px-4"
+        >
+          {children}
+        </Link>
+      )}
+    </>
+  );
+};
+
 const ChatRoomHeader = ({ chatRoom, roomId }: ChatRoomHeaderProps) => {
   const router = useRouter();
   if (!chatRoom) return null;
-  const { address, postType, title, thumbnailUrl, postId, category } = chatRoom.postInfo;
+  const { address, postType, title, thumbnailUrl, postId, category, postStatus, deleted } =
+    chatRoom.postInfo;
   const { nickname } = chatRoom.opponentUser;
 
   return (
@@ -35,11 +61,7 @@ const ChatRoomHeader = ({ chatRoom, roomId }: ChatRoomHeaderProps) => {
         <ChatRoomHeaderInfoButton roomId={roomId} />
       </nav>
 
-      <Link
-        href={`/list/${postId}`}
-        className="flex items-center gap-4 px-4"
-        aria-label="게시글 상세 페이지 이동"
-      >
+      <LinkWrapper deleted={deleted} href={`/list/${postId}`}>
         <div className="shrink-0">
           <ListItemImage
             alt="채팅방 게시글 썸네일"
@@ -50,12 +72,14 @@ const ChatRoomHeader = ({ chatRoom, roomId }: ChatRoomHeaderProps) => {
         </div>
         <div className="flex min-w-0 flex-col">
           <div className="flex items-center gap-1">
-            <ChatChip postMode={postType} />
-            <h2 className="truncate text-body1-semibold text-layout-header-default">{title}</h2>
+            <ChatChip postMode={postType} postStatus={postStatus} />
+            <h2 className="truncate text-body1-semibold text-layout-header-default">
+              {deleted ? `삭제됨 ${title}` : title}
+            </h2>
           </div>
           <p className="h-4 text-caption1-medium text-layout-body-default">{address}</p>
         </div>
-      </Link>
+      </LinkWrapper>
     </header>
   );
 };

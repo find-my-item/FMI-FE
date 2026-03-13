@@ -1,49 +1,34 @@
-import { AdminGuestInquiryItem, AdminInquiryItem, AdminReportItem } from "@/api/fetch/admin";
+import { AdminGuestInquiryItem, AdminInquiriesItem, AdminReportItem } from "@/api/fetch/admin";
 import { AdminReportsItemData } from "../../_types";
 import {
   ProcessStatusBadgeConfig,
   ReplyStatusBadgeConfig,
 } from "../AdminStatusBadgeConfig/AdminStatusBadgeConfig";
-
-const getReportTitle = (item: AdminReportItem): string => {
-  switch (item.targetType) {
-    case "POST":
-      return "게시글 신고";
-    case "COMMENT":
-      return "댓글 신고";
-    case "USER":
-      return "사용자 신고";
-    case "CHAT":
-      return "채팅 신고";
-    default:
-      return "신고";
-  }
-};
+import { REPORT_TYPE_TITLE } from "../../_constants/REPORT_TYPE_TITLE";
 
 export const toReportItemVM = (item: AdminReportItem): AdminReportsItemData => {
   return {
     href: `/admin/reports/report/${item.reportId}`,
-    title: getReportTitle(item),
+    title: REPORT_TYPE_TITLE[item.reportType],
     content: item.reason,
-    nickname: item.reporterNickname,
+    nickname: item.nickname,
     createdAt: item.createdAt,
 
     processStatus: ProcessStatusBadgeConfig[item.status],
-    answerStatus: ReplyStatusBadgeConfig.UNANSWERED, // TODO(지권): 백엔드 API 누락
+    answerStatus: ReplyStatusBadgeConfig(item.answered),
   };
 };
 
-export const toInquiryItemVM = (item: AdminInquiryItem): AdminReportsItemData => {
+export const toInquiryItemVM = (item: AdminInquiriesItem): AdminReportsItemData => {
   return {
-    href: `/admin/inquiries/inquiry/${item.inquiryId}`,
+    href: `/admin/reports/inquiry/${item.inquiryId}`,
     title: item.title,
-    content: "",
-    nickname: item.userNickname,
+    content: item.content,
+    nickname: item.nickname,
     createdAt: item.createdAt,
 
     processStatus: ProcessStatusBadgeConfig[item.status],
-
-    answerStatus: ReplyStatusBadgeConfig.ANSWERED, // TODO(지권): 백엔드 API 누락
+    answerStatus: ReplyStatusBadgeConfig(item.answered),
   };
 };
 
@@ -51,11 +36,11 @@ export const toGuestInquiryItemVM = (item: AdminGuestInquiryItem): AdminReportsI
   return {
     href: `/admin/guest-inquiries/${item.inquiryId}`,
     title: item.title,
-    content: item.reason,
-    nickname: item.userEmail,
+    content: item.content,
+    nickname: item.email,
     createdAt: item.createdAt,
 
     processStatus: ProcessStatusBadgeConfig[item.status],
-    answerStatus: ReplyStatusBadgeConfig.UNANSWERED, // TODO(지권): 백엔드 API 누락
+    answerStatus: ReplyStatusBadgeConfig(item.answered),
   };
 };

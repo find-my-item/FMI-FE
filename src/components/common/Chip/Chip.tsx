@@ -32,6 +32,7 @@ const TypeMap: Record<ChipType, string> = {
     "bg-fill-brand-subtle-default text-brand-normal-default text-caption2-semibold !py-1 !px-2",
   toast: "bg-toast text-white",
   neutralDisabled: "bg-fill-neutral-strong-disabled text-neutral-strong-default",
+  brandSubtleHover: "bg-fill-brand-subtle-hover text-layout-header-default",
 };
 
 const Chip = ({ label, type = "brandSubtle" }: ChipProps) => {

@@ -1,6 +1,9 @@
+"use client";
+
 import { AxiosError } from "axios";
-import { QueryKey, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/context/ToastContext";
+import { useSnackBar } from "@/context/SnackBarContext";
 import useAppMutation from "@/api/_base/query/useAppMutation";
 import { BLOCK_ERROR_MESSAGE } from "./BLOCK_ERROR_MESSAGE";
 import { useRouter } from "next/navigation";
@@ -12,15 +15,17 @@ interface UseBlockParams {
 
 const useBlock = ({ onClose, userId }: UseBlockParams) => {
   const toast = useToast();
+  const { showSnackBar } = useSnackBar();
   const router = useRouter();
   const queryClient = useQueryClient();
 
   return useAppMutation<void, unknown, AxiosError>("auth", `/reports/${userId}/block`, "post", {
     onSuccess: () => {
-      toast.addToast("작성자를 차단했어요", "success");
+      showSnackBar("유저를 차단했어요", "차단 목록으로 이동", () => {
+        router.push("/mypage/blocked-users");
+      });
       queryClient.invalidateQueries({ queryKey: ["user-block-list"] });
       queryClient.invalidateQueries({ queryKey: ["posts"] });
-      // TODO(지권): 기획에 따라 변경 가능
       router.replace("/list");
       onClose();
     },

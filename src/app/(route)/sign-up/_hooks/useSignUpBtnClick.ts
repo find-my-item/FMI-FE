@@ -1,11 +1,10 @@
 import { useFormContext, useWatch } from "react-hook-form";
 import { useToast } from "@/context/ToastContext";
 import { useEffect, useMemo, useState } from "react";
-import { useNicknameCheck } from "./useNicknameCheck";
 import { EMAIL_ERROR_MESSAGE, EMAIL_CHECK_CODE_MESSAGE } from "../_constants/SIGNUP_ERROR_MESSAGE";
 import { throttle } from "lodash";
 import { useApiCheckCode, useApiSendEmail } from "@/api/fetch/auth";
-import { useErrorToast } from "@/hooks/domain";
+import { useErrorToast, useNicknameCheck } from "@/hooks/domain";
 
 export const useSignUpBtnClick = () => {
   const { getValues, trigger, control } = useFormContext();
@@ -22,7 +21,7 @@ export const useSignUpBtnClick = () => {
 
   const { mutate: EmailMutate } = useApiSendEmail();
   const { mutate: CodeMutate } = useApiCheckCode();
-  const { handleClickNickname, isNicknameVerified } = useNicknameCheck();
+  const { handleClickNickname, isNicknameVerified, isNicknameDisabled } = useNicknameCheck();
 
   const currentEmailAuth = useWatch({
     control,
@@ -30,8 +29,9 @@ export const useSignUpBtnClick = () => {
   });
 
   useEffect(() => {
+    if (isEmailAuthDisabled) return;
     setIsEmailAuthVerified(false);
-  }, [currentEmailAuth]);
+  }, [currentEmailAuth, isEmailAuthDisabled]);
 
   const handlerToClick = useMemo(
     () =>
@@ -99,5 +99,6 @@ export const useSignUpBtnClick = () => {
     isEmailDisabled,
     isEmailAuthVerified,
     isNicknameVerified,
+    isNicknameDisabled,
   };
 };

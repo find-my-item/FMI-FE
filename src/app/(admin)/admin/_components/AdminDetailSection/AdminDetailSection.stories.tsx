@@ -22,12 +22,15 @@ const meta: Meta<typeof AdminDetailSection> = {
   ],
   args: {
     data: {
+      inquiryId: 1,
       title: "비회원 문의 제목입니다.",
-      userName: "닉네임",
-      createdAt: "2026-01-01",
       content: "문의 내용입니다.",
+      inquiryType: "TECHNICAL",
+      email: "asd@asd.com",
+      createdAt: "2026-01-01T00:00:00",
       status: "RECEIVED",
-      replyStatus: "UNANSWERED",
+      answered: true,
+      comments: [],
     },
   },
 };

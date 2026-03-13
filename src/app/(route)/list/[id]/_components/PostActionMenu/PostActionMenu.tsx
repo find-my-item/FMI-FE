@@ -9,7 +9,7 @@ import ModalLayout from "@/components/common/Modal/_internal/ModalLayout";
 import { ACTION_MENU } from "./ACTION_MENU_STYLES";
 import { PostReportBlockActions, ReportModal } from "@/components/domain";
 import { PostActionData } from "../../_types/PostActionType";
-import UserBlockModal from "@/components/domain/PostReportBlockActions/_internal/UserBlockModal/UserBlockModal";
+import UserBlockModal from "@/components/domain/PostReportBlockActions/UserBlockModal/UserBlockModal";
 
 interface PostOptionBoxProps {
   open: boolean;
@@ -25,8 +25,8 @@ const PostActionMenu = ({ open, onClose, postId, postData }: PostOptionBoxProps)
   const [isReportOpen, setIsReportOpen] = useState(false);
   const [isBlockOpen, setIsBlockOpen] = useState(false);
 
-  const { mutate: putPostStatus } = usePutPostStatus(postId);
   const isFound = postStatus === "FOUND";
+  const { mutate: putPostStatus } = usePutPostStatus(postId, isFound);
 
   const handleEditPost = () => {
     onClose();
@@ -44,11 +44,10 @@ const PostActionMenu = ({ open, onClose, postId, postData }: PostOptionBoxProps)
     <>
       <div
         className={cn(
-          "absolute left-[40%] top-[60%] z-10 mt-2",
+          "absolute right-0 top-full z-10 mt-2",
           "min-h-[114px] w-[218px] overflow-hidden rounded-[20px] flex-col-center",
           "border border-white bg-fill-neutral-subtle-default",
-          "text-nowrap text-h3-medium text-neutral-normal-default shadow-sm",
-          "tablet:left-[70%]"
+          "text-nowrap text-h3-medium text-neutral-normal-default shadow-sm"
         )}
       >
         {isMine ? (
@@ -65,7 +64,7 @@ const PostActionMenu = ({ open, onClose, postId, postData }: PostOptionBoxProps)
             <hr className={ACTION_MENU.hrStyle} aria-hidden="true" />
             <button className={ACTION_MENU.buttonStyle} onClick={handleStatusChange}>
               <Icon name="ArrowSwitchHorizontal" size={20} />
-              <span>{isFound ? "찾는중 상태로 변경" : "찾았음 상태로 변경"}</span>
+              <span>{isFound ? "찾았어요 상태로 변경" : "찾아요 상태로 변경"}</span>
             </button>
           </>
         ) : (

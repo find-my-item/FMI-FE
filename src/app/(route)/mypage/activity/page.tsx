@@ -1,8 +1,8 @@
 import { MypageSearch } from "@/components/domain";
 import { DetailHeader } from "@/components/layout";
-import ActivityFilter from "./_components/ActivityFilter/ActivityFilter";
 import ActivityContainer from "./_components/ActivityContainer/ActivityContainer";
 import { MOCK_MYPAGE_ACTIVITY } from "@/mock/data";
+import { ActivityFilterSection } from "./_components";
 
 const page = () => {
   return (
@@ -12,7 +12,7 @@ const page = () => {
       <div className="w-full h-base">
         <MypageSearch />
 
-        <ActivityFilter />
+        <ActivityFilterSection />
 
         <ActivityContainer activityData={MOCK_MYPAGE_ACTIVITY} />
       </div>

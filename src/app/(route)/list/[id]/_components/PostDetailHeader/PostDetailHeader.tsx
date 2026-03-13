@@ -20,7 +20,7 @@ const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
 
   return (
     <>
-      <ImageSection imageUrls={imageResponseList.map((item) => item.imgUrl)} />
+      <ImageSection imageUrls={imageResponseList} />
 
       <section
         aria-label="게시글 작성자 정보"
@@ -48,13 +48,12 @@ const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
           </div>
         </div>
 
-        {/* TODO(지권): 본인 게시글 텍스트 변경 필요 */}
         <Button
           as={Link}
           href={isMine ? "/chat" : `/chat/${id}`}
           className={cn("min-h-11 w-full py-[10px]", "tablet:flex-1")}
         >
-          {isMine ? "채팅 목록으로 이동" : "채팅하러 가기"}
+          {isMine ? "채팅 목록으로 이동하기" : "채팅하러 가기"}
         </Button>
       </section>
     </>

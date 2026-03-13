@@ -33,7 +33,7 @@ const ViewMoreComment = ({ count, ...props }: ViewMoreCommentProps) => {
         <span>댓글</span>
         <span>{count}개</span>
         <span>더 보기</span>
-        <Icon name="ArrowDownSmall" size={24} />
+        <Icon name="ArrowDownSmall" size={24} className="text-layout-header-default" />
       </button>
     </div>
   );

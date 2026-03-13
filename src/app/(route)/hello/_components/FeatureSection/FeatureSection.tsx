@@ -3,7 +3,7 @@ import { cn } from "@/utils";
 
 interface FeatureSectionContent {
   title: string;
-  description: string;
+  description: ReactNode;
 }
 
 interface FeatureSectionProps {
@@ -18,7 +18,10 @@ const FeatureSection = ({ content, variant = "default", imageSlot }: FeatureSect
   return (
     <section
       aria-labelledby={`service-introduce-${title}`}
-      className={cn("px-10 py-[60px] flex-col-center", variant === "highlight" && "bg-layoutBrand")}
+      className={cn(
+        "w-full px-10 py-[60px] flex-col-center",
+        variant === "highlight" && "bg-layoutBrand"
+      )}
     >
       {imageSlot}
       <div className="mt-10 gap-5 text-center flex-col-center">

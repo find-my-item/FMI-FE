@@ -1,28 +1,36 @@
-import { AdminFilter, AdminSearch } from "../../../_components";
-import GuestInquiriesList from "../GuestInquiriesList/GuestInquiriesList";
+"use client";
 
-// TODO(지권): 필터 기능 추가
-const guestInquiriesFilters = [
-  {
-    label: "상태",
-    onSelected: false,
-    onClick: () => {},
-  },
-  {
-    label: "답변",
-    onSelected: false,
-    onClick: () => {},
-  },
-];
+import { useRouter, useSearchParams } from "next/navigation";
+import GuestInquiriesList from "../GuestInquiriesList/GuestInquiriesList";
+import { AdminSearch } from "../../../_components";
+import { normalizeEnumValue } from "@/utils";
+import GuestInquiriesFilter from "../GuestInquiriesFilter/GuestInquiriesFilter";
 
 const GuestInquiriesView = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const params = Object.fromEntries(searchParams.entries());
+
   return (
     <div className="h-base">
-      <AdminSearch onEnter={() => {}} />
+      <AdminSearch
+        onEnter={(searchValue) => {
+          const newParams = new URLSearchParams(searchParams.toString());
+          if (searchValue) newParams.set("q", searchValue);
+          else newParams.delete("q");
+          router.replace(`/admin/guest-inquiries?${newParams.toString()}`);
+        }}
+      />
 
-      <AdminFilter filters={guestInquiriesFilters} />
+      <GuestInquiriesFilter currentParams={searchParams} />
 
-      <GuestInquiriesList />
+      <GuestInquiriesList
+        status={normalizeEnumValue(params.status) ?? ""}
+        answered={
+          params.answered === "true" ? true : params.answered === "false" ? false : undefined
+        }
+        keyword={params.q ?? ""}
+      />
     </div>
   );
 };

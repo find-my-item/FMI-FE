@@ -1,41 +1,49 @@
-import { NoticeCustomerState } from "../../_types/noticeContainer";
-import { noticeListObject } from "../../_constant/noticeListObject";
-import Customer from "../Customer/Customer";
-import { PostListItem } from "@/components/domain";
+"use client";
 
-interface NoticeView {
-  noticeCustomerState: NoticeCustomerState;
-}
+import NoticeList from "../NoticeList/NoticeList";
+import { InputSearch } from "@/components/common";
+import NoticeFilter from "../NoticeFilter/NoticeFilter";
+import { useGetNotices } from "@/api/fetch/notice";
+import { useInfiniteScroll, useSearchUpdateQueryString } from "@/hooks";
+import { FieldValues, FormProvider, useForm } from "react-hook-form";
+import { useEffect } from "react";
 
-const NoticeView = ({ noticeCustomerState }: NoticeView) => {
+const NoticeView = () => {
+  const methods = useForm({
+    mode: "onChange",
+    reValidateMode: "onChange",
+  });
+  const noticeSearch = methods.watch("noticeSearch") ?? "";
+  const { data: notices, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetNotices();
+  const { ref: noticeListRef } = useInfiniteScroll({
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  });
+  const { searchUpdateQuery } = useSearchUpdateQueryString();
+
+  const handleSearchSubmit = ({ noticeSearch }: FieldValues) => {
+    if (!noticeSearch.trim()) return;
+    searchUpdateQuery("keyword", noticeSearch);
+  };
+
+  useEffect(() => {
+    searchUpdateQuery("keyword", noticeSearch);
+  }, [noticeSearch]);
+
   return (
-    <>
-      {noticeCustomerState === "customer" ? (
-        <Customer />
-      ) : (
-        noticeListObject.map((item) => (
-          <PostListItem
-            key={item.id}
-            post={{
-              postId: item.id,
-              title: item.title,
-              summary: item.body,
-              thumbnailUrl: "",
-              address: "",
-              category: "ELECTRONICS",
-              itemStatus: "SEARCHING",
-              postType: "LOST",
-              favoriteCount: 0,
-              viewCount: 0,
-              createdAt: "",
-              new: false,
-              hot: false,
-            }}
-            linkState="notice"
-          />
-        ))
-      )}
-    </>
+    <div className="h-base">
+      <div className="px-5 py-[10px]">
+        <FormProvider {...methods}>
+          <form onSubmit={methods.handleSubmit(handleSearchSubmit)}>
+            <InputSearch name="noticeSearch" mode="RHF" placeholder="제목, 내용을 입력해 주세요." />
+          </form>
+        </FormProvider>
+      </div>
+      <NoticeFilter searchUpdateQuery={searchUpdateQuery} />
+      {notices && notices.length > 0 && <NoticeList notices={notices} />}
+      <div ref={noticeListRef} className="h-[100px]" />
+    </div>
   );
 };
 
