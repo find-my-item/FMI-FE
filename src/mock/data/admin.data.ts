@@ -159,10 +159,12 @@ export const MOCK_ADMIN_DETAIL_COMMENT_DATA: InquiryComments[] = [
   {
     id: 1,
     content: "여기에 댓글 내용이 표기됩니다.",
-    // userImageUrl: "",
     authorId: 1,
     authorName: "관리자닉네임",
     createdAt: "2025-05-06",
+    profileImg: "",
+    imageList: [],
+    admin: true,
   },
   {
     id: 2,
@@ -170,6 +172,9 @@ export const MOCK_ADMIN_DETAIL_COMMENT_DATA: InquiryComments[] = [
     authorId: 2,
     authorName: "유저닉네임",
     createdAt: "2025-05-06",
+    profileImg: "",
+    imageList: [],
+    admin: true,
   },
 ];
 

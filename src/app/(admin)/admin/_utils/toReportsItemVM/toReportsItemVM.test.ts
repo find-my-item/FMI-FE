@@ -10,7 +10,7 @@ describe("toReportItemVM", () => {
       reportId: 1,
       reportType: "SPAM",
       reason: "스팸입니다.",
-      nickname: "짱구",
+      reporterNickname: "짱구",
       createdAt: "2026-01-01",
       status: "PENDING",
       answered: false,
