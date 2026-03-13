@@ -3,7 +3,7 @@
 import { PropsWithChildren, useCallback, useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { useApiRefreshToken } from "@/api/fetch/auth";
+import authApi from "@/api/_base/axios/authApi";
 import { NotificationEventData, useNotificationSSE } from "@/api/fetch/notification";
 import { getNotificationDisplayTitle } from "@/api/fetch/notification/utils/getNotificationDisplayTitle";
 import { useSnackBar } from "@/context/SnackBarContext";
@@ -14,7 +14,6 @@ const ACCESS_TOKEN_API_PATH = "/api/auth/access-token";
 export const NotificationSSEProvider = ({ children }: PropsWithChildren) => {
   const router = useRouter();
   const queryClient = useQueryClient();
-  const { mutateAsync: refreshAccessTokenMutateAsync } = useApiRefreshToken();
   const { showSnackBar } = useSnackBar();
   const isAuthInitialized = useAuthStore((state) => state.isAuthInitialized);
   const [hasAccessToken, setHasAccessToken] = useState(false);
@@ -49,13 +48,13 @@ export const NotificationSSEProvider = ({ children }: PropsWithChildren) => {
 
   const refreshAccessToken = useCallback(async () => {
     try {
-      await refreshAccessTokenMutateAsync(undefined);
+      await authApi.post("/auth/refresh");
       return await syncAccessTokenState();
     } catch {
       setHasAccessToken(false);
       return false;
     }
-  }, [refreshAccessTokenMutateAsync, syncAccessTokenState]);
+  }, [syncAccessTokenState]);
 
   const onNotification = useCallback(
     ({ type, referenceType }: NotificationEventData) => {

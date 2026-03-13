@@ -41,6 +41,7 @@ export function useNotificationSSE({
   const consecutiveFailureRef = useRef(0);
   const enabledRef = useRef(enabled);
   const connectRef = useRef<() => Promise<void>>(async () => {});
+  const connectionVersionRef = useRef(0);
 
   enabledRef.current = enabled;
 
@@ -53,6 +54,7 @@ export function useNotificationSSE({
 
   const disconnect = useCallback(() => {
     clearReconnectTimeout();
+    connectionVersionRef.current += 1;
 
     if (eventSourceRef.current) {
       eventSourceRef.current.close();
@@ -79,8 +81,13 @@ export function useNotificationSSE({
     if (typeof window === "undefined") return;
 
     disconnect();
+    const connectionVersion = connectionVersionRef.current;
 
     const accessToken = await getAccessToken();
+
+    if (connectionVersionRef.current !== connectionVersion) {
+      return;
+    }
 
     if (!enabledRef.current || !accessToken) {
       consecutiveFailureRef.current = 0;
@@ -89,10 +96,21 @@ export function useNotificationSSE({
 
     const url = `${process.env.NEXT_PUBLIC_API_URL}/notifications/subscribe?token=${encodeURIComponent(accessToken)}`;
     const eventSource = new EventSource(url);
+
+    if (connectionVersionRef.current !== connectionVersion) {
+      eventSource.close();
+      return;
+    }
+
     eventSourceRef.current = eventSource;
 
     eventSource.addEventListener("connect", (e: MessageEvent) => {
-      if (eventSourceRef.current !== eventSource) return;
+      if (
+        connectionVersionRef.current !== connectionVersion ||
+        eventSourceRef.current !== eventSource
+      ) {
+        return;
+      }
 
       consecutiveFailureRef.current = 0;
       setIsConnected(true);
@@ -100,7 +118,12 @@ export function useNotificationSSE({
     });
 
     eventSource.addEventListener("notification", (e: MessageEvent) => {
-      if (eventSourceRef.current !== eventSource) return;
+      if (
+        connectionVersionRef.current !== connectionVersion ||
+        eventSourceRef.current !== eventSource
+      ) {
+        return;
+      }
 
       const data = JSON.parse(e.data) as NotificationEventData;
       onNotification?.(data);
@@ -108,7 +131,12 @@ export function useNotificationSSE({
 
     eventSource.onerror = () => {
       void (async () => {
-        if (eventSourceRef.current !== eventSource) return;
+        if (
+          connectionVersionRef.current !== connectionVersion ||
+          eventSourceRef.current !== eventSource
+        ) {
+          return;
+        }
 
         eventSource.close();
         eventSourceRef.current = null;
