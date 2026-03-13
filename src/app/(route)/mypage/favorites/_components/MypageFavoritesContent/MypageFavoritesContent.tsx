@@ -1,11 +1,9 @@
 "use client";
 
-import { FilterSection, MypageSearch } from "@/components/domain";
-import { DetailHeader } from "@/components/layout";
-import { useFilterParams } from "@/hooks/domain";
 import { useGetUserMeFavorites } from "@/api/fetch/user";
 import { StatusFilterValue } from "@/components/domain/FilterSectionBottomSheet/_types/types";
 import { LoadingState } from "@/components/state";
+import { useFilterParams } from "@/hooks/domain";
 import MypageFavoritesList from "../MypageFavoritesList/MypageFavoritesList";
 
 const MypageFavoritesContent = () => {
@@ -27,22 +25,12 @@ const MypageFavoritesContent = () => {
   if (isLoading) return <LoadingState />;
 
   return (
-    <>
-      <DetailHeader title="즐겨찾기 목록" />
-      <h1 className="sr-only">즐겨찾기 목록 페이지</h1>
-      <div className="w-full h-base">
-        <MypageSearch />
-
-        <FilterSection pageType="MY_FAVORITES" />
-
-        <MypageFavoritesList
-          favoritesData={FavoritesData}
-          hasNextPage={hasNextPage}
-          fetchNextPage={fetchNextPage}
-          isFetchingNextPage={isFetchingNextPage}
-        />
-      </div>
-    </>
+    <MypageFavoritesList
+      favoritesData={FavoritesData}
+      hasNextPage={hasNextPage}
+      fetchNextPage={fetchNextPage}
+      isFetchingNextPage={isFetchingNextPage}
+    />
   );
 };
 
