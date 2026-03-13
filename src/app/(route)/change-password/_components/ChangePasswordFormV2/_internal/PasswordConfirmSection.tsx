@@ -36,6 +36,9 @@ const PasswordConfirmSection = () => {
                   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=])[A-Za-z\d!@#$%^&*()_\-+=]{8,16}$/,
                 message,
               },
+              validate: (value: string) =>
+                value !== getValues("currentPassword") ||
+                "기존 비밀번호와 동일한 비밀번호는 사용할 수 없어요",
             },
           }}
           caption={{

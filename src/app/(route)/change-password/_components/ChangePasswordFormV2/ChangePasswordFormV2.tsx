@@ -12,7 +12,10 @@ import VerifyPasswordSection from "./_internal/VerifyPasswordSection";
 const ChangePasswordFormV2 = () => {
   const router = useRouter();
 
-  const { watch } = useFormContext();
+  const {
+    watch,
+    formState: { errors },
+  } = useFormContext();
 
   const { data: userData } = useGetUsersMe();
   const { mutateAsync, isPending } = usePostChangePassword();
@@ -32,11 +35,15 @@ const ChangePasswordFormV2 = () => {
   };
 
   const buttonDisabled =
-    isPending || !newPassword || !newPasswordConfirm || newPassword !== newPasswordConfirm;
+    isPending ||
+    !!errors.newPassword ||
+    !newPassword ||
+    !newPasswordConfirm ||
+    newPassword !== newPasswordConfirm;
 
   return (
-    <form className="flex h-dvh flex-col justify-between" onSubmit={handleSubmit}>
-      <div className="flex flex-col gap-5 px-5 py-[30px]">
+    <form className="contents" onSubmit={handleSubmit}>
+      <div className="flex flex-1 flex-col gap-5 px-5 py-[30px]">
         <VerifyPasswordSection />
 
         <PasswordConfirmSection />
