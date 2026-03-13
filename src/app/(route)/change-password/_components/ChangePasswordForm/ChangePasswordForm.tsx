@@ -1,56 +1,56 @@
-import { InputText } from "@/components/common";
-import { FooterButton } from "@/components/domain";
-import { CHANGE_PASSWORD_CONFIG } from "../../_constants/CHANGE_PASSWORD_CONFIG";
-import { usePostVerifyPassword } from "@/api/fetch/user";
-import { useFormContext } from "react-hook-form";
-import { useState } from "react";
+"use client";
+"use no memo";
 
-interface ChangePasswordFormType {
-  currentPassword: string;
-  newPassword: string;
-  newPasswordConfirm: string;
-}
+import { FormEvent } from "react";
+import { useRouter } from "next/navigation";
+import { useFormContext } from "react-hook-form";
+import { useGetUsersMe, usePostChangePassword } from "@/api/fetch/user";
+import { FooterButton } from "@/components/domain";
+import { PasswordConfirmSection, VerifyPasswordSection } from "../_internal";
 
 const ChangePasswordForm = () => {
-  const { getValues, handleSubmit } = useFormContext<ChangePasswordFormType>();
-  const { mutateAsync } = usePostVerifyPassword();
+  const router = useRouter();
 
-  const [verifyMessage, setVerifyMessage] = useState<string | null>(null);
-  const [verifyStatus, setVerifyStatus] = useState<"success" | "error" | null>(null);
+  const {
+    watch,
+    formState: { errors },
+  } = useFormContext();
 
-  const handleVerifyPassword = async () => {
-    const currentPassword = getValues("currentPassword");
+  const { data: userData } = useGetUsersMe();
+  const { mutateAsync, isPending } = usePostChangePassword();
 
-    try {
-      await mutateAsync({ currentPassword });
+  const [newPassword, newPasswordConfirm] = watch(["newPassword", "newPasswordConfirm"]);
 
-      setVerifyStatus("success");
-      setVerifyMessage("비밀번호가 확인되었습니다.");
-    } catch {
-      setVerifyStatus("error");
-      setVerifyMessage("비밀번호가 일치하지 않습니다.");
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    await mutateAsync({ newPassword, newPasswordConfirm });
+
+    if (userData?.result?.role === "ADMIN") {
+      router.push("/admin");
+    } else {
+      router.push("/mypage");
     }
   };
 
+  const buttonDisabled =
+    isPending ||
+    !!errors.newPassword ||
+    !newPassword ||
+    !newPasswordConfirm ||
+    newPassword !== newPasswordConfirm;
+
   return (
-    <form className="flex h-dvh flex-col" onSubmit={handleSubmit(() => {})}>
-      <fieldset className="flex w-full flex-col gap-5 px-5 py-[30px]">
-        <legend className="sr-only">비밀번호 변경 정보 입력</legend>
+    <form className="contents" onSubmit={handleSubmit}>
+      <div className="flex flex-1 flex-col gap-5 px-5 py-[30px]">
+        <VerifyPasswordSection />
 
-        {CHANGE_PASSWORD_CONFIG.map((item) => {
-          const onButtonClick =
-            item.btnOption?.action === "verifyPassword" ? handleVerifyPassword : undefined;
+        <PasswordConfirmSection />
+      </div>
 
-          return (
-            <div key={item.inputOption.name} className="h-[92px]">
-              <InputText {...item} btnOption={{ ...item.btnOption, onClick: onButtonClick }} />
-              {verifyMessage}
-            </div>
-          );
-        })}
-      </fieldset>
-
-      <FooterButton type="submit">변경 완료</FooterButton>
+      <FooterButton type="submit" disabled={buttonDisabled}>
+        변경 완료
+      </FooterButton>
     </form>
   );
 };

@@ -3,7 +3,6 @@
 import { FormProvider, useForm } from "react-hook-form";
 import { DetailHeader } from "@/components/layout";
 import { ChangePasswordForm } from "./_components";
-import ChangePasswordFormV2 from "./_components/ChangePasswordFormV2/ChangePasswordFormV2";
 
 interface ChangePasswordFormType {
   currentPassword: string;
@@ -11,7 +10,6 @@ interface ChangePasswordFormType {
   newPasswordConfirm: string;
 }
 
-// Input 클리어 버튼
 const page = () => {
   const methods = useForm<ChangePasswordFormType>({
     mode: "onChange",
@@ -25,7 +23,7 @@ const page = () => {
 
       <section className="flex flex-col h-base">
         <FormProvider {...methods}>
-          <ChangePasswordFormV2 />
+          <ChangePasswordForm />
         </FormProvider>
       </section>
     </>
