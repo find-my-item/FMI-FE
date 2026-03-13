@@ -63,7 +63,7 @@ const config: Config = {
       fontWeight: fontWeights,
       fontSize: customFonts,
       boxShadow: boxShadow,
-      backgroundColor: { bg, fg },
+      backgroundColor: { ...bg, fg },
       letterSpacing: letterSpacing,
       accentColor: accent,
       textColor: fg,

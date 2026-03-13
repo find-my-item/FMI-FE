@@ -2,30 +2,31 @@
 
 import { PropsWithChildren, useCallback } from "react";
 import { useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
+import { NotificationEventData, useNotificationSSE } from "@/api/fetch/notification";
 import { useGetUsersMe } from "@/api/fetch/user";
-import { useNotificationSSE } from "@/api/fetch/notification";
-import { useToast } from "@/context/ToastContext";
+import { getNotificationDisplayTitle } from "@/api/fetch/notification/utils/getNotificationDisplayTitle";
+import { useSnackBar } from "@/context/SnackBarContext";
 
-/**
- * 로그인 사용자에 대해 알림 SSE를 구독하고,
- * 새 알림 시 알림 목록 쿼리 무효화 및 토스트 표시
- */
-export function NotificationSSEProvider({
+export const NotificationSSEProvider = ({
   children,
   accessToken,
-}: PropsWithChildren<{ accessToken: string | undefined }>) {
+}: PropsWithChildren<{ accessToken: string | undefined }>) => {
+  const router = useRouter();
   const queryClient = useQueryClient();
   const { data: usersMeData } = useGetUsersMe();
-  const { addToast } = useToast();
+  const { showSnackBar } = useSnackBar();
 
   const isLoggedIn = Boolean(usersMeData?.result);
 
   const onNotification = useCallback(
-    (notification: { title: string; message: string }) => {
+    ({ type, referenceType }: NotificationEventData) => {
       queryClient.invalidateQueries({ queryKey: ["notifications"] });
-      addToast(notification.title || notification.message, "success");
+      showSnackBar(getNotificationDisplayTitle(type, referenceType), "알림 페이지로 이동", () =>
+        router.push("/alert")
+      );
     },
-    [queryClient, addToast]
+    [queryClient, router, showSnackBar]
   );
 
   useNotificationSSE({
@@ -34,5 +35,5 @@ export function NotificationSSEProvider({
     accessToken,
   });
 
-  return <>{children}</>;
-}
+  return children;
+};
