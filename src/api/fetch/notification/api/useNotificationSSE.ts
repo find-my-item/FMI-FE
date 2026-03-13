@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { NotificationEventData } from "../types/notificationSSETypes";
 
 const RECONNECT_DELAY_MS = 5000;
-const MAX_RECONNECT_ATTEMPTS = 3;
+const REFRESH_AFTER_CONSECUTIVE_FAILURES = 3;
 
 export interface UseNotificationSSEOptions {
   /** 로그인 등 연결 조건이 true일 때만 연결/유지 */
@@ -13,15 +13,17 @@ export interface UseNotificationSSEOptions {
   onConnect?: (message: string) => void;
   /** 알림 수신 시 (notification 이벤트) */
   onNotification?: (data: NotificationEventData) => void;
-  /** 액세스 토큰 (쿼리 파라미터로 전달) */
-  accessToken?: string;
+  /** 최신 액세스 토큰 조회 */
+  getAccessToken: () => Promise<string | undefined>;
+  /** 연속 연결 실패 시 토큰 재발급 */
+  refreshAccessToken?: () => Promise<boolean>;
   /** 연결 실패/끊김 시 재연결 대기 시간(ms). 기본 5초 */
   reconnectDelayMs?: number;
 }
 
 export interface UseNotificationSSEReturn {
   isConnected: boolean;
-  connect: () => void;
+  connect: () => Promise<void>;
   disconnect: () => void;
 }
 
@@ -29,71 +31,128 @@ export function useNotificationSSE({
   enabled = true,
   onConnect,
   onNotification,
-  accessToken,
+  getAccessToken,
+  refreshAccessToken,
   reconnectDelayMs = RECONNECT_DELAY_MS,
-}: UseNotificationSSEOptions = {}): UseNotificationSSEReturn {
+}: UseNotificationSSEOptions): UseNotificationSSEReturn {
   const [isConnected, setIsConnected] = useState(false);
   const eventSourceRef = useRef<EventSource | null>(null);
   const reconnectTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const reconnectAttemptRef = useRef(0);
+  const consecutiveFailureRef = useRef(0);
   const enabledRef = useRef(enabled);
+  const connectRef = useRef<() => Promise<void>>(async () => {});
+
   enabledRef.current = enabled;
 
+  const clearReconnectTimeout = useCallback(() => {
+    if (!reconnectTimeoutRef.current) return;
+
+    clearTimeout(reconnectTimeoutRef.current);
+    reconnectTimeoutRef.current = null;
+  }, []);
+
   const disconnect = useCallback(() => {
-    if (reconnectTimeoutRef.current) {
-      clearTimeout(reconnectTimeoutRef.current);
-      reconnectTimeoutRef.current = null;
-    }
+    clearReconnectTimeout();
+
     if (eventSourceRef.current) {
       eventSourceRef.current.close();
       eventSourceRef.current = null;
     }
-    setIsConnected(false);
-  }, []);
 
-  const connect = useCallback(() => {
+    setIsConnected(false);
+  }, [clearReconnectTimeout]);
+
+  const scheduleReconnect = useCallback(
+    (delayMs: number) => {
+      if (!enabledRef.current) return;
+
+      clearReconnectTimeout();
+      reconnectTimeoutRef.current = setTimeout(() => {
+        reconnectTimeoutRef.current = null;
+        void connectRef.current();
+      }, delayMs);
+    },
+    [clearReconnectTimeout]
+  );
+
+  const connect = useCallback(async () => {
     if (typeof window === "undefined") return;
 
     disconnect();
 
-    const url = `${process.env.NEXT_PUBLIC_API_URL}/notifications/subscribe?token=${accessToken}`;
+    const accessToken = await getAccessToken();
+
+    if (!enabledRef.current || !accessToken) {
+      consecutiveFailureRef.current = 0;
+      return;
+    }
+
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/notifications/subscribe?token=${encodeURIComponent(accessToken)}`;
     const eventSource = new EventSource(url);
     eventSourceRef.current = eventSource;
 
     eventSource.addEventListener("connect", (e: MessageEvent) => {
-      reconnectAttemptRef.current = 0;
+      if (eventSourceRef.current !== eventSource) return;
+
+      consecutiveFailureRef.current = 0;
       setIsConnected(true);
       onConnect?.(typeof e.data === "string" ? e.data : "");
     });
 
     eventSource.addEventListener("notification", (e: MessageEvent) => {
+      if (eventSourceRef.current !== eventSource) return;
+
       const data = JSON.parse(e.data) as NotificationEventData;
       onNotification?.(data);
     });
 
     eventSource.onerror = () => {
-      eventSource.close();
-      eventSourceRef.current = null;
-      setIsConnected(false);
+      void (async () => {
+        if (eventSourceRef.current !== eventSource) return;
 
-      if (!enabledRef.current) return;
-      if (reconnectAttemptRef.current >= MAX_RECONNECT_ATTEMPTS) return;
+        eventSource.close();
+        eventSourceRef.current = null;
+        setIsConnected(false);
 
-      reconnectAttemptRef.current += 1;
-      reconnectTimeoutRef.current = setTimeout(() => {
-        reconnectTimeoutRef.current = null;
-        connect();
-      }, reconnectDelayMs);
+        if (!enabledRef.current) return;
+
+        const nextFailureCount = consecutiveFailureRef.current + 1;
+        consecutiveFailureRef.current = nextFailureCount;
+
+        if (nextFailureCount < REFRESH_AFTER_CONSECUTIVE_FAILURES) {
+          scheduleReconnect(reconnectDelayMs);
+          return;
+        }
+
+        consecutiveFailureRef.current = 0;
+
+        const isRefreshSucceeded = (await refreshAccessToken?.()) ?? false;
+
+        if (!enabledRef.current || !isRefreshSucceeded) return;
+
+        scheduleReconnect(0);
+      })();
     };
-  }, [disconnect, onConnect, onNotification, reconnectDelayMs, accessToken]);
+  }, [
+    disconnect,
+    getAccessToken,
+    onConnect,
+    onNotification,
+    reconnectDelayMs,
+    refreshAccessToken,
+    scheduleReconnect,
+  ]);
+
+  connectRef.current = connect;
 
   useEffect(() => {
     if (enabled) {
-      reconnectAttemptRef.current = 0;
-      connect();
+      consecutiveFailureRef.current = 0;
+      void connect();
     } else {
       disconnect();
     }
+
     return () => disconnect();
   }, [enabled, connect, disconnect]);
 
