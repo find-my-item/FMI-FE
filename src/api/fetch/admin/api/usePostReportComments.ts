@@ -2,9 +2,9 @@ import { useQueryClient } from "@tanstack/react-query";
 import useAppMutation from "@/api/_base/query/useAppMutation";
 import { useToast } from "@/context/ToastContext";
 
-// TODO(지권): 백엔드 업데이트 후 수정
 interface UpdateReportCommentRequest {
   adminAnswer: string;
+  images: string[];
 }
 
 export const usePostReportComments = (reportId: number) => {

@@ -11,11 +11,11 @@ export const usePostReportsComment = ({ reportsId, reportsType }: UsePostReports
   const inquiryMutation = usePostInquiryComments(reportsId);
   const reportMutation = usePostReportComments(reportsId);
 
-  const mutateAsync = async (data: { content: string }) => {
+  const mutateAsync = async (data: { content: string; images: string[] }) => {
     if (reportsType === "inquiry") {
       return inquiryMutation.mutateAsync(data);
     }
-    return reportMutation.mutateAsync({ adminAnswer: data.content });
+    return reportMutation.mutateAsync({ adminAnswer: data.content, images: data.images });
   };
 
   const isPending =

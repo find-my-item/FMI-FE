@@ -3,7 +3,7 @@ import { AdminDetailSection } from "@/app/(admin)/admin/_components";
 import AdminReportsCommentSection from "../AdminReportsCommentSection/AdminReportsCommentSection";
 import { ReportsType } from "../../_types/ReportsType";
 import { useReportsDetailQuery } from "../../_hooks/useReportsDetailQuery";
-import { AdminDetailInquiry } from "@/api/fetch/admin";
+import { AdminDetailInquiry, AdminDetailReport, InquiryComments } from "@/api/fetch/admin";
 
 interface AdminReportsViewProps {
   id: number;
@@ -15,11 +15,28 @@ const AdminReportsView = ({ id, type }: AdminReportsViewProps) => {
 
   if (isError) return null;
 
-  let comments;
+  let comments: InquiryComments[] = [];
 
-  // TODO(지권): 신고 댓글 추가 후 확인 필요
-  if (type === "inquiry" && data?.result) {
-    comments = (data.result as AdminDetailInquiry).comments;
+  if (data?.result) {
+    if (type === "inquiry") {
+      comments = (data.result as AdminDetailInquiry).comments;
+    } else if (type === "report") {
+      const reportData = data.result as AdminDetailReport;
+
+      if (reportData.answered) {
+        comments = [
+          {
+            id: reportData.reportId,
+            content: reportData.adminAnswer,
+            authorId: reportData.adminId,
+            authorName: reportData.adminNickname,
+            profileImg: reportData.adminProfileImg,
+            createdAt: reportData.answeredAt,
+            imageList: reportData.answerImageList || [],
+          },
+        ];
+      }
+    }
   }
 
   return (

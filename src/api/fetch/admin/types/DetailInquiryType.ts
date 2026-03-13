@@ -21,5 +21,7 @@ export interface InquiryComments {
   content: string;
   authorId: number;
   authorName: string;
+  profileImg: string;
   createdAt: string;
+  imageList: string[];
 }

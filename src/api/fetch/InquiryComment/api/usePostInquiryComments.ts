@@ -5,6 +5,7 @@ import { PostInquiryCommentsResponse } from "../types/PostInquiryCommentsType";
 
 interface UpdateInquiryStatusRequest {
   content: string;
+  images: string[];
 }
 
 export const usePostInquiryComments = (inquiryId: number) => {

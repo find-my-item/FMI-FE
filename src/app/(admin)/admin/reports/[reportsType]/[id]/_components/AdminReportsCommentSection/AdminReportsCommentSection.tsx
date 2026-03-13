@@ -9,11 +9,10 @@ interface AdminReportsCommentSectionProps {
 const AdminReportsCommentSection = ({ comments }: AdminReportsCommentSectionProps) => {
   if (!comments) return null;
 
-  // TODO(지권): 신고 댓글 추가 후 확인 필요
   const commentItemVM = (item: InquiryComments): ReadOnlyCommentItemProps => {
     return {
       isAdmin: false,
-      userImageUrl: "",
+      userImageUrl: item.profileImg || "",
       userName: item.authorName,
       content: item.content,
       createdAt: item.createdAt,
@@ -28,7 +27,7 @@ const AdminReportsCommentSection = ({ comments }: AdminReportsCommentSectionProp
 
       <ul>
         {comments.map((data, index) => (
-          <ReadOnlyCommentItem key={index} data={commentItemVM(data)} />
+          <ReadOnlyCommentItem key={index} data={commentItemVM(data)} images={data.imageList} />
         ))}
       </ul>
     </section>

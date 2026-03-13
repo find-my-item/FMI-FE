@@ -34,8 +34,8 @@ export const MOCK_ADMIN_REPORT_LIST: AdminReportItem[] = [
     updatedAt: "2025-02-01T10:15:00",
     resolvedAt: "",
     reporterId: 1,
-    nickname: "짱구",
-    email: "jjanggu@example.com",
+    reporterNickname: "짱구",
+    reporterEmail: "jjanggu@example.com",
     answered: false,
   },
   {
@@ -50,8 +50,8 @@ export const MOCK_ADMIN_REPORT_LIST: AdminReportItem[] = [
     updatedAt: "2025-02-02T11:20:00",
     resolvedAt: "",
     reporterId: 2,
-    nickname: "철수",
-    email: "chulsoo@example.com",
+    reporterNickname: "철수",
+    reporterEmail: "chulsoo@example.com",
     answered: false,
   },
   {
@@ -66,8 +66,8 @@ export const MOCK_ADMIN_REPORT_LIST: AdminReportItem[] = [
     updatedAt: "2025-02-03T10:00:00",
     resolvedAt: "",
     reporterId: 3,
-    nickname: "유리",
-    email: "yuri@example.com",
+    reporterNickname: "유리",
+    reporterEmail: "yuri@example.com",
     answered: false,
   },
   {
@@ -82,8 +82,8 @@ export const MOCK_ADMIN_REPORT_LIST: AdminReportItem[] = [
     updatedAt: "2025-02-04T15:00:00",
     resolvedAt: "2025-02-04T15:00:00",
     reporterId: 4,
-    nickname: "맹구",
-    email: "maenggu@example.com",
+    reporterNickname: "맹구",
+    reporterEmail: "maenggu@example.com",
     answered: true,
   },
 ];
