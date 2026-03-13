@@ -15,6 +15,8 @@ import PostInputComment from "../PostInputComment/PostInputComment";
 import { DetailSkeleton, ErrorSimilarSection } from "../_internal";
 import { useHandleReplySubmit } from "../../_hooks/useHandleReplySubmit/useHandleReplySubmit";
 import { useToggleCommentLike } from "../../_hooks/usePostCommentLike/usePostCommentLike";
+import { useEffect } from "react";
+import { useToast } from "@/context/ToastContext";
 
 interface ClientDetailProps {
   id: number;
@@ -22,6 +24,8 @@ interface ClientDetailProps {
 }
 
 const ClientDetail = ({ id, isLoggedIn }: ClientDetailProps) => {
+  const { addToast } = useToast();
+
   const { data, isLoading, isError } = useGetDetailPost({ id });
   const { data: commentsData, fetchNextPage } = useGetPostsComments({
     postId: id,
@@ -31,8 +35,14 @@ const ClientDetail = ({ id, isLoggedIn }: ClientDetailProps) => {
   const { mutate: deleteComment } = useDeleteComment();
   const { handleToggleFavorite } = useToggleCommentLike();
 
+  useEffect(() => {
+    if (isError) {
+      addToast("게시글 불러오기에 실패했어요", "error");
+    }
+  }, [isError, addToast]);
+
   if (isLoading) return <DetailSkeleton />;
-  if (isError || !data?.result) return <div className="pt-4 h-base">오류가 발생했습니다.</div>;
+  if (isError || !data?.result) return <DetailSkeleton />;
 
   const { isMine, postUserInformation } = data.result;
 
@@ -48,7 +58,7 @@ const ClientDetail = ({ id, isLoggedIn }: ClientDetailProps) => {
         }}
       />
 
-      <div className="h-base">
+      <div className="flex flex-col h-base">
         <PostDetail type="find" data={data.result} />
 
         <CommentList
@@ -68,9 +78,9 @@ const ClientDetail = ({ id, isLoggedIn }: ClientDetailProps) => {
         <ErrorBoundary fallback={<ErrorSimilarSection postId={id} />}>
           <SimilarItemsSection postId={id} />
         </ErrorBoundary>
-      </div>
 
-      <PostInputComment postId={id} isLoggedIn={isLoggedIn} />
+        <PostInputComment postId={id} isLoggedIn={isLoggedIn} />
+      </div>
     </>
   );
 };

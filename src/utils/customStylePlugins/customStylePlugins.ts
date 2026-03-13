@@ -93,11 +93,27 @@ export const hBase = plugin(function ({ addUtilities }) {
 
 /**
  * fixed-button-position
+ * footer가 노출되는 페이지에서 사용됩니다.
  */
 export const fixedButtonPosition = plugin(function ({ addUtilities }) {
   const utilities: Record<string, CSSRuleObject> = {
     ".fixed-button-position": {
       bottom: "110px",
+      right: "20px",
+      position: "fixed",
+    },
+  };
+  addUtilities(utilities);
+});
+
+/**
+ * fixed-button-position-bottom
+ * footer가 없는 페이지에서 사용됩니다.
+ */
+export const fixedButtonPositionBottom = plugin(function ({ addUtilities }) {
+  const utilities: Record<string, CSSRuleObject> = {
+    ".fixed-button-position-bottom": {
+      bottom: "24px",
       right: "20px",
       position: "fixed",
     },
