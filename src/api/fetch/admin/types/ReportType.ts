@@ -21,7 +21,7 @@ export interface AdminReportItem {
   updatedAt: string;
   resolvedAt: string;
   reporterId: number;
-  nickname: string;
-  email: string;
+  reporterNickname: string;
+  reporterEmail: string;
   answered: boolean;
 }

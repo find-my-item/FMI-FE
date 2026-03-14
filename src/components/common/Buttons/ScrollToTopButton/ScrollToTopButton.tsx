@@ -17,6 +17,7 @@ const SCROLL_TOP_HIDE_THRESHOLD_PX = 200;
  * 컴포넌트의 위치는 부모 컴포넌트에서 정해야 합니다.
  *
  * @param onHide - `true`일 경우 스크롤 위치와 관계없이 버튼을 숨깁니다. (기본값: `false`)
+ * @param className - 버튼에 추가할 스타일
  *
  * @example
  * ```tsx
@@ -28,13 +29,20 @@ const SCROLL_TOP_HIDE_THRESHOLD_PX = 200;
  * // 조건부로 숨기기
  * <ScrollToTopButton onHide={isModalOpen} />
  * ```
+ *
+ * @example
+ * ```tsx
+ * // 스타일 추가
+ * <ScrollToTopButton className="bg-fill-brand-subtle-default" />
+ * ```
  */
 
 interface ScrollToTopButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   onHide?: boolean;
+  className?: string;
 }
 
-const ScrollToTopButton = ({ onHide = false }: ScrollToTopButtonProps) => {
+const ScrollToTopButton = ({ onHide = false, className }: ScrollToTopButtonProps) => {
   const [isNearTop, setIsNearTop] = useState(true);
 
   const handleScrollToTop = () => setIsNearTop(window.scrollY < SCROLL_TOP_HIDE_THRESHOLD_PX);
@@ -53,7 +61,8 @@ const ScrollToTopButton = ({ onHide = false }: ScrollToTopButtonProps) => {
         "glass-card h-[70px] w-[70px] rounded-full transition-colors duration-150 bg-fill-brand-subtle-default flex-center",
         "hover:bg-fill-brand-subtle-hover",
         "active:bg-fill-brand-subtle-pressed",
-        "disabled:bg-fill-brand-subtle-disabled"
+        "disabled:bg-fill-brand-subtle-disabled",
+        className
       )}
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
     >

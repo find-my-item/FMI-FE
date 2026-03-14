@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import AdminReportsCommentSection from "./AdminReportsCommentSection";
-import { MOCK_COMMENT_DATA } from "@/mock/data";
+import { MOCK_ADMIN_DETAIL_COMMENT_DATA } from "@/mock/data";
 
 jest.mock("@/components/domain", () => ({
   ReadOnlyCommentItem: ({ data }: any) => (
@@ -12,7 +12,7 @@ jest.mock("@/components/domain", () => ({
 
 describe("AdminReportsCommentSection", () => {
   it("댓글 섹션 렌더 및 aria 연결", () => {
-    render(<AdminReportsCommentSection />);
+    render(<AdminReportsCommentSection comments={MOCK_ADMIN_DETAIL_COMMENT_DATA} />);
 
     const section = screen.getByRole("region", { name: "댓글" });
     expect(section).toBeInTheDocument();
@@ -21,12 +21,12 @@ describe("AdminReportsCommentSection", () => {
   });
 
   it("MOCK_COMMENT_DATA 개수만큼 렌더", () => {
-    render(<AdminReportsCommentSection />);
+    render(<AdminReportsCommentSection comments={MOCK_ADMIN_DETAIL_COMMENT_DATA} />);
 
     const items = screen.getAllByTestId("comment-item");
-    expect(items.length).toBe(MOCK_COMMENT_DATA.length);
+    expect(items.length).toBe(MOCK_ADMIN_DETAIL_COMMENT_DATA.length);
 
-    MOCK_COMMENT_DATA.forEach((item, index) => {
+    MOCK_ADMIN_DETAIL_COMMENT_DATA.forEach((item, index) => {
       expect(items[index]).toHaveTextContent(item.content);
     });
   });

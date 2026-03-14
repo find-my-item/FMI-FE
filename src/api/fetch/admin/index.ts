@@ -16,3 +16,4 @@ export { usePostNotices } from "./api/usePostNotices";
 export { useGetDetailInquiry } from "./api/useGetDetailInquiry";
 export { usePutReportStatus } from "./api/usePutReportStatus";
 export { usePutInquiryStatus } from "./api/usePutInquiryStatus";
+export { usePostReportComments } from "./api/usePostReportComments";

@@ -19,7 +19,6 @@ interface CommentBodyProps {
 const CommentBody = ({ bodyData }: CommentBodyProps) => {
   const { content, images } = bodyData;
 
-  // TODO(지권): 이미지 있을 때 디자인 추가 필요, 현재 임시 구현
   return (
     <div>
       <p className="whitespace-pre-wrap break-all text-body1-regular text-layout-header-default">
@@ -34,7 +33,7 @@ const CommentBody = ({ bodyData }: CommentBodyProps) => {
               width={80}
               height={80}
               alt={`이미지-${i}`}
-              className="h-20 w-20 rounded-[10px] object-cover"
+              className="h-20 w-20 rounded-[16px] object-cover"
             />
           ))}
         </div>

@@ -1,5 +1,4 @@
-import { MypagePostListType, PostItem } from "@/api/fetch/post";
-import { BlockUserResult } from "@/api/fetch/report";
+import { BlockUserItem } from "@/api/fetch/report";
 
 export const MOCK_MYPAGE_COMMENTS_ITEM = [
   {
@@ -168,7 +167,7 @@ export const MOCK_MYPAGE_ACTIVITY = [
   },
 ] as const;
 
-export const MOCK_MYPAGE_BLOCK_USER: BlockUserResult[] = [
+export const MOCK_MYPAGE_BLOCK_USER: BlockUserItem[] = [
   {
     userId: 1,
     profileImage: "",
