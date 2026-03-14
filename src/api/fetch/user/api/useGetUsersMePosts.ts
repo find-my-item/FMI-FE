@@ -30,11 +30,11 @@ export const useGetUsersMePosts = ({
   size = 10,
 }: useGetUsersMePostsParams) => {
   const isAuthInitialized = useAuthStore((state) => state.isAuthInitialized);
-  const [isMounted, setIsMounted] = useState(false);
+  // const [isMounted, setIsMounted] = useState(false);
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  // useEffect(() => {
+  //   setIsMounted(true);
+  // }, []);
 
   const queryParams = new URLSearchParams();
 
@@ -64,12 +64,14 @@ export const useGetUsersMePosts = ({
     ],
     `/users/me/posts?${queryParams.toString()}`,
     {
-      placeholderData: keepPreviousData,
+      suspense: true,
+      // placeholderData: keepPreviousData,
       getNextPageParam: (lastPage) => lastPage.result.nextCursor ?? undefined,
       select: (data: InfiniteData<MypagePostsResponseType>) =>
         data.pages.flatMap((page) => page.result.postList),
       throwOnError: true,
-      enabled: isMounted && isAuthInitialized,
+      enabled: isAuthInitialized,
+      // enabled: isMounted && isAuthInitialized,
     }
   );
 };
