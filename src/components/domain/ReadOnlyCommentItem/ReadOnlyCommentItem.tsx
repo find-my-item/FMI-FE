@@ -1,5 +1,7 @@
+import Image from "next/image";
 import { cn, formatDate } from "@/utils";
 import { ProfileAvatar } from "@/components/common";
+import { ReadOnlyCommentItemProps } from "@/types";
 
 /**
  * @author jikwon
@@ -16,15 +18,13 @@ import { ProfileAvatar } from "@/components/common";
  *
  */
 
-interface ReadOnlyCommentItemProps {
-  isAdmin: boolean;
-  userImageUrl: string;
-  userName: string;
-  content: string;
-  createdAt: string;
-}
-
-const ReadOnlyCommentItem = ({ data }: { data: ReadOnlyCommentItemProps }) => {
+const ReadOnlyCommentItem = ({
+  data,
+  images,
+}: {
+  data: ReadOnlyCommentItemProps;
+  images?: string[];
+}) => {
   const { isAdmin, userImageUrl, userName, content, createdAt } = data;
 
   return (
@@ -44,7 +44,23 @@ const ReadOnlyCommentItem = ({ data }: { data: ReadOnlyCommentItemProps }) => {
             </time>
           </div>
         </div>
-        <p className="text-body1-regular text-layout-header-default">{content}</p>
+        <p className="whitespace-pre-wrap text-body1-regular text-layout-header-default">
+          {content}
+        </p>
+        {images && images.length > 0 && (
+          <div className="flex flex-wrap gap-2">
+            {images.map((image) => (
+              <Image
+                key={image}
+                src={image}
+                alt={image}
+                width={100}
+                height={100}
+                className="size-[100px] select-none rounded-lg"
+              />
+            ))}
+          </div>
+        )}
       </article>
     </li>
   );

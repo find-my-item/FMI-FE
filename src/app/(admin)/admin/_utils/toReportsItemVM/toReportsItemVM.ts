@@ -11,7 +11,7 @@ export const toReportItemVM = (item: AdminReportItem): AdminReportsItemData => {
     href: `/admin/reports/report/${item.reportId}`,
     title: REPORT_TYPE_TITLE[item.reportType],
     content: item.reason,
-    nickname: item.nickname,
+    nickname: item.reporterNickname,
     createdAt: item.createdAt,
 
     processStatus: ProcessStatusBadgeConfig[item.status],

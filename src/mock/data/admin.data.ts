@@ -1,5 +1,10 @@
 import { NoticeItem } from "@/api/fetch/notice";
-import { AdminInquiriesItem, AdminReportItem, WithdrawUserItem } from "@/api/fetch/admin";
+import {
+  AdminInquiriesItem,
+  AdminReportItem,
+  InquiryComments,
+  WithdrawUserItem,
+} from "@/api/fetch/admin";
 import { InquiryType, InquiryStatus, ReportStatus } from "@/types";
 import { AdminGuestInquiryItem } from "@/api/fetch/admin/types/GuestInquiriesType";
 
@@ -29,8 +34,8 @@ export const MOCK_ADMIN_REPORT_LIST: AdminReportItem[] = [
     updatedAt: "2025-02-01T10:15:00",
     resolvedAt: "",
     reporterId: 1,
-    nickname: "짱구",
-    email: "jjanggu@example.com",
+    reporterNickname: "짱구",
+    reporterEmail: "jjanggu@example.com",
     answered: false,
   },
   {
@@ -45,8 +50,8 @@ export const MOCK_ADMIN_REPORT_LIST: AdminReportItem[] = [
     updatedAt: "2025-02-02T11:20:00",
     resolvedAt: "",
     reporterId: 2,
-    nickname: "철수",
-    email: "chulsoo@example.com",
+    reporterNickname: "철수",
+    reporterEmail: "chulsoo@example.com",
     answered: false,
   },
   {
@@ -61,8 +66,8 @@ export const MOCK_ADMIN_REPORT_LIST: AdminReportItem[] = [
     updatedAt: "2025-02-03T10:00:00",
     resolvedAt: "",
     reporterId: 3,
-    nickname: "유리",
-    email: "yuri@example.com",
+    reporterNickname: "유리",
+    reporterEmail: "yuri@example.com",
     answered: false,
   },
   {
@@ -77,8 +82,8 @@ export const MOCK_ADMIN_REPORT_LIST: AdminReportItem[] = [
     updatedAt: "2025-02-04T15:00:00",
     resolvedAt: "2025-02-04T15:00:00",
     reporterId: 4,
-    nickname: "맹구",
-    email: "maenggu@example.com",
+    reporterNickname: "맹구",
+    reporterEmail: "maenggu@example.com",
     answered: true,
   },
 ];
@@ -150,20 +155,26 @@ export const MOCK_REPORTS_DETAIL_DATA = {
   comments: [],
 };
 
-export const MOCK_COMMENT_DATA = [
+export const MOCK_ADMIN_DETAIL_COMMENT_DATA: InquiryComments[] = [
   {
-    isAdmin: true,
-    userImageUrl: "",
-    userName: "관리자닉네임",
+    id: 1,
     content: "여기에 댓글 내용이 표기됩니다.",
+    authorId: 1,
+    authorName: "관리자닉네임",
     createdAt: "2025-05-06",
+    profileImg: "",
+    imageList: [],
+    admin: true,
   },
   {
-    isAdmin: false,
-    userImageUrl: "",
-    userName: "유저닉네임",
+    id: 2,
     content: "여기에 댓글 내용이 표기됩니다.",
+    authorId: 2,
+    authorName: "유저닉네임",
     createdAt: "2025-05-06",
+    profileImg: "",
+    imageList: [],
+    admin: true,
   },
 ];
 

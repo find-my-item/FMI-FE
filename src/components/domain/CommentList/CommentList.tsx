@@ -6,6 +6,7 @@ import {
 } from "@/api/fetch/comment";
 import CommentItem from "./CommentItem";
 import { EmptyCommentUI, GuestCommentUI } from "./_internal";
+import { formatCappedNumber } from "@/utils";
 
 /**
  * 댓글 목록을 렌더링하는 컴포넌트입니다.
@@ -58,7 +59,7 @@ const CommentList = ({
     <>
       <header className="w-full border-t border-divider-default px-5">
         <h2 className="mt-[18px] flex items-center gap-1 py-2 text-body1-semibold text-layout-header-default">
-          댓글<span>{comments.totalCommentCount}</span>
+          댓글<span>{formatCappedNumber(comments.totalCommentCount, 999)}</span>
         </h2>
       </header>
 
