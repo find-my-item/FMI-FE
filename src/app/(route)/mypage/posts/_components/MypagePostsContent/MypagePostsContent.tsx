@@ -26,12 +26,16 @@ const MypagePostsContent = () => {
   });
 
   return (
-    <MypagePostsList
-      postsData={PostsData}
-      hasNextPage={hasNextPage}
-      fetchNextPage={fetchNextPage}
-      isFetchingNextPage={isFetchingNextPage}
-    />
+    <>
+      {PostsData && (
+        <MypagePostsList
+          postsData={PostsData}
+          hasNextPage={hasNextPage}
+          fetchNextPage={fetchNextPage}
+          isFetchingNextPage={isFetchingNextPage}
+        />
+      )}
+    </>
   );
 };
 
