@@ -1,6 +1,7 @@
 import { DetailHeader } from "@/components/layout";
-import { MypageCommentsFilterSection, MypageCommentsList } from "./_components";
+import { MypageCommentsContent, MypageCommentsFilterSection } from "./_components";
 import { MypageSearch } from "@/components/domain";
+import { ErrorBoundary } from "@/app/ErrorBoundary";
 
 const page = () => {
   return (
@@ -12,7 +13,9 @@ const page = () => {
 
         <MypageCommentsFilterSection />
 
-        <MypageCommentsList />
+        <ErrorBoundary toastMessage="목록을 불러올 수 없어요. 다시 시도해 주세요.">
+          <MypageCommentsContent />
+        </ErrorBoundary>
       </div>
     </>
   );
