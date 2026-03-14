@@ -8,7 +8,7 @@ const Post = ({ ariaLabel = "게시글 저장", ...props }: BaseButtonProps) => 
     : "text-brand-strongUseThis-default text-h2-bold";
 
   return (
-    <button {...props} className={isDisabledStyle} aria-label={ariaLabel}>
+    <button className={isDisabledStyle} aria-label={ariaLabel} {...props}>
       등록
     </button>
   );
