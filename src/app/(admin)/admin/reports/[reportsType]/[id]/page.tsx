@@ -20,7 +20,7 @@ const page = () => {
 
       <AdminReportsView id={Number(id)} type={reportsType as ReportsType} />
 
-      <ReportsInputComment reportsId={Number(id)} reportsType={reportsType as string} />
+      <ReportsInputComment reportsId={Number(id)} reportsType={reportsType as ReportsType} />
     </>
   );
 };
