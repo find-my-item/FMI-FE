@@ -1,10 +1,9 @@
 import { PostItem } from "@/api/fetch/post";
 import { MypageEmptyUI, PostListItem } from "@/components/domain";
-import { LoadingState } from "@/components/state";
 import { useInfiniteScroll } from "@/hooks";
 
 interface MypageFavoritesListProps {
-  favoritesData?: PostItem[];
+  favoritesData: PostItem[];
   hasNextPage?: boolean;
   fetchNextPage: () => void;
   isFetchingNextPage: boolean;
@@ -22,7 +21,6 @@ const MypageFavoritesList = ({
     isFetchingNextPage,
   });
 
-  if (favoritesData === undefined) return <LoadingState />;
   return (
     <section>
       <h2 className="sr-only">내 즐겨찾기 목록 영역</h2>

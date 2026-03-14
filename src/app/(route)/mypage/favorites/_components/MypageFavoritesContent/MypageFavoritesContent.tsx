@@ -2,7 +2,6 @@
 
 import { useGetUserMeFavorites } from "@/api/fetch/user";
 import { StatusFilterValue } from "@/components/domain/FilterSectionBottomSheet/_types/types";
-import { LoadingState } from "@/components/state";
 import { useFilterParams } from "@/hooks/domain";
 import MypageFavoritesList from "../MypageFavoritesList/MypageFavoritesList";
 
@@ -11,7 +10,6 @@ const MypageFavoritesContent = () => {
 
   const {
     data: FavoritesData,
-    isLoading,
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
@@ -22,15 +20,17 @@ const MypageFavoritesContent = () => {
     sortType: sort ?? "LATEST",
   });
 
-  if (isLoading) return <LoadingState />;
-
   return (
-    <MypageFavoritesList
-      favoritesData={FavoritesData}
-      hasNextPage={hasNextPage}
-      fetchNextPage={fetchNextPage}
-      isFetchingNextPage={isFetchingNextPage}
-    />
+    <>
+      {FavoritesData && (
+        <MypageFavoritesList
+          favoritesData={FavoritesData}
+          hasNextPage={hasNextPage}
+          fetchNextPage={fetchNextPage}
+          isFetchingNextPage={isFetchingNextPage}
+        />
+      )}
+    </>
   );
 };
 
