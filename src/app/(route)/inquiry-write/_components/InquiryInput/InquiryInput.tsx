@@ -4,24 +4,12 @@ import { useHorizontalDragScroll } from "@/hooks";
 import { cn } from "@/utils";
 import { InputHTMLAttributes } from "react";
 import { FieldValues, useFormContext, UseFormSetValue, useWatch } from "react-hook-form";
+import { EMAIL_AUTO_COMPLETE_LIST } from "./_internal/EMAIL_AUTO_COMPLETE_LIST";
 
 interface InquiryInputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   className?: string;
 }
-
-const EMAIL_AUTO_COMPLETE_LIST = [
-  "gmail.com",
-  "naver.com",
-  "daum.net",
-  "kakao.com",
-  "hanmail.net",
-  "nate.com",
-  "outlook.com",
-  "hotmail.com",
-  "icloud.com",
-  "yahoo.com",
-];
 
 const EmailAutoComplete = ({
   email,
