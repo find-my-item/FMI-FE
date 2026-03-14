@@ -8,6 +8,7 @@ import {
   noScrollbar,
   hBase,
   fixedButtonPosition,
+  fixedButtonPositionBottom,
   footerAlertDot,
 } from "./src/utils/customStylePlugins/customStylePlugins";
 import customFonts from "./src/utils/customFonts/customFonts";
@@ -81,6 +82,7 @@ const config: Config = {
     noScrollbar,
     hBase,
     fixedButtonPosition,
+    fixedButtonPositionBottom,
     footerAlertDot,
   ],
   safelist: [
@@ -91,6 +93,7 @@ const config: Config = {
     "no-scrollbar",
     "h-base",
     "fixed-button-position",
+    "fixedButtonPositionBottom",
     "footer-alert-dot",
   ],
 };

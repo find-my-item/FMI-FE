@@ -1,9 +1,24 @@
-import useAppQuery from "@/api/_base/query/useAppQuery";
-import { BlockUserResponse } from "../types/BlockUserResponse";
+import { InfiniteData, keepPreviousData } from "@tanstack/react-query";
+import useAppInfiniteQuery from "@/api/_base/query/useAppInfiniteQuery";
+import { BlockUserItem, BlockUserResponse } from "../types/BlockUserResponse";
 
-// TODO(지권): 무한 스크롤 여부 확인 필요
-const useGetBlockUser = () => {
-  return useAppQuery<BlockUserResponse>("public", ["user-block-list"], `/reports/block`);
+const useGetBlockUser = (size: number = 10) => {
+  const params = new URLSearchParams();
+  params.set("size", String(size));
+
+  if (size) params.set("size", String(size));
+
+  return useAppInfiniteQuery<BlockUserResponse, unknown, BlockUserItem[]>(
+    "auth",
+    ["user-block-list"],
+    `/reports/block?${params.toString()}`,
+    {
+      placeholderData: keepPreviousData,
+      getNextPageParam: (lastPage) => lastPage.result.nextCursor ?? undefined,
+      select: (data: InfiniteData<BlockUserResponse>) =>
+        data.pages.flatMap((page) => page.result.content),
+    }
+  );
 };
 
 export default useGetBlockUser;

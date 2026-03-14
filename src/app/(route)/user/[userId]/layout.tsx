@@ -5,9 +5,7 @@ const layout = ({ children }: { children: ReactNode }) => {
   return (
     <>
       {children}
-      <div className="fixed bottom-5 right-5">
-        <ScrollToTopButton />
-      </div>
+      <ScrollToTopButton className="fixed-button-position-bottom" />
     </>
   );
 };

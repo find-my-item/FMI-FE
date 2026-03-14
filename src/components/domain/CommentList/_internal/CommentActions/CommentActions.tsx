@@ -1,6 +1,6 @@
 import type { Dispatch, SetStateAction } from "react";
 import { Icon } from "@/components/common";
-import { cn } from "@/utils";
+import { cn, formatCappedNumber } from "@/utils";
 
 /**
  * 답글 작성 및 답글 보기 버튼
@@ -48,7 +48,7 @@ const CommentActions = ({
               viewReply ? "text-brand-normal-enteredSelected" : "text-layout-header-default"
             )}
           >
-            답글 <span>{replyCount}</span>개
+            답글 <span>{formatCappedNumber(replyCount, 999)}</span>개
           </span>
           <Icon
             name="ArrowDownSmall"
