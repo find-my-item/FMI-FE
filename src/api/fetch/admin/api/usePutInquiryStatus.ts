@@ -13,6 +13,12 @@ interface UsePutInquiryStatusParams {
   isGuest: boolean;
 }
 
+const STATUS_TOAST_MESSAGE: Record<InquiryStatus, string> = {
+  PENDING: "접수 상태로 변경되었어요",
+  RECEIVED: "검토 중 상태로 변경되었어요",
+  ANSWERED: "처리 완료 상태로 변경되었어요",
+};
+
 export const usePutInquiryStatus = ({ inquiryId, isGuest }: UsePutInquiryStatusParams) => {
   const { addToast } = useToast();
   const queryClient = useQueryClient();
@@ -22,7 +28,7 @@ export const usePutInquiryStatus = ({ inquiryId, isGuest }: UsePutInquiryStatusP
     `/admin/inquiries/${inquiryId}/status`,
     "put",
     {
-      onSuccess: () => {
+      onSuccess: (_, variables) => {
         queryClient.invalidateQueries({
           queryKey: [isGuest ? "guest-inquiries-detail" : "detail-inquiry", inquiryId],
         });
@@ -31,7 +37,10 @@ export const usePutInquiryStatus = ({ inquiryId, isGuest }: UsePutInquiryStatusP
           queryKey: [isGuest ? "guest-inquiries" : "inquiries"],
         });
 
-        addToast("상태가 변경되었습니다.", "success");
+        addToast(STATUS_TOAST_MESSAGE[variables.status], "success");
+      },
+      onError: () => {
+        addToast("게시글 상태 변경에 실패했어요", "error");
       },
     }
   );
