@@ -4,7 +4,6 @@ import { CategoryType, PostType, SortType } from "@/types";
 import useAppInfiniteQuery from "@/api/_base/query/useAppInfiniteQuery";
 import { PostItem } from "../../post";
 import { InfiniteData, keepPreviousData } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
 import { useAuthStore } from "@/store";
 
 interface useGetUserMeFavoritesProps {
@@ -25,11 +24,6 @@ export const useGetUserMeFavorites = ({
   size = 10,
 }: useGetUserMeFavoritesProps) => {
   const isAuthInitialized = useAuthStore((state) => state.isAuthInitialized);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   const queryParams = new URLSearchParams();
   queryParams.set("address", address ?? "");
@@ -49,7 +43,7 @@ export const useGetUserMeFavorites = ({
       getNextPageParam: (lastPage) => lastPage.result.nextCursor ?? undefined,
       select: (data: InfiniteData<MypagePostsResponseType>) =>
         data.pages.flatMap((page) => page.result.postList),
-      enabled: isMounted && isAuthInitialized,
+      enabled: isAuthInitialized,
     }
   );
 };

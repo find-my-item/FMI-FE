@@ -6,7 +6,6 @@ import { useFilterParams } from "@/hooks/domain";
 import MypageFavoritesList from "../MypageFavoritesList/MypageFavoritesList";
 import { LoadingState } from "@/components/state";
 import { useToast } from "@/context/ToastContext";
-import { Suspense } from "react";
 
 const MypageFavoritesContent = () => {
   const { addToast } = useToast();
@@ -20,7 +19,7 @@ const MypageFavoritesContent = () => {
     fetchNextPage,
     isFetchingNextPage,
   } = useGetUserMeFavorites({
-    address: region ?? undefined,
+    address: region ?? "",
     postType: status as StatusFilterValue,
     category: category,
     sortType: sort ?? "LATEST",
