@@ -5,7 +5,6 @@ import { CategoryType, ItemStatus, PostType } from "@/types";
 import { InfiniteData, keepPreviousData } from "@tanstack/react-query";
 import { PostItem } from "../../post";
 import { useAuthStore } from "@/store";
-import { useEffect, useState } from "react";
 import { SortFilterValue } from "@/components/domain/FilterSectionBottomSheet/_types/types";
 
 interface useGetUsersMePostsParams {
@@ -30,11 +29,6 @@ export const useGetUsersMePosts = ({
   size = 10,
 }: useGetUsersMePostsParams) => {
   const isAuthInitialized = useAuthStore((state) => state.isAuthInitialized);
-  // const [isMounted, setIsMounted] = useState(false);
-
-  // useEffect(() => {
-  //   setIsMounted(true);
-  // }, []);
 
   const queryParams = new URLSearchParams();
 
@@ -65,13 +59,12 @@ export const useGetUsersMePosts = ({
     `/users/me/posts?${queryParams.toString()}`,
     {
       suspense: true,
-      // placeholderData: keepPreviousData,
+      placeholderData: keepPreviousData,
       getNextPageParam: (lastPage) => lastPage.result.nextCursor ?? undefined,
       select: (data: InfiniteData<MypagePostsResponseType>) =>
         data.pages.flatMap((page) => page.result.postList),
       throwOnError: true,
       enabled: isAuthInitialized,
-      // enabled: isMounted && isAuthInitialized,
     }
   );
 };

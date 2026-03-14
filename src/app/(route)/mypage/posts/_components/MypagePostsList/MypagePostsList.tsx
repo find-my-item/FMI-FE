@@ -1,6 +1,5 @@
 import { PostItem } from "@/api/fetch/post";
 import { MypageEmptyUI, PostListItem } from "@/components/domain";
-import { LoadingState } from "@/components/state";
 import { useInfiniteScroll } from "@/hooks";
 
 interface MypagePostsListProps {
