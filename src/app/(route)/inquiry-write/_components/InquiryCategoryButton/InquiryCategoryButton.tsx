@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
 import { InquiryTargetType } from "@/types";
 import { INQUIRY_WRITE_CATEGORY_OPTIONS } from "@/constants";
-import { RequiredText } from "@/components/common";
+import { Icon, RequiredText } from "@/components/common";
 import { CategoryPopup } from "@/components/domain";
 import { cn } from "@/utils";
 
@@ -34,7 +34,7 @@ const InquiryCategoryButton = () => {
     <div className="px-5 py-2">
       <button
         className={cn(
-          "w-full rounded-full px-4 py-3 text-start text-body1-regular bg-fill-neutral-subtle-default focus:border focus:border-brand-normal-default focus:outline-none disabled:bg-fill-neutral-subtle-pressed",
+          "flex w-full items-center rounded-full px-4 py-3 text-start text-body1-regular bg-fill-neutral-subtle-default focus:border focus:border-brand-normal-default focus:outline-none disabled:bg-fill-neutral-subtle-pressed",
           category ? "text-layout-header-default" : "text-layout-body-default"
         )}
         type="button"
@@ -42,6 +42,7 @@ const InquiryCategoryButton = () => {
       >
         {categoryLabel || "카테고리를 선택해주세요."}
         {!category && <RequiredText />}
+        <Icon name="ArrowDown" size={12} className="ml-auto text-neutralInversed-normal-default" />
       </button>
 
       <CategoryPopup
