@@ -3,7 +3,7 @@
 import { DetailHeader } from "@/components/layout";
 import { HeaderPost } from "@/components/layout/DetailHeader/DetailHeaderParts";
 import { FormProvider, useForm } from "react-hook-form";
-import { InquiryCategoryButton, InquiryInput } from "./_components";
+import { InquiryCategoryButton, InquiryInput, InquiryTextarea } from "./_components";
 
 const page = () => {
   const methods = useForm({
@@ -27,6 +27,7 @@ const page = () => {
           <InquiryInput name="title" placeholder="문의 제목을 입력해 주세요." />
           <InquiryInput name="email" type="email" placeholder="이메일을 입력해주세요." />
           <InquiryCategoryButton />
+          <InquiryTextarea name="content" />
         </form>
       </FormProvider>
     </div>

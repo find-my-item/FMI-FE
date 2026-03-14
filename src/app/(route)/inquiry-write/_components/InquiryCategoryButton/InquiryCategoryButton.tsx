@@ -9,7 +9,7 @@ import { CategoryPopup } from "@/components/domain";
 import { cn } from "@/utils";
 
 interface InquiryWriteFormValues {
-  category?: InquiryTargetType;
+  inquiryType?: InquiryTargetType;
 }
 
 const getInquiryCategoryLabel = (category: InquiryTargetType) =>
@@ -18,10 +18,10 @@ const getInquiryCategoryLabel = (category: InquiryTargetType) =>
 const InquiryCategoryButton = () => {
   const [categoryPopupOpen, setCategoryPopupOpen] = useState(false);
   const { control, setValue } = useFormContext<InquiryWriteFormValues>();
-  const category = useWatch({ control, name: "category" });
+  const category = useWatch({ control, name: "inquiryType" });
 
   const handleSelectCategory = (selectedCategory: InquiryTargetType) => {
-    setValue("category", selectedCategory, {
+    setValue("inquiryType", selectedCategory, {
       shouldDirty: true,
       shouldValidate: true,
     });
