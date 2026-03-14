@@ -4,22 +4,32 @@
 import { useState } from "react";
 import { Button, RadioOptionItem } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
-import { CategoryType, NoticeCategory } from "@/types";
-import { CATEGORY_OPTIONS, NOTICE_WRITE_CATEGORY_OPTIONS } from "@/constants";
+import { CategoryType, InquiryTargetType, NoticeCategory } from "@/types";
+import {
+  CATEGORY_OPTIONS,
+  INQUIRY_WRITE_CATEGORY_OPTIONS,
+  NOTICE_WRITE_CATEGORY_OPTIONS,
+} from "@/constants";
+
+type CategoryPopupMode = "post" | "notice" | "inquiry";
+type AllCategoryType = CategoryType | NoticeCategory | InquiryTargetType;
+
+const CATEGORY_OPTIONS_BY_MODE = {
+  post: CATEGORY_OPTIONS,
+  notice: NOTICE_WRITE_CATEGORY_OPTIONS,
+  inquiry: INQUIRY_WRITE_CATEGORY_OPTIONS,
+} as const;
 
 interface CategoryPopupProps {
-  mode?: "post" | "notice";
+  mode?: CategoryPopupMode;
   isOpen: boolean;
   onClose: () => void;
   onSelect: (category: AllCategoryType) => void;
 }
 
-type AllCategoryType = CategoryType | NoticeCategory;
-
 const CategoryPopup = ({ mode = "post", isOpen, onClose, onSelect }: CategoryPopupProps) => {
   const [selected, setSelected] = useState<AllCategoryType>();
-
-  const categoryOptions = mode === "post" ? CATEGORY_OPTIONS : NOTICE_WRITE_CATEGORY_OPTIONS;
+  const categoryOptions = CATEGORY_OPTIONS_BY_MODE[mode];
 
   const handleApply = () => {
     if (!selected) return;

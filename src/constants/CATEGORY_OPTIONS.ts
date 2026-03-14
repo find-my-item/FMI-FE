@@ -15,3 +15,9 @@ export const NOTICE_WRITE_CATEGORY_OPTIONS = [
   { value: "EVENT", label: "이벤트" },
   { value: "GENERAL", label: "일반" },
 ] as const;
+
+export const INQUIRY_WRITE_CATEGORY_OPTIONS = [
+  { value: "ACCOUNT_LOGIN", label: "계정" },
+  { value: "USAGE", label: "이용방법" },
+  { value: "ETC", label: "기타" },
+] as const;

@@ -3,7 +3,7 @@
 import { DetailHeader } from "@/components/layout";
 import { HeaderPost } from "@/components/layout/DetailHeader/DetailHeaderParts";
 import { FormProvider, useForm } from "react-hook-form";
-import { InquiryInput } from "./_components";
+import { InquiryCategoryButton, InquiryInput } from "./_components";
 
 const page = () => {
   const methods = useForm({
@@ -23,10 +23,10 @@ const page = () => {
       <h1 className="sr-only">1:1 문의하기 작성</h1>
 
       <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-3">
+        <form onSubmit={methods.handleSubmit(onSubmit)} className="flex flex-col gap-3 py-5">
           <InquiryInput name="title" placeholder="문의 제목을 입력해 주세요." />
           <InquiryInput name="email" type="email" placeholder="이메일을 입력해주세요." />
-          <InquiryInput name="category" placeholder="카테고리를 선택해주세요." />
+          <InquiryCategoryButton />
         </form>
       </FormProvider>
     </div>
