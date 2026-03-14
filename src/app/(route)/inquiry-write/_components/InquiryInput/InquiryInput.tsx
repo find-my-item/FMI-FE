@@ -1,4 +1,5 @@
 import { RequiredText } from "@/components/common";
+import DeleteButton from "@/components/common/Input/_internal/DeleteButton/DeleteButton";
 import { useHorizontalDragScroll } from "@/hooks";
 import { cn } from "@/utils";
 import { InputHTMLAttributes } from "react";
@@ -63,6 +64,7 @@ const InquiryInput = ({ name, className, ...props }: InquiryInputProps) => {
 
   const isEmailField = name === "email";
   const emailValue = typeof inputValue === "string" ? inputValue : "";
+  const hasInputValue = emailValue.length > 0;
   const shouldShowEmailAutoComplete =
     isEmailField && emailValue.length > 0 && !emailValue.includes("@");
 
@@ -74,6 +76,7 @@ const InquiryInput = ({ name, className, ...props }: InquiryInputProps) => {
             {...register(name)}
             className={cn(
               "peer w-full rounded-full px-4 py-3 text-body1-regular text-layout-header-default bg-fill-neutral-subtle-default placeholder:text-layout-body-default focus:border focus:border-brand-normal-default focus:outline-none disabled:bg-fill-neutral-subtle-pressed",
+              hasInputValue && "pr-10",
               className
             )}
             placeholder={placeholder}
@@ -87,6 +90,14 @@ const InquiryInput = ({ name, className, ...props }: InquiryInputProps) => {
               <span className="invisible text-body1-regular">{placeholder}</span>
               <RequiredText />
             </span>
+          )}
+          {hasInputValue && (
+            <DeleteButton
+              eyeShow={false}
+              className="right-4 top-1/2 -translate-y-1/2"
+              value={emailValue}
+              onDelete={() => setValue(name, "", { shouldDirty: true, shouldValidate: true })}
+            />
           )}
         </div>
       </div>
