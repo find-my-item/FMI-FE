@@ -17,7 +17,7 @@ export const usePostReportComments = (reportId: number) => {
     "put",
     {
       onSuccess: () => {
-        addToast("댓글이 등록되었습니다.", "success");
+        addToast("답변이 등록되었어요", "success");
         queryClient.invalidateQueries({
           queryKey: ["detail-report", reportId],
         });
