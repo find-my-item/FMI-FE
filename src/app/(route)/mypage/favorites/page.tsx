@@ -3,9 +3,6 @@
 import { FilterSection, MypageSearch } from "@/components/domain";
 import { DetailHeader } from "@/components/layout";
 import { MypageFavoritesContent } from "./_components";
-import { ErrorBoundary } from "@/app/ErrorBoundary";
-import { Suspense } from "react";
-import { LoadingState } from "@/components/state";
 
 const page = () => {
   return (
@@ -17,11 +14,7 @@ const page = () => {
 
         <FilterSection pageType="MY_FAVORITES" />
 
-        <ErrorBoundary toastMessage="목록을 불러올 수 없어요. 다시 시도해 주세요.">
-          <Suspense fallback={<LoadingState />}>
-            <MypageFavoritesContent />
-          </Suspense>
-        </ErrorBoundary>
+        <MypageFavoritesContent />
       </div>
     </>
   );

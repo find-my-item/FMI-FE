@@ -45,12 +45,10 @@ export const useGetUserMeFavorites = ({
     ["/users/me/favorites", address, postType, category, sortType, keyword, size],
     `/users/me/favorites?${queryParams.toString()}`,
     {
-      suspense: true,
-      // placeholderData: keepPreviousData,
+      placeholderData: keepPreviousData,
       getNextPageParam: (lastPage) => lastPage.result.nextCursor ?? undefined,
       select: (data: InfiniteData<MypagePostsResponseType>) =>
         data.pages.flatMap((page) => page.result.postList),
-      throwOnError: true,
       enabled: isMounted && isAuthInitialized,
     }
   );
