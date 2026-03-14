@@ -57,7 +57,7 @@ const EmailAutoComplete = ({
   );
 };
 
-const InquiryInput = ({ name, className, ...props }: InquiryInputProps) => {
+const InquiryInput = ({ name, className, disabled, ...props }: InquiryInputProps) => {
   const { register, control, setValue } = useFormContext();
   const inputValue = useWatch({ control, name });
   const { placeholder, ...inputProps } = props;
@@ -67,6 +67,7 @@ const InquiryInput = ({ name, className, ...props }: InquiryInputProps) => {
   const hasInputValue = emailValue.length > 0;
   const shouldShowEmailAutoComplete =
     isEmailField && emailValue.length > 0 && !emailValue.includes("@");
+  const shouldShowDeleteButton = hasInputValue || disabled === false;
 
   return (
     <div>
@@ -75,10 +76,11 @@ const InquiryInput = ({ name, className, ...props }: InquiryInputProps) => {
           <input
             {...register(name)}
             className={cn(
-              "peer w-full rounded-full px-4 py-3 text-body1-regular text-layout-header-default bg-fill-neutral-subtle-default placeholder:text-layout-body-default focus:border focus:border-brand-normal-default focus:outline-none disabled:bg-fill-neutral-subtle-pressed",
+              "peer w-full rounded-full px-4 py-3 text-body1-regular text-layout-header-default bg-fill-neutral-subtle-default placeholder:text-layout-body-default focus:border focus:border-brand-normal-default focus:outline-none disabled:text-layout-body-default disabled:bg-fill-neutral-subtle-pressed",
               hasInputValue && "pr-10",
               className
             )}
+            disabled={disabled}
             placeholder={placeholder}
             {...inputProps}
           />
@@ -91,7 +93,7 @@ const InquiryInput = ({ name, className, ...props }: InquiryInputProps) => {
               <RequiredText />
             </span>
           )}
-          {hasInputValue && (
+          {shouldShowDeleteButton && (
             <DeleteButton
               eyeShow={false}
               className="right-4 top-1/2 -translate-y-1/2"
