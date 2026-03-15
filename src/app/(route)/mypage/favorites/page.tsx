@@ -2,8 +2,7 @@
 
 import { FilterSection, MypageSearch } from "@/components/domain";
 import { DetailHeader } from "@/components/layout";
-import { MOCK_MYPAGE_POSTS_LIST } from "@/mock/data";
-import { MypageFavoritesList } from "./_components";
+import { MypageFavoritesContent } from "./_components";
 
 const page = () => {
   return (
@@ -15,7 +14,7 @@ const page = () => {
 
         <FilterSection pageType="MY_FAVORITES" />
 
-        <MypageFavoritesList data={MOCK_MYPAGE_POSTS_LIST} />
+        <MypageFavoritesContent />
       </div>
     </>
   );
