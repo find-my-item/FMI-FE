@@ -1,0 +1,54 @@
+import { Button, ProfileAvatar } from "@/components/common";
+import { cn } from "@/utils";
+import { ImageResponse, userInformation } from "@/api/fetch/post";
+import ImageSection from "@/app/(route)/list/[id]/_components/PostDetailHeader/_internal/ImageSection/ImageSection";
+
+type HeaderData = {
+  id: string;
+  imageResponseList: ImageResponse[];
+  userData: userInformation;
+};
+
+interface PostDetailHeaderType {
+  headerData: HeaderData;
+}
+
+const PublicDetailHeader = ({ headerData }: PostDetailHeaderType) => {
+  const { id, imageResponseList, userData } = headerData;
+
+  return (
+    <>
+      <ImageSection imageUrls={imageResponseList} />
+
+      <section
+        aria-label="게시글 작성자 정보"
+        className={cn(
+          "flex flex-col items-start justify-center gap-5 border-b border-divider-default p-5",
+          "tablet:flex-row tablet:items-center tablet:justify-between"
+        )}
+      >
+        <div className={cn("flex items-center justify-start gap-[14px]", "tablet:w-[461px]")}>
+          <ProfileAvatar
+            size={40}
+            src={userData.profileImage}
+            alt={userData.nickName}
+            priority={true}
+          />
+
+          <div className="flex flex-col items-start justify-center">
+            <p className="text-body1-medium text-layout-header-default">{userData.nickName}</p>
+            <div className="text-body2-regular text-layout-body-default">
+              <span className="text-body2-regular text-layout-body-default">경찰청</span>
+            </div>
+          </div>
+        </div>
+
+        <Button className={cn("min-h-11 w-full py-[10px]", "tablet:flex-1")}>
+          연락처 확인하기
+        </Button>
+      </section>
+    </>
+  );
+};
+
+export default PublicDetailHeader;
