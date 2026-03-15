@@ -16,7 +16,7 @@ const LOST_FIND_ACTION_DATA = [
   },
   {
     type: "found",
-    title: "습득 신고",
+    title: "발견 신고",
     positionImage: "/main/LostFindActions/found-position.svg",
     markImage: {
       src: "/main/LostFindActions/exclamation.svg",
