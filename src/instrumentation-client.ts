@@ -4,8 +4,13 @@
 
 import * as Sentry from "@sentry/nextjs";
 
+const isProd = process.env.NODE_ENV === "production";
+
 Sentry.init({
   dsn: "https://733ec55f58e2fda3ed51d8127bda3036@o4510692801249280.ingest.us.sentry.io/4510692807475200",
+
+  // Conditionally disable locally
+  enabled: isProd,
 
   // Add optional integrations for additional features
   integrations: [Sentry.replayIntegration()],
