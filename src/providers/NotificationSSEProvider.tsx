@@ -59,8 +59,10 @@ export const NotificationSSEProvider = ({ children }: PropsWithChildren) => {
   const onNotification = useCallback(
     ({ type, referenceType }: NotificationEventData) => {
       queryClient.invalidateQueries({ queryKey: ["notificationList"] });
-      showSnackBar(getNotificationDisplayTitle(type, referenceType), "알림 페이지로 이동", () =>
-        router.push("/alert")
+      showSnackBar(
+        getNotificationDisplayTitle(type, referenceType).replace(/"/g, ""),
+        "알림 페이지로 이동",
+        () => router.push("/alert")
       );
     },
     [queryClient, router, showSnackBar]
