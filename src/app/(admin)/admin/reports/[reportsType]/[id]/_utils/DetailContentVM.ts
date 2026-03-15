@@ -31,6 +31,7 @@ export const getDetailContentVM = (
 
   if ("nickname" in data) userEmailLabel = data.nickname as string;
   else if ("userEmail" in data) userEmailLabel = data.userEmail as string;
+  else if ("reporterNickname" in data) userEmailLabel = data.reporterNickname as string;
 
   return {
     title,

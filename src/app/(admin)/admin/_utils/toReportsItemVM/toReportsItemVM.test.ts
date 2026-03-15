@@ -8,9 +8,9 @@ describe("toReportItemVM", () => {
   it("게시글 신고 매핑", () => {
     const item = {
       reportId: 1,
-      reportType: "SPAM",
+      reportType: "DUPLICATE",
       reason: "스팸입니다.",
-      nickname: "짱구",
+      reporterNickname: "짱구",
       createdAt: "2026-01-01",
       status: "PENDING",
       answered: false,
@@ -20,7 +20,7 @@ describe("toReportItemVM", () => {
 
     expect(result).toEqual({
       href: "/admin/reports/report/1",
-      title: "스팸",
+      title: "동일한 내용이 여러 번 올라왔어요.",
       content: "스팸입니다.",
       nickname: "짱구",
       createdAt: "2026-01-01",
