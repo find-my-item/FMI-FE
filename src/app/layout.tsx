@@ -37,7 +37,10 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="찾아줘!" />
-        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="/pwa/apple-icon-120.png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="/pwa/apple-icon-152.png" />
+        <link rel="apple-touch-icon" sizes="167x167" href="/pwa/apple-icon-167.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/pwa/apple-icon-180.png" />
       </head>
       <body className="mx-auto max-w-[768px] border-x-2 flex-col-center">
         {isProd && gaId && <GoogleAnalytics gaId={gaId} />}
