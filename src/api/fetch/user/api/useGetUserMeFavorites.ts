@@ -1,16 +1,17 @@
 import { MypagePostsResponseType } from "../types/MypagePostsResponseType";
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
-import { CategoryType, PostType, SortType } from "@/types";
+import { CategoryType, PostType } from "@/types";
 import useAppInfiniteQuery from "@/api/_base/query/useAppInfiniteQuery";
 import { PostItem } from "../../post";
 import { InfiniteData, keepPreviousData } from "@tanstack/react-query";
 import { useAuthStore } from "@/store";
+import { SortFilterValue } from "@/components/domain/FilterSectionBottomSheet/_types/types";
 
 interface useGetUserMeFavoritesProps {
   address?: string;
   postType?: PostType;
   category?: CategoryType;
-  sortType?: SortType;
+  sortType?: SortFilterValue;
   keyword?: string;
   size?: number;
 }
