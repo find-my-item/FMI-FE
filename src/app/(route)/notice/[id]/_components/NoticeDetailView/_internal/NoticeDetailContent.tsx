@@ -1,24 +1,29 @@
 import { NoticeDetail } from "@/api/fetch/notice";
 import { Icon } from "@/components/common";
-import { formatDate } from "@/utils";
+import { cn, formatDate } from "@/utils";
 import Image from "next/image";
 
-const NoticeNewBadge = () => {
+const BADGE_DEFAULT_STYLE = "inline-block rounded-full px-2 py-1 text-caption2-medium text-white";
+
+const NoticeDetailBadges = ({ isNew, isHot }: { isNew: boolean; isHot: boolean }) => {
+  if (!isNew && !isHot) return null;
+
   return (
-    <div className="inline-block rounded-full px-2 py-1 text-caption2-medium text-white bg-fill-brand-normal-default">
-      NEW
+    <div className="flex items-center gap-1">
+      {isNew && <div className={cn(BADGE_DEFAULT_STYLE, "bg-fill-brand-normal-default")}>NEW</div>}
+      {isHot && <div className={cn(BADGE_DEFAULT_STYLE, "bg-system-favorite")}>HOT</div>}
     </div>
   );
 };
 
 const NoticeDetailContent = ({ noticeDetail }: { noticeDetail?: NoticeDetail }) => {
   if (!noticeDetail) return null;
-  const { title, content, viewCount, likeCount, authorName, isNew, createdAt, images } =
+  const { title, content, viewCount, likeCount, authorName, isNew, isHot, createdAt, images } =
     noticeDetail;
 
   return (
     <section className="space-y-3 px-5 py-[30px]">
-      {isNew && <NoticeNewBadge />}
+      <NoticeDetailBadges isNew={isNew} isHot={isHot} />
 
       <div className="space-y-6">
         <div className="space-y-1">
