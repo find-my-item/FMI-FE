@@ -6,8 +6,8 @@ import { InfiniteData, keepPreviousData } from "@tanstack/react-query";
 import { useAuthStore } from "@/store";
 
 interface CommentsParams {
-  startDate?: string;
-  endDate?: string;
+  startDate?: string | null;
+  endDate?: string | null;
   keyword?: string;
   sort?: SimpleSortType;
   size?: number;

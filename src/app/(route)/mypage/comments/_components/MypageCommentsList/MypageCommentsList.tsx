@@ -1,19 +1,36 @@
-import { MOCK_MYPAGE_COMMENTS_ITEM } from "@/mock/data";
 import { CommentCard, MypageEmptyUI } from "@/components/domain";
+import { CommentItem } from "@/api/fetch/user/types/UserMeCommentsType";
+import { useInfiniteScroll } from "@/hooks";
 
-const MypageCommentsList = () => {
+interface MypageCommentsListProps {
+  commentData: CommentItem[];
+  fetchNextPage: () => void;
+  hasNextPage?: boolean;
+  isFetchingNextPage: boolean;
+}
+
+const MypageCommentsList = ({
+  commentData,
+  hasNextPage,
+  isFetchingNextPage,
+  fetchNextPage,
+}: MypageCommentsListProps) => {
+  const { ref } = useInfiniteScroll({ hasNextPage, fetchNextPage, isFetchingNextPage });
   return (
     <section>
       <h2 className="sr-only">댓글 목록 영역</h2>
 
-      {MOCK_MYPAGE_COMMENTS_ITEM.length === 0 ? (
+      {commentData.length === 0 ? (
         <MypageEmptyUI pageType="comments" />
       ) : (
-        <ul>
-          {MOCK_MYPAGE_COMMENTS_ITEM.map((item) => (
-            <CommentCard key={item.commentId} data={item} />
-          ))}
-        </ul>
+        <>
+          <ul>
+            {commentData.map((item) => (
+              <CommentCard key={item.commentId} data={item} />
+            ))}
+          </ul>
+          <div ref={ref} className="h-10" />
+        </>
       )}
     </section>
   );
