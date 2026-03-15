@@ -1,15 +1,46 @@
 import useAppInfiniteQuery from "@/api/_base/query/useAppInfiniteQuery";
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 import { UserMeCommentsResponse } from "../types/UserMeCommentsType";
-import { useSearchParams } from "next/navigation";
+import { SimpleSortType } from "@/types";
+import { InfiniteData, keepPreviousData } from "@tanstack/react-query";
+import { useAuthStore } from "@/store";
 
-export const useGetUserComments = () => {
-  const params = useSearchParams();
+interface CommentsParams {
+  startDate?: string;
+  endDate?: string;
+  keyword?: string;
+  sort?: SimpleSortType;
+  size?: number;
+}
+export const useGetUserComments = ({
+  startDate,
+  endDate,
+  keyword,
+  sort = "LATEST",
+  size = 10,
+}: CommentsParams) => {
+  const isAuthInitialized = useAuthStore((state) => state.isAuthInitialized);
+
+  const queryParams = new URLSearchParams();
+
+  if (startDate && endDate) {
+    queryParams.set("startDate", startDate);
+    queryParams.set("endDate", endDate);
+  }
+  if (keyword) queryParams.set("keyword", keyword);
+  if (sort) queryParams.set("sort", sort);
+  queryParams.set("size", size.toString());
 
   return useAppInfiniteQuery<UserMeCommentsResponse, ApiBaseResponseType<null>>(
     "auth",
     ["/users/me/comments"],
-    `/users/me/comments`,
-    {}
+    `/users/me/comments${queryParams}`,
+    {
+      placeholderData: keepPreviousData,
+      getNextPageParam: (lastPage) => lastPage.result.nextCursor ?? undefined,
+      select: (data: InfiniteData<UserMeCommentsResponse>) =>
+        data.pages.flatMap((page) => page.result.comments),
+      enabled: isAuthInitialized,
+    }
   );
 };
