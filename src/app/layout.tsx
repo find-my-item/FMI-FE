@@ -20,6 +20,13 @@ const pretendard = localFont({
 export const metadata: Metadata = {
   title: "찾아줘!",
   description: "분실물 찾기 서비스",
+  icons: {
+    icon: [
+      { url: "/favicon/default/favicon-16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon/default/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon/default/favicon-48.png", sizes: "48x48", type: "image/png" },
+    ],
+  },
 };
 
 export default function RootLayout({

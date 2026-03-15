@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useApiRefreshToken } from "@/api/fetch/auth";
 import { useAuthStore } from "@/store";
+import { useFaviconNotification } from "@/hooks";
 
 export default function AuthBootstrap() {
   const router = useRouter();
@@ -11,6 +12,9 @@ export default function AuthBootstrap() {
 
   const { mutate: refreshTokenMutate } = useApiRefreshToken();
   const ranRef = useRef(false);
+
+  // TODO(지권): favicon 알림 유뮤에 따른 변경 함수
+  useFaviconNotification(true);
 
   const setAuthInitialized = useAuthStore((state) => state.setAuthInitialized);
 

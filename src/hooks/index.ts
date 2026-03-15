@@ -8,3 +8,4 @@ export { default as useHorizontalDragScroll } from "./useHorizontalDragScroll/us
 export { useInfiniteScroll } from "./useInfiniteScroll/useInfiniteScroll";
 export { default as useLogout } from "./useLogout/useLogout";
 export { default as useVWorldAddressSearch } from "./useVWorldAddressSearch/useVWorldAddressSearch";
+export { default as useFaviconNotification } from "./useFaviconNotification/useFaviconNotification";
