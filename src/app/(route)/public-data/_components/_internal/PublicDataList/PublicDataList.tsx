@@ -17,10 +17,13 @@ const PublicDataList = () => {
 export default PublicDataList;
 
 const PublicDataItem = () => {
+  const type = "lost";
+  const postId = "1";
+
   return (
     <li>
       <Link
-        href={"#"}
+        href={`/public-data/${type}/${postId}`}
         aria-label="휴대폰, 검정색 카드지갑 가죽케이스"
         className={cn(
           "flex w-full items-center gap-[14px] px-5 py-[30px]",
