@@ -1,11 +1,12 @@
 import { DetailHeader } from "@/components/layout";
 import { HeaderSearch } from "@/components/layout/DetailHeader/DetailHeaderParts";
 import { PublicDataList } from "./_components/_internal";
+import { Icon } from "@/components/common";
 
 const page = () => {
   return (
     <>
-      <DetailHeader title="분실물">
+      <DetailHeader title={<Icon name="DetailPolice24" size={154} />}>
         <HeaderSearch />
       </DetailHeader>
 
