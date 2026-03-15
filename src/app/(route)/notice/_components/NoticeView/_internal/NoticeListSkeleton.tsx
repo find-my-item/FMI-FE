@@ -27,7 +27,7 @@ const NoticeListSkeletonItem = () => {
 
 const NoticeListSkeleton = () => {
   return (
-    <ul>
+    <ul className="h-base">
       {Array.from({ length: 5 }).map((_, index) => (
         <NoticeListSkeletonItem key={index} />
       ))}

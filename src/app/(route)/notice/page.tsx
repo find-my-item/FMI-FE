@@ -1,19 +1,23 @@
 "use client";
 
 import { DetailHeader } from "@/components/layout";
-import { NoticeView } from "./_components";
+import { NoticeFilter, NoticeSearchForm, NoticeView } from "./_components";
 import { FloatingButton, ScrollToTopButton } from "@/components/common";
 import { useRouter } from "next/navigation";
 import { Suspense } from "react";
+import { useSearchUpdateQueryString } from "@/hooks";
 
 const Notice = () => {
   const router = useRouter();
+  const { searchUpdateQuery } = useSearchUpdateQueryString();
 
   return (
     <>
       <DetailHeader title="공지사항" />
       <h1 className="sr-only">공지사항 목록</h1>
       <Suspense fallback="">
+        <NoticeSearchForm />
+        <NoticeFilter searchUpdateQuery={searchUpdateQuery} />
         <NoticeView />
       </Suspense>
 
