@@ -9,31 +9,40 @@ import { useSearchUpdateQueryString } from "@/hooks";
 import { ErrorBoundary } from "@/app/ErrorBoundary";
 import { ErrorState } from "@/components/state";
 
+const NoticePageContent = () => {
+  const { searchUpdateQuery } = useSearchUpdateQueryString();
+
+  return (
+    <>
+      <NoticeSearchForm />
+      <NoticeFilter searchUpdateQuery={searchUpdateQuery} />
+
+      <ErrorBoundary
+        fallback={
+          <ErrorState
+            icon={{ iconName: "ErrorNoticeList", iconSize: 70 }}
+            title="공지사항을 불러올 수 없어요"
+            description={"네트워크 연결을 확인하거나\n잠시 후 다시 시도해주세요"}
+          >
+            <NoticeListErrorButtons />
+          </ErrorState>
+        }
+      >
+        <NoticeView />
+      </ErrorBoundary>
+    </>
+  );
+};
+
 const Notice = () => {
   const router = useRouter();
-  const { searchUpdateQuery } = useSearchUpdateQueryString();
 
   return (
     <div className="min-h-dvh">
       <DetailHeader title="공지사항" />
       <h1 className="sr-only">공지사항 목록</h1>
       <Suspense fallback="">
-        <NoticeSearchForm />
-        <NoticeFilter searchUpdateQuery={searchUpdateQuery} />
-
-        <ErrorBoundary
-          fallback={
-            <ErrorState
-              icon={{ iconName: "ErrorNoticeList", iconSize: 70 }}
-              title="공지사항을 불러올 수 없어요"
-              description={"네트워크 연결을 확인하거나\n잠시 후 다시 시도해주세요"}
-            >
-              <NoticeListErrorButtons />
-            </ErrorState>
-          }
-        >
-          <NoticeView />
-        </ErrorBoundary>
+        <NoticePageContent />
       </Suspense>
 
       <div className="fixed bottom-[30px] right-6 space-y-2">
