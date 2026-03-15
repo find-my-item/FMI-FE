@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     template: "%s | 찾아줘! 관리자",
     default: "관리자 페이지 | 찾아줘! 관리자",
   },
-  description: "시스템 관리자 전용 페이지입니다.",
+  description: "찾아줘의 관리자만 접근할 수 있는 페이지입니다.",
   robots: {
     index: false,
     follow: false,
