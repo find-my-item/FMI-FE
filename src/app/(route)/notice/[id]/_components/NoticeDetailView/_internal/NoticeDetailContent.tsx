@@ -1,5 +1,9 @@
+"use client";
+
+import { useState } from "react";
 import { NoticeDetail } from "@/api/fetch/notice";
 import { Icon } from "@/components/common";
+import { ImageViewerModal } from "@/components/domain";
 import { cn, formatDate } from "@/utils";
 import Image from "next/image";
 
@@ -17,7 +21,13 @@ const NoticeDetailBadges = ({ isNew, isHot }: { isNew: boolean; isHot: boolean }
 };
 
 const NoticeDetailContent = ({ noticeDetail }: { noticeDetail?: NoticeDetail }) => {
+  const [imageViewerState, setImageViewerState] = useState<{
+    isOpen: boolean;
+    initialIndex: number;
+  }>({ isOpen: false, initialIndex: 0 });
+
   if (!noticeDetail) return null;
+
   const { title, content, viewCount, likeCount, authorName, isNew, isHot, createdAt, images } =
     noticeDetail;
 
@@ -40,15 +50,21 @@ const NoticeDetailContent = ({ noticeDetail }: { noticeDetail?: NoticeDetail }) 
         </p>
         {/* TODO(형준): 이미지 임시 스타일 적용 상태, 피그마 디자인 추가 시 변경 필요 */}
         {images &&
-          images.map((image) => (
-            <div key={image} className="relative aspect-square w-full">
+          images.map((image, index) => (
+            <button
+              key={image}
+              type="button"
+              className="relative aspect-square w-full cursor-pointer"
+              onClick={() => setImageViewerState({ isOpen: true, initialIndex: index })}
+              aria-label={`공지사항 상세 이미지 ${index + 1} 보기`}
+            >
               <Image
                 src={image}
                 alt="공지사항 상세 이미지"
                 fill
                 className="rounded-2xl object-contain"
               />
-            </div>
+            </button>
           ))}
 
         <div className="flex gap-3 text-body2-regular text-neutral-strong-placeholder">
@@ -63,6 +79,15 @@ const NoticeDetailContent = ({ noticeDetail }: { noticeDetail?: NoticeDetail }) 
           </div>
         </div>
       </div>
+
+      {images && images.length > 0 && (
+        <ImageViewerModal
+          images={images}
+          initialIndex={imageViewerState.initialIndex}
+          isOpen={imageViewerState.isOpen}
+          onClose={() => setImageViewerState((prev) => ({ ...prev, isOpen: false }))}
+        />
+      )}
     </section>
   );
 };
