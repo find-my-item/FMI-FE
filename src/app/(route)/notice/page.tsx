@@ -13,7 +13,7 @@ const Notice = () => {
   const { searchUpdateQuery } = useSearchUpdateQueryString();
 
   return (
-    <div className="h-base">
+    <div className="min-h-dvh">
       <DetailHeader title="공지사항" />
       <h1 className="sr-only">공지사항 목록</h1>
       <Suspense fallback="">
