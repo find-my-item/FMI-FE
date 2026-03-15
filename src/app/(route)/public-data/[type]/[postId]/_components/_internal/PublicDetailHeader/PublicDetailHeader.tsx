@@ -1,12 +1,18 @@
+"use client";
+
+import { useState } from "react";
 import { Button, ProfileAvatar } from "@/components/common";
 import { cn } from "@/utils";
 import { ImageResponse, userInformation } from "@/api/fetch/post";
 import ImageSection from "@/app/(route)/list/[id]/_components/PostDetailHeader/_internal/ImageSection/ImageSection";
+import PublicCallBottomSheet from "../PublicCallBottomSheet/PublicCallBottomSheet";
 
 type HeaderData = {
   id: string;
   imageResponseList: ImageResponse[];
   userData: userInformation;
+  location: string;
+  phoneNumber: string;
 };
 
 interface PostDetailHeaderType {
@@ -14,7 +20,9 @@ interface PostDetailHeaderType {
 }
 
 const PublicDetailHeader = ({ headerData }: PostDetailHeaderType) => {
-  const { id, imageResponseList, userData } = headerData;
+  const { id, imageResponseList, userData, location, phoneNumber } = headerData;
+
+  const [isNumberCheck, setIsNumberCheck] = useState(false);
 
   return (
     <>
@@ -43,10 +51,19 @@ const PublicDetailHeader = ({ headerData }: PostDetailHeaderType) => {
           </div>
         </div>
 
-        <Button className={cn("min-h-11 w-full py-[10px]", "tablet:flex-1")}>
+        <Button
+          className={cn("min-h-11 w-full py-[10px]", "tablet:flex-1")}
+          onClick={() => setIsNumberCheck(true)}
+        >
           연락처 확인하기
         </Button>
       </section>
+
+      <PublicCallBottomSheet
+        callBottomSheetData={{ location, phoneNumber }}
+        isOpen={isNumberCheck}
+        onClose={() => setIsNumberCheck(false)}
+      />
     </>
   );
 };

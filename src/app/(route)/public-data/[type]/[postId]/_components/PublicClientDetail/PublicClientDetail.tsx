@@ -23,6 +23,8 @@ const headerData = {
     postCount: 0,
     chattingCount: 0,
   },
+  location: "불암지구대 유실물센터",
+  phoneNumber: "02-3469-0112",
 };
 
 const PublicClientDetail = ({ id }: { id: number }) => {
