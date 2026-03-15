@@ -11,6 +11,7 @@ import { Metadata } from "next";
 import MSWProvider from "@/providers/MSWProvider";
 import AuthBootstrap from "./authBootStrap";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { PWAProvider } from "@/providers/PWAProvider";
 
 const pretendard = localFont({
   src: "../../public/fonts/PretendardVariable.woff2",
@@ -56,26 +57,28 @@ export default function RootLayout({
           </Script>
         )}
         <Providers>
-          <SnackBarProvider>
-            <ToastProvider>
-              <MSWProvider />
-              <AuthBootstrap />
-              <main className="w-full flex-1">{children}</main>
-              <Footer />
-            </ToastProvider>
-          </SnackBarProvider>
-          <Script
-            src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.7/kakao.min.js"
-            integrity="sha384-tJkjbtDbvoxO+diRuDtwRO9JXR7pjWnfjfRn5ePUpl7e7RJCxKCwwnfqUAdXh53p"
-            crossOrigin="anonymous"
-            strategy="afterInteractive"
-          />
-          {isProd && (
-            <>
-              <Analytics />
-              <SpeedInsights />
-            </>
-          )}
+          <PWAProvider>
+            <SnackBarProvider>
+              <ToastProvider>
+                <MSWProvider />
+                <AuthBootstrap />
+                <main className="w-full flex-1">{children}</main>
+                <Footer />
+              </ToastProvider>
+            </SnackBarProvider>
+            <Script
+              src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.7/kakao.min.js"
+              integrity="sha384-tJkjbtDbvoxO+diRuDtwRO9JXR7pjWnfjfRn5ePUpl7e7RJCxKCwwnfqUAdXh53p"
+              crossOrigin="anonymous"
+              strategy="afterInteractive"
+            />
+            {isProd && (
+              <>
+                <Analytics />
+                <SpeedInsights />
+              </>
+            )}
+          </PWAProvider>
         </Providers>
       </body>
     </html>
