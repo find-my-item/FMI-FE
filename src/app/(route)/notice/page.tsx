@@ -6,19 +6,23 @@ import { FloatingButton, ScrollToTopButton } from "@/components/common";
 import { useRouter } from "next/navigation";
 import { Suspense } from "react";
 import { useSearchUpdateQueryString } from "@/hooks";
+import { ErrorBoundary } from "@/app/ErrorBoundary";
 
 const Notice = () => {
   const router = useRouter();
   const { searchUpdateQuery } = useSearchUpdateQueryString();
 
   return (
-    <>
+    <div className="h-base">
       <DetailHeader title="공지사항" />
       <h1 className="sr-only">공지사항 목록</h1>
       <Suspense fallback="">
         <NoticeSearchForm />
         <NoticeFilter searchUpdateQuery={searchUpdateQuery} />
-        <NoticeView />
+
+        <ErrorBoundary fallback="">
+          <NoticeView />
+        </ErrorBoundary>
       </Suspense>
 
       <div className="fixed bottom-[30px] right-6 space-y-2">
@@ -29,7 +33,7 @@ const Notice = () => {
           onClick={() => router.push("/admin/notice/write")}
         />
       </div>
-    </>
+    </div>
   );
 };
 

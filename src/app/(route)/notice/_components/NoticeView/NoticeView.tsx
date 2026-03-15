@@ -15,10 +15,10 @@ const NoticeContent = () => {
   });
 
   return (
-    <div className="h-base">
-      {notices && notices.length > 0 && <NoticeList notices={notices} />}
+    <>
+      {notices && <NoticeList notices={notices} />}
       {hasNextPage && <div ref={noticeListRef} className="h-[100px]" />}
-    </div>
+    </>
   );
 };
 
