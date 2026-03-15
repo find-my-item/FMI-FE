@@ -107,3 +107,4 @@ export { default as NewBadge } from "@/assets/new-badge.svg";
 export { default as AlertInquiry } from "@/assets/alert-inquiry.svg";
 export { default as AlertNotice } from "@/assets/alert-notice.svg";
 export { default as AlertReportResult } from "@/assets/alert-report-result.svg";
+export { default as AccordionArrowRight } from "@/assets/accordion-arrow-right.svg";
