@@ -105,3 +105,4 @@ export { default as EyeDetail } from "@/assets/eye-detail.svg";
 export { default as HotBadge } from "@/assets/hot-badge.svg";
 export { default as NewBadge } from "@/assets/new-badge.svg";
 export { default as AccordionArrowRight } from "@/assets/accordion-arrow-right.svg";
+export { default as LogoCharacter } from "@/assets/logo-character.svg";
