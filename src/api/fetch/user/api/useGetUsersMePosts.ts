@@ -58,12 +58,10 @@ export const useGetUsersMePosts = ({
     ],
     `/users/me/posts?${queryParams.toString()}`,
     {
-      suspense: true,
       placeholderData: keepPreviousData,
       getNextPageParam: (lastPage) => lastPage.result.nextCursor ?? undefined,
       select: (data: InfiniteData<MypagePostsResponseType>) =>
         data.pages.flatMap((page) => page.result.postList),
-      throwOnError: true,
       enabled: isAuthInitialized,
     }
   );
