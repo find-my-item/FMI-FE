@@ -7,7 +7,7 @@
 import { CategoryType, ItemStatus, PostType } from "@/types";
 
 // 탭 타입
-export type tabsType = "LIST" | "MY_POSTS" | "MY_FAVORITES";
+export type tabsType = "LIST" | "MY_POSTS" | "MY_FAVORITES" | "PUBLIC_DATA";
 
 // 필터 타입
 export type FilterTab = "date" | "region" | "category" | "sort" | "status" | "findStatus";

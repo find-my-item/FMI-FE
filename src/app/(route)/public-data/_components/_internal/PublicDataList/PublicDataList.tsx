@@ -5,9 +5,11 @@ import { cn, formatDate } from "@/utils";
 const PublicDataList = () => {
   return (
     <section aria-label="목록">
-      {Array.from({ length: 10 }).map((_, i) => (
-        <PublicDataItem key={i} />
-      ))}
+      <ul>
+        {Array.from({ length: 10 }).map((_, i) => (
+          <PublicDataItem key={i} />
+        ))}
+      </ul>
     </section>
   );
 };

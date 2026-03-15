@@ -4,11 +4,11 @@ import Link from "next/link";
 // TODO(지권): 경로 수정 필요
 const POLICE_ITEMS = [
   {
-    href: "http://localhost:3000/public-data?search=분실",
+    href: "http://localhost:3000/public-data?type=lost",
     label: "분실\n했어요",
   },
   {
-    href: "http://localhost:3000/public-data?search=습득",
+    href: "http://localhost:3000/public-data?type=found",
     label: "습득\n했어요",
   },
 ];
