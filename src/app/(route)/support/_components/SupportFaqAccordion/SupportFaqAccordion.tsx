@@ -10,7 +10,7 @@ import {
   filterFaqItemsByTab,
 } from "./_internal";
 import { useSupportTabQuery } from "../SupportTab/_internal/useSupportTabQuery";
-import { Fragment, MouseEvent } from "react";
+import { MouseEvent } from "react";
 import Link from "next/link";
 
 interface SupportFaqAccordionItemProps {
@@ -62,22 +62,28 @@ const SupportFaqAccordionItem = ({ item, isExpanded, onToggle }: SupportFaqAccor
           <div className="inline-block">
             <Chip label={item.category} type="brandSubtleHover" />
           </div>
-          <p className="whitespace-pre-line text-body1-medium text-layout-header-default">
+          <div className="flex flex-col gap-3 whitespace-pre-line text-body1-medium text-layout-header-default">
             {item.answer.map((segment, index) =>
               segment.type === "text" ? (
-                <Fragment key={index}>{segment.content}</Fragment>
+                <span key={index} className="block">
+                  {segment.content}
+                </span>
               ) : (
                 <Link
                   key={index}
                   href={segment.href}
-                  className="text-brand-normal-default underline"
+                  className="flex items-center gap-1 text-brand-strongUseThis-default"
                 >
-                  {/* TODO(형준): 링크 텍스트 스타일 수정 필요 */}
                   {segment.text}
+                  <Icon
+                    name="AccordionArrowRight"
+                    size={12}
+                    className="text-brand-strongUseThis-default"
+                  />
                 </Link>
               )
             )}
-          </p>
+          </div>
         </div>
       )}
     </li>
