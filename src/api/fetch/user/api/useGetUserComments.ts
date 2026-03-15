@@ -1,6 +1,6 @@
 import useAppInfiniteQuery from "@/api/_base/query/useAppInfiniteQuery";
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
-import { UserMeCommentsResponse } from "../types/UserMeCommentsType";
+import { CommentItem, UserMeCommentsResponse } from "../types/UserMeCommentsType";
 import { SimpleSortType } from "@/types";
 import { InfiniteData, keepPreviousData } from "@tanstack/react-query";
 import { useAuthStore } from "@/store";
@@ -31,7 +31,7 @@ export const useGetUserComments = ({
   if (sort) queryParams.set("sort", sort);
   queryParams.set("size", size.toString());
 
-  return useAppInfiniteQuery<UserMeCommentsResponse, ApiBaseResponseType<null>>(
+  return useAppInfiniteQuery<UserMeCommentsResponse, ApiBaseResponseType<null>, CommentItem[]>(
     "auth",
     ["/users/me/comments"],
     `/users/me/comments${queryParams}`,
