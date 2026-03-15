@@ -19,12 +19,13 @@ import { ButtonHTMLAttributes } from "react";
 
 interface FooterButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: string;
+  type?: "button" | "submit" | "reset";
 }
 
-const FooterButton = ({ children, ...props }: FooterButtonProps) => {
+const FooterButton = ({ children, type = "button", ...props }: FooterButtonProps) => {
   return (
     <footer className="sticky bottom-0 h-[88px] w-full border-t border-divider-default bg-white px-4 pb-8 pt-3">
-      <Button type="button" variant="auth" {...props}>
+      <Button type={type} variant="auth" {...props}>
         {children}
       </Button>
     </footer>

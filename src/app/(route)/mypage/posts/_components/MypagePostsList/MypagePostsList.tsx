@@ -1,10 +1,9 @@
 import { PostItem } from "@/api/fetch/post";
 import { MypageEmptyUI, PostListItem } from "@/components/domain";
-import { LoadingState } from "@/components/state";
 import { useInfiniteScroll } from "@/hooks";
 
 interface MypagePostsListProps {
-  postsData?: PostItem[];
+  postsData: PostItem[];
   fetchNextPage: () => void;
   hasNextPage?: boolean;
   isFetchingNextPage: boolean;
@@ -21,8 +20,6 @@ const MypagePostsList = ({
     hasNextPage,
     isFetchingNextPage,
   });
-
-  if (postsData === undefined) return <LoadingState />;
 
   return (
     <section>

@@ -37,7 +37,11 @@ const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
             priority={true}
           />
 
-          <div className="flex flex-col items-start justify-center">
+          <Link
+            href={`/user/${userData.userId}`}
+            aria-label={`${userData.nickName} 프로필 보기`}
+            className="flex flex-col items-start justify-center"
+          >
             <p className="text-body1-medium text-layout-header-default">{userData.nickName}</p>
             <div className="text-body2-regular text-layout-body-default">
               <span className="after:mx-2 after:inline-block after:content-['·']">
@@ -45,7 +49,7 @@ const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
               </span>
               <span>현재 채팅 {formatCappedNumber(userData.chattingCount)}</span>
             </div>
-          </div>
+          </Link>
         </div>
 
         <Button

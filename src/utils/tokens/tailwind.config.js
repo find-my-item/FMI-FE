@@ -586,6 +586,10 @@ module.exports = {
         dimTransparent_2: "rgba(120, 120, 120, 0.1)",
         dimTransparent_3: "rgba(120, 120, 120, 0.1)",
         layoutBrand: "#eefff6",
+        notificationBlue: "#4f95ff",
+        notificationGrey: "#5d5d5d",
+        notificationYellow: "#ffc642",
+        notificationBrand: "#0aa874",
       },
       spacing: {
         padding: {

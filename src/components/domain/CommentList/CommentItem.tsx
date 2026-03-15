@@ -93,12 +93,12 @@ const CommentItem = ({
   const itemQueryKey = parentQueryKey ?? ["post-comments", postId];
   const childrenQueryKey = ["replies-post-comments", data.id, 10];
 
-  // console.log(replyCommentData?.hasNext);
-
   return (
     <li className={cn("my-[18px]", !isNestedReply && "px-5", className)}>
       <div className="flex">
-        {isNestedReply && <Icon name="CommentReplyIcon" size={24} className="text-[#D9D9D9]" />}
+        {isNestedReply && (
+          <Icon name="CommentReplyIcon" size={24} className="text-border-divider-default" />
+        )}
 
         <div className="flex-1">
           <div className="space-y-2">
