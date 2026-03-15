@@ -106,3 +106,4 @@ export { default as HotBadge } from "@/assets/hot-badge.svg";
 export { default as NewBadge } from "@/assets/new-badge.svg";
 export { default as EmptyNoticeList } from "@/assets/empty-notice-list.svg";
 export { default as AccordionArrowRight } from "@/assets/accordion-arrow-right.svg";
+export { default as ErrorNoticeList } from "@/assets/error-notice-list.svg";

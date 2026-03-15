@@ -1,12 +1,13 @@
 "use client";
 
 import { DetailHeader } from "@/components/layout";
-import { NoticeFilter, NoticeSearchForm, NoticeView } from "./_components";
+import { NoticeFilter, NoticeSearchForm, NoticeView, NoticeListErrorButtons } from "./_components";
 import { FloatingButton, ScrollToTopButton } from "@/components/common";
 import { useRouter } from "next/navigation";
 import { Suspense } from "react";
 import { useSearchUpdateQueryString } from "@/hooks";
 import { ErrorBoundary } from "@/app/ErrorBoundary";
+import { ErrorState } from "@/components/state";
 
 const Notice = () => {
   const router = useRouter();
@@ -20,7 +21,17 @@ const Notice = () => {
         <NoticeSearchForm />
         <NoticeFilter searchUpdateQuery={searchUpdateQuery} />
 
-        <ErrorBoundary fallback="">
+        <ErrorBoundary
+          fallback={
+            <ErrorState
+              icon={{ iconName: "ErrorNoticeList", iconSize: 70 }}
+              title="공지사항을 불러올 수 없어요"
+              description={"네트워크 연결을 확인하거나\n잠시 후 다시 시도해주세요"}
+            >
+              <NoticeListErrorButtons />
+            </ErrorState>
+          }
+        >
           <NoticeView />
         </ErrorBoundary>
       </Suspense>
