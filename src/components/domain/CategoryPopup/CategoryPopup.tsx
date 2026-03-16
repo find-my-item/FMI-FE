@@ -4,22 +4,48 @@
 import { useState } from "react";
 import { Button, RadioOptionItem } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
-import { CategoryType, NoticeCategory } from "@/types";
-import { CATEGORY_OPTIONS, NOTICE_WRITE_CATEGORY_OPTIONS } from "@/constants";
+import { CategoryType, InquiryTargetType, NoticeCategory } from "@/types";
+import {
+  CATEGORY_OPTIONS,
+  INQUIRY_WRITE_CATEGORY_OPTIONS,
+  NOTICE_WRITE_CATEGORY_OPTIONS,
+} from "@/constants";
 
-interface CategoryPopupProps {
-  mode?: "post" | "notice";
+type CategoryPopupMode = "post" | "notice" | "inquiry";
+type CategoryValueByMode = {
+  post: CategoryType;
+  notice: NoticeCategory;
+  inquiry: InquiryTargetType;
+};
+
+type CategoryOption<T extends string> = {
+  value: T;
+  label: string;
+};
+
+const CATEGORY_OPTIONS_BY_MODE: {
+  [K in CategoryPopupMode]: readonly CategoryOption<CategoryValueByMode[K]>[];
+} = {
+  post: CATEGORY_OPTIONS,
+  notice: NOTICE_WRITE_CATEGORY_OPTIONS,
+  inquiry: INQUIRY_WRITE_CATEGORY_OPTIONS,
+};
+
+interface CategoryPopupProps<T extends CategoryPopupMode = "post"> {
+  mode?: T;
   isOpen: boolean;
   onClose: () => void;
-  onSelect: (category: AllCategoryType) => void;
+  onSelect: (category: CategoryValueByMode[T]) => void;
 }
 
-type AllCategoryType = CategoryType | NoticeCategory;
-
-const CategoryPopup = ({ mode = "post", isOpen, onClose, onSelect }: CategoryPopupProps) => {
-  const [selected, setSelected] = useState<AllCategoryType>();
-
-  const categoryOptions = mode === "post" ? CATEGORY_OPTIONS : NOTICE_WRITE_CATEGORY_OPTIONS;
+const CategoryPopup = <T extends CategoryPopupMode = "post">({
+  mode = "post" as T,
+  isOpen,
+  onClose,
+  onSelect,
+}: CategoryPopupProps<T>) => {
+  const [selected, setSelected] = useState<CategoryValueByMode[T]>();
+  const categoryOptions = CATEGORY_OPTIONS_BY_MODE[mode];
 
   const handleApply = () => {
     if (!selected) return;
@@ -37,7 +63,7 @@ const CategoryPopup = ({ mode = "post", isOpen, onClose, onSelect }: CategoryPop
               key={option.value}
               option={option}
               selected={selected || ""}
-              onChange={(value) => setSelected(value as AllCategoryType)}
+              onChange={(value) => setSelected(value as CategoryValueByMode[T])}
               inputName="category"
             />
           ))}

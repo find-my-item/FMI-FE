@@ -1,7 +1,7 @@
 "use client";
 
 import { DetailHeader } from "@/components/layout";
-import { MypagePostsList } from "./_components";
+import { MypagePostsContent } from "./_components";
 import { FilterSection, MypageSearch } from "@/components/domain";
 
 const page = () => {
@@ -14,7 +14,7 @@ const page = () => {
 
         <FilterSection pageType="MY_POSTS" />
 
-        <MypagePostsList />
+        <MypagePostsContent />
       </div>
     </>
   );

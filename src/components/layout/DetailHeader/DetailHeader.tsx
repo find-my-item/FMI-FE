@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Icon } from "@/components/common";
 
 interface DetailHeaderProps {
-  title?: string;
+  title?: ReactNode;
   children?: ReactNode;
   onBack?: () => void;
 }
