@@ -44,7 +44,7 @@ interface MainCardListProps {
 }
 
 // TODO(형준): 데이터 props/type 추가 필요
-const MainCardList = ({ mode = "recent", isLoading = true }: MainCardListProps) => {
+const MainCardList = ({ mode = "recent", isLoading = false }: MainCardListProps) => {
   const { ref: scrollRef, onMouseDown } = useHorizontalDragScroll();
 
   const isPublicMode = mode === "public";
