@@ -26,7 +26,7 @@ const ChatItem = ({ chatRoom }: ChatItemProps) => {
           src={profileImageUrl}
           alt="유저 프로필 이미지"
           size={26}
-          className="absolute left-0 top-0 z-10 rounded-full border-[1.5px] border-white"
+          className="absolute left-0 top-0 z-10 size-[26px] rounded-full border-[1.5px] border-white"
         />
         <div className="absolute bottom-0 right-0 rounded object-cover">
           <ListItemImage

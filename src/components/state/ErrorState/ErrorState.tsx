@@ -57,7 +57,9 @@ const ErrorState = ({
         <Icon name={iconName} className={iconClass} size={iconSize} />
         <p className="text-h2-bold text-layout-header-default">{title}</p>
         {description && (
-          <p className="text-body2-regular text-layout-body-default">{description}</p>
+          <p className="whitespace-pre-line text-body2-regular text-layout-body-default">
+            {description}
+          </p>
         )}
       </div>
       {children}

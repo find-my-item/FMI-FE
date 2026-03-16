@@ -3,7 +3,7 @@ import { DefaultListView } from "./_components";
 
 const page = () => {
   return (
-    <Suspense fallback="">
+    <Suspense fallback={null}>
       <DefaultListView />
     </Suspense>
   );
