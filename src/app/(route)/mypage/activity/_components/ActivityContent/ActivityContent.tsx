@@ -1,3 +1,5 @@
+"use client";
+
 import Icon from "@/components/common/Icon/Icon";
 import { cn } from "@/utils";
 import { ACTIVITY_STYLE_CONFIG } from "../../_constants/ACTIVITY_STYLE_CONFIG";

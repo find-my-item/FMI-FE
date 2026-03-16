@@ -38,7 +38,7 @@ export const useGetUserActivity = ({
   >(
     "auth",
     ["/users/me/activities", type, startDate, endDate, keyword],
-    `/users/me/activities${queryParams}`,
+    `/users/me/activities?${queryParams}`,
     {
       placeholderData: keepPreviousData,
       getNextPageParam: (lastPage) => lastPage.result.nextCursor ?? undefined,
