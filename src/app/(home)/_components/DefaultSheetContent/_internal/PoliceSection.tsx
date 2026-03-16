@@ -5,11 +5,13 @@ import Link from "next/link";
 const POLICE_ITEMS = [
   {
     href: "http://localhost:3000/public-data?type=lost",
-    label: "분실\n했어요",
+    headLabel: "분실",
+    label: "했어요",
   },
   {
     href: "http://localhost:3000/public-data?type=found",
-    label: "습득\n했어요",
+    headLabel: "발견",
+    label: "했어요",
   },
 ];
 
@@ -26,11 +28,16 @@ const PoliceSection = () => {
           <Link
             key={item.href}
             href={item.href}
-            className="box-border h-14 w-[60px] overflow-hidden rounded-2xl border border-brand-normal-disabled bg-white px-[14px] py-3 flex-col-center"
+            className="group box-border h-14 w-[60px] overflow-hidden rounded-2xl border border-brand-normal-disabled bg-white px-[14px] py-3 flex-col-center"
           >
-            <span className="whitespace-pre text-center text-caption1-semibold text-neutralInversed-normal-default transition-colors hover:text-flatGreen-500">
-              {item.label}
-            </span>
+            <div className="flex flex-col items-center text-center text-caption1-medium transition-colors">
+              <span className="text-neutralInversed-normal-focused group-hover:text-caption1-semibold group-hover:text-flatGreen-500">
+                {item.headLabel}
+              </span>
+              <span className="text-neutralInversed-normal-default group-hover:text-caption1-semibold group-hover:text-flatGreen-500">
+                {item.label}
+              </span>
+            </div>
           </Link>
         ))}
       </div>
