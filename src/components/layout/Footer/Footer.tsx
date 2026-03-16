@@ -13,6 +13,7 @@ const Footer = () => {
   const isHidden = useHiddenPath();
   const { data: userData, isError } = useGetUsersMe();
   const isLoggedIn = !!userData && !isError;
+  const isUserRole = userData?.result?.role ?? "USER";
   const { loginNoticeFor, setLoginNoticeFor } = useLoginNoticeTimer();
 
   if (isHidden) return null;
@@ -38,6 +39,7 @@ const Footer = () => {
             isLoggedIn={isLoggedIn}
             showLoginRequiredNotice={loginNoticeFor === link.href}
             onClick={() => handleClick(link.href)}
+            isUserRole={isUserRole}
           />
         ))}
       </nav>
