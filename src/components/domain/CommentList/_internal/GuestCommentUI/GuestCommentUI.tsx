@@ -15,7 +15,7 @@ export const MOCK_COMMENT_DATA: CommentItemType[] = [
     authorResponse: {
       userId: 1,
       nickName: "console.log",
-      profileImageUrl: "/user/default-profile.svg",
+      profileImage: "/user/default-profile.svg",
     },
     childCommentCount: 0,
     imageList: [],
@@ -33,7 +33,7 @@ export const MOCK_COMMENT_DATA: CommentItemType[] = [
     authorResponse: {
       userId: 2,
       nickName: "undefined",
-      profileImageUrl: "/user/default-profile.svg",
+      profileImage: "/user/default-profile.svg",
     },
     childCommentCount: 0,
     imageList: [],

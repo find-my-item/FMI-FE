@@ -92,6 +92,8 @@ const config: Config = {
     "u-ellipsis",
     "no-scrollbar",
     "h-base",
+    "h-hf-base",
+    "h-f-base",
     "fixed-button-position",
     "fixedButtonPositionBottom",
     "footer-alert-dot",

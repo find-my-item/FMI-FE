@@ -21,7 +21,7 @@ const MyPageMenuSection = ({ isUserLogin }: { isUserLogin: boolean }) => {
               className="flex w-full justify-between py-[10px] text-body1-semibold text-neutral-strong-default"
             >
               {item.pageName}
-              <Icon name="ArrowRightSmall" size={24} />
+              <Icon name="ArrowRightSmall" size={24} className="text-neutral-strong-default" />
             </Link>
           </Fragment>
         ))}

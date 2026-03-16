@@ -42,7 +42,7 @@ const DefaultListSearch = () => {
   };
 
   return (
-    <div className="h-base">
+    <div className="h-hf-base">
       <FormProvider {...methods}>
         <div className="px-5 py-[10px]">
           <InputSearch

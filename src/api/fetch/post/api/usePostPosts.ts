@@ -2,6 +2,7 @@
 
 import useAppMutation from "@/api/_base/query/useAppMutation";
 import { PostPostsWriteResponse } from "../types/PostWriteType";
+import { useWriteFlowStore } from "@/store";
 import { useToast } from "@/context/ToastContext";
 import { useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
@@ -10,6 +11,7 @@ export const usePostPosts = () => {
   const { addToast } = useToast();
   const router = useRouter();
   const queryClient = useQueryClient();
+  const { setShowManualPopup } = useWriteFlowStore();
 
   return useAppMutation<FormData, PostPostsWriteResponse>("auth", "/posts", "post", {
     onSuccess: (data, variables) => {
@@ -17,6 +19,8 @@ export const usePostPosts = () => {
         queryClient.invalidateQueries({ queryKey: ["temp-post"] });
       }
       addToast("게시글이 등록되었습니다.", "success");
+      sessionStorage.setItem("showManualPopup", "true");
+      setShowManualPopup(true);
       router.replace(`/list/${data.result.id}`);
     },
     onError: () => {

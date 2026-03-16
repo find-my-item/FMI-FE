@@ -73,7 +73,7 @@ const DetailHeader = ({ title = "", children, onBack }: DetailHeaderProps) => {
           onClick={handleBack}
           aria-label="뒤로가기"
         >
-          <Icon name="ArrowLeftSmall" size={30} />
+          <Icon name="ArrowLeftSmall" size={30} className="text-neutral-strong-default" />
         </button>
         {title && <h2 className="text-xl font-semibold text-layout-header-default">{title}</h2>}
       </div>

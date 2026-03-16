@@ -76,7 +76,7 @@ const ManualItem = ({ item, isOpen, onToggle }: ManualItemProps) => {
                   className="flex w-full items-center justify-center gap-[6px] rounded-[10px] border border-neutral-normal-default bg-white py-[10px] text-center text-body2-semibold text-neutral-normal-default"
                 >
                   {btnText}
-                  <Icon name="ArrowRightSmall" size={20} />
+                  <Icon name="ArrowRightSmall" size={20} className="text-neutral-normal-default" />
                 </Link>
               )}
             </div>

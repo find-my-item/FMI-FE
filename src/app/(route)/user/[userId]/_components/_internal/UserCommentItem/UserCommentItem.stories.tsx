@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs";
-import CommentItem from "./CommentItem";
+import CommentItem from "./UserCommentItem";
 
 type Story = StoryObj<typeof CommentItem>;
 
