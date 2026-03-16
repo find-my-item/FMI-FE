@@ -11,7 +11,7 @@ interface MainCardProps {
   showChip: boolean;
 }
 
-const MainCard = ({ showChip }: MainCardProps) => {
+const MainCardItem = ({ showChip }: MainCardProps) => {
   return (
     <Link href="#" className="relative rounded-2xl border-[0.7px] border-divider-default">
       <div className="h-[120px] w-[123px] rounded-2xl bg-fill-neutralInversed-normal-preesed">
@@ -58,7 +58,7 @@ const MainCardList = ({ mode = "recent", isLoading = false }: MainCardListProps)
         <RecentFoundItemSkeleton />
       ) : (
         Array.from({ length: 10 }).map((_, index) => (
-          <MainCard key={index} showChip={isPublicMode} />
+          <MainCardItem key={index} showChip={isPublicMode} />
         ))
       )}
       {isPublicMode && <PublicMoreViewCard />}
