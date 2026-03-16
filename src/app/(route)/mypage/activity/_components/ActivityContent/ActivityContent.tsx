@@ -1,21 +1,20 @@
 import Icon from "@/components/common/Icon/Icon";
 import { cn } from "@/utils";
 import { ACTIVITY_STYLE_CONFIG } from "../../_constants/ACTIVITY_STYLE_CONFIG";
-import { ActivityDataType } from "../../_types/ActivityType";
 import { MypageEmptyUI } from "@/components/domain";
 import formatHHMM from "../../_utils/formatHHMM";
-import { ActivityGroupItemType, useGetUserActivity } from "@/api/fetch/user";
+import { ActivityEachItemType, ActivityGroupItemType, useGetUserActivity } from "@/api/fetch/user";
 import { LoadingState } from "@/components/state";
 import { useToast } from "@/context/ToastContext";
 import { useFilterParams } from "@/hooks/domain";
 import { useInfiniteScroll } from "@/hooks";
 
 interface ActivityItemProps {
-  activityItem: ActivityDataType;
+  activityItem: ActivityEachItemType;
 }
 
 const ActivityItem = ({ activityItem }: ActivityItemProps) => {
-  const { type, createdAt, title, subText } = activityItem;
+  const { type, createdAt, title, content } = activityItem;
 
   const { bgColor, iconName } = ACTIVITY_STYLE_CONFIG[type];
 
@@ -37,7 +36,7 @@ const ActivityItem = ({ activityItem }: ActivityItemProps) => {
         <time className="text-body2-regular text-layout-body-default">{formatHHMM(createdAt)}</time>
         <p className="mt-[6px] text-body1-semibold text-neutral-strong-default">{title}</p>
         <p className="mt-[2px] truncate text-body2-regular text-neutral-normal-default">
-          {subText}
+          {content}
         </p>
       </div>
     </li>
@@ -45,17 +44,19 @@ const ActivityItem = ({ activityItem }: ActivityItemProps) => {
 };
 
 interface ActivityGroupItemProps {
-  activityItem: ActivityGroupItemType[];
+  activityItem: ActivityGroupItemType;
 }
 
 const ActivityGroupItem = ({ activityItem }: ActivityGroupItemProps) => {
+  const { date, activities } = activityItem;
+
   return (
     <li className="flex flex-col gap-7 p-5">
-      <h3 className="text-h3-semibold text-layout-header-default">{activityItem[0].date}</h3>
+      <h3 className="text-h3-semibold text-layout-header-default">{date}</h3>
 
       <ol className="flex flex-col">
-        {activityItem.map((item, index) => (
-          <ActivityItem key={item.date} activityItem={item.activities} />
+        {activities.map((item) => (
+          <ActivityItem key={item.id} activityItem={item} />
         ))}
       </ol>
     </li>
@@ -80,6 +81,7 @@ const ActivityContent = () => {
   const { addToast } = useToast();
 
   const { ref } = useInfiniteScroll({ hasNextPage, isFetchingNextPage, fetchNextPage });
+
   if (isLoading) return <LoadingState />;
   if (isError) addToast("목록을 불러오는데 실패했어요", "error");
 
@@ -94,7 +96,7 @@ const ActivityContent = () => {
           <ol className="flex flex-col">
             {activityData &&
               activityData.map((item, index) => (
-                <ActivityGroupItem key={index} activityItem={item.items} />
+                <ActivityGroupItem key={index} activityItem={item} />
               ))}
           </ol>
 
