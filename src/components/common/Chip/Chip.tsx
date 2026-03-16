@@ -35,9 +35,9 @@ const TypeMap: Record<ChipType, string> = {
   brandSubtleHover: "bg-fill-brand-subtle-hover text-layout-header-default",
 };
 
-const Chip = ({ label, type = "brandSubtle" }: ChipProps) => {
+const Chip = ({ label, type = "brandSubtle", className }: ChipProps) => {
   return (
-    <span className={cn("rounded-full px-3 py-1 text-caption1-semibold", TypeMap[type])}>
+    <span className={cn("rounded-full px-3 py-1 text-caption1-semibold", TypeMap[type], className)}>
       {label}
     </span>
   );

@@ -22,7 +22,7 @@ const SupportLinkSection = () => {
           className="flex items-center justify-between px-1 py-2"
         >
           <span className="text-body1-medium text-layout-header-default">{item.label}</span>
-          <Icon name="ArrowRightSmall" size={20} />
+          <Icon name="ArrowRightSmall" size={20} className="text-neutral-normal-disabled" />
         </Link>
       ))}
     </section>

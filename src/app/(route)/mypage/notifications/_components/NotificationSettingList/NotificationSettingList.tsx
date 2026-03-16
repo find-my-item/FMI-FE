@@ -35,7 +35,7 @@ const NotificationSettingItem = ({ settingName }: NotificationSettingItem) => {
           <span className="my-[10px] ml-[10px] text-body1-medium text-neutral-normal-placeholder">
             카테고리 키워드 선택
           </span>
-          <Icon name="ArrowRightSmall" size={24} />
+          <Icon name="ArrowRightSmall" size={24} className="text-neutral-strong-default" />
         </button>
       )}
 

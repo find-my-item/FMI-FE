@@ -24,6 +24,7 @@ const MyPageProfile = ({ userData }: ProfileProps) => {
           src={profileImg ? profileImg : null}
           alt={nickname}
           priority={true}
+          className="flex-shrink-0"
         />
         <div className="flex w-[160px] flex-col gap-1">
           {userData ? (
