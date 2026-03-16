@@ -1,5 +1,10 @@
 import { ReactNode } from "react";
+import type { Metadata } from "next";
 import { ScrollToTopButton } from "@/components/common";
+
+export const metadata: Metadata = {
+  title: "비회원 문의 내역",
+};
 
 const layout = ({ children }: { children: ReactNode }) => {
   return (

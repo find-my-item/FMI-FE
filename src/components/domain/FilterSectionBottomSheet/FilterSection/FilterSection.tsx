@@ -37,7 +37,7 @@ import { getDateRangeLabel } from "@/utils/getDateRangeLabel/getDateRangeLabel";
  * 지역, 카테고리, 정렬, 찾음여부, 분류, 기간 각각의 필터 선택 시 해당 BottomSheet를 호출합니다.
  * 기간 필터(`date`)의 경우 별도의 `DateRangeBottomSheet`를 사용합니다.
  *
- * @param pageType - 페이지의 유형 ('LIST' | 'MY_POSTS' | 'MY_FAVORITES'). 기본값은 'LIST'입니다.
+ * @param pageType - 페이지의 유형 ('LIST' | 'MY_POSTS' | 'MY_FAVORITES' | 'PUBLIC_DATA'). 기본값은 'LIST'입니다.
  *
  * @example
  * ```tsx
@@ -50,7 +50,7 @@ import { getDateRangeLabel } from "@/utils/getDateRangeLabel/getDateRangeLabel";
  */
 
 interface FilterSectionProps {
-  pageType?: "LIST" | "MY_POSTS" | "MY_FAVORITES";
+  pageType?: "LIST" | "MY_POSTS" | "MY_FAVORITES" | "PUBLIC_DATA";
 }
 
 const FilterSection = ({ pageType = "LIST" }: FilterSectionProps) => {
