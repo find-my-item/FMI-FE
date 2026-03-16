@@ -1,7 +1,7 @@
 import useAppInfiniteQuery from "@/api/_base/query/useAppInfiniteQuery";
 import { ActivityFilterValue } from "@/app/(route)/mypage/activity/_types/ActivityFilterType";
 import { useAuthStore } from "@/store";
-import { ActivityItem, MypageActivityResponse } from "../types/UserActivityType";
+import { ActivityItemType, MypageActivityResponse } from "../types/MypageActivityResponse";
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 import { InfiniteData, keepPreviousData } from "@tanstack/react-query";
 
@@ -31,7 +31,7 @@ export const useGetUserActivity = ({
   }
 
   queryParams.set("size", size.toString());
-  return useAppInfiniteQuery<MypageActivityResponse, ApiBaseResponseType<null>, ActivityItem[]>(
+  return useAppInfiniteQuery<MypageActivityResponse, ApiBaseResponseType<null>, ActivityItemType[]>(
     "auth",
     ["/users/me/activities", type, startDate, endDate, keyword],
     `/users/me/activities${queryParams}`,

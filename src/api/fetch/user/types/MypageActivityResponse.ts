@@ -10,16 +10,18 @@ export interface MypageActivityType {
 }
 
 export interface ActivityItem {
-  items: {
-    date: string;
-    activities: {
-      items: {
-        type: ActivityType;
-        id: number;
-        title: string;
-        content: string;
-        createdAt: string;
-      };
+  items: ActivityGroupItem[];
+}
+
+export type ActivityGroupItem = {
+  date: string;
+  activities: {
+    items: {
+      type: ActivityType;
+      id: number;
+      title: string;
+      content: string;
+      createdAt: string;
     };
   };
-}
+};

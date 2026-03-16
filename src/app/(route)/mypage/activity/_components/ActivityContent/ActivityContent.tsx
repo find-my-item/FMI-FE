@@ -2,9 +2,13 @@ import Icon from "@/components/common/Icon/Icon";
 import { cn } from "@/utils";
 import { ACTIVITY_STYLE_CONFIG } from "../../_constants/ACTIVITY_STYLE_CONFIG";
 import { ActivityDataType } from "../../_types/ActivityType";
-import transformActivityArray from "../../_utils/transformActivityArray";
 import { MypageEmptyUI } from "@/components/domain";
 import formatHHMM from "../../_utils/formatHHMM";
+import { ActivityGroupItemType, useGetUserActivity } from "@/api/fetch/user";
+import { LoadingState } from "@/components/state";
+import { useToast } from "@/context/ToastContext";
+import { useFilterParams } from "@/hooks/domain";
+import { useInfiniteScroll } from "@/hooks";
 
 interface ActivityItemProps {
   activityItem: ActivityDataType;
@@ -41,50 +45,64 @@ const ActivityItem = ({ activityItem }: ActivityItemProps) => {
 };
 
 interface ActivityGroupItemProps {
-  groupDate: string;
-  activityItem: readonly ActivityDataType[];
+  activityItem: ActivityGroupItemType[];
 }
 
-const ActivityGroupItem = ({ groupDate, activityItem }: ActivityGroupItemProps) => {
+const ActivityGroupItem = ({ activityItem }: ActivityGroupItemProps) => {
   return (
     <li className="flex flex-col gap-7 p-5">
-      <h3 className="text-h3-semibold text-layout-header-default">{groupDate}</h3>
+      <h3 className="text-h3-semibold text-layout-header-default">{activityItem[0].date}</h3>
 
       <ol className="flex flex-col">
         {activityItem.map((item, index) => (
-          <ActivityItem key={item.activityId} activityItem={item} />
+          <ActivityItem key={item.date} activityItem={item.activities} />
         ))}
       </ol>
     </li>
   );
 };
 
-interface ActivityContainerProps {
-  activityData: readonly ActivityDataType[];
-}
+const ActivityContent = () => {
+  const { startDate, endDate, activity } = useFilterParams();
+  const {
+    data: activityData,
+    isLoading,
+    isError,
+    isFetchingNextPage,
+    hasNextPage,
+    fetchNextPage,
+  } = useGetUserActivity({
+    type: activity,
+    startDate,
+    endDate,
+  });
 
-const ActivityContainer = ({ activityData }: ActivityContainerProps) => {
-  const newActivityArray = transformActivityArray(activityData);
+  const { addToast } = useToast();
+
+  const { ref } = useInfiniteScroll({ hasNextPage, isFetchingNextPage, fetchNextPage });
+  if (isLoading) return <LoadingState />;
+  if (isError) addToast("목록을 불러오는데 실패했어요", "error");
 
   return (
     <section>
       <h2 className="sr-only">내 활동 내역 영역</h2>
 
-      {activityData.length === 0 ? (
+      {activityData && activityData.length === 0 ? (
         <MypageEmptyUI pageType="activity" />
       ) : (
-        <ol className="flex flex-col">
-          {newActivityArray.map((item) => (
-            <ActivityGroupItem
-              key={item.groupId}
-              groupDate={item.groupDate}
-              activityItem={item.activityItem}
-            />
-          ))}
-        </ol>
+        <>
+          <ol className="flex flex-col">
+            {activityData &&
+              activityData.map((item, index) => (
+                <ActivityGroupItem key={index} activityItem={item.items} />
+              ))}
+          </ol>
+
+          <div ref={ref} className="h-10" />
+        </>
       )}
     </section>
   );
 };
 
-export default ActivityContainer;
+export default ActivityContent;
