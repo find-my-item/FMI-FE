@@ -1,22 +1,27 @@
 "use client";
 "use no memo";
 
-import { useNicknameCheck } from "@/hooks/domain/useNicknameCheck/useNicknameCheck";
-import { Icon, InputText, KebabMenu, ProfileAvatar } from "@/components/common";
-import { FooterButton } from "@/components/domain";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
-import useChangeImg from "./_hooks/useChangeImg";
 import { UsersMeType } from "@/api/fetch/user/types/UserMeType";
-import useProfileFormSubmit from "./_hooks/useProfileFormSubmit";
-import MypageProfileModal from "./MypageProfileModal/MypageProfileModal";
-import { usePreventLeave } from "./_hooks/usePreventLeave";
+import { Icon, InputText, KebabMenu, ProfileAvatar } from "@/components/common";
+import { FooterButton } from "@/components/domain";
+import { useNicknameCheck } from "@/hooks/domain";
+import { useProfileFormSubmit } from "../../_hooks/useProfileFormSubmit";
+import { usePreventLeave } from "../../_hooks/usePreventLeave";
+import { useChangeImg } from "../../_hooks/useChangeImg";
+import MypageProfileModal from "../ProfileEditLeaveConfirmModal/ProfileEditLeaveConfirmModal";
 
 interface ProfileFormProps {
   user?: UsersMeType;
+  /**
+   * 전송 전 확인 절차가 필요한 경우 사용하는 콜백입니다.
+   * 유저에게 확인을 받은 후 전달받은 submitFn을 실행하면 API가 호출됩니다.
+   */
+  onConfirmRequest?: (submitFn: () => void) => void;
 }
 
-const ProfileForm = ({ user }: ProfileFormProps) => {
+const ProfileForm = ({ user, onConfirmRequest }: ProfileFormProps) => {
   const { nickname, profileImg } = user ?? {};
 
   const {
@@ -44,6 +49,7 @@ const ProfileForm = ({ user }: ProfileFormProps) => {
     preNickname: nickname ?? "",
     preProfileImg: profileImg,
     onNoChange: () => setOpenModal(true),
+    onConfirmRequest,
   });
 
   const [profileImgValue, nicknameValue] = watch(["profileImg", "nickname"]);

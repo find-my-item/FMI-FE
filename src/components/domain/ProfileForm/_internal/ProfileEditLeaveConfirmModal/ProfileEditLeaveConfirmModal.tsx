@@ -2,12 +2,12 @@ import { Button } from "@/components/common";
 import ModalLayout from "@/components/common/Modal/_internal/ModalLayout";
 import { useRouter } from "next/navigation";
 
-interface MypageProfileModalProps {
+interface ProfileEditLeaveConfirmModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const MypageProfileModal = ({ isOpen, onClose }: MypageProfileModalProps) => {
+const ProfileEditLeaveConfirmModal = ({ isOpen, onClose }: ProfileEditLeaveConfirmModalProps) => {
   const router = useRouter();
 
   return (
@@ -28,4 +28,4 @@ const MypageProfileModal = ({ isOpen, onClose }: MypageProfileModalProps) => {
   );
 };
 
-export default MypageProfileModal;
+export default ProfileEditLeaveConfirmModal;
