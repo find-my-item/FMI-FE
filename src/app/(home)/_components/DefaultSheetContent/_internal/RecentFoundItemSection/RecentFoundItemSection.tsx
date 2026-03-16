@@ -9,7 +9,7 @@ const RecentFoundItemSection = () => {
         <span className="text-brand-normal-default">OO동</span>
         <span className="text-neutral-strong-hover">최근 발견된 분실물</span>
       </h2>
-      <MainCardList />
+      <MainCardList isLoading={false} />
     </section>
   );
 };

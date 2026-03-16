@@ -45,7 +45,7 @@ const PoliceSection = () => {
         </div>
       </div>
 
-      <MainCardList mode="public" />
+      <MainCardList mode="public" isLoading={false} />
     </section>
   );
 };

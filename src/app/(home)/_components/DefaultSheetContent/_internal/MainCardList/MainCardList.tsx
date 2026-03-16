@@ -43,7 +43,7 @@ const MainCard = ({ showChip }: MainCardProps) => {
 
 interface MainCardListProps {
   mode?: "recent" | "public";
-  isLoading?: boolean;
+  isLoading: boolean;
 }
 
 // TODO(형준): 데이터 props/type 추가 필요
