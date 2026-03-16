@@ -15,7 +15,7 @@ const useSearchUpdateQueryString = () => {
     } else {
       params.delete(key);
     }
-    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
   return { searchMode, searchUpdateQuery };
