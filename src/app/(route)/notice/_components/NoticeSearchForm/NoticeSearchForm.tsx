@@ -34,13 +34,11 @@ const NoticeSearchForm = () => {
   };
 
   return (
-    <div className="px-5 py-[10px]">
-      <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(handleSearchSubmit)}>
-          <InputSearch name="noticeSearch" mode="RHF" placeholder="제목, 내용을 입력해 주세요." />
-        </form>
-      </FormProvider>
-    </div>
+    <FormProvider {...methods}>
+      <form onSubmit={methods.handleSubmit(handleSearchSubmit)} className="px-5 py-[10px]">
+        <InputSearch name="noticeSearch" mode="RHF" placeholder="제목, 내용을 입력해 주세요." />
+      </form>
+    </FormProvider>
   );
 };
 
