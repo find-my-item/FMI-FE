@@ -1,3 +1,4 @@
+import { useDeleteNotice } from "@/api/fetch/admin";
 import { Button } from "@/components/common";
 import ModalLayout from "@/components/common/Modal/_internal/ModalLayout";
 
@@ -10,6 +11,13 @@ interface NoticeDeleteModalProps {
 const BUTTON_STYLE = "min-h-11 flex-1";
 
 const NoticeDeleteModal = ({ isOpen, onClose, postId }: NoticeDeleteModalProps) => {
+  const { mutate: deleteNotice } = useDeleteNotice(postId);
+
+  const handleDeleteNotice = () => {
+    deleteNotice({});
+    onClose();
+  };
+
   return (
     <ModalLayout
       isOpen={isOpen}
@@ -26,7 +34,7 @@ const NoticeDeleteModal = ({ isOpen, onClose, postId }: NoticeDeleteModalProps) 
         <Button variant="outlined" onClick={onClose} className={BUTTON_STYLE}>
           취소
         </Button>
-        <Button onClick={onClose} className={BUTTON_STYLE}>
+        <Button onClick={handleDeleteNotice} className={BUTTON_STYLE}>
           삭제하기
         </Button>
       </div>
