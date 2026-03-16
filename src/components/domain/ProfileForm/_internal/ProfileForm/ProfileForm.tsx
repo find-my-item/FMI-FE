@@ -11,14 +11,14 @@ import { useProfileFormSubmit } from "../../_hooks/useProfileFormSubmit";
 import { usePreventLeave } from "../../_hooks/usePreventLeave";
 import { useChangeImg } from "../../_hooks/useChangeImg";
 import MypageProfileModal from "../ProfileEditLeaveConfirmModal/ProfileEditLeaveConfirmModal";
+import { useClickOutside } from "@/hooks";
 
 interface ProfileFormProps {
   user?: UsersMeType;
   onConfirmRequest?: (submitFn: () => void) => void;
-  onSuccess?: () => void;
 }
 
-const ProfileForm = ({ user, onConfirmRequest, onSuccess }: ProfileFormProps) => {
+const ProfileForm = ({ user, onConfirmRequest }: ProfileFormProps) => {
   const { nickname, profileImg } = user ?? {};
 
   const {
@@ -29,9 +29,10 @@ const ProfileForm = ({ user, onConfirmRequest, onSuccess }: ProfileFormProps) =>
 
   const { handleClickNickname, isNicknameVerified, isNicknameDisabled } = useNicknameCheck();
 
+  const [openModal, setOpenModal] = useState(false);
   const [openKebabMenu, setOpenKebabMenu] = useState(false);
 
-  const [openModal, setOpenModal] = useState(false);
+  const ref = useClickOutside(() => setOpenKebabMenu(false));
 
   // 이미지 관련 처리
   const { handleChangeImg, handleButtonClick, previewImgUrl, resetImage, fileInputRef } =
@@ -47,7 +48,6 @@ const ProfileForm = ({ user, onConfirmRequest, onSuccess }: ProfileFormProps) =>
     preProfileImg: profileImg,
     onNoChange: () => setOpenModal(true),
     onConfirmRequest,
-    onSuccess,
   });
 
   const [profileImgValue, nicknameValue] = watch(["profileImg", "nickname"]);
@@ -62,7 +62,7 @@ const ProfileForm = ({ user, onConfirmRequest, onSuccess }: ProfileFormProps) =>
     <form className="flex w-full flex-col h-base">
       <div className="flex-1">
         <div className="flex justify-center py-[30px]">
-          <div className="relative h-[80px] w-[80px]">
+          <div ref={ref} className="relative z-10 h-[80px] w-[80px]">
             <ProfileAvatar size={80} src={previewImgUrl} alt="프로필" priority={true} />
             <button
               className="absolute left-[52px] top-[52px] size-7 rounded-full bg-fill-neutral-strong-default flex-center"

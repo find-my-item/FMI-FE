@@ -9,10 +9,9 @@ import { ProfileForm } from "./_internal";
 
 interface ProfileEditSectionProps {
   onConfirmRequest?: (submitFn: () => void) => void;
-  onSuccess?: () => void;
 }
 
-const ProfileEditSection = ({ onConfirmRequest, onSuccess }: ProfileEditSectionProps) => {
+const ProfileEditSection = ({ onConfirmRequest }: ProfileEditSectionProps) => {
   const { addToast } = useToast();
   const { data, isError } = useGetUsersMe();
 
@@ -41,7 +40,7 @@ const ProfileEditSection = ({ onConfirmRequest, onSuccess }: ProfileEditSectionP
 
   return (
     <FormProvider {...methods}>
-      <ProfileForm user={data?.result} onConfirmRequest={onConfirmRequest} onSuccess={onSuccess} />
+      <ProfileForm user={data?.result} onConfirmRequest={onConfirmRequest} />
     </FormProvider>
   );
 };
