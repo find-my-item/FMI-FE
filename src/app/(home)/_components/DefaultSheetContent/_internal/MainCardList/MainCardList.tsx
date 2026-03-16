@@ -1,18 +1,17 @@
 "use client";
 
-import { Icon } from "@/components/common";
+import { Chip, Icon } from "@/components/common";
 import { useHorizontalDragScroll } from "@/hooks";
 import Link from "next/link";
-import PublicChip from "./PublicChip";
 import PublicMoreViewCard from "./PublicMoreViewCard";
 import Image from "next/image";
 import RecentFoundItemSkeleton from "../RecentFoundItemSection/RecentFoundItemSkeleton";
 
 interface MainCardProps {
-  showChip?: boolean;
+  showChip: boolean;
 }
 
-const MainCard = ({ showChip = false }: MainCardProps) => {
+const MainCard = ({ showChip }: MainCardProps) => {
   return (
     <Link href="#" className="relative rounded-2xl border-[0.7px] border-divider-default">
       <div className="h-[120px] w-[123px] rounded-2xl bg-fill-neutralInversed-normal-preesed">
@@ -25,7 +24,11 @@ const MainCard = ({ showChip = false }: MainCardProps) => {
             className="rounded-2xl object-cover"
           /> */}
           <Icon name="LogoCharacter" size={65} />
-          {showChip && <PublicChip />}
+          {showChip && (
+            <div className="absolute left-2 top-2">
+              <Chip label="경찰청" className="!px-2" />
+            </div>
+          )}
         </div>
       </div>
       <div className="absolute bottom-0 right-0 flex w-full flex-col gap-1 rounded-b-2xl bg-white px-3 py-[6px]">
