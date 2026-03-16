@@ -1,6 +1,6 @@
 "use client";
 
-import { CommentList } from "@/components/domain";
+import { CommentList, AddToHomeScreenPWA } from "@/components/domain";
 import { ErrorBoundary } from "@/app/ErrorBoundary";
 import { useGetDetailPost } from "@/api/fetch/post";
 import {
@@ -17,6 +17,7 @@ import { useHandleReplySubmit } from "../../_hooks/useHandleReplySubmit/useHandl
 import { useToggleCommentLike } from "../../_hooks/usePostCommentLike/usePostCommentLike";
 import { useEffect } from "react";
 import { useToast } from "@/context/ToastContext";
+import { useAddToHomeScreen } from "@/hooks";
 
 interface ClientDetailProps {
   id: number;
@@ -25,6 +26,7 @@ interface ClientDetailProps {
 
 const ClientDetail = ({ id, isLoggedIn }: ClientDetailProps) => {
   const { addToast } = useToast();
+  const { showPrompt, incrementViewCount, closePrompt } = useAddToHomeScreen();
 
   const { data, isLoading, isError } = useGetDetailPost({ id });
   const { data: commentsData, fetchNextPage } = useGetPostsComments({
@@ -40,6 +42,12 @@ const ClientDetail = ({ id, isLoggedIn }: ClientDetailProps) => {
       addToast("게시글 불러오기에 실패했어요", "error");
     }
   }, [isError, addToast]);
+
+  useEffect(() => {
+    if (!isLoading && data?.result) {
+      incrementViewCount();
+    }
+  }, [isLoading, data]);
 
   if (isLoading) return <DetailSkeleton />;
   if (isError || !data?.result) return <DetailSkeleton />;
@@ -81,6 +89,8 @@ const ClientDetail = ({ id, isLoggedIn }: ClientDetailProps) => {
 
         <PostInputComment postId={id} isLoggedIn={isLoggedIn} />
       </div>
+
+      <AddToHomeScreenPWA isOpen={showPrompt} onClose={closePrompt} />
     </>
   );
 };
