@@ -11,6 +11,7 @@ export const usePutNoticeDetail = (noticeId: number) => {
   return useAppMutation("auth", `/admin/notices/${noticeId}`, "put", {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notice-detail", noticeId] });
+      queryClient.invalidateQueries({ queryKey: ["notices"] });
       addToast("공지사항이 수정되었습니다.", "success");
       router.replace(`/notice/${noticeId}`);
     },
