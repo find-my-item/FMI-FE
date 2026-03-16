@@ -1,5 +1,6 @@
 "use client";
 
+import { useGetUsersMe } from "@/api/fetch/user";
 import { Button, KebabMenu } from "@/components/common";
 import ModalLayout from "@/components/common/Modal/_internal/ModalLayout";
 import { DetailHeader } from "@/components/layout";
@@ -45,13 +46,15 @@ const NoticeDetailHeader = ({ id }: { id: number }) => {
   const [isKebabMenuOpen, setIsKebabMenuOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const kebabMenuRef = useClickOutside(() => setIsKebabMenuOpen(false));
+  const { data: userData } = useGetUsersMe();
   const router = useRouter();
+  const isAdmin = userData?.result?.role === "ADMIN";
 
   return (
     <div className="relative" ref={kebabMenuRef}>
       <DetailHeader>
         <HeaderShare />
-        <HeaderMenu onClick={() => setIsKebabMenuOpen((prev) => !prev)} />
+        {isAdmin && <HeaderMenu onClick={() => setIsKebabMenuOpen((prev) => !prev)} />}
       </DetailHeader>
 
       {isKebabMenuOpen && (
