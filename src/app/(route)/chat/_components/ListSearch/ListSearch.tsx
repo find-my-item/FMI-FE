@@ -1,28 +1,35 @@
 "use client";
 
-import { FormProvider, useForm } from "react-hook-form";
+import { FieldValues, FormProvider, useForm } from "react-hook-form";
 import RegionSearchView from "./_internal/RegionSearchView";
 import InputSearch from "@/components/common/Input/InputSearch/InputSearch";
+import { useRouter } from "next/navigation";
 
 const ListSearch = () => {
+  const router = useRouter();
   const methods = useForm({
     mode: "onChange",
     reValidateMode: "onChange",
   });
   const searchQuery = methods.watch("regionSearch") ?? "";
 
+  const onSubmit = ({ regionSearch }: FieldValues) => {
+    const region = regionSearch.trim();
+    if (!region) return;
+    router.replace(`/chat?&region=${region}`);
+  };
+
   return (
     <>
       <FormProvider {...methods}>
-        <div className="px-5 py-[10px]">
+        <form onSubmit={methods.handleSubmit(onSubmit)} className="px-5 py-[10px]">
           <InputSearch
             mode="RHF"
             name="regionSearch"
             placeholder="시/군/구를 입력해 주세요."
-            onEnter={() => {}}
             autoFocus
           />
-        </div>
+        </form>
       </FormProvider>
 
       <RegionSearchView searchQuery={searchQuery} />
