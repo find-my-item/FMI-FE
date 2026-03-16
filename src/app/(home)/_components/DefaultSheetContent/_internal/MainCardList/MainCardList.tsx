@@ -7,11 +7,11 @@ import PublicMoreViewCard from "./PublicMoreViewCard";
 import Image from "next/image";
 import RecentFoundItemSkeleton from "../RecentFoundItemSection/RecentFoundItemSkeleton";
 
-interface MainCardProps {
+interface MainCardItemProps {
   showChip: boolean;
 }
 
-const MainCardItem = ({ showChip }: MainCardProps) => {
+const MainCardItem = ({ showChip }: MainCardItemProps) => {
   return (
     <Link href="#" className="relative rounded-2xl border-[0.7px] border-divider-default">
       <div className="h-[120px] w-[123px] rounded-2xl bg-fill-neutralInversed-normal-preesed">
