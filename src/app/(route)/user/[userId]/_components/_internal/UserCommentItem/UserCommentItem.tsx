@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Icon } from "@/components/common";
 import { UserCommentsDataType } from "@/api/fetch/user";
+import { formatDate } from "@/utils";
 
 interface NormalizedCommentItem {
   postId: number;
@@ -49,7 +50,7 @@ const UserCommentItem = ({ data }: UserCommentItemProps) => {
           {comment}
         </p>
         <time className="text-body2-regular text-layout-body-default" dateTime={date}>
-          {date}
+          {formatDate(date)}
         </time>
         <div
           aria-label={`좋아요 ${likes}개`}
