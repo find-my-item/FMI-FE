@@ -49,7 +49,7 @@ const NoticeList = ({ notices }: { notices: NoticeItem[] }) => {
   if (notices.length === 0)
     return (
       <EmptyState
-        icon={{ iconName: "EmptyNoticeList", iconSize: 70 }}
+        icon={{ iconName: "NoInquiries", iconSize: 70 }}
         title="등록된 공지사항이 없어요"
         description={"새로운 공지사항이 등록되면\n이곳에 표기됩니다."}
       />

@@ -20,7 +20,7 @@ const NoticePageContent = () => {
       <ErrorBoundary
         fallback={
           <ErrorState
-            icon={{ iconName: "ErrorNoticeList", iconSize: 70 }}
+            icon={{ iconName: "NoReports", iconSize: 70 }}
             title="공지사항을 불러올 수 없어요"
             description={"네트워크 연결을 확인하거나\n잠시 후 다시 시도해주세요"}
           >
