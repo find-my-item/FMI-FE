@@ -3,10 +3,10 @@
 import { Icon } from "@/components/common";
 import { useHorizontalDragScroll } from "@/hooks";
 import Link from "next/link";
-import { MainCardMode } from "./MainCardModeType";
 import PublicChip from "./PublicChip";
 import PublicMoreViewCard from "./PublicMoreViewCard";
 import Image from "next/image";
+import RecentFoundItemSkeleton from "../RecentFoundItemSection/RecentFoundItemSkeleton";
 
 interface MainCardProps {
   showChip?: boolean;
@@ -38,16 +38,26 @@ const MainCard = ({ showChip = false }: MainCardProps) => {
   );
 };
 
-const MainCardList = ({ mode = "recent" }: MainCardMode) => {
+interface MainCardListProps {
+  mode?: "recent" | "public";
+  isLoading?: boolean;
+}
+
+// TODO(형준): 데이터 props/type 추가 필요
+const MainCardList = ({ mode = "recent", isLoading = true }: MainCardListProps) => {
   const { ref: scrollRef, onMouseDown } = useHorizontalDragScroll();
 
   const isPublicMode = mode === "public";
 
   return (
     <div ref={scrollRef} onMouseDown={onMouseDown} className="-mx-5 flex gap-4 px-5 no-scrollbar">
-      {Array.from({ length: 10 }).map((_, index) => (
-        <MainCard key={index} showChip={isPublicMode} />
-      ))}
+      {isLoading ? (
+        <RecentFoundItemSkeleton />
+      ) : (
+        Array.from({ length: 10 }).map((_, index) => (
+          <MainCard key={index} showChip={isPublicMode} />
+        ))
+      )}
       {isPublicMode && <PublicMoreViewCard />}
     </div>
   );
