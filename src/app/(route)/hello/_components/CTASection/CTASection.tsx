@@ -12,8 +12,8 @@ const CTASection = () => {
       <Image
         src="/hello/CTA/service-CTA.svg"
         alt=""
-        width={70}
-        height={70}
+        width={50}
+        height={50}
         draggable={false}
         className="select-none"
       />

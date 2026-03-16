@@ -18,4 +18,8 @@ export const TABS = {
     { label: "카테고리", value: "category" },
     { label: "정렬", value: "sort" },
   ],
+  PUBLIC_DATA: [
+    { label: "지역", value: "region" },
+    { label: "카테고리", value: "category" },
+  ],
 } as const;
