@@ -104,3 +104,7 @@ export { default as EyeDetail } from "@/assets/eye-detail.svg";
 export { default as HotBadge } from "@/assets/hot-badge.svg";
 export { default as NewBadge } from "@/assets/new-badge.svg";
 export { default as AccordionArrowRight } from "@/assets/accordion-arrow-right.svg";
+export { default as DetailPolice24 } from "@/assets/detail-police24.svg";
+export { default as PublicDetailPolice24 } from "@/assets/public-detail-police24.svg";
+export { default as MessageAlertCircle } from "@/assets/message-alert-circle.svg";
+export { default as Phone } from "@/assets/phone.svg";

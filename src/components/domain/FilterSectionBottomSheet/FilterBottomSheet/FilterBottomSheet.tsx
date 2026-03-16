@@ -35,7 +35,7 @@ import PopupLayout from "../../PopupLayout/PopupLayout";
  * @param setSelectedTab - 활성화된 탭을 변경하는 함수
  * @param filters - 현재 선택된 필터 값들의 상태 객체
  * @param setFilters - 필터 상태 객체를 업데이트하는 Dispatch 함수
- * @param pageType - 페이지 유형에 따른 탭 구성을 결정하는 타입 ('LIST' | 'MY_POSTS' | 'MY_FAVORITES')
+ * @param pageType - 페이지 유형에 따른 탭 구성을 결정하는 타입 ('LIST' | 'MY_POSTS' | 'MY_FAVORITES' | 'PUBLIC_DATA')
  *
  * @example
  * ```tsx
