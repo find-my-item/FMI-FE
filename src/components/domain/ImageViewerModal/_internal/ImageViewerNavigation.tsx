@@ -23,7 +23,7 @@ const ImageViewerNavigation = ({
         className="absolute left-5 z-10 text-white"
         aria-label="이전 이미지 버튼"
       >
-        <Icon name="ArrowLeftSmall" size={36} />
+        <Icon name="ArrowLeftSmall" size={36} className="text-white" />
       </button>
       <button
         onClick={(e) => {
@@ -33,7 +33,7 @@ const ImageViewerNavigation = ({
         className="absolute right-5 z-10 text-white"
         aria-label="다음 이미지 버튼"
       >
-        <Icon name="ArrowRightSmall" size={36} />
+        <Icon name="ArrowRightSmall" size={36} className="text-white" />
       </button>
     </>
   );

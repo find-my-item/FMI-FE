@@ -13,6 +13,12 @@ jest.mock("@/components/common", () => ({
   ),
 }));
 
+jest.mock("next/navigation", () => ({
+  useRouter: () => ({
+    push: jest.fn(),
+  }),
+}));
+
 describe("ManualPopup", () => {
   const titleText = /분실물이 있나요\?\s*매뉴얼을 보면 더 도움이 돼요!/;
   const descText = /분실물 발생 시 도움이 되는 정보/i;

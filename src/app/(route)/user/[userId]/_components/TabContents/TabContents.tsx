@@ -4,7 +4,7 @@ import { PostListItem } from "@/components/domain";
 import { EmptyState, LoadingState } from "@/components/state";
 import { UserCommentsDataType, UserPostsDataType, UserProfileItem } from "@/api/fetch/user";
 import { UserProfileTabKey } from "../../_types/USER_TABS";
-import { CommentItem } from "../_internal";
+import { UserCommentItem } from "../_internal";
 
 interface TabContentsProps {
   selectedTab: UserProfileTabKey;
@@ -50,7 +50,7 @@ const TabContents = ({ selectedTab, data, isLoading }: TabContentsProps) => {
             ) : (
               comments.map((comment) => {
                 const c = comment as UserCommentsDataType & { id?: number };
-                return <CommentItem key={`comment-${c.commentId ?? c.id}`} data={c} />;
+                return <UserCommentItem key={`comment-${c.commentId ?? c.id}`} data={c} />;
               })
             );
           })()}

@@ -10,4 +10,5 @@ export type ChipType =
 export interface ChipProps {
   label: string;
   type?: ChipType;
+  className?: string;
 }
