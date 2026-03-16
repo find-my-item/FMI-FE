@@ -5,16 +5,20 @@ import {
   UserProfileInfiniteSelectedData,
   UserProfileItem,
 } from "../types/UserProfileIdDataType";
-import { UserTabType } from "../types/UserDataType";
+import { UserUpperTabType } from "../types/UserDataType";
 
-export const useGetUserProfileById = (userId: string | undefined, tab: UserTabType, size = 10) => {
+export const useGetUserProfileById = (
+  userId: string | undefined,
+  type: UserUpperTabType,
+  size = 10
+) => {
   const params = new URLSearchParams();
-  params.set("tab", tab);
+  params.set("type", type);
   params.set("size", String(size));
 
   return useAppInfiniteQuery<GetUserProfileDataResponse, unknown, UserProfileInfiniteSelectedData>(
     "auth",
-    ["user-data", userId, tab, size],
+    ["user-data", userId, type, size],
     `/users/${userId}/page?${params.toString()}`,
     {
       placeholderData: keepPreviousData,
@@ -29,8 +33,8 @@ export const useGetUserProfileById = (userId: string | undefined, tab: UserTabTy
         const list = data.pages.flatMap((page): UserProfileItem[] => {
           const r = page.result;
 
-          if (tab === "posts") return r.posts;
-          if (tab === "favorites") return r.favorites;
+          if (type === "POSTS") return r.posts;
+          if (type === "FAVORITES") return r.favorites;
           return r.comments;
         });
 

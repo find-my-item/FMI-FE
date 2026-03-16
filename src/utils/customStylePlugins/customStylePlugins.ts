@@ -80,11 +80,20 @@ export const noScrollbar = plugin(function ({ addUtilities }) {
 
 /**
  * h-base
+ * @description h-base: Header만 있을 때
+ * @description h-hf-base: Header + Footer 있을 때
+ * @description h-f-base: Footer만 있을 때
  */
 export const hBase = plugin(function ({ addUtilities }) {
   const utilities: Record<string, CSSRuleObject> = {
     ".h-base": {
       minHeight: "calc(100dvh - 56px)",
+    },
+    ".h-hf-base": {
+      minHeight: "calc(100dvh - 56px - 87px)",
+    },
+    ".h-f-base": {
+      minHeight: "calc(100dvh - 87px)",
     },
   };
 

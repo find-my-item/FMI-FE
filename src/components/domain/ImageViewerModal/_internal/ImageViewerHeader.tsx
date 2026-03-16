@@ -35,7 +35,7 @@ const ImageViewerHeader = ({
         className={cn(NAV_BUTTON_STYLE, "w-10")}
         aria-label="이미지 상세 보기 닫기"
       >
-        <Icon name="ArrowLeftSmall" size={18} />
+        <Icon name="ArrowLeftSmall" size={18} className="text-neutralInversed-strong-default" />
       </button>
       {imageInfo && (
         <div className="flex flex-col items-center">

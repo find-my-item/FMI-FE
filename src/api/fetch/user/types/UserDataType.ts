@@ -12,3 +12,4 @@ export interface UserDataType {
 }
 
 export type UserTabType = "posts" | "comments" | "favorites";
+export type UserUpperTabType = "POSTS" | "COMMENTS" | "FAVORITES";

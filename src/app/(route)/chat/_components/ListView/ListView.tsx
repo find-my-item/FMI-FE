@@ -35,7 +35,7 @@ const ListViewContent = () => {
 const ListView = () => {
   return (
     <Suspense fallback="">
-      <div className="w-full h-base">
+      <div className="w-full h-f-base">
         <ListViewContent />
       </div>
     </Suspense>
