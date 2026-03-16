@@ -10,7 +10,7 @@ interface NormalizedCommentItem {
 }
 
 const normalizeCommentData = (
-  data: CommentItemType | UserCommentsDataType
+  data: UserCommentItemType | UserCommentsDataType
 ): NormalizedCommentItem => {
   if ("comment" in data) {
     return {
@@ -29,17 +29,17 @@ const normalizeCommentData = (
   };
 };
 
-interface CommentItemType {
+interface UserCommentItemType {
   postId: number;
   comment: string;
   date: string;
   likes: number;
 }
 
-interface CommentItemProps {
-  data: CommentItemType | UserCommentsDataType;
+interface UserCommentItemProps {
+  data: UserCommentItemType | UserCommentsDataType;
 }
-const CommentItem = ({ data }: CommentItemProps) => {
+const UserCommentItem = ({ data }: UserCommentItemProps) => {
   const { postId, comment, date, likes } = normalizeCommentData(data);
 
   return (
@@ -55,7 +55,7 @@ const CommentItem = ({ data }: CommentItemProps) => {
           aria-label={`좋아요 ${likes}개`}
           className="flex items-center gap-1 text-body2-regular text-neutral-strong-placeholder"
         >
-          <Icon name="Heart" size={16} />
+          <Icon name="Heart" size={16} className="text-border-divider-default" />
           <span>좋아요 {likes}</span>
         </div>
       </Link>
@@ -63,4 +63,4 @@ const CommentItem = ({ data }: CommentItemProps) => {
   );
 };
 
-export default CommentItem;
+export default UserCommentItem;
