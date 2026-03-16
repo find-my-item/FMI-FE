@@ -26,7 +26,7 @@ interface CommentMetaHeaderProps {
     /** 작성자 이름 */
     authorName: string;
     /** 작성자 프로필 이미지 URL */
-    profileImageUrl: string;
+    profileImage: string;
     /** 댓글 ID */
     commentId: number;
     /** 댓글 삭제 여부 */
@@ -53,7 +53,7 @@ const CommentMetaHeader = ({
   queryKey,
   onDeleteComment,
 }: CommentMetaHeaderProps) => {
-  const { authorId, createdAt, authorName, profileImageUrl, commentId, deleted, canDelete } = data;
+  const { authorId, createdAt, authorName, profileImage, commentId, deleted, canDelete } = data;
 
   const [isKebabMenuOpen, setIsKebabMenuOpen] = useState(false);
   const [reportOpen, setReportOpen] = useState(false);
@@ -69,7 +69,7 @@ const CommentMetaHeader = ({
     <>
       <div className="flex items-start justify-between">
         <div className="flex gap-[14px]">
-          <ProfileAvatar src={profileImageUrl} size={isThreadItem ? 30 : 40} />
+          <ProfileAvatar src={profileImage} size={isThreadItem ? 30 : 40} />
 
           <div className="flex flex-col flex-wrap items-start">
             {isGuest ? (

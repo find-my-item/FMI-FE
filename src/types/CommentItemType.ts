@@ -42,7 +42,7 @@ export interface CommentItemType {
 export interface AuthorResponse {
   userId: number;
   nickName: string;
-  profileImageUrl: string;
+  profileImage: string;
 }
 
 export interface ImageList {

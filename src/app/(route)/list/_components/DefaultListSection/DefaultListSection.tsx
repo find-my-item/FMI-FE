@@ -43,7 +43,7 @@ const DefaultListSection = ({ searchUpdateQuery }: DefaultListProps) => {
   });
 
   return (
-    <section className="h-base">
+    <section className="h-hf-base">
       <Tab
         tabs={TABS}
         selected={selectedType}
