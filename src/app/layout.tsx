@@ -12,6 +12,7 @@ import MSWProvider from "@/providers/MSWProvider";
 import AuthBootstrap from "./authBootStrap";
 import { NotificationSSEProvider } from "@/providers/NotificationSSEProvider";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { PWAProvider } from "@/providers/PWAProvider";
 
 const pretendard = localFont({
   src: "../../public/fonts/PretendardVariable.woff2",
@@ -21,6 +22,9 @@ const pretendard = localFont({
 export const metadata: Metadata = {
   title: "찾아줘!",
   description: "분실물 찾기 서비스",
+  icons: {
+    icon: "/favicon/default/favicon-32.png",
+  },
 };
 
 export default function RootLayout({
@@ -38,7 +42,10 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="찾아줘!" />
-        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="/pwa/apple-icon-120.png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="/pwa/apple-icon-152.png" />
+        <link rel="apple-touch-icon" sizes="167x167" href="/pwa/apple-icon-167.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/pwa/apple-icon-180.png" />
       </head>
       <body className="mx-auto max-w-[768px] border-x-2 flex-col-center">
         {isProd && gaId && <GoogleAnalytics gaId={gaId} />}
@@ -76,6 +83,28 @@ export default function RootLayout({
               <SpeedInsights />
             </>
           )}
+          <PWAProvider>
+            <SnackBarProvider>
+              <ToastProvider>
+                <MSWProvider />
+                <AuthBootstrap />
+                <main className="w-full flex-1">{children}</main>
+                <Footer />
+              </ToastProvider>
+            </SnackBarProvider>
+            <Script
+              src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.7/kakao.min.js"
+              integrity="sha384-tJkjbtDbvoxO+diRuDtwRO9JXR7pjWnfjfRn5ePUpl7e7RJCxKCwwnfqUAdXh53p"
+              crossOrigin="anonymous"
+              strategy="afterInteractive"
+            />
+            {isProd && (
+              <>
+                <Analytics />
+                <SpeedInsights />
+              </>
+            )}
+          </PWAProvider>
         </Providers>
       </body>
     </html>
