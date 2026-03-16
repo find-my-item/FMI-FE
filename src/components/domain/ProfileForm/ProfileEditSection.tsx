@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useGetUsersMe } from "@/api/fetch/user";
 import { useToast } from "@/context/ToastContext";
@@ -16,11 +16,17 @@ const ProfileEditSection = ({ onConfirmRequest, onSuccess }: ProfileEditSectionP
   const { addToast } = useToast();
   const { data, isError } = useGetUsersMe();
 
+  const [isMounted, setIsMounted] = useState(false);
+
   useEffect(() => {
     if (isError) {
       addToast("프로필 정보를 불러오지 못했어요", "error");
     }
   }, [isError, addToast]);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const methods = useForm<ProfileFormType>({
     mode: "onChange",
@@ -30,6 +36,8 @@ const ProfileEditSection = ({ onConfirmRequest, onSuccess }: ProfileEditSectionP
       profileImage: data?.result?.profileImg ?? "",
     },
   });
+
+  if (!isMounted) return null;
 
   return (
     <FormProvider {...methods}>
