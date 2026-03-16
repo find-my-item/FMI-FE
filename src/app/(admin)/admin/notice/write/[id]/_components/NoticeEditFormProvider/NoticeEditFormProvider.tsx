@@ -11,7 +11,7 @@ interface NoticeEditFormProviderProps {
   noticeId: number;
 }
 
-export function NoticeEditFormProvider({ initialData, noticeId }: NoticeEditFormProviderProps) {
+export const NoticeEditFormProvider = ({ initialData, noticeId }: NoticeEditFormProviderProps) => {
   const methods = useForm<NoticeEditFormValues>({
     defaultValues: toNoticeEditFormValues(initialData),
     mode: "onChange",
@@ -23,4 +23,4 @@ export function NoticeEditFormProvider({ initialData, noticeId }: NoticeEditForm
       <NoticeEditForm noticeId={noticeId} />
     </FormProvider>
   );
-}
+};
