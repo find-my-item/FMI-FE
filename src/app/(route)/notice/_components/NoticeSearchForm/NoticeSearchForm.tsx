@@ -3,9 +3,10 @@
 import { FieldValues, FormProvider, useForm } from "react-hook-form";
 import { InputSearch } from "@/components/common";
 import { useSearchUpdateQueryString } from "@/hooks";
-import { useEffect, useState } from "react";
+import { debounce } from "lodash";
+import { useEffect } from "react";
 
-const SEARCH_DEBOUNCE_DELAY_MS = 300;
+const SEARCH_DEBOUNCE_DELAY_MS = 500;
 
 const NoticeSearchForm = () => {
   const { searchUpdateQuery } = useSearchUpdateQueryString();
@@ -14,19 +15,16 @@ const NoticeSearchForm = () => {
     reValidateMode: "onChange",
   });
   const noticeSearch = methods.watch("noticeSearch") ?? "";
-  const [debouncedKeyword, setDebouncedKeyword] = useState(noticeSearch);
+
+  const debouncedSearchUpdate = debounce(
+    (keyword: string) => searchUpdateQuery("keyword", keyword),
+    SEARCH_DEBOUNCE_DELAY_MS
+  );
 
   useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedKeyword(noticeSearch);
-    }, SEARCH_DEBOUNCE_DELAY_MS);
-
-    return () => clearTimeout(handler);
-  }, [noticeSearch]);
-
-  useEffect(() => {
-    searchUpdateQuery("keyword", debouncedKeyword);
-  }, [debouncedKeyword, searchUpdateQuery]);
+    debouncedSearchUpdate(noticeSearch);
+    return () => debouncedSearchUpdate.cancel();
+  }, [noticeSearch, debouncedSearchUpdate]);
 
   const handleSearchSubmit = ({ noticeSearch }: FieldValues) => {
     if (!noticeSearch.trim()) return;
