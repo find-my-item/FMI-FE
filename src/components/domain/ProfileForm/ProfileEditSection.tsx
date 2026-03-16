@@ -8,14 +8,11 @@ import { ProfileFormType } from "./_types/ProfileFormType";
 import { ProfileForm } from "./_internal";
 
 interface ProfileEditSectionProps {
-  /**
-   * 전송 전 확인 절차가 필요한 경우 사용하는 콜백입니다.
-   * 유저에게 확인을 받은 후 전달받은 submitFn을 실행하면 API가 호출됩니다.
-   */
   onConfirmRequest?: (submitFn: () => void) => void;
+  onSuccess?: () => void;
 }
 
-const ProfileEditSection = ({ onConfirmRequest }: ProfileEditSectionProps) => {
+const ProfileEditSection = ({ onConfirmRequest, onSuccess }: ProfileEditSectionProps) => {
   const { addToast } = useToast();
   const { data, isError } = useGetUsersMe();
 
@@ -36,7 +33,7 @@ const ProfileEditSection = ({ onConfirmRequest }: ProfileEditSectionProps) => {
 
   return (
     <FormProvider {...methods}>
-      <ProfileForm user={data?.result} onConfirmRequest={onConfirmRequest} />
+      <ProfileForm user={data?.result} onConfirmRequest={onConfirmRequest} onSuccess={onSuccess} />
     </FormProvider>
   );
 };

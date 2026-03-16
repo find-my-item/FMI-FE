@@ -14,14 +14,11 @@ import MypageProfileModal from "../ProfileEditLeaveConfirmModal/ProfileEditLeave
 
 interface ProfileFormProps {
   user?: UsersMeType;
-  /**
-   * 전송 전 확인 절차가 필요한 경우 사용하는 콜백입니다.
-   * 유저에게 확인을 받은 후 전달받은 submitFn을 실행하면 API가 호출됩니다.
-   */
   onConfirmRequest?: (submitFn: () => void) => void;
+  onSuccess?: () => void;
 }
 
-const ProfileForm = ({ user, onConfirmRequest }: ProfileFormProps) => {
+const ProfileForm = ({ user, onConfirmRequest, onSuccess }: ProfileFormProps) => {
   const { nickname, profileImg } = user ?? {};
 
   const {
@@ -50,6 +47,7 @@ const ProfileForm = ({ user, onConfirmRequest }: ProfileFormProps) => {
     preProfileImg: profileImg,
     onNoChange: () => setOpenModal(true),
     onConfirmRequest,
+    onSuccess,
   });
 
   const [profileImgValue, nicknameValue] = watch(["profileImg", "nickname"]);

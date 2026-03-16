@@ -1,12 +1,15 @@
+"use client";
+
 import { Suspense } from "react";
-import { DetailHeader } from "@/components/layout";
+import { useRouter } from "next/navigation";
 import { ProfileEditSection } from "@/components/domain";
 
 const page = () => {
+  const router = useRouter();
+
   return (
     <Suspense fallback={null}>
-      <DetailHeader title="프로필 설정" />
-      <ProfileEditSection />
+      <ProfileEditSection onSuccess={() => router.replace("/mypage")} />
     </Suspense>
   );
 };
