@@ -9,7 +9,7 @@ import { useEffect } from "react";
 const SEARCH_DEBOUNCE_DELAY_MS = 500;
 
 const NoticeSearchForm = () => {
-  const { searchUpdateQuery } = useSearchUpdateQueryString();
+  const { searchUpdateQuery } = useSearchUpdateQueryString("replace");
   const methods = useForm({
     mode: "onChange",
     reValidateMode: "onChange",
