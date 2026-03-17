@@ -1,9 +1,9 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://www.finditem.kr/sitemap.xml";
+  const baseUrl = "https://www.finditem.kr";
 
-  const routes = ["", "/list", "/mypage"].map((route) => ({
+  const routes = ["", "/list", "/hello", "/mypage"].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: "daily" as const,
