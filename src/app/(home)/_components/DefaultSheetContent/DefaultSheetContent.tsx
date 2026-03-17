@@ -13,22 +13,24 @@ interface DefaultSheetContentProps {
   onSectionHeights?: (heights: DefaultSheetContentHeights) => void;
 }
 
-const MEASURED_SECTIONS = [
-  { key: "lostFind", refKey: "lostFindRef" as const, Content: LostFindActions },
-  { key: "recent", refKey: "recentRef" as const, Content: RecentFoundItemSection },
-  { key: "police", refKey: "policeRef" as const, Content: PoliceSection },
-] as const;
-
 const DefaultSheetContent = ({ onSectionHeights }: DefaultSheetContentProps) => {
   const refs = useSectionHeights(onSectionHeights);
 
   return (
     <div className="space-y-5">
-      {MEASURED_SECTIONS.map(({ key, refKey, Content }) => (
-        <div key={key} ref={refs[refKey]}>
-          <Content />
-        </div>
-      ))}
+      <div ref={refs.lostFindRef}>
+        <LostFindActions />
+      </div>
+
+      <div ref={refs.recentRef}>
+        <RecentFoundItemSection />
+        <hr className="my-5 w-full border-[0.7px] border-divider-default" />
+      </div>
+
+      <div ref={refs.policeRef}>
+        <PoliceSection />
+      </div>
+
       <hr className="w-full border-collapse border-[0.7px] border-divider-default" />
       <SupportLinkSection />
     </div>

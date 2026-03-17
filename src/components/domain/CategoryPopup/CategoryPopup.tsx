@@ -1,7 +1,7 @@
 "use client";
 "use no memo";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, RadioOptionItem } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
 import { CategoryType, InquiryTargetType, NoticeCategory } from "@/types";
@@ -36,6 +36,7 @@ interface CategoryPopupProps<T extends CategoryPopupMode = "post"> {
   isOpen: boolean;
   onClose: () => void;
   onSelect: (category: CategoryValueByMode[T]) => void;
+  defaultSelected?: CategoryValueByMode[T];
 }
 
 const CategoryPopup = <T extends CategoryPopupMode = "post">({
@@ -43,9 +44,16 @@ const CategoryPopup = <T extends CategoryPopupMode = "post">({
   isOpen,
   onClose,
   onSelect,
+  defaultSelected,
 }: CategoryPopupProps<T>) => {
   const [selected, setSelected] = useState<CategoryValueByMode[T]>();
   const categoryOptions = CATEGORY_OPTIONS_BY_MODE[mode];
+
+  useEffect(() => {
+    if (!isOpen) return;
+    if (!defaultSelected) return;
+    setSelected(defaultSelected);
+  }, [defaultSelected, isOpen]);
 
   const handleApply = () => {
     if (!selected) return;

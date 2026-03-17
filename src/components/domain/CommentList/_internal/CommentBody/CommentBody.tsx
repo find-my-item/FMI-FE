@@ -1,5 +1,9 @@
+"use client";
+
+import { useState } from "react";
 import { ImageList } from "@/types";
 import Image from "next/image";
+import { ImageViewerModal } from "@/components/domain";
 
 /**
  * 댓글 내용 및 이미지
@@ -18,6 +22,15 @@ interface CommentBodyProps {
 
 const CommentBody = ({ bodyData }: CommentBodyProps) => {
   const { content, images } = bodyData;
+  const [isViewerOpen, setIsViewerOpen] = useState(false);
+  const [initialIndex, setInitialIndex] = useState(0);
+
+  const handleImageClick = (index: number) => {
+    setInitialIndex(index);
+    setIsViewerOpen(true);
+  };
+
+  const imageUrls = images.map((image) => image.imageUrl);
 
   return (
     <div>
@@ -33,11 +46,19 @@ const CommentBody = ({ bodyData }: CommentBodyProps) => {
               width={80}
               height={80}
               alt={`이미지-${i}`}
-              className="h-20 w-20 rounded-[16px] object-cover"
+              className="h-20 w-20 cursor-pointer rounded-[16px] object-cover"
+              onClick={() => handleImageClick(i)}
             />
           ))}
         </div>
       )}
+
+      <ImageViewerModal
+        images={imageUrls}
+        initialIndex={initialIndex}
+        isOpen={isViewerOpen}
+        onClose={() => setIsViewerOpen(false)}
+      />
     </div>
   );
 };

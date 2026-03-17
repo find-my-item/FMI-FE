@@ -34,7 +34,7 @@ const Location = ({ children, ariaLabel = "상세 위치 보기", ...props }: Lo
     >
       <Icon name="Location" size={16} />
       <span>{children}</span>
-      <Icon name="ArrowRightSmall" size={18} className="ml-[1px]" />
+      <Icon name="ArrowRightSmall" size={18} className="ml-[1px] text-neutral-normal-hover" />
     </button>
   );
 };
