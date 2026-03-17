@@ -51,6 +51,7 @@ const CategoryInput = () => {
         mode="notice"
         isOpen={categoryPopupOpen}
         onClose={() => setCategoryPopupOpen(false)}
+        defaultSelected={category ? (category as NoticeCategory) : undefined}
         onSelect={(c) => onSelectCategory(c as NoticeCategory)}
       />
     </>
