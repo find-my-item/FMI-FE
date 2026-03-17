@@ -11,14 +11,16 @@ import {
   PublicStorageInfo,
 } from "../_internal";
 import { usePublicDataDetailQuery } from "../../_hooks/usePublicDataDetailQuery/usePublicDataDetailQuery";
+import { PublicDataTabType } from "@/app/(route)/public-data/_types/PublicDataTabType";
 
 const NO_IMAGE_URL = "https://minwon24.police.go.kr/images/sub/img04_no_img.gif";
 
 const PublicClientDetail = ({ id }: { id: string }) => {
   const { type } = useParams();
-  const isLost = type === "lost";
+  const tabType = (type === "lost" ? "lost" : "found") as PublicDataTabType;
+  const isLost = tabType === "lost";
 
-  const { data, isLoading, isError } = usePublicDataDetailQuery(id);
+  const { data, isLoading, isError } = usePublicDataDetailQuery(id, tabType);
 
   if (isLoading) return <LoadingState />;
 

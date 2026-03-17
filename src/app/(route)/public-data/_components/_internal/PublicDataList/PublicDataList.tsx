@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { Chip, ListItemImage } from "@/components/common";
 import { EmptyState, LoadingState } from "@/components/state";
 import { cn, formatDate } from "@/utils";
@@ -55,7 +56,9 @@ interface PublicDataItemCardProps {
 const NO_IMAGE_URL = "https://minwon24.police.go.kr/images/sub/img02_no_img.gif";
 
 const PublicDataItemCard = ({ item }: PublicDataItemCardProps) => {
-  const type = "found"; // 우선 습득물로 고정
+  const searchParams = useSearchParams();
+  const type = searchParams.get("type") || "lost";
+  const isLost = type === "lost";
   const postId = item.atcId;
 
   const imageSrc =
@@ -91,12 +94,15 @@ const PublicDataItemCard = ({ item }: PublicDataItemCardProps) => {
                 <time dateTime={item.fdYmd}>{formatDate(item.fdYmd)}</time>
               </span>
             </div>
-            {/* TODO(지권): 분실일때만 노출 */}
-            <div className="text-neutral-normal-default">
-              {/* TODO(지권): 디자인 토큰 누락 */}
-              <span className="text-[14px] font-bold leading-[140%] after:px-[2px]">분실자명</span>
-              <span className="text-body2-regular">{item.depPlace}</span>
-            </div>
+            {isLost && (
+              <div className="text-neutral-normal-default">
+                {/* TODO(지권): 디자인 토큰 누락 */}
+                <span className="text-[14px] font-bold leading-[140%] after:px-[2px]">
+                  분실자명
+                </span>
+                <span className="text-body2-regular">{item.depPlace}</span>
+              </div>
+            )}
           </div>
         </div>
 
