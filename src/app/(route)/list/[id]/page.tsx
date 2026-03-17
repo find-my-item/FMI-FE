@@ -9,9 +9,9 @@ interface ListDetailProps {
 export async function generateMetadata({ params }: ListDetailProps): Promise<Metadata> {
   const { id } = await params;
 
-  const post = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts/${id}/share`).then((res) =>
-    res.json()
-  );
+  const post = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts/${id}/share`, {
+    next: { revalidate: 60 },
+  }).then((res) => res.json());
 
   const title = `${post.result.title} | ${post.result.address}`;
   const description = post.result.summary;
