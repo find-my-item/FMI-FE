@@ -13,10 +13,10 @@ export async function generateMetadata({ params }: ListDetailProps): Promise<Met
     next: { revalidate: 60 },
   }).then((res) => res.json());
 
-  const title = `${post.result.title} | ${post.result.address}`;
-  const description = post.result.summary;
+  const title = `${post?.result?.title ?? "물품"} | ${post?.result?.address} ?? "주소"`;
+  const description = post?.result?.summary ?? "리스트 상세";
   const thumbnailUrl =
-    post.result.thumbnailUrl ??
+    post?.result?.thumbnailUrl ??
     "https://fmi-project-s3-bucket.s3.ap-northeast-2.amazonaws.com/9e619169-f_default-share.png";
 
   return {

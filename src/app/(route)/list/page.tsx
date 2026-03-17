@@ -8,10 +8,10 @@ interface PageProps {
 
 type PostType = "lost" | "found" | undefined;
 
-const getPostType = (type?: string): PostType => {
-  if (type === "lost") return "lost";
-  if (type === "found") return "found";
-  return undefined;
+const getPostType = (type?: string) => {
+  if (type === "lost") return "분실한";
+  if (type === "found") return "발견된";
+  return "";
 };
 
 export async function generateMetadata({ searchParams }: PageProps): Promise<Metadata> {
@@ -21,14 +21,13 @@ export async function generateMetadata({ searchParams }: PageProps): Promise<Met
   let description = "";
 
   const postType = getPostType(type);
-  const label = postType === "lost" ? "분실한" : "발견된";
 
   if (!!keyword) {
     title = `${keyword} 검색결과 | 찾아줘!`;
     description = `찾아줘에서 ${keyword}을 찾고 있나요? 우리 동네에서 잃어버린 ${keyword} 분실물을 찾아보세요!`;
   } else if (!!type) {
-    title = `${label} 물건 리스트`;
-    description = `${label} 물건을 한눈에 확인해보세요! 우리 동네 분실물들이 이곳에 모여 있어요.`;
+    title = `${postType} 물건 리스트`;
+    description = `${postType} 물건을 한눈에 확인해보세요! 우리 동네 분실물들이 이곳에 모여 있어요.`;
   }
 
   return {

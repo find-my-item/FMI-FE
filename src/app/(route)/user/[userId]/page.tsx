@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     next: { revalidate: 60 },
   }).then((res) => res.json());
 
-  const title = `${user.nickname}`;
+  const title = `${user?.nickname} ?? "닉네임"`;
 
   return {
     title,
