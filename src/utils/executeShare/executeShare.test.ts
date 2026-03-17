@@ -19,17 +19,19 @@ describe("executeShare", () => {
     executeShare({
       id: "kakao",
       metaData: MOCK_POST_META_DATA,
+      objectType: "location",
       addToast,
     });
 
     expect(shareWithKakao).toHaveBeenCalledTimes(1);
-    expect(shareWithKakao).toHaveBeenCalledWith(MOCK_POST_META_DATA);
+    expect(shareWithKakao).toHaveBeenCalledWith(MOCK_POST_META_DATA, "location");
   });
 
   it("native id를 받으면 네이티브로 공유한다", () => {
     executeShare({
       id: "native",
       metaData: MOCK_POST_META_DATA,
+      objectType: "location",
       addToast,
     });
 
@@ -41,6 +43,7 @@ describe("executeShare", () => {
     executeShare({
       id: "copy",
       metaData: MOCK_POST_META_DATA,
+      objectType: "location",
       addToast,
     });
 
