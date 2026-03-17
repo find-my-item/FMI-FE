@@ -37,6 +37,7 @@ export const usePostNoticeLike = (id: number) => {
     },
     onSuccess: () => {
       addToast("공지사항 좋아요를 등록했어요", "success");
+      queryClient.invalidateQueries({ queryKey: ["notices"] });
     },
     onError: (_error, _variables, context) => {
       const typedContext = context as LikeOptimisticContext | undefined;
