@@ -14,7 +14,7 @@ const PublicDataView = () => {
         className="sticky left-0 top-[56px]"
       />
 
-      <div className="h-base">
+      <div>
         <FilterSection pageType="PUBLIC_DATA" />
 
         <PublicDataList />
