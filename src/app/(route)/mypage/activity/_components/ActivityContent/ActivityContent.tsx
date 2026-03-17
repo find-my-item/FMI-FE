@@ -10,6 +10,7 @@ import { LoadingState } from "@/components/state";
 import { useToast } from "@/context/ToastContext";
 import { useFilterParams } from "@/hooks/domain";
 import { useInfiniteScroll } from "@/hooks";
+import { useEffect } from "react";
 
 interface ActivityItemProps {
   activityItem: ActivityEachItemType;
@@ -84,8 +85,13 @@ const ActivityContent = () => {
 
   const { ref } = useInfiniteScroll({ hasNextPage, isFetchingNextPage, fetchNextPage });
 
+  useEffect(() => {
+    if (isError) {
+      addToast("목록을 불러오는데 실패했어요", "error");
+    }
+  }, [isError, addToast]);
+
   if (isLoading) return <LoadingState />;
-  if (isError) addToast("목록을 불러오는데 실패했어요", "error");
 
   return (
     <section>
@@ -97,9 +103,7 @@ const ActivityContent = () => {
         <>
           <ol className="flex flex-col">
             {activityData &&
-              activityData.map((item, index) => (
-                <ActivityGroupItem key={index} activityItem={item} />
-              ))}
+              activityData.map((item) => <ActivityGroupItem key={item.date} activityItem={item} />)}
           </ol>
 
           <div ref={ref} className="h-10" />
