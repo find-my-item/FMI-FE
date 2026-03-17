@@ -4,7 +4,12 @@ import { PropsWithChildren, useCallback, useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { usePathname, useRouter } from "next/navigation";
 import authApi from "@/api/_base/axios/authApi";
-import { NotificationEventData, useNotificationSSE } from "@/api/fetch/notification";
+import {
+  NotificationEventData,
+  NOTIFICATION_TYPE,
+  REFERENCE_TYPE,
+  useNotificationSSE,
+} from "@/api/fetch/notification";
 import { getNotificationDisplayTitle } from "@/api/fetch/notification/utils/getNotificationDisplayTitle";
 import { useSnackBar } from "@/context/SnackBarContext";
 import { useAuthStore } from "@/store";
@@ -59,6 +64,16 @@ export const NotificationSSEProvider = ({ children }: PropsWithChildren) => {
 
   const onNotification = useCallback(
     ({ type, referenceType }: NotificationEventData) => {
+      const isChatPage = pathname.startsWith("/chat");
+      const isChatNotification =
+        type === NOTIFICATION_TYPE.CHAT ||
+        type === NOTIFICATION_TYPE.CHAT_REMINDER ||
+        referenceType === REFERENCE_TYPE.CHAT;
+
+      if (isChatPage && isChatNotification) {
+        return;
+      }
+
       queryClient.invalidateQueries({ queryKey: ["notificationList"] });
       showSnackBar(
         getNotificationDisplayTitle(type, referenceType).replace(/"/g, ""),
@@ -66,7 +81,7 @@ export const NotificationSSEProvider = ({ children }: PropsWithChildren) => {
         () => router.push("/alert")
       );
     },
-    [queryClient, router, showSnackBar]
+    [pathname, queryClient, router, showSnackBar]
   );
 
   useNotificationSSE({
