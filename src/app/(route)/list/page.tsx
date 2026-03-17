@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { DefaultListView } from "./_components";
 
+interface PageProps {
+  searchParams: Promise<{ type?: string; keyword?: string }>;
+}
+
 type PostType = "lost" | "found" | undefined;
 
 const getPostType = (type?: string): PostType => {
@@ -10,11 +14,7 @@ const getPostType = (type?: string): PostType => {
   return undefined;
 };
 
-export async function generateMetadata({
-  searchParams,
-}: {
-  searchParams: { type?: string; keyword?: string };
-}): Promise<Metadata> {
+export async function generateMetadata({ searchParams }: PageProps): Promise<Metadata> {
   const { type, keyword } = await searchParams;
 
   let title = "";
