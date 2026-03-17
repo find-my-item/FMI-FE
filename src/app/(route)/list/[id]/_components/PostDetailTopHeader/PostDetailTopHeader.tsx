@@ -11,7 +11,7 @@ import {
 import { PostActionData } from "../../_types/PostActionType";
 import { useToggleFavorite } from "../../_hooks/useToggleFavorite";
 import { useClickOutside } from "@/hooks";
-import { PostShare } from "@/components/domain";
+import { ContentShareModal } from "@/components/domain";
 import { useGetMetaData } from "@/api/fetch/post";
 
 interface PostDetailTopHeaderProps {
@@ -66,7 +66,7 @@ const PostDetailTopHeader = ({ postId, postData }: PostDetailTopHeaderProps) => 
         </DetailHeader>
       </div>
 
-      <PostShare
+      <ContentShareModal
         isOpen={openShareModal}
         onClose={() => setOpenShareModal(false)}
         metaData={metaData}

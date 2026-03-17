@@ -8,7 +8,7 @@ import { useClickOutside } from "@/hooks";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import NoticeDeleteModal from "./_internal/NoticeDeleteModal";
-import { PostShare } from "@/components/domain";
+import { ContentShareModal } from "@/components/domain";
 import { useGetNoticeDetail } from "@/api/fetch/notice";
 
 const NoticeDetailHeader = ({ id }: { id: number }) => {
@@ -67,7 +67,7 @@ const NoticeDetailHeader = ({ id }: { id: number }) => {
         onClose={() => setIsDeleteModalOpen(false)}
         postId={id}
       />
-      <PostShare
+      <ContentShareModal
         isOpen={openShareModal}
         onClose={() => setOpenShareModal(false)}
         metaData={metaData}

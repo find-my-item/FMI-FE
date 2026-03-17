@@ -27,4 +27,4 @@ export { default as Terms } from "./Terms/Terms";
 export { default as ProfileForm } from "./ProfileForm/ProfileForm";
 export { default as BlockUserModal } from "./PostReportBlockActions/UserBlockModal/UserBlockModal";
 export { default as AddToHomeScreenPWA } from "./AddToHomeScreenPWA/AddToHomeScreenPWA";
-export { default as PostShare } from "./PostShare/PostShare";
+export { default as ContentShareModal } from "./ContentShareModal/ContentShareModal";

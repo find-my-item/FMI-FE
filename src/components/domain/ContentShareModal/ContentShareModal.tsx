@@ -9,14 +9,14 @@ import { ShareId } from "@/types";
 import { useToast } from "@/context/ToastContext";
 import { MetaDataItemWithLink } from "@/types/MetaDataType";
 
-interface PostShareProps {
+interface ContentShareModalProps {
   isOpen: boolean;
   onClose: () => void;
   metaData: MetaDataItemWithLink;
   objectType: "feed" | "location";
 }
 
-const PostShare = ({ isOpen, onClose, metaData, objectType }: PostShareProps) => {
+const ContentShareModal = ({ isOpen, onClose, metaData, objectType }: ContentShareModalProps) => {
   const { addToast } = useToast();
 
   const handleOption = (id: ShareId) =>
@@ -50,7 +50,7 @@ const PostShare = ({ isOpen, onClose, metaData, objectType }: PostShareProps) =>
   );
 };
 
-export default PostShare;
+export default ContentShareModal;
 
 const ShareOptionButton = ({
   src,
