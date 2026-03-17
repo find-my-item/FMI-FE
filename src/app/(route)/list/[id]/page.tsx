@@ -23,22 +23,14 @@ export async function generateMetadata({ params }: ListDetailProps): Promise<Met
     title,
     description,
     openGraph: {
-      title,
-      description,
-      type: "website",
       images: [
         {
           url: thumbnailUrl,
-          width: 1200,
-          height: 630,
           alt: title,
         },
       ],
     },
     twitter: {
-      title,
-      description,
-      card: "summary_large_image",
       images: [thumbnailUrl],
     },
   };
