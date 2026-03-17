@@ -8,6 +8,7 @@ import { parseStringPromise } from "xml2js";
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
 
+  const ATC_ID = searchParams.get("atcId") || "";
   const PRDT_CL_CD_01 = searchParams.get("PRDT_CL_CD_01") || "";
   const PRDT_CL_CD_02 = searchParams.get("PRDT_CL_CD_02") || "";
   const FD_COL_CD = searchParams.get("FD_COL_CD") || "";
@@ -23,10 +24,13 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "API 키가 설정되지 않았습니다." }, { status: 500 });
   }
 
-  const baseUrl =
-    "https://apis.data.go.kr/1320000/LosfundInfoInqireService/getLosfundInfoAccToClAreaPd";
+  const baseUrl = ATC_ID
+    ? "https://apis.data.go.kr/1320000/LosfundInfoInqireService/getLosfundDetailInfo"
+    : "https://apis.data.go.kr/1320000/LosfundInfoInqireService/getLosfundInfoAccToClAreaPd";
 
   const params = new URLSearchParams();
+  if (ATC_ID) params.append("ATC_ID", ATC_ID);
+  if (ATC_ID) params.append("FD_SN", "1");
   if (PRDT_CL_CD_01) params.append("PRDT_CL_CD_01", PRDT_CL_CD_01);
   if (PRDT_CL_CD_02) params.append("PRDT_CL_CD_02", PRDT_CL_CD_02);
   if (FD_COL_CD) params.append("FD_COL_CD", FD_COL_CD);
@@ -51,7 +55,6 @@ export async function GET(request: NextRequest) {
 
     const responseText = await response.text();
 
-    // XML 결과 파싱
     const xmlResult = await parseStringPromise(responseText, { explicitArray: false });
     const res = xmlResult.response;
 

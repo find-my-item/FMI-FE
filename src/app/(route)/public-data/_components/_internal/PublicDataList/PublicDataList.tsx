@@ -55,7 +55,7 @@ interface PublicDataItemCardProps {
 const NO_IMAGE_URL = "https://minwon24.police.go.kr/images/sub/img02_no_img.gif";
 
 const PublicDataItemCard = ({ item }: PublicDataItemCardProps) => {
-  const type = "found"; // 우선 습득물로 고정 (추후 URL type에 따라 변경 가능)
+  const type = "found"; // 우선 습득물로 고정
   const postId = item.atcId;
 
   const imageSrc =

@@ -13,7 +13,7 @@ export const usePublicDataTabQuery = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const activeTab: PublicDataTabType = searchParams.get("type") === "lost" ? "lost" : "found";
+  const activeTab: PublicDataTabType = searchParams.get("type") === "found" ? "found" : "lost";
 
   const handleTabChange = (key: PublicDataTabType) => {
     const params = new URLSearchParams(searchParams.toString());
