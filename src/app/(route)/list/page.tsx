@@ -11,13 +11,23 @@ const getPostType = (type?: string): PostType => {
 export async function generateMetadata({
   searchParams,
 }: {
-  searchParams: { type?: string };
+  searchParams: { type?: string; keyword?: string };
 }): Promise<Metadata> {
-  const postType = getPostType(searchParams.type);
+  const { type, keyword } = searchParams;
+
+  let title = "";
+  let description = "";
+
+  const postType = getPostType(type);
   const label = postType === "lost" ? "분실한" : "발견된";
 
-  const title = `${label} 물건 리스트`;
-  const description = `${label} 물건을 한눈에 확인해보세요! 우리 동네 분실물들이 이곳에 모여 있어요.`;
+  if (!!keyword) {
+    title = `${keyword} 검색결과 | 찾아줘!`;
+    description = `찾아줘에서 ${keyword}을 찾고 있나요? 우리 동네에서 잃어버린 ${keyword} 분실물을 찾아보세요!`;
+  } else if (!!type) {
+    title = `${label} 물건 리스트`;
+    description = `${label} 물건을 한눈에 확인해보세요! 우리 동네 분실물들이 이곳에 모여 있어요.`;
+  }
 
   return {
     title,
