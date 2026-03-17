@@ -48,7 +48,7 @@ const page = () => {
       </div>
 
       {/* divider 구분선 */}
-      <div className="flex h-[18px] w-full items-center mobile:px-5 tablet:px-[96px]">
+      <div className="flex h-[18px] w-full items-center mobile:px-5 tablet:px-[80px]">
         <hr className="h-px flex-1 bg-flatGray-50" aria-hidden={true} />
         <span className="px-3 text-caption1-medium text-layout-body-default">또는</span>
         <hr className="h-px flex-1 bg-flatGray-50" aria-hidden={true} />
