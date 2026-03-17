@@ -15,7 +15,7 @@ const EmailLoginForm = () => {
   return (
     <form onSubmit={onSubmitLogin} className="flex w-full flex-col gap-12">
       {/* 로그인 입력칸 */}
-      <fieldset className="flex w-full flex-col gap-3 tablet:px-[96px]">
+      <fieldset className="flex w-full flex-col gap-3">
         <legend className="sr-only">로그인 정보 입력</legend>
         {EMAIL_LOGIN_CONFIG.map((item) => (
           <InputText key={item.inputOption.name} {...item} />
@@ -32,7 +32,7 @@ const EmailLoginForm = () => {
         />
       </fieldset>
       {/* 로그인 버튼 */}
-      <footer className="w-full gap-6 flex-col-center tablet:px-[96px]">
+      <footer className="w-full gap-6 flex-col-center">
         <Button type="submit" variant="auth">
           로그인
         </Button>
