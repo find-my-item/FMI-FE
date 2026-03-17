@@ -98,7 +98,7 @@ const PublicDataItemCard = ({ item }: PublicDataItemCardProps) => {
               <div className="text-neutral-normal-default">
                 {/* TODO(지권): 디자인 토큰 누락 */}
                 <span className="text-[14px] font-bold leading-[140%] after:px-[2px]">
-                  분실자명
+                  분실장소
                 </span>
                 <span className="text-body2-regular">{item.depPlace}</span>
               </div>
