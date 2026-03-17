@@ -1,13 +1,11 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { PostWriteMenu } from "./_components";
-import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: `한 물건 리스트`,
-  description: `물건을 한눈에 확인해 보세요! 우리 동네 분실물들이 이곳에 모여 있어요.`,
-};
+interface LayoutProps {
+  children: ReactNode;
+}
 
-const layout = ({ children }: { children: ReactNode }) => {
+const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       {children}
@@ -16,4 +14,4 @@ const layout = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default layout;
+export default Layout;
