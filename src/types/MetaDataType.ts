@@ -1,16 +1,18 @@
-import { GetNoticeMetaDataResponse } from "@/api/fetch/notice";
 import { PostMetaDataItem } from "@/api/fetch/post";
 
 /**
  * @author jikwon
+ * rewrite hyungjun
  *
  * 메타데이터 타입 정의
  *
  * - 이 타입은 메타데이터를 표시합니다.
+ *   공지사항/게시글 메타데이터 호환 가능합니다.
  *
  * @description PostMetaDataItemWithLink
- * - PostMetaDataItem: 메타데이터 아이템
+ * - PostMetaDataItem: 게시글 메타데이터 아이템
  * - link: 메타데이터 링크
+ * - MetaDataItem: 공지사항/게시글 호환 타입
  *
  * @description ShareId
  * - kakao: 카카오
@@ -18,7 +20,6 @@ import { PostMetaDataItem } from "@/api/fetch/post";
  * - copy: 복사
  */
 
-// TODO(형준): 삭제될 타입
 export type PostMetaDataItemWithLink = PostMetaDataItem & {
   link: string;
 };
