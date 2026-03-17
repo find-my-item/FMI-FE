@@ -20,7 +20,7 @@ const page = () => {
       <LogoLink />
 
       {/* button */}
-      <div className="flex w-full flex-col gap-3 mobile:px-5 tablet:px-[96px]">
+      <div className="flex w-full flex-col gap-3 mobile:px-5 tablet:px-[80px]">
         <Button
           type="submit"
           ignoreBase
