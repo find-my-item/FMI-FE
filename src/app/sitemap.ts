@@ -1,0 +1,21 @@
+import { MetadataRoute } from "next";
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const baseUrl = "https://www.finditem.kr/sitemap.xml";
+
+  const routes = ["", "/list", "/mypage"].map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified: new Date(),
+    changeFrequency: "daily" as const,
+    priority: 1.0,
+  }));
+
+  const listTypes = ["found", "lost"].map((type) => ({
+    url: `${baseUrl}/list?type=${type}`,
+    lastModified: new Date(),
+    changeFrequency: "always" as const,
+    priority: 0.8,
+  }));
+
+  return [...routes, ...listTypes];
+}
