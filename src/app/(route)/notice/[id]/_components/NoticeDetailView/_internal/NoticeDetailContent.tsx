@@ -4,8 +4,9 @@ import { useState } from "react";
 import { NoticeDetail } from "@/api/fetch/notice";
 import { Icon } from "@/components/common";
 import { ImageViewerModal } from "@/components/domain";
-import { cn, formatDate } from "@/utils";
+import { cn, formatDate, formatViewCount } from "@/utils";
 import Image from "next/image";
+import { useToggleLike } from "./useToggleLike";
 
 const BADGE_DEFAULT_STYLE = "inline-block rounded-full px-2 py-1 text-caption2-medium text-white";
 
@@ -20,16 +21,26 @@ const NoticeDetailBadges = ({ isNew, isHot }: { isNew: boolean; isHot: boolean }
   );
 };
 
-const NoticeDetailContent = ({ noticeDetail }: { noticeDetail?: NoticeDetail }) => {
+const NoticeDetailContent = ({ noticeDetail }: { noticeDetail: NoticeDetail }) => {
   const [imageViewerState, setImageViewerState] = useState<{
     isOpen: boolean;
     initialIndex: number;
   }>({ isOpen: false, initialIndex: 0 });
 
-  if (!noticeDetail) return null;
-
-  const { title, content, viewCount, likeCount, authorName, isNew, isHot, createdAt, images } =
-    noticeDetail;
+  const noticeId = noticeDetail?.noticeId;
+  const { handleToggleLike, isPending: isLikePending } = useToggleLike({ noticeId });
+  const {
+    title,
+    content,
+    viewCount,
+    likeCount,
+    authorName,
+    isNew,
+    isHot,
+    createdAt,
+    images,
+    likeStatus,
+  } = noticeDetail;
 
   return (
     <section className="space-y-3 px-5 py-[30px]">
@@ -68,14 +79,26 @@ const NoticeDetailContent = ({ noticeDetail }: { noticeDetail?: NoticeDetail }) 
           ))}
 
         <div className="flex gap-3 text-body2-regular text-neutral-strong-placeholder">
-          <button aria-label="좋아요 버튼" className="flex items-center gap-1">
-            <Icon name="Like" size={16} className="text-border-divider-default" />
-            {/* TODO(형준): 공지사항 상세 응답 값 likeStatus 추가 확인 후 추천 기능 작업 필요 */}
-            <span>추천 {likeCount}</span>
+          <button
+            type="button"
+            aria-label={likeStatus ? "좋아요 취소" : "좋아요"}
+            onClick={() => handleToggleLike(likeStatus)}
+            className="flex items-center gap-1"
+            disabled={isLikePending}
+          >
+            <Icon
+              name={likeStatus ? "LikeActive" : "Like"}
+              size={16}
+              className={cn(
+                "text-border-divider-default transition-colors",
+                likeStatus && "text-system-favorite"
+              )}
+            />
+            <span>추천 {formatViewCount(likeCount)}</span>
           </button>
           <div className="flex items-center gap-1">
             <Icon name="Eye" size={16} className="text-border-divider-default" />
-            <span>조회 {viewCount}</span>
+            <span>조회 {formatViewCount(viewCount)}</span>
           </div>
         </div>
       </div>
