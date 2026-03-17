@@ -16,6 +16,8 @@ import { useAuthStore } from "@/store";
 
 const ACCESS_TOKEN_API_PATH = "/api/auth/access-token";
 
+// TODO(형준): SSE 재연결 시 알림 오지않는 문제, 미확인 알림 전역 변수 추가 필요, 알림 디자인/API 달라서 누락 있음
+
 export const NotificationSSEProvider = ({ children }: PropsWithChildren) => {
   const router = useRouter();
   const pathname = usePathname();
