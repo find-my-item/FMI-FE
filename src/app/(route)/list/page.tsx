@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { DefaultListView } from "./_components";
 
-type PostType = "lost" | "found";
+type PostType = "lost" | "found" | undefined;
 
 const getPostType = (type?: string): PostType => {
-  return type === "lost" ? "lost" : "found";
+  if (type === "lost") return "lost";
+  if (type === "found") return "found";
+  return undefined;
 };
 
 export async function generateMetadata({
@@ -13,7 +15,7 @@ export async function generateMetadata({
 }: {
   searchParams: { type?: string; keyword?: string };
 }): Promise<Metadata> {
-  const { type, keyword } = searchParams;
+  const { type, keyword } = await searchParams;
 
   let title = "";
   let description = "";
