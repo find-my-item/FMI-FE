@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/admin", "/mypage/notice", "/mypage/inquiries", "/chat/"],
+      disallow: ["/admin", "/mypage/", "/chat", "/write"],
     },
     sitemap: "https://www.finditem.kr/sitemap.xml",
   };
