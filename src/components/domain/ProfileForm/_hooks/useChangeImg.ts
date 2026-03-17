@@ -6,7 +6,11 @@ interface UseChangeImgProps {
   onImageChange: (file: File | null) => void;
 }
 
-const useChangeImg = ({ setOpenKebabMenu, initialImg, onImageChange }: UseChangeImgProps) => {
+export const useChangeImg = ({
+  setOpenKebabMenu,
+  initialImg,
+  onImageChange,
+}: UseChangeImgProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [previewImgUrl, setPreviewImgUrl] = useState<string | null>(initialImg ?? "");
 
@@ -46,5 +50,3 @@ const useChangeImg = ({ setOpenKebabMenu, initialImg, onImageChange }: UseChange
     fileInputRef,
   };
 };
-
-export default useChangeImg;
