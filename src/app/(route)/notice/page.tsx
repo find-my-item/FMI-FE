@@ -8,6 +8,7 @@ import { Suspense } from "react";
 import { useSearchUpdateQueryString } from "@/hooks";
 import { ErrorBoundary } from "@/app/ErrorBoundary";
 import { ErrorState } from "@/components/state";
+import { useGetUsersMe } from "@/api/fetch/user";
 
 const NoticePageContent = () => {
   const { searchUpdateQuery } = useSearchUpdateQueryString();
@@ -36,6 +37,8 @@ const NoticePageContent = () => {
 
 const Notice = () => {
   const router = useRouter();
+  const { data: userData } = useGetUsersMe();
+  const isAdmin = userData?.result?.role === "ADMIN";
 
   return (
     <div className="min-h-dvh">
@@ -47,11 +50,13 @@ const Notice = () => {
 
       <div className="fixed bottom-[30px] right-6 space-y-2">
         <ScrollToTopButton />
-        <FloatingButton
-          ariaLabel="공지사항 작성 페이지 이동"
-          mode="notice"
-          onClick={() => router.push("/admin/notice/write")}
-        />
+        {isAdmin && (
+          <FloatingButton
+            ariaLabel="공지사항 작성 페이지 이동"
+            mode="notice"
+            onClick={() => router.push("/admin/notice/write")}
+          />
+        )}
       </div>
     </div>
   );

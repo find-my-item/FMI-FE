@@ -1,22 +1,24 @@
 "use client";
 "use no memo";
 
-import { useNicknameCheck } from "@/hooks/domain/useNicknameCheck/useNicknameCheck";
-import { Icon, InputText, KebabMenu, ProfileAvatar } from "@/components/common";
-import { FooterButton } from "@/components/domain";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
-import useChangeImg from "./_hooks/useChangeImg";
 import { UsersMeType } from "@/api/fetch/user/types/UserMeType";
-import useProfileFormSubmit from "./_hooks/useProfileFormSubmit";
-import MypageProfileModal from "./MypageProfileModal/MypageProfileModal";
-import { usePreventLeave } from "./_hooks/usePreventLeave";
+import { Icon, InputText, KebabMenu, ProfileAvatar } from "@/components/common";
+import { FooterButton } from "@/components/domain";
+import { useNicknameCheck } from "@/hooks/domain";
+import { useProfileFormSubmit } from "../../_hooks/useProfileFormSubmit";
+import { usePreventLeave } from "../../_hooks/usePreventLeave";
+import { useChangeImg } from "../../_hooks/useChangeImg";
+import MypageProfileModal from "../ProfileEditLeaveConfirmModal/ProfileEditLeaveConfirmModal";
+import { useClickOutside } from "@/hooks";
 
 interface ProfileFormProps {
   user?: UsersMeType;
+  onConfirmRequest?: (submitFn: () => void) => void;
 }
 
-const ProfileForm = ({ user }: ProfileFormProps) => {
+const ProfileForm = ({ user, onConfirmRequest }: ProfileFormProps) => {
   const { nickname, profileImg } = user ?? {};
 
   const {
@@ -27,9 +29,10 @@ const ProfileForm = ({ user }: ProfileFormProps) => {
 
   const { handleClickNickname, isNicknameVerified, isNicknameDisabled } = useNicknameCheck();
 
+  const [openModal, setOpenModal] = useState(false);
   const [openKebabMenu, setOpenKebabMenu] = useState(false);
 
-  const [openModal, setOpenModal] = useState(false);
+  const ref = useClickOutside(() => setOpenKebabMenu(false));
 
   // 이미지 관련 처리
   const { handleChangeImg, handleButtonClick, previewImgUrl, resetImage, fileInputRef } =
@@ -44,6 +47,7 @@ const ProfileForm = ({ user }: ProfileFormProps) => {
     preNickname: nickname ?? "",
     preProfileImg: profileImg,
     onNoChange: () => setOpenModal(true),
+    onConfirmRequest,
   });
 
   const [profileImgValue, nicknameValue] = watch(["profileImg", "nickname"]);
@@ -58,7 +62,7 @@ const ProfileForm = ({ user }: ProfileFormProps) => {
     <form className="flex w-full flex-col h-base">
       <div className="flex-1">
         <div className="flex justify-center py-[30px]">
-          <div className="relative h-[80px] w-[80px]">
+          <div ref={ref} className="relative z-10 h-[80px] w-[80px]">
             <ProfileAvatar size={80} src={previewImgUrl} alt="프로필" priority={true} />
             <button
               className="absolute left-[52px] top-[52px] size-7 rounded-full bg-fill-neutral-strong-default flex-center"
