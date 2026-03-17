@@ -96,7 +96,6 @@ const NoticeEditImageSection = ({ helpText = DEFAULT_HELP_TEXT }: { helpText?: s
 
         <div role="list" aria-label="이미지 미리보기 목록" className="flex gap-2">
           {fields.map((image, index) => {
-            // previewUrl은 항상 string이어야 합니다. 비어 있으면 렌더하지 않습니다.
             const previewUrl = (image as unknown as NoticeEditImageItem).previewUrl;
             if (!previewUrl) return null;
 
