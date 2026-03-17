@@ -1,4 +1,4 @@
-import { Icon } from "@/components/common";
+import Image from "next/image";
 
 interface PublicStorageInfoProps {
   office: string;
@@ -18,11 +18,12 @@ const PublicStorageInfo = ({ office, department, tel, place, postId }: PublicSto
       <article className="flex flex-col gap-5 rounded-[24px] px-5 py-4 bg-fill-brand-subtle-default_2">
         <div className="flex items-center justify-between">
           <h3 className="text-body1-semibold text-layout-header-default">{office}</h3>
-          <Icon
-            name="PublicDetailPolice24"
-            size={100}
-            className="h-[21px] w-[100px]"
-            title="경찰청 마크"
+          <Image
+            src="/public-data/public-detail-police24.svg"
+            alt="경찰청 마크"
+            width={100}
+            height={21}
+            priority
           />
         </div>
         <ul
