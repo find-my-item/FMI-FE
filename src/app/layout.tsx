@@ -28,6 +28,24 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon/default/favicon-32.png",
   },
+  openGraph: {
+    type: "website",
+    images: [
+      {
+        url: "https://fmi-project-s3-bucket.s3.ap-northeast-2.amazonaws.com/9e619169-f_default-share.png",
+        width: 1200,
+        height: 630,
+        alt: "찾아줘!",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    images: [
+      "https://fmi-project-s3-bucket.s3.ap-northeast-2.amazonaws.com/9e619169-f_default-share.png",
+    ],
+  },
 };
 
 export default function RootLayout({
