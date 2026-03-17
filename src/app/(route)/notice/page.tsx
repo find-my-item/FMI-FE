@@ -40,7 +40,7 @@ const Notice = () => {
   return (
     <div className="min-h-dvh">
       <DetailHeader title="공지사항" />
-      <h1 className="sr-only">공지사항 목록</h1>
+      <h1 className="sr-only">공지사항 페이지</h1>
       <Suspense fallback="">
         <NoticePageContent />
       </Suspense>
