@@ -2,7 +2,7 @@ import { useSearchParams, useRouter, usePathname } from "next/navigation";
 
 type SearchMode = "default" | "region" | "post";
 
-const useSearchUpdateQueryString = () => {
+const useSearchUpdateQueryString = (routerMode: "push" | "replace" = "push") => {
   const router = useRouter();
   const searchPrams = useSearchParams();
   const pathname = usePathname();
@@ -15,7 +15,14 @@ const useSearchUpdateQueryString = () => {
     } else {
       params.delete(key);
     }
-    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+
+    const url = `${pathname}?${params.toString()}`;
+
+    if (routerMode === "replace") {
+      router.replace(url, { scroll: false });
+    } else {
+      router.push(url, { scroll: false });
+    }
   };
 
   return { searchMode, searchUpdateQuery };

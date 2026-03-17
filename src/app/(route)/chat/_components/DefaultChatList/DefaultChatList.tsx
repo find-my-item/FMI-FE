@@ -58,7 +58,7 @@ const DefaultChatList = ({ searchUpdateQuery }: DefaultChatListProps) => {
         />
       )}
 
-      <div ref={chatListRef} className="h-[100px]" />
+      {hasNextPage && <div ref={chatListRef} className="h-[100px]" />}
     </>
   );
 };

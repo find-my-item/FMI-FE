@@ -12,12 +12,11 @@ const LOST_FIND_ACTION_DATA = [
     },
     bagImage: "/main/LostFindActions/lost-bag.svg",
     messageImage: "/main/LostFindActions/lost-message.svg",
-    // TODO(형준): 토큰 반영 후 변경
     bgColor: "bg-fill-accent-lostItem2",
   },
   {
     type: "found",
-    title: "습득 신고",
+    title: "발견 신고",
     positionImage: "/main/LostFindActions/found-position.svg",
     markImage: {
       src: "/main/LostFindActions/exclamation.svg",

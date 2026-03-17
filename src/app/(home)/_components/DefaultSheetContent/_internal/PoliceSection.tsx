@@ -1,47 +1,52 @@
 import Image from "next/image";
 import Link from "next/link";
+import MainCardList from "./MainCardList/MainCardList";
 
+// TODO(지권): 경로 수정 필요
 const POLICE_ITEMS = [
   {
-    href: "https://minwon24.police.go.kr/cvlcpt/cvlcptGdInfo.do?cvlcptId=MW-001",
-    label: "분실물\n신고",
+    href: "http://localhost:3000/public-data?type=lost",
+    headLabel: "분실",
+    label: "했어요",
   },
   {
-    href: "https://minwon24.police.go.kr/cvlcpt/cvlcptAply.do?cvlcptId=MW-201&keyword=",
-    label: "습득물\n검색",
-  },
-  {
-    href: "https://minwon24.police.go.kr/login/loginLost112.do",
-    label: "기관용\n분실물",
+    href: "http://localhost:3000/public-data?type=found",
+    headLabel: "발견",
+    label: "했어요",
   },
 ];
 
 const PoliceSection = () => {
   return (
-    <div className="flex items-center gap-[15px] rounded-2xl px-3 py-4 bg-fill-brand-subtle-default_2">
-      <Link
-        href="https://minwon24.police.go.kr/main.do"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex flex-col gap-[10px] px-3 py-[10px]"
-      >
-        <Image src="/main/police24-icon.svg" alt="경찰민원24로고" width={77} height={21} />
-        <span className="text-body2-semibold text-brand-normal-default">바로가기</span>
-      </Link>
-      {POLICE_ITEMS.map((item) => (
-        <Link
-          key={item.href}
-          href={item.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="box-border h-14 w-[60px] overflow-hidden rounded-2xl border border-brand-normal-disabled bg-white px-[14px] py-3 flex-col-center"
-        >
-          <span className="whitespace-pre text-center text-caption1-semibold text-neutralInversed-normal-default transition-colors hover:text-flatGreen-500">
-            {item.label}
-          </span>
-        </Link>
-      ))}
-    </div>
+    <section className="space-y-4">
+      <div className="flex items-center gap-10 rounded-2xl px-3 py-4 bg-fill-brand-subtle-default_2">
+        <div className="flex flex-col gap-[10px] px-3 py-[10px]">
+          <span className="whitespace-pre text-body2-semibold text-brand-normal-default">{`경찰청 분실물도\n찾아줘!에서 확인해요`}</span>
+          <Image src="/main/police24-icon.svg" alt="경찰민원24로고" width={77} height={21} />
+        </div>
+
+        <div className="flex w-full items-center gap-3">
+          {POLICE_ITEMS.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="group box-border h-14 w-full max-w-[255.5px] overflow-hidden rounded-[10px] border border-brand-normal-disabled/90 bg-white px-[14px] py-3 flex-col-center"
+            >
+              <div className="flex flex-col items-center text-center text-caption1-medium transition-colors">
+                <span className="text-neutralInversed-normal-focused group-hover:text-caption1-semibold group-hover:text-flatGreen-500">
+                  {item.headLabel}
+                </span>
+                <span className="text-neutralInversed-normal-default group-hover:text-caption1-semibold group-hover:text-flatGreen-500">
+                  {item.label}
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      <MainCardList mode="public" isLoading={false} />
+    </section>
   );
 };
 

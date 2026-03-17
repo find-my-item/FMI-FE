@@ -11,7 +11,7 @@ export const MOCK_COMMENT_ITEM_DATA: CommentItemType = {
   authorResponse: {
     userId: 1,
     nickName: "짱구",
-    profileImageUrl: "https://picsum.photos/200",
+    profileImage: "https://picsum.photos/200",
   },
   childCommentCount: 0,
   imageList: [],
@@ -29,7 +29,7 @@ export const MOCK_COMMENT_LIST_DATA: CommentItemType[] = [
     authorResponse: {
       userId: 2,
       nickName: "철수",
-      profileImageUrl: "https://picsum.photos/201",
+      profileImage: "https://picsum.photos/201",
     },
   },
 ];
