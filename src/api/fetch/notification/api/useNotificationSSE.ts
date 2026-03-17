@@ -9,6 +9,8 @@ const REFRESH_AFTER_CONSECUTIVE_FAILURES = 3;
 export interface UseNotificationSSEOptions {
   /** 로그인 등 연결 조건이 true일 때만 연결/유지 */
   enabled?: boolean;
+  /** 토큰 변경 등으로 강제 재연결이 필요할 때 변경되는 키 */
+  connectionKey?: string;
   /** 연결 성공 시 (connect 이벤트) */
   onConnect?: (message: string) => void;
   /** 알림 수신 시 (notification 이벤트) */
@@ -29,6 +31,7 @@ export interface UseNotificationSSEReturn {
 
 export function useNotificationSSE({
   enabled = true,
+  connectionKey,
   onConnect,
   onNotification,
   getAccessToken,
@@ -182,7 +185,7 @@ export function useNotificationSSE({
     }
 
     return () => disconnect();
-  }, [enabled, connect, disconnect]);
+  }, [enabled, connectionKey, connect, disconnect]);
 
   return { isConnected, connect, disconnect };
 }

@@ -2,7 +2,7 @@
 
 import { PropsWithChildren, useCallback, useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import authApi from "@/api/_base/axios/authApi";
 import { NotificationEventData, useNotificationSSE } from "@/api/fetch/notification";
 import { getNotificationDisplayTitle } from "@/api/fetch/notification/utils/getNotificationDisplayTitle";
@@ -13,6 +13,7 @@ const ACCESS_TOKEN_API_PATH = "/api/auth/access-token";
 
 export const NotificationSSEProvider = ({ children }: PropsWithChildren) => {
   const router = useRouter();
+  const pathname = usePathname();
   const queryClient = useQueryClient();
   const { showSnackBar } = useSnackBar();
   const isAuthInitialized = useAuthStore((state) => state.isAuthInitialized);
@@ -44,7 +45,7 @@ export const NotificationSSEProvider = ({ children }: PropsWithChildren) => {
     }
 
     void syncAccessTokenState();
-  }, [isAuthInitialized, syncAccessTokenState]);
+  }, [isAuthInitialized, pathname, syncAccessTokenState]);
 
   const refreshAccessToken = useCallback(async () => {
     try {
