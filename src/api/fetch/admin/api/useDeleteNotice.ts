@@ -12,7 +12,7 @@ export const useDeleteNotice = (id: number) => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notice-detail", id] });
       queryClient.invalidateQueries({ queryKey: ["notices"] });
-      addToast("공지사항이 삭제되었습니다.", "success");
+      addToast("공지사항이 삭제되었습니다", "success");
       router.replace("/notice");
     },
     onError: () => {

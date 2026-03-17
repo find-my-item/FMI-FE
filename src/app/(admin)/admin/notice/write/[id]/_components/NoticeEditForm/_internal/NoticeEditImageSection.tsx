@@ -33,7 +33,7 @@ const NoticeEditImageSection = ({ helpText = DEFAULT_HELP_TEXT }: { helpText?: s
     const remainCount = MAX_IMAGES - fields.length;
 
     if (remainCount <= 0 || fileArray.length > remainCount) {
-      addToast("이미지는 최대 5장만 첨부할 수 있어요.", "warning");
+      addToast("이미지는 최대 5장만 첨부할 수 있어요", "warning");
       return;
     }
 
