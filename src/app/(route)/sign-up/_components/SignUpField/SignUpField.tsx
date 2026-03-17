@@ -48,7 +48,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
   return (
     <>
       <DetailHeader title="회원가입" />
-      <div className="flex w-full flex-1 flex-col gap-5 px-4 py-5 h-base mobile:px-4 tablet:px-[80px]">
+      <div className="flex w-full flex-1 flex-col gap-5 px-4 py-5 h-base tablet:px-[80px]">
         {SIGNUP_INPUT_CONFIG.map((item) => (
           <SignUpItem
             key={item.inputOption.name}
@@ -66,8 +66,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
         ))}
       </div>
 
-      <FooterButton aria-label="다음 버튼" onClick={onNext}>
-        {/* <FooterButton aria-label="다음 버튼" onClick={onNext} disabled={!isNextEnabled}> */}
+      <FooterButton aria-label="다음 버튼" onClick={onNext} disabled={!isNextEnabled}>
         다음
       </FooterButton>
     </>
