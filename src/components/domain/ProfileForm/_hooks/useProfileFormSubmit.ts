@@ -6,18 +6,25 @@ interface useProfileFormSubmitProps {
   preNickname: string;
   preProfileImg?: string;
   onNoChange: () => void;
+  onConfirmRequest?: (submitFn: () => void) => void;
 }
 
-const useProfileFormSubmit = ({
+export const useProfileFormSubmit = ({
   preNickname,
   preProfileImg,
   onNoChange,
+  onConfirmRequest,
 }: useProfileFormSubmitProps) => {
   const { getValues } = useFormContext();
 
   const { mutate: PatchUserMeMutate } = usePatchProfile();
 
-  // 폼 제출 함수
+  // 실제 API 호출을 수행하는 로직
+  const executeMutation = (formData: FormData) => {
+    PatchUserMeMutate(formData);
+  };
+
+  // 폼 제출 핸들러
   const handleSubmitMypageProfile = (e: FormEvent) => {
     e.preventDefault();
 
@@ -27,6 +34,7 @@ const useProfileFormSubmit = ({
     const ChangeImg = preProfileImg !== isProfileImg;
     const ChangeNickname = preNickname !== isNickname;
 
+    // 변경사항이 없는 경우
     if (!ChangeImg && !ChangeNickname) {
       onNoChange?.();
       return;
@@ -34,24 +42,29 @@ const useProfileFormSubmit = ({
 
     const formData = new FormData();
 
-    if (ChangeNickname) {
-      formData.append("nickname", isNickname);
+    const requestData = {
+      nickname: ChangeNickname ? isNickname : undefined,
+      deleteProfileImage: ChangeImg && !isProfileImg ? true : null,
+    };
+
+    formData.append(
+      "request",
+      new Blob([JSON.stringify(requestData)], { type: "application/json" })
+    );
+
+    if (ChangeImg && isProfileImg) {
+      formData.append("profileImage", isProfileImg);
     }
 
-    if (ChangeImg) {
-      if (isProfileImg) {
-        formData.append("profileImage", isProfileImg);
-      } else {
-        formData.append("deleteProfileImage", "true");
-      }
+    // 확인 모달이 필요한 경우 확인 후 실행하도록 콜백 전달
+    if (onConfirmRequest) {
+      onConfirmRequest(() => executeMutation(formData));
+    } else {
+      executeMutation(formData);
     }
-
-    PatchUserMeMutate(formData);
   };
 
   return {
     handleSubmitMypageProfile,
   };
 };
-
-export default useProfileFormSubmit;

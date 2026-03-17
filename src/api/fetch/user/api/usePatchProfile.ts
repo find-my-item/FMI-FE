@@ -18,7 +18,6 @@ export const usePatchProfile = () => {
     "patch",
     {
       onSuccess: (updateProfile) => {
-        router.push("/mypage");
         addToast("프로필 이미지 변경 성공", "success");
         queryClient.setQueryData(["users-me"], updateProfile);
       },
