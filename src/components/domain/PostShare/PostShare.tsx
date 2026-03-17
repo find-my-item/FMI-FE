@@ -2,40 +2,28 @@
 
 import Image from "next/image";
 import { executeShare } from "@/utils";
-import { useGetMetaData } from "@/api/fetch/post";
 import { Button } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
 import { SHARE } from "./SHARE";
 import { ShareId } from "@/types";
 import { useToast } from "@/context/ToastContext";
+import { MetaDataItemWithLink } from "@/types/MetaDataType";
 
 interface PostShareProps {
   isOpen: boolean;
   onClose: () => void;
-  postId: number;
+  metaData: MetaDataItemWithLink;
+  objectType: "feed" | "location";
 }
 
-const PostShare = ({ isOpen, onClose, postId }: PostShareProps) => {
-  const { data } = useGetMetaData({ postId });
+const PostShare = ({ isOpen, onClose, metaData, objectType }: PostShareProps) => {
   const { addToast } = useToast();
-
-  const metaData = {
-    title: data?.result?.title || "찾아줘 게시글 공유",
-    summary: data?.result?.summary || "게시글을 확인해보세요.",
-    thumbnailUrl:
-      data?.result?.thumbnailUrl ||
-      "https://fmi-project-s3-bucket.s3.ap-northeast-2.amazonaws.com/9e619169-f_default-share.png",
-    address: data?.result?.address || "위치 정보 없음",
-    likeCount: data?.result?.likeCount || 0,
-    commentCount: data?.result?.commentCount || 0,
-    viewCount: data?.result?.viewCount || 0,
-    link: window.location.href,
-  };
 
   const handleOption = (id: ShareId) =>
     executeShare({
       id,
       metaData,
+      objectType,
       addToast,
     });
 

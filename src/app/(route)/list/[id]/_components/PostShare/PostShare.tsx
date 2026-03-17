@@ -36,6 +36,7 @@ const PostShare = ({ isOpen, onClose, postId }: PostShareProps) => {
     executeShare({
       id,
       metaData,
+      objectType: "location",
       addToast,
     });
 

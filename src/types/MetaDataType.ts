@@ -1,3 +1,4 @@
+import { GetNoticeMetaDataResponse } from "@/api/fetch/notice";
 import { PostMetaDataItem } from "@/api/fetch/post";
 
 /**
@@ -17,8 +18,23 @@ import { PostMetaDataItem } from "@/api/fetch/post";
  * - copy: 복사
  */
 
+// TODO(형준): 삭제될 타입
 export type PostMetaDataItemWithLink = PostMetaDataItem & {
   link: string;
 };
 
 export type ShareId = "kakao" | "native" | "copy";
+
+export interface MetaDataItem {
+  title: string;
+  summary: string;
+  thumbnailUrl: string;
+  address?: string;
+  likeCount: number;
+  commentCount: number;
+  viewCount: number;
+}
+
+export type MetaDataItemWithLink = MetaDataItem & {
+  link: string;
+};
