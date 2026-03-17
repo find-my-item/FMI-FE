@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { ReactNode } from "react";
 
 export const metadata: Metadata = {
-  title: "비밀번호 찾기",
-  description: "찾아줘에서 계정 이메일 인증을 통해 비밀번호를 변경해 보세요.",
+  title: "내 신고 내역",
 };
 
 export default function Layout({ children }: { children: ReactNode }) {
