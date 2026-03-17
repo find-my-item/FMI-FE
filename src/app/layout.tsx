@@ -61,16 +61,18 @@ export default function RootLayout({
           </Script>
         )}
         <Providers>
-          <SnackBarProvider>
-            <ToastProvider>
-              <MSWProvider />
-              <AuthBootstrap />
-              <NotificationSSEProvider>
-                <main className="w-full flex-1">{children}</main>
-                <Footer />
-              </NotificationSSEProvider>
-            </ToastProvider>
-          </SnackBarProvider>
+          <PWAProvider>
+            <SnackBarProvider>
+              <ToastProvider>
+                <MSWProvider />
+                <AuthBootstrap />
+                <NotificationSSEProvider>
+                  <main className="w-full flex-1">{children}</main>
+                  <Footer />
+                </NotificationSSEProvider>
+              </ToastProvider>
+            </SnackBarProvider>
+          </PWAProvider>
           <Script
             src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.7/kakao.min.js"
             integrity="sha384-tJkjbtDbvoxO+diRuDtwRO9JXR7pjWnfjfRn5ePUpl7e7RJCxKCwwnfqUAdXh53p"
@@ -83,28 +85,6 @@ export default function RootLayout({
               <SpeedInsights />
             </>
           )}
-          <PWAProvider>
-            <SnackBarProvider>
-              <ToastProvider>
-                <MSWProvider />
-                <AuthBootstrap />
-                <main className="w-full flex-1">{children}</main>
-                <Footer />
-              </ToastProvider>
-            </SnackBarProvider>
-            <Script
-              src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.7/kakao.min.js"
-              integrity="sha384-tJkjbtDbvoxO+diRuDtwRO9JXR7pjWnfjfRn5ePUpl7e7RJCxKCwwnfqUAdXh53p"
-              crossOrigin="anonymous"
-              strategy="afterInteractive"
-            />
-            {isProd && (
-              <>
-                <Analytics />
-                <SpeedInsights />
-              </>
-            )}
-          </PWAProvider>
         </Providers>
       </body>
     </html>
