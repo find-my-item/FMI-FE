@@ -17,8 +17,6 @@ const useNotificationList = () => {
     ["notificationList", category ?? "all"],
     url,
     {
-      staleTime: 1000 * 60 * 5, // 5분
-      gcTime: 1000 * 60 * 10, // 10분
       getNextPageParam: (lastPage) =>
         lastPage.result.hasNext ? lastPage.result.nextCursor : undefined,
       select: (data: InfiniteData<NotificationListResponse>) =>
