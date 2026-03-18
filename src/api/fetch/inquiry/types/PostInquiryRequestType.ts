@@ -1,13 +1,13 @@
-import { InquiryType } from "@/types";
+import { InquiryTargetType } from "@/types";
 
 interface PostInquiryData {
   title: string;
   content: string;
-  inquiryType: InquiryType;
+  inquiryType: InquiryTargetType;
   email: string;
 }
 
 export interface PostInquiryRequest {
-  request: PostInquiryData;
+  inquiry: PostInquiryData;
   images?: File[];
 }

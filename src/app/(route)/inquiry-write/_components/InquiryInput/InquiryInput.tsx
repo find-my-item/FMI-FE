@@ -55,7 +55,7 @@ const InquiryInput = ({ name, className, disabled, ...props }: InquiryInputProps
   const hasInputValue = emailValue.length > 0;
   const shouldShowEmailAutoComplete =
     isEmailField && emailValue.length > 0 && !emailValue.includes("@");
-  const shouldShowDeleteButton = hasInputValue || disabled === false;
+  const shouldShowDeleteButton = hasInputValue && !disabled;
 
   return (
     <div>
