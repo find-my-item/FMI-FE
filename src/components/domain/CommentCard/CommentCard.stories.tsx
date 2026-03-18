@@ -39,7 +39,7 @@ const mockCommentCard: CommentItem = {
 
 export const Default: Story = {
   args: {
-    data: mockCommentCard, // 👈 CommentItem 타입 자체가 아닌 데이터를 넣어야 합니다.
+    data: mockCommentCard,
   },
 };
 
