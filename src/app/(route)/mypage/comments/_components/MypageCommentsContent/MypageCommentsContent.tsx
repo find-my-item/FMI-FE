@@ -45,7 +45,7 @@ const MypageCommentsContent = () => {
             {commentsData &&
               commentsData.map((item) => <CommentCard key={item.commentId} data={item} />)}
           </ul>
-          <div ref={ref} className="h-10" />
+          {hasNextPage && <div ref={ref} className="h-10" />}
         </>
       )}
     </section>

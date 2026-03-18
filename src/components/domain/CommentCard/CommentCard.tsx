@@ -46,9 +46,9 @@ const CommentCard = ({ data }: CommentCardProps) => {
         <div className="flex min-w-0 flex-1 flex-col">
           <p className="w-full truncate">{content}</p>
 
-          <span className="mt-1 text-body2-regular text-layout-body-default">
+          <time dateTime={createdAt} className="mt-1 text-body2-regular text-layout-body-default">
             {formatDate(createdAt)}
-          </span>
+          </time>
 
           <span className="mt-2 flex gap-1 text-body2-regular text-neutral-strong-placeholder">
             <Icon
@@ -61,7 +61,7 @@ const CommentCard = ({ data }: CommentCardProps) => {
           </span>
         </div>
 
-        {imageList && <ListItemImage src={imageUrl} alt="댓글 이미지" size={90} />}
+        {imageUrl && <ListItemImage src={imageUrl} alt="댓글 이미지" size={90} />}
       </Link>
     </li>
   );
