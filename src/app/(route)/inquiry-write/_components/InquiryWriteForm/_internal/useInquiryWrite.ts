@@ -15,8 +15,6 @@ const useInquiryWrite = () => {
     email,
     images,
   }: InquiryWriteFormValues) => {
-    if (!inquiryType) return;
-
     const inquiry = { title, content, inquiryType, email };
     const formData = new FormData();
     formData.append("inquiry", new Blob([JSON.stringify(inquiry)], { type: "application/json" }));
