@@ -60,6 +60,7 @@ export const usePublicClientDetail = (id: string) => {
       place,
       office,
       tel,
+      imageSrc,
     },
   };
 };
