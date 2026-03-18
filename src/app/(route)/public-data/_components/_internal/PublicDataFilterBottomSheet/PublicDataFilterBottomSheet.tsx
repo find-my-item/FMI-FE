@@ -3,9 +3,9 @@
 import { Dispatch, SetStateAction } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/common";
+import { PopupLayout } from "@/components/domain";
 import { cn } from "@/utils";
 import { FilterTab } from "@/components/domain/FilterSectionBottomSheet/_types/types";
-import PopupLayout from "@/components/domain/PopupLayout/PopupLayout";
 import { PUBLIC_CATEGORY_CODES, PUBLIC_REGION_CODES } from "@/constants";
 import { PublicFilterStateType } from "../../../_types/PublicFilterStateType";
 
@@ -52,7 +52,11 @@ const PublicDataFilterBottomSheet = ({
   ];
 
   return (
-    <PopupLayout isOpen={isOpen} onClose={() => setIsOpen(false)} className="min-h-[530px] py-10">
+    <PopupLayout
+      isOpen={isOpen}
+      onClose={() => setIsOpen(false)}
+      className="flex min-h-[530px] flex-col justify-between gap-5 py-10"
+    >
       <div className="w-full gap-6 flex-col-center">
         <h2 className="text-h2-medium text-layout-header-default">필터</h2>
 
