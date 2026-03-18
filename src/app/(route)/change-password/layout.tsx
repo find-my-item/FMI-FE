@@ -2,11 +2,8 @@ import { ReactNode } from "react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: {
-    absolute: "공지사항",
-    template: "%s | 찾아줘! 공지사항",
-  },
-  description: "찾아줘에 등록된 공지사항을 확인해 보세요.",
+  title: "비밀번호 변경",
+  description: "찾아줘 계정의 비밀번호를 안전하게 변경해 보세요.",
 };
 
 const Layout = ({ children }: { children: ReactNode }) => {

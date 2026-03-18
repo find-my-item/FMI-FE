@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense } from "react";
-import { Icon } from "@/components/common";
+import Image from "next/image";
 import { DetailHeader } from "@/components/layout";
 import { HeaderSearch } from "@/components/layout/DetailHeader/DetailHeaderParts";
 import { PublicDataView } from "./_components";
@@ -9,7 +9,17 @@ import { PublicDataView } from "./_components";
 const page = () => {
   return (
     <>
-      <DetailHeader title={<Icon name="DetailPolice24" size={154} />}>
+      <DetailHeader
+        title={
+          <Image
+            src="/public-data/public-detail-police24.svg"
+            alt=""
+            width={130}
+            height={26}
+            priority
+          />
+        }
+      >
         <HeaderSearch />
       </DetailHeader>
 
