@@ -25,14 +25,20 @@ export const usePublicDataListQuery = () => {
         }
       }
 
-      if (region) params.append("N_FD_LCT_CD", region);
+      const isLost = type === "lost";
+      const apiEndpoint = isLost ? "/api/public/lost" : "/api/public/found";
+
+      if (region) {
+        params.append(isLost ? "LST_LCT_CD" : "N_FD_LCT_CD", region);
+      }
+
       params.append("pageNo", pageNo);
       params.append("numOfRows", "10");
 
-      const response = await fetch(`/api/public?${params.toString()}`);
+      const response = await fetch(`${apiEndpoint}?${params.toString()}`);
 
       if (!response.ok) {
-        throw new Error("Failed to fetch public data");
+        throw new Error("데이터를 불러오지 못했어요");
       }
 
       return response.json();

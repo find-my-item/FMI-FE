@@ -109,6 +109,5 @@ export { default as AlertReportResult } from "@/assets/alert-report-result.svg";
 export { default as AccordionArrowRight } from "@/assets/accordion-arrow-right.svg";
 export { default as LogoCharacter } from "@/assets/logo-character.svg";
 export { default as DetailPolice24 } from "@/assets/detail-police24.svg";
-export { default as PublicDetailPolice24 } from "@/assets/public-detail-police24.svg";
 export { default as MessageAlertCircle } from "@/assets/message-alert-circle.svg";
 export { default as Phone } from "@/assets/phone.svg";
