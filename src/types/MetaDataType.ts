@@ -13,6 +13,7 @@ import { PostMetaDataItem } from "@/api/fetch/post";
  * - PostMetaDataItem: 게시글 메타데이터 아이템
  * - link: 메타데이터 링크
  * - MetaDataItem: 공지사항/게시글 호환 타입
+ * - objectType: 카카오 템플릿 타입
  *
  * @description ShareId
  * - kakao: 카카오
@@ -39,3 +40,5 @@ export interface MetaDataItem {
 export type MetaDataItemWithLink = MetaDataItem & {
   link: string;
 };
+
+export type ObjectType = "feed" | "location";

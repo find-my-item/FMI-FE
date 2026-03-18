@@ -1,12 +1,12 @@
 import { ShareId } from "@/types";
 import { shareWithCopyUrl, shareWithKakao, shareWithNative } from "./_internal";
 import { ToastType } from "@/types/ToastTypes";
-import { MetaDataItemWithLink } from "@/types/MetaDataType";
+import { MetaDataItemWithLink, ObjectType } from "@/types/MetaDataType";
 
 interface ExecuteShareProps {
   id: ShareId;
   metaData: MetaDataItemWithLink;
-  objectType: "feed" | "location";
+  objectType: ObjectType;
   addToast: (message: string, type: ToastType) => void;
 }
 

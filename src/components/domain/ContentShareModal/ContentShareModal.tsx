@@ -7,13 +7,13 @@ import { PopupLayout } from "@/components/domain";
 import { SHARE } from "./SHARE";
 import { ShareId } from "@/types";
 import { useToast } from "@/context/ToastContext";
-import { MetaDataItemWithLink } from "@/types/MetaDataType";
+import { MetaDataItemWithLink, ObjectType } from "@/types/MetaDataType";
 
 interface ContentShareModalProps {
   isOpen: boolean;
   onClose: () => void;
   metaData: MetaDataItemWithLink;
-  objectType: "feed" | "location";
+  objectType: ObjectType;
 }
 
 const ContentShareModal = ({ isOpen, onClose, metaData, objectType }: ContentShareModalProps) => {

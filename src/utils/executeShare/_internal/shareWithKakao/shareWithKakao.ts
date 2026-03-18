@@ -1,6 +1,6 @@
 "use client";
 
-import { MetaDataItemWithLink } from "@/types/MetaDataType";
+import { MetaDataItemWithLink, ObjectType } from "@/types/MetaDataType";
 
 const getKakaoKey = () => {
   const key = process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY;
@@ -22,7 +22,7 @@ const initKakao = () => {
   return true;
 };
 
-export const shareWithKakao = (data: MetaDataItemWithLink, objectType: "feed" | "location") => {
+export const shareWithKakao = (data: MetaDataItemWithLink, objectType: ObjectType) => {
   const Kakao = (window as any).Kakao;
   if (!Kakao) return;
 
