@@ -14,14 +14,7 @@ import Link from "next/link";
  * @example
  * ```tsx
  * <CommentCard
- *   data={
- *     commentId: 1,
- *     mentionUser: "suhyeon",
- *     comment: "댓글 내용이 들어갑니다.",
- *     createdAt: "2025-12-26T10:22:58",
- *     like: 4,
- *     thumbnailUrl: "https://picsum.photos/400/300?random=2",
- *   }
+ *   data={CommentItem}
  * >
  * ```
  */
@@ -55,7 +48,7 @@ const CommentCard = ({ data }: CommentCardProps) => {
     });
   };
 
-  const firstImage = imageList[0];
+  const firstImage = imageList?.[0];
   const imageUrl = firstImage?.imageUrl;
 
   return (
