@@ -6,7 +6,7 @@ import type { NotificationEventData } from "../types/notificationSSETypes";
 const RECONNECT_DELAY_MS = 5000;
 const REFRESH_AFTER_CONSECUTIVE_FAILURES = 3;
 
-export interface UseNotificationSSEOptions {
+interface UseNotificationSSEOptions {
   /** 로그인 등 연결 조건이 true일 때만 연결/유지 */
   enabled?: boolean;
   /** 토큰 변경 등으로 강제 재연결이 필요할 때 변경되는 키 */
@@ -23,13 +23,13 @@ export interface UseNotificationSSEOptions {
   reconnectDelayMs?: number;
 }
 
-export interface UseNotificationSSEReturn {
+interface UseNotificationSSEReturn {
   isConnected: boolean;
   connect: () => Promise<void>;
   disconnect: () => void;
 }
 
-export function useNotificationSSE({
+const useNotificationSSE = ({
   enabled = true,
   connectionKey,
   onConnect,
@@ -37,7 +37,7 @@ export function useNotificationSSE({
   getAccessToken,
   refreshAccessToken,
   reconnectDelayMs = RECONNECT_DELAY_MS,
-}: UseNotificationSSEOptions): UseNotificationSSEReturn {
+}: UseNotificationSSEOptions): UseNotificationSSEReturn => {
   const [isConnected, setIsConnected] = useState(false);
   const eventSourceRef = useRef<EventSource | null>(null);
   const reconnectTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -188,4 +188,6 @@ export function useNotificationSSE({
   }, [enabled, connectionKey, connect, disconnect]);
 
   return { isConnected, connect, disconnect };
-}
+};
+
+export default useNotificationSSE;
