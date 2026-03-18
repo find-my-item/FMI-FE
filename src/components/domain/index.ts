@@ -28,3 +28,4 @@ export { default as ProfileForm } from "./ProfileForm/_internal/ProfileForm/Prof
 export { default as ProfileEditSection } from "./ProfileForm/ProfileEditSection";
 export { default as BlockUserModal } from "./PostReportBlockActions/UserBlockModal/UserBlockModal";
 export { default as AddToHomeScreenPWA } from "./AddToHomeScreenPWA/AddToHomeScreenPWA";
+export { default as ContentShareModal } from "./ContentShareModal/ContentShareModal";
