@@ -12,8 +12,8 @@ export interface NoticeDetail {
   likeCount: number;
   commentCount: number;
   authorName: string;
-  thumbnailUrl: string | null;
-  images: string[] | null;
+  thumbnailUrl: string;
+  images: string[];
   isNew: boolean;
   isHot: boolean;
   createdAt: string;

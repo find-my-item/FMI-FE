@@ -56,7 +56,7 @@ export const useGetUsersMePosts = ({
       keyword,
       size,
     ],
-    `/users/me/posts?${queryParams.toString()}`,
+    `/users/me/posts?${queryParams}`,
     {
       placeholderData: keepPreviousData,
       getNextPageParam: (lastPage) => lastPage.result.nextCursor ?? undefined,

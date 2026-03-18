@@ -1,3 +1,7 @@
+"use client";
+
+import { useParams } from "next/navigation";
+import { LoadingState } from "@/components/state";
 import { DetailHeader } from "@/components/layout";
 import { HeaderShare } from "@/components/layout/DetailHeader/DetailHeaderParts";
 import {
@@ -6,29 +10,46 @@ import {
   PublicLostItemInfo,
   PublicStorageInfo,
 } from "../_internal";
+import { usePublicDataDetailQuery } from "../../_hooks/usePublicDataDetailQuery/usePublicDataDetailQuery";
 
-const headerData = {
-  id: "1",
-  imageResponseList: [
-    {
-      id: 1,
-      imgUrl: "/test_list.JPG",
-      imageType: "THUMBNAIL" as const,
+const NO_IMAGE_URL = "https://minwon24.police.go.kr/images/sub/img04_no_img.gif";
+
+const PublicClientDetail = ({ id }: { id: string }) => {
+  const { type } = useParams();
+  const isLost = type === "lost";
+
+  const { data, isLoading, isError } = usePublicDataDetailQuery(id);
+
+  if (isLoading) return <LoadingState />;
+
+  if (isError || !data) {
+    return <LoadingState />;
+  }
+
+  const imageSrc =
+    data.fdFilePathImg && data.fdFilePathImg !== NO_IMAGE_URL ? data.fdFilePathImg : null;
+
+  const headerData = {
+    id: data.atcId,
+    imageResponseList: imageSrc
+      ? [
+          {
+            id: 1,
+            imgUrl: imageSrc,
+            imageType: "THUMBNAIL" as const,
+          },
+        ]
+      : [],
+    userData: {
+      userId: 0,
+      nickName: data.depPlace,
+      profileImage: "",
+      postCount: 0,
+      chattingCount: 0,
     },
-  ],
-  userData: {
-    userId: 1,
-    nickName: "경찰청",
-    profileImage: "",
-    postCount: 0,
-    chattingCount: 0,
-  },
-  location: "불암지구대 유실물센터",
-  phoneNumber: "02-3469-0112",
-};
-
-const PublicClientDetail = ({ id }: { id: number }) => {
-  console.log(id);
+    location: data.depPlace,
+    phoneNumber: data.tel,
+  };
 
   return (
     <>
@@ -40,9 +61,15 @@ const PublicClientDetail = ({ id }: { id: number }) => {
         <PublicDetailHeader headerData={headerData} />
 
         <div className="space-y-8 px-5 py-[30px]">
-          <PublicDetailInfo />
-          <PublicLostItemInfo />
-          <PublicStorageInfo />
+          <PublicDetailInfo category={data.prdtClNm} title={data.fdPrdtNm} content={data.uniq} />
+          <PublicLostItemInfo date={data.fdYmd} depositor={data.uniq} isLost={isLost} />
+          <PublicStorageInfo
+            office={data.depPlace}
+            department={data.depPlace}
+            tel={data.tel}
+            place={data.fdPlace}
+            postId={id}
+          />
         </div>
       </article>
     </>

@@ -38,7 +38,7 @@ export const useGetUserMeFavorites = ({
   return useAppInfiniteQuery<MypagePostsResponseType, ApiBaseResponseType<null>, PostItem[]>(
     "auth",
     ["/users/me/favorites", address, postType, category, sortType, keyword, size],
-    `/users/me/favorites?${queryParams.toString()}`,
+    `/users/me/favorites?${queryParams}`,
     {
       placeholderData: keepPreviousData,
       getNextPageParam: (lastPage) => lastPage.result.nextCursor ?? undefined,

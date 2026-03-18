@@ -1,18 +1,19 @@
 import { ShareId } from "@/types";
 import { shareWithCopyUrl, shareWithKakao, shareWithNative } from "./_internal";
-import { PostMetaDataItemWithLink } from "@/types";
 import { ToastType } from "@/types/ToastTypes";
+import { MetaDataItemWithLink, ObjectType } from "@/types/MetaDataType";
 
 interface ExecuteShareProps {
   id: ShareId;
-  metaData: PostMetaDataItemWithLink;
+  metaData: MetaDataItemWithLink;
+  objectType: ObjectType;
   addToast: (message: string, type: ToastType) => void;
 }
 
-export const executeShare = ({ id, metaData, addToast }: ExecuteShareProps) => {
+export const executeShare = ({ id, metaData, objectType, addToast }: ExecuteShareProps) => {
   switch (id) {
     case "kakao":
-      shareWithKakao(metaData);
+      shareWithKakao(metaData, objectType);
       break;
     case "native":
       shareWithNative({
