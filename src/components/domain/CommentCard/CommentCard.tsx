@@ -1,5 +1,4 @@
 import { CommentItem } from "@/api/fetch/user";
-import { useToggleCommentLike } from "@/app/(route)/list/[id]/_hooks/usePostCommentLike/usePostCommentLike";
 import { Icon, ListItemImage } from "@/components/common";
 import { cn, formatDate } from "@/utils";
 import Link from "next/link";
@@ -24,8 +23,6 @@ interface CommentCardProps {
 }
 
 const CommentCard = ({ data }: CommentCardProps) => {
-  const { handleToggleFavorite, isPending } = useToggleCommentLike();
-
   const {
     commentId,
     postId,
@@ -36,17 +33,6 @@ const CommentCard = ({ data }: CommentCardProps) => {
     createdAt,
     like,
   } = data;
-
-  const onLikeClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    handleToggleFavorite({
-      isLike: like,
-      commentId,
-      queryKey: ["/users/me/comments"],
-    });
-  };
 
   const firstImage = imageList?.[0];
   const imageUrl = firstImage?.imageUrl;
@@ -65,17 +51,12 @@ const CommentCard = ({ data }: CommentCardProps) => {
           </span>
 
           <span className="mt-2 flex gap-1 text-body2-regular text-neutral-strong-placeholder">
-            <button
-              aria-label={like ? "좋아요 취소" : "좋아요"}
-              onClick={onLikeClick}
-              disabled={isPending}
-            >
-              <Icon
-                name="Heart"
-                size={16}
-                className={cn(like ? "text-system-favorite" : "text-border-divider-default")}
-              />
-            </button>
+            <Icon
+              name="Heart"
+              aria-label="좋아요"
+              size={16}
+              className={cn(like ? "text-system-favorite" : "text-border-divider-default")}
+            />
             {likeCount}
           </span>
         </div>
