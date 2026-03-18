@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { DetailHeader } from "@/components/layout";
-import PostShare from "../PostShare/PostShare";
 import PostActionMenu from "../PostActionMenu/PostActionMenu";
 import {
   HeaderMenu,
@@ -12,6 +11,8 @@ import {
 import { PostActionData } from "../../_types/PostActionType";
 import { useToggleFavorite } from "../../_hooks/useToggleFavorite";
 import { useClickOutside } from "@/hooks";
+import { ContentShareModal } from "@/components/domain";
+import { useGetMetaData } from "@/api/fetch/post";
 
 interface PostDetailTopHeaderProps {
   postId: number;
@@ -24,6 +25,21 @@ const PostDetailTopHeader = ({ postId, postData }: PostDetailTopHeaderProps) => 
 
   const { handleToggleFavorite, isPending } = useToggleFavorite({ postId });
   const ref = useClickOutside(() => setOpenOptionModal(false));
+
+  const { data: postMetaData } = useGetMetaData({ postId });
+  const { title, summary, thumbnailUrl, address, likeCount, commentCount, viewCount } =
+    postMetaData?.result || {};
+
+  const metaData = {
+    title: title || "찾아줘 게시글 공유",
+    summary: summary || "게시글을 확인해보세요",
+    address: address || "위치 정보 없음",
+    thumbnailUrl,
+    likeCount: likeCount || 0,
+    commentCount: commentCount || 0,
+    viewCount: viewCount || 0,
+    link: window.location.href,
+  };
 
   return (
     <>
@@ -48,7 +64,12 @@ const PostDetailTopHeader = ({ postId, postData }: PostDetailTopHeaderProps) => 
         </DetailHeader>
       </div>
 
-      <PostShare isOpen={openShareModal} onClose={() => setOpenShareModal(false)} postId={postId} />
+      <ContentShareModal
+        isOpen={openShareModal}
+        onClose={() => setOpenShareModal(false)}
+        metaData={metaData}
+        objectType="location"
+      />
     </>
   );
 };
