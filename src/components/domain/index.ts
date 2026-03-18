@@ -24,6 +24,8 @@ export { default as WriteActionSection } from "./WriteActionSection/WriteActionS
 export { default as CategoryPopup } from "./CategoryPopup/CategoryPopup";
 export { default as GuestLoginModal } from "./GuestLoginModal/GuestLoginModal";
 export { default as Terms } from "./Terms/Terms";
-export { default as ProfileForm } from "./ProfileForm/ProfileForm";
+export { default as ProfileForm } from "./ProfileForm/_internal/ProfileForm/ProfileForm";
+export { default as ProfileEditSection } from "./ProfileForm/ProfileEditSection";
 export { default as BlockUserModal } from "./PostReportBlockActions/UserBlockModal/UserBlockModal";
 export { default as AddToHomeScreenPWA } from "./AddToHomeScreenPWA/AddToHomeScreenPWA";
+export { default as ContentShareModal } from "./ContentShareModal/ContentShareModal";
