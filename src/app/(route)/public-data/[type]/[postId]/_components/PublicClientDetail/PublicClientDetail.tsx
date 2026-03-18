@@ -1,48 +1,49 @@
-import { DetailHeader } from "@/components/layout";
-import { HeaderShare } from "@/components/layout/DetailHeader/DetailHeaderParts";
+"use client";
+
+import { LoadingState } from "@/components/state";
 import {
+  PublicDataDetailHeader,
   PublicDetailHeader,
   PublicDetailInfo,
   PublicLostItemInfo,
   PublicStorageInfo,
 } from "../_internal";
+import { usePublicClientDetail } from "../../_hooks/usePublicClientDetail/usePublicClientDetail";
 
-const headerData = {
-  id: "1",
-  imageResponseList: [
-    {
-      id: 1,
-      imgUrl: "/test_list.JPG",
-      imageType: "THUMBNAIL" as const,
-    },
-  ],
-  userData: {
-    userId: 1,
-    nickName: "경찰청",
-    profileImage: "",
-    postCount: 0,
-    chattingCount: 0,
-  },
-  location: "불암지구대 유실물센터",
-  phoneNumber: "02-3469-0112",
-};
+const PublicClientDetail = ({ id }: { id: string }) => {
+  const { isLoading, isError, detailData } = usePublicClientDetail(id);
 
-const PublicClientDetail = ({ id }: { id: number }) => {
-  console.log(id);
+  if (isLoading || isError || !detailData) return <LoadingState />;
+
+  const { isLost, headerData, itemData, title, content, place, office, tel, imageSrc } = detailData;
+
+  const metaData = {
+    title: title || "찾아줘 경찰청 데이터 공유",
+    summary: content || "경찰청 데이터를 확인해보세요",
+    thumbnailUrl: imageSrc,
+    likeCount: 0,
+    commentCount: 0,
+    viewCount: 0,
+    link: window.location.href,
+  };
 
   return (
     <>
-      <DetailHeader>
-        <HeaderShare />
-      </DetailHeader>
+      <PublicDataDetailHeader metaData={metaData} />
 
       <article className="h-base">
         <PublicDetailHeader headerData={headerData} />
 
         <div className="space-y-8 px-5 py-[30px]">
-          <PublicDetailInfo />
-          <PublicLostItemInfo />
-          <PublicStorageInfo />
+          <PublicDetailInfo category={itemData.prdtClNm} title={title} content={content} />
+          <PublicLostItemInfo date={itemData.fdYmd} isLost={isLost} />
+          <PublicStorageInfo
+            office={office}
+            department={office}
+            tel={tel}
+            place={place}
+            isLost={isLost}
+          />
         </div>
       </article>
     </>

@@ -15,12 +15,12 @@ type HeaderData = {
   phoneNumber: string;
 };
 
-interface PostDetailHeaderType {
+interface PostDetailHeaderProps {
   headerData: HeaderData;
 }
 
-const PublicDetailHeader = ({ headerData }: PostDetailHeaderType) => {
-  const { id, imageResponseList, userData, location, phoneNumber } = headerData;
+const PublicDetailHeader = ({ headerData }: PostDetailHeaderProps) => {
+  const { imageResponseList, userData, location, phoneNumber } = headerData;
 
   const [isNumberCheck, setIsNumberCheck] = useState(false);
 
@@ -51,19 +51,23 @@ const PublicDetailHeader = ({ headerData }: PostDetailHeaderType) => {
           </div>
         </div>
 
-        <Button
-          className={cn("min-h-11 w-full py-[10px]", "tablet:flex-1")}
-          onClick={() => setIsNumberCheck(true)}
-        >
-          연락처 확인하기
-        </Button>
+        {phoneNumber && (
+          <Button
+            className={cn("min-h-11 w-full py-[10px]", "tablet:flex-1")}
+            onClick={() => setIsNumberCheck(true)}
+          >
+            연락처 확인하기
+          </Button>
+        )}
       </section>
 
-      <PublicCallBottomSheet
-        callBottomSheetData={{ location, phoneNumber }}
-        isOpen={isNumberCheck}
-        onClose={() => setIsNumberCheck(false)}
-      />
+      {phoneNumber && (
+        <PublicCallBottomSheet
+          callBottomSheetData={{ location, phoneNumber }}
+          isOpen={isNumberCheck}
+          onClose={() => setIsNumberCheck(false)}
+        />
+      )}
     </>
   );
 };
