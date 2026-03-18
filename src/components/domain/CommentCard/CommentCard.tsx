@@ -1,6 +1,7 @@
+import { CommentItem } from "@/api/fetch/user";
 import { Icon, ListItemImage } from "@/components/common";
-import { CommentCardType } from "@/types";
 import { formatDate } from "@/utils";
+import Link from "next/link";
 
 /**
  * @author suhyeon
@@ -25,31 +26,44 @@ import { formatDate } from "@/utils";
  */
 
 interface CommentCardProps {
-  data: CommentCardType;
+  data: CommentItem;
 }
 
 const CommentCard = ({ data }: CommentCardProps) => {
-  const { createdAt, mentionUser, thumbnailUrl, comment, like } = data;
+  const {
+    commentId,
+    postId,
+    postTitle,
+    content,
+    likeCount,
+    imageList = [],
+    createdAt,
+    like,
+  } = data;
+  const firstImage = imageList[0];
+  const imageUrl = firstImage?.imageUrl;
 
   return (
-    <li className="flex w-full justify-between border-b border-divider-default px-5 py-[30px]">
-      <div className="flex min-w-0 flex-1 flex-col">
-        <p className="w-full truncate">
-          {mentionUser && <span className="mr-1 text-brand-normal-default"> @{mentionUser}</span>}
-          {comment}
-        </p>
+    <li>
+      <Link
+        href={`/list/${postId}`}
+        className="flex w-full justify-between border-b border-divider-default px-5 py-[30px]"
+      >
+        <div className="flex min-w-0 flex-1 flex-col">
+          <p className="w-full truncate">{content}</p>
 
-        <span className="mt-1 text-body2-regular text-layout-body-default">
-          {formatDate(createdAt)}
-        </span>
+          <span className="mt-1 text-body2-regular text-layout-body-default">
+            {formatDate(createdAt)}
+          </span>
 
-        <span className="mt-2 flex gap-1 text-body2-regular text-neutral-strong-placeholder">
-          <Icon name="Heart" size={16} />
-          {like}
-        </span>
-      </div>
+          <span className="mt-2 flex gap-1 text-body2-regular text-neutral-strong-placeholder">
+            <Icon name="Heart" size={16} />
+            {likeCount}
+          </span>
+        </div>
 
-      {thumbnailUrl && <ListItemImage src={thumbnailUrl} alt="댓글 이미지" size={90} />}
+        {imageList && <ListItemImage src={imageUrl} alt="댓글 이미지" size={90} />}
+      </Link>
     </li>
   );
 };
