@@ -1,13 +1,13 @@
 import { PublicClientDetail } from "./_components";
 
 interface PublicDataDetailProps {
-  params: Promise<{ id: string }>;
+  params: Promise<{ postId: string }>;
 }
 
 const page = async ({ params }: PublicDataDetailProps) => {
-  const { id } = await params;
+  const { postId } = await params;
 
-  return <PublicClientDetail id={Number(id)} />;
+  return <PublicClientDetail id={postId} />;
 };
 
 export default page;

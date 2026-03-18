@@ -10,6 +10,7 @@ import Script from "next/script";
 import { Metadata } from "next";
 import MSWProvider from "@/providers/MSWProvider";
 import AuthBootstrap from "./authBootStrap";
+import { NotificationSSEProvider } from "@/providers/NotificationSSEProvider";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { PWAProvider } from "@/providers/PWAProvider";
 
@@ -87,23 +88,25 @@ export default function RootLayout({
               <ToastProvider>
                 <MSWProvider />
                 <AuthBootstrap />
-                <main className="w-full flex-1">{children}</main>
-                <Footer />
+                <NotificationSSEProvider>
+                  <main className="w-full flex-1">{children}</main>
+                  <Footer />
+                </NotificationSSEProvider>
               </ToastProvider>
             </SnackBarProvider>
-            <Script
-              src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.7/kakao.min.js"
-              integrity="sha384-tJkjbtDbvoxO+diRuDtwRO9JXR7pjWnfjfRn5ePUpl7e7RJCxKCwwnfqUAdXh53p"
-              crossOrigin="anonymous"
-              strategy="afterInteractive"
-            />
-            {isProd && (
-              <>
-                <Analytics />
-                <SpeedInsights />
-              </>
-            )}
           </PWAProvider>
+          <Script
+            src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.7/kakao.min.js"
+            integrity="sha384-tJkjbtDbvoxO+diRuDtwRO9JXR7pjWnfjfRn5ePUpl7e7RJCxKCwwnfqUAdXh53p"
+            crossOrigin="anonymous"
+            strategy="afterInteractive"
+          />
+          {isProd && (
+            <>
+              <Analytics />
+              <SpeedInsights />
+            </>
+          )}
         </Providers>
       </body>
     </html>

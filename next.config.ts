@@ -88,6 +88,14 @@ const nextConfig: NextConfig = {
         hostname: "fmi-project-s3-bucket.s3.ap-northeast-2.amazonaws.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "**.police.go.kr",
+      },
+      {
+        protocol: "http",
+        hostname: "**.police.go.kr",
+      },
     ],
   },
 
