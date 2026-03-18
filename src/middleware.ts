@@ -19,7 +19,6 @@ export function middleware(request: NextRequest) {
     currentPath.startsWith("/chat") ||
     currentPath.startsWith("/change-password") ||
     currentPath.startsWith("/alert") ||
-    currentPath.startsWith("/change-password") ||
     currentPath.startsWith("/admin");
 
   const isAdminPath = currentPath.startsWith("/admin");
@@ -70,7 +69,6 @@ export const config = {
     "/chat/:path*",
     "/alert/:path*",
     "/change-password",
-    "/alert",
     "/admin/:path*",
   ],
 };
