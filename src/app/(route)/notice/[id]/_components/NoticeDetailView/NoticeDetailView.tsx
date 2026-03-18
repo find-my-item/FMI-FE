@@ -13,11 +13,8 @@ const NoticeDetailView = ({ id }: { id: number }) => {
 
   return (
     <div className="flex flex-col h-base">
-      {isLoading ? (
-        <NoticeDetailSkeleton />
-      ) : (
-        <NoticeDetailContent noticeDetail={noticeDetail?.result} />
-      )}
+      {isLoading && <NoticeDetailSkeleton />}
+      {noticeDetail && !isLoading && <NoticeDetailContent noticeDetail={noticeDetail?.result} />}
       <CommentList
         postId={id}
         onSubmit={() => {}}

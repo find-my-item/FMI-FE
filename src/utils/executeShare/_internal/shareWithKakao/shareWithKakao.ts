@@ -1,6 +1,6 @@
 "use client";
 
-import { PostMetaDataItemWithLink } from "@/types";
+import { MetaDataItemWithLink, ObjectType } from "@/types/MetaDataType";
 
 const getKakaoKey = () => {
   const key = process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY;
@@ -22,7 +22,10 @@ const initKakao = () => {
   return true;
 };
 
-export const shareWithKakao = (data: PostMetaDataItemWithLink) => {
+const DEFAULT_SHARE_IMAGE =
+  "https://fmi-project-s3-bucket.s3.ap-northeast-2.amazonaws.com/9e619169-f_default-share.png";
+
+export const shareWithKakao = (data: MetaDataItemWithLink, objectType: ObjectType) => {
   const Kakao = (window as any).Kakao;
   if (!Kakao) return;
 
@@ -35,14 +38,44 @@ export const shareWithKakao = (data: PostMetaDataItemWithLink) => {
 
   if (!sendDefault) return;
 
+  if (objectType === "location") {
+    sendDefault({
+      objectType,
+      address: data.address,
+      addressTitle: data.title,
+      content: {
+        title: data.title,
+        description: data.summary,
+        imageUrl: data.thumbnailUrl || DEFAULT_SHARE_IMAGE,
+        link: {
+          mobileWebUrl: data.link,
+          webUrl: data.link,
+        },
+      },
+      social: {
+        likeCount: data.likeCount,
+        commentCount: data.commentCount,
+        viewCount: data.viewCount,
+      },
+      buttons: [
+        {
+          title: "웹으로 보기",
+          link: {
+            mobileWebUrl: data.link,
+            webUrl: data.link,
+          },
+        },
+      ],
+    });
+    return;
+  }
+
   sendDefault({
-    objectType: "location",
-    address: data.address,
-    addressTitle: data.title,
+    objectType,
     content: {
       title: data.title,
       description: data.summary,
-      imageUrl: data.thumbnailUrl,
+      imageUrl: data.thumbnailUrl || DEFAULT_SHARE_IMAGE,
       link: {
         mobileWebUrl: data.link,
         webUrl: data.link,
