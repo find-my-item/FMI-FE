@@ -29,17 +29,13 @@ const PublicClientDetail = ({ id }: { id: string }) => {
 
         <div className="space-y-8 px-5 py-[30px]">
           <PublicDetailInfo category={itemData.prdtClNm} title={title} content={content} />
-          <PublicLostItemInfo
-            date={itemData.fdYmd}
-            depositor={itemData.uniq || ""}
-            isLost={isLost}
-          />
+          <PublicLostItemInfo date={itemData.fdYmd} isLost={isLost} />
           <PublicStorageInfo
             office={office}
             department={office}
             tel={tel}
             place={place}
-            postId={id}
+            isLost={isLost}
           />
         </div>
       </article>

@@ -5,14 +5,14 @@ interface PublicStorageInfoProps {
   department: string;
   tel: string;
   place: string;
-  postId: string;
+  isLost: boolean;
 }
 
-const PublicStorageInfo = ({ office, department, tel, place, postId }: PublicStorageInfoProps) => {
+const PublicStorageInfo = ({ office, department, tel, place, isLost }: PublicStorageInfoProps) => {
   return (
     <section aria-labelledby="storage-info-title" className="space-y-[18px]">
       <h2 id="storage-info-title" className="text-h2-bold text-layout-header-default">
-        보관 정보
+        {isLost ? "분실 정보" : "보관 정보"}
       </h2>
 
       <article className="flex flex-col gap-5 rounded-[24px] px-5 py-4 bg-fill-brand-subtle-default_2">
@@ -35,7 +35,9 @@ const PublicStorageInfo = ({ office, department, tel, place, postId }: PublicSto
               부서: {department} {tel}
             </li>
           )}
-          <li>습득 장소: {place}</li>
+          <li>
+            {isLost ? "분실 장소" : "습득 장소"}: {place}
+          </li>
         </ul>
       </article>
     </section>

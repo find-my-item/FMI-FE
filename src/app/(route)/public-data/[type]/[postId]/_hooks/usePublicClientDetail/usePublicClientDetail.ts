@@ -24,7 +24,7 @@ export const usePublicClientDetail = (id: string) => {
   const content = isLost ? itemData.fdSbjt : itemData.uniq;
   const place = isLost ? itemData.depPlace : itemData.fdPlace;
   const office = itemData.depPlace || "";
-  const tel = itemData.tel || "";
+  const tel = itemData.tel;
 
   const headerData = {
     id: itemData.atcId,
