@@ -13,5 +13,8 @@ export interface CommentItem {
   postId: number;
   postTitle: string;
   content: string;
+  likeCount: number;
+  imageList: [{ id: number; imageUrl: string }];
   createdAt: string;
+  like: boolean;
 }
