@@ -22,10 +22,9 @@ const PublicDataList = () => {
 
   if (isLoading) return <LoadingState />;
 
-  const items = data?.items?.item;
-  const itemList = Array.isArray(items) ? items : items ? [items] : [];
+  const items = (data?.items?.item || []) as PublicDataItem[];
 
-  if (itemList.length === 0) {
+  if (items.length === 0) {
     return (
       <EmptyState
         icon={{
@@ -40,7 +39,7 @@ const PublicDataList = () => {
   return (
     <section aria-label="목록">
       <ul>
-        {itemList.map((item) => (
+        {items.map((item) => (
           <PublicDataItemCard key={item.atcId} item={item} />
         ))}
       </ul>
