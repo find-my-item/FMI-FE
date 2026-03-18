@@ -15,12 +15,12 @@ type HeaderData = {
   phoneNumber: string;
 };
 
-interface PostDetailHeaderType {
+interface PostDetailHeaderProps {
   headerData: HeaderData;
 }
 
-const PublicDetailHeader = ({ headerData }: PostDetailHeaderType) => {
-  const { id, imageResponseList, userData, location, phoneNumber } = headerData;
+const PublicDetailHeader = ({ headerData }: PostDetailHeaderProps) => {
+  const { imageResponseList, userData, location, phoneNumber } = headerData;
 
   const [isNumberCheck, setIsNumberCheck] = useState(false);
 
