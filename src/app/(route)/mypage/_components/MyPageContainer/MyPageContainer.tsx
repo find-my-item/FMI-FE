@@ -29,7 +29,7 @@ const MyPageContainer = ({ hasToken }: { hasToken: boolean }) => {
     : undefined;
 
   return (
-    <div className="flex w-full flex-col h-base">
+    <div className="flex w-full flex-col h-f-base">
       <MyPageProfile userData={userData} />
 
       <MyPageIconNav />

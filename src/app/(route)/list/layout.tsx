@@ -1,13 +1,17 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { PostWriteMenu } from "./_components";
 
-const layout = ({ children }: { children: ReactNode }) => {
+interface LayoutProps {
+  children: ReactNode;
+}
+
+const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className="h-base">
+    <>
       {children}
       <PostWriteMenu />
-    </div>
+    </>
   );
 };
 
-export default layout;
+export default Layout;

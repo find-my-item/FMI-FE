@@ -4,7 +4,7 @@ import { useToast } from "@/context/ToastContext";
 import { useApiCheckNickname } from "@/api/fetch/auth";
 import { NICKNAME_ERROR_MESSAGE } from "./NICKNAME_ERROR_MESSAGE";
 
-export const useNicknameCheck = () => {
+const useNicknameCheck = () => {
   const [nicknameValue, setNicknameValue] = useState("");
   const [isNicknameVerified, setIsNicknameVerified] = useState(false);
   const [isNicknameDisabled, setIsNicknameDisabled] = useState(false);
@@ -55,3 +55,5 @@ export const useNicknameCheck = () => {
     isNicknameDisabled,
   };
 };
+
+export default useNicknameCheck;

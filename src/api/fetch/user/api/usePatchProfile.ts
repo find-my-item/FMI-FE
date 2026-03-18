@@ -1,3 +1,5 @@
+"use client";
+
 import useAppMutation from "@/api/_base/query/useAppMutation";
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 import { GetUsersMeResponse } from "../types/UserMeType";
@@ -16,7 +18,6 @@ export const usePatchProfile = () => {
     "patch",
     {
       onSuccess: (updateProfile) => {
-        router.push("/mypage");
         addToast("프로필 이미지 변경 성공", "success");
         queryClient.setQueryData(["users-me"], updateProfile);
       },

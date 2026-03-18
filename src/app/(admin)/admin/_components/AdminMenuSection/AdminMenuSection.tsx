@@ -45,7 +45,7 @@ const AdminSectionNavItem = ({ label, items, footer }: AdminSectionNavItemProps)
           <li key={href}>
             <Link href={href} className="flex items-center justify-between py-[10px]">
               <span className="text-body1-semibold text-neutral-strong-default">{title}</span>
-              <Icon name="ArrowRightSmall" size={24} />
+              <Icon name="ArrowRightSmall" size={24} className="text-neutral-strong-default" />
             </Link>
           </li>
         ))}

@@ -84,7 +84,7 @@ const CommentItem = ({
 
   const authorId = data.authorResponse ? String(data.authorResponse.userId) : "";
   const authorName = data.authorResponse ? data.authorResponse.nickName : "";
-  const profileImageUrl = data.authorResponse ? data.authorResponse.profileImageUrl : "";
+  const profileImage = data.authorResponse ? data.authorResponse.profileImage : "";
 
   const replyComments = replyCommentData?.comments ?? [];
   const isRepliesVisible = shouldFetchReplies;
@@ -108,7 +108,7 @@ const CommentItem = ({
                   authorId,
                   createdAt: data.createdAt,
                   authorName,
-                  profileImageUrl,
+                  profileImage,
                   commentId: data.id,
                   deleted: data.deleted,
                   canDelete: data.canDelete,
@@ -183,6 +183,7 @@ const CommentItem = ({
             <div className="px-5 py-2">
               <ViewMoreComment
                 count={replyCommentData.remainingCount}
+                isThreadItem={true}
                 onClick={() => fetchNextPage()}
               />
             </div>

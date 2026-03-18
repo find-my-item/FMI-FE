@@ -1,6 +1,10 @@
 "use client";
 
-import { CommentList } from "@/components/domain";
+import { useEffect } from "react";
+import { useToast } from "@/context/ToastContext";
+import { useAddToHomeScreen } from "@/hooks";
+import { useWriteFlowStore } from "@/store";
+import { CommentList, AddToHomeScreenPWA } from "@/components/domain";
 import { ErrorBoundary } from "@/app/ErrorBoundary";
 import { useGetDetailPost } from "@/api/fetch/post";
 import {
@@ -15,8 +19,7 @@ import PostInputComment from "../PostInputComment/PostInputComment";
 import { DetailSkeleton, ErrorSimilarSection } from "../_internal";
 import { useHandleReplySubmit } from "../../_hooks/useHandleReplySubmit/useHandleReplySubmit";
 import { useToggleCommentLike } from "../../_hooks/usePostCommentLike/usePostCommentLike";
-import { useEffect } from "react";
-import { useToast } from "@/context/ToastContext";
+import ManualPopup from "@/app/(route)/manual/_components/ManualPopup/ManualPopup";
 
 interface ClientDetailProps {
   id: number;
@@ -25,6 +28,8 @@ interface ClientDetailProps {
 
 const ClientDetail = ({ id, isLoggedIn }: ClientDetailProps) => {
   const { addToast } = useToast();
+  const { showPrompt, incrementViewCount, closePrompt } = useAddToHomeScreen();
+  const { showManualPopup, setShowManualPopup } = useWriteFlowStore();
 
   const { data, isLoading, isError } = useGetDetailPost({ id });
   const { data: commentsData, fetchNextPage } = useGetPostsComments({
@@ -41,13 +46,33 @@ const ClientDetail = ({ id, isLoggedIn }: ClientDetailProps) => {
     }
   }, [isError, addToast]);
 
-  if (isLoading) return <DetailSkeleton />;
-  if (isError || !data?.result) return <DetailSkeleton />;
+  useEffect(() => {
+    if (!isLoading && data?.result) {
+      incrementViewCount();
+    }
+  }, [isLoading, data, incrementViewCount]);
+
+  useEffect(() => {
+    if (sessionStorage.getItem("showManualPopup") === "true") {
+      setShowManualPopup(true);
+      sessionStorage.removeItem("showManualPopup");
+    }
+  }, [setShowManualPopup]);
+
+  if (isLoading || isError || !data?.result) {
+    return (
+      <>
+        <ManualPopup isOpen={showManualPopup} onClose={() => setShowManualPopup(false)} />
+        <DetailSkeleton />
+      </>
+    );
+  }
 
   const { isMine, postUserInformation } = data.result;
 
   return (
     <>
+      <ManualPopup isOpen={showManualPopup} onClose={() => setShowManualPopup(false)} />
       <PostDetailTopHeader
         postId={id}
         postData={{
@@ -81,6 +106,8 @@ const ClientDetail = ({ id, isLoggedIn }: ClientDetailProps) => {
 
         <PostInputComment postId={id} isLoggedIn={isLoggedIn} />
       </div>
+
+      <AddToHomeScreenPWA isOpen={showPrompt} onClose={closePrompt} />
     </>
   );
 };

@@ -11,7 +11,7 @@ describe("shareWithKakao", () => {
         sendDefault: sendDefaultMock,
       },
     };
-    shareWithKakao(MOCK_POST_META_DATA);
+    shareWithKakao(MOCK_POST_META_DATA, "location");
 
     expect(sendDefaultMock).toHaveBeenCalledTimes(1);
     expect(sendDefaultMock).toHaveBeenCalledWith({

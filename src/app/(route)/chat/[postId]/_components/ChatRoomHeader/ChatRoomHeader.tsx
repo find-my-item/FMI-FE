@@ -53,7 +53,7 @@ const ChatRoomHeader = ({ chatRoom, roomId }: ChatRoomHeaderProps) => {
           onClick={() => router.back()}
           type="button"
         >
-          <Icon name="ArrowLeftSmall" size={18} />
+          <Icon name="ArrowLeftSmall" size={18} className="text-neutral-normal-default" />
         </button>
 
         <p className="text-body2-semibold text-layout-body-default">{nickname}</p>

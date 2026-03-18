@@ -26,7 +26,7 @@ export const useGetNotices = ({ keyword, sortType }: UseGetNoticesParams = {}) =
 
   return useAppInfiniteQuery<GetNoticesResponse, unknown, NoticeItem[]>(
     "public",
-    ["notices", category, keyword, sortType, size],
+    ["notices", category, keywordParam, sortTypeParam, size],
     `/notices?${params.toString()}`,
     {
       placeholderData: keepPreviousData,

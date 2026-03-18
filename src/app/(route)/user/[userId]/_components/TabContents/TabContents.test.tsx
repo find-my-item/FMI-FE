@@ -7,8 +7,8 @@ jest.mock("@/components/domain", () => ({
   PostListItem: () => <div data-testid="list-item">PostListItem</div>,
 }));
 
-jest.mock("../_internal/CommentItem/CommentItem", () => () => (
-  <li data-testid="comment-item">CommentItem</li>
+jest.mock("../_internal/UserCommentItem/UserCommentItem", () => () => (
+  <li data-testid="user-comment-item">UserCommentItem</li>
 ));
 
 jest.mock("@/components/state", () => ({
@@ -43,7 +43,7 @@ describe("TabContents", () => {
       />
     );
 
-    expect(screen.queryAllByTestId("comment-item").length).toBeGreaterThan(0);
+    expect(screen.queryAllByTestId("user-comment-item").length).toBeGreaterThan(0);
     expect(screen.queryAllByTestId("list-item")).toHaveLength(0);
   });
 

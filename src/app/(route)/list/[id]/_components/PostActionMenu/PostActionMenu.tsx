@@ -38,42 +38,42 @@ const PostActionMenu = ({ open, onClose, postId, postData }: PostOptionBoxProps)
     onClose();
   };
 
-  if (!open) return null;
-
   return (
     <>
-      <div
-        className={cn(
-          "absolute right-0 top-full z-10 mt-2",
-          "min-h-[114px] w-[218px] overflow-hidden rounded-[20px] flex-col-center",
-          "border border-white bg-fill-neutral-subtle-default",
-          "text-nowrap text-h3-medium text-neutral-normal-default shadow-sm"
-        )}
-      >
-        {isMine ? (
-          <>
-            <button className={ACTION_MENU.buttonStyle} onClick={handleEditPost}>
-              <Icon name="Edit" size={20} />
-              <span>게시글 수정하기</span>
-            </button>
-            <hr className={ACTION_MENU.hrStyle} aria-hidden="true" />
-            <button className={ACTION_MENU.buttonStyle} onClick={() => setDeleteModalOpen(true)}>
-              <Icon name="Trash" size={20} />
-              <span className="text-system-warning">게시글 삭제하기</span>
-            </button>
-            <hr className={ACTION_MENU.hrStyle} aria-hidden="true" />
-            <button className={ACTION_MENU.buttonStyle} onClick={handleStatusChange}>
-              <Icon name="ArrowSwitchHorizontal" size={20} />
-              <span>{isFound ? "찾았어요 상태로 변경" : "찾아요 상태로 변경"}</span>
-            </button>
-          </>
-        ) : (
-          <PostReportBlockActions
-            onOpenReport={() => setIsReportOpen(true)}
-            onOpenBlock={() => setIsBlockOpen(true)}
-          />
-        )}
-      </div>
+      {open && (
+        <div
+          className={cn(
+            "absolute right-0 top-full z-10 mt-2",
+            "min-h-[114px] w-[218px] overflow-hidden rounded-[20px] flex-col-center",
+            "border border-white bg-fill-neutral-subtle-default",
+            "text-nowrap text-h3-medium text-neutral-normal-default shadow-sm"
+          )}
+        >
+          {isMine ? (
+            <>
+              <button className={ACTION_MENU.buttonStyle} onClick={handleEditPost}>
+                <Icon name="Edit" size={20} />
+                <span>게시글 수정하기</span>
+              </button>
+              <hr className={ACTION_MENU.hrStyle} aria-hidden="true" />
+              <button className={ACTION_MENU.buttonStyle} onClick={() => setDeleteModalOpen(true)}>
+                <Icon name="Trash" size={20} />
+                <span className="text-system-warning">게시글 삭제하기</span>
+              </button>
+              <hr className={ACTION_MENU.hrStyle} aria-hidden="true" />
+              <button className={ACTION_MENU.buttonStyle} onClick={handleStatusChange}>
+                <Icon name="ArrowSwitchHorizontal" size={20} />
+                <span>{isFound ? "찾아요 상태로 변경" : "찾았어요 상태로 변경"}</span>
+              </button>
+            </>
+          ) : (
+            <PostReportBlockActions
+              onOpenReport={() => setIsReportOpen(true)}
+              onOpenBlock={() => setIsBlockOpen(true)}
+            />
+          )}
+        </div>
+      )}
 
       <PostDeleteModal
         isOpen={deleteModalOpen}

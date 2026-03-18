@@ -49,7 +49,7 @@ export const useSignUpBtnClick = () => {
                 { email: inputValue },
                 {
                   onSuccess: () => {
-                    addToast("인증번호가 발송되었습니다.", "success");
+                    addToast("인증번호가 발송되었어요", "success");
                     setIsEmailAuthDisabled(false);
                     setEmailValue(inputValue);
                   },
