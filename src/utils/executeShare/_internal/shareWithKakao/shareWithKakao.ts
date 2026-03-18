@@ -22,6 +22,9 @@ const initKakao = () => {
   return true;
 };
 
+const DEFAULT_SHARE_IMAGE =
+  "https://fmi-project-s3-bucket.s3.ap-northeast-2.amazonaws.com/9e619169-f_default-share.png";
+
 export const shareWithKakao = (data: MetaDataItemWithLink, objectType: ObjectType) => {
   const Kakao = (window as any).Kakao;
   if (!Kakao) return;
@@ -43,7 +46,7 @@ export const shareWithKakao = (data: MetaDataItemWithLink, objectType: ObjectTyp
       content: {
         title: data.title,
         description: data.summary,
-        imageUrl: data.thumbnailUrl,
+        imageUrl: data.thumbnailUrl || DEFAULT_SHARE_IMAGE,
         link: {
           mobileWebUrl: data.link,
           webUrl: data.link,
@@ -72,7 +75,7 @@ export const shareWithKakao = (data: MetaDataItemWithLink, objectType: ObjectTyp
     content: {
       title: data.title,
       description: data.summary,
-      imageUrl: data.thumbnailUrl,
+      imageUrl: data.thumbnailUrl || DEFAULT_SHARE_IMAGE,
       link: {
         mobileWebUrl: data.link,
         webUrl: data.link,

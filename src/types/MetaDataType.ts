@@ -30,7 +30,7 @@ export type ShareId = "kakao" | "native" | "copy";
 export interface MetaDataItem {
   title: string;
   summary: string;
-  thumbnailUrl: string;
+  thumbnailUrl?: string;
   address?: string;
   likeCount: number;
   commentCount: number;

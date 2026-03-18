@@ -34,9 +34,7 @@ const PostDetailTopHeader = ({ postId, postData }: PostDetailTopHeaderProps) => 
     title: title || "찾아줘 게시글 공유",
     summary: summary || "게시글을 확인해보세요",
     address: address || "위치 정보 없음",
-    thumbnailUrl:
-      thumbnailUrl ||
-      "https://fmi-project-s3-bucket.s3.ap-northeast-2.amazonaws.com/9e619169-f_default-share.png",
+    thumbnailUrl,
     likeCount: likeCount || 0,
     commentCount: commentCount || 0,
     viewCount: viewCount || 0,
