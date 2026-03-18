@@ -1,28 +1,44 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { useInView } from "react-intersection-observer";
 import { Chip, ListItemImage } from "@/components/common";
 import { EmptyState, LoadingState } from "@/components/state";
 import { cn, formatDate } from "@/utils";
-import { PublicDataItem } from "@/types";
+import { PublicDataItem, PublicDataResponse } from "@/types";
 import { useToast } from "@/context/ToastContext";
 import { usePublicDataListQuery } from "../../../_hooks/usePublicDataListQuery/usePublicDataListQuery";
 
 const PublicDataList = () => {
   const { addToast } = useToast();
-  const { data, isLoading, isError } = usePublicDataListQuery();
+  const { ref, inView } = useInView();
+
+  const { data, isLoading, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    usePublicDataListQuery();
+
+  const items = useMemo(() => {
+    if (!data?.pages) return [];
+    return data.pages.flatMap((page: PublicDataResponse) => {
+      const itemData = page?.items?.item || [];
+      return Array.isArray(itemData) ? itemData : [itemData];
+    }) as PublicDataItem[];
+  }, [data?.pages]);
+
+  useEffect(() => {
+    if (inView && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   useEffect(() => {
     if (isError) {
       addToast("데이터를 불러오지 못했어요.", "error");
     }
-  }, [isError]);
+  }, [isError, addToast]);
 
   if (isLoading) return <LoadingState />;
-
-  const items = (data?.items?.item || []) as PublicDataItem[];
 
   if (items.length === 0) {
     return (
@@ -39,10 +55,11 @@ const PublicDataList = () => {
   return (
     <section aria-label="목록">
       <ul>
-        {items.map((item) => (
-          <PublicDataItemCard key={item.atcId} item={item} />
+        {items.map((item, index) => (
+          <PublicDataItemCard key={`${item.atcId}-${index}`} item={item} />
         ))}
       </ul>
+      {hasNextPage && <div ref={ref} className="h-10 w-full" />}
     </section>
   );
 };
