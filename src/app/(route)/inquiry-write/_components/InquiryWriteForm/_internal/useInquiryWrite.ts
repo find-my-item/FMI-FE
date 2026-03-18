@@ -1,5 +1,5 @@
 import { resizeImage } from "@/utils";
-import { InquiryWriteFormValues } from "../../../types";
+import { InquiryWriteFormValues } from "../../../types/InquiryWriteFormValues";
 import { useGetUsersMe } from "@/api/fetch/user";
 import { usePostInquiry } from "@/api/fetch/inquiry";
 
