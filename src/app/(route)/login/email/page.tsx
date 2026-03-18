@@ -18,7 +18,7 @@ const page = () => {
     <>
       <DetailHeader title="이메일 로그인" />
       <h1 className="sr-only">이메일 로그인 페이지</h1>
-      <main className="flex w-full gap-6 px-5 flex-col-center h-base">
+      <main className="flex w-full gap-6 px-5 flex-col-center h-base tablet:px-[96px]">
         <LogoLink />
 
         <FormProvider {...methods}>
