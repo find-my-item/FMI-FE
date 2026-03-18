@@ -1,9 +1,9 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { InquiryWriteFormValues } from "./types/InquiryWriteFormValues";
+import { InquiryWriteFormValues } from "./_types/InquiryWriteFormValues";
 import { InquiryWriteDetailHeader, InquiryWriteForm } from "./_components";
-import { useInquiryWrite } from "./_components/InquiryWriteForm/_internal";
+import useInquiryWrite from "./_hooks/useInquiryWrite";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
