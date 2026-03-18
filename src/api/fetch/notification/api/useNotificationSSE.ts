@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { NotificationEventData } from "../types/notificationSSETypes";
 
+// TODO(형준): exponential backoff 검토 후 적용 필요
 const RECONNECT_DELAY_MS = 5000;
 const REFRESH_AFTER_CONSECUTIVE_FAILURES = 3;
 
@@ -97,6 +98,7 @@ const useNotificationSSE = ({
       return;
     }
 
+    // TODO(형준): 토큰 노출 문제 해결 필요
     const url = `${process.env.NEXT_PUBLIC_API_URL}/notifications/subscribe?token=${encodeURIComponent(accessToken)}`;
     const eventSource = new EventSource(url);
 
