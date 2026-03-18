@@ -18,8 +18,7 @@ export function middleware(request: NextRequest) {
     currentPath.startsWith("/write") ||
     currentPath.startsWith("/chat") ||
     currentPath.startsWith("/change-password") ||
-    currentPath.startsWith("/alert");
-  currentPath.startsWith("/alert") ||
+    currentPath.startsWith("/alert") ||
     currentPath.startsWith("/change-password") ||
     currentPath.startsWith("/admin");
 
