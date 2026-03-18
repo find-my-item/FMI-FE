@@ -12,7 +12,7 @@ import {
   getAlertIconBackgroundColor,
   getAlertTitle,
   renderTitle,
-} from "./_internal/alertViewMapper";
+} from "./_internal/AlertViewMapper";
 import { IconName } from "@/components/common/Icon/Icon";
 import { EmptyState } from "@/components/state";
 import { alertRouteUrl } from "./_internal/alertRouteUrl";

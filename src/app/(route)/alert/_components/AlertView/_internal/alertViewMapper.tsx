@@ -1,34 +1,23 @@
 import type { ReactNode } from "react";
 import { NotificationType, ReferenceType } from "@/api/fetch/notification";
 import { getNotificationDisplayTitle } from "@/api/fetch/notification/utils/getNotificationDisplayTitle";
+import {
+  ALERT_ICON_BG_BY_NOTIFICATION_TYPE,
+  ALERT_ICON_BG_BY_REFERENCE_TYPE,
+  DEFAULT_ALERT_ICON_BG,
+} from "./ALERT_VIEW_MAPPINGS";
 
 export const getAlertIconBackgroundColor = (
   type: NotificationType,
   referenceType: ReferenceType
 ) => {
-  if (type === "FAVORITE" || type === "CATEGORY") {
-    return { icon: "AlertStar", bg: "bg-system-bookmark" };
-  }
+  const byType = ALERT_ICON_BG_BY_NOTIFICATION_TYPE[type];
+  if (byType) return byType;
 
-  switch (referenceType) {
-    case "POST":
-      return { icon: "AlertItem", bg: "bg-fg-accent-foundItem" };
-    case "COMMENT":
-      return { icon: "AlertNewComment", bg: "bg-fg-neutral-strong-default" };
-    case "CHAT":
-      if (type === "CHAT_REMINDER") {
-        return { icon: "AlertUnreadChat", bg: "bg-fg-brand-normal-default" };
-      }
-      return { icon: "AlertNewChat", bg: "bg-fg-brand-normal-default" };
-    case "INQUIRY":
-      return { icon: "AlertInquiry", bg: "bg-fg-neutral-strong-default" };
-    case "NOTICE":
-      return { icon: "AlertNotice", bg: "bg-system-announcement" };
-    case "REPORT":
-      return { icon: "AlertReportResult", bg: "bg-system-report" };
-    default:
-      return { icon: "AlertItem", bg: "bg-fg-accent-foundItem" };
-  }
+  const mapper = ALERT_ICON_BG_BY_REFERENCE_TYPE[referenceType];
+  if (!mapper) return DEFAULT_ALERT_ICON_BG;
+
+  return typeof mapper === "function" ? mapper(type) : mapper;
 };
 
 export const getAlertTitle = (type: NotificationType, referenceType: ReferenceType): string =>
