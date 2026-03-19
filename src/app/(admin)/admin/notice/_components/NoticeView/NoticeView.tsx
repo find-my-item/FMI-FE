@@ -10,7 +10,6 @@ import NoticeList from "../NoticeList/NoticeList";
 import { AdminFilter, AdminSearch } from "../../../_components";
 import { AdminFilterItemType } from "../../../_types";
 
-// TODO(지권): 공지사항 무한 스크롤 cursor 기반 변경 후 작업 예정
 const getSortLabel = (sortValue: NoticeSortType) => {
   switch (sortValue) {
     case "LATEST":

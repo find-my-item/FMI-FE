@@ -1,8 +1,11 @@
+"use client";
+
 import { Suspense } from "react";
 import { AdminListItem } from "../../../_components";
 import { useGetNotices } from "@/api/fetch/notice";
 import { LoadingState } from "@/components/state";
 import { NoticeSortType } from "@/types/NoticeType";
+import { useInfiniteScroll } from "@/hooks";
 
 interface NoticeListProps {
   keyword?: string;
@@ -10,7 +13,15 @@ interface NoticeListProps {
 }
 
 const NoticeList = ({ keyword, sortType }: NoticeListProps) => {
-  const { data } = useGetNotices({ keyword, sortType });
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetNotices({
+    keyword,
+    sortType,
+  });
+  const { ref: noticeListRef } = useInfiniteScroll({
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  });
 
   return (
     <Suspense fallback={<LoadingState />}>
@@ -25,6 +36,7 @@ const NoticeList = ({ keyword, sortType }: NoticeListProps) => {
             />
           ))}
         </ul>
+        {hasNextPage && <div ref={noticeListRef} className="h-10 w-full" />}
       </section>
     </Suspense>
   );
