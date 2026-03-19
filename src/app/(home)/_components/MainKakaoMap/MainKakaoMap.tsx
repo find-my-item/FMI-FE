@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { BaseKakaoMap } from "@/components/domain";
-import { useMainKakaoMapStore } from "@/utils/store/store";
+import { useMainKakaoMapStore } from "@/store";
 import { DEFAULT_LAT_LNG } from "@/constants";
 
 const MainKakaoMap = () => {

@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { Icon } from "@/components/common";
-import { useMainKakaoMapStore } from "@/utils/store/store";
+import { useMainKakaoMapStore } from "@/store";
 
 interface MyLocationButtonProps {
   isFullyExpanded: boolean;

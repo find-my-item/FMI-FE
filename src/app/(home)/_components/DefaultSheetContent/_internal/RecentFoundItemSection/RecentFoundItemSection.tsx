@@ -1,7 +1,7 @@
 "use client";
 
 import MainCardList from "../MainCardList/MainCardList";
-import { useMainKakaoMapStore } from "@/utils/store/store";
+import { useMainKakaoMapStore } from "@/store";
 
 const RecentFoundItemSection = () => {
   const { address } = useMainKakaoMapStore();
