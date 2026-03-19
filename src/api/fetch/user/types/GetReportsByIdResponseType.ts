@@ -1,14 +1,8 @@
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 
-export interface MypageReportsResponseType extends ApiBaseResponseType<MypageReportType> {}
+export interface GetReportsByIdResponseType extends ApiBaseResponseType<ReportByIdType> {}
 
-export interface MypageReportType {
-  content: ReportItemType[];
-  nextCursor: number;
-  hasNext: boolean;
-}
-
-export interface ReportItemType {
+export interface ReportByIdType {
   nickname: string;
   reportId: number;
   targetId: number;
@@ -16,6 +10,8 @@ export interface ReportItemType {
   targetTitle: string;
   reason: string;
   status: "PENDING" | "REVIEWED" | "RESOLVED";
+  answered: boolean;
+  adminAnswer: string;
   createdAt: string;
   resolvedAt: string;
 }

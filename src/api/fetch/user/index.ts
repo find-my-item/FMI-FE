@@ -2,7 +2,7 @@ export * from "./types/UserDataType";
 export * from "./types/UserProfileIdDataType";
 export * from "./types/MypagePostsResponseType";
 export * from "./types/MypageActivityResponse";
-export * from "./types/MypageReportsResponseType";
+export * from "./types/GetReportsResponseType";
 export * from "./types/MypageInquiriesResponseType";
 export * from "./types/MypageCommentsResponseType";
 
@@ -17,3 +17,4 @@ export { useGetUserActivity } from "./api/useGetUserActivity";
 export { useGetUserReports } from "./api/useGetUserReports";
 export { useGetUserInquiries } from "./api/useGetUserInquiries";
 export { useGetUserComments } from "./api/useGetUserComments";
+export { useGetReportById } from "./api/useGetReportById";
