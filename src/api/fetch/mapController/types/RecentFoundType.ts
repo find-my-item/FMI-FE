@@ -7,4 +7,4 @@ export interface RecentFoundItem {
   createdAt: string;
 }
 
-export interface RecentFoundResponse extends ApiBaseResponseType<RecentFoundItem> {}
+export interface RecentFoundResponse extends ApiBaseResponseType<RecentFoundItem[]> {}

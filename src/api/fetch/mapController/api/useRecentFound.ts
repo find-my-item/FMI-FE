@@ -8,7 +8,7 @@ const useRecentFound = (level: number) => {
 
   return useAppQuery<RecentFoundResponse>(
     "public",
-    ["recent-found"],
+    ["recent-found", level, latitude, longitude],
     `/main/posts/recent-found?latitude=${latitude}&longitude=${longitude}&level=${level}`
   );
 };

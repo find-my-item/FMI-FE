@@ -1,10 +1,22 @@
 "use client";
 
+import useRecentFound from "@/api/fetch/mapController/api/useRecentFound";
 import MainCardList from "../MainCardList/MainCardList";
 import { useMainKakaoMapStore } from "@/store";
+import RecentFoundItemEmpty from "./RecentFoundItemEmpty";
 
 const RecentFoundItemSection = () => {
   const { address } = useMainKakaoMapStore();
+  const { data: recentFoundItems, isLoading } = useRecentFound(10);
+
+  if (recentFoundItems?.result?.length === 0) return <RecentFoundItemEmpty />;
+
+  const data = recentFoundItems?.result?.map((item) => ({
+    postId: item.postId,
+    title: item.title,
+    thumbnailImageUrl: item.thumbnailImageUrl,
+    createdAt: item.createdAt,
+  }));
 
   return (
     <section className="space-y-2">
@@ -12,7 +24,7 @@ const RecentFoundItemSection = () => {
         <span className="text-brand-normal-default">{address}</span>
         <span className="text-neutral-strong-hover">최근 발견된 분실물</span>
       </h2>
-      <MainCardList isLoading={false} />
+      <MainCardList isLoading={isLoading} cardListData={data} />
     </section>
   );
 };
