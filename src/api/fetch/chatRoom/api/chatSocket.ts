@@ -10,17 +10,32 @@ const handlers = new Map<string, Set<MessageHandler>>();
 let pendingSubscriptions: Array<() => void> = [];
 const savedSubscriptions = new Map<string, Set<MessageHandler>>();
 
-// 중복 재연결 방지
 let isReconnecting = false;
-
-// 재연결 쓰로틀: 마지막 시도 이후 이 시간(ms) 이내면 재연결 생략
-const RECONNECT_THROTTLE_MS = 1000;
-let lastReconnectAttempt = 0;
+const RECONNECT_BASE_DELAY_MS = 1000;
+const RECONNECT_MAX_DELAY_MS = 30000;
+const RECONNECT_JITTER_RATIO = 0.2;
+let reconnectAttempt = 0;
+let reconnectTimeoutId: ReturnType<typeof setTimeout> | null = null;
 
 let tokenRefreshHandler: (() => void) | null = null;
 
-const reconnectChatSocket = async () => {
+const MAX_AUTH_REFRESH_FAILURES = 1;
+let consecutiveAuthRefreshFailures = 0;
+let isAuthInvalid = false;
+
+const calcReconnectDelayMs = (attempt: number) => {
+  const exponential = RECONNECT_BASE_DELAY_MS * 2 ** attempt;
+  const capped = Math.min(exponential, RECONNECT_MAX_DELAY_MS);
+
+  const jitter = capped * RECONNECT_JITTER_RATIO * (Math.random() * 2 - 1);
+  return Math.max(0, Math.floor(capped + jitter));
+};
+
+const performReconnectChatSocket = async () => {
+  reconnectTimeoutId = null;
+
   if (isReconnecting) return;
+  if (isAuthInvalid) return;
   isReconnecting = true;
 
   try {
@@ -31,18 +46,27 @@ const reconnectChatSocket = async () => {
     subscriptions.forEach((sub) => sub.unsubscribe());
     subscriptions.clear();
 
-    // deactivate 완료 후 재연결 (Promise로 순서 보장)
     if (client) {
       await client.deactivate();
       client = null;
     }
 
-    // 끊김 시 토큰 만료 가능성 있으므로 재발급 시도
     try {
       await authApi.post("/auth/refresh");
       console.log("[STOMP] Token refreshed before reconnecting");
+      consecutiveAuthRefreshFailures = 0;
     } catch (refreshError) {
-      console.warn("[STOMP] Token refresh failed, reconnecting anyway:", refreshError);
+      consecutiveAuthRefreshFailures += 1;
+      console.warn(
+        "[STOMP] Token refresh failed. Stop reconnect attempts after session becomes invalid:",
+        refreshError
+      );
+
+      if (consecutiveAuthRefreshFailures >= MAX_AUTH_REFRESH_FAILURES) {
+        isAuthInvalid = true;
+        disconnectChatSocket();
+        return;
+      }
     }
 
     connectChatSocket();
@@ -50,6 +74,39 @@ const reconnectChatSocket = async () => {
   } catch {
     isReconnecting = false;
   }
+};
+
+const scheduleReconnectChatSocket = ({
+  immediate = false,
+  resetAttempt = false,
+}: {
+  immediate?: boolean;
+  resetAttempt?: boolean;
+} = {}) => {
+  if (client?.connected) return;
+  if (client?.active) return;
+  if (handlers.size === 0) return;
+  if (isAuthInvalid) return;
+  if (isReconnecting) return;
+
+  if (resetAttempt) {
+    reconnectAttempt = 0;
+  }
+
+  if (reconnectTimeoutId && !immediate) return;
+
+  if (reconnectTimeoutId) {
+    clearTimeout(reconnectTimeoutId);
+    reconnectTimeoutId = null;
+  }
+
+  const nextAttempt = resetAttempt ? 0 : reconnectAttempt + 1;
+  reconnectAttempt = nextAttempt;
+  const delayMs = immediate ? 0 : calcReconnectDelayMs(nextAttempt);
+
+  reconnectTimeoutId = setTimeout(() => {
+    void performReconnectChatSocket();
+  }, delayMs);
 };
 
 export const connectChatSocket = () => {
@@ -62,7 +119,7 @@ export const connectChatSocket = () => {
 
   client = new Client({
     brokerURL: process.env.NODE_ENV === "development" ? "/api/ws" : "wss://www.finditem.kr/ws",
-    reconnectDelay: 5000,
+    reconnectDelay: 0,
 
     debug: (msg) => {
       if (process.env.NODE_ENV === "development") {
@@ -73,6 +130,13 @@ export const connectChatSocket = () => {
     onConnect: () => {
       console.log("[STOMP] connected");
       isReconnecting = false;
+      reconnectAttempt = 0;
+      isAuthInvalid = false;
+      consecutiveAuthRefreshFailures = 0;
+      if (reconnectTimeoutId) {
+        clearTimeout(reconnectTimeoutId);
+        reconnectTimeoutId = null;
+      }
 
       pendingSubscriptions.forEach((subscribe) => subscribe());
       pendingSubscriptions = [];
@@ -93,23 +157,20 @@ export const connectChatSocket = () => {
         errorMessage.includes("Unauthorized")
       ) {
         console.log("[STOMP] Authentication error detected, reconnecting...");
-        reconnectChatSocket();
+        scheduleReconnectChatSocket({ immediate: true, resetAttempt: true });
       }
     },
 
     onDisconnect: () => {
       console.log("[STOMP] disconnected");
       if (client && !client.connected && handlers.size > 0) {
-        const now = Date.now();
-        if (now - lastReconnectAttempt < RECONNECT_THROTTLE_MS) return;
-        lastReconnectAttempt = now;
-        reconnectChatSocket();
+        scheduleReconnectChatSocket();
       }
     },
 
     onWebSocketError: () => {
       if (client && !client.connected && handlers.size > 0) {
-        reconnectChatSocket();
+        scheduleReconnectChatSocket();
       }
     },
   });
@@ -121,7 +182,7 @@ export const connectChatSocket = () => {
 
     tokenRefreshHandler = () => {
       console.log("[STOMP] Token refreshed event received, reconnecting...");
-      reconnectChatSocket();
+      scheduleReconnectChatSocket({ immediate: true, resetAttempt: true });
     };
 
     window.addEventListener("tokenRefreshed", tokenRefreshHandler);
@@ -138,6 +199,11 @@ export const disconnectChatSocket = () => {
 
   pendingSubscriptions = [];
   isReconnecting = false;
+  reconnectAttempt = 0;
+  if (reconnectTimeoutId) {
+    clearTimeout(reconnectTimeoutId);
+    reconnectTimeoutId = null;
+  }
 
   if (typeof window !== "undefined" && tokenRefreshHandler) {
     window.removeEventListener("tokenRefreshed", tokenRefreshHandler);
@@ -165,9 +231,7 @@ export const subscribeChatSocket = <T>(destination: string, handler: MessageHand
       try {
         const parsed = JSON.parse(message.body);
         handlers.get(destination)?.forEach((h) => h(parsed));
-      } catch {
-        // ignore parse error
-      }
+      } catch {}
     });
 
     subscriptions.set(destination, sub);
