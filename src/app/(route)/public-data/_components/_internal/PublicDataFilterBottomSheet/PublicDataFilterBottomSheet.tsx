@@ -8,6 +8,7 @@ import { cn } from "@/utils";
 import { FilterTab } from "@/components/domain/FilterSectionBottomSheet/_types/types";
 import { PUBLIC_CATEGORY_CODES, PUBLIC_REGION_CODES } from "@/constants";
 import { PublicFilterStateType } from "../../../_types/PublicFilterStateType";
+import { PUBLIC_DEFAULT_TABS } from "../../../_constants/PUBLIC_DEFAULT_FILTERS";
 
 interface PublicDataFilterBottomSheetProps {
   isOpen: boolean;
@@ -46,11 +47,6 @@ const PublicDataFilterBottomSheet = ({
     setIsOpen(false);
   };
 
-  const currentTabs = [
-    { label: "지역", value: "region" },
-    { label: "카테고리", value: "category" },
-  ];
-
   return (
     <PopupLayout
       isOpen={isOpen}
@@ -61,7 +57,7 @@ const PublicDataFilterBottomSheet = ({
         <h2 className="text-h2-medium text-layout-header-default">필터</h2>
 
         <section role="tablist" className="w-full flex-center">
-          {currentTabs.map((tab) => {
+          {PUBLIC_DEFAULT_TABS.map((tab) => {
             const isSelected = selectedTab === tab.value;
 
             return (
