@@ -18,7 +18,8 @@ import { KakaoLocalCoord2AddressResponse } from "../types/KakaoLocalCoord2Addres
  */
 export const getKakaoLocalCoord2Address = async (
   lat: number,
-  lng: number
+  lng: number,
+  signal?: AbortSignal
 ): Promise<KakaoLocalCoord2AddressResponse> => {
   const { data } = await axios.get<KakaoLocalCoord2AddressResponse>(
     "https://dapi.kakao.com/v2/local/geo/coord2address.json",
@@ -30,6 +31,7 @@ export const getKakaoLocalCoord2Address = async (
       headers: {
         Authorization: `KakaoAK ${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}`,
       },
+      signal,
     }
   );
 
