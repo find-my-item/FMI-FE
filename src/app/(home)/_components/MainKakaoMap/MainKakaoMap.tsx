@@ -9,6 +9,7 @@ const MainKakaoMap = () => {
   const { latLng, setLatLng, clearLatLng, levelResetSignal } = useMainKakaoMapStore();
   const [isPermissionResolved, setIsPermissionResolved] = useState(false);
   const [mapCenter, setMapCenter] = useState(DEFAULT_LAT_LNG);
+  const [mapLevel, setMapLevel] = useState(6);
 
   useEffect(() => {
     const syncCenterByPermission = async () => {
@@ -40,15 +41,21 @@ const MainKakaoMap = () => {
     setMapCenter(latLng);
   }, [latLng, isPermissionResolved]);
 
+  useEffect(() => {
+    setMapLevel((prevLevel) => Math.min(prevLevel, 6));
+  }, [levelResetSignal]);
+
   if (!isPermissionResolved) return null;
 
   return (
     <BaseKakaoMap
-      key={levelResetSignal}
       center={mapCenter}
-      level={6}
+      level={mapLevel}
       showMarker
       draggable
+      onLevelChange={(nextLevel) => {
+        setMapLevel(nextLevel);
+      }}
       onDragEnd={(nextCenter) => {
         setLatLng(nextCenter);
       }}

@@ -92,6 +92,7 @@ interface BaseKakaoMapProps {
 
   /** events */
   onDragEnd?: (center: LatLng) => void;
+  onLevelChange?: (level: number) => void;
 
   /** overlay ui */
   children?: ReactNode;
@@ -111,6 +112,7 @@ const BaseKakaoMap = ({
   showCircle = false,
 
   onDragEnd,
+  onLevelChange,
   children,
 }: BaseKakaoMapProps) => {
   const [loading, error] = useKakaoLoader({
@@ -134,6 +136,10 @@ const BaseKakaoMap = ({
         level={level}
         draggable={draggable}
         style={style}
+        onZoomChanged={(map) => {
+          if (!onLevelChange) return;
+          onLevelChange(map.getLevel());
+        }}
         onDragEnd={(map) => {
           if (!onDragEnd) return;
           const latlng = map.getCenter();
