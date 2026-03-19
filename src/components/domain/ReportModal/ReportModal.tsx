@@ -27,7 +27,7 @@ interface ReportModalProps {
  * @description
  * 신고하기 폼을 제공하는 모달 컴포넌트입니다.
  * 신고 사유 선택 및 신고 내용 입력 기능을 포함하며, react-hook-form을 사용하여 폼 상태를 관리합니다.
- * 신고 사유는 필수이며, 신고 내용은 선택 사항입니다(최소 10자 이상 입력 시 제출 가능).
+ * 신고 사유는 필수이며, 신고 내용은 선택 사항입니다
  *
  * @param isOpen - 모달의 열림/닫힘 상태
  * @param onClose - 모달을 닫을 때 호출되는 콜백 함수
@@ -69,16 +69,18 @@ const ReportModal = ({
     onClose: onClose,
   });
 
-  const reasonValueCount = methods.watch("reason");
-  const isDisabled = !reportType || isPending || reasonValueCount.length < 10;
+  const isDisabled = !reportType || isPending;
 
   const onSubmit = ({ reason }: ReportFormValues) => {
     if (isDisabled) return;
 
+    const isOnlyWhitespace = reason.trim().length === 0;
+    const payloadReason = isOnlyWhitespace ? "" : reason;
+
     report({
       targetType,
       targetId,
-      reason,
+      reason: payloadReason,
       reportType: reportType.value,
     });
   };
@@ -97,9 +99,6 @@ const ReportModal = ({
               name="reason"
               label="신고 내용 (선택)"
               placeholder="신고 사유를 입력해주세요. (최대 300자)"
-              validation={{
-                minLength: { value: 10, message: "10자 이상 입력해주세요." },
-              }}
               maxLength={300}
             />
           </div>
