@@ -1,12 +1,13 @@
 import { DEFAULT_LAT_LNG } from "@/constants";
 import { useMainKakaoMapStore } from "@/store";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const useMainKakaoMap = () => {
-  const { latLng, setLatLng, clearLatLng, levelResetSignal } = useMainKakaoMapStore();
+  const { latLng, setLatLng, clearLatLng, levelResetSignal, mapLevel, setMapLevel } =
+    useMainKakaoMapStore();
   const [isPermissionResolved, setIsPermissionResolved] = useState(false);
   const [mapCenter, setMapCenter] = useState(DEFAULT_LAT_LNG);
-  const [mapLevel, setMapLevel] = useState(6);
+  const mapLevelRef = useRef(mapLevel);
 
   useEffect(() => {
     const syncCenterByPermission = async () => {
@@ -39,8 +40,12 @@ const useMainKakaoMap = () => {
   }, [latLng, isPermissionResolved]);
 
   useEffect(() => {
-    setMapLevel((prevLevel) => Math.min(prevLevel, 6));
-  }, [levelResetSignal]);
+    mapLevelRef.current = mapLevel;
+  }, [mapLevel]);
+
+  useEffect(() => {
+    setMapLevel(Math.min(mapLevelRef.current, 6));
+  }, [levelResetSignal, setMapLevel]);
 
   return {
     mapCenter,
