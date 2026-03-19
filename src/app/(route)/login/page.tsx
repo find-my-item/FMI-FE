@@ -20,7 +20,7 @@ const page = () => {
       <LogoLink />
 
       {/* button */}
-      <div className="flex w-full flex-col gap-3 px-5">
+      <div className="flex w-full flex-col gap-3 px-5 tablet:px-[96px]">
         <Button
           type="submit"
           ignoreBase
@@ -48,7 +48,7 @@ const page = () => {
       </div>
 
       {/* divider 구분선 */}
-      <div className="flex h-[18px] w-full items-center px-5">
+      <div className="flex h-[18px] w-full items-center px-5 tablet:px-[96px]">
         <hr className="h-px flex-1 bg-flatGray-50" aria-hidden={true} />
         <span className="px-3 text-caption1-medium text-layout-body-default">또는</span>
         <hr className="h-px flex-1 bg-flatGray-50" aria-hidden={true} />
