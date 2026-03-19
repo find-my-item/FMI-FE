@@ -5,6 +5,7 @@ import { Chip } from "@/components/common";
 import { MypageEmptyUI } from "@/components/domain";
 import { LoadingState } from "@/components/state";
 import { useToast } from "@/context/ToastContext";
+import { useInfiniteScroll } from "@/hooks";
 import { useFilterParams } from "@/hooks/domain";
 import { formatDate } from "@/utils";
 import Link from "next/link";
@@ -50,6 +51,9 @@ const MypageReportsContent = () => {
     data: reportsData,
     isLoading,
     isError,
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
   } = useGetUserReports({
     status: requestStatus,
   });
@@ -62,6 +66,12 @@ const MypageReportsContent = () => {
     }
   }, [isError, addToast]);
 
+  const { ref } = useInfiniteScroll({
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+  });
+
   if (isLoading) return <LoadingState />;
 
   return (
@@ -71,10 +81,14 @@ const MypageReportsContent = () => {
       {reportsData && reportsData.length === 0 ? (
         <MypageEmptyUI pageType="reports" />
       ) : (
-        <ul>
-          {reportsData &&
-            reportsData.map((item) => <MypageReportsItem key={item.reportId} reports={item} />)}
-        </ul>
+        <>
+          <ul>
+            {reportsData &&
+              reportsData.map((item) => <MypageReportsItem key={item.reportId} reports={item} />)}
+          </ul>
+
+          {hasNextPage && <div ref={ref} className="h-10" />}
+        </>
       )}
     </section>
   );
