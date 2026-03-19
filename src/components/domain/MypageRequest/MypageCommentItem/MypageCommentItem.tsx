@@ -1,5 +1,6 @@
 import { Chip, ProfileAvatar } from "@/components/common";
 import { cn, formatDate } from "@/utils";
+import Image from "next/image";
 // TODO(수현): 데이터 타입 api 연결 시 작업 시 type 폴더로 분리 예정입니다. 현재는 api가 없기에 api 폴더에 옮기지 않았습니다.
 interface MypageCommentItemType {
   status: "admin" | "user";
@@ -27,7 +28,6 @@ const MypageCommentItem = ({ data }: MypageCommentItemProps) => {
       )}
     >
       <header className="flex gap-[14px]">
-        {/* <div className="my-2 size-[30px] rounded-full bg-slate-200" /> */}
         <ProfileAvatar src={profileImg} size={30} />
 
         <span className="flex flex-col gap-[2px]">
@@ -37,14 +37,32 @@ const MypageCommentItem = ({ data }: MypageCommentItemProps) => {
           </span>
 
           {displayDate && (
-            <span className="text-body2-regular text-layout-body-default">
+            <time dateTime={displayDate} className="text-body2-regular text-layout-body-default">
               {formatDate(displayDate)}
-            </span>
+            </time>
           )}
         </span>
       </header>
 
       <p className="text-body1-regular text-layout-header-default">{content}</p>
+      {answerImageList && answerImageList.length > 0 && (
+        <div className="mt-2 flex flex-wrap gap-2">
+          {answerImageList.map((src, index) => (
+            <div
+              key={`${src}-${index}`}
+              className="relative aspect-square w-[100px] overflow-hidden rounded-lg border border-divider-default"
+            >
+              <Image
+                src={src}
+                alt={`첨부 이미지 ${index + 1}`}
+                fill
+                className="object-cover"
+                sizes="100px"
+              />
+            </div>
+          ))}
+        </div>
+      )}
     </article>
   );
 };
