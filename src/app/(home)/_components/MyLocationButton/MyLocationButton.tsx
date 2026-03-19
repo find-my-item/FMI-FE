@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
 import { Icon } from "@/components/common";
-import { useMainKakaoMapStore } from "@/store";
+import useMyLocationButton from "../../_hooks/useMyLocationButton";
 
 interface MyLocationButtonProps {
   isFullyExpanded: boolean;
@@ -11,54 +10,12 @@ interface MyLocationButtonProps {
 const MyLocationButton = ({ isFullyExpanded }: MyLocationButtonProps) => {
   if (isFullyExpanded) return null;
 
-  const { setLatLng, clearLatLng, triggerLevelReset } = useMainKakaoMapStore();
-
-  useEffect(() => {
-    const checkGeolocationPermission = async () => {
-      if (!navigator.geolocation) {
-        clearLatLng();
-        return;
-      }
-
-      if (!navigator.permissions) return;
-
-      const permission = await navigator.permissions.query({
-        name: "geolocation",
-      });
-
-      if (permission.state === "denied") {
-        clearLatLng();
-      }
-    };
-
-    void checkGeolocationPermission();
-  }, [clearLatLng]);
-
-  const handleClick = () => {
-    if (!navigator.geolocation) {
-      clearLatLng();
-      return;
-    }
-
-    navigator.geolocation.getCurrentPosition(
-      ({ coords }) => {
-        triggerLevelReset();
-        setLatLng({
-          lat: coords.latitude,
-          lng: coords.longitude,
-        });
-      },
-      () => {
-        triggerLevelReset();
-        clearLatLng();
-      }
-    );
-  };
+  const { handleMyLocationClick } = useMyLocationButton();
 
   return (
     <button
       aria-label="내 위치로 이동"
-      onClick={handleClick}
+      onClick={handleMyLocationClick}
       className="absolute right-3 flex h-[38px] w-[38px] rounded-full bg-white shadow-lg flex-center"
       style={{ bottom: `calc(100% + 12px)` }}
     >
