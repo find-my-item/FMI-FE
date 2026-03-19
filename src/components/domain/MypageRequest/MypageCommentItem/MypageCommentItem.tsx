@@ -1,12 +1,14 @@
-import { Chip } from "@/components/common";
+import { Chip, ProfileAvatar } from "@/components/common";
 import { cn, formatDate } from "@/utils";
 // TODO(수현): 데이터 타입 api 연결 시 작업 시 type 폴더로 분리 예정입니다. 현재는 api가 없기에 api 폴더에 옮기지 않았습니다.
 interface MypageCommentItemType {
   status: "admin" | "user";
-  resolvedAt?: string;
-  createdAt?: string;
-  userNickname?: string;
   content?: string;
+  nickname?: string;
+  createdAt?: string;
+  profileImg?: string;
+  answerImageList?: string[];
+  resolvedAt?: string;
 }
 
 interface MypageCommentItemProps {
@@ -14,8 +16,8 @@ interface MypageCommentItemProps {
 }
 
 const MypageCommentItem = ({ data }: MypageCommentItemProps) => {
-  const displayDate = data.resolvedAt || data.createdAt;
-  const displayName = data.status === "admin" ? "찾아줘 관리자" : data.userNickname;
+  const { status, content, nickname, createdAt, profileImg, answerImageList, resolvedAt } = data;
+  const displayDate = resolvedAt || createdAt;
 
   return (
     <article
@@ -25,12 +27,13 @@ const MypageCommentItem = ({ data }: MypageCommentItemProps) => {
       )}
     >
       <header className="flex gap-[14px]">
-        <div className="my-2 size-[30px] rounded-full bg-slate-200" />
+        {/* <div className="my-2 size-[30px] rounded-full bg-slate-200" /> */}
+        <ProfileAvatar src={profileImg} size={30} />
 
         <span className="flex flex-col gap-[2px]">
           <span className="flex gap-[6px]">
-            {data.status === "admin" && <Chip label="관리자" type="admin" />}
-            <span className="text-body1-medium text-layout-header-default">{displayName}</span>
+            {status === "admin" && <Chip label="관리자" type="admin" />}
+            <span className="text-body1-medium text-layout-header-default">{nickname}</span>
           </span>
 
           {displayDate && (
@@ -41,7 +44,7 @@ const MypageCommentItem = ({ data }: MypageCommentItemProps) => {
         </span>
       </header>
 
-      <p className="text-body1-regular text-layout-header-default">{data.content}</p>
+      <p className="text-body1-regular text-layout-header-default">{content}</p>
     </article>
   );
 };
