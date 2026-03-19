@@ -11,10 +11,11 @@ interface useGetUserReportsParams {
   size?: number;
 }
 
-export const useGetUserReports = ({ keyword, size = 10 }: useGetUserReportsParams) => {
+export const useGetUserReports = ({ status, keyword, size = 10 }: useGetUserReportsParams) => {
   const isAuthInitialized = useAuthStore((state) => state.isAuthInitialized);
 
   const queryParams = new URLSearchParams();
+
   if (keyword) queryParams.set("keyword", keyword);
   if (status) queryParams.set("status", status);
   queryParams.set("size", size.toString());
@@ -23,7 +24,7 @@ export const useGetUserReports = ({ keyword, size = 10 }: useGetUserReportsParam
     MypageReportsResponseType,
     ApiBaseResponseType<null>,
     ReportItemType[]
-  >("auth", ["/users/me/reports", keyword], `/users/me/reports?${queryParams}`, {
+  >("auth", ["/reports/me", status, keyword], `/reports/me?${queryParams}`, {
     placeholderData: keepPreviousData,
     getNextPageParam: (lastPage) => lastPage.result.nextCursor ?? undefined,
     select: (data: InfiniteData<MypageReportsResponseType>) =>

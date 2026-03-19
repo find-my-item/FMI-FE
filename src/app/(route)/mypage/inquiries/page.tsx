@@ -1,8 +1,19 @@
 import { DetailHeader } from "@/components/layout";
 import { MypageRequestFilter, MypageRequestList, MypageSearch } from "@/components/domain";
-import { MOCK_MYPAGE_INQUIRIES } from "@/mock/data";
+import { useFilterParams } from "@/hooks/domain";
+import { useGetUserInquiries } from "@/api/fetch/user";
 
 const page = () => {
+  const { requestStatus } = useFilterParams();
+
+  const {
+    data: inquiriesData,
+    isLoading,
+    isError,
+  } = useGetUserInquiries({
+    status: requestStatus,
+  });
+
   return (
     <>
       <DetailHeader title="내 문의 내역" />
@@ -12,7 +23,11 @@ const page = () => {
 
         <MypageRequestFilter status="inquiries" />
 
-        <MypageRequestList listType="inquiries" data={MOCK_MYPAGE_INQUIRIES} />
+        {/* <MypageRequestList
+          listType="inquiries"
+          data={inquiriesData ?? []}
+          isLoading={isLoading}
+          isError={isError} /> */}
       </div>
     </>
   );

@@ -1,19 +1,8 @@
 import { DetailHeader } from "@/components/layout";
-import { MypageRequestFilter, MypageRequestList, MypageSearch } from "@/components/domain";
-import { useFilterParams } from "@/hooks/domain";
-import { useGetUserReports } from "@/api/fetch/user";
+import { MypageRequestFilter, MypageSearch } from "@/components/domain";
+import MypageReportsContent from "./_components/MypageReportsContent/MypageReportsContent";
 
 const page = () => {
-  const { requestStatus } = useFilterParams();
-
-  const {
-    data: reportsData,
-    isLoading,
-    isError,
-  } = useGetUserReports({
-    status: requestStatus,
-  });
-
   return (
     <>
       <DetailHeader title="내 신고 내역" />
@@ -23,12 +12,7 @@ const page = () => {
 
         <MypageRequestFilter status="reports" />
 
-        <MypageRequestList
-          listType="reports"
-          data={reportsData ?? []}
-          isLoading={isLoading}
-          isError={isError}
-        />
+        <MypageReportsContent />
       </div>
     </>
   );
