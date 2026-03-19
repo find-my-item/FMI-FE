@@ -1,48 +1,52 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useQuery } from "@tanstack/react-query";
+import { InfiniteData } from "@tanstack/react-query";
 import { PublicDataResponse } from "@/types";
 import { PUBLIC_CATEGORY_CODES } from "@/constants";
+import useAppInfiniteQuery from "@/api/_base/query/useAppInfiniteQuery";
 
 export const usePublicDataListQuery = () => {
   const searchParams = useSearchParams();
 
-  const type = searchParams.get("type") || "lost";
+  const typeParam = searchParams.get("type")?.toLowerCase() || "lost";
+  const type = typeParam === "found" ? "found" : "lost";
+
   const categoryValue = searchParams.get("category") || "";
   const region = searchParams.get("region") || "";
-  const pageNo = searchParams.get("page") || "1";
 
-  return useQuery<PublicDataResponse>({
-    queryKey: ["publicDataList", type, categoryValue, region, pageNo],
-    queryFn: async () => {
-      const params = new URLSearchParams();
+  const isLost = type === "lost";
+  const apiEndpoint = isLost ? "/public/lost" : "/public/found";
 
-      if (categoryValue) {
-        const categoryConfig = PUBLIC_CATEGORY_CODES.find((c) => c.value === categoryValue);
-        if (categoryConfig) {
-          params.append("PRDT_CL_CD_01", categoryConfig.value);
-        }
-      }
+  const params = new URLSearchParams();
+  if (categoryValue) {
+    const categoryConfig = PUBLIC_CATEGORY_CODES.find((c) => c.value === categoryValue);
+    if (categoryConfig) {
+      params.append("PRDT_CL_CD_01", categoryConfig.value);
+    }
+  }
 
-      const isLost = type === "lost";
-      const apiEndpoint = isLost ? "/api/public/lost" : "/api/public/found";
+  if (region) {
+    params.append(isLost ? "LST_LCT_CD" : "N_FD_LCT_CD", region);
+  }
 
-      if (region) {
-        params.append(isLost ? "LST_LCT_CD" : "N_FD_LCT_CD", region);
-      }
+  params.append("numOfRows", "10");
 
-      params.append("pageNo", pageNo);
-      params.append("numOfRows", "10");
+  const queryStr = params.toString();
+  const url = queryStr ? `${apiEndpoint}?${queryStr}` : apiEndpoint;
 
-      const response = await fetch(`${apiEndpoint}?${params.toString()}`);
-
-      if (!response.ok) {
-        throw new Error("데이터를 불러오지 못했어요");
-      }
-
-      return response.json();
-    },
-    staleTime: 1000 * 60 * 5,
-  });
+  return useAppInfiniteQuery<PublicDataResponse, Error, InfiniteData<PublicDataResponse>>(
+    "public",
+    ["publicDataList", type, categoryValue, region],
+    url,
+    {
+      pageParamName: "pageNo",
+      initialPageParam: 1,
+      getNextPageParam: (lastPage) => {
+        const { pageNo, numOfRows, totalCount } = lastPage;
+        const isLastPage = pageNo * numOfRows >= totalCount;
+        return isLastPage ? undefined : pageNo + 1;
+      },
+    }
+  );
 };
