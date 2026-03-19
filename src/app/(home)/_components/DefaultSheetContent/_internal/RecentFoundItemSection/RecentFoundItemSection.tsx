@@ -1,6 +1,6 @@
 "use client";
 
-import useRecentFound from "@/api/fetch/mapController/api/useRecentFound";
+import { useRecentFound } from "@/api/fetch/mapController";
 import MainCardList from "../MainCardList/MainCardList";
 import { useMainKakaoMapStore } from "@/store";
 import RecentFoundItemEmpty from "./RecentFoundItemEmpty";
