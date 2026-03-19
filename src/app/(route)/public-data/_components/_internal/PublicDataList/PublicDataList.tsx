@@ -3,20 +3,25 @@
 import { useEffect, useMemo } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useInView } from "react-intersection-observer";
 import { Chip, ListItemImage } from "@/components/common";
 import { EmptyState, LoadingState } from "@/components/state";
 import { cn, formatDate } from "@/utils";
+import { useInfiniteScroll } from "@/hooks";
 import { PublicDataItem, PublicDataResponse } from "@/types";
 import { useToast } from "@/context/ToastContext";
 import { usePublicDataListQuery } from "../../../_hooks/usePublicDataListQuery/usePublicDataListQuery";
 
 const PublicDataList = () => {
   const { addToast } = useToast();
-  const { ref, inView } = useInView();
 
   const { data, isLoading, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =
     usePublicDataListQuery();
+
+  const { ref } = useInfiniteScroll({
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  });
 
   const items = useMemo(() => {
     if (!data?.pages) return [];
@@ -25,12 +30,6 @@ const PublicDataList = () => {
       return Array.isArray(itemData) ? itemData : [itemData];
     }) as PublicDataItem[];
   }, [data?.pages]);
-
-  useEffect(() => {
-    if (inView && hasNextPage && !isFetchingNextPage) {
-      fetchNextPage();
-    }
-  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   useEffect(() => {
     if (isError) {
@@ -60,6 +59,7 @@ const PublicDataList = () => {
         ))}
       </ul>
       {hasNextPage && <div ref={ref} className="h-10 w-full" />}
+      {isFetchingNextPage && <LoadingState />}
     </section>
   );
 };
@@ -69,6 +69,7 @@ export default PublicDataList;
 interface PublicDataItemCardProps {
   item: PublicDataItem;
 }
+
 const NO_IMAGE_URL = "https://minwon24.police.go.kr/images/sub/img02_no_img.gif";
 
 const PublicDataItemCard = ({ item }: PublicDataItemCardProps) => {
@@ -110,6 +111,7 @@ const PublicDataItemCard = ({ item }: PublicDataItemCardProps) => {
                 <time dateTime={item.fdYmd}>{formatDate(item.fdYmd)}</time>
               </span>
             </div>
+
             {isLost && (
               <div className="text-neutral-normal-default">
                 {/* TODO(지권): 디자인 토큰 누락 */}
