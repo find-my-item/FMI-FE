@@ -2,15 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import MainCardList from "./MainCardList/MainCardList";
 
-// TODO(지권): 경로 수정 필요
 const POLICE_ITEMS = [
   {
-    href: "http://localhost:3000/public-data?type=lost",
+    href: "https://www.finditem.kr/public-data?type=lost",
     headLabel: "분실",
     label: "했어요",
   },
   {
-    href: "http://localhost:3000/public-data?type=found",
+    href: "https://www.finditem.kr/public-data?type=found",
     headLabel: "발견",
     label: "했어요",
   },

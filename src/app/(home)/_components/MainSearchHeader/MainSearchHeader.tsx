@@ -5,7 +5,6 @@ import { Icon } from "@/components/common";
 import { useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/utils";
 import { Suspense, useRef, useState } from "react";
-import SideBar from "./_internal/SideBar";
 import SearchFocusDropdown from "../SearchFocusDropdown/SearchFocusDropdown";
 import MainSearchLayout from "../MainSearchLayout/MainSearchLayout";
 
@@ -96,8 +95,6 @@ const HeaderContent = ({ setFocused, focused }: FocusedProps) => {
 };
 
 const MainSearchHeader = () => {
-  // TODO(형준): 임시 사이드바 추가, 향후 제거
-  const [isOpen, setIsOpen] = useState(false);
   const [focused, setFocused] = useState(false);
 
   return (
@@ -106,12 +103,8 @@ const MainSearchHeader = () => {
         <div className="relative">
           <HeaderContent setFocused={setFocused} focused={focused} />
           <SearchFocusDropdown focused={focused} />
-          <button onClick={() => setIsOpen(!isOpen)} className="absolute right-5 top-4 z-50">
-            <Icon name="Menu" title="메뉴 열기" />
-          </button>
         </div>
       </MainSearchLayout>
-      <SideBar isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </Suspense>
   );
 };
