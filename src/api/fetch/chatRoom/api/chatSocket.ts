@@ -1,5 +1,6 @@
 import { Client, IMessage, StompSubscription } from "@stomp/stompjs";
 import authApi from "@/api/_base/axios/authApi";
+import { retryBackoffController } from "@/utils";
 
 export type MessageHandler<T = any> = (message: T) => void;
 
@@ -14,8 +15,11 @@ let isReconnecting = false;
 const RECONNECT_BASE_DELAY_MS = 1000;
 const RECONNECT_MAX_DELAY_MS = 30000;
 const RECONNECT_JITTER_RATIO = 0.2;
-let reconnectAttempt = 0;
-let reconnectTimeoutId: ReturnType<typeof setTimeout> | null = null;
+const reconnectRetryController = retryBackoffController({
+  baseDelayMs: RECONNECT_BASE_DELAY_MS,
+  maxDelayMs: RECONNECT_MAX_DELAY_MS,
+  jitterRatio: RECONNECT_JITTER_RATIO,
+});
 
 let tokenRefreshHandler: (() => void) | null = null;
 
@@ -23,17 +27,7 @@ const MAX_AUTH_REFRESH_FAILURES = 1;
 let consecutiveAuthRefreshFailures = 0;
 let isAuthInvalid = false;
 
-const calcReconnectDelayMs = (attempt: number) => {
-  const exponential = RECONNECT_BASE_DELAY_MS * 2 ** attempt;
-  const capped = Math.min(exponential, RECONNECT_MAX_DELAY_MS);
-
-  const jitter = capped * RECONNECT_JITTER_RATIO * (Math.random() * 2 - 1);
-  return Math.max(0, Math.floor(capped + jitter));
-};
-
 const performReconnectChatSocket = async () => {
-  reconnectTimeoutId = null;
-
   if (isReconnecting) return;
   if (isAuthInvalid) return;
   isReconnecting = true;
@@ -89,24 +83,7 @@ const scheduleReconnectChatSocket = ({
   if (isAuthInvalid) return;
   if (isReconnecting) return;
 
-  if (resetAttempt) {
-    reconnectAttempt = 0;
-  }
-
-  if (reconnectTimeoutId && !immediate) return;
-
-  if (reconnectTimeoutId) {
-    clearTimeout(reconnectTimeoutId);
-    reconnectTimeoutId = null;
-  }
-
-  const nextAttempt = resetAttempt ? 0 : reconnectAttempt + 1;
-  reconnectAttempt = nextAttempt;
-  const delayMs = immediate ? 0 : calcReconnectDelayMs(nextAttempt);
-
-  reconnectTimeoutId = setTimeout(() => {
-    void performReconnectChatSocket();
-  }, delayMs);
+  reconnectRetryController.schedule(performReconnectChatSocket, { immediate, resetAttempt });
 };
 
 export const connectChatSocket = () => {
@@ -116,6 +93,9 @@ export const connectChatSocket = () => {
     client.deactivate();
     client = null;
   }
+
+  // 성공적으로 연결할 것이므로 재시도 상태(백오프/대기 타이머)를 초기화합니다.
+  reconnectRetryController.reset();
 
   client = new Client({
     brokerURL: process.env.NODE_ENV === "development" ? "/api/ws" : "wss://www.finditem.kr/ws",
@@ -130,13 +110,9 @@ export const connectChatSocket = () => {
     onConnect: () => {
       console.log("[STOMP] connected");
       isReconnecting = false;
-      reconnectAttempt = 0;
       isAuthInvalid = false;
       consecutiveAuthRefreshFailures = 0;
-      if (reconnectTimeoutId) {
-        clearTimeout(reconnectTimeoutId);
-        reconnectTimeoutId = null;
-      }
+      reconnectRetryController.reset();
 
       pendingSubscriptions.forEach((subscribe) => subscribe());
       pendingSubscriptions = [];
@@ -199,11 +175,7 @@ export const disconnectChatSocket = () => {
 
   pendingSubscriptions = [];
   isReconnecting = false;
-  reconnectAttempt = 0;
-  if (reconnectTimeoutId) {
-    clearTimeout(reconnectTimeoutId);
-    reconnectTimeoutId = null;
-  }
+  reconnectRetryController.cancel();
 
   if (typeof window !== "undefined" && tokenRefreshHandler) {
     window.removeEventListener("tokenRefreshed", tokenRefreshHandler);
