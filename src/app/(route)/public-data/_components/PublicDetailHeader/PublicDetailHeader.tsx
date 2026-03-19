@@ -4,11 +4,7 @@ import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { DetailHeader } from "@/components/layout";
 import { HeaderSearch } from "@/components/layout/DetailHeader/DetailHeaderParts";
-
-const SEARCH_PATH = {
-  lost: "/public-data/lost/search",
-  found: "/public-data/found/search",
-} as const;
+import { SEARCH_PATH } from "../../_constants/PUBLIC_SEARCH_PATH";
 
 const PublicDetailHeader = () => {
   const router = useRouter();

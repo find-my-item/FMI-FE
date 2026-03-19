@@ -1,5 +1,7 @@
+import { PublicDataTabType } from "@/app/(route)/public-data/_types/PublicDataTabType";
 import { PublicDataItemCard } from "../../../../_components/_internal";
 
+// TODO(지권): 기능 개발 후 삭제
 const items = Array.from({ length: 10 }).map((_, index) => ({
   atcId: `${index}`,
   depPlace: "분실장소",
@@ -11,7 +13,11 @@ const items = Array.from({ length: 10 }).map((_, index) => ({
   rnum: `${index}`,
 }));
 
-const PublicDataSearchList = () => {
+interface PublicDataSearchListProps {
+  type: PublicDataTabType;
+}
+
+const PublicDataSearchList = ({ type }: PublicDataSearchListProps) => {
   return (
     <section>
       <ul>
