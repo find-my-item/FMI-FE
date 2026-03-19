@@ -1,4 +1,2 @@
-export { default as FooterItem } from "./FooterItem";
-export { default as LoginRequiredNotice } from "./LoginRequiredNotice";
-export * from "./CONST_FOOTER";
-export { default as useLoginNoticeTimer } from "./useLoginNoticeTimer";
+export { default as FooterItem } from "./FooterItem/FooterItem";
+export { default as LoginRequiredNotice } from "./LoginRequiredNotice/LoginRequiredNotice";

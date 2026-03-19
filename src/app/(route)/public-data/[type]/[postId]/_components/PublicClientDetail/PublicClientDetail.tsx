@@ -18,8 +18,8 @@ const PublicClientDetail = ({ id }: { id: string }) => {
   const { isLost, headerData, itemData, title, content, place, office, tel, imageSrc } = detailData;
 
   const metaData = {
-    title: title || "찾아줘 공지사항 공유",
-    summary: content || "공지사항을 확인해보세요",
+    title: title || "찾아줘 경찰청 데이터 공유",
+    summary: content || "경찰청 데이터를 확인해보세요",
     thumbnailUrl: imageSrc,
     likeCount: 0,
     commentCount: 0,
