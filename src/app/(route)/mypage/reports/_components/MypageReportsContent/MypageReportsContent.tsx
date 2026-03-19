@@ -11,9 +11,9 @@ import Link from "next/link";
 import { useEffect } from "react";
 
 export const REPORT_STATUS_CHIP = {
-  PENDING: { label: "접수", chipType: "brandSubtle" },
+  PENDING: { label: "접수", chipType: "neutralStrong" },
   REVIEWED: { label: "처리 중", chipType: "brandSubtle" },
-  RESOLVED: { label: "처리 완료", chipType: "neutralStrong" },
+  RESOLVED: { label: "처리 완료", chipType: "brandNormal" },
 } as const;
 
 interface MypageReportsItemProps {
@@ -24,7 +24,7 @@ const MypageReportsItem = ({ reports }: MypageReportsItemProps) => {
   const { reportId, targetId, targetTitle, targetType, reason, status, createdAt, resolvedAt } =
     reports;
   return (
-    <li>
+    <li className="flex w-full flex-col justify-between border-b border-divider-default px-5 py-[30px]">
       <Link href={`/mypage/reports/${reportId}`}>
         <Chip label={REPORT_STATUS_CHIP[status].label} type={REPORT_STATUS_CHIP[status].chipType} />
 
