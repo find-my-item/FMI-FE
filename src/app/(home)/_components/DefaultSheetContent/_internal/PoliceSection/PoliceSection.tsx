@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import MainCardList from "./MainCardList/MainCardList";
+import MainCardList from "../MainCardList/MainCardList";
 
 const POLICE_ITEMS = [
   {

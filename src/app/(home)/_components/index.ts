@@ -5,3 +5,4 @@ export { default as MainSearchHeader } from "./MainSearchHeader/MainSearchHeader
 export { default as MainSearchLayout } from "./MainSearchLayout/MainSearchLayout";
 export { default as SearchFocusDropdown } from "./SearchFocusDropdown/SearchFocusDropdown";
 export { default as MainKakaoMap } from "./MainKakaoMap/MainKakaoMap";
+export { default as MyLocationButton } from "./MyLocationButton/MyLocationButton";
