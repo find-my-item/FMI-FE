@@ -1,13 +1,13 @@
 "use client";
 
-import type { DefaultSheetContentHeights } from "../BottomSheet/_internal";
 import {
   LostFindActions,
   PoliceSection,
   RecentFoundItemSection,
   SupportLinkSection,
-  useSectionHeights,
 } from "./_internal";
+import useSectionHeights from "../../_hooks/useSectionHeights";
+import { DefaultSheetContentHeights } from "../../_utils/heightUtils";
 
 interface DefaultSheetContentProps {
   onSectionHeights?: (heights: DefaultSheetContentHeights) => void;

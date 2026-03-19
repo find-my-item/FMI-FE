@@ -1,5 +1,4 @@
-import { BaseKakaoMap } from "@/components/domain";
-import { BottomSheet, MainSearchHeader } from "./_components";
+import { BottomSheet, MainKakaoMap, MainSearchHeader } from "./_components";
 import type { Metadata } from "next";
 
 interface PageProps {
@@ -30,7 +29,7 @@ const Page = () => {
   return (
     <div className="h-[calc(100dvh-87px)]">
       <MainSearchHeader />
-      <BaseKakaoMap center={{ lat: 37.5665, lng: 126.978 }} showMarker={false} />
+      <MainKakaoMap />
       <BottomSheet />
     </div>
   );

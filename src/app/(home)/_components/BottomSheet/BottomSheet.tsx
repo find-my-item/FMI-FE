@@ -3,10 +3,12 @@
 import { motion } from "framer-motion";
 import { Suspense, useCallback, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import type { DefaultSheetContentHeights } from "./_internal";
-import { BOTTOM_OFFSET_PX, useBottomSheetHeight, MyLocationButton } from "./_internal";
+import { BOTTOM_OFFSET_PX } from "../../_constants/HEIGHT_PX";
+import useBottomSheetHeight from "../../_hooks/useBottomSheetHeight";
+import MyLocationButton from "../MyLocationButton/MyLocationButton";
 import DefaultSheetContent from "../DefaultSheetContent/DefaultSheetContent";
 import PostSheetContent from "../PostSheetContent/PostSheetContent";
+import { DefaultSheetContentHeights } from "../../_utils/heightUtils";
 
 const BottomSheetContent = () => {
   const searchParams = useSearchParams();
