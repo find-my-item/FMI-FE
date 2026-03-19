@@ -1,6 +1,6 @@
 "use client";
 
-import { CSSProperties, ReactNode, useState } from "react";
+import { CSSProperties, ReactNode, useEffect, useState } from "react";
 import { Map, MapMarker, Circle, useKakaoLoader } from "react-kakao-maps-sdk";
 import { MapErrorState, MapLoadingState } from "@/components/domain/BaseKakaoMap/_internal";
 
@@ -119,6 +119,10 @@ const BaseKakaoMap = ({
   });
 
   const [mapCenter, setMapCenter] = useState(center);
+
+  useEffect(() => {
+    setMapCenter(center);
+  }, [center]);
 
   if (loading) return <MapLoadingState />;
   if (error) return <MapErrorState />;
