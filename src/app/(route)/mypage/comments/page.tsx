@@ -1,5 +1,5 @@
 import { DetailHeader } from "@/components/layout";
-import { MypageCommentsFilterSection, MypageCommentsList } from "./_components";
+import { MypageCommentsContent, MypageCommentsFilterSection } from "./_components";
 import { MypageSearch } from "@/components/domain";
 
 const page = () => {
@@ -12,7 +12,7 @@ const page = () => {
 
         <MypageCommentsFilterSection />
 
-        <MypageCommentsList />
+        <MypageCommentsContent />
       </div>
     </>
   );

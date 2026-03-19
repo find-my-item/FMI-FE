@@ -1,3 +1,2 @@
-export { default as InquiryInput } from "./InquiryInput/InquiryInput";
-export { default as InquiryCategoryButton } from "./InquiryCategoryButton/InquiryCategoryButton";
-export { default as InquiryTextarea } from "./InquiryTextarea/InquiryTextarea";
+export { default as InquiryWriteForm } from "./InquiryWriteForm/InquiryWriteForm";
+export { default as InquiryWriteDetailHeader } from "./InquiryWriteDetailHeader/InquiryWriteDetailHeader";
