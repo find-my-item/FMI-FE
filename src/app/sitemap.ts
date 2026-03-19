@@ -4,7 +4,6 @@ import { NoticeItem } from "@/api/fetch/notice/types/NoticesType";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://www.finditem.kr";
-  // TODO(지권): 대체 경로 수정 필요
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://api.finditem.kr";
 
   // 기본 정적 라우트

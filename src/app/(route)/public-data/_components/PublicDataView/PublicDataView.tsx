@@ -1,3 +1,5 @@
+"use client";
+
 import { Tab } from "@/components/domain";
 import { PublicDataFilterSection, PublicDataList } from "../_internal";
 import { usePublicDataTabQuery } from "../../_hooks/usePublicDataTabQuery/usePublicDataTabQuery";
