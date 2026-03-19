@@ -178,7 +178,6 @@ const CommentItem = ({
             />
           ))}
 
-          {/* TODO(지권): 댓글 더보기 임시 디자인 */}
           {replyCommentData?.hasNext && (
             <div className="px-5 py-2">
               <ViewMoreComment

@@ -4,7 +4,7 @@ import { Badge, Chip, Icon, ListItemImage } from "@/components/common";
 import { cn, formatDate, getItemCategoryLabel, getItemStatusLabel, highlightText } from "@/utils";
 
 interface PostListItemProps {
-  post: PostItem | any; // TODO(지권): 각 페이지에 맞는 타입 추가해주세요
+  post: PostItem | any; // 각 페이지에 맞는 타입 추가해주세요
   linkState?: "notice" | "list";
   keyword?: string;
 }
