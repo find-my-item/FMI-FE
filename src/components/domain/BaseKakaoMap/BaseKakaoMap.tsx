@@ -1,6 +1,6 @@
 "use client";
 
-import { CSSProperties, ReactNode, useState } from "react";
+import { CSSProperties, ReactNode, useEffect, useState } from "react";
 import { Map, MapMarker, Circle, useKakaoLoader } from "react-kakao-maps-sdk";
 import { MapErrorState, MapLoadingState } from "@/components/domain/BaseKakaoMap/_internal";
 
@@ -92,6 +92,7 @@ interface BaseKakaoMapProps {
 
   /** events */
   onDragEnd?: (center: LatLng) => void;
+  onLevelChange?: (level: number) => void;
 
   /** overlay ui */
   children?: ReactNode;
@@ -111,6 +112,7 @@ const BaseKakaoMap = ({
   showCircle = false,
 
   onDragEnd,
+  onLevelChange,
   children,
 }: BaseKakaoMapProps) => {
   const [loading, error] = useKakaoLoader({
@@ -119,6 +121,10 @@ const BaseKakaoMap = ({
   });
 
   const [mapCenter, setMapCenter] = useState(center);
+
+  useEffect(() => {
+    setMapCenter(center);
+  }, [center]);
 
   if (loading) return <MapLoadingState />;
   if (error) return <MapErrorState />;
@@ -130,6 +136,10 @@ const BaseKakaoMap = ({
         level={level}
         draggable={draggable}
         style={style}
+        onZoomChanged={(map) => {
+          if (!onLevelChange) return;
+          onLevelChange(map.getLevel());
+        }}
         onDragEnd={(map) => {
           if (!onDragEnd) return;
           const latlng = map.getCenter();
