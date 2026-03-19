@@ -8,6 +8,8 @@ interface MainKakaoMapStore {
   setLatLng: (latLng: { lat: number; lng: number }) => void;
   address: string;
   clearLatLng: () => void;
+  levelResetSignal: number;
+  triggerLevelReset: () => void;
 }
 
 const extractDongAddress = (address: string): string => {
@@ -34,6 +36,7 @@ export const useMainKakaoMapStore = create<MainKakaoMapStore>()(
     (set) => ({
       latLng: DEFAULT_LAT_LNG,
       address: DEFAULT_ADDRESS,
+      levelResetSignal: 0,
       setLatLng: (latLng) => {
         set({ latLng });
 
@@ -51,6 +54,10 @@ export const useMainKakaoMapStore = create<MainKakaoMapStore>()(
           latLng: DEFAULT_LAT_LNG,
           address: DEFAULT_ADDRESS,
         }),
+      triggerLevelReset: () =>
+        set((state) => ({
+          levelResetSignal: state.levelResetSignal + 1,
+        })),
     }),
     {
       name: "main-kakao-map-store",

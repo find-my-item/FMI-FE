@@ -6,7 +6,7 @@ import { useMainKakaoMapStore } from "@/utils/store/store";
 import { DEFAULT_LAT_LNG } from "@/constants";
 
 const MainKakaoMap = () => {
-  const { latLng, setLatLng, clearLatLng } = useMainKakaoMapStore();
+  const { latLng, setLatLng, clearLatLng, levelResetSignal } = useMainKakaoMapStore();
   const [isPermissionResolved, setIsPermissionResolved] = useState(false);
   const [mapCenter, setMapCenter] = useState(DEFAULT_LAT_LNG);
 
@@ -44,7 +44,9 @@ const MainKakaoMap = () => {
 
   return (
     <BaseKakaoMap
+      key={levelResetSignal}
       center={mapCenter}
+      level={6}
       showMarker
       draggable
       onDragEnd={(nextCenter) => {

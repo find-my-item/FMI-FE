@@ -11,7 +11,7 @@ interface MyLocationButtonProps {
 const MyLocationButton = ({ isFullyExpanded }: MyLocationButtonProps) => {
   if (isFullyExpanded) return null;
 
-  const { setLatLng, clearLatLng } = useMainKakaoMapStore();
+  const { setLatLng, clearLatLng, triggerLevelReset } = useMainKakaoMapStore();
 
   useEffect(() => {
     const checkGeolocationPermission = async () => {
@@ -42,12 +42,14 @@ const MyLocationButton = ({ isFullyExpanded }: MyLocationButtonProps) => {
 
     navigator.geolocation.getCurrentPosition(
       ({ coords }) => {
+        triggerLevelReset();
         setLatLng({
           lat: coords.latitude,
           lng: coords.longitude,
         });
       },
       () => {
+        triggerLevelReset();
         clearLatLng();
       }
     );
