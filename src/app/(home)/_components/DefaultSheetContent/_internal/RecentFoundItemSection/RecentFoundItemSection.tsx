@@ -4,6 +4,7 @@ import useRecentFound from "@/api/fetch/mapController/api/useRecentFound";
 import MainCardList from "../MainCardList/MainCardList";
 import { useMainKakaoMapStore } from "@/store";
 import RecentFoundItemEmpty from "./RecentFoundItemEmpty";
+import { RecentFoundItem } from "@/api/fetch/mapController";
 
 const RecentFoundItemSection = () => {
   const { address } = useMainKakaoMapStore();
@@ -11,12 +12,14 @@ const RecentFoundItemSection = () => {
 
   if (recentFoundItems?.result?.length === 0) return <RecentFoundItemEmpty />;
 
-  const data = recentFoundItems?.result?.map((item) => ({
-    postId: item.postId,
-    title: item.title,
-    thumbnailImageUrl: item.thumbnailImageUrl,
-    createdAt: item.createdAt,
-  }));
+  const data = recentFoundItems?.result?.map(
+    ({ postId, title, thumbnailImageUrl, createdAt }: RecentFoundItem) => ({
+      postId,
+      title,
+      thumbnailImageUrl,
+      createdAt,
+    })
+  );
 
   return (
     <section className="space-y-2">
