@@ -4,6 +4,7 @@ export * from "./types/MypagePostsResponseType";
 export * from "./types/MypageActivityResponse";
 export * from "./types/MypageReportsResponseType";
 export * from "./types/MypageInquiriesResponseType";
+export * from "./types/MypageCommentsResponseType";
 
 export { useGetUserProfileById } from "./api/useGetUserProfileById";
 export { useGetUsersMe } from "./api/useGetUsersMe";
@@ -15,3 +16,4 @@ export { usePostChangePassword } from "./api/usePostChangePassword";
 export { useGetUserActivity } from "./api/useGetUserActivity";
 export { useGetUserReports } from "./api/useGetUserReports";
 export { useGetUserInquiries } from "./api/useGetUserInquiries";
+export { useGetUserComments } from "./api/useGetUserComments";

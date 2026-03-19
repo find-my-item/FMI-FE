@@ -1,28 +1,43 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Chip, ListItemImage } from "@/components/common";
 import { EmptyState, LoadingState } from "@/components/state";
 import { cn, formatDate } from "@/utils";
-import { PublicDataItem } from "@/types";
+import { useInfiniteScroll } from "@/hooks";
+import { PublicDataItem, PublicDataResponse } from "@/types";
 import { useToast } from "@/context/ToastContext";
 import { usePublicDataListQuery } from "../../../_hooks/usePublicDataListQuery/usePublicDataListQuery";
 
 const PublicDataList = () => {
   const { addToast } = useToast();
-  const { data, isLoading, isError } = usePublicDataListQuery();
+
+  const { data, isLoading, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    usePublicDataListQuery();
+
+  const { ref } = useInfiniteScroll({
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  });
+
+  const items = useMemo(() => {
+    if (!data?.pages) return [];
+    return data.pages.flatMap((page: PublicDataResponse) => {
+      const itemData = page?.items?.item || [];
+      return Array.isArray(itemData) ? itemData : [itemData];
+    }) as PublicDataItem[];
+  }, [data?.pages]);
 
   useEffect(() => {
     if (isError) {
       addToast("데이터를 불러오지 못했어요.", "error");
     }
-  }, [isError]);
+  }, [isError, addToast]);
 
   if (isLoading) return <LoadingState />;
-
-  const items = (data?.items?.item || []) as PublicDataItem[];
 
   if (items.length === 0) {
     return (
@@ -39,10 +54,12 @@ const PublicDataList = () => {
   return (
     <section aria-label="목록">
       <ul>
-        {items.map((item) => (
-          <PublicDataItemCard key={item.atcId} item={item} />
+        {items.map((item, index) => (
+          <PublicDataItemCard key={`${item.atcId}-${index}`} item={item} />
         ))}
       </ul>
+      {hasNextPage && <div ref={ref} className="h-10 w-full" />}
+      {isFetchingNextPage && <LoadingState />}
     </section>
   );
 };
@@ -52,6 +69,7 @@ export default PublicDataList;
 interface PublicDataItemCardProps {
   item: PublicDataItem;
 }
+
 const NO_IMAGE_URL = "https://minwon24.police.go.kr/images/sub/img02_no_img.gif";
 
 const PublicDataItemCard = ({ item }: PublicDataItemCardProps) => {
@@ -93,6 +111,7 @@ const PublicDataItemCard = ({ item }: PublicDataItemCardProps) => {
                 <time dateTime={item.fdYmd}>{formatDate(item.fdYmd)}</time>
               </span>
             </div>
+
             {isLost && (
               <div className="text-neutral-normal-default">
                 {/* TODO(지권): 디자인 토큰 누락 */}

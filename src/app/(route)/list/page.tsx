@@ -6,8 +6,6 @@ interface PageProps {
   searchParams: Promise<{ type?: string; keyword?: string }>;
 }
 
-type PostType = "lost" | "found" | undefined;
-
 const getPostType = (type?: string) => {
   if (type === "lost") return "분실한";
   if (type === "found") return "발견된";

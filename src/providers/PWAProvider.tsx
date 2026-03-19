@@ -7,8 +7,6 @@ interface BeforeInstallPromptEvent extends Event {
   userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
 }
 
-// TODO(지권): 배포 후 모바일 테스트 필요
-
 interface PWAContextType {
   canInstall: boolean;
   showPrompt: boolean;
