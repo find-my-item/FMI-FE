@@ -1,17 +1,20 @@
 import useAppInfiniteQuery from "@/api/_base/query/useAppInfiniteQuery";
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 import { useAuthStore } from "@/store";
-import { MypageReportsResponseType, ReportItemType } from "../types/MypageReportsResponseType";
 import { InfiniteData, keepPreviousData } from "@tanstack/react-query";
 import { RequestType } from "@/types";
+import {
+  InquiriesItemType,
+  MypageInquiriesResponseType,
+} from "../types/MypageInquiriesResponseType";
 
-interface useGetUserReportsParams {
+interface useGetUserInquiriesParams {
   status?: RequestType;
   keyword?: string;
   size?: number;
 }
 
-export const useGetUserReports = ({ keyword, size = 10 }: useGetUserReportsParams) => {
+export const useGetUserInquiries = ({ status, keyword, size = 10 }: useGetUserInquiriesParams) => {
   const isAuthInitialized = useAuthStore((state) => state.isAuthInitialized);
 
   const queryParams = new URLSearchParams();
@@ -20,13 +23,13 @@ export const useGetUserReports = ({ keyword, size = 10 }: useGetUserReportsParam
   queryParams.set("size", size.toString());
 
   return useAppInfiniteQuery<
-    MypageReportsResponseType,
+    MypageInquiriesResponseType,
     ApiBaseResponseType<null>,
-    ReportItemType[]
-  >("auth", ["/users/me/reports", keyword], `/users/me/reports?${queryParams}`, {
+    InquiriesItemType[]
+  >("auth", ["/users/me/inquiries", keyword], `/users/me/inquiries?${queryParams}`, {
     placeholderData: keepPreviousData,
     getNextPageParam: (lastPage) => lastPage.result.nextCursor ?? undefined,
-    select: (data: InfiniteData<MypageReportsResponseType>) =>
+    select: (data: InfiniteData<MypageInquiriesResponseType>) =>
       data.pages.flatMap((page) => page.result.content),
     enabled: isAuthInitialized,
   });

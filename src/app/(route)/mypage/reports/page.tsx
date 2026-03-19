@@ -1,8 +1,19 @@
 import { DetailHeader } from "@/components/layout";
 import { MypageRequestFilter, MypageRequestList, MypageSearch } from "@/components/domain";
-import { MOCK_MYPAGE_REPORTS } from "@/mock/data";
+import { useFilterParams } from "@/hooks/domain";
+import { useGetUserReports } from "@/api/fetch/user";
 
 const page = () => {
+  const { requestStatus } = useFilterParams();
+
+  const {
+    data: reportsData,
+    isLoading,
+    isError,
+  } = useGetUserReports({
+    status: requestStatus,
+  });
+
   return (
     <>
       <DetailHeader title="내 신고 내역" />
@@ -12,7 +23,12 @@ const page = () => {
 
         <MypageRequestFilter status="reports" />
 
-        <MypageRequestList listType="reports" data={MOCK_MYPAGE_REPORTS} />
+        <MypageRequestList
+          listType="reports"
+          data={reportsData ?? []}
+          isLoading={isLoading}
+          isError={isError}
+        />
       </div>
     </>
   );

@@ -1,6 +1,7 @@
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 
 export interface MypageReportsResponseType extends ApiBaseResponseType<MypageReportType> {}
+
 export interface MypageReportType {
   content: ReportItemType[];
   nextCursor: number;
