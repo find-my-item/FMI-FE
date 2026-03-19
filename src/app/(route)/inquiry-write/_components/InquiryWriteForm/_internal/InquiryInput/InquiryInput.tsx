@@ -4,7 +4,7 @@ import { useHorizontalDragScroll } from "@/hooks";
 import { cn } from "@/utils";
 import { InputHTMLAttributes } from "react";
 import { FieldValues, useFormContext, UseFormSetValue, useWatch } from "react-hook-form";
-import { EMAIL_AUTO_COMPLETE_LIST } from "./_internal/EMAIL_AUTO_COMPLETE_LIST";
+import { EMAIL_AUTO_COMPLETE_LIST } from "./EMAIL_AUTO_COMPLETE_LIST";
 
 interface InquiryInputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
@@ -55,7 +55,7 @@ const InquiryInput = ({ name, className, disabled, ...props }: InquiryInputProps
   const hasInputValue = emailValue.length > 0;
   const shouldShowEmailAutoComplete =
     isEmailField && emailValue.length > 0 && !emailValue.includes("@");
-  const shouldShowDeleteButton = hasInputValue || disabled === false;
+  const shouldShowDeleteButton = hasInputValue && !disabled;
 
   return (
     <div>

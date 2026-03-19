@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FooterLinkHref } from "./CONST_FOOTER";
+import { FooterLinkHref } from "../_constants/CONST_FOOTER";
 
 const useLoginNoticeTimer = () => {
   const [loginNoticeFor, setLoginNoticeFor] = useState<FooterLinkHref | null>(null);
