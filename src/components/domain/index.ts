@@ -8,7 +8,7 @@ export { default as PostListItem } from "./PostListItem/PostListItem";
 export { default as MypageSearch } from "./MypageSearch/MypageSearch";
 export { default as MypageEmptyUI } from "./MypageEmptyUI/MypageEmptyUI";
 export { default as MypageRequestFilter } from "./MypageRequest/MypageRequestFilter/MypageRequestFilter";
-export { default as MypageRequestList } from "./MypageRequest/MypageRequestList/MypageRequestList";
+// export { default as MypageRequestList } from "./MypageRequest/MypageRequestList/MypageRequestList";
 export { default as MypageRequestDetailContainer } from "./MypageRequest/MypageRequestDetailContainer/MypageRequestDetailContainer";
 export { default as MypageCommentItem } from "./MypageRequest/MypageCommentItem/MypageCommentItem";
 export { default as CommentCard } from "./CommentCard/CommentCard";

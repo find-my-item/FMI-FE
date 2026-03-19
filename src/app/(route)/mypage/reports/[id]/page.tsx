@@ -3,13 +3,12 @@ import { DetailHeader } from "@/components/layout";
 import { MypageReportsIdContainer } from "./_components";
 
 interface PageProps {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }>;
 }
 
-const page = ({ params }: PageProps) => {
-  const reportId = Number(params.id);
+const page = async ({ params }: PageProps) => {
+  const { id } = await params;
+  const reportId = Number(id);
 
   return (
     <>
