@@ -15,12 +15,6 @@
  * - CARD: 카드
  * - ETC: 기타
  *
- * - LOST: 분실
- * - FOUND: 제보
- *
- * - SEARCHING: 찾는중
- * - FOUND: 찾았음
- *
  * @description PostType
  * - LOST: 분실
  * - FOUND: 제보

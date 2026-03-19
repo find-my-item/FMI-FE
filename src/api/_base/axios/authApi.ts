@@ -22,7 +22,7 @@ authApi.interceptors.response.use(
     const isAlreadyRetried = originalRequest._retry;
     const isRefreshRequest = originalRequest.url?.includes("auth/refresh");
 
-    if (isRefreshRequest) {
+    if (isRefreshRequest || originalRequest.url?.includes("auth/login")) {
       return Promise.reject(error);
     }
 

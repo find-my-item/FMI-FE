@@ -1,39 +1,23 @@
-import { FilterSection, Tab } from "@/components/domain";
-import { useRouter, useSearchParams } from "next/navigation";
-import { PublicDataList } from "../_internal";
+"use client";
 
-type PublicDataTabType = "lost" | "found";
-
-const TABS: { label: string; key: PublicDataTabType }[] = [
-  { label: "분실", key: "lost" },
-  { label: "습득", key: "found" },
-];
+import { Tab } from "@/components/domain";
+import { PublicDataFilterSection, PublicDataList } from "../_internal";
+import { usePublicDataTabQuery } from "../../_hooks/usePublicDataTabQuery/usePublicDataTabQuery";
 
 const PublicDataView = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  const activeTab: PublicDataTabType = searchParams.get("type") === "lost" ? "lost" : "found";
-
-  const handleTabChange = (key: PublicDataTabType) => {
-    const params = new URLSearchParams(searchParams.toString());
-
-    params.set("type", key);
-
-    router.replace(`/public-data?${params.toString()}`);
-  };
+  const { PUBLIC_LIST_TABS, activeTab, handleTabChange } = usePublicDataTabQuery();
 
   return (
     <>
       <Tab
-        tabs={TABS}
+        tabs={PUBLIC_LIST_TABS}
         selected={activeTab}
         onValueChange={(key) => handleTabChange(key)}
         className="sticky left-0 top-[56px]"
       />
 
-      <div className="h-base">
-        <FilterSection pageType="PUBLIC_DATA" />
+      <div>
+        <PublicDataFilterSection />
 
         <PublicDataList />
       </div>

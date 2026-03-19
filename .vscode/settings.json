@@ -4,6 +4,8 @@
     "autodocs",
     "clusterer",
     "dapi",
+    "daum",
+    "hanmail",
     "hyungjun",
     "inversed",
     "jikwon",
@@ -11,11 +13,12 @@
     "myeon",
     "noimageindex",
     "pageable",
+    "Prdt",
+    "rnum",
+    "Sbjt",
     "sido",
     "sigungu",
     "suhyeon",
-    "vworld",
-    "daum",
-    "hanmail"
+    "vworld"
   ]
 }
