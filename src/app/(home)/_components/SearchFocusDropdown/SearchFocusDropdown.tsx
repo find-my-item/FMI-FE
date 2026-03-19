@@ -1,5 +1,4 @@
-import AutoCompleteList from "./_internal/AutoCompleteList";
-import LatestList from "./_internal/LatestList";
+import { AutoCompleteList, LatestList } from "./_internal";
 
 const SearchFocusDropdown = ({ focused }: { focused: boolean }) => {
   if (!focused) return null;
