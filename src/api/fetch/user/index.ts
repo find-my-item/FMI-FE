@@ -2,6 +2,7 @@ export * from "./types/UserDataType";
 export * from "./types/UserProfileIdDataType";
 export * from "./types/MypagePostsResponseType";
 export * from "./types/MypageActivityResponse";
+export * from "./types/MypageReportsResponseType";
 
 export { useGetUserProfileById } from "./api/useGetUserProfileById";
 export { useGetUsersMe } from "./api/useGetUsersMe";
@@ -11,3 +12,4 @@ export { useGetUsersMePosts } from "./api/useGetUsersMePosts";
 export { usePostVerifyPassword } from "./api/usePostVerifyPassword";
 export { usePostChangePassword } from "./api/usePostChangePassword";
 export { useGetUserActivity } from "./api/useGetUserActivity";
+export { useGetUserReports } from "./api/useGetUserReports";
