@@ -1,1 +1,1 @@
-export { default as WriteForm } from "./WriteForm/WriteForm";
+export { default as WritePage } from "./WritePage/WritePage";

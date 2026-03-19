@@ -51,19 +51,23 @@ const PublicDetailHeader = ({ headerData }: PostDetailHeaderProps) => {
           </div>
         </div>
 
-        <Button
-          className={cn("min-h-11 w-full py-[10px]", "tablet:flex-1")}
-          onClick={() => setIsNumberCheck(true)}
-        >
-          연락처 확인하기
-        </Button>
+        {phoneNumber && (
+          <Button
+            className={cn("min-h-11 w-full py-[10px]", "tablet:flex-1")}
+            onClick={() => setIsNumberCheck(true)}
+          >
+            연락처 확인하기
+          </Button>
+        )}
       </section>
 
-      <PublicCallBottomSheet
-        callBottomSheetData={{ location, phoneNumber }}
-        isOpen={isNumberCheck}
-        onClose={() => setIsNumberCheck(false)}
-      />
+      {phoneNumber && (
+        <PublicCallBottomSheet
+          callBottomSheetData={{ location, phoneNumber }}
+          isOpen={isNumberCheck}
+          onClose={() => setIsNumberCheck(false)}
+        />
+      )}
     </>
   );
 };
