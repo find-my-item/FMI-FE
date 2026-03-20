@@ -41,7 +41,6 @@ const MypageReportsFilter = () => {
         <Filter
           ariaLabel="임시"
           onSelected={selectionState.isReportStatusSelected}
-          // TODO(수현): 아이콘 색 변경 필요함
           icon={{ name: "ArrowDown", size: 12 }}
           iconPosition="trailing"
           onClick={() => setIsKebabMenu((prev) => !prev)}
