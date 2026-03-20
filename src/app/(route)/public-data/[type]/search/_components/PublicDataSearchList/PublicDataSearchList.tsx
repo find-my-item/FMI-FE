@@ -1,30 +1,62 @@
-import { PublicDataTabType } from "@/app/(route)/public-data/_types/PublicDataTabType";
+"use client";
+
+import { useEffect, useMemo } from "react";
 import { PublicDataItemCard } from "../../../../_components/_internal";
+import { EmptyState, LoadingState } from "@/components/state";
+import { useInfiniteScroll } from "@/hooks";
+import { PublicDataItem, PublicDataResponse } from "@/types";
+import { useToast } from "@/context/ToastContext";
+import { usePublicDataListQuery } from "../../../../_hooks/usePublicDataListQuery/usePublicDataListQuery";
 
-// TODO(지권): 기능 개발 후 삭제
-const items = Array.from({ length: 10 }).map((_, index) => ({
-  atcId: `${index}`,
-  depPlace: "분실장소",
-  fdFilePathImg: "https://minwon24.police.go.kr/images/sub/img02_no_img.gif",
-  fdPrdtNm: "분실물",
-  fdSbjt: "분실물",
-  fdYmd: "2022-01-01",
-  prdtClNm: "분실물",
-  rnum: `${index}`,
-}));
+const PublicDataSearchList = () => {
+  const { addToast } = useToast();
 
-interface PublicDataSearchListProps {
-  type: PublicDataTabType;
-}
+  const { data, isLoading, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    usePublicDataListQuery();
 
-const PublicDataSearchList = ({ type }: PublicDataSearchListProps) => {
+  const { ref } = useInfiniteScroll({
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  });
+
+  const items = useMemo(() => {
+    if (!data?.pages) return [];
+    return data.pages.flatMap((page: PublicDataResponse) => {
+      const itemData = page?.items?.item || [];
+      return Array.isArray(itemData) ? itemData : [itemData];
+    }) as PublicDataItem[];
+  }, [data?.pages]);
+
+  useEffect(() => {
+    if (isError) {
+      addToast("데이터를 불러오지 못했어요.", "error");
+    }
+  }, [isError, addToast]);
+
+  if (isLoading) return <LoadingState />;
+
+  if (items.length === 0) {
+    return (
+      <EmptyState
+        icon={{
+          iconName: "Search",
+          iconSize: 70,
+        }}
+        title="조회된 검색결과가 없습니다."
+      />
+    );
+  }
+
   return (
     <section>
       <ul>
-        {items.map((item) => (
-          <PublicDataItemCard key={item.atcId} item={item} />
+        {items.map((item, index) => (
+          <PublicDataItemCard key={`${item.atcId}-${index}`} item={item} />
         ))}
       </ul>
+      {hasNextPage && <div ref={ref} className="h-10 w-full" />}
+      {isFetchingNextPage && <LoadingState />}
     </section>
   );
 };
