@@ -3,7 +3,8 @@ import { GetMarkerResponse } from "../types/GetMarkerType";
 import { useMainKakaoMapStore } from "@/store";
 
 const useGetMarker = () => {
-  const { latLng, mapLevel: level } = useMainKakaoMapStore();
+  const { latLng, mapLevel } = useMainKakaoMapStore();
+  const level = Math.min(mapLevel, 11);
   const { lat: latitude, lng: longitude } = latLng;
 
   return useAppQuery<GetMarkerResponse>(

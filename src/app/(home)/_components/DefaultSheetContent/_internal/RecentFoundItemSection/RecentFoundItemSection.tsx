@@ -7,9 +7,8 @@ import RecentFoundItemEmpty from "./RecentFoundItemEmpty";
 import { RecentFoundItem } from "@/api/fetch/mapController";
 
 const RecentFoundItemSection = () => {
-  const { address, mapLevel } = useMainKakaoMapStore();
-  const requestLevel = Math.min(mapLevel, 11);
-  const { data: recentFoundItems, isLoading } = useRecentFound(requestLevel);
+  const { address } = useMainKakaoMapStore();
+  const { data: recentFoundItems, isLoading } = useRecentFound();
 
   if (recentFoundItems?.result?.length === 0) return <RecentFoundItemEmpty />;
 
