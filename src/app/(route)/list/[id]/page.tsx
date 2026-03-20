@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: ListDetailProps): Promise<Met
     next: { revalidate: 60 },
   }).then((res) => res.json());
 
-  const title = `${post?.result?.title ?? "물품"} | ${post?.result?.address} ?? "주소"`;
+  const title = `${post?.result?.title ?? "물품"} | ${post?.result?.address ?? "주소"}`;
   const description = post?.result?.summary ?? "리스트 상세";
   const thumbnailUrl =
     post?.result?.thumbnailUrl ??
