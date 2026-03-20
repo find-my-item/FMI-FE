@@ -23,3 +23,4 @@ export {
   normalizedFilterValues,
   filterSelectionState,
 } from "./deriveFilterParams/deriveFilterParams";
+export { retryBackoffController } from "./retryBackoffController/retryBackoffController";
