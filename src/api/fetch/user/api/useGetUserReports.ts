@@ -3,10 +3,10 @@ import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 import { useAuthStore } from "@/store";
 import { GetReportsResponseType, ReportItemType } from "../types/GetReportsResponseType";
 import { InfiniteData, keepPreviousData } from "@tanstack/react-query";
-import { RequestType } from "@/types";
+import { ReportType } from "@/types";
 
 interface useGetUserReportsParams {
-  status?: RequestType;
+  status?: ReportType;
   keyword?: string;
   size?: number;
 }
