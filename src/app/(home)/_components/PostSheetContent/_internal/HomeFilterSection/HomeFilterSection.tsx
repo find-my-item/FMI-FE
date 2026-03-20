@@ -3,31 +3,13 @@
 import { ButtonHTMLAttributes, ReactNode } from "react";
 import { cn } from "@/utils";
 import { useHorizontalDragScroll } from "@/hooks";
+import { FILTER_ITEMS } from "./FILTER_ITEMS";
 
 interface HomeFilterProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   onSelected: boolean;
   ariaLabel: string;
 }
-
-const FILTER_ITEMS = [
-  {
-    label: "모두보기",
-    value: "all",
-  },
-  {
-    label: "분실물만",
-    value: "lost",
-  },
-  {
-    label: "발견물만",
-    value: "find",
-  },
-  {
-    label: "카테고리",
-    value: "category",
-  },
-];
 
 // TODO(형준): 필터 선택 쿼리스트링으로 관리하도록 변경 예정
 const HomeFilter = ({ children, onSelected, ariaLabel, ...props }: HomeFilterProps) => {
