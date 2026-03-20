@@ -32,7 +32,7 @@ const PoliceSection = () => {
         </div>
       </div>
 
-      <MainCardList mode="public" isLoading={false} />
+      <MainCardList mode="public" isLoading={false} cardListData={[]} />
     </section>
   );
 };
