@@ -36,6 +36,7 @@ const PublicDataSearchList = () => {
 
   if (isLoading) return <LoadingState />;
 
+  // TODO(지권): Empty 아이콘 변경 예정
   if (items.length === 0) {
     return (
       <EmptyState
