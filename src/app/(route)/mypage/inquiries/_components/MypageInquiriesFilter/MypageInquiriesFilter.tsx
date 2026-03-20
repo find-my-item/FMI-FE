@@ -41,7 +41,7 @@ const MypageInquiriesFilter = () => {
       <div className="relative">
         <Filter
           ariaLabel="필터"
-          onSelected={selectionState.isReportStatusSelected}
+          onSelected={selectionState.isInquiryStatusSelected}
           icon={{ name: "ArrowDown", size: 12 }}
           iconPosition="trailing"
           onClick={() => setIsKebabMenu((prev) => !prev)}
