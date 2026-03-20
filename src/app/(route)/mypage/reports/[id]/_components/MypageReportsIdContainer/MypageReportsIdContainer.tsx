@@ -7,6 +7,7 @@ import { LoadingState } from "@/components/state";
 import { useToast } from "@/context/ToastContext";
 import { formatDate } from "@/utils";
 import { useEffect } from "react";
+import { REPORT_STATUS_CHIP } from "../../../_constants/REPORT_STATUS_CHIP";
 
 interface MypageReportsIdContainerProps {
   id: number;
@@ -56,7 +57,7 @@ const MypageReportsIdContainer = ({ id }: MypageReportsIdContainerProps) => {
   return (
     <div className="w-full h-base">
       <div className="border-b-flat-gray-50 w-full border-b px-5 py-[30px]">
-        <Chip label="접수" type="brandSubtle" />
+        <Chip label={REPORT_STATUS_CHIP[status].label} type={REPORT_STATUS_CHIP[status].chipType} />
         <h2 className="mt-[14px] text-h2-medium">{targetTitle}</h2>
         <time dateTime={createdAt} className="mt-1 text-body2-regular text-layout-body-default">
           {formatDate(createdAt)}
@@ -67,8 +68,13 @@ const MypageReportsIdContainer = ({ id }: MypageReportsIdContainerProps) => {
       {answered && (
         <ul>
           <MypageCommentItem
-            data={mockMypageComment}
-            // data={{ status: "admin", resolvedAt: resolvedAt, content: adminAnswer }}
+            // TODO(수현): 백엔드 수정 중이라 닉네임은 임시 데이터로 넘겨주고 있습니다.
+            data={{
+              resolvedAt: resolvedAt,
+              content: adminAnswer,
+              nickname: "찾아줘! 관리자",
+              role: "admin",
+            }}
           />
         </ul>
       )}
