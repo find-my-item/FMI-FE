@@ -6,24 +6,40 @@ import Link from "next/link";
 import PublicMoreViewCard from "./PublicMoreViewCard";
 import Image from "next/image";
 import RecentFoundItemSkeleton from "../RecentFoundItemSection/RecentFoundItemSkeleton";
+import { formatDate } from "@/utils";
+
+interface CardListData {
+  postId: number;
+  title: string;
+  thumbnailImageUrl: string;
+  createdAt: string;
+}
 
 interface MainCardItemProps {
   showChip: boolean;
+  cardItemData: CardListData;
 }
 
-const MainCardItem = ({ showChip }: MainCardItemProps) => {
+const MainCardItem = ({ showChip, cardItemData }: MainCardItemProps) => {
+  const { postId, title, thumbnailImageUrl, createdAt } = cardItemData;
+
   return (
-    <Link href="#" className="relative rounded-2xl border-[0.7px] border-divider-default">
+    <Link
+      href={`/list/${postId}`}
+      className="relative rounded-2xl border-[0.7px] border-divider-default"
+    >
       <div className="h-[120px] w-[123px] rounded-2xl bg-fill-neutralInversed-normal-preesed">
         <div className="relative flex h-full w-full justify-center">
-          {/* TODO(형준): 이미지 없을 때 Icon, 있을 때 Image 사용 */}
-          {/* <Image
-            src="https://i.namu.wiki/i/HXXV8jiIlE0t9EoBXsyfG-ltpGEqnc620PzNjD6G_aYP74irttmRysvhQlYX0lEVSWFEt3icEL0RU6R_jE1URg.webp"
-            alt="thumbnail"
-            fill
-            className="rounded-2xl object-cover"
-          /> */}
-          <Icon name="LogoCharacter" size={65} />
+          {thumbnailImageUrl ? (
+            <Image
+              src={thumbnailImageUrl}
+              alt={`최근 발견된 분실물 ${title} 이미지`}
+              fill
+              className="rounded-2xl object-cover"
+            />
+          ) : (
+            <Icon name="LogoCharacter" size={65} />
+          )}
           {showChip && (
             <div className="absolute left-2 top-2">
               <Chip label="경찰청" className="!px-2" />
@@ -32,10 +48,10 @@ const MainCardItem = ({ showChip }: MainCardItemProps) => {
         </div>
       </div>
       <div className="absolute bottom-0 right-0 flex w-full flex-col gap-1 rounded-b-2xl bg-white px-3 py-[6px]">
-        <span className="truncate text-caption1-semibold text-layout-header-default">
-          습득물 제목 습득물 제목 습득물 제목
-        </span>
-        <time className="text-caption2-regular text-layout-body-default">2026-00-00</time>
+        <span className="truncate text-caption1-semibold text-layout-header-default">{title}</span>
+        <time dateTime={createdAt} className="text-caption2-regular text-layout-body-default">
+          {formatDate(createdAt)}
+        </time>
       </div>
     </Link>
   );
@@ -44,10 +60,14 @@ const MainCardItem = ({ showChip }: MainCardItemProps) => {
 interface MainCardListProps {
   mode?: "recent" | "public";
   isLoading: boolean;
+  cardListData: CardListData[] | undefined;
 }
 
-// TODO(형준): 데이터 props/type 추가 필요
-const MainCardList = ({ mode = "recent", isLoading = false }: MainCardListProps) => {
+const MainCardList = ({
+  mode = "recent",
+  isLoading = false,
+  cardListData = [],
+}: MainCardListProps) => {
   const { ref: scrollRef, onMouseDown } = useHorizontalDragScroll();
 
   const isPublicMode = mode === "public";
@@ -57,8 +77,8 @@ const MainCardList = ({ mode = "recent", isLoading = false }: MainCardListProps)
       {isLoading ? (
         <RecentFoundItemSkeleton />
       ) : (
-        Array.from({ length: 10 }).map((_, index) => (
-          <MainCardItem key={index} showChip={isPublicMode} />
+        cardListData.map((item) => (
+          <MainCardItem key={item.postId} showChip={isPublicMode} cardItemData={item} />
         ))
       )}
       {isPublicMode && <PublicMoreViewCard />}

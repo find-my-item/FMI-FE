@@ -1,19 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import MainCardList from "./MainCardList/MainCardList";
-
-const POLICE_ITEMS = [
-  {
-    href: "https://www.finditem.kr/public-data?type=lost",
-    headLabel: "분실",
-    label: "했어요",
-  },
-  {
-    href: "https://www.finditem.kr/public-data?type=found",
-    headLabel: "발견",
-    label: "했어요",
-  },
-];
+import MainCardList from "../MainCardList/MainCardList";
+import { POLICE_ITEMS } from "./POLICE_ITEMS";
 
 const PoliceSection = () => {
   return (
@@ -44,7 +32,7 @@ const PoliceSection = () => {
         </div>
       </div>
 
-      <MainCardList mode="public" isLoading={false} />
+      <MainCardList mode="public" isLoading={false} cardListData={[]} />
     </section>
   );
 };
