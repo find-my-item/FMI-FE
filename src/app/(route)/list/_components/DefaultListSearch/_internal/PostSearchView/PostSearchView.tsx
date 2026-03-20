@@ -1,21 +1,15 @@
 import { Suspense } from "react";
 import { PostListItem } from "@/components/domain";
-import { EmptyState, LoadingState } from "@/components/state";
+import { LoadingState } from "@/components/state";
 import { PostItem } from "@/api/fetch/post";
+import PostSearchEmpty from "../PostSearchEmpty/PostSearchEmpty";
 
 const PostSearchView = ({ data, keyword }: { data: PostItem[]; keyword: string }) => {
   return (
     <Suspense fallback={<LoadingState />}>
-      <section>
+      <section className="flex flex-1 flex-col">
         {!data || data.length === 0 ? (
-          <EmptyState
-            icon={{
-              iconName: "EmptyPostSearch",
-              iconSize: 70,
-            }}
-            title="검색 결과가 없습니다."
-            description={"입력한 내용을 다시 한 번 확인해 주세요."}
-          />
+          <PostSearchEmpty keyword={keyword} />
         ) : (
           <ul>
             {data?.map((item) => (
