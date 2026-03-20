@@ -1,6 +1,6 @@
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 
-export interface GetInquiriesResponseType extends ApiBaseResponseType<InquiryItemType> {}
+export interface GetInquiriesResponseType extends ApiBaseResponseType<MypageInquiryType> {}
 
 export interface MypageInquiryType {
   content: InquiryItemType[];
