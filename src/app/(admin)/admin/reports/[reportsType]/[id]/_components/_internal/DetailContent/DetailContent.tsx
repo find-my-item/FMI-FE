@@ -1,6 +1,7 @@
 import { AdminDetailGuestInquiry, AdminDetailInquiry, AdminDetailReport } from "@/api/fetch/admin";
 import { formatDate } from "@/utils";
 import { getDetailContentVM } from "../../../_utils/DetailContentVM";
+import Image from "next/image";
 
 interface DetailContentProps {
   data: AdminDetailGuestInquiry | AdminDetailReport | AdminDetailInquiry;
@@ -11,7 +12,7 @@ const DetailContent = ({ data }: DetailContentProps) => {
 
   if (!viewModel) return null;
 
-  const { title, content, createdAt, userEmailLabel } = viewModel;
+  const { title, content, createdAt, userEmailLabel, imageUrls } = viewModel;
 
   return (
     <div className="space-y-2">
@@ -24,13 +25,24 @@ const DetailContent = ({ data }: DetailContentProps) => {
       </div>
 
       <p className="text-body1-regular text-layout-header-default">{content}</p>
+
+      {imageUrls && imageUrls.length > 0 && (
+        <div className="grid grid-cols-1 gap-2 pt-[6px]">
+          {imageUrls.map((url, index) => (
+            <div key={url} className="relative aspect-square overflow-hidden rounded-[10px]">
+              <Image
+                fill
+                src={url}
+                alt={`이미지 ${index + 1}`}
+                draggable={false}
+                className="select-none object-cover"
+              />
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
 
 export default DetailContent;
-function getDetailViewModel(
-  data: AdminDetailGuestInquiry | AdminDetailReport | AdminDetailInquiry
-) {
-  throw new Error("Function not implemented.");
-}
