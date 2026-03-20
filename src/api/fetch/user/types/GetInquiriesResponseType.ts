@@ -1,20 +1,19 @@
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 
-export interface MypageInquiriesResponseType extends ApiBaseResponseType<MypageInquiriesType> {}
+export interface GetInquiriesResponseType extends ApiBaseResponseType<InquiryItemType> {}
 
-export interface MypageInquiriesType {
-  content: InquiriesItemType[];
+export interface MypageInquiryType {
+  content: InquiryItemType[];
   nextCursor: number;
   hasNext: boolean;
 }
 
-export interface InquiriesItemType {
+export interface InquiryItemType {
   nickname: string;
   inquiryId: number;
   title: string;
   content: string;
-  reason: string;
+  inquiryType: "ACCOUNT_LOGIN" | "USAGE" | "BUG" | "SUGGESTION" | "ETC";
   status: "RECEIVED" | "PENDING" | "ANSWERED";
   createdAt: string;
-  resolvedAt: string;
 }

@@ -1,20 +1,18 @@
-"use client";
-
 import { DetailHeader } from "@/components/layout";
 import { MypageRequestFilter, MypageSearch } from "@/components/domain";
 import { useFilterParams } from "@/hooks/domain";
 import { useGetUserInquiries } from "@/api/fetch/user";
 
 const page = () => {
-  const { requestStatus } = useFilterParams();
+  // const { requestStatus } = useFilterParams();
 
-  const {
-    data: inquiriesData,
-    isLoading,
-    isError,
-  } = useGetUserInquiries({
-    status: requestStatus,
-  });
+  // const {
+  //   data: inquiriesData,
+  //   isLoading,
+  //   isError,
+  // } = useGetUserInquiries({
+  //   status: requestStatus,
+  // });
 
   return (
     <>
@@ -25,11 +23,7 @@ const page = () => {
 
         <MypageRequestFilter status="inquiries" />
 
-        {/* <MypageRequestList
-          listType="inquiries"
-          data={inquiriesData ?? []}
-          isLoading={isLoading}
-          isError={isError} /> */}
+        <MypageInquiriesContent />
       </div>
     </>
   );

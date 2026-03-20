@@ -3,7 +3,7 @@ export * from "./types/UserProfileIdDataType";
 export * from "./types/MypagePostsResponseType";
 export * from "./types/MypageActivityResponse";
 export * from "./types/GetReportsResponseType";
-export * from "./types/MypageInquiriesResponseType";
+export * from "./types/GetInquiriesResponseType";
 export * from "./types/MypageCommentsResponseType";
 
 export { useGetUserProfileById } from "./api/useGetUserProfileById";

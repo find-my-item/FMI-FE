@@ -1,15 +1,12 @@
 import useAppInfiniteQuery from "@/api/_base/query/useAppInfiniteQuery";
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 import { useAuthStore } from "@/store";
+import { InquiryType } from "@/types";
 import { InfiniteData, keepPreviousData } from "@tanstack/react-query";
-import { RequestType } from "@/types";
-import {
-  InquiriesItemType,
-  MypageInquiriesResponseType,
-} from "../types/MypageInquiriesResponseType";
+import { GetInquiriesResponseType, InquiryItemType } from "../types/GetInquiriesResponseType";
 
 interface useGetUserInquiriesParams {
-  status?: RequestType;
+  status?: InquiryType;
   keyword?: string;
   size?: number;
 }
@@ -23,13 +20,13 @@ export const useGetUserInquiries = ({ status, keyword, size = 10 }: useGetUserIn
   queryParams.set("size", size.toString());
 
   return useAppInfiniteQuery<
-    MypageInquiriesResponseType,
+    GetInquiriesResponseType,
     ApiBaseResponseType<null>,
-    InquiriesItemType[]
-  >("auth", ["/users/me/inquiries", keyword], `/users/me/inquiries?${queryParams}`, {
+    InquiryItemType[]
+  >("auth", ["/inquiries/me", keyword], `/inquiries/me?${queryParams}`, {
     placeholderData: keepPreviousData,
     getNextPageParam: (lastPage) => lastPage.result.nextCursor ?? undefined,
-    select: (data: InfiniteData<MypageInquiriesResponseType>) =>
+    select: (data: InfiniteData<GetInquiriesResponseType>) =>
       data.pages.flatMap((page) => page.result.content),
     enabled: isAuthInitialized,
   });
