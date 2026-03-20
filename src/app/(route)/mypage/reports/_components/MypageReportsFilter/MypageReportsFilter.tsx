@@ -39,7 +39,7 @@ const MypageReportsFilter = () => {
 
       <div className="relative">
         <Filter
-          ariaLabel="임시"
+          ariaLabel="필터"
           onSelected={selectionState.isReportStatusSelected}
           icon={{ name: "ArrowDown", size: 12 }}
           iconPosition="trailing"
