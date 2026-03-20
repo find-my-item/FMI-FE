@@ -39,3 +39,5 @@ export type InquiryType =
   | "REPORT_ISSUE"
   | "SERVICE"
   | "ETC";
+
+export type InquiryFilterStatus = "ALL" | "RECEIVED" | "PENDING" | "ANSWERED";
