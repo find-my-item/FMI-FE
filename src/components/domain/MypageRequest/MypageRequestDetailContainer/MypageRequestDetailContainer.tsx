@@ -1,3 +1,5 @@
+// TODO(수현): 다음 pr에 삭제될 부분입니다
+
 import { Chip } from "@/components/common";
 import MypageCommentItem from "../MypageCommentItem/MypageCommentItem";
 import { MOCK_MYPAGE_REQUEST_COMMENTS } from "@/mock/data";
@@ -17,7 +19,7 @@ const MypageRequestDetailContainer = () => {
       <ul>
         {MOCK_MYPAGE_REQUEST_COMMENTS.map((item) => (
           <li key={item.commentId}>
-            <MypageCommentItem key={item.commentId} data={item} />
+            {/* <MypageCommentItem key={item.commentId} data={item} /> */}
           </li>
         ))}
       </ul>
