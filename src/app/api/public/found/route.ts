@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { parseStringPromise } from "xml2js";
+import { PublicFoundPortalItem } from "./PublicFoundPortalItem";
 
 /**
  * @author jikwon
@@ -12,11 +13,15 @@ export async function GET(request: NextRequest) {
   const PRDT_CL_CD_01 = searchParams.get("PRDT_CL_CD_01") || "";
   const PRDT_CL_CD_02 = searchParams.get("PRDT_CL_CD_02") || "";
   const FD_COL_CD = searchParams.get("FD_COL_CD") || "";
+  const PRDT_NM = searchParams.get("PRDT_NM") || "";
   const START_YMD = searchParams.get("START_YMD") || "";
   const END_YMD = searchParams.get("END_YMD") || "";
   const N_FD_LCT_CD = searchParams.get("N_FD_LCT_CD") || "";
-  const pageNo = searchParams.get("pageNo") || "1";
-  const numOfRows = searchParams.get("numOfRows") || "10";
+  const pageNoStr = searchParams.get("pageNo") || "1";
+  const numOfRowsStr = searchParams.get("numOfRows") || "10";
+
+  const requestedPageNo = parseInt(pageNoStr, 10);
+  const requestedNumOfRows = parseInt(numOfRowsStr, 10);
 
   const apiKey = process.env.PUBLIC_DATA_PORTAL_API_KEY;
 
@@ -37,8 +42,8 @@ export async function GET(request: NextRequest) {
   if (START_YMD) params.append("START_YMD", START_YMD);
   if (END_YMD) params.append("END_YMD", END_YMD);
   if (N_FD_LCT_CD) params.append("N_FD_LCT_CD", N_FD_LCT_CD);
-  params.append("pageNo", pageNo);
-  params.append("numOfRows", numOfRows);
+  params.append("pageNo", PRDT_NM ? "1" : pageNoStr);
+  params.append("numOfRows", PRDT_NM ? "1000" : numOfRowsStr);
 
   const queryPrefix = `serviceKey=${apiKey}`;
   const url = `${baseUrl}?${queryPrefix}&${params.toString()}`;
@@ -46,7 +51,7 @@ export async function GET(request: NextRequest) {
   try {
     const response = await fetch(url, {
       method: "GET",
-      next: { revalidate: 3600 },
+      next: { revalidate: 43200 },
     });
 
     if (!response.ok) {
@@ -59,11 +64,31 @@ export async function GET(request: NextRequest) {
     const res = xmlResult.response;
 
     if (res?.header?.resultCode === "00") {
+      const rawItems = res.body?.items?.item || [];
+      const itemList = Array.isArray(rawItems) ? rawItems : [rawItems];
+
+      let filteredItems = itemList;
+      if (PRDT_NM) {
+        filteredItems = itemList.filter((item: PublicFoundPortalItem) => {
+          const name = item.fdPrdtNm || "";
+          const sbjt = item.fdSbjt || "";
+          const place = item.fdPlace || item.depPlace || "";
+          return name.includes(PRDT_NM) || sbjt.includes(PRDT_NM) || place.includes(PRDT_NM);
+        });
+      }
+
+      const finalItems = PRDT_NM
+        ? filteredItems.slice(
+            (requestedPageNo - 1) * requestedNumOfRows,
+            requestedPageNo * requestedNumOfRows
+          )
+        : filteredItems;
+
       return NextResponse.json({
-        items: res.body?.items || { item: [] },
-        numOfRows: parseInt(res.body?.numOfRows || "10"),
-        pageNo: parseInt(res.body?.pageNo || "1"),
-        totalCount: parseInt(res.body?.totalCount || "0"),
+        items: { item: finalItems },
+        numOfRows: requestedNumOfRows,
+        pageNo: requestedPageNo,
+        totalCount: PRDT_NM ? filteredItems.length : parseInt(res.body?.totalCount || "0"),
       });
     }
 

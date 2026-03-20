@@ -1,6 +1,6 @@
+import { Suspense } from "react";
 import { DetailHeader } from "@/components/layout";
 import { PublicDataSearchContent } from "./_components";
-import { Suspense } from "react";
 
 const page = () => {
   return (
