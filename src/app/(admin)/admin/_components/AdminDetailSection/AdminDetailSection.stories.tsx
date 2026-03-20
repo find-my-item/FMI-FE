@@ -31,6 +31,7 @@ const meta: Meta<typeof AdminDetailSection> = {
       status: "RECEIVED",
       answered: true,
       comments: [],
+      imageUrls: [],
     },
   },
 };
