@@ -1,4 +1,5 @@
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
+import { InquiryStatus, InquiryTargetType } from "@/types";
 
 export interface GetInquiriesResponseType extends ApiBaseResponseType<MypageInquiryType> {}
 
@@ -13,7 +14,7 @@ export interface InquiryItemType {
   inquiryId: number;
   title: string;
   content: string;
-  inquiryType: "ACCOUNT_LOGIN" | "USAGE" | "BUG" | "SUGGESTION" | "ETC";
-  status: "RECEIVED" | "PENDING" | "ANSWERED";
+  inquiryType: InquiryTargetType;
+  status: InquiryStatus;
   createdAt: string;
 }
