@@ -15,7 +15,9 @@ const ADDRESS_REVALIDATE_DELAY_MS = 500;
  * - 좌표가 갱신되면 `getAddressFromLatLng`로 좌표 → 표시용 주소를 자동 갱신합니다.
  * - 단, 연속적으로 좌표가 바뀌는 경우를 고려해 `setLatLng` 호출 후 `500ms` 동안 추가 입력이 없을 때 1회만 조회합니다(`lodash.debounce`).
  * - 디바운스 실행 시점에 이전 in-flight 요청이 있었다면 `AbortController`로 취소합니다.
- * - 내 위치 버튼 동작 시에는 줌(level) 리셋을 위한 `levelResetSignal`을 통해 UI가 반응하도록 합니다.
+ * - `mapLevel`은 현재 카카오 지도 줌 레벨을 전역으로 공유하기 위한 상태입니다.
+ * - 내 위치 버튼/리셋 동작 시에는 `levelResetSignal`을 통해 UI가 반응하도록 하며,
+ *   `clearLatLng` 호출 시 `mapLevel`도 기본값(6)으로 초기화합니다.
  *
  * @example
  * ```ts
@@ -30,6 +32,8 @@ interface MainKakaoMapStore {
   setLatLng: (latLng: { lat: number; lng: number }) => void;
   address: string;
   clearLatLng: () => void;
+  mapLevel: number;
+  setMapLevel: (level: number) => void;
   levelResetSignal: number;
   triggerLevelReset: () => void;
 }
@@ -57,6 +61,7 @@ export const useMainKakaoMapStore = create<MainKakaoMapStore>()(
       return {
         latLng: DEFAULT_LAT_LNG,
         address: DEFAULT_ADDRESS,
+        mapLevel: 6,
         levelResetSignal: 0,
         setLatLng: (latLng) => {
           set({ latLng });
@@ -68,7 +73,11 @@ export const useMainKakaoMapStore = create<MainKakaoMapStore>()(
           set({
             latLng: DEFAULT_LAT_LNG,
             address: DEFAULT_ADDRESS,
+            mapLevel: 6,
           });
+        },
+        setMapLevel: (level: number) => {
+          set({ mapLevel: level });
         },
         triggerLevelReset: () =>
           set((state) => ({
@@ -78,6 +87,10 @@ export const useMainKakaoMapStore = create<MainKakaoMapStore>()(
     },
     {
       name: "main-kakao-map-store",
+      partialize: (state) => ({
+        latLng: state.latLng,
+        address: state.address,
+      }),
     }
   )
 );

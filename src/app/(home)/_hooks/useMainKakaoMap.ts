@@ -1,26 +1,26 @@
 import { DEFAULT_LAT_LNG } from "@/constants";
 import { useMainKakaoMapStore } from "@/store";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const useMainKakaoMap = () => {
-  const { latLng, setLatLng, clearLatLng, levelResetSignal } = useMainKakaoMapStore();
+  const { latLng, setLatLng, clearLatLng, levelResetSignal, mapLevel, setMapLevel } =
+    useMainKakaoMapStore();
   const [isPermissionResolved, setIsPermissionResolved] = useState(false);
   const [mapCenter, setMapCenter] = useState(DEFAULT_LAT_LNG);
-  const [mapLevel, setMapLevel] = useState(6);
+  const mapLevelRef = useRef(mapLevel);
+  const prevLevelResetSignalRef = useRef(levelResetSignal);
 
   useEffect(() => {
     const syncCenterByPermission = async () => {
       if (!navigator.permissions) {
-        clearLatLng();
-        setMapCenter(DEFAULT_LAT_LNG);
         setIsPermissionResolved(true);
         return;
       }
 
       const permission = await navigator.permissions.query({ name: "geolocation" });
-      const isLocationGranted = permission.state === "granted";
+      const isLocationDenied = permission.state === "denied";
 
-      if (!isLocationGranted) {
+      if (isLocationDenied) {
         clearLatLng();
         setMapCenter(DEFAULT_LAT_LNG);
         setIsPermissionResolved(true);
@@ -39,8 +39,14 @@ const useMainKakaoMap = () => {
   }, [latLng, isPermissionResolved]);
 
   useEffect(() => {
-    setMapLevel((prevLevel) => Math.min(prevLevel, 6));
-  }, [levelResetSignal]);
+    mapLevelRef.current = mapLevel;
+  }, [mapLevel]);
+
+  useEffect(() => {
+    if (prevLevelResetSignalRef.current === levelResetSignal) return;
+    prevLevelResetSignalRef.current = levelResetSignal;
+    setMapLevel(Math.min(mapLevelRef.current, 6));
+  }, [levelResetSignal, setMapLevel]);
 
   return {
     mapCenter,
