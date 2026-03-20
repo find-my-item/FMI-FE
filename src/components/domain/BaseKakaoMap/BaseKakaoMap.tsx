@@ -3,6 +3,8 @@
 import { CSSProperties, ReactNode, useEffect, useState } from "react";
 import { Map, MapMarker, Circle, useKakaoLoader } from "react-kakao-maps-sdk";
 import { MapErrorState, MapLoadingState } from "@/components/domain/BaseKakaoMap/_internal";
+import { GetMarkerData } from "@/api/fetch/mapController";
+import { MAP_MARKER_ICON } from "./MAP_MARKER_ICON";
 
 /**
  * @author jikwon
@@ -85,6 +87,7 @@ interface BaseKakaoMapProps {
   showMarker?: boolean;
   markerSize?: { width: number; height: number };
   markerOffset?: { x: number; y: number };
+  markerData?: GetMarkerData[];
 
   /** radius */
   radius?: number;
@@ -107,6 +110,7 @@ const BaseKakaoMap = ({
   showMarker = true,
   markerSize = { width: 26, height: 37 },
   markerOffset = { x: 13, y: 20 },
+  markerData,
 
   radius,
   showCircle = false,
@@ -151,16 +155,19 @@ const BaseKakaoMap = ({
           onDragEnd(nextCenter);
         }}
       >
-        {showMarker && (
-          <MapMarker
-            position={mapCenter}
-            image={{
-              src: "/kakao-map/marker.svg",
-              size: markerSize,
-              options: { offset: markerOffset },
-            }}
-          />
-        )}
+        {showMarker &&
+          markerData &&
+          markerData.map(({ postId, latitude, longitude, postType }) => (
+            <MapMarker
+              key={postId}
+              position={{ lat: latitude, lng: longitude }}
+              image={{
+                src: MAP_MARKER_ICON[postType],
+                size: markerSize,
+                options: { offset: markerOffset },
+              }}
+            />
+          ))}
 
         {showCircle && radius && (
           <Circle

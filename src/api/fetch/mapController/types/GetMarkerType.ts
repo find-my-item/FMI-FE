@@ -1,7 +1,7 @@
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 import { CategoryType, ItemStatus, PostType } from "@/types";
 
-interface GetMarkerData {
+export interface GetMarkerData {
   postId: number;
   latitude: number;
   longitude: number;
