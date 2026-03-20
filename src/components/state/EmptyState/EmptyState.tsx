@@ -12,6 +12,7 @@ import BaseStateLayout from "../BaseStateLayout/BaseStateLayout";
  * @param icon - 아이콘 정보
  * @param title - 제목
  * @param description - 설명
+ * @param className - 추가 클래스
  *
  * @example
  * <EmptyState
@@ -32,13 +33,14 @@ interface EmptyStateProps {
   };
   title?: string;
   description?: string;
+  className?: string;
 }
 
-const EmptyState = ({ icon, title, description }: EmptyStateProps) => {
+const EmptyState = ({ icon, title, description, className }: EmptyStateProps) => {
   const { iconName, iconSize, iconColor } = icon;
 
   return (
-    <BaseStateLayout>
+    <BaseStateLayout className={className}>
       <Icon name={iconName} size={iconSize} className={iconColor} />
       {title && <p className="text-h2-bold text-layout-header-default">{title}</p>}
       {description && (

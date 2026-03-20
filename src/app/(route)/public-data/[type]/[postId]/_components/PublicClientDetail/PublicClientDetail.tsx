@@ -1,10 +1,10 @@
 "use client";
 
-import { LoadingState } from "@/components/state";
 import {
   PublicDataDetailHeader,
   PublicDetailHeader,
   PublicDetailInfo,
+  PublicDetailSkeleton,
   PublicLostItemInfo,
   PublicStorageInfo,
 } from "../_internal";
@@ -13,7 +13,7 @@ import { usePublicClientDetail } from "../../_hooks/usePublicClientDetail/usePub
 const PublicClientDetail = ({ id }: { id: string }) => {
   const { isLoading, isError, detailData } = usePublicClientDetail(id);
 
-  if (isLoading || isError || !detailData) return <LoadingState />;
+  if (isLoading || isError || !detailData) return <PublicDetailSkeleton />;
 
   const { isLost, headerData, itemData, title, content, place, office, tel, imageSrc } = detailData;
 
