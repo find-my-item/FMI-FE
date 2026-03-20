@@ -48,6 +48,7 @@ const DefaultListSearch = () => {
           <InputSearch
             mode="RHF"
             name="postSearch"
+            defaultValue={keyword}
             placeholder="제목, 내용을 입력해 주세요."
             onEnter={handleSearchSubmit}
           />
