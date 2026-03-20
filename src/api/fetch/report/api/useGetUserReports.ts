@@ -3,10 +3,10 @@ import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 import { useAuthStore } from "@/store";
 import { GetReportsResponseType, ReportItemType } from "../types/GetReportsResponseType";
 import { InfiniteData, keepPreviousData } from "@tanstack/react-query";
-import { ReportStatus } from "@/types";
+import { ReportFilterStatus } from "@/types";
 
 interface useGetUserReportsParams {
-  status?: ReportStatus;
+  status?: ReportFilterStatus;
   keyword?: string;
   size?: number;
 }
@@ -17,7 +17,7 @@ const useGetUserReports = ({ status, keyword, size = 10 }: useGetUserReportsPara
   const queryParams = new URLSearchParams();
 
   if (keyword) queryParams.set("keyword", keyword);
-  if (status) queryParams.set("status", status);
+  if (status && status !== "ALL") queryParams.set("status", status);
   queryParams.set("size", size.toString());
 
   return useAppInfiniteQuery<GetReportsResponseType, ApiBaseResponseType<null>, ReportItemType[]>(

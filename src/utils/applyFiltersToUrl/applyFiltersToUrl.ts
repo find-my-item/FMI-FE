@@ -18,7 +18,7 @@ import {
   InquiryStatus,
   ItemStatus,
   PostType,
-  ReportStatus,
+  ReportFilterStatus,
   SimpleSortType,
 } from "@/types";
 import { ReportStatusFilterValue } from "@/app/(route)/mypage/reports/_types/MypageReportsFilterType";
@@ -64,7 +64,8 @@ export const SIMPLE_SORT_QUERY_VALUE_MAP: Record<SimpleSortType, string> = {
   OLDEST: "oldest",
 };
 
-const REPORT_STATUS_QUERY_VALUE_MAP: Record<ReportStatus, string> = {
+const REPORT_STATUS_QUERY_VALUE_MAP: Record<ReportFilterStatus, string> = {
+  ALL: "all",
   PENDING: "pending",
   REVIEWED: "reviewed",
   RESOLVED: "resolved",
