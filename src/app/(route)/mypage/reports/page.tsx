@@ -1,6 +1,6 @@
 import { DetailHeader } from "@/components/layout";
-import { MypageRequestFilter, MypageSearch } from "@/components/domain";
-import MypageReportsContent from "./_components/MypageReportsContent/MypageReportsContent";
+import { MypageSearch } from "@/components/domain";
+import { MypageReportsContent, MypageReportsFilter } from "./_components";
 
 const page = () => {
   return (
@@ -10,7 +10,7 @@ const page = () => {
       <div className="w-full h-base">
         <MypageSearch />
 
-        <MypageRequestFilter status="reports" />
+        <MypageReportsFilter />
 
         <MypageReportsContent />
       </div>

@@ -1,5 +1,7 @@
+"use client";
+
 import { DetailHeader } from "@/components/layout";
-import { MypageRequestFilter, MypageRequestList, MypageSearch } from "@/components/domain";
+import { MypageRequestFilter, MypageSearch } from "@/components/domain";
 import { useFilterParams } from "@/hooks/domain";
 import { useGetUserInquiries } from "@/api/fetch/user";
 
