@@ -21,7 +21,7 @@ const MypageInquiryItem = ({ inquiries }: MypageInquiryItemProps) => {
 
   return (
     <li className="flex w-full flex-col justify-between border-b border-divider-default px-5 py-[30px]">
-      <Link href={`/mypage/reports/${inquiryId}`}>
+      <Link href={`/mypage/inquiries/${inquiryId}`}>
         <Chip
           label={INQUIRY_STATUS_CHIP[status].label}
           type={INQUIRY_STATUS_CHIP[status].chipType}
@@ -74,7 +74,7 @@ const MypageInquiriesContent = () => {
 
   return (
     <section>
-      <h2 className="sr-only">내 신고 내역 목록 영역</h2>
+      <h2 className="sr-only">내 문의 내역 목록 영역</h2>
 
       {inquiriesData && inquiriesData.length === 0 ? (
         <MypageEmptyUI pageType="reports" />

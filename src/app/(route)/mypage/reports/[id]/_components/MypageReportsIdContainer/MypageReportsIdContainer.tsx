@@ -13,21 +13,6 @@ interface MypageReportsIdContainerProps {
   id: number;
 }
 
-const mockMypageComment = {
-  status: "admin" as "admin" | "user",
-  content:
-    "안녕하세요, 문의하신 내용에 대해 검토가 완료되었습니다. 해당 게시글은 운영 정책에 따라 조치되었음을 알려드립니다.",
-  nickname: "운영자",
-  createdAt: "2026-03-20T10:00:00.000Z",
-  profileImg:
-    "https://fmi-project-s3-bucket.s3.ap-northeast-2.amazonaws.com/9e619169-f_default-share.png",
-  answerImageList: [
-    "https://fmi-project-s3-bucket.s3.ap-northeast-2.amazonaws.com/9e619169-f_default-share.png",
-    "https://fmi-project-s3-bucket.s3.ap-northeast-2.amazonaws.com/9e619169-f_default-share.png",
-  ],
-  resolvedAt: "2026-03-20T14:30:00.000Z",
-};
-
 const MypageReportsIdContainer = ({ id }: MypageReportsIdContainerProps) => {
   const { data: reportIdData, isError, isLoading } = useGetReportById({ reportId: id });
   const { addToast } = useToast();

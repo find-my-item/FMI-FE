@@ -13,8 +13,6 @@ export interface MypageInquiriesType {
   createdAt: string;
   imageUrls: string[];
   comments: InquiriesCommentType[];
-  nextCursor: number;
-  hasNext: boolean;
 }
 
 export interface InquiriesCommentType {
