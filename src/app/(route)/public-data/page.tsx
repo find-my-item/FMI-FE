@@ -1,9 +1,6 @@
 import { Suspense } from "react";
-import Image from "next/image";
 import type { Metadata } from "next";
-import { DetailHeader } from "@/components/layout";
-import { HeaderSearch } from "@/components/layout/DetailHeader/DetailHeaderParts";
-import { PublicDataView } from "./_components";
+import { PublicDataView, PublicDetailHeader } from "./_components";
 
 interface PageProps {
   searchParams: Promise<{ type?: string; keyword?: string }>;
@@ -41,38 +38,16 @@ export async function generateMetadata({ searchParams }: PageProps): Promise<Met
   return {
     title,
     description,
-    openGraph: {
-      title,
-      description,
-    },
-    twitter: {
-      title,
-      description,
-    },
   };
 }
 
 const page = () => {
   return (
-    <>
-      <DetailHeader
-        title={
-          <Image
-            src="/public-data/public-detail-police24.svg"
-            alt=""
-            width={130}
-            height={26}
-            priority
-          />
-        }
-      >
-        <HeaderSearch />
-      </DetailHeader>
+    <Suspense fallback={null}>
+      <PublicDetailHeader />
 
-      <Suspense fallback={null}>
-        <PublicDataView />
-      </Suspense>
-    </>
+      <PublicDataView />
+    </Suspense>
   );
 };
 
