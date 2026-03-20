@@ -46,7 +46,7 @@ const MypageReportsFilter = () => {
           iconPosition="trailing"
           onClick={() => setIsKebabMenu((prev) => !prev)}
         >
-          {(normalizedReportStatus && REPORTS_LABEL_MAP[normalizedReportStatus]) ?? "전체"}
+          {(normalizedReportStatus && REPORTS_LABEL_MAP[normalizedReportStatus]) ?? "상태"}
         </Filter>
 
         {isKebabMenu && (
