@@ -2,10 +2,9 @@
 
 import { animate, useMotionValue, useMotionValueEvent } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { INITIAL_HEIGHT_PX, MIN_HEIGHT_PX } from "./HEIGHT_PX";
-import type { DefaultSheetContentHeights } from "./heightUtils";
-import { getMaxHeightPx, getSnapHeights } from "./heightUtils";
 import { useSearchParams } from "next/navigation";
+import { INITIAL_HEIGHT_PX, MIN_HEIGHT_PX } from "../_constants/HEIGHT_PX";
+import { getMaxHeightPx, getSnapHeights, DefaultSheetContentHeights } from "../_utils/heightUtils";
 
 const FULLY_EXPANDED_TOLERANCE_PX = 2;
 

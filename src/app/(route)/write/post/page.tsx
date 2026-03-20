@@ -15,7 +15,7 @@ export async function generateMetadata({ searchParams }: PageProps): Promise<Met
   if (type === "lost") {
     title = "분실한 물건 등록";
     description = "분실한 물건의 정보를 등록해보세요.";
-  } else if (type === "find") {
+  } else {
     title = "발견한 물건 등록";
     description = "발견한 물건의 정보를 등록해보세요.";
   }
