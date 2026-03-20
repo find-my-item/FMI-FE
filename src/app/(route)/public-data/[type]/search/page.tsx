@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { DetailHeader } from "@/components/layout";
-import { sanitizeKeyword } from "@/utils";
+import { formatMetadataKeyword } from "@/utils";
 import { PublicDataSearchContent } from "./_components";
 
 interface PageProps {
@@ -10,7 +10,7 @@ interface PageProps {
 
 export async function generateMetadata({ searchParams }: PageProps): Promise<Metadata> {
   const { keyword } = await searchParams;
-  const displayKeyword = sanitizeKeyword(keyword);
+  const displayKeyword = formatMetadataKeyword(keyword);
 
   const title = `${displayKeyword} 검색결과`;
   const description = `찾아줘에서 ${displayKeyword}을 찾고 있나요? 경찰청 유실물 센터, lost112에 올라온 ${displayKeyword} 분실물을 찾아보세요!`;

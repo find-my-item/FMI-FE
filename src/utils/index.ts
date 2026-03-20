@@ -24,4 +24,4 @@ export {
   filterSelectionState,
 } from "./deriveFilterParams/deriveFilterParams";
 export { retryBackoffController } from "./retryBackoffController/retryBackoffController";
-export { sanitizeKeyword } from "./sanitizeKeyword/sanitizeKeyword";
+export { formatMetadataKeyword } from "./formatMetadataKeyword/formatMetadataKeyword";

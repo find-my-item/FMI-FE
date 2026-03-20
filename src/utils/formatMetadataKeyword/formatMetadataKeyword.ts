@@ -7,12 +7,12 @@
  *
  * @example
  * ```tsx
- * sanitizeKeyword("<script>alert(1)</script>") // "scriptalert(1)/script"
- * sanitizeKeyword("지갑") // "지갑"
- * sanitizeKeyword() // "물건"
+ * formatMetadataKeyword("<script>alert(1)</script>") // "scriptalert(1)/script"
+ * formatMetadataKeyword("지갑") // "지갑"
+ * formatMetadataKeyword() // "물건"
  * ```
  */
-export const sanitizeKeyword = (keyword?: string) => {
+export const formatMetadataKeyword = (keyword?: string) => {
   if (!keyword) return "물건";
   return keyword.replace(/[<>]/g, "").slice(0, 20);
 };
