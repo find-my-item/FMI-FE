@@ -1,41 +1,35 @@
 "use client";
 
 import { Filter, KebabMenu } from "@/components/common";
-import {
-  RequestStatusFilterState,
-  RequestStatusFilterValue,
-} from "@/components/domain/MypageRequest/_types/MypageRequestFilterType";
 import { useFilterParams, useFilterSync } from "@/hooks/domain";
 import { filterSelectionState, normalizedFilterValues, normalizeEnumValue } from "@/utils";
 import { useState } from "react";
-
-export const MYPAGE_REPORTS_KEBAB_OPTIONS = [
-  { label: "전체", value: "ALL" },
-  { label: "접수", value: "PENDING" },
-  { label: "검토 중", value: "REVIEWED" },
-  { label: "처리 완료", value: "RESOLVED" },
-];
+import {
+  ReportStatusFilterState,
+  ReportStatusFilterValue,
+} from "../../_types/MypageReportsFilterType";
+import { REPORTS_KEBAB_OPTIONS, REPORTS_LABEL_MAP } from "../../_constants/REPORT_LABEL";
 
 const MypageReportsFilter = () => {
   const [isKebabMenu, setIsKebabMenu] = useState(false);
 
-  const { requestStatus } = useFilterParams();
+  const { reportStatus } = useFilterParams();
 
-  const kebabMenuItems = MYPAGE_REPORTS_KEBAB_OPTIONS.map((item) => ({
+  const kebabMenuItems = REPORTS_KEBAB_OPTIONS.map((item) => ({
     text: item.label,
     onClick: () => {
-      updateFilters({ requestStatus: item.value });
+      updateFilters({ reportStatus: item.value });
       setIsKebabMenu((prev) => !prev);
     },
   }));
 
-  const { normalizedRequestStatus } = normalizedFilterValues({ requestStatus });
-  const selectionState = filterSelectionState({ requestStatus });
+  const { normalizedReportStatus } = normalizedFilterValues({ reportStatus });
+  const selectionState = filterSelectionState({ reportStatus });
 
-  const { updateFilters } = useFilterSync<RequestStatusFilterState>({
-    defaultFilters: { requestStatus: undefined },
+  const { updateFilters } = useFilterSync<ReportStatusFilterState>({
+    defaultFilters: { reportStatus: undefined },
     currentFiltersFromUrl: {
-      requestStatus: normalizeEnumValue<Exclude<RequestStatusFilterValue, undefined>>(status),
+      reportStatus: normalizeEnumValue<Exclude<ReportStatusFilterValue, undefined>>(reportStatus),
     },
   });
 
@@ -46,14 +40,13 @@ const MypageReportsFilter = () => {
       <div className="relative">
         <Filter
           ariaLabel="임시"
-          onSelected={selectionState.isRequestStatusSelected}
+          onSelected={selectionState.isReportStatusSelected}
           // TODO(수현): 아이콘 색 변경 필요함
           icon={{ name: "ArrowDown", size: 12 }}
           iconPosition="trailing"
           onClick={() => setIsKebabMenu((prev) => !prev)}
         >
-          {(normalizedRequestStatus && MYPAGE_REPORTS_KEBAB_OPTIONS[normalizedRequestStatus]) ??
-            "전체"}
+          {(normalizedReportStatus && REPORTS_LABEL_MAP[normalizedReportStatus]) ?? "전체"}
         </Filter>
 
         {isKebabMenu && (

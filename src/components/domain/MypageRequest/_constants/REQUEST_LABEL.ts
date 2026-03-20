@@ -1,5 +1,3 @@
-import { RequestType } from "@/types";
-
 export const REPORTS_LABEL_MAP: Record<RequestType, string> = {
   ALL: "전체",
   PENDING: "접수",
