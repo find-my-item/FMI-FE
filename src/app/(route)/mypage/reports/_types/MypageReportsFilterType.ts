@@ -1,6 +1,6 @@
-import { ReportType } from "@/types";
+import { ReportStatus } from "@/types";
 
-export type ReportStatusFilterValue = ReportType | undefined;
+export type ReportStatusFilterValue = ReportStatus | undefined;
 
 export interface ReportStatusFilterState {
   reportStatus: ReportStatusFilterValue;

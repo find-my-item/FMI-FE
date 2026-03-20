@@ -3,15 +3,15 @@ import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 import { useAuthStore } from "@/store";
 import { GetReportsResponseType, ReportItemType } from "../types/GetReportsResponseType";
 import { InfiniteData, keepPreviousData } from "@tanstack/react-query";
-import { ReportType } from "@/types";
+import { ReportStatus } from "@/types";
 
 interface useGetUserReportsParams {
-  status?: ReportType;
+  status?: ReportStatus;
   keyword?: string;
   size?: number;
 }
 
-export const useGetUserReports = ({ status, keyword, size = 10 }: useGetUserReportsParams) => {
+const useGetUserReports = ({ status, keyword, size = 10 }: useGetUserReportsParams) => {
   const isAuthInitialized = useAuthStore((state) => state.isAuthInitialized);
 
   const queryParams = new URLSearchParams();
@@ -33,3 +33,5 @@ export const useGetUserReports = ({ status, keyword, size = 10 }: useGetUserRepo
     }
   );
 };
+
+export default useGetUserReports;

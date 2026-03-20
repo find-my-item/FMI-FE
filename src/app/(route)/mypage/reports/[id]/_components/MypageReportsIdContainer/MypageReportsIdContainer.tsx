@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetReportById } from "@/api/fetch/user";
+import { useGetReportById } from "@/api/fetch/report";
 import { Chip } from "@/components/common";
 import { MypageCommentItem } from "@/components/domain";
 import { LoadingState } from "@/components/state";

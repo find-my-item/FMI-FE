@@ -1,6 +1,6 @@
 "use client";
 
-import { ReportItemType, useGetUserReports } from "@/api/fetch/user";
+import { ReportItemType, useGetUserReports } from "@/api/fetch/report";
 import { Chip } from "@/components/common";
 import { MypageEmptyUI } from "@/components/domain";
 import { LoadingState } from "@/components/state";
@@ -10,12 +10,7 @@ import { useFilterParams } from "@/hooks/domain";
 import { formatDate } from "@/utils";
 import Link from "next/link";
 import { useEffect } from "react";
-
-export const REPORT_STATUS_CHIP = {
-  PENDING: { label: "접수", chipType: "neutralStrong" },
-  REVIEWED: { label: "처리 중", chipType: "brandSubtle" },
-  RESOLVED: { label: "처리 완료", chipType: "brandNormal" },
-} as const;
+import { REPORT_STATUS_CHIP } from "../../_constants/REPORT_STATUS_CHIP";
 
 interface MypageReportsItemProps {
   reports: ReportItemType;

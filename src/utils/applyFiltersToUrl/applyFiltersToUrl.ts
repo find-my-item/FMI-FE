@@ -15,10 +15,10 @@ import {
 import {
   ActivityType,
   CategoryType,
-  InquiryType,
+  InquiryStatus,
   ItemStatus,
   PostType,
-  ReportType,
+  ReportStatus,
   SimpleSortType,
 } from "@/types";
 import { ReportStatusFilterValue } from "@/app/(route)/mypage/reports/_types/MypageReportsFilterType";
@@ -64,15 +64,13 @@ export const SIMPLE_SORT_QUERY_VALUE_MAP: Record<SimpleSortType, string> = {
   OLDEST: "oldest",
 };
 
-const REPORT_STATUS_QUERY_VALUE_MAP: Record<ReportType, string> = {
-  ALL: "all",
+const REPORT_STATUS_QUERY_VALUE_MAP: Record<ReportStatus, string> = {
   PENDING: "pending",
   REVIEWED: "reviewed",
   RESOLVED: "resolved",
 };
 
-const INQUIRY_STATUS_QUERY_VALUE_MAP: Record<InquiryType, string> = {
-  ALL: "all",
+const INQUIRY_STATUS_QUERY_VALUE_MAP: Record<InquiryStatus, string> = {
   RECEIVED: "received",
   PENDING: "pending",
   ANSWERED: "answered",

@@ -41,6 +41,4 @@ export type ActivityType = "POST" | "COMMENT" | "FAVORITE" | "INQUIRY" | "REPORT
 
 export type SimpleSortType = "LATEST" | "OLDEST";
 
-export type ReportType = "ALL" | "PENDING" | "REVIEWED" | "RESOLVED";
-
-export type InquiryType = "ALL" | "RECEIVED" | "PENDING" | "ANSWERED";
+// export type ReportType = "ALL" | "PENDING" | "REVIEWED" | "RESOLVED";

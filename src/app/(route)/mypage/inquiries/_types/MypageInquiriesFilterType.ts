@@ -1,6 +1,6 @@
-import { InquiryType } from "@/types";
+import { InquiryStatus } from "@/types";
 
-export type InquiryStatusFilterValue = InquiryType | undefined;
+export type InquiryStatusFilterValue = InquiryStatus | undefined;
 
 export interface InquiryStatusFilterState {
   inquiryStatus: InquiryStatusFilterValue;
