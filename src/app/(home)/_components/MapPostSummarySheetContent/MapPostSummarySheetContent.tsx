@@ -1,10 +1,12 @@
 "use client";
 
 import { PostListItem } from "@/components/domain";
-import { HomeFilterSection, MainSearchEmpty, SearchLoading } from "./_internal";
 import { useSearchParams } from "next/navigation";
 import { useMapPostSummary } from "@/api/fetch/mapController";
 import { MARKER_ID } from "../../_constants/QUERY_PARAMS";
+import SearchLoading from "../SearchLoading/SearchLoading";
+import MainSearchEmpty from "../MainSearchEmpty/MainSearchEmpty";
+import HomeFilterSection from "../HomeFilterSection/HomeFilterSection";
 
 const MapPostSummarySheetContent = () => {
   const searchParams = useSearchParams();

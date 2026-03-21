@@ -8,7 +8,7 @@ import useBottomSheetHeight from "../../_hooks/useBottomSheetHeight";
 import MyLocationButton from "../MyLocationButton/MyLocationButton";
 import DefaultSheetContent from "../DefaultSheetContent/DefaultSheetContent";
 import PostSheetContent from "../PostSheetContent/PostSheetContent";
-import MapPostSummarySheetContent from "../PostSheetContent/MapPostSummarySheetContent";
+import MapPostSummarySheetContent from "../MapPostSummarySheetContent/MapPostSummarySheetContent";
 import { DefaultSheetContentHeights } from "../../_utils/heightUtils";
 import { MARKER_ID } from "../../_constants/QUERY_PARAMS";
 

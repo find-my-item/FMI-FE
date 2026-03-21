@@ -6,7 +6,7 @@ import { useHorizontalDragScroll } from "@/hooks";
 import { FILTER_ITEMS } from "./FILTER_ITEMS";
 import { Icon } from "@/components/common";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { POST_TYPE } from "../../../../_constants/QUERY_PARAMS";
+import { POST_TYPE } from "../../_constants/QUERY_PARAMS";
 
 interface HomeFilterProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
