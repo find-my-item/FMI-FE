@@ -1,9 +1,8 @@
 "use client";
 
-import { PropsWithChildren, useCallback, useEffect, useState } from "react";
+import { PropsWithChildren, useCallback } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { usePathname, useRouter } from "next/navigation";
-import authApi from "@/api/_base/axios/authApi";
 import {
   NotificationEventData,
   NOTIFICATION_TYPE,
@@ -14,7 +13,9 @@ import { getNotificationDisplayTitle } from "@/api/fetch/notification/utils/getN
 import { useSnackBar } from "@/context/SnackBarContext";
 import { useAuthStore } from "@/store";
 
-const ACCESS_TOKEN_API_PATH = "/api/auth/access-token";
+/** 로그인·회원가입 화면에서는 SSE 불필요(세션 없음/곧 이동) + 불필요한 연결 시도 방지 */
+const isAuthRoutePath = (pathname: string) =>
+  pathname.startsWith("/login") || pathname.startsWith("/sign-up");
 
 // TODO(형준): SSE 재연결 시 알림 오지않는 문제, 미확인 알림 전역 변수 추가 필요, 알림 디자인/API 달라서 누락 있음, 알림 리스트 중 채팅 클릭 시 채팅 API 실패하는 문제
 
@@ -24,45 +25,6 @@ export const NotificationSSEProvider = ({ children }: PropsWithChildren) => {
   const queryClient = useQueryClient();
   const { showSnackBar } = useSnackBar();
   const isAuthInitialized = useAuthStore((state) => state.isAuthInitialized);
-  const [hasAccessToken, setHasAccessToken] = useState(false);
-
-  const getAccessToken = useCallback(async () => {
-    const response = await fetch(ACCESS_TOKEN_API_PATH, { cache: "no-store" });
-
-    if (!response.ok) {
-      return undefined;
-    }
-
-    const data = (await response.json()) as { accessToken: string | null };
-    return data.accessToken ?? undefined;
-  }, []);
-
-  const syncAccessTokenState = useCallback(async () => {
-    const accessToken = await getAccessToken();
-    const hasToken = Boolean(accessToken);
-
-    setHasAccessToken(hasToken);
-    return hasToken;
-  }, [getAccessToken]);
-
-  useEffect(() => {
-    if (!isAuthInitialized) {
-      setHasAccessToken(false);
-      return;
-    }
-
-    void syncAccessTokenState();
-  }, [isAuthInitialized, pathname, syncAccessTokenState]);
-
-  const refreshAccessToken = useCallback(async () => {
-    try {
-      await authApi.post("/auth/refresh");
-      return await syncAccessTokenState();
-    } catch {
-      setHasAccessToken(false);
-      return false;
-    }
-  }, [syncAccessTokenState]);
 
   const onNotification = useCallback(
     ({ type, referenceType }: NotificationEventData) => {
@@ -87,10 +49,8 @@ export const NotificationSSEProvider = ({ children }: PropsWithChildren) => {
   );
 
   useNotificationSSE({
-    enabled: isAuthInitialized && hasAccessToken,
+    enabled: isAuthInitialized && !isAuthRoutePath(pathname),
     onNotification,
-    getAccessToken,
-    refreshAccessToken,
   });
 
   return children;
