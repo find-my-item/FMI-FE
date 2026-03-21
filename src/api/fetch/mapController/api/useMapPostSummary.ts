@@ -9,7 +9,8 @@ const useMapPostSummary = (postId: number) => {
   return useAppQuery<MapPostSummaryResponse>(
     "public",
     ["map-post-summary", postId, level],
-    `/main/posts/${postId}/summary?level=${level}`
+    `/main/posts/${postId}/summary?level=${level}`,
+    { enabled: !!postId }
   );
 };
 

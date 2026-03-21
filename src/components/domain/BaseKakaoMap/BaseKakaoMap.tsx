@@ -96,6 +96,7 @@ interface BaseKakaoMapProps {
   /** events */
   onDragEnd?: (center: LatLng) => void;
   onLevelChange?: (level: number) => void;
+  onMarkerClick?: (postId: number, position: LatLng) => void;
 
   /** overlay ui */
   children?: ReactNode;
@@ -117,6 +118,7 @@ const BaseKakaoMap = ({
 
   onDragEnd,
   onLevelChange,
+  onMarkerClick,
   children,
 }: BaseKakaoMapProps) => {
   const [loading, error] = useKakaoLoader({
@@ -166,6 +168,11 @@ const BaseKakaoMap = ({
                 size: markerSize,
                 options: { offset: markerOffset },
               }}
+              onClick={
+                onMarkerClick
+                  ? () => onMarkerClick(postId, { lat: latitude, lng: longitude })
+                  : undefined
+              }
             />
           ))}
 

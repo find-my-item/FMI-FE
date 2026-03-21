@@ -8,11 +8,14 @@ import useBottomSheetHeight from "../../_hooks/useBottomSheetHeight";
 import MyLocationButton from "../MyLocationButton/MyLocationButton";
 import DefaultSheetContent from "../DefaultSheetContent/DefaultSheetContent";
 import PostSheetContent from "../PostSheetContent/PostSheetContent";
+import MapPostSummarySheetContent from "../PostSheetContent/MapPostSummarySheetContent";
 import { DefaultSheetContentHeights } from "../../_utils/heightUtils";
+import { MARKER_ID } from "../../_constants/QUERY_PARAMS";
 
 const BottomSheetContent = () => {
   const searchParams = useSearchParams();
   const searchValue = searchParams.get("search");
+  const markerId = searchParams.get(MARKER_ID);
   const [contentHeights, setContentHeights] = useState<DefaultSheetContentHeights | null>(null);
   const { height, isFullyExpanded, handlePointerDown, handlePointerUp } =
     useBottomSheetHeight(contentHeights);
@@ -41,6 +44,8 @@ const BottomSheetContent = () => {
         <div className="min-h-0 flex-1 overflow-auto px-5 pb-[18px] no-scrollbar">
           {searchValue ? (
             <PostSheetContent />
+          ) : markerId ? (
+            <MapPostSummarySheetContent />
           ) : (
             <DefaultSheetContent onSectionHeights={handleSectionHeights} />
           )}

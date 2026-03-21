@@ -4,7 +4,9 @@ import { animate, useMotionValue, useMotionValueEvent } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { INITIAL_HEIGHT_PX, MIN_HEIGHT_PX } from "../_constants/HEIGHT_PX";
+import { MARKER_ID } from "../_constants/QUERY_PARAMS";
 import { getMaxHeightPx, getSnapHeights, DefaultSheetContentHeights } from "../_utils/heightUtils";
+import { useMainKakaoMapStore } from "@/store";
 
 const FULLY_EXPANDED_TOLERANCE_PX = 2;
 
@@ -21,6 +23,8 @@ const useBottomSheetHeight = (contentHeights: DefaultSheetContentHeights | null 
   const moveListenerRef = useRef<((e: PointerEvent) => void) | null>(null);
   const searchParams = useSearchParams();
   const searchValue = searchParams.get("search");
+  const markerId = searchParams.get(MARKER_ID);
+  const markerSheetSnapSignal = useMainKakaoMapStore((s) => s.markerSheetSnapSignal);
 
   useMotionValueEvent(height, "change", (latest: number) => {
     const max = getMaxHeightPx();
@@ -28,31 +32,30 @@ const useBottomSheetHeight = (contentHeights: DefaultSheetContentHeights | null 
   });
 
   useEffect(() => {
+    const max = getMaxHeightPx();
+    const points = getSnapHeights(max, { searchValue, contentHeights, markerId });
+    setSnapHeights(points);
+
     if (searchValue) {
-      height.set(getMaxHeightPx());
+      height.set(max);
       return;
     }
-    height.set(INITIAL_HEIGHT_PX);
-  }, [searchValue]);
-
-  useEffect(() => {
-    const max = getMaxHeightPx();
-    const points = getSnapHeights(max, { searchValue, contentHeights });
-    setSnapHeights(points);
-    if (!searchValue) {
-      height.set(points[2]); // 초기: 세 번째 스냅 지점
+    if (markerId) {
+      height.set(points[2]);
+      return;
     }
-  }, [height, searchValue, contentHeights]);
+    height.set(points[2]);
+  }, [searchValue, markerId, contentHeights, markerSheetSnapSignal]);
 
   useEffect(() => {
     const onResize = () => {
       const max = getMaxHeightPx();
-      setSnapHeights(getSnapHeights(max, { searchValue, contentHeights }));
+      setSnapHeights(getSnapHeights(max, { searchValue, contentHeights, markerId }));
       height.set(Math.min(height.get(), max));
     };
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
-  }, [height, searchValue, contentHeights]);
+  }, [height, searchValue, markerId, contentHeights]);
 
   const snapToClosestHeight = (currentHeight: number) => {
     if (!snapHeights.length) return;

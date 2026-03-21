@@ -18,6 +18,7 @@ const ADDRESS_REVALIDATE_DELAY_MS = 500;
  * - `mapLevel`은 현재 카카오 지도 줌 레벨을 전역으로 공유하기 위한 상태입니다.
  * - 내 위치 버튼/리셋 동작 시에는 `levelResetSignal`을 통해 UI가 반응하도록 하며,
  *   `clearLatLng` 호출 시 `mapLevel`도 기본값(6)으로 초기화합니다.
+ * - 지도 마커 클릭 시 `markerSheetSnapSignal`을 올려 바텀시트 높이를 다시 맞출 수 있습니다(동일 `marker-id` 재클릭 포함).
  *
  * @example
  * ```ts
@@ -36,6 +37,8 @@ interface MainKakaoMapStore {
   setMapLevel: (level: number) => void;
   levelResetSignal: number;
   triggerLevelReset: () => void;
+  markerSheetSnapSignal: number;
+  triggerMarkerSheetSnap: () => void;
 }
 
 export const useMainKakaoMapStore = create<MainKakaoMapStore>()(
@@ -63,6 +66,7 @@ export const useMainKakaoMapStore = create<MainKakaoMapStore>()(
         address: DEFAULT_ADDRESS,
         mapLevel: 6,
         levelResetSignal: 0,
+        markerSheetSnapSignal: 0,
         setLatLng: (latLng) => {
           set({ latLng });
           resolveAddressDebounced(latLng.lat, latLng.lng);
@@ -82,6 +86,10 @@ export const useMainKakaoMapStore = create<MainKakaoMapStore>()(
         triggerLevelReset: () =>
           set((state) => ({
             levelResetSignal: state.levelResetSignal + 1,
+          })),
+        triggerMarkerSheetSnap: () =>
+          set((state) => ({
+            markerSheetSnapSignal: state.markerSheetSnapSignal + 1,
           })),
       };
     },
