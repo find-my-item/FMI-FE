@@ -59,11 +59,14 @@ const ClientDetail = ({ id, isLoggedIn }: ClientDetailProps) => {
     }
   }, [setShowManualPopup]);
 
-  if (isLoading || isError || !data?.result) {
+  const shouldShowSkeleton = isLoading || isError || !data?.result;
+  const isErrorState = !isLoading && (isError || !data?.result);
+
+  if (shouldShowSkeleton) {
     return (
       <>
         <ManualPopup isOpen={showManualPopup} onClose={() => setShowManualPopup(false)} />
-        <DetailSkeleton />
+        <DetailSkeleton isError={isErrorState} />
       </>
     );
   }
