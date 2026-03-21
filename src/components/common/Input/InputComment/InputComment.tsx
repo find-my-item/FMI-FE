@@ -127,9 +127,8 @@ const InputCommentField = ({
                 aria-label="전송 버튼"
                 disabled={disabled || (!field.value?.trim() && images.length === 0)}
               >
-                {/* TODO(지권): 아이콘 중앙 정렬 확인 필요 */}
                 <Icon
-                  name="Send"
+                  name="SendArrow"
                   size={20}
                   className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white"
                 />

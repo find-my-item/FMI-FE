@@ -119,7 +119,7 @@ const InputChat = ({ name, validation, disabled, roomId, userId, ...props }: Inp
                 disabled={disabled || !field.value?.trim()}
               >
                 <Icon
-                  name="Send"
+                  name="SendArrow"
                   size={20}
                   className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white"
                 />

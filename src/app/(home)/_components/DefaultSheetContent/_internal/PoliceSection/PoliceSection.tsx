@@ -1,9 +1,28 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import MainCardList from "../MainCardList/MainCardList";
 import { POLICE_ITEMS } from "./POLICE_ITEMS";
+import { usePublicRecentFound } from "@/api/fetch/publicData/api/usePublicRecentFound";
+import { PublicDataItem } from "@/types";
+
+const NO_IMAGE_URL = "https://minwon24.police.go.kr/images/sub/img02_no_img.gif";
 
 const PoliceSection = () => {
+  const { data, isLoading } = usePublicRecentFound(5);
+
+  const rawItems = data?.items?.item;
+  const itemsArray = [rawItems].flat().filter((item): item is PublicDataItem => !!item);
+
+  const publicData = itemsArray.map((item) => ({
+    postId: item.atcId,
+    title: item.fdPrdtNm || item.fdSbjt || "제목 없음",
+    thumbnailImageUrl:
+      item.fdFilePathImg && item.fdFilePathImg !== NO_IMAGE_URL ? item.fdFilePathImg : "",
+    createdAt: item.fdYmd,
+  }));
+
   return (
     <section className="space-y-4">
       <div className="flex items-center gap-10 rounded-2xl px-3 py-4 bg-fill-brand-subtle-default_2">
@@ -32,7 +51,7 @@ const PoliceSection = () => {
         </div>
       </div>
 
-      <MainCardList mode="public" isLoading={false} cardListData={[]} />
+      <MainCardList mode="public" isLoading={isLoading} cardListData={publicData} />
     </section>
   );
 };
