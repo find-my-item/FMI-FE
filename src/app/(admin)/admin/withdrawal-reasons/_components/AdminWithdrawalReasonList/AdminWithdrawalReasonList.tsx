@@ -33,7 +33,8 @@ const AdminWithdrawalReasonList = ({
     if (isError) addToast("유저 탈퇴 사유를 불러오지 못했어요", "error");
   }, [isError, addToast]);
 
-  if (isLoading) return <LoadingState />;
+  if (isLoading)
+    return <LoadingState title={keyword ? "검색하신 내용을 찾고 있어요" : undefined} />;
   if (isError) return null;
 
   const isEmpty = data?.length === 0;
