@@ -15,6 +15,7 @@ export const mapPostTypeQueryToApiParam = (value: string | null): PostType | und
   return undefined;
 };
 
+// TODO(형준): API에 무한스크롤 추가되면 useInfiniteQuery로 변경
 const useMapPostSummary = (postId: number) => {
   const { mapLevel } = useMainKakaoMapStore();
   const level = Math.min(mapLevel, 11);
