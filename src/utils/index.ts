@@ -24,3 +24,4 @@ export {
   filterSelectionState,
 } from "./deriveFilterParams/deriveFilterParams";
 export { retryBackoffController } from "./retryBackoffController/retryBackoffController";
+export { formatMetadataKeyword } from "./formatMetadataKeyword/formatMetadataKeyword";

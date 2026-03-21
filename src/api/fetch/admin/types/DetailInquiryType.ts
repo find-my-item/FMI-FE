@@ -12,6 +12,7 @@ export interface AdminDetailInquiry {
   createdAt: string;
   nickname: string;
   ip: string;
+  imageUrls: string[];
   answered: boolean;
   comments: InquiryComments[];
 }

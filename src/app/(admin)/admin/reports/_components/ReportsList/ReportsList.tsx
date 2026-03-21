@@ -7,7 +7,7 @@ import { useToast } from "@/context/ToastContext";
 import { toInquiryItemVM, toReportItemVM } from "../../../_utils/toReportsItemVM/toReportsItemVM";
 import { ReportsTabType } from "../../_types/ReportsTabType";
 import { AdminReportsItem } from "../../../_components";
-import { EMPTY_STATE_CONFIG } from "./EMPTY_STATE_CONFIG";
+import { getReportsEmptyState } from "../../_utils/getReportsEmptyState";
 import { InquiryStatus, ReportStatus } from "@/types";
 import { useReportsListQuery } from "../../_hooks/useReportsListQuery";
 
@@ -47,10 +47,13 @@ const ReportsList = ({
     if (isError) addToast("신고/문의 내역을 불러오지 못했어요", "error");
   }, [isError, addToast]);
 
-  if (isLoading) return <LoadingState />;
+  const hasKeyword = Boolean(keyword?.trim());
+
+  if (isLoading)
+    return <LoadingState title={hasKeyword ? "검색하신 내용을 찾고 있어요" : undefined} />;
   if (isError) return null;
 
-  const emptyState = EMPTY_STATE_CONFIG[activeTab];
+  const emptyState = getReportsEmptyState(activeTab, hasKeyword);
 
   return (
     <section aria-label="신고/문의 목록">

@@ -6,6 +6,7 @@ type DetailContentVMProps = {
   content: string;
   createdAt: string;
   userEmailLabel: string;
+  imageUrls?: string[];
 };
 
 export const getDetailContentVM = (
@@ -14,6 +15,7 @@ export const getDetailContentVM = (
   let title = "";
   let content = "";
   let createdAt = "";
+  let imageUrls: string[] = [];
 
   if ("reportId" in data) {
     title = REPORT_TYPE_TITLE[data.reportType];
@@ -23,20 +25,24 @@ export const getDetailContentVM = (
     title = data.title;
     content = data.content;
     createdAt = data.createdAt;
+    imageUrls = data.imageUrls || [];
   } else {
     return null;
   }
 
   let userEmailLabel = "";
 
-  if ("nickname" in data) userEmailLabel = data.nickname as string;
-  else if ("userEmail" in data) userEmailLabel = data.userEmail as string;
-  else if ("reporterNickname" in data) userEmailLabel = data.reporterNickname as string;
+  if ("nickname" in data && data.nickname) userEmailLabel = data.nickname as string;
+  else if ("email" in data && data.email) userEmailLabel = data.email as string;
+  else if ("userEmail" in data && data.userEmail) userEmailLabel = data.userEmail as string;
+  else if ("reporterNickname" in data && data.reporterNickname)
+    userEmailLabel = data.reporterNickname as string;
 
   return {
     title,
     content,
     createdAt,
     userEmailLabel,
+    imageUrls,
   };
 };

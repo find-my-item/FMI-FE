@@ -27,7 +27,9 @@ const StateLayout = ({ icon, title, children, contentClassName }: StateLayoutPro
 const MapLoadingState = () => {
   return (
     <StateLayout
-      icon={<Icon name="Logo" size={70} />}
+      icon={
+        <Icon name="LogoCharacterOutlined" size={70} className="text-labelsVibrant-quaternary" />
+      }
       title="페이지 로딩 중입니다."
       contentClassName="gap-8"
     >
