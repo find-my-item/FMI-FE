@@ -3,7 +3,11 @@ import { DetailHeader } from "@/components/layout";
 import { HeaderShare } from "@/components/layout/DetailHeader/DetailHeaderParts";
 import { cn } from "@/utils";
 
-const PublicDetailSkeleton = () => {
+interface PublicDetailSkeletonProps {
+  isError?: boolean;
+}
+
+const PublicDetailSkeleton = ({ isError = false }: PublicDetailSkeletonProps) => {
   return (
     <>
       <span className="sr-only" role="status">
@@ -21,8 +25,13 @@ const PublicDetailSkeleton = () => {
             "tablet:h-[420px]"
           )}
         >
-          <Icon name="LoadingSkeleton" size={36} className="animate-spin" />
+          {isError ? (
+            <Icon name="DetailImageFail" size={80} />
+          ) : (
+            <Icon name="LoadingSkeleton" size={36} className="animate-spin" />
+          )}
         </div>
+
         {/* 작성자 정보 및 연락처 화인 버튼 */}
         <div
           className={cn(
