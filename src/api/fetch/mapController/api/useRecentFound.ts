@@ -5,6 +5,7 @@ import { RecentFoundResponse } from "../types/RecentFoundType";
 import { useMainKakaoMapStore } from "@/store";
 import { debounce } from "lodash";
 import { useEffect, useRef, useState } from "react";
+import { keepPreviousData } from "@tanstack/react-query";
 
 const useRecentFound = () => {
   const { latLng, mapLevel } = useMainKakaoMapStore();
@@ -33,7 +34,8 @@ const useRecentFound = () => {
   return useAppQuery<RecentFoundResponse>(
     "public",
     ["recent-found", level, debouncedLatitude, debouncedLongitude],
-    `/main/posts/recent-found?latitude=${debouncedLatitude}&longitude=${debouncedLongitude}&level=${level}`
+    `/main/posts/recent-found?latitude=${debouncedLatitude}&longitude=${debouncedLongitude}&level=${level}`,
+    { placeholderData: keepPreviousData }
   );
 };
 
