@@ -79,7 +79,7 @@ const HomeFilterSection = ({ isHidden = false }: { isHidden?: boolean }) => {
             key={item.value}
             ariaLabel={item.label}
             onSelected={onSelected}
-            onClick={isCategory ? () => {} : () => setPostTypeQuery(item.value)}
+            onClick={!isCategory ? () => setPostTypeQuery(item.value) : undefined}
           >
             {item.label}
             {isCategory && <Icon name="ArrowDown" size={12} />}
