@@ -43,10 +43,7 @@ const InquiryInputComment = ({ id: inquiryId }: { id: number }) => {
 
   return (
     <FormProvider {...methods}>
-      <form
-        className="sticky bottom-0 left-0 right-0 z-10 mt-auto w-full border-t border-neutral-normal-default bg-white px-5 py-4"
-        onSubmit={methods.handleSubmit(onSubmit)}
-      >
+      <form onSubmit={methods.handleSubmit(onSubmit)}>
         <InputComment
           name="comment"
           validation={{ required: true }}
