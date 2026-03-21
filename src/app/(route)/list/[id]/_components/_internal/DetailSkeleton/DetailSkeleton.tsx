@@ -7,7 +7,11 @@ import {
 } from "@/components/layout/DetailHeader/DetailHeaderParts";
 import { cn } from "@/utils";
 
-const DetailSkeleton = () => {
+interface DetailSkeletonProps {
+  isError?: boolean;
+}
+
+const DetailSkeleton = ({ isError = false }: DetailSkeletonProps) => {
   return (
     <>
       <span className="sr-only" role="status">
@@ -27,7 +31,11 @@ const DetailSkeleton = () => {
             "tablet:h-[420px]"
           )}
         >
-          <Icon name="LoadingSkeleton" size={36} className="animate-spin" />
+          {isError ? (
+            <Icon name="DetailImageFail" size={80} />
+          ) : (
+            <Icon name="LoadingSkeleton" size={36} className="animate-spin" />
+          )}
         </div>
         {/* 작성자 정보 및 채팅하기 버튼 */}
         <div
