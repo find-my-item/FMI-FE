@@ -9,7 +9,7 @@ import RecentFoundItemSkeleton from "../RecentFoundItemSection/RecentFoundItemSk
 import { formatDate } from "@/utils";
 
 interface CardListData {
-  postId: number;
+  postId: string;
   title: string;
   thumbnailImageUrl: string;
   createdAt: string;
@@ -18,16 +18,16 @@ interface CardListData {
 interface MainCardItemProps {
   showChip: boolean;
   cardItemData: CardListData;
+  mode: "recent" | "public";
 }
 
-const MainCardItem = ({ showChip, cardItemData }: MainCardItemProps) => {
+const MainCardItem = ({ showChip, cardItemData, mode }: MainCardItemProps) => {
   const { postId, title, thumbnailImageUrl, createdAt } = cardItemData;
 
+  const href = mode === "public" ? `/public-data/found/${postId}` : `/list/${postId}`;
+
   return (
-    <Link
-      href={`/list/${postId}`}
-      className="relative rounded-2xl border-[0.7px] border-divider-default"
-    >
+    <Link href={href} className="relative rounded-2xl border-[0.7px] border-divider-default">
       <div className="h-[120px] w-[123px] rounded-2xl bg-fill-neutralInversed-normal-preesed">
         <div className="relative flex h-full w-full justify-center">
           {thumbnailImageUrl ? (
@@ -78,7 +78,7 @@ const MainCardList = ({
         <RecentFoundItemSkeleton />
       ) : (
         cardListData.map((item) => (
-          <MainCardItem key={item.postId} showChip={isPublicMode} cardItemData={item} />
+          <MainCardItem key={item.postId} showChip={isPublicMode} cardItemData={item} mode={mode} />
         ))
       )}
       {isPublicMode && <PublicMoreViewCard />}
