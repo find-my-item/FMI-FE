@@ -142,6 +142,7 @@ const BaseKakaoMap = ({
         level={level}
         draggable={draggable}
         style={style}
+        isPanto={true}
         onZoomChanged={(map) => {
           if (!onLevelChange) return;
           onLevelChange(map.getLevel());
