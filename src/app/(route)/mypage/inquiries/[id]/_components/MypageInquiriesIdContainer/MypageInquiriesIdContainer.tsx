@@ -6,10 +6,10 @@ import { useToast } from "@/context/ToastContext";
 import { useEffect } from "react";
 import { INQUIRY_STATUS_CHIP } from "../../../_constants/INQUIRY_STATUS_CHIP";
 import { Chip } from "@/components/common";
-import { REPORT_STATUS_CHIP } from "@/components/domain/MypageRequest/_constants/STATUS_CHIP";
 import { formatDate } from "@/utils";
 import { MypageCommentItem } from "@/components/domain";
 import Image from "next/image";
+import InquiryCommentItem from "../InquiryCommentItem/InquiryCommentItem";
 
 interface MypageReportsIdContainerProps {
   id: number;
@@ -59,18 +59,12 @@ const MypageInquiriesIdContainer = ({ id }: MypageReportsIdContainerProps) => {
           ))}
       </div>
 
-      {/* {comments && comments.map((item) => (
-        <ul>
-          <MypageCommentItem
-            data={{
-              resolvedAt: resolvedAt,
-              content: adminAnswer,
-              nickname: "찾아줘! 관리자",
-              role: "admin",
-            }}
-          />
-        </ul>
-      ))} */}
+      {comments &&
+        comments.map((item) => (
+          <ul>
+            <InquiryCommentItem data={item} />
+          </ul>
+        ))}
     </div>
   );
 };
