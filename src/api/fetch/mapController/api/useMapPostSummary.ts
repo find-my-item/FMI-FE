@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { POST_TYPE } from "@/app/(home)/_constants/QUERY_PARAMS";
 import { MapPostSummaryResponse } from "../types/MapPostSummaryType";
 import { PostType } from "@/types";
+import { keepPreviousData } from "@tanstack/react-query";
 
 export const mapPostTypeQueryToApiParam = (value: string | null): PostType | undefined => {
   const v = value?.trim().toLowerCase();
@@ -30,7 +31,7 @@ const useMapPostSummary = (postId: number) => {
     "public",
     ["map-post-summary", postId, level, apiPostType ?? "all"],
     `/main/posts/${postId}/summary?${query.toString()}`,
-    { enabled: !!postId }
+    { enabled: !!postId, placeholderData: keepPreviousData }
   );
 };
 

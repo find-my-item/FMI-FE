@@ -1,7 +1,7 @@
 "use client";
 
 import { PostListItem } from "@/components/domain";
-import { HomeFilterSection, MainSearchEmpty } from "./_internal";
+import { HomeFilterSection, MainSearchEmpty, SearchLoading } from "./_internal";
 import { useSearchParams } from "next/navigation";
 import { useMapPostSummary } from "@/api/fetch/mapController";
 import { MARKER_ID } from "../../_constants/QUERY_PARAMS";
@@ -18,12 +18,16 @@ const MapPostSummarySheetContent = () => {
 
   const posts = data?.result ?? [];
 
+  if (isLoading) return <SearchLoading />;
+
   return (
     <>
       <HomeFilterSection />
       {posts.length === 0 && <MainSearchEmpty />}
       <ul className="-mx-5 mt-2 space-y-2">
-        {!isLoading && posts.map((post) => <PostListItem key={post.id} post={post} />)}
+        {posts.map((post) => (
+          <PostListItem key={post.id} post={post} />
+        ))}
       </ul>
     </>
   );
