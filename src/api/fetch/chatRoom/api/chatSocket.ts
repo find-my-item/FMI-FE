@@ -98,7 +98,6 @@ export const connectChatSocket = () => {
   reconnectRetryController.reset();
 
   client = new Client({
-    // brokerURL: process.env.NODE_ENV === "development" ? "/api/ws" : "wss://www.finditem.kr/ws",
     brokerURL: `${process.env.NEXT_PUBLIC_API_URL}/ws`,
     reconnectDelay: 0,
 
