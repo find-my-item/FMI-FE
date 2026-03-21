@@ -1,4 +1,5 @@
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
+import { ReportStatus, ReportTargetType } from "@/types";
 
 export interface GetReportsByIdResponseType extends ApiBaseResponseType<ReportByIdType> {}
 
@@ -6,10 +7,10 @@ export interface ReportByIdType {
   nickname: string;
   reportId: number;
   targetId: number;
-  targetType: "POST" | "COMMENT" | "USER" | "CHAT";
+  targetType: ReportTargetType;
   targetTitle: string;
   reason: string;
-  status: "PENDING" | "REVIEWED" | "RESOLVED";
+  status: ReportStatus;
   answered: boolean;
   adminAnswer: string;
   adminNickname: string;
