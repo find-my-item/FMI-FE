@@ -14,6 +14,7 @@ const GuestInquiriesView = () => {
   return (
     <div className="h-base">
       <AdminSearch
+        defaultValue={params.q}
         onEnter={(searchValue) => {
           const newParams = new URLSearchParams(searchParams.toString());
           if (searchValue) newParams.set("q", searchValue);

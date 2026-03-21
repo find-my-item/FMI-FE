@@ -18,7 +18,6 @@ const DeleteButton = ({
 }: DeleteButtonProps) => {
   const isValue = !!value.trim();
 
-  // TODO(지권): 아이콘 중앙 정렬 확인 필요
   return (
     <button
       type="button"
@@ -26,7 +25,7 @@ const DeleteButton = ({
       aria-label="입력값 전체 삭제"
       onClick={onDelete}
       className={cn(
-        "absolute h-[16.67px] w-[16.67px] rounded-full bg-fg-neutral-strong-placeholder outline-none flex-center",
+        "absolute size-5 rounded-full bg-fg-neutral-strong-placeholder outline-none flex-center",
         eyeShow ? "right-8" : "right-2",
         className
       )}
