@@ -7,15 +7,14 @@ import { useEffect } from "react";
 import { INQUIRY_STATUS_CHIP } from "../../../_constants/INQUIRY_STATUS_CHIP";
 import { Chip } from "@/components/common";
 import { formatDate } from "@/utils";
-import { MypageCommentItem } from "@/components/domain";
 import Image from "next/image";
 import InquiryCommentItem from "../InquiryCommentItem/InquiryCommentItem";
 
-interface MypageReportsIdContainerProps {
+interface MypageInquiriesIdContainerProps {
   id: number;
 }
 
-const MypageInquiriesIdContainer = ({ id }: MypageReportsIdContainerProps) => {
+const MypageInquiriesIdContainer = ({ id }: MypageInquiriesIdContainerProps) => {
   const { data: reportIdData, isError, isLoading } = useGetUserInquiryById({ inquiryId: id });
   const { addToast } = useToast();
 
@@ -59,12 +58,15 @@ const MypageInquiriesIdContainer = ({ id }: MypageReportsIdContainerProps) => {
           ))}
       </div>
 
-      {comments &&
-        comments.map((item) => (
-          <ul>
-            <InquiryCommentItem data={item} />
-          </ul>
-        ))}
+      {comments && (
+        <ul>
+          {comments.map((item) => (
+            <li key={item.id}>
+              <InquiryCommentItem data={item} />
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
