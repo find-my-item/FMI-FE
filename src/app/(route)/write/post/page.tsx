@@ -1,16 +1,30 @@
-"use client";
-
 import { Suspense } from "react";
-import NotFound from "@/app/not-found";
-import { WriteForm } from "./_components";
-import useWritePageType from "./_hooks/useWritePageType/useWritePageType";
+import type { Metadata } from "next";
+import { WritePage } from "./_components";
 
-const WritePage = () => {
-  const { isValid, title } = useWritePageType();
-  if (!isValid) return <NotFound />;
+interface PageProps {
+  searchParams: Promise<{ type?: string }>;
+}
 
-  return <WriteForm title={title} />;
-};
+export async function generateMetadata({ searchParams }: PageProps): Promise<Metadata> {
+  const { type } = await searchParams;
+
+  let title = "물건 등록";
+  let description = "분실 또는 발견한 물건의 정보를 등록해보세요.";
+
+  if (type === "lost") {
+    title = "분실한 물건 등록";
+    description = "분실한 물건의 정보를 등록해보세요.";
+  } else {
+    title = "발견한 물건 등록";
+    description = "발견한 물건의 정보를 등록해보세요.";
+  }
+
+  return {
+    title,
+    description,
+  };
+}
 
 const Page = () => {
   return (

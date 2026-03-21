@@ -1,7 +1,11 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { PostWriteMenu } from "./_components";
 
-const layout = ({ children }: { children: ReactNode }) => {
+interface LayoutProps {
+  children: ReactNode;
+}
+
+const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       {children}
@@ -10,4 +14,4 @@ const layout = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default layout;
+export default Layout;

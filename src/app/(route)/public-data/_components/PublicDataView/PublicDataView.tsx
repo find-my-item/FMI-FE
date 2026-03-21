@@ -1,5 +1,7 @@
-import { FilterSection, Tab } from "@/components/domain";
-import { PublicDataList } from "../_internal";
+"use client";
+
+import { Tab } from "@/components/domain";
+import { PublicDataFilterSection, PublicDataList } from "../_internal";
 import { usePublicDataTabQuery } from "../../_hooks/usePublicDataTabQuery/usePublicDataTabQuery";
 
 const PublicDataView = () => {
@@ -15,7 +17,7 @@ const PublicDataView = () => {
       />
 
       <div>
-        <FilterSection pageType="PUBLIC_DATA" />
+        <PublicDataFilterSection />
 
         <PublicDataList />
       </div>

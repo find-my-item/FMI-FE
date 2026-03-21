@@ -6,7 +6,7 @@ import { useGetSearchKeyword } from "@/api/fetch/post";
 import { ErrorBoundary } from "@/app/ErrorBoundary";
 import { InputSearch } from "@/components/common";
 import { useInfiniteScroll } from "@/hooks";
-import PostSearchView from "./_internal/PostSearchView";
+import { PostSearchView } from "./_internal";
 
 const DefaultListSearch = () => {
   const router = useRouter();
@@ -42,12 +42,13 @@ const DefaultListSearch = () => {
   };
 
   return (
-    <div className="h-hf-base">
+    <div className="flex flex-col h-hf-base">
       <FormProvider {...methods}>
         <div className="px-5 py-[10px]">
           <InputSearch
             mode="RHF"
             name="postSearch"
+            defaultValue={keyword}
             placeholder="제목, 내용을 입력해 주세요."
             onEnter={handleSearchSubmit}
           />

@@ -12,6 +12,7 @@ export interface AdminDetailGuestInquiry {
   createdAt: string;
   email: string;
   answered: boolean;
+  imageUrls: string[];
   comments: GuestInquiryComments[];
 }
 

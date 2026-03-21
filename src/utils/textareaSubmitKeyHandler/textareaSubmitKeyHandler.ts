@@ -9,7 +9,7 @@ export const textareaSubmitKeyHandler = (
   e: KeyboardEvent<HTMLTextAreaElement>,
   textareaRef: RefObject<HTMLTextAreaElement | null>
 ) => {
-  if (e.key === "Enter" && !e.shiftKey) {
+  if (e.key === "Enter" && !e.shiftKey && e.nativeEvent.isComposing === false) {
     e.preventDefault();
     e.currentTarget.form?.requestSubmit();
     clearHeight(textareaRef.current ?? null);

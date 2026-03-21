@@ -6,6 +6,7 @@ import { cn } from "@/utils";
 import { ImageResponse, userInformation } from "@/api/fetch/post";
 import ImageSection from "@/app/(route)/list/[id]/_components/PostDetailHeader/_internal/ImageSection/ImageSection";
 import PublicCallBottomSheet from "../PublicCallBottomSheet/PublicCallBottomSheet";
+import Image from "next/image";
 
 type HeaderData = {
   id: string;
@@ -36,11 +37,14 @@ const PublicDetailHeader = ({ headerData }: PostDetailHeaderProps) => {
         )}
       >
         <div className={cn("flex items-center justify-start gap-[14px]", "tablet:w-[461px]")}>
-          <ProfileAvatar
-            size={40}
-            src={userData.profileImage}
+          <Image
+            width={40}
+            height={40}
+            src={"/public-data/public-data-detail-avatar.png"}
             alt={userData.nickName}
             priority={true}
+            draggable={false}
+            className="select-none rounded-full"
           />
 
           <div className="flex flex-col items-start justify-center">
@@ -51,19 +55,23 @@ const PublicDetailHeader = ({ headerData }: PostDetailHeaderProps) => {
           </div>
         </div>
 
-        <Button
-          className={cn("min-h-11 w-full py-[10px]", "tablet:flex-1")}
-          onClick={() => setIsNumberCheck(true)}
-        >
-          연락처 확인하기
-        </Button>
+        {phoneNumber && (
+          <Button
+            className={cn("min-h-11 w-full py-[10px]", "tablet:flex-1")}
+            onClick={() => setIsNumberCheck(true)}
+          >
+            연락처 확인하기
+          </Button>
+        )}
       </section>
 
-      <PublicCallBottomSheet
-        callBottomSheetData={{ location, phoneNumber }}
-        isOpen={isNumberCheck}
-        onClose={() => setIsNumberCheck(false)}
-      />
+      {phoneNumber && (
+        <PublicCallBottomSheet
+          callBottomSheetData={{ location, phoneNumber }}
+          isOpen={isNumberCheck}
+          onClose={() => setIsNumberCheck(false)}
+        />
+      )}
     </>
   );
 };

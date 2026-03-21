@@ -1,74 +1,48 @@
 "use client";
 
-import { useParams } from "next/navigation";
-import { LoadingState } from "@/components/state";
-import { DetailHeader } from "@/components/layout";
-import { HeaderShare } from "@/components/layout/DetailHeader/DetailHeaderParts";
 import {
+  PublicDataDetailHeader,
   PublicDetailHeader,
   PublicDetailInfo,
+  PublicDetailSkeleton,
   PublicLostItemInfo,
   PublicStorageInfo,
 } from "../_internal";
-import { usePublicDataDetailQuery } from "../../_hooks/usePublicDataDetailQuery/usePublicDataDetailQuery";
-
-const NO_IMAGE_URL = "https://minwon24.police.go.kr/images/sub/img04_no_img.gif";
+import { usePublicClientDetail } from "../../_hooks/usePublicClientDetail/usePublicClientDetail";
 
 const PublicClientDetail = ({ id }: { id: string }) => {
-  const { type } = useParams();
-  const isLost = type === "lost";
+  const { isLoading, isError, detailData } = usePublicClientDetail(id);
 
-  const { data, isLoading, isError } = usePublicDataDetailQuery(id);
+  if (isLoading || isError || !detailData) return <PublicDetailSkeleton />;
 
-  if (isLoading) return <LoadingState />;
+  const { isLost, headerData, itemData, title, content, place, office, tel, imageSrc } = detailData;
 
-  if (isError || !data) {
-    return <LoadingState />;
-  }
-
-  const imageSrc =
-    data.fdFilePathImg && data.fdFilePathImg !== NO_IMAGE_URL ? data.fdFilePathImg : null;
-
-  const headerData = {
-    id: data.atcId,
-    imageResponseList: imageSrc
-      ? [
-          {
-            id: 1,
-            imgUrl: imageSrc,
-            imageType: "THUMBNAIL" as const,
-          },
-        ]
-      : [],
-    userData: {
-      userId: 0,
-      nickName: data.depPlace,
-      profileImage: "",
-      postCount: 0,
-      chattingCount: 0,
-    },
-    location: data.depPlace,
-    phoneNumber: data.tel,
+  const metaData = {
+    title: title || "찾아줘 경찰청 데이터 공유",
+    summary: content || "경찰청 데이터를 확인해보세요",
+    thumbnailUrl: imageSrc,
+    likeCount: 0,
+    commentCount: 0,
+    viewCount: 0,
+    link: window.location.href,
   };
 
   return (
     <>
-      <DetailHeader>
-        <HeaderShare />
-      </DetailHeader>
+      <PublicDataDetailHeader metaData={metaData} />
 
       <article className="h-base">
         <PublicDetailHeader headerData={headerData} />
 
         <div className="space-y-8 px-5 py-[30px]">
-          <PublicDetailInfo category={data.prdtClNm} title={data.fdPrdtNm} content={data.uniq} />
-          <PublicLostItemInfo date={data.fdYmd} depositor={data.uniq} isLost={isLost} />
+          <PublicDetailInfo category={itemData.prdtClNm} title={title} content={content} />
+          <PublicLostItemInfo date={itemData.fdYmd} isLost={isLost} />
           <PublicStorageInfo
-            office={data.depPlace}
-            department={data.depPlace}
-            tel={data.tel}
-            place={data.fdPlace}
-            postId={id}
+            office={office}
+            department={office}
+            tel={tel}
+            place={place}
+            isLost={isLost}
           />
         </div>
       </article>

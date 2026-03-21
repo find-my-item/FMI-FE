@@ -21,6 +21,7 @@ const useReport = ({ reset, setReportType, invalidateKey, onClose }: UseReportPa
       reset();
       setReportType(null);
       toast.addToast("신고가 접수되었어요", "success");
+      queryClient.invalidateQueries({ queryKey: ["reports/me"] });
       invalidateKey && queryClient.invalidateQueries({ queryKey: invalidateKey });
       onClose();
     },
