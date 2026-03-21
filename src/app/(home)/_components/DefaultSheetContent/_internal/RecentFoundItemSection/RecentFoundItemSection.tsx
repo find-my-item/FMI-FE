@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { useRecentFound } from "@/api/fetch/mapController";
 import MainCardList from "../MainCardList/MainCardList";
 import { useMainKakaoMapStore } from "@/store";
@@ -7,10 +8,29 @@ import RecentFoundItemEmpty from "./RecentFoundItemEmpty";
 import { RecentFoundItem } from "@/api/fetch/mapController";
 
 const RecentFoundItemSection = () => {
-  const { address } = useMainKakaoMapStore();
   const { data: recentFoundItems, isLoading } = useRecentFound();
+  const address = useMainKakaoMapStore((s) => s.address);
+  const latLng = useMainKakaoMapStore((s) => s.latLng);
+  const syncAddressFromLatLng = useMainKakaoMapStore((s) => s.syncAddressFromLatLng);
+  const cancelAddressResolve = useMainKakaoMapStore((s) => s.cancelAddressResolve);
 
-  if (recentFoundItems?.result?.length === 0) return <RecentFoundItemEmpty />;
+  const result = recentFoundItems?.result;
+  const hasRecentItems = Array.isArray(result) && result.length > 0;
+
+  useEffect(() => {
+    if (isLoading) return;
+
+    if (!hasRecentItems) {
+      cancelAddressResolve();
+      return;
+    }
+
+    syncAddressFromLatLng();
+  }, [isLoading, hasRecentItems, latLng, syncAddressFromLatLng, cancelAddressResolve]);
+
+  if (!isLoading && Array.isArray(result) && result.length === 0) {
+    return <RecentFoundItemEmpty />;
+  }
 
   const data = recentFoundItems?.result?.map(
     ({ postId, title, thumbnailImageUrl, createdAt }: RecentFoundItem) => ({

@@ -10,7 +10,7 @@ const useGetMarker = () => {
 
   return useAppQuery<GetMarkerResponse>(
     "public",
-    ["marker", latitude, longitude],
+    ["marker", latitude, longitude, level],
     `/main/posts/marker?latitude=${latitude}&longitude=${longitude}&level=${level}`,
     { placeholderData: keepPreviousData }
   );
