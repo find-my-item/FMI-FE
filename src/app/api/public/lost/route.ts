@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { parseStringPromise } from "xml2js";
 import { PublicLostPortalItem } from "./PublicLostPortalItem";
+import { PublicDataItem } from "@/types";
 
 /**
  * @author jikwon
@@ -14,6 +15,7 @@ export async function GET(request: NextRequest) {
   const ATC_ID = searchParams.get("atcId") || "";
   const PRDT_CL_CD_01 = searchParams.get("PRDT_CL_CD_01") || "";
   const LST_LCT_CD = searchParams.get("LST_LCT_CD") || "";
+  const PRDT_NM = searchParams.get("PRDT_NM") || "";
 
   const now = new Date();
   const defaultEnd = now.toISOString().slice(0, 10).replace(/-/g, "");
@@ -22,8 +24,11 @@ export async function GET(request: NextRequest) {
 
   const START_YMD = searchParams.get("START_YMD")?.replace(/-/g, "") || defaultStart;
   const END_YMD = searchParams.get("END_YMD")?.replace(/-/g, "") || defaultEnd;
-  const pageNo = searchParams.get("pageNo") || "1";
-  const numOfRows = searchParams.get("numOfRows") || "10";
+  const pageNoStr = searchParams.get("pageNo") || "1";
+  const numOfRowsStr = searchParams.get("numOfRows") || "10";
+
+  const requestedPageNo = parseInt(pageNoStr, 10);
+  const requestedNumOfRows = parseInt(numOfRowsStr, 10);
 
   const apiKey = process.env.PUBLIC_DATA_PORTAL_API_KEY;
 
@@ -47,8 +52,8 @@ export async function GET(request: NextRequest) {
     params.append("START_YMD", START_YMD);
     params.append("END_YMD", END_YMD);
 
-    params.append("pageNo", pageNo);
-    params.append("numOfRows", numOfRows);
+    params.append("pageNo", PRDT_NM ? "1" : pageNoStr);
+    params.append("numOfRows", PRDT_NM ? "1000" : numOfRowsStr);
   }
 
   const finalUrl = `${baseUrl}?serviceKey=${apiKey}&${params.toString()}`;
@@ -56,7 +61,7 @@ export async function GET(request: NextRequest) {
   try {
     const response = await fetch(finalUrl, {
       method: "GET",
-      next: { revalidate: 3600 },
+      next: { revalidate: 43200 },
     });
 
     if (!response.ok) {
@@ -83,11 +88,28 @@ export async function GET(request: NextRequest) {
         rnum: item.rnum || "1",
       }));
 
+      let filteredItems = normalizedItems;
+      if (PRDT_NM) {
+        filteredItems = normalizedItems.filter(
+          (item: PublicDataItem) =>
+            item.fdPrdtNm.includes(PRDT_NM) ||
+            item.fdSbjt.includes(PRDT_NM) ||
+            item.depPlace.includes(PRDT_NM)
+        );
+      }
+
+      const finalItems = PRDT_NM
+        ? filteredItems.slice(
+            (requestedPageNo - 1) * requestedNumOfRows,
+            requestedPageNo * requestedNumOfRows
+          )
+        : filteredItems;
+
       return NextResponse.json({
-        items: { item: normalizedItems },
-        numOfRows: parseInt(res.body?.numOfRows || "10"),
-        pageNo: parseInt(res.body?.pageNo || "1"),
-        totalCount: parseInt(res.body?.totalCount || "0"),
+        items: { item: finalItems },
+        numOfRows: requestedNumOfRows,
+        pageNo: requestedPageNo,
+        totalCount: PRDT_NM ? filteredItems.length : parseInt(res.body?.totalCount || "0"),
       });
     }
 

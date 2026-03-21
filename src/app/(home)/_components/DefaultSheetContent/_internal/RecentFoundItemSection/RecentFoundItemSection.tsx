@@ -14,7 +14,7 @@ const RecentFoundItemSection = () => {
 
   const data = recentFoundItems?.result?.map(
     ({ postId, title, thumbnailImageUrl, createdAt }: RecentFoundItem) => ({
-      postId,
+      postId: String(postId),
       title,
       thumbnailImageUrl,
       createdAt,

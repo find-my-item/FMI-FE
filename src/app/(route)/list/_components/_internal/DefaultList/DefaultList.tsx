@@ -24,8 +24,9 @@ const DefaultList = ({ listData, listRef, hasNextPage }: DefaultListProps) => {
         {listData.length === 0 ? (
           <EmptyState
             icon={{
-              iconName: "EmptyPostList",
-              iconSize: 200,
+              iconName: "LogoCharacterOutlined",
+              iconSize: 130,
+              iconColor: "text-labelsVibrant-quaternary",
             }}
             description={"아직 게시글이 없어요.\n가장 먼저 작성해보세요!"}
           />
