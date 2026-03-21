@@ -12,6 +12,7 @@ const page = async ({ params }: PageProps) => {
   return (
     <>
       <DetailHeader title="내 신고 내역" />
+      <h1 className="sr-only">내 신고 내역 상세 페이지</h1>
       <MypageReportsIdContainer id={reportId} />
     </>
   );
