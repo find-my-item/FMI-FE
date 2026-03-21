@@ -7,4 +7,5 @@ export const getBaseURL = (): string => {
     return process.env.NEXT_PUBLIC_API_URL;
   }
   return "/api";
+  // return process.env.NEXT_PUBLIC_API_URL || "";
 };

@@ -31,8 +31,7 @@ const PostSearchEmpty = ({ keyword }: { keyword?: string }) => {
           <span>경찰청 분실물 목록에서 다시 찾아볼까요?</span>
         </p>
 
-        {/* TODO(지권): 디자인 토큰 누락 */}
-        <div className="w-full border-t border-[#E4E4E4] px-4 pb-8 pt-3">
+        <div className="w-full border-t border-divider-default px-4 pb-8 pt-3">
           <Button as={Link} href="/public-data" className="w-full">
             경찰청 목록에서 찾아보기
           </Button>

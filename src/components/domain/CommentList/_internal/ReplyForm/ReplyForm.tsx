@@ -1,6 +1,15 @@
 "use client";
 
-import { ChangeEvent, FormEvent, useEffect, useId, useMemo, useRef, useState } from "react";
+import {
+  ChangeEvent,
+  FormEvent,
+  KeyboardEvent,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import Image from "next/image";
 import { Button, Icon } from "@/components/common";
 import { cn } from "@/utils";
@@ -58,6 +67,15 @@ const ReplyForm = ({ isThreadItem, className, disabled, onSubmit, isPending }: R
     requestAnimationFrame(resizeTextarea);
   };
 
+  const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.nativeEvent.isComposing) return;
+
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      e.currentTarget.form?.requestSubmit();
+    }
+  };
+
   useEffect(() => {
     resizeTextarea();
   }, []);
@@ -96,6 +114,7 @@ const ReplyForm = ({ isThreadItem, className, disabled, onSubmit, isPending }: R
           maxLength={500}
           value={content}
           onChange={handleChange}
+          onKeyDown={handleKeyDown}
           autoFocus={true}
           rows={1}
           className={cn(
