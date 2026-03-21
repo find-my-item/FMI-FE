@@ -1,6 +1,7 @@
 import useAppQuery from "@/api/_base/query/useAppQuery";
 import { GetMarkerResponse } from "../types/GetMarkerType";
 import { useMainKakaoMapStore } from "@/store";
+import { keepPreviousData } from "@tanstack/react-query";
 
 const useGetMarker = () => {
   const { latLng, mapLevel } = useMainKakaoMapStore();
@@ -10,7 +11,8 @@ const useGetMarker = () => {
   return useAppQuery<GetMarkerResponse>(
     "public",
     ["marker", latitude, longitude],
-    `/main/posts/marker?latitude=${latitude}&longitude=${longitude}&level=${level}`
+    `/main/posts/marker?latitude=${latitude}&longitude=${longitude}&level=${level}`,
+    { placeholderData: keepPreviousData }
   );
 };
 

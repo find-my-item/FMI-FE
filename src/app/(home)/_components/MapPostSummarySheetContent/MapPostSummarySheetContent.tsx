@@ -14,20 +14,20 @@ const MapPostSummarySheetContent = () => {
   const postId = raw ? Number(raw) : NaN;
   const isValidPostId = Number.isFinite(postId) && postId > 0;
 
-  const { data, isLoading } = useMapPostSummary(isValidPostId ? postId : 0);
+  const { data: posts, isLoading } = useMapPostSummary(isValidPostId ? postId : 0);
 
   if (!isValidPostId) return null;
 
-  const posts = data?.result ?? [];
-
   if (isLoading) return <SearchLoading />;
+
+  if (!posts?.result) return null;
 
   return (
     <>
       <HomeFilterSection />
-      {posts.length === 0 && <MainSearchEmpty />}
+      {posts?.result?.length === 0 && <MainSearchEmpty />}
       <ul className="-mx-5 mt-2 space-y-2">
-        {posts.map((post) => (
+        {posts?.result?.map((post) => (
           <PostListItem key={post.id} post={post} />
         ))}
       </ul>
