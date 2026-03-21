@@ -41,7 +41,7 @@ const BottomSheetContent = () => {
         >
           <div className="h-[3px] w-[50px] rounded-full bg-labelsVibrant-primary" />
         </div>
-        <div className="min-h-0 flex-1 overflow-auto px-5 pb-[18px] no-scrollbar">
+        <div className="min-h-0 flex-1 overflow-auto px-5 pb-[18px] [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {searchValue ? (
             <PostSheetContent />
           ) : markerId ? (
