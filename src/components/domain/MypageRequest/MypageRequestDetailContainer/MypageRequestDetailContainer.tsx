@@ -1,7 +1,7 @@
 // TODO(수현): 다음 pr에 삭제될 부분입니다
 
 import { Chip } from "@/components/common";
-import MypageCommentItem from "../MypageCommentItem/MypageCommentItem";
+import MypageCommentItem from "../../../../app/(route)/mypage/reports/[id]/_components/ReportCommentItem/ReportCommentItem";
 import { MOCK_MYPAGE_REQUEST_COMMENTS } from "@/mock/data";
 
 const MypageRequestDetailContainer = () => {

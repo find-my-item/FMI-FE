@@ -1,39 +1,35 @@
+import { ReportByIdType } from "@/api/fetch/report";
 import { Chip, ProfileAvatar } from "@/components/common";
 import { cn, formatDate } from "@/utils";
 import Image from "next/image";
-// TODO(수현): 데이터 타입 api 연결 시 작업 시 type 폴더로 분리 예정입니다. 현재는 api가 없기에 api 폴더에 옮기지 않았습니다.
-interface MypageCommentItemType {
-  role: "admin" | "user";
-  content?: string;
-  nickname?: string;
-  createdAt?: string;
-  profileImg?: string;
-  answerImageList?: string[];
-  resolvedAt?: string;
-}
 
-interface MypageCommentItemProps {
-  data: MypageCommentItemType;
-}
+const ReportCommentItem = ({ data }: { data: ReportByIdType }) => {
+  const {
+    answered,
+    adminAnswer,
+    adminNickname,
+    adminProfileImg,
+    answerImageList,
+    resolvedAt,
+    createdAt,
+  } = data;
 
-const MypageCommentItem = ({ data }: MypageCommentItemProps) => {
-  const { role, content, nickname, createdAt, profileImg, answerImageList, resolvedAt } = data;
   const displayDate = resolvedAt || createdAt;
 
   return (
     <article
       className={cn(
         "flex flex-col gap-2 border-b border-neutral-normal-default px-5 py-9",
-        role === "admin" && "bg-fill-neutral-strong-default"
+        answered && "bg-fill-neutral-strong-default"
       )}
     >
       <header className="flex gap-[14px]">
-        <ProfileAvatar src={profileImg} size={30} />
+        <ProfileAvatar src={adminProfileImg} size={30} />
 
         <span className="flex flex-col gap-[2px]">
           <span className="flex gap-[6px]">
-            {role === "admin" && <Chip label="관리자" type="admin" />}
-            <span className="text-body1-medium text-layout-header-default">{nickname}</span>
+            {answered && <Chip label="관리자" type="admin" />}
+            <span className="text-body1-medium text-layout-header-default">{adminNickname}</span>
           </span>
 
           {displayDate && (
@@ -44,7 +40,7 @@ const MypageCommentItem = ({ data }: MypageCommentItemProps) => {
         </span>
       </header>
 
-      <p className="text-body1-regular text-layout-header-default">{content}</p>
+      <p className="text-body1-regular text-layout-header-default">{adminAnswer}</p>
       {answerImageList && answerImageList.length > 0 && (
         <div className="mt-2 flex flex-wrap gap-2">
           {answerImageList.map((src, index) => (
@@ -67,4 +63,4 @@ const MypageCommentItem = ({ data }: MypageCommentItemProps) => {
   );
 };
 
-export default MypageCommentItem;
+export default ReportCommentItem;
