@@ -59,7 +59,7 @@ describe("InputChat 컴포넌트", () => {
     expect(screen.getByPlaceholderText("메시지 보내기")).toBeInTheDocument();
 
     expect(screen.getByLabelText("전송 버튼")).toBeInTheDocument();
-    expect(screen.getByText("Send")).toBeInTheDocument();
+    expect(screen.getByText("SendArrow")).toBeInTheDocument();
   });
 
   it("입력창에 텍스트를 입력할 수 있는지 확인", async () => {

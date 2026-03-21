@@ -6,6 +6,7 @@ type DetailContentVMProps = {
   content: string;
   createdAt: string;
   userEmailLabel: string;
+  imageUrls?: string[];
 };
 
 export const getDetailContentVM = (
@@ -14,6 +15,7 @@ export const getDetailContentVM = (
   let title = "";
   let content = "";
   let createdAt = "";
+  let imageUrls: string[] = [];
 
   if ("reportId" in data) {
     title = REPORT_TYPE_TITLE[data.reportType];
@@ -23,6 +25,7 @@ export const getDetailContentVM = (
     title = data.title;
     content = data.content;
     createdAt = data.createdAt;
+    imageUrls = data.imageUrls || [];
   } else {
     return null;
   }
@@ -40,5 +43,6 @@ export const getDetailContentVM = (
     content,
     createdAt,
     userEmailLabel,
+    imageUrls,
   };
 };
