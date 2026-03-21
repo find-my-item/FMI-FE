@@ -11,6 +11,7 @@ const MainKakaoMap = () => {
   if (!isPermissionResolved) return null;
 
   // MapMarker 클릭 시 바텀 시트 반 올라오고, 바텀 시트 내부에서 지도 게시글 카드 리스트 조회 결과 렌더링
+  // 지도 게시글 카드 리스트 조회 API에 무한 스크롤 추가되어야 함 백엔드 지연
 
   return (
     <BaseKakaoMap
