@@ -47,7 +47,7 @@ const AutoCompleteList = ({ searchKeyword, setFocused }: AutoCompleteListProps) 
       {uniqueResults.map((item, index, array) => {
         const address = item.address.road || item.address.parcel;
         return (
-          <li key={`${address}-${index}`}>
+          <li key={address}>
             <button
               type="button"
               aria-label="자동완성 지역 검색어 클릭"
