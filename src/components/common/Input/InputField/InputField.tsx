@@ -44,7 +44,7 @@ import { useFormInput } from "../_internal/_hooks/useFormInput";
 
 interface InputFieldProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   name: string;
-  label: string;
+  label?: string;
   rule?: string;
   validation?: RegisterOptions;
 }

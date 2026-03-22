@@ -1,15 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FooterButton } from "@/components/domain";
 import { CheckBoxConfig } from "../../_constants/CheckBoxConfig";
 import { CheckBox, InputField } from "@/components/common";
-import { useToast } from "@/context/ToastContext";
 
 const DeleteAccountReason = () => {
   const router = useRouter();
-  const { addToast } = useToast();
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
 
   const handleCheckboxChange = (value: string) => {
@@ -26,14 +24,6 @@ const DeleteAccountReason = () => {
     });
   };
 
-  const handleNext = () => {
-    if (selectedValues.length === 0) {
-      addToast("이유를 하나 이상 선택해주세요.", "warning");
-      return;
-    }
-    router.push("?state=passwordConfirm");
-  };
-
   return (
     <>
       <div className="flex w-full flex-col gap-7 px-5 py-[30px] h-base">
@@ -45,7 +35,7 @@ const DeleteAccountReason = () => {
           {CheckBoxConfig.map((item) => {
             const isChecked = selectedValues.includes(item.value);
             return (
-              <>
+              <Fragment key={item.label}>
                 <CheckBox
                   key={item.value}
                   id={item.value}
@@ -53,14 +43,25 @@ const DeleteAccountReason = () => {
                   checked={isChecked}
                   onChange={() => handleCheckboxChange(item.value)}
                 />
-                {isChecked && item.value === "OTHER" && <InputField name={""} label={""} />}
-              </>
+                {isChecked && item.value === "OTHER" && (
+                  <InputField
+                    name="otherReason"
+                    validation={{ maxLength: 300 }}
+                    placeholder="서비스를 탈퇴하려는 이유를 작성해 주세요."
+                  />
+                )}
+              </Fragment>
             );
           })}
         </div>
       </div>
 
-      <FooterButton onClick={handleNext}>다음</FooterButton>
+      <FooterButton
+        onClick={() => router.push("?state=passwordConfirm")}
+        disabled={selectedValues.length === 0}
+      >
+        다음
+      </FooterButton>
     </>
   );
 };
