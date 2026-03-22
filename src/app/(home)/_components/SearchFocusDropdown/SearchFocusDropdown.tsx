@@ -1,12 +1,18 @@
 import { AutoCompleteList, LatestList } from "./_internal";
 
-const SearchFocusDropdown = ({ focused }: { focused: boolean }) => {
+const SearchFocusDropdown = ({
+  focused,
+  setFocused,
+}: {
+  focused: boolean;
+  setFocused: (focused: boolean) => void;
+}) => {
   if (!focused) return null;
 
   return (
     <>
       <AutoCompleteList />
-      <LatestList />
+      <LatestList setFocused={setFocused} />
     </>
   );
 };

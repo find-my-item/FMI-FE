@@ -4,9 +4,10 @@ import { useForm } from "react-hook-form";
 import { Icon } from "@/components/common";
 import { useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/utils";
-import { Suspense, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import SearchFocusDropdown from "../SearchFocusDropdown/SearchFocusDropdown";
 import MainSearchLayout from "../MainSearchLayout/MainSearchLayout";
+import { useMainRecentSearch } from "@/store";
 
 interface LocationFormValues {
   search: string;
@@ -23,17 +24,23 @@ const HeaderSearchForm = ({
   focused,
 }: FocusedProps & { searchValue: string | null }) => {
   const router = useRouter();
+  const addRecentSearch = useMainRecentSearch((s) => s.addRecentSearch);
   const inputRef = useRef<HTMLInputElement>(null);
-  const { register, handleSubmit } = useForm<LocationFormValues>({
-    defaultValues: { search: searchValue || "" },
+  const { register, handleSubmit, setValue } = useForm<LocationFormValues>({
+    defaultValues: { search: searchValue ?? "" },
   });
   const { ref: registerRef, ...searchRegister } = register("search", { required: true });
   const isDropdownOpen = searchValue || focused;
 
+  useEffect(() => {
+    setValue("search", searchValue ?? "");
+  }, [searchValue, setValue]);
+
   const onSubmit = ({ search }: LocationFormValues) => {
     const trimmedSearch = search.trim();
     if (!trimmedSearch) return;
-    router.push(`/?search=${trimmedSearch}`);
+    addRecentSearch(trimmedSearch);
+    router.push(`/?search=${encodeURIComponent(trimmedSearch)}`);
     setFocused(false);
   };
 
@@ -102,7 +109,7 @@ const MainSearchHeader = () => {
       <MainSearchLayout focused={focused}>
         <div className="relative">
           <HeaderContent setFocused={setFocused} focused={focused} />
-          <SearchFocusDropdown focused={focused} />
+          <SearchFocusDropdown focused={focused} setFocused={setFocused} />
         </div>
       </MainSearchLayout>
     </Suspense>
