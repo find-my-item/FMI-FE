@@ -4,50 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FooterButton } from "@/components/domain";
 import { CheckBoxConfig } from "../../_constants/CheckBoxConfig";
-import { cn } from "@/utils";
-import { DeleteUserRadioType } from "../../_types/RadioType";
-import { CheckBox } from "@/components/common";
+import { CheckBox, InputField } from "@/components/common";
 import { useToast } from "@/context/ToastContext";
-
-// interface DeleteAccountRadioItemProps {
-//   option: { value: string; label: string };
-//   selected: string;
-//   onChange: (value: DeleteUserRadioType) => void;
-//   inputName: string;
-// }
-
-// const DeleteAccountRadioItem = ({
-//   option,
-//   selected,
-//   onChange,
-//   inputName,
-//   ...inputProps
-// }: DeleteAccountRadioItemProps) => {
-//   const { value, label } = option;
-//   const isChecked = selected === value;
-
-//   return (
-//     <label className="flex w-full cursor-pointer items-center gap-2 py-[6px] text-body1-semibold text-neutral-normal-default">
-//       <input
-//         type="radio"
-//         name={inputName}
-//         value={value}
-//         checked={isChecked}
-//         onChange={(e) => onChange(e.target.value as DeleteUserRadioType)}
-//         className="peer hidden"
-//         {...inputProps}
-//       />
-//       <span
-//         className={cn(
-//           "relative h-4 w-4 rounded-full border border-neutral-normal-default peer-checked:border-brand-normal-enteredSelected",
-//           "before:absolute before:inset-[3px] before:scale-0 before:rounded-full before:transition-transform before:bg-fill-brand-normal-enteredSelected",
-//           "peer-checked:before:scale-100"
-//         )}
-//       />
-//       <span>{label}</span>
-//     </label>
-//   );
-// };
 
 const DeleteAccountReason = () => {
   const router = useRouter();
@@ -87,13 +45,16 @@ const DeleteAccountReason = () => {
           {CheckBoxConfig.map((item) => {
             const isChecked = selectedValues.includes(item.value);
             return (
-              <CheckBox
-                key={item.value}
-                id={item.value}
-                label={item.label}
-                checked={isChecked}
-                onChange={() => handleCheckboxChange(item.value)}
-              />
+              <>
+                <CheckBox
+                  key={item.value}
+                  id={item.value}
+                  label={item.label}
+                  checked={isChecked}
+                  onChange={() => handleCheckboxChange(item.value)}
+                />
+                {isChecked && item.value === "OTHER" && <InputField name={""} label={""} />}
+              </>
             );
           })}
         </div>
