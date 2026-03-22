@@ -17,20 +17,20 @@ const DeleteAccountPassword = () => {
 
   const handleToClick = () => {
     const currentPassword = getValues("passwordConfirm");
-    // VerifyPasswordMutate(
-    //   { currentPassword },
-    //   {
-    //     onSuccess: () => {
-    //       setModalOpen(true);
-    //     },
-    //     onError: (error) => {
-    //       if (error.code === "USER400-PASSWORD_INCORRECT") {
-    //         addToast("비밀번호가 일치하지 않아요", "warning");
-    //       } else if (error.code === "USER404-NOT_FOUND")
-    //         addToast("존재하지 않는 회원이에요", "warning");
-    //     },
-    //   }
-    // );
+    VerifyPasswordMutate(
+      { currentPassword },
+      {
+        onSuccess: () => {
+          setModalOpen(true);
+        },
+        onError: (error) => {
+          if (error.code === "USER400-PASSWORD_INCORRECT") {
+            addToast("비밀번호가 일치하지 않아요", "warning");
+          } else if (error.code === "USER404-NOT_FOUND")
+            addToast("존재하지 않는 회원이에요", "warning");
+        },
+      }
+    );
     setModalOpen(true);
   };
 
