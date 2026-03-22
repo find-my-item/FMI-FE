@@ -1,6 +1,6 @@
 "use client";
 
-import { retryBackoffController } from "@/utils";
+import { retryBackoffController } from "@/utils/retryBackoffController/retryBackoffController";
 import type { NotificationEventData } from "../types/notificationSSETypes";
 
 const ACCESS_TOKEN_API_PATH = "/api/auth/access-token";
