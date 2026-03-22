@@ -20,10 +20,6 @@ interface UseNotificationSSEReturn {
   disconnect: () => void;
 }
 
-/**
- * SSE는 `notificationSSEClient` 싱글톤으로만 연결한다.
- * 핸들러는 ref로 최신 콜백을 참조하고, 등록은 마운트 시 한 번만 한다.
- */
 const useNotificationSSE = ({
   enabled = true,
   onConnect,

@@ -1,4 +1,5 @@
 import useApiLogout from "@/api/fetch/auth/api/useApiLogout";
+import { disconnectNotificationSSE } from "@/api/fetch/notification/api/notificationSSEClient";
 import { useToast } from "@/context/ToastContext";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -15,6 +16,7 @@ const useLogout = () => {
 
     logoutMutate(undefined, {
       onSuccess: () => {
+        disconnectNotificationSSE();
         queryClient.clear();
         addToast("로그아웃 되었어요.", "success");
         router.replace("/");

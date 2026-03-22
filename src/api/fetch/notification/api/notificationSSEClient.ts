@@ -1,11 +1,11 @@
 "use client";
 
+import { retryBackoffController } from "@/utils";
 import type { NotificationEventData } from "../types/notificationSSETypes";
 
 const ACCESS_TOKEN_API_PATH = "/api/auth/access-token";
 const DEV_SSE_ACCESS_TOKEN_QUERY_KEY = "token";
 
-/** HMR 시 모듈이 다시 로드되면서 `let eventSource`만 초기화되면, 브라우저에 남은 기존 EventSource와 새 연결이 겹친다. 전역에 붙여 한 인스턴스만 유지한다. */
 const RUNTIME_KEY = "__fmi_notification_sse_runtime__";
 
 type Handlers = {
@@ -18,11 +18,22 @@ type SSERuntime = {
   eventSource: EventSource | null;
   connectionVersion: number;
   connectInFlight: boolean;
-  wasConnected: boolean;
   shouldKeepAlive: boolean;
+  isReconnecting: boolean;
+  isAuthInvalid: boolean;
+  consecutiveAuthRefreshFailures: number;
+  tokenRefreshHandler: (() => void) | null;
 };
 
 const handlers: Handlers = {};
+const RECONNECT_BASE_DELAY_MS = 1000;
+const RECONNECT_MAX_DELAY_MS = 30000;
+const RECONNECT_JITTER_RATIO = 0.2;
+const reconnectRetryController = retryBackoffController({
+  baseDelayMs: RECONNECT_BASE_DELAY_MS,
+  maxDelayMs: RECONNECT_MAX_DELAY_MS,
+  jitterRatio: RECONNECT_JITTER_RATIO,
+});
 
 function getRuntime(): SSERuntime {
   const g = globalThis as typeof globalThis & { [RUNTIME_KEY]?: SSERuntime };
@@ -31,8 +42,11 @@ function getRuntime(): SSERuntime {
       eventSource: null,
       connectionVersion: 0,
       connectInFlight: false,
-      wasConnected: false,
       shouldKeepAlive: false,
+      isReconnecting: false,
+      isAuthInvalid: false,
+      consecutiveAuthRefreshFailures: 0,
+      tokenRefreshHandler: null,
     };
   }
   return g[RUNTIME_KEY];
@@ -78,11 +92,59 @@ function release() {
   handlers.onConnectionState?.(false);
 }
 
+function detachTokenRefreshListener() {
+  if (typeof window === "undefined") return;
+  const rt = getRuntime();
+  if (!rt.tokenRefreshHandler) return;
+  window.removeEventListener("tokenRefreshed", rt.tokenRefreshHandler);
+  rt.tokenRefreshHandler = null;
+}
+
+function scheduleReconnectNotificationSSE({
+  immediate = false,
+  resetAttempt = false,
+}: {
+  immediate?: boolean;
+  resetAttempt?: boolean;
+} = {}) {
+  const rt = getRuntime();
+  if (!rt.shouldKeepAlive) return;
+  if (rt.isAuthInvalid) return;
+  if (rt.isReconnecting) return;
+  if (rt.connectInFlight) return;
+
+  reconnectRetryController.schedule(() => performReconnectNotificationSSE(), {
+    immediate,
+    resetAttempt,
+  });
+}
+
+async function performReconnectNotificationSSE() {
+  const rt = getRuntime();
+  if (!rt.shouldKeepAlive) return;
+  if (rt.isAuthInvalid) return;
+  if (rt.isReconnecting) return;
+  rt.isReconnecting = true;
+
+  try {
+    release();
+    await connectNotificationSSE({ force: true });
+    rt.consecutiveAuthRefreshFailures = 0;
+    rt.isAuthInvalid = false;
+  } finally {
+    rt.isReconnecting = false;
+  }
+}
+
 export function disconnectNotificationSSE() {
   const rt = getRuntime();
   rt.connectInFlight = false;
   rt.shouldKeepAlive = false;
-  rt.wasConnected = false;
+  rt.isReconnecting = false;
+  rt.isAuthInvalid = false;
+  rt.consecutiveAuthRefreshFailures = 0;
+  reconnectRetryController.cancel();
+  detachTokenRefreshListener();
   release();
 }
 
@@ -93,10 +155,11 @@ export async function connectNotificationSSE(options?: { force?: boolean }): Pro
   const force = options?.force === true;
 
   if (!force) {
-    if (rt.wasConnected) return;
     if (rt.eventSource?.readyState === EventSource.OPEN) return;
     if (rt.eventSource?.readyState === EventSource.CONNECTING) return;
     if (rt.connectInFlight) return;
+    if (rt.isReconnecting) return;
+    if (rt.isAuthInvalid) return;
   }
 
   rt.shouldKeepAlive = true;
@@ -120,12 +183,34 @@ export async function connectNotificationSSE(options?: { force?: boolean }): Pro
     }
 
     rt.eventSource = es;
+    rt.isAuthInvalid = false;
+    rt.consecutiveAuthRefreshFailures = 0;
+
+    reconnectRetryController.reset();
+
+    if (typeof window !== "undefined") {
+      if (rt.tokenRefreshHandler) {
+        window.removeEventListener("tokenRefreshed", rt.tokenRefreshHandler);
+      }
+
+      rt.tokenRefreshHandler = () => {
+        scheduleReconnectNotificationSSE({ immediate: true, resetAttempt: true });
+      };
+
+      window.addEventListener("tokenRefreshed", rt.tokenRefreshHandler);
+    }
+
+    es.onopen = () => {
+      if (rt.connectionVersion !== version || rt.eventSource !== es) return;
+      handlers.onConnectionState?.(true);
+      reconnectRetryController.reset();
+    };
 
     es.addEventListener("connect", (e: MessageEvent) => {
       if (rt.connectionVersion !== version || rt.eventSource !== es) return;
-      rt.wasConnected = true;
       handlers.onConnectionState?.(true);
       handlers.onConnect?.(typeof e.data === "string" ? e.data : "");
+      reconnectRetryController.reset();
     });
 
     es.addEventListener("notification", (e: MessageEvent) => {
@@ -136,24 +221,10 @@ export async function connectNotificationSSE(options?: { force?: boolean }): Pro
 
     es.onerror = () => {
       if (rt.connectionVersion !== version || rt.eventSource !== es) return;
-      if (!rt.shouldKeepAlive) {
-        es.close();
-        rt.eventSource = null;
-        handlers.onConnectionState?.(false);
-        return;
-      }
-
-      // 최초 연결 성공 이후에는 자동 재연결 루프를 막는다.
-      if (rt.wasConnected) {
-        es.close();
-        rt.eventSource = null;
-        handlers.onConnectionState?.(false);
-        return;
-      }
-
-      if (es.readyState === EventSource.CLOSED) {
-        handlers.onConnectionState?.(false);
-      }
+      handlers.onConnectionState?.(false);
+      // 브라우저 EventSource 자동 재연결 루프를 차단한다.
+      es.close();
+      rt.eventSource = null;
     };
   } finally {
     rt.connectInFlight = false;
