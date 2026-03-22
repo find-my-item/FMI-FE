@@ -29,9 +29,6 @@ const DeleteAccountReason = () => {
     setValue("reason", nextValues, { shouldValidate: true, shouldDirty: true });
   };
 
-  const selectedReasons = watch("reason");
-  console.log("selectedReason>>> ", selectedReasons);
-
   return (
     <>
       <div className="flex w-full flex-col gap-7 px-5 py-[30px] h-base">
@@ -48,6 +45,7 @@ const DeleteAccountReason = () => {
                   {...register("reason")}
                   id={item.value}
                   label={item.label}
+                  value={item.value}
                   checked={isChecked}
                   onChange={() => handleCheckboxChange(item.value)}
                 />

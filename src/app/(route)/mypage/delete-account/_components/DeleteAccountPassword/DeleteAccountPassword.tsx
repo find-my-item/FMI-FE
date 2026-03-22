@@ -12,26 +12,26 @@ import { useFormContext } from "react-hook-form";
 const DeleteAccountPassword = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const { addToast } = useToast();
-  const { getValues } = useFormContext();
+  const { handleSubmit, getValues } = useFormContext();
   const { mutate: VerifyPasswordMutate } = usePostVerifyPassword();
 
   const handleToClick = () => {
     const currentPassword = getValues("passwordConfirm");
-    console.log("password>> ", currentPassword);
-    VerifyPasswordMutate(
-      { currentPassword },
-      {
-        onSuccess: () => {
-          setModalOpen(true);
-        },
-        onError: (error) => {
-          if (error.code === "USER400-PASSWORD_INCORRECT") {
-            addToast("비밀번호가 일치하지 않아요", "warning");
-          } else if (error.code === "USER404-NOT_FOUND")
-            addToast("존재하지 않는 회원이에요", "warning");
-        },
-      }
-    );
+    // VerifyPasswordMutate(
+    //   { currentPassword },
+    //   {
+    //     onSuccess: () => {
+    //       setModalOpen(true);
+    //     },
+    //     onError: (error) => {
+    //       if (error.code === "USER400-PASSWORD_INCORRECT") {
+    //         addToast("비밀번호가 일치하지 않아요", "warning");
+    //       } else if (error.code === "USER404-NOT_FOUND")
+    //         addToast("존재하지 않는 회원이에요", "warning");
+    //     },
+    //   }
+    // );
+    setModalOpen(true);
   };
 
   return (
@@ -62,7 +62,14 @@ const DeleteAccountPassword = () => {
             <Button variant="outlined" className="w-full" onClick={() => setModalOpen(false)}>
               취소
             </Button>
-            <Button type="submit" className="w-full !bg-system-warning">
+            <Button
+              type="submit"
+              onClick={handleSubmit(() => {
+                const formElement = document.querySelector("form");
+                formElement?.requestSubmit();
+              })}
+              className="w-full !bg-system-warning"
+            >
               탈퇴하기
             </Button>
           </div>
