@@ -3,7 +3,6 @@
 import { useSearchParams } from "next/navigation";
 import { useSearchLocation } from "@/api/fetch/mapController";
 import { PostListItem } from "@/components/domain";
-import { useMainKakaoMapStore } from "@/store";
 import MainSearchEmpty from "../MainSearchEmpty/MainSearchEmpty";
 import HomeFilterSection from "../HomeFilterSection/HomeFilterSection";
 import SearchLoading from "../SearchLoading/SearchLoading";
