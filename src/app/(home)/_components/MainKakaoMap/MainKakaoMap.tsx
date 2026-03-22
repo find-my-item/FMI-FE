@@ -2,7 +2,7 @@
 
 import { BaseKakaoMap } from "@/components/domain";
 import useMainKakaoMap from "../../_hooks/useMainKakaoMap";
-import { useGetMarker } from "@/api/fetch/mapController";
+import { useGetMarker, isMarkerFetchDisabledByZoom } from "@/api/fetch/mapController";
 import { useRouter, useSearchParams } from "next/navigation";
 import { MARKER_ID } from "../../_constants/QUERY_PARAMS";
 import { useMainKakaoMapStore } from "@/store";
@@ -14,6 +14,7 @@ const MainKakaoMap = () => {
   const triggerMarkerSheetSnap = useMainKakaoMapStore((s) => s.triggerMarkerSheetSnap);
   const { mapCenter, mapLevel, isPermissionResolved, setMapLevel, setLatLng } = useMainKakaoMap();
   const { data: markerData } = useGetMarker();
+  const showPostMarkers = !isMarkerFetchDisabledByZoom(mapLevel);
 
   if (!isPermissionResolved) return null;
 
@@ -35,7 +36,7 @@ const MainKakaoMap = () => {
       draggable
       onLevelChange={(nextLevel) => setMapLevel(nextLevel)}
       onDragEnd={(nextCenter) => setLatLng(nextCenter)}
-      markerData={markerData?.result}
+      markerData={showPostMarkers ? markerData?.result : undefined}
       onMarkerClick={handleMarkerClick}
     />
   );
