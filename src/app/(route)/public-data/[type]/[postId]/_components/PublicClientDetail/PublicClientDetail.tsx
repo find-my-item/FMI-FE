@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+import { useToast } from "@/context/ToastContext";
 import {
   PublicDataDetailHeader,
   PublicDetailHeader,
@@ -11,9 +13,17 @@ import {
 import { usePublicClientDetail } from "../../_hooks/usePublicClientDetail/usePublicClientDetail";
 
 const PublicClientDetail = ({ id }: { id: string }) => {
+  const { addToast } = useToast();
   const { isLoading, isError, detailData } = usePublicClientDetail(id);
 
-  if (isLoading || isError || !detailData) return <PublicDetailSkeleton />;
+  useEffect(() => {
+    if (isError) {
+      addToast("게시글 불러오기에 실패했어요", "error");
+    }
+  }, [isError, addToast]);
+
+  if (isLoading) return <PublicDetailSkeleton />;
+  if (isError || !detailData) return <PublicDetailSkeleton isError />;
 
   const { isLost, headerData, itemData, title, content, place, office, tel, imageSrc } = detailData;
 

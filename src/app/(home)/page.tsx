@@ -1,5 +1,6 @@
 import { BottomSheet, MainKakaoMap, MainSearchHeader } from "./_components";
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 interface PageProps {
   searchParams: Promise<{ search?: string }>;
@@ -23,7 +24,9 @@ const Page = () => {
   return (
     <div className="h-[calc(100dvh-87px)]">
       <MainSearchHeader />
-      <MainKakaoMap />
+      <Suspense fallback={null}>
+        <MainKakaoMap />
+      </Suspense>
       <BottomSheet />
     </div>
   );
