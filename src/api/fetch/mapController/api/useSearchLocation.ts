@@ -76,10 +76,10 @@ const useSearchLocation = ({ latitude, longitude }: UseSearchLocationParams) => 
     },
     getNextPageParam: (lastPage) => {
       const r = lastPage.result;
-      if (!r?.posts?.length) return undefined;
-      if (!r.hasNext) return undefined;
-      if (r.nextDistance == null || r.nextPostId == null) return undefined;
-      return { lastDistance: r.nextDistance, lastPostId: r.nextPostId };
+      if (r?.hasNext && r.nextDistance != null && r.nextPostId != null) {
+        return { lastDistance: r.nextDistance, lastPostId: r.nextPostId };
+      }
+      return undefined;
     },
     select: (data: InfiniteData<MapPostSummaryResponse>) =>
       data.pages.flatMap((page) => page.result?.posts ?? []),
