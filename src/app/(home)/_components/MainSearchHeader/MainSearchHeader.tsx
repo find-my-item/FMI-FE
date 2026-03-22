@@ -22,7 +22,8 @@ const HeaderSearchForm = ({
   searchValue,
   setFocused,
   focused,
-}: FocusedProps & { searchValue: string | null }) => {
+  setSearchKeyword,
+}: FocusedProps & { searchValue: string | null; setSearchKeyword: (value: string) => void }) => {
   const router = useRouter();
   const addRecentSearch = useMainRecentSearch((s) => s.addRecentSearch);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -34,7 +35,8 @@ const HeaderSearchForm = ({
 
   useEffect(() => {
     setValue("search", searchValue ?? "");
-  }, [searchValue, setValue]);
+    setSearchKeyword(searchValue ?? "");
+  }, [searchValue, setSearchKeyword, setValue]);
 
   const onSubmit = ({ search }: LocationFormValues) => {
     const trimmedSearch = search.trim();
@@ -67,6 +69,10 @@ const HeaderSearchForm = ({
           registerRef(el);
           inputRef.current = el;
         }}
+        onChange={(e) => {
+          searchRegister.onChange(e);
+          setSearchKeyword(e.target.value);
+        }}
         type="text"
         onFocus={() => setFocused(true)}
         className="w-full pl-8 text-h3-semibold text-flatGray-700 placeholder:text-flatGray-700"
@@ -85,7 +91,11 @@ const HeaderSearchForm = ({
   );
 };
 
-const HeaderContent = ({ setFocused, focused }: FocusedProps) => {
+const HeaderContent = ({
+  setFocused,
+  focused,
+  setSearchKeyword,
+}: FocusedProps & { setSearchKeyword: (value: string) => void }) => {
   const searchParams = useSearchParams();
   const searchValue = searchParams.get("search");
 
@@ -96,20 +106,34 @@ const HeaderContent = ({ setFocused, focused }: FocusedProps) => {
         (searchValue || focused) && "border-x-2 bg-white"
       )}
     >
-      <HeaderSearchForm searchValue={searchValue} setFocused={setFocused} focused={focused} />
+      <HeaderSearchForm
+        searchValue={searchValue}
+        setFocused={setFocused}
+        focused={focused}
+        setSearchKeyword={setSearchKeyword}
+      />
     </header>
   );
 };
 
 const MainSearchHeader = () => {
   const [focused, setFocused] = useState(false);
+  const [searchKeyword, setSearchKeyword] = useState("");
 
   return (
     <Suspense fallback={""}>
       <MainSearchLayout focused={focused}>
         <div className="relative">
-          <HeaderContent setFocused={setFocused} focused={focused} />
-          <SearchFocusDropdown focused={focused} setFocused={setFocused} />
+          <HeaderContent
+            setFocused={setFocused}
+            focused={focused}
+            setSearchKeyword={setSearchKeyword}
+          />
+          <SearchFocusDropdown
+            focused={focused}
+            setFocused={setFocused}
+            searchKeyword={searchKeyword}
+          />
         </div>
       </MainSearchLayout>
     </Suspense>
