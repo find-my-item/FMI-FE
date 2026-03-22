@@ -4,10 +4,14 @@ import { NotificationListResponse, NotificationListItem } from "../types/notific
 import { useSearchParams } from "next/navigation";
 import { useNotificationStore } from "@/store";
 import { useEffect } from "react";
+import type { NotificationType } from "../types/notificationSSETypes";
 
 const useNotificationList = () => {
   const searchParams = useSearchParams();
   const setHasUnreadNotification = useNotificationStore((state) => state.setHasUnreadNotification);
+  const setUnreadNotificationTypes = useNotificationStore(
+    (state) => state.setUnreadNotificationTypes
+  );
   const categoryParam = searchParams.get("category");
   const category = categoryParam && categoryParam !== "all" ? categoryParam : undefined;
 
@@ -29,9 +33,17 @@ const useNotificationList = () => {
 
   useEffect(() => {
     if (!query.data) return;
-    const hasUnreadNotification = query.data.some((notification) => !notification.isRead);
+    const unreadTypes = Array.from(
+      new Set(
+        query.data
+          .filter((notification) => !notification.isRead)
+          .map((notification) => notification.type)
+      )
+    ) as NotificationType[];
+    const hasUnreadNotification = unreadTypes.length > 0;
     setHasUnreadNotification(hasUnreadNotification);
-  }, [query.data, setHasUnreadNotification]);
+    setUnreadNotificationTypes(unreadTypes);
+  }, [query.data, setHasUnreadNotification, setUnreadNotificationTypes]);
 
   return query;
 };

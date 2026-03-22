@@ -9,7 +9,9 @@ const useLogout = () => {
   const { mutate: logoutMutate, isPending } = useApiLogout();
   const { addToast } = useToast();
   const router = useRouter();
-  const setHasUnreadNotification = useNotificationStore((state) => state.setHasUnreadNotification);
+  const resetUnreadNotificationState = useNotificationStore(
+    (state) => state.resetUnreadNotificationState
+  );
 
   const queryClient = useQueryClient();
 
@@ -19,7 +21,7 @@ const useLogout = () => {
     logoutMutate(undefined, {
       onSuccess: () => {
         disconnectNotificationSSE();
-        setHasUnreadNotification(false);
+        resetUnreadNotificationState();
         queryClient.clear();
         addToast("로그아웃 되었어요.", "success");
         router.replace("/");

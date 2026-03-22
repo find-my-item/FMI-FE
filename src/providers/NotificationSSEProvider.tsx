@@ -18,7 +18,7 @@ const isAuthRoutePath = (pathname: string) =>
 
 const NOTIFICATION_BATCH_DEBOUNCE_MS = 500;
 
-// TODO(형준): 미확인 알림 전역 변수 추가 필요, 알림 디자인/API 달라서 누락 있음
+// TODO(형준): 알림 디자인/API 달라서 누락 있음
 
 export const NotificationSSEProvider = ({ children }: PropsWithChildren) => {
   const router = useRouter();
@@ -27,6 +27,9 @@ export const NotificationSSEProvider = ({ children }: PropsWithChildren) => {
   const { showSnackBar } = useSnackBar();
   const isAuthInitialized = useAuthStore((state) => state.isAuthInitialized);
   const setHasUnreadNotification = useNotificationStore((state) => state.setHasUnreadNotification);
+  const addUnreadNotificationType = useNotificationStore(
+    (state) => state.addUnreadNotificationType
+  );
 
   const bufferedKeysRef = useRef<
     {
@@ -62,6 +65,7 @@ export const NotificationSSEProvider = ({ children }: PropsWithChildren) => {
   const onNotification = useCallback(
     ({ type, referenceType, title }: NotificationEventData) => {
       setHasUnreadNotification(true);
+      addUnreadNotificationType(type);
 
       if (isAuthRoutePath(pathname)) {
         return;
@@ -85,7 +89,7 @@ export const NotificationSSEProvider = ({ children }: PropsWithChildren) => {
 
       debouncedFlush();
     },
-    [pathname, debouncedFlush, setHasUnreadNotification]
+    [pathname, debouncedFlush, setHasUnreadNotification, addUnreadNotificationType]
   );
 
   useNotificationSSE({
