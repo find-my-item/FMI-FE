@@ -68,9 +68,9 @@ const useSearchLocation = ({ latitude, longitude }: UseSearchLocationParams) => 
   >(queryKey, {
     enabled: isValidCoordinates && level > 0,
     placeholderData: keepPreviousData,
-    initialPageParam: undefined as MapPostSummaryPageParam,
+    initialPageParam: undefined,
     queryFn: async ({ pageParam }) => {
-      const qs = buildQueryString(pageParam as MapPostSummaryPageParam);
+      const qs = buildQueryString(pageParam);
       const { data } = await axios.get<MapPostSummaryResponse>(`/main/posts/search-location?${qs}`);
       return data;
     },

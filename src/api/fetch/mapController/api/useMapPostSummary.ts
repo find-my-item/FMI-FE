@@ -76,9 +76,9 @@ const useMapPostSummary = (postId: number) => {
   >(queryKey, {
     enabled: !!postId,
     placeholderData: keepPreviousData,
-    initialPageParam: undefined as MapPostSummaryPageParam,
+    initialPageParam: undefined,
     queryFn: async ({ pageParam }) => {
-      const qs = buildQueryString(pageParam as MapPostSummaryPageParam);
+      const qs = buildQueryString(pageParam);
       const { data } = await axios.get<MapPostSummaryResponse>(
         `/main/posts/${postId}/summary?${qs}`
       );
