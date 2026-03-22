@@ -7,6 +7,7 @@ import type { VWorldAddressItem } from "@/types";
 import { cn } from "@/utils";
 import { highlightText } from "@/utils";
 import { useRouter } from "next/navigation";
+import { useMemo } from "react";
 
 interface AutoCompleteListProps {
   searchKeyword: string;
@@ -19,6 +20,18 @@ const AutoCompleteList = ({ searchKeyword, setFocused }: AutoCompleteListProps) 
   const query = searchKeyword.trim();
   const { data: results = [], isLoading } = useVWorldAddressSearch(query);
 
+  const uniqueResults = useMemo(() => {
+    const seenAddresses = new Set<string>();
+
+    return results.filter((item) => {
+      const address = item.address.road || item.address.parcel;
+      if (!address) return false;
+      if (seenAddresses.has(address)) return false;
+      seenAddresses.add(address);
+      return true;
+    });
+  }, [results]);
+
   const handleSelect = (item: VWorldAddressItem) => {
     const address = item.address.road || item.address.parcel;
     if (!address) return;
@@ -27,11 +40,11 @@ const AutoCompleteList = ({ searchKeyword, setFocused }: AutoCompleteListProps) 
     setFocused(false);
   };
 
-  if (query.length < 2 || (!isLoading && results.length === 0)) return null;
+  if (query.length < 2 || (!isLoading && uniqueResults.length === 0)) return null;
 
   return (
     <ul className="border-b-[3px] border-labelsVibrant-quaternary">
-      {results.map((item, index, array) => {
+      {uniqueResults.map((item, index, array) => {
         const address = item.address.road || item.address.parcel;
         return (
           <li key={`${address}-${index}`}>
