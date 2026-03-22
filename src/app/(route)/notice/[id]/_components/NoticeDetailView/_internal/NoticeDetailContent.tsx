@@ -65,7 +65,7 @@ const NoticeDetailContent = ({ noticeDetail }: { noticeDetail: NoticeDetail }) =
             <button
               key={image}
               type="button"
-              className="relative aspect-square w-full cursor-pointer"
+              className="relative aspect-square w-full"
               onClick={() => setImageViewerState({ isOpen: true, initialIndex: index })}
               aria-label={`공지사항 상세 이미지 ${index + 1} 보기`}
             >
@@ -73,7 +73,7 @@ const NoticeDetailContent = ({ noticeDetail }: { noticeDetail: NoticeDetail }) =
                 src={image}
                 alt="공지사항 상세 이미지"
                 fill
-                className="rounded-2xl object-contain"
+                className="rounded-2xl object-cover"
               />
             </button>
           ))}
