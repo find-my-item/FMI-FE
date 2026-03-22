@@ -1,4 +1,5 @@
 "use client";
+// "use no memo";
 
 import Icon from "../Icon/Icon";
 import { InputHTMLAttributes } from "react";
@@ -20,14 +21,28 @@ const CheckBox = ({
   textStyle,
   iconSize,
   checked,
+  onChange,
   ...props
 }: CheckBoxProps) => {
   return (
     <label htmlFor={id} className="flex cursor-pointer items-center">
-      <input id={id} type="checkbox" className="peer sr-only" checked={checked} {...props} />
+      {/* <input id={id} type="checkbox"
+        className="peer sr-only"
+        checked={checked}
+        {...props}
+      /> */}
+      <input
+        id={id}
+        type="checkbox"
+        className="peer sr-only"
+        checked={checked} // 부모의 selectedValues 상태를 따름
+        onChange={onChange} // 클릭 시 handleCheckboxChange 실행
+        {...props}
+      />
       <div
         className={cn(
-          "relative h-6 w-6 rounded bg-fill-neutral-strong-pressed flex-center peer-checked:bg-fill-brand-normal-default",
+          "relative h-6 w-6 rounded bg-fill-neutral-strong-pressed flex-center",
+          checked && "bg-fill-brand-normal-default",
           boxSize
         )}
       >

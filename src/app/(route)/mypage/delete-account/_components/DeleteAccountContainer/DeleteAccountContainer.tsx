@@ -1,4 +1,5 @@
 "use client";
+"use no memo";
 
 import { useSearchParams } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
@@ -14,8 +15,9 @@ const DeleteAccountContainer = () => {
 
   const { mutate: DeleteAccountMutate } = useDeleteAccount();
 
-  const onSubmit = (data: DeleteAccountType) => {
-    console.log("data>> ", data);
+  const onSubmit = () => {
+    console.log("data>> ");
+    // DeleteAccountMutate()
   };
 
   return (

@@ -1,28 +1,36 @@
 "use client";
+"use no memo";
 
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { useRouter } from "next/navigation";
 import { FooterButton } from "@/components/domain";
 import { CheckBoxConfig } from "../../_constants/CheckBoxConfig";
 import { CheckBox, InputField } from "@/components/common";
+import { useFormContext } from "react-hook-form";
 
 const DeleteAccountReason = () => {
   const router = useRouter();
-  const [selectedValues, setSelectedValues] = useState<string[]>([]);
+
+  const { setValue, watch, register } = useFormContext();
+  const selectedValues: string[] = watch("reason") || [];
 
   const handleCheckboxChange = (value: string) => {
-    setSelectedValues((prev) => {
-      if (prev.includes(value)) {
-        return prev.filter((item) => item !== value);
-      }
+    let nextValues: string[];
 
-      if (prev.length >= 3) {
-        return [...prev.slice(1), value];
-      }
+    if (selectedValues.includes(value)) {
+      nextValues = selectedValues.filter((item) => item !== value);
+    } else {
+      nextValues =
+        selectedValues.length >= 3
+          ? [...selectedValues.slice(1), value]
+          : [...selectedValues, value];
+    }
 
-      return [...prev, value];
-    });
+    setValue("reason", nextValues, { shouldValidate: true, shouldDirty: true });
   };
+
+  const selectedReasons = watch("reason");
+  console.log("selectedReason>>> ", selectedReasons);
 
   return (
     <>
@@ -37,7 +45,7 @@ const DeleteAccountReason = () => {
             return (
               <Fragment key={item.label}>
                 <CheckBox
-                  key={item.value}
+                  {...register("reason")}
                   id={item.value}
                   label={item.label}
                   checked={isChecked}
