@@ -39,7 +39,7 @@ const useNotificationList = () => {
           .filter((notification) => !notification.isRead)
           .map((notification) => notification.type)
       )
-    ) as NotificationType[];
+    );
     const hasUnreadNotification = unreadTypes.length > 0;
     setHasUnreadNotification(hasUnreadNotification);
     setUnreadNotificationTypes(unreadTypes);
