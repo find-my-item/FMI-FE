@@ -4,9 +4,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: {
     template: "%s | 찾아줘! 관리자",
-    default: "관리자 페이지 | 찾아줘! 관리자",
+    absolute: "관리자 메인 페이지 | 찾아줘! 관리자",
   },
-  description: "찾아줘의 관리자만 접근할 수 있는 페이지입니다.",
+  description: "찾아줘의 관리자만 접근할 수 있어요.",
   robots: {
     index: false,
     follow: false,

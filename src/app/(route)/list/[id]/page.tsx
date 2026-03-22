@@ -12,6 +12,7 @@ export async function generateMetadata({ params }: ListDetailProps): Promise<Met
   const post = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts/${id}/share`, {
     next: { revalidate: 60 },
   }).then((res) => res.json());
+  console.log(post);
 
   const title = `${post?.result?.title ?? "물품"} | ${post?.result?.address ?? "주소"}`;
   const description = post?.result?.summary ?? "리스트 상세";
