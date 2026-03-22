@@ -66,19 +66,28 @@ async function buildSubscribeUrl(): Promise<string | null> {
     return subscribeUrl;
   }
 
+  const rt = getRuntime();
+
   try {
     const res = await fetch(ACCESS_TOKEN_API_PATH, { cache: "no-store" });
-    if (!res.ok) return subscribeUrl;
+    if (!res.ok) {
+      rt.isAuthInvalid = true;
+      return null;
+    }
 
     const data = (await res.json()) as { accessToken: string | null };
     const token = data.accessToken ?? undefined;
-    if (!token) return subscribeUrl;
+    if (!token) {
+      rt.isAuthInvalid = true;
+      return null;
+    }
 
     const q = new URLSearchParams();
     q.set(DEV_SSE_ACCESS_TOKEN_QUERY_KEY, token);
     return `${subscribeUrl}?${q.toString()}`;
   } catch {
-    return subscribeUrl;
+    rt.isAuthInvalid = true;
+    return null;
   }
 }
 
@@ -194,6 +203,7 @@ export async function connectNotificationSSE(options?: { force?: boolean }): Pro
       }
 
       rt.tokenRefreshHandler = () => {
+        rt.isAuthInvalid = false;
         scheduleReconnectNotificationSSE({ immediate: true, resetAttempt: true });
       };
 
@@ -225,6 +235,7 @@ export async function connectNotificationSSE(options?: { force?: boolean }): Pro
       // 브라우저 EventSource 자동 재연결 루프를 차단한다.
       es.close();
       rt.eventSource = null;
+      scheduleReconnectNotificationSSE();
     };
   } finally {
     rt.connectInFlight = false;
