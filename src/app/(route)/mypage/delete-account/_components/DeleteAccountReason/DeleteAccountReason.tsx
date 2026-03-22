@@ -3,9 +3,10 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FooterButton } from "@/components/domain";
-import { RadioConfig } from "../../_constants/RadioConfig";
+import { CheckBoxConfig } from "../../_constants/CheckBoxConfig";
 import { cn } from "@/utils";
 import { DeleteUserRadioType } from "../../_types/RadioType";
+import { CheckBox } from "@/components/common";
 
 interface DeleteAccountRadioItemProps {
   option: { value: string; label: string };
@@ -62,14 +63,8 @@ const DeleteAccountReason = () => {
         <h3 className="text-h3-semibold">탈퇴하시려는 이유를 알려주세요.</h3>
 
         <div className="flex flex-col gap-[14px]">
-          {RadioConfig.map((item) => (
-            <DeleteAccountRadioItem
-              key={item.value}
-              option={item}
-              selected={isSelected}
-              onChange={setIsSelected}
-              inputName="회원 탈퇴 사유"
-            />
+          {CheckBoxConfig.map((item) => (
+            <CheckBox key={item.value} id={item.value} label={item.label} state={true} />
           ))}
         </div>
       </div>
