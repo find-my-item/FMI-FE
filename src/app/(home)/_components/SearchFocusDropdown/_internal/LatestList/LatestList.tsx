@@ -35,7 +35,7 @@ const LatestList = ({ setFocused }: LatestListProps) => {
   return (
     <ul>
       {recentItems.map((item) => (
-        <li key={`${item.keyword}-${item.searchedAt}`}>
+        <li key={item.keyword}>
           <div
             role="button"
             tabIndex={0}
