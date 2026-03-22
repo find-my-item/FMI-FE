@@ -1,5 +1,7 @@
 import { AutoCompleteList, LatestList } from "./_internal";
 
+const HEADER_HEIGHT_PX = 77;
+
 const SearchFocusDropdown = ({
   focused,
   setFocused,
@@ -12,7 +14,7 @@ const SearchFocusDropdown = ({
   if (!focused) return null;
 
   return (
-    <div className="pt-[77px]">
+    <div className={`pt-[${HEADER_HEIGHT_PX}px]`}>
       <AutoCompleteList searchKeyword={searchKeyword} setFocused={setFocused} />
       <LatestList setFocused={setFocused} />
     </div>
