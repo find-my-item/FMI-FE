@@ -9,6 +9,7 @@ import {
 } from "@/api/fetch/notification";
 import { useInfiniteScroll } from "@/hooks";
 import { getAlertIconBackgroundColor } from "./_internal/AlertViewMappers";
+import { getAlertTitleSegments } from "./_internal/alertTitleSegments";
 import { IconName } from "@/components/common/Icon/Icon";
 import { EmptyState } from "@/components/state";
 import { alertRouteUrl } from "./_internal/alertRouteUrl";
@@ -20,6 +21,7 @@ const AlertItem = ({ item }: { item: NotificationListItem }) => {
     item;
   const { mutate: readNotification } = useNotificationRead();
   const { icon, bg } = getAlertIconBackgroundColor(type, referenceType);
+  const titleSegments = getAlertTitleSegments(type, title);
   const IconSize = referenceType === "NOTICE" ? 20 : 15;
 
   const handleAlertRoute = () => {
@@ -43,7 +45,11 @@ const AlertItem = ({ item }: { item: NotificationListItem }) => {
       <div className="flex w-full flex-col gap-1">
         <div className="flex items-center justify-between">
           <div className="flex items-center text-body2-medium text-neutral-normal-default">
-            {title}
+            {titleSegments.map((seg, i) => (
+              <span key={i} className={cn(seg.emphasize && "text-brand-normal-default")}>
+                {seg.text}
+              </span>
+            ))}
           </div>
           <span className="text-caption1-regular text-neutral-normal-placeholder">
             {formatDate(createdAt)}

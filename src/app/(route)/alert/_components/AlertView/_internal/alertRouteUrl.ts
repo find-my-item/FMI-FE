@@ -5,7 +5,6 @@ export const alertRouteUrl = (referenceType: ReferenceType, referenceId: number)
     case "POST":
     case "COMMENT":
       return `/list/${referenceId}`;
-    // TODO(형준): 알림 목록 API 수정 후 동작 확인 필요
     case "CHAT":
       return `/chat/${referenceId}`;
     case "INQUIRY":
