@@ -1,6 +1,6 @@
 import { PostListItem } from "@/components/domain";
-import { HomeFilterSection } from "./_internal";
 import { MOCK_POST_ITEM } from "@/mock/data";
+import HomeFilterSection from "../HomeFilterSection/HomeFilterSection";
 
 const PostSheetContent = () => {
   return (
