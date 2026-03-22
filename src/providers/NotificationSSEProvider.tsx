@@ -11,14 +11,14 @@ import {
   useNotificationSSE,
 } from "@/api/fetch/notification";
 import { useSnackBar } from "@/context/SnackBarContext";
-import { useAuthStore } from "@/store";
+import { useAuthStore, useNotificationStore } from "@/store";
 
 const isAuthRoutePath = (pathname: string) =>
   pathname.startsWith("/login") || pathname.startsWith("/sign-up");
 
 const NOTIFICATION_BATCH_DEBOUNCE_MS = 500;
 
-// TODO(형준): SSE 재연결 시 알림 오지않는 문제, 미확인 알림 전역 변수 추가 필요, 알림 디자인/API 달라서 누락 있음, 알림 리스트 중 채팅 클릭 시 채팅 API 실패하는 문제
+// TODO(형준): 미확인 알림 전역 변수 추가 필요, 알림 디자인/API 달라서 누락 있음
 
 export const NotificationSSEProvider = ({ children }: PropsWithChildren) => {
   const router = useRouter();
@@ -26,6 +26,7 @@ export const NotificationSSEProvider = ({ children }: PropsWithChildren) => {
   const queryClient = useQueryClient();
   const { showSnackBar } = useSnackBar();
   const isAuthInitialized = useAuthStore((state) => state.isAuthInitialized);
+  const setHasUnreadNotification = useNotificationStore((state) => state.setHasUnreadNotification);
 
   const bufferedKeysRef = useRef<
     {
@@ -60,6 +61,8 @@ export const NotificationSSEProvider = ({ children }: PropsWithChildren) => {
 
   const onNotification = useCallback(
     ({ type, referenceType, title }: NotificationEventData) => {
+      setHasUnreadNotification(true);
+
       if (isAuthRoutePath(pathname)) {
         return;
       }
@@ -82,7 +85,7 @@ export const NotificationSSEProvider = ({ children }: PropsWithChildren) => {
 
       debouncedFlush();
     },
-    [pathname, debouncedFlush]
+    [pathname, debouncedFlush, setHasUnreadNotification]
   );
 
   useNotificationSSE({
