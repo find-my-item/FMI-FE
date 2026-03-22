@@ -68,6 +68,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" sizes="152x152" href="/pwa/apple-icon-152.png" />
         <link rel="apple-touch-icon" sizes="167x167" href="/pwa/apple-icon-167.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/pwa/apple-icon-180.png" />
+        <meta name="naver-site-verification" content="6e6273a72b1c013d4f54c30896dbdb7a6ab63945" />
       </head>
       <body className="mx-auto max-w-[768px] border-x-2 flex-col-center">
         {isProd && gaId && <GoogleAnalytics gaId={gaId} />}
