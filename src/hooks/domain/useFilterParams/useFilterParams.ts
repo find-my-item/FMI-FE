@@ -54,7 +54,8 @@ import {
 } from "../../../components/domain/FilterSectionBottomSheet/_types/types";
 import { ActivityFilterValue } from "@/app/(route)/mypage/activity/_types/ActivityFilterType";
 import { SimpleSortType } from "@/types";
-import { RequestStatusFilterValue } from "@/components/domain/MypageRequest/_types/MypageRequestFilterType";
+import { ReportStatusFilterValue } from "@/app/(route)/mypage/reports/_types/MypageReportsFilterType";
+import { InquiryStatusFilterValue } from "@/app/(route)/mypage/inquiries/_types/MypageInquiriesFilterType";
 
 export const useFilterParams = () => {
   const searchParams = useSearchParams();
@@ -76,8 +77,11 @@ export const useFilterParams = () => {
       searchParams.get("activity")
     ),
     simpleSort: normalizeEnumValue<SimpleSortType>(searchParams.get("simpleSort")),
-    requestStatus: normalizeEnumValue<Exclude<RequestStatusFilterValue, undefined>>(
-      searchParams.get("requestStatus")
+    reportStatus: normalizeEnumValue<Exclude<ReportStatusFilterValue, undefined>>(
+      searchParams.get("reportStatus")
+    ),
+    inquiryStatus: normalizeEnumValue<Exclude<InquiryStatusFilterValue, undefined>>(
+      searchParams.get("inquiryStatus")
     ),
   };
 };

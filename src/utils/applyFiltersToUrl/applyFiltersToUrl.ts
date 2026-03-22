@@ -15,12 +15,14 @@ import {
 import {
   ActivityType,
   CategoryType,
+  InquiryStatus,
   ItemStatus,
   PostType,
-  RequestType,
+  ReportFilterStatus,
   SimpleSortType,
 } from "@/types";
-import { RequestStatusFilterValue } from "@/components/domain/MypageRequest/_types/MypageRequestFilterType";
+import { ReportStatusFilterValue } from "@/app/(route)/mypage/reports/_types/MypageReportsFilterType";
+import { InquiryStatusFilterValue } from "@/app/(route)/mypage/inquiries/_types/MypageInquiriesFilterType";
 
 const CATEGORY_QUERY_VALUE_MAP: Record<CategoryType, string> = {
   ELECTRONICS: "electronics",
@@ -62,11 +64,17 @@ export const SIMPLE_SORT_QUERY_VALUE_MAP: Record<SimpleSortType, string> = {
   OLDEST: "oldest",
 };
 
-const REQUEST_STATUS_QUERY_VALUE_MAP: Record<RequestType, string> = {
+const REPORT_STATUS_QUERY_VALUE_MAP: Record<ReportFilterStatus, string> = {
   ALL: "all",
   PENDING: "pending",
   REVIEWED: "reviewed",
   RESOLVED: "resolved",
+};
+
+const INQUIRY_STATUS_QUERY_VALUE_MAP: Record<InquiryStatus, string> = {
+  RECEIVED: "received",
+  PENDING: "pending",
+  ANSWERED: "answered",
 };
 
 const categoryToQueryValue = (category: CategoryFilterValue): string | undefined => {
@@ -97,9 +105,14 @@ const simpleSortToQueryValue = (simpleSort: SimpleSortType): string => {
   return SIMPLE_SORT_QUERY_VALUE_MAP[simpleSort];
 };
 
-const requestStatusToQueryValue = (requestStatus: RequestStatusFilterValue): string | undefined => {
+const reportStatusToQueryValue = (reportStatus: ReportStatusFilterValue): string | undefined => {
+  if (!reportStatus) return undefined;
+  return REPORT_STATUS_QUERY_VALUE_MAP[reportStatus];
+};
+
+const inquiryStatusToQueryValue = (requestStatus: InquiryStatusFilterValue): string | undefined => {
   if (!requestStatus) return undefined;
-  return REQUEST_STATUS_QUERY_VALUE_MAP[requestStatus];
+  return INQUIRY_STATUS_QUERY_VALUE_MAP[requestStatus];
 };
 
 const FILTER_TRANSFORMERS: Record<string, (val: any) => string | undefined> = {
@@ -109,7 +122,8 @@ const FILTER_TRANSFORMERS: Record<string, (val: any) => string | undefined> = {
   findStatus: (val) => findStatusToQueryValue(val),
   activity: (val) => activityToQueryValue(val),
   simpleSort: (val) => (val ? simpleSortToQueryValue(val) : undefined),
-  requestStatus: (val) => requestStatusToQueryValue(val),
+  reportStatus: (val) => reportStatusToQueryValue(val),
+  inquiryStatus: (val) => inquiryStatusToQueryValue(val),
   region: (val) => val,
   startDate: (val) => val,
   endDate: (val) => val,
