@@ -7,3 +7,12 @@ export const CheckBoxConfig = [
   { value: "UNFAIR_RESTRICTION", label: "억울하게 서비스 이용이 제한됐어요" },
   { value: "OTHER", label: "기타" },
 ] as const;
+
+export type DeleteType =
+  | "NOT_USING"
+  | "LOW_TRUST"
+  | "DIFFICULT_TO_USE"
+  | "DUPLICATE_ACCOUNT"
+  | "UNPLEASANT_USER"
+  | "UNFAIR_RESTRICTION"
+  | "OTHER";

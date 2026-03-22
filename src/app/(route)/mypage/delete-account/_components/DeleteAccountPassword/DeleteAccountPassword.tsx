@@ -1,12 +1,39 @@
 "use client";
+"use no memo";
 
+import { usePostVerifyPassword } from "@/api/fetch/user";
 import { Button, InputText } from "@/components/common";
 import ModalLayout from "@/components/common/Modal/_internal/ModalLayout";
 import { FooterButton } from "@/components/domain";
+import { useToast } from "@/context/ToastContext";
 import { useState } from "react";
+import { useFormContext } from "react-hook-form";
 
 const DeleteAccountPassword = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const { addToast } = useToast();
+  const { getValues } = useFormContext();
+  const { mutate: VerifyPasswordMutate } = usePostVerifyPassword();
+
+  const handleToClick = () => {
+    const currentPassword = getValues("passwordConfirm");
+    console.log("password>> ", currentPassword);
+    VerifyPasswordMutate(
+      { currentPassword },
+      {
+        onSuccess: () => {
+          setModalOpen(true);
+        },
+        onError: (error) => {
+          if (error.code === "USER400-PASSWORD_INCORRECT") {
+            addToast("비밀번호가 일치하지 않아요", "warning");
+          } else if (error.code === "USER404-NOT_FOUND")
+            addToast("존재하지 않는 회원이에요", "warning");
+        },
+      }
+    );
+  };
+
   return (
     <>
       <div className="flex w-full flex-col gap-[18px] px-5 py-[30px] h-base">
@@ -21,7 +48,8 @@ const DeleteAccountPassword = () => {
         />
       </div>
 
-      <FooterButton onClick={() => console.log("비밀번호 검증 버튼")}>탈퇴하기</FooterButton>
+      <FooterButton onClick={handleToClick}>탈퇴하기</FooterButton>
+
       {modalOpen && (
         <ModalLayout
           className="w-[350px] gap-6 p-6 flex-col-center"
@@ -31,10 +59,12 @@ const DeleteAccountPassword = () => {
           <h3 className="text-h3-semibold text-layout-header-default">정말로 탈퇴하시겠습니까?</h3>
 
           <div className="flex w-full gap-2">
-            <Button variant="outlined" className="w-full">
+            <Button variant="outlined" className="w-full" onClick={() => setModalOpen(false)}>
               취소
             </Button>
-            <Button className="w-full !bg-system-warning">탈퇴하기</Button>
+            <Button type="submit" className="w-full !bg-system-warning">
+              탈퇴하기
+            </Button>
           </div>
         </ModalLayout>
       )}
