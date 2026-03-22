@@ -157,6 +157,7 @@ const BaseKakaoMap = ({
           setMapCenter(nextCenter);
           onDragEnd(nextCenter);
         }}
+        minLevel={13}
       >
         {showMarker &&
           markerData &&
