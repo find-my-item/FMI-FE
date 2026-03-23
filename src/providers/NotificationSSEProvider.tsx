@@ -10,6 +10,7 @@ import {
   REFERENCE_TYPE,
   useNotificationSSE,
 } from "@/api/fetch/notification";
+import { useFaviconNotification } from "@/hooks";
 import { useSnackBar } from "@/context/SnackBarContext";
 import { useAuthStore, useNotificationStore } from "@/store";
 
@@ -26,7 +27,10 @@ export const NotificationSSEProvider = ({ children }: PropsWithChildren) => {
   const queryClient = useQueryClient();
   const { showSnackBar } = useSnackBar();
   const isAuthInitialized = useAuthStore((state) => state.isAuthInitialized);
+  const hasUnreadNotification = useNotificationStore((state) => state.hasUnreadNotification);
   const setHasUnreadNotification = useNotificationStore((state) => state.setHasUnreadNotification);
+
+  useFaviconNotification(hasUnreadNotification);
   const addUnreadNotificationType = useNotificationStore(
     (state) => state.addUnreadNotificationType
   );
