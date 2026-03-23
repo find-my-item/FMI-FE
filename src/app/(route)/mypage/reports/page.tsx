@@ -1,6 +1,6 @@
 import { DetailHeader } from "@/components/layout";
-import { MypageRequestFilter, MypageRequestList, MypageSearch } from "@/components/domain";
-import { MOCK_MYPAGE_REPORTS } from "@/mock/data";
+import { MypageSearch } from "@/components/domain";
+import { MypageReportsContent, MypageReportsFilter } from "./_components";
 
 const page = () => {
   return (
@@ -10,9 +10,9 @@ const page = () => {
       <div className="w-full h-base">
         <MypageSearch />
 
-        <MypageRequestFilter status="reports" />
+        <MypageReportsFilter />
 
-        <MypageRequestList listType="reports" data={MOCK_MYPAGE_REPORTS} />
+        <MypageReportsContent />
       </div>
     </>
   );

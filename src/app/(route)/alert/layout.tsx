@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
 import type { Metadata } from "next";
-import { AlertDetailHeader } from "./_components";
 
 export const metadata: Metadata = {
   title: "알림",
@@ -8,13 +7,7 @@ export const metadata: Metadata = {
 };
 
 const layout = ({ children }: { children: ReactNode }) => {
-  return (
-    <div className="h-base">
-      <AlertDetailHeader />
-      <h1 className="sr-only">알림 페이지</h1>
-      {children}
-    </div>
-  );
+  return <div className="h-base">{children}</div>;
 };
 
 export default layout;

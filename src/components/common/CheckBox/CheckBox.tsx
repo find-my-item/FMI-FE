@@ -7,7 +7,7 @@ import { cn } from "@/utils";
 
 interface CheckBoxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type" | "id"> {
   id: string;
-  label: string;
+  label?: string;
   boxSize?: string;
   textStyle?: string;
   iconSize?: string;
@@ -50,14 +50,16 @@ const CheckBox = ({
           )}
         />
       </div>
-      <span
-        className={cn(
-          "ml-3 text-body1-semibold text-neutral-normal-default peer-checked:text-neutral-normal-enteredSelected",
-          textStyle
-        )}
-      >
-        {label}
-      </span>
+      {label && (
+        <span
+          className={cn(
+            "ml-3 text-body1-semibold text-neutral-normal-default peer-checked:text-neutral-normal-enteredSelected",
+            textStyle
+          )}
+        >
+          {label}
+        </span>
+      )}
     </label>
   );
 };

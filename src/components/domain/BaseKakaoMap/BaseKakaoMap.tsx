@@ -3,6 +3,8 @@
 import { CSSProperties, ReactNode, useEffect, useState } from "react";
 import { Map, MapMarker, Circle, useKakaoLoader } from "react-kakao-maps-sdk";
 import { MapErrorState, MapLoadingState } from "@/components/domain/BaseKakaoMap/_internal";
+import { GetMarkerData } from "@/api/fetch/mapController";
+import { MAP_MARKER_ICON } from "./MAP_MARKER_ICON";
 
 /**
  * @author jikwon
@@ -85,6 +87,7 @@ interface BaseKakaoMapProps {
   showMarker?: boolean;
   markerSize?: { width: number; height: number };
   markerOffset?: { x: number; y: number };
+  markerData?: GetMarkerData[];
 
   /** radius */
   radius?: number;
@@ -93,6 +96,7 @@ interface BaseKakaoMapProps {
   /** events */
   onDragEnd?: (center: LatLng) => void;
   onLevelChange?: (level: number) => void;
+  onMarkerClick?: (postId: number, position: LatLng) => void;
 
   /** overlay ui */
   children?: ReactNode;
@@ -107,12 +111,14 @@ const BaseKakaoMap = ({
   showMarker = true,
   markerSize = { width: 26, height: 37 },
   markerOffset = { x: 13, y: 20 },
+  markerData,
 
   radius,
   showCircle = false,
 
   onDragEnd,
   onLevelChange,
+  onMarkerClick,
   children,
 }: BaseKakaoMapProps) => {
   const [loading, error] = useKakaoLoader({
@@ -136,6 +142,7 @@ const BaseKakaoMap = ({
         level={level}
         draggable={draggable}
         style={style}
+        isPanto={true}
         onZoomChanged={(map) => {
           if (!onLevelChange) return;
           onLevelChange(map.getLevel());
@@ -150,17 +157,26 @@ const BaseKakaoMap = ({
           setMapCenter(nextCenter);
           onDragEnd(nextCenter);
         }}
+        minLevel={13}
       >
-        {showMarker && (
-          <MapMarker
-            position={mapCenter}
-            image={{
-              src: "/kakao-map/marker.svg",
-              size: markerSize,
-              options: { offset: markerOffset },
-            }}
-          />
-        )}
+        {showMarker &&
+          markerData &&
+          markerData.map(({ postId, latitude, longitude, postType }) => (
+            <MapMarker
+              key={postId}
+              position={{ lat: latitude, lng: longitude }}
+              image={{
+                src: MAP_MARKER_ICON[postType],
+                size: markerSize,
+                options: { offset: markerOffset },
+              }}
+              onClick={
+                onMarkerClick
+                  ? () => onMarkerClick(postId, { lat: latitude, lng: longitude })
+                  : undefined
+              }
+            />
+          ))}
 
         {showCircle && radius && (
           <Circle

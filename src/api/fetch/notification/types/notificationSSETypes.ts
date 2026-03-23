@@ -5,8 +5,6 @@
 /** 알림 타입 */
 export const NOTIFICATION_TYPE = {
   COMMENT: "COMMENT",
-  REPLY: "REPLY",
-  MENTION: "MENTION",
   CHAT: "CHAT",
   CHAT_REMINDER: "CHAT_REMINDER",
   INQUIRY_REPLY: "INQUIRY_REPLY",
@@ -15,7 +13,6 @@ export const NOTIFICATION_TYPE = {
   CATEGORY: "CATEGORY",
   NOTICE: "NOTICE",
   SYSTEM: "SYSTEM",
-  LIKE: "LIKE",
 } as const;
 
 export type NotificationType = (typeof NOTIFICATION_TYPE)[keyof typeof NOTIFICATION_TYPE];

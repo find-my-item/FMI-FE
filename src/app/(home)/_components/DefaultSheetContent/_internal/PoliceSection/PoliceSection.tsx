@@ -36,13 +36,13 @@ const PoliceSection = () => {
             <Link
               key={item.href}
               href={item.href}
-              className="group box-border h-14 w-full max-w-[255.5px] overflow-hidden rounded-[10px] border border-brand-normal-disabled/90 bg-white px-[14px] py-3 flex-col-center"
+              className="sm:h-[60px] sm:w-[60px] group box-border h-14 w-full max-w-[255.5px] overflow-hidden rounded-[10px] border border-brand-normal-disabled/90 bg-white px-[14px] py-3 flex-col-center"
             >
               <div className="flex flex-col items-center text-center text-caption1-medium transition-colors">
                 <span className="text-neutralInversed-normal-focused group-hover:text-caption1-semibold group-hover:text-flatGreen-500">
                   {item.headLabel}
                 </span>
-                <span className="text-neutralInversed-normal-default group-hover:text-caption1-semibold group-hover:text-flatGreen-500">
+                <span className="text-nowrap text-neutralInversed-normal-default group-hover:text-caption1-semibold group-hover:text-flatGreen-500">
                   {item.label}
                 </span>
               </div>
