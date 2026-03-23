@@ -34,6 +34,7 @@ const AlertItem = ({
   const { icon, bg } = getAlertIconBackgroundColor(type, referenceType);
   const titleSegments = getAlertTitleSegments(type, title);
   const IconSize = referenceType === "NOTICE" ? 20 : 15;
+  const isSelected = selectedNotifications.includes(notificationId);
 
   const handleAlertRoute = () => {
     if (isDeleteMode) return;
@@ -66,10 +67,12 @@ const AlertItem = ({
       {isDeleteMode && (
         <CheckBox
           id={String(notificationId)}
+          checked={isSelected}
           label=""
-          state={isRead}
+          state={isSelected}
           boxSize="size-6"
-          onClick={() => handleSelectNotification(notificationId)}
+          onChange={() => handleSelectNotification(notificationId)}
+          onClick={(e) => e.stopPropagation()}
         />
       )}
       <div className={cn("h-[30px] w-[30px] flex-shrink-0 rounded-full flex-center", bg)}>

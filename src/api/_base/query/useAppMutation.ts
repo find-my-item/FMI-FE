@@ -1,5 +1,6 @@
 "use client";
 
+import type { AxiosRequestConfig } from "axios";
 import useAxios from "../axios/useAxios";
 import { useMutation, UseMutationOptions, UseMutationResult } from "@tanstack/react-query";
 
@@ -22,8 +23,9 @@ import { useMutation, UseMutationOptions, UseMutationResult } from "@tanstack/re
 // method: HTTP method
 // option: 추가 useMutation option (ex: {onSuccess: (data)=> ...} (객체로 삽입))
 // appMutationConfig:
-//   - sendDeleteBody: DELETE 요청에 variables를 JSON body로 보낼 때 true.
-//     Axios는 delete 본문을 `config.data`에 넣어야 하며, 기본값 false는 기존 동작 유지(URL·쿼리키만 있고 body 없는 delete).
+//   - sendDeleteBody: DELETE 요청에 variables를 JSON body로 보낼 때 true (`config.data`).
+//     false/미지정: body·params 없이 호출. variables는 URL 함수·onSuccess 캐시용 등으로만 쓰이며,
+//     `queryKey` 같은 필드를 params로 넣으면 안 되므로 기본적으로 요청 config에 실어 보내지 않음.
 
 type UseAppMutationConfig = {
   sendDeleteBody?: boolean;
@@ -43,17 +45,14 @@ const useAppMutation = <TVariables, TData = unknown, TError = unknown, TContext 
       const requestUrl = typeof url === "function" ? url(variables) : url;
 
       if (method === "delete") {
-        if (appMutationConfig?.sendDeleteBody) {
-          const { data } = await axios.delete<TData>(
-            requestUrl,
-            variables !== undefined && variables !== null ? { data: variables } : undefined
-          );
-          return data;
-        }
-        const { data } = await axios.delete<TData>(
-          requestUrl,
-          variables !== undefined && variables !== null ? (variables as never) : undefined
-        );
+        const config: AxiosRequestConfig | undefined =
+          variables != null
+            ? appMutationConfig?.sendDeleteBody
+              ? { data: variables }
+              : undefined
+            : undefined;
+
+        const { data } = await axios.delete<TData>(requestUrl, config);
         return data;
       }
 
