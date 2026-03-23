@@ -12,7 +12,7 @@ import { useFormContext } from "react-hook-form";
 const DeleteAccountPassword = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const { addToast } = useToast();
-  const { handleSubmit, getValues } = useFormContext();
+  const { handleSubmit, getValues, watch } = useFormContext();
   const { mutate: VerifyPasswordMutate } = usePostVerifyPassword();
 
   const handleToClick = () => {
@@ -34,6 +34,8 @@ const DeleteAccountPassword = () => {
     setModalOpen(true);
   };
 
+  const watchPassword = watch("passwordConfirm").trim() || "";
+
   return (
     <>
       <div className="flex w-full flex-col gap-[18px] px-5 py-[30px] h-base">
@@ -48,7 +50,9 @@ const DeleteAccountPassword = () => {
         />
       </div>
 
-      <FooterButton onClick={handleToClick}>탈퇴하기</FooterButton>
+      <FooterButton onClick={handleToClick} disabled={!watchPassword}>
+        탈퇴하기
+      </FooterButton>
 
       {modalOpen && (
         <ModalLayout
