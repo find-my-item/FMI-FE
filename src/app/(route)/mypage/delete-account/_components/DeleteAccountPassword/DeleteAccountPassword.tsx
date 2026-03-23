@@ -6,14 +6,29 @@ import { Button, InputText } from "@/components/common";
 import ModalLayout from "@/components/common/Modal/_internal/ModalLayout";
 import { FooterButton } from "@/components/domain";
 import { useToast } from "@/context/ToastContext";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
-const DeleteAccountPassword = () => {
+const DeleteAccountPassword = ({ onBack }: { onBack: () => void }) => {
   const [modalOpen, setModalOpen] = useState(false);
+  const router = useRouter();
   const { addToast } = useToast();
   const { handleSubmit, getValues, watch } = useFormContext();
   const { mutate: VerifyPasswordMutate, isPending } = usePostVerifyPassword();
+
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = "";
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
 
   const handleToClick = () => {
     const currentPassword = getValues("passwordConfirm");
@@ -65,7 +80,14 @@ const DeleteAccountPassword = () => {
           <h3 className="text-h3-semibold text-layout-header-default">정말로 탈퇴하시겠습니까?</h3>
 
           <div className="flex w-full gap-2">
-            <Button variant="outlined" className="w-full" onClick={() => setModalOpen(false)}>
+            <Button
+              variant="outlined"
+              className="w-full"
+              onClick={() => {
+                setModalOpen(false);
+                onBack();
+              }}
+            >
               취소
             </Button>
             <Button

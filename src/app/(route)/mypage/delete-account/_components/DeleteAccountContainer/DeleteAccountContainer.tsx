@@ -1,20 +1,18 @@
 "use client";
 "use no memo";
 
-import { useSearchParams } from "next/navigation";
 import DeleteAccountReason from "../DeleteAccountReason/DeleteAccountReason";
 import DeleteAccountPassword from "../DeleteAccountPassword/DeleteAccountPassword";
+import { useState } from "react";
 
 const DeleteAccountContainer = () => {
-  const searchParams = useSearchParams();
-  const state = searchParams.get("state") || "reason";
-
+  const [state, setState] = useState<number>(1);
   return (
     <section>
       <h2 className="sr-only">탈퇴 선택 영역</h2>
-      {state === "reason" && <DeleteAccountReason />}
+      {state === 1 && <DeleteAccountReason onNext={() => setState(2)} />}
 
-      {state === "passwordConfirm" && <DeleteAccountPassword />}
+      {state === 2 && <DeleteAccountPassword onBack={() => setState(1)} />}
     </section>
   );
 };

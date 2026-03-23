@@ -2,7 +2,7 @@
 
 import { DetailHeader } from "@/components/layout";
 import { DeleteAccountContainer, DeleteComplete } from "./_components";
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { DeleteAccountType, useDeleteAccount } from "@/api/fetch/user";
 import { FormProvider, useForm } from "react-hook-form";
 import { useToast } from "@/context/ToastContext";
@@ -14,7 +14,21 @@ const page = () => {
   const [isDeleted, setIsDeleted] = useState(false);
   const { mutate: DeleteAccountMutate, isPending } = useDeleteAccount();
 
+  // useEffect(() => {
+  //   const savedReasons = sessionStorage.getItem("reasons");
+  //   const savedOther = sessionStorage.getItem("other_reason");
+
+  //   if (savedReasons) {
+  //     methods.reset({
+  //       reasons: JSON.parse(savedReasons),
+  //       otherReason: savedOther || ""
+  //     });
+  //   }
+  // }, [methods.reset]);
+
   const onSubmit = (data: DeleteAccountType) => {
+    const savedReasons = sessionStorage.getItem("reasons");
+    const savedOther = sessionStorage.getItem("other_reason");
     if (isPending) return;
 
     const payload: DeleteAccountType = {
@@ -28,13 +42,18 @@ const page = () => {
     DeleteAccountMutate(payload, {
       onSuccess: () => {
         setIsDeleted(true);
+        sessionStorage.removeItem("reasons");
+        sessionStorage.removeItem("otherReason");
       },
       onError: (error) => {
         if (error.code === "USER404-NOT_FOUND") addToast("존제하지 않는 회원이에요", "warning");
         else if (error.code === "FILE500-DELETE_IO") addToast("회원탈퇴에 실패했어요", "warning");
       },
     });
+
     console.log("payload>> ", payload);
+    console.log("데이터 확인>> ", savedReasons);
+    console.log("데이터 확인>> ", savedOther);
   };
 
   if (isDeleted) {

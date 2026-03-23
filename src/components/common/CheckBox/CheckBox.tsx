@@ -26,17 +26,12 @@ const CheckBox = ({
 }: CheckBoxProps) => {
   return (
     <label htmlFor={id} className="flex cursor-pointer items-center">
-      {/* <input id={id} type="checkbox"
-        className="peer sr-only"
-        checked={checked}
-        {...props}
-      /> */}
       <input
         id={id}
         type="checkbox"
         className="peer sr-only"
-        checked={checked} // 부모의 selectedValues 상태를 따름
-        onChange={onChange} // 클릭 시 handleCheckboxChange 실행
+        checked={checked}
+        onChange={onChange}
         {...props}
       />
       <div

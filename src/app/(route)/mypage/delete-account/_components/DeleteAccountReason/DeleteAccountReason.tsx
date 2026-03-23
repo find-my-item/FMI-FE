@@ -1,18 +1,41 @@
 "use client";
 "use no memo";
 
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { FooterButton } from "@/components/domain";
 import { CheckBoxConfig } from "../../_constants/CheckBoxConfig";
 import { CheckBox, InputField } from "@/components/common";
 import { useFormContext } from "react-hook-form";
 
-const DeleteAccountReason = () => {
+const DeleteAccountReason = ({ onNext }: { onNext: () => void }) => {
   const router = useRouter();
 
   const { setValue, watch, register } = useFormContext();
-  const selectedValues: string[] = watch("reason") || [];
+  const selectedValues: string[] = watch("reasons") || [];
+
+  // useEffect(() => {
+  //   const savedReasons = sessionStorage.getItem("reasons");
+  //   const savedOther = sessionStorage.getItem("other_reason");
+
+  //   if (savedReasons) {
+  //     setValue("reasons", JSON.parse(savedReasons));
+  //   }
+  //   if (savedOther) {
+  //     setValue("otherReason", savedOther);
+  //   }
+  // }, [setValue]);
+
+  // useEffect(() => {
+  //   sessionStorage.setItem("reasons", JSON.stringify(selectedValues));
+  // }, [selectedValues]);
+
+  // const otherReasonValue = watch("otherReason");
+  // useEffect(() => {
+  //   if (otherReasonValue) {
+  //     sessionStorage.setItem("other_reason", otherReasonValue);
+  //   }
+  // }, [otherReasonValue]);
 
   const handleCheckboxChange = (value: string) => {
     let nextValues: string[];
@@ -26,7 +49,7 @@ const DeleteAccountReason = () => {
           : [...selectedValues, value];
     }
 
-    setValue("reason", nextValues, { shouldValidate: true, shouldDirty: true });
+    setValue("reasons", nextValues, { shouldValidate: true, shouldDirty: true });
   };
 
   return (
@@ -36,13 +59,13 @@ const DeleteAccountReason = () => {
           <h3 className="text-h3-semibold">탈퇴하시려는 이유를 알려주세요.</h3>
           <p className="text-body2-regular text-layout-body-default">최대 3개 선택</p>
         </div>
-        <div className="flex flex-col gap-[14px]">
+        <div className="flex flex-col gap-[18px]">
           {CheckBoxConfig.map((item) => {
             const isChecked = selectedValues.includes(item.value);
             return (
               <Fragment key={item.label}>
                 <CheckBox
-                  {...register("reason")}
+                  {...register("reasons")}
                   id={item.value}
                   label={item.label}
                   value={item.value}
@@ -62,10 +85,7 @@ const DeleteAccountReason = () => {
         </div>
       </div>
 
-      <FooterButton
-        onClick={() => router.push("?state=passwordConfirm")}
-        disabled={selectedValues.length === 0}
-      >
+      <FooterButton onClick={() => onNext()} disabled={selectedValues.length === 0}>
         다음
       </FooterButton>
     </>
