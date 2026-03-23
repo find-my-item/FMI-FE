@@ -43,7 +43,7 @@ const AutoCompleteList = ({ searchKeyword, setFocused }: AutoCompleteListProps) 
   if (query.length < 2 || (!isLoading && uniqueResults.length === 0)) return null;
 
   return (
-    <ul className="border-b-[3px] border-labelsVibrant-quaternary">
+    <ul className={cn(!isLoading && "border-b-[3px] border-labelsVibrant-quaternary")}>
       {uniqueResults.map((item, index, array) => {
         const address = item.address.road || item.address.parcel;
         return (
