@@ -8,11 +8,8 @@ import {
   useNotificationRead,
 } from "@/api/fetch/notification";
 import { useInfiniteScroll } from "@/hooks";
-import {
-  getAlertIconBackgroundColor,
-  getAlertTitle,
-  renderTitle,
-} from "./_internal/AlertViewMappers";
+import { getAlertIconBackgroundColor } from "./_internal/AlertViewMappers";
+import { getAlertTitleSegments } from "./_internal/alertTitleSegments";
 import { IconName } from "@/components/common/Icon/Icon";
 import { EmptyState } from "@/components/state";
 import { alertRouteUrl } from "./_internal/alertRouteUrl";
@@ -24,9 +21,8 @@ const AlertItem = ({ item }: { item: NotificationListItem }) => {
     item;
   const { mutate: readNotification } = useNotificationRead();
   const { icon, bg } = getAlertIconBackgroundColor(type, referenceType);
+  const titleSegments = getAlertTitleSegments(type, title);
   const IconSize = referenceType === "NOTICE" ? 20 : 15;
-  const alertTitle = getAlertTitle(type, referenceType);
-  const alertMessage = referenceType === "NOTICE" ? title : message;
 
   const handleAlertRoute = () => {
     readNotification({ ids: [notificationId] });
@@ -48,13 +44,19 @@ const AlertItem = ({ item }: { item: NotificationListItem }) => {
       </div>
       <div className="flex w-full flex-col gap-1">
         <div className="flex items-center justify-between">
-          <div className="flex items-center text-body2-medium">{renderTitle(alertTitle)}</div>
+          <div className="flex items-center text-body2-medium text-neutral-normal-default">
+            {titleSegments.map((seg, i) => (
+              <span key={i} className={cn(seg.emphasize && "text-brand-normal-default")}>
+                {seg.text}
+              </span>
+            ))}
+          </div>
           <span className="text-caption1-regular text-neutral-normal-placeholder">
             {formatDate(createdAt)}
           </span>
         </div>
         <span className="line-clamp-1 text-body2-regular text-neutral-strong-default">
-          {alertMessage}
+          {message}
         </span>
       </div>
     </button>
