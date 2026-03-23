@@ -4,9 +4,10 @@ import { useForm } from "react-hook-form";
 import { Icon } from "@/components/common";
 import { useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/utils";
-import { Suspense, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import SearchFocusDropdown from "../SearchFocusDropdown/SearchFocusDropdown";
 import MainSearchLayout from "../MainSearchLayout/MainSearchLayout";
+import { useMainRecentSearch } from "@/store";
 
 interface LocationFormValues {
   search: string;
@@ -21,19 +22,27 @@ const HeaderSearchForm = ({
   searchValue,
   setFocused,
   focused,
-}: FocusedProps & { searchValue: string | null }) => {
+  setSearchKeyword,
+}: FocusedProps & { searchValue: string | null; setSearchKeyword: (value: string) => void }) => {
   const router = useRouter();
+  const addRecentSearch = useMainRecentSearch((s) => s.addRecentSearch);
   const inputRef = useRef<HTMLInputElement>(null);
-  const { register, handleSubmit } = useForm<LocationFormValues>({
-    defaultValues: { search: searchValue || "" },
+  const { register, handleSubmit, setValue } = useForm<LocationFormValues>({
+    defaultValues: { search: searchValue ?? "" },
   });
   const { ref: registerRef, ...searchRegister } = register("search", { required: true });
   const isDropdownOpen = searchValue || focused;
 
+  useEffect(() => {
+    setValue("search", searchValue ?? "");
+    setSearchKeyword(searchValue ?? "");
+  }, [searchValue, setSearchKeyword, setValue]);
+
   const onSubmit = ({ search }: LocationFormValues) => {
     const trimmedSearch = search.trim();
     if (!trimmedSearch) return;
-    router.push(`/?search=${trimmedSearch}`);
+    addRecentSearch(trimmedSearch);
+    router.push(`/?search=${encodeURIComponent(trimmedSearch)}`);
     setFocused(false);
   };
 
@@ -60,6 +69,10 @@ const HeaderSearchForm = ({
           registerRef(el);
           inputRef.current = el;
         }}
+        onChange={(e) => {
+          searchRegister.onChange(e);
+          setSearchKeyword(e.target.value);
+        }}
         type="text"
         onFocus={() => setFocused(true)}
         className="w-full pl-8 text-h3-semibold text-flatGray-700 placeholder:text-flatGray-700"
@@ -78,7 +91,11 @@ const HeaderSearchForm = ({
   );
 };
 
-const HeaderContent = ({ setFocused, focused }: FocusedProps) => {
+const HeaderContent = ({
+  setFocused,
+  focused,
+  setSearchKeyword,
+}: FocusedProps & { setSearchKeyword: (value: string) => void }) => {
   const searchParams = useSearchParams();
   const searchValue = searchParams.get("search");
 
@@ -89,20 +106,34 @@ const HeaderContent = ({ setFocused, focused }: FocusedProps) => {
         (searchValue || focused) && "border-x-2 bg-white"
       )}
     >
-      <HeaderSearchForm searchValue={searchValue} setFocused={setFocused} focused={focused} />
+      <HeaderSearchForm
+        searchValue={searchValue}
+        setFocused={setFocused}
+        focused={focused}
+        setSearchKeyword={setSearchKeyword}
+      />
     </header>
   );
 };
 
 const MainSearchHeader = () => {
   const [focused, setFocused] = useState(false);
+  const [searchKeyword, setSearchKeyword] = useState("");
 
   return (
     <Suspense fallback={""}>
       <MainSearchLayout focused={focused}>
         <div className="relative">
-          <HeaderContent setFocused={setFocused} focused={focused} />
-          <SearchFocusDropdown focused={focused} />
+          <HeaderContent
+            setFocused={setFocused}
+            focused={focused}
+            setSearchKeyword={setSearchKeyword}
+          />
+          <SearchFocusDropdown
+            focused={focused}
+            setFocused={setFocused}
+            searchKeyword={searchKeyword}
+          />
         </div>
       </MainSearchLayout>
     </Suspense>

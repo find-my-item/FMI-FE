@@ -2,12 +2,12 @@ import { ReactNode } from "react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "알림",
-  description: "찾아줘에서 나에게 온 알림을 확인해보세요.",
+  title: "채팅방 | 찾아줘! 채팅",
+  description: "찾아줘에서 진행 중인 채팅을 확인해보세요.",
 };
 
 const layout = ({ children }: { children: ReactNode }) => {
-  return <div className="h-base">{children}</div>;
+  return children;
 };
 
 export default layout;
