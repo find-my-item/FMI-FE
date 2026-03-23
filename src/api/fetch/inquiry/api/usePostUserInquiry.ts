@@ -14,7 +14,7 @@ export const usePostUserInquiry = ({ inquiryId }: { inquiryId: number }) => {
     `/inquiries/${inquiryId}/comments`,
     "post",
     {
-      onSuccess: (response) => {
+      onSuccess: () => {
         addToast("문의 댓글 작성에 성공했어요", "success");
         queryClient.invalidateQueries({ queryKey: ["/inquiries/id", inquiryId] });
       },

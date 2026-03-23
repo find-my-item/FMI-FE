@@ -8,20 +8,7 @@ interface InquiryCommentItemProps {
 }
 
 const InquiryCommentItem = ({ data }: InquiryCommentItemProps) => {
-  const {
-    id,
-    content,
-    authorEmail,
-    authorId,
-    authorName,
-    createdAt,
-    profileImg,
-    parentId,
-    imageList,
-    canDelete,
-    canEdit,
-    admin,
-  } = data;
+  const { content, authorName, createdAt, profileImg, imageList, admin } = data;
 
   return (
     <article

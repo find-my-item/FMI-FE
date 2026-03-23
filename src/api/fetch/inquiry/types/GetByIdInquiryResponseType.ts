@@ -16,7 +16,7 @@ export interface MypageInquiriesType {
 }
 
 export interface InquiriesCommentType {
-  id: any;
+  id: number;
   content: string;
   authorId: number;
   authorName: string;

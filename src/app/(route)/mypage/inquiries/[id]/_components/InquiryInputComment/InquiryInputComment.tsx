@@ -1,45 +1,21 @@
 "use client";
 
-import { usePostUserInquiry } from "@/api/fetch/inquiry/api/usePostUserInquiry";
 import { InputComment } from "@/components/common";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-
-interface InquiryFormType {
-  comment: string;
-}
+import { InquiryFormType } from "../../_types/InquiryFormType";
+import { useSubmitInquiry } from "../../_hooks/useSubmitInquiry";
 
 const InquiryInputComment = ({ id: inquiryId }: { id: number }) => {
   const methods = useForm<InquiryFormType>();
   const [images, setImages] = useState<File[]>([]);
-  const { mutate: postInquiryMutate, isPending } = usePostUserInquiry({ inquiryId });
 
-  const onSubmit = async (data: InquiryFormType) => {
-    const comment = data.comment.trim();
-    if (!comment || isPending) return;
-
-    const formData = new FormData();
-    formData.append(
-      "comment",
-      new Blob(
-        [
-          JSON.stringify({
-            content: comment,
-          }),
-        ],
-        { type: "application/json" }
-      )
-    );
-
-    if (images)
-      images.forEach((img) => {
-        formData.append("images", img);
-      });
-
-    await postInquiryMutate(formData);
-    methods.setValue("comment", "");
-    setImages([]);
-  };
+  const { onSubmit, isPending } = useSubmitInquiry({
+    images,
+    setImages,
+    inquiryId,
+    setValue: methods.setValue,
+  });
 
   return (
     <FormProvider {...methods}>
