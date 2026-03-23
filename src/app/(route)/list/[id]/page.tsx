@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: ListDetailProps): Promise<Met
     next: { revalidate: 600 },
   }).then((res) => res.json());
 
-  const postTypeLabel = post?.result?.postType === "LOST" ? "분실" : "습득";
+  const postTypeLabel = post?.result?.postType === "LOST" ? "분실" : "발견";
   const address = formatMetadataAddress(post?.result?.address);
 
   const title = `${post?.result?.title ?? "물품"} | ${address} | 찾아줘! ${postTypeLabel}`;
