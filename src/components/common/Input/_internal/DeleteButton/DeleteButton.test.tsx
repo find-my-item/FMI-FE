@@ -19,14 +19,12 @@ jest.mock("@/components/common/Icon/Icon", () => {
 describe("DeleteButton 컴포넌트", () => {
   const getButton = () => screen.getByLabelText("입력값 전체 삭제");
 
-  it("값이 비어 있거나 공백만 있으면 렌더하지 않는다", () => {
-    const { rerender } = render(<DeleteButton />);
-    expect(screen.queryByLabelText("입력값 전체 삭제")).not.toBeInTheDocument();
-
-    rerender(<DeleteButton value="" />);
-    expect(screen.queryByLabelText("입력값 전체 삭제")).not.toBeInTheDocument();
-
-    rerender(<DeleteButton value="   " />);
+  it.each([
+    { value: undefined, case: "값이 없을 경우" },
+    { value: "", case: "값이 빈 문자열일 경우" },
+    { value: "   ", case: "값이 공백 문자열일 경우" },
+  ] as const)("$case 렌더링되지 않아야 한다.", ({ value }) => {
+    render(<DeleteButton value={value} />);
     expect(screen.queryByLabelText("입력값 전체 삭제")).not.toBeInTheDocument();
   });
 
