@@ -24,6 +24,12 @@
  * - EXTORTION: "물건 반환을 빌미로 금전 요구가 있어요."
  * - FALSE_CLAIM: "실제 주인이 아닌 사람이 소유를 주장해요."
  * - ETC: 위 항목 외의 다른 문제를 신고해요.
+ *
+ * @description ReportFilterStatus
+ * - ALL: 모든 상태를 포함
+ * - PENDING: 신고에 대한 답변이 접수 됨
+ * - REVIEWED: 신고에 대한 답변이 진행 중
+ * - RESOLVED: 신고에 대한 답변이 완료됨
  */
 
 export type ReportStatus = "PENDING" | "REVIEWED" | "RESOLVED";

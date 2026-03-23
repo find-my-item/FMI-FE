@@ -26,7 +26,7 @@
  * - SERVICE: 서비스
  * - ETC: 기타
  *
- * @description InquiryFilterType
+ * @description InquiryFilterStatus
  * - ALL: 모든 상태를 포함
  * - RECEIVED: 문의가 접수됨
  * - PENDING: 문의에 대한 답변이 진행 중
