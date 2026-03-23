@@ -28,7 +28,7 @@ const EmailLoginForm = () => {
           boxSize="w-[18px] h-[18px]"
           textStyle="text-caption1-semibold text-neutral-normal-default ml-2"
           iconSize="h-[6px]"
-          state={!!checkBoxValues}
+          checked={!!checkBoxValues}
         />
       </fieldset>
       {/* 로그인 버튼 */}

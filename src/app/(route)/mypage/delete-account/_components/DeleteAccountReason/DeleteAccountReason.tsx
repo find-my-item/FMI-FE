@@ -1,41 +1,15 @@
 "use client";
 "use no memo";
 
-import { Fragment, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { Fragment } from "react";
 import { FooterButton } from "@/components/domain";
 import { CheckBoxConfig } from "../../_constants/CheckBoxConfig";
 import { CheckBox, InputField } from "@/components/common";
 import { useFormContext } from "react-hook-form";
 
 const DeleteAccountReason = ({ onNext }: { onNext: () => void }) => {
-  const router = useRouter();
-
   const { setValue, watch, register } = useFormContext();
   const selectedValues: string[] = watch("reasons") || [];
-
-  // useEffect(() => {
-  //   const savedReasons = sessionStorage.getItem("reasons");
-  //   const savedOther = sessionStorage.getItem("other_reason");
-
-  //   if (savedReasons) {
-  //     setValue("reasons", JSON.parse(savedReasons));
-  //   }
-  //   if (savedOther) {
-  //     setValue("otherReason", savedOther);
-  //   }
-  // }, [setValue]);
-
-  // useEffect(() => {
-  //   sessionStorage.setItem("reasons", JSON.stringify(selectedValues));
-  // }, [selectedValues]);
-
-  // const otherReasonValue = watch("otherReason");
-  // useEffect(() => {
-  //   if (otherReasonValue) {
-  //     sessionStorage.setItem("other_reason", otherReasonValue);
-  //   }
-  // }, [otherReasonValue]);
 
   const handleCheckboxChange = (value: string) => {
     let nextValues: string[];
