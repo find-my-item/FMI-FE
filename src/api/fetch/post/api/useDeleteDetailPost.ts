@@ -27,6 +27,7 @@ export const useDeleteDetailPost = (id: number) => {
       onError: () => {
         addToast("게시글 삭제에 실패했어요", "error");
       },
-    }
+    },
+    { sendDeleteBody: true }
   );
 };
