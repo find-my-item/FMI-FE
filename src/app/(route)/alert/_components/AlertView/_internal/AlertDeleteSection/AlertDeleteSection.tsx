@@ -6,6 +6,7 @@ interface AlertDeleteSectionProps {
   setIsDeleteModalOpen: (isDeleteModalOpen: boolean) => void;
 }
 
+// TODO(형준): 알림 전체 삭제 API 반영 후 구현
 const AlertDeleteSection = ({
   isDeleteMode,
   disabled,

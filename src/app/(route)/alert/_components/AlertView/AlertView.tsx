@@ -1,9 +1,8 @@
 "use client";
 
-import { ConfirmModal } from "@/components/common";
 import { useState } from "react";
 import useNotificationDelete from "@/api/fetch/notification/api/useNotificationDelete";
-import { AlertList, AlertDeleteSection } from "./_internal";
+import { AlertList, AlertDeleteSection, AlertDeleteModal } from "./_internal";
 
 interface AlertViewProps {
   isDeleteMode: boolean;
@@ -36,9 +35,7 @@ const AlertView = ({ isDeleteMode, setIsDeleteMode }: AlertViewProps) => {
         setIsDeleteModalOpen={setIsDeleteModalOpen}
       />
 
-      <ConfirmModal
-        title="정말로 알림을 삭제하시겠어요?"
-        content="삭제한 알림은 복구할 수 없습니다."
+      <AlertDeleteModal
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
         onConfirm={handleDeleteNotifications}
