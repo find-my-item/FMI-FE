@@ -104,7 +104,7 @@ const InputChat = ({ name, validation, disabled, roomId, userId, ...props }: Inp
                 }}
                 onKeyDown={(e) => textareaSubmitKeyHandler(e, textareaRef)}
                 className={cn(
-                  "max-h-[120px] min-h-11 min-w-0 flex-1 resize-none overflow-y-hidden rounded-[24px] px-4 py-[10px] text-body2-medium text-neutral-normal-placeholder bg-fill-neutral-strong-default focus:text-black disabled:text-neutral-strong-disabled",
+                  "max-h-[120px] min-h-11 min-w-0 flex-1 resize-none overflow-y-hidden rounded-[24px] px-4 py-[10px] text-body2-medium leading-[24px] text-neutral-normal-placeholder bg-fill-neutral-strong-default focus:text-black disabled:text-neutral-strong-disabled",
                   field.value && "text-neutral-strong-focused"
                 )}
                 placeholder="메시지 보내기"
