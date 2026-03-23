@@ -32,12 +32,17 @@ const FilterDropdown = ({
   const searchParams = useSearchParams();
   useHandleClickOutside(isOpen, containerRef, dropdownRef, setIsOpen);
   useUpdatePosition(isOpen, containerRef, dropdownRef);
-  const selectedValue = searchParams.get(keyName);
+  const rawParam = searchParams.get(keyName);
+  const normalized = (rawParam ?? "").toLowerCase();
+  const defaultKey = keyName === "sort" ? "latest" : "all";
+  const effectiveKey = normalized === "" ? defaultKey : normalized;
   const displayText =
-    SELECTED_TEXT[
-      (selectedValue || (keyName === "sort" ? "LATEST" : "ALL")) as keyof typeof SELECTED_TEXT
-    ];
-  const isSelected = !!selectedValue;
+    SELECTED_TEXT[effectiveKey as keyof typeof SELECTED_TEXT] ?? SELECTED_TEXT[defaultKey];
+  const isDefault =
+    keyName === "sort"
+      ? normalized === "" || normalized === "latest"
+      : normalized === "" || normalized === "all";
+  const isSelected = !isDefault;
 
   const handleOptionClick = (value: string) => {
     searchUpdateQuery(keyName, value);
