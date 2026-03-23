@@ -25,3 +25,4 @@ export {
 } from "./deriveFilterParams/deriveFilterParams";
 export { retryBackoffController } from "./retryBackoffController/retryBackoffController";
 export { formatMetadataKeyword } from "./formatMetadataKeyword/formatMetadataKeyword";
+export { formatMetadataAddress } from "./formatMetadataAddress/formatMetadataAddress";
