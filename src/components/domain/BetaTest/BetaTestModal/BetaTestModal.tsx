@@ -8,6 +8,17 @@ interface BetaTestModalProps {
   onClose: () => void;
 }
 
+/**
+ * @author jikwon
+ *
+ * @description
+ * 베타 테스트 설문 참여 팝업
+ *
+ * @example
+ * ```tsx
+ * <BetaTestModal isOpen={isOpen} onClose={onClose} />
+ * ```
+ */
 const BetaTestModal = ({ isOpen, onClose }: BetaTestModalProps) => {
   return (
     <PopupLayout

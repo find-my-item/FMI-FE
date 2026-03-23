@@ -1,6 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
 
+/**
+ * @author jikwon
+ *
+ * @description
+ * 베타 테스트 기간 동안 메인 페이지에 추가되는 배너
+ * 베타 기간 종료 후 제거 예정
+ *
+ * @example
+ * ```tsx
+ * <BetaTestMainBanner />
+ * ```
+ */
 const BetaTestMainBanner = () => {
   return (
     <Link

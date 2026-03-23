@@ -1,6 +1,18 @@
 import Link from "next/link";
 import Image from "next/image";
 
+/**
+ * @author jikwon
+ *
+ * @description
+ * 베타 테스트 기간 동안 마이페이지에 추가되는 배너
+ * 베타 기간 종료 후 제거 예정
+ *
+ * @example
+ * ```tsx
+ * <BetaTestMypageBanner />
+ * ```
+ */
 const BetaTestMypageBanner = () => {
   return (
     <Link
