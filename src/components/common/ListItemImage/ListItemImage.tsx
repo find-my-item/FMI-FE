@@ -50,7 +50,7 @@ const ListItemImage = ({
 
   return (
     <div
-      className={cn("relative overflow-hidden rounded-[4px]", className)}
+      className={cn("relative overflow-hidden rounded-[10px]", className)}
       style={{ width: size, height: size }}
     >
       {src ? (
