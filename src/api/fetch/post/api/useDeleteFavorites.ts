@@ -59,6 +59,7 @@ export const useDeletePostFavorites = (id: number) => {
       onSettled: () => {
         queryClient.invalidateQueries({ queryKey });
       },
-    }
+    },
+    { sendDeleteBody: true }
   );
 };

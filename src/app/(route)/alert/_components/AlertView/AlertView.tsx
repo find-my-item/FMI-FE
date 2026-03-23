@@ -1,6 +1,6 @@
 "use client";
 
-import { Icon } from "@/components/common";
+import { Button, CheckBox, ConfirmModal, Icon } from "@/components/common";
 import { cn, formatDate } from "@/utils";
 import {
   NotificationListItem,
@@ -14,8 +14,23 @@ import { IconName } from "@/components/common/Icon/Icon";
 import { EmptyState } from "@/components/state";
 import { alertRouteUrl } from "./_internal/alertRouteUrl";
 import { useRouter } from "next/navigation";
+import { ALERT_ROW_BG } from "./_internal/ALERT_ROW_BG";
+import { useState } from "react";
+import useNotificationDelete from "@/api/fetch/notification/api/useNotificationDelete";
 
-const AlertItem = ({ item }: { item: NotificationListItem }) => {
+interface AlertItemProps {
+  item: NotificationListItem;
+  isDeleteMode: boolean;
+  selectedNotifications: number[];
+  setSelectedNotifications: (selectedNotifications: number[]) => void;
+}
+
+const AlertItem = ({
+  item,
+  isDeleteMode,
+  selectedNotifications,
+  setSelectedNotifications,
+}: AlertItemProps) => {
   const router = useRouter();
   const { notificationId, type, title, message, referenceType, referenceId, isRead, createdAt } =
     item;
@@ -25,8 +40,18 @@ const AlertItem = ({ item }: { item: NotificationListItem }) => {
   const IconSize = referenceType === "NOTICE" ? 20 : 15;
 
   const handleAlertRoute = () => {
+    if (isDeleteMode) return;
+
     readNotification({ ids: [notificationId] });
     router.push(alertRouteUrl(referenceType, referenceId));
+  };
+
+  const handleSelectNotification = (notificationId: number) => {
+    if (selectedNotifications.includes(notificationId)) {
+      setSelectedNotifications(selectedNotifications.filter((id) => id !== notificationId));
+    } else {
+      setSelectedNotifications([...selectedNotifications, notificationId]);
+    }
   };
 
   return (
@@ -35,27 +60,39 @@ const AlertItem = ({ item }: { item: NotificationListItem }) => {
       aria-label="알림 확인, 외부 페이지 이동"
       key={notificationId}
       className={cn(
-        "flex min-h-[86px] w-full cursor-pointer gap-3 border-b border-divider-default p-5 text-left transition-colors hover:bg-fill-flatGray-25",
-        isRead ? "bg-white" : "bg-fill-brand-subtle-default_3 hover:bg-fill-brand-subtle-default_2"
+        "flex min-h-[86px] w-full items-start gap-3 border-b border-divider-default p-5 text-left transition-colors",
+        isDeleteMode ? "cursor-default" : "cursor-pointer",
+        isRead
+          ? ALERT_ROW_BG.read[isDeleteMode ? "delete" : "default"]
+          : ALERT_ROW_BG.unread[isDeleteMode ? "delete" : "default"]
       )}
     >
+      {isDeleteMode && (
+        <CheckBox
+          id={String(notificationId)}
+          label=""
+          state={isRead}
+          boxSize="size-6"
+          onClick={() => handleSelectNotification(notificationId)}
+        />
+      )}
       <div className={cn("h-[30px] w-[30px] flex-shrink-0 rounded-full flex-center", bg)}>
         <Icon name={icon as IconName} size={IconSize} />
       </div>
-      <div className="flex w-full flex-col gap-1">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center text-body2-medium text-neutral-normal-default">
+      <div className="flex min-w-0 flex-1 flex-col gap-1">
+        <div className="flex min-w-0 items-center justify-between gap-2">
+          <div className="min-w-0 flex-1 truncate text-body2-medium text-neutral-normal-default">
             {titleSegments.map((seg, i) => (
               <span key={i} className={cn(seg.emphasize && "text-brand-normal-default")}>
                 {seg.text}
               </span>
             ))}
           </div>
-          <span className="text-caption1-regular text-neutral-normal-placeholder">
+          <span className="shrink-0 text-caption1-regular text-neutral-normal-placeholder">
             {formatDate(createdAt)}
           </span>
         </div>
-        <span className="line-clamp-1 text-body2-regular text-neutral-strong-default">
+        <span className="min-w-0 truncate text-body2-regular text-neutral-strong-default">
           {message}
         </span>
       </div>
@@ -63,7 +100,12 @@ const AlertItem = ({ item }: { item: NotificationListItem }) => {
   );
 };
 
-const AlertView = () => {
+interface AlertViewProps {
+  isDeleteMode: boolean;
+  setIsDeleteMode: (isDeleteMode: boolean) => void;
+}
+
+const AlertView = ({ isDeleteMode, setIsDeleteMode }: AlertViewProps) => {
   const {
     data: notifications,
     fetchNextPage,
@@ -75,6 +117,9 @@ const AlertView = () => {
     hasNextPage,
     isFetchingNextPage,
   });
+  const { mutate: deleteNotifications } = useNotificationDelete();
+  const [selectedNotifications, setSelectedNotifications] = useState<number[]>([]);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   if (notifications?.length === 0) {
     return (
@@ -86,12 +131,51 @@ const AlertView = () => {
     );
   }
 
+  const handleDeleteNotifications = () => {
+    deleteNotifications({ ids: selectedNotifications });
+    setSelectedNotifications([]);
+    setIsDeleteMode(false);
+    setIsDeleteModalOpen(false);
+  };
+
   return (
     <>
       {notifications?.map((item) => (
-        <AlertItem key={item.notificationId} item={item} />
+        <AlertItem
+          key={item.notificationId}
+          item={item}
+          isDeleteMode={isDeleteMode}
+          selectedNotifications={selectedNotifications}
+          setSelectedNotifications={setSelectedNotifications}
+        />
       ))}
       {hasNextPage && <div ref={alertListRef} className="h-[100px]" />}
+
+      {isDeleteMode && <div aria-hidden className="h-[86px]" />}
+      {isDeleteMode && (
+        <div className="fixed bottom-[86px] left-0 right-0 mx-auto flex max-w-[768px] gap-2 border-x-2 border-t border-t-divider-default bg-white px-4 pb-8 pt-3">
+          <Button size="big" variant="outlined" className="w-[116px] text-system-warning">
+            전체 삭제
+          </Button>
+          <Button
+            size="big"
+            disabled={selectedNotifications.length === 0}
+            className="flex-1"
+            onClick={() => setIsDeleteModalOpen(true)}
+          >
+            선택 삭제
+          </Button>
+        </div>
+      )}
+
+      <ConfirmModal
+        title="정말로 알림을 삭제하시겠어요?"
+        content="삭제한 알림은 복구할 수 없습니다."
+        isOpen={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+        onConfirm={handleDeleteNotifications}
+        onCancel={() => setIsDeleteModalOpen(false)}
+      />
     </>
   );
 };
