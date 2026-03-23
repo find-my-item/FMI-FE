@@ -17,11 +17,11 @@ interface MypageInquiryItemProps {
 }
 
 const MypageInquiryItem = ({ inquiries }: MypageInquiryItemProps) => {
-  const { inquiryId, title, content, inquiryType, status, createdAt } = inquiries;
+  const { inquiryId, title, content, status, createdAt } = inquiries;
 
   return (
     <li className="flex w-full flex-col justify-between border-b border-divider-default px-5 py-[30px]">
-      <Link href={`/mypage/inquiries/${inquiryId}`}>
+      <Link href={`/mypage/inquiries/${inquiryId}`} aria-label={`${title} 문의 상세 내용 보기`}>
         <Chip
           label={INQUIRY_STATUS_CHIP[status].label}
           type={INQUIRY_STATUS_CHIP[status].chipType}
