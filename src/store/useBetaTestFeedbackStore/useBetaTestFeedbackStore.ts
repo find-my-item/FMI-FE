@@ -16,6 +16,7 @@ interface BetaTestFeedbackStore {
 export const useBetaTestFeedbackStore = create<BetaTestFeedbackStore>((set) => ({
   isOpen: false,
   openBetaTestModal: () => {
+    if (typeof window === "undefined") return;
     const hasShown = localStorage.getItem("hasShownBetaTestModal");
     if (!hasShown) {
       set({ isOpen: true });
