@@ -3,11 +3,12 @@ import { MypageInquiriesIdContainer } from "./_components";
 import InquiryInputComment from "./_components/InquiryInputComment/InquiryInputComment";
 
 interface PageProps {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
-const page = ({ params }: PageProps) => {
-  const inquiryId = Number(params.id);
+const page = async ({ params }: PageProps) => {
+  const { id } = await params;
+  const inquiryId = Number(id);
 
   return (
     <>
