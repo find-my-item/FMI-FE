@@ -18,10 +18,10 @@ const page = () => {
     if (isPending) return;
 
     const payload: DeleteAccountType = {
-      reason: data.reason,
+      reasons: data.reasons,
     };
 
-    if (data.reason.includes("OTHER") && data.otherReason && data.otherReason.trim() !== "") {
+    if (data.reasons?.includes("OTHER") && data.otherReason && data.otherReason.trim() !== "") {
       payload.otherReason = data.otherReason;
     }
 
@@ -34,6 +34,7 @@ const page = () => {
         else if (error.code === "FILE500-DELETE_IO") addToast("회원탈퇴에 실패했어요", "warning");
       },
     });
+    console.log("payload>> ", payload);
   };
 
   if (isDeleted) {
@@ -46,7 +47,12 @@ const page = () => {
       <h1 className="sr-only">회원탈퇴 페이지</h1>
 
       <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <form
+          onSubmit={methods.handleSubmit(onSubmit)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") e.preventDefault();
+          }}
+        >
           <Suspense fallback="">
             <DeleteAccountContainer />
           </Suspense>

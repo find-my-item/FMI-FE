@@ -1,5 +1,5 @@
 export interface DeleteAccountType {
-  reason: DeleteType[];
+  reasons: DeleteType[];
   otherReason?: string;
 }
 

@@ -13,7 +13,7 @@ const DeleteAccountPassword = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const { addToast } = useToast();
   const { handleSubmit, getValues, watch } = useFormContext();
-  const { mutate: VerifyPasswordMutate } = usePostVerifyPassword();
+  const { mutate: VerifyPasswordMutate, isPending } = usePostVerifyPassword();
 
   const handleToClick = () => {
     const currentPassword = getValues("passwordConfirm");
@@ -31,10 +31,9 @@ const DeleteAccountPassword = () => {
         },
       }
     );
-    setModalOpen(true);
   };
 
-  const watchPassword = watch("passwordConfirm").trim() || "";
+  const passwordValue = watch("passwordConfirm")?.trim() || "";
 
   return (
     <>
@@ -46,11 +45,14 @@ const DeleteAccountPassword = () => {
             name: "passwordConfirm",
             type: "password",
             placeholder: "현재 비밀번호를 입력해 주세요.",
+            onKeyDown: (e) => {
+              if (e.key === " ") e.preventDefault();
+            },
           }}
         />
       </div>
 
-      <FooterButton onClick={handleToClick} disabled={!watchPassword}>
+      <FooterButton onClick={handleToClick} disabled={passwordValue.length === 0 || isPending}>
         탈퇴하기
       </FooterButton>
 
@@ -67,7 +69,6 @@ const DeleteAccountPassword = () => {
               취소
             </Button>
             <Button
-              type="submit"
               onClick={handleSubmit(() => {
                 const formElement = document.querySelector("form");
                 formElement?.requestSubmit();
