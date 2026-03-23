@@ -19,7 +19,7 @@ const MypageInquiriesIdContainer = ({ id }: MypageInquiriesIdContainerProps) => 
   const { addToast } = useToast();
 
   useEffect(() => {
-    if (isError) addToast("신고내역을 불러오는데 실패했어요", "error");
+    if (isError) addToast("문의 내역을 불러오는데 실패했어요", "error");
   }, [isError, addToast]);
 
   if (isLoading) return <LoadingState />;
@@ -27,8 +27,7 @@ const MypageInquiriesIdContainer = ({ id }: MypageInquiriesIdContainerProps) => 
   const result = reportIdData?.result;
   if (!result) return null;
 
-  const { nickname, email, inquiryId, title, content, status, createdAt, imageUrls, comments } =
-    result;
+  const { title, content, status, createdAt, imageUrls, comments } = result;
 
   return (
     <div className="w-full h-base">
