@@ -77,7 +77,7 @@ const MypageInquiriesContent = () => {
       <h2 className="sr-only">내 문의 내역 목록 영역</h2>
 
       {inquiriesData && inquiriesData.length === 0 ? (
-        <MypageEmptyUI pageType="reports" />
+        <MypageEmptyUI pageType="inquiries" />
       ) : (
         <>
           <ul>
