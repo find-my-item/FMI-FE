@@ -12,17 +12,17 @@
  * formatMetadataAddress() // "주소"
  * ```
  */
-export const formatMetadataAddress = (address: string) => {
+export const formatMetadataAddress = (address?: string | null) => {
   if (!address) return "주소";
 
   const addressParts = address.split(" ");
 
-  const village = addressParts.find((part) => {
-    const clean = part.replace(/[()]/g, "");
-    return ["동", "면", "읍"].some((u) => clean.endsWith(u));
-  });
-
-  if (village) return village.replace(/[()]/g, "");
+  for (const part of addressParts) {
+    const cleanPart = part.replace(/[()]/g, "");
+    if (["동", "면", "읍"].some((u) => cleanPart.endsWith(u))) {
+      return cleanPart;
+    }
+  }
 
   if (addressParts.length >= 2) {
     return `${addressParts[0]} ${addressParts[1]}`;
