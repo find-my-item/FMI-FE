@@ -4,12 +4,21 @@ import { CommentList } from "@/components/domain";
 import { MOCK_COMMENT_RESPONSE_DATA } from "@/mock/data";
 import { NoticeCommentForm, NoticeDetailContent, NoticeDetailSkeleton } from "./_internal";
 import { useGetNoticeDetail } from "@/api/fetch/notice";
+import { useEffect } from "react";
+import { useToast } from "@/context/ToastContext";
+import { useRouter } from "next/navigation";
 
 const NoticeDetailView = ({ id }: { id: number }) => {
   const { data: noticeDetail, isLoading, isError } = useGetNoticeDetail({ id });
+  const { addToast } = useToast();
+  const router = useRouter();
 
-  // TODO(형준): 에러, 데이터 없을 때 처리 추가 필요
-  if (isError) return null;
+  useEffect(() => {
+    if (isError) {
+      addToast("공지사항 불러오기에 실패했어요", "error");
+      router.replace("/notice");
+    }
+  }, [isError]);
 
   return (
     <div className="flex flex-col h-base">

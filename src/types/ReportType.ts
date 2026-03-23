@@ -38,3 +38,5 @@ export type ReportType =
   | "EXTORTION"
   | "FALSE_CLAIM"
   | "ETC";
+
+export type ReportFilterStatus = "ALL" | "PENDING" | "REVIEWED" | "RESOLVED";

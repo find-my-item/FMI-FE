@@ -1,13 +1,11 @@
-import { PostInputComment } from "@/app/(route)/list/[id]/_components";
-import { MypageRequestDetailContainer } from "@/components/domain";
+// TODO(수현): 빌드에러로 기존 코드를 삭제했습니다.
+
 import { DetailHeader } from "@/components/layout";
 
 const page = () => {
   return (
     <>
       <DetailHeader title="내 문의 내역" />
-      <MypageRequestDetailContainer />
-      <PostInputComment postId={123} isLoggedIn={false} />
     </>
   );
 };
