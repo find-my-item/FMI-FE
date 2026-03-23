@@ -30,7 +30,12 @@ const ChatLeaveModal = ({ isOpen, onClose, onConfirm, onCancel }: ChatLeaveModal
   ] as const;
 
   return (
-    <ModalLayout isOpen={isOpen} onClose={onClose} className={cn("gap-[24px] p-6 flex-col-center")}>
+    <ModalLayout
+      isOpen={isOpen}
+      onClose={onClose}
+      dialogTestId="confirm-modal"
+      className={cn("gap-[24px] p-6 flex-col-center")}
+    >
       <div className="gap-[16px] flex-col-center">
         <div className="gap-[4px] text-center flex-col-center">
           <div className="text-h3-semibold text-layout-header-default">채팅방을 나가시겠어요?</div>
@@ -46,6 +51,7 @@ const ChatLeaveModal = ({ isOpen, onClose, onConfirm, onCancel }: ChatLeaveModal
             key={b.key}
             type="button"
             onClick={b.onClick}
+            data-testid={b.key === "confirm" ? "modal-confirm" : "modal-cancel"}
             className={cn(BUTTON_STYLE, b.style)}
           >
             {b.label}
