@@ -3,7 +3,7 @@ import {
   ALERT_ICON_BG_BY_NOTIFICATION_TYPE,
   ALERT_ICON_BG_BY_REFERENCE_TYPE,
   DEFAULT_ALERT_ICON_BG,
-} from "./ALERT_VIEW_MAPPINGS";
+} from "../_constants/ALERT_VIEW_MAPPINGS";
 
 export const getAlertIconBackgroundColor = (
   type: NotificationType,
