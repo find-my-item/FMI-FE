@@ -1,18 +1,52 @@
 "use client";
 
+import { NOTIFICATION_TYPE } from "@/api/fetch/notification";
 import { cn } from "@/utils";
 import { FOOTER_ITEM_BASE_STYLE } from "../../_constants/CONST_FOOTER";
 import { Icon } from "@/components/common";
 import LoginRequiredNotice from "../LoginRequiredNotice/LoginRequiredNotice";
 import Link from "next/link";
 import type useFooterNav from "../../_hooks/useFooterNav";
+import { useNotificationStore } from "@/store";
 
 interface FooterItemProps {
   item: ReturnType<typeof useFooterNav>["items"][number];
 }
 
-// TODO(형준): 알림있을 경우 알림 아이콘에 초록점 표시
+interface NotificationDotProps {
+  link: FooterItemProps["item"]["link"];
+  href: FooterItemProps["item"]["href"];
+  hasUnreadNotification: boolean;
+  unreadNotificationTypes: ReturnType<
+    typeof useNotificationStore.getState
+  >["unreadNotificationTypes"];
+}
+
+const NotificationDot = ({
+  link,
+  href,
+  hasUnreadNotification,
+  unreadNotificationTypes,
+}: NotificationDotProps) => {
+  if (!("alert" in link && link.alert)) return null;
+
+  const isChatItem = href === "/chat";
+  const isAlertItem = href === "/alert";
+
+  const hasUnreadChatNotification = unreadNotificationTypes.some(
+    (type) => type === NOTIFICATION_TYPE.CHAT || type === NOTIFICATION_TYPE.CHAT_REMINDER
+  );
+
+  const shouldShowDot =
+    (isChatItem && hasUnreadChatNotification) || (isAlertItem && hasUnreadNotification);
+
+  if (!shouldShowDot) return null;
+
+  return <div className={cn("footer-alert-dot", link.alert)} />;
+};
+
 const FooterItem = ({ item }: FooterItemProps) => {
+  const { hasUnreadNotification, unreadNotificationTypes } = useNotificationStore();
   const { link, href, isActive, isLoginRequiredDisabled, showLoginRequiredNotice, onClick } = item;
   const iconClassName = isActive ? "text-brand-normal-pressed" : "text-labelsVibrant-quaternary";
 
@@ -36,7 +70,12 @@ const FooterItem = ({ item }: FooterItemProps) => {
             !isLoginRequiredDisabled && "group-hover:text-brand-normal-pressed"
           )}
         />
-        {"alert" in link && link.alert && <div className={cn("footer-alert-dot", link.alert)} />}
+        <NotificationDot
+          link={link}
+          href={href}
+          hasUnreadNotification={hasUnreadNotification}
+          unreadNotificationTypes={unreadNotificationTypes}
+        />
       </div>
       <span className={cn("py-[2px]", isActive)}>{link.name}</span>
       {isLoginRequiredDisabled && showLoginRequiredNotice ? <LoginRequiredNotice /> : null}

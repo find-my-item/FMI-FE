@@ -1,6 +1,4 @@
-import type { ReactNode } from "react";
 import { NotificationType, ReferenceType } from "@/api/fetch/notification";
-import { getNotificationDisplayTitle } from "@/api/fetch/notification/utils/getNotificationDisplayTitle";
 import {
   ALERT_ICON_BG_BY_NOTIFICATION_TYPE,
   ALERT_ICON_BG_BY_REFERENCE_TYPE,
@@ -11,41 +9,35 @@ export const getAlertIconBackgroundColor = (
   type: NotificationType,
   referenceType: ReferenceType
 ) => {
+  if (type === "FAVORITE" || type === "CATEGORY") {
+    const byType = ALERT_ICON_BG_BY_NOTIFICATION_TYPE[type];
+    if (byType) return byType;
+  }
+
+  if (referenceType === "INQUIRY" || referenceType === "REPORT") {
+    const fixed = ALERT_ICON_BG_BY_REFERENCE_TYPE[referenceType];
+    if (fixed && typeof fixed !== "function") return fixed;
+  }
+
+  if (referenceType === "CHAT") {
+    const chatMapper = ALERT_ICON_BG_BY_REFERENCE_TYPE.CHAT;
+    if (chatMapper) {
+      return typeof chatMapper === "function" ? chatMapper(type) : chatMapper;
+    }
+  }
+
+  if (type === "COMMENT") {
+    const commentByType = ALERT_ICON_BG_BY_NOTIFICATION_TYPE.COMMENT;
+    if (commentByType) return commentByType;
+  }
+
+  const refMapper = ALERT_ICON_BG_BY_REFERENCE_TYPE[referenceType];
+  if (refMapper) {
+    return typeof refMapper === "function" ? refMapper(type) : refMapper;
+  }
+
   const byType = ALERT_ICON_BG_BY_NOTIFICATION_TYPE[type];
   if (byType) return byType;
 
-  const mapper = ALERT_ICON_BG_BY_REFERENCE_TYPE[referenceType];
-  if (!mapper) return DEFAULT_ALERT_ICON_BG;
-
-  return typeof mapper === "function" ? mapper(type) : mapper;
-};
-
-export const getAlertTitle = (type: NotificationType, referenceType: ReferenceType): string =>
-  getNotificationDisplayTitle(type, referenceType);
-
-export const renderTitle = (text: string): ReactNode[] => {
-  const segments = text.split(/(".*?")/g);
-
-  return segments.map((segment, index) => {
-    const isQuoted = segment.startsWith('"') && segment.endsWith('"');
-    const content = isQuoted ? segment.slice(1, -1) : segment;
-
-    if (!content) {
-      return <span key={index} />;
-    }
-
-    if (isQuoted) {
-      return (
-        <span key={index} className="text-brand-normal-default">
-          {content}
-        </span>
-      );
-    }
-
-    return (
-      <span key={index} className="text-neutral-normal-default">
-        {content}
-      </span>
-    );
-  });
+  return DEFAULT_ALERT_ICON_BG;
 };
