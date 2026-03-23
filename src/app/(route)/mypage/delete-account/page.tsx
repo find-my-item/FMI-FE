@@ -12,18 +12,28 @@ const page = () => {
   const { addToast } = useToast();
 
   const [isDeleted, setIsDeleted] = useState(false);
-  const { mutate: DeleteAccountMutate } = useDeleteAccount();
+  const { mutate: DeleteAccountMutate, isPending } = useDeleteAccount();
 
   const onSubmit = (data: DeleteAccountType) => {
-    DeleteAccountMutate(
-      { reason: data.reason },
-      {
-        onSuccess: () => {
-          setIsDeleted(true);
-        },
-        onError: () => addToast("회원탈퇴에 실패했어요", "warning"),
-      }
-    );
+    if (isPending) return;
+
+    const payload: DeleteAccountType = {
+      reason: data.reason,
+    };
+
+    if (data.reason.includes("OTHER") && data.otherReason && data.otherReason.trim() !== "") {
+      payload.otherReason = data.otherReason;
+    }
+
+    DeleteAccountMutate(payload, {
+      onSuccess: () => {
+        setIsDeleted(true);
+      },
+      onError: (error) => {
+        if (error.code === "USER404-NOT_FOUND") addToast("존제하지 않는 회원이에요", "warning");
+        else if (error.code === "FILE500-DELETE_IO") addToast("회원탈퇴에 실패했어요", "warning");
+      },
+    });
   };
 
   if (isDeleted) {
