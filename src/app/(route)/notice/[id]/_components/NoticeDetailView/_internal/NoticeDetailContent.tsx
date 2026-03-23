@@ -59,24 +59,26 @@ const NoticeDetailContent = ({ noticeDetail }: { noticeDetail: NoticeDetail }) =
         <p className="whitespace-pre-line text-body1-regular text-layout-header-default">
           {content}
         </p>
-        {/* TODO(형준): 이미지 임시 스타일 적용 상태, 피그마 디자인 추가 시 변경 필요 */}
-        {images &&
-          images.map((image, index) => (
-            <button
-              key={image}
-              type="button"
-              className="relative aspect-square w-full cursor-pointer"
-              onClick={() => setImageViewerState({ isOpen: true, initialIndex: index })}
-              aria-label={`공지사항 상세 이미지 ${index + 1} 보기`}
-            >
-              <Image
-                src={image}
-                alt="공지사항 상세 이미지"
-                fill
-                className="rounded-2xl object-contain"
-              />
-            </button>
-          ))}
+
+        <div className="flex flex-col gap-[14px]">
+          {images &&
+            images.map((image, index) => (
+              <button
+                key={image}
+                type="button"
+                className="relative aspect-square w-full"
+                onClick={() => setImageViewerState({ isOpen: true, initialIndex: index })}
+                aria-label={`공지사항 상세 이미지 ${index + 1} 보기`}
+              >
+                <Image
+                  src={image}
+                  alt="공지사항 상세 이미지"
+                  fill
+                  className="rounded-[10px] object-cover"
+                />
+              </button>
+            ))}
+        </div>
 
         <div className="flex gap-3 text-body2-regular text-neutral-strong-placeholder">
           <button
