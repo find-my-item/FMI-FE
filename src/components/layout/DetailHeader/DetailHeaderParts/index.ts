@@ -5,3 +5,4 @@ export { default as HeaderShare } from "./HeaderShare";
 export { default as HeaderMenu } from "./HeaderMenu";
 export { default as HeaderSetting } from "./HeaderSetting";
 export { default as HeaderPost } from "./HeaderPost";
+export { default as HeaderDelete } from "./HeaderDelete";
