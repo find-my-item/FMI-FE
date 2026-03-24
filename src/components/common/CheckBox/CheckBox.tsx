@@ -1,4 +1,5 @@
 "use client";
+// "use no memo";
 
 import Icon from "../Icon/Icon";
 import { InputHTMLAttributes } from "react";
@@ -10,22 +11,39 @@ interface CheckBoxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "typ
   boxSize?: string;
   textStyle?: string;
   iconSize?: string;
-  state: boolean;
+  checked: boolean;
 }
 
-const CheckBox = ({ id, label, boxSize, textStyle, iconSize, state, ...props }: CheckBoxProps) => {
+const CheckBox = ({
+  id,
+  label,
+  boxSize,
+  textStyle,
+  iconSize,
+  checked,
+  onChange,
+  ...props
+}: CheckBoxProps) => {
   return (
     <label htmlFor={id} className="flex cursor-pointer items-center">
-      <input id={id} type="checkbox" className="peer sr-only" {...props} />
+      <input
+        id={id}
+        type="checkbox"
+        className="peer sr-only"
+        checked={checked}
+        onChange={onChange}
+        {...props}
+      />
       <div
         className={cn(
-          "relative h-6 w-6 rounded bg-fill-neutral-strong-pressed flex-center peer-checked:bg-fill-brand-normal-default",
+          "relative h-6 w-6 rounded bg-fill-neutral-strong-pressed flex-center",
+          checked && "bg-fill-brand-normal-default",
           boxSize
         )}
       >
         <Icon
           name="Check"
-          title={state ? "체크됨" : "체크안됨"}
+          title={checked ? "체크됨" : "체크안됨"}
           className={cn(
             "absolute left-1/2 top-1/2 h-2 -translate-x-1/2 -translate-y-1/2 text-neutral-normal-default peer-checked:text-neutral-normal-enteredSelected",
             iconSize
