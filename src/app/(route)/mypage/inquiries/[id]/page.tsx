@@ -1,11 +1,20 @@
-// TODO(수현): 빌드에러로 기존 코드를 삭제했습니다.
-
 import { DetailHeader } from "@/components/layout";
+import { MypageInquiriesIdContainer } from "./_components";
+import InquiryInputComment from "./_components/InquiryInputComment/InquiryInputComment";
 
-const page = () => {
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
+
+const page = async ({ params }: PageProps) => {
+  const { id } = await params;
+  const inquiryId = Number(id);
+
   return (
     <>
       <DetailHeader title="내 문의 내역" />
+      <MypageInquiriesIdContainer id={inquiryId} />
+      <InquiryInputComment id={inquiryId} />
     </>
   );
 };

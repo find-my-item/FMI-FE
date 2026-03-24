@@ -16,7 +16,8 @@ const DeleteButton = ({
   onDelete,
   ...props
 }: DeleteButtonProps) => {
-  const isValue = !!value.trim();
+  const hasValue = !!value.trim();
+  if (!hasValue) return null;
 
   return (
     <button
