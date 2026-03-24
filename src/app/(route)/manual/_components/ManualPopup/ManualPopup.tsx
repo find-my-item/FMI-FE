@@ -2,6 +2,7 @@
 
 import { Button, Icon } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 interface ManualPopupProps {
@@ -31,7 +32,8 @@ const ManualPopup = ({ isOpen, onClose }: ManualPopupProps) => {
       <div className="my-10 flex flex-col gap-3">
         <Button
           className="h-[48px] w-full rounded-[12px] text-body1-semibold text-white bg-fill-brand-normal-default"
-          onClick={() => router.push("/manual")}
+          as={Link}
+          href="/manual"
         >
           매뉴얼 보러가기
         </Button>
