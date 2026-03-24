@@ -1,6 +1,7 @@
 import { Client, IMessage, StompSubscription } from "@stomp/stompjs";
 import authApi from "@/api/_base/axios/authApi";
 import { retryBackoffController } from "@/utils";
+import { useBetaTestFeedbackStore } from "@/store";
 
 export type MessageHandler<T = any> = (message: T) => void;
 
@@ -251,6 +252,7 @@ export const sendChatSocketMessage = (destination: string, body: unknown): boole
       destination,
       body: JSON.stringify(body),
     });
+    useBetaTestFeedbackStore.getState().openBetaTestModal();
     return true;
   } catch {
     return false;
