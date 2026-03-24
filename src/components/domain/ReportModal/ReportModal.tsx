@@ -86,7 +86,7 @@ const ReportModal = ({
   };
 
   return (
-    <ReportPopupLayout isOpen={isOpen} onClose={onClose}>
+    <ReportPopupLayout isOpen={isOpen}>
       <DetailHeader title="신고하기" onBack={onClose} />
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
