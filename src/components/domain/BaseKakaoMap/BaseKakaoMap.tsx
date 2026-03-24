@@ -108,7 +108,7 @@ const BaseKakaoMap = ({
   draggable = false,
   style = { width: "100%", height: "100%" },
 
-  showCenterMarker = true,
+  showCenterMarker = false,
   markerSize = { width: 26, height: 37 },
   markerOffset = { x: 13, y: 20 },
   markerData,
