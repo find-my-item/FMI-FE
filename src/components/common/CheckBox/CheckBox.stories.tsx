@@ -8,7 +8,7 @@ const meta: Meta<typeof CheckBox> = {
   args: {
     id: "agree",
     label: "전체 약관 동의",
-    state: false,
+    checked: false,
   },
   argTypes: {
     id: { control: "text" },
@@ -28,7 +28,7 @@ export const loginChecked: Story = {
   args: {
     id: "allTerms",
     label: "전체 동의",
-    state: false,
+    checked: false,
     boxSize: "w-[18px] h-[18px]",
     textStyle: "text-[12px] ml-2",
     iconSize: "h-[6px]",

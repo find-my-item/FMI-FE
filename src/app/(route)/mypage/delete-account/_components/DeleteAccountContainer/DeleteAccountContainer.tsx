@@ -1,52 +1,18 @@
 "use client";
+"use no memo";
 
-import { useSearchParams } from "next/navigation";
-import { InputText } from "@/components/common";
-import { FormProvider, useForm } from "react-hook-form";
-import { FooterButton } from "@/components/domain";
 import DeleteAccountReason from "../DeleteAccountReason/DeleteAccountReason";
-
-const PasswordConfirm = () => {
-  return (
-    <>
-      <div className="flex w-full flex-col gap-[18px] px-5 py-[30px] h-base">
-        <h3 className="text-h3-semibold text-[#171717]">비밀번호를 입력해 주세요.</h3>
-        {/* TODO(수현): 디자인 업데이트 시 placeholder 변경예정 */}
-        <InputText
-          inputOption={{
-            name: "passwordConfirm",
-            type: "password",
-            placeholder: "현재 비밀번호를 입력해 주세요.",
-          }}
-        />
-      </div>
-
-      <FooterButton>탈퇴하기</FooterButton>
-    </>
-  );
-};
-
-interface DeleteUserType {
-  reason: string;
-  otherReason?: string;
-}
+import DeleteAccountPassword from "../DeleteAccountPassword/DeleteAccountPassword";
+import { useState } from "react";
 
 const DeleteAccountContainer = () => {
-  const methods = useForm<DeleteUserType>({ mode: "onChange", reValidateMode: "onChange" });
-
-  const searchParams = useSearchParams();
-  const state = searchParams.get("state") || "reason";
-
+  const [state, setState] = useState<number>(1);
   return (
     <section>
       <h2 className="sr-only">탈퇴 선택 영역</h2>
-      <FormProvider {...methods}>
-        <form>
-          {state === "reason" && <DeleteAccountReason />}
+      {state === 1 && <DeleteAccountReason onNext={() => setState(2)} />}
 
-          {state === "passwordConfirm" && <PasswordConfirm />}
-        </form>
-      </FormProvider>
+      {state === 2 && <DeleteAccountPassword onBack={() => setState(1)} />}
     </section>
   );
 };

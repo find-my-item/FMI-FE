@@ -1,6 +1,6 @@
 import { Button } from "@/components/common";
 import ModalLayout from "@/components/common/Modal/_internal/ModalLayout";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface ProfileEditLeaveConfirmModalProps {
   isOpen: boolean;
@@ -8,8 +8,6 @@ interface ProfileEditLeaveConfirmModalProps {
 }
 
 const ProfileEditLeaveConfirmModal = ({ isOpen, onClose }: ProfileEditLeaveConfirmModalProps) => {
-  const router = useRouter();
-
   return (
     <ModalLayout
       isOpen={isOpen}
@@ -26,7 +24,7 @@ const ProfileEditLeaveConfirmModal = ({ isOpen, onClose }: ProfileEditLeaveConfi
         <Button variant="outlined" className="w-full" onClick={onClose}>
           취소
         </Button>
-        <Button className="w-full" onClick={() => router.push("/mypage")}>
+        <Button className="w-full" as={Link} href="/mypage">
           나가기
         </Button>
       </div>

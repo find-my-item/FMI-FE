@@ -6,9 +6,9 @@ interface ApiPostVerifyPasswordType {
 }
 
 export const usePostVerifyPassword = () => {
-  return useAppMutation<ApiPostVerifyPasswordType, ApiBaseResponseType<string>>(
-    "auth",
-    "/users/me/password/verify",
-    "post"
-  );
+  return useAppMutation<
+    ApiPostVerifyPasswordType,
+    ApiBaseResponseType<string>,
+    ApiBaseResponseType<null>
+  >("auth", "/users/me/password/verify", "post");
 };
