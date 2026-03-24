@@ -26,7 +26,7 @@ const PostDetailPreviewKakaoMap = ({ data }: PostDetailPreviewKakaoMapProps) => 
           "tablet:h-[200px]"
         )}
       >
-        <BaseKakaoMap center={{ lat: latitude, lng: longitude }} level={7} showMarker />
+        <BaseKakaoMap center={{ lat: latitude, lng: longitude }} level={7} showCenterMarker />
       </div>
 
       <Link

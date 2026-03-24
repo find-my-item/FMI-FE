@@ -38,7 +38,7 @@ import { MAP_MARKER_ICON } from "./MAP_MARKER_ICON";
  * 지도(Map) 컴포넌트에 전달되는 스타일 객체입니다.
  * 기본값은 `{ width: "100%", height: "100%" }` 입니다.
  *
- * @param props.showMarker
+ * @param props.showCenterMarker
  * 중심 좌표에 마커를 표시할지 여부입니다. 기본값은 true입니다.
  *
  * @param props.markerSize
@@ -84,7 +84,7 @@ interface BaseKakaoMapProps {
   style?: CSSProperties;
 
   /** marker */
-  showMarker?: boolean;
+  showCenterMarker?: boolean;
   markerSize?: { width: number; height: number };
   markerOffset?: { x: number; y: number };
   markerData?: GetMarkerData[];
@@ -108,7 +108,7 @@ const BaseKakaoMap = ({
   draggable = false,
   style = { width: "100%", height: "100%" },
 
-  showMarker = true,
+  showCenterMarker = true,
   markerSize = { width: 26, height: 37 },
   markerOffset = { x: 13, y: 20 },
   markerData,
@@ -159,8 +159,7 @@ const BaseKakaoMap = ({
         }}
         minLevel={13}
       >
-        {showMarker &&
-          markerData &&
+        {markerData &&
           markerData.map(({ postId, latitude, longitude, postType }) => (
             <MapMarker
               key={postId}
@@ -177,6 +176,17 @@ const BaseKakaoMap = ({
               }
             />
           ))}
+
+        {showCenterMarker && !markerData && (
+          <MapMarker
+            position={mapCenter}
+            image={{
+              src: "/kakao-map/marker.svg",
+              size: markerSize,
+              options: { offset: markerOffset },
+            }}
+          />
+        )}
 
         {showCircle && radius && (
           <Circle
