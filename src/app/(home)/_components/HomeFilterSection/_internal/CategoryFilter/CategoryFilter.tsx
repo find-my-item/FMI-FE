@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import { Icon } from "@/components/common";
 import { CATEGORY_OPTIONS } from "@/constants";
 import { cn } from "@/utils";
-import { useHandleClickOutside, useUpdatePosition } from "@/app/(route)/chat/hooks";
+import { usePopoverOutsideClose, usePopoverPosition } from "@/hooks";
 import HomeFilter from "../HomeFilter/HomeFilter";
 
 interface CategoryFilterProps {
@@ -27,8 +27,8 @@ const CategoryFilter = ({
   const triggerRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  useHandleClickOutside(isOpen, triggerRef, dropdownRef, setIsOpen);
-  useUpdatePosition(isOpen, triggerRef, dropdownRef);
+  usePopoverOutsideClose(isOpen, triggerRef, dropdownRef, () => setIsOpen(false));
+  usePopoverPosition(isOpen, triggerRef, dropdownRef);
 
   const handleOptionClick = (value: string) => {
     const nextValue = selectedValue === value ? undefined : value;
