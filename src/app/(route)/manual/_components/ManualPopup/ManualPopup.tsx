@@ -3,7 +3,6 @@
 import { Button, Icon } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 interface ManualPopupProps {
   isOpen: boolean;
@@ -11,8 +10,6 @@ interface ManualPopupProps {
 }
 
 const ManualPopup = ({ isOpen, onClose }: ManualPopupProps) => {
-  const router = useRouter();
-
   return (
     <PopupLayout isOpen={isOpen} onClose={onClose}>
       <div className="mx-auto mb-6 mt-[71px] h-[74px] w-[74px] rounded-full">

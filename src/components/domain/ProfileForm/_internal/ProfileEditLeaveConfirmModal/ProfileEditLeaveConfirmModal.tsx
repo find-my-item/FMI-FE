@@ -1,7 +1,6 @@
 import { Button } from "@/components/common";
 import ModalLayout from "@/components/common/Modal/_internal/ModalLayout";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 interface ProfileEditLeaveConfirmModalProps {
   isOpen: boolean;
@@ -9,8 +8,6 @@ interface ProfileEditLeaveConfirmModalProps {
 }
 
 const ProfileEditLeaveConfirmModal = ({ isOpen, onClose }: ProfileEditLeaveConfirmModalProps) => {
-  const router = useRouter();
-
   return (
     <ModalLayout
       isOpen={isOpen}
