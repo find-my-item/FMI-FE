@@ -4,8 +4,8 @@ export const NOTIFICATION_CONFIG: { label: NotificationLabelType; value: Notific
   { label: "카테고리 키워드", value: "categoryEnabled" },
   { label: "카테고리 키워드 선택", value: "enabledCategories" },
   { label: "채팅", value: "chatEnabled" },
-  { label: "즐겨찾기", value: "favoriteEnabled" },
   { label: "댓글", value: "commentEnabled" },
+  { label: "즐겨찾기", value: "favoriteEnabled" },
   { label: "1:1 문의", value: "inquiryReplyEnabled" },
   { label: "신고", value: "reportResultEnabled" },
   { label: "공지사항", value: "noticeEnabled" },
@@ -22,6 +22,16 @@ export const NOTIFICATION = {
   enabledCategories: { label: "카테고리 키워드 선택" },
   marketingConsent: { label: "마케팅 수신 동의" },
 };
+
+export const CATEGORY_ITEM = [
+  { label: "전자기기", value: "ELECTRONICS" },
+  { label: "지갑", value: "WALLET" },
+  { label: "신분증", value: "ID_CARD" },
+  { label: "귀금속", value: "JEWELRY" },
+  { label: "가방", value: "BAG" },
+  { label: "카드", value: "CARD" },
+  { label: "기타", value: "ETC" },
+] as const;
 
 // "browserNotificationEnabled": {label: "알림 설정"},
 // marketingConsent: { label: "마케팅 수신 동의", type: "toggle" },

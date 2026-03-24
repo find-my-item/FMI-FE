@@ -1,10 +1,11 @@
 "use client";
 
-import { Icon, ToggleButton } from "@/components/common";
+import { Button, Filter, Icon, ToggleButton } from "@/components/common";
 import { NotificationLabelType, NotificationType } from "../../_types/NotificationType";
 import { useState } from "react";
-import { NOTIFICATION_CONFIG } from "../../_constants/NOTIFICATION_ITEM";
+import { CATEGORY_ITEM, NOTIFICATION_CONFIG } from "../../_constants/NOTIFICATION_ITEM";
 import { cn } from "@/utils";
+import { PopupLayout } from "@/components/domain";
 
 interface NotificationSettingItem {
   item: { label: NotificationLabelType; value: NotificationType };
@@ -15,8 +16,11 @@ const NotificationSettingItem = ({ item }: NotificationSettingItem) => {
 
   const toggleAriaLabel = label + "토글";
   const [isNotificationOn, setIsNotificationOn] = useState(false);
-
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
+
+  const handleToClick = () => {
+    setIsBottomSheetOpen(false);
+  };
 
   return (
     <>
@@ -50,25 +54,27 @@ const NotificationSettingItem = ({ item }: NotificationSettingItem) => {
         </div>
       </li>
 
-      {/* {label === "카테고리 키워드" && (
-        <button
-          onClick={() => setIsBottomSheetOpen(true)}
-          className="flex w-full items-center justify-between px-4 py-5"
-        >
-          <span className="my-[10px] ml-[10px] text-body1-medium text-neutral-normal-placeholder">
-            카테고리 키워드 선택
-          </span>
-          <Icon name="ArrowRightSmall" size={24} className="text-neutral-strong-default" />
-        </button>
-      )} */}
-
-      {/* TODO(수현): 바텀 시트 변경으로 인한 수정 필요 */}
-      {/* <SelectBottomSheet
+      <PopupLayout
         isOpen={isBottomSheetOpen}
         onClose={() => setIsBottomSheetOpen(false)}
-        title="카테고리 키워드"
-        option={CATEGORY_OPTIONS}
-      /> */}
+        className="flex px-5 py-10 flex-col-center"
+      >
+        <div className="mb-8">
+          <h2 className="text-h2-medium text-layout-header-default">카테고리 키워드</h2>
+        </div>
+
+        <div className="mb-12 flex flex-wrap gap-2">
+          {CATEGORY_ITEM.map((item) => (
+            <Filter key={item.value} ariaLabel={item.label} onSelected={false}>
+              {item.label}
+            </Filter>
+          ))}
+        </div>
+
+        <Button className="w-full" onClick={() => handleToClick()}>
+          적용하기
+        </Button>
+      </PopupLayout>
     </>
   );
 };
