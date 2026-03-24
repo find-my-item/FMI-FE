@@ -25,6 +25,7 @@ const PostWriteKakaoMap = ({ lat, lng, radius, onCenterChange }: PostWriteKakaoM
       showCircle
       showCenterMarker
       radius={radius}
+      minLevel={9}
       onDragEnd={(nextCenter) => {
         setCenter(nextCenter);
         onCenterChange?.(nextCenter);

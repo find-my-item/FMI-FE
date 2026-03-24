@@ -6,7 +6,7 @@ import { useState, useRef } from "react";
 import { createPortal } from "react-dom";
 import { SELECTED_TEXT } from "../../constants/SELECTED_TEXT";
 import { cn } from "@/utils";
-import { useHandleClickOutside, useUpdatePosition } from "../../hooks";
+import { usePopoverOutsideClose, usePopoverPosition } from "@/hooks";
 
 interface FilterOption {
   label: string;
@@ -30,8 +30,9 @@ const FilterDropdown = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const searchParams = useSearchParams();
-  useHandleClickOutside(isOpen, containerRef, dropdownRef, setIsOpen);
-  useUpdatePosition(isOpen, containerRef, dropdownRef);
+  usePopoverOutsideClose(isOpen, containerRef, dropdownRef, () => setIsOpen(false));
+  usePopoverPosition(isOpen, containerRef, dropdownRef);
+
   const rawParam = searchParams.get(keyName);
   const normalized = (rawParam ?? "").toLowerCase();
   const defaultKey = keyName === "sort" ? "latest" : "all";

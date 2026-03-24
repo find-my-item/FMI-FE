@@ -100,6 +100,11 @@ interface BaseKakaoMapProps {
 
   /** overlay ui */
   children?: ReactNode;
+
+  /** 지도 최대 확대 제한 */
+  minLevel?: number;
+  /** 지도 최대 축소 제한 */
+  maxLevel?: number;
 }
 
 const BaseKakaoMap = ({
@@ -119,7 +124,11 @@ const BaseKakaoMap = ({
   onDragEnd,
   onLevelChange,
   onMarkerClick,
+
   children,
+
+  minLevel = 13,
+  maxLevel,
 }: BaseKakaoMapProps) => {
   const [loading, error] = useKakaoLoader({
     appkey: process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY!,
@@ -157,7 +166,8 @@ const BaseKakaoMap = ({
           setMapCenter(nextCenter);
           onDragEnd(nextCenter);
         }}
-        minLevel={13}
+        minLevel={minLevel}
+        maxLevel={maxLevel}
       >
         {markerData &&
           markerData.map(({ postId, latitude, longitude, postType }) => (

@@ -3,11 +3,10 @@ import { PostDetailBody, PostDetailPreviewKakaoMap } from "./_internal";
 import PostDetailHeader from "../PostDetailHeader/PostDetailHeader";
 
 interface PostDetailProps {
-  type: "find" | "lost";
   data: PostDetailData;
 }
 
-const PostDetail = ({ type, data }: PostDetailProps) => {
+const PostDetail = ({ data }: PostDetailProps) => {
   if (!data) return null;
 
   const headerData = {
