@@ -15,7 +15,7 @@ const DeleteComplete = () => {
             </p>
           </div>
 
-          <Button variant="outlined" className="!px-5" as={Link} href="/">
+          <Button as={Link} href="/" variant="outlined" replace className="!px-5">
             홈 화면으로 이동하기
           </Button>
         </div>
