@@ -1,3 +1,5 @@
+import { PostFilterChipValue } from "../_types/PostFilterChipValue";
+
 export const FILTER_ITEMS = [
   {
     label: "모두보기",
@@ -17,7 +19,6 @@ export const FILTER_ITEMS = [
   },
 ];
 
-type PostFilterChipValue = "all" | "lost" | "find";
 type FilterItemValue = PostFilterChipValue | "category";
 
 export const POST_FILTER_ITEMS = FILTER_ITEMS.filter(
