@@ -30,10 +30,12 @@ const BottomSheetContent = () => {
       style={{ height, bottom: `${BOTTOM_OFFSET_PX}px` }}
       className="fixed left-0 right-0 z-50 mx-auto max-w-[768px] select-none border-x-2"
     >
-      <div className="flex items-end justify-between px-3 pb-3">
-        <BetaTestMainBanner />
-        <MyLocationButton isFullyExpanded={isFullyExpanded} />
-      </div>
+      {!isFullyExpanded && (
+        <div className="relative">
+          <BetaTestMainBanner />
+          <MyLocationButton />
+        </div>
+      )}
 
       <div className="flex h-full flex-col overflow-hidden rounded-t-[20px] bg-white">
         <div
