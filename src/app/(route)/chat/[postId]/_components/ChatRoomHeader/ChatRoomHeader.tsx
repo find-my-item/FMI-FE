@@ -68,6 +68,7 @@ const ChatRoomHeader = ({ chatRoom, roomId }: ChatRoomHeaderProps) => {
             size={40}
             src={thumbnailUrl}
             category={category}
+            className="rounded-[4px]"
           />
         </div>
         <div className="flex min-w-0 flex-col">
