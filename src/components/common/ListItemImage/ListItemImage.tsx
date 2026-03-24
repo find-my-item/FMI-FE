@@ -13,7 +13,7 @@ import Icon, { IconName } from "../Icon/Icon";
  * @param src - 리스트 아이템 이미지 URL
  * @param alt - 리스트 아이템 이미지 대체 텍스트
  * @param size - 리스트 아이템 이미지 크기(px)
- * @param className - 추가 클래스명
+ * @param className - 추가 클래스명 (div 태그에 적용)
  * @param priority - LCP 대상 여부 (헤더 등 주요 위치에서만 사용)
  * @param imageCount - 이미지 개수 (1개 이상일 때만 표시)
  */
@@ -49,7 +49,10 @@ const ListItemImage = ({
   if (!src && !category) return null;
 
   return (
-    <div className="relative overflow-hidden rounded-[10px]" style={{ width: size, height: size }}>
+    <div
+      className={cn("relative overflow-hidden rounded-[10px]", className)}
+      style={{ width: size, height: size }}
+    >
       {src ? (
         <Image
           src={src}

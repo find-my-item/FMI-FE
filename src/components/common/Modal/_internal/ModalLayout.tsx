@@ -30,9 +30,11 @@ interface ModalLayoutProps {
   onClose?: () => void;
   children: React.ReactNode;
   className: string;
+  /** 테스트 등에서 dialog 루트를 식별할 때 사용 */
+  dialogTestId?: string;
 }
 
-const ModalLayout = ({ isOpen, onClose, children, className }: ModalLayoutProps) => {
+const ModalLayout = ({ isOpen, onClose, children, className, dialogTestId }: ModalLayoutProps) => {
   useModalLockAndEsc({ isOpen, onClose });
   const onBackdropMouseDown = useModalBackdrop({ onClose });
 
@@ -48,6 +50,7 @@ const ModalLayout = ({ isOpen, onClose, children, className }: ModalLayoutProps)
         aria-modal="true"
         aria-labelledby="modal-title"
         aria-describedby="modal-desc"
+        data-testid={dialogTestId}
         onClick={(e) => e.stopPropagation()}
         className={cn(
           "rounded-[20px] border border-gray-200 bg-white",
