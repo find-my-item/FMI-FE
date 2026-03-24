@@ -57,7 +57,7 @@ const CategoryFilter = ({
                 key={option.value}
                 onClick={() => handleOptionClick(option.value)}
                 className={cn(
-                  "glass-card w-full text-nowrap border border-white bg-flatGray-25/70 px-7 py-4 text-left text-h3-medium text-neutral-normal-default transition-colors flex-center",
+                  "glass-card w-full text-nowrap border border-white bg-flatGray-25/70 px-7 py-4 text-h3-medium text-neutral-normal-default transition-colors flex-center",
                   "first:rounded-t-[20px] last:rounded-b-[20px]"
                 )}
               >
