@@ -187,7 +187,7 @@ describe("ChatRoomHeaderInfoButton", () => {
     expect(screen.getByText("채팅방을 나가시겠어요?")).toBeInTheDocument();
     expect(
       screen.getByText(
-        "채팅방을 나가면 채팅 목록 및 대화 내용이 삭제되고 복구할 수 없어요, 채팅방에서 나가시겠어요?"
+        /채팅방을 나가면 채팅 목록 및 대화 내용이 삭제되고\s+복구할 수 없어요\. 채팅방에서 나가시겠어요\?/
       )
     ).toBeInTheDocument();
   });
