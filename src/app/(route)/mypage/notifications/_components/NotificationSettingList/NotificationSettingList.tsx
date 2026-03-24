@@ -1,13 +1,26 @@
 "use client";
 
 import { ToggleButton } from "@/components/common";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NOTIFICATION_CONFIG } from "../../_constants/NOTIFICATION_ITEM";
 import NotificationSettingItem from "../NotificationSettingItem/NotificationSettingItem";
+import { useGetNotificationSetting } from "@/api/fetch/notification";
+import { LoadingState } from "@/components/state";
 
 const NotificationSettingList = () => {
+  const { data: notificationData, isSuccess, isError, isLoading } = useGetNotificationSetting();
+
   const [isBrowserOn, setIsBrowserOn] = useState(false);
   const [isMarketingOn, setIsMarketingOn] = useState(false);
+
+  useEffect(() => {
+    if (isSuccess && notificationData?.result) {
+      setIsBrowserOn(notificationData.result.browserNotificationEnabled);
+      setIsMarketingOn(notificationData.result.marketingConsent);
+    }
+  }, [isSuccess, notificationData]);
+
+  if (isLoading) return <LoadingState />;
 
   return (
     <ul className="w-full py-4">
