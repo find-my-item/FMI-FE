@@ -1,4 +1,4 @@
-export const RadioConfig = [
+export const CheckBoxConfig = [
   { value: "NOT_USING", label: "잘 사용하지 않아요" },
   { value: "LOW_TRUST", label: "서비스에 대한 신뢰도가 낮아요" },
   { value: "DIFFICULT_TO_USE", label: "사용이 어려워요" },

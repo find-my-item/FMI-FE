@@ -19,8 +19,6 @@ const isAuthRoutePath = (pathname: string) =>
 
 const NOTIFICATION_BATCH_DEBOUNCE_MS = 500;
 
-// TODO(형준): 알림 디자인/API 달라서 누락 있음
-
 export const NotificationSSEProvider = ({ children }: PropsWithChildren) => {
   const router = useRouter();
   const pathname = usePathname();

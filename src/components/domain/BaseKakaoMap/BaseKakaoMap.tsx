@@ -38,7 +38,7 @@ import { MAP_MARKER_ICON } from "./MAP_MARKER_ICON";
  * 지도(Map) 컴포넌트에 전달되는 스타일 객체입니다.
  * 기본값은 `{ width: "100%", height: "100%" }` 입니다.
  *
- * @param props.showMarker
+ * @param props.showCenterMarker
  * 중심 좌표에 마커를 표시할지 여부입니다. 기본값은 true입니다.
  *
  * @param props.markerSize
@@ -84,7 +84,7 @@ interface BaseKakaoMapProps {
   style?: CSSProperties;
 
   /** marker */
-  showMarker?: boolean;
+  showCenterMarker?: boolean;
   markerSize?: { width: number; height: number };
   markerOffset?: { x: number; y: number };
   markerData?: GetMarkerData[];
@@ -100,6 +100,11 @@ interface BaseKakaoMapProps {
 
   /** overlay ui */
   children?: ReactNode;
+
+  /** 지도 최대 확대 제한 */
+  minLevel?: number;
+  /** 지도 최대 축소 제한 */
+  maxLevel?: number;
 }
 
 const BaseKakaoMap = ({
@@ -108,7 +113,7 @@ const BaseKakaoMap = ({
   draggable = false,
   style = { width: "100%", height: "100%" },
 
-  showMarker = true,
+  showCenterMarker = false,
   markerSize = { width: 26, height: 37 },
   markerOffset = { x: 13, y: 20 },
   markerData,
@@ -119,7 +124,11 @@ const BaseKakaoMap = ({
   onDragEnd,
   onLevelChange,
   onMarkerClick,
+
   children,
+
+  minLevel = 13,
+  maxLevel,
 }: BaseKakaoMapProps) => {
   const [loading, error] = useKakaoLoader({
     appkey: process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY!,
@@ -157,10 +166,10 @@ const BaseKakaoMap = ({
           setMapCenter(nextCenter);
           onDragEnd(nextCenter);
         }}
-        minLevel={13}
+        minLevel={minLevel}
+        maxLevel={maxLevel}
       >
-        {showMarker &&
-          markerData &&
+        {markerData &&
           markerData.map(({ postId, latitude, longitude, postType }) => (
             <MapMarker
               key={postId}
@@ -177,6 +186,17 @@ const BaseKakaoMap = ({
               }
             />
           ))}
+
+        {showCenterMarker && !markerData && (
+          <MapMarker
+            position={mapCenter}
+            image={{
+              src: "/kakao-map/marker.svg",
+              size: markerSize,
+              options: { offset: markerOffset },
+            }}
+          />
+        )}
 
         {showCircle && radius && (
           <Circle

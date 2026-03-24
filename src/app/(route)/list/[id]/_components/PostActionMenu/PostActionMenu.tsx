@@ -8,6 +8,7 @@ import { useDeleteDetailPost, usePutPostStatus } from "@/api/fetch/post";
 import ModalLayout from "@/components/common/Modal/_internal/ModalLayout";
 import { ACTION_MENU } from "./ACTION_MENU_STYLES";
 import { PostReportBlockActions, ReportModal } from "@/components/domain";
+import { useGetUsersMe } from "@/api/fetch/user";
 import { PostActionData } from "../../_types/PostActionType";
 import UserBlockModal from "@/components/domain/PostReportBlockActions/UserBlockModal/UserBlockModal";
 
@@ -21,6 +22,7 @@ interface PostOptionBoxProps {
 const PostActionMenu = ({ open, onClose, postId, postData }: PostOptionBoxProps) => {
   const router = useRouter();
   const { isMine, writerId, postStatus } = postData;
+  const { data: me } = useGetUsersMe();
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [isReportOpen, setIsReportOpen] = useState(false);
   const [isBlockOpen, setIsBlockOpen] = useState(false);
@@ -36,6 +38,18 @@ const PostActionMenu = ({ open, onClose, postId, postData }: PostOptionBoxProps)
   const handleStatusChange = () => {
     putPostStatus({ postStatus: isFound ? "SEARCHING" : "FOUND" });
     onClose();
+  };
+
+  const handleOpenReport = () => {
+    if (!me) return;
+
+    setIsReportOpen(true);
+  };
+
+  const handleOpenBlock = () => {
+    if (!me) return;
+
+    setIsBlockOpen(true);
   };
 
   return (
@@ -67,10 +81,7 @@ const PostActionMenu = ({ open, onClose, postId, postData }: PostOptionBoxProps)
               </button>
             </>
           ) : (
-            <PostReportBlockActions
-              onOpenReport={() => setIsReportOpen(true)}
-              onOpenBlock={() => setIsBlockOpen(true)}
-            />
+            <PostReportBlockActions onOpenReport={handleOpenReport} onOpenBlock={handleOpenBlock} />
           )}
         </div>
       )}

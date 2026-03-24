@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { FormProvider, useForm, UseFormProps } from "react-hook-form";
 import InputField from "./InputField";
@@ -178,7 +178,7 @@ describe("InputField (Textarea) 컴포넌트", () => {
 
   // 테스트 5
   it("RHF 에러 발생 시 에러 클래스가 적용되고 Caption(Mock)이 에러 메시지를 렌더링한다", async () => {
-    const { user, textarea } = renderComponent({
+    const { textarea } = renderComponent({
       name: "intro",
       label: "소개",
       validation: {
@@ -186,7 +186,13 @@ describe("InputField (Textarea) 컴포넌트", () => {
       },
     });
 
-    await user.type(textarea, "여섯글자입니다");
+    // 네이티브 maxlength로는 6자 이상 입력이 막혀 RHF maxLength 에러가 나지 않음 — DOM value setter로 길이 초과 값을 넣고 input으로 동기화
+    const setNativeValue = Object.getOwnPropertyDescriptor(
+      window.HTMLTextAreaElement.prototype,
+      "value"
+    )?.set;
+    setNativeValue?.call(textarea, "123456");
+    fireEvent.input(textarea, { target: { value: "123456" } });
 
     const errorMessage = await screen.findByTestId("error-message");
 
