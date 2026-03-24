@@ -69,7 +69,6 @@ const AlertItem = ({
           id={String(notificationId)}
           checked={isSelected}
           label=""
-          state={isSelected}
           boxSize="size-6"
           onChange={() => handleSelectNotification(notificationId)}
           onClick={(e) => e.stopPropagation()}

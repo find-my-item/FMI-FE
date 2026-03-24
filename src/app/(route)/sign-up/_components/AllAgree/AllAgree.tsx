@@ -62,7 +62,7 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
               label="전체 약관 동의"
               {...register("selectAll")}
               onChange={handleToggleAll}
-              state={!!selectAll}
+              checked={!!selectAll}
             />
           </div>
 
@@ -77,7 +77,7 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
                   id={item.name}
                   label={item.label}
                   {...register(item.name, item.validation)}
-                  state={!!termsValue?.[index]}
+                  checked={!!termsValue?.[index]}
                 />
                 <button
                   className="bg-white"
