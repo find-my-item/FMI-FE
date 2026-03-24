@@ -33,6 +33,7 @@ const useMapPostSummary = (postId: number) => {
   const apiPostType = mapPostTypeQueryToApiParam(searchParams.get(POST_TYPE));
   const postStatus = searchParams.get("postStatus");
   const category = searchParams.get("category");
+  const apiCategory = category?.toUpperCase();
   const keyword = searchParams.get("keyword");
 
   const queryKey = [
@@ -41,7 +42,7 @@ const useMapPostSummary = (postId: number) => {
     level,
     apiPostType ?? "all",
     postStatus ?? "",
-    category ?? "",
+    apiCategory ?? "",
     keyword ?? "",
   ] as const;
 
@@ -55,8 +56,8 @@ const useMapPostSummary = (postId: number) => {
     if (postStatus) {
       params.set("postStatus", postStatus);
     }
-    if (category) {
-      params.set("category", category);
+    if (apiCategory) {
+      params.set("category", apiCategory);
     }
     if (keyword) {
       params.set("keyword", keyword);

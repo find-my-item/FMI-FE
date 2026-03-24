@@ -32,7 +32,9 @@ const PostDetailKakaoMap = () => {
         center={{ lat: rawData.lat, lng: rawData.lng }}
         level={getMapLevelByRadius(rawData.radius)}
         showCircle
+        showCenterMarker
         radius={rawData.radius}
+        minLevel={8}
         draggable
       >
         <div

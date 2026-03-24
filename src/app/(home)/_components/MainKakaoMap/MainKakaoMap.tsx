@@ -32,7 +32,6 @@ const MainKakaoMap = () => {
     <BaseKakaoMap
       center={mapCenter}
       level={mapLevel}
-      showMarker
       draggable
       onLevelChange={(nextLevel) => setMapLevel(nextLevel)}
       onDragEnd={(nextCenter) => setLatLng(nextCenter)}

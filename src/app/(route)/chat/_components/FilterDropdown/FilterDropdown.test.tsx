@@ -47,9 +47,9 @@ describe("FilterDropdown", () => {
       expect(filterButton).toHaveTextContent("최신순");
     });
 
-    it("sort 파라미터가 LATEST일 때 최신순이 표시됩니다", () => {
+    it("sort 파라미터가 latest일 때 최신순이 표시됩니다", () => {
       const searchParams = new URLSearchParams();
-      searchParams.set("sort", "LATEST");
+      searchParams.set("sort", "latest");
       (useSearchParams as jest.Mock).mockReturnValue(searchParams);
 
       render(
@@ -65,9 +65,9 @@ describe("FilterDropdown", () => {
       expect(filterButton).toHaveTextContent("최신순");
     });
 
-    it("sort 파라미터가 OLDEST일 때 오래된순이 표시됩니다", () => {
+    it("sort 파라미터가 oldest일 때 오래된순이 표시됩니다", () => {
       const searchParams = new URLSearchParams();
-      searchParams.set("sort", "OLDEST");
+      searchParams.set("sort", "oldest");
       (useSearchParams as jest.Mock).mockReturnValue(searchParams);
 
       render(
@@ -83,9 +83,27 @@ describe("FilterDropdown", () => {
       expect(filterButton).toHaveTextContent("오래된순");
     });
 
-    it("sort 파라미터가 있을 때 Filter가 선택된 상태로 표시됩니다", () => {
+    it("sort 파라미터가 latest(기본값)일 때 Filter는 비활성으로 표시됩니다", () => {
       const searchParams = new URLSearchParams();
-      searchParams.set("sort", "LATEST");
+      searchParams.set("sort", "latest");
+      (useSearchParams as jest.Mock).mockReturnValue(searchParams);
+
+      render(
+        <FilterDropdown
+          ariaLabel="채팅 리스트 최신순"
+          options={SORT_OPTIONS}
+          keyName="sort"
+          searchUpdateQuery={mockSearchUpdateQuery}
+        />
+      );
+
+      const filterButton = screen.getByTestId("filter-채팅 리스트 최신순");
+      expect(filterButton).toHaveAttribute("aria-selected", "false");
+    });
+
+    it("sort 파라미터가 oldest일 때 Filter가 선택된 상태로 표시됩니다", () => {
+      const searchParams = new URLSearchParams();
+      searchParams.set("sort", "oldest");
       (useSearchParams as jest.Mock).mockReturnValue(searchParams);
 
       render(
@@ -158,7 +176,7 @@ describe("FilterDropdown", () => {
       const oldestOption = screen.getByText("오래된순");
       await user.click(oldestOption);
 
-      expect(mockSearchUpdateQuery).toHaveBeenCalledWith("sort", "OLDEST");
+      expect(mockSearchUpdateQuery).toHaveBeenCalledWith("sort", "oldest");
       expect(screen.queryByText("오래된순")).not.toBeInTheDocument();
     });
 
@@ -229,9 +247,9 @@ describe("FilterDropdown", () => {
       expect(screen.getByText("발견/분실")).toBeInTheDocument();
     });
 
-    it("type 파라미터가 ALL일 때 분실/발견이 표시됩니다", () => {
+    it("type 파라미터가 all일 때 분실/발견이 표시됩니다", () => {
       const searchParams = new URLSearchParams();
-      searchParams.set("type", "ALL");
+      searchParams.set("type", "all");
       (useSearchParams as jest.Mock).mockReturnValue(searchParams);
 
       render(
@@ -247,9 +265,9 @@ describe("FilterDropdown", () => {
       expect(filterButton).toHaveTextContent("발견/분실");
     });
 
-    it("type 파라미터가 FOUND일 때 발견 게시물이 표시됩니다", () => {
+    it("type 파라미터가 found일 때 발견 게시물이 표시됩니다", () => {
       const searchParams = new URLSearchParams();
-      searchParams.set("type", "FOUND");
+      searchParams.set("type", "found");
       (useSearchParams as jest.Mock).mockReturnValue(searchParams);
 
       render(
@@ -265,9 +283,9 @@ describe("FilterDropdown", () => {
       expect(filterButton).toHaveTextContent("발견");
     });
 
-    it("type 파라미터가 LOST일 때 분실물이 표시됩니다", () => {
+    it("type 파라미터가 lost일 때 분실물이 표시됩니다", () => {
       const searchParams = new URLSearchParams();
-      searchParams.set("type", "LOST");
+      searchParams.set("type", "lost");
       (useSearchParams as jest.Mock).mockReturnValue(searchParams);
 
       render(
@@ -283,9 +301,9 @@ describe("FilterDropdown", () => {
       expect(filterButton).toHaveTextContent("분실");
     });
 
-    it("type 파라미터가 있을 때 Filter가 선택된 상태로 표시됩니다", () => {
+    it("type 파라미터가 found일 때 Filter가 선택된 상태로 표시됩니다", () => {
       const searchParams = new URLSearchParams();
-      searchParams.set("type", "FOUND");
+      searchParams.set("type", "found");
       (useSearchParams as jest.Mock).mockReturnValue(searchParams);
 
       render(
@@ -299,6 +317,24 @@ describe("FilterDropdown", () => {
 
       const filterButton = screen.getByTestId("filter-채팅 리스트 분실/발견");
       expect(filterButton).toHaveAttribute("aria-selected", "true");
+    });
+
+    it("type 파라미터가 all(기본값)일 때 Filter는 비활성으로 표시됩니다", () => {
+      const searchParams = new URLSearchParams();
+      searchParams.set("type", "all");
+      (useSearchParams as jest.Mock).mockReturnValue(searchParams);
+
+      render(
+        <FilterDropdown
+          ariaLabel="채팅 리스트 분실/발견"
+          options={TYPE_OPTIONS}
+          keyName="type"
+          searchUpdateQuery={mockSearchUpdateQuery}
+        />
+      );
+
+      const filterButton = screen.getByTestId("filter-채팅 리스트 분실/발견");
+      expect(filterButton).toHaveAttribute("aria-selected", "false");
     });
 
     it("type 파라미터가 없을 때 Filter가 선택되지 않은 상태로 표시됩니다", () => {
@@ -357,7 +393,7 @@ describe("FilterDropdown", () => {
       const foundOption = screen.getByText("발견");
       await user.click(foundOption);
 
-      expect(mockSearchUpdateQuery).toHaveBeenCalledWith("type", "FOUND");
+      expect(mockSearchUpdateQuery).toHaveBeenCalledWith("type", "found");
     });
   });
 

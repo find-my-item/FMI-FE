@@ -31,7 +31,6 @@ type Story = StoryObj<typeof PostDetail>;
 
 export const Single: Story = {
   args: {
-    type: "find",
     data: MOCK_POST_DEFAULT_DETAIL.result,
   },
 };
