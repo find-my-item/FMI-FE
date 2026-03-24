@@ -27,7 +27,6 @@ interface BookmarkProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: "large" | "medium" | "small";
 }
 
-// TODO(형준): svgr 세팅 변경 시 isActive 별 색깔 수정
 const Bookmark = ({
   ariaLabel = "즐겨찾기 버튼",
   isActive,
