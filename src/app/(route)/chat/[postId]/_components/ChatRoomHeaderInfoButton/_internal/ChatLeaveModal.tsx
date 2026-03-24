@@ -34,14 +34,14 @@ const ChatLeaveModal = ({ isOpen, onClose, onConfirm, onCancel }: ChatLeaveModal
       isOpen={isOpen}
       onClose={onClose}
       dialogTestId="confirm-modal"
-      className={cn("gap-[24px] p-6 flex-col-center")}
+      className="gap-6 p-6 flex-col-center"
     >
-      <div className="gap-[16px] flex-col-center">
-        <div className="gap-[4px] text-center flex-col-center">
-          <div className="text-h3-semibold text-layout-header-default">채팅방을 나가시겠어요?</div>
-          <div className="whitespace-pre-line text-body2-regular text-layout-body-default">
+      <div className="gap-4 flex-col-center">
+        <div className="gap-1 text-center flex-col-center">
+          <p className="text-h3-semibold text-layout-header-default">채팅방을 나가시겠어요?</p>
+          <p className="whitespace-pre-line text-body2-regular text-layout-body-default">
             {`채팅방을 나가면 채팅 목록 및 대화 내용이 삭제되고\n복구할 수 없어요. 채팅방에서 나가시겠어요?`}
-          </div>
+          </p>
         </div>
       </div>
 
