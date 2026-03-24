@@ -1,13 +1,14 @@
 "use client";
 
-import { ConfirmModal, Icon } from "@/components/common";
+import { Icon } from "@/components/common";
 import { ReportModal } from "@/components/domain";
 import { cn } from "@/utils";
 import { useState } from "react";
-import { INFO_OPTIONS } from "./INFO_OPTIONS";
+import { INFO_OPTIONS } from "./_internal/INFO_OPTIONS";
+import { InfoButtonOptionValue } from "./_internal/InfoButtonOptionValueTypes";
 import useLeaveChatRoom from "@/api/fetch/chatRoom/api/useLeaveChatRoom";
 import { useClickOutside } from "@/hooks";
-import { InfoButtonOptionValue } from "./InfoButtonOptionValueTypes";
+import ChatLeaveModal from "./_internal/ChatLeaveModal";
 
 const MenuItem = ({
   chatMenuOpen,
@@ -70,17 +71,17 @@ const ChatRoomHeaderInfoButton = ({ roomId }: { roomId: number }) => {
         </button>
         <MenuItem chatMenuOpen={chatMenuOpen} onOptionClick={handleOptionClick} />
       </div>
+
       <ReportModal
         isOpen={reportOpen}
         onClose={() => setReportOpen(false)}
         targetId={roomId}
         targetType="CHAT"
       />
-      <ConfirmModal
+
+      <ChatLeaveModal
         isOpen={leaveChatRoomModalOpen}
         onClose={() => setLeaveChatRoomModalOpen(false)}
-        title="채팅방을 나가시겠어요?"
-        content="채팅방을 나가면 채팅 목록 및 대화 내용이 삭제되고 복구할 수 없어요, 채팅방에서 나가시겠어요?"
         onConfirm={() => leaveChatRoom(undefined)}
         onCancel={() => setLeaveChatRoomModalOpen(false)}
       />

@@ -4,6 +4,8 @@ export { useModalBackdrop } from "./useOverlayHandlers/useOverlayHandlers";
 export { default as useSearchUpdateQueryString } from "./useSearchUpdateQueryString/useSearchUpdateQueryString";
 export { default as useObjectURLs } from "./useObjectURLs/useObjectURLs";
 export { default as useClickOutside } from "./useClickOutside/useClickOutside";
+export { default as usePopoverOutsideClose } from "./usePopoverOutsideClose/usePopoverOutsideClose";
+export { default as usePopoverPosition } from "./usePopoverPosition/usePopoverPosition";
 export { default as useHorizontalDragScroll } from "./useHorizontalDragScroll/useHorizontalDragScroll";
 export { useInfiniteScroll } from "./useInfiniteScroll/useInfiniteScroll";
 export { default as useLogout } from "./useLogout/useLogout";

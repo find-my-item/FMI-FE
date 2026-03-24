@@ -6,8 +6,8 @@ import { ReportModal } from "@/components/domain";
 import { DetailHeader } from "@/components/layout";
 import { HeaderMenu } from "@/components/layout/DetailHeader/DetailHeaderParts";
 import { cn } from "@/utils";
-import { useHandleClickOutside } from "@/app/(route)/chat/hooks";
 import { useGetUsersMe } from "@/api/fetch/user";
+import { usePopoverOutsideClose } from "@/hooks";
 
 const UserProfileDetailHeader = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,7 +19,7 @@ const UserProfileDetailHeader = () => {
 
   const isMyProfile = me?.result?.userId?.toString() === userId;
 
-  useHandleClickOutside(isMenuOpen, menuWrapperRef, menuWrapperRef, setIsMenuOpen);
+  usePopoverOutsideClose(isMenuOpen, menuWrapperRef, menuWrapperRef, () => setIsMenuOpen(false));
 
   return (
     <div className="relative">
