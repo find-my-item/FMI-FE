@@ -4,14 +4,14 @@ import { useState } from "react";
 import { NotificationLabelType, NotificationType } from "../../_types/NotificationType";
 import { cn } from "@/utils";
 import { Icon, ToggleButton } from "@/components/common";
-import { CategoryType } from "@/types";
 import NotificationCategory from "../NotificationCategory/NotificationCategory";
 
 interface NotificationSettingItem {
   item: { label: NotificationLabelType; value: NotificationType };
+  browserNotification: boolean;
 }
 
-const NotificationSettingItem = ({ item }: NotificationSettingItem) => {
+const NotificationSettingItem = ({ item, browserNotification }: NotificationSettingItem) => {
   const { label, value } = item;
 
   const toggleAriaLabel = label + "토글";
@@ -41,6 +41,7 @@ const NotificationSettingItem = ({ item }: NotificationSettingItem) => {
             <>
               <span className="text-body1-semibold text-neutral-normal-default">{label}</span>
               <ToggleButton
+                disabled={!browserNotification}
                 ariaLabel={toggleAriaLabel}
                 toggleState={isNotificationOn}
                 onClick={() => setIsNotificationOn((prev) => !prev)}

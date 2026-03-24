@@ -24,7 +24,7 @@ const NotificationSettingList = () => {
 
       <div className="mb-4 flex flex-col gap-[2px]">
         {NOTIFICATION_CONFIG.map((item) => (
-          <NotificationSettingItem key={item.value} item={item} />
+          <NotificationSettingItem key={item.value} item={item} browserNotification={isBrowserOn} />
         ))}
       </div>
 
