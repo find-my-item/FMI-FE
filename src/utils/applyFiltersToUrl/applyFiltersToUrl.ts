@@ -15,7 +15,7 @@ import {
 import {
   ActivityType,
   CategoryType,
-  InquiryStatus,
+  InquiryFilterStatus,
   ItemStatus,
   PostType,
   ReportFilterStatus,
@@ -71,7 +71,8 @@ const REPORT_STATUS_QUERY_VALUE_MAP: Record<ReportFilterStatus, string> = {
   RESOLVED: "resolved",
 };
 
-const INQUIRY_STATUS_QUERY_VALUE_MAP: Record<InquiryStatus, string> = {
+const INQUIRY_STATUS_QUERY_VALUE_MAP: Record<InquiryFilterStatus, string> = {
+  ALL: "all",
   RECEIVED: "received",
   PENDING: "pending",
   ANSWERED: "answered",
@@ -110,9 +111,9 @@ const reportStatusToQueryValue = (reportStatus: ReportStatusFilterValue): string
   return REPORT_STATUS_QUERY_VALUE_MAP[reportStatus];
 };
 
-const inquiryStatusToQueryValue = (requestStatus: InquiryStatusFilterValue): string | undefined => {
-  if (!requestStatus) return undefined;
-  return INQUIRY_STATUS_QUERY_VALUE_MAP[requestStatus];
+const inquiryStatusToQueryValue = (inquiryStatus: InquiryStatusFilterValue): string | undefined => {
+  if (!inquiryStatus) return undefined;
+  return INQUIRY_STATUS_QUERY_VALUE_MAP[inquiryStatus];
 };
 
 const FILTER_TRANSFORMERS: Record<string, (val: any) => string | undefined> = {
