@@ -89,10 +89,12 @@ const DeleteAccountPassword = ({ onBack }: { onBack: () => void }) => {
               취소
             </Button>
             <Button
-              onClick={handleSubmit((_, e) => {
-                const formElement = (e?.target as HTMLElement)?.closest("form");
-                formElement?.requestSubmit();
-              })}
+              onClick={() => {
+                handleSubmit((data) => {
+                  const formElement = document.querySelector("form");
+                  formElement?.requestSubmit();
+                })();
+              }}
               className="w-full !bg-system-warning"
             >
               탈퇴하기

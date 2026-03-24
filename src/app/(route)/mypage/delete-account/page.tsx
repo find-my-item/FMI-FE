@@ -26,14 +26,12 @@ const page = () => {
     }
 
     DeleteAccountMutate(payload, {
-      onSuccess: () => {
+      onSuccess: (response) => {
         setIsDeleted(true);
-        sessionStorage.removeItem("reasons");
-        sessionStorage.removeItem("otherReason");
       },
       onError: (error) => {
-        if (error.code === "USER404-NOT_FOUND") addToast("존제하지 않는 회원이에요", "warning");
-        else if (error.code === "FILE500-DELETE_IO") addToast("회원탈퇴에 실패했어요", "warning");
+        if (error.code === "USER404-NOT_FOUND") addToast("존재하지 않는 회원이에요", "warning");
+        else if (error.code === "FILE500-DELETE_IO") addToast("회원 탈퇴에 실패했어요", "warning");
       },
     });
   };
