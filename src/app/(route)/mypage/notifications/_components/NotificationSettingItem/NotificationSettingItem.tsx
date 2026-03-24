@@ -5,17 +5,25 @@ import { NotificationLabelType, NotificationType } from "../../_types/Notificati
 import { cn } from "@/utils";
 import { Icon, ToggleButton } from "@/components/common";
 import NotificationCategory from "../NotificationCategory/NotificationCategory";
+import { CategoryType } from "@/types";
 
 interface NotificationSettingItem {
   item: { label: NotificationLabelType; value: NotificationType };
   browserNotification: boolean;
+  isOn?: boolean;
+  categoryOn?: CategoryType[];
 }
 
-const NotificationSettingItem = ({ item, browserNotification }: NotificationSettingItem) => {
+const NotificationSettingItem = ({
+  item,
+  browserNotification = false,
+  isOn = false,
+  categoryOn = [],
+}: NotificationSettingItem) => {
   const { label, value } = item;
 
   const toggleAriaLabel = label + "토글";
-  const [isNotificationOn, setIsNotificationOn] = useState(false);
+  const [isNotificationOn, setIsNotificationOn] = useState(isOn);
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
 
   return (
@@ -24,10 +32,10 @@ const NotificationSettingItem = ({ item, browserNotification }: NotificationSett
         <div
           className={cn(
             "flex h-11 w-full items-center justify-between pl-[10px]",
-            label === "카테고리 키워드 선택" && "pl-[18px]"
+            value === "enabledCategories" && "pl-[18px]"
           )}
         >
-          {label === "카테고리 키워드 선택" ? (
+          {value === "enabledCategories" ? (
             <button
               onClick={() => setIsBottomSheetOpen(true)}
               className="flex w-full items-center justify-between"
@@ -54,6 +62,7 @@ const NotificationSettingItem = ({ item, browserNotification }: NotificationSett
       <NotificationCategory
         isBottomSheetOpen={isBottomSheetOpen}
         setIsBottomSheetOpen={setIsBottomSheetOpen}
+        categoryOn={categoryOn}
       />
     </>
   );

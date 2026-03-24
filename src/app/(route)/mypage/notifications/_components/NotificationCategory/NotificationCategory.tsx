@@ -9,13 +9,15 @@ import { CategoryType } from "@/types";
 interface NotificationCategoryProps {
   isBottomSheetOpen: boolean;
   setIsBottomSheetOpen: Dispatch<SetStateAction<boolean>>;
+  categoryOn: CategoryType[];
 }
 
 const NotificationCategory = ({
   isBottomSheetOpen,
   setIsBottomSheetOpen,
+  categoryOn,
 }: NotificationCategoryProps) => {
-  const [selectedCategory, setSelectedCategory] = useState<CategoryType[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<CategoryType[]>(categoryOn);
 
   const handleToClick = () => {
     setIsBottomSheetOpen(false);

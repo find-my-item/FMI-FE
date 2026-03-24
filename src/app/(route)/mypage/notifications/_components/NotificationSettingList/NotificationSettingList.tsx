@@ -36,9 +36,19 @@ const NotificationSettingList = () => {
       </li>
 
       <div className="mb-4 flex flex-col gap-[2px]">
-        {NOTIFICATION_CONFIG.map((item) => (
-          <NotificationSettingItem key={item.value} item={item} browserNotification={isBrowserOn} />
-        ))}
+        {NOTIFICATION_CONFIG.map((item) => {
+          const isCategorySelector = item.value === "enabledCategories";
+
+          return (
+            <NotificationSettingItem
+              key={item.value}
+              item={item}
+              browserNotification={isBrowserOn}
+              isOn={!isCategorySelector ? (notificationData?.result[item.value] as boolean) : false}
+              categoryOn={notificationData?.result["enabledCategories"]}
+            />
+          );
+        })}
       </div>
 
       <li className="w-full border-t border-border-neutral-normal-default px-5 pb-2 pt-4">

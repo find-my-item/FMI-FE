@@ -20,7 +20,6 @@ export const NOTIFICATION = {
   noticeEnabled: { label: "공지사항" },
   categoryEnabled: { label: "카테고리 키워드" },
   enabledCategories: { label: "카테고리 키워드 선택" },
-  marketingConsent: { label: "마케팅 수신 동의" },
 };
 
 export const CATEGORY_ITEM = [
@@ -33,6 +32,7 @@ export const CATEGORY_ITEM = [
   { label: "기타", value: "ETC" },
 ] as const;
 
+// marketingConsent: { label: "마케팅 수신 동의" },
 // "browserNotificationEnabled": {label: "알림 설정"},
 // marketingConsent: { label: "마케팅 수신 동의", type: "toggle" },
 // export const NOTIFICATION_CONFIG = {
