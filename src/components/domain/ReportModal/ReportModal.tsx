@@ -86,7 +86,7 @@ const ReportModal = ({
   };
 
   return (
-    <ReportPopupLayout isOpen={isOpen} onClose={onClose}>
+    <ReportPopupLayout isOpen={isOpen}>
       <DetailHeader title="신고하기" onBack={onClose} />
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
@@ -104,7 +104,7 @@ const ReportModal = ({
           </div>
 
           <div className="fixed bottom-0 w-full max-w-[768px] border-t border-flatGray-50 px-4 pb-8 pt-3">
-            <Button type="submit" className="w-full" disabled={isDisabled}>
+            <Button type="submit" size="big" className="w-full" disabled={isDisabled}>
               차단 및 신고하기
             </Button>
           </div>

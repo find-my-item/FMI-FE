@@ -49,7 +49,14 @@ interface InputFieldProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   validation?: RegisterOptions;
 }
 
-const InputField = ({ name, label, validation, rule, ...props }: InputFieldProps) => {
+const InputField = ({
+  name,
+  label,
+  validation,
+  rule,
+  maxLength: maxLengthProp,
+  ...props
+}: InputFieldProps) => {
   const {
     register,
     formState: { errors },
@@ -60,8 +67,9 @@ const InputField = ({ name, label, validation, rule, ...props }: InputFieldProps
   const isValue = useWatch({ name }) ?? "";
   const isValueStr = (isValue ?? "").toString();
 
-  const maxLength =
+  const maxLengthFromValidation =
     typeof validation?.maxLength === "number" ? validation.maxLength : validation?.maxLength?.value;
+  const maxLength = maxLengthFromValidation ?? maxLengthProp;
 
   return (
     <div className="flex w-full flex-col gap-1">
@@ -83,6 +91,7 @@ const InputField = ({ name, label, validation, rule, ...props }: InputFieldProps
             isValue && "focus:border-neutral-normal-focused"
           )}
           {...register(name, validation)}
+          maxLength={maxLength}
         />
 
         {/* 삭제 버튼 */}

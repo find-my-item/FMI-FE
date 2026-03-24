@@ -1,7 +1,20 @@
+const toApiType = (raw: string | null): "ALL" | "LOST" | "FOUND" => {
+  const v = (raw ?? "").toLowerCase();
+  if (v === "lost") return "LOST";
+  if (v === "found") return "FOUND";
+  return "ALL";
+};
+
+const toApiSort = (raw: string | null): "LATEST" | "OLDEST" => {
+  const v = (raw ?? "").toLowerCase();
+  if (v === "oldest") return "OLDEST";
+  return "LATEST";
+};
+
 const QUERY_PARAMS = {
   type: {
     key: "type",
-    transform: (raw: string | null) => (raw === "all" ? "" : (raw as "LOST" | "FOUND") || ""),
+    transform: toApiType,
   },
   address: {
     key: "region",
@@ -9,7 +22,7 @@ const QUERY_PARAMS = {
   },
   sort: {
     key: "sort",
-    transform: (raw: string | null) => (raw as "LATEST" | "OLDEST") || "LATEST",
+    transform: toApiSort,
   },
 } as const;
 

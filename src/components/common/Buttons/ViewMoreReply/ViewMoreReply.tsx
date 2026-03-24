@@ -67,7 +67,7 @@ const ViewMoreReply = ({
         </button>
         <button
           onClick={onWriteReply}
-          className="text-body1-medium text-neutral-strong-default transition-colors duration-150 hover:text-black active:text-neutral-strong-preesed disabled:text-neutral-strong-disabled"
+          className="text-body1-medium text-neutral-strong-default transition-colors duration-150 hover:text-black disabled:text-neutral-strong-disabled"
           aria-label={writeReplyAriaLabel}
           disabled={disabled}
         >
