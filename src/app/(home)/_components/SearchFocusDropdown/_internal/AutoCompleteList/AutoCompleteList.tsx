@@ -18,7 +18,7 @@ const AutoCompleteList = ({ searchKeyword, setFocused }: AutoCompleteListProps) 
   const router = useRouter();
   const addRecentSearch = useMainRecentSearch((s) => s.addRecentSearch);
   const query = searchKeyword.trim();
-  const { data: results = [], isLoading } = useVWorldAddressSearch(query);
+  const { data: results = [], isLoading, isFetching } = useVWorldAddressSearch(query);
 
   const uniqueResults = useMemo(() => {
     const seenAddresses = new Set<string>();
@@ -43,7 +43,7 @@ const AutoCompleteList = ({ searchKeyword, setFocused }: AutoCompleteListProps) 
   if (query.length < 2 || (!isLoading && uniqueResults.length === 0)) return null;
 
   return (
-    <ul className="border-b-[3px] border-labelsVibrant-quaternary">
+    <ul className={cn(!isFetching && "border-b-[3px] border-labelsVibrant-quaternary")}>
       {uniqueResults.map((item, index, array) => {
         const address = item.address.road || item.address.parcel;
         return (
