@@ -7,6 +7,7 @@ import MyPageProfile from "../MyPageProfile/MyPageProfile";
 import MyPageIconNav from "../MyPageIconNav/MyPageIconNav";
 import MyPageMenuSection from "../MyPageMenuSection/MyPageMenuSection";
 import { useGetUsersMe } from "@/api/fetch/user";
+import { BetaTestMypageBanner } from "@/components/domain";
 
 const MyPageContainer = ({ hasToken }: { hasToken: boolean }) => {
   const { data, isLoading, error } = useGetUsersMe(hasToken);
@@ -33,6 +34,8 @@ const MyPageContainer = ({ hasToken }: { hasToken: boolean }) => {
       <MyPageProfile userData={userData} />
 
       <MyPageIconNav />
+
+      <BetaTestMypageBanner />
 
       <MyPageMenuSection isUserLogin={!!userData} />
     </div>
