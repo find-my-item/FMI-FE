@@ -87,7 +87,7 @@ const ClientDetail = ({ id, isLoggedIn }: ClientDetailProps) => {
       />
 
       <div className="flex flex-col h-base">
-        <PostDetail type="find" data={data.result} />
+        <PostDetail data={data.result} />
 
         <CommentList
           postId={id}
