@@ -15,8 +15,6 @@ const page = () => {
   const { mutate: DeleteAccountMutate, isPending } = useDeleteAccount();
 
   const onSubmit = (data: DeleteAccountType) => {
-    const savedReasons = sessionStorage.getItem("reasons");
-    const savedOther = sessionStorage.getItem("other_reason");
     if (isPending) return;
 
     const payload: DeleteAccountType = {
@@ -38,10 +36,6 @@ const page = () => {
         else if (error.code === "FILE500-DELETE_IO") addToast("회원탈퇴에 실패했어요", "warning");
       },
     });
-
-    console.log("payload>> ", payload);
-    console.log("데이터 확인>> ", savedReasons);
-    console.log("데이터 확인>> ", savedOther);
   };
 
   if (isDeleted) {

@@ -1,6 +1,8 @@
 import { Button, Icon } from "@/components/common";
+import { useRouter } from "next/navigation";
 
 const DeleteComplete = () => {
+  const router = useRouter();
   return (
     <div className="w-full flex-col-center h-base">
       <div className="gap-4 flex-col-center">
@@ -14,7 +16,7 @@ const DeleteComplete = () => {
             </p>
           </div>
 
-          <Button variant="outlined" className="!px-5">
+          <Button variant="outlined" className="!px-5" onClick={() => router.replace("/")}>
             홈 화면으로 이동하기
           </Button>
         </div>

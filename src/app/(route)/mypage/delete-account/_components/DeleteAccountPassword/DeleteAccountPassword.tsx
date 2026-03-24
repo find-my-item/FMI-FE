@@ -6,13 +6,11 @@ import { Button, InputText } from "@/components/common";
 import ModalLayout from "@/components/common/Modal/_internal/ModalLayout";
 import { FooterButton } from "@/components/domain";
 import { useToast } from "@/context/ToastContext";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 const DeleteAccountPassword = ({ onBack }: { onBack: () => void }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const router = useRouter();
   const { addToast } = useToast();
   const { handleSubmit, getValues, watch } = useFormContext();
   const { mutate: VerifyPasswordMutate, isPending } = usePostVerifyPassword();
@@ -91,8 +89,8 @@ const DeleteAccountPassword = ({ onBack }: { onBack: () => void }) => {
               취소
             </Button>
             <Button
-              onClick={handleSubmit(() => {
-                const formElement = document.querySelector("form");
+              onClick={handleSubmit((_, e) => {
+                const formElement = (e?.target as HTMLElement)?.closest("form");
                 formElement?.requestSubmit();
               })}
               className="w-full !bg-system-warning"

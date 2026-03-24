@@ -6,6 +6,8 @@ export const useDeleteAccount = () => {
   return useAppMutation<DeleteAccountType, ApiBaseResponseType<null>, ApiBaseResponseType<null>>(
     "auth",
     "/users/me",
-    "delete"
+    "delete",
+    undefined,
+    { sendDeleteBody: true }
   );
 };
