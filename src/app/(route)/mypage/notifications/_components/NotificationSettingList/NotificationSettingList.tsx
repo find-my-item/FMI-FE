@@ -1,61 +1,63 @@
 "use client";
 
-import { Icon, ToggleButton } from "@/components/common";
-import { NotificationType } from "../../_types/NotificationType";
-import { useState } from "react";
-import { NOTIFICATION_ITEM } from "../../_constants/NOTIFICATION_ITEM";
-
-interface NotificationSettingItem {
-  settingName: NotificationType;
-}
-
-const NotificationSettingItem = ({ settingName }: NotificationSettingItem) => {
-  const toggleAriaLabel = settingName + "토글";
-  const [isNotificationOn, setIsNotificationOn] = useState(false);
-
-  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
-
-  return (
-    <>
-      <li className="flex w-full items-center justify-between px-5 py-2">
-        <span className="my-[10px] text-body1-semibold text-neutral-normal-default">
-          {settingName}
-        </span>
-        <ToggleButton
-          ariaLabel={toggleAriaLabel}
-          toggleState={isNotificationOn}
-          onClick={() => setIsNotificationOn((prev) => !prev)}
-        />
-      </li>
-      {settingName === "카테고리 키워드" && (
-        <button
-          onClick={() => setIsBottomSheetOpen(true)}
-          className="flex w-full items-center justify-between px-4 py-5"
-        >
-          <span className="my-[10px] ml-[10px] text-body1-medium text-neutral-normal-placeholder">
-            카테고리 키워드 선택
-          </span>
-          <Icon name="ArrowRightSmall" size={24} className="text-neutral-strong-default" />
-        </button>
-      )}
-
-      {/* TODO(수현): 바텀 시트 변경으로 인한 수정 필요 */}
-      {/* <SelectBottomSheet
-        isOpen={isBottomSheetOpen}
-        onClose={() => setIsBottomSheetOpen(false)}
-        title="카테고리 키워드"
-        option={CATEGORY_OPTIONS}
-      /> */}
-    </>
-  );
-};
+import { ToggleButton } from "@/components/common";
+import { NOTIFICATION_CONFIG } from "../../_constants/NOTIFICATION_ITEM";
+import NotificationSettingItem from "../NotificationSettingItem/NotificationSettingItem";
+import { useGetNotificationSetting } from "@/api/fetch/notification";
+import { LoadingState } from "@/components/state";
+import { useToggleClick } from "../../_hooks/useToggleClick";
+import { DEFAULT_NOTIFICATION_SETTING } from "../../_constants/DEFAULT_NOTIFICATION_SETTING";
 
 const NotificationSettingList = () => {
+  const { data: notificationData, isLoading } = useGetNotificationSetting();
+
+  const { handleToggle } = useToggleClick(notificationData?.result);
+
+  if (isLoading) return <LoadingState />;
+
+  const toggleState = notificationData?.result ?? DEFAULT_NOTIFICATION_SETTING;
+
   return (
     <ul className="w-full py-4">
-      {NOTIFICATION_ITEM.map((item) => (
-        <NotificationSettingItem key={item} settingName={item} />
-      ))}
+      <li className="w-full px-5 py-2">
+        <div className="flex h-11 w-full items-center justify-between">
+          <h3 className="text-h3-semibold text-neutral-normal-default">알림 설정</h3>
+          <ToggleButton
+            ariaLabel="전체 알림 설정"
+            toggleState={toggleState?.browserNotificationEnabled ?? false}
+            onClick={() => handleToggle("browserNotificationEnabled")}
+          />
+        </div>
+      </li>
+
+      <div className="mb-4 flex flex-col gap-[2px]">
+        {NOTIFICATION_CONFIG.map((item) => {
+          const isCategorySelector = item.value === "enabledCategories";
+          const currentState = toggleState[item.value];
+
+          return (
+            <NotificationSettingItem
+              key={item.value}
+              item={item}
+              browserNotification={toggleState?.browserNotificationEnabled ?? false}
+              isOn={isCategorySelector ? false : (currentState as boolean)}
+              notificationStatus={toggleState}
+            />
+          );
+        })}
+      </div>
+
+      <li className="w-full border-t border-border-neutral-normal-default px-5 pb-2 pt-4">
+        <div className="flex h-11 w-full items-center justify-between">
+          <h3 className="text-h3-semibold text-neutral-normal-default">마케팅 수신 동의</h3>
+
+          <ToggleButton
+            ariaLabel="마케팅 수신 동의"
+            toggleState={toggleState?.marketingConsent ?? false}
+            onClick={() => handleToggle("marketingConsent")}
+          />
+        </div>
+      </li>
     </ul>
   );
 };
