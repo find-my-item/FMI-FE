@@ -68,23 +68,35 @@ const CommentMetaHeader = ({
   return (
     <>
       <div className="flex items-start justify-between">
-        <div className="flex gap-[14px]">
-          <ProfileAvatar src={profileImage} size={isThreadItem ? 30 : 40} />
+        {isGuest ? (
+          <div className="flex gap-[14px]">
+            <ProfileAvatar src={profileImage} size={isThreadItem ? 30 : 40} />
 
-          <div className="flex flex-col flex-wrap items-start">
-            {isGuest ? (
+            <div className="flex flex-col flex-wrap items-start">
               <span className={authorStyle}>{authorName}</span>
-            ) : (
-              <Link href={`/user/${authorId}`} className={authorStyle}>
-                {authorName}
-              </Link>
-            )}
 
-            <time dateTime={createdAt} className="text-body2-regular text-layout-body-default">
-              {formatDate(createdAt)}
-            </time>
+              <time dateTime={createdAt} className="text-body2-regular text-layout-body-default">
+                {formatDate(createdAt)}
+              </time>
+            </div>
           </div>
-        </div>
+        ) : (
+          <Link
+            href={`/user/${authorId}`}
+            aria-label={`${authorName} 프로필 보기`}
+            className="flex gap-[14px]"
+          >
+            <ProfileAvatar src={profileImage} size={isThreadItem ? 30 : 40} />
+
+            <div className="flex flex-col flex-wrap items-start">
+              <span className={authorStyle}>{authorName}</span>
+
+              <time dateTime={createdAt} className="text-body2-regular text-layout-body-default">
+                {formatDate(createdAt)}
+              </time>
+            </div>
+          </Link>
+        )}
 
         <div ref={ref} className="relative">
           <KebabMenuButton

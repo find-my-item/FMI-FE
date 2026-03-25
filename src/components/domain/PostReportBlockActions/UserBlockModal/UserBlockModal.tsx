@@ -23,7 +23,7 @@ const UserBlockModal = ({ isOpen, onClose, writerId }: UserBlockModalProps) => {
         </span>
       </div>
       <div className="w-full gap-2 flex-center">
-        <Button variant="outlined" className="min-h-11 flex-1">
+        <Button variant="outlined" className="min-h-11 flex-1" onClick={onClose}>
           취소
         </Button>
         <Button className="min-h-11 flex-1" onClick={() => blockUser()}>
