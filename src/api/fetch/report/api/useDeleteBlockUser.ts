@@ -1,7 +1,6 @@
 "use client";
 
 import useAppMutation from "@/api/_base/query/useAppMutation";
-import { BlockUserResponse } from "../types/BlockUserResponse";
 import { useQueryClient } from "@tanstack/react-query";
 
 interface DeleteBlockUserParams {
@@ -20,6 +19,7 @@ const useDeleteBlockUser = () => {
         queryClient.invalidateQueries({
           queryKey: ["user-block-list"],
         });
+        queryClient.invalidateQueries({ queryKey: ["posts"] });
       },
     }
   );
