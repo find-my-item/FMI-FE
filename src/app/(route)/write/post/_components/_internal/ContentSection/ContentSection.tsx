@@ -14,8 +14,9 @@ const ContentSection = () => {
           id="content"
           rows={5}
           placeholder=" "
+          maxLength={500}
           className={cn(
-            "w-full resize-none py-1 text-body1-medium text-neutral-strong-default",
+            "min-h-[200px] w-full resize-none py-1 text-body1-medium text-neutral-strong-default",
             "peer placeholder:text-body2-regular placeholder:text-neutral-normal-placeholder focus:outline-none"
           )}
           {...register("content", {
