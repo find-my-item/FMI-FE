@@ -33,7 +33,6 @@ export const usePostNoticeCommentSubmit = ({
 
     const formData = new FormData();
 
-    // 공지사항 댓글 생성 API는 multipart/form-data로 request(Blob JSON) + images(files)를 전송합니다.
     const request = {
       content: trimmedContent,
       parentId: null,
