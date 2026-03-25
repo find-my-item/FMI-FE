@@ -50,8 +50,10 @@ export const Default: Story = {
   args: {
     comments: MOCK_COMMENT_RESPONSE_DATA,
     postId: 1,
-    onSubmit: () => {},
+    onSubmit: (_content, _image, _parentId) => {},
     isPending: false,
     useFetchReplies: mockUseFetchReplies,
+    onDeleteComment: () => {},
+    onFavoriteComment: () => {},
   },
 };
