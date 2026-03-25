@@ -1,5 +1,3 @@
-"use client";
-
 import useAppInfiniteQuery from "@/api/_base/query/useAppInfiniteQuery";
 import { InfiniteData, keepPreviousData } from "@tanstack/react-query";
 import { GetNoticeCommentsData, GetNoticeCommentsResponse } from "../types/GetNoticeComments";
