@@ -13,7 +13,7 @@ interface UseGetRepliesNoticeCommentParams {
   size?: number;
 }
 
-export const useGetRepliesNoticeComment = ({
+const useGetRepliesNoticeComment = ({
   commentId,
   enabled = true,
 }: UseGetRepliesNoticeCommentParams) => {
