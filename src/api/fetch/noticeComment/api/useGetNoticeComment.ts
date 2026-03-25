@@ -22,7 +22,7 @@ export const useGetNoticeComment = ({
     {
       enabled: !!noticeId && enabled,
       pageParamName: "cursor",
-      initialPageParam: 0,
+      initialPageParam: undefined,
       getNextPageParam: (lastPage) =>
         lastPage.result.hasNext ? lastPage.result.cursor : undefined,
       select: (data: InfiniteData<GetNoticeCommentsResponse>) => {

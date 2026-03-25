@@ -13,6 +13,7 @@ import {
   useGetRepliesNoticeComment,
 } from "@/api/fetch/noticeComment";
 import { DeleteCommentVariables } from "@/api/fetch/comment";
+import { useHandleNoticeReplySubmit } from "../../_hooks/useHandleNoticeReplySubmit/useHandleNoticeReplySubmit";
 
 const NoticeDetailView = ({ id }: { id: number }) => {
   const { data: noticeDetail, isLoading, isError } = useGetNoticeDetail({ id });
@@ -28,6 +29,7 @@ const NoticeDetailView = ({ id }: { id: number }) => {
   });
 
   const { mutate: deleteNoticeComment } = useDeleteNoticeComment();
+  const { handleReplySubmit, isPending } = useHandleNoticeReplySubmit(id);
 
   useEffect(() => {
     if (isError) {
@@ -52,8 +54,8 @@ const NoticeDetailView = ({ id }: { id: number }) => {
       {noticeDetail && !isLoading && <NoticeDetailContent noticeDetail={noticeDetail?.result} />}
       <CommentList
         postId={id}
-        onSubmit={() => {}}
-        isPending={false}
+        onSubmit={handleReplySubmit}
+        isPending={isPending}
         isLoggedIn={isLoggedIn}
         comments={noticeComments}
         useFetchReplies={useGetRepliesNoticeComment}
@@ -62,7 +64,7 @@ const NoticeDetailView = ({ id }: { id: number }) => {
         onFavoriteComment={() => {}}
       />
       <hr className="border border-divider-default" />
-      <NoticeCommentForm />
+      <NoticeCommentForm noticeId={id} isLoggedIn={isLoggedIn} />
     </div>
   );
 };
