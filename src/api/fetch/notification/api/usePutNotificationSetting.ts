@@ -3,7 +3,6 @@ import {
   notificationSettingRequest,
   PutNotificationSetting,
 } from "../types/notificationSettingType";
-import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 import { useToast } from "@/context/ToastContext";
 import { useQueryClient } from "@tanstack/react-query";
 
