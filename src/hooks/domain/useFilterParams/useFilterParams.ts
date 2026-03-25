@@ -69,7 +69,7 @@ export const useFilterParams = () => {
     sort: normalizeEnumValue<SortFilterValue>(searchParams.get("sort")),
     region: searchParams.get("region"),
     findStatus: normalizeEnumValue<Exclude<FindStatusFilterValue, undefined>>(
-      searchParams.get("findStatus")
+      searchParams.get("find-status")
     ),
     startDate: searchParams.get("startDate"),
     endDate: searchParams.get("endDate"),

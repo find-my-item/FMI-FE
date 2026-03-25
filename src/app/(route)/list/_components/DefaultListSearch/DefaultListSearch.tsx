@@ -1,4 +1,5 @@
 "use client";
+"use no memo";
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
