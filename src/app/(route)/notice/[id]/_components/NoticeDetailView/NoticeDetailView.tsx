@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useToast } from "@/context/ToastContext";
 import { useRouter } from "next/navigation";
 import { useGetUsersMe } from "@/api/fetch/user";
+import { useQueryClient } from "@tanstack/react-query";
 import {
   useDeleteNoticeComment,
   useGetNoticeComment,
@@ -19,6 +20,7 @@ const NoticeDetailView = ({ id }: { id: number }) => {
   const { data: noticeDetail, isLoading, isError } = useGetNoticeDetail({ id });
   const { addToast } = useToast();
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const { data: userData } = useGetUsersMe();
   const isLoggedIn = !!userData?.result;
@@ -40,12 +42,21 @@ const NoticeDetailView = ({ id }: { id: number }) => {
 
   const handleDeleteComment = ({ commentId, queryKey }: DeleteCommentVariables) => {
     const firstKey = Array.isArray(queryKey) ? queryKey[0] : undefined;
+    const parentCommentId =
+      Array.isArray(queryKey) && typeof queryKey[1] === "number" ? queryKey[1] : undefined;
     const invalidateQueryKey =
       firstKey === "replies-post-comments"
-        ? ["replies-notice-comments", commentId]
+        ? ["replies-notice-comments", parentCommentId ?? commentId]
         : ["notice-comments", id];
 
-    deleteNoticeComment({ commentId, queryKey: invalidateQueryKey });
+    deleteNoticeComment(
+      { commentId, queryKey: invalidateQueryKey },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: ["notice-comments", id] });
+        },
+      }
+    );
   };
 
   return (
