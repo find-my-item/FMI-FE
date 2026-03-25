@@ -90,10 +90,10 @@ export default function RootLayout({
               <ToastProvider>
                 <MSWProvider />
                 <AuthBootstrap />
-                {/* <NotificationSSEProvider> */}
-                <main className="w-full flex-1">{children}</main>
-                <Footer />
-                {/* </NotificationSSEProvider> */}
+                <NotificationSSEProvider>
+                  <main className="w-full flex-1">{children}</main>
+                  <Footer />
+                </NotificationSSEProvider>
                 <BetaTestModalGlobal />
               </ToastProvider>
             </SnackBarProvider>
