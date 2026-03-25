@@ -13,15 +13,16 @@ import Link from "next/link";
  * <BetaTestMainBanner />
  * ```
  */
+
 const BetaTestMainBanner = () => {
   return (
     <Link
       href="https://forms.gle/GZC7fibDFou8R9Di9"
       target="_blank"
       rel="noopener noreferrer"
-      className="min-h-[101px] w-[120px] rounded-[10px] bg-fg-brand-strong-default px-3 py-[10px] shadow-sm"
+      className="absolute bottom-3 left-3 min-h-[101px] w-[120px] rounded-[10px] bg-fg-brand-strong-default px-3 py-[10px] shadow-sm"
     >
-      <div className="flex flex-col gap-2 flex-col-center">
+      <div className="w-full gap-2 flex-col-center">
         <Image
           src="/beta-test/beta-test-banner-icon.svg"
           alt=""
