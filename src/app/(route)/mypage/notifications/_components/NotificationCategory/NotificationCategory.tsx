@@ -5,6 +5,7 @@ import { CATEGORY_ITEM } from "../../_constants/NOTIFICATION_ITEM";
 import { Button, Filter } from "@/components/common";
 import { Dispatch, SetStateAction, useState } from "react";
 import { CategoryType } from "@/types";
+import usePutNotificationSetting from "@/api/fetch/notification/api/usePutNotificationSetting";
 
 interface NotificationCategoryProps {
   isBottomSheetOpen: boolean;
@@ -18,8 +19,11 @@ const NotificationCategory = ({
   categoryOn,
 }: NotificationCategoryProps) => {
   const [selectedCategory, setSelectedCategory] = useState<CategoryType[]>(categoryOn);
+  const { mutate: notificationMutate, isPending } = usePutNotificationSetting();
 
   const handleToClick = () => {
+    if (isPending) return;
+    notificationMutate({ enabledCategories: selectedCategory });
     setIsBottomSheetOpen(false);
   };
 
