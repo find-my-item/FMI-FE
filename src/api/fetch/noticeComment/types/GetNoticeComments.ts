@@ -27,7 +27,8 @@ export type NoticeCommentItemApiType = {
 export type GetNoticeCommentsData = {
   comments: CommentItemType[];
   hasNext: boolean;
-  cursor: number;
+  nextPage: number;
   totalCommentCount: number;
   remainingCount: number;
+  cursor?: number;
 };

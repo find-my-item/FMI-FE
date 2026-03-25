@@ -22,7 +22,7 @@ export const useGetNoticeComment = ({
     {
       enabled: !!noticeId && enabled,
       pageParamName: "cursor",
-      initialPageParam: undefined,
+      initialPageParam: 0,
       getNextPageParam: (lastPage) =>
         lastPage.result.hasNext ? lastPage.result.cursor : undefined,
       select: (data: InfiniteData<GetNoticeCommentsResponse>) => {
@@ -41,9 +41,10 @@ export const useGetNoticeComment = ({
         return {
           comments,
           hasNext,
-          cursor,
+          nextPage: cursor,
           totalCommentCount: comments.length,
           remainingCount: hasNext ? size : 0,
+          cursor,
         };
       },
       placeholderData: keepPreviousData,
