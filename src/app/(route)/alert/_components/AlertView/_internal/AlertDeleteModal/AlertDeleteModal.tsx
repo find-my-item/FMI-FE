@@ -3,6 +3,7 @@ import ModalLayout from "@/components/common/Modal/_internal/ModalLayout";
 
 interface AlertDeleteModalProps {
   isOpen: boolean;
+  disabled: boolean;
   onClose: () => void;
   onConfirm: () => void;
   onCancel: () => void;
@@ -13,7 +14,13 @@ const BUTTON_STYLE_CANCEL =
   "bg-white text-neutral-normal-default border border-neutral-normal-default";
 const BUTTON_STYLE_CONFIRM = "bg-fill-brand-strong-default text-white";
 
-const AlertDeleteModal = ({ isOpen, onClose, onConfirm, onCancel }: AlertDeleteModalProps) => {
+const AlertDeleteModal = ({
+  isOpen,
+  disabled,
+  onClose,
+  onConfirm,
+  onCancel,
+}: AlertDeleteModalProps) => {
   const buttons = [
     {
       key: "cancel",
@@ -30,9 +37,9 @@ const AlertDeleteModal = ({ isOpen, onClose, onConfirm, onCancel }: AlertDeleteM
   ] as const;
 
   return (
-    <ModalLayout isOpen={isOpen} onClose={onClose} className={cn("gap-[24px] p-6 flex-col-center")}>
-      <div className="gap-[16px] flex-col-center">
-        <div className="gap-[4px] text-center flex-col-center">
+    <ModalLayout isOpen={isOpen} onClose={onClose} className={cn("gap-6 p-6 flex-col-center")}>
+      <div className="gap-4 flex-col-center">
+        <div className="gap-1 text-center flex-col-center">
           <div className="text-h3-semibold text-layout-header-default">
             정말로 알림을 삭제하시겠어요?
           </div>
@@ -43,14 +50,15 @@ const AlertDeleteModal = ({ isOpen, onClose, onConfirm, onCancel }: AlertDeleteM
       </div>
 
       <div className="w-full gap-2 flex-center">
-        {buttons.map((b) => (
+        {buttons.map(({ key, label, onClick, style }) => (
           <button
-            key={b.key}
+            key={key}
+            disabled={disabled && key === "confirm"}
             type="button"
-            onClick={b.onClick}
-            className={cn(BUTTON_STYLE, b.style)}
+            onClick={onClick}
+            className={cn(BUTTON_STYLE, style)}
           >
-            {b.label}
+            {label}
           </button>
         ))}
       </div>
