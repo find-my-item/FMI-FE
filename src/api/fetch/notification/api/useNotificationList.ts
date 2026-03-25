@@ -4,7 +4,6 @@ import { NotificationListResponse, NotificationListItem } from "../types/notific
 import { useSearchParams } from "next/navigation";
 import { useNotificationStore } from "@/store";
 import { useEffect } from "react";
-import type { NotificationType } from "../types/notificationSSETypes";
 
 const useNotificationList = () => {
   const searchParams = useSearchParams();
