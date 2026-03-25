@@ -1,26 +1,27 @@
 "use client";
 
 import { ToggleButton } from "@/components/common";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { NOTIFICATION_CONFIG } from "../../_constants/NOTIFICATION_ITEM";
 import NotificationSettingItem from "../NotificationSettingItem/NotificationSettingItem";
 import { useGetNotificationSetting } from "@/api/fetch/notification";
 import { LoadingState } from "@/components/state";
+// import usePutNotificationSetting from "@/api/fetch/notification/api/usePutNotificationSetting";
+// import { NotificationSettingType } from "../../_types/NotificationType";
+import { useToggleClick } from "../../_hooks/useToggleClick";
+import { DEFAULT_NOTIFICATION_SETTING } from "../../_constants/DEFAULT_NOTIFICATION_SETTING";
 
 const NotificationSettingList = () => {
-  const { data: notificationData, isSuccess, isError, isLoading } = useGetNotificationSetting();
+  const { data: notificationData, isLoading } = useGetNotificationSetting();
 
-  const [isBrowserOn, setIsBrowserOn] = useState(false);
-  const [isMarketingOn, setIsMarketingOn] = useState(false);
+  // const [isBrowserOn, setIsBrowserOn] = useState(false);
+  // const [isMarketingOn, setIsMarketingOn] = useState(false);
 
-  useEffect(() => {
-    if (isSuccess && notificationData?.result) {
-      setIsBrowserOn(notificationData.result.browserNotificationEnabled);
-      setIsMarketingOn(notificationData.result.marketingConsent);
-    }
-  }, [isSuccess, notificationData]);
+  const { handleToggle } = useToggleClick(notificationData?.result);
 
   if (isLoading) return <LoadingState />;
+
+  const toggleState = notificationData?.result ?? DEFAULT_NOTIFICATION_SETTING;
 
   return (
     <ul className="w-full py-4">
@@ -29,8 +30,8 @@ const NotificationSettingList = () => {
           <h3 className="text-h3-semibold text-neutral-normal-default">알림 설정</h3>
           <ToggleButton
             ariaLabel="전체 알림 설정"
-            toggleState={isBrowserOn}
-            onClick={() => setIsBrowserOn((prev) => !prev)}
+            toggleState={toggleState?.browserNotificationEnabled ?? false}
+            onClick={() => handleToggle("browserNotificationEnabled")}
           />
         </div>
       </li>
@@ -38,13 +39,14 @@ const NotificationSettingList = () => {
       <div className="mb-4 flex flex-col gap-[2px]">
         {NOTIFICATION_CONFIG.map((item) => {
           const isCategorySelector = item.value === "enabledCategories";
-
+          const currentState = toggleState[item.value];
           return (
             <NotificationSettingItem
               key={item.value}
               item={item}
-              browserNotification={isBrowserOn}
-              isOn={!isCategorySelector ? (notificationData?.result[item.value] as boolean) : false}
+              browserNotification={toggleState?.browserNotificationEnabled ?? false}
+              isOn={isCategorySelector ? false : (currentState as boolean)}
+              notificationStatus={toggleState}
               categoryOn={notificationData?.result["enabledCategories"]}
             />
           );
@@ -57,8 +59,8 @@ const NotificationSettingList = () => {
 
           <ToggleButton
             ariaLabel="마케팅 수신 동의"
-            toggleState={isMarketingOn}
-            onClick={() => setIsMarketingOn((prev) => !prev)}
+            toggleState={toggleState?.marketingConsent ?? false}
+            onClick={() => handleToggle("marketingConsent")}
           />
         </div>
       </li>

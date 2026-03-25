@@ -1,6 +1,9 @@
-import { NotificationLabelType, NotificationType } from "../_types/NotificationType";
+import { NotificationLabelType, NotificationSettingType } from "../_types/NotificationType";
 
-export const NOTIFICATION_CONFIG: { label: NotificationLabelType; value: NotificationType }[] = [
+export const NOTIFICATION_CONFIG: {
+  label: NotificationLabelType;
+  value: NotificationSettingType;
+}[] = [
   { label: "카테고리 키워드", value: "categoryEnabled" },
   { label: "카테고리 키워드 선택", value: "enabledCategories" },
   { label: "채팅", value: "chatEnabled" },

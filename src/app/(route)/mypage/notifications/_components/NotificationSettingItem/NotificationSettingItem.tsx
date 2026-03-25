@@ -1,31 +1,36 @@
 "use client";
 
 import { useState } from "react";
-import { NotificationLabelType, NotificationType } from "../../_types/NotificationType";
+import { NotificationLabelType, NotificationSettingType } from "../../_types/NotificationType";
 import { cn } from "@/utils";
 import { Icon, ToggleButton } from "@/components/common";
 import NotificationCategory from "../NotificationCategory/NotificationCategory";
-import { CategoryType } from "@/types";
+// import { CategoryType } from "@/types";
+import { NotificationSetting } from "@/api/fetch/notification";
+import { useToggleClick } from "../../_hooks/useToggleClick";
 
 interface NotificationSettingItem {
-  item: { label: NotificationLabelType; value: NotificationType };
+  item: { label: NotificationLabelType; value: NotificationSettingType };
   browserNotification: boolean;
-  isOn?: boolean;
-  categoryOn?: CategoryType[];
+  notificationStatus: NotificationSetting; // 전체 알림 상태
+  isOn: boolean; // 각 알림의 현재 상태
+  // categoryOn?: CategoryType[];
 }
 
 const NotificationSettingItem = ({
   item,
   browserNotification = false,
-  isOn = false,
-  categoryOn = [],
+  notificationStatus,
+  isOn,
+  // categoryOn,
 }: NotificationSettingItem) => {
   const { label, value } = item;
 
   const toggleAriaLabel = label + "토글";
-  const [isNotificationOn, setIsNotificationOn] = useState(isOn);
+  // const [isNotificationOn, setIsNotificationOn] = useState(isOn);
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
 
+  const { handleToggle } = useToggleClick(notificationStatus);
   return (
     <>
       <li className="w-full px-5 py-2">
@@ -51,8 +56,8 @@ const NotificationSettingItem = ({
               <ToggleButton
                 disabled={!browserNotification}
                 ariaLabel={toggleAriaLabel}
-                toggleState={isNotificationOn}
-                onClick={() => setIsNotificationOn((prev) => !prev)}
+                toggleState={isOn}
+                onClick={() => handleToggle(value)}
               />
             </>
           )}
@@ -62,7 +67,7 @@ const NotificationSettingItem = ({
       <NotificationCategory
         isBottomSheetOpen={isBottomSheetOpen}
         setIsBottomSheetOpen={setIsBottomSheetOpen}
-        categoryOn={categoryOn}
+        categoryOn={notificationStatus.enabledCategories}
       />
     </>
   );

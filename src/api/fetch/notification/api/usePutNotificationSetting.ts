@@ -1,13 +1,25 @@
 import useAppMutation from "@/api/_base/query/useAppMutation";
-import { PutNotificationSetting } from "../types/notificationSettingType";
+import {
+  notificationSettingRequest,
+  PutNotificationSetting,
+} from "../types/notificationSettingType";
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
+import { useToast } from "@/context/ToastContext";
+import { useQueryClient } from "@tanstack/react-query";
 
 const usePutNotificationSetting = () => {
-  return useAppMutation<PutNotificationSetting, PutNotificationSetting, ApiBaseResponseType<null>>(
-    "auth",
-    "/notifications/settings",
-    "put"
-  );
+  const { addToast } = useToast();
+  const queryClient = useQueryClient();
+
+  return useAppMutation<
+    notificationSettingRequest,
+    PutNotificationSetting,
+    ApiBaseResponseType<null>
+  >("auth", "/notifications/settings", "put", {
+    onSuccess: (response) =>
+      queryClient.invalidateQueries({ queryKey: ["/notifications/settings"] }),
+    onError: () => addToast("알림 설정 변경에 실패했어요", "warning"),
+  });
 };
 
 export default usePutNotificationSetting;

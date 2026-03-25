@@ -17,3 +17,16 @@ export interface NotificationSetting {
   browserNotificationEnabled: boolean;
   marketingConsent: boolean;
 }
+
+export interface notificationSettingRequest {
+  commentEnabled?: boolean;
+  chatEnabled?: boolean;
+  inquiryReplyEnabled?: boolean;
+  reportResultEnabled?: boolean;
+  favoriteEnabled?: boolean;
+  noticeEnabled?: boolean;
+  categoryEnabled?: boolean;
+  enabledCategories?: CategoryType[];
+  browserNotificationEnabled?: boolean;
+  marketingConsent?: boolean;
+}

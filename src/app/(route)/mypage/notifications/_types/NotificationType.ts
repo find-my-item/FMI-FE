@@ -10,7 +10,7 @@ export type NotificationLabelType =
   | "마케팅 수신 동의"
   | "알림 설정";
 
-export type NotificationType =
+export type NotificationSettingType =
   | "categoryEnabled"
   | "enabledCategories"
   | "chatEnabled"
