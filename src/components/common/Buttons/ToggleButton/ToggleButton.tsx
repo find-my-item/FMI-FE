@@ -47,11 +47,7 @@ const ToggleButton = ({
       aria-checked={finalToggleState}
       className={cn(
         "h-[30px] w-[64px] rounded-full p-1 transition-colors duration-200 disabled:bg-fill-neutralInversed-normal-disabled",
-        disabled
-          ? "bg-labelsVibrant-tertiary"
-          : finalToggleState
-            ? "bg-fill-brand-normal-default"
-            : "bg-labelsVibrant-tertiary"
+        disabled || !finalToggleState ? "bg-labelsVibrant-tertiary" : "bg-fill-brand-normal-default"
       )}
     >
       <span

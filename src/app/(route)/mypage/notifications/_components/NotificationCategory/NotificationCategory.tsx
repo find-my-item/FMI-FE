@@ -1,11 +1,11 @@
 "use client";
 
 import { PopupLayout } from "@/components/domain";
-import { CATEGORY_ITEM } from "../../_constants/NOTIFICATION_ITEM";
 import { Button, Filter } from "@/components/common";
 import { Dispatch, SetStateAction, useState } from "react";
 import { CategoryType } from "@/types";
 import usePutNotificationSetting from "@/api/fetch/notification/api/usePutNotificationSetting";
+import { CATEGORY_OPTIONS } from "@/constants";
 
 interface NotificationCategoryProps {
   isBottomSheetOpen: boolean;
@@ -22,7 +22,6 @@ const NotificationCategory = ({
   const { mutate: notificationMutate, isPending } = usePutNotificationSetting();
 
   const handleToClick = () => {
-    if (isPending) return;
     notificationMutate({ enabledCategories: selectedCategory });
     setIsBottomSheetOpen(false);
   };
@@ -38,7 +37,7 @@ const NotificationCategory = ({
       </div>
 
       <div className="mb-12 flex flex-wrap gap-2">
-        {CATEGORY_ITEM.map((item) => (
+        {CATEGORY_OPTIONS.map((item) => (
           <Filter
             key={item.value}
             ariaLabel={item.label}
@@ -56,7 +55,7 @@ const NotificationCategory = ({
         ))}
       </div>
 
-      <Button className="w-full" onClick={() => handleToClick()}>
+      <Button className="w-full" onClick={() => handleToClick()} disabled={isPending}>
         적용하기
       </Button>
     </PopupLayout>

@@ -24,13 +24,3 @@ export const NOTIFICATION = {
   categoryEnabled: { label: "카테고리 키워드" },
   enabledCategories: { label: "카테고리 키워드 선택" },
 };
-
-export const CATEGORY_ITEM = [
-  { label: "전자기기", value: "ELECTRONICS" },
-  { label: "지갑", value: "WALLET" },
-  { label: "신분증", value: "ID_CARD" },
-  { label: "귀금속", value: "JEWELRY" },
-  { label: "가방", value: "BAG" },
-  { label: "카드", value: "CARD" },
-  { label: "기타", value: "ETC" },
-] as const;
