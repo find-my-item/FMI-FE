@@ -1,21 +1,15 @@
 "use client";
 
 import { ToggleButton } from "@/components/common";
-import { useState } from "react";
 import { NOTIFICATION_CONFIG } from "../../_constants/NOTIFICATION_ITEM";
 import NotificationSettingItem from "../NotificationSettingItem/NotificationSettingItem";
 import { useGetNotificationSetting } from "@/api/fetch/notification";
 import { LoadingState } from "@/components/state";
-// import usePutNotificationSetting from "@/api/fetch/notification/api/usePutNotificationSetting";
-// import { NotificationSettingType } from "../../_types/NotificationType";
 import { useToggleClick } from "../../_hooks/useToggleClick";
 import { DEFAULT_NOTIFICATION_SETTING } from "../../_constants/DEFAULT_NOTIFICATION_SETTING";
 
 const NotificationSettingList = () => {
   const { data: notificationData, isLoading } = useGetNotificationSetting();
-
-  // const [isBrowserOn, setIsBrowserOn] = useState(false);
-  // const [isMarketingOn, setIsMarketingOn] = useState(false);
 
   const { handleToggle } = useToggleClick(notificationData?.result);
 
@@ -40,6 +34,7 @@ const NotificationSettingList = () => {
         {NOTIFICATION_CONFIG.map((item) => {
           const isCategorySelector = item.value === "enabledCategories";
           const currentState = toggleState[item.value];
+
           return (
             <NotificationSettingItem
               key={item.value}
@@ -47,7 +42,6 @@ const NotificationSettingList = () => {
               browserNotification={toggleState?.browserNotificationEnabled ?? false}
               isOn={isCategorySelector ? false : (currentState as boolean)}
               notificationStatus={toggleState}
-              categoryOn={notificationData?.result["enabledCategories"]}
             />
           );
         })}

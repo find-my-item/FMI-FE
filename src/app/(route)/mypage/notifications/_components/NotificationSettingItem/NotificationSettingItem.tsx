@@ -5,7 +5,6 @@ import { NotificationLabelType, NotificationSettingType } from "../../_types/Not
 import { cn } from "@/utils";
 import { Icon, ToggleButton } from "@/components/common";
 import NotificationCategory from "../NotificationCategory/NotificationCategory";
-// import { CategoryType } from "@/types";
 import { NotificationSetting } from "@/api/fetch/notification";
 import { useToggleClick } from "../../_hooks/useToggleClick";
 
@@ -14,7 +13,6 @@ interface NotificationSettingItem {
   browserNotification: boolean;
   notificationStatus: NotificationSetting; // 전체 알림 상태
   isOn: boolean; // 각 알림의 현재 상태
-  // categoryOn?: CategoryType[];
 }
 
 const NotificationSettingItem = ({
@@ -22,12 +20,10 @@ const NotificationSettingItem = ({
   browserNotification = false,
   notificationStatus,
   isOn,
-  // categoryOn,
 }: NotificationSettingItem) => {
   const { label, value } = item;
 
   const toggleAriaLabel = label + "토글";
-  // const [isNotificationOn, setIsNotificationOn] = useState(isOn);
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
 
   const { handleToggle } = useToggleClick(notificationStatus);
