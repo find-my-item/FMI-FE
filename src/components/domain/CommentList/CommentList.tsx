@@ -9,10 +9,6 @@ import { EmptyCommentUI, GuestCommentUI } from "./_internal";
 import { formatCappedNumber } from "@/utils";
 
 /**
- * 댓글 목록을 렌더링하는 컴포넌트입니다.
- *
- * !!현재 타입 에러를 방지하기 위해 타입 단언이 설정되어 있습니다. 공지사항 작업 후 제거 필요합니다.!!
- *
  * @author jikwon
  */
 
@@ -28,11 +24,11 @@ interface CommentListProps {
   /** 로그인 여부 */
   isLoggedIn?: boolean;
   /** 답글 조회 함수 */
-  useFetchReplies?: typeof useGetRepliesPostsComments;
+  useFetchReplies: typeof useGetRepliesPostsComments;
   /** 답글 삭제 함수 */
-  onDeleteComment?: (commentVariables: DeleteCommentVariables) => void;
+  onDeleteComment: (commentVariables: DeleteCommentVariables) => void;
   /** 답글 좋아요 함수 */
-  onFavoriteComment?: (commentId: number, isLike: boolean, queryKey: unknown[]) => void;
+  onFavoriteComment: (commentId: number, isLike: boolean, queryKey: unknown[]) => void;
   /** 댓글 페이지네이션 함수 */
   onCommentLoadMore?: () => void;
 }
@@ -74,9 +70,9 @@ const CommentList = ({
               data={comment}
               onSubmit={onSubmit}
               isPending={isPending}
-              useFetchReplies={useFetchReplies!}
-              onDeleteComment={onDeleteComment!}
-              onFavoriteComment={onFavoriteComment!}
+              useFetchReplies={useFetchReplies}
+              onDeleteComment={onDeleteComment}
+              onFavoriteComment={onFavoriteComment}
             />
           ))}
         </ul>
