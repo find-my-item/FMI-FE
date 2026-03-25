@@ -1,9 +1,8 @@
 import useAppQuery from "@/api/_base/query/useAppQuery";
-import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 import { GetNotificationSetting } from "../types/notificationSettingType";
 
 const useGetNotificationSetting = () => {
-  return useAppQuery<GetNotificationSetting, ApiBaseResponseType<null>>(
+  return useAppQuery<GetNotificationSetting, unknown>(
     "auth",
     ["/notifications/settings"],
     "/notifications/settings"
