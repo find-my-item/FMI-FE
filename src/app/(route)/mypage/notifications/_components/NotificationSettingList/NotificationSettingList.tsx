@@ -22,7 +22,7 @@ const NotificationSettingList = () => {
 
       handleToggle("browserNotificationEnabled");
     }
-  }, [toggleState?.browserNotificationEnabled]);
+  }, [toggleState?.browserNotificationEnabled, handleToggle]);
 
   if (isLoading) return <LoadingState />;
 
