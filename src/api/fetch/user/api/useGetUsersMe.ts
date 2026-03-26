@@ -9,6 +9,7 @@ export const useGetUsersMe = (hasToken = true) => {
     "/users/me",
     {
       enabled: hasToken,
+      staleTime: 1000 * 60,
     }
   );
 };

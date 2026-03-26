@@ -17,17 +17,26 @@ export default async function layout({ children }: { children: ReactNode }) {
   const queryClient = new QueryClient();
 
   const cookieStore = await cookies();
+  const hasToken = cookieStore.has("accessToken");
 
-  await useServerPrefetchQuery({
-    queryClient,
-    queryKey: ["users-me"],
-    fetcher: () =>
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/me`, {
-        headers: {
-          Cookie: cookieStore.toString(),
-        },
-        next: { revalidate: 0 },
-      }).then((res) => res.json()),
-  });
+  if (hasToken) {
+    try {
+      await useServerPrefetchQuery({
+        queryClient,
+        queryKey: ["users-me"],
+        fetcher: () =>
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/me`, {
+            headers: { Cookie: cookieStore.toString() },
+            next: { revalidate: 0 },
+          }).then((res) => {
+            if (!res.ok) throw new Error("Unauthorized");
+            return res.json();
+          }),
+      });
+    } catch (error) {
+      console.error("Server prefetch failed, passing to client");
+    }
+  }
+
   return <HydrationBoundary state={dehydrate(queryClient)}>{children}</HydrationBoundary>;
 }

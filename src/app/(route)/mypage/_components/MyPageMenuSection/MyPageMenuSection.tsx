@@ -5,8 +5,15 @@ import { Icon } from "@/components/common";
 import Link from "next/link";
 import { MYPAGE_MENU_LIST } from "../../_constants/MYPAGE_ROUTE_CONFIG";
 import useLogout from "@/hooks/useLogout/useLogout";
+import { cn } from "@/utils";
 
-const MyPageMenuSection = ({ isUserLogin }: { isUserLogin: boolean }) => {
+const MyPageMenuSection = ({
+  isUserLogin,
+  disabled,
+}: {
+  isUserLogin: boolean;
+  disabled?: boolean;
+}) => {
   const { handleLogout } = useLogout();
 
   return MYPAGE_MENU_LIST.map((menu) => (
@@ -18,7 +25,10 @@ const MyPageMenuSection = ({ isUserLogin }: { isUserLogin: boolean }) => {
           <Fragment key={item.pageName}>
             <Link
               href={item.pageLink}
-              className="flex w-full justify-between py-[10px] text-body1-semibold text-neutral-strong-default"
+              className={cn(
+                "flex w-full justify-between py-[10px] text-body1-semibold text-neutral-strong-default",
+                disabled && "pointer-events-none"
+              )}
             >
               {item.pageName}
               <Icon name="ArrowRightSmall" size={24} className="text-neutral-strong-default" />
@@ -32,6 +42,7 @@ const MyPageMenuSection = ({ isUserLogin }: { isUserLogin: boolean }) => {
           <button
             className="mt-[6px] flex w-full py-[10px] text-body1-semibold text-neutral-strong-default"
             onClick={handleLogout}
+            disabled={disabled}
           >
             로그아웃
           </button>
