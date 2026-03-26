@@ -41,7 +41,8 @@ const CategorySection = () => {
       <CategoryPopup
         isOpen={categoryPopupOpen}
         onClose={() => setCategoryPopupOpen(false)}
-        onSelect={onSelectCategory}
+        onSelect={(category) => onSelectCategory(category as CategoryType)}
+        defaultSelected={category || undefined}
       />
     </>
   );
