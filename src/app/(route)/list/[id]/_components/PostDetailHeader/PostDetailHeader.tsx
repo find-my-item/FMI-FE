@@ -29,7 +29,11 @@ const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
           "tablet:flex-row tablet:items-center tablet:justify-between"
         )}
       >
-        <div className={cn("flex items-center justify-start gap-[14px]", "tablet:w-[461px]")}>
+        <Link
+          href={`/user/${userData.userId}`}
+          aria-label={`${userData.nickName} 프로필 보기`}
+          className={cn("flex items-center justify-start gap-[14px]", "tablet:w-[461px]")}
+        >
           <ProfileAvatar
             size={40}
             src={userData.profileImage}
@@ -37,11 +41,7 @@ const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
             priority={true}
           />
 
-          <Link
-            href={`/user/${userData.userId}`}
-            aria-label={`${userData.nickName} 프로필 보기`}
-            className="flex flex-col items-start justify-center"
-          >
+          <div className="flex flex-col items-start justify-center">
             <p className="text-body1-medium text-layout-header-default">{userData.nickName}</p>
             <div className="text-body2-regular text-layout-body-default">
               <span className="after:mx-2 after:inline-block after:content-['·']">
@@ -49,8 +49,8 @@ const PostDetailHeader = ({ headerData }: PostDetailHeaderType) => {
               </span>
               <span>현재 채팅 {formatCappedNumber(userData.chattingCount)}</span>
             </div>
-          </Link>
-        </div>
+          </div>
+        </Link>
 
         <Button
           as={Link}

@@ -134,7 +134,7 @@ const InputText = ({
       />
 
       <div className="flex w-full flex-row gap-2">
-        <div className="relative flex w-full flex-row">
+        <div className="relative flex flex-1 flex-row">
           <input
             id={name}
             {...register(name, validation)}

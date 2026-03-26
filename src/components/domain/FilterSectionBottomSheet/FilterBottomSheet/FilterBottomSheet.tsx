@@ -141,14 +141,16 @@ const FilterBottomSheet = ({
                 value={filters.region}
                 onChange={(e) => setFilters((prev) => ({ ...prev, region: e.target.value }))}
               />
-              <button
-                type="button"
-                onClick={() => setFilters((prev) => ({ ...prev, region: "" }))}
-                className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-[#787878] p-1"
-                aria-label="지역 검색어 지우기"
-              >
-                <Icon name="Delete" size={9} />
-              </button>
+              {filters.region.trim().length >= 2 && (
+                <button
+                  type="button"
+                  onClick={() => setFilters((prev) => ({ ...prev, region: "" }))}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-[#787878] p-1"
+                  aria-label="지역 검색어 지우기"
+                >
+                  <Icon name="Delete" size={9} />
+                </button>
+              )}
             </div>
 
             <ul className="h-[230px] w-full overflow-y-auto">

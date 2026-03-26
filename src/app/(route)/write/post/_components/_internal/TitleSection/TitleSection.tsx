@@ -14,6 +14,7 @@ const TitleSection = () => {
           type="text"
           id="title"
           placeholder="제목을 입력해 주세요."
+          maxLength={50}
           className="peer w-full bg-transparent text-body1-medium text-neutral-normal-default placeholder-transparent outline-none placeholder:text-flatGray-400"
           {...register("title", {
             required: "제목을 입력해 주세요.",

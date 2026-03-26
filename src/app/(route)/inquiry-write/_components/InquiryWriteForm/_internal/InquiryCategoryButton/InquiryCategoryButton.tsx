@@ -50,6 +50,7 @@ const InquiryCategoryButton = () => {
         onClose={() => setCategoryPopupOpen(false)}
         onSelect={(category) => handleSelectCategory(category as InquiryTargetType)}
         mode="inquiry"
+        defaultSelected={category}
       />
     </div>
   );

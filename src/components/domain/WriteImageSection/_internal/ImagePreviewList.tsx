@@ -1,9 +1,23 @@
 "use client";
 
-import { useRef, type DragEvent } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { Icon } from "@/components/common";
 import { cn } from "@/utils";
+import {
+  DndContext,
+  closestCenter,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  DragEndEvent,
+  DragStartEvent,
+  DragOverlay,
+  defaultDropAnimationSideEffects,
+} from "@dnd-kit/core";
+import { SortableContext, horizontalListSortingStrategy, useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import { restrictToWindowEdges } from "@dnd-kit/modifiers";
 
 interface ImagePreviewListProps {
   images: { id: string; previewUrl: string }[];
@@ -11,83 +25,168 @@ interface ImagePreviewListProps {
   onMove: (from: number, to: number) => void;
 }
 
-const ImagePreviewList = ({ images, onRemove, onMove }: ImagePreviewListProps) => {
-  const dragFromIndexRef = useRef<number | null>(null);
+interface ImageItemProps {
+  image: { id: string; previewUrl: string };
+  index: number;
+  onRemove?: (index: number) => void;
+  isDragging?: boolean;
+  isOverlay?: boolean;
+}
 
-  const reorderImages = (from: number, to: number) => {
-    if (from === to) return;
-    if (from < 0 || to < 0 || from >= images.length || to >= images.length) return;
-    onMove(from, to);
-  };
+const ImageItemUI = ({ image, index, onRemove, isDragging, isOverlay }: ImageItemProps) => {
+  return (
+    <div
+      className={cn(
+        "relative shrink-0 touch-none",
+        isOverlay ? "cursor-grabbing" : "cursor-grab active:cursor-grabbing",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+        isDragging && !isOverlay ? "opacity-30" : "opacity-100"
+      )}
+    >
+      <Image
+        src={image.previewUrl}
+        alt=""
+        width={104}
+        height={104}
+        quality={100}
+        draggable={false}
+        className={cn(
+          "pointer-events-none size-[104px] select-none rounded-[10px] object-cover",
+          isOverlay && "scale-105 opacity-90 shadow-lg transition-transform"
+        )}
+      />
+      {index === 0 && (
+        <span
+          className={cn(
+            "absolute left-0 top-0 rounded-tl-[10px] pb-[3px] pl-[9px] pr-2 pt-[5px]",
+            "pointer-events-none bg-flatGreen-500 text-caption1-semibold text-white"
+          )}
+        >
+          대표
+        </span>
+      )}
+      {onRemove && !isOverlay && (
+        <button
+          type="button"
+          aria-label="이미지 삭제"
+          onPointerDown={(e) => e.stopPropagation()}
+          onClick={(e) => {
+            e.stopPropagation();
+            onRemove(index);
+          }}
+          className="absolute right-1.5 top-1.5 z-10 rounded-full border border-divider-default bg-[#5D5D5D] p-[5px]"
+        >
+          <Icon name="Delete" size={10} />
+        </button>
+      )}
+    </div>
+  );
+};
 
-  const handleImageDrop = (e: DragEvent<HTMLDivElement>, to: number) => {
-    e.preventDefault();
+interface SortableImageItemProps {
+  id: string;
+  index: number;
+  image: { id: string; previewUrl: string };
+  onRemove: (index: number) => void;
+}
 
-    const from = dragFromIndexRef.current ?? Number(e.dataTransfer.getData("text/plain"));
-    if (Number.isNaN(from)) return;
+const SortableImageItem = ({ id, index, image, onRemove }: SortableImageItemProps) => {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id,
+  });
 
-    reorderImages(from, to);
-    dragFromIndexRef.current = null;
+  const style = {
+    transform: CSS.Translate.toString(transform),
+    transition,
+    zIndex: isDragging ? 1 : 0,
   };
 
   return (
-    <div role="list" aria-label="이미지 미리보기 목록" className="flex gap-2">
-      {images.map((image, index) => (
-        <div
-          key={image.id}
-          className={cn(
-            "relative shrink-0",
-            "cursor-grab active:cursor-grabbing",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-          )}
-          role="listitem"
-          aria-label={`이미지 ${index + 1} 드래그로 순서 변경`}
-          tabIndex={0}
-          draggable
-          onDragStart={(e) => {
-            dragFromIndexRef.current = index;
-            e.dataTransfer.effectAllowed = "move";
-            e.dataTransfer.setData("text/plain", String(index));
-          }}
-          onDragOver={(e) => {
-            e.preventDefault();
-            e.dataTransfer.dropEffect = "move";
-          }}
-          onDrop={(e) => handleImageDrop(e, index)}
-          onDragEnd={() => {
-            dragFromIndexRef.current = null;
+    <div
+      ref={setNodeRef}
+      style={style}
+      className="shrink-0"
+      aria-label={`이미지 ${index + 1} 드래그로 순서 변경`}
+      {...attributes}
+      {...listeners}
+    >
+      <ImageItemUI image={image} index={index} onRemove={onRemove} isDragging={isDragging} />
+    </div>
+  );
+};
+
+const ImagePreviewList = ({ images, onRemove, onMove }: ImagePreviewListProps) => {
+  const [activeId, setActiveId] = useState<string | null>(null);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 5,
+      },
+    })
+  );
+
+  const handleDragStart = (event: DragStartEvent) => {
+    setActiveId(event.active.id as string);
+  };
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    setActiveId(null);
+    const { active, over } = event;
+
+    if (over && active.id !== over.id) {
+      const oldIndex = images.findIndex((img) => img.id === active.id);
+      const newIndex = images.findIndex((img) => img.id === over.id);
+      onMove(oldIndex, newIndex);
+    }
+  };
+
+  const handleDragCancel = () => {
+    setActiveId(null);
+  };
+
+  const activeIndex = images.findIndex((img) => img.id === activeId);
+  const activeImage = activeIndex !== -1 ? images[activeIndex] : null;
+
+  return (
+    <DndContext
+      sensors={sensors}
+      collisionDetection={closestCenter}
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+      onDragCancel={handleDragCancel}
+      modifiers={[restrictToWindowEdges]}
+    >
+      <SortableContext items={images.map((img) => img.id)} strategy={horizontalListSortingStrategy}>
+        <div role="list" aria-label="이미지 미리보기 목록" className="relative flex shrink-0 gap-2">
+          {images.map((image, index) => (
+            <SortableImageItem
+              key={image.id}
+              id={image.id}
+              index={index}
+              image={image}
+              onRemove={onRemove}
+            />
+          ))}
+        </div>
+      </SortableContext>
+
+      {typeof document !== "undefined" && (
+        <DragOverlay
+          dropAnimation={{
+            sideEffects: defaultDropAnimationSideEffects({
+              styles: {
+                active: {
+                  opacity: "0.5",
+                },
+              },
+            }),
           }}
         >
-          <Image
-            src={image.previewUrl}
-            alt=""
-            width={104}
-            height={104}
-            quality={100}
-            draggable={false}
-            className="size-[104px] select-none rounded-[10px] object-cover"
-          />
-          {index === 0 && (
-            <span
-              className={cn(
-                "absolute left-0 top-0 rounded-tl-[10px] pb-[3px] pl-[9px] pr-2 pt-[5px]",
-                "bg-flatGreen-500 text-caption1-semibold text-white"
-              )}
-            >
-              대표
-            </span>
-          )}
-          <button
-            type="button"
-            aria-label="이미지 삭제"
-            onClick={() => onRemove(index)}
-            className="absolute right-1.5 top-1.5 rounded-full border border-divider-default bg-[#5D5D5D] p-[5px]"
-          >
-            <Icon name="Delete" size={10} />
-          </button>
-        </div>
-      ))}
-    </div>
+          {activeImage ? <ImageItemUI image={activeImage} index={activeIndex} isOverlay /> : null}
+        </DragOverlay>
+      )}
+    </DndContext>
   );
 };
 
