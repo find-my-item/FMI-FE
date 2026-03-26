@@ -14,7 +14,7 @@ const MyPageMenuSection = ({
   isUserLogin: boolean;
   disabled?: boolean;
 }) => {
-  const { handleLogout } = useLogout();
+  const { handleLogout, isPending } = useLogout();
 
   return MYPAGE_MENU_LIST.map((menu) => (
     <Fragment key={menu.title}>
@@ -42,7 +42,7 @@ const MyPageMenuSection = ({
           <button
             className="mt-[6px] flex w-full py-[10px] text-body1-semibold text-neutral-strong-default"
             onClick={handleLogout}
-            disabled={disabled}
+            disabled={disabled || isPending}
           >
             로그아웃
           </button>
