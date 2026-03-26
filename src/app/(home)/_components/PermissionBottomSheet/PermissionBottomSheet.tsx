@@ -3,7 +3,7 @@ import { Button, Icon } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
 import { useToast } from "@/context/ToastContext";
 import { useState } from "react";
-import { ITEM, PERMISSION_CONFIG } from "../../_constants/PERMISSION_CONFIG";
+import { PERMISSION_CONFIG, PERMISSION_ITEM } from "../../_constants/PERMISSION_CONFIG";
 
 interface DetailPermissionSheetProps {
   isOpen: boolean;
@@ -134,7 +134,7 @@ const PermissionSheet = ({ isOpen, onClose }: PermissionSheetProps) => {
         </h3>
 
         <div className="flex w-full flex-col gap-6 rounded-[20px] p-5 bg-fill-neutral-subtle-default">
-          {ITEM.map((item) => (
+          {PERMISSION_ITEM.map((item) => (
             <div className="flex w-full gap-[18px]">
               <Icon name={item.iconName} size={44} />
               <div className="flex flex-col gap-[2px]">

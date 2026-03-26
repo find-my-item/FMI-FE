@@ -1,4 +1,4 @@
-export const ITEM = [
+export const PERMISSION_ITEM = [
   {
     iconName: "Marker" as const,
     title: "위치 (선택)",
