@@ -11,6 +11,7 @@ import { formatDate } from "@/utils";
 import Link from "next/link";
 import { useEffect } from "react";
 import { INQUIRY_STATUS_CHIP } from "../../_constants/INQUIRY_STATUS_CHIP";
+import { useSearchParams } from "next/navigation";
 
 interface MypageInquiryItemProps {
   inquiries: InquiryItemType;
@@ -45,6 +46,9 @@ const MypageInquiryItem = ({ inquiries }: MypageInquiryItemProps) => {
 const MypageInquiriesContent = () => {
   const { inquiryStatus } = useFilterParams();
 
+  const searchParams = useSearchParams();
+  const keyword = searchParams.get("keyword") ?? undefined;
+
   const {
     data: inquiriesData,
     isLoading,
@@ -54,6 +58,7 @@ const MypageInquiriesContent = () => {
     isFetchingNextPage,
   } = useGetUserInquiries({
     status: inquiryStatus,
+    keyword,
   });
 
   const { addToast } = useToast();
