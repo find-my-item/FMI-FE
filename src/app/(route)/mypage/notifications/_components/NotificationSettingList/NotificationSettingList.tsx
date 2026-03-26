@@ -18,8 +18,6 @@ const NotificationSettingList = () => {
 
   useEffect(() => {
     if (toggleState?.browserNotificationEnabled && Notification.permission === "denied") {
-      console.warn("브라우저 권한이 거부된 상태입니다.");
-
       handleToggle("browserNotificationEnabled");
     }
   }, [toggleState?.browserNotificationEnabled, handleToggle]);

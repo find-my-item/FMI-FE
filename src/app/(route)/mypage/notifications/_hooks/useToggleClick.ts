@@ -17,7 +17,7 @@ export const useToggleClick = (notificationData?: NotificationSetting) => {
 
       if (settingName === "browserNotificationEnabled" && nextState === true) {
         if (!("Notification" in window)) {
-          alert("이 브라우저는 알림 기능을 지원하지 않습니다.");
+          addToast("이 브라우저는 알림 기능을 지원하지 않아요", "warning");
           return;
         }
 
