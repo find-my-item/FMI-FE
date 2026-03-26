@@ -12,7 +12,7 @@ const DefaultListView = () => {
   const isDefaultMode = searchMode === "default";
 
   return (
-    <>
+    <div className="h-base">
       <DetailHeader title={SEARCH_HEADER_TITLE[searchMode]}>
         {isDefaultMode && (
           <HeaderSearch
@@ -27,7 +27,7 @@ const DefaultListView = () => {
       ) : (
         <DefaultListSearch />
       )}
-    </>
+    </div>
   );
 };
 

@@ -17,7 +17,7 @@ const PostListItem = ({ post, linkState = "list", keyword }: PostListItemProps) 
     {
       icon: "Star",
       count: post.favoriteCount,
-      iconColor: "text-labelsVibrant-quaternary",
+      iconColor: post.favoriteStatus ? "text-system-bookmark" : "text-labelsVibrant-quaternary",
     },
     {
       icon: "Eye",

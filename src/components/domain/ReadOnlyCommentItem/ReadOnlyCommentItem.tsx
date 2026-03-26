@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { cn, formatDate } from "@/utils";
-import { ProfileAvatar } from "@/components/common";
+import { ProfileAvatar, Chip } from "@/components/common";
 import { ReadOnlyCommentItemProps } from "@/types";
 
 /**
@@ -38,13 +38,16 @@ const ReadOnlyCommentItem = ({
         <div className="flex items-center gap-[14px]">
           <ProfileAvatar src={userImageUrl} alt={userName} size={30} />
           <div className="flex flex-col gap-[2px]">
-            <p className="text-body1-medium text-layout-header-default">{userName}</p>
+            <div className="flex items-center gap-[6px]">
+              {isAdmin && <Chip label="관리자" type="admin" />}
+              <p className="text-body1-medium text-layout-header-default">{userName}</p>
+            </div>
             <time dateTime={createdAt} className="text-body2-regular text-layout-body-default">
               {formatDate(createdAt)}
             </time>
           </div>
         </div>
-        <p className="whitespace-pre-wrap text-body1-regular text-layout-header-default">
+        <p className="whitespace-pre-wrap break-words text-body1-regular text-layout-header-default">
           {content}
         </p>
         {images && images.length > 0 && (

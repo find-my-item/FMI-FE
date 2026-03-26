@@ -37,7 +37,7 @@ const BetaTestMypageBanner = () => {
           height={76}
           draggable={false}
           priority
-          className="relative"
+          className="relative h-[76px] w-[105px] shrink-0"
         />
       </section>
     </Link>

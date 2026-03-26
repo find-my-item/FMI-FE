@@ -148,10 +148,12 @@ export const applyFiltersToUrl = <T extends object>({
     const transformer = FILTER_TRANSFORMERS[stringKey];
     const transformedValue = transformer ? transformer(value) : (value as string | undefined);
 
+    const queryKey = stringKey === "findStatus" ? "find-status" : stringKey;
+
     if (!transformedValue) {
-      params.delete(stringKey);
+      params.delete(queryKey);
     } else {
-      params.set(stringKey, transformedValue);
+      params.set(queryKey, transformedValue);
     }
   });
 

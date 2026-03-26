@@ -12,7 +12,7 @@ interface UseGetPostsParams {
   address?: string;
   size?: number;
   postType?: PostType;
-  postStatus?: ItemStatus;
+  postStatus?: ItemStatus | "";
   category?: string;
   sortType?: SortFilterValue;
 }
@@ -21,7 +21,7 @@ export const useGetPosts = ({
   address,
   size = 10,
   postType,
-  postStatus = "SEARCHING",
+  postStatus = "",
   category,
   sortType = "LATEST",
 }: UseGetPostsParams) => {
