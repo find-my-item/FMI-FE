@@ -6,6 +6,6 @@ interface PermissionState {
 }
 
 export const usePermissionStore = create<PermissionState>((set) => ({
-  isFirstSignUp: true,
+  isFirstSignUp: false,
   setFirstSignUp: (value) => set({ isFirstSignUp: value }),
 }));
