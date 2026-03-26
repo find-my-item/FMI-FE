@@ -16,13 +16,13 @@ interface DefaultListProps {
 }
 
 const DefaultListSection = ({ searchUpdateQuery }: DefaultListProps) => {
-  const { type, region, category, sort, status } = useFilterParams();
+  const { type, region, category, sort, findStatus } = useFilterParams();
   const normalizedType = type?.toLowerCase();
   const selectedType = (normalizedType ?? "lost") as "lost" | "found";
   const postType: PostType = selectedType === "found" ? "FOUND" : "LOST";
 
   const postStatus: ItemStatus | undefined =
-    status && status.trim() !== "" ? (status as ItemStatus) : undefined;
+    findStatus && findStatus.trim() !== "" ? (findStatus as ItemStatus) : undefined;
 
   const {
     data: listData,

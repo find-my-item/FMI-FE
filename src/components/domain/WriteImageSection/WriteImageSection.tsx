@@ -61,7 +61,7 @@ const WriteImageSection = ({ helpText = DEFAULT_HELP_TEXT }: { helpText?: string
   };
 
   return (
-    <section className="flex flex-col items-start justify-center gap-4 border-b border-flatGray-50 px-5 py-6">
+    <section className="flex w-full flex-col justify-center gap-4 overflow-hidden border-b border-flatGray-50 px-5 py-6">
       <input
         type="file"
         accept="image/png, image/jpeg, image/jpg"
@@ -71,7 +71,7 @@ const WriteImageSection = ({ helpText = DEFAULT_HELP_TEXT }: { helpText?: string
         onChange={handleImageChange}
       />
 
-      <div className="hide-scrollbar flex flex-nowrap items-center gap-4 overflow-x-scroll">
+      <div className="hide-scrollbar flex w-full max-w-full flex-nowrap items-center gap-4 overflow-x-scroll">
         <button
           type="button"
           aria-label="이미지 업로드"

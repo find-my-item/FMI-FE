@@ -60,29 +60,29 @@ const ConfirmModal = ({
     <ModalLayout
       isOpen={isOpen}
       onClose={onClose}
-      className={cn("gap-[24px] p-6 flex-col-center", sizeMap[size])}
+      className={cn("gap-6 p-6 flex-col-center", sizeMap[size])}
     >
-      <div className="gap-[16px] flex-col-center">
+      <div className="gap-4 flex-col-center">
         {icon && (
-          <div className="h-[48px] w-[48px] rounded-full bg-fill-neutralInversed-normal-enteredSelected flex-center">
+          <div className="size-12 rounded-full bg-fill-neutralInversed-normal-enteredSelected flex-center">
             <Icon name={icon.name} size={icon.size} title={icon.title} className="text-white" />
           </div>
         )}
-        <div className="gap-[4px] text-center flex-col-center">
+        <div className="gap-1 text-center flex-col-center">
           <div className="text-h3-semibold text-layout-header-default">{title}</div>
           <div className="text-body2-regular text-layout-body-default">{content}</div>
         </div>
       </div>
 
       <div className="w-full gap-2 flex-center">
-        {buttons.map((b) => (
+        {buttons.map(({ key, label, onClick, className }) => (
           <button
-            key={b.key}
+            key={key}
             type="button"
-            className={cn(style.baseBtn, b.className)}
-            onClick={b.onClick}
+            className={cn(style.baseBtn, className)}
+            onClick={onClick}
           >
-            {b.label}
+            {label}
           </button>
         ))}
       </div>

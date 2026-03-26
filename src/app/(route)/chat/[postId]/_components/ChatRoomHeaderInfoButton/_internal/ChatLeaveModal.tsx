@@ -46,15 +46,15 @@ const ChatLeaveModal = ({ isOpen, onClose, onConfirm, onCancel }: ChatLeaveModal
       </div>
 
       <div className="w-full gap-2 flex-center">
-        {buttons.map((b) => (
+        {buttons.map(({ key, label, onClick, style }) => (
           <button
-            key={b.key}
+            key={key}
             type="button"
-            onClick={b.onClick}
-            data-testid={b.key === "confirm" ? "modal-confirm" : "modal-cancel"}
-            className={cn(BUTTON_STYLE, b.style)}
+            onClick={onClick}
+            data-testid={key === "confirm" ? "modal-confirm" : "modal-cancel"}
+            className={cn(BUTTON_STYLE, style)}
           >
-            {b.label}
+            {label}
           </button>
         ))}
       </div>

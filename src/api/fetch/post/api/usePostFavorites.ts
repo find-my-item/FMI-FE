@@ -57,6 +57,7 @@ export const usePostFavorites = (id: number) => {
       },
       onSettled: () => {
         queryClient.invalidateQueries({ queryKey });
+        queryClient.invalidateQueries({ queryKey: ["posts"] });
       },
     }
   );
