@@ -7,9 +7,14 @@ import { useToast } from "@/context/ToastContext";
 import { CommentCard, MypageEmptyUI } from "@/components/domain";
 import { useInfiniteScroll } from "@/hooks";
 import { useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 
 const MypageCommentsContent = () => {
   const { startDate, endDate, simpleSort } = useFilterParams();
+
+  const searchParams = useSearchParams();
+  const keyword = searchParams.get("keyword") ?? undefined;
+
   const {
     data: commentsData,
     isLoading,
@@ -21,6 +26,7 @@ const MypageCommentsContent = () => {
     startDate: startDate,
     endDate: endDate,
     sort: simpleSort,
+    keyword,
   });
 
   const { addToast } = useToast();

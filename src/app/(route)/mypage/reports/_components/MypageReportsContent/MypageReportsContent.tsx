@@ -11,6 +11,7 @@ import { formatDate } from "@/utils";
 import Link from "next/link";
 import { useEffect } from "react";
 import { REPORT_STATUS_CHIP } from "../../_constants/REPORT_STATUS_CHIP";
+import { useSearchParams } from "next/navigation";
 
 interface MypageReportsItemProps {
   reports: ReportItemType;
@@ -42,6 +43,9 @@ const MypageReportsItem = ({ reports }: MypageReportsItemProps) => {
 const MypageReportsContent = () => {
   const { reportStatus } = useFilterParams();
 
+  const searchParams = useSearchParams();
+  const keyword = searchParams.get("keyword") ?? undefined;
+
   const {
     data: reportsData,
     isLoading,
@@ -51,6 +55,7 @@ const MypageReportsContent = () => {
     isFetchingNextPage,
   } = useGetUserReports({
     status: reportStatus,
+    keyword,
   });
 
   const { addToast } = useToast();

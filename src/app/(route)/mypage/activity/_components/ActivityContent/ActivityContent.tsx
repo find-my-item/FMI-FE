@@ -11,6 +11,7 @@ import { useToast } from "@/context/ToastContext";
 import { useFilterParams } from "@/hooks/domain";
 import { useInfiniteScroll } from "@/hooks";
 import { useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 
 interface ActivityItemProps {
   activityItem: ActivityEachItemType;
@@ -68,6 +69,10 @@ const ActivityGroupItem = ({ activityItem }: ActivityGroupItemProps) => {
 
 const ActivityContent = () => {
   const { startDate, endDate, activity } = useFilterParams();
+
+  const searchParams = useSearchParams();
+  const keyword = searchParams.get("keyword") ?? undefined;
+
   const {
     data: activityData,
     isLoading,
@@ -79,6 +84,7 @@ const ActivityContent = () => {
     type: activity,
     startDate,
     endDate,
+    keyword,
   });
 
   const { addToast } = useToast();

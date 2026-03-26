@@ -5,10 +5,14 @@ import { LoadingState } from "@/components/state";
 import { useToast } from "@/context/ToastContext";
 import { useInfiniteScroll } from "@/hooks";
 import { MypageEmptyUI, PostListItem } from "@/components/domain";
+import { useSearchParams } from "next/navigation";
 
 const MypageFavoritesContent = () => {
   const { addToast } = useToast();
   const { region, status, category, sort } = useFilterParams();
+
+  const searchParams = useSearchParams();
+  const keyword = searchParams.get("keyword") ?? undefined;
 
   const {
     data: favoritesData,
@@ -22,6 +26,7 @@ const MypageFavoritesContent = () => {
     postType: status as StatusFilterValue,
     category: category,
     sortType: sort ?? "LATEST",
+    keyword,
   });
 
   const { ref } = useInfiniteScroll({

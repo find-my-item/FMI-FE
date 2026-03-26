@@ -10,7 +10,7 @@ const page = () => {
       <DetailHeader title="내가 쓴 게시글" />
       <h1 className="sr-only">내가 쓴 게시글 페이지</h1>
       <div className="w-full h-base">
-        <MypageSearch />
+        <MypageSearch searchMode="posts" />
 
         <FilterSection pageType="MY_POSTS" />
 

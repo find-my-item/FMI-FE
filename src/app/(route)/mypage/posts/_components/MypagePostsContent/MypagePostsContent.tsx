@@ -10,10 +10,14 @@ import { LoadingState } from "@/components/state";
 import { useToast } from "@/context/ToastContext";
 import { useInfiniteScroll } from "@/hooks";
 import { MypageEmptyUI, PostListItem } from "@/components/domain";
+import { useSearchParams } from "next/navigation";
 
 const MypagePostsContent = () => {
   const { status, findStatus, category, sort, startDate, endDate } = useFilterParams();
+  const searchParams = useSearchParams();
   const { addToast } = useToast();
+
+  const keyword = searchParams.get("keyword") ?? undefined;
 
   const {
     data: postsData,
@@ -28,6 +32,7 @@ const MypagePostsContent = () => {
     category,
     startDate,
     endDate,
+    keyword,
     sortType: sort ?? "LATEST",
   });
 
