@@ -11,6 +11,8 @@ const MypageSearch = ({ searchMode }: MypageSearchProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
+  const currentKeyword = searchParams.get("keyword") ?? "";
+
   const handleSearch = (value: string) => {
     const params = new URLSearchParams(searchParams.toString());
     const searchValue = value.trim();
@@ -29,6 +31,7 @@ const MypageSearch = ({ searchMode }: MypageSearchProps) => {
       <h2 className="sr-only">검색 영역</h2>
       <InputSearch
         name="search"
+        defaultValue={currentKeyword}
         placeholder="제목, 내용을 입력해 주세요."
         mode="onChange"
         onEnter={(value) => handleSearch(value)}
