@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const PERMISSION_CONFIG = {
   Location: {
-    title: "더 편한 서비스를 위해 위치 정보를 접급의 허용해 주세요.",
+    title: "더 편한 서비스를 위해 위치 정보를 접근의 허용해 주세요.",
     description: `위치 정보 허용 시 현재 위치를 기반으로\n 유실물 정보를 제공해요.`,
     iconName: "Marker" as const,
     agreeBtnText: "위치 접근 허용하기",
@@ -84,16 +84,35 @@ interface PermissionSheetProps {
 }
 
 const PermissionSheet = ({ isOpen, onClose }: PermissionSheetProps) => {
-  const [isLocationPermissionSheet, setIsLocationPermissionSheet] = useState(false);
+  const [isDetailPermissionSheet, setIsDetailPermissionSheet] = useState<{
+    open: boolean;
+    state: "Alert" | "Location";
+  }>({ open: false, state: "Location" });
 
-  if (isLocationPermissionSheet) {
+  if (isDetailPermissionSheet.state === "Location" && isDetailPermissionSheet.open) {
     return (
       <DetailPermissionSheet
-        isOpen={isLocationPermissionSheet}
+        isOpen={isDetailPermissionSheet.open}
         onClose={() => {
-          setIsLocationPermissionSheet(false);
+          setIsDetailPermissionSheet((prev) => ({
+            ...prev,
+            open: false,
+          }));
         }}
         state="Location"
+      />
+    );
+  } else if (isDetailPermissionSheet.state === "Alert" && isDetailPermissionSheet.open) {
+    return (
+      <DetailPermissionSheet
+        isOpen={isDetailPermissionSheet.open}
+        onClose={() => {
+          setIsDetailPermissionSheet((prev) => ({
+            ...prev,
+            open: false,
+          }));
+        }}
+        state="Alert"
       />
     );
   }
@@ -131,7 +150,15 @@ const PermissionSheet = ({ isOpen, onClose }: PermissionSheetProps) => {
           </div>
         </div>
 
-        <Button className="w-full" onClick={() => setIsLocationPermissionSheet(true)}>
+        <Button
+          className="w-full"
+          onClick={() =>
+            setIsDetailPermissionSheet((prev) => ({
+              ...prev,
+              open: true,
+            }))
+          }
+        >
           확인
         </Button>
       </div>
