@@ -47,16 +47,32 @@ const DetailPermissionSheet = ({ isOpen, onClose, state }: DetailPermissionSheet
           onClose();
         }
       );
-    } else {
-      if ("Notification" in window) {
+    }
+    if (state === "Alert") {
+      if (!("Notification" in window)) {
+        alert("이 브라우저는 알림 기능을 지원하지 않습니다.");
+        return;
+      }
+
+      if (Notification.permission === "granted") {
+        updateNotification({ browserNotificationEnabled: true });
+        onClose();
+        return;
+      }
+
+      if (Notification.permission === "default") {
         const permission = await Notification.requestPermission();
 
         if (permission === "granted") {
           updateNotification({ browserNotificationEnabled: true });
         }
       }
-      onClose();
+
+      if (Notification.permission === "denied") {
+        alert("알림 권한이 차단되어 있습니다. 브라우저 설정에서 허용해 주세요.");
+      }
     }
+    onClose();
   };
 
   return (
