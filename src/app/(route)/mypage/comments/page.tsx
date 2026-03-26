@@ -8,7 +8,7 @@ const page = () => {
       <DetailHeader title="내가 쓴 댓글" />
       <h1 className="sr-only">내가 쓴 댓글 페이지</h1>
       <div className="w-full h-base">
-        <MypageSearch />
+        <MypageSearch searchMode="comments" />
 
         <MypageCommentsFilterSection />
 
