@@ -26,24 +26,28 @@ interface DetailPermissionSheetProps {
 const DetailPermissionSheet = ({ isOpen, onClose, state }: DetailPermissionSheetProps) => {
   const { iconName, title, description, agreeBtnText } = PERMISSION_CONFIG[state];
 
-  const handleLocationPermission = () => {
-    if (!navigator.geolocation) {
-      alert("위치 기능을 지원하지 않는 브라우저입니다.");
-      return;
-    }
-
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        console.log(latitude, longitude);
-      },
-      (error) => {
-        if (error.code === error.PERMISSION_DENIED) {
-          alert("위치 권한이 거부되었습니다. 브라우저 설정에서 허용해주세요.");
-          return;
-        }
+  const handleRequestPermission = async () => {
+    if (state === "Location") {
+      if (!navigator.geolocation) {
+        alert("위치 기능을 지원하지 않는 브라우저입니다.");
+        onClose();
+        return;
       }
-    );
+      navigator.geolocation.getCurrentPosition(
+        () => onClose(),
+        (error) => {
+          if (error.code === error.PERMISSION_DENIED) {
+            alert("위치 권한이 거부되었습니다. 설정에서 허용해주세요.");
+          }
+          onClose();
+        }
+      );
+    } else {
+      if ("Notification" in window) {
+        await Notification.requestPermission();
+      }
+      onClose();
+    }
   };
 
   return (
@@ -63,7 +67,7 @@ const DetailPermissionSheet = ({ isOpen, onClose, state }: DetailPermissionSheet
         </div>
 
         <div className="w-full gap-3 flex-col-center">
-          <Button className="w-full" onClick={handleLocationPermission}>
+          <Button className="w-full" onClick={handleRequestPermission}>
             {agreeBtnText}
           </Button>
           <button
@@ -89,30 +93,21 @@ const PermissionSheet = ({ isOpen, onClose }: PermissionSheetProps) => {
     state: "Alert" | "Location";
   }>({ open: false, state: "Location" });
 
-  if (isDetailPermissionSheet.state === "Location" && isDetailPermissionSheet.open) {
+  const handleDetailClose = () => {
+    if (isDetailPermissionSheet.state === "Location") {
+      setIsDetailPermissionSheet({ open: true, state: "Alert" });
+    } else {
+      setIsDetailPermissionSheet((prev) => ({ ...prev, open: false }));
+      onClose();
+    }
+  };
+
+  if (isDetailPermissionSheet.open) {
     return (
       <DetailPermissionSheet
         isOpen={isDetailPermissionSheet.open}
-        onClose={() => {
-          setIsDetailPermissionSheet((prev) => ({
-            ...prev,
-            open: false,
-          }));
-        }}
-        state="Location"
-      />
-    );
-  } else if (isDetailPermissionSheet.state === "Alert" && isDetailPermissionSheet.open) {
-    return (
-      <DetailPermissionSheet
-        isOpen={isDetailPermissionSheet.open}
-        onClose={() => {
-          setIsDetailPermissionSheet((prev) => ({
-            ...prev,
-            open: false,
-          }));
-        }}
-        state="Alert"
+        onClose={handleDetailClose}
+        state={isDetailPermissionSheet.state}
       />
     );
   }
