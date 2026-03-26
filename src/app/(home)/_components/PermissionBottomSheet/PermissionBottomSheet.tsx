@@ -1,5 +1,7 @@
+import usePutNotificationSetting from "@/api/fetch/notification/api/usePutNotificationSetting";
 import { Button, Icon } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
+import { useToast } from "@/context/ToastContext";
 import { useState } from "react";
 
 const PERMISSION_CONFIG = {
@@ -26,6 +28,9 @@ interface DetailPermissionSheetProps {
 const DetailPermissionSheet = ({ isOpen, onClose, state }: DetailPermissionSheetProps) => {
   const { iconName, title, description, agreeBtnText } = PERMISSION_CONFIG[state];
 
+  const { addToast } = useToast();
+  const { mutate: updateNotification } = usePutNotificationSetting();
+
   const handleRequestPermission = async () => {
     if (state === "Location") {
       if (!navigator.geolocation) {
@@ -37,14 +42,18 @@ const DetailPermissionSheet = ({ isOpen, onClose, state }: DetailPermissionSheet
         () => onClose(),
         (error) => {
           if (error.code === error.PERMISSION_DENIED) {
-            alert("위치 권한이 거부되었습니다. 설정에서 허용해주세요.");
+            addToast("위치 권한이 거부되었습니다. 설정에서 허용해주세요.", "warning");
           }
           onClose();
         }
       );
     } else {
       if ("Notification" in window) {
-        await Notification.requestPermission();
+        const permission = await Notification.requestPermission();
+
+        if (permission === "granted") {
+          updateNotification({ browserNotificationEnabled: true });
+        }
       }
       onClose();
     }
