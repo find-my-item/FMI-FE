@@ -110,6 +110,12 @@ const ProfileForm = ({ user, onConfirmRequest }: ProfileFormProps) => {
                 required: true,
                 maxLength: 10,
               },
+              onKeyDown: (e) => {
+                if (e.key === " ") e.preventDefault();
+              },
+              onChange: (e) => {
+                e.target.value = e.target.value.replace(/\s/g, "");
+              },
             }}
             label="닉네임"
             btnOption={{
