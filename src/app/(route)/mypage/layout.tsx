@@ -34,7 +34,7 @@ export default async function layout({ children }: { children: ReactNode }) {
           }),
       });
     } catch (error) {
-      console.error("Server prefetch failed, passing to client");
+      // no-op
     }
   }
 
