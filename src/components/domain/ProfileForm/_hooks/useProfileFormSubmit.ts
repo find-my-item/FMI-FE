@@ -20,10 +20,6 @@ export const useProfileFormSubmit = ({
 
   // 실제 API 호출을 수행하는 로직
   const executeMutation = (formData: FormData) => {
-    for (let [key, value] of formData.entries()) {
-      console.log(`${key}:`, value);
-    }
-
     PatchUserMeMutate(formData, {
       onSuccess: () => router.push("/mypage"),
     });
