@@ -8,6 +8,7 @@ import { MARKER_ID } from "../_constants/QUERY_PARAMS";
 import { getMaxHeightPx, getSnapHeights, DefaultSheetContentHeights } from "../_utils/heightUtils";
 import { useMainKakaoMapStore } from "@/store";
 
+const FULLY_EXPANDED_HEIGHT_RATIO = 0.8;
 const FULLY_EXPANDED_TOLERANCE_PX = 2;
 
 interface PointerHandlerEvent {
@@ -28,7 +29,8 @@ const useBottomSheetHeight = (contentHeights: DefaultSheetContentHeights | null 
 
   useMotionValueEvent(height, "change", (latest: number) => {
     const max = getMaxHeightPx();
-    setIsFullyExpanded(latest >= max - FULLY_EXPANDED_TOLERANCE_PX);
+    const thresholdPx = max * FULLY_EXPANDED_HEIGHT_RATIO;
+    setIsFullyExpanded(latest >= thresholdPx - FULLY_EXPANDED_TOLERANCE_PX);
   });
 
   useEffect(() => {
