@@ -1,4 +1,5 @@
 import { ChangeEvent, useRef, useState } from "react";
+import { useFormContext } from "react-hook-form";
 
 interface UseChangeImgProps {
   setOpenKebabMenu: (open: boolean) => void;
@@ -11,6 +12,8 @@ export const useChangeImg = ({
   initialImg,
   onImageChange,
 }: UseChangeImgProps) => {
+  const { setValue } = useFormContext();
+
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [previewImgUrl, setPreviewImgUrl] = useState<string | null>(initialImg ?? "");
 
@@ -36,7 +39,9 @@ export const useChangeImg = ({
   };
 
   // 이미지 삭제
-  const resetImage = () => {
+  const handleDeleteImage = () => {
+    setValue("profileImg", null);
+
     setPreviewImgUrl(null);
     onImageChange(null);
     setOpenKebabMenu(false);
@@ -46,7 +51,7 @@ export const useChangeImg = ({
     handleChangeImg,
     handleButtonClick,
     previewImgUrl,
-    resetImage,
+    handleDeleteImage,
     fileInputRef,
   };
 };

@@ -185,7 +185,7 @@ const InputText = ({
             onClick={() => btnOnClick?.(isValue)}
             ignoreBase
             disabled={disabled}
-            className="text-neutral-normal-default, w-auto whitespace-nowrap rounded-[10px] border border-neutral-normal-default px-[14px] py-[10px] text-body2-semibold disabled:text-neutral-normal-disabled disabled:bg-fill-neutral-strong-default"
+            className="text-neutral-normal-default, h-11 w-auto whitespace-nowrap rounded-[10px] border border-neutral-normal-default px-[14px] py-[10px] text-body2-semibold disabled:text-neutral-normal-disabled disabled:bg-fill-neutral-strong-default"
             {...restBtnOption}
           >
             {btnLabel}
