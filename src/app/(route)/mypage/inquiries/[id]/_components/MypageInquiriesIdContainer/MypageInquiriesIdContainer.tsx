@@ -75,6 +75,7 @@ const MypageInquiriesIdContainer = ({ id }: MypageInquiriesIdContainerProps) => 
                   height={0}
                   sizes="100vw"
                   style={{ width: "100%", height: "auto", borderRadius: "10px" }}
+                  className="cursor-pointer"
                   aria-label={`${index + 1}번째 이미지 보기`}
                   onClick={() => setImageViewerState({ isOpen: true, initialIndex: index })}
                 />

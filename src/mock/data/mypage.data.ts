@@ -239,7 +239,7 @@ export const MOCK_MYPAGE_INQUIRY_DETAIL = {
       {
         id: 2,
         content:
-          "확인 감사합니다. 해당 현상은 문의 등록 직후부터 발생했고, 새로고침해도 동일합니다.",
+          "ㄴㅇㄹㅁ나엉ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ",
         authorId: 12,
         authorName: "김찾아",
         authorEmail: "findme_user@example.com",
