@@ -13,8 +13,8 @@ const AlertDetailHeader = ({
   setIsDeleteMode: (isDeleteMode: boolean) => void;
 }) => {
   const router = useRouter();
-  const { data: notifications } = useNotificationList();
-  const isDeleteDisabled = (notifications?.length ?? 0) === 0;
+  const { data: notifications, isPending } = useNotificationList();
+  const isDeleteDisabled = isPending || (notifications?.length ?? 0) === 0;
 
   return (
     <>
