@@ -15,6 +15,7 @@ export const usePutPost = (postId: number) => {
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["post-detail", postId] });
       queryClient.invalidateQueries({ queryKey: ["posts"] });
+      queryClient.invalidateQueries({ queryKey: ["/users/me/posts"] });
       addToast("게시글이 수정되었어요", "success");
       router.replace(`/list/${data.result.id}`);
     },
