@@ -48,7 +48,6 @@ const useNicknameCheck = () => {
     }
     if (isError) {
       setIsNicknameVerified(false);
-      console.log("error>>>>>>      ", error.response?.data.code);
       const errorCode = error.response?.data.code;
 
       if (errorCode === "NICKNAME_INVALID") {

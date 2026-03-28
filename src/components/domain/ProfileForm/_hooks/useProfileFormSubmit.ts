@@ -1,52 +1,49 @@
 import { usePatchProfile } from "@/api/fetch/user";
+import { useRouter } from "next/navigation";
 import { FormEvent } from "react";
 import { useFormContext } from "react-hook-form";
 
 interface useProfileFormSubmitProps {
-  preNickname: string;
   preProfileImg?: string;
-  onNoChange: () => void;
   onConfirmRequest?: (submitFn: () => void) => void;
+  isNicknameVerified: boolean;
 }
 
 export const useProfileFormSubmit = ({
-  preNickname,
   preProfileImg,
-  onNoChange,
   onConfirmRequest,
+  isNicknameVerified,
 }: useProfileFormSubmitProps) => {
+  const router = useRouter();
   const { getValues } = useFormContext();
-
   const { mutate: PatchUserMeMutate } = usePatchProfile();
 
   // 실제 API 호출을 수행하는 로직
   const executeMutation = (formData: FormData) => {
-    PatchUserMeMutate(formData);
+    for (let [key, value] of formData.entries()) {
+      console.log(`${key}:`, value);
+    }
+
+    PatchUserMeMutate(formData, {
+      onSuccess: () => router.push("/mypage"),
+    });
   };
 
   // 폼 제출 핸들러
   const handleSubmitMypageProfile = (e: FormEvent) => {
     e.preventDefault();
-
-    const isNickname = getValues("nickname");
-    const isProfileImg = getValues("profileImg");
-
-    const ChangeImg = preProfileImg !== isProfileImg;
-    const ChangeNickname = preNickname !== isNickname;
-
-    // 변경사항이 없는 경우
-    if (!ChangeImg && !ChangeNickname) {
-      onNoChange?.();
-      return;
-    }
-
     const formData = new FormData();
 
-    const requestData = {
-      nickname: ChangeNickname ? isNickname : undefined,
-      deleteProfileImage: ChangeImg && !isProfileImg ? true : null,
-    };
+    const isProfileImg = getValues("profileImg");
+    const ChangeImg = preProfileImg !== isProfileImg;
 
+    const requestData: { nickname?: string; deleteProfileImage?: boolean } = {};
+    if (isNicknameVerified) {
+      requestData.nickname = getValues("nickname");
+    }
+    if (ChangeImg && !isProfileImg) {
+      requestData.deleteProfileImage = true;
+    }
     formData.append(
       "request",
       new Blob([JSON.stringify(requestData)], { type: "application/json" })
