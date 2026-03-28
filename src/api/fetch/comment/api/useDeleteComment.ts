@@ -14,8 +14,11 @@ export const useDeleteComment = () => {
     ({ commentId }) => `/comments/${commentId}`,
     "delete",
     {
-      onSuccess: (_, variables) => {
-        queryClient.invalidateQueries({ queryKey: variables.queryKey });
+      onSuccess: async (_, variables) => {
+        await Promise.all([
+          queryClient.invalidateQueries({ queryKey: variables.queryKey }),
+          queryClient.invalidateQueries({ queryKey: ["/users/me/comments"] }),
+        ]);
         addToast("댓글 삭제가 완료되었어요", "success");
       },
     }
