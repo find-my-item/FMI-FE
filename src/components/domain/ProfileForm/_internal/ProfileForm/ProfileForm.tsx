@@ -21,39 +21,34 @@ interface ProfileFormProps {
 const ProfileForm = ({ user, onConfirmRequest }: ProfileFormProps) => {
   const { nickname, profileImg } = user ?? {};
 
-  const {
-    setValue,
-    watch,
-    formState: { isValid },
-  } = useFormContext();
-
-  const { handleClickNickname, isNicknameVerified, isNicknameDisabled } = useNicknameCheck();
-
   const [openModal, setOpenModal] = useState(false);
   const [openKebabMenu, setOpenKebabMenu] = useState(false);
+  const { setValue, watch } = useFormContext();
 
   const ref = useClickOutside(() => setOpenKebabMenu(false));
 
-  // 이미지 관련 처리
-  const { handleChangeImg, handleButtonClick, previewImgUrl, resetImage, fileInputRef } =
+  // 닉네임 처리
+  const { handleClickNickname, isNicknameVerified, isNicknameDisabled } = useNicknameCheck();
+
+  // 이미지 처리
+  const { handleChangeImg, handleButtonClick, previewImgUrl, handleDeleteImage, fileInputRef } =
     useChangeImg({
       setOpenKebabMenu,
       initialImg: profileImg,
       onImageChange: (file) => setValue("profileImg", file, { shouldDirty: true }),
     });
 
-  // 최종 버튼 제출 함수
+  // 최종 버튼 제출
   const { handleSubmitMypageProfile } = useProfileFormSubmit({
-    preNickname: nickname ?? "",
     preProfileImg: profileImg,
-    onNoChange: () => setOpenModal(true),
     onConfirmRequest,
+    isNicknameVerified,
   });
 
   const [profileImgValue, nicknameValue] = watch(["profileImg", "nickname"]);
   const isImageChanged = profileImgValue instanceof File || profileImgValue === null;
 
-  const canSubmit = isImageChanged || (nicknameValue && isValid && isNicknameVerified);
+  const canSubmit = isImageChanged || isNicknameVerified;
 
   const hasChanges = isImageChanged || nicknameValue;
   usePreventLeave(hasChanges, () => setOpenModal(true));
@@ -81,7 +76,7 @@ const ProfileForm = ({ user, onConfirmRequest }: ProfileFormProps) => {
                   {
                     text: "프로필 이미지 삭제",
                     textColor: "text-system-warning",
-                    onClick: resetImage,
+                    onClick: handleDeleteImage,
                     type: "button",
                   },
                 ]}
@@ -109,6 +104,14 @@ const ProfileForm = ({ user, onConfirmRequest }: ProfileFormProps) => {
               validation: {
                 required: true,
                 maxLength: 10,
+                pattern: {
+                  value: /^[^\s]+$/,
+                  message: "공백은 포함할 수 없어요.",
+                },
+              },
+              onKeyDown: (e) => {
+                if (e.key === " ") e.preventDefault();
+                if (e.key === "Enter") e.preventDefault();
               },
             }}
             label="닉네임"
@@ -118,7 +121,11 @@ const ProfileForm = ({ user, onConfirmRequest }: ProfileFormProps) => {
                 handleClickNickname("nickname");
               },
             }}
-            caption={{ rule: "2~10자, 특수문자/금칙어 제한" }}
+            caption={{
+              rule: "2~10자, 특수문자/금칙어 제한",
+              isSuccess: isNicknameVerified,
+              successMessage: "사용할 수 있는 닉네임이에요",
+            }}
           />
         </div>
 
