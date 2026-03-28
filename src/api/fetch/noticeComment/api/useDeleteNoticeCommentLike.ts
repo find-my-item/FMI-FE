@@ -118,7 +118,6 @@ const useDeleteNoticeCommentLike = (noticeId: number) => {
           queryClient.setQueryData(queryKey, typedContext.previous);
         }
 
-        queryClient.invalidateQueries({ queryKey: ["notice-comments", noticeId] });
         addToast("댓글 좋아요 삭제에 실패했어요", "error");
       },
       onSettled: (_, __, { queryKey }) => {
