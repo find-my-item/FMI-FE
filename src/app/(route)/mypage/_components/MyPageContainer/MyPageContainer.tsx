@@ -10,7 +10,7 @@ import { useGetUsersMe } from "@/api/fetch/user";
 import { BetaTestMypageBanner } from "@/components/domain";
 
 const MyPageContainer = ({ hasToken }: { hasToken: boolean }) => {
-  const { data, isLoading, error } = useGetUsersMe(hasToken);
+  const { data, isFetching, error } = useGetUsersMe(hasToken);
   const { addToast } = useToast();
 
   useEffect(() => {
@@ -18,8 +18,6 @@ const MyPageContainer = ({ hasToken }: { hasToken: boolean }) => {
       addToast("프로필 정보를 불러오는데 실패했어요.", "warning");
     }
   }, [error, addToast]);
-
-  if (isLoading) return <LoadingState />;
 
   const userData = data?.result
     ? {
@@ -31,13 +29,13 @@ const MyPageContainer = ({ hasToken }: { hasToken: boolean }) => {
 
   return (
     <div className="flex w-full flex-col h-f-base">
-      <MyPageProfile userData={userData} />
+      <MyPageProfile userData={userData} loading={isFetching} />
 
-      <MyPageIconNav />
+      <MyPageIconNav disabled={isFetching} />
 
       <BetaTestMypageBanner />
 
-      <MyPageMenuSection isUserLogin={!!userData} />
+      <MyPageMenuSection isUserLogin={!!userData} disabled={isFetching} />
     </div>
   );
 };
