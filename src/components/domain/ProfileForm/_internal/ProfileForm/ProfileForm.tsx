@@ -112,6 +112,7 @@ const ProfileForm = ({ user, onConfirmRequest }: ProfileFormProps) => {
               },
               onKeyDown: (e) => {
                 if (e.key === " ") e.preventDefault();
+                if (e.key === "Enter") e.preventDefault();
               },
               onChange: (e) => {
                 e.target.value = e.target.value.replace(/\s/g, "");
@@ -124,7 +125,11 @@ const ProfileForm = ({ user, onConfirmRequest }: ProfileFormProps) => {
                 handleClickNickname("nickname");
               },
             }}
-            caption={{ rule: "2~10자, 특수문자/금칙어 제한" }}
+            caption={{
+              rule: "2~10자, 특수문자/금칙어 제한",
+              isSuccess: isNicknameVerified,
+              successMessage: "사용할 수 있는 닉네임이에요",
+            }}
           />
         </div>
 
