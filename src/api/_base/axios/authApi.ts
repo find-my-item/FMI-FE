@@ -18,7 +18,7 @@ authApi.interceptors.response.use(
       return Promise.reject(error);
     }
 
-    const isAuthError = [401, 403].includes(error.response?.status);
+    const isAuthError = [401].includes(error.response?.status);
     const isAlreadyRetried = originalRequest._retry;
     const isRefreshRequest = originalRequest.url?.includes("auth/refresh");
 

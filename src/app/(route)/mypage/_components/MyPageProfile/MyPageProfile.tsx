@@ -7,9 +7,10 @@ interface ProfileProps {
     email: string;
     profileImg?: string;
   };
+  loading?: boolean;
 }
 
-const MyPageProfile = ({ userData }: ProfileProps) => {
+const MyPageProfile = ({ userData, loading }: ProfileProps) => {
   const { nickname, email, profileImg } = userData ?? {
     nickname: "",
     email: "",
@@ -46,6 +47,7 @@ const MyPageProfile = ({ userData }: ProfileProps) => {
         variant="outlined"
         size="small"
         className="!min-w-0"
+        loading={loading}
       >
         {userData ? "프로필 수정" : "로그인"}
       </Button>
