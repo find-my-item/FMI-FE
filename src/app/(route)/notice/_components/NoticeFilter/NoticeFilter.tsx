@@ -19,10 +19,12 @@ const NoticeFilter = ({ searchUpdateQuery }: NoticeFilterProps) => {
   const searchParams = useSearchParams();
   const selectedSortType = searchParams.get("sortType");
   const sortTypeDisplayText =
-    FILTER_OPTIONS.find((option) => option.value === selectedSortType)?.label ?? "최신순";
+    FILTER_OPTIONS.find((option) => option.value.toLowerCase() === selectedSortType?.toLowerCase())
+      ?.label ?? "최신순";
 
   const handleOptionClick = (value: NoticeSortType) => {
-    searchUpdateQuery("sortType", value === "LATEST" ? undefined : value);
+    const queryValue = value === "LATEST" ? undefined : value.toLowerCase();
+    searchUpdateQuery("sortType", queryValue);
     setIsOpen(false);
   };
 
