@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Suspense, useCallback, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { Suspense, useCallback, useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { BOTTOM_OFFSET_PX } from "../../_constants/HEIGHT_PX";
 import useBottomSheetHeight from "../../_hooks/useBottomSheetHeight";
 import MyLocationButton from "../MyLocationButton/MyLocationButton";
@@ -12,6 +12,8 @@ import MapPostSummarySheetContent from "../MapPostSummarySheetContent/MapPostSum
 import { DefaultSheetContentHeights } from "../../_utils/heightUtils";
 import { MARKER_ID } from "../../_constants/QUERY_PARAMS";
 import { BetaTestMainBanner } from "@/components/domain";
+import PermissionSheet from "../PermissionBottomSheet/PermissionBottomSheet";
+import { usePermissionStore } from "@/store";
 
 const BottomSheetContent = () => {
   const searchParams = useSearchParams();
@@ -63,9 +65,29 @@ const BottomSheetContent = () => {
 };
 
 const BottomSheet = () => {
+  const router = useRouter();
+  const { isFirstSignUp } = usePermissionStore();
+  const [isPermissionSheetOpen, setIsPermissionSheetOpen] = useState(false);
+
+  useEffect(() => {
+    if (isFirstSignUp) {
+      setIsPermissionSheetOpen(true);
+    }
+  }, [isFirstSignUp]);
+
   return (
     <Suspense fallback="">
-      <BottomSheetContent />
+      {isPermissionSheetOpen ? (
+        <PermissionSheet
+          isOpen={isPermissionSheetOpen}
+          onClose={() => {
+            router.replace("/");
+            setIsPermissionSheetOpen(false);
+          }}
+        />
+      ) : (
+        <BottomSheetContent />
+      )}
     </Suspense>
   );
 };
