@@ -3,13 +3,14 @@
 import { useGetUserInquiryById } from "@/api/fetch/inquiry";
 import { LoadingState } from "@/components/state";
 import { useToast } from "@/context/ToastContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { INQUIRY_STATUS_CHIP } from "../../../_constants/INQUIRY_STATUS_CHIP";
 import { Chip } from "@/components/common";
 import { formatDate } from "@/utils";
 import Image from "next/image";
 import InquiryCommentItem from "../InquiryCommentItem/InquiryCommentItem";
 import { MOCK_MYPAGE_INQUIRY_DETAIL } from "@/mock/data";
+import { ImageViewerModal } from "@/components/domain";
 
 interface MypageInquiriesIdContainerProps {
   id: number;
@@ -29,6 +30,11 @@ const MypageInquiriesIdContainer = ({ id }: MypageInquiriesIdContainerProps) => 
   // if (!result) return null;
 
   // const { title, content, status, createdAt, imageUrls, comments } = result;
+
+  const [imageViewerState, setImageViewerState] = useState<{
+    isOpen: boolean;
+    initialIndex: number;
+  }>({ isOpen: false, initialIndex: 0 });
 
   const { title, content, status, createdAt, imageUrls, comments } =
     MOCK_MYPAGE_INQUIRY_DETAIL.result;
@@ -69,10 +75,19 @@ const MypageInquiriesIdContainer = ({ id }: MypageInquiriesIdContainerProps) => 
                   height={0}
                   sizes="100vw"
                   style={{ width: "100%", height: "auto", borderRadius: "10px" }}
+                  aria-label={`${index + 1}번째 이미지 보기`}
+                  onClick={() => setImageViewerState({ isOpen: true, initialIndex: index })}
                 />
               ))}
           </div>
         </div>
+
+        <ImageViewerModal
+          images={imageUrls}
+          initialIndex={imageViewerState.initialIndex}
+          isOpen={imageViewerState.isOpen}
+          onClose={() => setImageViewerState((prev) => ({ ...prev, isOpen: false }))}
+        />
       </div>
 
       {comments && (
