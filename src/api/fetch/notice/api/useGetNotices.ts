@@ -15,18 +15,20 @@ export const useGetNotices = ({ keyword, sortType }: UseGetNoticesParams = {}) =
 
   const category = searchParams.get("category") ?? undefined;
   const keywordParam = searchParams.get("keyword") ?? keyword;
-  const sortTypeParam = searchParams.get("sortType") ?? sortType;
+  const sortTypeRaw = searchParams.get("sortType") ?? sortType;
+  const sortTypeForApi =
+    sortTypeRaw && sortTypeRaw.length > 0 ? sortTypeRaw.toUpperCase() : undefined;
   const size = Number(searchParams.get("size")) || 10;
 
   const params = new URLSearchParams();
   params.set("size", String(size));
   if (category) params.set("category", category);
   if (keywordParam) params.set("keyword", keywordParam);
-  if (sortTypeParam) params.set("sortType", sortTypeParam);
+  if (sortTypeForApi) params.set("sortType", sortTypeForApi);
 
   return useAppInfiniteQuery<GetNoticesResponse, unknown, NoticeItem[]>(
     "public",
-    ["notices", category, keywordParam, sortTypeParam, size],
+    ["notices", category, keywordParam, sortTypeForApi, size],
     `/notices?${params.toString()}`,
     {
       placeholderData: keepPreviousData,

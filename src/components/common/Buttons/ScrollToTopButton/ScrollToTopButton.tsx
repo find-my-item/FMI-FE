@@ -58,7 +58,7 @@ const ScrollToTopButton = ({ onHide = false, className }: ScrollToTopButtonProps
     <button
       aria-label="스크롤 맨 위로 이동"
       className={cn(
-        "glass-card h-[70px] w-[70px] rounded-full transition-colors duration-150 bg-fill-brand-subtle-default flex-center",
+        "h-[70px] w-[70px] rounded-full border border-white transition-colors duration-150 bg-fill-brand-subtle-default flex-center",
         "hover:bg-fill-brand-subtle-hover",
         "active:bg-fill-brand-subtle-pressed",
         "disabled:bg-fill-brand-subtle-disabled",
