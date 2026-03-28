@@ -66,7 +66,7 @@ const ReportReasonModal = ({
           ))}
         </fieldset>
         <div className="mt-auto px-5">
-          <Button className="w-full" disabled={!tempSelectedReportReason} type="submit">
+          <Button className="w-full" size="big" disabled={!tempSelectedReportReason} type="submit">
             선택하기
           </Button>
         </div>
