@@ -51,7 +51,7 @@ const useNicknameCheck = () => {
 
       if (errorCode === "NICKNAME_INVALID") {
         setError("nickname", {
-          message: "사용할 수 없는 단어가 포함되어 있습니다.",
+          message: "사용할 수 없는 단어가 포함되어 있어요.",
         });
         addToast("사용할 수 없는 단어가 포함되어 있어요", "warning");
       } else if (errorCode === "NICKNAME_DUPLICATE") {
