@@ -9,26 +9,29 @@ import { Chip } from "@/components/common";
 import { formatDate } from "@/utils";
 import Image from "next/image";
 import InquiryCommentItem from "../InquiryCommentItem/InquiryCommentItem";
+import { MOCK_MYPAGE_INQUIRY_DETAIL } from "@/mock/data";
 
 interface MypageInquiriesIdContainerProps {
   id: number;
 }
 
 const MypageInquiriesIdContainer = ({ id }: MypageInquiriesIdContainerProps) => {
-  const { data: reportIdData, isError, isLoading } = useGetUserInquiryById({ inquiryId: id });
+  // const { data: reportIdData, isError, isLoading } = useGetUserInquiryById({ inquiryId: id });
   const { addToast } = useToast();
 
-  useEffect(() => {
-    if (isError) addToast("문의 내역을 불러오는데 실패했어요", "error");
-  }, [isError, addToast]);
+  // useEffect(() => {
+  //   if (isError) addToast("문의 내역을 불러오는데 실패했어요", "error");
+  // }, [isError, addToast]);
 
-  if (isLoading) return <LoadingState />;
+  // if (isLoading) return <LoadingState />;
 
-  const result = reportIdData?.result;
-  if (!result) return null;
+  // const result = reportIdData?.result;
+  // if (!result) return null;
 
-  const { title, content, status, createdAt, imageUrls, comments } = result;
+  // const { title, content, status, createdAt, imageUrls, comments } = result;
 
+  const { title, content, status, createdAt, imageUrls, comments } =
+    MOCK_MYPAGE_INQUIRY_DETAIL.result;
   return (
     <div className="w-full h-base">
       <div className="border-b-flat-gray-50 w-full border-b px-5 py-[30px]">
