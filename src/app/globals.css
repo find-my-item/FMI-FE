@@ -70,10 +70,6 @@
   }
 }
 
-.animate-modal-slide-up {
-  animation: modal-slide-up 350ms ease-out forwards;
-}
-
 /* Footer 채팅 버튼 애니메이션 */
 @keyframes float {
   0%,
