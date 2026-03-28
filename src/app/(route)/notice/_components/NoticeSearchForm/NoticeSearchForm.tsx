@@ -7,7 +7,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 
 const NoticeSearchForm = () => {
-  const { searchUpdateQuery } = useSearchUpdateQueryString("replace");
+  const { searchUpdateQuery } = useSearchUpdateQueryString();
   const searchParams = useSearchParams();
   const keywordFromUrl = searchParams.get("keyword") ?? "";
 
