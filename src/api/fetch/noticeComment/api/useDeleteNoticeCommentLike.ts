@@ -5,10 +5,88 @@ import {
   PostCommentLikeResponse,
   ToggleCommentLikeVariables,
 } from "@/api/fetch/comment/types/CommentType";
-import { NoticeCommentsLikeCacheDataType } from "../types/NoticeCommentsLikeCacheDataType";
+import { GetNoticeCommentsResponse } from "../types/GetNoticeComments";
+import { GetRepliesNoticeCommentsResponse } from "../types/GetRepliesNoticeComments";
+
+type LikeTargetComment = {
+  id: number;
+  likeCount?: number;
+  isLike?: boolean;
+  like?: boolean;
+};
+
+type InfiniteNoticeLikeCacheData = {
+  pages: Array<{
+    result?: {
+      comments?: LikeTargetComment[];
+    };
+  }>;
+  pageParams: unknown[];
+};
+
+type FlatNoticeLikeCacheData = {
+  comments: LikeTargetComment[];
+};
+
+type NoticeLikeCacheData = InfiniteNoticeLikeCacheData | FlatNoticeLikeCacheData;
 
 type LikeOptimisticContext = {
-  previous?: NoticeCommentsLikeCacheDataType;
+  previous?: NoticeLikeCacheData;
+};
+
+const updateCommentLikeState = (
+  comment: LikeTargetComment,
+  nextIsLike: boolean
+): LikeTargetComment => {
+  const nextLikeCount = nextIsLike
+    ? (comment.likeCount ?? 0) + 1
+    : Math.max(0, (comment.likeCount ?? 0) - 1);
+
+  return {
+    ...comment,
+    likeCount: nextLikeCount,
+    ...(typeof comment.isLike === "boolean" ? { isLike: nextIsLike } : {}),
+    ...(typeof comment.like === "boolean" ? { like: nextIsLike } : {}),
+  };
+};
+
+const patchNoticeLikeCache = (
+  old: NoticeLikeCacheData | undefined,
+  commentId: number,
+  nextIsLike: boolean
+): NoticeLikeCacheData | undefined => {
+  if (!old) return old;
+
+  if ("pages" in old) {
+    return {
+      ...old,
+      pages: old.pages.map((page) => {
+        const pageComments = page.result?.comments;
+        if (!pageComments) return page;
+
+        return {
+          ...page,
+          result: {
+            ...page.result,
+            comments: pageComments.map((comment) =>
+              comment.id === commentId ? updateCommentLikeState(comment, nextIsLike) : comment
+            ),
+          },
+        };
+      }),
+    };
+  }
+
+  if ("comments" in old) {
+    return {
+      ...old,
+      comments: old.comments.map((comment) =>
+        comment.id === commentId ? updateCommentLikeState(comment, nextIsLike) : comment
+      ),
+    };
+  }
+
+  return old;
 };
 
 const useDeleteNoticeCommentLike = (noticeId: number) => {
@@ -23,25 +101,13 @@ const useDeleteNoticeCommentLike = (noticeId: number) => {
       onMutate: async ({ commentId, queryKey }) => {
         await queryClient.cancelQueries({ queryKey });
 
-        const previous = queryClient.getQueryData<NoticeCommentsLikeCacheDataType>(queryKey);
+        const previous = queryClient.getQueryData<
+          GetNoticeCommentsResponse | GetRepliesNoticeCommentsResponse
+        >(queryKey) as NoticeLikeCacheData | undefined;
 
-        queryClient.setQueryData<NoticeCommentsLikeCacheDataType | undefined>(queryKey, (old) => {
-          if (!old?.comments) return old;
-
-          return {
-            ...old,
-            comments: old.comments.map((comment) => {
-              if (comment.id !== commentId) return comment;
-              if (!comment.isLike) return comment;
-
-              return {
-                ...comment,
-                isLike: false,
-                likeCount: Math.max(0, (comment.likeCount ?? 0) - 1),
-              };
-            }),
-          };
-        });
+        queryClient.setQueryData<NoticeLikeCacheData | undefined>(queryKey, (old) =>
+          patchNoticeLikeCache(old, commentId, false)
+        );
 
         return { previous };
       },
