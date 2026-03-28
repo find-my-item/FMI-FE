@@ -15,13 +15,12 @@ const LostFindActions = () => {
               href={`/list?type=${type}`}
               key={type}
               aria-label={`${title} 목록 페이지로 이동`}
-              className={cn(
-                "relative h-[106px] w-full min-w-0 flex-1 overflow-hidden rounded-2xl",
-                bgColor
-              )}
+              className={cn("relative h-[106px] w-full min-w-0 flex-1 rounded-2xl", bgColor)}
+              onDragStart={(e) => e.preventDefault()}
             >
-              <Image src={positionImage} alt="" width={50} height={70} priority />
+              <Image draggable={false} src={positionImage} alt="" width={50} height={70} priority />
               <Image
+                draggable={false}
                 src={messageImage}
                 alt=""
                 width={58}
@@ -30,6 +29,7 @@ const LostFindActions = () => {
                 priority
               />
               <Image
+                draggable={false}
                 src={src}
                 alt=""
                 width={size.width}
@@ -38,6 +38,7 @@ const LostFindActions = () => {
                 priority
               />
               <Image
+                draggable={false}
                 src={bagImage}
                 alt=""
                 width={57.69}
