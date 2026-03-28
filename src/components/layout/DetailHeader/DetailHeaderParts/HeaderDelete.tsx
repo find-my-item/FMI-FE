@@ -5,14 +5,17 @@ import { Icon } from "@/components/common";
 interface HeaderDeleteProps {
   isDeleteMode: boolean;
   setIsDeleteMode: (isDeleteMode: boolean) => void;
+  disabled?: boolean;
 }
 
-const HeaderDelete = ({ isDeleteMode, setIsDeleteMode }: HeaderDeleteProps) => {
+const HeaderDelete = ({ isDeleteMode, setIsDeleteMode, disabled = false }: HeaderDeleteProps) => {
   return (
     <button
       type="button"
       aria-label={isDeleteMode ? "삭제 화면 취소" : "삭제 화면 진입"}
       onClick={() => setIsDeleteMode(!isDeleteMode)}
+      disabled={disabled}
+      className="disabled:cursor-not-allowed disabled:opacity-40"
     >
       {/* TODO(형준): 아이콘 색상 변경 필요 */}
       {!isDeleteMode ? (
