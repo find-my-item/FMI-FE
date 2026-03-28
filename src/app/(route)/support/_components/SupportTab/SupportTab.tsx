@@ -7,7 +7,7 @@ const SupportTab = () => {
   const { tab, updateTabQuery } = useSupportTabQuery();
 
   return (
-    <div className="flex w-full px-[20px]">
+    <div className="flex w-full px-5">
       {SUPPORT_TABS.map((item) => (
         <button
           key={item.key}
