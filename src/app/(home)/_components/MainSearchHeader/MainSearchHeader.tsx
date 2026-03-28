@@ -75,7 +75,9 @@ const HeaderSearchForm = ({
         }}
         type="text"
         onFocus={() => setFocused(true)}
-        className="w-full pl-8 text-h3-semibold text-flatGray-700 placeholder:text-flatGray-700"
+        className={cn(
+          "w-full pl-8 text-h3-semibold text-flatGray-700 placeholder:text-flatGray-700"
+        )}
         placeholder="현재 위치 (위치 정보 허용 시)"
       />
       <button
