@@ -17,6 +17,7 @@ export const usePutPostStatus = (postId: number, isFound: boolean) => {
       );
       queryClient.invalidateQueries({ queryKey: ["post-detail", postId] });
       queryClient.invalidateQueries({ queryKey: ["posts"] });
+      queryClient.invalidateQueries({ queryKey: ["/users/me/posts"] });
     },
     onError: () => {
       addToast(

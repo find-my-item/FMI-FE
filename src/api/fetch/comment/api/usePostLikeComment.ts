@@ -44,6 +44,10 @@ export const usePostLikeComment = () => {
         return { previous };
       },
 
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["/users/me/comments"] });
+      },
+
       onError: (_error, { queryKey }, context) => {
         const typedContext = context as LikeOptimisticContext | undefined;
 

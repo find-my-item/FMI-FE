@@ -43,11 +43,11 @@ const ReportReasonModal = ({
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/60"
+      className="fixed inset-0 z-[10000] flex select-none items-center justify-center bg-black/60"
       onClick={onClose}
     >
       <form
-        className="animate-modal-slide-up absolute bottom-0 flex h-[671px] w-full max-w-[768px] flex-col rounded-t-[20px] bg-white py-10"
+        className="absolute bottom-0 flex h-[671px] w-full max-w-[768px] flex-col rounded-t-[20px] bg-white py-10"
         onClick={(e) => e.stopPropagation()}
         onSubmit={handleSelectReportReason}
       >
@@ -66,7 +66,7 @@ const ReportReasonModal = ({
           ))}
         </fieldset>
         <div className="mt-auto px-5">
-          <Button className="w-full" disabled={!tempSelectedReportReason} type="submit">
+          <Button className="w-full" size="big" disabled={!tempSelectedReportReason} type="submit">
             선택하기
           </Button>
         </div>

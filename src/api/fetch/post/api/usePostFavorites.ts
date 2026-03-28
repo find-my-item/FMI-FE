@@ -44,6 +44,7 @@ export const usePostFavorites = (id: number) => {
         return { previous };
       },
       onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["/users/me/favorites"] });
         addToast("즐겨찾기가 등록되었어요.", "success");
       },
       onError: (_error, _variables, context) => {

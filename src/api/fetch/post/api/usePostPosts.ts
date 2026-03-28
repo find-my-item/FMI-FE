@@ -18,6 +18,7 @@ export const usePostPosts = () => {
       if (variables.has("tempPostId")) {
         queryClient.invalidateQueries({ queryKey: ["temp-post"] });
       }
+      queryClient.invalidateQueries({ queryKey: ["/users/me/posts"] });
       addToast("게시글이 등록되었습니다.", "success");
       sessionStorage.setItem("showManualPopup", "true");
       setShowManualPopup(true);
