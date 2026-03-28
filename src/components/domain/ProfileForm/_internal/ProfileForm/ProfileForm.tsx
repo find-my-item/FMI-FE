@@ -104,13 +104,14 @@ const ProfileForm = ({ user, onConfirmRequest }: ProfileFormProps) => {
               validation: {
                 required: true,
                 maxLength: 10,
+                pattern: {
+                  value: /^[^\s]+$/,
+                  message: "공백은 포함할 수 없어요.",
+                },
               },
               onKeyDown: (e) => {
                 if (e.key === " ") e.preventDefault();
                 if (e.key === "Enter") e.preventDefault();
-              },
-              onChange: (e) => {
-                e.target.value = e.target.value.replace(/\s/g, "");
               },
             }}
             label="닉네임"

@@ -45,8 +45,7 @@ const useNicknameCheck = () => {
       setIsNicknameDisabled(true);
 
       addToast("사용할 수 있는 닉네임이에요.", "success");
-    }
-    if (isError) {
+    } else if (isError) {
       setIsNicknameVerified(false);
       const errorCode = error.response?.data.code;
 
@@ -64,7 +63,7 @@ const useNicknameCheck = () => {
         addToast("예상치 못한 오류가 발생했어요", "error");
       }
     }
-  }, [data, isSuccess, isError, addToast]);
+  }, [data, isSuccess, isError, error, setError, addToast]);
 
   return {
     handleClickNickname,
