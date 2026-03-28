@@ -83,7 +83,7 @@ const HeaderSearchForm = ({
         onMouseDown={(e) => e.preventDefault()}
         onClick={isDropdownOpen ? handleBack : handleSubmit(onSubmit)}
         aria-label={isDropdownOpen ? "뒤로가기" : "위치 검색"}
-        className="absolute left-5 top-[18.5px]"
+        className="absolute left-5 top-1/2 -translate-y-1/2"
       >
         <Icon name={isDropdownOpen ? "ArrowLeftSmall" : "Search"} size={20} />
       </button>
