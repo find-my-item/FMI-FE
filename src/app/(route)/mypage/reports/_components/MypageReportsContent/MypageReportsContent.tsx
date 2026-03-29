@@ -33,7 +33,7 @@ const MypageReportsItem = ({ reports }: MypageReportsItemProps) => {
 
   return (
     <li className="flex w-full flex-col justify-between border-b border-divider-default px-5 py-[30px]">
-      <Link href={`/mypage/reports/${reportId}`} aria-label={`${targetTitle} 신고 상세 보기`}>
+      <Link href={`/mypage/reports/${reportId}`} aria-label="신고 상세 보기">
         <Chip label={REPORT_STATUS_CHIP[status].label} type={REPORT_STATUS_CHIP[status].chipType} />
 
         <h3 className="mt-2 text-h3-semibold text-layout-header-default">
