@@ -17,7 +17,7 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
     register,
     setValue,
     control,
-    formState: { isValid },
+    formState: { isValid, isSubmitting },
   } = useFormContext();
 
   const selectAll = useWatch({ control, name: "selectAll" });
@@ -49,7 +49,7 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
   return (
     <>
       <DetailHeader title="회원가입" />
-      <div className="flex w-full flex-col gap-7 p-4 h-base">
+      <div className="flex w-full flex-col gap-7 p-4 h-hf-base">
         <p className="text-h3-semibold text-black">
           서비스 이용을 위해 <br />
           약관 동의가 필요합니다.
@@ -93,7 +93,7 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
         </div>
       </div>
 
-      <FooterButton onClick={onComplete} disabled={!isValid}>
+      <FooterButton onClick={onComplete} disabled={!isValid || isSubmitting}>
         가입 완료
       </FooterButton>
     </>
