@@ -88,7 +88,6 @@ const NoticeDetailView = ({ id }: { id: number }) => {
         onDeleteComment={handleDeleteComment}
         onFavoriteComment={handleFavoriteComment}
       />
-      <hr className="border border-divider-default" />
       <NoticeCommentForm noticeId={id} isLoggedIn={isLoggedIn} />
     </div>
   );

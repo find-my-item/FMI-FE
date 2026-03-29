@@ -54,6 +54,7 @@ const NoticeDetailHeader = ({ id }: { id: number }) => {
               {
                 text: "게시글 삭제하기",
                 icon: { name: "Trash" },
+                textColor: "text-system-warning",
                 onClick: () => setIsDeleteModalOpen(true),
               },
             ]}

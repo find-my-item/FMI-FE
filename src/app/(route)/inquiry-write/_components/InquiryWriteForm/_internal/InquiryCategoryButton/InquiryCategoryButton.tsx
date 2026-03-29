@@ -34,7 +34,7 @@ const InquiryCategoryButton = () => {
     <div className="px-5 py-2">
       <button
         className={cn(
-          "flex w-full items-center rounded-full px-4 py-3 text-start text-body1-regular bg-fill-neutral-subtle-default focus:border focus:border-brand-normal-default focus:outline-none disabled:bg-fill-neutral-subtle-pressed",
+          "flex w-full items-center rounded-full border border-transparent px-4 py-3 text-start text-body1-regular bg-fill-neutral-subtle-default focus:border-brand-normal-default focus:outline-none disabled:bg-fill-neutral-subtle-pressed",
           category ? "text-layout-header-default" : "text-layout-body-default"
         )}
         type="button"
