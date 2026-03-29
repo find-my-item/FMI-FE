@@ -77,7 +77,7 @@ const InputField = ({
         name={name}
         label={label}
         required={!!validation?.required}
-        className="text-body2-regular text-layout-body-default"
+        className="text-body1-regular text-layout-body-default"
       />
 
       <div className="relative">
