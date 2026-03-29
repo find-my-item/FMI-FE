@@ -64,7 +64,7 @@ const DeleteAccountPassword = ({ onBack }: { onBack: () => void }) => {
 
   return (
     <>
-      <div className="flex w-full flex-col gap-[18px] px-5 py-[30px] h-hf-base">
+      <div className="flex w-full flex-col gap-[18px] px-5 py-[30px] h-hf-base tablet:px-[80px]">
         <h3 className="text-h3-semibold text-[#171717]">비밀번호를 입력해 주세요.</h3>
 
         <InputText
