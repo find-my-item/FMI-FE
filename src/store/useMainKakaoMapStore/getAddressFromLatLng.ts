@@ -1,5 +1,5 @@
 import { getKakaoLocalCoord2Address } from "@/api/fetch/kakao";
-import { extractDongAddress } from "@/utils/extractDongAddress/extractDongAddress";
+import { extractDongAddress } from "@/utils";
 
 /**
  * 카카오 좌표→주소 변환 API를 이용해 지도 표시용 주소를 반환합니다.
