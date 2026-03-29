@@ -20,7 +20,7 @@ interface ActivityItemProps {
 const ActivityItem = ({ activityItem }: ActivityItemProps) => {
   const { type, createdAt, title, content } = activityItem;
 
-  const { bgColor, iconName } = ACTIVITY_STYLE_CONFIG[type];
+  const { bgColor, iconName, logTitle } = ACTIVITY_STYLE_CONFIG[type];
 
   return (
     <li className="group flex gap-[10px]">
@@ -38,10 +38,8 @@ const ActivityItem = ({ activityItem }: ActivityItemProps) => {
       {/* 텍스트 영역 */}
       <div className="min-w-0 flex-1 px-5 pb-9">
         <time className="text-body2-regular text-layout-body-default">{formatHHMM(createdAt)}</time>
-        <p className="mt-[6px] text-body1-semibold text-neutral-strong-default">{title}</p>
-        <p className="mt-[2px] truncate text-body2-regular text-neutral-normal-default">
-          {content}
-        </p>
+        <p className="mt-[6px] text-body1-semibold text-neutral-strong-default">{logTitle}</p>
+        <p className="mt-[2px] truncate text-body2-regular text-neutral-normal-default">{title}</p>
       </div>
     </li>
   );
