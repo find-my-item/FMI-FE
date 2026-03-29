@@ -3,13 +3,14 @@ export const SIGNUP_INPUT_CONFIG = [
     inputOption: {
       name: "email",
       type: "text",
-      placeholder: "로그인에 사용할 이메일을 입력해주세요.",
+      placeholder: "이메일을 입력해주세요.",
       maxLength: 256,
     },
     label: "아이디(이메일)",
     btnOption: {
       btnLabel: "인증번호 발송",
     },
+    caption: {},
   },
   {
     inputOption: {
@@ -44,7 +45,7 @@ export const SIGNUP_INPUT_CONFIG = [
     inputOption: {
       name: "passwordConfirm",
       type: "password",
-      placeholder: "비밀번호 입력해 주세요.",
+      placeholder: "비밀번호 한번 더 입력해 주세요.",
       maxLength: 16,
     },
     btnOption: {},

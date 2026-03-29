@@ -1,7 +1,6 @@
 "use no memo";
 
 import { SIGNUP_INPUT_CONFIG } from "../../_constants/SIGNUP_INPUT_CONFIG";
-import { Button } from "@/components/common";
 import { DetailHeader } from "@/components/layout";
 import { useFormContext, useWatch } from "react-hook-form";
 import { useSignUpBtnClick } from "../../_hooks/useSignUpBtnClick";
@@ -29,6 +28,9 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
     handlerToClick,
     isNicknameVerified,
     isNicknameDisabled,
+    EmailPending,
+    EmailCodePending,
+    timer,
   } = useSignUpBtnClick();
 
   const handleDisabled = (name: string) => {
@@ -41,6 +43,15 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
     if (name === "emailAuth") return isEmailAuthVerified;
     else if (name === "nickname") return isNicknameVerified;
     else return false;
+  };
+
+  const handleBtnDisabled = (name: string) => {
+    if (name === "emailAuth") return EmailCodePending;
+    else if (name === "email") return EmailPending || timer > 0;
+  };
+
+  const handleTimer = (name: string) => {
+    if (name === "emailAuth" && timer > 0) return timer;
   };
 
   const isNextEnabled = isValid && isEmailAuthVerified && isNicknameVerified;
@@ -61,6 +72,11 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
             btnOption={{
               ...item.btnOption,
               btnOnClick: () => handlerToClick(item.inputOption.name),
+              disabled: handleBtnDisabled(item.inputOption.name),
+            }}
+            caption={{
+              ...item.caption,
+              timer: handleTimer(item.inputOption.name),
             }}
           />
         ))}

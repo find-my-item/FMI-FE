@@ -19,14 +19,25 @@ export const useSignUpBtnClick = () => {
   const { addToast } = useToast();
   const { handlerApiError } = useErrorToast();
 
-  const { mutate: EmailMutate } = useApiSendEmail();
-  const { mutate: CodeMutate } = useApiCheckCode();
+  const { mutate: EmailMutate, isPending: EmailPending } = useApiSendEmail();
+  const { mutate: CodeMutate, isPending: EmailCodePending } = useApiCheckCode();
   const { handleClickNickname, isNicknameVerified, isNicknameDisabled } = useNicknameCheck();
 
   const currentEmailAuth = useWatch({
     control,
     name: "emailAuth",
   });
+
+  const [timer, setTimer] = useState(0);
+
+  // 타이머
+  useEffect(() => {
+    if (timer <= 0) return;
+    const interval = setInterval(() => {
+      setTimer((prev) => prev - 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [timer]);
 
   useEffect(() => {
     if (isEmailAuthDisabled) return;
@@ -50,6 +61,7 @@ export const useSignUpBtnClick = () => {
                 {
                   onSuccess: () => {
                     addToast("인증번호가 발송되었어요", "success");
+                    setTimer(300);
                     setIsEmailAuthDisabled(false);
                     setEmailValue(inputValue);
                   },
@@ -67,6 +79,7 @@ export const useSignUpBtnClick = () => {
                 {
                   onSuccess: () => {
                     addToast("인증되었습니다.", "success");
+                    setTimer(0);
                     setIsEmailAuthDisabled(true);
                     setIsEmailDisabled(true);
                     setIsEmailAuthVerified(true);
@@ -105,5 +118,8 @@ export const useSignUpBtnClick = () => {
     isEmailAuthVerified,
     isNicknameVerified,
     isNicknameDisabled,
+    EmailPending,
+    EmailCodePending,
+    timer,
   };
 };
