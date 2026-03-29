@@ -67,6 +67,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
             isVerified={handleVerified(item.inputOption.name)}
             inputOption={{
               disabled: handleDisabled(item.inputOption.name),
+              autoFocus: item.inputOption.name === "email",
               ...item.inputOption,
             }}
             btnOption={{
