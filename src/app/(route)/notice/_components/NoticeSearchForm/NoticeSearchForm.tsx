@@ -19,13 +19,9 @@ const NoticeSearchForm = () => {
   const resetRef = useRef(reset);
   resetRef.current = reset;
 
-  const syncedKeywordFromUrlRef = useRef<string | null>(null);
-
   useEffect(() => {
-    if (syncedKeywordFromUrlRef.current === keywordFromUrl) return;
-    syncedKeywordFromUrlRef.current = keywordFromUrl;
-    resetRef.current({ noticeSearch: keywordFromUrl });
-  }, [keywordFromUrl]);
+    reset({ noticeSearch: keywordFromUrl });
+  }, [keywordFromUrl, reset]);
 
   const handleSearchSubmit = ({ noticeSearch }: FieldValues) => {
     const trimmed = typeof noticeSearch === "string" ? noticeSearch.trim() : "";
