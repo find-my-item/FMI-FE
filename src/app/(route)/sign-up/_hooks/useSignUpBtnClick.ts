@@ -54,7 +54,8 @@ export const useSignUpBtnClick = () => {
                     setEmailValue(inputValue);
                   },
                   onError: (error) => {
-                    handlerApiError(EMAIL_ERROR_MESSAGE, error.code);
+                    const errorCode = error.response?.data.code;
+                    handlerApiError(EMAIL_ERROR_MESSAGE, errorCode);
                   },
                 }
               );
