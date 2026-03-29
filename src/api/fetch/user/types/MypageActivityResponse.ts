@@ -1,5 +1,4 @@
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
-import { ActivityType } from "@/types";
 
 export interface MypageActivityResponse extends ApiBaseResponseType<MypageActivityType> {}
 
@@ -15,9 +14,19 @@ export interface ActivityGroupItemType {
 }
 
 export interface ActivityEachItemType {
-  type: ActivityType;
+  type: ActivityDetailType;
   id: number;
   title: string;
   content: string;
   createdAt: string;
 }
+
+// TODO(수현): 백엔드 수정 후 타입 확인 필요
+export type ActivityDetailType =
+  | "POST"
+  | "COMMENT"
+  | "FAVORITE"
+  | "INQUIRY"
+  | "REPORT"
+  | "INQUIRY_REPLY"
+  | "REPORT_RESULT";
