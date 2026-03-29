@@ -8,7 +8,7 @@ export const REPORTS_LABEL_MAP: Record<ReportFilterStatus, string> = {
 };
 
 export const REPORTS_KEBAB_OPTIONS = [
-  { label: "전체", value: "ALL" },
+  { label: "전체", value: undefined },
   { label: "접수", value: "PENDING" },
   { label: "처리 중", value: "REVIEWED" },
   { label: "처리 완료", value: "RESOLVED" },
