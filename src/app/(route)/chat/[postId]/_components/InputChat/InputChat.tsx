@@ -88,7 +88,7 @@ const InputChat = ({ name, validation, disabled, roomId, userId, ...props }: Inp
               {/* 전송 버튼 */}
               <button
                 type="submit"
-                className="relative h-11 w-11 shrink-0 rounded-full bg-fill-brand-normal-default hover:bg-fill-brand-normal-disabled active:bg-fill-brand-normal-default disabled:bg-fill-brand-normal-disabled"
+                className="relative h-11 w-11 shrink-0 rounded-full transition-colors bg-fill-brand-normal-default hover:bg-fill-brand-normal-disabled active:bg-fill-brand-normal-default disabled:bg-fill-brand-normal-disabled"
                 aria-label="전송 버튼"
                 disabled={disabled || !field.value?.trim()}
               >
