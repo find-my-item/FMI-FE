@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { PublicDataItemCard } from "../../../../_components/_internal";
 import { EmptyState, LoadingState } from "@/components/state";
 import { useInfiniteScroll } from "@/hooks";
@@ -10,6 +10,7 @@ import { usePublicDataListQuery } from "../../../../_hooks/usePublicDataListQuer
 
 const PublicDataSearchList = () => {
   const { addToast } = useToast();
+  const hasErrorToastShown = useRef(false);
 
   const { data, isLoading, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =
     usePublicDataListQuery();
@@ -30,21 +31,25 @@ const PublicDataSearchList = () => {
 
   useEffect(() => {
     if (isError) {
-      addToast("데이터를 불러오지 못했어요.", "error");
+      if (!hasErrorToastShown.current) {
+        addToast("데이터를 불러오지 못했어요.", "error");
+        hasErrorToastShown.current = true;
+      }
+    } else {
+      hasErrorToastShown.current = false;
     }
   }, [isError, addToast]);
 
   if (isLoading) return <LoadingState />;
 
-  // TODO(지권): Empty 아이콘 변경 예정
   if (items.length === 0) {
     return (
       <EmptyState
         icon={{
-          iconName: "Search",
+          iconName: "NoPublicDataSearch",
           iconSize: 70,
         }}
-        title="조회된 검색결과가 없습니다."
+        title="검색 결과가 없습니다."
       />
     );
   }
