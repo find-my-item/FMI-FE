@@ -1,8 +1,9 @@
 import { Suspense } from "react";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { DetailHeader } from "@/components/layout";
 import { formatMetadataKeyword } from "@/utils";
-import { PublicDataSearchContent } from "./_components";
+import { PublicDataSearchContent, PublicDataSearchDetailHeader } from "./_components";
 
 interface PageProps {
   searchParams: Promise<{ keyword?: string }>;
@@ -24,7 +25,7 @@ export async function generateMetadata({ searchParams }: PageProps): Promise<Met
 const page = () => {
   return (
     <>
-      <DetailHeader title="게시글 검색" />
+      <PublicDataSearchDetailHeader />
 
       <Suspense fallback={null}>
         <PublicDataSearchContent />
