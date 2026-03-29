@@ -1,3 +1,4 @@
+import { GetByIdInquiryResponseType } from "@/api/fetch/inquiry";
 import { BlockUserItem } from "@/api/fetch/report";
 
 export const MOCK_MYPAGE_COMMENTS_ITEM = [
@@ -200,3 +201,73 @@ export const MOCK_MYPAGE_BLOCK_USER: BlockUserItem[] = [
     nickname: "사용자닉네임최대열자",
   },
 ];
+
+export const MOCK_MYPAGE_INQUIRY_DETAIL = {
+  result: {
+    nickname: "김찾아",
+    email: "findme_user@example.com",
+    inquiryId: 101,
+    title: "문의 게시글 이미지가 보이지 않아요",
+    content:
+      "마이페이지 문의내역 상세 화면에서 첨부한 이미지가 노출되지 않고 있습니다.\n모바일 환경과 데스크톱 환경 모두에서 동일하게 발생하고 있어 확인 부탁드립니다.",
+    status: "PENDING" as const,
+    createdAt: "2026-03-29T10:30:00",
+    imageUrls: [
+      "https://picsum.photos/seed/inquiry-detail-1/640/480",
+      "https://picsum.photos/seed/inquiry-detail-2/640/480",
+    ],
+    comments: [
+      {
+        id: 1,
+        content:
+          "안녕하세요. 문의 주신 내용 확인했습니다. 현재 이미지 렌더링 관련 이슈를 점검 중이며, 확인 후 다시 안내드리겠습니다.",
+        authorId: 999,
+        authorName: "관리자",
+        authorEmail: "admin@findme.com",
+        profileImg: "https://picsum.photos/seed/admin-profile-1/80/80",
+        parentId: 0,
+        replies: [
+          "확인 감사합니다. 혹시 예상 수정 일정도 알 수 있을까요?",
+          "추가로 iOS Safari 환경에서 더 자주 발생하는 것 같습니다.",
+        ],
+        imageList: [],
+        canEdit: true,
+        canDelete: true,
+        createdAt: "2026-03-29T11:00:00",
+        admin: true,
+      },
+      {
+        id: 2,
+        content:
+          "ㄴㅇㄹㅁ나엉ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ",
+        authorId: 12,
+        authorName: "김찾아",
+        authorEmail: "findme_user@example.com",
+        profileImg: "https://picsum.photos/seed/user-profile-1/80/80",
+        parentId: 1,
+        replies: [],
+        imageList: ["https://picsum.photos/seed/comment-image-1/640/480"],
+        canEdit: true,
+        canDelete: true,
+        createdAt: "2026-03-29T11:12:00",
+        admin: false,
+      },
+      {
+        id: 3,
+        content:
+          "현재 원인 파악이 완료되어 수정 작업 중입니다. 반영 후 다시 댓글로 안내드리겠습니다.",
+        authorId: 999,
+        authorName: "관리자",
+        authorEmail: "admin@findme.com",
+        profileImg: "https://picsum.photos/seed/admin-profile-2/80/80",
+        parentId: 0,
+        replies: [],
+        imageList: [],
+        canEdit: true,
+        canDelete: true,
+        createdAt: "2026-03-29T13:40:00",
+        admin: true,
+      },
+    ],
+  },
+};

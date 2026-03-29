@@ -8,7 +8,7 @@ export const INQUIRIES_LABEL_MAP: Record<InquiryFilterStatus, string> = {
 };
 
 export const INQUIRIES_KEBAB_OPTIONS = [
-  { label: "전체", value: "ALL" },
+  { label: "전체", value: undefined },
   { label: "접수", value: "RECEIVED" },
   { label: "검토 중", value: "PENDING" },
   { label: "답변 완료", value: "ANSWERED" },
