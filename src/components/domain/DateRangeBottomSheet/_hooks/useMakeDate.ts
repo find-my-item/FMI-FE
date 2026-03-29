@@ -54,6 +54,16 @@ const useMakeDate = (queryDate?: { year: number; month: number; day: number }) =
 
   useEffect(() => {
     if (!queryDate) return;
+
+    const isDifferent =
+      selectDate.year !== queryDate.year ||
+      selectDate.month !== queryDate.month ||
+      selectDate.day !== queryDate.day;
+
+    if (isDifferent) {
+      setSelectDate(queryDate);
+    }
+
     setSelectDate((prev) =>
       prev.year === queryDate.year && prev.month === queryDate.month && prev.day === queryDate.day
         ? prev
@@ -98,12 +108,17 @@ const useMakeDate = (queryDate?: { year: number; month: number; day: number }) =
     });
   };
 
+  const handleResetDate = () => {
+    setSelectDate({ year: currentYear, month: currentMonth, day: currentDate });
+  };
+
   return {
     years,
     months,
     days,
     selectDate,
     handleDateChange,
+    handleResetDate,
   };
 };
 

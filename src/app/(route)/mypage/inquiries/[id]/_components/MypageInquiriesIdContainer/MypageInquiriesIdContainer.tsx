@@ -3,12 +3,14 @@
 import { useGetUserInquiryById } from "@/api/fetch/inquiry";
 import { LoadingState } from "@/components/state";
 import { useToast } from "@/context/ToastContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { INQUIRY_STATUS_CHIP } from "../../../_constants/INQUIRY_STATUS_CHIP";
 import { Chip } from "@/components/common";
 import { formatDate } from "@/utils";
 import Image from "next/image";
 import InquiryCommentItem from "../InquiryCommentItem/InquiryCommentItem";
+import { MOCK_MYPAGE_INQUIRY_DETAIL } from "@/mock/data";
+import { ImageViewerModal } from "@/components/domain";
 
 interface MypageInquiriesIdContainerProps {
   id: number;
@@ -29,32 +31,62 @@ const MypageInquiriesIdContainer = ({ id }: MypageInquiriesIdContainerProps) => 
 
   const { title, content, status, createdAt, imageUrls, comments } = result;
 
+  const [imageViewerState, setImageViewerState] = useState<{
+    isOpen: boolean;
+    initialIndex: number;
+  }>({ isOpen: false, initialIndex: 0 });
+
   return (
     <div className="w-full h-base">
-      <div className="border-b-flat-gray-50 w-full border-b px-5 py-[30px]">
-        <Chip
-          label={INQUIRY_STATUS_CHIP[status].label}
-          type={INQUIRY_STATUS_CHIP[status].chipType}
-        />
-        <h2 className="mt-[14px] text-h2-medium">{title}</h2>
-        <time dateTime={createdAt} className="mt-1 text-body2-regular text-layout-body-default">
-          {formatDate(createdAt)}
-        </time>
-        <p className="mt-6 text-body1-regular text-layout-header-default">{content}</p>
+      <div className="border-b-flat-gray-50 flex w-full flex-col gap-[14px] border-b px-5 py-[30px]">
+        <div>
+          <Chip
+            label={INQUIRY_STATUS_CHIP[status].label}
+            type={INQUIRY_STATUS_CHIP[status].chipType}
+          />
+        </div>
 
-        {imageUrls &&
-          imageUrls.length > 0 &&
-          imageUrls.map((imageUrl, index) => (
-            <Image
-              key={index}
-              alt={`이미지 ${index + 1}`}
-              src={imageUrl}
-              width={0}
-              height={0}
-              sizes="100vw"
-              style={{ width: "100%", height: "auto" }}
-            />
-          ))}
+        <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-1">
+              <h2 className="text-h2-medium">{title}</h2>
+              <time
+                dateTime={createdAt}
+                className="mt-1 text-body2-regular text-layout-body-default"
+              >
+                {formatDate(createdAt)}
+              </time>
+            </div>
+
+            <p className="inline-block text-body1-regular text-layout-header-default">{content}</p>
+          </div>
+
+          <div className="gap-[14px] flex-col-center">
+            {imageUrls &&
+              imageUrls.length > 0 &&
+              imageUrls.map((imageUrl, index) => (
+                <Image
+                  key={index}
+                  alt={`이미지 ${index + 1}`}
+                  src={imageUrl}
+                  width={0}
+                  height={0}
+                  sizes="100vw"
+                  style={{ width: "100%", height: "auto", borderRadius: "10px" }}
+                  className="cursor-pointer"
+                  aria-label={`${index + 1}번째 이미지 보기`}
+                  onClick={() => setImageViewerState({ isOpen: true, initialIndex: index })}
+                />
+              ))}
+          </div>
+        </div>
+
+        <ImageViewerModal
+          images={imageUrls}
+          initialIndex={imageViewerState.initialIndex}
+          isOpen={imageViewerState.isOpen}
+          onClose={() => setImageViewerState((prev) => ({ ...prev, isOpen: false }))}
+        />
       </div>
 
       {comments && (
