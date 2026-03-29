@@ -12,7 +12,13 @@ import { useFormContext } from "react-hook-form";
 const DeleteAccountPassword = ({ onBack }: { onBack: () => void }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const { addToast } = useToast();
-  const { handleSubmit, getValues, watch, setError } = useFormContext();
+  const {
+    handleSubmit,
+    getValues,
+    watch,
+    setError,
+    formState: { isSubmitting },
+  } = useFormContext();
   const { mutate: VerifyPasswordMutate, isPending } = usePostVerifyPassword();
 
   useEffect(() => {
@@ -58,7 +64,7 @@ const DeleteAccountPassword = ({ onBack }: { onBack: () => void }) => {
 
   return (
     <>
-      <div className="flex w-full flex-col gap-[18px] px-5 py-[30px] h-base">
+      <div className="flex w-full flex-col gap-[18px] px-5 py-[30px] h-hf-base">
         <h3 className="text-h3-semibold text-[#171717]">비밀번호를 입력해 주세요.</h3>
 
         <InputText
@@ -79,7 +85,7 @@ const DeleteAccountPassword = ({ onBack }: { onBack: () => void }) => {
 
       {modalOpen && (
         <ModalLayout
-          className="w-[350px] gap-6 p-6 flex-col-center"
+          className="w-[350px] gap-6 rounded-[8px] p-6 flex-col-center"
           isOpen={modalOpen}
           onClose={() => setModalOpen(false)}
         >
@@ -88,6 +94,7 @@ const DeleteAccountPassword = ({ onBack }: { onBack: () => void }) => {
           <div className="flex w-full gap-2">
             <Button
               variant="outlined"
+              size="big"
               className="w-full"
               onClick={() => {
                 setModalOpen(false);
@@ -97,12 +104,14 @@ const DeleteAccountPassword = ({ onBack }: { onBack: () => void }) => {
               취소
             </Button>
             <Button
+              size="big"
               onClick={() => {
                 handleSubmit((data) => {
                   const formElement = document.querySelector("form");
                   formElement?.requestSubmit();
                 })();
               }}
+              loading={isSubmitting}
               className="w-full !bg-system-warning"
             >
               탈퇴하기
