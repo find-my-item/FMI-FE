@@ -16,6 +16,7 @@ interface LinkWrapperProps {
 interface ChatRoomHeaderProps {
   chatRoom: ChatRoomResponse | undefined;
   roomId: number;
+  currentUserId?: number;
 }
 
 const LinkWrapper = ({ deleted, children, href }: LinkWrapperProps) => {
@@ -36,11 +37,14 @@ const LinkWrapper = ({ deleted, children, href }: LinkWrapperProps) => {
   );
 };
 
-const ChatRoomHeader = ({ chatRoom, roomId }: ChatRoomHeaderProps) => {
+const NICK_NAME_STYLE = "text-body2-semibold text-layout-body-default";
+
+const ChatRoomHeader = ({ chatRoom, roomId, currentUserId }: ChatRoomHeaderProps) => {
   if (!chatRoom) return null;
   const { address, postType, title, thumbnailUrl, postId, category, postStatus, deleted } =
     chatRoom.postInfo;
-  const { nickname } = chatRoom.opponentUser;
+  const { nickname, opponentUserId } = chatRoom.opponentUser;
+  const isOwnPostChatRoom = currentUserId === opponentUserId;
 
   return (
     <header className="pb-3">
@@ -54,7 +58,17 @@ const ChatRoomHeader = ({ chatRoom, roomId }: ChatRoomHeaderProps) => {
           <Icon name="ArrowLeftSmall" size={18} className="text-neutral-normal-default" />
         </Link>
 
-        <p className="text-body2-semibold text-layout-body-default">{nickname}</p>
+        {isOwnPostChatRoom ? (
+          <p className={NICK_NAME_STYLE}>{nickname}</p>
+        ) : (
+          <Link
+            href={`/user/${opponentUserId}`}
+            aria-label="상대방 프로필 이동"
+            className={NICK_NAME_STYLE}
+          >
+            {nickname}
+          </Link>
+        )}
 
         <ChatRoomHeaderInfoButton roomId={roomId} />
       </nav>
