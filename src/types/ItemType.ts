@@ -37,14 +37,6 @@ export type PostType = "LOST" | "FOUND";
 
 export type ItemStatus = "SEARCHING" | "FOUND";
 
-// TODO(수현): 백엔드 수정 후 타입 확인 필요
-export type ActivityType =
-  | "POST"
-  | "COMMENT"
-  | "FAVORITE"
-  | "INQUIRY"
-  | "REPORT"
-  | "INQUIRY_REPLY"
-  | "REPORT_RESULT";
+export type ActivityType = "POST" | "COMMENT" | "FAVORITE" | "INQUIRY" | "REPORT";
 
 export type SimpleSortType = "LATEST" | "OLDEST";
