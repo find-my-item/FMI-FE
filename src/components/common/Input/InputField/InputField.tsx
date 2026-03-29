@@ -80,7 +80,7 @@ const InputField = ({
           id={name}
           {...props}
           className={cn(
-            "text-body4-regular h-[120px] w-full resize-none rounded-[10px] border border-neutral-normal-default p-3",
+            "text-body4-regular h-[120px] w-full resize-none rounded-[10px] border border-neutral-normal-default p-3 pr-9",
             "hover:border-neutral-normal-hover focus:border-neutral-normal-focused disabled:border-neutral-normal-disabled disabled:bg-fill-neutral-normal-disabled",
             !!errors[name] && "!border-system-warning",
             isValue && "focus:border-neutral-normal-focused"
