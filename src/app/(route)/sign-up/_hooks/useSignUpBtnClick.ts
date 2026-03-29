@@ -54,7 +54,10 @@ export const useSignUpBtnClick = () => {
                     setEmailValue(inputValue);
                   },
                   onError: (error) => {
-                    handlerApiError(EMAIL_ERROR_MESSAGE, error.code);
+                    const errorCode = error.response?.data.code;
+                    if (errorCode) {
+                      handlerApiError(EMAIL_ERROR_MESSAGE, errorCode, "email");
+                    }
                   },
                 }
               );
@@ -69,7 +72,9 @@ export const useSignUpBtnClick = () => {
                     setIsEmailAuthVerified(true);
                   },
                   onError: (error) => {
-                    handlerApiError(EMAIL_CHECK_CODE_MESSAGE, error.code);
+                    const errorCode = error.response?.data.code;
+                    if (errorCode)
+                      handlerApiError(EMAIL_CHECK_CODE_MESSAGE, errorCode, "emailAuth");
                   },
                 }
               );
