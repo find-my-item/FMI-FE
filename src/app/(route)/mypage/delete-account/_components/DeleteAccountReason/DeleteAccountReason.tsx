@@ -8,7 +8,12 @@ import { CheckBox, InputField } from "@/components/common";
 import { useFormContext } from "react-hook-form";
 
 const DeleteAccountReason = ({ onNext }: { onNext: () => void }) => {
-  const { setValue, watch, register } = useFormContext();
+  const {
+    setValue,
+    watch,
+    register,
+    formState: { isValid },
+  } = useFormContext();
   const selectedValues: string[] = watch("reasons") || [];
 
   const handleCheckboxChange = (value: string) => {
@@ -49,7 +54,12 @@ const DeleteAccountReason = ({ onNext }: { onNext: () => void }) => {
                 {isChecked && item.value === "OTHER" && (
                   <InputField
                     name="otherReason"
-                    validation={{ maxLength: 300 }}
+                    validation={{
+                      maxLength: 300,
+                      required: selectedValues.includes("OTHER")
+                        ? "기타 사유를 입력해주세요."
+                        : false,
+                    }}
                     placeholder="서비스를 탈퇴하려는 이유를 작성해 주세요."
                   />
                 )}
@@ -59,7 +69,7 @@ const DeleteAccountReason = ({ onNext }: { onNext: () => void }) => {
         </div>
       </div>
 
-      <FooterButton onClick={() => onNext()} disabled={selectedValues.length === 0}>
+      <FooterButton onClick={() => onNext()} disabled={selectedValues.length === 0 || !isValid}>
         다음
       </FooterButton>
     </>

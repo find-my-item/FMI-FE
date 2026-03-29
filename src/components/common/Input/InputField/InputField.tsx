@@ -73,12 +73,7 @@ const InputField = ({
 
   return (
     <div className="flex w-full flex-col gap-1">
-      <Label
-        name={name}
-        label={label}
-        required={!!validation?.required}
-        className="text-body2-regular text-layout-body-default"
-      />
+      <Label name={name} label={label} className="text-body2-regular text-layout-body-default" />
 
       <div className="relative">
         <textarea
