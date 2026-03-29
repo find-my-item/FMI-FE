@@ -7,7 +7,9 @@ import { cn } from "@/utils";
 import { Suspense, useEffect, useRef, useState } from "react";
 import SearchFocusDropdown from "../SearchFocusDropdown/SearchFocusDropdown";
 import MainSearchLayout from "../MainSearchLayout/MainSearchLayout";
-import { useMainRecentSearch } from "@/store";
+import { DEFAULT_ADDRESS } from "@/constants";
+import { useGeolocationPermissionGranted } from "@/hooks";
+import { useMainKakaoMapStore, useMainRecentSearch } from "@/store";
 
 interface LocationFormValues {
   search: string;
@@ -18,6 +20,8 @@ interface FocusedProps {
   focused: boolean;
 }
 
+const LOCATION_PLACEHOLDER_DEFAULT = "현재 위치 (위치 정보 허용 시)";
+
 const HeaderSearchForm = ({
   searchValue,
   setFocused,
@@ -26,6 +30,12 @@ const HeaderSearchForm = ({
 }: FocusedProps & { searchValue: string | null; setSearchKeyword: (value: string) => void }) => {
   const router = useRouter();
   const addRecentSearch = useMainRecentSearch((s) => s.addRecentSearch);
+  const address = useMainKakaoMapStore((s) => s.address);
+  const geoGranted = useGeolocationPermissionGranted();
+  const isResolvedAddress = address.trim().length > 0 && address.trim() !== DEFAULT_ADDRESS;
+  const locationPlaceholder =
+    geoGranted && isResolvedAddress ? address : LOCATION_PLACEHOLDER_DEFAULT;
+
   const inputRef = useRef<HTMLInputElement>(null);
   const { register, handleSubmit, setValue } = useForm<LocationFormValues>({
     defaultValues: { search: searchValue ?? "" },
@@ -78,7 +88,7 @@ const HeaderSearchForm = ({
         className={cn(
           "w-full pl-8 text-h3-semibold text-flatGray-700 placeholder:text-flatGray-700"
         )}
-        placeholder="현재 위치 (위치 정보 허용 시)"
+        placeholder={locationPlaceholder}
       />
       <button
         type="button"
