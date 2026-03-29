@@ -1,7 +1,6 @@
 "use client";
 
 import { Icon, ListItemImage } from "@/components/common";
-import { useRouter } from "next/navigation";
 import ChatChip from "../ChatChip/ChatChip";
 import ChatRoomHeaderInfoButton from "../ChatRoomHeaderInfoButton/ChatRoomHeaderInfoButton";
 import { ChatRoomResponse } from "@/api/fetch/chatRoom/types/ChatRoomResponse";
@@ -38,7 +37,6 @@ const LinkWrapper = ({ deleted, children, href }: LinkWrapperProps) => {
 };
 
 const ChatRoomHeader = ({ chatRoom, roomId }: ChatRoomHeaderProps) => {
-  const router = useRouter();
   if (!chatRoom) return null;
   const { address, postType, title, thumbnailUrl, postId, category, postStatus, deleted } =
     chatRoom.postInfo;
@@ -47,14 +45,14 @@ const ChatRoomHeader = ({ chatRoom, roomId }: ChatRoomHeaderProps) => {
   return (
     <header className="pb-3">
       <nav className="flex items-center justify-between px-4 py-1">
-        <button
+        <Link
+          replace
+          href="/chat"
           className="flex h-10 w-10 items-center"
           aria-label="뒤로 가기 버튼"
-          onClick={() => router.back()}
-          type="button"
         >
           <Icon name="ArrowLeftSmall" size={18} className="text-neutral-normal-default" />
-        </button>
+        </Link>
 
         <p className="text-body2-semibold text-layout-body-default">{nickname}</p>
 
