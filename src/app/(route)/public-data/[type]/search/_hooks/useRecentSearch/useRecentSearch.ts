@@ -12,7 +12,7 @@ export const useRecentSearch = () => {
       try {
         setRecentSearches(JSON.parse(stored));
       } catch (e) {
-        console.error("Failed to parse recent searches", e);
+        // no-op
       }
     }
   }, [key]);
