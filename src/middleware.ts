@@ -62,7 +62,7 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/mypage/:path+",
+    // "/mypage/:path+",
     "/login/:path*",
     "/sign-up",
     "/write/:path*",

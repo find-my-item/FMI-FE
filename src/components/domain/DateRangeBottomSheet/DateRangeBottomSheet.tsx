@@ -168,10 +168,6 @@ const DateRangeBottomSheet = <T extends DateRangeFilterBase>({
     >
       <div className="w-full gap-8 flex-col-center">
         <h2 className="text-h2-medium">기간 설정</h2>
-        {/* TODO(수현): 임시 초기화 버튼  */}
-        <Filter ariaLabel="날짜 초기화 버튼" onSelected={false} onClick={handleResetToToday}>
-          오늘 날짜
-        </Filter>
 
         {/* 상단 탭 버튼 */}
         <div className="flex gap-[14px]">
@@ -190,6 +186,16 @@ const DateRangeBottomSheet = <T extends DateRangeFilterBase>({
             onClick={() => setActiveTab("endDate")}
           >
             종료일
+          </Filter>
+
+          {/* TODO(수현): 임시 초기화 버튼  */}
+          <Filter
+            ariaLabel="날짜 초기화 버튼"
+            onSelected={false}
+            className="!px-10 !py-2"
+            onClick={handleResetToToday}
+          >
+            초기화
           </Filter>
         </div>
 
