@@ -30,13 +30,31 @@ const HeaderSearchForm = ({
 }: FocusedProps & { searchValue: string | null; setSearchKeyword: (value: string) => void }) => {
   const router = useRouter();
   const addRecentSearch = useMainRecentSearch((s) => s.addRecentSearch);
-  const address = useMainKakaoMapStore((s) => s.address);
+  const userGpsAddress = useMainKakaoMapStore((s) => s.userGpsAddress);
+  const userGpsLatLng = useMainKakaoMapStore((s) => s.userGpsLatLng);
+  const setUserGpsFromDevice = useMainKakaoMapStore((s) => s.setUserGpsFromDevice);
   const geoGranted = useGeolocationPermissionGranted();
-  const isResolvedAddress = address.trim().length > 0 && address.trim() !== DEFAULT_ADDRESS;
+  const isResolvedGpsAddress =
+    userGpsAddress.trim().length > 0 && userGpsAddress.trim() !== DEFAULT_ADDRESS;
   const locationPlaceholder =
-    geoGranted && isResolvedAddress ? address : LOCATION_PLACEHOLDER_DEFAULT;
+    geoGranted && isResolvedGpsAddress ? userGpsAddress : LOCATION_PLACEHOLDER_DEFAULT;
 
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (!geoGranted || userGpsLatLng) return;
+    if (typeof navigator === "undefined" || !navigator.geolocation) return;
+
+    navigator.geolocation.getCurrentPosition(
+      ({ coords }) => {
+        setUserGpsFromDevice({
+          lat: coords.latitude,
+          lng: coords.longitude,
+        });
+      },
+      () => {}
+    );
+  }, [geoGranted, userGpsLatLng, setUserGpsFromDevice]);
   const { register, handleSubmit, setValue } = useForm<LocationFormValues>({
     defaultValues: { search: searchValue ?? "" },
   });
