@@ -12,7 +12,7 @@ import { useFormContext } from "react-hook-form";
 const DeleteAccountPassword = ({ onBack }: { onBack: () => void }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const { addToast } = useToast();
-  const { handleSubmit, getValues, watch } = useFormContext();
+  const { handleSubmit, getValues, watch, setError } = useFormContext();
   const { mutate: VerifyPasswordMutate, isPending } = usePostVerifyPassword();
 
   useEffect(() => {
@@ -37,10 +37,18 @@ const DeleteAccountPassword = ({ onBack }: { onBack: () => void }) => {
           setModalOpen(true);
         },
         onError: (error) => {
-          if (error.code === "USER400-PASSWORD_INCORRECT") {
+          const errorCode = error.response?.data.code;
+
+          if (errorCode === "USER400-PASSWORD_INCORRECT") {
+            setError("passwordConfirm", {
+              message: "비밀번호가 일치하지 않아요.",
+            });
             addToast("비밀번호가 일치하지 않아요", "warning");
-          } else if (error.code === "USER404-NOT_FOUND")
-            addToast("존재하지 않는 회원이에요", "warning");
+          } else if (errorCode === "USER404-NOT_FOUND")
+            setError("passwordConfirm", {
+              message: "존재하지 않는 회원이에요.",
+            });
+          addToast("존재하지 않는 회원이에요", "warning");
         },
       }
     );
