@@ -13,6 +13,7 @@ import {
 import {
   CategoryFilterValue,
   FilterTab,
+  FindStatusFilterValue,
   SortFilterValue,
   StatusFilterValue,
 } from "../_types/types";
@@ -82,6 +83,7 @@ const FilterSection = ({ pageType = "LIST" }: FilterSectionProps) => {
       category: normalizeEnumValue<Exclude<CategoryFilterValue, undefined>>(category),
       sort: normalizeEnumValue<SortFilterValue>(sort) ?? "LATEST",
       status: normalizeEnumValue<Exclude<StatusFilterValue, undefined>>(status),
+      findStatus: normalizeEnumValue<Exclude<FindStatusFilterValue, undefined>>(findStatus),
     });
     setSelectedTab(tab);
 

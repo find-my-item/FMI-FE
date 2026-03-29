@@ -12,9 +12,12 @@ export const usePutPost = (postId: number) => {
   const queryClient = useQueryClient();
 
   return useAppMutation<FormData, PostPostsWriteResponse>("auth", `/posts/${postId}`, "put", {
-    onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ["post-detail", postId] });
-      queryClient.invalidateQueries({ queryKey: ["posts"] });
+    onSuccess: async (data) => {
+      Promise.all([
+        queryClient.invalidateQueries({ queryKey: ["post-detail", postId] }),
+        queryClient.invalidateQueries({ queryKey: ["posts"] }),
+        queryClient.invalidateQueries({ queryKey: ["/users/me/posts"] }),
+      ]);
       addToast("게시글이 수정되었어요", "success");
       router.replace(`/list/${data.result.id}`);
     },
