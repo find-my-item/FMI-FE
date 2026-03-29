@@ -8,8 +8,8 @@ const Alert = () => {
 
   return (
     <>
-      <AlertDetailHeader isDeleteMode={isDeleteMode} setIsDeleteMode={setIsDeleteMode} />
       <Suspense fallback="">
+        <AlertDetailHeader isDeleteMode={isDeleteMode} setIsDeleteMode={setIsDeleteMode} />
         <AlertCategory />
         <AlertView isDeleteMode={isDeleteMode} setIsDeleteMode={setIsDeleteMode} />
       </Suspense>

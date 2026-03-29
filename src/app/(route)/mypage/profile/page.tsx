@@ -1,4 +1,5 @@
 "use client";
+"use no memo";
 
 import { Suspense } from "react";
 import { ProfileEditSection } from "@/components/domain";
