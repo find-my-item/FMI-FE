@@ -14,14 +14,17 @@ import { MARKER_ID } from "../../_constants/QUERY_PARAMS";
 import { BetaTestMainBanner } from "@/components/domain";
 import PermissionSheet from "../PermissionBottomSheet/PermissionBottomSheet";
 import { usePermissionStore } from "@/store";
+import { cn } from "@/utils";
 
 const BottomSheetContent = () => {
   const searchParams = useSearchParams();
   const searchValue = searchParams.get("search");
   const markerId = searchParams.get(MARKER_ID);
   const [contentHeights, setContentHeights] = useState<DefaultSheetContentHeights | null>(null);
-  const { height, isFullyExpanded, handlePointerDown, handlePointerUp } =
+  const { height, isFullyExpanded, isInitialized, handlePointerDown, handlePointerUp } =
     useBottomSheetHeight(contentHeights);
+  const isDefaultMode = !searchValue && !markerId;
+  const isBottomSheetReady = isInitialized && (!isDefaultMode || contentHeights !== null);
 
   const handleSectionHeights = useCallback((heights: DefaultSheetContentHeights) => {
     setContentHeights(heights);
@@ -30,7 +33,11 @@ const BottomSheetContent = () => {
   return (
     <motion.div
       style={{ height, bottom: `${BOTTOM_OFFSET_PX}px` }}
-      className="fixed left-0 right-0 z-50 mx-auto max-w-[768px] select-none border-x-2"
+      className={cn(
+        "fixed left-0 right-0 z-50 mx-auto max-w-[768px] select-none border-x-2",
+        !isBottomSheetReady && "pointer-events-none invisible"
+      )}
+      aria-hidden={!isBottomSheetReady}
     >
       {!isFullyExpanded && (
         <div className="relative">

@@ -12,21 +12,13 @@ const RecentFoundItemSection = () => {
   const address = useMainKakaoMapStore((s) => s.address);
   const latLng = useMainKakaoMapStore((s) => s.latLng);
   const syncAddressFromLatLng = useMainKakaoMapStore((s) => s.syncAddressFromLatLng);
-  const cancelAddressResolve = useMainKakaoMapStore((s) => s.cancelAddressResolve);
 
   const result = recentFoundItems?.result;
-  const hasRecentItems = Array.isArray(result) && result.length > 0;
 
   useEffect(() => {
     if (isLoading) return;
-
-    if (!hasRecentItems) {
-      cancelAddressResolve();
-      return;
-    }
-
     syncAddressFromLatLng();
-  }, [isLoading, hasRecentItems, latLng, syncAddressFromLatLng, cancelAddressResolve]);
+  }, [isLoading, latLng, syncAddressFromLatLng]);
 
   if (!isLoading && Array.isArray(result) && result.length === 0) {
     return <RecentFoundItemEmpty />;

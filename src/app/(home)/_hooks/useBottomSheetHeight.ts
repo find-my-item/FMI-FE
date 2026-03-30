@@ -8,6 +8,7 @@ import { MARKER_ID } from "../_constants/QUERY_PARAMS";
 import { getMaxHeightPx, getSnapHeights, DefaultSheetContentHeights } from "../_utils/heightUtils";
 import { useMainKakaoMapStore } from "@/store";
 
+const FULLY_EXPANDED_HEIGHT_RATIO = 0.8;
 const FULLY_EXPANDED_TOLERANCE_PX = 2;
 
 interface PointerHandlerEvent {
@@ -16,35 +17,45 @@ interface PointerHandlerEvent {
   clientY: number;
 }
 
+const getTargetHeight = ({
+  searchValue,
+  markerId,
+  contentHeights,
+}: {
+  searchValue: string | null;
+  markerId: string | null;
+  contentHeights: DefaultSheetContentHeights | null;
+}) => {
+  const max = getMaxHeightPx();
+  const points = getSnapHeights(max, { searchValue, contentHeights, markerId });
+
+  if (searchValue) return max;
+  return points[2];
+};
+
 const useBottomSheetHeight = (contentHeights: DefaultSheetContentHeights | null = null) => {
   const [snapHeights, setSnapHeights] = useState<number[]>([]);
   const [isFullyExpanded, setIsFullyExpanded] = useState(false);
-  const height = useMotionValue(INITIAL_HEIGHT_PX);
+  const [isInitialized, setIsInitialized] = useState(false);
   const moveListenerRef = useRef<((e: PointerEvent) => void) | null>(null);
   const searchParams = useSearchParams();
   const searchValue = searchParams.get("search");
   const markerId = searchParams.get(MARKER_ID);
   const markerSheetSnapSignal = useMainKakaoMapStore((s) => s.markerSheetSnapSignal);
+  const height = useMotionValue(INITIAL_HEIGHT_PX);
 
   useMotionValueEvent(height, "change", (latest: number) => {
     const max = getMaxHeightPx();
-    setIsFullyExpanded(latest >= max - FULLY_EXPANDED_TOLERANCE_PX);
+    const thresholdPx = max * FULLY_EXPANDED_HEIGHT_RATIO;
+    setIsFullyExpanded(latest >= thresholdPx - FULLY_EXPANDED_TOLERANCE_PX);
   });
 
   useEffect(() => {
     const max = getMaxHeightPx();
     const points = getSnapHeights(max, { searchValue, contentHeights, markerId });
     setSnapHeights(points);
-
-    if (searchValue) {
-      height.set(max);
-      return;
-    }
-    if (markerId) {
-      height.set(points[2]);
-      return;
-    }
-    height.set(points[2]);
+    height.set(getTargetHeight({ searchValue, markerId, contentHeights }));
+    setIsInitialized(true);
   }, [searchValue, markerId, contentHeights, markerSheetSnapSignal]);
 
   useEffect(() => {
@@ -98,7 +109,7 @@ const useBottomSheetHeight = (contentHeights: DefaultSheetContentHeights | null 
     }
   };
 
-  return { height, isFullyExpanded, handlePointerDown, handlePointerUp };
+  return { height, isFullyExpanded, isInitialized, handlePointerDown, handlePointerUp };
 };
 
 export default useBottomSheetHeight;

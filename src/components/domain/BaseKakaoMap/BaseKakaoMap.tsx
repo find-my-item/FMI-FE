@@ -145,7 +145,7 @@ const BaseKakaoMap = ({
   if (error) return <MapErrorState />;
 
   return (
-    <div className="relative h-full w-full">
+    <div className="relative h-full w-full [backface-visibility:hidden] [transform:translateZ(0)]">
       <Map
         center={mapCenter}
         level={level}
