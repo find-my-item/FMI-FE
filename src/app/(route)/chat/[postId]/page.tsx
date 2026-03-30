@@ -2,7 +2,7 @@
 
 import { ChatRoomHeader, EmptyChatRoom, ChatRoomMain, InputChat } from "./_components";
 import { FormProvider, useForm } from "react-hook-form";
-import { use, useEffect } from "react";
+import { use, useCallback, useEffect, useState } from "react";
 import useChatMessages from "@/api/fetch/chatMessage/api/useChatMessages";
 import {
   useChatRoomData,
@@ -23,6 +23,10 @@ const ChatRoom = ({ params }: { params: Promise<{ postId: string }> }) => {
   const { roomId, chatRoomData, userInfo, postMode, unreadCount } = useChatRoomData(postId);
   const userId = Number(userInfo?.result?.userId);
   const currentUserId = userId != null ? userId : undefined;
+  const [scrollToBottomSignal, setScrollToBottomSignal] = useState(0);
+  const triggerScrollToBottom = useCallback(() => {
+    setScrollToBottomSignal((prev) => prev + 1);
+  }, []);
 
   useChatSocketMessage(roomId, currentUserId);
 
@@ -59,6 +63,7 @@ const ChatRoom = ({ params }: { params: Promise<{ postId: string }> }) => {
     roomId,
     userId,
     reset: methods.reset,
+    onSendSuccess: triggerScrollToBottom,
   });
 
   return (
@@ -74,6 +79,7 @@ const ChatRoom = ({ params }: { params: Promise<{ postId: string }> }) => {
             hasNextPage={hasNextPage}
             isFetchingNextPage={isFetchingNextPage}
             opponentNickname={chatRoomData?.opponentUser.nickname}
+            scrollToBottomSignal={scrollToBottomSignal}
           />
         ) : (
           <EmptyChatRoom postMode={postMode} />
@@ -82,7 +88,13 @@ const ChatRoom = ({ params }: { params: Promise<{ postId: string }> }) => {
       {roomId && userId ? (
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)} className="px-4 pb-6 pt-3">
-            <InputChat name="content" aria-label="채팅 입력창" roomId={roomId} userId={userId} />
+            <InputChat
+              name="content"
+              aria-label="채팅 입력창"
+              roomId={roomId}
+              userId={userId}
+              onImageSendSuccess={triggerScrollToBottom}
+            />
           </form>
         </FormProvider>
       ) : null}

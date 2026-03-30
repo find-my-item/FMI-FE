@@ -13,9 +13,18 @@ interface InputChatProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   disabled?: boolean;
   roomId: number;
   userId: number;
+  onImageSendSuccess?: () => void;
 }
 
-const InputChat = ({ name, validation, disabled, roomId, userId, ...props }: InputChatProps) => {
+const InputChat = ({
+  name,
+  validation,
+  disabled,
+  roomId,
+  userId,
+  onImageSendSuccess,
+  ...props
+}: InputChatProps) => {
   const { control } = useFormContext();
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [images, setImages] = useState<File[]>([]);
@@ -26,6 +35,7 @@ const InputChat = ({ name, validation, disabled, roomId, userId, ...props }: Inp
       {images?.length !== 0 ? (
         <InputChatImageSection
           ids={{ roomId, userId }}
+          onImageSendSuccess={onImageSendSuccess}
           imageState={{
             images,
             setImages,
