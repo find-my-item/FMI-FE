@@ -38,8 +38,7 @@ const InquiryWriteForm = ({
         />
         <InquiryCategoryButton />
         <InquiryTextarea name="content" maxLength={500} />
-        <div className="flex-1" />
-        <hr className="border border-labelsVibrant-quaternary" />
+        <div className="flex-1 border-b border-labelsVibrant-quaternary" />
         <WriteImageSection />
       </form>
     </FormProvider>
