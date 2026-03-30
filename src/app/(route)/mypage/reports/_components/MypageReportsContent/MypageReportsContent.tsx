@@ -38,7 +38,6 @@ const MypageReportsItem = ({ reports, keyword }: MypageReportsItemProps) => {
         <Chip label={REPORT_STATUS_CHIP[status].label} type={REPORT_STATUS_CHIP[status].chipType} />
 
         <h3 className="mt-2 text-h3-semibold text-layout-header-default">
-          {/* {REPORT_TYPE_TITLE[reportType]} */}
           {keyword
             ? highlightText(REPORT_TYPE_TITLE[reportType], keyword)
             : REPORT_TYPE_TITLE[reportType]}
