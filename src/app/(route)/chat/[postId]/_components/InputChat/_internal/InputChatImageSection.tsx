@@ -11,12 +11,19 @@ import {
 interface InputChatImageSectionProps {
   ids: InputChatImageSectionIds;
   imageState: InputChatImageSectionImageState;
+  onImageSendSuccess?: () => void;
 }
 
-const InputChatImageSection = ({ ids, imageState }: InputChatImageSectionProps) => {
+const InputChatImageSection = ({
+  ids,
+  imageState,
+  onImageSendSuccess,
+}: InputChatImageSectionProps) => {
   const { roomId, userId } = ids;
   const { images, setImages, selectedImages, setSelectedImages } = imageState;
-  const { mutate: sendImage } = useSendImage(roomId, userId);
+  const { mutate: sendImage } = useSendImage(roomId, userId, {
+    onSuccess: onImageSendSuccess,
+  });
   const handleSendImage = useHandleSendImage();
 
   return (
