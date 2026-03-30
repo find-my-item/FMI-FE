@@ -32,7 +32,7 @@ const EmailLoginForm = () => {
               {...register("rememberId", { required: false })}
               id="rememberId"
               label="아이디 기억하기"
-              boxSize="w-[18px] h-[18px]"
+              boxSize="size-[18px]"
               textStyle="text-caption1-semibold text-neutral-normal-default ml-2"
               iconSize="h-[6px]"
               checked={!!checkBoxValues}
