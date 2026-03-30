@@ -95,6 +95,7 @@ export const NotificationSSEProvider = ({ children }: PropsWithChildren) => {
   );
 
   const prevPathnameRef = useRef(pathname);
+  const didMoveFromAuthRouteRef = useRef(false);
 
   const { connect } = useNotificationSSE({
     enabled: isAuthInitialized,
@@ -103,11 +104,15 @@ export const NotificationSSEProvider = ({ children }: PropsWithChildren) => {
 
   useEffect(() => {
     const prevPathname = prevPathnameRef.current;
-    const movedFromAuthRouteToAppRoute =
-      isAuthRoutePath(prevPathname) && !isAuthRoutePath(pathname);
+    const didMove = isAuthRoutePath(prevPathname) && !isAuthRoutePath(pathname);
 
-    if (isAuthInitialized && movedFromAuthRouteToAppRoute) {
+    if (didMove) {
+      didMoveFromAuthRouteRef.current = true;
+    }
+
+    if (isAuthInitialized && didMoveFromAuthRouteRef.current) {
       connect();
+      didMoveFromAuthRouteRef.current = false;
     }
 
     prevPathnameRef.current = pathname;
