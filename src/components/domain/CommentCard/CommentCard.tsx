@@ -46,7 +46,6 @@ const CommentCard = ({ data, keyword }: CommentCardProps) => {
         className="flex w-full justify-between border-b border-divider-default px-5 py-[30px]"
       >
         <div className="flex min-w-0 flex-1 flex-col">
-          {/* <p className="w-full truncate">{content}</p> */}
           <p className="w-full truncate">{keyword ? highlightText(content, keyword) : content}</p>
 
           <time dateTime={createdAt} className="mt-1 text-body2-regular text-layout-body-default">

@@ -1,5 +1,5 @@
 export const ACTIVITY_STYLE_CONFIG = {
-  POST: { bgColor: "bg-notificationBlue", iconName: "Post", logTitle: "게시글을 작성했아요." },
+  POST: { bgColor: "bg-notificationBlue", iconName: "Post", logTitle: "게시글을 작성했어요." },
   COMMENT: {
     bgColor: "bg-notificationGrey",
     iconName: "Comment",
