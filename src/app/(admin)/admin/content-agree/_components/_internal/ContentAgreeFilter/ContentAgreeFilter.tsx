@@ -21,6 +21,12 @@ const getSortLabel = (sortValue?: string) => {
   }
 };
 
+const ADMIN_CONTENT_SORT_OPTIONS = [
+  { value: "LATEST", label: "최신순" },
+  { value: "OLDEST", label: "오래된순" },
+  { value: "MOST_FAVORITED", label: "인기순" },
+];
+
 const ContentAgreeFilter = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -48,9 +54,9 @@ const ContentAgreeFilter = () => {
   }, [startDate, endDate]);
 
   const handleSortChange = (newSort: string) => {
-    const currentSort = searchParams.get("sort")?.toLowerCase() || "latest";
+    const currentSort = sort || "LATEST";
 
-    if (currentSort === newSort.toLowerCase()) {
+    if (currentSort === newSort) {
       setIsSortOpen(false);
       return;
     }
@@ -97,26 +103,19 @@ const ContentAgreeFilter = () => {
 
       {isSortOpen && (
         <div className="absolute left-[110px] top-[45px] z-10 flex overflow-hidden rounded-[20px] border border-gray-200 bg-white py-1 text-center shadow-lg flex-col-center">
-          <button
-            className="w-full px-7 py-4 text-h3-medium text-neutral-normal-default transition-colors hover:bg-gray-50"
-            onClick={() => handleSortChange("LATEST")}
-          >
-            최신순
-          </button>
-          <hr className="h-px w-full bg-gray-200" />
-          <button
-            className="w-full px-7 py-4 text-h3-medium text-neutral-normal-default transition-colors hover:bg-gray-50"
-            onClick={() => handleSortChange("OLDEST")}
-          >
-            오래된순
-          </button>
-          <hr className="h-px w-full bg-gray-200" />
-          <button
-            className="w-full px-7 py-4 text-h3-medium text-neutral-normal-default transition-colors hover:bg-gray-50"
-            onClick={() => handleSortChange("MOST_FAVORITED")}
-          >
-            인기순
-          </button>
+          {ADMIN_CONTENT_SORT_OPTIONS.map(({ value, label }, index) => (
+            <div key={value} className="w-full">
+              <button
+                className="w-full px-7 py-4 text-h3-medium text-neutral-normal-default transition-colors hover:bg-gray-50"
+                onClick={() => handleSortChange(value)}
+              >
+                {label}
+              </button>
+              {index < ADMIN_CONTENT_SORT_OPTIONS.length - 1 && (
+                <hr className="h-px w-full bg-gray-200" />
+              )}
+            </div>
+          ))}
         </div>
       )}
 

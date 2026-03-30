@@ -156,13 +156,9 @@ const DateRangeBottomSheet = <T extends DateRangeFilterBase>({
   const handleResetDateFilters = () => {
     const nextFilters = { ...filters, startDate: undefined, endDate: undefined };
 
-    const urlParams = new URLSearchParams(searchParams.toString());
-    urlParams.delete("startDate");
-    urlParams.delete("endDate");
-
     const qs = applyFiltersToUrl({
       filters: nextFilters,
-      searchParams: urlParams,
+      searchParams: new URLSearchParams(searchParams.toString()),
     });
 
     router.replace(qs ? `${pathname}?${qs}` : pathname);
