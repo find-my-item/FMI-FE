@@ -17,7 +17,7 @@ export const usePostInquiry = (isUserSuccess: boolean) => {
         router.replace(`/mypage/inquiries/${result}`);
         return;
       }
-      router.replace("/support");
+      router.replace("/mypage");
     },
     onError: () => {
       addToast("1:1 문의 등록에 실패했어요", "error");
