@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Suspense, useCallback, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { Suspense, useCallback, useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { BOTTOM_OFFSET_PX } from "../../_constants/HEIGHT_PX";
 import useBottomSheetHeight from "../../_hooks/useBottomSheetHeight";
 import MyLocationButton from "../MyLocationButton/MyLocationButton";
@@ -12,14 +12,19 @@ import MapPostSummarySheetContent from "../MapPostSummarySheetContent/MapPostSum
 import { DefaultSheetContentHeights } from "../../_utils/heightUtils";
 import { MARKER_ID } from "../../_constants/QUERY_PARAMS";
 import { BetaTestMainBanner } from "@/components/domain";
+import PermissionSheet from "../PermissionBottomSheet/PermissionBottomSheet";
+import { usePermissionStore } from "@/store";
+import { cn } from "@/utils";
 
 const BottomSheetContent = () => {
   const searchParams = useSearchParams();
   const searchValue = searchParams.get("search");
   const markerId = searchParams.get(MARKER_ID);
   const [contentHeights, setContentHeights] = useState<DefaultSheetContentHeights | null>(null);
-  const { height, isFullyExpanded, handlePointerDown, handlePointerUp } =
+  const { height, isFullyExpanded, isInitialized, handlePointerDown, handlePointerUp } =
     useBottomSheetHeight(contentHeights);
+  const isDefaultMode = !searchValue && !markerId;
+  const isBottomSheetReady = isInitialized && (!isDefaultMode || contentHeights !== null);
 
   const handleSectionHeights = useCallback((heights: DefaultSheetContentHeights) => {
     setContentHeights(heights);
@@ -28,7 +33,11 @@ const BottomSheetContent = () => {
   return (
     <motion.div
       style={{ height, bottom: `${BOTTOM_OFFSET_PX}px` }}
-      className="fixed left-0 right-0 z-50 mx-auto max-w-[768px] select-none border-x-2"
+      className={cn(
+        "fixed left-0 right-0 z-50 mx-auto max-w-[768px] select-none border-x-2",
+        !isBottomSheetReady && "pointer-events-none invisible"
+      )}
+      aria-hidden={!isBottomSheetReady}
     >
       {!isFullyExpanded && (
         <div className="relative">
@@ -63,9 +72,29 @@ const BottomSheetContent = () => {
 };
 
 const BottomSheet = () => {
+  const router = useRouter();
+  const { isFirstSignUp } = usePermissionStore();
+  const [isPermissionSheetOpen, setIsPermissionSheetOpen] = useState(false);
+
+  useEffect(() => {
+    if (isFirstSignUp) {
+      setIsPermissionSheetOpen(true);
+    }
+  }, [isFirstSignUp]);
+
   return (
     <Suspense fallback="">
-      <BottomSheetContent />
+      {isPermissionSheetOpen ? (
+        <PermissionSheet
+          isOpen={isPermissionSheetOpen}
+          onClose={() => {
+            router.replace("/");
+            setIsPermissionSheetOpen(false);
+          }}
+        />
+      ) : (
+        <BottomSheetContent />
+      )}
     </Suspense>
   );
 };

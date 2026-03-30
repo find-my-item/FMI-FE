@@ -21,6 +21,7 @@ export const usePostPostsComments = (postId: number, parentId?: number) => {
             ? { queryKey: ["replies-post-comments", parentId] }
             : { queryKey: ["post-comments", postId] }),
         });
+        queryClient.invalidateQueries({ queryKey: ["/users/me/comments"] });
         addToast("댓글이 등록되었어요", "success");
         useBetaTestFeedbackStore.getState().openBetaTestModal();
       },

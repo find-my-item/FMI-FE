@@ -15,7 +15,7 @@ const useNotificationList = () => {
   const category = categoryParam && categoryParam !== "all" ? categoryParam : undefined;
 
   const url = category
-    ? `/notifications?notificationType=${encodeURIComponent(category)}`
+    ? `/notifications?notificationType=${encodeURIComponent(category?.toUpperCase())}`
     : "/notifications";
 
   const query = useAppInfiniteQuery<NotificationListResponse, unknown, NotificationListItem[]>(

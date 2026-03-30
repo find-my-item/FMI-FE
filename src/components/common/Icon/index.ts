@@ -114,3 +114,5 @@ export { default as SendArrow } from "@/assets/send-arrow.svg";
 export { default as NoWithdrawalAdmin } from "@/assets/no-withdrawal-admin.svg";
 export { default as DetailImageFail } from "@/assets/detail-image-fail.svg";
 export { default as CompleteCheck } from "@/assets/complete-check.svg";
+export { default as Marker } from "@/assets/marker.svg";
+export { default as NoPublicDataSearch } from "@/assets/no-public-data-search.svg";

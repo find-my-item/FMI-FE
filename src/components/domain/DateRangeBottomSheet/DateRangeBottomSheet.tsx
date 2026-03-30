@@ -10,9 +10,7 @@ import PopupLayout from "../PopupLayout/PopupLayout";
 import { Button, Filter } from "@/components/common";
 import { applyFiltersToUrl } from "../../../utils/applyFiltersToUrl/applyFiltersToUrl";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { FiltersStateType } from "../FilterSectionBottomSheet/_types/filtersStateType";
 import { useFilterParams } from "@/hooks/domain";
-import { ActivityFilterState } from "@/app/(route)/mypage/activity/_types/ActivityFilterType";
 import { useToast } from "@/context/ToastContext";
 
 const DateWheel = ({
@@ -64,7 +62,8 @@ const DateWheel = ({
             key={item}
             className={cn(
               "flex w-full items-center justify-center text-h2-regular text-layout-header-default transition-colors",
-              "[&.swiper-slide-active]:text-h2-regular [&.swiper-slide-active]:text-layout-header-default [&.swiper-slide-active]:opacity-100"
+              "[&.swiper-slide-active]:text-h2-regular [&.swiper-slide-active]:text-layout-header-default [&.swiper-slide-active]:opacity-100",
+              "cursor-default select-none"
             )}
           >
             <div className="flex-center">
@@ -107,13 +106,16 @@ const DateRangeBottomSheet = <T extends DateRangeFilterBase>({
     days: startDays,
     selectDate: selectStartDate,
     handleDateChange: handleStartDateChange,
+    handleResetDate: handleStartResetDate,
   } = useMakeDate(queryStartDate ?? undefined);
+
   const {
     years: EndYears,
     months: EndMonths,
     days: EndDays,
     selectDate: selectEndDate,
     handleDateChange: handleEndDateChange,
+    handleResetDate: handleEndResetDate,
   } = useMakeDate(queryEndDate ?? undefined);
 
   const router = useRouter();
@@ -151,6 +153,13 @@ const DateRangeBottomSheet = <T extends DateRangeFilterBase>({
 
   const [activeTab, setActiveTab] = useState<"startDate" | "endDate">("startDate");
 
+  const handleResetToToday = () => {
+    handleStartResetDate();
+    handleEndResetDate();
+
+    setActiveTab("startDate");
+  };
+
   return (
     <PopupLayout
       isOpen={isOpen}
@@ -177,6 +186,16 @@ const DateRangeBottomSheet = <T extends DateRangeFilterBase>({
             onClick={() => setActiveTab("endDate")}
           >
             종료일
+          </Filter>
+
+          {/* TODO(수현): 임시 초기화 버튼  */}
+          <Filter
+            ariaLabel="날짜 초기화 버튼"
+            onSelected={false}
+            className="!px-10 !py-2"
+            onClick={handleResetToToday}
+          >
+            초기화
           </Filter>
         </div>
 

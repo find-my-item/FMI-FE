@@ -1,5 +1,6 @@
 "use client";
 
+import { AnimatePresence, motion } from "framer-motion";
 import { Chip, Icon } from "@/components/common";
 import { cn } from "@/utils";
 import {
@@ -57,35 +58,46 @@ const SupportFaqAccordionItem = ({ item, isExpanded, onToggle }: SupportFaqAccor
         </p>
       </a>
 
-      {isExpanded && (
-        <div className="flex flex-col gap-3 rounded-2xl p-4 bg-fill-neutral-subtle-default">
-          <div className="inline-block">
-            <Chip label={item.category} type="brandSubtleHover" />
-          </div>
-          <div className="flex flex-col gap-3 whitespace-pre-line text-body1-medium text-layout-header-default">
-            {item.answer.map((segment, index) =>
-              segment.type === "text" ? (
-                <span key={index} className="block">
-                  {segment.content}
-                </span>
-              ) : (
-                <Link
-                  key={index}
-                  href={segment.href}
-                  className="flex items-center gap-1 text-brand-strongUseThis-default"
-                >
-                  {segment.text}
-                  <Icon
-                    name="AccordionArrowRight"
-                    size={12}
-                    className="text-brand-strongUseThis-default"
-                  />
-                </Link>
-              )
-            )}
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {isExpanded && (
+          <motion.div
+            key="content"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="w-full overflow-hidden"
+          >
+            <div className="flex flex-col gap-3 rounded-2xl p-4 bg-fill-neutral-subtle-default">
+              <div className="inline-block">
+                <Chip label={item.category} type="brandSubtleHover" />
+              </div>
+              <div className="flex flex-col gap-3 whitespace-pre-line text-body1-medium text-layout-header-default">
+                {item.answer.map((segment, index) =>
+                  segment.type === "text" ? (
+                    <span key={index} className="block">
+                      {segment.content}
+                    </span>
+                  ) : (
+                    <Link
+                      key={index}
+                      href={segment.href}
+                      className="flex items-center gap-1 text-brand-strongUseThis-default"
+                    >
+                      {segment.text}
+                      <Icon
+                        name="AccordionArrowRight"
+                        size={12}
+                        className="text-brand-strongUseThis-default"
+                      />
+                    </Link>
+                  )
+                )}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </li>
   );
 };

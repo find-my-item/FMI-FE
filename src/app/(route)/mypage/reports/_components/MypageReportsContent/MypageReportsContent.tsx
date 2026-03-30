@@ -11,20 +11,34 @@ import { formatDate } from "@/utils";
 import Link from "next/link";
 import { useEffect } from "react";
 import { REPORT_STATUS_CHIP } from "../../_constants/REPORT_STATUS_CHIP";
+import { useSearchParams } from "next/navigation";
+import { REPORT_TYPE_TITLE } from "@/app/(admin)/admin/_constants/REPORT_TYPE_TITLE";
 
 interface MypageReportsItemProps {
   reports: ReportItemType;
 }
 
 const MypageReportsItem = ({ reports }: MypageReportsItemProps) => {
-  const { reportId, targetId, targetTitle, targetType, reason, status, createdAt, resolvedAt } =
-    reports;
+  const {
+    reportId,
+    reportType,
+    targetId,
+    targetTitle,
+    targetType,
+    reason,
+    status,
+    createdAt,
+    resolvedAt,
+  } = reports;
+
   return (
     <li className="flex w-full flex-col justify-between border-b border-divider-default px-5 py-[30px]">
-      <Link href={`/mypage/reports/${reportId}`} aria-label={`${targetTitle} 신고 상세 보기`}>
+      <Link href={`/mypage/reports/${reportId}`} aria-label="신고 상세 보기">
         <Chip label={REPORT_STATUS_CHIP[status].label} type={REPORT_STATUS_CHIP[status].chipType} />
 
-        <h3 className="mt-2 text-h3-semibold text-layout-header-default">{targetTitle}</h3>
+        <h3 className="mt-2 text-h3-semibold text-layout-header-default">
+          {REPORT_TYPE_TITLE[reportType]}
+        </h3>
 
         <time
           dateTime={createdAt}
@@ -42,6 +56,9 @@ const MypageReportsItem = ({ reports }: MypageReportsItemProps) => {
 const MypageReportsContent = () => {
   const { reportStatus } = useFilterParams();
 
+  const searchParams = useSearchParams();
+  const keyword = searchParams.get("keyword") ?? undefined;
+
   const {
     data: reportsData,
     isLoading,
@@ -51,6 +68,7 @@ const MypageReportsContent = () => {
     isFetchingNextPage,
   } = useGetUserReports({
     status: reportStatus,
+    keyword,
   });
 
   const { addToast } = useToast();

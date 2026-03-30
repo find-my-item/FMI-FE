@@ -17,6 +17,14 @@
   select:focus {
     @apply outline-none ring-0;
   }
+
+  /* 네이티브 자동완성 호버 시 input 파란 배경 제거 */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    box-shadow: inset 0 0 0 1000px #fff !important;
+  }
 }
 
 /* 글래스모피즘 */
@@ -57,21 +65,6 @@
       rgba(255, 255, 255, 0.3)
     );
   }
-}
-
-/* 모달 슬라이드 애니메이션 */
-@keyframes modal-slide-up {
-  from {
-    transform: translateY(100%);
-  }
-
-  to {
-    transform: translateY(0);
-  }
-}
-
-.animate-modal-slide-up {
-  animation: modal-slide-up 350ms ease-out forwards;
 }
 
 /* Footer 채팅 버튼 애니메이션 */

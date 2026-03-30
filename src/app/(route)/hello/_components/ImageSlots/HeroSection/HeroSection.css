@@ -19,10 +19,9 @@
 
 .animate-fade-in-float {
   opacity: 0;
-
   animation:
-    fadeInY 0.3s ease-out 0.5s forwards,
-    floatY 2.2s ease-in-out 0.5s infinite;
+    fadeInY 0.3s ease-out 1.05s forwards,
+    floatY 2s ease-in-out 1.05s infinite;
 }
 
 @keyframes floatHeroY {
@@ -38,4 +37,20 @@
 
 .animate-float-hero-y {
   animation: floatHeroY 1.5s ease-in-out forwards;
+}
+
+@keyframes zoomInGlass {
+  0% {
+    transform: scale(1);
+  }
+  50%, 75% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-zoom-in-glass {
+  animation: zoomInGlass 1.05s ease-in-out forwards;
 }

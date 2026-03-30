@@ -8,7 +8,7 @@ const page = () => {
       <DetailHeader title="내 활동 내역" />
       <h1 className="sr-only">내 활동 내역 페이지</h1>
       <div className="w-full h-base">
-        <MypageSearch />
+        <MypageSearch searchMode="activities" />
 
         <ActivityFilterSection />
 

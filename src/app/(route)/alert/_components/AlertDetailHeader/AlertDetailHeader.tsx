@@ -1,5 +1,6 @@
 "use client";
 
+import { useNotificationList } from "@/api/fetch/notification";
 import { DetailHeader } from "@/components/layout";
 import { HeaderDelete, HeaderSetting } from "@/components/layout/DetailHeader/DetailHeaderParts";
 import { useRouter } from "next/navigation";
@@ -12,11 +13,17 @@ const AlertDetailHeader = ({
   setIsDeleteMode: (isDeleteMode: boolean) => void;
 }) => {
   const router = useRouter();
+  const { data: notifications, isPending } = useNotificationList();
+  const isDeleteDisabled = isPending || (notifications?.length ?? 0) === 0;
 
   return (
     <>
       <DetailHeader title="알림">
-        <HeaderDelete isDeleteMode={isDeleteMode} setIsDeleteMode={setIsDeleteMode} />
+        <HeaderDelete
+          isDeleteMode={isDeleteMode}
+          setIsDeleteMode={setIsDeleteMode}
+          disabled={isDeleteDisabled}
+        />
         <HeaderSetting onClick={() => router.push("/mypage/notifications")} />
       </DetailHeader>
       <h1 className="sr-only">알림 페이지</h1>

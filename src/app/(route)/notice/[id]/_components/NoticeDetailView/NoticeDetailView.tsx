@@ -15,6 +15,7 @@ import {
 } from "@/api/fetch/noticeComment";
 import { DeleteCommentVariables } from "@/api/fetch/comment";
 import { useHandleNoticeReplySubmit } from "../../_hooks/useHandleNoticeReplySubmit/useHandleNoticeReplySubmit";
+import { useToggleNoticeCommentLike } from "../../_hooks/useToggleNoticeCommentLike/useToggleNoticeCommentLike";
 
 const NoticeDetailView = ({ id }: { id: number }) => {
   const { data: noticeDetail, isLoading, isError } = useGetNoticeDetail({ id });
@@ -31,6 +32,7 @@ const NoticeDetailView = ({ id }: { id: number }) => {
   });
 
   const { mutate: deleteNoticeComment } = useDeleteNoticeComment();
+  const { handleToggleFavorite } = useToggleNoticeCommentLike(id);
   const { handleReplySubmit, isPending } = useHandleNoticeReplySubmit(id);
 
   useEffect(() => {
@@ -59,6 +61,18 @@ const NoticeDetailView = ({ id }: { id: number }) => {
     );
   };
 
+  const handleFavoriteComment = (commentId: number, isLike: boolean, queryKey: unknown[]) => {
+    const firstKey = Array.isArray(queryKey) ? queryKey[0] : undefined;
+    const parentCommentId =
+      Array.isArray(queryKey) && typeof queryKey[1] === "number" ? queryKey[1] : undefined;
+    const mappedQueryKey =
+      firstKey === "replies-post-comments"
+        ? ["replies-notice-comments", parentCommentId ?? commentId]
+        : ["notice-comments", id];
+
+    handleToggleFavorite({ commentId, isLike, queryKey: mappedQueryKey });
+  };
+
   return (
     <div className="flex flex-col h-base">
       {isLoading && <NoticeDetailSkeleton />}
@@ -72,9 +86,8 @@ const NoticeDetailView = ({ id }: { id: number }) => {
         useFetchReplies={useGetRepliesNoticeComment}
         onCommentLoadMore={() => fetchNextPage()}
         onDeleteComment={handleDeleteComment}
-        onFavoriteComment={() => {}}
+        onFavoriteComment={handleFavoriteComment}
       />
-      <hr className="border border-divider-default" />
       <NoticeCommentForm noticeId={id} isLoggedIn={isLoggedIn} />
     </div>
   );

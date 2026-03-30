@@ -7,15 +7,22 @@ import { useGetNotificationSetting } from "@/api/fetch/notification";
 import { LoadingState } from "@/components/state";
 import { useToggleClick } from "../../_hooks/useToggleClick";
 import { DEFAULT_NOTIFICATION_SETTING } from "../../_constants/DEFAULT_NOTIFICATION_SETTING";
+import { useEffect } from "react";
 
 const NotificationSettingList = () => {
   const { data: notificationData, isLoading } = useGetNotificationSetting();
 
   const { handleToggle } = useToggleClick(notificationData?.result);
 
-  if (isLoading) return <LoadingState />;
-
   const toggleState = notificationData?.result ?? DEFAULT_NOTIFICATION_SETTING;
+
+  useEffect(() => {
+    if (toggleState?.browserNotificationEnabled && Notification.permission === "denied") {
+      handleToggle("browserNotificationEnabled");
+    }
+  }, [toggleState?.browserNotificationEnabled, handleToggle]);
+
+  if (isLoading) return <LoadingState />;
 
   return (
     <ul className="w-full py-4">

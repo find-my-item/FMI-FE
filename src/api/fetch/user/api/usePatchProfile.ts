@@ -18,7 +18,7 @@ export const usePatchProfile = () => {
     "patch",
     {
       onSuccess: (updateProfile) => {
-        addToast("프로필 이미지 변경 성공", "success");
+        addToast("프로필을 변경했어요", "success");
         queryClient.setQueryData(["users-me"], updateProfile);
       },
       onError: (error) => {

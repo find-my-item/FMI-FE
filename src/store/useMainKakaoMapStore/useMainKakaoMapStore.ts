@@ -11,9 +11,9 @@ const ADDRESS_REVALIDATE_DELAY_MS = 500;
  *
  * @author hyungjun
  * @description
- * - `persist`로 `latLng`과 `address`를 로컬 스토리지에 저장합니다.
+ * - `persist`로 `latLng`, `address`, `userGpsLatLng`, `userGpsAddress`를 로컬 스토리지에 저장합니다.
  * - 좌표가 갱신되어도 주소 API는 바로 호출하지 않으며, `syncAddressFromLatLng`는
- *   최근 발견 목록(`useRecentFound`)에 항목이 있을 때만 UI 쪽에서 호출합니다.
+ *   UI(예: `RecentFoundItemSection`)에서 `latLng` 변경 시 호출합니다.
  * - 단, 연속적으로 좌표가 바뀌는 경우를 고려해 `setLatLng` 호출 후 `500ms` 동안 추가 입력이 없을 때 1회만 조회합니다(`lodash.debounce`).
  * - 디바운스 실행 시점에 이전 in-flight 요청이 있었다면 `AbortController`로 취소합니다.
  * - `mapLevel`은 현재 카카오 지도 줌 레벨을 전역으로 공유하기 위한 상태입니다.
@@ -25,18 +25,23 @@ const ADDRESS_REVALIDATE_DELAY_MS = 500;
  * ```ts
  * const { latLng, setLatLng, syncAddressFromLatLng } = useMainKakaoMapStore();
  * setLatLng({ lat: 37.5665, lng: 126.978 });
- * // 최근 발견 목록이 있을 때만 syncAddressFromLatLng()로 주소 갱신
+ * // 화면에서 syncAddressFromLatLng()로 주소 갱신
  * ```
  */
 
 interface MainKakaoMapStore {
   latLng: { lat: number; lng: number };
   setLatLng: (latLng: { lat: number; lng: number }) => void;
-  /** 현재 `latLng` 기준으로 주소 조회(최근 발견 데이터가 있을 때만 호출) */
+  /** 현재 `latLng` 기준 카카오 좌표→주소 조회(디바운스) */
   syncAddressFromLatLng: () => void;
   /** 대기 중인 주소 조회를 취소(최근 발견이 비었을 때 등) */
   cancelAddressResolve: () => void;
   address: string;
+  /** 기기 GPS로 확보한 좌표(지도 드래그·중심 이동과 무관). 검색 placeholder용 주소는 이 좌표만 사용 */
+  userGpsLatLng: { lat: number; lng: number } | null;
+  userGpsAddress: string;
+  setUserGpsFromDevice: (latLng: { lat: number; lng: number }) => void;
+  syncUserGpsAddress: () => void;
   clearLatLng: () => void;
   mapLevel: number;
   setMapLevel: (level: number) => void;
@@ -50,6 +55,7 @@ export const useMainKakaoMapStore = create<MainKakaoMapStore>()(
   persist(
     (set, get) => {
       let abortController: AbortController | null = null;
+      let userGpsAbortController: AbortController | null = null;
 
       const resolveAddressDebounced = debounce(async (lat: number, lng: number) => {
         abortController?.abort();
@@ -66,9 +72,26 @@ export const useMainKakaoMapStore = create<MainKakaoMapStore>()(
         }
       }, ADDRESS_REVALIDATE_DELAY_MS);
 
+      const resolveUserGpsAddressDebounced = debounce(async (lat: number, lng: number) => {
+        userGpsAbortController?.abort();
+        userGpsAbortController = new AbortController();
+        const controller = userGpsAbortController;
+
+        try {
+          const userGpsAddress = await getAddressFromLatLng(lat, lng, controller.signal);
+          if (controller.signal.aborted) return;
+          set({ userGpsAddress });
+        } catch {
+          if (controller.signal.aborted) return;
+          set({ userGpsAddress: "" });
+        }
+      }, ADDRESS_REVALIDATE_DELAY_MS);
+
       return {
         latLng: DEFAULT_LAT_LNG,
         address: DEFAULT_ADDRESS,
+        userGpsLatLng: null,
+        userGpsAddress: "",
         mapLevel: 6,
         levelResetSignal: 0,
         markerSheetSnapSignal: 0,
@@ -79,16 +102,28 @@ export const useMainKakaoMapStore = create<MainKakaoMapStore>()(
           const { latLng } = get();
           resolveAddressDebounced(latLng.lat, latLng.lng);
         },
+        setUserGpsFromDevice: (latLng) => {
+          set({ userGpsLatLng: latLng });
+          resolveUserGpsAddressDebounced(latLng.lat, latLng.lng);
+        },
+        syncUserGpsAddress: () => {
+          const g = get().userGpsLatLng;
+          if (g) resolveUserGpsAddressDebounced(g.lat, g.lng);
+        },
         cancelAddressResolve: () => {
           resolveAddressDebounced.cancel();
           abortController?.abort();
         },
         clearLatLng: () => {
           resolveAddressDebounced.cancel();
+          resolveUserGpsAddressDebounced.cancel();
           abortController?.abort();
+          userGpsAbortController?.abort();
           set({
             latLng: DEFAULT_LAT_LNG,
             address: DEFAULT_ADDRESS,
+            userGpsLatLng: null,
+            userGpsAddress: "",
             mapLevel: 6,
           });
         },
@@ -110,6 +145,8 @@ export const useMainKakaoMapStore = create<MainKakaoMapStore>()(
       partialize: (state) => ({
         latLng: state.latLng,
         address: state.address,
+        userGpsLatLng: state.userGpsLatLng,
+        userGpsAddress: state.userGpsAddress,
       }),
     }
   )
