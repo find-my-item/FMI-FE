@@ -1,10 +1,14 @@
-import { useFormContext, useWatch } from "react-hook-form";
+import { useFormContext, UseFormSetFocus, useWatch } from "react-hook-form";
 import { useToast } from "@/context/ToastContext";
 import { useEffect, useMemo, useState } from "react";
 import { EMAIL_ERROR_MESSAGE, EMAIL_CHECK_CODE_MESSAGE } from "../_constants/SIGNUP_ERROR_MESSAGE";
 import { throttle } from "lodash";
 import { useApiCheckCode, useApiSendEmail } from "@/api/fetch/auth";
 import { useErrorToast, useNicknameCheck } from "@/hooks/domain";
+import { FormType } from "../types/FormType";
+
+type SignUpFieldType = Omit<FormType, "privacyPolicyAgreed" | "marketingConsent">;
+type SignUpSetFocus = UseFormSetFocus<SignUpFieldType>;
 
 export const useSignUpBtnClick = () => {
   const { getValues, trigger, control } = useFormContext();
@@ -47,7 +51,7 @@ export const useSignUpBtnClick = () => {
   const handlerToClick = useMemo(
     () =>
       throttle(
-        async (name: string) => {
+        async (name: string, setFocus: SignUpSetFocus) => {
           const isValid = await trigger(name);
           if (!isValid) return;
 
@@ -64,6 +68,7 @@ export const useSignUpBtnClick = () => {
                     setTimer(300);
                     setIsEmailAuthDisabled(false);
                     setEmailValue(inputValue);
+                    setFocus("emailAuth");
                   },
                   onError: (error) => {
                     const errorCode = error.response?.data.code;
@@ -83,6 +88,7 @@ export const useSignUpBtnClick = () => {
                     setIsEmailAuthDisabled(true);
                     setIsEmailDisabled(true);
                     setIsEmailAuthVerified(true);
+                    setFocus("password");
                   },
                   onError: (error) => {
                     const errorCode = error.response?.data.code;

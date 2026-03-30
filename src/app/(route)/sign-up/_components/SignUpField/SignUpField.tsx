@@ -12,6 +12,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
   const {
     control,
     trigger,
+    setFocus,
     formState: { isValid },
   } = useFormContext();
 
@@ -72,7 +73,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
             }}
             btnOption={{
               ...item.btnOption,
-              btnOnClick: () => handlerToClick(item.inputOption.name),
+              btnOnClick: () => handlerToClick(item.inputOption.name, setFocus),
               disabled: handleBtnDisabled(item.inputOption.name),
             }}
             caption={{
