@@ -16,7 +16,12 @@ export const ACTIVITY_STYLE_CONFIG = {
     iconName: "Inquiry",
     logTitle: "1:1문의를 작성했습니다.",
   },
-  INQUIRY_REPLY: {
+  INQUIRY_RECEIVED: {
+    bgColor: "bg-notificationGrey",
+    iconName: "Inquiry",
+    logTitle: "1:1문의를 작성했습니다.",
+  },
+  INQUIRY_ANSWERED: {
     bgColor: "bg-notificationBrand",
     iconName: "Inquiry",
     logTitle: "1:1문의 답변이 달렸습니다.",
@@ -26,7 +31,12 @@ export const ACTIVITY_STYLE_CONFIG = {
     iconName: "Report",
     logTitle: "신고가 접수되었습니다.",
   },
-  REPORT_RESULT: {
+  REPORT_RECEIVED: {
+    bgColor: "bg-notificationGrey",
+    iconName: "Report",
+    logTitle: "신고가 접수되었습니다.",
+  },
+  REPORT_ANSWERED: {
     bgColor: "bg-notificationBrand",
     iconName: "Report",
     logTitle: "접수된 신고가 처리되었습니다.",
