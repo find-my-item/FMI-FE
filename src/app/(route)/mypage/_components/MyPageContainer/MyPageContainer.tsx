@@ -1,6 +1,5 @@
 "use client";
 
-import { LoadingState } from "@/components/state";
 import { useToast } from "@/context/ToastContext";
 import { useEffect } from "react";
 import MyPageProfile from "../MyPageProfile/MyPageProfile";
@@ -14,8 +13,14 @@ const MyPageContainer = ({ hasToken }: { hasToken: boolean }) => {
   const { addToast } = useToast();
 
   useEffect(() => {
-    if (error) {
-      addToast("프로필 정보를 불러오는데 실패했어요.", "warning");
+    const errorCode = error?.response?.data.code;
+    console.log("errorCode>>>>>       ", errorCode);
+    if (errorCode === "AUTH401-INVALID_REFRESH") {
+      // noop
+    } else if (errorCode === "USER404-NOT_FOUND") {
+      // noop 존재하지 않는 회원
+    } else {
+      addToast("예상치 못한 에러가 발생했어요", "error");
     }
   }, [error, addToast]);
 
