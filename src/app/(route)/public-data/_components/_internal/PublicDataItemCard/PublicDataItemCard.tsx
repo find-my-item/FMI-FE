@@ -15,7 +15,6 @@ const NO_IMAGE_URL = "https://minwon24.police.go.kr/images/sub/img02_no_img.gif"
 const PublicDataItemCard = ({ item }: PublicDataItemCardProps) => {
   const searchParams = useSearchParams();
   const type = searchParams.get("type") || "lost";
-  const isLost = type === "lost";
   const postId = item.atcId;
 
   const imageSrc =
@@ -37,27 +36,18 @@ const PublicDataItemCard = ({ item }: PublicDataItemCardProps) => {
             <Chip label={item.prdtClNm} type="neutralStrong" />
           </div>
 
-          <div className="flex flex-col gap-2">
-            <div className="w-full">
-              <div className="flex items-center gap-1">
-                <h2 className="flex-1 text-h3-semibold text-layout-header-default u-ellipsis">
-                  {item.fdPrdtNm || item.fdSbjt}
-                </h2>
-              </div>
-              <span className="text-body2-regular text-layout-body-default">
-                <span className="after:inline-block after:px-1 after:content-['·']">
-                  {item.depPlace}
-                </span>
-                <time dateTime={item.fdYmd}>{formatDate(item.fdYmd)}</time>
-              </span>
+          <div className="w-full">
+            <div className="flex items-center gap-1">
+              <h2 className="flex-1 text-h3-semibold text-layout-header-default u-ellipsis">
+                {item.fdPrdtNm || item.fdSbjt}
+              </h2>
             </div>
-
-            {isLost && (
-              <div className="text-neutral-normal-default">
-                <span className="text-body2-semibold after:px-[2px]">분실장소</span>
-                <span className="text-body2-regular">{item.depPlace}</span>
-              </div>
-            )}
+            <span className="text-body2-regular text-layout-body-default">
+              <span className="after:inline-block after:px-1 after:content-['·']">
+                {item.depPlace}
+              </span>
+              <time dateTime={item.fdYmd}>{formatDate(item.fdYmd)}</time>
+            </span>
           </div>
         </div>
 

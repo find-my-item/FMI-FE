@@ -3,32 +3,29 @@
 import { FieldValues, FormProvider, useForm } from "react-hook-form";
 import { InputSearch } from "@/components/common";
 import { useSearchUpdateQueryString } from "@/hooks";
-import { debounce } from "lodash";
-import { useEffect } from "react";
-
-const SEARCH_DEBOUNCE_DELAY_MS = 500;
+import { useSearchParams } from "next/navigation";
+import { useEffect, useRef } from "react";
 
 const NoticeSearchForm = () => {
-  const { searchUpdateQuery } = useSearchUpdateQueryString("replace");
-  const methods = useForm({
-    mode: "onChange",
-    reValidateMode: "onChange",
-  });
-  const noticeSearch = methods.watch("noticeSearch") ?? "";
+  const { searchUpdateQuery } = useSearchUpdateQueryString();
+  const searchParams = useSearchParams();
+  const keywordFromUrl = searchParams.get("keyword") ?? "";
 
-  const debouncedSearchUpdate = debounce(
-    (keyword: string) => searchUpdateQuery("keyword", keyword),
-    SEARCH_DEBOUNCE_DELAY_MS
-  );
+  const methods = useForm({
+    defaultValues: { noticeSearch: keywordFromUrl },
+  });
+
+  const { reset } = methods;
+  const resetRef = useRef(reset);
+  resetRef.current = reset;
 
   useEffect(() => {
-    debouncedSearchUpdate(noticeSearch);
-    return () => debouncedSearchUpdate.cancel();
-  }, [noticeSearch, debouncedSearchUpdate]);
+    reset({ noticeSearch: keywordFromUrl });
+  }, [keywordFromUrl, reset]);
 
   const handleSearchSubmit = ({ noticeSearch }: FieldValues) => {
-    if (!noticeSearch.trim()) return;
-    searchUpdateQuery("keyword", noticeSearch);
+    const trimmed = typeof noticeSearch === "string" ? noticeSearch.trim() : "";
+    searchUpdateQuery("keyword", trimmed || undefined);
   };
 
   return (

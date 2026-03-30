@@ -73,19 +73,14 @@ const InputField = ({
 
   return (
     <div className="flex w-full flex-col gap-1">
-      <Label
-        name={name}
-        label={label}
-        required={!!validation?.required}
-        className="text-body1-regular text-layout-body-default"
-      />
+      <Label name={name} label={label} className="text-body2-regular text-layout-body-default" />
 
       <div className="relative">
         <textarea
           id={name}
           {...props}
           className={cn(
-            "text-body4-regular h-[120px] w-full resize-none rounded-[10px] border border-neutral-normal-default p-3",
+            "text-body4-regular h-[120px] w-full resize-none rounded-[10px] border border-neutral-normal-default p-3 pr-9",
             "hover:border-neutral-normal-hover focus:border-neutral-normal-focused disabled:border-neutral-normal-disabled disabled:bg-fill-neutral-normal-disabled",
             !!errors[name] && "!border-system-warning",
             isValue && "focus:border-neutral-normal-focused"
