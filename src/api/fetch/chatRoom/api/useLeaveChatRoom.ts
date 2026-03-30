@@ -12,6 +12,12 @@ const useLeaveChatRoom = (roomId: number) => {
   return useAppMutation("auth", `/chats/${roomId}/leave`, "post", {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["chatList"] });
+      queryClient.invalidateQueries({ queryKey: ["chatRoomDetail", roomId] });
+      queryClient.invalidateQueries({ queryKey: ["chatMessages", roomId] });
+      queryClient.invalidateQueries({ queryKey: ["chatRoom"] });
+
+      queryClient.removeQueries({ queryKey: ["chatRoomDetail", roomId], exact: true });
+      queryClient.removeQueries({ queryKey: ["chatMessages", roomId], exact: true });
       router.replace(`/chat`);
     },
     onError: () => {
