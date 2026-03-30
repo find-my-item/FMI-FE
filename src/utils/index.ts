@@ -26,3 +26,4 @@ export {
 export { retryBackoffController } from "./retryBackoffController/retryBackoffController";
 export { formatMetadataKeyword } from "./formatMetadataKeyword/formatMetadataKeyword";
 export { formatMetadataAddress } from "./formatMetadataAddress/formatMetadataAddress";
+export { extractDongAddress } from "./extractDongAddress/extractDongAddress";

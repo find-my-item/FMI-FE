@@ -26,7 +26,7 @@ const page = () => {
     }
 
     DeleteAccountMutate(payload, {
-      onSuccess: (response) => {
+      onSuccess: () => {
         setIsDeleted(true);
       },
       onError: (error) => {

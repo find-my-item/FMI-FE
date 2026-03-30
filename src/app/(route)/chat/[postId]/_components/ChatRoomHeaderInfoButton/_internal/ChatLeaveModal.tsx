@@ -34,7 +34,7 @@ const ChatLeaveModal = ({ isOpen, onClose, onConfirm, onCancel }: ChatLeaveModal
       isOpen={isOpen}
       onClose={onClose}
       dialogTestId="confirm-modal"
-      className="gap-6 p-6 flex-col-center"
+      className="gap-6 rounded-lg p-6 flex-col-center"
     >
       <div className="gap-4 flex-col-center">
         <div className="gap-1 text-center flex-col-center">

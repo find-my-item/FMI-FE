@@ -1,16 +1,9 @@
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 import ChatRoomHeader from "./ChatRoomHeader";
 import { ChatRoomResponse } from "@/api/fetch/chatRoom/types/ChatRoomResponse";
 import { PostType } from "@/types";
 import { MOCK_CHAT_ROOM_FOUND, MOCK_CHAT_ROOM_LOST } from "@/mock/data/chat.data";
-
-const mockBack = jest.fn();
-
-jest.mock("next/navigation", () => ({
-  useRouter: () => ({ back: mockBack }),
-}));
 
 jest.mock("next/image", () => (props: any) => {
   return <img {...props} />;
@@ -38,25 +31,18 @@ jest.mock("../ChatRoomHeaderInfoButton/ChatRoomHeaderInfoButton", () => ({
 }));
 
 describe("ChatRoomHeader", () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
   it("chatRoom이 undefined일 때 null을 반환합니다", () => {
     const { container } = render(<ChatRoomHeader chatRoom={undefined} roomId={0} />);
     expect(container.firstChild).toBeNull();
   });
 
-  it("뒤로가기 버튼이 렌더링되고 클릭 시 router.back()이 호출됩니다", async () => {
-    const user = userEvent.setup();
+  it("뒤로가기 링크가 렌더링되고 /chat 경로를 가집니다", () => {
     render(<ChatRoomHeader chatRoom={MOCK_CHAT_ROOM_FOUND} roomId={MOCK_CHAT_ROOM_FOUND.roomId} />);
 
-    const backButton = screen.getByRole("button", { name: "뒤로 가기 버튼" });
-    expect(backButton).toBeInTheDocument();
+    const backLink = screen.getByRole("link", { name: "뒤로 가기 버튼" });
+    expect(backLink).toBeInTheDocument();
+    expect(backLink).toHaveAttribute("href", "/chat");
     expect(screen.getByTestId("icon-ArrowLeftSmall")).toBeInTheDocument();
-
-    await user.click(backButton);
-    expect(mockBack).toHaveBeenCalledTimes(1);
   });
 
   it("사용자 닉네임이 렌더링됩니다", () => {
@@ -111,7 +97,7 @@ describe("ChatRoomHeader", () => {
   it("게시글 링크가 올바른 href를 가집니다", () => {
     render(<ChatRoomHeader chatRoom={MOCK_CHAT_ROOM_FOUND} roomId={MOCK_CHAT_ROOM_FOUND.roomId} />);
 
-    const link = screen.getByRole("link");
+    const link = screen.getByRole("link", { name: "게시글 상세 페이지 이동" });
     expect(link).toHaveAttribute("href", `/list/${MOCK_CHAT_ROOM_FOUND.postInfo.postId}`);
   });
 
@@ -139,8 +125,8 @@ describe("ChatRoomHeader", () => {
   it("모든 주요 요소가 함께 렌더링됩니다", () => {
     render(<ChatRoomHeader chatRoom={MOCK_CHAT_ROOM_FOUND} roomId={MOCK_CHAT_ROOM_FOUND.roomId} />);
 
-    // 뒤로가기 버튼
-    expect(screen.getByRole("button", { name: "뒤로 가기 버튼" })).toBeInTheDocument();
+    // 뒤로가기 링크
+    expect(screen.getByRole("link", { name: "뒤로 가기 버튼" })).toBeInTheDocument();
     expect(screen.getByTestId("icon-ArrowLeftSmall")).toBeInTheDocument();
 
     // 사용자 닉네임

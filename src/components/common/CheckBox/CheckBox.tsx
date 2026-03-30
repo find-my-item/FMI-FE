@@ -53,7 +53,7 @@ const CheckBox = ({
       {label && (
         <span
           className={cn(
-            "ml-3 text-body1-semibold text-neutral-normal-default peer-checked:text-neutral-normal-enteredSelected",
+            "ml-3 cursor-default select-none text-body1-semibold text-neutral-normal-default peer-checked:text-neutral-normal-enteredSelected",
             textStyle
           )}
         >

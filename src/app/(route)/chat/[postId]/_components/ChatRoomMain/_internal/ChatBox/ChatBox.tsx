@@ -3,6 +3,7 @@ import { CHAT_SENDER_STYLE } from "../../constants/CHAT_SENDER_STYLE";
 import ChatImageBox from "../ChatImageBox/ChatImageBox";
 import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageResponse";
 import { useGetUsersMe } from "@/api/fetch/user";
+import ExpandableMessageBubble from "./_internal/ExpandableMessageBubble";
 
 interface ChatBoxProps {
   chat: ChatMessage;
@@ -25,15 +26,11 @@ const ChatBox = ({ chat, nextSender, lastChat, opponentNickname }: ChatBoxProps)
         {formatChatTime(createdAt)}
       </time>
       {messageType === "TEXT" && (
-        <p
-          className={cn(
-            "max-w-[272px] whitespace-pre-wrap break-words rounded-[24px] px-4 py-3",
-            style.bubbleColor,
-            style.bubbleOrder
-          )}
-        >
-          {content}
-        </p>
+        <ExpandableMessageBubble
+          content={content}
+          bubbleColor={style.bubbleColor}
+          bubbleOrder={style.bubbleOrder}
+        />
       )}
       {messageType === "IMAGE" && (
         <ChatImageBox

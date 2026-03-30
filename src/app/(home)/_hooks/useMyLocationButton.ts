@@ -2,7 +2,8 @@ import { useMainKakaoMapStore } from "@/store";
 import { useEffect } from "react";
 
 const useMyLocationButton = () => {
-  const { setLatLng, clearLatLng, triggerLevelReset } = useMainKakaoMapStore();
+  const { setLatLng, setUserGpsFromDevice, clearLatLng, triggerLevelReset } =
+    useMainKakaoMapStore();
 
   useEffect(() => {
     const checkGeolocationPermission = async () => {
@@ -34,10 +35,9 @@ const useMyLocationButton = () => {
     navigator.geolocation.getCurrentPosition(
       ({ coords }) => {
         triggerLevelReset();
-        setLatLng({
-          lat: coords.latitude,
-          lng: coords.longitude,
-        });
+        const next = { lat: coords.latitude, lng: coords.longitude };
+        setUserGpsFromDevice(next);
+        setLatLng(next);
       },
       () => {
         triggerLevelReset();
