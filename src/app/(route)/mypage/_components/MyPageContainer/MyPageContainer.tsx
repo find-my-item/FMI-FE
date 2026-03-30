@@ -13,8 +13,9 @@ const MyPageContainer = ({ hasToken }: { hasToken: boolean }) => {
   const { addToast } = useToast();
 
   useEffect(() => {
+    if (!error) return;
+
     const errorCode = error?.response?.data.code;
-    console.log("errorCode>>>>>       ", errorCode);
     if (errorCode === "AUTH401-INVALID_REFRESH") {
       // noop
     } else if (errorCode === "USER404-NOT_FOUND") {

@@ -73,7 +73,7 @@ export const useSignUpBtnClick = () => {
                   onError: (error) => {
                     const errorCode = error.response?.data.code;
                     if (errorCode) {
-                      handlerApiError(EMAIL_ERROR_MESSAGE, errorCode, "email");
+                      handlerApiError(EMAIL_ERROR_MESSAGE, errorCode || "", "email");
                     }
                   },
                 }
@@ -93,7 +93,7 @@ export const useSignUpBtnClick = () => {
                   onError: (error) => {
                     const errorCode = error.response?.data.code;
                     if (errorCode)
-                      handlerApiError(EMAIL_CHECK_CODE_MESSAGE, errorCode, "emailAuth");
+                      handlerApiError(EMAIL_CHECK_CODE_MESSAGE, errorCode || "", "emailAuth");
                   },
                 }
               );

@@ -16,7 +16,7 @@ const useErrorToast = () => {
       if (name) setError(name, { message: target.message });
       addToast(target.message, target.status);
     } else {
-      addToast("잠시 후 다시 시도해 주세요", "error");
+      addToast("예상치 못한 에러가 발생했어요", "error");
     }
   };
 
