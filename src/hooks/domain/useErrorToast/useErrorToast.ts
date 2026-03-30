@@ -9,11 +9,11 @@ const useErrorToast = () => {
   const handlerApiError = (
     errorConstant: Record<string, { message: string; status: ToastType }>,
     errorCode: string,
-    name: string
+    name?: string
   ) => {
     const target = errorConstant[errorCode as keyof typeof errorConstant];
     if (target) {
-      setError(name, { message: target.message });
+      if (name) setError(name, { message: target.message });
       addToast(target.message, target.status);
     } else {
       addToast("잠시 후 다시 시도해 주세요", "error");
