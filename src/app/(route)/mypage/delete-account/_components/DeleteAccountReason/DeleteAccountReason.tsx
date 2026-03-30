@@ -33,7 +33,7 @@ const DeleteAccountReason = ({ onNext }: { onNext: () => void }) => {
 
   return (
     <>
-      <div className="flex w-full flex-col gap-7 px-5 py-[30px] h-hf-base tablet:px-[80px]">
+      <div className="flex w-full flex-col gap-7 px-5 py-[30px] h-hf-base tablet:px-20">
         <div className="flex flex-col gap-[6px]">
           <h3 className="text-h3-semibold">탈퇴하시려는 이유를 알려주세요.</h3>
           <p className="text-body2-regular text-layout-body-default">최대 3개 선택</p>
