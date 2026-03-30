@@ -94,10 +94,29 @@ export const NotificationSSEProvider = ({ children }: PropsWithChildren) => {
     [pathname, debouncedFlush, setHasUnreadNotification, addUnreadNotificationType]
   );
 
-  useNotificationSSE({
+  const prevPathnameRef = useRef(pathname);
+  const didMoveFromAuthRouteRef = useRef(false);
+
+  const { connect } = useNotificationSSE({
     enabled: isAuthInitialized,
     onNotification,
   });
+
+  useEffect(() => {
+    const prevPathname = prevPathnameRef.current;
+    const didMove = isAuthRoutePath(prevPathname) && !isAuthRoutePath(pathname);
+
+    if (didMove) {
+      didMoveFromAuthRouteRef.current = true;
+    }
+
+    if (isAuthInitialized && didMoveFromAuthRouteRef.current) {
+      connect();
+      didMoveFromAuthRouteRef.current = false;
+    }
+
+    prevPathnameRef.current = pathname;
+  }, [pathname, isAuthInitialized, connect]);
 
   return children;
 };
