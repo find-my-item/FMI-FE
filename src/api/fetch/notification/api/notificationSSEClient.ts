@@ -23,12 +23,15 @@ type SSERuntime = {
   isAuthInvalid: boolean;
   consecutiveAuthRefreshFailures: number;
   tokenRefreshHandler: (() => void) | null;
+  currentAccessToken: string | null;
+  consecutiveSSEErrorCount: number;
 };
 
 const handlers: Handlers = {};
 const RECONNECT_BASE_DELAY_MS = 1000;
 const RECONNECT_MAX_DELAY_MS = 30000;
 const RECONNECT_JITTER_RATIO = 0.2;
+const MAX_SSE_ERROR_RETRY_PER_TOKEN = 3;
 const reconnectRetryController = retryBackoffController({
   baseDelayMs: RECONNECT_BASE_DELAY_MS,
   maxDelayMs: RECONNECT_MAX_DELAY_MS,
@@ -47,6 +50,8 @@ function getRuntime(): SSERuntime {
       isAuthInvalid: false,
       consecutiveAuthRefreshFailures: 0,
       tokenRefreshHandler: null,
+      currentAccessToken: null,
+      consecutiveSSEErrorCount: 0,
     };
   }
   return g[RUNTIME_KEY];
@@ -56,16 +61,11 @@ export function setNotificationSSEHandlers(next: Partial<Handlers>) {
   Object.assign(handlers, next);
 }
 
-async function buildSubscribeUrl(): Promise<string | null> {
+async function buildSubscribeUrl(): Promise<{ url: string; accessToken: string } | null> {
   const apiBase = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "");
   if (!apiBase) return null;
 
   const subscribeUrl = `${apiBase}/notifications/subscribe`;
-
-  if (process.env.NODE_ENV !== "development") {
-    return subscribeUrl;
-  }
-
   const rt = getRuntime();
 
   try {
@@ -84,7 +84,17 @@ async function buildSubscribeUrl(): Promise<string | null> {
 
     const q = new URLSearchParams();
     q.set(DEV_SSE_ACCESS_TOKEN_QUERY_KEY, token);
-    return `${subscribeUrl}?${q.toString()}`;
+    if (process.env.NODE_ENV === "development") {
+      return {
+        url: `${subscribeUrl}?${q.toString()}`,
+        accessToken: token,
+      };
+    }
+
+    return {
+      url: subscribeUrl,
+      accessToken: token,
+    };
   } catch {
     rt.isAuthInvalid = true;
     return null;
@@ -152,6 +162,8 @@ export function disconnectNotificationSSE() {
   rt.isReconnecting = false;
   rt.isAuthInvalid = false;
   rt.consecutiveAuthRefreshFailures = 0;
+  rt.currentAccessToken = null;
+  rt.consecutiveSSEErrorCount = 0;
   reconnectRetryController.cancel();
   detachTokenRefreshListener();
   release();
@@ -179,12 +191,17 @@ export async function connectNotificationSSE(options?: { force?: boolean }): Pro
 
     const version = rt.connectionVersion;
 
-    const url = await buildSubscribeUrl();
-    if (!url) return;
+    const connectionInfo = await buildSubscribeUrl();
+    if (!connectionInfo) return;
 
     if (rt.connectionVersion !== version) return;
 
-    const es = new EventSource(url, { withCredentials: true });
+    if (rt.currentAccessToken !== connectionInfo.accessToken) {
+      rt.currentAccessToken = connectionInfo.accessToken;
+      rt.consecutiveSSEErrorCount = 0;
+    }
+
+    const es = new EventSource(connectionInfo.url, { withCredentials: true });
 
     if (rt.connectionVersion !== version) {
       es.close();
@@ -204,6 +221,7 @@ export async function connectNotificationSSE(options?: { force?: boolean }): Pro
 
       rt.tokenRefreshHandler = () => {
         rt.isAuthInvalid = false;
+        rt.consecutiveSSEErrorCount = 0;
         scheduleReconnectNotificationSSE({ immediate: true, resetAttempt: true });
       };
 
@@ -213,6 +231,7 @@ export async function connectNotificationSSE(options?: { force?: boolean }): Pro
     es.onopen = () => {
       if (rt.connectionVersion !== version || rt.eventSource !== es) return;
       handlers.onConnectionState?.(true);
+      rt.consecutiveSSEErrorCount = 0;
       reconnectRetryController.reset();
     };
 
@@ -220,6 +239,7 @@ export async function connectNotificationSSE(options?: { force?: boolean }): Pro
       if (rt.connectionVersion !== version || rt.eventSource !== es) return;
       handlers.onConnectionState?.(true);
       handlers.onConnect?.(typeof e.data === "string" ? e.data : "");
+      rt.consecutiveSSEErrorCount = 0;
       reconnectRetryController.reset();
     });
 
@@ -235,6 +255,13 @@ export async function connectNotificationSSE(options?: { force?: boolean }): Pro
       // 브라우저 EventSource 자동 재연결 루프를 차단한다.
       es.close();
       rt.eventSource = null;
+      rt.consecutiveSSEErrorCount += 1;
+
+      if (rt.consecutiveSSEErrorCount >= MAX_SSE_ERROR_RETRY_PER_TOKEN) {
+        rt.isAuthInvalid = true;
+        return;
+      }
+
       scheduleReconnectNotificationSSE();
     };
   } finally {
