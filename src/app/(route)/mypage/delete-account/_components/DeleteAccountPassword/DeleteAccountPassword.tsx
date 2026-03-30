@@ -50,11 +50,11 @@ const DeleteAccountPassword = ({ onBack }: { onBack: () => void }) => {
               message: "비밀번호가 일치하지 않아요.",
             });
             addToast("비밀번호가 일치하지 않아요", "warning");
-          } else if (errorCode === "USER404-NOT_FOUND"){
+          } else if (errorCode === "USER404-NOT_FOUND") {
             setError("passwordConfirm", {
               message: "존재하지 않는 회원이에요.",
             });
-          addToast("존재하지 않는 회원이에요", "warning");
+            addToast("존재하지 않는 회원이에요", "warning");
           }
         },
       }
