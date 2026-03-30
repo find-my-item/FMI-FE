@@ -8,7 +8,11 @@ interface SendImageContext {
   imageUrls: string[];
 }
 
-const useSendImage = (roomId: number, userId: number) => {
+interface UseSendImageOptions {
+  onSuccess?: () => void;
+}
+
+const useSendImage = (roomId: number, userId: number, options?: UseSendImageOptions) => {
   const queryClient = useQueryClient();
   return useAppMutation<FormData, unknown, unknown, SendImageContext>(
     "auth",
@@ -34,6 +38,7 @@ const useSendImage = (roomId: number, userId: number) => {
       },
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ["chatMessages", roomId] });
+        options?.onSuccess?.();
       },
       onError: (error, variables, context) => {
         if (context?.optimisticId) {
