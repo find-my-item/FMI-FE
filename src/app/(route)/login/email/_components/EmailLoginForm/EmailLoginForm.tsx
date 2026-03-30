@@ -21,7 +21,7 @@ const EmailLoginForm = () => {
           <LogoLink />
 
           {/* 로그인 입력칸 */}
-          <div className="flex w-full flex-col gap-3">
+          <fieldset className="flex w-full flex-col gap-3">
             <legend className="sr-only">로그인 정보 입력</legend>
             {EMAIL_LOGIN_CONFIG.map((item) => (
               <InputText key={item.inputOption.name} {...item} />
@@ -37,11 +37,11 @@ const EmailLoginForm = () => {
               iconSize="h-[6px]"
               checked={!!checkBoxValues}
             />
-          </div>
+          </fieldset>
         </div>
 
         {/* 로그인 버튼 */}
-        <div className="w-full gap-5 flex-col-center tablet:px-[10px]">
+        <footer className="w-full gap-5 flex-col-center tablet:px-[10px]">
           <Button type="submit" variant="auth" loading={isPending}>
             로그인
           </Button>
@@ -73,7 +73,7 @@ const EmailLoginForm = () => {
               </Link>
             </div>
           </nav>
-        </div>
+        </footer>
       </main>
     </form>
   );
