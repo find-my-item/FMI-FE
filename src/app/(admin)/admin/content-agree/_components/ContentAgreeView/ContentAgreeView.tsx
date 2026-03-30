@@ -1,22 +1,9 @@
 "use client";
 
 import { PostListItem } from "@/components/domain";
-import { AdminFilter } from "../../../_components";
+import { ContentAgreeFilter } from "../_internal";
 
-const filters = [
-  {
-    label: "기간",
-    onSelected: false,
-    icon: {
-      name: "Calendar",
-      size: 16,
-    },
-    iconPosition: "leading",
-    onClick: () => {},
-  },
-  { label: "전체", onSelected: true, onClick: () => {} },
-];
-
+// TODO(지권): 임시 데이터
 const mock = {
   id: 1,
   title: "제목입니다",
@@ -37,8 +24,8 @@ const mock = {
 
 const ContentAgreeView = () => {
   return (
-    <div>
-      <AdminFilter filters={filters} />
+    <>
+      <ContentAgreeFilter />
 
       <section>
         <ul>
@@ -47,7 +34,7 @@ const ContentAgreeView = () => {
           ))}
         </ul>
       </section>
-    </div>
+    </>
   );
 };
 
