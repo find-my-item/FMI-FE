@@ -7,7 +7,9 @@ import { cn } from "@/utils";
 import { Suspense, useEffect, useRef, useState } from "react";
 import SearchFocusDropdown from "../SearchFocusDropdown/SearchFocusDropdown";
 import MainSearchLayout from "../MainSearchLayout/MainSearchLayout";
-import { useMainRecentSearch } from "@/store";
+import { DEFAULT_ADDRESS } from "@/constants";
+import { useGeolocationPermissionGranted } from "@/hooks";
+import { useMainKakaoMapStore, useMainRecentSearch } from "@/store";
 
 interface LocationFormValues {
   search: string;
@@ -18,6 +20,8 @@ interface FocusedProps {
   focused: boolean;
 }
 
+const LOCATION_PLACEHOLDER_DEFAULT = "현재 위치 (위치 정보 허용 시)";
+
 const HeaderSearchForm = ({
   searchValue,
   setFocused,
@@ -26,7 +30,31 @@ const HeaderSearchForm = ({
 }: FocusedProps & { searchValue: string | null; setSearchKeyword: (value: string) => void }) => {
   const router = useRouter();
   const addRecentSearch = useMainRecentSearch((s) => s.addRecentSearch);
+  const userGpsAddress = useMainKakaoMapStore((s) => s.userGpsAddress);
+  const userGpsLatLng = useMainKakaoMapStore((s) => s.userGpsLatLng);
+  const setUserGpsFromDevice = useMainKakaoMapStore((s) => s.setUserGpsFromDevice);
+  const geoGranted = useGeolocationPermissionGranted();
+  const isResolvedGpsAddress =
+    userGpsAddress.trim().length > 0 && userGpsAddress.trim() !== DEFAULT_ADDRESS;
+  const locationPlaceholder =
+    geoGranted && isResolvedGpsAddress ? userGpsAddress : LOCATION_PLACEHOLDER_DEFAULT;
+
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (!geoGranted || userGpsLatLng) return;
+    if (typeof navigator === "undefined" || !navigator.geolocation) return;
+
+    navigator.geolocation.getCurrentPosition(
+      ({ coords }) => {
+        setUserGpsFromDevice({
+          lat: coords.latitude,
+          lng: coords.longitude,
+        });
+      },
+      () => {}
+    );
+  }, [geoGranted, userGpsLatLng, setUserGpsFromDevice]);
   const { register, handleSubmit, setValue } = useForm<LocationFormValues>({
     defaultValues: { search: searchValue ?? "" },
   });
@@ -75,15 +103,17 @@ const HeaderSearchForm = ({
         }}
         type="text"
         onFocus={() => setFocused(true)}
-        className="w-full pl-8 text-h3-semibold text-flatGray-700 placeholder:text-flatGray-700"
-        placeholder="현재 위치 (위치 정보 허용 시)"
+        className={cn(
+          "w-full pl-8 text-h3-semibold text-flatGray-700 placeholder:text-flatGray-700"
+        )}
+        placeholder={locationPlaceholder}
       />
       <button
         type="button"
         onMouseDown={(e) => e.preventDefault()}
         onClick={isDropdownOpen ? handleBack : handleSubmit(onSubmit)}
         aria-label={isDropdownOpen ? "뒤로가기" : "위치 검색"}
-        className="absolute left-5 top-[18.5px]"
+        className="absolute left-5 top-1/2 -translate-y-1/2"
       >
         <Icon name={isDropdownOpen ? "ArrowLeftSmall" : "Search"} size={20} />
       </button>

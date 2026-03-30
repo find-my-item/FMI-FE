@@ -1,6 +1,5 @@
 "use client";
 
-import { LoadingState } from "@/components/state";
 import { useToast } from "@/context/ToastContext";
 import { useEffect } from "react";
 import MyPageProfile from "../MyPageProfile/MyPageProfile";

@@ -1,6 +1,5 @@
 import { DetailHeader } from "@/components/layout";
 import { MypageInquiriesIdContainer } from "./_components";
-import InquiryInputComment from "./_components/InquiryInputComment/InquiryInputComment";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -14,7 +13,6 @@ const page = async ({ params }: PageProps) => {
     <>
       <DetailHeader title="내 문의 내역" />
       <MypageInquiriesIdContainer id={inquiryId} />
-      <InquiryInputComment id={inquiryId} />
     </>
   );
 };

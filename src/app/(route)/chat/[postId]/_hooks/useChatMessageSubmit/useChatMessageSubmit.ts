@@ -8,9 +8,15 @@ interface UseChatMessageSubmitParams {
   roomId: number;
   userId: number;
   reset: UseFormReset<{ content: string }>;
+  onSendSuccess?: () => void;
 }
 
-const useChatMessageSubmit = ({ roomId, userId, reset }: UseChatMessageSubmitParams) => {
+const useChatMessageSubmit = ({
+  roomId,
+  userId,
+  reset,
+  onSendSuccess,
+}: UseChatMessageSubmitParams) => {
   const queryClient = useQueryClient();
 
   const onSubmit = ({ content }: { content: string }) => {
@@ -33,6 +39,8 @@ const useChatMessageSubmit = ({ roomId, userId, reset }: UseChatMessageSubmitPar
     });
     if (!sendSucceeded) {
       removeMessageFromCache(queryClient, roomId, optimisticId);
+    } else {
+      onSendSuccess?.();
     }
 
     reset();
