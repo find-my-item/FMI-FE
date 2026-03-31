@@ -11,7 +11,7 @@ type SignUpFieldType = Omit<FormType, "privacyPolicyAgreed" | "marketingConsent"
 type SignUpSetFocus = UseFormSetFocus<SignUpFieldType>;
 
 export const useSignUpBtnClick = () => {
-  const { getValues, trigger, control } = useFormContext();
+  const { getValues, trigger, control, setValue } = useFormContext();
 
   const [emailValue, setEmailValue] = useState("");
 
@@ -88,6 +88,8 @@ export const useSignUpBtnClick = () => {
                     setIsEmailAuthDisabled(true);
                     setIsEmailDisabled(true);
                     setIsEmailAuthVerified(true);
+
+                    setValue("isEmailAuthVerified", true, { shouldValidate: true });
                     setFocus("password");
                   },
                   onError: (error) => {

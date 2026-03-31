@@ -14,13 +14,21 @@ export const usePostPosts = () => {
   const { setShowManualPopup } = useWriteFlowStore();
 
   return useAppMutation<FormData, PostPostsWriteResponse>("auth", "/posts", "post", {
-    onSuccess: (data, variables) => {
+    onSuccess: async (data, variables) => {
       if (variables.has("tempPostId")) {
         queryClient.invalidateQueries({ queryKey: ["temp-post"] });
       }
-      queryClient.invalidateQueries({ queryKey: ["/users/me/posts"] });
+
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: ["posts"] }),
+        queryClient.invalidateQueries({ queryKey: ["/users/me/posts"] }),
+        queryClient.invalidateQueries({ queryKey: ["similar"] }),
+      ]);
+
       addToast("게시글이 등록되었습니다.", "success");
-      sessionStorage.setItem("showManualPopup", "true");
+      if (typeof window !== "undefined") {
+        sessionStorage.setItem("showManualPopup", "true");
+      }
       setShowManualPopup(true);
       useBetaTestFeedbackStore.getState().openBetaTestModal();
       router.replace(`/list/${data.result.id}`);

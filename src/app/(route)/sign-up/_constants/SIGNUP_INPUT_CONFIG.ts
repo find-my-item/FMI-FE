@@ -3,7 +3,7 @@ export const SIGNUP_INPUT_CONFIG = [
     inputOption: {
       name: "email",
       type: "text",
-      placeholder: "이메일을 입력해주세요.",
+      placeholder: "이메일을 입력해 주세요.",
       maxLength: 256,
     },
     label: "아이디(이메일)",
@@ -16,7 +16,7 @@ export const SIGNUP_INPUT_CONFIG = [
     inputOption: {
       name: "emailAuth",
       type: "text",
-      placeholder: "인증번호를 입력해주세요.",
+      placeholder: "인증번호를 입력해 주세요.",
       maxLength: 6,
     },
     btnOption: {
