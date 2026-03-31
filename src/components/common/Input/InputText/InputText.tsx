@@ -71,6 +71,7 @@ interface InputButtonType extends ButtonHTMLAttributes<HTMLButtonElement> {
   btnLabel?: string;
   btnOnClick?: (value: string) => void;
   btnType?: "button" | "submit" | "reset";
+  loading?: boolean;
 }
 
 export interface InputTextProps {
@@ -184,9 +185,9 @@ const InputText = ({
             variant="outlined"
             type={btnType}
             onClick={() => btnOnClick?.(isValue)}
-            ignoreBase
             disabled={disabled}
-            className="text-neutral-normal-default, h-11 w-auto whitespace-nowrap rounded-[10px] border border-neutral-normal-default px-[14px] py-[10px] text-body2-semibold disabled:text-neutral-normal-disabled disabled:bg-fill-neutral-strong-default"
+            size="big"
+            className="h-11 w-auto whitespace-nowrap px-5 py-[10px]"
             {...restBtnOption}
           >
             {btnLabel}
