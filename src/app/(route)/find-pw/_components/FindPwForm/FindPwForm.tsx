@@ -30,7 +30,7 @@ const FindPwForm = () => {
               placeholder: "아이디를 입력해 주세요.",
               maxLength: 254,
               validation: {
-                required: true,
+                required: "이메일을 입력해 주세요.",
                 pattern: {
                   value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                   message: "이메일 형식을 입력해주세요.",
