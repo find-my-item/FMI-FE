@@ -96,52 +96,47 @@ export const NotificationSSEProvider = ({ children }: PropsWithChildren) => {
   );
 
   const prevPathnameRef = useRef(pathname);
-  const didMoveFromAuthRouteRef = useRef(false);
-  const didLoginSuccessEventRef = useRef(false);
+  const hasPendingSSEReconnectRef = useRef(false);
 
   const { connect } = useNotificationSSE({
     enabled: isAuthInitialized,
     onNotification,
   });
 
+  const requestSSEReconnect = useCallback(() => {
+    hasPendingSSEReconnectRef.current = true;
+    if (!isAuthInitialized) return;
+
+    connect();
+    hasPendingSSEReconnectRef.current = false;
+  }, [isAuthInitialized, connect]);
+
   useEffect(() => {
     const prevPathname = prevPathnameRef.current;
     const didMove = isAuthRoutePath(prevPathname) && !isAuthRoutePath(pathname);
 
     if (didMove) {
-      didMoveFromAuthRouteRef.current = true;
-    }
-
-    if (isAuthInitialized && didMoveFromAuthRouteRef.current) {
-      connect();
-      didMoveFromAuthRouteRef.current = false;
+      requestSSEReconnect();
     }
 
     prevPathnameRef.current = pathname;
-  }, [pathname, isAuthInitialized, connect]);
+  }, [pathname, requestSSEReconnect]);
 
   useEffect(() => {
     const handleLoginSuccess = () => {
-      didLoginSuccessEventRef.current = true;
-
-      if (isAuthInitialized) {
-        connect();
-        didLoginSuccessEventRef.current = false;
-      }
+      requestSSEReconnect();
     };
 
     window.addEventListener(AUTH_LOGIN_SUCCESS_EVENT, handleLoginSuccess);
     return () => {
       window.removeEventListener(AUTH_LOGIN_SUCCESS_EVENT, handleLoginSuccess);
     };
-  }, [connect, isAuthInitialized]);
+  }, [requestSSEReconnect]);
 
   useEffect(() => {
-    if (!isAuthInitialized || !didLoginSuccessEventRef.current) return;
-
-    connect();
-    didLoginSuccessEventRef.current = false;
-  }, [isAuthInitialized, connect]);
+    if (!isAuthInitialized || !hasPendingSSEReconnectRef.current) return;
+    requestSSEReconnect();
+  }, [isAuthInitialized, requestSSEReconnect]);
 
   return children;
 };
