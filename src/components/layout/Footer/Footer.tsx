@@ -3,8 +3,8 @@
 import { FooterItem } from "./_internal";
 import useFooterNav from "./_hooks/useFooterNav";
 
-const Footer = () => {
-  const { isHidden, items } = useFooterNav();
+const Footer = ({ hasToken = false }: { hasToken?: boolean }) => {
+  const { isHidden, items } = useFooterNav(hasToken);
   if (isHidden) return null;
 
   return (
