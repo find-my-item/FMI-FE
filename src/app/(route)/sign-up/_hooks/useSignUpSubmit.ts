@@ -20,7 +20,12 @@ export const useSignUpSubmit = () => {
         router.replace("/");
         addToast("회원가입이 완료되었어요.", "success");
       },
-      onError: (error) => handlerApiError(SIGNUP_ERROR_MESSAGE, error.code),
+      onError: (error) => {
+        const errorCode = error?.response?.data.code;
+        if (errorCode) {
+          handlerApiError(SIGNUP_ERROR_MESSAGE, errorCode);
+        }
+      },
     });
   };
 
