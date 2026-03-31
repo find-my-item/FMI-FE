@@ -14,31 +14,31 @@ export const ACTIVITY_STYLE_CONFIG = {
   INQUIRY: {
     bgColor: "bg-notificationGrey",
     iconName: "Inquiry",
-    logTitle: "1:1문의를 작성했습니다.",
+    logTitle: "1:1문의를 작성했어요.",
   },
   INQUIRY_RECEIVED: {
     bgColor: "bg-notificationGrey",
     iconName: "Inquiry",
-    logTitle: "1:1 문의에 대한 답변이 등록되었어요.",
+    logTitle: "1:1문의를 작성했어요.",
   },
   INQUIRY_ANSWERED: {
     bgColor: "bg-notificationBrand",
     iconName: "InquiryAnswered",
-    logTitle: "1:1문의 답변이 달렸습니다.",
+    logTitle: "1:1 문의에 대한 답변이 등록되었어요.",
   },
   REPORT: {
     bgColor: "bg-notificationGrey",
     iconName: "Report",
-    logTitle: "신고가 접수되었습니다.",
+    logTitle: "신고가 접수되었어요.",
   },
   REPORT_RECEIVED: {
     bgColor: "bg-notificationGrey",
     iconName: "Report",
-    logTitle: "신고가 접수되었습니다.",
+    logTitle: "신고가 접수되었어요.",
   },
   REPORT_ANSWERED: {
     bgColor: "bg-notificationBrand",
     iconName: "Report",
-    logTitle: "접수된 신고가 처리되었습니다.",
+    logTitle: "신고에 대한 답변이 등록되었어요.",
   },
 } as const;

@@ -42,6 +42,7 @@ const useLoginForm = () => {
         if (typeof window !== "undefined") {
           window.dispatchEvent(new CustomEvent(AUTH_LOGIN_SUCCESS_EVENT));
         }
+        router.refresh();
         router.replace("/");
 
         if (data.rememberId) {
