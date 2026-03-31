@@ -71,6 +71,7 @@ interface InputButtonType extends ButtonHTMLAttributes<HTMLButtonElement> {
   btnLabel?: string;
   btnOnClick?: (value: string) => void;
   btnType?: "button" | "submit" | "reset";
+  loading?: boolean;
 }
 
 export interface InputTextProps {
@@ -81,6 +82,7 @@ export interface InputTextProps {
     isSuccess?: boolean;
     successMessage?: string;
     rule?: string;
+    timer?: number;
   };
 }
 
@@ -99,7 +101,7 @@ const InputText = ({
 }: InputTextProps) => {
   const { name, type = "text", validation, disabled } = inputOption;
   const { btnType = "button", btnOnClick, btnLabel, ...restBtnOption } = btnOption;
-  const { isSuccess, successMessage, rule } = caption;
+  const { isSuccess, successMessage, rule, timer } = caption;
 
   const {
     register,
@@ -183,9 +185,9 @@ const InputText = ({
             variant="outlined"
             type={btnType}
             onClick={() => btnOnClick?.(isValue)}
-            ignoreBase
             disabled={disabled}
-            className="text-neutral-normal-default, h-11 w-auto whitespace-nowrap rounded-[10px] border border-neutral-normal-default px-[14px] py-[10px] text-body2-semibold disabled:text-neutral-normal-disabled disabled:bg-fill-neutral-strong-default"
+            size="big"
+            className="h-11 w-auto whitespace-nowrap px-5 py-[10px]"
             {...restBtnOption}
           >
             {btnLabel}
@@ -205,6 +207,13 @@ const InputText = ({
 
         {/* 글자 수 확인 */}
         <Counter isLength={isValueStr.length} maxLength={maxLength} />
+
+        {/* 타이머 */}
+        {timer && timer > 0 && (
+          <time className="text-caption1-regular text-brand-normal-default">
+            {Math.floor(timer / 60)}:{String(timer % 60).padStart(2, "0")}
+          </time>
+        )}
       </div>
     </div>
   );
