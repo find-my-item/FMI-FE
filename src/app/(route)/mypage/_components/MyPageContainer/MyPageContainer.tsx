@@ -1,6 +1,5 @@
 "use client";
 
-import { LoadingState } from "@/components/state";
 import { useToast } from "@/context/ToastContext";
 import { useEffect } from "react";
 import MyPageProfile from "../MyPageProfile/MyPageProfile";
@@ -15,7 +14,12 @@ const MyPageContainer = ({ hasToken }: { hasToken: boolean }) => {
 
   useEffect(() => {
     if (error) {
-      addToast("프로필 정보를 불러오는데 실패했어요.", "warning");
+      const errorCode = error.response?.data.code;
+      if (errorCode === "COMMON401") {
+        // noop
+      } else {
+        addToast("프로필 정보를 불러오는데 실패했어요.", "warning");
+      }
     }
   }, [error, addToast]);
 
