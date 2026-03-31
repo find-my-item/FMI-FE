@@ -7,32 +7,26 @@ import Link from "next/link";
 import { useFindPwSubmit } from "@/hooks/domain";
 import { ApiFindPwType } from "@/api/fetch/auth";
 
-interface FindPwFormProps {
-  text: string;
-  redirectLink: string;
-}
-
-const FindPwForm = ({ text, redirectLink }: FindPwFormProps) => {
+const FindPwForm = () => {
   const { handleSubmit } = useFormContext<ApiFindPwType>();
   const { onSubmitFindPassword, email } = useFindPwSubmit();
 
   return (
     <form
-      className={cn("flex min-h-screen w-full flex-col gap-[10px] px-5 py-[64px]", email && "px-9")}
+      className={cn("flex w-full flex-col gap-[10px] px-5 py-[64px] h-base", email && "px-9")}
       noValidate
       onSubmit={handleSubmit(onSubmitFindPassword)}
     >
       {!email ? (
         <InputText
-          label="아이디(이메일)"
+          label="아이디 (이메일)"
           inputOption={{
             name: "email",
             type: "email",
-            placeholder: "아이디(이메일)을 입력해 주세요.",
+            placeholder: "아이디를 입력해 주세요.",
+            maxLength: 254,
             validation: {
-              required: "이메일은 필수 입력 항목입니다.",
-              maxLength: { value: 254, message: "이메일이 너무 깁니다." },
-              minLength: { value: 6, message: "최소 6자 이상 입력해주세요." },
+              required: true,
               pattern: {
                 value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                 message: "이메일 형식을 입력해주세요.",
@@ -40,7 +34,7 @@ const FindPwForm = ({ text, redirectLink }: FindPwFormProps) => {
             },
           }}
           btnOption={{
-            btnLabel: "발송",
+            btnLabel: "비밀번호 찾기",
             btnType: "submit",
           }}
         />
@@ -55,8 +49,8 @@ const FindPwForm = ({ text, redirectLink }: FindPwFormProps) => {
             </span>
             임시 비밀번호를 발송했습니다.
           </p>
-          <Button as={Link} href={redirectLink} className="w-full" ariaLabel="로그인 화면으로 이동">
-            {text}
+          <Button as={Link} href="/login/email" className="w-full" ariaLabel="로그인 화면으로 이동">
+            비밀번호 변경
           </Button>
         </>
       )}
