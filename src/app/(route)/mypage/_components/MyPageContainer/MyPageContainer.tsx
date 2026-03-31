@@ -16,10 +16,12 @@ const MyPageContainer = ({ hasToken }: { hasToken: boolean }) => {
     if (!error) return;
 
     const errorCode = error?.response?.data.code;
-    if (errorCode === "AUTH401-INVALID_REFRESH") {
+    if (
+      errorCode === "USER404-NOT_FOUND" ||
+      errorCode === "COMMON401" ||
+      errorCode === "AUTH401-INVALID_REFRESH"
+    ) {
       // noop
-    } else if (errorCode === "USER404-NOT_FOUND") {
-      // noop 존재하지 않는 회원
     } else {
       addToast("예상치 못한 에러가 발생했어요", "error");
     }
