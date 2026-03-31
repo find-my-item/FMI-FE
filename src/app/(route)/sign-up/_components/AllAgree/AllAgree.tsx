@@ -79,14 +79,20 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
                   {...register(item.name, item.validation)}
                   checked={!!termsValue?.[index]}
                 />
-                <button
-                  className="bg-white"
-                  type="button"
-                  aria-label="상세 약관 열기"
-                  onClick={() => onOpenDetail(item.name)}
-                >
-                  <Icon name="ArrowRightSmall" size={24} className="text-neutral-normal-default" />
-                </button>
+                {item.name !== "over14Age" && (
+                  <button
+                    className="bg-white"
+                    type="button"
+                    aria-label="상세 약관 열기"
+                    onClick={() => onOpenDetail(item.name)}
+                  >
+                    <Icon
+                      name="ArrowRightSmall"
+                      size={24}
+                      className="text-neutral-normal-default"
+                    />
+                  </button>
+                )}
               </div>
             ))}
           </div>

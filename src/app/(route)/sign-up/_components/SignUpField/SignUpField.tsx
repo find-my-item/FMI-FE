@@ -16,34 +16,42 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
     formState: { isValid },
   } = useFormContext();
 
-  const password = useWatch({ control, name: "password" });
-
-  useEffect(() => {
-    void trigger("passwordConfirm");
-  }, [password, trigger]);
+  const isEmailAuthVerifiedForm = useWatch({ control, name: "isEmailAuthVerified" });
+  const isNicknameVerifiedForm = useWatch({ control, name: "isNicknameVerified" });
 
   const {
     isEmailDisabled,
     isEmailAuthDisabled,
-    isEmailAuthVerified,
+    isEmailAuthVerified: isEmailAuthVerifiedLocal,
     handlerToClick,
-    isNicknameVerified,
+    isNicknameVerified: isNicknameVerifiedLocal,
     isNicknameDisabled,
     EmailPending,
     EmailCodePending,
     timer,
   } = useSignUpBtnClick();
 
+  const finalEmailVerified = isEmailAuthVerifiedForm || isEmailAuthVerifiedLocal;
+  const finalNicknameVerified = isNicknameVerifiedForm || isNicknameVerifiedLocal;
+
+  const handleVerified = (name: string) => {
+    if (name === "emailAuth") return finalEmailVerified;
+    if (name === "nickname") return finalNicknameVerified;
+    return false;
+  };
+
+  const isNextEnabled = isValid && finalEmailVerified && finalNicknameVerified;
+
+  const password = useWatch({ control, name: "password" });
+
+  useEffect(() => {
+    void trigger("passwordConfirm");
+  }, [password, trigger]);
+
   const handleDisabled = (name: string) => {
     if (name === "emailAuth") return isEmailAuthDisabled;
     else if (name === "email") return isEmailDisabled;
     else if (name === "nickname") return isNicknameDisabled;
-  };
-
-  const handleVerified = (name: string) => {
-    if (name === "emailAuth") return isEmailAuthVerified;
-    else if (name === "nickname") return isNicknameVerified;
-    else return false;
   };
 
   const handleBtnDisabled = (name: string) => {
@@ -55,12 +63,10 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
     if (name === "emailAuth" && timer > 0) return timer;
   };
 
-  const isNextEnabled = isValid && isEmailAuthVerified && isNicknameVerified;
-
   return (
     <>
       <DetailHeader title="회원가입" />
-      <div className="flex w-full flex-1 flex-col gap-5 px-4 py-5 h-hf-base tablet:px-[80px]">
+      <div className="flex w-full flex-1 flex-col gap-5 px-4 py-5 h-hfb-base tablet:px-[80px]">
         {SIGNUP_INPUT_CONFIG.map((item) => (
           <SignUpItem
             key={item.inputOption.name}

@@ -17,7 +17,7 @@ const SignUpContainer = () => {
   const { setValue } = useFormContext();
 
   return (
-    <form className="flex w-full flex-1 flex-col justify-between">
+    <form className="h-bf-base flex w-full flex-1 flex-col justify-between">
       {step === "1" && <SignUpField onNext={() => onNext(2)} />}
       {step === "2" && !termName && (
         <AllAgree onOpenDetail={openTermDetail} onComplete={completeTerms} />
