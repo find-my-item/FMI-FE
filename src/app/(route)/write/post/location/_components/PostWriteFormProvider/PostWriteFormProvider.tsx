@@ -54,7 +54,7 @@ const PostWriteFormProvider = ({ children }: { children: ReactNode }) => {
     prevPathRef.current = pathname;
 
     return () => {
-      if (!window.location.pathname.startsWith("/write/post")) {
+      if (typeof window !== "undefined" && !window.location.pathname.startsWith("/write/post")) {
         resetWriteFlow();
       }
     };
