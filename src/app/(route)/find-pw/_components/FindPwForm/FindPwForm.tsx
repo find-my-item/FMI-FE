@@ -9,35 +9,42 @@ import { ApiFindPwType } from "@/api/fetch/auth";
 
 const FindPwForm = () => {
   const { handleSubmit } = useFormContext<ApiFindPwType>();
-  const { onSubmitFindPassword, email } = useFindPwSubmit();
+  const { onSubmitFindPassword, email, isPending } = useFindPwSubmit();
 
   return (
     <form
-      className={cn("flex w-full flex-col gap-[10px] px-5 py-[64px] h-base", email && "px-9")}
+      className={cn(
+        "flex w-full flex-col gap-[10px] px-5 py-[64px] h-base tablet:px-20",
+        email && "px-9"
+      )}
       noValidate
       onSubmit={handleSubmit(onSubmitFindPassword)}
     >
       {!email ? (
-        <InputText
-          label="아이디 (이메일)"
-          inputOption={{
-            name: "email",
-            type: "email",
-            placeholder: "아이디를 입력해 주세요.",
-            maxLength: 254,
-            validation: {
-              required: true,
-              pattern: {
-                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                message: "이메일 형식을 입력해주세요.",
+        <div className="w-full tablet:px-4">
+          <InputText
+            label="아이디 (이메일)"
+            inputOption={{
+              name: "email",
+              type: "email",
+              placeholder: "아이디를 입력해 주세요.",
+              maxLength: 254,
+              validation: {
+                required: true,
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "이메일 형식을 입력해주세요.",
+                },
               },
-            },
-          }}
-          btnOption={{
-            btnLabel: "비밀번호 찾기",
-            btnType: "submit",
-          }}
-        />
+            }}
+            btnOption={{
+              btnLabel: "비밀번호 찾기",
+              btnType: "submit",
+              className: "min-w-[127px]",
+              loading: isPending,
+            }}
+          />
+        </div>
       ) : (
         <>
           <p className="flex flex-col items-center py-[18.5px] text-center text-body2-regular">
