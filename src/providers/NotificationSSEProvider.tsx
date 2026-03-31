@@ -13,6 +13,7 @@ import {
 import { useFaviconNotification } from "@/hooks";
 import { useSnackBar } from "@/context/SnackBarContext";
 import { useAuthStore, useNotificationStore } from "@/store";
+import { AUTH_LOGIN_SUCCESS_EVENT } from "@/constants";
 
 const isAuthRoutePath = (pathname: string) =>
   pathname.startsWith("/login") || pathname.startsWith("/sign-up");
@@ -96,6 +97,7 @@ export const NotificationSSEProvider = ({ children }: PropsWithChildren) => {
 
   const prevPathnameRef = useRef(pathname);
   const didMoveFromAuthRouteRef = useRef(false);
+  const didLoginSuccessEventRef = useRef(false);
 
   const { connect } = useNotificationSSE({
     enabled: isAuthInitialized,
@@ -117,6 +119,29 @@ export const NotificationSSEProvider = ({ children }: PropsWithChildren) => {
 
     prevPathnameRef.current = pathname;
   }, [pathname, isAuthInitialized, connect]);
+
+  useEffect(() => {
+    const handleLoginSuccess = () => {
+      didLoginSuccessEventRef.current = true;
+
+      if (isAuthInitialized) {
+        connect();
+        didLoginSuccessEventRef.current = false;
+      }
+    };
+
+    window.addEventListener(AUTH_LOGIN_SUCCESS_EVENT, handleLoginSuccess);
+    return () => {
+      window.removeEventListener(AUTH_LOGIN_SUCCESS_EVENT, handleLoginSuccess);
+    };
+  }, [connect, isAuthInitialized]);
+
+  useEffect(() => {
+    if (!isAuthInitialized || !didLoginSuccessEventRef.current) return;
+
+    connect();
+    didLoginSuccessEventRef.current = false;
+  }, [isAuthInitialized, connect]);
 
   return children;
 };

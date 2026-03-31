@@ -7,6 +7,7 @@ import { EMAIL_LOGIN_ERROR_MESSAGE } from "../_constants/EMAIL_LOGIN_ERROR_MESSA
 import { useToast } from "@/context/ToastContext";
 import { LoginFormType } from "../_types/LoginFormType";
 import { useErrorToast } from "@/hooks/domain";
+import { AUTH_LOGIN_SUCCESS_EVENT } from "@/constants";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -38,6 +39,7 @@ const useLoginForm = () => {
 
     EmailLoginMutate(filterData, {
       onSuccess: () => {
+        window.dispatchEvent(new CustomEvent(AUTH_LOGIN_SUCCESS_EVENT));
         router.replace("/");
 
         if (data.rememberId) {

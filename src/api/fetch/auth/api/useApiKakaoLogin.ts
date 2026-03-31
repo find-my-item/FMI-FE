@@ -2,6 +2,7 @@ import useAppMutation from "@/api/_base/query/useAppMutation";
 import { ApiBaseResponseType } from "@/api/_base/types/ApiBaseResponseType";
 import { useToast } from "@/context/ToastContext";
 import { useRouter } from "next/navigation";
+import { AUTH_LOGIN_SUCCESS_EVENT } from "@/constants";
 
 const useApiKakaoLogin = () => {
   const router = useRouter();
@@ -14,6 +15,7 @@ const useApiKakaoLogin = () => {
     ApiBaseResponseType<null>
   >("auth", "/auth/kakao", "post", {
     onSuccess: () => {
+      window.dispatchEvent(new CustomEvent(AUTH_LOGIN_SUCCESS_EVENT));
       router.replace("/");
     },
     onError: (error) => {
