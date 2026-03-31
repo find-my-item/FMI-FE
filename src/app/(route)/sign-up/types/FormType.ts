@@ -8,4 +8,6 @@ export interface FormType {
   termsOfServiceAgreed: boolean;
   contentPolicyAgreed: boolean;
   marketingConsent: boolean;
+  isEmailAuthVerified?: boolean;
+  isNicknameVerified?: boolean;
 }

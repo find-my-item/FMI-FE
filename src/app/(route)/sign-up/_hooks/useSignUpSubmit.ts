@@ -35,7 +35,7 @@ export const useSignUpSubmit = () => {
             },
           });
         },
-        3000,
+        300,
         { leading: true, trailing: false }
       ),
     [SignUpMutate, setFirstSignUp, queryClient, router, addToast, handlerApiError]
