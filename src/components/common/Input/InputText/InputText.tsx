@@ -187,7 +187,7 @@ const InputText = ({
             onClick={() => btnOnClick?.(isValue)}
             disabled={disabled}
             size="big"
-            className="h-11 w-auto whitespace-nowrap rounded-[10px] border border-neutral-normal-default px-[14px] py-[10px] text-body2-semibold text-neutral-normal-default disabled:text-neutral-normal-disabled disabled:bg-fill-neutral-strong-default"
+            className="h-11 w-auto whitespace-nowrap px-5 py-[10px]"
             {...restBtnOption}
           >
             {btnLabel}
