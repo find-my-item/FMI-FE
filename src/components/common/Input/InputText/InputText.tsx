@@ -82,6 +82,7 @@ export interface InputTextProps {
     isSuccess?: boolean;
     successMessage?: string;
     rule?: string;
+    timer?: number;
   };
 }
 
@@ -100,7 +101,7 @@ const InputText = ({
 }: InputTextProps) => {
   const { name, type = "text", validation, disabled } = inputOption;
   const { btnType = "button", btnOnClick, btnLabel, ...restBtnOption } = btnOption;
-  const { isSuccess, successMessage, rule } = caption;
+  const { isSuccess, successMessage, rule, timer } = caption;
 
   const {
     register,
@@ -206,6 +207,13 @@ const InputText = ({
 
         {/* 글자 수 확인 */}
         <Counter isLength={isValueStr.length} maxLength={maxLength} />
+
+        {/* 타이머 */}
+        {timer && timer > 0 && (
+          <time className="text-caption1-regular text-brand-normal-default">
+            {Math.floor(timer / 60)}:{String(timer % 60).padStart(2, "0")}
+          </time>
+        )}
       </div>
     </div>
   );

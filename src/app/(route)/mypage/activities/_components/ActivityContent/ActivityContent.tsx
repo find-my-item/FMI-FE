@@ -1,7 +1,7 @@
 "use client";
 
 import Icon from "@/components/common/Icon/Icon";
-import { cn } from "@/utils";
+import { cn, highlightText } from "@/utils";
 import { ACTIVITY_STYLE_CONFIG } from "../../_constants/ACTIVITY_STYLE_CONFIG";
 import { MypageEmptyUI } from "@/components/domain";
 import formatHHMM from "../../_utils/formatHHMM";
@@ -15,9 +15,10 @@ import { useSearchParams } from "next/navigation";
 
 interface ActivityItemProps {
   activityItem: ActivityEachItemType;
+  keyword?: string;
 }
 
-const ActivityItem = ({ activityItem }: ActivityItemProps) => {
+const ActivityItem = ({ activityItem, keyword }: ActivityItemProps) => {
   const { type, createdAt, title, content } = activityItem;
 
   const { bgColor, iconName, logTitle } = ACTIVITY_STYLE_CONFIG[type];
@@ -39,7 +40,9 @@ const ActivityItem = ({ activityItem }: ActivityItemProps) => {
       <div className="min-w-0 flex-1 px-5 pb-9">
         <time className="text-body2-regular text-layout-body-default">{formatHHMM(createdAt)}</time>
         <p className="mt-[6px] text-body1-semibold text-neutral-strong-default">{logTitle}</p>
-        <p className="mt-[2px] truncate text-body2-regular text-neutral-normal-default">{title}</p>
+        <p className="mt-[2px] truncate text-body2-regular text-neutral-normal-default">
+          {keyword ? highlightText(title, keyword) : title}
+        </p>
       </div>
     </li>
   );
@@ -47,9 +50,10 @@ const ActivityItem = ({ activityItem }: ActivityItemProps) => {
 
 interface ActivityGroupItemProps {
   activityItem: ActivityGroupItemType;
+  keyword?: string;
 }
 
-const ActivityGroupItem = ({ activityItem }: ActivityGroupItemProps) => {
+const ActivityGroupItem = ({ activityItem, keyword }: ActivityGroupItemProps) => {
   const { date, activities } = activityItem;
 
   return (
@@ -58,7 +62,7 @@ const ActivityGroupItem = ({ activityItem }: ActivityGroupItemProps) => {
 
       <ol className="flex flex-col">
         {activities.map((item) => (
-          <ActivityItem key={item.id} activityItem={item} />
+          <ActivityItem key={item.id} activityItem={item} keyword={keyword} />
         ))}
       </ol>
     </li>
@@ -107,7 +111,9 @@ const ActivityContent = () => {
         <>
           <ol className="flex flex-col">
             {activityData &&
-              activityData.map((item) => <ActivityGroupItem key={item.date} activityItem={item} />)}
+              activityData.map((item, index) => (
+                <ActivityGroupItem key={index} activityItem={item} keyword={keyword} />
+              ))}
           </ol>
 
           <div ref={ref} className="h-10" />
