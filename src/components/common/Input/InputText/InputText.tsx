@@ -161,6 +161,7 @@ const InputText = ({
                 onDelete={() => onDelete(name)}
               />
             ))}
+
           {/* 비밀번호 눈 모양 버튼 */}
           {togglePassword && (
             <button
