@@ -83,6 +83,7 @@ const SignUpItem = ({ isVerified, ...props }: SignUpItemProps) => {
         caption={{
           ...caption,
           isSuccess: isSuccessState,
+          timer: caption?.timer,
         }}
       />
     </div>

@@ -13,8 +13,15 @@ const MyPageContainer = ({ hasToken }: { hasToken: boolean }) => {
   const { addToast } = useToast();
 
   useEffect(() => {
-    if (error) {
-      addToast("프로필 정보를 불러오는데 실패했어요.", "warning");
+    if (!error) return;
+
+    const errorCode = error?.response?.data.code;
+    if (errorCode === "AUTH401-INVALID_REFRESH") {
+      // noop
+    } else if (errorCode === "USER404-NOT_FOUND") {
+      // noop 존재하지 않는 회원
+    } else {
+      addToast("예상치 못한 에러가 발생했어요", "error");
     }
   }, [error, addToast]);
 
