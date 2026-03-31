@@ -84,8 +84,7 @@ const SignUpField = ({ onNext }: { onNext: () => void }) => {
         ))}
       </div>
 
-      <FooterButton aria-label="다음 버튼" onClick={onNext}>
-        {/* <FooterButton aria-label="다음 버튼" onClick={onNext} disabled={!isNextEnabled}> */}
+      <FooterButton aria-label="다음 버튼" onClick={onNext} disabled={!isNextEnabled}>
         다음
       </FooterButton>
     </>
