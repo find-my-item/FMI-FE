@@ -2,6 +2,7 @@ import usePutNotificationSetting from "@/api/fetch/notification/api/usePutNotifi
 import { Button, Icon } from "@/components/common";
 import { PopupLayout } from "@/components/domain";
 import { useToast } from "@/context/ToastContext";
+import { useMainKakaoMapStore } from "@/store";
 import { useState } from "react";
 import { PERMISSION_CONFIG, PERMISSION_ITEM } from "../../_constants/PERMISSION_CONFIG";
 
@@ -25,7 +26,11 @@ const DetailPermissionSheet = ({ isOpen, onClose, state }: DetailPermissionSheet
         return;
       }
       navigator.geolocation.getCurrentPosition(
-        () => {
+        ({ coords }) => {
+          useMainKakaoMapStore.getState().setUserGpsFromDevice({
+            lat: coords.latitude,
+            lng: coords.longitude,
+          });
           onClose();
         },
         (error) => {

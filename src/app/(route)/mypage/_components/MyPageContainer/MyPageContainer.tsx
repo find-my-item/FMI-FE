@@ -13,13 +13,17 @@ const MyPageContainer = ({ hasToken }: { hasToken: boolean }) => {
   const { addToast } = useToast();
 
   useEffect(() => {
-    if (error) {
-      const errorCode = error.response?.data.code;
-      if (errorCode === "COMMON401") {
-        // noop
-      } else {
-        addToast("프로필 정보를 불러오는데 실패했어요.", "warning");
-      }
+    if (!error) return;
+
+    const errorCode = error?.response?.data.code;
+    if (
+      errorCode === "USER404-NOT_FOUND" ||
+      errorCode === "COMMON401" ||
+      errorCode === "AUTH401-INVALID_REFRESH"
+    ) {
+      // noop
+    } else {
+      addToast("예상치 못한 에러가 발생했어요", "error");
     }
   }, [error, addToast]);
 

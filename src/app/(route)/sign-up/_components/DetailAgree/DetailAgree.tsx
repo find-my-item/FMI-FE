@@ -21,7 +21,7 @@ const DetailAgree = ({ termName, onAgree }: DetailAgreeProps) => {
   return (
     <>
       <DetailHeader title={term.title} />
-      <div className="whitespace-pre-wrap px-4 pb-[calc(88px+24px)] pt-6 text-body2-regular text-layout-body-default h-base">
+      <div className="whitespace-pre-wrap px-4 pb-[calc(88px+24px)] pt-6 text-body2-regular text-layout-body-default h-hf-base">
         {term.content}
       </div>
 

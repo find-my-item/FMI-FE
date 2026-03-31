@@ -3,10 +3,10 @@
 import { ChatBox, ChatDateDivider } from "./_internal";
 import { useRef } from "react";
 import {
-  useChatScroll,
   useChatInfiniteScroll,
   useChatInitialScroll,
   useChatScrollPreserve,
+  useChatScrollOnSignal,
 } from "./_internal/hooks";
 import { cn } from "@/utils";
 import { useGetUsersMe } from "@/api/fetch/user";
@@ -19,6 +19,7 @@ interface ChatRoomMainProps {
   hasNextPage: boolean | undefined;
   isFetchingNextPage: boolean;
   opponentNickname?: string;
+  scrollToBottomSignal: number;
 }
 
 const ChatRoomMain = ({
@@ -27,14 +28,13 @@ const ChatRoomMain = ({
   hasNextPage,
   isFetchingNextPage,
   opponentNickname,
+  scrollToBottomSignal,
 }: ChatRoomMainProps) => {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const scrollHeightRef = useRef<number>(0);
   const { data: userInfo } = useGetUsersMe();
-
   const userId = userInfo?.result?.userId != null ? Number(userInfo.result.userId) : undefined;
-
-  useChatScroll(scrollRef, chatMessages, userId ?? 0);
+  useChatScrollOnSignal({ scrollRef, signal: scrollToBottomSignal });
   useChatInfiniteScroll({
     scrollRef,
     fetchNextPage,

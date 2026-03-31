@@ -7,25 +7,31 @@ const HeroSection = () => {
       data-testid="intro-section"
       className="relative min-h-[225px] w-full overflow-hidden flex-center"
     >
-      <div className="animate-fade-in-float absolute right-[calc(50%+75px)]">
-        <HeroSectionImage src="/hello/hero/service-hero-wallet.svg" width={120} height={57} />
+      <div className="animate-fade-in-float absolute right-[calc(50%+100px)]">
+        {/* TODO(지권): 피그마 아이콘 내보내기 이슈, 피그마 업데이트 후 반영 예정 */}
+        <HeroSectionImage src="/hello/hero/service-hero-wallet.svg" width={42} height={39} />
       </div>
 
       <div className="absolute inset-x-0 bottom-0 flex justify-center">
         <div className="relative flex-center">
-          <div className="animate-float-hero-y absolute bottom-[50px]">
-            <HeroSectionImage src="/hello/hero/service-hero-location.svg" width={94} height={131} />
+          <div className="animate-zoom-in-glass absolute bottom-[5px] right-[70px]">
+            <HeroSectionImage src="/hello/hero/service-hero-glass.svg" width={123} height={150} />
           </div>
-          <HeroSectionImage src="/hello/hero/service-hero-bottom.svg" width={190} height={72} />
+
+          <HeroSectionImage
+            src="/hello/hero/service-hero-background.svg"
+            width={318}
+            height={220}
+          />
         </div>
       </div>
 
-      <div className="animate-fade-in-float absolute left-[calc(50%+55px)] top-[20px]">
-        <HeroSectionImage src="/hello/hero/service-hero-phone.svg" width={80} height={57} />
+      <div className="animate-fade-in-float absolute left-[calc(50%+85px)] top-[40px]">
+        <HeroSectionImage src="/hello/hero/service-hero-phone.svg" width={54} height={54} />
       </div>
 
-      <div className="animate-fade-in-float absolute left-[calc(50%+85px)] top-[130px]">
-        <HeroSectionImage src="/hello/hero/service-hero-bag.svg" width={80} height={57} />
+      <div className="animate-fade-in-float absolute left-[calc(50%+95px)] top-[140px]">
+        <HeroSectionImage src="/hello/hero/service-hero-bag.svg" width={42} height={42} />
       </div>
     </div>
   );

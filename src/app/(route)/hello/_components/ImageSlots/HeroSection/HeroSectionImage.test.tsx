@@ -25,8 +25,8 @@ describe("HeroSection", () => {
 
     expect(srcs).toEqual([
       "/hello/hero/service-hero-wallet.svg",
-      "/hello/hero/service-hero-location.svg",
-      "/hello/hero/service-hero-bottom.svg",
+      "/hello/hero/service-hero-glass.svg",
+      "/hello/hero/service-hero-background.svg",
       "/hello/hero/service-hero-phone.svg",
       "/hello/hero/service-hero-bag.svg",
     ]);

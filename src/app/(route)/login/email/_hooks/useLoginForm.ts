@@ -7,6 +7,7 @@ import { EMAIL_LOGIN_ERROR_MESSAGE } from "../_constants/EMAIL_LOGIN_ERROR_MESSA
 import { useToast } from "@/context/ToastContext";
 import { LoginFormType } from "../_types/LoginFormType";
 import { useErrorToast } from "@/hooks/domain";
+import { AUTH_LOGIN_SUCCESS_EVENT } from "@/constants";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -14,7 +15,7 @@ const useLoginForm = () => {
   const { handleSubmit, setValue } = useFormContext<LoginFormType>();
   const router = useRouter();
   const cookie = getCookie("email");
-  const { mutate: EmailLoginMutate } = useApiEmailLogin();
+  const { mutate: EmailLoginMutate, isPending } = useApiEmailLogin();
   const { addToast } = useToast();
   const { handlerApiError } = useErrorToast();
 
@@ -38,6 +39,9 @@ const useLoginForm = () => {
 
     EmailLoginMutate(filterData, {
       onSuccess: () => {
+        if (typeof window !== "undefined") {
+          window.dispatchEvent(new CustomEvent(AUTH_LOGIN_SUCCESS_EVENT));
+        }
         router.replace("/");
 
         if (data.rememberId) {
@@ -51,12 +55,15 @@ const useLoginForm = () => {
         }
       },
       onError: (error) => {
-        handlerApiError(EMAIL_LOGIN_ERROR_MESSAGE, error.response.data.code);
+        const errorCode = error.response?.data.code;
+        if (errorCode) {
+          handlerApiError(EMAIL_LOGIN_ERROR_MESSAGE, errorCode);
+        }
       },
     });
   });
 
-  return { onSubmitLogin };
+  return { onSubmitLogin, isPending };
 };
 
 export default useLoginForm;

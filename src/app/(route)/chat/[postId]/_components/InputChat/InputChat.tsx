@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, TextareaHTMLAttributes, useRef, useState } from "react";
+import { ChangeEvent, TextareaHTMLAttributes, useEffect, useRef, useState } from "react";
 import { cn, textareaAutoResize, fileInputHandler, textareaSubmitKeyHandler } from "@/utils";
 import { Controller, RegisterOptions, useFormContext } from "react-hook-form";
 import { Icon } from "@/components/common";
@@ -13,19 +13,38 @@ interface InputChatProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   disabled?: boolean;
   roomId: number;
   userId: number;
+  onImageSendSuccess?: () => void;
 }
 
-const InputChat = ({ name, validation, disabled, roomId, userId, ...props }: InputChatProps) => {
-  const { control } = useFormContext();
+const InputChat = ({
+  name,
+  validation,
+  disabled,
+  roomId,
+  userId,
+  onImageSendSuccess,
+  ...props
+}: InputChatProps) => {
+  const { control, watch } = useFormContext();
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [images, setImages] = useState<File[]>([]);
   const [selectedImages, setSelectedImages] = useState<SelectedImage[]>([]);
+  const contentValue = watch(name);
+
+  useEffect(() => {
+    if (!textareaRef.current) return;
+
+    if (contentValue === "") {
+      textareaRef.current.style.height = "auto";
+    }
+  }, [contentValue]);
 
   return (
     <>
       {images?.length !== 0 ? (
         <InputChatImageSection
           ids={{ roomId, userId }}
+          onImageSendSuccess={onImageSendSuccess}
           imageState={{
             images,
             setImages,
@@ -88,7 +107,7 @@ const InputChat = ({ name, validation, disabled, roomId, userId, ...props }: Inp
               {/* 전송 버튼 */}
               <button
                 type="submit"
-                className="relative h-11 w-11 shrink-0 rounded-full bg-fill-brand-normal-default hover:bg-fill-brand-normal-disabled active:bg-fill-brand-normal-default disabled:bg-fill-brand-normal-disabled"
+                className="relative h-11 w-11 shrink-0 rounded-full transition-colors bg-fill-brand-normal-default hover:bg-fill-brand-normal-disabled active:bg-fill-brand-normal-default disabled:bg-fill-brand-normal-disabled"
                 aria-label="전송 버튼"
                 disabled={disabled || !field.value?.trim()}
               >
