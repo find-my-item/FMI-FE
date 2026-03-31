@@ -5,10 +5,10 @@ import { ChatMessage } from "@/api/fetch/chatMessage/types/ChatMessageResponse";
 import { MOCK_CHAT_MESSAGES } from "@/mock/data/chat.data";
 
 jest.mock("./_internal/hooks", () => ({
-  useChatScroll: jest.fn(),
   useChatInfiniteScroll: jest.fn(),
   useChatInitialScroll: jest.fn(() => true),
   useChatScrollPreserve: jest.fn(),
+  useChatScrollOnSignal: jest.fn(),
 }));
 
 jest.mock("@/api/fetch/user", () => ({
@@ -50,6 +50,7 @@ const renderWithMessages = (
       fetchNextPage={noop}
       hasNextPage={hasNextPage}
       isFetchingNextPage={isFetchingNextPage}
+      scrollToBottomSignal={0}
     />
   );
 };

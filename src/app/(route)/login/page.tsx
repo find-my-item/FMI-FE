@@ -20,7 +20,7 @@ const page = () => {
       <LogoLink />
 
       {/* button */}
-      <div className="flex w-full flex-col gap-3 px-5 tablet:px-[96px]">
+      <div className="flex w-full flex-col gap-4 px-4 tablet:px-[80px]">
         <Button
           type="submit"
           ignoreBase
@@ -28,10 +28,10 @@ const page = () => {
           onClick={() => (window.location.href = kakaoURL)}
           className={cn(
             ButtonStyle,
-            "text-flatGray-900 bg-fill-accent-kakao hover:bg-fill-accent-kakao"
+            "gap-1 text-flatGray-900 bg-fill-accent-kakao hover:bg-fill-accent-kakao"
           )}
         >
-          <Icon name="KakaoLogin" size={14} />
+          <Icon name="KakaoLogin" size={20} />
           카카오로 3초 만에 시작하기
         </Button>
         <Button
@@ -40,7 +40,7 @@ const page = () => {
             reason === "session-expired" ? "/login/email?reason=session-expired" : "/login/email"
           }
           ignoreBase
-          className={cn(ButtonStyle, "text-white bg-fill-brand-normal-default")}
+          className={cn(ButtonStyle, "gap-2 text-white bg-fill-brand-normal-default")}
           aria-label="로그인 버튼"
         >
           <Icon name="Mail" size={20} className="text-white" /> 이메일로 로그인

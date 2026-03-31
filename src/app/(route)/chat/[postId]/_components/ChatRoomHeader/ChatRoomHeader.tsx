@@ -1,7 +1,6 @@
 "use client";
 
 import { Icon, ListItemImage } from "@/components/common";
-import { useRouter } from "next/navigation";
 import ChatChip from "../ChatChip/ChatChip";
 import ChatRoomHeaderInfoButton from "../ChatRoomHeaderInfoButton/ChatRoomHeaderInfoButton";
 import { ChatRoomResponse } from "@/api/fetch/chatRoom/types/ChatRoomResponse";
@@ -17,6 +16,7 @@ interface LinkWrapperProps {
 interface ChatRoomHeaderProps {
   chatRoom: ChatRoomResponse | undefined;
   roomId: number;
+  currentUserId?: number;
 }
 
 const LinkWrapper = ({ deleted, children, href }: LinkWrapperProps) => {
@@ -37,26 +37,38 @@ const LinkWrapper = ({ deleted, children, href }: LinkWrapperProps) => {
   );
 };
 
-const ChatRoomHeader = ({ chatRoom, roomId }: ChatRoomHeaderProps) => {
-  const router = useRouter();
+const NICK_NAME_STYLE = "text-body2-semibold text-layout-body-default";
+
+const ChatRoomHeader = ({ chatRoom, roomId, currentUserId }: ChatRoomHeaderProps) => {
   if (!chatRoom) return null;
   const { address, postType, title, thumbnailUrl, postId, category, postStatus, deleted } =
     chatRoom.postInfo;
-  const { nickname } = chatRoom.opponentUser;
+  const { nickname, opponentUserId } = chatRoom.opponentUser;
+  const isOwnPostChatRoom = currentUserId === opponentUserId;
 
   return (
     <header className="pb-3">
       <nav className="flex items-center justify-between px-4 py-1">
-        <button
+        <Link
+          replace
+          href="/chat"
           className="flex h-10 w-10 items-center"
           aria-label="뒤로 가기 버튼"
-          onClick={() => router.back()}
-          type="button"
         >
           <Icon name="ArrowLeftSmall" size={18} className="text-neutral-normal-default" />
-        </button>
+        </Link>
 
-        <p className="text-body2-semibold text-layout-body-default">{nickname}</p>
+        {isOwnPostChatRoom ? (
+          <p className={NICK_NAME_STYLE}>{nickname}</p>
+        ) : (
+          <Link
+            href={`/user/${opponentUserId}`}
+            aria-label="상대방 프로필 이동"
+            className={NICK_NAME_STYLE}
+          >
+            {nickname}
+          </Link>
+        )}
 
         <ChatRoomHeaderInfoButton roomId={roomId} />
       </nav>

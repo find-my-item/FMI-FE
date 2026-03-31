@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
 
 type PublicDataTabType = "lost" | "found";
 
@@ -11,16 +11,26 @@ const PUBLIC_LIST_TABS: { label: string; key: PublicDataTabType }[] = [
 
 export const usePublicDataTabQuery = () => {
   const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
+  const paramsConfig = useParams();
 
-  const activeTab: PublicDataTabType = searchParams.get("type") === "found" ? "found" : "lost";
+  const isSearchPage = pathname.includes("/search");
+
+  const currentTabFromQuery = searchParams.get("type") === "found" ? "found" : "lost";
+  const currentTabFromParam = paramsConfig?.type === "found" ? "found" : "lost";
+
+  const activeTab: PublicDataTabType = isSearchPage ? currentTabFromParam : currentTabFromQuery;
 
   const handleTabChange = (key: PublicDataTabType) => {
-    const params = new URLSearchParams();
-
-    params.set("type", key);
-
-    router.replace(`/public-data?${params.toString()}`);
+    if (isSearchPage) {
+      const params = new URLSearchParams(searchParams.toString());
+      router.replace(`/public-data/${key}/search?${params.toString()}`);
+    } else {
+      const params = new URLSearchParams();
+      params.set("type", key);
+      router.replace(`/public-data?${params.toString()}`);
+    }
   };
 
   return {

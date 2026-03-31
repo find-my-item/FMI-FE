@@ -1,13 +1,5 @@
 import { getKakaoLocalCoord2Address } from "@/api/fetch/kakao";
-
-const extractDongAddress = (address: string): string => {
-  if (!address) return "";
-
-  const segments = address.split(" ").filter(Boolean);
-  const dongSegment = segments.findLast((segment) => segment.endsWith("동"));
-
-  return dongSegment ?? "";
-};
+import { extractDongAddress } from "@/utils";
 
 /**
  * 카카오 좌표→주소 변환 API를 이용해 지도 표시용 주소를 반환합니다.
