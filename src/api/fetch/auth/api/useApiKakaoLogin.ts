@@ -15,7 +15,9 @@ const useApiKakaoLogin = () => {
     ApiBaseResponseType<null>
   >("auth", "/auth/kakao", "post", {
     onSuccess: () => {
-      window.dispatchEvent(new CustomEvent(AUTH_LOGIN_SUCCESS_EVENT));
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(new CustomEvent(AUTH_LOGIN_SUCCESS_EVENT));
+      }
       router.replace("/");
     },
     onError: (error) => {
