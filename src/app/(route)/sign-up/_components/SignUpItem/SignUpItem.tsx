@@ -21,7 +21,7 @@ const inputValidationRules: Record<keyof SignUpFieldType, RegisterOptions<SignUp
     },
   },
   passwordConfirm: {
-    required: "한번 더 비밀번호를 입력해 주세요.",
+    required: true,
     validate: (value, formValues: SignUpFieldType) =>
       value === formValues.password || "비밀번호가 일치하지 않습니다.",
     deps: ["password"],
