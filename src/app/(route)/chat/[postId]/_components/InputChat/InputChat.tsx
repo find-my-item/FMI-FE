@@ -34,7 +34,7 @@ const InputChat = ({
   useEffect(() => {
     if (!textareaRef.current) return;
 
-    if (!contentValue?.trim()) {
+    if (contentValue === "") {
       textareaRef.current.style.height = "auto";
     }
   }, [contentValue]);
