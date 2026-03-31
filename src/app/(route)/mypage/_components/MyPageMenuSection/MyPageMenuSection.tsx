@@ -36,7 +36,7 @@ const MyPageMenuSection = ({
           </Fragment>
         ))}
       </div>
-      {isUserLogin && <hr className="mx-5 max-w-full border border-divider-default_3" />}
+      <hr className="mx-5 max-w-full border border-divider-default_3" />
 
       {isUserLogin && menu.title === "서비스 정책" && (
         <div className="w-full px-5 py-6">

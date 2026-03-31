@@ -55,7 +55,10 @@ const useLoginForm = () => {
         }
       },
       onError: (error) => {
-        handlerApiError(EMAIL_LOGIN_ERROR_MESSAGE, error.response.data.code);
+        const errorCode = error.response?.data.code;
+        if (errorCode) {
+          handlerApiError(EMAIL_LOGIN_ERROR_MESSAGE, errorCode);
+        }
       },
     });
   });
