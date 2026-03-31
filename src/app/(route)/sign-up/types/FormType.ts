@@ -5,5 +5,7 @@ export interface FormType {
   passwordConfirm: string;
   nickname: string;
   privacyPolicyAgreed: boolean;
+  termsOfServiceAgreed: boolean;
+  contentPolicyAgreed: boolean;
   marketingConsent: boolean;
 }

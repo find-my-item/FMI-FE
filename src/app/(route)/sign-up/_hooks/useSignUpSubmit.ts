@@ -13,6 +13,7 @@ export const useSignUpSubmit = () => {
   const { setFirstSignUp } = usePermissionStore();
 
   const submitSignUp = (data: ApiSignUpType) => {
+    console.log("data>> ", data);
     SignUpMutate(data, {
       onSuccess: () => {
         setFirstSignUp(true);

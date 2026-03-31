@@ -43,7 +43,10 @@ const inputValidationRules: Record<keyof SignUpFieldType, RegisterOptions<SignUp
   },
 };
 
-type SignUpFieldType = Omit<FormType, "privacyPolicyAgreed" | "marketingConsent">;
+type SignUpFieldType = Omit<
+  FormType,
+  "privacyPolicyAgreed" | "marketingConsent" | "termsOfServiceAgreed" | "contentPolicyAgreed"
+>;
 
 interface SignUpItemProps extends Omit<InputTextProps, "inputOption"> {
   inputOption: Omit<InputTextProps["inputOption"], "name"> & {
