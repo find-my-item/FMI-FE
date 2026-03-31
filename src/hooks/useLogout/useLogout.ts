@@ -24,7 +24,6 @@ const useLogout = () => {
         resetUnreadNotificationState();
         queryClient.clear();
         addToast("로그아웃 되었어요.", "success");
-        router.refresh();
         router.replace("/");
       },
       onError: () => {
