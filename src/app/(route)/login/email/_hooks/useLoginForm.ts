@@ -8,6 +8,7 @@ import { useToast } from "@/context/ToastContext";
 import { LoginFormType } from "../_types/LoginFormType";
 import { useErrorToast } from "@/hooks/domain";
 import { AUTH_LOGIN_SUCCESS_EVENT } from "@/constants";
+import { useQueryClient } from "@tanstack/react-query";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -18,6 +19,7 @@ const useLoginForm = () => {
   const { mutate: EmailLoginMutate, isPending } = useApiEmailLogin();
   const { addToast } = useToast();
   const { handlerApiError } = useErrorToast();
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     if (typeof cookie === "string") {
@@ -42,6 +44,8 @@ const useLoginForm = () => {
         if (typeof window !== "undefined") {
           window.dispatchEvent(new CustomEvent(AUTH_LOGIN_SUCCESS_EVENT));
         }
+
+        queryClient.clear();
         router.replace("/");
 
         if (data.rememberId) {
