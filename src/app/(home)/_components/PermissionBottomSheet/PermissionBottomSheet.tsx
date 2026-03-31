@@ -140,7 +140,7 @@ const PermissionSheet = ({ isOpen, onClose }: PermissionSheetProps) => {
 
         <div className="flex w-full flex-col gap-6 rounded-[20px] p-5 bg-fill-neutral-subtle-default">
           {PERMISSION_ITEM.map((item) => (
-            <div className="flex w-full gap-[18px]">
+            <div className="flex w-full gap-[18px]" key={item.title}>
               <Icon name={item.iconName} size={44} />
               <div className="flex flex-col gap-[2px]">
                 <span className="text-body1-semibold text-layout-header-default">{item.title}</span>
