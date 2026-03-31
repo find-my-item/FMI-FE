@@ -28,8 +28,8 @@ export function middleware(request: NextRequest) {
   // 세션 완료 시 로그인 페이지로 진입 했을 때 모든 토큰 제거
   if (isAuthPath && isSessionExpired) {
     const response = NextResponse.next();
-    response.cookies.set("access_token", "", { maxAge: 0 });
-    response.cookies.set("refresh_token", "", { maxAge: 0 });
+    response.cookies.set("access_token", "", { path: "/", maxAge: 0 });
+    response.cookies.set("refresh_token", "", { path: "/", maxAge: 0 });
     return response;
   }
 
