@@ -30,8 +30,10 @@ const BetaTestMainBanner = () => {
           height={47}
           priority
           draggable={false}
+          quality={100}
+          className="h-[47px] w-[68px] shrink-0"
         />
-        <div className="flex flex-col gap-2 text-center text-[12px] leading-[8.1px] tracking-[-0.05em] text-white">
+        <div className="flex flex-col gap-2 text-nowrap text-center text-[12px] leading-[8.1px] tracking-[-0.05em] text-white">
           <span>설문 참여하고</span>
           <span className="font-bold">커피 쿠폰 받아가세요!</span>
         </div>
