@@ -8,7 +8,7 @@ import { useFormContext } from "react-hook-form";
 import { Terms } from "@/components/domain";
 
 const SignUpContainer = () => {
-  const { submitSignUp } = useSignUpSubmit();
+  const { submitSignUp, isPending } = useSignUpSubmit();
 
   const { step, onNext, openTermDetail, onAgreeTerm, completeTerms, termName } = useSignUpFlow({
     onSubmit: submitSignUp,
@@ -20,7 +20,7 @@ const SignUpContainer = () => {
     <form className="h-bf-base flex w-full flex-1 flex-col justify-between">
       {step === "1" && <SignUpField onNext={() => onNext(2)} />}
       {step === "2" && !termName && (
-        <AllAgree onOpenDetail={openTermDetail} onComplete={completeTerms} />
+        <AllAgree onOpenDetail={openTermDetail} onComplete={completeTerms} isPending={isPending} />
       )}
       {step === "2" && termName && (
         <Terms

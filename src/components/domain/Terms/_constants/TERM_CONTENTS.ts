@@ -1,7 +1,7 @@
 export const TERM_CONTENTS: Record<string, { termHeader: string; title: string; content: string }> =
   {
     privacyPolicyAgreed: {
-      termHeader: "개인정보 수집 및 이용 약관",
+      termHeader: "개인정보처리방침",
       title: "개인정보 수집 및 이용 동의 (필수)",
       content: `제1조(목적)
 
