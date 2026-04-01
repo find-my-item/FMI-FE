@@ -10,14 +10,15 @@ import { FooterButton } from "@/components/domain";
 interface AllAgreeProps {
   onOpenDetail: (termKey: string) => void;
   onComplete: () => void;
+  isPending?: boolean;
 }
 
-const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
+const AllAgree = ({ onOpenDetail, onComplete, isPending }: AllAgreeProps) => {
   const {
     register,
     setValue,
     control,
-    formState: { isValid, isSubmitting },
+    formState: { isValid },
   } = useFormContext();
 
   const selectAll = useWatch({ control, name: "selectAll" });
@@ -99,7 +100,7 @@ const AllAgree = ({ onOpenDetail, onComplete }: AllAgreeProps) => {
         </div>
       </div>
 
-      <FooterButton onClick={onComplete} disabled={!isValid || isSubmitting}>
+      <FooterButton onClick={onComplete} disabled={!isValid || isPending}>
         가입 완료
       </FooterButton>
     </>
