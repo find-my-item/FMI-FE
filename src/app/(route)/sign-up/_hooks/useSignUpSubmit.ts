@@ -11,7 +11,7 @@ import { useMemo } from "react";
 export const useSignUpSubmit = () => {
   const router = useRouter();
   const { addToast } = useToast();
-  const { mutate: SignUpMutate } = useApiSignUp();
+  const { mutate: SignUpMutate, isPending } = useApiSignUp();
   const { handlerApiError } = useErrorToast();
   const { setFirstSignUp } = usePermissionStore();
   const queryClient = useQueryClient();
@@ -43,5 +43,6 @@ export const useSignUpSubmit = () => {
 
   return {
     submitSignUp,
+    isPending,
   };
 };
