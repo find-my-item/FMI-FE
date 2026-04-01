@@ -9,7 +9,10 @@ import { useGetUsersMe } from "@/api/fetch/user";
 import { BetaTestMypageBanner } from "@/components/domain";
 
 const MyPageContainer = ({ hasToken }: { hasToken: boolean }) => {
-  const { data, isFetching, error } = useGetUsersMe(hasToken);
+  const { data, isFetching, error } = useGetUsersMe(hasToken, {
+    staleTime: 1000 * 30,
+  });
+
   const { addToast } = useToast();
 
   useEffect(() => {
