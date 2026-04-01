@@ -74,7 +74,9 @@ const useMyLocationButton = () => {
           setIsLocationPermissionSheetOpen(true);
           return;
         }
-      } catch {}
+      } catch {
+        // no-op
+      }
     }
 
     requestDeviceLocation({
