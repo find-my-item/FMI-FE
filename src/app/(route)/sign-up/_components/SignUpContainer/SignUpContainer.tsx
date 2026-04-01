@@ -30,6 +30,7 @@ const SignUpContainer = () => {
             onAgreeTerm(2);
           }}
           showButton={true}
+          pageType="SIGN_UP"
         />
       )}
     </form>
