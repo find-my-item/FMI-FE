@@ -33,21 +33,21 @@ const MyPageMenuSection = ({
               {item.pageName}
               <Icon name="ArrowRightSmall" size={24} className="text-neutral-strong-default" />
             </Link>
+
+            {isUserLogin && menu.title === "계정 설정" && item.pageName === "회원 탈퇴" && (
+              <button
+                className="mt-[6px] flex w-full py-[10px] text-body1-semibold text-neutral-strong-default"
+                onClick={handleLogout}
+                disabled={disabled || isPending}
+              >
+                로그아웃
+              </button>
+            )}
           </Fragment>
         ))}
       </div>
-      <hr className="mx-5 max-w-full border border-divider-default_3" />
-
-      {isUserLogin && menu.title === "서비스 정책" && (
-        <div className="w-full px-5 py-6">
-          <button
-            className="mt-[6px] flex w-full py-[10px] text-body1-semibold text-neutral-strong-default"
-            onClick={handleLogout}
-            disabled={disabled || isPending}
-          >
-            로그아웃
-          </button>
-        </div>
+      {menu.title !== "서비스 정책" && (
+        <hr className="mx-5 max-w-full border border-divider-default_3" />
       )}
     </Fragment>
   ));
