@@ -19,15 +19,23 @@ interface TermsProps {
 
 const Terms = ({ termName, onAgree, showButton = false, pageType = "TERM" }: TermsProps) => {
   const isOptionalTerm = termName === "marketingConsent" || termName === "contentPolicyAgreed";
-  const { data: SettingData, isError } = useGetNotificationSetting({ enabled: isOptionalTerm });
+  const { data: SettingData, isError } = useGetNotificationSetting({
+    enabled: isOptionalTerm && pageType === "TERM",
+  });
   const { mutate: SettingMutate, isPending } = usePutNotificationSetting();
   const { addToast } = useToast();
 
   if (isError) addToast("정보를 불러오는데 실패했어요", "warning");
 
-  const { termHeader, title, content } = TERM_CONTENTS[termName as keyof typeof TERM_CONTENTS];
-  const checkState = SettingData?.result ?? DEFAULT_NOTIFICATION_SETTING;
+  const term = TERM_CONTENTS[termName as keyof typeof TERM_CONTENTS];
 
+  if (!term) {
+    return null;
+  }
+
+  const { termHeader, title, content } = term;
+
+  const checkState = SettingData?.result ?? DEFAULT_NOTIFICATION_SETTING;
   const isChecked =
     termName === "marketingConsent" ? checkState.marketingConsent : checkState.contentPolicyAgreed;
 

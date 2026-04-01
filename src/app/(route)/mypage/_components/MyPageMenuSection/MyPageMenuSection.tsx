@@ -23,7 +23,7 @@ const MyPageMenuSection = ({
     return true;
   });
 
-  return visibleMenuList.map((menu) => (
+  return visibleMenuList.map((menu, index) => (
     <Fragment key={menu.title}>
       <div className="flex w-full flex-col gap-3 px-5 py-6">
         <div className="flex text-body2-regular text-layout-body-default">{menu.title}</div>
@@ -54,7 +54,7 @@ const MyPageMenuSection = ({
         ))}
       </div>
 
-      {menu.title !== visibleMenuList[visibleMenuList.length - 1].title && (
+      {index !== visibleMenuList.length - 1 && (
         <hr className="mx-5 max-w-full border border-divider-default_3" />
       )}
     </Fragment>
