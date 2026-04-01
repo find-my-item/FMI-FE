@@ -18,7 +18,7 @@ const AllAgree = ({ onOpenDetail, onComplete, isPending }: AllAgreeProps) => {
     register,
     setValue,
     control,
-    formState: { isValid, isSubmitting },
+    formState: { isValid },
   } = useFormContext();
 
   const selectAll = useWatch({ control, name: "selectAll" });
@@ -100,7 +100,7 @@ const AllAgree = ({ onOpenDetail, onComplete, isPending }: AllAgreeProps) => {
         </div>
       </div>
 
-      <FooterButton onClick={onComplete} disabled={!isValid || isSubmitting || isPending}>
+      <FooterButton onClick={onComplete} disabled={!isValid || isPending}>
         가입 완료
       </FooterButton>
     </>
