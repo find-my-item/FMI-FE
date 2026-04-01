@@ -102,6 +102,7 @@ const InputChat = ({
                 )}
                 placeholder="메시지 보내기"
                 disabled={disabled}
+                maxLength={255}
               />
 
               {/* 전송 버튼 */}
