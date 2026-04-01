@@ -7,7 +7,7 @@ import { useSearchParams } from "next/navigation";
 
 const NoticeListItem = ({ notice }: { notice: NoticeItem }) => {
   const { noticeId, title, createdAt, likeCount, viewCount, thumbnailUrl, isNew, isHot } = notice;
-  const keyword = useSearchParams().get("keyword") || "";
+  const keyword = useSearchParams()?.get("keyword") || "";
 
   return (
     <li>
