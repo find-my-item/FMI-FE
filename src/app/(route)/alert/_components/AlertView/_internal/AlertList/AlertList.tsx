@@ -13,12 +13,13 @@ import { EmptyState } from "@/components/state";
 import { useInfiniteScroll } from "@/hooks";
 import { cn, formatDate } from "@/utils";
 import { useRouter } from "next/navigation";
+import type { Dispatch, SetStateAction } from "react";
 
 interface AlertItemProps {
   item: NotificationListItem;
   isDeleteMode: boolean;
   selectedNotifications: number[];
-  setSelectedNotifications: (selectedNotifications: number[]) => void;
+  setSelectedNotifications: Dispatch<SetStateAction<number[]>>;
 }
 
 const AlertItem = ({
@@ -37,11 +38,9 @@ const AlertItem = ({
   const isSelected = selectedNotifications.includes(notificationId);
 
   const handleSelectNotification = (id: number) => {
-    if (selectedNotifications.includes(id)) {
-      setSelectedNotifications(selectedNotifications.filter((n) => n !== id));
-    } else {
-      setSelectedNotifications([...selectedNotifications, id]);
-    }
+    setSelectedNotifications((prev) =>
+      prev.includes(id) ? prev.filter((n) => n !== id) : [...prev, id]
+    );
   };
 
   const handleRowClick = () => {
@@ -114,7 +113,7 @@ const AlertItem = ({
 interface AlertListProps {
   isDeleteMode: boolean;
   selectedNotifications: number[];
-  setSelectedNotifications: (selectedNotifications: number[]) => void;
+  setSelectedNotifications: Dispatch<SetStateAction<number[]>>;
 }
 
 const AlertList = ({
