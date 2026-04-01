@@ -27,13 +27,15 @@ const DetailPermissionSheet = ({ isOpen, onClose, state }: DetailPermissionSheet
       }
       navigator.geolocation.getCurrentPosition(
         ({ coords }) => {
-          useMainKakaoMapStore.getState().setUserGpsFromDevice({
-            lat: coords.latitude,
-            lng: coords.longitude,
-          });
+          const next = { lat: coords.latitude, lng: coords.longitude };
+          useMainKakaoMapStore.getState().triggerLevelReset();
+          useMainKakaoMapStore.getState().setUserGpsFromDevice(next);
+          useMainKakaoMapStore.getState().setLatLng(next);
           onClose();
         },
         (error) => {
+          useMainKakaoMapStore.getState().triggerLevelReset();
+          useMainKakaoMapStore.getState().clearLatLng();
           if (error.code === error.PERMISSION_DENIED) {
             addToast("위치 권한이 거부되었습니다. 설정에서 허용해주세요.", "warning");
           }
@@ -167,5 +169,13 @@ const PermissionSheet = ({ isOpen, onClose }: PermissionSheetProps) => {
     </PopupLayout>
   );
 };
+
+export const LocationPermissionBottomSheet = ({
+  isOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+}) => <DetailPermissionSheet isOpen={isOpen} onClose={onClose} state="Location" />;
 
 export default PermissionSheet;
