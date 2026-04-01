@@ -1,7 +1,9 @@
-export const AGREE_CONFIG: Record<string, { title: string; content: string }> = {
-  privacyPolicyAgreed: {
-    title: "개인정보 수집 및 이용 동의 (필수)",
-    content: `제1조(목적)
+export const TERM_CONTENTS: Record<string, { termHeader: string; title: string; content: string }> =
+  {
+    privacyPolicyAgreed: {
+      termHeader: "개인정보 수집 및 이용 약관",
+      title: "개인정보 수집 및 이용 동의 (필수)",
+      content: `제1조(목적)
 
 찾아줘!(이하 “회사”)는 회사가 제공하는 웹 및 모바일 웹 기반 서비스(이하 “서비스”)를 이용하는 이용자의 개인정보를 보호하기 위하여 「개인정보 보호법」 및 관계 법령을 준수하고, 이용자의 개인정보와 관련한 권익을 보호하며 고충을 원활하게 처리할 수 있도록 본 개인정보처리방침을 수립합니다.
 
@@ -156,10 +158,11 @@ export const AGREE_CONFIG: Record<string, { title: string; content: string }> = 
 
 제1조(시행일)
 본 방침은 2026.03.01.부터 시행됩니다.`,
-  },
-  marketingConsent: {
-    title: "마케팅 수신 동의 (선택)",
-    content: `“찾아줘”는 「정보통신망 이용촉진 및 정보보호 등에 관한 법률」 및 「개인정보 보호법」 등 관계 법령에 따라 광고성 정보를 전송하기 위하여 사전 수신 동의를 받고 있으며, 수신 동의 여부를 정기적으로 확인합니다.
+    },
+    marketingConsent: {
+      termHeader: "마케팅 수신 약관",
+      title: "마케팅 수신 동의 (선택)",
+      content: `“찾아줘”는 「정보통신망 이용촉진 및 정보보호 등에 관한 법률」 및 「개인정보 보호법」 등 관계 법령에 따라 광고성 정보를 전송하기 위하여 사전 수신 동의를 받고 있으며, 수신 동의 여부를 정기적으로 확인합니다.
 마케팅 정보 수신에 동의하지 않으실 경우, 일부 혜택 및 이벤트 안내가 제한될 수 있습니다.
 
 1. 수집·이용목적
@@ -176,10 +179,11 @@ export const AGREE_CONFIG: Record<string, { title: string; content: string }> = 
 ※ 본 동의는 선택 사항이며, 동의를 거부하셔도 서비스 이용에는 제한이 없습니다.
 ※ 마케팅 정보 수신 동의/해제는 언제든지 설정 메뉴에서 변경하실 수 있습니다.
 (찾아줘 > 마이 페이지 > 알림 설정 > 마케팅 이메일 수신 동의)`,
-  },
-  termsOfServiceAgreed: {
-    title: "약관 이용 동의 (필수)",
-    content: `제1조 (목적)
+    },
+    termsOfServiceAgreed: {
+      termHeader: "이용 약관",
+      title: "약관 이용 동의 (필수)",
+      content: `제1조 (목적)
 
 이 약관은 “찾아줘”(이하 “회사”라 합니다)가 제공하는 분실물·습득물 관련 정보 제공, 게시물 등록, 검색, 댓글, 채팅 등 제반 서비스(이하 “서비스”라 합니다)의 이용과 관련하여 회사와 회원 간의 권리, 의무 및 책임사항 기타 필요한 사항을 규정함을 목적으로 합니다. 
 
@@ -341,10 +345,11 @@ export const AGREE_CONFIG: Record<string, { title: string; content: string }> = 
 
 이 약관은 2026.04.01부터 시행합니다.
 `,
-  },
-  contentPolicyAgreed: {
-    title: "콘텐츠 활동 동의 (선택)",
-    content: `“찾아줘”는 회원이 서비스에 게시하거나 업로드한 콘텐츠를 서비스 소개, 홍보 및 마케팅 목적으로 활용하기 위하여 아래와 같이 별도의 동의를 받고 있습니다.
+    },
+    contentPolicyAgreed: {
+      termHeader: "콘텐츠 활용 동의서",
+      title: "콘텐츠 활동 동의 (선택)",
+      content: `“찾아줘”는 회원이 서비스에 게시하거나 업로드한 콘텐츠를 서비스 소개, 홍보 및 마케팅 목적으로 활용하기 위하여 아래와 같이 별도의 동의를 받고 있습니다.
 회원이 본 동의서에 동의하는 경우, “찾아줘”는 회원이 직접 작성 또는 업로드한 콘텐츠를 아래 범위 내에서 활용할 수 있습니다.
 다만, 본 동의는 서비스 제공에 필수적인 사항이 아닌 선택 사항이며, 동의하지 않더라도 서비스 이용에는 제한이 없습니다.
 
@@ -382,5 +387,5 @@ export const AGREE_CONFIG: Record<string, { title: string; content: string }> = 
 7. 동의 거부 권리 및 불이익 여부
 본 동의는 선택 사항입니다.
 회원은 본 동의를 거부할 수 있으며, 거부하더라도 “찾아줘”의 기본적인 서비스 이용에는 제한이 없습니다.`,
-  },
-};
+    },
+  };
