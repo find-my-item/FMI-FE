@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useApiRefreshToken } from "@/api/fetch/auth";
 import { useAuthStore } from "@/store";
 
-export default function AuthBootstrap({ hasToken = false }: { hasToken?: boolean }) {
+export default function AuthBootstrap() {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -33,11 +33,6 @@ export default function AuthBootstrap({ hasToken = false }: { hasToken?: boolean
       return;
     }
 
-    if (!hasToken) {
-      setAuthInitialized(true);
-      return;
-    }
-
     if (ranRef.current) return;
     ranRef.current = true;
 
@@ -56,7 +51,7 @@ export default function AuthBootstrap({ hasToken = false }: { hasToken?: boolean
         setAuthInitialized(true);
       },
     });
-  }, [refreshTokenMutate, router, pathname, setAuthInitialized, hasToken]);
+  }, [refreshTokenMutate, router, pathname, setAuthInitialized]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
