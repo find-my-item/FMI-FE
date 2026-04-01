@@ -33,7 +33,7 @@ const AlertItem = ({
   const { mutate: readNotification } = useNotificationRead();
   const { icon, bg } = getAlertIconBackgroundColor(type, referenceType);
   const titleSegments = getAlertTitleSegments(type, title);
-  const IconSize = referenceType === "NOTICE" ? 20 : 15;
+  const IconSize = referenceType === "NOTICE" && type !== "COMMENT" ? 20 : 15;
   const isSelected = selectedNotifications.includes(notificationId);
 
   const handleSelectNotification = (id: number) => {
