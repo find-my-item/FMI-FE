@@ -108,9 +108,9 @@ const HeaderSearchForm = ({
         type="text"
         onFocus={() => {
           setFocused(true);
-          if (!searchValue?.trim()) {
-            setValue("search", locationPlaceholder);
-            setSearchKeyword(locationPlaceholder);
+          if (!searchValue?.trim() && geoGranted && isResolvedGpsAddress) {
+            setValue("search", userGpsAddress);
+            setSearchKeyword(userGpsAddress);
           }
         }}
         className={cn(
