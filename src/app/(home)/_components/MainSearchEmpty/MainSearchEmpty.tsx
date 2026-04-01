@@ -1,4 +1,5 @@
 import { Button, Icon } from "@/components/common";
+import Link from "next/link";
 
 const MainSearchEmpty = () => {
   return (
@@ -10,8 +11,8 @@ const MainSearchEmpty = () => {
       <span className="whitespace-pre-line text-center text-body2-regular text-layout-body-default">
         {`찾으시는 물건이 아직 등록되지 않았네요.\n직접 글을 올려 더 많은 사람에게 알려보세요.`}
       </span>
-      <Button variant="outlined" size="big">
-        게시글 작성하러 가기
+      <Button as={Link} href="/list" variant="outlined" size="big">
+        게시글 살펴보러 가기
       </Button>
     </div>
   );
