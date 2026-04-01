@@ -10,6 +10,7 @@ import { BetaTestMypageBanner } from "@/components/domain";
 
 const MyPageContainer = ({ hasToken }: { hasToken: boolean }) => {
   const { data, isFetching, error } = useGetUsersMe(hasToken);
+
   const { addToast } = useToast();
 
   useEffect(() => {
