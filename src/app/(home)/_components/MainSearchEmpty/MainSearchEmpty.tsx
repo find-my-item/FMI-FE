@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const MainSearchEmpty = () => {
   return (
-    <div className="w-full gap-5 pt-20 flex-col-center">
+    <div className="w-full gap-5 pt-5 flex-col-center">
       <div className="h-[54px] w-[54px] rounded-full border-[2.8px] border-white/30 backdrop-blur-[11.19px] bg-fill-brand-subtle-pressed flex-center">
         <Icon name="MainSearchWarning" size={48} className="mt-1" />
       </div>
