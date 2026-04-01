@@ -78,6 +78,10 @@ const HeaderSearchForm = ({
     if (focused) {
       inputRef.current?.blur();
       setFocused(false);
+      if (!searchValue?.trim()) {
+        setValue("search", "");
+        setSearchKeyword("");
+      }
       return;
     }
     router.back();
@@ -102,7 +106,13 @@ const HeaderSearchForm = ({
           setSearchKeyword(e.target.value);
         }}
         type="text"
-        onFocus={() => setFocused(true)}
+        onFocus={() => {
+          setFocused(true);
+          if (!searchValue?.trim()) {
+            setValue("search", locationPlaceholder);
+            setSearchKeyword(locationPlaceholder);
+          }
+        }}
         className={cn(
           "w-full pl-8 text-h3-semibold text-flatGray-700 placeholder:text-flatGray-700"
         )}
