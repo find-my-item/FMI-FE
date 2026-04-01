@@ -16,7 +16,14 @@ const MyPageMenuSection = ({
 }) => {
   const { handleLogout, isPending } = useLogout();
 
-  return MYPAGE_MENU_LIST.map((menu) => (
+  const visibleMenuList = MYPAGE_MENU_LIST.filter((menu) => {
+    if (!isUserLogin && menu.title === "서비스 정책") {
+      return false;
+    }
+    return true;
+  });
+
+  return visibleMenuList.map((menu) => (
     <Fragment key={menu.title}>
       <div className="flex w-full flex-col gap-3 px-5 py-6">
         <div className="flex text-body2-regular text-layout-body-default">{menu.title}</div>
@@ -46,7 +53,8 @@ const MyPageMenuSection = ({
           </Fragment>
         ))}
       </div>
-      {menu.title !== "서비스 정책" && (
+
+      {menu.title !== visibleMenuList[visibleMenuList.length - 1].title && (
         <hr className="mx-5 max-w-full border border-divider-default_3" />
       )}
     </Fragment>
