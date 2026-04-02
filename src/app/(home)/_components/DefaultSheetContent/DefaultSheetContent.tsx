@@ -14,7 +14,7 @@ interface DefaultSheetContentProps {
   onSectionHeights?: (heights: DefaultSheetContentHeights) => void;
 }
 
-const DIVIDER_STYLE = "w-full border-t-[0.7px] border-divider-default";
+const DIVIDER_STYLE = "w-full border-0 border-solid border-t-[0.7px] border-divider-default";
 
 const DefaultSheetContent = ({ onSectionHeights }: DefaultSheetContentProps) => {
   const refs = useSectionHeights(onSectionHeights);
