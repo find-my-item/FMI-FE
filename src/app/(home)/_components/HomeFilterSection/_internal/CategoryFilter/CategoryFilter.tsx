@@ -2,12 +2,11 @@
 
 import { useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { Icon } from "@/components/common";
+import { Filter } from "@/components/common";
 import { MAP_CATEGORY_FILTER_OPTIONS } from "@/constants";
 import { CATEGORY_FILTER_DROPDOWN_MIN_WIDTH_PX } from "../../../../_constants/FILTER";
 import { cn } from "@/utils";
 import { usePopoverOutsideClose, usePopoverPosition } from "@/hooks";
-import HomeFilter from "../HomeFilter/HomeFilter";
 
 interface CategoryFilterProps {
   ariaLabel: string;
@@ -45,14 +44,15 @@ const CategoryFilter = ({
   return (
     <>
       <div ref={triggerRef}>
-        <HomeFilter
+        <Filter
           ariaLabel={ariaLabel}
           onSelected={isSelected}
+          icon={{ name: "ArrowDown", size: 12 }}
+          iconPosition="trailing"
           onClick={() => setIsOpen((prev) => !prev)}
         >
           {label}
-          <Icon name="ArrowDown" size={12} />
-        </HomeFilter>
+        </Filter>
       </div>
 
       {isOpen &&
