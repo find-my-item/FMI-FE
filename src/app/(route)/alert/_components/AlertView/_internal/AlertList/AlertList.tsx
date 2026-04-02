@@ -29,8 +29,17 @@ const AlertItem = ({
   setSelectedNotifications,
 }: AlertItemProps) => {
   const router = useRouter();
-  const { notificationId, type, title, message, referenceType, referenceId, isRead, createdAt } =
-    item;
+  const {
+    notificationId,
+    type,
+    title,
+    message,
+    referenceType,
+    referenceId,
+    isRead,
+    createdAt,
+    roomId,
+  } = item;
   const { mutate: readNotification } = useNotificationRead();
   const { icon, bg } = getAlertIconBackgroundColor(type, referenceType);
   const titleSegments = getAlertTitleSegments(type, title);
@@ -49,7 +58,7 @@ const AlertItem = ({
       return;
     }
     readNotification({ ids: [notificationId] });
-    router.push(alertRouteUrl(referenceType, referenceId));
+    router.push(alertRouteUrl(referenceType, referenceId, roomId));
   };
 
   return (
@@ -86,7 +95,7 @@ const AlertItem = ({
           />
         </span>
       )}
-      <div className={cn("h-[30px] w-[30px] flex-shrink-0 rounded-full flex-center", bg)}>
+      <div className={cn("size-[30px] flex-shrink-0 rounded-full flex-center", bg)}>
         <Icon name={icon as IconName} size={IconSize} />
       </div>
       <div className="flex min-w-0 flex-1 flex-col gap-1">

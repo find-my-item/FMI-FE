@@ -27,39 +27,25 @@ const useMyLocationButton = () => {
     void checkGeolocationPermission();
   }, [clearLatLng]);
 
-  const requestDeviceLocation = useCallback(
-    ({
-      onPermissionDenied,
-      onError,
-    }: {
-      onPermissionDenied?: () => void;
-      onError?: () => void;
-    } = {}) => {
-      if (!navigator.geolocation) {
-        clearLatLng();
-        return;
-      }
+  const requestDeviceLocation = useCallback(() => {
+    if (!navigator.geolocation) {
+      clearLatLng();
+      return;
+    }
 
-      navigator.geolocation.getCurrentPosition(
-        ({ coords }) => {
-          triggerLevelReset();
-          const next = { lat: coords.latitude, lng: coords.longitude };
-          setUserGpsFromDevice(next);
-          setLatLng(next);
-        },
-        (error) => {
-          triggerLevelReset();
-          clearLatLng();
-          if (error.code === error.PERMISSION_DENIED) {
-            onPermissionDenied?.();
-            return;
-          }
-          onError?.();
-        }
-      );
-    },
-    [clearLatLng, setLatLng, setUserGpsFromDevice, triggerLevelReset]
-  );
+    navigator.geolocation.getCurrentPosition(
+      ({ coords }) => {
+        triggerLevelReset();
+        const next = { lat: coords.latitude, lng: coords.longitude };
+        setUserGpsFromDevice(next);
+        setLatLng(next);
+      },
+      () => {
+        triggerLevelReset();
+        clearLatLng();
+      }
+    );
+  }, [clearLatLng, setLatLng, setUserGpsFromDevice, triggerLevelReset]);
 
   const handleMyLocationClick = async () => {
     if (typeof navigator === "undefined" || !navigator.geolocation) {
@@ -70,20 +56,19 @@ const useMyLocationButton = () => {
     if (navigator.permissions) {
       try {
         const result = await navigator.permissions.query({ name: "geolocation" });
-        if (result.state === "denied") {
-          setIsLocationPermissionSheetOpen(true);
+        if (result.state === "granted") {
+          requestDeviceLocation();
           return;
         }
+        setIsLocationPermissionSheetOpen(true);
+        return;
       } catch {
-        // no-op
+        requestDeviceLocation();
+        return;
       }
     }
 
-    requestDeviceLocation({
-      onPermissionDenied: () => {
-        setIsLocationPermissionSheetOpen(true);
-      },
-    });
+    requestDeviceLocation();
   };
 
   const closeLocationPermissionSheet = useCallback(() => {
