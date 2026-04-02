@@ -39,9 +39,9 @@ const ContentAgreeView = () => {
         )}
         {!isLoading && (!data || data.length === 0) && (
           <EmptyState
-            icon={{ iconName: "ArrowDown", iconSize: 70 }}
-            title="검색 결과가 없어요"
-            description="입력한 내용을 다시 한 번 확인해 주세요."
+            icon={{ iconName: "NoPublicDataSearch", iconSize: 70 }}
+            title="게시글이 없어요"
+            description="아직 콘텐츠 활용 동의한 게시글이 없습니다."
           />
         )}
       </section>
