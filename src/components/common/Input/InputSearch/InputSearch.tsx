@@ -55,7 +55,7 @@ interface InputSearchProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const BASE_STYLE =
-  "h-11 min-w-0 flex-1 rounded-[24px] border px-10 text-body1-regular outline-none bg-fill-neutral-subtle-default placeholder:text-neutral-normal-placeholder hover:text-neutral-normal-hover focus:border-black focus:text-neutral-normal-focused";
+  "h-11 min-w-0 flex-1 rounded-[24px] border px-10 text-body1-regular outline-none bg-fill-neutral-subtle-default placeholder:text-neutral-normal-placeholder hover:text-neutral-normal-hover focus:text-neutral-normal-focused";
 
 // RHF 모드용 컴포넌트
 const InputSearchRHF = ({
