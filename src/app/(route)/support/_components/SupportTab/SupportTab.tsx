@@ -3,6 +3,7 @@
 import { cn } from "@/utils";
 import { useSupportTabQuery, SUPPORT_TABS } from "./_internal";
 
+// TODO(형준): 디자인 토큰 반영
 const SupportTab = () => {
   const { tab, updateTabQuery } = useSupportTabQuery();
 
