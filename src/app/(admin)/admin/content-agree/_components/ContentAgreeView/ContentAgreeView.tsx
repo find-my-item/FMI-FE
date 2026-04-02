@@ -8,13 +8,12 @@ import { ContentAgreeFilter } from "../_internal";
 import { EmptyState, LoadingState } from "@/components/state";
 
 const ContentAgreeView = () => {
-  const { sort, category, status } = useFilterParams();
+  const { sort, category, findStatus } = useFilterParams();
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useGetMarketingPosts({
     sort: sort || "LATEST",
     category,
-    postStatus: status as any,
-    size: 20,
+    postStatus: findStatus,
   });
 
   const { ref } = useInfiniteScroll({

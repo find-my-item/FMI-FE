@@ -8,6 +8,7 @@ interface UseGetMarketingPostsParams {
   category?: CategoryType;
   postStatus?: ItemStatus;
   size?: number;
+  keyword?: string;
 }
 
 interface UseGetMarketingPostsOptions {
@@ -15,30 +16,29 @@ interface UseGetMarketingPostsOptions {
 }
 
 export const useGetMarketingPosts = (
-  { sort = "LATEST", category, postStatus, size = 10 }: UseGetMarketingPostsParams,
+  { sort = "LATEST", category, postStatus, size = 10, keyword }: UseGetMarketingPostsParams,
   { enabled = true }: UseGetMarketingPostsOptions = {}
 ) => {
   const params = new URLSearchParams();
   params.set("size", String(size));
-
-  const apiSort = sort === "MOST_FAVORITED" ? "popular" : "latest";
-  params.set("sort", apiSort);
+  params.set("sortType", sort);
 
   if (category) params.set("category", category);
   if (postStatus) params.set("postStatus", postStatus);
+  if (keyword) params.set("keyword", keyword);
 
   return useAppInfiniteQuery<GetMarketingPostsResponse, unknown, AdminMarketingPostItem[]>(
     "auth",
-    ["marketing-posts", sort, category, postStatus, size],
-    `/admin/posts/marketing?${params.toString()}`,
+    ["marketing-posts", sort, category, postStatus, size, keyword],
+    `/admin/marketing-consent/posts?${params.toString()}`,
     {
       enabled,
       placeholderData: keepPreviousData,
       getNextPageParam: (lastPage) =>
         lastPage.result.hasNext ? lastPage.result.nextCursor : undefined,
       select: (data: InfiniteData<GetMarketingPostsResponse>) =>
-        data.pages.flatMap((page) => page.result.content ?? []),
-      pageParamName: sort === "MOST_FAVORITED" ? "cursorViewCount" : "cursor",
+        data.pages.flatMap((page) => page.result.postList ?? []),
+      pageParamName: "cursor",
     }
   );
 };
