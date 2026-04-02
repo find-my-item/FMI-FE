@@ -54,6 +54,9 @@ interface InputSearchProps extends InputHTMLAttributes<HTMLInputElement> {
   onEnter?: (value: string) => void;
 }
 
+const BASE_STYLE =
+  "h-11 min-w-0 flex-1 rounded-[24px] border px-10 text-body1-regular outline-none bg-fill-neutral-subtle-default placeholder:text-neutral-normal-placeholder hover:text-neutral-normal-hover focus:border-black focus:text-neutral-normal-focused";
+
 // RHF 모드용 컴포넌트
 const InputSearchRHF = ({
   name,
@@ -77,7 +80,7 @@ const InputSearchRHF = ({
         id={name}
         {...register(name, validation)}
         {...props}
-        className="h-11 min-w-0 flex-1 rounded-[24px] border px-10 text-body1-regular outline-none bg-fill-neutral-subtle-default placeholder:text-neutral-normal-placeholder hover:text-neutral-normal-hover focus:border-black focus:text-neutral-normal-focused"
+        className={BASE_STYLE}
         onKeyDown={handleKeyDown}
       />
 
@@ -109,7 +112,7 @@ const InputSearchOnChange = ({
         value={innerValue}
         onChange={(e) => setInnerValue(e.target.value)}
         {...props}
-        className="h-11 min-w-0 flex-1 rounded-[24px] border px-10 text-body1-regular bg-fill-neutral-subtle-default placeholder:text-neutral-normal-placeholder hover:text-neutral-normal-hover focus:border-black focus:text-neutral-normal-focused"
+        className={BASE_STYLE}
         onKeyDown={handleKeyDown}
       />
 
