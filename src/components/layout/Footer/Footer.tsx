@@ -5,8 +5,8 @@ import useFooterNav from "./_hooks/useFooterNav";
 
 const FOOTER_HEIGHT = "h-[86.67px]";
 
-const Footer = ({ hasToken = false }: { hasToken?: boolean }) => {
-  const { isHidden, items } = useFooterNav(hasToken);
+const Footer = () => {
+  const { isHidden, items } = useFooterNav();
   if (isHidden) return null;
 
   return (

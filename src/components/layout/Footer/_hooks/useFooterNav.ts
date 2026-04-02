@@ -19,11 +19,11 @@ interface FooterNavItem {
   onClick: (e: MouseEvent<HTMLAnchorElement>) => void;
 }
 
-const useFooterNav = (hasToken: boolean = false) => {
+const useFooterNav = () => {
   const pathname = usePathname();
   const isHidden = useHiddenPath();
 
-  const { data: userData, isError } = useGetUsersMe(hasToken);
+  const { data: userData, isError } = useGetUsersMe();
   const isLoggedIn = !!userData && !isError;
   const isUserRole = userData?.result?.role ?? "USER";
 
