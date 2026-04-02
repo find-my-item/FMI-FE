@@ -32,7 +32,7 @@ export const MYPAGE_MENU_LIST = [
     title: "서비스 정책",
     pages: [
       { pageName: "서비스 소개", pageLink: "/hello" },
-      { pageName: "개인정보 수집 및 이용 약관", pageLink: "/terms/privacy" },
+      { pageName: "개인정보처리방침", pageLink: "/terms/privacy" },
       { pageName: "서비스 이용 약관", pageLink: "/terms/service" },
       { pageName: "마케팅 수신 약관", pageLink: "/terms/marketing" },
       { pageName: "콘텐츠 활용 동의서", pageLink: "/terms/contentPolicy" },

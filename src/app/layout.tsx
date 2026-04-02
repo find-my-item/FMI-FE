@@ -14,7 +14,6 @@ import { NotificationSSEProvider } from "@/providers/NotificationSSEProvider";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { PWAProvider } from "@/providers/PWAProvider";
 import BetaTestModalGlobal from "@/components/domain/BetaTest/BetaTestModalGlobal/BetaTestModalGlobal";
-import { cookies } from "next/headers";
 
 const pretendard = localFont({
   src: "../../public/fonts/PretendardVariable.woff2",
@@ -51,7 +50,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -59,9 +58,6 @@ export default async function RootLayout({
   const isProd = process.env.VERCEL_ENV === "production";
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
   const clarityId = process.env.NEXT_PUBLIC_CLARITY_ID;
-
-  const cookieStore = await cookies();
-  const hasToken = cookieStore.has("refresh_token");
 
   return (
     <html lang="ko" className={pretendard.variable}>
@@ -93,10 +89,10 @@ export default async function RootLayout({
             <SnackBarProvider>
               <ToastProvider>
                 <MSWProvider />
-                <AuthBootstrap hasToken={hasToken} />
+                <AuthBootstrap />
                 <NotificationSSEProvider>
                   <main className="w-full flex-1">{children}</main>
-                  <Footer hasToken={hasToken} />
+                  <Footer />
                 </NotificationSSEProvider>
                 <BetaTestModalGlobal />
               </ToastProvider>
