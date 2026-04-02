@@ -10,7 +10,7 @@ import { EmptyState, LoadingState } from "@/components/state";
 const ContentAgreeSearchView = () => {
   const router = useRouter();
   const params = useSearchParams();
-  const search = params.get("search") || "";
+  const search = params.get("search")?.trim() || "";
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useGetMarketingPosts(
     {
@@ -27,10 +27,12 @@ const ContentAgreeSearchView = () => {
   });
 
   const handleSearch = (value: string) => {
-    if (value === "") {
+    const trimmedValue = value.trim();
+
+    if (trimmedValue === "") {
       router.push(`/admin/content-agree/search`);
     } else {
-      router.push(`/admin/content-agree/search?search=${value}`);
+      router.push(`/admin/content-agree/search?search=${trimmedValue}`);
     }
   };
 
