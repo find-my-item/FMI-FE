@@ -74,7 +74,11 @@ const InputSearchRHF = ({
 
   return (
     <div className="relative flex w-full flex-row gap-2">
-      <Icon name="Search" size={16} className="absolute left-5 top-1/2 -translate-y-1/2" />
+      <Icon
+        name="Search"
+        size={16}
+        className="absolute left-5 top-1/2 -translate-y-1/2 text-neutral-normal-placeholder"
+      />
 
       <input
         id={name}
@@ -105,7 +109,11 @@ const InputSearchOnChange = ({
 
   return (
     <div className="relative flex w-full flex-row gap-2">
-      <Icon name="Search" size={16} className="absolute left-5 top-1/2 -translate-y-1/2" />
+      <Icon
+        name="Search"
+        size={16}
+        className="absolute left-5 top-1/2 -translate-y-1/2 text-neutral-normal-placeholder"
+      />
 
       <input
         id={name}

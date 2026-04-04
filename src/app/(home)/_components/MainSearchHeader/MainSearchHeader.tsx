@@ -21,7 +21,7 @@ interface FocusedProps {
 }
 
 const LOCATION_PLACEHOLDER_DEFAULT = "현재 위치 (위치 정보 허용 시)";
-
+// TODO(형준): 검색 아이콘 토큰 추가
 const HeaderSearchForm = ({
   searchValue,
   setFocused,
@@ -125,7 +125,11 @@ const HeaderSearchForm = ({
         aria-label={isDropdownOpen ? "뒤로가기" : "위치 검색"}
         className="absolute left-5 top-1/2 -translate-y-1/2"
       >
-        <Icon name={isDropdownOpen ? "ArrowLeftSmall" : "Search"} size={20} />
+        <Icon
+          name={isDropdownOpen ? "ArrowLeftSmall" : "Search"}
+          size={20}
+          className={!isDropdownOpen ? "text-[#00B76E]" : ""}
+        />
       </button>
     </form>
   );
